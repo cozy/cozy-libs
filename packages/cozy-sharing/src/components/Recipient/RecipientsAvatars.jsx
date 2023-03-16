@@ -1,12 +1,12 @@
-import React from 'react'
 import cx from 'classnames'
-import { useClient } from 'cozy-client'
+import React from 'react'
 
+import { useClient } from 'cozy-client'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
 
-import RecipientAvatar from './RecipientAvatar'
 import AvatarPlusX from './AvatarPlusX'
+import RecipientAvatar from './RecipientAvatar'
 import styles from './recipient.styl'
 import { getDisplayName } from '../../models'
 

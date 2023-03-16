@@ -16,7 +16,6 @@ import reducer, {
   getPermissionDocIds,
   getDocumentSharingType
 } from './state'
-
 import {
   SHARING_1,
   SHARING_2,

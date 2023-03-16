@@ -1,17 +1,15 @@
-import React from 'react'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
+import React from 'react'
 
-import SelectBox, { components } from 'cozy-ui/transpiled/react/SelectBox'
-import palette from 'cozy-ui/transpiled/react/palette'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-
-import styles from '../share.styl'
-
-import logger from '../logger'
-
 import BottomIcon from 'cozy-ui/transpiled/react/Icons/Bottom'
 import CheckIcon from 'cozy-ui/transpiled/react/Icons/Check'
+import SelectBox, { components } from 'cozy-ui/transpiled/react/SelectBox'
+import palette from 'cozy-ui/transpiled/react/palette'
+
+import logger from '../logger'
+import styles from '../share.styl'
 
 const DropdownIndicator = props => (
   <components.DropdownIndicator {...props}>

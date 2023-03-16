@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import uniqueId from 'lodash/uniqueId'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 

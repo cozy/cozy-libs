@@ -1,20 +1,19 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import get from 'lodash/get'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 
 import { useClient } from 'cozy-client'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
+import ShareRecipientsInput from './ShareRecipientsInput'
 import ShareSubmit from './Sharesubmit'
 import ShareTypeSelect from './Sharetypeselect'
-
+import { getOrCreateFromArray } from '../helpers/contacts'
+import { getSuccessMessage } from '../helpers/successMessage'
 import { Group } from '../models'
 import { contactsResponseType, groupsResponseType } from '../propTypes'
-import ShareRecipientsInput from './ShareRecipientsInput'
 import styles from '../share.styl'
-import { getSuccessMessage } from '../helpers/successMessage'
-import { getOrCreateFromArray } from '../helpers/contacts'
 import { isReadOnlySharing } from '../state'
 
 export const ShareByEmail = ({

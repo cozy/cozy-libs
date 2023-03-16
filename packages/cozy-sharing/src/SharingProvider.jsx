@@ -3,6 +3,15 @@ import React, { Component } from 'react'
 import { withClient } from 'cozy-client'
 
 import SharingContext from './context'
+import { fetchNextPermissions } from './fetchNextPermissions'
+import { fetchFilesPaths } from './helpers/files'
+import {
+  getSharingObject,
+  createSharingInStore,
+  updateSharingInStore
+} from './helpers/sharings'
+import { SynchronousJobQueue } from './helpers/synchronousJobQueue'
+import { fetchApps } from './queries/queries'
 import reducer, {
   receiveSharings,
   addSharing,
@@ -28,15 +37,6 @@ import reducer, {
   hasSharedParent,
   hasSharedChild
 } from './state'
-import { fetchNextPermissions } from './fetchNextPermissions'
-import { fetchFilesPaths } from './helpers/files'
-import { SynchronousJobQueue } from './helpers/synchronousJobQueue'
-import {
-  getSharingObject,
-  createSharingInStore,
-  updateSharingInStore
-} from './helpers/sharings'
-import { fetchApps } from './queries/queries'
 
 const SHARING_DOCTYPE = 'io.cozy.sharings'
 const PERMISSION_DOCTYPE = 'io.cozy.permissions'

@@ -2,9 +2,9 @@ import React from 'react'
 
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
+import Identity from './Identity'
 import styles from './recipient.styl'
 import { getDisplayName, getInitials } from '../../models'
-import Identity from './Identity'
 
 const RecipientWithoutStatus = ({ instance, ...rest }) => {
   const name = getDisplayName(rest)

@@ -1,10 +1,12 @@
 import React from 'react'
-import { ShareButton } from './ShareButton'
-import { SharedRecipients } from './SharedRecipients'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
-import SharingContext from './context'
+
 import Grid from 'cozy-ui/transpiled/react/MuiCozyTheme/Grid'
 import Skeleton from 'cozy-ui/transpiled/react/Skeleton'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+
+import { ShareButton } from './ShareButton'
+import { SharedRecipients } from './SharedRecipients'
+import SharingContext from './context'
 
 export const ShareButtonWithRecipients = ({ docId, onClick, ...props }) => {
   const { isMobile } = useBreakpoints()

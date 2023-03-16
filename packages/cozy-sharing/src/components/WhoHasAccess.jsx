@@ -1,13 +1,14 @@
-import React from 'react'
 import PropTypes from 'prop-types'
-import Recipient from './Recipient/Recipient'
-import LinkRecipient from './Recipient/LinkRecipient'
+import React from 'react'
+
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 
-import { filterAndReworkRecipients } from '../helpers/recipients'
-import { usePrevious } from '../helpers/hooks'
+import LinkRecipient from './Recipient/LinkRecipient'
 import OwnerRecipient from './Recipient/OwnerRecipient'
+import Recipient from './Recipient/Recipient'
+import { usePrevious } from '../helpers/hooks'
+import { filterAndReworkRecipients } from '../helpers/recipients'
 
 /**
  * Displays a warning if some contacts are waiting for confirmation of their sharing

@@ -1,18 +1,18 @@
 import React from 'react'
-import { CozyProvider } from 'cozy-client'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
+import { CozyProvider } from 'cozy-client'
 import { I18n } from 'cozy-ui/transpiled/react/I18n'
-import SharingContext from '../../context'
-
-import langEn from '../../../locales/en.json'
-import { ThumbnailSizeContextProvider } from './ThumbnailSizeContext'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
-import { ModalContext } from './ModalContext'
-import { RouterContext } from './RouterContext'
+
 import { AcceptingSharingProvider } from './AcceptingSharingContext'
 import FabProvider from './FabProvider'
+import { ModalContext } from './ModalContext'
+import { RouterContext } from './RouterContext'
+import { ThumbnailSizeContextProvider } from './ThumbnailSizeContext'
+import langEn from '../../../locales/en.json'
+import SharingContext from '../../context'
 
 const mockStore = createStore(() => ({
   mobile: {

@@ -1,11 +1,11 @@
-import React from 'react'
 import omit from 'lodash/omit'
+import React from 'react'
 import { useLocation } from 'react-router'
 
+import { SharingDetailsModal } from './SharingDetailsModal'
 import EditableSharingModal from './components/EditableSharingModal'
 import SharingContext from './context'
 import withLocales from './withLocales'
-import { SharingDetailsModal } from './SharingDetailsModal'
 
 const SharingModal = ({ document, ...rest }) => (
   <SharingContext.Consumer>

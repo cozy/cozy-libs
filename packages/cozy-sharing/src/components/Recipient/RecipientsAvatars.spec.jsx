@@ -1,6 +1,7 @@
-import React from 'react'
-import { createMockClient } from 'cozy-client'
 import { render } from '@testing-library/react'
+import React from 'react'
+
+import { createMockClient } from 'cozy-client'
 
 import RecipientsAvatars, {
   MAX_DISPLAYED_RECIPIENTS,

@@ -1,8 +1,8 @@
 import React from 'react'
 
+import RecipientAvatar from './components/Recipient/RecipientAvatar'
 import SharingContext from './context'
 import withLocales from './withLocales'
-import RecipientAvatar from './components/Recipient/RecipientAvatar'
 
 export const SharingOwnerAvatar = withLocales(({ docId, ...rest }) => (
   <SharingContext.Consumer>

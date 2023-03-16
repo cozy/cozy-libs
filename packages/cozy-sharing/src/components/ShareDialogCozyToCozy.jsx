@@ -1,15 +1,14 @@
+import cx from 'classnames'
 import React from 'react'
+
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
-import { default as DumbShareByLink } from './ShareByLink'
 import { default as DumbShareByEmail } from './ShareByEmail'
-import WhoHasAccess from './WhoHasAccess'
-
-import cx from 'classnames'
-import styles from '../share.styl'
-
+import { default as DumbShareByLink } from './ShareByLink'
 import ShareDialogTwoStepsConfirmationContainer from './ShareDialogTwoStepsConfirmationContainer'
+import WhoHasAccess from './WhoHasAccess'
+import styles from '../share.styl'
 
 /**
  * Displays the sharing interface that can be used when ShareDialogCozyToCozy is in sharing state

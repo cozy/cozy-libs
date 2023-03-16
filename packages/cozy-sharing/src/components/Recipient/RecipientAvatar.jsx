@@ -1,6 +1,6 @@
 import React from 'react'
-import { useClient } from 'cozy-client'
 
+import { useClient } from 'cozy-client'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
 import { getDisplayName, getInitials } from '../../models'

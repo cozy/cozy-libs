@@ -1,13 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import get from 'lodash/get'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 import { models } from 'cozy-client'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
-import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
 import { Contact, Group, getDisplayName, getInitials } from '../models'
 

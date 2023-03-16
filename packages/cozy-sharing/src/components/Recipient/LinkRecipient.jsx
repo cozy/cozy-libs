@@ -1,20 +1,20 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
+import Circle from 'cozy-ui/transpiled/react/Circle'
+import Fade from 'cozy-ui/transpiled/react/Fade'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
-import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
-import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
-import Circle from 'cozy-ui/transpiled/react/Circle'
+import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
+import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import Fade from 'cozy-ui/transpiled/react/Fade'
 
-import { FADE_IN_DURATION } from '../../helpers/recipients'
-import RecipientConfirm from './RecipientConfirm'
 import LinkRecipientPermissions from './LinkRecipientPermissions'
+import RecipientConfirm from './RecipientConfirm'
 import styles from './recipient.styl'
+import { FADE_IN_DURATION } from '../../helpers/recipients'
 
 const LinkRecipient = props => {
   const { t } = useI18n()

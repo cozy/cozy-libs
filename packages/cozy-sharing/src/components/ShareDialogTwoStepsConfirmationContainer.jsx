@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react'
+
+import Button from 'cozy-ui/transpiled/react/Button'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import Button from 'cozy-ui/transpiled/react/Button'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import { useSafeState } from '../helpers/hooks'

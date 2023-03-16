@@ -1,8 +1,8 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
-import Recipient from './Recipient'
 import OwnerRecipientDefault from './OwnerRecipientDefault'
+import Recipient from './Recipient'
 
 const OwnerRecipient = ({ recipients }) => {
   const ownerRecipient = recipients.find(

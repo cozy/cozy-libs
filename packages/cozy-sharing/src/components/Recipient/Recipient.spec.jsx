@@ -1,8 +1,10 @@
+import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
+
+import { createMockClient } from 'cozy-client'
+
 import Recipient from './Recipient'
 import AppLike from '../../../test/AppLike'
-import { createMockClient } from 'cozy-client'
-import { render, fireEvent } from '@testing-library/react'
 
 describe('Recipient component', () => {
   const client = createMockClient({})

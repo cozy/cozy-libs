@@ -1,5 +1,6 @@
-import React from 'react'
 import { mount } from 'enzyme'
+import React from 'react'
+
 import { SharedStatus } from './SharedStatus'
 import AppLike from '../../test/AppLike'
 describe('SharedStatus component', () => {

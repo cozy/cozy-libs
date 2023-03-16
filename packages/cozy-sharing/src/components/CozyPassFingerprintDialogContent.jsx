@@ -1,13 +1,12 @@
-import React from 'react'
+import cx from 'classnames'
 import PropTypes from 'prop-types'
+import React from 'react'
+import snarkdown from 'snarkdown'
 
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Paper from 'cozy-ui/transpiled/react/Paper'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import snarkdown from 'snarkdown'
-
-import cx from 'classnames'
 import styles from './CozyPassFingerprintDialogContent.styl'
 
 /**

@@ -1,4 +1,5 @@
 import get from 'lodash/get'
+
 import { models } from 'cozy-client'
 
 export const checkIsReadOnlyPermissions = permissions => {

@@ -1,8 +1,8 @@
 import React from 'react'
 
+import RecipientsAvatars from './components/Recipient/RecipientsAvatars'
 import SharingContext from './context'
 import withLocales from './withLocales'
-import RecipientsAvatars from './components/Recipient/RecipientsAvatars'
 
 export const SharedRecipients = withLocales(({ docId, onClick, ...rest }) => (
   <SharingContext.Consumer>

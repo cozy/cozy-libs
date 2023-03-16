@@ -1,9 +1,9 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
-import withLocales from '../withLocales'
-import { useSharingInfos } from './hooks/useSharingInfos'
 import { SharingBanner } from './components/SharingBanner'
+import { useSharingInfos } from './hooks/useSharingInfos'
+import withLocales from '../withLocales'
 
 const Plugin = ({ previewPath }) => {
   const sharingInfos = useSharingInfos(previewPath)

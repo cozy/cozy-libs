@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import React, { useState, useEffect } from 'react'
 
-import { contactsResponseType, groupsResponseType } from '../propTypes'
 import ShareAutosuggest from './ShareAutosuggest'
+import { contactsResponseType, groupsResponseType } from '../propTypes'
 
 const ShareRecipientsInput = ({
   contacts,

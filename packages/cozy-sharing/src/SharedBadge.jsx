@@ -1,8 +1,8 @@
 import React from 'react'
 
+import { default as DumbSharedBadge } from './components/SharedBadge'
 import SharingContext from './context'
 import withLocales from './withLocales'
-import { default as DumbSharedBadge } from './components/SharedBadge'
 
 export const SharedBadge = withLocales(({ docId, ...rest }) => (
   <SharingContext.Consumer>
