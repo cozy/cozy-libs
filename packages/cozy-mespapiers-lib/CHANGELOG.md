@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [24.2.4](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@24.2.3...cozy-mespapiers-lib@24.2.4) (2023-03-16)
+
+
+### Bug Fixes
+
+* **mespapiers-lib:** Apply breaking changes from cozy/cozy-ui[#2215](https://github.com/cozy/cozy-libs/issues/2215) ([14126f1](https://github.com/cozy/cozy-libs/commit/14126f1490e511120604af95b0ff0e2d2bf1437d))
+
+
+
+
+
 ## [24.2.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@24.2.2...cozy-mespapiers-lib@24.2.3) (2023-03-16)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
