@@ -1,21 +1,23 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
-const omit = require('lodash/omit')
-const pick = require('lodash/pick')
-const size = require('lodash/size')
-const omitBy = require('lodash/omitBy')
-const isUndefined = require('lodash/isUndefined')
-const fromPairs = require('lodash/fromPairs')
-const pickBy = require('lodash/pickBy')
+const querystring = require('querystring')
+
 const flatMap = require('lodash/flatMap')
-const groupBy = require('lodash/groupBy')
-const sortBy = require('lodash/sortBy')
+const fromPairs = require('lodash/fromPairs')
 const get = require('lodash/get')
-const { parallelMap } = require('./utils')
+const groupBy = require('lodash/groupBy')
+const isUndefined = require('lodash/isUndefined')
+const omit = require('lodash/omit')
+const omitBy = require('lodash/omitBy')
+const pick = require('lodash/pick')
+const pickBy = require('lodash/pickBy')
+const size = require('lodash/size')
+const sortBy = require('lodash/sortBy')
+
 const CozyClient = require('cozy-client/dist/CozyClient').default
 const Q = require('cozy-client/dist/queries/dsl').Q
-
 const log = require('cozy-logger').namespace('Document')
-const querystring = require('querystring')
+
+const { parallelMap } = require('./utils')
 
 const DATABASE_DOES_NOT_EXIST = 'Database does not exist.'
 
