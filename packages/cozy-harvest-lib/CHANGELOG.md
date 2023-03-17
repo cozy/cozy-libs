@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.8.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.7.2...cozy-harvest-lib@13.8.0) (2023-03-17)
+
+
+### Bug Fixes
+
+* Import order lint via --fix lint option ([728f86f](https://github.com/cozy/cozy-libs/commit/728f86fdd033031d9a8949a0bcf3a5bf7064a281))
+
+
+### Features
+
+* Wait for startLaucher resolution ([5f322b7](https://github.com/cozy/cozy-libs/commit/5f322b7a7534350d3251f597180a957339ef1129))
+
+
+
+
+
 ## [13.7.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.7.1...cozy-harvest-lib@13.7.2) (2023-03-16)
 
 **Note:** Version bump only for package cozy-harvest-lib
