@@ -281,7 +281,7 @@ class Document {
       const update = omit(attributes, userAttributes)
       const updatedDoc = this.applyUpdateIfDifferent(doc, update)
       if (updatedDoc !== doc) {
-        return this.cozyClient.save(updatedDoc)
+        return this.save(updatedDoc)
       } else {
         return updatedDoc
       }
@@ -303,10 +303,7 @@ class Document {
     }
 
     if (results.length === 0) {
-      return this.cozyClient.data.create(
-        this.doctype,
-        this.addCozyMetadata(attributes)
-      )
+      return this.create(this.addCozyMetadata(attributes))
     } else {
       results = sortBy(results, newestDocumentComparisonFunc)
       if (results.length > 1) {
@@ -317,18 +314,14 @@ class Document {
       const update = omit(attributes, userAttributes)
       const updatedDoc = this.applyUpdateIfDifferent(doc, update)
       if (updatedDoc !== doc) {
-        return this.cozyClient.data.updateAttributes(
-          this.doctype,
-          updatedDoc._id,
-          updatedDoc
-        )
+        return this.save(updatedDoc)
       } else {
         return doc
       }
     }
   }
 
-  static create(attributes) {
+  static async create(attributes) {
     if (this.usesCozyClient()) {
       return this.createViaNewClient(attributes)
     }
@@ -336,12 +329,34 @@ class Document {
     return this.createViaOldClient(attributes)
   }
 
-  static createViaNewClient(attributes) {
-    return this.cozyClient.create(this.doctype, attributes)
+  static async createViaNewClient(attributes) {
+    const { data } = await this.cozyClient.create(this.doctype, attributes)
+    return data
   }
 
-  static createViaOldClient(attributes) {
+  static async createViaOldClient(attributes) {
     return this.cozyClient.data.create(this.doctype, attributes)
+  }
+
+  static async save(attributes) {
+    if (this.usesCozyClient()) {
+      return this.saveViaNewClient(attributes)
+    }
+
+    return this.saveViaOldClient(attributes)
+  }
+
+  static async saveViaNewClient(attributes) {
+    const { data } = await this.cozyClient.save(attributes)
+    return data
+  }
+
+  static async saveViaOldClient(attributes) {
+    return this.cozyClient.data.updateAttributes(
+      this.doctype,
+      attributes._id,
+      attributes
+    )
   }
 
   /**

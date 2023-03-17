@@ -1,7 +1,9 @@
 const MockDate = require('mockdate')
+
+const logger = require('cozy-logger')
+
 const Document = require('./Document')
 const { cozyClientJS, cozyClient } = require('./testUtils')
-const logger = require('cozy-logger')
 
 class Simpson extends Document {}
 Simpson.doctype = 'io.cozy.simpsons'
@@ -448,7 +450,7 @@ describe('Document used with CozyClient', () => {
             cozyMetadata: { updatedAt: new Date('2019-11-20') }
           }
         ])
-        jest.spyOn(cozyClient, 'save').mockReturnValueOnce()
+        jest.spyOn(cozyClient, 'save').mockReturnValueOnce({ data: {} })
         jest.spyOn(Simpson, 'deleteAll').mockReturnValueOnce()
       })
 
@@ -507,7 +509,7 @@ describe('Document used with CozyClient', () => {
 
     it('should update the document if it already exists', async () => {
       jest.spyOn(Simpson, 'queryAll').mockReturnValueOnce([{ name: 'Marge' }])
-      jest.spyOn(cozyClient, 'save').mockReturnValueOnce()
+      jest.spyOn(cozyClient, 'save').mockReturnValueOnce({ data: {} })
 
       await Simpson.createOrUpdate({ name: 'Marge', son: 'Bart' })
 
@@ -523,7 +525,9 @@ describe('Document used with CozyClient', () => {
     })
 
     it('should create the document with the given attributes', async () => {
-      jest.spyOn(cozyClient, 'create').mockImplementation(() => {})
+      jest.spyOn(cozyClient, 'create').mockImplementation(() => {
+        return { data: {} }
+      })
 
       const marge = { name: 'Marge' }
       await Simpson.create(marge)
