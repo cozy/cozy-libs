@@ -254,6 +254,10 @@
         "text": "Photographier votre passeport"
       },
       "information": {
+        "country": {
+          "inputLabel": "Nationalité du bénéficiaire",
+          "text": "Quelle est la Nationalité du bénéficiaire ?"
+        },
         "passportNumber": {
           "inputLabel": "Numéro du passeport",
           "text": "Saisir le numéro de votre passeport"
