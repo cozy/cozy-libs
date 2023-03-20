@@ -224,8 +224,8 @@
       },
       "stranger": {
         "country": {
-          "inputLabel": "Pays de délivrance",
-          "text": "Quel est le pays de délivrance ?"
+          "inputLabel": "Nationalité du bénéficiaire",
+          "text": "Quelle est la nationalité du bénéficiaire ?"
         },
         "obtentionDate": {
           "inputLabel": "Date d'obtention",

@@ -224,8 +224,8 @@
       },
       "stranger": {
         "country": {
-          "inputLabel": "Country of delivery",
-          "text": "What is the country of delivery?"
+          "inputLabel": "Beneficiary nationality",
+          "text": "What is the Nationality of the beneficiary?"
         },
         "obtentionDate": {
           "inputLabel": "Date of obtaining",
