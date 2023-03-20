@@ -254,6 +254,10 @@
         "text": "Take a picture of your passport"
       },
       "information": {
+        "country": {
+          "inputLabel": "Beneficiary nationality",
+          "text": "What is the Nationality of the beneficiary?"
+        },
         "passportNumber": {
           "inputLabel": "Passport number",
           "text": "Enter your passport number"

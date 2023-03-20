@@ -1721,6 +1721,19 @@
         {
           "stepIndex": 2,
           "model": "information",
+          "illustration": "IlluGenericInputDate.png",
+          "text": "PaperJSON.passport.country.text",
+          "attributes": [
+            {
+              "name": "country",
+              "type": "text",
+              "inputLabel": "PaperJSON.passport.country.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "model": "information",
           "illustration": "IlluPassportNumber.png",
           "text": "PaperJSON.passport.information.passportNumber.text",
           "attributes": [
@@ -1733,7 +1746,7 @@
           ]
         },
         {
-          "stepIndex": 3,
+          "stepIndex": 4,
           "model": "information",
           "illustration": "IlluPassportDate.png",
           "text": "PaperJSON.passport.information.expirationDate.text",
@@ -1746,7 +1759,7 @@
           ]
         },
         {
-          "stepIndex": 4,
+          "stepIndex": 5,
           "model": "information",
           "illustration": "IlluGenericAlert.svg",
           "illustrationSize": "small",
@@ -1764,7 +1777,7 @@
           ]
         },
         {
-          "stepIndex": 5,
+          "stepIndex": 6,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
