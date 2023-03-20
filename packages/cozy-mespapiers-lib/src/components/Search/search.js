@@ -2,10 +2,30 @@ import { Document } from 'flexsearch'
 
 import { themesList } from 'cozy-client/dist/models/document/documentTypeData'
 import { isFile, hasQualifications } from 'cozy-client/dist/models/file'
+import flag from 'cozy-flags'
 
 import { CONTACTS_DOCTYPE } from '../../doctypes'
 
 const isContact = doc => doc._type === CONTACTS_DOCTYPE
+
+const flexSearchIndex = [
+  'flexsearchProps:translatedQualificationLabel', // io.cozy.files
+  'metadata:number', // io.cozy.files
+  'fullname', // io.cozy.contacts
+  'name', // io.cozy.files, io.cozy.contacts
+  'birthday', // io.cozy.contacts
+  'birthcity', // io.cozy.contacts
+  'email[]:address', // io.cozy.contacts
+  'phone[]:number', // io.cozy.contacts
+  'civility', // io.cozy.contacts
+  'company', // io.cozy.contacts
+  'jobTitle' // io.cozy.contacts
+]
+if (!flag('mespapiers.migrated.metadata')) {
+  flexSearchIndex.splice(1, 0, 'metadata:ibanNumber')
+  flexSearchIndex.splice(3, 0, 'metadata:passportNumber')
+  flexSearchIndex.splice(4, 0, 'metadata:vinNumber')
+}
 
 /** The index document will store _id for each document having the declared indexed fields,
  * coming from both `io.cozy.files` and `io.cozy.contacts`.
@@ -19,22 +39,7 @@ export const index = new Document({
   document: {
     id: '_id',
     tag: 'flexsearchProps:tag',
-    index: [
-      'flexsearchProps:translatedQualificationLabel', // io.cozy.files
-      'metadata:ibanNumber', // io.cozy.files
-      'metadata:number', // io.cozy.files
-      'metadata:passportNumber', // io.cozy.files
-      'metadata:vinNumber', // io.cozy.files
-      'fullname', // io.cozy.contacts
-      'name', // io.cozy.files, io.cozy.contacts
-      'birthday', // io.cozy.contacts
-      'birthcity', // io.cozy.contacts
-      'email[]:address', // io.cozy.contacts
-      'phone[]:number', // io.cozy.contacts
-      'civility', // io.cozy.contacts
-      'company', // io.cozy.contacts
-      'jobTitle' // io.cozy.contacts
-    ]
+    index: flexSearchIndex
   }
 })
 

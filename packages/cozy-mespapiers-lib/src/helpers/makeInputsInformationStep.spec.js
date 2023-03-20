@@ -1,10 +1,10 @@
+import { makeInputsInformationStep } from './makeInputsInformationStep'
 import InputDateAdapter from '../components/ModelSteps/widgets/InputDateAdapter'
 import InputTextAdapter from '../components/ModelSteps/widgets/InputTextAdapter'
-import { makeInputsInformationStep } from './makeInputsInformationStep'
 
 const attributes = [
   {
-    name: 'cardNumber',
+    name: 'number',
     type: 'text',
     maxLength: 12,
     inputLabel: 'PaperJSON.card.number.inputLabel'
@@ -21,7 +21,7 @@ const inputTextExpected = {
   attrs: {
     inputLabel: 'PaperJSON.card.number.inputLabel',
     maxLength: 12,
-    name: 'cardNumber',
+    name: 'number',
     type: 'text'
   }
 }

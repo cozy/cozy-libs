@@ -1,4 +1,5 @@
 import { Q, fetchPolicies } from 'cozy-client'
+import flag from 'cozy-flags'
 
 import {
   CONTACTS_DOCTYPE,
@@ -12,6 +13,27 @@ import {
 const defaultFetchPolicy = fetchPolicies.olderThan(86_400_000) // 24 hours
 
 export const buildFilesQueryWithQualificationLabel = () => {
+  const select = [
+    'name',
+    'referenced_by',
+    'metadata.country',
+    'metadata.datetime',
+    'metadata.expirationDate',
+    'metadata.noticePeriod',
+    'metadata.qualification.label',
+    'metadata.referencedDate',
+    'metadata.number',
+    'created_at',
+    'updated_at',
+    'type',
+    'trashed'
+  ]
+  if (!flag('mespapiers.migrated.metadata')) {
+    select.splice(8, 0, 'metadata:ibanNumber')
+    select.splice(10, 0, 'metadata:passportNumber')
+    select.splice(11, 0, 'metadata:vinNumber')
+  }
+
   return {
     definition: () =>
       Q(FILES_DOCTYPE)
@@ -25,24 +47,7 @@ export const buildFilesQueryWithQualificationLabel = () => {
           }
         })
         .indexFields(['metadata.qualification.label'])
-        .select([
-          'name',
-          'referenced_by',
-          'metadata.country',
-          'metadata.datetime',
-          'metadata.expirationDate',
-          'metadata.noticePeriod',
-          'metadata.qualification.label',
-          'metadata.referencedDate',
-          'metadata.ibanNumber',
-          'metadata.number',
-          'metadata.passportNumber',
-          'metadata.vinNumber',
-          'created_at',
-          'updated_at',
-          'type',
-          'trashed'
-        ])
+        .select(select)
         .limitBy(1000),
     options: {
       as: `${FILES_DOCTYPE}/metadata_qualification_label`,
