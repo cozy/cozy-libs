@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [24.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@24.2.7...cozy-mespapiers-lib@24.3.0) (2023-03-20)
+
+
+### Features
+
+* Add one information step to passport creation ([b989f2b](https://github.com/cozy/cozy-libs/commit/b989f2bb4cdaf024bdad188ece4a8ff9600910b3))
+* Change wording of country attribut to driver license ([3c4ca07](https://github.com/cozy/cozy-libs/commit/3c4ca072524932287e826d9e0a0ab86a0b828a6b))
+
+
+
+
+
 ## [24.2.7](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@24.2.6...cozy-mespapiers-lib@24.2.7) (2023-03-17)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
