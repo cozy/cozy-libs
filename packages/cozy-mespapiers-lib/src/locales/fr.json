@@ -194,10 +194,18 @@
       "ibanNumber": {
         "inputLabel": "IBAN",
         "text": "Saisissez votre numéro d'IBAN"
+      },
+      "number": {
+        "inputLabel": "IBAN",
+        "text": "Saisissez votre numéro d'IBAN"
       }
     },
     "vehicleRegistration": {
       "vinNumber": {
+        "inputLabel": "Numéro en position E. de votre carte crise",
+        "text": "Saisissez le Numéro d'identification du véhicule (VIN)"
+      },
+      "number": {
         "inputLabel": "Numéro en position E. de votre carte crise",
         "text": "Saisissez le Numéro d'identification du véhicule (VIN)"
       }
@@ -262,6 +270,10 @@
           "inputLabel": "Numéro du passeport",
           "text": "Saisir le numéro de votre passeport"
         },
+        "number": {
+          "inputLabel": "Numéro du passeport",
+          "text": "Saisir le numéro de votre passeport"
+        },
         "expirationDate": {
           "inputLabel": "Date d'expiration",
           "text": "Quelle est la date d'expiration du passeport ?"
@@ -277,10 +289,18 @@
       "cafFileNumber": {
         "inputLabel": "Numéro de dossier CAF",
         "text": "Saisissez votre numéro de dossier CAF"
+      },
+      "number": {
+        "inputLabel": "Numéro de dossier CAF",
+        "text": "Saisissez votre numéro de dossier CAF"
       }
     },
     "payment_proof_family_allowance": {
       "cafFileNumber": {
+        "inputLabel": "Numéro de dossier CAF",
+        "text": "Saisissez votre numéro de dossier CAF"
+      },
+      "number": {
         "inputLabel": "Numéro de dossier CAF",
         "text": "Saisissez votre numéro de dossier CAF"
       }

@@ -68,13 +68,13 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "text": "PaperJSON.bankDetails.number.text",
+          "text": "PaperJSON.bankDetails.ibanNumber.text",
           "attributes": [
             {
-              "name": "number",
+              "name": "ibanNumber",
               "type": "text",
               "mask": "aa** 9999 9999 99** **** **** *99",
-              "inputLabel": "PaperJSON.bankDetails.number.inputLabel"
+              "inputLabel": "PaperJSON.bankDetails.ibanNumber.inputLabel"
             }
           ]
         },
@@ -139,12 +139,12 @@
           "stepIndex": 2,
           "model": "information",
           "illustration": "IlluCafNumberHelp.png",
-          "text": "PaperJSON.caf.number.text",
+          "text": "PaperJSON.caf.cafFileNumber.text",
           "attributes": [
             {
-              "name": "number",
+              "name": "cafFileNumber",
               "type": "text",
-              "inputLabel": "PaperJSON.caf.number.inputLabel"
+              "inputLabel": "PaperJSON.caf.cafFileNumber.inputLabel"
             }
           ]
         },
@@ -573,7 +573,7 @@
           "text": "PaperJSON.card.number.text",
           "attributes": [
             {
-              "name": "number",
+              "name": "cardNumber",
               "type": "text",
               "maxLength": 12,
               "inputLabel": "PaperJSON.card.number.inputLabel"
@@ -1197,12 +1197,12 @@
           "stepIndex": 2,
           "model": "information",
           "illustration": "IlluCafNumberHelp.png",
-          "text": "PaperJSON.payment_proof_family_allowance.number.text",
+          "text": "PaperJSON.payment_proof_family_allowance.cafFileNumber.text",
           "attributes": [
             {
-              "name": "number",
+              "name": "cafFileNumber",
               "type": "text",
-              "inputLabel": "PaperJSON.payment_proof_family_allowance.number.inputLabel"
+              "inputLabel": "PaperJSON.payment_proof_family_allowance.cafFileNumber.inputLabel"
             }
           ]
         },
@@ -1338,7 +1338,7 @@
           "text": "PaperJSON.card.number.text",
           "attributes": [
             {
-              "name": "number",
+              "name": "cardNumber",
               "type": "number",
               "maxLength": 12,
               "inputLabel": "PaperJSON.card.number.inputLabel"
@@ -1643,13 +1643,13 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "text": "PaperJSON.vehicleRegistration.number.text",
+          "text": "PaperJSON.vehicleRegistration.vinNumber.text",
           "attributes": [
             {
-              "name": "number",
+              "name": "vinNumber",
               "type": "text",
               "mask": "*** ****** ********",
-              "inputLabel": "PaperJSON.vehicleRegistration.number.inputLabel"
+              "inputLabel": "PaperJSON.vehicleRegistration.vinNumber.inputLabel"
             }
           ]
         },
@@ -1721,32 +1721,19 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericInputDate.png",
-          "text": "PaperJSON.passport.country.text",
+          "illustration": "IlluPassportNumber.png",
+          "text": "PaperJSON.passport.information.passportNumber.text",
           "attributes": [
             {
-              "name": "country",
+              "name": "passportNumber",
               "type": "text",
-              "inputLabel": "PaperJSON.passport.country.inputLabel"
+              "maxLength": 12,
+              "inputLabel": "PaperJSON.passport.information.passportNumber.inputLabel"
             }
           ]
         },
         {
           "stepIndex": 3,
-          "model": "information",
-          "illustration": "IlluPassportNumber.png",
-          "text": "PaperJSON.passport.information.number.text",
-          "attributes": [
-            {
-              "name": "number",
-              "type": "text",
-              "maxLength": 12,
-              "inputLabel": "PaperJSON.passport.information.number.inputLabel"
-            }
-          ]
-        },
-        {
-          "stepIndex": 4,
           "model": "information",
           "illustration": "IlluPassportDate.png",
           "text": "PaperJSON.passport.information.expirationDate.text",
@@ -1759,7 +1746,7 @@
           ]
         },
         {
-          "stepIndex": 5,
+          "stepIndex": 4,
           "model": "information",
           "illustration": "IlluGenericAlert.svg",
           "illustrationSize": "small",
@@ -1777,7 +1764,7 @@
           ]
         },
         {
-          "stepIndex": 6,
+          "stepIndex": 5,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"

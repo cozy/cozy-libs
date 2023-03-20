@@ -51,7 +51,7 @@ const makeCurrentPaperDefinition = ({ label, country } = {}) => ({
       illustration: 'illuNumber.png',
       attributes: [
         {
-          name: 'cardNumber',
+          name: 'number',
           type: 'text'
         }
       ]
@@ -77,7 +77,7 @@ const makeFakeFile = ({ country, qualificationLabel } = {}) => ({
   id: '123456',
   name: 'fake file',
   metadata: {
-    cardNumber: '454654876789',
+    number: '454654876789',
     datetime: '2022-09-29T11:53:00.000Z',
     datetimeLabel: 'expirationDate',
     expirationDate: '2022-09-29T11:53:00.000Z',
@@ -148,7 +148,7 @@ describe('updateFileMetadata', () => {
       id: '123456',
       name: 'fake file',
       metadata: {
-        cardNumber: '454654876789',
+        number: '454654876789',
         datetime: '2022-09-29T11:53:00.000Z',
         datetimeLabel: 'expirationDate',
         expirationDate: '2022-09-29T11:53:00.000Z',
@@ -163,7 +163,7 @@ describe('updateFileMetadata', () => {
     })
 
     expect(res).toEqual({
-      cardNumber: '454654876789',
+      number: '454654876789',
       datetime: newExpirationDate,
       datetimeLabel: 'expirationDate',
       expirationDate: newExpirationDate,
@@ -176,7 +176,7 @@ describe('updateFileMetadata', () => {
       id: '123456',
       name: 'fake file',
       metadata: {
-        cardNumber: '454654876789',
+        number: '454654876789',
         datetime: '2018-01-01T11:00:00.000Z',
         datetimeLabel: 'referencedDate',
         expirationDate: '2022-09-29T11:53:00.000Z',
@@ -191,7 +191,7 @@ describe('updateFileMetadata', () => {
     })
 
     expect(res).toEqual({
-      cardNumber: '454654876789',
+      number: '454654876789',
       datetime: '2018-01-01T11:00:00.000Z',
       datetimeLabel: 'referencedDate',
       expirationDate: newExpirationDate,
@@ -202,15 +202,15 @@ describe('updateFileMetadata', () => {
 describe('makeCurrentStep', () => {
   const paperDef = makeCurrentPaperDefinition()
   describe('information model', () => {
-    it('should return "information" step with "cardNumber" attribute name', () => {
+    it('should return "information" step with "number" attribute name', () => {
       const res = makeCurrentStep({
         paperDef,
         model: 'information',
-        metadataName: 'cardNumber'
+        metadataName: 'number'
       })
 
       expect(res).toEqual({
-        attributes: [{ name: 'cardNumber', type: 'text' }],
+        attributes: [{ name: 'number', type: 'text' }],
         illustration: 'illuNumber.png',
         model: 'information'
       })

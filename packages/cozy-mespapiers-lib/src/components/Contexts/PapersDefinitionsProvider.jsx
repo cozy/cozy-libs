@@ -1,16 +1,18 @@
 import React, { createContext, useEffect, useState } from 'react'
 
+import { useClient } from 'cozy-client'
+import flag from 'cozy-flags'
 import useFlag from 'cozy-flags/dist/useFlag'
 import log from 'cozy-logger'
-import { useClient } from 'cozy-client'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import papersJSON from '../../constants/papersDefinitions.json'
-import { fetchCustomPaperDefinitions } from '../../utils/fetchCustomPaperDefinitions'
-import { fetchContentFileToJson } from '../../utils/fetchContentFileToJson'
-import { useScannerI18n } from '../Hooks/useScannerI18n'
+import papersJSONWithNewMetadata from '../../constants/papersDefinitions.json'
+import papersJSON from '../../constants/papersDefinitionsOld.json'
 import { buildPapersDefinitions } from '../../helpers/buildPapersDefinitions'
+import { fetchContentFileToJson } from '../../utils/fetchContentFileToJson'
+import { fetchCustomPaperDefinitions } from '../../utils/fetchCustomPaperDefinitions'
+import { useScannerI18n } from '../Hooks/useScannerI18n'
 
 const PapersDefinitionsContext = createContext()
 
@@ -69,8 +71,11 @@ const PapersDefinitionsProvider = ({ children }) => {
           name: '',
           path: ''
         })
+        const papers = flag('mespapiers.migrated.metadata')
+          ? papersJSONWithNewMetadata
+          : papersJSON
         setPapersDefinitions(
-          buildPapersDefinitions(papersJSON.papersDefinitions, scannerT)
+          buildPapersDefinitions(papers.papersDefinitions, scannerT)
         )
         log('info', 'PapersDefinitions of the app loaded')
       }
