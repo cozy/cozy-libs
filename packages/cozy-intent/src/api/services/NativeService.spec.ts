@@ -48,6 +48,7 @@ describe('NativeService', () => {
       logout: jest.fn(),
       openApp: jest.fn(),
       hideSplashScreen: jest.fn(),
+      setDefaultRedirection: jest.fn(),
       setFlagshipUI: jest.fn(),
       showSplashScreen: jest.fn()
     }

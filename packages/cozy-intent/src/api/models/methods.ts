@@ -12,6 +12,7 @@ interface _NativeMethodsRegister {
     iconParams?: DOMRect
   ) => Promise<null>
   openSettingBiometry: () => Promise<boolean>
+  setDefaultRedirection: (defaultRedirection: string) => Promise<null>
   setFlagshipUI: (flagshipUI: FlagshipUI, caller?: string) => Promise<null>
   showSplashScreen: () => Promise<null>
   toggleSetting: (
