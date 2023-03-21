@@ -39,7 +39,10 @@ describe('search', () => {
     index.search.mockReturnValue([])
     const res = search({})
 
-    expect(res).toStrictEqual([])
+    expect(res).toStrictEqual({
+      filteredDocs: [],
+      firstSearchResultMatchingAttributes: []
+    })
   })
 
   it('should return the matched document', () => {
@@ -76,18 +79,24 @@ describe('search', () => {
       tag: undefined // ignored because of mocked search result
     })
 
-    expect(res).toStrictEqual([
-      {
-        _id: '01',
-        name: 'Certificat de naissance',
-        flexsearchProps: { translatedQualificationLabel: 'naissance' }
-      },
-      {
-        _id: '02',
-        name: 'attestation',
-        flexsearchProps: { translatedQualificationLabel: 'naissance' }
-      }
-    ])
+    expect(res).toStrictEqual({
+      filteredDocs: [
+        {
+          _id: '01',
+          flexsearchProps: { translatedQualificationLabel: 'naissance' },
+          name: 'Certificat de naissance'
+        },
+        {
+          _id: '02',
+          flexsearchProps: { translatedQualificationLabel: 'naissance' },
+          name: 'attestation'
+        }
+      ],
+      firstSearchResultMatchingAttributes: [
+        'name',
+        'flexsearchProps:translatedQualificationLabel'
+      ]
+    })
   })
 
   it('should return empty array if no matching documents', () => {
@@ -98,7 +107,10 @@ describe('search', () => {
       tag: undefined // ignored because of mocked search result
     })
 
-    expect(res).toStrictEqual([])
+    expect(res).toStrictEqual({
+      filteredDocs: [],
+      firstSearchResultMatchingAttributes: []
+    })
   })
 })
 
