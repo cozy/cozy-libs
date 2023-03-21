@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [24.4.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@24.3.0...cozy-mespapiers-lib@24.4.0) (2023-03-21)
+
+
+### Features
+
+* Harmonizes file metadata names ([5d92d9f](https://github.com/cozy/cozy-libs/commit/5d92d9f9e110964f578a9afdb428d648a415441f))
+
+
+
+
+
 # [24.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@24.2.7...cozy-mespapiers-lib@24.3.0) (2023-03-20)
 
 
