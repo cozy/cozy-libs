@@ -19,7 +19,7 @@
       "button": "Déconnecter le compte"
     },
     "installFlagship": {
-      "label": "Install Cozy on mobile"
+      "label": "Installer Cozy sur mobile"
     },
     "cannotConnectModal": {
       "title": "Vous ne parvenez pas à vous connecter ?",
