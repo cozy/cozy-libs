@@ -62,6 +62,7 @@ export const mockNativeMethods: NativeMethodsRegister = {
   hideSplashScreen: jest.fn(),
   logout: jest.fn(),
   openApp: jest.fn(),
+  setDefaultRedirection: jest.fn(),
   setFlagshipUI: jest.fn(),
   showSplashScreen: jest.fn()
 }
