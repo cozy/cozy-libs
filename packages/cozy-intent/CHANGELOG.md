@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.10.0 (2023-03-21)
+
+
+### Features
+
+* Add set default redirection type ([eb77578](https://github.com/cozy/cozy-libs/commit/eb77578ef7ee4fdbb1e5a404fb067b1e9c73f71d))
+* **mespapiers:** Get all contacts if flexsearch is activated ([24bc523](https://github.com/cozy/cozy-libs/commit/24bc523a0b3461c07fc9df9dc5ecc7f2af12282d))
+
+
+
+
+
 # 2.9.0 (2023-02-11)
 
 
