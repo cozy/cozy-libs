@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
+import withLocales from '../../../locales/withLocales'
 import ActionMenuItemWrapper from '../ActionMenuItemWrapper'
 
 export const open = () => {
   return {
     name: 'open',
-    Component: function Open({ className, files }) {
+    Component: withLocales(({ className, files }) => {
       const { t } = useI18n()
       const navigate = useNavigate()
       const fileId = files[0]?._id
@@ -28,6 +29,6 @@ export const open = () => {
           {t('action.open')}
         </ActionMenuItemWrapper>
       )
-    }
+    })
   }
 }

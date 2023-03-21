@@ -2,14 +2,15 @@ import React from 'react'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import { forwardFile } from '../utils'
+import withLocales from '../../../locales/withLocales'
 import ActionMenuItemWrapper from '../ActionMenuItemWrapper'
+import { forwardFile } from '../utils'
 
 export const forward = ({ client }) => {
   return {
     name: 'forward',
     action: (files, t) => forwardFile(client, files, t),
-    Component: function Forward({ onClick, className }) {
+    Component: withLocales(({ onClick, className }) => {
       const { t } = useI18n()
 
       return (
@@ -21,6 +22,6 @@ export const forward = ({ client }) => {
           {t('action.forward')}
         </ActionMenuItemWrapper>
       )
-    }
+    })
   }
 }

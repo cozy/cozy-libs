@@ -2,14 +2,15 @@ import React from 'react'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import { downloadFiles } from '../utils'
+import withLocales from '../../../locales/withLocales'
 import ActionMenuItemWrapper from '../ActionMenuItemWrapper'
+import { downloadFiles } from '../utils'
 
 export const download = ({ client }) => {
   return {
     name: 'download',
     action: files => downloadFiles(client, files),
-    Component: function Download({ onClick, className }) {
+    Component: withLocales(({ onClick, className }) => {
       const { t } = useI18n()
 
       return (
@@ -21,6 +22,6 @@ export const download = ({ client }) => {
           {t('action.download')}
         </ActionMenuItemWrapper>
       )
-    }
+    })
   }
 }
