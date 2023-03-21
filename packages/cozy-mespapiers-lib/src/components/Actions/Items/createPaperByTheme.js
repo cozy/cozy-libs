@@ -2,10 +2,11 @@ import React from 'react'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import ActionMenuItemWrapper from '../ActionMenuItemWrapper'
-import { useScannerI18n } from '../../Hooks/useScannerI18n'
-import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'
 import { findPlaceholderByLabelAndCountry } from '../../../helpers/findPlaceholders'
+import withLocales from '../../../locales/withLocales'
+import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'
+import { useScannerI18n } from '../../Hooks/useScannerI18n'
+import ActionMenuItemWrapper from '../ActionMenuItemWrapper'
 
 export const createPaperByTheme = ({
   showImportDropdown,
@@ -14,7 +15,7 @@ export const createPaperByTheme = ({
 }) => {
   return {
     name: 'createPaperByTheme',
-    Component: function CreatePaperByTheme({ className }) {
+    Component: withLocales(({ className }) => {
       const { t } = useI18n()
       const scannerT = useScannerI18n()
       const { papersDefinitions: paperDefinitionsList } = usePapersDefinitions()
@@ -35,6 +36,6 @@ export const createPaperByTheme = ({
           })}
         </ActionMenuItemWrapper>
       )
-    }
+    })
   }
 }

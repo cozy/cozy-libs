@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
+import withLocales from '../../../locales/withLocales'
 import ActionMenuItemWrapper from '../ActionMenuItemWrapper'
 
 export const select = ({ hideActionsMenu, addMultiSelectionFile }) => {
   return {
     name: 'select',
-    Component: function Select({ className, files }) {
+    Component: withLocales(({ className, files }) => {
       const { t } = useI18n()
       const navigate = useNavigate()
       const selectFromFile = files.length === 1
@@ -28,6 +29,6 @@ export const select = ({ hideActionsMenu, addMultiSelectionFile }) => {
           {selectFromFile ? t('action.select') : t('action.forwardPapers')}
         </ActionMenuItemWrapper>
       )
-    }
+    })
   }
 }

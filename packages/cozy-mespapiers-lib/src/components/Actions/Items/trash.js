@@ -4,8 +4,9 @@ import { isReferencedBy } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import { CONTACTS_DOCTYPE } from '../../../doctypes'
-import DeleteConfirm from '../DeleteConfirm'
+import withLocales from '../../../locales/withLocales'
 import ActionMenuItemWrapper from '../ActionMenuItemWrapper'
+import DeleteConfirm from '../DeleteConfirm'
 
 export const trash = ({ pushModal, popModal }) => {
   return {
@@ -19,7 +20,7 @@ export const trash = ({ pushModal, popModal }) => {
           onClose={popModal}
         />
       ),
-    Component: function Trash({ onClick, className }) {
+    Component: withLocales(({ onClick, className }) => {
       const { t } = useI18n()
 
       return (
@@ -33,6 +34,6 @@ export const trash = ({ pushModal, popModal }) => {
           {t('action.trash')}
         </ActionMenuItemWrapper>
       )
-    }
+    })
   }
 }

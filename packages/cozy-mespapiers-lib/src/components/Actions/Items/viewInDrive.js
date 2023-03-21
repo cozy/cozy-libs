@@ -4,12 +4,13 @@ import { generateWebLink } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Link from 'cozy-ui/transpiled/react/Link'
 
+import withLocales from '../../../locales/withLocales'
 import ActionMenuItemWrapper from '../ActionMenuItemWrapper'
 
 export const viewInDrive = ({ client }) => {
   return {
     name: 'viewInDrive',
-    Component: function ViewInDrive({ onClick, className, files }) {
+    Component: withLocales(({ onClick, className, files }) => {
       const { t } = useI18n()
       const dirId = files[0].dir_id
 
@@ -33,6 +34,6 @@ export const viewInDrive = ({ client }) => {
           </Link>
         </ActionMenuItemWrapper>
       )
-    }
+    })
   }
 }
