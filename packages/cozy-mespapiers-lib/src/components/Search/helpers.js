@@ -20,13 +20,22 @@ export const makeReducedResultIds = flexsearchResult =>
     return acc
   }, [])
 
-export const search = ({ docs, value, tag }) => {
-  const filteredDocs = index.search(value, { tag })
-  const resultsIds = makeReducedResultIds(filteredDocs)
+export const makeFirstSearchResultMatchingAttributes = (results, id) =>
+  results.map(x => (x.result.includes(id) ? x.field : undefined)).filter(x => x)
 
-  return (
-    resultsIds?.map(resultId => docs.find(doc => doc._id === resultId)) || []
-  )
+export const search = ({ docs, value, tag }) => {
+  const results = index.search(value, { tag })
+  const resultIds = makeReducedResultIds(results)
+
+  const filteredDocs =
+    resultIds
+      ?.map(resultId => docs.find(doc => doc._id === resultId))
+      .filter(x => x !== undefined) || []
+
+  const firstSearchResultMatchingAttributes =
+    makeFirstSearchResultMatchingAttributes(results, resultIds[0])
+
+  return { filteredDocs, firstSearchResultMatchingAttributes }
 }
 
 const onCreate = t => async doc => {
