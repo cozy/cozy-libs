@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.9.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.8.0...cozy-harvest-lib@13.9.0) (2023-03-21)
+
+
+### Features
+
+* **harvest:** Add FR translation to installFlagship ([31b5839](https://github.com/cozy/cozy-libs/commit/31b583970164bc13e5a98eaac7d6d097bb4e8998))
+
+
+
+
+
 # [13.8.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.7.2...cozy-harvest-lib@13.8.0) (2023-03-17)
 
 
