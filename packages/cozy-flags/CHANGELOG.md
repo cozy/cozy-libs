@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.12.0 (2023-03-21)
+
+
+### Features
+
+* **flag:** Find value from parameter with nested part into JSON content ([7836d84](https://github.com/cozy/cozy-libs/commit/7836d8445ed811602cfb689525368ac06407ab46))
+
+
+
+
+
 # 2.11.0 (2023-01-31)
 
 
