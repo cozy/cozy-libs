@@ -5,7 +5,7 @@ import Empty from 'cozy-ui/transpiled/react/Empty'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import { filterPapersByThemeAndSearchValue } from './helpers'
-import HomeCloud from '../../assets/icons/HomeCloud.svg'
+import SearchEmpty from '../../assets/icons/SearchEmpty.svg'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { buildFilesWithContacts } from '../Papers/helpers'
 import SearchResult from '../SearchResult/SearchResult'
@@ -31,7 +31,7 @@ const ResultForSearch = ({ contacts, papers, selectedTheme, searchValue }) => {
     return (
       <Empty
         className="u-ph-1"
-        icon={HomeCloud}
+        icon={SearchEmpty}
         iconSize="large"
         title={t('Search.empty.title')}
         text={t('Search.empty.text')}

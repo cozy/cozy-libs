@@ -6,6 +6,7 @@ import Empty from 'cozy-ui/transpiled/react/Empty'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import HomeCloud from '../../assets/icons/HomeCloud.svg'
+import SearchEmpty from '../../assets/icons/SearchEmpty.svg'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import PaperGroup from '../Papers/PaperGroup'
 import { useSearch } from '../Search/SearchProvider'
@@ -57,7 +58,7 @@ const ContentFlexsearch = ({
     return (
       <Empty
         className="u-ph-1"
-        icon={HomeCloud}
+        icon={SearchEmpty}
         iconSize="large"
         title={t('Search.empty.title')}
         text={t('Search.empty.text')}
