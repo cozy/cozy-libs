@@ -6,10 +6,10 @@ import { ActionMenuHeader } from 'cozy-ui/transpiled/react/ActionMenu'
 import Filename from 'cozy-ui/transpiled/react/Filename'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
+import ActionMenuWithClose from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemBase/ActionsMenu/ActionMenuWithClose'
 import ActionsItems from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemBase/ActionsMenu/ActionsItems'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
-import ActionMenuWrapper from '../Actions/ActionMenuWrapper'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import PaperItem from '../Papers/PaperItem'
 
@@ -53,7 +53,7 @@ const SearchResultLine = ({
       </PaperItem>
 
       {optionFile && (
-        <ActionMenuWrapper onClose={hideActionsMenu} ref={actionBtnRef}>
+        <ActionMenuWithClose onClose={hideActionsMenu} ref={actionBtnRef}>
           {isMobile && (
             <ActionMenuHeader>
               <Filename
@@ -64,7 +64,7 @@ const SearchResultLine = ({
             </ActionMenuHeader>
           )}
           <ActionsItems actions={actions} doc={file} />
-        </ActionMenuWrapper>
+        </ActionMenuWithClose>
       )}
     </>
   )

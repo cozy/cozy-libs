@@ -5,10 +5,10 @@ import { useClient } from 'cozy-client'
 import CozyTheme from 'cozy-ui/transpiled/react/CozyTheme'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
+import ActionMenuWithClose from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemBase/ActionsMenu/ActionMenuWithClose'
 import ActionsItems from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemBase/ActionsMenu/ActionsItems'
 import { makeActions } from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemBase/ActionsMenu/helpers'
 
-import ActionMenuWrapper from '../Actions/ActionMenuWrapper'
 import { createPaper } from '../Actions/Items/createPaper'
 import { select } from '../Actions/Items/select'
 
@@ -41,9 +41,9 @@ const MoreOptions = () => {
       </BarRight>
 
       {generalOptions && (
-        <ActionMenuWrapper onClose={hideActionsMenu} ref={actionBtnRef}>
+        <ActionMenuWithClose onClose={hideActionsMenu} ref={actionBtnRef}>
           <ActionsItems actions={actions} />
-        </ActionMenuWrapper>
+        </ActionMenuWithClose>
       )}
     </>
   )

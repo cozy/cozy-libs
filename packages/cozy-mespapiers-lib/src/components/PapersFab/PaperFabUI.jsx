@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import ActionMenuWithClose from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemBase/ActionsMenu/ActionMenuWithClose'
 import ActionsItems from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemBase/ActionsMenu/ActionsItems'
 
-import ActionMenuWrapper from '../Actions/ActionMenuWrapper'
 import ActionMenuImportDropdown from '../Placeholders/ActionMenuImportDropdown'
 
 const PaperFabUI = React.forwardRef(
@@ -16,9 +16,9 @@ const PaperFabUI = React.forwardRef(
         {PapersFabOverrided}
 
         {showGeneralMenu && (
-          <ActionMenuWrapper onClose={onClose} ref={ref}>
+          <ActionMenuWithClose onClose={onClose} ref={ref}>
             <ActionsItems actions={actions} />
-          </ActionMenuWrapper>
+          </ActionMenuWithClose>
         )}
         {showKonnectorMenu && (
           <ActionMenuImportDropdown
