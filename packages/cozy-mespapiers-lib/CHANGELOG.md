@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [27.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@26.0.2...cozy-mespapiers-lib@27.0.0) (2023-03-22)
+
+
+### Features
+
+* Add ContextFlexsearch ([7120bc4](https://github.com/cozy/cozy-libs/commit/7120bc474089c938e0bb232249514572a3ac6b54))
+* Add FlexsearchResultLine and useActions hook ([2541b8c](https://github.com/cozy/cozy-libs/commit/2541b8cc1aa6a881c417522b286745b6ccc34466))
+* Add renameDefaultActions ([3313dd9](https://github.com/cozy/cozy-libs/commit/3313dd978b124f763110d675f632a0093271c330))
+* AddFlexsearchResult ([86391e5](https://github.com/cozy/cozy-libs/commit/86391e56db9d2441e278b25f1b5335cb62e7cbeb))
+* Better code separation when using flexsearch or not ([352b86f](https://github.com/cozy/cozy-libs/commit/352b86fe78205fa6727b86813ac4806e30817ae7))
+* Change search placeholder wording ([647dc1a](https://github.com/cozy/cozy-libs/commit/647dc1a502249191afbb2b91492995d5b6589688))
+* Force app locales on paper actions ([edeae46](https://github.com/cozy/cozy-libs/commit/edeae4617009f0a57a6e8aaac5f95ef4581c37cb))
+* Replace illustration for empty search ([e3183c5](https://github.com/cozy/cozy-libs/commit/e3183c5fca4bd2499b2af3b9708d11cbbf3cbbb3))
+* Update cozy-ui from 81.6.0 to 81.8.0 ([d393148](https://github.com/cozy/cozy-libs/commit/d393148ced8c353015895babb6958d62579da150))
+
+
+### BREAKING CHANGES
+
+* you must have `cozy-ui >= 81.8.0`
+
+
+
+
+
 ## [26.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@26.0.1...cozy-mespapiers-lib@26.0.2) (2023-03-21)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
