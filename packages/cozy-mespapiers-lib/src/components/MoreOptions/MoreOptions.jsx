@@ -2,15 +2,15 @@
 import React, { useState, useRef } from 'react'
 
 import { useClient } from 'cozy-client'
-import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import CozyTheme from 'cozy-ui/transpiled/react/CozyTheme'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import IconButton from 'cozy-ui/transpiled/react/IconButton'
+import ActionsItems from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemBase/ActionsMenu/ActionsItems'
+import { makeActions } from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemBase/ActionsMenu/helpers'
 
-import { makeActions } from '../Actions/utils'
-import { select } from '../Actions/Items/select'
-import { createPaper } from '../Actions/Items/createPaper'
 import ActionMenuWrapper from '../Actions/ActionMenuWrapper'
-import { ActionsItems } from '../Actions/ActionsItems'
+import { createPaper } from '../Actions/Items/createPaper'
+import { select } from '../Actions/Items/select'
 
 /**
  * This component is no longer used temporarily,

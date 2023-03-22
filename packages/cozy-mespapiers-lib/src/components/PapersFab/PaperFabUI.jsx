@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import ActionsItems from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemBase/ActionsMenu/ActionsItems'
+
 import ActionMenuWrapper from '../Actions/ActionMenuWrapper'
-import { ActionsItems } from '../Actions/ActionsItems'
 import ActionMenuImportDropdown from '../Placeholders/ActionMenuImportDropdown'
 
 const PaperFabUI = React.forwardRef(

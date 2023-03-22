@@ -7,7 +7,7 @@ import ActionMenuItemWrapper from '../ActionMenuItemWrapper'
 
 export const rename = ({ setPaperBeingRenamedId }) => {
   return {
-    name: 'rename',
+    name: 'renameWithOwnAction',
     action: files => setPaperBeingRenamedId(files[0].id),
     Component: withLocales(({ onClick, className }) => {
       const { t } = useI18n()

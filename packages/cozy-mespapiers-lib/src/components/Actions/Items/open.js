@@ -9,11 +9,11 @@ import ActionMenuItemWrapper from '../ActionMenuItemWrapper'
 export const open = () => {
   return {
     name: 'open',
-    Component: withLocales(({ className, files }) => {
+    Component: withLocales(({ className, docs }) => {
       const { t } = useI18n()
       const navigate = useNavigate()
-      const fileId = files[0]?._id
-      const fileTheme = files[0]?.metadata?.qualification?.label
+      const fileId = docs[0]?._id
+      const fileTheme = docs[0]?.metadata?.qualification?.label
 
       return (
         <ActionMenuItemWrapper

@@ -1,21 +1,22 @@
-import React, { useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
+import React, { useMemo, useState } from 'react'
 
 import { useClient } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
+import { makeActions } from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemBase/ActionsMenu/helpers'
 import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
 
-import { useMultiSelection } from '../Hooks/useMultiSelection'
-import { useModal } from '../Hooks/useModal'
-import { makeActions, makeActionVariant } from '../Actions/utils'
-import { select } from '../Actions/Items/select'
+import SearchResultLine from './SearchResultLine'
 import { hr } from '../Actions/Items/hr'
-import { viewInDrive } from '../Actions/Items/viewInDrive'
-import { trash } from '../Actions/Items/trash'
 import { open } from '../Actions/Items/open'
 import { rename } from '../Actions/Items/rename'
-import SearchResultLine from './SearchResultLine'
+import { select } from '../Actions/Items/select'
+import { trash } from '../Actions/Items/trash'
+import { viewInDrive } from '../Actions/Items/viewInDrive'
+import { makeActionVariant } from '../Actions/utils'
+import { useModal } from '../Hooks/useModal'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const SearchResult = ({ filteredPapers }) => {
   const client = useClient()
