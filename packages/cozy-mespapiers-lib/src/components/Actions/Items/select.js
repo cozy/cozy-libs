@@ -9,10 +9,10 @@ import ActionMenuItemWrapper from '../ActionMenuItemWrapper'
 export const select = ({ hideActionsMenu, addMultiSelectionFile }) => {
   return {
     name: 'select',
-    Component: withLocales(({ className, files }) => {
+    Component: withLocales(({ className, docs }) => {
       const { t } = useI18n()
       const navigate = useNavigate()
-      const selectFromFile = files.length === 1
+      const selectFromFile = docs.length === 1
 
       return (
         <ActionMenuItemWrapper
@@ -21,9 +21,9 @@ export const select = ({ hideActionsMenu, addMultiSelectionFile }) => {
           onClick={() => {
             navigate(`/paper/multiselect`)
             hideActionsMenu && hideActionsMenu()
-            files.length > 0 &&
+            docs.length > 0 &&
               addMultiSelectionFile &&
-              addMultiSelectionFile(files[0])
+              addMultiSelectionFile(docs[0])
           }}
         >
           {selectFromFile ? t('action.select') : t('action.forwardPapers')}

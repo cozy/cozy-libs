@@ -1,17 +1,17 @@
-import React, { useState, useRef, memo } from 'react'
 import PropTypes from 'prop-types'
+import React, { useState, useRef, memo } from 'react'
 
 import { models } from 'cozy-client'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { ActionMenuHeader } from 'cozy-ui/transpiled/react/ActionMenu'
 import Filename from 'cozy-ui/transpiled/react/Filename'
-import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import IconButton from 'cozy-ui/transpiled/react/IconButton'
+import ActionsItems from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemBase/ActionsMenu/ActionsItems'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
-import { ActionsItems } from '../Actions/ActionsItems'
 import ActionMenuWrapper from '../Actions/ActionMenuWrapper'
-import PaperItem from '../Papers/PaperItem'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
+import PaperItem from '../Papers/PaperItem'
 
 const { splitFilename } = models.file
 
@@ -64,7 +64,7 @@ const PaperLine = ({
               />
             </ActionMenuHeader>
           )}
-          <ActionsItems actions={actions} file={paper} isLast={isLast} />
+          <ActionsItems actions={actions} doc={paper} isLast={isLast} />
         </ActionMenuWrapper>
       )}
     </>

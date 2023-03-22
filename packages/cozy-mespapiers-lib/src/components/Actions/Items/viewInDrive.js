@@ -10,9 +10,9 @@ import ActionMenuItemWrapper from '../ActionMenuItemWrapper'
 export const viewInDrive = ({ client }) => {
   return {
     name: 'viewInDrive',
-    Component: withLocales(({ onClick, className, files }) => {
+    Component: withLocales(({ onClick, className, docs }) => {
       const { t } = useI18n()
-      const dirId = files[0].dir_id
+      const dirId = docs[0].dir_id
 
       const webLink = generateWebLink({
         slug: 'drive',
