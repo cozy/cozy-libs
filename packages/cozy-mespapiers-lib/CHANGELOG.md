@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [27.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@27.0.0...cozy-mespapiers-lib@27.0.1) (2023-03-22)
+
+
+### Bug Fixes
+
+* **mespapiers:** Use ActionsItems and makeActions from cozy-ui ([5e9d202](https://github.com/cozy/cozy-libs/commit/5e9d202e2d8b2ae4e52f481d98258350dbbc829b))
+
+
+
+
+
 # [27.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@26.0.2...cozy-mespapiers-lib@27.0.0) (2023-03-22)
 
 
