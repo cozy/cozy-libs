@@ -16,7 +16,6 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import AccountFields from './AccountFields'
 import CannotConnectModal from './CannotConnectModal'
-import ConnectionBackdrop from './ConnectionBackdrop'
 import ReadOnlyIdentifier from './ReadOnlyIdentifier'
 import fieldHelpers, {
   getEncryptedFieldName,
@@ -357,9 +356,6 @@ export class AccountForm extends PureComponent {
                     onClick={() => this.handleSubmit(values, form)}
                     data-testid="submit-btn"
                   />
-                )}
-                {submitting && flag('harvest.inappconnectors.enabled') && (
-                  <ConnectionBackdrop name={name} />
                 )}
               </>
             ) : (
