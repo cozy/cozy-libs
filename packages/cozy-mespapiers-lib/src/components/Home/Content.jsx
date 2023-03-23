@@ -1,12 +1,12 @@
-import React, { useMemo } from 'react'
-import PropTypes from 'prop-types'
 import uniqBy from 'lodash/uniqBy'
+import PropTypes from 'prop-types'
+import React, { useMemo } from 'react'
 
 import Empty from 'cozy-ui/transpiled/react/Empty'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import HomeCloud from '../../assets/icons/HomeCloud.svg'
 import ResultForSearch from './ResultForSearch'
+import HomeCloud from '../../assets/icons/HomeCloud.svg'
 import PaperGroup from '../Papers/PaperGroup'
 
 const Content = ({
@@ -50,6 +50,7 @@ const Content = ({
     <PaperGroup
       papersByCategories={papersByCategories}
       konnectors={konnectors}
+      selectedTheme={selectedTheme}
     />
   )
 }

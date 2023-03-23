@@ -11,7 +11,7 @@ import CategoryItemByPaper from './CategoryItemByPaper'
 import KonnectorsCategories from './KonnectorsCategories'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
-const PaperGroup = ({ papersByCategories, konnectors }) => {
+const PaperGroup = ({ papersByCategories, konnectors, selectedTheme }) => {
   const navigate = useNavigate()
   const { t } = useI18n()
   const { isMultiSelectionActive, setSelectedThemeLabel } = useMultiSelection()
@@ -44,20 +44,23 @@ const PaperGroup = ({ papersByCategories, konnectors }) => {
           <CategoryItemByPaper
             key={paper.id}
             paper={paper}
-            isLast={
-              index === papersByCategories.length - 1 && konnectors.length === 0
-            }
+            isLast={index === papersByCategories.length - 1}
             onClick={goPapersList}
           />
         ))}
-      <KonnectorsCategories konnectors={konnectors} onClick={goPapersList} />
+      <KonnectorsCategories
+        konnectors={konnectors}
+        selectedTheme={selectedTheme}
+        onClick={goPapersList}
+      />
     </List>
   )
 }
 
 PaperGroup.propTypes = {
   papersByCategories: PropTypes.arrayOf(PropTypes.object),
-  konnectors: PropTypes.arrayOf(PropTypes.object)
+  konnectors: PropTypes.arrayOf(PropTypes.object),
+  selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 }
 
 export default PaperGroup

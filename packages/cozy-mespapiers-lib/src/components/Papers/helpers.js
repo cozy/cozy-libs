@@ -2,6 +2,7 @@ import groupBy from 'lodash/groupBy'
 
 import { models, getReferencedBy } from 'cozy-client'
 import { getAccountName } from 'cozy-client/dist/models/account'
+import { getThemeByItem } from 'cozy-client/dist/models/document/documentTypeDataHelpers'
 
 import { CONTACTS_DOCTYPE } from '../../doctypes'
 import { filterWithRemaining } from '../../helpers/filterWithRemaining'
@@ -228,4 +229,21 @@ export const makeAccountFromPapers = (papers, accounts) => {
     : undefined
 
   return account
+}
+
+export const makeQualificationLabelsWithoutFiles = (
+  konnectorsWithAccounts,
+  selectedTheme
+) => {
+  return konnectorsWithAccounts
+    .flatMap(({ konnectorQualifLabelsWithoutFile }) => {
+      return konnectorQualifLabelsWithoutFile?.map(qualificationLabel => {
+        const themeLabel = getThemeByItem({ label: qualificationLabel }).label
+        const showCategoryItemByKonnector =
+          !selectedTheme || selectedTheme.label === themeLabel
+
+        return showCategoryItemByKonnector ? qualificationLabel : undefined
+      })
+    })
+    .filter(x => x)
 }
