@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [28.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@28.0.0...cozy-mespapiers-lib@28.0.1) (2023-03-23)
+
+
+### Bug Fixes
+
+* **mespapiers:** Flexsearch result wasn't correct when filtering ([aa8aa51](https://github.com/cozy/cozy-libs/commit/aa8aa51ab79e982e98ecabd856b8d305293530e0))
+* **mespapiers:** KonnectorsCategories wasn't relied on search filter ([6fd8553](https://github.com/cozy/cozy-libs/commit/6fd85535e9d28c0caead67a975b8a80d4426126a))
+
+
+
+
+
 # [28.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@27.0.2...cozy-mespapiers-lib@28.0.0) (2023-03-23)
 
 
