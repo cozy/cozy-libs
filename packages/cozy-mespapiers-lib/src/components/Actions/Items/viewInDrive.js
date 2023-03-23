@@ -1,11 +1,11 @@
 import React from 'react'
 
 import { generateWebLink } from 'cozy-client'
+import ActionMenuItemWrapper from 'cozy-ui/transpiled/react/ActionMenu/ActionMenuItemWrapper'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Link from 'cozy-ui/transpiled/react/Link'
 
 import withLocales from '../../../locales/withLocales'
-import ActionMenuItemWrapper from '../ActionMenuItemWrapper'
 
 export const viewInDrive = ({ client }) => {
   return {
