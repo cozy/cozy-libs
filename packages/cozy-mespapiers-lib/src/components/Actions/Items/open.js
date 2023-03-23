@@ -1,10 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import ActionMenuItemWrapper from 'cozy-ui/transpiled/react/ActionMenu/ActionMenuItemWrapper'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import withLocales from '../../../locales/withLocales'
-import ActionMenuItemWrapper from '../ActionMenuItemWrapper'
 
 export const open = () => {
   return {
