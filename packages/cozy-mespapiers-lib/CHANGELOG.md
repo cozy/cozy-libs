@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [28.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@27.0.2...cozy-mespapiers-lib@28.0.0) (2023-03-23)
+
+
+### Features
+
+* Change route import after cozy-ui breaking change ([e68149a](https://github.com/cozy/cozy-libs/commit/e68149ac886d9b962490c53776f9a4ea29930f48))
+* **mespapiers:** Upgrade cozy-ui from 81.8.0 to 82.1.0 ([385b932](https://github.com/cozy/cozy-libs/commit/385b93242c87d3358fbc1cfd67d32a7d619d9aa0))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 82.1.0`
+
+
+
+
+
 ## [27.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@27.0.1...cozy-mespapiers-lib@27.0.2) (2023-03-23)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
