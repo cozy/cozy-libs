@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+import { createPortal } from 'react-dom'
 
 import { withClient } from 'cozy-client'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
@@ -173,9 +174,11 @@ export class FlowProvider extends Component {
           />
         )}
 
-        {showConnectionBackdrop && (
-          <ConnectionBackdrop name={flow.konnector.name} />
-        )}
+        {showConnectionBackdrop &&
+          createPortal(
+            <ConnectionBackdrop name={flow.konnector.name} />,
+            document.body
+          )}
       </>
     )
   }
