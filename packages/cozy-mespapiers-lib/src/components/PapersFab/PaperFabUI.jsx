@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import ActionMenuWithClose from 'cozy-ui/transpiled/react/ActionMenu/ActionMenuWithClose'
-import ActionsItems from 'cozy-ui/transpiled/react/ActionMenu/Actions/ActionsItems'
+import {
+  ActionMenuWithClose,
+  ActionsItems
+} from 'cozy-ui/transpiled/react/ActionMenu'
 
 import ActionMenuImportDropdown from '../Placeholders/ActionMenuImportDropdown'
 

@@ -2,9 +2,11 @@ import PropTypes from 'prop-types'
 import React, { useRef, useState } from 'react'
 
 import { models } from 'cozy-client'
-import { ActionMenuHeader } from 'cozy-ui/transpiled/react/ActionMenu'
-import ActionMenuWithClose from 'cozy-ui/transpiled/react/ActionMenu/ActionMenuWithClose'
-import ActionsItems from 'cozy-ui/transpiled/react/ActionMenu/Actions/ActionsItems'
+import {
+  ActionMenuHeader,
+  ActionMenuWithClose,
+  ActionsItems
+} from 'cozy-ui/transpiled/react/ActionMenu'
 import Filename from 'cozy-ui/transpiled/react/Filename'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
