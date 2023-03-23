@@ -3,11 +3,11 @@ import React, { useState, useRef, memo } from 'react'
 
 import { models } from 'cozy-client'
 import { ActionMenuHeader } from 'cozy-ui/transpiled/react/ActionMenu'
+import ActionMenuWithClose from 'cozy-ui/transpiled/react/ActionMenu/ActionMenuWithClose'
+import ActionsItems from 'cozy-ui/transpiled/react/ActionMenu/Actions/ActionsItems'
 import Filename from 'cozy-ui/transpiled/react/Filename'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import ActionMenuWithClose from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemBase/ActionsMenu/ActionMenuWithClose'
-import ActionsItems from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemBase/ActionsMenu/ActionsItems'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import { useMultiSelection } from '../Hooks/useMultiSelection'

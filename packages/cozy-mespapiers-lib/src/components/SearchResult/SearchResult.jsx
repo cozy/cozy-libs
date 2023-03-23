@@ -2,9 +2,9 @@ import PropTypes from 'prop-types'
 import React, { useMemo, useState } from 'react'
 
 import { useClient } from 'cozy-client'
+import { makeActions } from 'cozy-ui/transpiled/react/ActionMenu/Actions/helpers'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
-import { makeActions } from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemBase/ActionsMenu/helpers'
 import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
 
 import SearchResultLine from './SearchResultLine'

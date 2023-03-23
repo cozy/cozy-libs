@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 
 import { useClient } from 'cozy-client'
 import { isFile } from 'cozy-client/dist/models/file'
-import { makeActions } from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemBase/ActionsMenu/helpers'
+import { makeActions } from 'cozy-ui/transpiled/react/ActionMenu/Actions/helpers'
 
 import { hr } from '../Actions/Items/hr'
 import { open } from '../Actions/Items/open'
