@@ -55,6 +55,7 @@ const ContentWhenSearching = ({
       <PaperGroup
         papersByCategories={papersByCategories}
         konnectors={konnectors}
+        selectedTheme={selectedTheme}
       />
     )
   }

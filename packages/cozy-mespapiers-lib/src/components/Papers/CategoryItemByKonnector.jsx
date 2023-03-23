@@ -10,11 +10,17 @@ import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 import styles from './styles.styl'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 
-const CategoryItemByKonnector = ({ qualificationLabel, isLast, onClick }) => {
+const CategoryItemByKonnector = ({
+  qualificationLabel,
+  isFirst,
+  isLast,
+  onClick
+}) => {
   const scannerT = useScannerI18n()
 
   return (
     <>
+      {isFirst && <Divider variant="inset" component="li" />}
       <ListItem button onClick={() => onClick(qualificationLabel)}>
         <ListItemIcon>
           <div className={styles['emptyKonnectorIcon']} />
