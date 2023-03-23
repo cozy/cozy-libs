@@ -3,9 +3,9 @@ import React, { useMemo, useState } from 'react'
 
 import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
+import { makeActions } from 'cozy-ui/transpiled/react/ActionMenu/Actions/helpers'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import { makeActions } from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemBase/ActionsMenu/helpers'
 
 import HarvestBanner from './HarvestBanner'
 import { makeAccountFromPapers } from './helpers'

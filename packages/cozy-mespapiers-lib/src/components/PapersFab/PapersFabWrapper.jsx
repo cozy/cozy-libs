@@ -3,7 +3,7 @@ import React, { cloneElement, useRef, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 import { useClient } from 'cozy-client'
-import { makeActions } from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemBase/ActionsMenu/helpers'
+import { makeActions } from 'cozy-ui/transpiled/react/ActionMenu/Actions/helpers'
 
 import PaperFabUI from './PaperFabUI'
 import { findPlaceholderByLabelAndCountry } from '../../helpers/findPlaceholders'
