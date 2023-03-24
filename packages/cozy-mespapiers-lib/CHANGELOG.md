@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [28.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@28.0.1...cozy-mespapiers-lib@28.0.2) (2023-03-24)
+
+
+### Bug Fixes
+
+* Passport translation key ([a6fc9c2](https://github.com/cozy/cozy-libs/commit/a6fc9c2e4677d5337e23d9bf29738cd4c21fa83a))
+
+
+
+
+
 ## [28.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@28.0.0...cozy-mespapiers-lib@28.0.1) (2023-03-23)
 
 
