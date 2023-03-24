@@ -1722,12 +1722,12 @@
           "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.png",
-          "text": "PaperJSON.passport.country.text",
+          "text": "PaperJSON.passport.information.country.text",
           "attributes": [
             {
               "name": "country",
               "type": "text",
-              "inputLabel": "PaperJSON.passport.country.inputLabel"
+              "inputLabel": "PaperJSON.passport.information.country.inputLabel"
             }
           ]
         },
