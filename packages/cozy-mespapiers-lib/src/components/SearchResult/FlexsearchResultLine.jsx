@@ -3,13 +3,12 @@ import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 import { isFile } from 'cozy-client/dist/models/file'
-import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import ListItemByDoc from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemByDoc'
 
 import useActions from './useActions'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
-const FlexsearchResultLine = ({ doc, expandedAttributes, isFirst, isLast }) => {
+const FlexsearchResultLine = ({ doc, expandedAttributesProps }) => {
   const actions = useActions(doc)
   const navigate = useNavigate()
   const { pathname, search } = useLocation()
@@ -53,10 +52,7 @@ const FlexsearchResultLine = ({ doc, expandedAttributes, isFirst, isLast }) => {
       <ListItemByDoc
         doc={doc}
         actions={actions}
-        expandedAttributesProps={{
-          isExpandedAttributesActive: isFirst,
-          expandedAttributes
-        }}
+        expandedAttributesProps={expandedAttributesProps}
         selectProps={{
           isSelectActive: isMultiSelectionActive,
           isSelected: isSelected(),
@@ -64,16 +60,13 @@ const FlexsearchResultLine = ({ doc, expandedAttributes, isFirst, isLast }) => {
         }}
         onClick={handleClick}
       />
-      {isFirst && !isLast && <Divider component="li" />}
     </>
   )
 }
 
 FlexsearchResultLine.propTypes = {
   doc: PropTypes.object,
-  searchMatchingAttributes: PropTypes.array,
-  isFirst: PropTypes.bool,
-  isLast: PropTypes.bool
+  searchMatchingAttributes: PropTypes.array
 }
 
 export default FlexsearchResultLine
