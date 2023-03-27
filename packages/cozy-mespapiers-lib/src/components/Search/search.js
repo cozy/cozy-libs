@@ -39,6 +39,7 @@ if (!flag('mespapiers.migrated.metadata')) {
  * The order of indexes declaration impact the order of the resulting documents.
  */
 export const index = new Document({
+  tokenize: 'full',
   document: {
     id: '_id',
     tag: 'flexsearchProps:tag',
