@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
 
@@ -13,25 +14,31 @@ const FlexsearchResult = ({
 }) => {
   const { t } = useI18n()
 
+  const firstDoc = filteredDocs[0]
+  const otherDocs = filteredDocs.slice(1)
+  const hasOtherDocs = otherDocs.length > 0
+
   return (
     <>
       <ListSubheader>{t('PapersList.subheader')}</ListSubheader>
       <List className="u-pv-0">
-        {filteredDocs.map((doc, index) => {
-          const isFirst = index === 0
-
-          return (
-            <FlexsearchResultLine
-              key={doc._id}
-              doc={doc}
-              expandedAttributes={
-                isFirst ? firstSearchResultMatchingAttributes : undefined
-              }
-              isFirst={isFirst}
-              isLast={index === filteredDocs.length - 1}
-            />
-          )
-        })}
+        <FlexsearchResultLine
+          doc={firstDoc}
+          expandedAttributesProps={{
+            isExpandedAttributesActive: true,
+            expandedAttributes: firstSearchResultMatchingAttributes
+          }}
+        />
+        {hasOtherDocs && (
+          <>
+            <Divider component="li" />
+            <List>
+              {otherDocs.map(doc => (
+                <FlexsearchResultLine key={doc._id} doc={doc} />
+              ))}
+            </List>
+          </>
+        )}
       </List>
     </>
   )
