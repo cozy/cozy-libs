@@ -8,7 +8,7 @@ import { CONTACTS_DOCTYPE } from '../../doctypes'
 
 const isContact = doc => doc._type === CONTACTS_DOCTYPE
 
-const flexSearchIndex = [
+const flexsearchIndex = [
   'flexsearchProps:translatedQualificationLabel', // io.cozy.files
   'metadata:number', // io.cozy.files
   'fullname', // io.cozy.contacts
@@ -22,12 +22,12 @@ const flexSearchIndex = [
   'jobTitle' // io.cozy.contacts
 ]
 if (!flag('mespapiers.migrated.metadata')) {
-  flexSearchIndex.splice(1, 0, 'metadata:ibanNumber') // io.cozy.files
-  flexSearchIndex.splice(3, 0, 'metadata:passportNumber') // io.cozy.files
-  flexSearchIndex.splice(4, 0, 'metadata:vinNumber') // io.cozy.files
-  flexSearchIndex.splice(5, 0, 'metadata:refTaxIncome') // io.cozy.files
-  flexSearchIndex.splice(6, 0, 'metadata:cardNumber') // io.cozy.files
-  flexSearchIndex.splice(7, 0, 'metadata:cafFileNumber') // io.cozy.files
+  flexsearchIndex.splice(1, 0, 'metadata:ibanNumber') // io.cozy.files
+  flexsearchIndex.splice(3, 0, 'metadata:passportNumber') // io.cozy.files
+  flexsearchIndex.splice(4, 0, 'metadata:vinNumber') // io.cozy.files
+  flexsearchIndex.splice(5, 0, 'metadata:refTaxIncome') // io.cozy.files
+  flexsearchIndex.splice(6, 0, 'metadata:cardNumber') // io.cozy.files
+  flexsearchIndex.splice(7, 0, 'metadata:cafFileNumber') // io.cozy.files
 }
 
 /** The index document will store _id for each document having the declared indexed fields,
@@ -42,7 +42,7 @@ export const index = new Document({
   document: {
     id: '_id',
     tag: 'flexsearchProps:tag',
-    index: flexSearchIndex
+    index: flexsearchIndex
   }
 })
 
