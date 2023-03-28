@@ -67,7 +67,7 @@ export const buildGroupsQuery = () => ({
 })
 
 export const buildInstanceSettingsQuery = () => ({
-  definition: Q('io.cozy.settings').getById('instance'),
+  definition: Q('io.cozy.settings').getById('io.cozy.settings.instance'),
   options: {
     as: 'io.cozy.settings/instance',
     singleDocData: true
