@@ -4,19 +4,36 @@ import React from 'react'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
+import { hasExpandedAttributesDisplayed } from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ExpandedAttributes/helpers'
 import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
 
 import FlexsearchResultLine from './FlexsearchResultLine'
+
+const SeparatorWrapper = ({ hasExpandedAttributes, children, ...props }) => {
+  if (!hasExpandedAttributes) return children
+  return (
+    <>
+      <Divider component="li" />
+      <List {...props}>{children}</List>
+    </>
+  )
+}
 
 const FlexsearchResult = ({
   filteredDocs,
   firstSearchResultMatchingAttributes
 }) => {
-  const { t } = useI18n()
+  const { t, f, lang } = useI18n()
 
   const firstDoc = filteredDocs[0]
   const otherDocs = filteredDocs.slice(1)
   const hasOtherDocs = otherDocs.length > 0
+  const hasExpandedAttributesToDisplay = hasExpandedAttributesDisplayed({
+    doc: firstDoc,
+    expandedAttributes: firstSearchResultMatchingAttributes,
+    f,
+    lang
+  })
 
   return (
     <>
@@ -30,14 +47,13 @@ const FlexsearchResult = ({
           }}
         />
         {hasOtherDocs && (
-          <>
-            <Divider component="li" />
-            <List>
-              {otherDocs.map(doc => (
-                <FlexsearchResultLine key={doc._id} doc={doc} />
-              ))}
-            </List>
-          </>
+          <SeparatorWrapper
+            hasExpandedAttributes={hasExpandedAttributesToDisplay}
+          >
+            {otherDocs.map(doc => (
+              <FlexsearchResultLine key={doc._id} doc={doc} />
+            ))}
+          </SeparatorWrapper>
         )}
       </List>
     </>
