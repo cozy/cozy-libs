@@ -159,7 +159,10 @@ const setupSubmit = (flow, submitOptions) => {
 describe('ConnectionFlow', () => {
   describe('constructor', () => {
     beforeAll(() => {
-      watchKonnectorJob.mockReturnValue({ on: () => ({}) })
+      watchKonnectorJob.mockReturnValue({
+        handleLoginSuccess: () => true,
+        on: () => ({})
+      })
     })
 
     afterEach(() => {
@@ -167,11 +170,14 @@ describe('ConnectionFlow', () => {
     })
 
     it('should watch a running trigger', () => {
-      setup({ trigger: fixtures.runningTrigger })
+      const { flow } = setup({ trigger: fixtures.runningTrigger })
       expect(watchKonnectorJob).toHaveBeenCalledWith(
         expect.any(Object),
         { _id: 'running-job-id' },
-        { autoSuccessTimer: false }
+        { autoSuccessTimer: false, loginSuccess: true }
+      )
+      expect(flow.getState()).toEqual(
+        expect.objectContaining({ loginSuccess: true })
       )
     })
 
@@ -302,7 +308,10 @@ describe('ConnectionFlow', () => {
 
   describe('getState', () => {
     beforeAll(() => {
-      watchKonnectorJob.mockReturnValue({ on: () => ({}) })
+      watchKonnectorJob.mockReturnValue({
+        handleLoginSuccess: () => true,
+        on: () => ({})
+      })
     })
     afterEach(() => {
       jest.clearAllMocks()
@@ -426,7 +435,10 @@ describe('ConnectionFlow', () => {
       return flow.getState().running === true
     }
     beforeAll(() => {
-      watchKonnectorJob.mockReturnValue({ on: () => ({}) })
+      watchKonnectorJob.mockReturnValue({
+        handleLoginSuccess: () => true,
+        on: () => ({})
+      })
     })
 
     afterEach(() => {

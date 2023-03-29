@@ -687,7 +687,7 @@ export class ConnectionFlow {
       this.job = {
         _id: this.trigger?.current_state?.last_executed_job_id
       }
-      this.watchJob()
+      this.watchJob({ autoSuccessTimer: false, loginSuccess: true })
     }
   }
 
@@ -728,9 +728,11 @@ export class ConnectionFlow {
    * Watches updates of the job given in this.job using watchKonnectorJob
    *
    * @param {Object} options
-   * @param {Boolean} options.autoSuccessTimer - if true, suppose the login is sucessfull after 8 seconds
+   * @param {Boolean} [options.autoSuccessTimer] - if true, suppose the login is sucessfull after 8 seconds
+   * @param {Boolean} [options.loginSuccess] - if true, automatically add LOGIN_SUCCESS state to the flow
+   * @returns {void}
    */
-  watchJob(options = { autoSuccessTimer: false }) {
+  watchJob(options = { autoSuccessTimer: false, loginSuccess: false }) {
     if (this.job?._id === this.jobWatcher?.job?._id) {
       // no need to rewatch a job we are already watching
       return
@@ -750,6 +752,9 @@ export class ConnectionFlow {
 
     for (const ev of JOB_EVENTS) {
       this.jobWatcher.on(ev, (...args) => this.triggerEvent(ev, ...args))
+    }
+    if (options.loginSuccess) {
+      this.handleLoginSuccess()
     }
 
     this.unsubscribeAllRealtime = () => {
