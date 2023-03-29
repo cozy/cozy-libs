@@ -97,7 +97,28 @@ export const buildContactsQueryByIds = (ids = [], enabled = true) => ({
 })
 
 export const buildContactsQuery = (enabled = true) => ({
-  definition: () => Q(CONTACTS_DOCTYPE).limitBy(1000),
+  definition: () =>
+    Q(CONTACTS_DOCTYPE)
+      .where({
+        // `where` should be removed when https://github.com/cozy/cozy-client/issues/1216 fixed
+        _id: {
+          $gt: null
+        }
+      })
+      .select([
+        '_id',
+        'name',
+        'displayName',
+        'fullname',
+        'email',
+        'phone',
+        'address',
+        'birthday',
+        'birthcity',
+        'company',
+        'jobTitle'
+      ])
+      .limitBy(1000),
   options: {
     as: CONTACTS_DOCTYPE,
     fetchPolicy: defaultFetchPolicy,
