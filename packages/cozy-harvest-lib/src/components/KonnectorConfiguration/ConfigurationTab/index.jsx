@@ -139,6 +139,11 @@ const ConfigurationTab = ({
   }
 
   const konnectorPolicy = findKonnectorPolicy(konnector)
+  const showEdit = !(
+    konnector.oauth ||
+    konnectorPolicy.isBIWebView ||
+    konnector.clientSide
+  )
 
   return (
     <div className={isMobile ? '' : 'u-pt-1 u-pb-1-half'}>
@@ -153,7 +158,7 @@ const ConfigurationTab = ({
           {t('modal.updateAccount.general-subheader')}
         </NavigationListHeader>
         <NavigationListSection>
-          {konnector.oauth || konnectorPolicy.isBIWebView ? null : (
+          {showEdit && (
             <ListItem
               button
               divider
