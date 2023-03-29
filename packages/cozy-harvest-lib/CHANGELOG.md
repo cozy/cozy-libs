@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.10.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.9.4...cozy-harvest-lib@13.10.0) (2023-03-29)
+
+
+### Features
+
+* **harvest:** Make configtab account non clickable ([0256633](https://github.com/cozy/cozy-libs/commit/02566334242f67fae2ef251904b403e74e651857))
+
+
+
+
+
 ## [13.9.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.9.3...cozy-harvest-lib@13.9.4) (2023-03-23)
 
 
