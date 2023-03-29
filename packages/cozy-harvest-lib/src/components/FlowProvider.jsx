@@ -158,6 +158,7 @@ export class FlowProvider extends Component {
     const { children } = this.props
     const showConnectionBackdrop =
       flowState?.running &&
+      !flowState[LOGIN_SUCCESS_EVENT] &&
       (flow.konnector?.clientSide || flow.konnector?.oauth)
 
     return (
