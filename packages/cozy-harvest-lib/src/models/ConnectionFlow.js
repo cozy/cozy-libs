@@ -1,5 +1,6 @@
 // @ts-check
 // @ts-ignore
+import clone from 'lodash/clone'
 import MicroEE from 'microee'
 
 // @ts-ignore
@@ -42,15 +43,12 @@ import * as accounts from '../helpers/accounts'
 import { KonnectorJobError } from '../helpers/konnectors'
 import * as triggersModel from '../helpers/triggers'
 import { findKonnectorPolicy } from '../konnector-policies'
-import '../types'
-
-import clone from 'lodash/clone'
-
-import { watchKonnectorJob } from '../models/konnector/KonnectorJobWatcher'
 import logger from '../logger'
 import { createOrUpdateCipher } from '../models/cipherUtils'
+import { watchKonnectorJob } from '../models/konnector/KonnectorJobWatcher'
 import sentryHub from '../sentry'
 import { sendRealtimeNotification } from '../services/jobUtils'
+import '../types'
 
 const JOBS_DOCTYPE = 'io.cozy.jobs'
 
