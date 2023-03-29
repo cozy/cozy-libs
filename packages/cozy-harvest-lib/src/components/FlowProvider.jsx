@@ -130,7 +130,7 @@ export class FlowProvider extends Component {
   }
 
   handleLoginSuccess() {
-    logger.info('FlowProvider: Handle success')
+    logger.info('FlowProvider: Handle login success')
     if (this.state.showTwoFAModal) {
       this.dismissTwoFAModal()
     }
