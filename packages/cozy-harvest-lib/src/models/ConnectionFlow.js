@@ -654,7 +654,8 @@ export class ConnectionFlow {
         .onLaunch({
           konnector: this.konnector,
           trigger: this.trigger,
-          account: this.account
+          account: this.account,
+          flow: this
         })
         .then(() => this.setState({ status: IDLE }))
         .catch(err =>

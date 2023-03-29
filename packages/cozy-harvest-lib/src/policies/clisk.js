@@ -4,6 +4,7 @@
  */
 
 import logger from '../logger'
+import { LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
 
 /**
  * Check if the given konnector is a client side konnector
@@ -34,9 +35,10 @@ function isRunnable() {
  * @param {import('cozy-client/types/types').KonnectorsDoctype} options.konnector - konnector object
  * @param {import('cozy-client/types/types').AccountsDoctype} options.account - account object
  * @param {import('cozy-client/types/types').TriggersDoctype} options.trigger - trigger object
- * @returns {Promise<StartLauncherResult> | void}
+ * @param {import('../models/ConnectionFlow').ConnectionFlow} options.flow - ConnectionFlow object
+ * @returns {Promise<StartLauncherResult | void>}
  */
-async function onLaunch({ konnector, account, trigger }) {
+async function onLaunch({ konnector, account, trigger, flow }) {
   const launcher = getLauncher()
   if (launcher) {
     logger.debug('Found a launcher', launcher)
@@ -44,7 +46,7 @@ async function onLaunch({ konnector, account, trigger }) {
     logger.warn('Found no launcher')
   }
   if (launcher === 'react-native') {
-    return startLauncher({ konnector, account, trigger })
+    return startLauncher({ konnector, account, trigger, flow })
   }
   return
 }
@@ -62,9 +64,10 @@ async function onLaunch({ konnector, account, trigger }) {
  * @param {import('cozy-client/types/types').KonnectorsDoctype} options.konnector - konnector object
  * @param {import('cozy-client/types/types').AccountsDoctype} options.account - account object
  * @param {import('cozy-client/types/types').TriggersDoctype} options.trigger - trigger object
+ * @param {import('../models/ConnectionFlow').ConnectionFlow} options.flow - ConnectionFlow object
  * @returns {Promise<StartLauncherResult>}
  */
-function startLauncher({ konnector, account, trigger }) {
+function startLauncher({ konnector, account, trigger, flow }) {
   return new Promise(resolve => {
     addMessageListener(rawData => {
       if (typeof rawData !== 'string') {
@@ -75,8 +78,14 @@ function startLauncher({ konnector, account, trigger }) {
 
       if (
         dataPayload.type !== 'Clisk' ||
-        dataPayload.message !== 'launchResult'
+        (dataPayload.message !== 'launchResult' &&
+          dataPayload.message !== LOGIN_SUCCESS_EVENT)
       ) {
+        return
+      }
+
+      if (dataPayload.message === LOGIN_SUCCESS_EVENT) {
+        flow.triggerEvent(LOGIN_SUCCESS_EVENT)
         return
       }
 
