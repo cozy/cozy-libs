@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@7.0.3...cozy-sharing@7.1.0) (2023-03-29)
+
+
+### Bug Fixes
+
+* Use io.cozy.settings.instance full id to fix cache issues ([d27e6ac](https://github.com/cozy/cozy-libs/commit/d27e6ac022e2d40ea8fc25be563d74ab48a93e33))
+
+
+### Features
+
+* Update cozy-client to get SettingsCollection update and cozy-ui ([a8ac6cd](https://github.com/cozy/cozy-libs/commit/a8ac6cdf359a86ad6b0f17d76af97d9210129425))
+
+
+
+
+
 ## [7.0.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@7.0.2...cozy-sharing@7.0.3) (2023-03-21)
 
 **Note:** Version bump only for package cozy-sharing
