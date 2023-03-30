@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [31.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@30.0.0...cozy-mespapiers-lib@31.0.0) (2023-03-30)
+
+
+### Features
+
+* **mespapiers:** Add local translator to SearchProvider ([353387d](https://github.com/cozy/cozy-libs/commit/353387d507589ef85cb352110e3d9053e8a158f4))
+* **mespapiers:** Add locales for metadata labels ([bc6e6a3](https://github.com/cozy/cozy-libs/commit/bc6e6a3889358eac35432ea3391bfec043e9cc44))
+* **mespapiers:** Add new indexes for flexsearch based on metadata label ([d01f253](https://github.com/cozy/cozy-libs/commit/d01f253d45675d9413e14ebef768f1b5e58be64d))
+* **mespapiers:** Add translated metadata label to files flexsearchprops ([a194845](https://github.com/cozy/cozy-libs/commit/a1948459ed08d09aacb350fa3ca999e7bbeb7226))
+* **mespapiers:** Upgrade cozy-ui from 82.3.0 to 82.4.0 ([81a6c25](https://github.com/cozy/cozy-libs/commit/81a6c25a45baa2b201728db4e8dbbd7f68f9065a))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 82.4.0`
+
+
+
+
+
 # [30.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@29.0.3...cozy-mespapiers-lib@30.0.0) (2023-03-30)
 
 
