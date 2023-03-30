@@ -10,6 +10,14 @@ const isContact = doc => doc._type === CONTACTS_DOCTYPE
 
 const flexsearchIndex = [
   'flexsearchProps:translatedQualificationLabel', // io.cozy.files
+  'flexsearchProps:translatedRefTaxIncome', // io.cozy.files
+  'flexsearchProps:translatedContractType', // io.cozy.files
+  'flexsearchProps:translatedDriverLicense', // io.cozy.files
+  'flexsearchProps:translatedPaymentProofFamilyAllowance', // io.cozy.files
+  'flexsearchProps:translatedVehicleRegistration', // io.cozy.files
+  'flexsearchProps:translatedNationalIdCard', // io.cozy.files
+  'flexsearchProps:translatedBankDetails', // io.cozy.files
+  'flexsearchProps:translatedPassport', // io.cozy.files
   'metadata:number', // io.cozy.files
   'fullname', // io.cozy.contacts
   'name', // io.cozy.files, io.cozy.contacts
