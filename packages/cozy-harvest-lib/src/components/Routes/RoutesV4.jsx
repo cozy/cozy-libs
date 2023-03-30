@@ -3,7 +3,6 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 
 import flag from 'cozy-flags'
 
-import { ViewerModal } from '../../datacards/ViewerModal'
 import AccountModal from '../AccountModal'
 import AccountModalContentWrapper from '../AccountModalWithoutTabs/ForV4Router/AccountModalContentWrapper'
 import AccountModalWithoutTabs from '../AccountModalWithoutTabs/ForV4Router/AccountModalWithoutTabs'
@@ -56,11 +55,6 @@ const RoutesV4 = ({
             onDismiss={onDismiss}
           />
         )}
-      />
-      <Route
-        path={`${konnectorRoot}/viewer/:accountId/:folderToSaveId/:fileIndex`}
-        exact
-        render={routeComponentProps => <ViewerModal {...routeComponentProps} />}
       />
       {flag('harvest.inappconnectors.enabled') ? (
         <>
