@@ -58,6 +58,12 @@ const eventToStatus = {
   [SUCCESS_EVENT]: SUCCESS
 }
 const stepEvents = [LOGIN_SUCCESS_EVENT]
+/**
+ * Get if the given event is a step event
+ *
+ * @param {String} eventName
+ * @returns {Boolean}
+ */
 const isStepEvent = eventName => stepEvents.includes(eventName)
 
 /**
@@ -65,11 +71,12 @@ const isStepEvent = eventName => stepEvents.includes(eventName)
  * Used as a form submit handler
  *
  * @param  {Object} options
- * @param  {IoCozyAccount} options.account - Existing io.cozy.account or object
+ * @param  {import('cozy-client/types/types').IOCozyAccount} options.account - Existing io.cozy.account or object
  * @param  {Object} options.cipher - Vault cipher if vault has been unlocked
+ * @param  {String} options.cipher.id - Vault cipher id
  * @param  {ConnectionFlow} options.flow - Current connection flow
  * @param  {CozyClient} options.client - A CozyClient instance
- * @param  {import('cozy-client/types/types').KonnectorsDoctype} options.konnector - Konnector to which the account is linked
+ * @param  {import('cozy-client/types/types').IOCozyKonnector} options.konnector - Konnector to which the account is linked
  * @param  {KonnectorPolicy} options.konnectorPolicy - Controls if auth is saved in io.cozy.accounts and if auth is saved into the vault
  * @param  {Object} options.userCredentials
  */
@@ -86,8 +93,10 @@ export const createOrUpdateAccount = async ({
   const isUpdate = !!account
 
   if (isUpdate) {
+    // @ts-ignore
     logger.debug('Updating the account...')
   } else {
+    // @ts-ignore
     logger.debug('Creating the account...')
   }
 
@@ -114,6 +123,7 @@ export const createOrUpdateAccount = async ({
   }
 
   if (onAccountCreation) {
+    // @ts-ignore
     logger.debug(
       `Using ${konnectorPolicy.name} konnector policy custom account creation`
     )
@@ -131,6 +141,7 @@ export const createOrUpdateAccount = async ({
       cipher.id
     )
   } else {
+    // @ts-ignore
     logger.warn(
       'No cipher passed when creating/updating account, account will not be linked to cipher'
     )
@@ -152,6 +163,13 @@ export const createOrUpdateAccount = async ({
  * This should be the go to source of truth for the state of a Konnector Job.
  */
 export class ConnectionFlow {
+  /**
+   * Constructor
+   *
+   * @param {CozyClient} client - CozyClient instance
+   * @param {import('cozy-client/types/types').IOCozyTrigger} trigger - io.cozy.triggers object
+   * @param {import('cozy-client/types/types').IOCozyKonnector} konnector - io.cozy.konnectors object
+   */
   constructor(client, trigger, konnector) {
     this.client = client
     this.trigger = trigger
@@ -196,6 +214,12 @@ export class ConnectionFlow {
     return this.trigger.message.konnector
   }
 
+  /**
+   * Handle 2FA
+   *
+   * @param {import('cozy-client/types/types').IOCozyAccount} prevAccount - previous state of the account
+   * @returns {void}
+   */
   handleAccountTwoFA(prevAccount) {
     const account = this.account
 
@@ -205,6 +229,13 @@ export class ConnectionFlow {
     return this.handleTwoFAStateChange(state, prevState)
   }
 
+  /**
+   * Adapt the ConnectionFlow status according to the current and previous state
+   *
+   * @param {String} state - current state
+   * @param {String|null} prevState - previous state
+   * @returns {void}
+   */
   handleTwoFAStateChange(state, prevState = null) {
     if (prevState === state) {
       return
@@ -221,11 +252,13 @@ export class ConnectionFlow {
   }
 
   triggerEvent(eventName, ...args) {
+    // @ts-ignore
     logger.debug(`ConnectionFlow: triggerEvent ${eventName}`, args)
     if (isStepEvent(eventName)) {
       this.setState({ [eventName]: true })
     }
     if (eventToStatus[eventName]) {
+      // @ts-ignore
       logger.debug(`ConnectionFlow: Setting status ${eventToStatus[eventName]}`)
       this.setState({ status: eventToStatus[eventName] })
     }
@@ -242,6 +275,7 @@ export class ConnectionFlow {
   }
 
   async saveTwoFARequest(twoFARequestOptions) {
+    // @ts-ignore
     logger.debug('Saving 2FA request', twoFARequestOptions)
     this.setState({ status: WAITING_TWOFA })
     try {
@@ -252,6 +286,7 @@ export class ConnectionFlow {
       await this.saveAccount(account)
       this.triggerEvent(TWO_FA_REQUEST_EVENT, twoFARequestOptions)
     } catch (error) {
+      // @ts-ignore
       logger.error(error)
       this.setState({ status: ERRORED, error })
     }
@@ -267,6 +302,7 @@ export class ConnectionFlow {
    * @returns {Promise<void>}
    */
   waitForTwoFA() {
+    // @ts-ignore
     logger.info('ConnectionFlow: Waiting for two FA')
     if (this.jobWatcher) {
       this.jobWatcher.disableSuccessTimer()
@@ -315,6 +351,7 @@ export class ConnectionFlow {
    */
   expectTriggerLaunch({ konnector }) {
     this.konnector = konnector
+    // @ts-ignore
     logger.info(
       `ConnectionFlow: Expecting trigger launch for konnector ${this.konnector.slug}`
     )
@@ -326,6 +363,12 @@ export class ConnectionFlow {
 
     this.setState({ status: EXPECTING_TRIGGER_LAUNCH, accountError: null })
 
+    /**
+     * Watch a newly created job
+     *
+     * @param {IoCozyJob} job - job document
+     * @returns void
+     */
     const handleTriggerLaunch = job => {
       if (
         job.worker !== 'konnector' ||
@@ -342,19 +385,25 @@ export class ConnectionFlow {
 
   /**
    * Saves and updates internal account
+   *
+   * @param {import('cozy-client/types/types').IOCozyAccount} updatedAccount - updated account
+   * @returns {import('cozy-client/types/types').IOCozyAccount}
    */
   async saveAccount(updatedAccount) {
+    // @ts-ignore
     logger.debug('ConnectionFlow: Saving account')
     this.account = await saveAccount(
       this.client,
       this.konnector,
       updatedAccount
     )
+    // @ts-ignore
     logger.info('ConnectionFlow: Saved account')
     return this.account
   }
 
   flushTwoFAWaiters() {
+    // @ts-ignore
     logger.debug(
       `ConnectionFlow: Flushing ${this.twoFAWaiters.length} two fa waiters`
     )
@@ -372,6 +421,7 @@ export class ConnectionFlow {
       await konnectorPolicy.sendAdditionalInformation(this, fields)
       this.flushTwoFAWaiters()
     } catch (error) {
+      // @ts-ignore
       logger.error(error)
       this.setState({ status: ERRORED, error })
     }
@@ -383,10 +433,12 @@ export class ConnectionFlow {
   async sendTwoFACode(code) {
     this.setState({ status: RUNNING_TWOFA })
     try {
+      // @ts-ignore
       logger.debug(`ConnectionFlow: Sending two fa code ${code}`)
       await this.saveAccount(accounts.updateTwoFaCode(this.account, code))
     } catch (error) {
       // eslint-disable-next-line no-console
+      // @ts-ignore
       logger.error(error)
       this.setState({ status: ERRORED, error })
     }
@@ -426,6 +478,7 @@ export class ConnectionFlow {
 
       assert(client, 'No client')
       const konnectorPolicy = findKonnectorPolicy(konnector)
+      // @ts-ignore
       logger.log(
         `ConnectionFlow: Handling submit, with konnector policy ${konnectorPolicy.name}`
       )
@@ -438,12 +491,14 @@ export class ConnectionFlow {
           userCredentials
         })
       } else {
+        // @ts-ignore
         logger.info(
           'ConnectionFlow: Bypassing cipher creation because of konnector account policy'
         )
       }
 
       if (konnectorPolicy.needsAccountAndTriggerCreation) {
+        // @ts-ignore
         logger.debug('ConnectionFlow: Creating/updating account...', account)
         account = await createOrUpdateAccount({
           account,
@@ -457,6 +512,7 @@ export class ConnectionFlow {
 
         this.account = account
 
+        // @ts-ignore
         logger.info(`ConnectionFlow: Saved account ${account._id}`)
 
         await this.ensureTriggerAndLaunch(client, {
@@ -470,6 +526,7 @@ export class ConnectionFlow {
       await this.launch()
       this.setState({ accountError: null })
     } catch (e) {
+      // @ts-ignore
       logger.error(e)
       this.setState({ accountError: e })
       this.triggerEvent(ERROR_EVENT, e)
@@ -488,9 +545,9 @@ export class ConnectionFlow {
    *
    * @param {CozyClient} client - CozyClient instance
    * @param {object} options - options object
-   * @param {IoCozyAccount} options.account - cozy account
-   * @param {import('cozy-client/types/types').CozyClientDocument} options.konnector - cozy konnector
-   * @param {import('cozy-client/types/types').CozyClientDocument} options.trigger - cozy trigger
+   * @param {import('cozy-client/types/types').IOCozyAccount} options.account - cozy account
+   * @param {import('cozy-client/types/types').IOCozyKonnector} options.konnector - cozy konnector
+   * @param {import('cozy-client/types/types').IOCozyTrigger} options.trigger - cozy trigger
    * @param {Function} options.t - localization function
    * @returns {Promise<void>}
    */
@@ -558,6 +615,7 @@ export class ConnectionFlow {
   }
 
   handleCurrentJobUpdated() {
+    // @ts-ignore
     logger.debug('ConnectionFlow: Handling update from job')
     this.refetchTrigger()
   }
@@ -581,8 +639,10 @@ export class ConnectionFlow {
     if (!this.trigger) {
       return null
     }
+    // @ts-ignore
     logger.debug(`ConnectionFlow: Refetching trigger  ${this.trigger._id}`)
     const trigger = await fetchTrigger(this.client, this.trigger._id)
+    // @ts-ignore
     logger.debug(`Refetched trigger`, trigger)
     this.trigger = trigger
 
@@ -603,7 +663,7 @@ export class ConnectionFlow {
    * @param  {CozyClient} client - A cozy client instance
    * @param  {Object} options
    * @param  {import('cozy-client/types/types').TriggersDoctype} options.trigger
-   * @param  {IoCozyAccount} options.account
+   * @param  {import('cozy-client/types/types').IOCozyAccount} options.account
    * @param  {import('cozy-client/types/types').KonnectorsDoctype} options.konnector
    */
   async ensureDefaultFolderPathInAccount(
@@ -626,6 +686,7 @@ export class ConnectionFlow {
         return savedAccount
       }
     } catch (err) {
+      // @ts-ignore
       logger.warn(
         `ConnectionFlow.ensureDefaultFolderPath: folder ${folderId} does not exist. Could not ensure defaultFolderPath. ${err.message}`
       )
@@ -641,6 +702,7 @@ export class ConnectionFlow {
 
     const computedAutoSuccessTimer = autoSuccessTimer
 
+    // @ts-ignore
     logger.info('ConnectionFlow: Launching job...')
     this.setState({ status: PENDING })
 
@@ -657,6 +719,7 @@ export class ConnectionFlow {
         })
         .then(() => this.setState({ status: IDLE }))
         .catch(err =>
+          // @ts-ignore
           logger.error(`Error while launching policy : ${err.message}`)
         )
     }
@@ -669,6 +732,7 @@ export class ConnectionFlow {
       this.account._id,
       this.handleAccountUpdated
     )
+    // @ts-ignore
     logger.info(
       `ConnectionFlow: Subscribed to ${ACCOUNTS_DOCTYPE}:${this.account._id}`
     )
@@ -746,6 +810,7 @@ export class ConnectionFlow {
       this.handleCurrentJobUpdated.bind(this)
     )
     this.jobWatcher = watchKonnectorJob(this.client, this.job, options)
+    // @ts-ignore
     logger.info(`ConnectionFlow: Subscribed to ${JOBS_DOCTYPE}:${this.job._id}`)
 
     for (const ev of JOB_EVENTS) {

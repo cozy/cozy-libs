@@ -1,10 +1,9 @@
-import './polyfill'
-
 import { build } from '@cozy/cli-tree'
 import minilog from '@cozy/minilog'
 
 import { createClientInteractive } from 'cozy-client/dist/cli'
 
+import './polyfill'
 import { multiPrompt } from './prompt'
 import assert from '../assert'
 import logger from '../logger'
