@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import InputMask from 'react-input-mask'
 
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import InputAdornment from 'cozy-ui/transpiled/react/InputAdornment'
 import TextField from 'cozy-ui/transpiled/react/MuiCozyTheme/TextField'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
+import { defaultProptypes } from './proptypes'
 import {
   checkConstraintsOfIinput,
   makeConstraintsOfInput
 } from '../../../utils/input'
-import { defaultProptypes } from './proptypes'
 
 const styleFontMono = 'Segoe UI Mono, SF Mono, Roboto Mono, Courier'
 

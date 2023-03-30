@@ -138,11 +138,29 @@ Here some examples:
 - Components overloaded or disabled
 
 ```jsx
-const CustomFab = ({ onClick }) => {
+/**
+ * @typedef {{
+ * "aria-controls": string
+ * "aria-haspopup": string
+ * "aria-expanded": string
+ * }} A11Y
+ */
+/**
+ * @param {Object} props
+ * @param {string} props.className - className to add to the component
+ * @param {Function} props.onClick - onClick callback
+ * @param {Object} props.innerRef - ref to the component
+ * @param {A11Y} props.a11y - Accessibilities props
+ */
+const CustomFab = ({ className, innerRef, onClick, a11y }) => {
   return (
     <Button
+      className={className}
+      ref={innerRef}
       label="Custom btn"
       onClick={onClick}
+      aria-label="Custom btn"
+      {...a11y} // To match accessibility with the menu opened with this button
     />
   )
 }

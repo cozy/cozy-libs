@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'
 import DateFnsUtils from '@date-io/date-fns'
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
 } from '@material-ui/pickers'
+import React, { useState, useEffect } from 'react'
 
-import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import { defaultProptypes } from './proptypes'
 
@@ -91,6 +91,9 @@ const InputDateAdapter = ({
         error={displayHelper && !isValidDate}
         inputProps={{
           inputMode: 'numeric'
+        }}
+        KeyboardButtonProps={{
+          'aria-label': t(inputLabel)
         }}
         helperText={
           displayHelper &&
