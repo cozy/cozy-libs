@@ -16,7 +16,7 @@ export const useSearch = () => {
   return context
 }
 
-const SearchProvider = ({ doctypes, t, children }) => {
+const SearchProvider = ({ doctypes, t, scannerT, children }) => {
   const [isInit, setIsInit] = useState(false)
   const client = useClient()
 
@@ -28,10 +28,15 @@ const SearchProvider = ({ doctypes, t, children }) => {
 
   const value = useMemo(() => {
     return {
-      addAllOnce: addAllOnce(t, isInit, setIsInit),
+      addAllOnce: addAllOnce({
+        isAdded: isInit,
+        setIsAdded: setIsInit,
+        scannerT,
+        t
+      }),
       search
     }
-  }, [isInit, t])
+  }, [isInit, t, scannerT])
 
   return (
     <SearchContext.Provider value={value}>{children}</SearchContext.Provider>

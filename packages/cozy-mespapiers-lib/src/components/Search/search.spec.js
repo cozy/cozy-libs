@@ -68,15 +68,15 @@ describe('addFileDoc', () => {
   })
 
   it('should use a doc with correct flexsearchProps', () => {
-    addFileDoc(
+    addFileDoc({
       index,
-      {
+      doc: {
         _type: 'io.cozy.files',
         name: 'file01.ext',
         metadata: { qualification: { label: 'tax_return' } }
       },
       scannerT
-    )
+    })
 
     expect(index.add).toBeCalledWith({
       _type: 'io.cozy.files',
