@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.10.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.10.0...cozy-harvest-lib@13.10.1) (2023-03-30)
+
+
+### Bug Fixes
+
+* **harvest:** Show account name in header for CCC ([0c0953b](https://github.com/cozy/cozy-libs/commit/0c0953bb7ac6a3bd458d91a70bdca00dfb206784))
+
+
+
+
+
 # [13.10.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.9.4...cozy-harvest-lib@13.10.0) (2023-03-29)
 
 
