@@ -1,11 +1,26 @@
 const BankAccount = require('./BankAccount')
 
 describe('account reconciliation', () => {
-  it('should update relationship of disabled accounts associated to the same relationship as updated anabled accounts even with accounts without connection relationship', () => {
+  it('should update connection of disabled accounts without connection with the one of matching fetched accounts', () => {
     const newAccounts = [
       {
         number: '1',
         balance: 100,
+        relationships: {
+          connection: {
+            data: {
+              _id: 'cozyaccountnew',
+              _type: 'io.cozy.accounts'
+            }
+          }
+        },
+        metadata: {
+          updatedAt: '2020-11-30'
+        }
+      },
+      {
+        number: '10',
+        balance: 33,
         relationships: {
           connection: {
             data: {
@@ -66,6 +81,15 @@ describe('account reconciliation', () => {
         metadata: {
           updatedAt: '2012-11-30'
         }
+      },
+      {
+        _id: 'otheraccountnorelationship',
+        number: '20',
+        balance: 130,
+        relationships: {},
+        metadata: {
+          updatedAt: '2012-11-30'
+        }
       }
     ]
     const matchedAccounts = BankAccount.reconciliate(
@@ -92,6 +116,28 @@ describe('account reconciliation', () => {
         }
       },
       {
+        _id: 'oldaccountnorelationship',
+        number: '10',
+        rawNumber: '10',
+        balance: 33,
+        relationships: {
+          connection: {
+            data: {
+              _id: 'cozyaccountnew',
+              _type: 'io.cozy.accounts'
+            }
+          },
+          other: {
+            data: {
+              some: 'data'
+            }
+          }
+        },
+        metadata: {
+          updatedAt: '2020-11-30'
+        }
+      },
+      {
         _id: 'a2',
         number: '2',
         balance: 300,
@@ -110,6 +156,7 @@ describe('account reconciliation', () => {
       }
     ])
   })
+
   it('should correctly match linxo accounts to cozy accounts through number', () => {
     const newAccounts = [
       {
