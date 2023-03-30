@@ -9,15 +9,15 @@ import { CONTACTS_DOCTYPE } from '../../doctypes'
 const isContact = doc => doc._type === CONTACTS_DOCTYPE
 
 const flexsearchIndex = [
-  'flexsearchProps:translatedQualificationLabel', // io.cozy.files
-  'flexsearchProps:translatedRefTaxIncome', // io.cozy.files
-  'flexsearchProps:translatedContractType', // io.cozy.files
-  'flexsearchProps:translatedDriverLicense', // io.cozy.files
-  'flexsearchProps:translatedPaymentProofFamilyAllowance', // io.cozy.files
-  'flexsearchProps:translatedVehicleRegistration', // io.cozy.files
-  'flexsearchProps:translatedNationalIdCard', // io.cozy.files
-  'flexsearchProps:translatedBankDetails', // io.cozy.files
-  'flexsearchProps:translatedPassport', // io.cozy.files
+  'flexsearchProps:translated:qualificationLabel', // io.cozy.files
+  'flexsearchProps:translated:refTaxIncome', // io.cozy.files
+  'flexsearchProps:translated:contractType', // io.cozy.files
+  'flexsearchProps:translated:driverLicense', // io.cozy.files
+  'flexsearchProps:translated:paymentProofFamilyAllowance', // io.cozy.files
+  'flexsearchProps:translated:vehicleRegistration', // io.cozy.files
+  'flexsearchProps:translated:nationalIdCard', // io.cozy.files
+  'flexsearchProps:translated:bankDetails', // io.cozy.files
+  'flexsearchProps:translated:passport', // io.cozy.files
   'metadata:number', // io.cozy.files
   'fullname', // io.cozy.contacts
   'name', // io.cozy.files, io.cozy.contacts

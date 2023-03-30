@@ -112,38 +112,36 @@ export const makeContactTags = contact => {
 
 export const makeFileFlexsearchProps = ({ doc, scannerT, t }) => ({
   tag: makeFileTags(doc),
-  translatedQualificationLabel: scannerT(
-    `items.${doc.metadata.qualification.label}`
-  ),
-  ...(doc.metadata.refTaxIncome && {
-    translatedRefTaxIncome: t('Search.metadataLabel.refTaxIncome')
-  }),
-  ...(doc.metadata.contractType && {
-    translatedContractType: t('Search.metadataLabel.contractType')
-  }),
-  ...(doc.metadata.qualification?.label === 'driver_license' && {
-    translatedDriverLicense: t('Search.metadataLabel.driver_license')
-  }),
-  ...(doc.metadata.qualification?.label ===
-    'payment_proof_family_allowance' && {
-    translatedPaymentProofFamilyAllowance: t(
-      'Search.metadataLabel.payment_proof_family_allowance'
-    )
-  }),
-  ...(doc.metadata.qualification?.label === 'vehicle_registration' && {
-    translatedVehicleRegistration: t(
-      'Search.metadataLabel.vehicle_registration'
-    )
-  }),
-  ...(doc.metadata.qualification?.label === 'national_id_card' && {
-    translatedNationalIdCard: t('Search.metadataLabel.national_id_card')
-  }),
-  ...(doc.metadata.qualification?.label === 'bank_details' && {
-    translatedBankDetails: t('Search.metadataLabel.bank_details')
-  }),
-  ...(doc.metadata.qualification?.label === 'passport' && {
-    translatedPassport: t('Search.metadataLabel.passport')
-  })
+  translated: {
+    qualificationLabel: scannerT(`items.${doc.metadata.qualification.label}`),
+    ...(doc.metadata.refTaxIncome && {
+      refTaxIncome: t('Search.metadataLabel.refTaxIncome')
+    }),
+    ...(doc.metadata.contractType && {
+      contractType: t('Search.metadataLabel.contractType')
+    }),
+    ...(doc.metadata.qualification?.label === 'driver_license' && {
+      driverLicense: t('Search.metadataLabel.driver_license')
+    }),
+    ...(doc.metadata.qualification?.label ===
+      'payment_proof_family_allowance' && {
+      paymentProofFamilyAllowance: t(
+        'Search.metadataLabel.payment_proof_family_allowance'
+      )
+    }),
+    ...(doc.metadata.qualification?.label === 'vehicle_registration' && {
+      vehicleRegistration: t('Search.metadataLabel.vehicle_registration')
+    }),
+    ...(doc.metadata.qualification?.label === 'national_id_card' && {
+      nationalIdCard: t('Search.metadataLabel.national_id_card')
+    }),
+    ...(doc.metadata.qualification?.label === 'bank_details' && {
+      bankDetails: t('Search.metadataLabel.bank_details')
+    }),
+    ...(doc.metadata.qualification?.label === 'passport' && {
+      passport: t('Search.metadataLabel.passport')
+    })
+  }
 })
 
 export const makeContactFlexsearchProps = doc => {
