@@ -15,9 +15,10 @@ const flexsearchIndex = [
   'name', // io.cozy.files, io.cozy.contacts
   'birthday', // io.cozy.contacts
   'birthcity', // io.cozy.contacts
-  'email[]:address', // io.cozy.contacts
-  'phone[]:number', // io.cozy.contacts
-  'civility', // io.cozy.contacts
+  // We do not use an array here but flat indexes, see https://github.com/nextapps-de/flexsearch/issues/383
+  // We use the number 7 arbitrarily, we assume that it is a correct value for emails and phones
+  ...Array.from(Array(7), (_, idx) => `flexsearchProps:email[${idx}].address`), // io.cozy.contacts
+  ...Array.from(Array(7), (_, idx) => `flexsearchProps:phone[${idx}].number`), // io.cozy.contacts
   'company', // io.cozy.contacts
   'jobTitle' // io.cozy.contacts
 ]
@@ -110,10 +111,20 @@ export const addFileDoc = (index, doc, t) => {
 }
 
 export const addContactDoc = (index, doc) => {
+  const flexsearchEmailAddresses = doc.email
+    ?.map(email => email.address)
+    .reduce((acc, val, idx) => ({ ...acc, [`email[${idx}].address`]: val }), {})
+
+  const flexsearchPhoneNumbers = doc.phone
+    ?.map(phone => phone.number)
+    .reduce((acc, val, idx) => ({ ...acc, [`phone[${idx}].number`]: val }), {})
+
   return index.add({
     ...doc,
     flexsearchProps: {
-      tag: makeContactTags(doc)
+      tag: makeContactTags(doc),
+      ...flexsearchEmailAddresses,
+      ...flexsearchPhoneNumbers
     }
   })
 }
