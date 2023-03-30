@@ -9,6 +9,8 @@ const matching = require('./matching-accounts')
 const { getSlugFromInstitutionLabel } = require('./slug-account')
 const Document = require('../Document')
 
+const connectionId = account => account?.relationships?.connection?.data?._id
+
 class BankAccount extends Document {
   /**
    * Adds _id of existing accounts to fetched accounts
@@ -65,10 +67,7 @@ class BankAccount extends Document {
       const foundInMatchedAccounts = Boolean(
         matchedAccountIds[localAccount._id]
       )
-      const newAccountId =
-        replacedCozyAccountIds[
-          localAccount?.relationships?.connection?.data?._id
-        ]
+      const newAccountId = replacedCozyAccountIds[connectionId(localAccount)]
       if (foundInMatchedAccounts || !newAccountId) {
         continue
       }
@@ -104,11 +103,9 @@ class BankAccount extends Document {
     for (const matching of matchings) {
       if (
         matching.match &&
-        matching?.account?.relationships?.connection?.data?._id !==
-          matching?.match?.relationships?.connection?.data?._id
+        connectionId(matching?.account) !== connectionId(matching?.match)
       ) {
-        result[matching?.match?.relationships?.connection?.data?._id] =
-          matching?.account?.relationships?.connection?.data?._id
+        result[connectionId(matching?.match)] = connectionId(matching?.account)
       }
     }
     return result
