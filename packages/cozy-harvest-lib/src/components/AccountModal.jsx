@@ -3,8 +3,7 @@ import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
-import { withClient } from 'cozy-client'
-import { Account } from 'cozy-doctypes'
+import { models, withClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Button'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 import Infos from 'cozy-ui/transpiled/react/Infos'
@@ -142,7 +141,7 @@ export class AccountModal extends Component {
               }}
             />
           ) : (
-            <Typography>{Account.getAccountName(account)}</Typography>
+            <Typography>{models.account.getAccountName(account)}</Typography>
           )}
         </KonnectorModalHeader>
         {(error || fetching) && (
