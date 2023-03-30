@@ -4,10 +4,12 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
 import { withClient } from 'cozy-client'
+import { Account } from 'cozy-doctypes'
 import Button from 'cozy-ui/transpiled/react/Button'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 import Infos from 'cozy-ui/transpiled/react/Infos'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
@@ -127,7 +129,7 @@ export class AccountModal extends Component {
     return (
       <>
         <KonnectorModalHeader konnector={konnector}>
-          {showAccountSelection && (
+          {showAccountSelection ? (
             <AccountSelectBox
               loading={!account}
               selectedAccount={account}
@@ -139,6 +141,8 @@ export class AccountModal extends Component {
                 pushHistory('/new')
               }}
             />
+          ) : (
+            <Typography>{Account.getAccountName(account)}</Typography>
           )}
         </KonnectorModalHeader>
         {(error || fetching) && (
