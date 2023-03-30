@@ -33,7 +33,9 @@ describe('addFileDoc', () => {
       metadata: { qualification: { label: 'tax_return' } },
       flexsearchProps: {
         tag: ['finance'],
-        translatedQualificationLabel: 'Impôts - Déclaration de revenus'
+        translated: {
+          qualificationLabel: 'Impôts - Déclaration de revenus'
+        }
       }
     })
   })

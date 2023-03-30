@@ -57,12 +57,12 @@ describe('search', () => {
       {
         _id: '01',
         name: 'Certificat de naissance',
-        flexsearchProps: { translatedQualificationLabel: 'naissance' }
+        flexsearchProps: { translated: { qualificationLabel: 'naissance' } }
       },
       {
         _id: '02',
         name: 'attestation',
-        flexsearchProps: { translatedQualificationLabel: 'naissance' }
+        flexsearchProps: { translated: { qualificationLabel: 'naissance' } }
       },
       {
         _id: '03',
@@ -76,7 +76,7 @@ describe('search', () => {
         result: ['01']
       },
       {
-        field: 'flexsearchProps:translatedQualificationLabel',
+        field: 'flexsearchProps:translated:qualificationLabel',
         result: ['01', '02']
       }
     ])
@@ -90,18 +90,18 @@ describe('search', () => {
       filteredDocs: [
         {
           _id: '01',
-          flexsearchProps: { translatedQualificationLabel: 'naissance' },
+          flexsearchProps: { translated: { qualificationLabel: 'naissance' } },
           name: 'Certificat de naissance'
         },
         {
           _id: '02',
-          flexsearchProps: { translatedQualificationLabel: 'naissance' },
+          flexsearchProps: { translated: { qualificationLabel: 'naissance' } },
           name: 'attestation'
         }
       ],
       firstSearchResultMatchingAttributes: [
         'name',
-        'flexsearchProps:translatedQualificationLabel'
+        'flexsearchProps:translated:qualificationLabel'
       ]
     })
   })
@@ -191,8 +191,10 @@ describe('makeFileFlexsearchProps', () => {
 
     expect(res).toStrictEqual({
       tag: [],
-      translatedQualificationLabel: 'items.others',
-      translatedRefTaxIncome: 'Search.metadataLabel.refTaxIncome'
+      translated: {
+        qualificationLabel: 'items.others',
+        refTaxIncome: 'Search.metadataLabel.refTaxIncome'
+      }
     })
   })
 
@@ -211,10 +213,12 @@ describe('makeFileFlexsearchProps', () => {
 
     expect(res).toStrictEqual({
       tag: ['identity', 'transport'],
-      translatedQualificationLabel: 'items.driver_license',
-      translatedRefTaxIncome: 'Search.metadataLabel.refTaxIncome',
-      translatedContractType: 'Search.metadataLabel.contractType',
-      translatedDriverLicense: 'Search.metadataLabel.driver_license'
+      translated: {
+        qualificationLabel: 'items.driver_license',
+        refTaxIncome: 'Search.metadataLabel.refTaxIncome',
+        contractType: 'Search.metadataLabel.contractType',
+        driverLicense: 'Search.metadataLabel.driver_license'
+      }
     })
   })
 })
