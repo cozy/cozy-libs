@@ -64,13 +64,26 @@ class BankAccount extends Document {
     const matchings = [...previousMatchings]
     const matchedAccountIds = keyBy(matchings, 'match._id')
     for (const localAccount of localAccounts) {
+      if (connectionId(localAccount) == null) {
+        // XXX: don't try to update the connectionId of local accounts which
+        // don't have any as they're probably not from the same bank.
+        // If they are, their connectionId should be updated via a match with a
+        // fetched account.
+        continue
+      }
+
       const foundInMatchedAccounts = Boolean(
         matchedAccountIds[localAccount._id]
       )
-      const newAccountId = replacedCozyAccountIds[connectionId(localAccount)]
-      if (foundInMatchedAccounts || !newAccountId) {
+      if (foundInMatchedAccounts) {
         continue
       }
+
+      const newAccountId = replacedCozyAccountIds[connectionId(localAccount)]
+      if (newAccountId == null) {
+        continue
+      }
+
       matchings.push({
         forcedReplace: true,
         account: {
