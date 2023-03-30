@@ -1,4 +1,11 @@
-import { makeRealtimeConnection, search, makeReducedResultIds } from './helpers'
+import {
+  makeRealtimeConnection,
+  search,
+  makeReducedResultIds,
+  makeFileTags,
+  makeContactTags,
+  makeFileFlexsearchProps
+} from './helpers'
 import { index } from './search'
 
 jest.mock('./search', () => ({
@@ -123,5 +130,91 @@ describe('makeReducedResultIds', () => {
     ])
 
     expect(res).toStrictEqual(['id01', 'id04', 'id03', 'id02'])
+  })
+})
+
+describe('makeFileTags', () => {
+  it('should return the theme label of tax_return qualification', () => {
+    const res = makeFileTags({
+      metadata: { qualification: { label: 'tax_return' } }
+    })
+
+    expect(res).toStrictEqual(['finance'])
+  })
+
+  it('should return the theme labels of driver_license qualification', () => {
+    const res = makeFileTags({
+      metadata: { qualification: { label: 'driver_license' } }
+    })
+
+    expect(res).toStrictEqual(['identity', 'transport'])
+  })
+
+  it('should return empty array if no qualification', () => {
+    const res = makeFileTags({ metadata: {} })
+
+    expect(res).toStrictEqual([])
+  })
+})
+
+describe('makeContactTags', () => {
+  it('should return the theme label `identity` for a contact with a given name', () => {
+    const res = makeContactTags({ name: { givenName: 'Jason' } })
+
+    expect(res).toStrictEqual(['identity'])
+  })
+
+  it('should return the theme label `work_study` for a contact with a company', () => {
+    const res = makeContactTags({ company: 'Cozy' })
+
+    expect(res).toStrictEqual(['work_study'])
+  })
+
+  it('should return the theme labels for a contact with an address', () => {
+    const res = makeContactTags({
+      address: [{ formattedAddress: '2 place Victor Hugo' }]
+    })
+
+    expect(res).toStrictEqual(['home', 'work_study', 'identity'])
+  })
+})
+
+describe('makeFileFlexsearchProps', () => {
+  it('should return correct translatedRefTaxIncome', () => {
+    const res = makeFileFlexsearchProps({
+      doc: {
+        metadata: { qualification: { label: 'others' }, refTaxIncome: 123456 }
+      },
+      scannerT: mockT,
+      t: mockT
+    })
+
+    expect(res).toStrictEqual({
+      tag: [],
+      translatedQualificationLabel: 'items.others',
+      translatedRefTaxIncome: 'Search.metadataLabel.refTaxIncome'
+    })
+  })
+
+  it('should return correct tags and translated metadata', () => {
+    const res = makeFileFlexsearchProps({
+      doc: {
+        metadata: {
+          qualification: { label: 'driver_license' },
+          refTaxIncome: 123456,
+          contractType: 'cdi'
+        }
+      },
+      scannerT: mockT,
+      t: mockT
+    })
+
+    expect(res).toStrictEqual({
+      tag: ['identity', 'transport'],
+      translatedQualificationLabel: 'items.driver_license',
+      translatedRefTaxIncome: 'Search.metadataLabel.refTaxIncome',
+      translatedContractType: 'Search.metadataLabel.contractType',
+      translatedDriverLicense: 'Search.metadataLabel.driver_license'
+    })
   })
 })
