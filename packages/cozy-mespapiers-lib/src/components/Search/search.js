@@ -96,13 +96,13 @@ export const makeContactTags = contact => {
   return contactTags
 }
 
-export const addFileDoc = (index, doc, t) => {
+export const addFileDoc = ({ index, doc, scannerT }) => {
   if (hasQualifications(doc)) {
     return index.add({
       ...doc,
       flexsearchProps: {
         tag: makeFileTags(doc),
-        translatedQualificationLabel: t(
+        translatedQualificationLabel: scannerT(
           `items.${doc.metadata.qualification.label}`
         )
       }
@@ -129,9 +129,9 @@ export const addContactDoc = (index, doc) => {
   })
 }
 
-export const addDoc = ({ index, doc, t }) => {
+export const addDoc = ({ index, doc, scannerT, t }) => {
   if (isFile(doc)) {
-    addFileDoc(index, doc, t)
+    addFileDoc({ index, doc, scannerT, t })
   } else if (isContact(doc)) {
     addContactDoc(index, doc)
   }

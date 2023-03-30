@@ -1,13 +1,15 @@
 import { index, addDoc, updateDoc } from './search'
 
-export const addAllOnce = (t, isAdded, setIsAdded) => docs => {
-  if (!isAdded) {
-    for (const doc of docs) {
-      addDoc({ index, doc, t })
+export const addAllOnce =
+  ({ isAdded, setIsAdded, scannerT, t }) =>
+  docs => {
+    if (!isAdded) {
+      for (const doc of docs) {
+        addDoc({ index, doc, scannerT, t })
+      }
+      setIsAdded(true)
     }
-    setIsAdded(true)
   }
-}
 
 export const makeReducedResultIds = flexsearchResult =>
   flexsearchResult?.reduce((acc, curr) => {
