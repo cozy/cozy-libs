@@ -1,3 +1,4 @@
+import { isFlagshipApp as isFlagshipAppOriginal } from './flagship'
 import {
   isWebApp,
   isMobileApp,
@@ -5,6 +6,9 @@ import {
   isAndroidApp,
   getPlatform
 } from './platform'
+
+const isFlagshipApp = isFlagshipAppOriginal as jest.Mock
+jest.mock('./flagship')
 
 describe('platforms', () => {
   it('should identify is a web application', () => {
@@ -15,6 +19,10 @@ describe('platforms', () => {
     window.cordova = true
     expect(isMobileApp()).toBeTruthy()
     window.cordova = undefined
+    expect(isMobileApp()).toBeFalsy()
+    isFlagshipApp.mockReturnValue(true)
+    expect(isMobileApp()).toBeTruthy()
+    isFlagshipApp.mockReturnValue(false)
     expect(isMobileApp()).toBeFalsy()
   })
   it('should identify is an iOS or Android application', () => {

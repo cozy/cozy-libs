@@ -1,4 +1,5 @@
 import { isCordova } from './cordova'
+import { isFlagshipApp } from './flagship'
 
 const ANDROID_PLATFORM = 'android'
 const IOS_PLATFORM = 'ios'
@@ -15,7 +16,7 @@ const isPlatform = (platform: PLATFORM): boolean => getPlatform() === platform
 export const isIOSApp = (): boolean => isPlatform(IOS_PLATFORM)
 export const isAndroidApp = (): boolean => isPlatform(ANDROID_PLATFORM)
 export const isWebApp = (): boolean => isPlatform(WEB_PLATFORM)
-export const isMobileApp = (): boolean => isCordova()
+export const isMobileApp = (): boolean => isCordova() || isFlagshipApp()
 
 // return if is on an Android Device (native or browser)
 export const isAndroid = (): boolean =>

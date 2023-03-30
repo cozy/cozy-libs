@@ -18,7 +18,7 @@ To know the platform:
 
 - `getPlatform()`: return `ios`, `android` or `web`
 - `isWebApp()`: return `boolean`
-- `isMobileApp()`: return `boolean`
+- `isMobileApp()`: return `boolean` (check if it's based on an app on cordova or on the flagship app)
 - `isIOSApp()`: return `boolean`
 - `isAndroidApp()`: return `boolean`
 - `isAndroid()`: return `boolean` (check if the user is on an android smartphone (native & browser))
@@ -32,6 +32,14 @@ import { getDeviceName } from 'cozy-device-helper'
 ```
 
 To know device name `getDeviceName()`.
+
+### Cordova
+
+```
+import { isCordova } from 'cozy-device-helper'
+```
+
+To know if your app is based on Cordova.
 
 ### Cordova Plugins
 
