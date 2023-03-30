@@ -1,11 +1,11 @@
-import React, { useMemo, useState, forwardRef } from 'react'
-import PropTypes from 'prop-types'
 import debounce from 'lodash/debounce'
+import PropTypes from 'prop-types'
+import React, { useMemo, useState, forwardRef } from 'react'
 
-import InputGroup from 'cozy-ui/transpiled/react/InputGroup'
-import Input from 'cozy-ui/transpiled/react/Input'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import Input from 'cozy-ui/transpiled/react/Input'
+import InputGroup from 'cozy-ui/transpiled/react/InputGroup'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 const useStyles = makeStyles(theme => ({
@@ -81,6 +81,7 @@ const SearchInput = forwardRef(
           onFocus={handleFocus}
           onBlur={handleBlur}
           ref={ref}
+          aria-label={t('common.search')}
         />
       </InputGroup>
     )

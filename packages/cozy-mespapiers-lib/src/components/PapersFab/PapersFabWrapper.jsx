@@ -69,7 +69,12 @@ const PapersFabWrapper = ({ children }) => {
 
   const PapersFabOverrided = cloneElement(children, {
     onClick: toggleGeneralMenu,
-    innerRef: actionBtnRef
+    innerRef: actionBtnRef,
+    a11y: {
+      'aria-controls': showGeneralMenu ? 'fab-menu' : undefined,
+      'aria-haspopup': true,
+      'aria-expanded': showGeneralMenu ? true : undefined
+    }
   })
 
   const props = {

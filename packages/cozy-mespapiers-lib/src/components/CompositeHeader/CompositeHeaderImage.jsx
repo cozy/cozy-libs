@@ -1,10 +1,16 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import cx from 'classnames'
+import PropTypes from 'prop-types'
+import React from 'react'
 
-import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 import Icon, { iconPropType } from 'cozy-ui/transpiled/react/Icon'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
+import Account from '../../assets/icons/Account.svg'
+import Contract from '../../assets/icons/Contract.svg'
+import IlluGenericAlert from '../../assets/icons/IlluGenericAlert.svg'
+import IlluGenericInputDate from '../../assets/icons/IlluGenericInputDate.svg'
+import IlluGenericInputText from '../../assets/icons/IlluGenericInputText.svg'
+import IlluGenericNewPage from '../../assets/icons/IlluGenericNewPage.svg'
 import IlluCafNumberHelp from '../../assets/images/IlluCafNumberHelp.png'
 import IlluCovidVaccineCertificate from '../../assets/images/IlluCovidVaccineCertificate.png'
 import IlluDiploma from '../../assets/images/IlluDiploma.png'
@@ -18,21 +24,15 @@ import IlluIdCardExpirationDateHelp from '../../assets/images/IlluIdCardExpirati
 import IlluIdCardFront from '../../assets/images/IlluIdCardFront.png'
 import IlluIdCardNumberHelp from '../../assets/images/IlluIdCardNumberHelp.png'
 import IlluInvoice from '../../assets/images/IlluInvoice.png'
+import IlluPassport from '../../assets/images/IlluPassport.png'
+import IlluPassportDate from '../../assets/images/IlluPassportDate.png'
+import IlluPassportNumber from '../../assets/images/IlluPassportNumber.png'
 import IlluResidencePermitBack from '../../assets/images/IlluResidencePermitBack.png'
 import IlluResidencePermitExpirationDateHelp from '../../assets/images/IlluResidencePermitExpirationDateHelp.png'
 import IlluResidencePermitFront from '../../assets/images/IlluResidencePermitFront.png'
 import IlluResidencePermitNumberHelp from '../../assets/images/IlluResidencePermitNumberHelp.png'
 import IlluVehicleRegistration from '../../assets/images/IlluVehicleRegistration.png'
 import IlluWorkContract from '../../assets/images/IlluWorkContract.png'
-import IlluPassport from '../../assets/images/IlluPassport.png'
-import IlluPassportNumber from '../../assets/images/IlluPassportNumber.png'
-import IlluPassportDate from '../../assets/images/IlluPassportDate.png'
-import IlluGenericAlert from '../../assets/icons/IlluGenericAlert.svg'
-import IlluGenericInputDate from '../../assets/icons/IlluGenericInputDate.svg'
-import IlluGenericInputText from '../../assets/icons/IlluGenericInputText.svg'
-import IlluGenericNewPage from '../../assets/icons/IlluGenericNewPage.svg'
-import Account from '../../assets/icons/Account.svg'
-import Contract from '../../assets/icons/Contract.svg'
 
 const images = {
   IlluCafNumberHelp,
@@ -97,6 +97,7 @@ const CompositeHeaderImage = ({ icon, fallbackIcon, iconSize = 'large' }) => {
         src={src}
         alt="illustration"
         style={{ maxWidth: '16.25rem' }}
+        aria-hidden="true"
       />
     )
   }
@@ -107,6 +108,7 @@ const CompositeHeaderImage = ({ icon, fallbackIcon, iconSize = 'large' }) => {
       className={cx('u-pb-1', {
         [`${styles.image}--${iconSize}`]: iconSize
       })}
+      aria-hidden="true"
     >
       <Icon icon={src} size="100%" />
     </div>
