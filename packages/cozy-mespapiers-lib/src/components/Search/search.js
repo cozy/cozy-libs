@@ -1,9 +1,9 @@
 import { Document } from 'flexsearch'
 
-import { themesList } from 'cozy-client/dist/models/document/documentTypeData'
 import { isFile, hasQualifications } from 'cozy-client/dist/models/file'
 import flag from 'cozy-flags'
 
+import { makeFileFlexsearchProps, makeContactFlexsearchProps } from './helpers'
 import { CONTACTS_DOCTYPE } from '../../doctypes'
 
 const isContact = doc => doc._type === CONTACTS_DOCTYPE
@@ -48,84 +48,19 @@ export const index = new Document({
   }
 })
 
-export const makeFileTags = file => {
-  const item = file.metadata?.qualification
-  const tags = themesList
-    .filter(theme => {
-      return theme.items.some(it => it.label === item?.label)
-    })
-    .map(x => x.label)
-  return tags
-}
-
-export const makeContactTags = contact => {
-  const contactTags = []
-
-  const themesByAttributes = {
-    givenName: ['identity'],
-    familyName: ['identity'],
-    phone: ['home', 'work_study', 'identity'],
-    email: ['work_study', 'identity'],
-    cozy: ['identity'],
-    address: ['home', 'work_study', 'identity'],
-    birthday: ['identity'],
-    company: ['work_study'],
-    jobTitle: ['work_study']
-  }
-
-  Object.keys(themesByAttributes).map(attribute => {
-    const preAttribute = ['givenName', 'familyName'].includes(attribute)
-      ? 'name'
-      : undefined
-
-    const value = preAttribute
-      ? contact?.[preAttribute]?.[attribute]
-      : contact?.[attribute]
-
-    const themes = themesByAttributes[attribute]
-
-    if (value && value.length > 0) {
-      themes.forEach(theme => {
-        if (!contactTags.includes(theme)) {
-          contactTags.push(theme)
-        }
-      })
-    }
-  })
-
-  return contactTags
-}
-
-export const addFileDoc = ({ index, doc, scannerT }) => {
+export const addFileDoc = ({ index, doc, scannerT, t }) => {
   if (hasQualifications(doc)) {
     return index.add({
       ...doc,
-      flexsearchProps: {
-        tag: makeFileTags(doc),
-        translatedQualificationLabel: scannerT(
-          `items.${doc.metadata.qualification.label}`
-        )
-      }
+      flexsearchProps: makeFileFlexsearchProps({ doc, scannerT, t })
     })
   }
 }
 
 export const addContactDoc = (index, doc) => {
-  const flexsearchEmailAddresses = doc.email
-    ?.map(email => email.address)
-    .reduce((acc, val, idx) => ({ ...acc, [`email[${idx}].address`]: val }), {})
-
-  const flexsearchPhoneNumbers = doc.phone
-    ?.map(phone => phone.number)
-    .reduce((acc, val, idx) => ({ ...acc, [`phone[${idx}].number`]: val }), {})
-
   return index.add({
     ...doc,
-    flexsearchProps: {
-      tag: makeContactTags(doc),
-      ...flexsearchEmailAddresses,
-      ...flexsearchPhoneNumbers
-    }
+    flexsearchProps: makeContactFlexsearchProps(doc)
   })
 }
 
