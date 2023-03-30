@@ -1,11 +1,13 @@
-const groupBy = require('lodash/groupBy')
 const get = require('lodash/get')
+const groupBy = require('lodash/groupBy')
 const keyBy = require('lodash/keyBy')
 const merge = require('lodash/merge')
-const Document = require('../Document')
+
+const log = require('cozy-logger').namespace('BankAccount')
+
 const matching = require('./matching-accounts')
 const { getSlugFromInstitutionLabel } = require('./slug-account')
-const log = require('cozy-logger').namespace('BankAccount')
+const Document = require('../Document')
 
 class BankAccount extends Document {
   /**
