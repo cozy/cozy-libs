@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.10.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.10.1...cozy-harvest-lib@13.10.2) (2023-03-30)
+
+
+### Bug Fixes
+
+* **harvest:** Use cozy-client instead of cozy-doctypes ([c6a18db](https://github.com/cozy/cozy-libs/commit/c6a18db91132438321efcd2b7145991b3a729300))
+* **harvest:** Use react-router 6 API in viewer route ([02670f0](https://github.com/cozy/cozy-libs/commit/02670f0729a66dcfc36bd7af655693571da3da70))
+
+
+
+
+
 ## [13.10.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.10.0...cozy-harvest-lib@13.10.1) (2023-03-30)
 
 

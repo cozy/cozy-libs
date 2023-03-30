@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [30.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@29.0.3...cozy-mespapiers-lib@30.0.0) (2023-03-30)
+
+
+### Bug Fixes
+
+* **mespapiers:** Displaying divider wasn't correct for search result ([0850ce1](https://github.com/cozy/cozy-libs/commit/0850ce13759d47ee5a8960f7feb88fc4f0e487c0))
+* **mespapiers:** Flexsearch wasn't using some paper number as indexes ([3f40ad9](https://github.com/cozy/cozy-libs/commit/3f40ad9d7f2874e2a730cd1fcf057db622b43aea))
+* **mespapiers:** Margins for flexsearch result wasn't correct ([bd79063](https://github.com/cozy/cozy-libs/commit/bd790635f39a44bbb59c4179d90be1e314d5826b))
+
+
+### Features
+
+* **mespapiers:** Change approach for indexing contact emails and phone ([ee525c9](https://github.com/cozy/cozy-libs/commit/ee525c948939e39b1e162de2d766ccf3098a0216))
+* **mespapiers:** Lightening of the result of the contacts request ([48020e0](https://github.com/cozy/cozy-libs/commit/48020e0b578ef25a8bd977b52527a0bf9b744c3d))
+* **mespapiers:** Provides more permissiveness to flexsearch ([ef087a9](https://github.com/cozy/cozy-libs/commit/ef087a92e527751bfc107d53bcc488dbb65d2186))
+* **mespapiers:** Update cozy-ui from 82.1.2 to 82.3.0 ([56597d5](https://github.com/cozy/cozy-libs/commit/56597d5c5297e332a2f729357e912afb0095d629))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 82.3.0`
+
+
+
+
+
 ## [29.0.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@29.0.2...cozy-mespapiers-lib@29.0.3) (2023-03-30)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
