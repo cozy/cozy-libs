@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.10.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.10.2...cozy-harvest-lib@13.10.3) (2023-03-30)
+
+
+### Bug Fixes
+
+* **harvest:** Remove fileviewer route from v4 router ([ab1e0ac](https://github.com/cozy/cozy-libs/commit/ab1e0ac550d26dad8e17d73caa721d67d06c75cd))
+
+
+
+
+
 ## [13.10.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.10.1...cozy-harvest-lib@13.10.2) (2023-03-30)
 
 
