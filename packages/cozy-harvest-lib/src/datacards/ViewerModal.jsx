@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { useParams } from 'react-router-dom'
 
 import Overlay from 'cozy-ui/transpiled/react/Overlay'
 import Viewer from 'cozy-ui/transpiled/react/Viewer'
@@ -6,13 +7,10 @@ import Viewer from 'cozy-ui/transpiled/react/Viewer'
 import { useDataCardFiles } from './useDataCardFiles'
 import { MountPointContext } from '../components/MountPointContext'
 
-export const ViewerModal = ({
-  match: {
-    params: { accountId, folderToSaveId, fileIndex }
-  }
-}) => {
+export const ViewerModal = () => {
   const { pushHistory, replaceHistory } = useContext(MountPointContext)
   const { data, fetchStatus } = useDataCardFiles(accountId, folderToSaveId)
+  const { accountId, folderToSaveId, fileIndex } = useParams()
 
   const handleCloseViewer = () => replaceHistory(`/accounts/${accountId}`)
   const handleFileChange = (_file, newIndex) =>

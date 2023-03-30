@@ -154,9 +154,7 @@ const RoutesV6 = ({
 
       <Route
         path="viewer/:accountId/:folderToSaveId/:fileIndex"
-        element={routeComponentProps => (
-          <ViewerModal {...routeComponentProps} />
-        )}
+        element={<ViewerModal />}
       />
 
       {/* Redirections */}
