@@ -96,7 +96,7 @@
         "undefined": "Manuellement"
       },
       "lastSync": {
-        "label": "Mise à jour :",
+        "label": "Synchronisé :",
         "syncing": "Récupération des données…",
         "unknown": "Indéterminée",
         "afterSomeTimes": "Sync. il y a %{times}",
@@ -150,7 +150,7 @@
       },
       "CHALLENGE_ASKED": {
         "title": "Second facteur d’authentification demandé",
-        "description": "Le site demande une authentification forte à deux facteurs. Vous devez relancer le connecteur manuellement pour vous authentifier et continuer à récupérer vos données."
+        "description": "Le site demande une authentification forte à deux facteurs. Vous devez synchroniser manuellement le service pour valider votre authentification et continuer à récupérer vos données."
       },
       "OAUTH_CANCELED": {
         "title": "Annulé",
@@ -166,11 +166,11 @@
       },
       "LOGIN_FAILED.TOO_MANY_ATTEMPTS": {
         "title": "Temporairement bloqué",
-        "description": "Trop de tentatives erronées ont eu lieu. Merci de modifier votre mot de passe sur le site [%{name}](%{link}) et de mettre à jour le connecteur ensuite."
+        "description": "Trop de tentatives erronées ont eu lieu. Merci de modifier votre mot de passe sur le site [%{name}](%{link}) avant de synchroniser à nouveau vos données."
       },
       "MAINTENANCE": {
         "title": "Site non disponible",
-        "description": "Il semble que le site [%{name}](%{link}) soit indisponible. Merci de relancer ultérieurement ou de consulter notre aide en ligne."
+        "description": "Il semble que le site [%{name}](%{link}) soit indisponible. Merci de synchroniser ultérieurement ou de consulter notre aide en ligne."
       },
       "NOT_EXISTING_DIRECTORY": {
         "title": "Dossier de destination manquant",
@@ -178,15 +178,15 @@
       },
       "TERMS_VERSION_MISMATCH": {
         "title": "Nouvelles CGUs à accepter",
-        "description": "Il semblerait que %{name} ait mis à jour ses Conditions Générales d'Utilisation. Merci de vérifier que le service est à jour. Si l'erreur persiste, contacter nous via [%{supportMail}](mailto:%{supportMail})."
+        "description": "Il semblerait que %{name} ait mis à jour ses Conditions Générales d'Utilisation. Merci de valider ces dernières sur le site [%{name}](%{link}) avant de synchroniser à nouveau vos données."
       },
       "UNKNOWN_ERROR": {
         "title": "Erreur de Connexion",
-        "description": "Une erreur inconnue est survenue. Vous pouvez essayer de mettre à jour vos données. Si le problème persiste, n'hésitez pas à nous contacter via [%{supportMail}](mailto:%{supportMail})."
+        "description": "Une erreur inconnue est survenue. Vous pouvez essayer de synchroniser à nouveau vos données. Si le problème persiste, n'hésitez pas à nous contacter via [%{supportMail}](mailto:%{supportMail})."
       },
       "USER_ACTION_NEEDED": {
         "title": "Action nécessaire chez le fournisseur",
-        "description": "Il semble que [%{name}](%{link}) ait besoin de revérifier votre connexion. Connectez-vous sur [%{name}](%{link}) puis cliquez sur \"Mettre à jour\" dans l'onglet données."
+        "description": "Il semble que [%{name}](%{link}) ait besoin de revérifier votre connexion. Connectez-vous sur [%{name}](%{link}) avant de synchroniser à nouveau vos données."
       },
       "USER_ACTION_NEEDED.OAUTH_OUTDATED": {
         "title": "Renouvellement de l’authentification requis",
@@ -198,15 +198,15 @@
       },
       "USER_ACTION_NEEDED.CHANGE_PASSWORD": {
         "title": "Renouvellement de mot de passe demandé",
-        "description": "Il semble que le site [%{name}](%{link}) ait besoin que vous vous y authentifiiez pour renouveler votre mot de passe. Merci de relancer le connecteur une fois cette action effectuée."
+        "description": "Il semble que le site [%{name}](%{link}) ait besoin que vous vous y authentifiiez pour renouveler votre mot de passe. Merci de renouveler votre mot de passe avant de synchroniser vos données."
       },
       "USER_ACTION_NEEDED.PERMISSIONS_CHANGED": {
         "title": "Validation des nouvelles permissions nécessaire",
-        "description": "Votre connecteur a été mis à jour et les permissions nécessaires ont changé. Merci de valider les nouvelles permissions avant de relancer le connecteur."
+        "description": "Votre service a été mis à jour et les permissions nécessaires ont changé. Merci de valider les nouvelles permissions avant de synchroniser vos données."
       },
       "USER_ACTION_NEEDED.SCA_REQUIRED": {
         "title": "Renouvellement d'authentification demandé",
-        "description": "Il semble que %{name} ait besoin de revérifier votre connexion afin d'autoriser une nouvelle synchronisation de vos comptes. Merci de relancer le connecteur, cela déclenchera la demande auprès de votre banque. Vous recevrez un code à usage unique ou une demande sur l'espace client ou l'application de votre banque."
+        "description": "Il semble que %{name} ait besoin de revérifier votre connexion afin d'autoriser une nouvelle synchronisation de vos comptes. Merci de synchroniser votre service, cela déclenchera la demande auprès de votre banque. Vous recevrez un code à usage unique ou une demande sur l'espace client ou l'application de votre banque."
       },
       "USER_ACTION_NEEDED.TWOFA_EXPIRED": {
         "title": "Renouvellement de l’authentification demandé",
@@ -214,7 +214,7 @@
       },
       "USER_ACTION_NEEDED.WEBAUTH_REQUIRED": {
         "title": "Authentification sur le site web demandée",
-        "description": "Il semble que [%{name}](%{link}) ait besoin que vous vous authentifiiez à leur site web pour que la synchronisation refonctionne. Merci de relancer le connecteur une fois cette action effectuée."
+        "description": "Il semble que [%{name}](%{link}) ait besoin que vous vous authentifiiez à leur site web pour que la synchronisation refonctionne. Merci de vous authentifier sur le site avant de synchroniser vos données."
       },
       "USER_ACTION_NEEDED.WRONG_TWOFA_CODE": {
         "title": "Le code fourni ne semble pas correct",
@@ -222,7 +222,7 @@
       },
       "VENDOR_DOWN": {
         "title": "Service non disponible",
-        "description": "Il semble que le service [%{name}](%{link}) ne nous ait pas répondu dans les temps. Vous pouvez tenter de le relancer manuellement maintenant ou ultérieurement."
+        "description": "Il semble que le service [%{name}](%{link}) ne nous ait pas répondu dans les temps. Vous pouvez tenter de synchroniser vos données manuellement maintenant ou ultérieurement."
       },
       "VENDOR_DOWN.BANK_DOWN": {
         "title": "Site non disponible",
@@ -230,7 +230,7 @@
       },
       "VENDOR_DOWN.LINXO_DOWN": {
         "title": "Service non disponible",
-        "description": "Il semble que le service [%{name}](%{link}) ne nous ait pas répondu dans les temps. Vous pouvez tenter de le relancer manuellement maintenant ou ultérieurement."
+        "description": "Il semble que le service [%{name}](%{link}) ne nous ait pas répondu dans les temps. Vous pouvez tenter de synchroniser vos données manuellement maintenant ou ultérieurement."
       },
       "ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED": {
         "title": "Ce compte est déjà configuré",
@@ -374,7 +374,7 @@
     }
   },
   "modal": {
-    "aria-label": "Configuration du connecteur",
+    "aria-label": "Configuration",
     "konnector": {
       "error": {
         "title": "Impossible de récupérer le compte",
