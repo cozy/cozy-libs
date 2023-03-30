@@ -1,8 +1,8 @@
+import 'leaflet/dist/leaflet.css'
 import get from 'lodash/get'
 import keyBy from 'lodash/keyBy'
 import PropTypes from 'prop-types'
 import React, { useContext, useState } from 'react'
-import 'leaflet/dist/leaflet.css'
 
 import { RealTimeQueries } from 'cozy-client'
 import Card from 'cozy-ui/transpiled/react/Card'

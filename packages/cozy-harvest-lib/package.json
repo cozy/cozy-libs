@@ -29,6 +29,7 @@
   "dependencies": {
     "@cozy/minilog": "^1.0.0",
     "@sentry/browser": "^6.0.1",
+    "classnames": "^2.3.1",
     "cozy-bi-auth": "0.0.25",
     "cozy-doctypes": "^1.88.4",
     "cozy-logger": "^1.10.0",
@@ -64,6 +65,7 @@
     "enzyme-adapter-react-16": "1.15.6",
     "form-data": "4.0.0",
     "identity-obj-proxy": "3.0.0",
+    "isomorphic-fetch": "^2.2.1",
     "jest": "26.6.3",
     "jest-environment-jsdom-sixteen": "1.0.3",
     "jest-resolve-cached": "1.0.0",

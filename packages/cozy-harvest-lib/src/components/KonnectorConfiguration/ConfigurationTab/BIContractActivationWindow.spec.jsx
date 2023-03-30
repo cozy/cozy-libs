@@ -1,4 +1,5 @@
 import { render, fireEvent, act, waitFor } from '@testing-library/react'
+import { openOAuthWindow } from 'components/OAuthService'
 import React from 'react'
 
 import CozyClient from 'cozy-client'
@@ -6,6 +7,8 @@ import { WebviewIntentProvider } from 'cozy-intent'
 
 import BIContractActivationWindow from './BiContractActivationWindow'
 import AppLike from '../../../../test/AppLike'
+import { findKonnectorPolicy } from '../../../konnector-policies'
+import { CozyConfirmDialogProvider } from '../../CozyConfirmDialogProvider'
 
 const fetchExtraOAuthUrlParams = jest.fn()
 const refreshContracts = jest.fn()
@@ -15,11 +18,7 @@ jest.mock('../../../konnector-policies', () => ({
 jest.mock('../../../helpers/oauth')
 jest.mock('cozy-device-helper')
 jest.mock('../../OAuthService')
-import { findKonnectorPolicy } from '../../../konnector-policies'
 
-import { openOAuthWindow } from 'components/OAuthService'
-
-import { CozyConfirmDialogProvider } from '../../CozyConfirmDialogProvider'
 findKonnectorPolicy.mockImplementation(() => ({
   fetchExtraOAuthUrlParams,
   refreshContracts

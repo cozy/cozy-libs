@@ -1,11 +1,11 @@
-import L from 'leaflet'
-import PropTypes from 'prop-types'
-import React, { useEffect, useRef, useMemo, memo } from 'react'
-import 'leaflet/dist/leaflet.css'
-import SwipeableViews from 'react-swipeable-views'
-import sortBy from 'lodash/sortBy'
 import isSameDay from 'date-fns/is_same_day'
 import isSameYear from 'date-fns/is_same_year'
+import L from 'leaflet'
+import 'leaflet/dist/leaflet.css'
+import sortBy from 'lodash/sortBy'
+import PropTypes from 'prop-types'
+import React, { useEffect, useRef, useMemo, memo } from 'react'
+import SwipeableViews from 'react-swipeable-views'
 
 import CozyClient, {
   Q,

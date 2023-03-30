@@ -41,8 +41,10 @@ function isRunnable() {
 async function onLaunch({ konnector, account, trigger, flow }) {
   const launcher = getLauncher()
   if (launcher) {
+    // @ts-ignore
     logger.debug('Found a launcher', launcher)
   } else {
+    // @ts-ignore
     logger.warn('Found no launcher')
   }
   if (launcher === 'react-native') {
