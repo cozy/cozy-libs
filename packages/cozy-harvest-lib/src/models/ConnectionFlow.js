@@ -190,7 +190,9 @@ export class ConnectionFlow {
     this.unwatch = this.unwatch.bind(this)
 
     this.state = {
-      status: IDLE
+      status: IDLE,
+      accountError: null,
+      firstRun: false
     }
 
     // Stores data necessary for custom connection flow, for example
@@ -469,7 +471,10 @@ export class ConnectionFlow {
 
       const client = this.client
 
-      this.setState({ status: CREATING_ACCOUNT })
+      this.setState({
+        status: CREATING_ACCOUNT,
+        firstRun: true // when the user submits new authentication information, this is considered a first run
+      })
       this.trigger = trigger
       this.account = account
       this.konnector = konnector
@@ -872,16 +877,22 @@ export class ConnectionFlow {
 
   getDerivedState() {
     const trigger = this.trigger
-    const { status, accountError } = this.state
+    const { status, accountError, firstRun } = this.state
     const triggerError = triggersModel.getKonnectorJobError(trigger)
     const running =
       trigger?.current_state?.status === 'running' ||
       ![ERRORED, IDLE, SUCCESS].includes(status)
+    const konnectorPolicy = this.getKonnectorPolicy()
     const expectingTriggerLaunch = status === EXPECTING_TRIGGER_LAUNCH
     const error =
       !running &&
       !expectingTriggerLaunch &&
       (this.getMockError() || accountError || triggerError)
+    const userNeeded =
+      running &&
+      !this.state[LOGIN_SUCCESS_EVENT] &&
+      (konnectorPolicy.name === 'clisk' || firstRun)
+
     return {
       running,
       twoFARunning: status === RUNNING_TWOFA,
@@ -891,7 +902,8 @@ export class ConnectionFlow {
       accountError,
       error,
       konnectorRunning: triggersModel.isKonnectorRunning(trigger),
-      expectingTriggerLaunch
+      expectingTriggerLaunch,
+      userNeeded
     }
   }
 
