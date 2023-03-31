@@ -156,10 +156,7 @@ export class FlowProvider extends Component {
     const { showTwoFAModal, flowState } = this.state
     const flow = this.flow
     const { children } = this.props
-    const showConnectionBackdrop =
-      flowState?.running &&
-      !flowState[LOGIN_SUCCESS_EVENT] &&
-      (flow.konnector?.clientSide || flow.konnector?.oauth)
+    const showConnectionBackdrop = flowState?.userNeeded
 
     return (
       <>
