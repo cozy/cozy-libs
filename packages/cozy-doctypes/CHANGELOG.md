@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.88.4 (2023-03-31)
+
+
+### Bug Fixes
+
+* Set connection id of current bank's accounts ([1964421](https://github.com/cozy/cozy-libs/commit/196442175534624617700e6043cda30cd5fde2ef)), closes [#1](https://github.com/cozy/cozy-libs/issues/1) [#2](https://github.com/cozy/cozy-libs/issues/2) [#3](https://github.com/cozy/cozy-libs/issues/3) [#1](https://github.com/cozy/cozy-libs/issues/1) [#1](https://github.com/cozy/cozy-libs/issues/1) [#2](https://github.com/cozy/cozy-libs/issues/2)
+
+
+
+
+
 ## [1.88.3](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.88.2...cozy-doctypes@1.88.3) (2023-03-21)
 
 
