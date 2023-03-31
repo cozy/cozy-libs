@@ -5,7 +5,7 @@ import { waitFor } from '@testing-library/react'
 import { Q } from 'cozy-client'
 
 import ConnectionFlow from './ConnectionFlow'
-import { ERRORED, EXPECTING_TRIGGER_LAUNCH } from './flowEvents'
+import { ERRORED, EXPECTING_TRIGGER_LAUNCH, PENDING } from './flowEvents'
 import KonnectorJobWatcher, {
   watchKonnectorJob
 } from './konnector/KonnectorJobWatcher'
@@ -131,7 +131,7 @@ const mockVaultClient = {
   isLocked: jest.fn().mockResolvedValue(false)
 }
 
-const setup = ({ trigger } = {}) => {
+const setup = ({ trigger, konnector } = {}) => {
   const client = {
     query: jest.fn(),
     collection: jest.fn().mockReturnValue({
@@ -143,7 +143,11 @@ const setup = ({ trigger } = {}) => {
   client.plugins = {
     realtime: realtimeMock
   }
-  const flow = new ConnectionFlow(client, trigger, fixtures.konnector)
+  const flow = new ConnectionFlow(
+    client,
+    trigger,
+    konnector || fixtures.konnector
+  )
   return { flow, client }
 }
 
@@ -350,6 +354,42 @@ describe('ConnectionFlow', () => {
       flow.setState({ status: ERRORED })
       const { expectingTriggerLaunch } = flow.getState()
       expect(expectingTriggerLaunch).toBe(false)
+    })
+
+    it('should always have userNeeded : true with clisk konnectors before LOGIN_SUCCESS', () => {
+      const { flow } = setup({
+        konnector: fixtures.clientKonnector,
+        trigger: fixtures.clientTrigger
+      })
+
+      flow.setState({ status: PENDING })
+      let state = flow.getState()
+      expect(state.userNeeded).toBe(true)
+
+      flow.setState({ firstRun: true })
+      state = flow.getState()
+      expect(state.userNeeded).toBe(true)
+
+      flow.setState({ loginSuccess: true })
+      state = flow.getState()
+      expect(state.userNeeded).toBe(false)
+    })
+
+    it('should have userNeeded : true with non clisk konnectors on first run', () => {
+      const { flow } = setup({
+        trigger: fixtures.existingTrigger
+      })
+      flow.setState({ status: PENDING })
+      let state = flow.getState()
+      expect(state.userNeeded).toBe(false)
+
+      flow.setState({ firstRun: true })
+      state = flow.getState()
+      expect(state.userNeeded).toBe(true)
+
+      flow.setState({ loginSuccess: true })
+      state = flow.getState()
+      expect(state.userNeeded).toBe(false)
     })
   })
 
