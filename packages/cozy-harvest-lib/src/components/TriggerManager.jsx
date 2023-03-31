@@ -106,7 +106,7 @@ export class DumbTriggerManager extends Component {
 
     // for "normal" OAuth connectors
     if (needsTriggerCreation) {
-      flow.ensureTriggerAndLaunch(client, {
+      await flow.ensureTriggerAndLaunch(client, {
         account: oAuthAccount,
         konnector: konnector,
         trigger: flow.trigger,

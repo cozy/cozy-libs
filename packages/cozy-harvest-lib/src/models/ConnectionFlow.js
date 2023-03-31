@@ -461,24 +461,12 @@ export class ConnectionFlow {
 
         logger.info(`ConnectionFlow: Saved account ${account._id}`)
 
-        logger.debug('ConnectionFlow: Ensuring trigger...')
-        trigger = await ensureTrigger(client, {
+        await this.ensureTriggerAndLaunch(client, {
           trigger,
           account,
           konnector,
           t
         })
-
-        await this.ensureDefaultFolderPathInAccount(client, {
-          trigger,
-          account,
-          konnector
-        })
-
-        logger.info(`Trigger is ${trigger._id}`)
-        this.trigger = trigger
-        // @ts-ignore
-        this.emit(UPDATE_EVENT)
       }
 
       await this.launch()
@@ -495,6 +483,39 @@ export class ConnectionFlow {
       })
       throw e
     }
+  }
+
+  /**
+   * Ensures a trigger is created and launched
+   *
+   * @param {CozyClient} client - CozyClient instance
+   * @param {object} options - options object
+   * @param {IoCozyAccount} options.account - cozy account
+   * @param {import('cozy-client/types/types').CozyClientDocument} options.konnector - cozy konnector
+   * @param {import('cozy-client/types/types').CozyClientDocument} options.trigger - cozy trigger
+   * @param {Function} options.t - localization function
+   * @returns {Promise<void>}
+   */
+  async ensureTriggerAndLaunch(client, { account, konnector, trigger, t }) {
+    // @ts-ignore
+    logger.debug('ConnectionFlow: Ensuring trigger...')
+    this.trigger = await ensureTrigger(client, {
+      trigger,
+      account,
+      konnector,
+      t
+    })
+    // @ts-ignore
+    logger.info(`Trigger is ${this.trigger._id}`)
+
+    await this.ensureDefaultFolderPathInAccount(client, {
+      trigger: this.trigger,
+      account,
+      konnector
+    })
+
+    // @ts-ignore
+    this.emit(UPDATE_EVENT)
   }
 
   handleTriggerCreated(trigger) {
