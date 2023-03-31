@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.10.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.10.4...cozy-harvest-lib@13.10.5) (2023-03-31)
+
+
+### Bug Fixes
+
+* Regression on OAuth konnectors ([abc8b19](https://github.com/cozy/cozy-libs/commit/abc8b195f96065ebf42c2806dd70fbd2b7c6318d))
+
+
+
+
+
 ## [13.10.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.10.3...cozy-harvest-lib@13.10.4) (2023-03-31)
 
 **Note:** Version bump only for package cozy-harvest-lib
