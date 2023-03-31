@@ -700,9 +700,29 @@ export class ConnectionFlow {
   }
 
   /**
+   * Tell if the error is an error which needs an action from the user
+   *
+   * @param {Error} error - error object
+   * @returns {boolean}
+   */
+  isUserActionError(error) {
+    if (!error) return false
+
+    const userErrors = ['USER_ACTION_NEEDED', 'LOGIN_FAILED']
+    return userErrors.some(userError => error.message.includes(userError))
+  }
+
+  /**
    * Launches the job and sets everything up to follow execution.
    */
   async launch({ autoSuccessTimer = true } = {}) {
+    const { error } = this.getState()
+
+    if (this.isUserActionError(error)) {
+      // accounts with user actionnable errors are considered as the first run.
+      // this will especially allow to show the backdrop effect to tell the user to stay until the login is successful
+      this.setState({ firstRun: true })
+    }
     const konnectorPolicy = findKonnectorPolicy(this.konnector)
 
     const computedAutoSuccessTimer = autoSuccessTimer
