@@ -17,14 +17,7 @@ const fixtures = {
   clientKonnector: {
     slug: 'konnectest',
     clientSide: true,
-    fields: {
-      username: {
-        type: 'text'
-      },
-      passphrase: {
-        type: 'password'
-      }
-    }
+    fields: {}
   },
   konnectorWithFolder: {
     _type: 'io.cozy.konnectors',
@@ -195,6 +188,24 @@ const fixtures = {
       message: {
         account: 'updated-account-id',
         konnector: 'konnectest',
+        folder_to_save: 'folder-id'
+      }
+    }
+  },
+  clientTrigger: {
+    id: 'client-trigger-id',
+    _type: 'io.cozy.triggers',
+    message: {
+      account: 'updated-account-id',
+      konnector: 'clientkonnector',
+      folder_to_save: 'folder-id'
+    },
+    attributes: {
+      type: '@client',
+      worker: 'client',
+      message: {
+        account: 'updated-account-id',
+        konnector: 'clientkonnector',
         folder_to_save: 'folder-id'
       }
     }
