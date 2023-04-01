@@ -20,6 +20,7 @@ interface _NativeMethodsRegister {
     params?: Record<string, unknown>
   ) => Promise<boolean | null>
   isBiometryDenied: () => Promise<boolean>
+  isNativePassInstalledOnDevice: () => Promise<boolean>
   openAppOSSettings: () => Promise<null>
 }
 
