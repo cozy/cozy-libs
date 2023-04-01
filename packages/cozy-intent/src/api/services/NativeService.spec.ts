@@ -50,7 +50,8 @@ describe('NativeService', () => {
       hideSplashScreen: jest.fn(),
       setDefaultRedirection: jest.fn(),
       setFlagshipUI: jest.fn(),
-      showSplashScreen: jest.fn()
+      showSplashScreen: jest.fn(),
+      isNativePassInstalledOnDevice: jest.fn()
     }
   })
 
