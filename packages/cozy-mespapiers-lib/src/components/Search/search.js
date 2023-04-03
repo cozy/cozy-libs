@@ -57,6 +57,8 @@ export const index = new Document({
 })
 
 export const addFileDoc = ({ index, doc, scannerT, t }) => {
+  if (!t || !scannerT) return null
+
   if (hasQualifications(doc)) {
     return index.add({
       ...doc,
@@ -84,10 +86,10 @@ export const addDoc = ({ index, doc, scannerT, t }) => {
 // To retrieve the documents, we make a link with the _id.
 // So there is no update of the index to do, only additions and deletions.
 // The update of the document is managed by the realtime.
-export const updateDoc = ({ index, doc, t }) => {
+export const updateDoc = ({ index, doc, scannerT, t }) => {
   if (isFile(doc) && doc.trashed) {
     index.remove(doc._id)
   } else {
-    addDoc({ index, doc, t }) // will perform update if id already indexed, see https://github.com/nextapps-de/flexsearch#append-contents
+    addDoc({ index, doc, scannerT, t }) // will perform update if id already indexed, see https://github.com/nextapps-de/flexsearch#append-contents
   }
 }

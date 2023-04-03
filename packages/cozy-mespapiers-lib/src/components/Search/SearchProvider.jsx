@@ -21,8 +21,8 @@ const SearchProvider = ({ doctypes, t, scannerT, children }) => {
   const client = useClient()
 
   const realtimeConnection = useMemo(
-    () => makeRealtimeConnection(doctypes, t),
-    [doctypes, t]
+    () => makeRealtimeConnection(doctypes, scannerT, t),
+    [doctypes, scannerT, t]
   )
   useRealtime(client, realtimeConnection)
 

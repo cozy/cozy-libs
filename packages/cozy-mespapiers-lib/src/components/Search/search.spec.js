@@ -9,6 +9,7 @@ const locales = {
 }
 
 const scannerT = x => get(locales, x)
+const t = x => x
 const index = { add: jest.fn() }
 
 describe('addFileDoc', () => {
@@ -24,7 +25,8 @@ describe('addFileDoc', () => {
         name: 'file01.ext',
         metadata: { qualification: { label: 'tax_return' } }
       },
-      scannerT
+      scannerT,
+      t
     })
 
     expect(index.add).toBeCalledWith({
@@ -33,9 +35,7 @@ describe('addFileDoc', () => {
       metadata: { qualification: { label: 'tax_return' } },
       flexsearchProps: {
         tag: ['finance'],
-        translated: {
-          qualificationLabel: 'Impôts - Déclaration de revenus'
-        }
+        translated: { qualificationLabel: 'Impôts - Déclaration de revenus' }
       }
     })
   })
