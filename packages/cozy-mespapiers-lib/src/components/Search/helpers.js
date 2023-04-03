@@ -42,21 +42,21 @@ export const search = ({ docs, value, tag }) => {
   return { filteredDocs, firstSearchResultMatchingAttributes }
 }
 
-const onCreate = t => async doc => {
-  addDoc({ index, doc, t })
+const onCreate = (scannerT, t) => async doc => {
+  addDoc({ index, doc, scannerT, t })
 }
 
-const onUpdate = t => async doc => {
-  updateDoc({ index, doc, t })
+const onUpdate = (scannerT, t) => async doc => {
+  updateDoc({ index, doc, scannerT, t })
 }
 
-export const makeRealtimeConnection = (doctypes, t) =>
+export const makeRealtimeConnection = (doctypes, scannerT, t) =>
   doctypes.reduce(
     (acc, curr) => ({
       ...acc,
       [`${curr}`]: {
-        created: onCreate(t),
-        updated: onUpdate(t)
+        created: onCreate(scannerT, t),
+        updated: onUpdate(scannerT, t)
       }
     }),
     {}
