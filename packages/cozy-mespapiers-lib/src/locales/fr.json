@@ -382,7 +382,8 @@
     "attributeLabel": {
       "phone": "Numéro de téléphone",
       "email": "Adresse email",
-      "birthday": "Date de naissance"
+      "birthday": "Date de naissance",
+      "address": "Adresse"
     }
   },
   "RenameInput": {
