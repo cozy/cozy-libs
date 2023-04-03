@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.11.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.11.0...cozy-harvest-lib@13.11.1) (2023-04-03)
+
+
+### Bug Fixes
+
+* **harvest:** Handle navback from edit dialog ([838ce24](https://github.com/cozy/cozy-libs/commit/838ce2406bdbd8c27f5e392d4c888e1ac2f8e9b5))
+* **harvest:** Use correct prop name in ListItem ([d0e1173](https://github.com/cozy/cozy-libs/commit/d0e11730494f6a118abc56c4d39f24e9f2ae6d0d))
+
+
+
+
+
 # [13.11.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.10.6...cozy-harvest-lib@13.11.0) (2023-04-03)
 
 
