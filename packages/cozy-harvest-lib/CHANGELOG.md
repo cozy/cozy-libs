@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.11.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.10.6...cozy-harvest-lib@13.11.0) (2023-04-03)
+
+
+### Bug Fixes
+
+* **harvest:** Typo on connection modal when no account ([6142963](https://github.com/cozy/cozy-libs/commit/614296312ac740a7164fc938a95d8946ffd8f531))
+
+
+### Features
+
+* **harvest:** Handle backButton on editModal ([7250ce4](https://github.com/cozy/cozy-libs/commit/7250ce42f756d87ab52ea34036824ad2249ffc25))
+
+
+
+
+
 ## [13.10.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.10.5...cozy-harvest-lib@13.10.6) (2023-04-03)
 
 **Note:** Version bump only for package cozy-harvest-lib
