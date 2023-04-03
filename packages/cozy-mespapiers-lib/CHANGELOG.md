@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [34.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@33.1.0...cozy-mespapiers-lib@34.0.0) (2023-04-03)
+
+
+### Bug Fixes
+
+* **mespapiers:** Metadata contractType wasn't returned in files query ([d857f0e](https://github.com/cozy/cozy-libs/commit/d857f0e4c73aacc8c01311783cbbf23cba2628a9))
+* **mespapiers:** RefTaxIncome metadata has been considered for migration ([603954c](https://github.com/cozy/cozy-libs/commit/603954cdc93c206f2ca7bec6cc9305f197d7f83c))
+* **mespapiers:** ScannerT wasn't transmitted in search methods ([31a6c60](https://github.com/cozy/cozy-libs/commit/31a6c6087790bd285246e7e031776a4b6b90df1a))
+
+
+### Features
+
+* **mespapiers:** Add contact addresses support in search ([d227b55](https://github.com/cozy/cozy-libs/commit/d227b559834b58d1d2c2c521561bfe755bef1d35))
+* **mespapiers:** Add search support for multiple attributes ([f9d1c68](https://github.com/cozy/cozy-libs/commit/f9d1c68ed4e821a1d1d8eb1893e7abbd06357f54))
+* **mespapiers:** Update cozy-ui from 82.8.0 to 82.9.0 ([15d7728](https://github.com/cozy/cozy-libs/commit/15d7728cf323715dd98644cfffa388250383fdbe))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 82.9.0`
+
+
+
+
+
 # [33.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@33.0.3...cozy-mespapiers-lib@33.1.0) (2023-04-03)
 
 
