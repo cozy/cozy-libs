@@ -1,15 +1,14 @@
 'use strict'
-import React from 'react'
 import { render } from '@testing-library/react'
+import React from 'react'
 
 import { models } from 'cozy-client'
 const {
   locales: { getBoundT }
 } = models.document
 
-import AppLike from '../../../test/components/AppLike'
-
 import ImportDropdown from './ImportDropdown'
+import AppLike from '../../../test/components/AppLike'
 
 jest.mock('cozy-client/dist/models/document/locales', () => ({
   getBoundT: jest.fn(() => jest.fn())
@@ -36,7 +35,7 @@ describe('ImportDropdown components:', () => {
     const { getByText } = setup('national_id_card')
 
     expect(getByText('Add: ID card'))
-    expect(getByText('Auto import'))
+    expect(getByText('Auto retrieve'))
   })
 
   it('should display correct menu for Passeport', () => {
@@ -44,6 +43,6 @@ describe('ImportDropdown components:', () => {
     const { getByText } = setup('passport')
 
     expect(getByText('Add: Passport'))
-    expect(getByText('Auto import'))
+    expect(getByText('Auto retrieve'))
   })
 })

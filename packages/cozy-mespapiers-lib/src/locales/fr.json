@@ -8,8 +8,8 @@
     "createPaper": "Ajouter un papier",
     "createPaperByTheme": "Ajouter : %{theme}",
     "download": "Télécharger",
-    "zipDownload": "Télécharger un .zip",
-    "forward": "Transmettre",
+    "zipDownload": "Télécharger les documents (format .ZIP)",
+    "forward": "Envoyer",
     "help": "Aides",
     "installHomepage": "Installer sur l’accueil de mon mobile",
     "moveTo": "Déplacer vers…",
@@ -17,7 +17,7 @@
     "phoneDownload": "Rendre accessible hors-ligne",
     "qualify": "Qualifier",
     "rename": "Renommer",
-    "forwardPapers": "Transmettre des papiers",
+    "forwardPapers": "Envoyer des papiers",
     "select": "Sélectionner",
     "share": "Partager",
     "trash": "Supprimer",
@@ -42,7 +42,7 @@
     "replace": "Remplacer",
     "saveFile": {
       "error": "Une erreur est survenue, veuillez réessayer ultérieurement",
-      "success": "Fichier enregistré avec succès"
+      "success": "Document enregistré avec succès"
     },
     "trashFile": {
       "error": "Une erreur s'est produite, veuillez réessayer dans un moment.",
@@ -66,9 +66,9 @@
   },
   "ContactStep": {
     "me": "Moi",
-    "onLoad": "Génération du document",
+    "onLoad": "Enregistrement en cours",
     "other": "Une autre personne",
-    "save": "Sauvegarder",
+    "save": "Enregistrer",
     "contactModal": {
       "placeholder": "Rechercher un contact",
       "addContactLabel": "Ajouter un contact",
@@ -97,8 +97,8 @@
   },
   "ImportDropdown": {
     "importAuto": {
-      "text": "Récupérer ce document grâce à son site internet, votre papier sera ensuite maintenu à jour automatiquement",
-      "title": "Importer automatiquement"
+      "text": "Sélectionner votre service, entrez vos identifiants et récupérer votre document de façon automatique",
+      "title": "Récupérer automatiquement"
     },
     "scanPicture": {
       "text": "Utiliser votre appareil photo ou un document existant",
@@ -333,12 +333,12 @@
   },
   "Scan": {
     "divider": "ou",
-    "importPicFromMobile": "Sélectionner depuis mon téléphone",
-    "importPicFromDesktop": "Sélectionner depuis mon ordinateur",
+    "importPicFromMobile": "Choisir depuis mon téléphone",
+    "importPicFromDesktop": "Choisir depuis mon ordinateur",
     "modal": {
       "validFileType": "Format acceptés : image ou pdf"
     },
-    "selectPicFromCozy": "Sélectionner dans mon Cozy",
+    "selectPicFromCozy": "Choisir depuis mon Cozy",
     "takePic": "Prendre en photo",
     "themes": {
       "work_study": "Travail",
@@ -358,7 +358,7 @@
       "default": "Ma sélection",
       "nbSelected": "%{smart_count} élément sélectionné |||| %{smart_count} éléments sélectionnés"
     },
-    "empty": "Sélectionner les papiers à transmettre",
+    "empty": "Choisir le(s) papier(s) à envoyer",
     "select": "Ajouter à ma sélection",
     "folderZipName": "%{contactName} - papiers - %{date}.zip"
   },

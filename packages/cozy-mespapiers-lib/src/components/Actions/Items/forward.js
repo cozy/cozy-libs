@@ -16,7 +16,7 @@ export const forward = ({ client }) => {
       return (
         <ActionMenuItemWrapper
           className={className}
-          icon="reply"
+          icon="paperplane"
           onClick={onClick}
         >
           {t('action.forward')}
