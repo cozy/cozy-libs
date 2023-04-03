@@ -367,19 +367,19 @@
       "title": "No results",
       "text": "Try to shorten or rephrase your search"
     },
-    "metadataLabel": {
-      "refTaxIncome": "Reference tax income",
-      "contractType": "Contract type",
-      "expirationDate": "Expiration date",
-      "driver_license": "License number",
-      "payment_proof_family_allowance": "CAF file number",
-      "vehicle_registration": "Vehicle registration number (VIN)",
-      "national_id_card": "National ID card number",
-      "bank_details": "IBAN number",
-      "passport": "Passport number",
-      "residence_permit": "License number"
-    },
     "attributeLabel": {
+      "metadata": {
+        "refTaxIncome": "Reference tax income",
+        "contractType": "Contract type",
+        "expirationDate": "Expiration date",
+        "driver_license": "License number",
+        "payment_proof_family_allowance": "CAF file number",
+        "vehicle_registration": "Vehicle registration number (VIN)",
+        "national_id_card": "National ID card number",
+        "bank_details": "IBAN number",
+        "passport": "Passport number",
+        "residence_permit": "License number"
+      },
       "phone": "Phone number",
       "email": "Email address",
       "birthday": "Birthday",

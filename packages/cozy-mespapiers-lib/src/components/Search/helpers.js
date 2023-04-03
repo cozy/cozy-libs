@@ -115,37 +115,39 @@ export const makeFileFlexsearchProps = ({ doc, scannerT, t }) => ({
   translated: {
     qualificationLabel: scannerT(`items.${doc.metadata.qualification.label}`),
     ...(doc.metadata.refTaxIncome && {
-      refTaxIncome: t('Search.metadataLabel.refTaxIncome')
+      refTaxIncome: t('Search.attributeLabel.metadata.refTaxIncome')
     }),
     ...(doc.metadata.contractType && {
-      contractType: t('Search.metadataLabel.contractType')
+      contractType: t('Search.attributeLabel.metadata.contractType')
     }),
     ...(doc.metadata.expirationDate && {
-      expirationDate: t('Search.metadataLabel.expirationDate')
+      expirationDate: t('Search.attributeLabel.metadata.expirationDate')
     }),
     ...(doc.metadata.qualification?.label === 'driver_license' && {
-      driverLicense: t('Search.metadataLabel.driver_license')
+      driverLicense: t('Search.attributeLabel.metadata.driver_license')
     }),
     ...(doc.metadata.qualification?.label ===
       'payment_proof_family_allowance' && {
       paymentProofFamilyAllowance: t(
-        'Search.metadataLabel.payment_proof_family_allowance'
+        'Search.attributeLabel.metadata.payment_proof_family_allowance'
       )
     }),
     ...(doc.metadata.qualification?.label === 'vehicle_registration' && {
-      vehicleRegistration: t('Search.metadataLabel.vehicle_registration')
+      vehicleRegistration: t(
+        'Search.attributeLabel.metadata.vehicle_registration'
+      )
     }),
     ...(doc.metadata.qualification?.label === 'national_id_card' && {
-      nationalIdCard: t('Search.metadataLabel.national_id_card')
+      nationalIdCard: t('Search.attributeLabel.metadata.national_id_card')
     }),
     ...(doc.metadata.qualification?.label === 'bank_details' && {
-      bankDetails: t('Search.metadataLabel.bank_details')
+      bankDetails: t('Search.attributeLabel.metadata.bank_details')
     }),
     ...(doc.metadata.qualification?.label === 'passport' && {
-      passport: t('Search.metadataLabel.passport')
+      passport: t('Search.attributeLabel.metadata.passport')
     }),
     ...(doc.metadata.qualification?.label === 'residence_permit' && {
-      residencePermit: t('Search.metadataLabel.residence_permit')
+      residencePermit: t('Search.attributeLabel.metadata.residence_permit')
     })
   }
 })
