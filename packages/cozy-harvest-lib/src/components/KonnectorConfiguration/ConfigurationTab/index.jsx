@@ -79,7 +79,7 @@ const ConfigurationTab = ({
 }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
-  const { replaceHistory } = useContext(MountPointContext)
+  const { pushHistory } = useContext(MountPointContext)
   const client = useClient()
   const vaultClient = useVaultClient()
   const [deleting, setDeleting] = useSafeState(false)
@@ -162,7 +162,7 @@ const ConfigurationTab = ({
             <ListItem
               button
               divider
-              onClick={() => replaceHistory(`/accounts/${account._id}/edit`)}
+              onClick={() => pushHistory(`/accounts/${account._id}/edit`)}
             >
               <ListItemIcon>
                 <Icon icon={KeyIcon} color={palette['slateGrey']} />
