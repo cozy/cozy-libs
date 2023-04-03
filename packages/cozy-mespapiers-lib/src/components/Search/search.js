@@ -32,11 +32,17 @@ const flexsearchIndex = [
   'jobTitle' // io.cozy.contacts
 ]
 if (!flag('mespapiers.migrated.metadata')) {
-  flexsearchIndex.splice(1, 0, 'metadata:ibanNumber') // io.cozy.files
-  flexsearchIndex.splice(3, 0, 'metadata:passportNumber') // io.cozy.files
-  flexsearchIndex.splice(4, 0, 'metadata:vinNumber') // io.cozy.files
-  flexsearchIndex.splice(5, 0, 'metadata:cardNumber') // io.cozy.files
-  flexsearchIndex.splice(6, 0, 'metadata:cafFileNumber') // io.cozy.files
+  flexsearchIndex.splice(
+    10,
+    0,
+    ...[
+      'metadata:ibanNumber',
+      'metadata:passportNumber',
+      'metadata:vinNumber',
+      'metadata:cardNumber',
+      'metadata:cafFileNumber'
+    ]
+  ) // io.cozy.files
 }
 
 /** The index document will store _id for each document having the declared indexed fields,

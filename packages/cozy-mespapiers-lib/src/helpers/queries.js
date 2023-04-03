@@ -31,11 +31,13 @@ export const buildFilesQueryWithQualificationLabel = () => {
     'trashed'
   ]
   if (!flag('mespapiers.migrated.metadata')) {
-    select.splice(8, 0, 'metadata.ibanNumber')
-    select.splice(10, 0, 'metadata.passportNumber')
-    select.splice(11, 0, 'metadata.vinNumber')
-    select.splice(12, 0, 'metadata.cardNumber')
-    select.splice(13, 0, 'metadata.cafFileNumber')
+    select.push(
+      'metadata.ibanNumber',
+      'metadata.passportNumber',
+      'metadata.vinNumber',
+      'metadata.cardNumber',
+      'metadata.cafFileNumber'
+    )
   }
 
   return {
