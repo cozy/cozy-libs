@@ -367,19 +367,19 @@
       "title": "Aucun résultat",
       "text": "Essayez de raccourcir ou de reformuler votre recherche."
     },
-    "metadataLabel": {
-      "refTaxIncome": "Revenu fiscal de référence",
-      "contractType": "Type de contrat",
-      "expirationDate": "Date d'expiration",
-      "driver_license": "Numéro du permis",
-      "payment_proof_family_allowance": "Numéro de dossier CAF",
-      "vehicle_registration": "Numéro de la carte grise (VIN)",
-      "national_id_card": "Numéro de la carte d'identité",
-      "bank_details": "Numéro d'IBAN",
-      "passport": "Numéro du passeport",
-      "residence_permit": "Numéro du permis"
-    },
     "attributeLabel": {
+      "metadata": {
+        "refTaxIncome": "Revenu fiscal de référence",
+        "contractType": "Type de contrat",
+        "expirationDate": "Date d'expiration",
+        "driver_license": "Numéro du permis",
+        "payment_proof_family_allowance": "Numéro de dossier CAF",
+        "vehicle_registration": "Numéro de la carte grise (VIN)",
+        "national_id_card": "Numéro de la carte d'identité",
+        "bank_details": "Numéro d'IBAN",
+        "passport": "Numéro du passeport",
+        "residence_permit": "Numéro du permis"
+      },
       "phone": "Numéro de téléphone",
       "email": "Adresse email",
       "birthday": "Date de naissance",
