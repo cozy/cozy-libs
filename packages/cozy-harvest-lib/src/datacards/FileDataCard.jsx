@@ -52,7 +52,7 @@ const FileListItem = ({ divider, file, onClick, style }) => {
       </ListItemIcon>
       <ListItemText
         primary={file.name}
-        primaryClassName="u-ellipsis"
+        classes={{ primary: 'u-ellipsis' }}
         secondary={
           <Typography variant="caption">
             {t('datacards.files.imported', {
