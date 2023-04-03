@@ -1,6 +1,6 @@
+import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { fireEvent, render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 import PapersFabWrapper from './PapersFabWrapper'
@@ -49,7 +49,7 @@ describe('PapersFabWrapper', () => {
     fireEvent.click(btn)
 
     expect(getByText('Add a paper')).toBeInTheDocument()
-    expect(getByText('Forward papers…')).toBeInTheDocument()
+    expect(getByText('Send papers…')).toBeInTheDocument()
     expect(queryByText('Add: Tax notice')).toBeNull()
   })
 
@@ -63,7 +63,7 @@ describe('PapersFabWrapper', () => {
     fireEvent.click(btn)
 
     expect(getByText('Add a paper')).toBeInTheDocument()
-    expect(getByText('Forward papers…')).toBeInTheDocument()
+    expect(getByText('Send papers…')).toBeInTheDocument()
     expect(getByText('Add: Tax notice')).toBeInTheDocument()
   })
 })

@@ -8,8 +8,8 @@
     "createPaper": "Add a paper",
     "createPaperByTheme": "Add: %{theme}",
     "download": "Download",
-    "zipDownload": "Download a .zip file",
-    "forward": "Forward",
+    "zipDownload": "Download documents (.ZIP format)",
+    "forward": "Send",
     "help": "Help",
     "installHomepage": "Install on my mobile's homepage",
     "moveTo": "Move to…",
@@ -17,7 +17,7 @@
     "phoneDownload": "Make available offline",
     "qualify": "Qualify",
     "rename": "Rename",
-    "forwardPapers": "Forward papers…",
+    "forwardPapers": "Send papers…",
     "select": "Select",
     "share": "Share",
     "trash": "Remove",
@@ -42,7 +42,7 @@
     "replace": "Replace",
     "saveFile": {
       "error": "An error has occurred, please try again later",
-      "success": "Successfully saved file"
+      "success": "Document saved successfully"
     },
     "trashFile": {
       "error": "An error has occurred, please try again in a moment.",
@@ -66,7 +66,7 @@
   },
   "ContactStep": {
     "me": "Me",
-    "onLoad": "Document generation",
+    "onLoad": "Save in progress",
     "other": "Someone else",
     "save": "Save",
     "contactModal": {
@@ -97,8 +97,8 @@
   },
   "ImportDropdown": {
     "importAuto": {
-      "text": "Retrieve this document from its website, your paper will then be kept updated automatically",
-      "title": "Auto import"
+      "text": "Select your service, enter your credentials and retrieve your document automatically",
+      "title": "Auto retrieve"
     },
     "scanPicture": {
       "text": "Use your camera or an existing document",
@@ -333,12 +333,12 @@
   },
   "Scan": {
     "divider": "or",
-    "importPicFromMobile": "Select from my phone",
-    "importPicFromDesktop": "Select from my desktop",
+    "importPicFromMobile": "Choose from my phone",
+    "importPicFromDesktop": "Choose from my desktop",
     "modal": {
       "validFileType": "Accepted formats: image or pdf"
     },
-    "selectPicFromCozy": "Select from my Cozy",
+    "selectPicFromCozy": "Choose from my Cozy",
     "takePic": "Take a picture",
     "themes": {
       "work_study": "Work",
@@ -358,7 +358,7 @@
       "default": "My selection",
       "nbSelected": "%{smart_count} selected item |||| %{smart_count} selected items"
     },
-    "empty": "Select the papers to be forwarded",
+    "empty": "Choose the paper(s) to send",
     "select": "Add to my selection",
     "folderZipName": "%{contactName} - papers - %{date}.zip"
   },
