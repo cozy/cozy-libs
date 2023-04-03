@@ -23,6 +23,7 @@ export const buildFilesQueryWithQualificationLabel = () => {
     'metadata.qualification.label',
     'metadata.referencedDate',
     'metadata.number',
+    'metadata.contractType',
     'created_at',
     'updated_at',
     'type',
