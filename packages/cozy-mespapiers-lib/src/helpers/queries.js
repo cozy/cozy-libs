@@ -24,6 +24,7 @@ export const buildFilesQueryWithQualificationLabel = () => {
     'metadata.referencedDate',
     'metadata.number',
     'metadata.contractType',
+    'metadata.refTaxIncome',
     'created_at',
     'updated_at',
     'type',
@@ -33,9 +34,8 @@ export const buildFilesQueryWithQualificationLabel = () => {
     select.splice(8, 0, 'metadata.ibanNumber')
     select.splice(10, 0, 'metadata.passportNumber')
     select.splice(11, 0, 'metadata.vinNumber')
-    select.splice(12, 0, 'metadata.refTaxIncome')
-    select.splice(13, 0, 'metadata.cardNumber')
-    select.splice(14, 0, 'metadata.cafFileNumber')
+    select.splice(12, 0, 'metadata.cardNumber')
+    select.splice(13, 0, 'metadata.cafFileNumber')
   }
 
   return {
