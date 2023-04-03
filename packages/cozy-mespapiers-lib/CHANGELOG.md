@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [33.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@33.0.3...cozy-mespapiers-lib@33.1.0) (2023-04-03)
+
+
+### Features
+
+* Add helper text to ContactEditDialog ([42f6bb6](https://github.com/cozy/cozy-libs/commit/42f6bb60b84dcab38430b27b956e675f4ec1362a))
+* Update wording ([8b1e1a5](https://github.com/cozy/cozy-libs/commit/8b1e1a59e86c0b940973dd559d2a42cb8437543a))
+
+
+
+
+
 ## [33.0.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@33.0.2...cozy-mespapiers-lib@33.0.3) (2023-04-03)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
