@@ -87,7 +87,7 @@ function startLauncher({ konnector, account, trigger, flow }) {
       }
 
       if (dataPayload.message === LOGIN_SUCCESS_EVENT) {
-        flow.triggerEvent(LOGIN_SUCCESS_EVENT)
+        flow.triggerEvent(LOGIN_SUCCESS_EVENT, dataPayload.param?.accountId)
         return
       }
 

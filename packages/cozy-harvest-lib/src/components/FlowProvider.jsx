@@ -129,7 +129,7 @@ export class FlowProvider extends Component {
     if (typeof onSuccess === 'function') onSuccess(flow.trigger)
   }
 
-  handleLoginSuccess() {
+  handleLoginSuccess(accountId) {
     logger.info('FlowProvider: Handle login success')
     if (this.state.showTwoFAModal) {
       this.dismissTwoFAModal()
@@ -144,8 +144,10 @@ export class FlowProvider extends Component {
     // created, this is why a trigger like object is created here
     const triggerLike = {
       message: {
-        account: flow?.account?._id,
-        konnector: flow?.konnector?.slug
+        // with clisk konnectors, LOGIN_SUCCESS event can trigger before the account creation realtime event
+        // and then flow wont have the correct account id yet
+        account: accountId || flow.account._id,
+        konnector: flow.konnector.slug
       },
       ...flow.trigger
     }
