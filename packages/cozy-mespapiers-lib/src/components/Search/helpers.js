@@ -120,6 +120,9 @@ export const makeFileFlexsearchProps = ({ doc, scannerT, t }) => ({
     ...(doc.metadata.contractType && {
       contractType: t('Search.metadataLabel.contractType')
     }),
+    ...(doc.metadata.expirationDate && {
+      expirationDate: t('Search.metadataLabel.expirationDate')
+    }),
     ...(doc.metadata.qualification?.label === 'driver_license' && {
       driverLicense: t('Search.metadataLabel.driver_license')
     }),
@@ -140,11 +143,14 @@ export const makeFileFlexsearchProps = ({ doc, scannerT, t }) => ({
     }),
     ...(doc.metadata.qualification?.label === 'passport' && {
       passport: t('Search.metadataLabel.passport')
+    }),
+    ...(doc.metadata.qualification?.label === 'residence_permit' && {
+      residencePermit: t('Search.metadataLabel.residence_permit')
     })
   }
 })
 
-export const makeContactFlexsearchProps = doc => {
+export const makeContactFlexsearchProps = (doc, t) => {
   const flexsearchEmailAddresses = doc.email
     ?.map(email => email.address)
     .reduce((acc, val, idx) => ({ ...acc, [`email[${idx}].address`]: val }), {})
@@ -155,6 +161,17 @@ export const makeContactFlexsearchProps = doc => {
 
   return {
     tag: makeContactTags(doc),
+    translated: {
+      ...(doc.phone?.length > 0 && {
+        phone: t('Search.attributeLabel.phone')
+      }),
+      ...(doc.email?.length > 0 && {
+        email: t('Search.attributeLabel.email')
+      }),
+      ...(doc.birthday && {
+        birthday: t('Search.attributeLabel.birthday')
+      })
+    },
     ...flexsearchEmailAddresses,
     ...flexsearchPhoneNumbers
   }
