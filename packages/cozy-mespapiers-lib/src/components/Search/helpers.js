@@ -159,6 +159,16 @@ export const makeContactFlexsearchProps = (doc, t) => {
     ?.map(phone => phone.number)
     .reduce((acc, val, idx) => ({ ...acc, [`phone[${idx}].number`]: val }), {})
 
+  const flexsearchPostalAddresses = doc.address
+    ?.map(address => address.formattedAddress)
+    .reduce(
+      (acc, val, idx) => ({
+        ...acc,
+        [`address[${idx}].formattedAddress`]: val
+      }),
+      {}
+    )
+
   return {
     tag: makeContactTags(doc),
     translated: {
@@ -170,9 +180,13 @@ export const makeContactFlexsearchProps = (doc, t) => {
       }),
       ...(doc.birthday && {
         birthday: t('Search.attributeLabel.birthday')
+      }),
+      ...(doc.address?.length > 0 && {
+        address: t('Search.attributeLabel.address')
       })
     },
     ...flexsearchEmailAddresses,
-    ...flexsearchPhoneNumbers
+    ...flexsearchPhoneNumbers,
+    ...flexsearchPostalAddresses
   }
 }

@@ -23,6 +23,7 @@ const flexsearchIndex = [
   'flexsearchProps:translated:phone', // io.cozy.contacts
   'flexsearchProps:translated:email', // io.cozy.contacts
   'flexsearchProps:translated:birthday', // io.cozy.contacts
+  'flexsearchProps:translated:address', // io.cozy.contacts
   'metadata:number', // io.cozy.files
   'metadata:refTaxIncome', // io.cozy.files
   'metadata:expirationDate', // io.cozy.files
@@ -34,6 +35,10 @@ const flexsearchIndex = [
   // We use the number 7 arbitrarily, we assume that it is a correct value for emails and phones
   ...Array.from(Array(7), (_, idx) => `flexsearchProps:email[${idx}].address`), // io.cozy.contacts
   ...Array.from(Array(7), (_, idx) => `flexsearchProps:phone[${idx}].number`), // io.cozy.contacts
+  ...Array.from(
+    Array(5),
+    (_, idx) => `flexsearchProps:address[${idx}].formattedAddress`
+  ), // io.cozy.contacts
   'company', // io.cozy.contacts
   'jobTitle' // io.cozy.contacts
 ]
