@@ -18,8 +18,14 @@ const flexsearchIndex = [
   'flexsearchProps:translated:nationalIdCard', // io.cozy.files
   'flexsearchProps:translated:bankDetails', // io.cozy.files
   'flexsearchProps:translated:passport', // io.cozy.files
+  'flexsearchProps:translated:residencePermit', // io.cozy.files
+  'flexsearchProps:translated:expirationDate', // io.cozy.files
+  'flexsearchProps:translated:phone', // io.cozy.contacts
+  'flexsearchProps:translated:email', // io.cozy.contacts
+  'flexsearchProps:translated:birthday', // io.cozy.contacts
   'metadata:number', // io.cozy.files
   'metadata:refTaxIncome', // io.cozy.files
+  'metadata:expirationDate', // io.cozy.files
   'fullname', // io.cozy.contacts
   'name', // io.cozy.files, io.cozy.contacts
   'birthday', // io.cozy.contacts
@@ -73,10 +79,10 @@ export const addFileDoc = ({ index, doc, scannerT, t }) => {
   }
 }
 
-export const addContactDoc = (index, doc) => {
+export const addContactDoc = ({ index, doc, t }) => {
   return index.add({
     ...doc,
-    flexsearchProps: makeContactFlexsearchProps(doc)
+    flexsearchProps: makeContactFlexsearchProps(doc, t)
   })
 }
 
@@ -84,7 +90,7 @@ export const addDoc = ({ index, doc, scannerT, t }) => {
   if (isFile(doc)) {
     addFileDoc({ index, doc, scannerT, t })
   } else if (isContact(doc)) {
-    addContactDoc(index, doc)
+    addContactDoc({ index, doc, t })
   }
 }
 

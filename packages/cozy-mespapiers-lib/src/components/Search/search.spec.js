@@ -47,16 +47,20 @@ describe('addContactDoc', () => {
   })
 
   it('should use a doc with correct flexsearchProps', () => {
-    addContactDoc(index, {
-      _type: 'io.cozy.contacts',
-      name: { givenName: 'Jason', familyName: 'Bourne' },
-      fullname: 'Jason Bourne',
-      birthday: '1959-05-15',
-      birthcity: 'Chicago',
-      email: [{ address: 'jason.bourne@aol.com' }],
-      civility: 'male',
-      company: 'CIA',
-      jobTitle: 'Facilitator'
+    addContactDoc({
+      index,
+      doc: {
+        _type: 'io.cozy.contacts',
+        name: { givenName: 'Jason', familyName: 'Bourne' },
+        fullname: 'Jason Bourne',
+        birthday: '1959-05-15',
+        birthcity: 'Chicago',
+        email: [{ address: 'jason.bourne@aol.com' }],
+        civility: 'male',
+        company: 'CIA',
+        jobTitle: 'Facilitator'
+      },
+      t
     })
 
     expect(index.add).toBeCalledWith({
@@ -71,7 +75,11 @@ describe('addContactDoc', () => {
       jobTitle: 'Facilitator',
       flexsearchProps: {
         tag: ['identity', 'work_study'],
-        'email[0].address': 'jason.bourne@aol.com'
+        'email[0].address': 'jason.bourne@aol.com',
+        translated: {
+          birthday: 'Search.attributeLabel.birthday',
+          email: 'Search.attributeLabel.email'
+        }
       }
     })
   })
