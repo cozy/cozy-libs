@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.11.0 (2023-04-03)
+
+
+### Features
+
+* Add isNativePassInstalledOnDevice type ([87ade68](https://github.com/cozy/cozy-libs/commit/87ade68985f8397d533ce32163c2df82e0741e8e))
+* Change route import after cozy-ui breaking change ([e68149a](https://github.com/cozy/cozy-libs/commit/e68149ac886d9b962490c53776f9a4ea29930f48))
+
+
+
+
+
 # 2.10.0 (2023-03-21)
 
 
