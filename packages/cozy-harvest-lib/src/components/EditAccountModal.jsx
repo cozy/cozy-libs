@@ -1,4 +1,3 @@
-import cx from 'classnames'
 import flow from 'lodash/flow'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
@@ -6,15 +5,8 @@ import React, { Component } from 'react'
 
 import { withClient } from 'cozy-client'
 import flag from 'cozy-flags'
-import CipherIcon from 'cozy-ui/transpiled/react/CipherIcon'
-import {
-  DialogCloseButton,
-  useCozyDialog
-} from 'cozy-ui/transpiled/react/CozyDialogs'
-import Dialog, { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
-import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
+import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import { withMountPointProps } from './MountPointContext'
 import TriggerManager from './TriggerManager'
@@ -39,12 +31,6 @@ const DumbEditAccountModal = withMountPointProps(
     reconnect,
     intentsApi
   }) => {
-    const { dialogProps, dialogTitleProps } = useCozyDialog({
-      open: true,
-      size: 'm',
-      onClose: redirectToAccount
-    })
-
     /**
      * The TriggerManager can open the vault if necessary when it is mounted.
      * If the vault is opened, the EditAccountModal will be closed and will reappear
@@ -65,25 +51,9 @@ const DumbEditAccountModal = withMountPointProps(
 
     return (
       <Dialog
-        style={shouldShow ? showStyle : hideStyle}
         aria-label={konnector.name}
-        {...dialogProps}
-        onClose={redirectToAccount}
-      >
-        <DialogCloseButton onClick={redirectToAccount} />
-        <DialogTitle
-          {...dialogTitleProps}
-          className={cx(
-            dialogTitleProps.className,
-            'u-flex u-flex-items-center'
-          )}
-          disableTypography
-        >
-          <CipherIcon konnector={konnector.slug} className="u-mr-1" />
-          <Typography variant="h5">{konnector.name}</Typography>
-        </DialogTitle>
-        <DialogContent className="u-pt-0">
-          {fetching ? (
+        content={
+          fetching ? (
             <div className="u-pv-2 u-ta-center">
               <Spinner size="xxlarge" />
             </div>
@@ -99,10 +69,15 @@ const DumbEditAccountModal = withMountPointProps(
               reconnect={fromReconnect}
               intentsApi={intentsApi}
             />
-          )}
-          <div className="u-mb-2" />
-        </DialogContent>
-      </Dialog>
+          )
+        }
+        onBack={redirectToAccount}
+        onClose={redirectToAccount}
+        open
+        size="medium"
+        style={shouldShow ? showStyle : hideStyle}
+        title={konnector.name}
+      />
     )
   }
 )
