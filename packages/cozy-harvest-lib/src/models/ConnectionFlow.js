@@ -351,8 +351,7 @@ export class ConnectionFlow {
    * @param {Object} options
    * @param {import('cozy-client/types/types').KonnectorsDoctype} options.konnector
    */
-  expectTriggerLaunch({ konnector }) {
-    this.konnector = konnector
+  expectTriggerLaunch() {
     // @ts-ignore
     logger.info(
       `ConnectionFlow: Expecting trigger launch for konnector ${this.konnector.slug}`
@@ -477,12 +476,11 @@ export class ConnectionFlow {
       })
       this.trigger = trigger
       this.account = account
-      this.konnector = konnector
 
       this.t = t
 
       assert(client, 'No client')
-      const konnectorPolicy = findKonnectorPolicy(konnector)
+      const konnectorPolicy = this.getKonnectorPolicy()
       // @ts-ignore
       logger.log(
         `ConnectionFlow: Handling submit, with konnector policy ${konnectorPolicy.name}`
@@ -723,7 +721,7 @@ export class ConnectionFlow {
       // this will especially allow to show the backdrop effect to tell the user to stay until the login is successful
       this.setState({ firstRun: true })
     }
-    const konnectorPolicy = findKonnectorPolicy(this.konnector)
+    const konnectorPolicy = this.getKonnectorPolicy()
 
     const computedAutoSuccessTimer = autoSuccessTimer
 

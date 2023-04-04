@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom'
 import { withClient } from 'cozy-client'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
+import assert from '../assert'
 import ConnectionBackdrop from './AccountForm/ConnectionBackdrop'
 import TwoFAModal from './TwoFAModal'
 import logger from '../logger'
@@ -38,6 +39,7 @@ export class FlowProvider extends Component {
   constructor(props, context) {
     super(props, context)
     const { initialTrigger, konnector } = this.props
+    assert(konnector, 'no konnector given to FlowProvider')
     this.state = {
       showTwoFAModal: false
     }

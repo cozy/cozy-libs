@@ -809,7 +809,7 @@ describe('ConnectionFlow', () => {
         .mockReset()
         .mockReturnValue(onAccountCreationResult)
 
-      const { flow, client } = setup()
+      const { flow, client } = setup({ konnector: bankingKonnector })
 
       jest.spyOn(flow, 'launch')
 
@@ -836,7 +836,7 @@ describe('expectTriggerLaunch', () => {
     const { flow } = setup({ trigger: fixtures.erroredTrigger })
     flow.setState({ accountError: 'error to hide' })
 
-    flow.expectTriggerLaunch({ konnector: fixtures.konnector })
+    flow.expectTriggerLaunch()
 
     const { accountError } = flow.getState()
     expect(accountError).toBe(null)
@@ -845,7 +845,7 @@ describe('expectTriggerLaunch', () => {
   it('sets the flow status to EXPECTING_TRIGGER_LAUNCH', () => {
     const { flow } = setup({ trigger: fixtures.runningTrigger })
 
-    flow.expectTriggerLaunch({ konnector: fixtures.konnector })
+    flow.expectTriggerLaunch()
 
     const { status } = flow.getState()
     expect(status).toBe(EXPECTING_TRIGGER_LAUNCH)
@@ -854,7 +854,7 @@ describe('expectTriggerLaunch', () => {
   it('starts watching for konnector jobs creation', () => {
     const { flow } = setup({ trigger: fixtures.erroredTrigger })
 
-    flow.expectTriggerLaunch({ konnector: fixtures.konnector })
+    flow.expectTriggerLaunch()
 
     expect(realtimeMock.subscribe).toHaveBeenCalledWith(
       'created',
@@ -872,7 +872,7 @@ describe('expectTriggerLaunch', () => {
 
     it('stops watching for konnector jobs creation', async () => {
       const { flow } = setup({ trigger: fixtures.erroredTrigger })
-      flow.expectTriggerLaunch({ konnector: fixtures.konnector })
+      flow.expectTriggerLaunch()
 
       const job = konnectorJob(flow)
       realtimeMock.events.emit(realtimeMock.key('created', 'io.cozy.jobs'), job)
@@ -886,7 +886,7 @@ describe('expectTriggerLaunch', () => {
 
     it('starts watching for updates on the job itself', () => {
       const { flow } = setup({ trigger: fixtures.erroredTrigger })
-      flow.expectTriggerLaunch({ konnector: fixtures.konnector })
+      flow.expectTriggerLaunch()
 
       const watchJobSpy = jest.spyOn(flow, 'watchJob')
       try {

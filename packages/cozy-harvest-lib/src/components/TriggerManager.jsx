@@ -475,6 +475,7 @@ const LegacyTriggerManager = props => {
     onLoginSuccess,
     onError,
     initialTrigger,
+    konnector,
     ...otherProps
   } = props
 
@@ -494,6 +495,7 @@ const LegacyTriggerManager = props => {
       onSuccess={onSuccess}
       onLoginSuccess={onLoginSuccess}
       onError={onError}
+      konnector={konnector}
       initialTrigger={initialTrigger}
     >
       {({ flow }) => (
@@ -501,6 +503,7 @@ const LegacyTriggerManager = props => {
           {...otherProps}
           error={flow.getState().error}
           flow={flow}
+          konnector={konnector}
         />
       )}
     </FlowProvider>

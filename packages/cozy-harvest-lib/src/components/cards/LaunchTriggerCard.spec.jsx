@@ -132,7 +132,7 @@ describe('LaunchTriggerCard', () => {
 
   it('should display a syncing message when a trigger launch is expected', async () => {
     const flow = new ConnectionFlow(client, triggerFixture, konnectorFixture)
-    flow.expectTriggerLaunch({ konnector: konnectorFixture })
+    flow.expectTriggerLaunch()
 
     const { root } = setup({
       props: {
