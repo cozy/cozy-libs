@@ -73,7 +73,7 @@ export const OAuthForm = props => {
     if (response.result === OAUTH_SERVICE_OK) {
       const konnectorPolicy = findKonnectorPolicy(konnector)
       if (konnectorPolicy.isBIWebView && flag('harvest.bi.fullwebhooks')) {
-        flow.expectTriggerLaunch({ konnector })
+        flow.expectTriggerLaunch()
       }
       const accountId = response.key
       if (typeof onSuccess === 'function') onSuccess(accountId)
