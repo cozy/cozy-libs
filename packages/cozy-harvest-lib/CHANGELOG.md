@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.12.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.11.1...cozy-harvest-lib@13.12.0) (2023-04-05)
+
+
+### Bug Fixes
+
+* Import order ([147a320](https://github.com/cozy/cozy-libs/commit/147a3206f6bc33e9637ebea75f259e8dc7ccf667))
+* Lint ([cd17c24](https://github.com/cozy/cozy-libs/commit/cd17c244811525daa7b6ffa968d60b0881f07c60))
+* Misleading log ([f3442d4](https://github.com/cozy/cozy-libs/commit/f3442d4af0782cb24fb1391884a11405dbdfa713))
+* Only display backdrop before login success ([bd8102a](https://github.com/cozy/cozy-libs/commit/bd8102aaf8e45a7811e746c7ddc9eb663314bfa0))
+* Use account id sent by flagship app event on login success ([e04a9ee](https://github.com/cozy/cozy-libs/commit/e04a9ee64f2e265c683a5d0803edced19b7c6c65))
+
+
+### Features
+
+* Backdrop display rules change ([c4c1e20](https://github.com/cozy/cozy-libs/commit/c4c1e206e45fe0b0ec64eb33d65962ea5faf6e68))
+* Display backdrop if the error needs an action from the user ([78cdb06](https://github.com/cozy/cozy-libs/commit/78cdb0679cd80271147b2e086cd48b97848a5e60))
+* Do not wait for LOGIN_SUCCESS event ([b8196fc](https://github.com/cozy/cozy-libs/commit/b8196fcc21a31ca360285bd4db1d1d4b2dee4afb))
+* Get LOGIN_SUCCESS event from flagship app ([a628527](https://github.com/cozy/cozy-libs/commit/a628527e13339c7145c6285002da6a9dcb24ae35))
+* Make konnector prop mandatory to FlowProvider ([f3e3d48](https://github.com/cozy/cozy-libs/commit/f3e3d48e600b576c13b8261354567da42e5489bb))
+* Upgrade cozy-client harvest dev dependency ([a51d910](https://github.com/cozy/cozy-libs/commit/a51d91069620f3348d335ebc29b7c86250209bd0))
+
+
+
+
+
 ## [13.11.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.11.0...cozy-harvest-lib@13.11.1) (2023-04-03)
 
 
