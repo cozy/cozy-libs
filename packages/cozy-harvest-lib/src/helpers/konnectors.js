@@ -172,7 +172,7 @@ export const getErrorLocale = (
 
 export const fetchSupportMail = async client => {
   const result = await client.fetchQueryAndGetFromState({
-    definition: Q('io.cozy.settings').getById('context'),
+    definition: Q('io.cozy.settings').getById('io.cozy.settings.context'),
     options: {
       as: 'contextSupportMail',
       fetchPolicy: fetchPolicies.olderThan(60 * 60 * 1000)
