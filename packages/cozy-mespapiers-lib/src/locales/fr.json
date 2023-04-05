@@ -93,6 +93,7 @@
     },
     "Fab": {
       "ariaLabel": "Ouvrir la menu de toutes les suggestions"
+      "forwardPaper": "Envoyer des documents"
     }
   },
   "ImportDropdown": {
