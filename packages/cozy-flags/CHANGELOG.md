@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 3.0.0 (2023-04-05)
+
+
+### Bug Fixes
+
+* Use io.cozy.settings.flags and io.cozy.settings.context id ([c27806f](https://github.com/cozy/cozy-libs/commit/c27806fb21b19bc2eac1704aa743f1b02f6632cf))
+
+
+### Features
+
+* **mespapiers:** Update cozy-ui from 82.4.0 to 82.5.1 ([d016608](https://github.com/cozy/cozy-libs/commit/d016608d3416149d29131e09a8fecc0a6f64f17c))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 82.5.1`
+
+
+
+
+
 # 2.12.0 (2023-03-21)
 
 

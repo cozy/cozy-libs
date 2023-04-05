@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [35.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@34.0.1...cozy-mespapiers-lib@35.0.0) (2023-04-05)
+
+
+### Bug Fixes
+
+* Remove Fab button on onboarding page ([9555d59](https://github.com/cozy/cozy-libs/commit/9555d59700bfffacd674e224c13a5eb003fb345e))
+
+
+### Features
+
+* **mespapiers:** Add multiple search ([c49e0bb](https://github.com/cozy/cozy-libs/commit/c49e0bb98209f4f0d5e08238a7f8fba274bb1bd0))
+* **mespapiers:** Rename indexed attributes to show theme as expanded ([26cce63](https://github.com/cozy/cozy-libs/commit/26cce63f555df289716315a76ac58b25c79423d1))
+* **mespapiers:** Update cozy-ui from 82.9.0 to 82.11.0 ([7c03f0f](https://github.com/cozy/cozy-libs/commit/7c03f0ff77b7a5e250d25079236326476777100e))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 82.11.0`
+
+
+
+
+
 ## [34.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@34.0.0...cozy-mespapiers-lib@34.0.1) (2023-04-05)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
