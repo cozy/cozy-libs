@@ -152,13 +152,15 @@ export const makeFileFlexsearchProps = ({ doc, scannerT, t }) => ({
   translated: {
     qualificationLabel: scannerT(`items.${doc.metadata.qualification.label}`),
     ...(doc.metadata.refTaxIncome && {
-      refTaxIncome: t('Search.attributeLabel.metadata.refTaxIncome')
+      'metadata.refTaxIncome': t('Search.attributeLabel.metadata.refTaxIncome')
     }),
     ...(doc.metadata.contractType && {
-      contractType: t('Search.attributeLabel.metadata.contractType')
+      'metadata.contractType': t('Search.attributeLabel.metadata.contractType')
     }),
     ...(doc.metadata.expirationDate && {
-      expirationDate: t('Search.attributeLabel.metadata.expirationDate')
+      'metadata.expirationDate': t(
+        'Search.attributeLabel.metadata.expirationDate'
+      )
     }),
     ...(doc.metadata.qualification?.label === 'driver_license' && {
       driverLicense: t('Search.attributeLabel.metadata.driver_license')
