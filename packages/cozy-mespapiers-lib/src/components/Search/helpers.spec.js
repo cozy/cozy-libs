@@ -194,7 +194,7 @@ describe('makeFileFlexsearchProps', () => {
       tag: [],
       translated: {
         qualificationLabel: 'items.others',
-        refTaxIncome: 'Search.attributeLabel.metadata.refTaxIncome'
+        'metadata.refTaxIncome': 'Search.attributeLabel.metadata.refTaxIncome'
       }
     })
   })
@@ -216,8 +216,8 @@ describe('makeFileFlexsearchProps', () => {
       tag: ['identity', 'transport'],
       translated: {
         qualificationLabel: 'items.driver_license',
-        refTaxIncome: 'Search.attributeLabel.metadata.refTaxIncome',
-        contractType: 'Search.attributeLabel.metadata.contractType',
+        'metadata.refTaxIncome': 'Search.attributeLabel.metadata.refTaxIncome',
+        'metadata.contractType': 'Search.attributeLabel.metadata.contractType',
         driverLicense: 'Search.attributeLabel.metadata.driver_license'
       }
     })

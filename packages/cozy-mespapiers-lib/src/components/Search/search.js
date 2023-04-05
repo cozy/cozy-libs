@@ -10,8 +10,9 @@ const isContact = doc => doc._type === CONTACTS_DOCTYPE
 
 const flexsearchIndex = [
   'flexsearchProps:translated:qualificationLabel', // io.cozy.files
-  'flexsearchProps:translated:refTaxIncome', // io.cozy.files
-  'flexsearchProps:translated:contractType', // io.cozy.files
+  'flexsearchProps:translated:metadata.refTaxIncome', // io.cozy.files
+  'flexsearchProps:translated:metadata.contractType', // io.cozy.files
+  'flexsearchProps:translated:metadata.expirationDate', // io.cozy.files
   'flexsearchProps:translated:driverLicense', // io.cozy.files
   'flexsearchProps:translated:paymentProofFamilyAllowance', // io.cozy.files
   'flexsearchProps:translated:vehicleRegistration', // io.cozy.files
@@ -19,7 +20,6 @@ const flexsearchIndex = [
   'flexsearchProps:translated:bankDetails', // io.cozy.files
   'flexsearchProps:translated:passport', // io.cozy.files
   'flexsearchProps:translated:residencePermit', // io.cozy.files
-  'flexsearchProps:translated:expirationDate', // io.cozy.files
   'flexsearchProps:translated:phone', // io.cozy.contacts
   'flexsearchProps:translated:email', // io.cozy.contacts
   'flexsearchProps:translated:birthday', // io.cozy.contacts
