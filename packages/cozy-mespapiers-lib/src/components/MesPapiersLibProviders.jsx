@@ -10,6 +10,8 @@ import { OnboardingProvider } from './Contexts/OnboardingProvider'
 import { PapersDefinitionsProvider } from './Contexts/PapersDefinitionsProvider'
 import { ScannerI18nProvider } from './Contexts/ScannerI18nProvider'
 import SearchProvider from './Contexts/SearchProvider'
+import FabWrapper from './FabWrapper'
+import ForwardFabWrapper from './ForwardFab/ForwardFabWrapper'
 import { MesPapiersLibLayout } from './MesPapiersLibLayout'
 import PapersFabWrapper from './PapersFab/PapersFabWrapper'
 import { FILES_DOCTYPE, CONTACTS_DOCTYPE } from '../doctypes'
@@ -18,7 +20,7 @@ import { getOnboardingStatus } from '../helpers/queries'
 
 export const MesPapiersLibProviders = ({ lang, components }) => {
   const polyglot = initTranslation(lang, lang => require(`../locales/${lang}`))
-  const { PapersFab, Onboarding } = getComponents(components)
+  const { PapersFab, ForwardFab, Onboarding } = getComponents(components)
 
   const { data: settingsData } = useQuery(
     getOnboardingStatus.definition,
@@ -37,10 +39,19 @@ export const MesPapiersLibProviders = ({ lang, components }) => {
                 <OnboardingProvider OnboardingComponent={Onboarding}>
                   <MesPapiersLibLayout />
                 </OnboardingProvider>
-                {PapersFab && isOnboarded && (
-                  <PapersFabWrapper>
-                    <PapersFab />
-                  </PapersFabWrapper>
+                {isOnboarded && (
+                  <FabWrapper>
+                    {ForwardFab && (
+                      <ForwardFabWrapper>
+                        <ForwardFab />
+                      </ForwardFabWrapper>
+                    )}
+                    {PapersFab && (
+                      <PapersFabWrapper>
+                        <PapersFab />
+                      </PapersFabWrapper>
+                    )}
+                  </FabWrapper>
                 )}
               </ModalProvider>
             </PapersDefinitionsProvider>
