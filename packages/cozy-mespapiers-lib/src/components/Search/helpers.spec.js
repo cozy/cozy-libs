@@ -4,7 +4,8 @@ import {
   makeReducedResultIds,
   makeFileTags,
   makeContactTags,
-  makeFileFlexsearchProps
+  makeFileFlexsearchProps,
+  makeMultipleSearchResultIds
 } from './helpers'
 import { index } from './search'
 
@@ -42,9 +43,9 @@ describe('search', () => {
     jest.clearAllMocks()
   })
 
-  it('should return empty array if no search result', () => {
+  it('should return empty array if no search result', async () => {
     index.search.mockReturnValue([])
-    const res = search({})
+    const res = await search({ value: '' })
 
     expect(res).toStrictEqual({
       filteredDocs: [],
@@ -52,7 +53,7 @@ describe('search', () => {
     })
   })
 
-  it('should return the matched document', () => {
+  it('should return the matched document', async () => {
     const indexedDocs = [
       {
         _id: '01',
@@ -80,7 +81,7 @@ describe('search', () => {
         result: ['01', '02']
       }
     ])
-    const res = search({
+    const res = await search({
       docs: indexedDocs,
       value: 'naissance', // ignored because of mocked search result
       tag: undefined // ignored because of mocked search result
@@ -106,9 +107,9 @@ describe('search', () => {
     })
   })
 
-  it('should return empty array if no matching documents', () => {
+  it('should return empty array if no matching documents', async () => {
     index.search.mockReturnValue([{ field: 'name', result: [] }])
-    const res = search({
+    const res = await search({
       docs: [{ _id: '01', name: 'Certificat de naissance' }],
       value: 'naissance', // ignored because of mocked search result
       tag: undefined // ignored because of mocked search result
@@ -220,5 +221,19 @@ describe('makeFileFlexsearchProps', () => {
         driverLicense: 'Search.attributeLabel.metadata.driver_license'
       }
     })
+  })
+})
+
+describe('makeMultipleSearchResultIds', () => {
+  it('should', () => {
+    const res = makeMultipleSearchResultIds([
+      [
+        { field: 'name', result: ['id01', 'id04'] },
+        { field: 'fullname', result: ['id03', 'id02'] }
+      ],
+      [{ field: 'civility', result: ['id01', 'id05'] }]
+    ])
+
+    expect(res).toStrictEqual(['id01'])
   })
 })
