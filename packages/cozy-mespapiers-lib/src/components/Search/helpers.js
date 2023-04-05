@@ -1,3 +1,5 @@
+import intersection from 'lodash/intersection'
+
 import { themesList } from 'cozy-client/dist/models/document/documentTypeData'
 
 import { index, addDoc, updateDoc } from './search'
@@ -27,8 +29,43 @@ export const makeReducedResultIds = flexsearchResult =>
 export const makeFirstSearchResultMatchingAttributes = (results, id) =>
   results.map(x => (x.result.includes(id) ? x.field : undefined)).filter(x => x)
 
-export const search = ({ docs, value, tag }) => {
-  const results = index.search(value, { tag })
+export const search = async ({ docs, value, tag }) => {
+  const tokens = value?.trim().split(' ')
+  const isMultipleSearch = tokens?.length > 1
+
+  return isMultipleSearch
+    ? await computeResultForMultipleSearch({ docs, tokens, tag })
+    : computeResultForSearch({ docs, tokens, tag })
+}
+
+export const makeMultipleSearchResultIds = resultsPerTokens => {
+  const resultsIdsPerTokens = resultsPerTokens.map(resultsPerToken =>
+    makeReducedResultIds(resultsPerToken)
+  )
+
+  return intersection(...resultsIdsPerTokens)
+}
+
+export const computeResultForMultipleSearch = async ({ docs, tokens, tag }) => {
+  const promises = tokens.map(token => index.searchAsync(token, { tag }))
+  const resultsPerTokens = await Promise.all(promises)
+
+  const resultIds = makeMultipleSearchResultIds(resultsPerTokens)
+
+  const filteredDocs =
+    resultIds
+      ?.map(resultId => docs.find(doc => doc._id === resultId))
+      .filter(x => x !== undefined) || []
+
+  const firstSearchResultMatchingAttributes =
+    makeFirstSearchResultMatchingAttributes(resultsPerTokens[0], resultIds[0])
+
+  return { filteredDocs, firstSearchResultMatchingAttributes }
+}
+
+export const computeResultForSearch = ({ docs, tokens, tag }) => {
+  const results = index.search(tokens[0], { tag })
+
   const resultIds = makeReducedResultIds(results)
 
   const filteredDocs =

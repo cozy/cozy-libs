@@ -4,11 +4,12 @@ import React, { useMemo } from 'react'
 
 import Empty from 'cozy-ui/transpiled/react/Empty'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import SearchEmpty from '../../assets/icons/SearchEmpty.svg'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import PaperGroup from '../Papers/PaperGroup'
-import { useSearch } from '../Search/SearchProvider'
+import useSearchResult from '../Search/useSearchResult'
 import FlexsearchResult from '../SearchResult/FlexsearchResult'
 
 const ContentWhenSearching = ({
@@ -20,23 +21,31 @@ const ContentWhenSearching = ({
 }) => {
   const { t } = useI18n()
   const { isMultiSelectionActive } = useMultiSelection()
-  const { search } = useSearch()
 
   const allDocs = useMemo(() => papers.concat(contacts), [papers, contacts])
   const showResultByGroup = searchValue?.length === 0
   const docsToBeSearched =
     isMultiSelectionActive || showResultByGroup ? papers : allDocs
 
-  const { filteredDocs, firstSearchResultMatchingAttributes } = search({
-    docs: docsToBeSearched,
-    value: searchValue,
-    tag: selectedTheme?.label
+  const {
+    pending,
+    hasResult,
+    filteredDocs,
+    firstSearchResultMatchingAttributes
+  } = useSearchResult({
+    docsToBeSearched,
+    searchValue,
+    selectedTheme
   })
-  const hasResult = filteredDocs?.length > 0
-  const papersByCategories = useMemo(
-    () => uniqBy(filteredDocs, 'metadata.qualification.label'),
-    [filteredDocs]
-  )
+
+  if (pending) {
+    return (
+      <Spinner
+        size="xxlarge"
+        className="u-flex u-flex-justify-center u-mt-2 u-h-5"
+      />
+    )
+  }
 
   if (!hasResult) {
     return (
@@ -51,6 +60,11 @@ const ContentWhenSearching = ({
   }
 
   if (showResultByGroup) {
+    const papersByCategories = uniqBy(
+      filteredDocs,
+      'metadata.qualification.label'
+    )
+
     return (
       <PaperGroup
         papersByCategories={papersByCategories}
