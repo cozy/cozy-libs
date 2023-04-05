@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { useQuery } from 'cozy-client'
 import { I18n, initTranslation } from 'cozy-ui/transpiled/react/I18n'
 
 import { ModalProvider } from './Contexts/ModalProvider'
@@ -13,10 +14,18 @@ import { MesPapiersLibLayout } from './MesPapiersLibLayout'
 import PapersFabWrapper from './PapersFab/PapersFabWrapper'
 import { FILES_DOCTYPE, CONTACTS_DOCTYPE } from '../doctypes'
 import { getComponents } from '../helpers/defaultComponent'
+import { getOnboardingStatus } from '../helpers/queries'
 
 export const MesPapiersLibProviders = ({ lang, components }) => {
   const polyglot = initTranslation(lang, lang => require(`../locales/${lang}`))
   const { PapersFab, Onboarding } = getComponents(components)
+
+  const { data: settingsData } = useQuery(
+    getOnboardingStatus.definition,
+    getOnboardingStatus.options
+  )
+
+  const isOnboarded = settingsData?.[0]?.onboarded
 
   return (
     <I18n lang={lang} polyglot={polyglot}>
@@ -28,7 +37,7 @@ export const MesPapiersLibProviders = ({ lang, components }) => {
                 <OnboardingProvider OnboardingComponent={Onboarding}>
                   <MesPapiersLibLayout />
                 </OnboardingProvider>
-                {PapersFab && (
+                {PapersFab && isOnboarded && (
                   <PapersFabWrapper>
                     <PapersFab />
                   </PapersFabWrapper>
