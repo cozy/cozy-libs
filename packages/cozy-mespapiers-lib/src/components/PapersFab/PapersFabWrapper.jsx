@@ -9,7 +9,6 @@ import PaperFabUI from './PaperFabUI'
 import { findPlaceholderByLabelAndCountry } from '../../helpers/findPlaceholders'
 import { createPaper } from '../Actions/Items/createPaper'
 import { createPaperByTheme } from '../Actions/Items/createPaperByTheme'
-import { select } from '../Actions/Items/select'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 
 const PapersFabWrapper = ({ children }) => {
@@ -54,8 +53,7 @@ const PapersFabWrapper = ({ children }) => {
     hideGeneralMenu()
   }
 
-  const actionList = [createPaper, select]
-  if (fileTheme) actionList.unshift(createPaperByTheme)
+  const actionList = fileTheme ? [createPaperByTheme, createPaper] : []
 
   const actions = makeActions(actionList, {
     client,
@@ -65,10 +63,14 @@ const PapersFabWrapper = ({ children }) => {
     country
   })
 
+  const handleClick = () => {
+    return actions.length === 0 ? navigate('create') : toggleGeneralMenu()
+  }
+
   if (!children) return null
 
   const PapersFabOverrided = cloneElement(children, {
-    onClick: toggleGeneralMenu,
+    onClick: handleClick,
     innerRef: actionBtnRef,
     a11y: {
       'aria-controls': showGeneralMenu ? 'fab-menu' : undefined,

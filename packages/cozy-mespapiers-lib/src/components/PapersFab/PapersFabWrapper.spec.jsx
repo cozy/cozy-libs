@@ -1,6 +1,6 @@
 import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import '@testing-library/jest-dom'
 
 import PapersFabWrapper from './PapersFabWrapper'
@@ -9,7 +9,8 @@ import AppLike from '../../../test/components/AppLike'
 jest.mock('react-router-dom', () => {
   return {
     ...jest.requireActual('react-router-dom'),
-    useParams: jest.fn(() => ({ fileTheme: '' }))
+    useParams: jest.fn(() => ({ fileTheme: '' })),
+    useNavigate: jest.fn()
   }
 })
 
@@ -17,8 +18,16 @@ const MockChild = ({ onClick }) => (
   <button onClick={onClick} data-testid="MockChild" />
 )
 
-const setup = ({ withChild, withFileThemeParam } = {}) => {
-  if (withFileThemeParam) useParams.mockReturnValue({ fileTheme: 'tax_notice' })
+const setup = ({
+  withChild,
+  withFileThemeParam,
+  mockNavigate = jest.fn()
+} = {}) => {
+  if (withFileThemeParam) {
+    useParams.mockReturnValue({ fileTheme: 'tax_notice' })
+  }
+
+  useNavigate.mockImplementation(() => mockNavigate)
 
   return render(
     <AppLike>
@@ -42,28 +51,47 @@ describe('PapersFabWrapper', () => {
     expect(getByTestId('MockChild'))
   })
 
-  it('should display ActionMenuWrapper if click on child', () => {
-    const { getByTestId, queryByText, getByText } = setup({ withChild: true })
+  describe('On home page', () => {
+    it('should navigate to the create modale if click on child', () => {
+      const mockNavigate = jest.fn()
+      const { getByTestId } = setup({
+        withChild: true,
+        mockNavigate
+      })
 
-    const btn = getByTestId('MockChild')
-    fireEvent.click(btn)
+      const btn = getByTestId('MockChild')
+      fireEvent.click(btn)
 
-    expect(getByText('Add a paper')).toBeInTheDocument()
-    expect(getByText('Send papers…')).toBeInTheDocument()
-    expect(queryByText('Add: Tax notice')).toBeNull()
+      expect(mockNavigate).toBeCalledTimes(1)
+      expect(mockNavigate).toBeCalledWith('create')
+    })
   })
 
-  it('should display ActionMenuWrapper with additionnal action if click on child', () => {
-    const { getByTestId, getByText } = setup({
-      withChild: true,
-      withFileThemeParam: true
+  describe('On papers list', () => {
+    it('should not navigate to the create modale if click on child', () => {
+      const mockNavigate = jest.fn()
+      const { getByTestId } = setup({
+        withChild: true,
+        withFileThemeParam: true,
+        mockNavigate
+      })
+
+      const btn = getByTestId('MockChild')
+      fireEvent.click(btn)
+
+      expect(mockNavigate).toBeCalledTimes(0)
     })
+    it('should display ActionMenuWrapper with additionnal action if click on child', () => {
+      const { getByTestId, getByText } = setup({
+        withChild: true,
+        withFileThemeParam: true
+      })
 
-    const btn = getByTestId('MockChild')
-    fireEvent.click(btn)
+      const btn = getByTestId('MockChild')
+      fireEvent.click(btn)
 
-    expect(getByText('Add a paper')).toBeInTheDocument()
-    expect(getByText('Send papers…')).toBeInTheDocument()
-    expect(getByText('Add: Tax notice')).toBeInTheDocument()
+      expect(getByText('Add a paper')).toBeInTheDocument()
+      expect(getByText('Add: Tax notice')).toBeInTheDocument()
+    })
   })
 })

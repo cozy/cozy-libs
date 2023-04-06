@@ -92,7 +92,7 @@
       "title": "Ajoutez vos documents personnels"
     },
     "Fab": {
-      "ariaLabel": "Ouvrir la menu de toutes les suggestions"
+      "createPaper": "Ouvrir la menu de toutes les suggestions",
       "forwardPaper": "Envoyer des documents"
     }
   },

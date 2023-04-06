@@ -92,7 +92,7 @@
       "title": "Add your personal documents"
     },
     "Fab": {
-      "ariaLabel": "Open the menu of all suggestions"
+      "createPaper": "Open the menu of all suggestions",
       "forwardPaper": "Send documents"
     }
   },
