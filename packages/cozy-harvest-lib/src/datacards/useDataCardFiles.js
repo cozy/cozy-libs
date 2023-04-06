@@ -74,6 +74,9 @@ const getResponse = (folderToSaveFiles, sourceAccountFiles) => {
 }
 
 export const useDataCardFiles = (accountId, folderToSaveId) => {
+  if (!accountId || !folderToSaveId)
+    throw new Error('Missing arguments in useDataCardFiles, cannot fetch files')
+
   const folderToSaveFiles = useFolderToSaveFiles(folderToSaveId)
   const sourceAccountFiles = useSourceAccountFiles(accountId)
 
