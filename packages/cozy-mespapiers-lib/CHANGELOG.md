@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [36.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.0.0...cozy-mespapiers-lib@36.0.1) (2023-04-06)
+
+
+### Bug Fixes
+
+* Redirect link to Drive ([e3b0b52](https://github.com/cozy/cozy-libs/commit/e3b0b52e71d03a71ace66ebdfb19ce5096be06d9))
+
+
+
+
+
 # [36.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@35.0.0...cozy-mespapiers-lib@36.0.0) (2023-04-06)
 
 
