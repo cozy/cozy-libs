@@ -14,7 +14,8 @@ const AccountSelectBox = ({
   selectedAccount,
   onChange,
   onCreate,
-  loading
+  loading,
+  variant
 }) => {
   if (loading) {
     return <div style={{ height: 20.8 }}>&nbsp;</div>
@@ -39,6 +40,7 @@ const AccountSelectBox = ({
         Control: reactSelectControl(
           <AccountSelectControl
             name={Account.getAccountName(selectedAccount)}
+            variant={variant}
           />
         ),
         Menu: MenuWithFixedComponent

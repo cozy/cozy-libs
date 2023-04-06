@@ -9,7 +9,7 @@ const MenuWithFixedComponent = props => {
   const { createAction, ...selectProps } = props.selectProps
   return (
     <components.Menu {...props} selectProps={selectProps}>
-      {children}
+      <div className="u-text u-fw-normal">{children}</div>
       <CreateAccountButton createAction={createAction} />
     </components.Menu>
   )

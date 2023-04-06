@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useMatch } from 'react-router-dom'
 
 import AccountSelectBox from '../AccountSelectBox/AccountSelectBox'
+import { AccountSelectorHeader } from '../AccountSelectBox/AccountSelectorHeader'
 import KonnectorModalHeader from '../KonnectorModalHeader'
 import { withMountPointProps } from '../MountPointContext'
 
@@ -12,6 +14,20 @@ export const AccountModalHeader = ({
   showAccountSelection,
   pushHistory
 }) => {
+  const isConfig = useMatch(
+    `/connected/${konnector.slug}/accounts/:accountId/config`
+  )
+
+  if (isConfig)
+    return (
+      <AccountSelectorHeader
+        konnector={konnector}
+        account={account}
+        accountsAndTriggers={accountsAndTriggers}
+        pushHistory={pushHistory}
+      />
+    )
+
   return (
     <KonnectorModalHeader konnector={konnector}>
       {showAccountSelection && (
