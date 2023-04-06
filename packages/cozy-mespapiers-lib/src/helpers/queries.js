@@ -26,6 +26,7 @@ export const buildFilesQueryWithQualificationLabel = () => {
     'metadata.contractType',
     'metadata.refTaxIncome',
     'created_at',
+    'dir_id',
     'updated_at',
     'type',
     'trashed'
