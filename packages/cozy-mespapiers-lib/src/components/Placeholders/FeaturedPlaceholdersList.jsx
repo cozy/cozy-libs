@@ -1,13 +1,13 @@
+import PropTypes from 'prop-types'
 import React, { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import PropTypes from 'prop-types'
 
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import Placeholder from './Placeholder'
 import ActionMenuImportDropdown from './ActionMenuImportDropdown'
+import Placeholder from './Placeholder'
 
 const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
   const [placeholder, setPlaceholder] = useState(null)
@@ -55,10 +55,17 @@ const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
             key={idx}
             ref={el => (actionBtnRefs.current[idx] = el)}
             placeholder={placeholder}
-            divider={idx !== featuredPlaceholders.length - 1}
+            divider
             onClick={showImportDropdown(idx)}
           />
         ))}
+        <Placeholder
+          placeholder={{
+            label: 'others',
+            placeholderIndex: featuredPlaceholders.length
+          }}
+          onClick={() => navigate('create')}
+        />
         <ActionMenuImportDropdown
           isOpened={isImportDropdownDisplayed}
           placeholder={placeholder}
