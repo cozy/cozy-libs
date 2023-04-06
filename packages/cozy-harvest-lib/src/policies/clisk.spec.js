@@ -44,10 +44,24 @@ describe('onLaunch', () => {
     delete window.ReactNativeWebView
   })
 
-  it('should send konnector when launcher is react-native', () => {
-    konnectorPolicy.onLaunch({
-      konnector: { slug: 'testkonnectorslug' }
-    })
+  it('should send konnector slug when launcher is react-native', async () => {
+    await Promise.all([
+      konnectorPolicy.onLaunch({
+        konnector: { slug: 'testkonnectorslug' }
+      }),
+      new Promise(resolve => {
+        setImmediate(() => {
+          window.postMessage(
+            JSON.stringify({
+              type: 'Clisk',
+              message: 'launchResult'
+            }),
+            '*'
+          )
+          resolve()
+        })
+      })
+    ])
     expect(window.ReactNativeWebView.postMessage).toHaveBeenCalledWith(
       JSON.stringify({
         message: 'startLauncher',
@@ -59,14 +73,26 @@ describe('onLaunch', () => {
     )
   })
 
-  it('should also send account and trigger when available when launcher is react-native', () => {
-    konnectorPolicy.onLaunch({
-      konnector: {
-        slug: 'testkonnectorslug'
-      },
-      account: { _id: 'testaccountid' },
-      trigger: { _id: 'testtriggerid' }
-    })
+  it('should also send account and trigger when available when launcher is react-native', async () => {
+    await Promise.all([
+      konnectorPolicy.onLaunch({
+        konnector: { slug: 'testkonnectorslug' },
+        account: { _id: 'testaccountid' },
+        trigger: { _id: 'testtriggerid' }
+      }),
+      new Promise(resolve => {
+        setImmediate(() => {
+          window.postMessage(
+            JSON.stringify({
+              type: 'Clisk',
+              message: 'launchResult'
+            }),
+            '*'
+          )
+          resolve()
+        })
+      })
+    ])
     expect(window.ReactNativeWebView.postMessage).toHaveBeenCalledWith(
       JSON.stringify({
         message: 'startLauncher',
@@ -77,6 +103,34 @@ describe('onLaunch', () => {
           trigger: { _id: 'testtriggerid' }
         }
       })
+    )
+  })
+  it('should return any error message sent from the launcher', async () => {
+    const flow = {
+      triggerEvent: jest.fn()
+    }
+    await Promise.all([
+      konnectorPolicy.onLaunch({
+        konnector: { slug: 'testkonnectorslug' },
+        flow
+      }),
+      new Promise(resolve => {
+        setImmediate(() => {
+          window.postMessage(
+            JSON.stringify({
+              type: 'Clisk',
+              message: 'launchResult',
+              param: { errorMessage: 'test error message' }
+            }),
+            '*'
+          )
+          resolve()
+        })
+      })
+    ])
+    expect(flow.triggerEvent).toHaveBeenCalledWith(
+      'error',
+      new Error('test error message')
     )
   })
 })

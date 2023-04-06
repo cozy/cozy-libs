@@ -4,7 +4,7 @@
  */
 
 import logger from '../logger'
-import { LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
+import { ERROR_EVENT, LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
 
 /**
  * Check if the given konnector is a client side konnector
@@ -48,14 +48,19 @@ async function onLaunch({ konnector, account, trigger, flow }) {
     logger.warn('Found no launcher')
   }
   if (launcher === 'react-native') {
-    return startLauncher({ konnector, account, trigger, flow })
+    const result = await startLauncher({ konnector, account, trigger, flow })
+    if (result?.errorMessage) {
+      logger.debug(`Error from launcher ${result.errorMessage}`)
+      flow.triggerEvent(ERROR_EVENT, new Error(result.errorMessage))
+    }
+    return result
   }
   return
 }
 
 /**
  * @typedef StartLauncherResult
- * @property {string} message - startLauncher result message
+ * @property {string} errorMessage - startLauncher errorMessage
  */
 
 /**
