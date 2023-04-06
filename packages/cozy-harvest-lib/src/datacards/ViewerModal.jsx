@@ -8,10 +8,9 @@ import { useDataCardFiles } from './useDataCardFiles'
 import { MountPointContext } from '../components/MountPointContext'
 
 export const ViewerModal = () => {
+  const { accountId, folderToSaveId, fileIndex } = useParams()
   const { pushHistory, replaceHistory } = useContext(MountPointContext)
   const { data, fetchStatus } = useDataCardFiles(accountId, folderToSaveId)
-  const { accountId, folderToSaveId, fileIndex } = useParams()
-
   const handleCloseViewer = () => replaceHistory(`/accounts/${accountId}`)
   const handleFileChange = (_file, newIndex) =>
     pushHistory(`/viewer/${accountId}/${folderToSaveId}/${newIndex}`)
