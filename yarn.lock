@@ -7231,6 +7231,13 @@ cozy-flags@2.7.1:
   dependencies:
     microee "^0.0.6"
 
+cozy-flags@^2.5.0, cozy-flags@^2.8.5:
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/cozy-flags/-/cozy-flags-2.12.0.tgz#bc3d689db9c91389c28f053223142d4684573ef1"
+  integrity sha512-s0et8aWChaqY4rMKkNKDACflU2h5s6s9UVU1guU3Il9GqktSPrhvMo+ntHLnQb2l+yLL6xV1S6/rK0qniR1q0A==
+  dependencies:
+    microee "^0.0.6"
+
 cozy-interapp@0.4.9:
   version "0.4.9"
   resolved "https://registry.yarnpkg.com/cozy-interapp/-/cozy-interapp-0.4.9.tgz#5ef68d54755cc99c3e154e5a4646b68cbe5f16fd"
@@ -7444,10 +7451,10 @@ cozy-ui@^80.1.1:
     react-swipeable-views "^0.13.3"
     rooks "^5.11.2"
 
-cozy-ui@^82.11.0:
-  version "82.11.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-82.11.0.tgz#a545010894df5d9e0cbacbec0ac499bbdc1d6234"
-  integrity sha512-I+/6G6o4R0gg6Ayybgd7Od03cNNb6V+/BknvbGSb/heGawEQRm9FG6pEE57ZVFhXZpr6/FHiDFKN6yszf0sTkw==
+cozy-ui@^82.12.0:
+  version "82.12.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-82.12.0.tgz#3c7b0c4c11b7f58c73e6f425ad442b7015c8eedf"
+  integrity sha512-mHClL8VKqHz8V4lqwQwjj/fpKRhfg9xNNKPIcKpgM5pIbrWUSdr4E/vsAscITBFz+YLYR+X8fTPK91QIX6bzYA==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@material-ui/core" "4.12.3"
