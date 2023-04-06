@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [36.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@35.0.0...cozy-mespapiers-lib@36.0.0) (2023-04-06)
+
+
+### Features
+
+* Add "Others" suggestion ([2ee4420](https://github.com/cozy/cozy-libs/commit/2ee44204dcd82d1fa0cf5fd25b69e0153558f10c))
+* Add FabWrapper component ([0f2c8f5](https://github.com/cozy/cozy-libs/commit/0f2c8f5004898342d3b6376d0df4a3df8573fbaa))
+* Add Forward component to the app ([ee355fb](https://github.com/cozy/cozy-libs/commit/ee355fbef4427316465b5587e8a3f09df07c5215))
+* Add ForwardFab components ([6fe1c58](https://github.com/cozy/cozy-libs/commit/6fe1c5859acb66f51d440864edc4d9b675ec25db))
+* Add useScroll hook ([f2108f7](https://github.com/cozy/cozy-libs/commit/f2108f7382a6145dd954a46a00d1271a79d9923a))
+* Update cozy-ui from 82.11.0 to 82.12.0 ([c1d607a](https://github.com/cozy/cozy-libs/commit/c1d607a9717af522cf648811a5e94ac70b11cd4e))
+* Update PaperFab components ([65cad79](https://github.com/cozy/cozy-libs/commit/65cad799a356e18be292ba01a7c4893aaa5c1869))
+
+
+### BREAKING CHANGES
+
+* you must have `cozy-ui >= 82.12.0`
+
+
+
+
+
 # [35.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@34.0.1...cozy-mespapiers-lib@35.0.0) (2023-04-05)
 
 
