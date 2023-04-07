@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.13.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.12.2...cozy-harvest-lib@13.13.0) (2023-04-07)
+
+
+### Features
+
+* Receive error messages from launcher in clisk konnectors ([f1bafd0](https://github.com/cozy/cozy-libs/commit/f1bafd091587f2aabde9ca24fea463daff4155ae))
+
+
+
+
+
 ## [13.12.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.12.1...cozy-harvest-lib@13.12.2) (2023-04-06)
 
 
