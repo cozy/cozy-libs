@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.14.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.13.0...cozy-harvest-lib@13.14.0) (2023-04-07)
+
+
+### Features
+
+* **harvest:** Update config page header ([4b69670](https://github.com/cozy/cozy-libs/commit/4b696701e45426ba8713ebfcbe2f6640a19d43b5))
+
+
+
+
+
 # [13.13.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.12.2...cozy-harvest-lib@13.13.0) (2023-04-07)
 
 
