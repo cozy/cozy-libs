@@ -10,7 +10,7 @@ const KONNECTORS_DOCTYPE = 'io.cozy.konnectors'
 export const useKonnectorWithTriggers = (slug, injectedKonnector) => {
   const client = useClient()
   const [isFetching, setIsFetching] = useState(true)
-  const [triggers, setTriggers] = useState([])
+  const [triggers, setTriggers] = useState({ data: [] })
   const [konnector, setKonnector] = useState({})
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export const useKonnectorWithTriggers = (slug, injectedKonnector) => {
     realtime.subscribe('created', TRIGGERS_DOCTYPE, onTriggerCreated)
     function onTriggerCreated(trigger) {
       if (get(trigger, 'message.konnector') === slug) {
-        setTriggers([...triggers, trigger])
+        setTriggers({ data: [...triggers.data, trigger] })
       }
     }
     return function cleanUp() {
