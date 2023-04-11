@@ -1,6 +1,7 @@
 import intersection from 'lodash/intersection'
 
 import { themesList } from 'cozy-client/dist/models/document/documentTypeData'
+import log from 'cozy-logger'
 
 import { index, addDoc, updateDoc } from './search'
 
@@ -30,8 +31,17 @@ export const makeFirstSearchResultMatchingAttributes = (results, id) =>
   results.map(x => (x.result.includes(id) ? x.field : undefined)).filter(x => x)
 
 export const search = async ({ docs, value, tag }) => {
+  log('warn', `====================================`)
+  log('warn', `search:: Search for "${value}" with tag "${tag}"`)
+  log('warn', `====================================`)
   const tokens = value?.trim().split(' ')
+  log('warn', `====================================`)
+  log('warn', `search:: tokens: "${tokens}"`)
+  log('warn', `====================================`)
   const isMultipleSearch = tokens?.length > 1
+  log('warn', `====================================`)
+  log('warn', `search:: isMultipleSearch: "${isMultipleSearch}"`)
+  log('warn', `====================================`)
 
   return isMultipleSearch
     ? await computeResultForMultipleSearch({ docs, tokens, tag })
@@ -64,17 +74,53 @@ export const computeResultForMultipleSearch = async ({ docs, tokens, tag }) => {
 }
 
 export const computeResultForSearch = ({ docs, tokens, tag }) => {
+  log('warn', `====================================`)
+  log(
+    'warn',
+    `computeResultForSearch:: Search for "${tokens[0]}" with tag "${tag}"`
+  )
+  log('warn', `====================================`)
   const results = index.search(tokens[0], { tag })
+  log('warn', `====================================`)
+  log('warn', `computeResultForSearch:: results: "${JSON.stringify(results)}"`)
+  log('warn', `====================================`)
 
   const resultIds = makeReducedResultIds(results)
+  log('warn', `====================================`)
+  log('warn', `computeResultForSearch:: resultIds: "${resultIds}"`)
+  log('warn', `====================================`)
+  if (docs?.length > 0) {
+    log('warn', `====================================`)
+    docs.map(doc =>
+      log(
+        'warn',
+        `computeResultForSearch:: doc name: "${doc.name}", doc id: "${doc._id}"`
+      )
+    )
+    log('warn', `====================================`)
+  } else {
+    log('warn', `NO DOCS FOUND`)
+  }
 
   const filteredDocs =
     resultIds
       ?.map(resultId => docs.find(doc => doc._id === resultId))
       .filter(x => x !== undefined) || []
 
+  log(
+    'warn',
+    `computeResultForSearch:: filteredDocs: "${JSON.stringify(filteredDocs)}"`
+  )
+
   const firstSearchResultMatchingAttributes =
     makeFirstSearchResultMatchingAttributes(results, resultIds[0])
+
+  log('warn', `====================================`)
+  log(
+    'warn',
+    `computeResultForSearch:: firstSearchResultMatchingAttributes: "${firstSearchResultMatchingAttributes}"`
+  )
+  log('warn', `====================================`)
 
   return { filteredDocs, firstSearchResultMatchingAttributes }
 }
@@ -100,12 +146,24 @@ export const makeRealtimeConnection = (doctypes, scannerT, t) =>
   )
 
 export const makeFileTags = file => {
+  log('warn', `====================================`)
+  log('warn', `makeFileTags:: filename: "${file.name}", file id: "${file._id}"`)
+  log('warn', `====================================`)
   const item = file.metadata?.qualification
+  log('warn', `====================================`)
+  log(
+    'warn',
+    `makeFileTags:: qualification.label: "${file.metadata?.qualification?.label}"`
+  )
+  log('warn', `====================================`)
   const tags = themesList
     .filter(theme => {
       return theme.items.some(it => it.label === item?.label)
     })
     .map(x => x.label)
+  log('warn', `====================================`)
+  log('warn', `makeFileTags:: tags: "${JSON.stringify(tags)}"`)
+  log('warn', `====================================`)
   return tags
 }
 
@@ -147,49 +205,63 @@ export const makeContactTags = contact => {
   return contactTags
 }
 
-export const makeFileFlexsearchProps = ({ doc, scannerT, t }) => ({
-  tag: makeFileTags(doc),
-  translated: {
-    qualificationLabel: scannerT(`items.${doc.metadata.qualification.label}`),
-    ...(doc.metadata.refTaxIncome && {
-      'metadata.refTaxIncome': t('Search.attributeLabel.metadata.refTaxIncome')
-    }),
-    ...(doc.metadata.contractType && {
-      'metadata.contractType': t('Search.attributeLabel.metadata.contractType')
-    }),
-    ...(doc.metadata.expirationDate && {
-      'metadata.expirationDate': t(
-        'Search.attributeLabel.metadata.expirationDate'
-      )
-    }),
-    ...(doc.metadata.qualification?.label === 'driver_license' && {
-      driverLicense: t('Search.attributeLabel.metadata.driver_license')
-    }),
-    ...(doc.metadata.qualification?.label ===
-      'payment_proof_family_allowance' && {
-      paymentProofFamilyAllowance: t(
-        'Search.attributeLabel.metadata.payment_proof_family_allowance'
-      )
-    }),
-    ...(doc.metadata.qualification?.label === 'vehicle_registration' && {
-      vehicleRegistration: t(
-        'Search.attributeLabel.metadata.vehicle_registration'
-      )
-    }),
-    ...(doc.metadata.qualification?.label === 'national_id_card' && {
-      nationalIdCard: t('Search.attributeLabel.metadata.national_id_card')
-    }),
-    ...(doc.metadata.qualification?.label === 'bank_details' && {
-      bankDetails: t('Search.attributeLabel.metadata.bank_details')
-    }),
-    ...(doc.metadata.qualification?.label === 'passport' && {
-      passport: t('Search.attributeLabel.metadata.passport')
-    }),
-    ...(doc.metadata.qualification?.label === 'residence_permit' && {
-      residencePermit: t('Search.attributeLabel.metadata.residence_permit')
-    })
+export const makeFileFlexsearchProps = ({ doc, scannerT, t }) => {
+  log('warn', `====================================`)
+  log(
+    'warn',
+    `makeFileFlexsearchProps:: scannerT Doc: "${scannerT(
+      `items.${doc.metadata.qualification.label}`
+    )}"`
+  )
+  log('warn', `====================================`)
+  return {
+    tag: makeFileTags(doc),
+    translated: {
+      qualificationLabel: scannerT(`items.${doc.metadata.qualification.label}`),
+      ...(doc.metadata.refTaxIncome && {
+        'metadata.refTaxIncome': t(
+          'Search.attributeLabel.metadata.refTaxIncome'
+        )
+      }),
+      ...(doc.metadata.contractType && {
+        'metadata.contractType': t(
+          'Search.attributeLabel.metadata.contractType'
+        )
+      }),
+      ...(doc.metadata.expirationDate && {
+        'metadata.expirationDate': t(
+          'Search.attributeLabel.metadata.expirationDate'
+        )
+      }),
+      ...(doc.metadata.qualification?.label === 'driver_license' && {
+        driverLicense: t('Search.attributeLabel.metadata.driver_license')
+      }),
+      ...(doc.metadata.qualification?.label ===
+        'payment_proof_family_allowance' && {
+        paymentProofFamilyAllowance: t(
+          'Search.attributeLabel.metadata.payment_proof_family_allowance'
+        )
+      }),
+      ...(doc.metadata.qualification?.label === 'vehicle_registration' && {
+        vehicleRegistration: t(
+          'Search.attributeLabel.metadata.vehicle_registration'
+        )
+      }),
+      ...(doc.metadata.qualification?.label === 'national_id_card' && {
+        nationalIdCard: t('Search.attributeLabel.metadata.national_id_card')
+      }),
+      ...(doc.metadata.qualification?.label === 'bank_details' && {
+        bankDetails: t('Search.attributeLabel.metadata.bank_details')
+      }),
+      ...(doc.metadata.qualification?.label === 'passport' && {
+        passport: t('Search.attributeLabel.metadata.passport')
+      }),
+      ...(doc.metadata.qualification?.label === 'residence_permit' && {
+        residencePermit: t('Search.attributeLabel.metadata.residence_permit')
+      })
+    }
   }
-})
+}
 
 export const makeContactFlexsearchProps = (doc, t) => {
   const flexsearchEmailAddresses = doc.email

@@ -2,6 +2,7 @@ import { Document } from 'flexsearch'
 
 import { isFile, hasQualifications } from 'cozy-client/dist/models/file'
 import flag from 'cozy-flags'
+import log from 'cozy-logger'
 
 import { makeFileFlexsearchProps, makeContactFlexsearchProps } from './helpers'
 import { CONTACTS_DOCTYPE } from '../../doctypes'
@@ -74,9 +75,21 @@ export const index = new Document({
 })
 
 export const addFileDoc = ({ index, doc, scannerT, t }) => {
+  console.log('==========')
+  console.log('addFileDoc:: index : ', index)
+  console.log('==========')
+  log('warn', `====================================`)
+  log('warn', `addFileDoc:: doc name: "${doc.name}", doc id: "${doc._id}"`)
+  log('warn', `====================================`)
   if (!t || !scannerT) return null
+  log('warn', `====================================`)
+  log('warn', `Has "t" or "scannerT"`)
+  log('warn', `====================================`)
 
   if (hasQualifications(doc)) {
+    log('warn', `====================================`)
+    log('warn', `"hasQualifications"`)
+    log('warn', `====================================`)
     return index.add({
       ...doc,
       flexsearchProps: makeFileFlexsearchProps({ doc, scannerT, t })
