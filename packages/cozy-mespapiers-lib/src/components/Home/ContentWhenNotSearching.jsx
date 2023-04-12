@@ -1,10 +1,10 @@
-import uniqBy from 'lodash/uniqBy'
 import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
 
 import Empty from 'cozy-ui/transpiled/react/Empty'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
+import { makePapersGroupByQualificationLabel } from './helpers'
 import HomeCloud from '../../assets/icons/HomeCloud.svg'
 import PaperGroup from '../Papers/PaperGroup'
 
@@ -14,10 +14,7 @@ const ContentWhenNotSearching = ({ papers, contacts, konnectors }) => {
   const allDocs = useMemo(() => papers.concat(contacts), [papers, contacts])
   const hasDocs = allDocs?.length > 0
 
-  const papersByCategories = useMemo(
-    () => uniqBy(papers, 'metadata.qualification.label'),
-    [papers]
-  )
+  const papersByCategories = makePapersGroupByQualificationLabel(papers)
 
   if (!hasDocs) {
     return (
