@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.14.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.14.0...cozy-harvest-lib@13.14.1) (2023-04-12)
+
+
+### Bug Fixes
+
+* EnsureTriggerAndLaunch in oauth context ([3024119](https://github.com/cozy/cozy-libs/commit/30241199bdc428f4693d6311b125a54df86842ba))
+* Import order lint ([69cdbd9](https://github.com/cozy/cozy-libs/commit/69cdbd9f93d689c7e4c8c48bf36dfe8b61b7c5b1))
+
+
+
+
+
 # [13.14.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.13.0...cozy-harvest-lib@13.14.0) (2023-04-07)
 
 
