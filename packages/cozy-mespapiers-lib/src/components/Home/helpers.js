@@ -1,4 +1,5 @@
 import Fuse from 'fuse.js'
+import groupBy from 'lodash/groupBy'
 
 const fuse = new Fuse([], {
   findAllMatches: true,
@@ -54,4 +55,8 @@ export const filterPapersByThemeAndSearchValue = ({
   }
 
   return filteredFiles
+}
+
+export const makePapersGroupByQualificationLabel = papers => {
+  return groupBy(papers, 'metadata.qualification.label')
 }

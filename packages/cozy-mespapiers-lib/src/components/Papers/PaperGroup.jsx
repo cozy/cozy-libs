@@ -16,7 +16,7 @@ const PaperGroup = ({ papersByCategories, konnectors, selectedTheme }) => {
   const { t } = useI18n()
   const { isMultiSelectionActive, setSelectedThemeLabel } = useMultiSelection()
 
-  const hasPapers = papersByCategories.length > 0
+  const hasPapers = Object.keys(papersByCategories).length > 0
 
   const goPapersList = category => {
     if (isMultiSelectionActive) {
@@ -40,10 +40,11 @@ const PaperGroup = ({ papersByCategories, konnectors, selectedTheme }) => {
         </Typography>
       )}
       {hasPapers &&
-        papersByCategories.map((paper, index) => (
+        Object.entries(papersByCategories).map(([category, papers], index) => (
           <CategoryItemByPaper
-            key={paper.id}
-            paper={paper}
+            key={category}
+            category={category}
+            papers={papers}
             isLast={index === papersByCategories.length - 1}
             onClick={goPapersList}
           />
@@ -58,7 +59,7 @@ const PaperGroup = ({ papersByCategories, konnectors, selectedTheme }) => {
 }
 
 PaperGroup.propTypes = {
-  papersByCategories: PropTypes.arrayOf(PropTypes.object),
+  papersByCategories: PropTypes.object,
   konnectors: PropTypes.arrayOf(PropTypes.object),
   selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 }

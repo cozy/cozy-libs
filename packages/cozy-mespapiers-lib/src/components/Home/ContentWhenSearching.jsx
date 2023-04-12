@@ -1,4 +1,3 @@
-import uniqBy from 'lodash/uniqBy'
 import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
 
@@ -6,6 +5,7 @@ import Empty from 'cozy-ui/transpiled/react/Empty'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
+import { makePapersGroupByQualificationLabel } from './helpers'
 import SearchEmpty from '../../assets/icons/SearchEmpty.svg'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import PaperGroup from '../Papers/PaperGroup'
@@ -60,10 +60,7 @@ const ContentWhenSearching = ({
   }
 
   if (showResultByGroup) {
-    const papersByCategories = uniqBy(
-      filteredDocs,
-      'metadata.qualification.label'
-    )
+    const papersByCategories = makePapersGroupByQualificationLabel(filteredDocs)
 
     return (
       <PaperGroup

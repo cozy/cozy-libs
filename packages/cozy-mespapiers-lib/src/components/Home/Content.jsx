@@ -1,11 +1,11 @@
-import uniqBy from 'lodash/uniqBy'
 import PropTypes from 'prop-types'
-import React, { useMemo } from 'react'
+import React from 'react'
 
 import Empty from 'cozy-ui/transpiled/react/Empty'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import ResultForSearch from './ResultForSearch'
+import { makePapersGroupByQualificationLabel } from './helpers'
 import HomeCloud from '../../assets/icons/HomeCloud.svg'
 import PaperGroup from '../Papers/PaperGroup'
 
@@ -18,11 +18,8 @@ const Content = ({
 }) => {
   const { t } = useI18n()
 
-  const papersByCategories = useMemo(
-    () => uniqBy(papers, 'metadata.qualification.label'),
-    [papers]
-  )
-  const hasResult = papersByCategories.length > 0
+  const papersByCategories = makePapersGroupByQualificationLabel(papers)
+  const hasResult = Object.keys(papersByCategories).length > 0
   const isSearching = searchValue.length > 0 || Boolean(selectedTheme)
 
   if (!hasResult)
