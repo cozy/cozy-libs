@@ -20,7 +20,8 @@ const useStyles = makeStyles(theme => ({
     },
     '& input': {
       borderRadius: '25px',
-      height: '38px'
+      height: '38px',
+      maxWidth: '100%'
     }
   }
 }))
