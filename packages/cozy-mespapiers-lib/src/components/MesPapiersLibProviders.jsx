@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { useQuery } from 'cozy-client'
+import flag from 'cozy-flags'
 import { I18n, initTranslation } from 'cozy-ui/transpiled/react/I18n'
 
 import { ModalProvider } from './Contexts/ModalProvider'
@@ -41,7 +42,7 @@ export const MesPapiersLibProviders = ({ lang, components }) => {
                 </OnboardingProvider>
                 {isOnboarded && (
                   <FabWrapper>
-                    {ForwardFab && (
+                    {ForwardFab && flag('mespapiers.fabExtended.enabled') && (
                       <ForwardFabWrapper>
                         <ForwardFab />
                       </ForwardFabWrapper>

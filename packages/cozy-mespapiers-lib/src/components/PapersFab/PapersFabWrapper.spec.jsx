@@ -3,9 +3,12 @@ import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import '@testing-library/jest-dom'
 
+import flag from 'cozy-flags'
+
 import PapersFabWrapper from './PapersFabWrapper'
 import AppLike from '../../../test/components/AppLike'
 
+jest.mock('cozy-flags')
 jest.mock('react-router-dom', () => {
   return {
     ...jest.requireActual('react-router-dom'),
@@ -21,8 +24,10 @@ const MockChild = ({ onClick }) => (
 const setup = ({
   withChild,
   withFileThemeParam,
-  mockNavigate = jest.fn()
+  mockNavigate = jest.fn(),
+  isFlag = true
 } = {}) => {
+  flag.mockReturnValue(isFlag)
   if (withFileThemeParam) {
     useParams.mockReturnValue({ fileTheme: 'tax_notice' })
   }
