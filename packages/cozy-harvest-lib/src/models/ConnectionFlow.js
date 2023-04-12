@@ -632,7 +632,7 @@ export class ConnectionFlow {
    */
   handleTriggerJobUpdated(job) {
     if (job.trigger_id !== this.trigger?._id) return // filter out jobs associated to other triggers
-    if (job._id === this.job?._id) return // if the event is associated to a job we are already watchin, ignore it. No need to refetch the current trigger in this case
+    if (job._id === this.job?._id) return // if the event is associated to a job we are already watching, ignore it. No need to refetch the current trigger in this case
 
     this.refetchTrigger()
   }
@@ -832,7 +832,7 @@ export class ConnectionFlow {
       'updated',
       JOBS_DOCTYPE,
       this.job._id,
-      this.handleCurrentJobUpdated.bind(this)
+      this.handleCurrentJobUpdated
     )
     this.jobWatcher = watchKonnectorJob(this.client, this.job, options)
     // @ts-ignore
@@ -862,7 +862,7 @@ export class ConnectionFlow {
       'updated',
       JOBS_DOCTYPE,
       this.job._id,
-      this.handleCurrentJobUpdated.bind(this)
+      this.handleCurrentJobUpdated
     )
     this.realtime.unsubscribe(
       'deleted',
