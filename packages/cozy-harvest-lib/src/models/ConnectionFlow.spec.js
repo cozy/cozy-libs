@@ -655,6 +655,7 @@ describe('ConnectionFlow', () => {
           }
         })
       )
+      expect(ensureTrigger).not.toHaveBeenCalled()
       expect(launchTrigger).not.toHaveBeenCalled()
 
       delete window.cozy
@@ -827,6 +828,28 @@ describe('ConnectionFlow', () => {
         flow.konnector,
         onAccountCreationResult
       )
+    })
+    it('should should call launch when the policy does not need account and trigger creation', async () => {
+      const { flow } = setup({ konnector: fixtures.clientKonnector })
+      jest.spyOn(flow, 'launch')
+      await setupSubmit(flow, {
+        konnector: fixtures.clientKonnector
+      })
+      expect(flow.launch).toHaveBeenCalledTimes(1)
+      expect(ensureTrigger).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('ensureTriggerAndLaunch', () => {
+    it('should call ensureTrigger and launch', async () => {
+      const { flow, client } = setup()
+      await flow.ensureTriggerAndLaunch(client, {
+        account: fixtures.createdAccount,
+        trigger: fixtures.createdTrigger,
+        konnector: fixtures.konnector
+      })
+      expect(ensureTrigger).toHaveBeenCalled()
+      expect(launchTrigger).toHaveBeenCalled()
     })
   })
 })
