@@ -799,8 +799,10 @@ export class ConnectionFlow {
    */
   watchTriggerJobs() {
     if (this.trigger) {
-      // When the trigger comes from realtime, cozy-stack does not add the current_state to the object. So we need to request the stack to get it
-      if (!this.trigger?.current_state) {
+      if (
+        !this.trigger?.current_state || // When the trigger comes from realtime, cozy-stack does not add the current_state to the object. So we need to request the stack to get it
+        this.trigger.current_state.status === 'running' // ConnectionFlow could miss end of trigger job execution while reloading. We force refetch in this case
+      ) {
         this.refetchTrigger()
       }
       this.realtime.subscribe(
