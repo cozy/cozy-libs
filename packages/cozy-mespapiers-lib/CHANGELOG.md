@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [36.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.0.3...cozy-mespapiers-lib@36.1.0) (2023-04-12)
+
+
+### Features
+
+* Add flag on extended PapersFab functionality ([21581a9](https://github.com/cozy/cozy-libs/commit/21581a9984bb11d0f4236a2a77e01317f73177da))
+
+
+
+
+
 ## [36.0.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.0.2...cozy-mespapiers-lib@36.0.3) (2023-04-07)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
