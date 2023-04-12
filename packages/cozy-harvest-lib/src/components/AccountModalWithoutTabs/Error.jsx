@@ -8,7 +8,12 @@ import Infos from 'cozy-ui/transpiled/react/Infos'
 import { loadSelectedAccountId } from '../../helpers/accounts'
 import withLocales from '../hoc/withLocales'
 
-const Error = ({ accountId, accountsAndTriggers, trigger, lastError }) => {
+const ErrorComponent = ({
+  accountId,
+  accountsAndTriggers,
+  trigger,
+  lastError
+}) => {
   const { t } = useI18n()
   const client = useClient()
 
@@ -35,4 +40,4 @@ const Error = ({ accountId, accountsAndTriggers, trigger, lastError }) => {
   )
 }
 
-export default withLocales(Error)
+export default withLocales(ErrorComponent)
