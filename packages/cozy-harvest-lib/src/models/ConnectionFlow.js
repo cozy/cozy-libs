@@ -524,9 +524,10 @@ export class ConnectionFlow {
           konnector,
           t
         })
+      } else {
+        await this.launch()
       }
 
-      await this.launch()
       this.setState({ accountError: null })
     } catch (e) {
       // @ts-ignore
@@ -574,6 +575,7 @@ export class ConnectionFlow {
 
     // @ts-ignore
     this.emit(UPDATE_EVENT)
+    await this.launch()
   }
 
   handleTriggerCreated(trigger) {
