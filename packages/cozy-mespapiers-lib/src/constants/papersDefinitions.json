@@ -57,7 +57,7 @@
     {
       "label": "bank_details",
       "icon": "bank",
-      "maxDisplay": 5,
+      "maxDisplay": 3,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -176,7 +176,7 @@
     {
       "label": "car_insurance",
       "icon": "car",
-      "maxDisplay": 5,
+      "maxDisplay": 3,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -318,7 +318,7 @@
       "label": "energy_invoice",
       "icon": "bill",
       "featureDate": "referencedDate",
-      "maxDisplay": 4,
+      "maxDisplay": 3,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -377,7 +377,7 @@
       "label": "health_certificate",
       "icon": "heart",
       "featureDate": "issueDate",
-      "maxDisplay": 4,
+      "maxDisplay": 3,
       "acquisitionSteps": []
     },
     {
@@ -468,7 +468,7 @@
       "placeholderIndex": 5,
       "icon": "bill",
       "featureDate": "referencedDate",
-      "maxDisplay": 6,
+      "maxDisplay": 3,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -658,7 +658,7 @@
       "icon": "compass",
       "filenameModel": ["labelGivenByUser"],
       "featureDate": "date",
-      "maxDisplay": 10,
+      "maxDisplay": 3,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -707,7 +707,7 @@
       "icon": "bank",
       "filenameModel": ["labelGivenByUser"],
       "featureDate": "date",
-      "maxDisplay": 10,
+      "maxDisplay": 3,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -757,7 +757,7 @@
       "icon": "team",
       "filenameModel": ["labelGivenByUser"],
       "featureDate": "date",
-      "maxDisplay": 10,
+      "maxDisplay": 3,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -807,7 +807,7 @@
       "icon": "heart",
       "filenameModel": ["labelGivenByUser"],
       "featureDate": "date",
-      "maxDisplay": 10,
+      "maxDisplay": 3,
       "acquisitionSteps": []
     },
     {
@@ -815,7 +815,7 @@
       "icon": "home",
       "filenameModel": ["labelGivenByUser"],
       "featureDate": "date",
-      "maxDisplay": 10,
+      "maxDisplay": 3,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -865,7 +865,7 @@
       "icon": "home",
       "filenameModel": ["labelGivenByUser"],
       "featureDate": "date",
-      "maxDisplay": 10,
+      "maxDisplay": 3,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -901,7 +901,7 @@
       "icon": "personal-data",
       "filenameModel": ["labelGivenByUser"],
       "featureDate": "date",
-      "maxDisplay": 10,
+      "maxDisplay": 3,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -950,7 +950,7 @@
       "icon": "car",
       "filenameModel": ["labelGivenByUser"],
       "featureDate": "date",
-      "maxDisplay": 10,
+      "maxDisplay": 3,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -1000,7 +1000,7 @@
       "icon": "company",
       "filenameModel": ["labelGivenByUser"],
       "featureDate": "date",
-      "maxDisplay": 10,
+      "maxDisplay": 3,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -1050,7 +1050,7 @@
       "icon": "company",
       "filenameModel": ["labelGivenByUser"],
       "featureDate": "date",
-      "maxDisplay": 10,
+      "maxDisplay": 3,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -1235,7 +1235,7 @@
       "label": "phone_invoice",
       "icon": "bill",
       "featureDate": "referencedDate",
-      "maxDisplay": 4,
+      "maxDisplay": 3,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -1632,7 +1632,7 @@
     {
       "label": "vehicle_registration",
       "icon": "car",
-      "maxDisplay": 5,
+      "maxDisplay": 3,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -1666,7 +1666,7 @@
       "label": "water_invoice",
       "icon": "bill",
       "featureDate": "referencedDate",
-      "maxDisplay": 4,
+      "maxDisplay": 3,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -1931,7 +1931,7 @@
       "label": "other_invoice",
       "icon": "bill",
       "featureDate": "referencedDate",
-      "maxDisplay": 4,
+      "maxDisplay": 3,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
