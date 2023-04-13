@@ -1,16 +1,16 @@
-import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
+import React, { forwardRef } from 'react'
 
-import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
-import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
-import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
-import Typography from 'cozy-ui/transpiled/react/Typography'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import InfosBadge from 'cozy-ui/transpiled/react/InfosBadge'
+import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
+import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
+import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
-import FileIcon from '../Icons/FileIcon'
-import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { PaperDefinitionsPropTypes } from '../../constants/PaperDefinitionsPropTypes'
+import { useScannerI18n } from '../Hooks/useScannerI18n'
+import FileIcon from '../Icons/FileIcon'
 
 const Placeholder = forwardRef(({ placeholder, divider, onClick }, ref) => {
   const scannerT = useScannerI18n()
@@ -33,7 +33,9 @@ const Placeholder = forwardRef(({ placeholder, divider, onClick }, ref) => {
           </InfosBadge>
         </ListItemIcon>
         <Typography color="textSecondary">
-          {scannerT(`items.${placeholder.label}`, placeholder.country)}
+          {scannerT(`items.${placeholder.label}`, {
+            country: placeholder.country
+          })}
         </Typography>
       </ListItem>
       {divider && <Divider variant="inset" component="li" />}
