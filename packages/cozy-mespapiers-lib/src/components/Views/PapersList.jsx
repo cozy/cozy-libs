@@ -70,7 +70,10 @@ const PapersList = () => {
 
   return (
     <>
-      <PapersListToolbar selectedThemeLabel={selectedThemeLabel} />
+      <PapersListToolbar
+        selectedThemeLabel={selectedThemeLabel}
+        fileCount={fileQueryResult.count}
+      />
       {isLoading && (
         <Spinner
           className="u-flex u-flex-justify-center u-mt-2 u-h-5"
