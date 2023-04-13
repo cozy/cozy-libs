@@ -47,7 +47,9 @@ export const makeMultipleSearchResultIds = resultsPerTokens => {
 }
 
 const computeResultForMultipleSearch = async ({ docs, tokens, tag }) => {
-  const promises = tokens.map(token => index.searchAsync(token, { tag }))
+  const promises = tokens.map(token =>
+    index.searchAsync(token, { tag, limit: 9999 })
+  )
   const resultsPerTokens = await Promise.all(promises)
 
   const resultIds = makeMultipleSearchResultIds(resultsPerTokens)
@@ -64,7 +66,7 @@ const computeResultForMultipleSearch = async ({ docs, tokens, tag }) => {
 }
 
 const computeResultForSearch = ({ docs, token, tag }) => {
-  const results = index.search(token, { tag })
+  const results = index.search(token, { tag, limit: 9999 })
 
   const resultIds = makeReducedResultIds(results)
 

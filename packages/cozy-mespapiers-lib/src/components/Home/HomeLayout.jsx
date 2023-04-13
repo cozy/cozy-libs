@@ -26,7 +26,7 @@ const HomeLayout = ({ contacts, papers, konnectors }) => {
 
   useEffect(() => {
     if (flag('mespapiers.flexsearch.enabled')) {
-      addAllOnce([...contacts, ...papers])
+      addAllOnce(papers.concat(contacts))
     }
   }, [addAllOnce, contacts, papers])
 
