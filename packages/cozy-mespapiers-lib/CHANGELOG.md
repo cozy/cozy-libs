@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [36.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.1.7...cozy-mespapiers-lib@36.2.0) (2023-04-13)
+
+
+### Features
+
+* Pluralize qualification labels on homepage ([91cac28](https://github.com/cozy/cozy-libs/commit/91cac28724825c9e8488e69ad950d4d4d3b960d3))
+* Pluralize qualification labels on PaperListToolbar ([84e3453](https://github.com/cozy/cozy-libs/commit/84e3453b91fccecf4b5877fcc739e6f9553957b6))
+* Update cozy-client from `36.1.0` to `38.0.0` ([c7e6f54](https://github.com/cozy/cozy-libs/commit/c7e6f5443e56ebd56178d422304a19d31fe128dd))
+
+
+
+
+
 ## [36.1.7](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.1.6...cozy-mespapiers-lib@36.1.7) (2023-04-13)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
