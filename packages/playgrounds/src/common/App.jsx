@@ -1,18 +1,17 @@
 import '@babel/polyfill'
-import React from 'react'
-
-import { hashHistory } from 'react-router'
 import 'date-fns/locale/en/index'
+import React from 'react'
+import { hashHistory } from 'react-router'
 
-import { CozyProvider } from 'cozy-client'
-
-import 'cozy-ui/transpiled/react/stylesheet.css'
-import IconSprite from 'cozy-ui/transpiled/react/Icon/Sprite'
-import Alerter from 'cozy-ui/transpiled/react/Alerter'
-import I18n from 'cozy-ui/transpiled/react/I18n'
-import { getUniversalLinkDomain } from 'cozy-ui/transpiled/react/AppLinker'
-import icon from './icon.png'
 import { MobileRouter } from 'cozy-authentication'
+import { CozyProvider } from 'cozy-client'
+import Alerter from 'cozy-ui/transpiled/react/Alerter'
+import { getUniversalLinkDomain } from 'cozy-ui/transpiled/react/AppLinker'
+import I18n from 'cozy-ui/transpiled/react/I18n'
+import IconSprite from 'cozy-ui/transpiled/react/Icon/Sprite'
+import 'cozy-ui/transpiled/react/stylesheet.css'
+
+import icon from './icon.png'
 
 const styles = {
   error: {

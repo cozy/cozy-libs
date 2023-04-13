@@ -1,19 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
 import { Route } from 'react-router'
 import { createStore, combineReducers } from 'redux'
-import { Provider } from 'react-redux'
-import App from './common/App'
-import client from './common/client'
-import 'cozy-ui/transpiled/react/stylesheet.css'
+
 import 'cozy-ui/dist/cozy-ui.min.css'
-// import Comp from 'cozy-procedures'
-import injectProcedureRoutes from '../../cozy-procedures/dist'
 import {
   PageLayout,
   PageFooter,
   PageContent
 } from 'cozy-ui/transpiled/react/Page'
+import 'cozy-ui/transpiled/react/stylesheet.css'
+
+import App from './common/App'
+import client from './common/client'
+// import Comp from 'cozy-procedures'
+import injectProcedureRoutes from '../../cozy-procedures/dist'
 
 const padded = Component => {
   const Wrapped = ({ children }) => (

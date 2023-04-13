@@ -1,21 +1,18 @@
 import React, { useCallback, useState } from 'react'
-import { createStore, combineReducers } from 'redux'
-import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { Route } from 'react-router'
+import { createStore, combineReducers } from 'redux'
 
+import { queryConnect } from 'cozy-client'
 import SharingProvider, { ShareButton, ShareModal } from 'cozy-sharing'
+import 'cozy-sharing/dist/stylesheet.css'
 import withLocales from 'cozy-sharing/dist/withLocales'
+import 'cozy-ui/dist/cozy-ui.min.css'
+import 'cozy-ui/transpiled/react/stylesheet.css'
 
 import App from './common/App'
 import client from './common/client'
-
-import { Route } from 'react-router'
-
-import 'cozy-ui/transpiled/react/stylesheet.css'
-import 'cozy-ui/dist/cozy-ui.min.css'
-import 'cozy-sharing/dist/stylesheet.css'
-
-import { queryConnect } from 'cozy-client'
 
 const reducer = combineReducers({
   cozy: client.reducer()

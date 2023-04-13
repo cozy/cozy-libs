@@ -1,5 +1,6 @@
-import CozyClient from 'cozy-client'
 import merge from 'lodash/merge'
+
+import CozyClient from 'cozy-client'
 
 /** Use this to quickly get a custom client */
 const getClient = customOptions => {
