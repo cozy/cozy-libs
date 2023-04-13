@@ -1,5 +1,5 @@
-const { filterLevel, filterSecrets } = require('./log-filters')
 const Secret = require('./Secret')
+const { filterLevel, filterSecrets } = require('./log-filters')
 const { LOG_LEVEL } = process.env
 let level = LOG_LEVEL || 'debug'
 const format = require('./log-format')

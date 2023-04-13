@@ -1,4 +1,5 @@
 const util = require('util')
+
 const chalk = require('chalk')
 
 if (util && util.inspect && util.inspect.defaultOptions) {
