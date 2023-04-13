@@ -36,7 +36,8 @@
     "postcss-merge-rules": "4.0.3",
     "react": "16.12.0",
     "react-dom": "16.13.0",
-    "react-router": "6.3.0"
+    "react-router": "6.3.0",
+    "react-router-dom": "6.4.5"
   },
   "dependencies": {
     "cozy-device-helper": "^2.7.0",
@@ -71,6 +72,6 @@
     "cozy-ui": ">=40.9.1",
     "react": ">=15",
     "react-router": "3",
-    "react-router-dom": "^6.4.1"
+    "react-router-dom": "^6.4.5"
   }
 }
