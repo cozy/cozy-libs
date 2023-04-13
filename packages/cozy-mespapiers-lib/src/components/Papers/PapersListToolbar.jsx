@@ -1,19 +1,18 @@
 /* global cozy */
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import UIBarTitle from 'cozy-ui/transpiled/react/BarTitle'
 import CozyTheme from 'cozy-ui/transpiled/react/CozyTheme'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import IconButton from 'cozy-ui/transpiled/react/IconButton'
 
+import { getCurrentFileTheme } from './helpers'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 
-import { getCurrentFileTheme } from './helpers'
-
-const PapersListToolbar = ({ selectedThemeLabel }) => {
+const PapersListToolbar = ({ selectedThemeLabel, fileCount }) => {
   const { BarLeft, BarCenter } = cozy.bar
   const params = useParams()
   const navigate = useNavigate()
@@ -21,7 +20,9 @@ const PapersListToolbar = ({ selectedThemeLabel }) => {
   const scannerT = useScannerI18n()
 
   const currentFileTheme = getCurrentFileTheme(params, selectedThemeLabel)
-  const themeLabel = scannerT(`items.${currentFileTheme}`)
+  const themeLabel = scannerT(`items.${currentFileTheme}`, {
+    smart_count: fileCount
+  })
   const onBack = () => navigate('..')
 
   if (isMultiSelectionActive) {
