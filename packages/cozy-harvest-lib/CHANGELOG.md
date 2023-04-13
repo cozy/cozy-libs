@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.14.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.14.1...cozy-harvest-lib@13.14.2) (2023-04-13)
+
+
+### Bug Fixes
+
+* Unsubbscribe of ConnectionFlow.handleCurrentJobUpdated ([2d82435](https://github.com/cozy/cozy-libs/commit/2d82435e66f9406d46f53c66c0af89c4de096caa))
+
+
+
+
+
 ## [13.14.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.14.0...cozy-harvest-lib@13.14.1) (2023-04-12)
 
 
