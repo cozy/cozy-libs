@@ -1,5 +1,5 @@
-const prodFormat = require('./prod-format')
 const devFormat = require('./dev-format')
+const prodFormat = require('./prod-format')
 
 switch (process.env.NODE_ENV) {
   case 'production':

@@ -1,6 +1,6 @@
-const prodFormat = require('./prod-format')
-const devFormat = require('./dev-format')
 const { setNoRetry } = require('./')
+const devFormat = require('./dev-format')
+const prodFormat = require('./prod-format')
 
 describe('dev format', () => {
   it('should log correctly an error', () => {
