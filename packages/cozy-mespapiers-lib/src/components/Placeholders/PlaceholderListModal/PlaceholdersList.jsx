@@ -1,17 +1,17 @@
+import PropTypes from 'prop-types'
 import React, { useState, useMemo } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import PropTypes from 'prop-types'
 
-import { makeStyles } from 'cozy-ui/transpiled/react/styles'
+import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
-import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
-import FileIcon from '../../Icons/FileIcon'
-import { useScannerI18n } from '../../Hooks/useScannerI18n'
-import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'
 import { findPlaceholdersByQualification } from '../../../helpers/findPlaceholders'
+import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'
+import { useScannerI18n } from '../../Hooks/useScannerI18n'
+import FileIcon from '../../Icons/FileIcon'
 import ActionMenuImportDropdown from '../ActionMenuImportDropdown'
 
 const useStyles = makeStyles(() => ({
@@ -100,10 +100,9 @@ const PlaceholdersList = ({ currentQualifItems }) => {
                 <FileIcon icon={placeholder.icon} />
               </ListItemIcon>
               <ListItemText
-                primary={scannerT(
-                  `items.${placeholder.label}`,
-                  placeholder.country
-                )}
+                primary={scannerT(`items.${placeholder.label}`, {
+                  country: placeholder.country
+                })}
               />
             </ListItem>
           )

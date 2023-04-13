@@ -14,7 +14,7 @@ const ScannerI18nProvider = ({ children }) => {
   const scannerI18n = useMemo(() => getBoundT(lang || 'fr'), [lang])
 
   const scannerT = useCallback(
-    (key, country) => scannerI18n(`${prefix}.${key}`, country),
+    (key, opts) => scannerI18n(`${prefix}.${key}`, opts),
     [scannerI18n]
   )
 
