@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.11.1 (2023-04-13)
+
+
+### Bug Fixes
+
+* Import order ([147a320](https://github.com/cozy/cozy-libs/commit/147a3206f6bc33e9637ebea75f259e8dc7ccf667))
+
+
+
+
+
 # 2.11.0 (2023-04-03)
 
 

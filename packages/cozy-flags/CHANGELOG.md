@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/cozy/cozy-libs/compare/cozy-flags@3.0.0...cozy-flags@3.0.1) (2023-04-13)
+
+
+### Bug Fixes
+
+* Cozy-Flags lint issues ([ee26c09](https://github.com/cozy/cozy-libs/commit/ee26c099b3375451fd2d427609578f087e36c928))
+
+
+
+
+
 # 3.0.0 (2023-04-05)
 
 
