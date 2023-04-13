@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import flag from 'cozy-flags'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
@@ -28,7 +29,9 @@ const PaperGroup = ({ papersByCategories, konnectors, selectedTheme }) => {
 
   return (
     <List
-      subheader={<ListSubheader>{t('PapersList.subheader')}</ListSubheader>}
+      {...(!flag('mespapiers.v2-1-0.enabled') && {
+        subheader: <ListSubheader>{t('PapersList.subheader')}</ListSubheader>
+      })}
     >
       {!hasPapers && (
         <Typography

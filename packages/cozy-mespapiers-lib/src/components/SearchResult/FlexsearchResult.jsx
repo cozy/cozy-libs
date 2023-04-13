@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import flag from 'cozy-flags'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
@@ -37,7 +38,9 @@ const FlexsearchResult = ({
 
   return (
     <>
-      <ListSubheader>{t('PapersList.subheader')}</ListSubheader>
+      {!flag('mespapiers.v2-1-0.enabled') && (
+        <ListSubheader>{t('PapersList.subheader')}</ListSubheader>
+      )}
       <List className="u-pv-0">
         <FlexsearchResultLine
           doc={firstDoc}

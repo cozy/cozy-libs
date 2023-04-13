@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { useMemo, useState } from 'react'
 
 import { useClient } from 'cozy-client'
+import flag from 'cozy-flags'
 import { makeActions } from 'cozy-ui/transpiled/react/ActionMenu/Actions/helpers'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
@@ -54,7 +55,9 @@ const SearchResult = ({ filteredPapers }) => {
 
   return (
     <>
-      <ListSubheader>{t('PapersList.subheader')}</ListSubheader>
+      {!flag('mespapiers.v2-1-0.enabled') && (
+        <ListSubheader>{t('PapersList.subheader')}</ListSubheader>
+      )}
       <List className="u-pv-0">
         {filteredPapers.map(({ contact, file }) => {
           return (
