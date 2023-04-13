@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.14.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.14.3...cozy-harvest-lib@13.14.4) (2023-04-13)
+
+
+### Bug Fixes
+
+* Refetch current trigger when it is running ([cbaa67f](https://github.com/cozy/cozy-libs/commit/cbaa67fc6c03bebec87b0c8153a8da79ce77152b))
+
+
+
+
+
 ## [13.14.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.14.2...cozy-harvest-lib@13.14.3) (2023-04-13)
 
 
