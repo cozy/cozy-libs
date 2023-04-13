@@ -1,6 +1,7 @@
 /** Components meant to be used in several examples */
 
 import React from 'react'
+
 import { withClient, queryConnect } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
