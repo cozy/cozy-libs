@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.14.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.14.2...cozy-harvest-lib@13.14.3) (2023-04-13)
+
+
+### Bug Fixes
+
+* Error react component ([d139fe9](https://github.com/cozy/cozy-libs/commit/d139fe9e5650fda96e79baa11a7d980854fa1a8e))
+
+
+
+
+
 ## [13.14.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.14.1...cozy-harvest-lib@13.14.2) (2023-04-13)
 
 
