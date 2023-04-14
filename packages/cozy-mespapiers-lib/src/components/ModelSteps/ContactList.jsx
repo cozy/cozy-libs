@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react'
 
+import Avatar from 'cozy-ui/transpiled/react/Avatar'
+import ContactsListModal from 'cozy-ui/transpiled/react/ContactsListModal'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import Paper from 'cozy-ui/transpiled/react/Paper'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
-import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
-import Avatar from 'cozy-ui/transpiled/react/Avatar'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import ContactsListModal from 'cozy-ui/transpiled/react/ContactsListModal'
+import Paper from 'cozy-ui/transpiled/react/Paper'
 
+import Contact from './Contact'
 import { useFormData } from '../Hooks/useFormData'
 import { useSessionstorage } from '../Hooks/useSessionstorage'
-import Contact from './Contact'
 
 const styleAvatar = {
   color: 'var(--primaryColor)',

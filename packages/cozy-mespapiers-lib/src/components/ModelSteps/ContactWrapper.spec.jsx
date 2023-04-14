@@ -1,11 +1,11 @@
-import React from 'react'
 import { fireEvent, render } from '@testing-library/react'
+import React from 'react'
 
-import AppLike from '../../../test/components/AppLike'
 import ContactWrapper from './ContactWrapper'
+import AppLike from '../../../test/components/AppLike'
+import { fetchCurrentUser } from '../../helpers/fetchCurrentUser'
 import { FormDataProvider } from '../Contexts/FormDataProvider'
 import { useFormData } from '../Hooks/useFormData'
-import { fetchCurrentUser } from '../../helpers/fetchCurrentUser'
 
 const mockCurrentStep = { illustration: 'Account.svg', text: 'text of step' }
 const mockFormData = ({ metadata = {}, data = [], contacts = [] } = {}) => ({

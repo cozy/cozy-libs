@@ -1,7 +1,7 @@
 import { PDFDocument } from 'pdf-lib'
 
-import { fileToArrayBuffer } from '../utils/pdf'
 import { resizeImage, fileToDataUri } from '../utils/image'
+import { fileToArrayBuffer } from '../utils/pdf'
 
 /**
  * @param {PDFDocument} pdfDoc

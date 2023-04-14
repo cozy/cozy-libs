@@ -1,23 +1,23 @@
-import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 
 import { useClient, models } from 'cozy-client'
 import useRealtime from 'cozy-realtime/dist/useRealtime'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import Button from 'cozy-ui/transpiled/react/Buttons'
 import Backdrop from 'cozy-ui/transpiled/react/Backdrop'
-import Typography from 'cozy-ui/transpiled/react/Typography'
-import { LinearProgress } from 'cozy-ui/transpiled/react/Progress'
-import { makeStyles } from 'cozy-ui/transpiled/react/styles'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import Button from 'cozy-ui/transpiled/react/Buttons'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import { LinearProgress } from 'cozy-ui/transpiled/react/Progress'
+import Typography from 'cozy-ui/transpiled/react/Typography'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
-import { downloadFiles, forwardFile, makeZipFolder } from '../Actions/utils'
-import { useMultiSelection } from '../Hooks/useMultiSelection'
+import ForwardModal from './ForwardModal'
 import { FILES_DOCTYPE } from '../../doctypes'
 import { fetchCurrentUser } from '../../helpers/fetchCurrentUser'
 import getOrCreateAppFolderWithReference from '../../helpers/getFolderWithReference'
-import ForwardModal from './ForwardModal'
+import { downloadFiles, forwardFile, makeZipFolder } from '../Actions/utils'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const { getDisplayName } = models.contact
 

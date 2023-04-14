@@ -1,12 +1,12 @@
-import React, { isValidElement } from 'react'
-import PropTypes from 'prop-types'
 import cx from 'classnames'
 import isArray from 'lodash/isArray'
+import PropTypes from 'prop-types'
+import React, { isValidElement } from 'react'
 
-import { makeStyles } from 'cozy-ui/transpiled/react/styles'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
-import Typography from 'cozy-ui/transpiled/react/Typography'
 import { iconPropType } from 'cozy-ui/transpiled/react/Icon'
+import Typography from 'cozy-ui/transpiled/react/Typography'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import CompositeHeaderImage from './CompositeHeaderImage'
 

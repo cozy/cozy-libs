@@ -1,7 +1,7 @@
+import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import '@testing-library/jest-dom'
 
 import flag from 'cozy-flags'
 

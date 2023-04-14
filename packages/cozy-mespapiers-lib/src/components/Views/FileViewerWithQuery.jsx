@@ -3,12 +3,11 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import { useQuery, useClient, hasQueryBeenLoaded } from 'cozy-client'
 import { SharingProvider } from 'cozy-sharing/dist/SharingProvider'
+import 'cozy-sharing/dist/stylesheet.css'
 
-import { buildViewerFileQuery } from '../Viewer/queries'
 import FileViewerLoading from '../Viewer/FileViewerLoading'
 import FilesViewer from '../Viewer/FilesViewer'
-
-import 'cozy-sharing/dist/stylesheet.css'
+import { buildViewerFileQuery } from '../Viewer/queries'
 
 const FilesViewerWithQuery = () => {
   const navigate = useNavigate()

@@ -1,20 +1,20 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
 import { models } from 'cozy-client'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon, {
   smallSize
 } from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
-import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 const {
   themes: { themesList }
 } = models.document
 
-import FileIcon from '../../Icons/FileIcon'
 import { useScannerI18n } from '../../Hooks/useScannerI18n'
+import FileIcon from '../../Icons/FileIcon'
 
 const PlaceholderThemesList = ({ setQualifByTheme }) => {
   const scannerT = useScannerI18n()

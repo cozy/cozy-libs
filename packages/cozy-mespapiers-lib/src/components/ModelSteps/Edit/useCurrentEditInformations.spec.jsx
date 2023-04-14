@@ -1,11 +1,11 @@
-import React from 'react'
 import { renderHook } from '@testing-library/react-hooks'
+import React from 'react'
 import { useLocation } from 'react-router-dom'
 
 import { useQuery, isQueryLoading } from 'cozy-client'
 
-import AppLike from '../../../../test/components/AppLike'
 import { useCurrentEditInformations } from './useCurrentEditInformations'
+import AppLike from '../../../../test/components/AppLike'
 
 jest.mock('cozy-client/dist/utils', () => ({
   ...jest.requireActual('cozy-client/dist/utils'),

@@ -1,12 +1,10 @@
-import React from 'react'
 import cx from 'classnames'
+import React from 'react'
 
 import { Q, useClient } from 'cozy-client'
-
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-
 import Button from 'cozy-ui/transpiled/react/Button'
 import Empty from 'cozy-ui/transpiled/react/Empty'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import HomeCloud from '../../assets/icons/HomeCloud.svg'

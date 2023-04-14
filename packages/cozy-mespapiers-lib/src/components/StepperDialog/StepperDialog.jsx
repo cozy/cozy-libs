@@ -1,8 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import cx from 'classnames'
+import PropTypes from 'prop-types'
+import React from 'react'
 
-import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 import {
   useCozyDialog,
   DialogBackButton,
@@ -12,9 +11,10 @@ import MUIDialog, {
   DialogTitle,
   DialogContent
 } from 'cozy-ui/transpiled/react/Dialog'
-import Typography from 'cozy-ui/transpiled/react/Typography'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 const useStyles = makeStyles(() => ({
   root: {

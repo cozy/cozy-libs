@@ -1,5 +1,5 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
 import ActionMenu from 'cozy-ui/transpiled/react/ActionMenu'
 import { iconPropType } from 'cozy-ui/transpiled/react/Icon'

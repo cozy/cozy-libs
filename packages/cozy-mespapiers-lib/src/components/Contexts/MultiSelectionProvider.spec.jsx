@@ -1,12 +1,16 @@
-import React, { useContext } from 'react'
 import { fireEvent, render } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import React, { useContext } from 'react'
+
+import flag from 'cozy-flags'
 
 import MultiSelectionContext, {
   MultiSelectionProvider
 } from './MultiSelectionProvider'
 
+jest.mock('cozy-flags')
+
 const setup = ({ filesToAdd, removeFile }) => {
+  flag.mockReturnValue(true)
   const TestComponent = () => {
     const {
       isMultiSelectionActive,

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import {
   Routes,
@@ -7,21 +8,20 @@ import {
   useLocation,
   Outlet
 } from 'react-router-dom'
-import PropTypes from 'prop-types'
 
 import { MesPapiersLibProviders } from './MesPapiersLibProviders'
 import OnboardedGuardedRoute from './OnboardedGuardedRoute'
-import Home from './Views/Home'
-import MultiselectView from './Views/MultiselectView'
-import PapersList from './Views/PapersList'
-import FilesViewerWithQuery from './Views/FileViewerWithQuery'
-import PlaceholderListModal from './Views/PlaceholderListModal'
-import CreatePaperModal from './Views/CreatePaperModal'
-import Onboarding from './Views/Onboarding'
-import InformationEdit from './Views/InformationEdit'
-import PageEdit from './Views/PageEdit'
 import ContactEdit from './Views/ContactEdit'
+import CreatePaperModal from './Views/CreatePaperModal'
+import FilesViewerWithQuery from './Views/FileViewerWithQuery'
 import HarvestRoutes from './Views/HarvestRoutes'
+import Home from './Views/Home'
+import InformationEdit from './Views/InformationEdit'
+import MultiselectView from './Views/MultiselectView'
+import Onboarding from './Views/Onboarding'
+import PageEdit from './Views/PageEdit'
+import PapersList from './Views/PapersList'
+import PlaceholderListModal from './Views/PlaceholderListModal'
 
 const OutletWrapper = ({ Component }) => (
   <>

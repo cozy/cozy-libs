@@ -1,9 +1,10 @@
 import { useLocation } from 'react-router-dom'
+
 import { isQueryLoading, useQuery } from 'cozy-client'
 
+import { getPaperDefinitionByFile, makeCurrentStep } from './helpers'
 import { buildFilesQueryById } from '../../../helpers/queries'
 import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'
-import { getPaperDefinitionByFile, makeCurrentStep } from './helpers'
 
 /**
  * @param {string} fileId

@@ -4,8 +4,8 @@ import BottomSheet, {
   BottomSheetHeader,
   BottomSheetItem
 } from 'cozy-ui/transpiled/react/BottomSheet'
-import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 const PageEditMobile = ({ onClose, children }) => {
   const { t } = useI18n()

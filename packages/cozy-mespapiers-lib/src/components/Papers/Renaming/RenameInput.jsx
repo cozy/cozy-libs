@@ -1,17 +1,17 @@
-import React, { useEffect, useReducer, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
+import React, { useEffect, useReducer, useRef, useState } from 'react'
 
 import { useClient, models } from 'cozy-client'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import { makeStyles } from 'cozy-ui/transpiled/react/styles'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Input from 'cozy-ui/transpiled/react/Input'
 import InputGroup from 'cozy-ui/transpiled/react/InputGroup'
-import Button from 'cozy-ui/transpiled/react/Buttons'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
-import { KEYS } from '../../../constants/const'
 import { renameFile } from './helpers'
+import { KEYS } from '../../../constants/const'
 
 const { splitFilename } = models.file
 

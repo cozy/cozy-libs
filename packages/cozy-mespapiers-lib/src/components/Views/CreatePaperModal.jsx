@@ -6,7 +6,6 @@ import { FormDataProvider } from '../Contexts/FormDataProvider'
 import { StepperDialogProvider } from '../Contexts/StepperDialogProvider'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
-
 import StepperDialogWrapper from '../StepperDialog/StepperDialogWrapper'
 
 const CreatePaperModal = () => {

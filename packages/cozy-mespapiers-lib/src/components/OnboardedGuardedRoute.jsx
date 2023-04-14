@@ -4,9 +4,8 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { useQuery, hasQueryBeenLoaded } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
-import { getOnboardingStatus } from '../helpers/queries'
-
 import { useOnboarding } from './Hooks/useOnboarding'
+import { getOnboardingStatus } from '../helpers/queries'
 
 const OnboardedGuardedRoute = () => {
   const location = useLocation()

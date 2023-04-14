@@ -1,4 +1,5 @@
 import { getReferencedBy } from 'cozy-client'
+
 import { CONTACTS_DOCTYPE, FILES_DOCTYPE } from '../../../doctypes'
 
 /**

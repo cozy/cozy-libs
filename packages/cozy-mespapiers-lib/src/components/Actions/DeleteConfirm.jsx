@@ -1,15 +1,15 @@
 import React, { useCallback, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { useClient } from 'cozy-client'
+import Button from 'cozy-ui/transpiled/react/Button'
+import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import Button from 'cozy-ui/transpiled/react/Button'
-import Typography from 'cozy-ui/transpiled/react/Typography'
 import Stack from 'cozy-ui/transpiled/react/Stack'
-import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import { trashFiles, removeQualification } from './utils'
-import { useNavigate } from 'react-router-dom'
 
 const DeleteConfirm = ({ files, isLast, onClose, children }) => {
   const { t } = useI18n()

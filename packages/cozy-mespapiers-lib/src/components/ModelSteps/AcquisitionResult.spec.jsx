@@ -1,11 +1,11 @@
-import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
+import React from 'react'
 
-import AppLike from '../../../test/components/AppLike'
 import AcquisitionResult from './AcquisitionResult'
+import AppLike from '../../../test/components/AppLike'
 import { FormDataProvider } from '../Contexts/FormDataProvider'
-import { useStepperDialog } from '../Hooks/useStepperDialog'
 import { useFormData } from '../Hooks/useFormData'
+import { useStepperDialog } from '../Hooks/useStepperDialog'
 
 const mockCurrentStep = ({
   page = '',

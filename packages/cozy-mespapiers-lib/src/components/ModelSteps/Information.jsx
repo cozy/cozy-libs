@@ -1,22 +1,22 @@
-import React, { useState, useMemo, useCallback } from 'react'
 import cx from 'classnames'
 import throttle from 'lodash/throttle'
+import React, { useState, useMemo, useCallback } from 'react'
 
 import { isIOS } from 'cozy-device-helper'
-import DialogActions from 'cozy-ui/transpiled/react/DialogActions'
 import Button from 'cozy-ui/transpiled/react/Buttons'
+import DialogActions from 'cozy-ui/transpiled/react/DialogActions'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 
-import { useFormData } from '../Hooks/useFormData'
-import { useStepperDialog } from '../Hooks/useStepperDialog'
-import CompositeHeader from '../CompositeHeader/CompositeHeader'
-import IlluGenericInputText from '../../assets/icons/IlluGenericInputText.svg'
 import IlluGenericInputDate from '../../assets/icons/IlluGenericInputDate.svg'
-import { hasNextvalue } from '../../utils/hasNextvalue'
+import IlluGenericInputText from '../../assets/icons/IlluGenericInputText.svg'
 import { KEYS } from '../../constants/const'
 import { makeInputsInformationStep } from '../../helpers/makeInputsInformationStep'
+import { hasNextvalue } from '../../utils/hasNextvalue'
+import CompositeHeader from '../CompositeHeader/CompositeHeader'
+import { useFormData } from '../Hooks/useFormData'
+import { useStepperDialog } from '../Hooks/useStepperDialog'
 
 const Information = ({ currentStep }) => {
   const { t } = useI18n()
