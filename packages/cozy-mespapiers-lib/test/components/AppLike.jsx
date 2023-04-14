@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { createHashHistory } from 'history'
 import React from 'react'
 import { HashRouter } from 'react-router-dom'
