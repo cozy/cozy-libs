@@ -48,7 +48,7 @@ const PaperGroup = ({ papersByCategories, konnectors, selectedTheme }) => {
             key={category}
             category={category}
             papers={papers}
-            isLast={index === papersByCategories.length - 1}
+            isLast={index === Object.entries(papersByCategories).length - 1}
             onClick={goPapersList}
           />
         ))}
