@@ -1,12 +1,11 @@
 import React from 'react'
 
 import CircleButton from 'cozy-ui/transpiled/react/CircleButton'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-
-import { useScannerI18n } from '../Hooks/useScannerI18n'
+import Icon from 'cozy-ui/transpiled/react/Icon'
 
 import enLocale from '../../locales/en.json'
+import { useScannerI18n } from '../Hooks/useScannerI18n'
 
 const makeLabel = ({ scannerT, t, label }) => {
   const hasLocale = enLocale?.Scan?.themes?.[label]

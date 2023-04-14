@@ -1,27 +1,26 @@
+import cx from 'classnames'
 import React, { useState } from 'react'
 import { useParams, useNavigate, Navigate } from 'react-router-dom'
-import cx from 'classnames'
 
-import { isIOS } from 'cozy-device-helper'
 import { useClient } from 'cozy-client'
+import { isIOS } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
-import { FILES_DOCTYPE } from '../../doctypes'
 import IlluGenericInputText from '../../assets/icons/IlluGenericInputText.svg'
+import { FILES_DOCTYPE } from '../../doctypes'
 import { makeInputsInformationStep } from '../../helpers/makeInputsInformationStep'
-import { useScannerI18n } from '../Hooks/useScannerI18n'
 import CompositeHeaderImage from '../CompositeHeader/CompositeHeaderImage'
-
-import { useCurrentEditInformations } from '../ModelSteps/Edit/useCurrentEditInformations'
+import { useScannerI18n } from '../Hooks/useScannerI18n'
 import {
   isInformationEditPermitted,
   updateFileMetadata
 } from '../ModelSteps/Edit/helpers'
 import styles from '../ModelSteps/Edit/styles.styl'
+import { useCurrentEditInformations } from '../ModelSteps/Edit/useCurrentEditInformations'
 
 const InformationEdit = () => {
   const { fileId } = useParams()

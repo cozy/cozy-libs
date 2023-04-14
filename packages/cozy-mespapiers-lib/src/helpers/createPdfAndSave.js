@@ -3,8 +3,8 @@ import { PDFDocument } from 'pdf-lib'
 import { models } from 'cozy-client'
 
 import { CONTACTS_DOCTYPE, FILES_DOCTYPE } from '../doctypes'
-import { addFileToPdf } from '../utils/addFileToPdf'
 import { buildFilename } from '../helpers/buildFilename'
+import { addFileToPdf } from '../utils/addFileToPdf'
 
 const {
   file: { uploadFileWithConflictStrategy }

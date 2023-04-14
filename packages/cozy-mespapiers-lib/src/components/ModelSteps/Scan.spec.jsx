@@ -1,10 +1,10 @@
-import React from 'react'
 import { render } from '@testing-library/react'
+import React from 'react'
 
 import { isMobile } from 'cozy-device-helper'
 
-import AppLike from '../../../test/components/AppLike'
 import Scan from './Scan'
+import AppLike from '../../../test/components/AppLike'
 import { FormDataProvider } from '../Contexts/FormDataProvider'
 import { useFormData } from '../Hooks/useFormData'
 

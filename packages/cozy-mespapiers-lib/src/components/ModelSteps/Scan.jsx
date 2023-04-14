@@ -1,20 +1,20 @@
 import React, { useState, useEffect, memo } from 'react'
 
 import { useClient, models } from 'cozy-client'
-import DialogActions from 'cozy-ui/transpiled/react/DialogActions'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import FilePicker from 'cozy-ui/transpiled/react/FilePicker'
-import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import { isMobile } from 'cozy-device-helper'
+import Alerter from 'cozy-ui/transpiled/react/Alerter'
+import DialogActions from 'cozy-ui/transpiled/react/DialogActions'
+import FilePicker from 'cozy-ui/transpiled/react/FilePicker'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import CompositeHeader from '../CompositeHeader/CompositeHeader'
-import AcquisitionResult from '../ModelSteps/AcquisitionResult'
-import ScanMobileActions from '../ModelSteps/ScanMobileActions'
-import ScanDesktopActions from '../ModelSteps/ScanDesktopActions'
+import { isFileAlreadySelected } from './helpers'
 import IlluGenericNewPage from '../../assets/icons/IlluGenericNewPage.svg'
 import { makeBlobWithCustomAttrs } from '../../helpers/makeBlobWithCustomAttrs'
+import CompositeHeader from '../CompositeHeader/CompositeHeader'
 import { useFormData } from '../Hooks/useFormData'
-import { isFileAlreadySelected } from './helpers'
+import AcquisitionResult from '../ModelSteps/AcquisitionResult'
+import ScanDesktopActions from '../ModelSteps/ScanDesktopActions'
+import ScanMobileActions from '../ModelSteps/ScanMobileActions'
 
 const { fetchBlobFileById } = models.file
 

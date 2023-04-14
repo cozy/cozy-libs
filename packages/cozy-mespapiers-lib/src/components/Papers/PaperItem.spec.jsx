@@ -1,10 +1,10 @@
-import React from 'react'
-import { fireEvent, render } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { fireEvent, render } from '@testing-library/react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import AppLike from '../../../test/components/AppLike'
 import PaperItem from './PaperItem'
+import AppLike from '../../../test/components/AppLike'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 jest.mock('react-router-dom', () => ({

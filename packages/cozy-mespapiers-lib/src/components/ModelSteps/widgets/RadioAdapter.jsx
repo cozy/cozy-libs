@@ -1,15 +1,15 @@
 import React, { Fragment, useState, useEffect } from 'react'
 
-import Paper from 'cozy-ui/transpiled/react/Paper'
+import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
-import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import Paper from 'cozy-ui/transpiled/react/Paper'
 import Radio from 'cozy-ui/transpiled/react/Radios'
-import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 
-import { useScannerI18n } from '../../Hooks/useScannerI18n'
 import { defaultProptypes } from './proptypes'
+import { useScannerI18n } from '../../Hooks/useScannerI18n'
 
 const RadioAdapter = ({
   attrs: { name, options, required },

@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { useStepperDialog } from '../Hooks/useStepperDialog'
-import Scan from '../ModelSteps/Scan'
-import Information from '../ModelSteps/Information'
 import ContactWrapper from '../ModelSteps/ContactWrapper'
+import Information from '../ModelSteps/Information'
+import Scan from '../ModelSteps/Scan'
 
 const StepperDialogContent = ({ onClose }) => {
   const { allCurrentSteps, currentStepIndex } = useStepperDialog()

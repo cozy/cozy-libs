@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import { useScannerI18n } from '../Hooks/useScannerI18n'
-import PlaceholdersList from '../Placeholders/PlaceholderListModal/PlaceholdersList'
 import PlaceholderThemesList from '../Placeholders/PlaceholderListModal/PlaceholderThemesList'
+import PlaceholdersList from '../Placeholders/PlaceholderListModal/PlaceholdersList'
 
 const defaultState = {
   onBack: false,

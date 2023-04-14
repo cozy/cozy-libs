@@ -1,8 +1,8 @@
-import React from 'react'
 import { render } from '@testing-library/react'
+import React from 'react'
 
-import AppLike from '../../../test/components/AppLike'
 import StepperDialogContent from './StepperDialogContent'
+import AppLike from '../../../test/components/AppLike'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
 
 /* eslint-disable react/display-name */

@@ -5,10 +5,9 @@ import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import { useMultiSelection } from '../Hooks/useMultiSelection'
-
 import MultiselectContent from '../Multiselect/MultiselectContent'
-import MultiselectViewActions from '../Multiselect/MultiselectViewActions'
 import MultiselectPaperList from '../Multiselect/MultiselectPaperList'
+import MultiselectViewActions from '../Multiselect/MultiselectViewActions'
 
 const MultiselectView = () => {
   const { t } = useI18n()

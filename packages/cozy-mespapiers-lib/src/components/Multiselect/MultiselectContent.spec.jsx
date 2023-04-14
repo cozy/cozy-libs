@@ -1,9 +1,9 @@
-import React from 'react'
 import { render } from '@testing-library/react'
+import React from 'react'
 
 import MultiselectContente from './MultiselectContent'
-import { useMultiSelection } from '../Hooks/useMultiSelection'
 import AppLike from '../../../test/components/AppLike'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 /* eslint-disable react/display-name */
 jest.mock('../Papers/PaperCardItem', () => () => (

@@ -1,10 +1,9 @@
-'use strict'
-import React from 'react'
-import { fireEvent, render } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { fireEvent, render } from '@testing-library/react'
+import React from 'react'
 
-import AppLike from '../../../../test/components/AppLike'
 import InputTextAdapter from './InputTextAdapter'
+import AppLike from '../../../../test/components/AppLike'
 
 jest.mock('cozy-client/dist/models/document/locales', () => ({
   getBoundT: jest.fn(() => jest.fn())

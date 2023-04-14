@@ -1,10 +1,10 @@
 import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
-import Typography from 'cozy-ui/transpiled/react/Typography'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import withLocales from '../../../locales/withLocales'
 

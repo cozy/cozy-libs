@@ -1,10 +1,10 @@
-import React from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
+import React from 'react'
 
 import { isQueryLoading, useQueryAll } from 'cozy-client'
 
-import AppLike from '../../../test/components/AppLike'
 import Home from './Home'
+import AppLike from '../../../test/components/AppLike'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 /* eslint-disable react/display-name */

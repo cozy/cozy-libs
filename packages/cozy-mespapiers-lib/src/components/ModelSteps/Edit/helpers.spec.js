@@ -1,4 +1,3 @@
-import { mockPapersDefinitions } from '../../../../test/mockPaperDefinitions'
 import {
   isInformationEditPermitted,
   updateFileMetadata,
@@ -6,6 +5,7 @@ import {
   updateReferencedContact,
   getPaperDefinitionByFile
 } from './helpers'
+import { mockPapersDefinitions } from '../../../../test/mockPaperDefinitions'
 
 const informationStep = {
   stepIndex: 4,

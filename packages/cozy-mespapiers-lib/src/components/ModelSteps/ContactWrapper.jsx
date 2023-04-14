@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import cx from 'classnames'
+import PropTypes from 'prop-types'
+import React, { useState, useEffect } from 'react'
 
 import { useClient } from 'cozy-client'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import DialogActions from 'cozy-ui/transpiled/react/DialogActions'
-import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 
-import { useFormData } from '../Hooks/useFormData'
-import { FILES_DOCTYPE } from '../../doctypes'
-import { KEYS } from '../../constants/const'
-import CompositeHeader from '../CompositeHeader/CompositeHeader'
-import ConfirmReplaceFile from './widgets/ConfirmReplaceFile'
 import ContactList from './ContactList'
+import ConfirmReplaceFile from './widgets/ConfirmReplaceFile'
+import { KEYS } from '../../constants/const'
+import { FILES_DOCTYPE } from '../../doctypes'
 import { fetchCurrentUser } from '../../helpers/fetchCurrentUser'
+import CompositeHeader from '../CompositeHeader/CompositeHeader'
+import { useFormData } from '../Hooks/useFormData'
 
 const ContactWrapper = ({ currentStep, onClose }) => {
   const { t } = useI18n()

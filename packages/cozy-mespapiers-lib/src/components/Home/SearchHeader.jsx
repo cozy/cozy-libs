@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 
 import { models } from 'cozy-client'
 import Box from 'cozy-ui/transpiled/react/Box'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
-import { useMultiSelection } from '../Hooks/useMultiSelection'
-import ThemesFilter from '../ThemesFilter'
-import SearchInput from '../SearchInput'
 import FilterButton from './FilterButton'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
+import SearchInput from '../SearchInput'
+import ThemesFilter from '../ThemesFilter'
 
 const {
   themes: { themesList }

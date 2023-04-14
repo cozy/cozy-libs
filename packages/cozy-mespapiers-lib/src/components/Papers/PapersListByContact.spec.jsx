@@ -1,10 +1,9 @@
 'use strict'
-import React from 'react'
 import { render } from '@testing-library/react'
+import React from 'react'
 
-import AppLike from '../../../test/components/AppLike'
 import PapersListByContact from './PapersListByContact'
-
+import AppLike from '../../../test/components/AppLike'
 import { buildFilesByContacts } from '../Papers/helpers'
 
 jest.mock('../Papers/helpers', () => ({

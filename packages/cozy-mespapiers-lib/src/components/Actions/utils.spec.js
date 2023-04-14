@@ -1,6 +1,6 @@
-import { makeActionVariant } from './utils'
 import { download } from './Items/download'
 import { forward } from './Items/forward'
+import { makeActionVariant } from './utils'
 
 jest.mock('./Items/download')
 jest.mock('./Items/forward')

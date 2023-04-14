@@ -1,14 +1,14 @@
 import React, { createContext, useState } from 'react'
 
-import log from 'cozy-logger'
 import { models, useClient } from 'cozy-client'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import log from 'cozy-logger'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import { useStepperDialog } from '../Hooks/useStepperDialog'
+import { createPdfAndSave } from '../../helpers/createPdfAndSave'
 import getOrCreateAppFolderWithReference from '../../helpers/getFolderWithReference'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
-import { createPdfAndSave } from '../../helpers/createPdfAndSave'
+import { useStepperDialog } from '../Hooks/useStepperDialog'
 
 const {
   document: { Qualification }

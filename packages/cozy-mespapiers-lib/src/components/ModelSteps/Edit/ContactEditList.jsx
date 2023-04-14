@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import ContactsListModal from 'cozy-ui/transpiled/react/ContactsListModal'
-import Paper from 'cozy-ui/transpiled/react/Paper'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
-import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
-import Avatar from 'cozy-ui/transpiled/react/Avatar'
-import Icon from 'cozy-ui/transpiled/react/Icon'
+import Paper from 'cozy-ui/transpiled/react/Paper'
 
 import ContactEditItem from './ContactEditItem'
 

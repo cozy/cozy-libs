@@ -1,12 +1,12 @@
 import React from 'react'
 
-import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import GhostButton from './GhostButton'
-import PaperCardItem from '../Papers/PaperCardItem'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
+import PaperCardItem from '../Papers/PaperCardItem'
 
 const MultiselectContent = ({ setIsFilePickerActive }) => {
   const { t } = useI18n()

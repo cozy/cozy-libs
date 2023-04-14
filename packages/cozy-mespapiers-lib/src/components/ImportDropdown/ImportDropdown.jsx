@@ -1,15 +1,15 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import Typography from 'cozy-ui/transpiled/react/Typography'
-import Icon, { iconPropType } from 'cozy-ui/transpiled/react/Icon'
 import { ActionMenuHeader } from 'cozy-ui/transpiled/react/ActionMenu'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Icon, { iconPropType } from 'cozy-ui/transpiled/react/Icon'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
-import FileIcon from '../Icons/FileIcon'
-import { useScannerI18n } from '../Hooks/useScannerI18n'
 import ImportDropdownItems from './ImportDropdownItems'
+import { useScannerI18n } from '../Hooks/useScannerI18n'
+import FileIcon from '../Icons/FileIcon'
 
 const ImportDropdown = ({ placeholder, onClick, onClose }) => {
   const { t } = useI18n()
