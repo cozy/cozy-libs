@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [36.4.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.3.0...cozy-mespapiers-lib@36.4.0) (2023-04-14)
+
+
+### Features
+
+* Remove "Existing" subheaders ([d68e527](https://github.com/cozy/cozy-libs/commit/d68e527bfeebcd2c0ce44b57088c40e1cc5478d7))
+* Sort category of papers ([1d7c981](https://github.com/cozy/cozy-libs/commit/1d7c981f3e57dadcca6d225c96c5d8ae98dd4398))
+
+
+
+
+
 # [36.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.2.0...cozy-mespapiers-lib@36.3.0) (2023-04-14)
 
 
