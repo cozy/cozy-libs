@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [36.4.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.4.0...cozy-mespapiers-lib@36.4.1) (2023-04-14)
+
+
+### Bug Fixes
+
+* **cozy-mespapiers-lib:** Display of the last Divider on the homepage ([2af2e70](https://github.com/cozy/cozy-libs/commit/2af2e70ea7ab68c82357a5bfd450b647384b47ed))
+
+
+
+
+
 # [36.4.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.3.0...cozy-mespapiers-lib@36.4.0) (2023-04-14)
 
 
