@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [36.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.2.0...cozy-mespapiers-lib@36.3.0) (2023-04-14)
+
+
+### Features
+
+* Limit the display to a maximum of 3 files by default ([e2caa10](https://github.com/cozy/cozy-libs/commit/e2caa107e1bfc9de96202435d7871690986de3d6))
+
+
+
+
+
 # [36.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.1.7...cozy-mespapiers-lib@36.2.0) (2023-04-13)
 
 
