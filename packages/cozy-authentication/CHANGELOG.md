@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.14.0 (2023-04-17)
+
+
+### Features
+
+* Add missing devDeps to cozy-authentication ([94832ed](https://github.com/cozy/cozy-libs/commit/94832ed1c1c2934de408f02929f4ea30cba28a2c))
+
+
+
+
+
 # 2.13.0 (2023-01-31)
 
 

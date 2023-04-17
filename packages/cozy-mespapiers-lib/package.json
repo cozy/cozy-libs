@@ -1,6 +1,6 @@
 {
   "name": "cozy-mespapiers-lib",
-  "version": "36.4.1",
+  "version": "36.5.0",
   "description": "Cozy Mes papiers lib",
   "license": "AGPL-3.0",
   "main": "dist/index.js",
@@ -34,7 +34,7 @@
     "jest-environment-jsdom-sixteen": "2.0.0",
     "lodash": "4.17.21",
     "mockdate": "3.0.5",
-    "prop-types":"15.8.1",
+    "prop-types": "15.8.1",
     "react-router-dom": "6.4.5",
     "stylus": "0.59.0"
   },

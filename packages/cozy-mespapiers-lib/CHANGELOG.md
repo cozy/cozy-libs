@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [36.5.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.4.1...cozy-mespapiers-lib@36.5.0) (2023-04-17)
+
+
+### Features
+
+* Add missing packages to devDeps ([50f6bfb](https://github.com/cozy/cozy-libs/commit/50f6bfb04a135ddd402f521c6bc3a24f9943fbf7))
+
+
+
+
+
 ## [36.4.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.4.0...cozy-mespapiers-lib@36.4.1) (2023-04-14)
 
 
