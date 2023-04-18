@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.14.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.14.5...cozy-harvest-lib@13.14.6) (2023-04-18)
+
+
+### Bug Fixes
+
+* **harvest:** DialogBackButtonon config modal ([94c87e2](https://github.com/cozy/cozy-libs/commit/94c87e2306c93d7ac21308f5e12b069f8f051edb))
+
+
+
+
+
 ## [13.14.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.14.4...cozy-harvest-lib@13.14.5) (2023-04-13)
 
 **Note:** Version bump only for package cozy-harvest-lib
