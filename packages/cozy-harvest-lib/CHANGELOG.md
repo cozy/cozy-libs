@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.15.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.14.6...cozy-harvest-lib@13.15.0) (2023-04-18)
+
+
+### Features
+
+* **harvest:** Update ConnectionBackdrop styles ([b307a4c](https://github.com/cozy/cozy-libs/commit/b307a4c39c1593dad2bacc55ba42203140ba18a2))
+
+
+
+
+
 ## [13.14.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.14.5...cozy-harvest-lib@13.14.6) (2023-04-18)
 
 
