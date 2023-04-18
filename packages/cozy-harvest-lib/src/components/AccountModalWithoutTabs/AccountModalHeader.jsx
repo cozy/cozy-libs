@@ -12,7 +12,8 @@ export const AccountModalHeader = ({
   account,
   accountsAndTriggers,
   showAccountSelection,
-  pushHistory
+  pushHistory,
+  replaceHistory
 }) => {
   const isConfig = useMatch(
     `/connected/${konnector.slug}/accounts/:accountId/config`
@@ -25,6 +26,7 @@ export const AccountModalHeader = ({
         account={account}
         accountsAndTriggers={accountsAndTriggers}
         pushHistory={pushHistory}
+        replaceHistory={replaceHistory}
       />
     )
 

@@ -7,22 +7,21 @@ import AccountSelectBox from './AccountSelectBox'
 
 interface AccountSelectorHeaderProps {
   konnector: { slug: string }
-  account: Record<string, unknown>
+  account: Record<string, unknown> & { _id: string }
   accountsAndTriggers: (object | null | undefined)[]
   pushHistory: (path: string) => void
+  replaceHistory: (path: string) => void
 }
 
 export const AccountSelectorHeader = ({
-  konnector,
   account,
   accountsAndTriggers,
-  pushHistory
+  pushHistory,
+  replaceHistory
 }: AccountSelectorHeaderProps): JSX.Element => (
   <>
     <DialogBackButton
-      onClick={(): void =>
-        pushHistory(`/connected/${konnector.slug}/accounts/:accountId`)
-      }
+      onClick={(): void => replaceHistory(`/accounts/${account._id}`)}
     />
     <DialogTitle
       className="dialogTitleWithBack dialogTitleWithClose"
