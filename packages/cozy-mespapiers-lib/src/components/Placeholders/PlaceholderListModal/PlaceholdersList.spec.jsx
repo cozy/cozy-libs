@@ -38,7 +38,7 @@ describe('PlaceholdersList components:', () => {
     const placeholdersLines = getAllByTestId('PlaceholdersList-ListItem')
 
     expect(placeholdersLines).toHaveLength(2)
-    expect(getByText('ID card (🇫🇷)'))
+    expect(getByText('ID card 🇫🇷'))
     expect(getByText('ISP invoice'))
   })
 
