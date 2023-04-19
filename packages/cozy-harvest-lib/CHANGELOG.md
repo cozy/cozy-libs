@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.15.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.15.0...cozy-harvest-lib@13.15.1) (2023-04-19)
+
+
+### Bug Fixes
+
+* **harvest:** Update AccountsListModal title ([73cd87a](https://github.com/cozy/cozy-libs/commit/73cd87a8c56f47b7115d158812086ae3e5d28a0b))
+
+
+
+
+
 # [13.15.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.14.6...cozy-harvest-lib@13.15.0) (2023-04-18)
 
 
