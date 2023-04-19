@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [36.6.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.5.3...cozy-mespapiers-lib@36.6.0) (2023-04-19)
+
+
+### Features
+
+* **cozy-mespapiers-lib:** Change behavior of SearchHeader components ([08e904d](https://github.com/cozy/cozy-libs/commit/08e904df91f1949bdea5273319ebc39e5efe13b1))
+* **cozy-mespapiers-lib:** Update style to FabWrapper ([040aafb](https://github.com/cozy/cozy-libs/commit/040aafb70f223f18751502f1bfe35aed22a50e52))
+
+
+
+
+
 ## [36.5.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.5.2...cozy-mespapiers-lib@36.5.3) (2023-04-19)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
