@@ -56,8 +56,8 @@ const SearchHeader = ({
           <div>
             <FilterButton
               badge={{
-                active: !isThemesFilterDisplayed,
-                content: selectedTheme ? 1 : 0
+                active: Boolean(selectedTheme),
+                content: 1
               }}
               onClick={() => setIsThemesFilterDisplayed(prev => !prev)}
             />
@@ -74,6 +74,7 @@ const SearchHeader = ({
               'u-ml-1-half': !isMultiSelectionActive
             }
           )}
+          id="theme-filters"
         >
           <ThemesFilter
             items={themesList}
