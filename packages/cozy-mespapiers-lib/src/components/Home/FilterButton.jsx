@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import Badge from 'cozy-ui/transpiled/react/Badge'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
@@ -17,6 +18,7 @@ const useStyles = makeStyles(theme => ({
 
 const FilterButton = ({ badge, onClick }) => {
   const styles = useStyles()
+  const { t } = useI18n()
 
   const { active, content, showZero } = badge
 
@@ -43,6 +45,9 @@ const FilterButton = ({ badge, onClick }) => {
       className={styles.iconButton}
       size="large"
       onClick={onClick}
+      aria-expanded={false}
+      aria-controls="theme-filters"
+      aria-label={t('action.themeFilter')}
     >
       <Icon icon="setting" />
     </IconButton>
