@@ -31,7 +31,7 @@ const FilterButton = ({ badge, onClick }) => {
       <IconButton
         data-testid="SwitchButton"
         className={styles.iconButton}
-        size="medium"
+        size="large"
         onClick={onClick}
       >
         <Icon icon="setting" />
@@ -41,7 +41,7 @@ const FilterButton = ({ badge, onClick }) => {
     <IconButton
       data-testid="SwitchButton"
       className={styles.iconButton}
-      size="medium"
+      size="large"
       onClick={onClick}
     >
       <Icon icon="setting" />

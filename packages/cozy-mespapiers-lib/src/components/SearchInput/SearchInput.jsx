@@ -11,16 +11,17 @@ import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 const useStyles = makeStyles(theme => ({
   input: {
     borderRadius: '25px',
-    height: '40px',
+    height: '48px',
     boxShadow: theme.shadows[1],
     border: '1px solid transparent',
+    maxWidth: '100%',
     '&:hover, &:focus, &:active': {
       border: '1px solid transparent',
       boxShadow: theme.shadows[6]
     },
     '& input': {
       borderRadius: '25px',
-      height: '38px',
+      height: '42px',
       maxWidth: '100%'
     }
   }
@@ -65,7 +66,7 @@ const SearchInput = forwardRef(
 
     return (
       <InputGroup
-        className={`${styles.input} u-mr-0-s u-mr-1 u-maw-100 `}
+        className={`${styles.input}`}
         prepend={
           <Icon
             className="u-pl-1"

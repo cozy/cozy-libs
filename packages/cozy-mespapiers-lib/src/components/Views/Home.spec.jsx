@@ -2,6 +2,7 @@ import { render, fireEvent, waitFor } from '@testing-library/react'
 import React from 'react'
 
 import { isQueryLoading, useQueryAll } from 'cozy-client'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import Home from './Home'
 import AppLike from '../../../test/components/AppLike'
@@ -32,12 +33,19 @@ jest.mock('cozy-client/dist/utils', () => ({
   hasQueryBeenLoaded: jest.fn(),
   useQueryAll: jest.fn()
 }))
+jest.mock('cozy-ui/transpiled/react/hooks/useBreakpoints', () => ({
+  ...jest.requireActual('cozy-ui/transpiled/react/hooks/useBreakpoints'),
+  __esModule: true,
+  default: jest.fn(() => ({ isMobile: false }))
+}))
 
 const setup = ({
   isLoading = true,
   withData = false,
-  isMultiSelectionActive = false
+  isMultiSelectionActive = false,
+  isDesktop = true
 } = {}) => {
+  useBreakpoints.mockReturnValue({ isDesktop })
   useMultiSelection.mockReturnValue({ isMultiSelectionActive })
   isQueryLoading.mockReturnValue(isLoading)
   useQueryAll.mockReturnValue({
@@ -117,10 +125,11 @@ describe('Home components:', () => {
     expect(queryByTestId('SwitchButton')).toBeNull()
   })
 
-  it('should hide ThemesFilter when SearchInput is focused', () => {
+  it('should hide ThemesFilter when SearchInput is focused, on Mobile', () => {
     const { queryAllByTestId, getByTestId } = setup({
       isLoading: false,
-      withData: true
+      withData: true,
+      isDesktop: false
     })
 
     expect(queryAllByTestId('ThemesFilter')).not.toHaveLength(0)
@@ -128,10 +137,11 @@ describe('Home components:', () => {
     expect(queryAllByTestId('ThemesFilter')).toHaveLength(0)
   })
 
-  it('should display ThemesFilter when click on SwitchButton', () => {
+  it('should display ThemesFilter when click on SwitchButton, on Mobile', () => {
     const { queryAllByTestId, getByTestId } = setup({
       isLoading: false,
-      withData: true
+      withData: true,
+      isDesktop: false
     })
     fireEvent.focus(getByTestId('SearchInput'))
     expect(queryAllByTestId('ThemesFilter')).toHaveLength(0)
@@ -139,10 +149,11 @@ describe('Home components:', () => {
     expect(queryAllByTestId('ThemesFilter')).not.toHaveLength(0)
   })
 
-  it('should hide SwitchButton when click on it', () => {
+  it('should hide SwitchButton when click on it, on Mobile', () => {
     const { queryByTestId, getByTestId } = setup({
       isLoading: false,
-      withData: true
+      withData: true,
+      isDesktop: false
     })
 
     fireEvent.focus(getByTestId('SearchInput'))
@@ -204,7 +215,7 @@ describe('Home components:', () => {
   })
 
   describe('multi-selection mode', () => {
-    it('should display PaperGroup, SearchInput & SwitchButton', () => {
+    it('should display PaperGroup & SearchInput', () => {
       const { getByTestId } = setup({
         isLoading: false,
         withData: true,
@@ -213,17 +224,16 @@ describe('Home components:', () => {
 
       expect(getByTestId('PaperGroup'))
       expect(getByTestId('SearchInput'))
-      expect(getByTestId('SwitchButton'))
     })
 
-    it('should not display ThemesFilter by default', () => {
+    it('should display ThemesFilter by default', () => {
       const { queryAllByTestId } = setup({
         isLoading: false,
         withData: true,
         isMultiSelectionActive: true
       })
 
-      expect(queryAllByTestId('ThemesFilter')).toHaveLength(0)
+      expect(queryAllByTestId('ThemesFilter').length).toBeGreaterThan(0)
     })
 
     it('should not display FeaturedPlaceholdersList', () => {

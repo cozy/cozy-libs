@@ -1,8 +1,8 @@
+import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
 import { models } from 'cozy-client'
-import Box from 'cozy-ui/transpiled/react/Box'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import FilterButton from './FilterButton'
@@ -20,47 +20,68 @@ const SearchHeader = ({
   selectedTheme,
   setSelectedTheme
 }) => {
-  const { isMobile } = useBreakpoints()
+  const { isDesktop } = useBreakpoints()
   const { isMultiSelectionActive } = useMultiSelection()
-  const [isThemesFilterDisplayed, setIsThemesFilterDisplayed] = useState(
-    !isMultiSelectionActive
-  )
+  const [isThemesFilterDisplayed, setIsThemesFilterDisplayed] = useState(true)
 
-  const handleThemesFilterDisplayed = isDisplayed => {
-    setIsThemesFilterDisplayed(isDisplayed)
+  const handleFocus = () => {
+    if (!isDesktop || isMultiSelectionActive) setIsThemesFilterDisplayed(false)
   }
 
   const handleThemeSelection = nextValue => {
     setSelectedTheme(oldValue => (nextValue === oldValue ? '' : nextValue))
   }
 
+  const hasFilterButton =
+    !isThemesFilterDisplayed &&
+    (!isDesktop || (isDesktop && isMultiSelectionActive))
+
+  const hasThemeFilter =
+    isThemesFilterDisplayed ||
+    (!isDesktop && !isMultiSelectionActive && isThemesFilterDisplayed)
+
   return (
-    <div className="u-flex u-flex-column-s u-mv-1 u-ph-half">
-      <Box className="u-flex u-flex-items-center u-mb-half-s" flex="1 1 auto">
+    <div
+      className={cx('u-flex u-flex-column-m u-m-1', {
+        'u-flex-column': isMultiSelectionActive
+      })}
+    >
+      <div className="u-flex u-w-100 u-mt-half">
         <SearchInput
           value={searchValue}
           onChange={ev => setSearchValue(ev.target.value)}
-          onFocus={() => handleThemesFilterDisplayed(false)}
+          onFocus={handleFocus}
         />
-        {(!isThemesFilterDisplayed || isMobile) && (
-          <FilterButton
-            badge={{
-              active: !isThemesFilterDisplayed,
-              content: selectedTheme ? 1 : 0
-            }}
-            onClick={() => handleThemesFilterDisplayed(prev => !prev)}
-          />
+        {hasFilterButton && (
+          <div>
+            <FilterButton
+              badge={{
+                active: !isThemesFilterDisplayed,
+                content: selectedTheme ? 1 : 0
+              }}
+              onClick={() => setIsThemesFilterDisplayed(prev => !prev)}
+            />
+          </div>
         )}
-      </Box>
-      <Box className="u-flex u-flex-justify-center" flexWrap="wrap">
-        {isThemesFilterDisplayed && (
+      </div>
+      {hasThemeFilter && (
+        <div
+          className={cx(
+            'u-flex u-flex-justify-center-m u-mt-half-m u-flex-wrap-m u-ml-0-m',
+            {
+              ['u-flex-justify-center u-mt-half u-flex-wrap u-ml-0']:
+                isMultiSelectionActive,
+              'u-ml-1-half': !isMultiSelectionActive
+            }
+          )}
+        >
           <ThemesFilter
             items={themesList}
             selectedTheme={selectedTheme}
             handleThemeSelection={handleThemeSelection}
           />
-        )}
-      </Box>
+        </div>
+      )}
     </div>
   )
 }
