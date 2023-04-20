@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [36.8.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.7.0...cozy-mespapiers-lib@36.8.0) (2023-04-20)
+
+
+### Features
+
+* **cozy-mespapiers-lib:** Add accessibility attributes to FilterButton ([8f02a23](https://github.com/cozy/cozy-libs/commit/8f02a23897acc2093080ef363b044d93b4ccece6))
+* **cozy-mespapiers-lib:** Add StackedThumbnail component ([d7f0906](https://github.com/cozy/cozy-libs/commit/d7f09066fa30ccdd229a982a7094cf4d5c0c9d15))
+
+
+
+
+
 # [36.7.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.6.0...cozy-mespapiers-lib@36.7.0) (2023-04-20)
 
 
