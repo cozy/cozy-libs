@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [36.7.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.6.0...cozy-mespapiers-lib@36.7.0) (2023-04-20)
+
+
+### Features
+
+* Update cozy-client from `38.0.0` to `38.1.0` ([f45713e](https://github.com/cozy/cozy-libs/commit/f45713e6de4aaec95702a390c788579ee3976487))
+
+
+
+
+
 # [36.6.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.5.3...cozy-mespapiers-lib@36.6.0) (2023-04-19)
 
 
