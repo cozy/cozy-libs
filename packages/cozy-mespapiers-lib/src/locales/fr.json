@@ -78,10 +78,10 @@
   },
   "DeleteConfirm": {
     "cancel": "Annuler",
-    "choice": "Ne pas supprimer l'image.",
+    "choice": "Conserver l'élément sur Drive ?",
     "delete": "Supprimer",
-    "title": "Supprimer cet élément ?",
-    "text": "L’élément est associé au fichier <strong>\"%{name}\"</strong> dans votre drive."
+    "title": "Êtes-vous sûr de vouloir supprimer ce document ?",
+    "text": " Il sera supprimé de l’application Mes Papiers et Drive."
   },
   "ForwardModal": {
     "action": "Sélectionner un destinataire",
