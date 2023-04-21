@@ -78,10 +78,10 @@
   },
   "DeleteConfirm": {
     "cancel": "Cancel",
-    "choice": "Do not delete the picture.",
+    "choice": "Keep item on Drive?",
     "delete": "Remove",
-    "title": "Delete this file?",
-    "text": "The item is associated with the file \"%{name}\" in your drive."
+    "title": "Are you sure you want to delete this document?",
+    "text": "It will be deleted from the My Papers and Drive app."
   },
   "ForwardModal": {
     "action": "Select a recipient",
