@@ -2,7 +2,6 @@ import get from 'lodash/get'
 import { useEffect, useState } from 'react'
 
 import { useClient, Q } from 'cozy-client'
-import CozyRealtime from 'cozy-realtime'
 
 const TRIGGERS_DOCTYPE = 'io.cozy.triggers'
 const KONNECTORS_DOCTYPE = 'io.cozy.konnectors'
@@ -33,7 +32,7 @@ export const useKonnectorWithTriggers = (slug, injectedKonnector) => {
   }, [client, injectedKonnector, slug])
 
   useEffect(() => {
-    const realtime = new CozyRealtime({ client })
+    const realtime = client.plugins.realtime
     realtime.subscribe('created', TRIGGERS_DOCTYPE, onTriggerCreated)
     function onTriggerCreated(trigger) {
       if (get(trigger, 'message.konnector') === slug) {
