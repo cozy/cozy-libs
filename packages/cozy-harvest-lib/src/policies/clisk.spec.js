@@ -1,4 +1,5 @@
 import { getLauncher, konnectorPolicy } from './clisk'
+import { KonnectorJobError } from '../helpers/konnectors'
 
 describe('getLauncher', () => {
   it('should get the current Launcher from the given window object', () => {
@@ -130,7 +131,7 @@ describe('onLaunch', () => {
     ])
     expect(flow.triggerEvent).toHaveBeenCalledWith(
       'error',
-      new Error('test error message')
+      new KonnectorJobError('test error message')
     )
   })
 })
