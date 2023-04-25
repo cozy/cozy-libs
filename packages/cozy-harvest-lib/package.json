@@ -50,6 +50,7 @@
     "@cozy/cli-tree": "^0.7.0",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "10.4.9",
+    "@testing-library/react-hooks": "8.0.1",
     "babel-jest": "26.6.3",
     "babel-plugin-inline-react-svg": "1.1.2",
     "babel-preset-cozy-app": "^2.1.0",

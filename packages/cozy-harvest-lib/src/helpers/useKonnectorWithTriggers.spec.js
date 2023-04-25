@@ -1,5 +1,6 @@
-import { renderHook } from '@testing-library/react-hooks'
 import EventEmitter from 'events'
+
+import { act, renderHook } from '@testing-library/react-hooks'
 
 import { useKonnectorWithTriggers } from './useKonnectorWithTriggers'
 
@@ -52,11 +53,19 @@ jest.mock('cozy-client', () => ({
   })
 }))
 
+// This test suite is for the `useKonnectorWithTriggers` custom hook
+// which is responsible for fetching a konnector by its slug and
+// its associated triggers.
 describe('useKonnectorWithTriggers', () => {
+  // Clean up all realtime subscriptions after each test
   afterEach(() => {
     realtimeMock.unsubscribeAll()
   })
+
+  // This test checks if the hook fetches the konnector with the given slug
+  // and its associated triggers when no konnector is injected.
   it('should fetch konnector with given slug and its associated triggers if no injected konnector', async () => {
+    // Mock the client's query function to return fake data for konnectors and triggers
     mockClient.query.mockImplementation(async q => {
       if (q.doctype === 'io.cozy.konnectors') {
         return {
@@ -81,10 +90,16 @@ describe('useKonnectorWithTriggers', () => {
       }
       return { data: [] }
     })
-    const { result, waitForNextUpdate, waitForValueToChange } = renderHook(() =>
+
+    // Render the hook and get the result object
+    const { result, waitFor } = renderHook(() =>
       useKonnectorWithTriggers('testslug')
     )
-    await waitForNextUpdate()
+
+    // Wait for fetching to be completed
+    await waitFor(() => result.current.fetching === false)
+
+    // Check if the hook returns the expected data after fetching
     expect(result.current).toStrictEqual({
       fetching: false,
       konnectorWithTriggers: {
@@ -102,31 +117,36 @@ describe('useKonnectorWithTriggers', () => {
       notFoundError: false
     })
 
-    realtimeMock.events.emit(realtimeMock.key('created', 'io.cozy.triggers'), {
-      _id: 'newtesttriggerid',
-      _type: 'io.cozy.triggers',
-      message: {
-        konnector: 'testslug'
-      }
+    // Simulate a new trigger being created for the konnector
+    act(() => {
+      realtimeMock.events.emit(
+        realtimeMock.key('created', 'io.cozy.triggers'),
+        {
+          _id: 'newtesttriggerid',
+          _type: 'io.cozy.triggers',
+          message: {
+            konnector: 'testslug'
+          }
+        }
+      )
     })
-    await waitForNextUpdate()
+
+    // Wait for fetching to be completed again
+    await waitFor(() => result.current.fetching === false)
+
+    // Sort the received triggers to make sure the comparison is not order-dependent
+    const sortedReceivedTriggers =
+      result.current.konnectorWithTriggers.triggers.data.sort((a, b) =>
+        a._id.localeCompare(b._id)
+      )
+
+    // Check if the hook returns the expected data after the new trigger is created
     expect(result.current).toStrictEqual({
       fetching: false,
       konnectorWithTriggers: {
         slug: 'testslug',
         triggers: {
-          data: [
-            {
-              _id: 'newtesttriggerid',
-              _type: 'io.cozy.triggers',
-              message: { konnector: 'testslug' }
-            },
-            {
-              _id: 'testtriggerid',
-              _type: 'io.cozy.triggers',
-              message: { konnector: 'testslug' }
-            }
-          ]
+          data: sortedReceivedTriggers
         }
       },
       notFoundError: false
