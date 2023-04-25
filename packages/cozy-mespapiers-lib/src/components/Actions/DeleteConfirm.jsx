@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { useClient } from 'cozy-client'
+import { getCreatedByApp } from 'cozy-client/dist/models/utils'
 import Button from 'cozy-ui/transpiled/react/Button'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
@@ -33,9 +34,13 @@ const DeleteConfirm = ({ files, isLast, onClose, children }) => {
     setClearQualification(prev => !prev)
   }
 
+  const createdByDriveOrDesktop = ['drive', 'cozy-desktop'].includes(
+    getCreatedByApp(files[0])
+  )
+
   return (
     <ConfirmDialog
-      open={true}
+      open
       onClose={onClose}
       title={t('DeleteConfirm.title')}
       content={
@@ -47,11 +52,13 @@ const DeleteConfirm = ({ files, isLast, onClose, children }) => {
               })
             }}
           />
-          <Checkbox
-            value={clearQualification}
-            onChange={handleOnChange}
-            label={t('DeleteConfirm.choice')}
-          />
+          {createdByDriveOrDesktop && (
+            <Checkbox
+              value={clearQualification}
+              onChange={handleOnChange}
+              label={t('DeleteConfirm.choice')}
+            />
+          )}
           {children}
         </Stack>
       }
