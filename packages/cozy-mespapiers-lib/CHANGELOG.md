@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [37.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.8.2...cozy-mespapiers-lib@37.0.0) (2023-04-25)
+
+
+### Features
+
+* **cozy-mespapiers-lib:** Remove choice to keep deleted file on Drive ([fe68e69](https://github.com/cozy/cozy-libs/commit/fe68e69d7aad81fe0bab6265828072019d41bfc5))
+* **cozy-mespapiers-lib:** Update wording of DeleteConfirm modal ([cb52ac7](https://github.com/cozy/cozy-libs/commit/cb52ac707fa11fdf0a62091dcabe2997d2f03f89))
+* Update cozy-ui package from `82.12.0` to`83.2.0` ([18db8fa](https://github.com/cozy/cozy-libs/commit/18db8fa79de3eac19494fbbb4b0b4133a423d641))
+
+
+### BREAKING CHANGES
+
+* you must have `cozy-ui >= 83.2.0`
+Please looks BC here https://github.com/cozy/cozy-ui/releases/tag/v83.0.0
+
+
+
+
+
 ## [36.8.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@36.8.1...cozy-mespapiers-lib@36.8.2) (2023-04-25)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
