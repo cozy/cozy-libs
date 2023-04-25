@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.15.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.15.1...cozy-harvest-lib@13.15.2) (2023-04-25)
+
+
+### Bug Fixes
+
+* Create KonnnectorJobError in clisk policy ([8fa6860](https://github.com/cozy/cozy-libs/commit/8fa686020e340af908ddc91d722fdb19f65ef36c))
+
+
+
+
+
 ## [13.15.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.15.0...cozy-harvest-lib@13.15.1) (2023-04-19)
 
 
