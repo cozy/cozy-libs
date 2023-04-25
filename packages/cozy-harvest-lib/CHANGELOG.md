@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.16.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.15.2...cozy-harvest-lib@13.16.0) (2023-04-25)
+
+
+### Bug Fixes
+
+* Regression in useKonnectorWithTrigger ([bac0085](https://github.com/cozy/cozy-libs/commit/bac0085634ee0ff6f93c60a12142bce6b21e3648))
+* Wip Unit tests ([e48dae6](https://github.com/cozy/cozy-libs/commit/e48dae6766a0e11bcff88b85f9372c761d3d8573))
+
+
+### Features
+
+* **harvest:** Update useKonnectorWithTriggerstest ([ad106d1](https://github.com/cozy/cozy-libs/commit/ad106d1a6f80c92afd8a1b065bc472f5ada4d9e6))
+* Use cozy-client realtime plugin ([0dbc361](https://github.com/cozy/cozy-libs/commit/0dbc3610f68234ecd465e718843d6f475eaa6083))
+
+
+
+
+
 ## [13.15.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.15.1...cozy-harvest-lib@13.15.2) (2023-04-25)
 
 
