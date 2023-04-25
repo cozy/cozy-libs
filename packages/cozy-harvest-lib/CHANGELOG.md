@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.17.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.16.0...cozy-harvest-lib@13.17.0) (2023-04-25)
+
+
+### Features
+
+* Update wording for konnectors errors ([3f1af77](https://github.com/cozy/cozy-libs/commit/3f1af7762ec332cc2a0859dab607cc24608c4f5e))
+
+
+
+
+
 # [13.16.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.15.2...cozy-harvest-lib@13.16.0) (2023-04-25)
 
 
