@@ -41,7 +41,7 @@ export const useKonnectorWithTriggers = (slug, injectedKonnector) => {
     }
     return function cleanUp() {
       if (realtime) {
-        realtime.unsubscribeAll()
+        realtime.unsubscribe('created', TRIGGERS_DOCTYPE, onTriggerCreated)
       }
     }
   }, [client, slug, triggers])
