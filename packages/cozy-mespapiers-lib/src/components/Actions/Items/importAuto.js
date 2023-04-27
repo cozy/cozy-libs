@@ -27,12 +27,6 @@ export const importAuto = ({ paperDefinition }) => {
         label
       } = paperDefinition
 
-      const handleClick = href => () =>
-        window.open(
-          href,
-          flag('harvest.inappconnectors.enabled') ? undefined : '_blank'
-        )
-
       return (
         <AppLinker
           app={{ slug: 'store' }}
@@ -47,13 +41,21 @@ export const importAuto = ({ paperDefinition }) => {
         >
           {({ href }) => {
             return (
-              <ActionsMenuItem {...props} onClick={handleClick(href)}>
+              <ActionsMenuItem
+                component="a"
+                href={href}
+                {...(!flag('harvest.inappconnectors.enabled') && {
+                  target: '_blank'
+                })}
+                {...props}
+              >
                 <ListItemIcon>
                   <Icon icon={Konnector} size={24} />
                 </ListItemIcon>
                 <ListItemText
                   primary={t('ImportDropdown.importAuto.title')}
                   secondary={t('ImportDropdown.importAuto.text')}
+                  ellipsis={false}
                 />
               </ActionsMenuItem>
             )
