@@ -11,7 +11,7 @@ import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 const useStyles = makeStyles(theme => ({
   input: {
     borderRadius: '25px',
-    height: '48px',
+    height: '40px',
     boxShadow: theme.shadows[1],
     border: '1px solid transparent',
     maxWidth: '100%',
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     },
     '& input': {
       borderRadius: '25px',
-      height: '42px',
+      height: '38px',
       maxWidth: '100%'
     }
   }

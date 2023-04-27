@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom'
 import { render, fireEvent, waitFor } from '@testing-library/react'
 import React from 'react'
 
@@ -149,7 +150,7 @@ describe('Home components:', () => {
     expect(queryAllByTestId('ThemesFilter')).not.toHaveLength(0)
   })
 
-  it('should hide SwitchButton when click on it, on Mobile', () => {
+  it('should keep SwitchButton when click on it, on Mobile', () => {
     const { queryByTestId, getByTestId } = setup({
       isLoading: false,
       withData: true,
@@ -157,9 +158,9 @@ describe('Home components:', () => {
     })
 
     fireEvent.focus(getByTestId('SearchInput'))
-    expect(getByTestId('SwitchButton'))
+    expect(getByTestId('SwitchButton')).toBeInTheDocument()
     fireEvent.click(getByTestId('SwitchButton'))
-    expect(queryByTestId('SwitchButton')).toBeNull()
+    expect(queryByTestId('SwitchButton')).toBeInTheDocument()
   })
 
   it('should not display SearchResult by default', () => {
