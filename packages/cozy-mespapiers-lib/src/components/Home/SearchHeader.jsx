@@ -32,12 +32,11 @@ const SearchHeader = ({
     setSelectedTheme(oldValue => (nextValue === oldValue ? '' : nextValue))
   }
 
-  const hasFilterButton =
-    !isThemesFilterDisplayed &&
-    (!isDesktop || (isDesktop && isMultiSelectionActive))
+  const hasFilterButton = !isDesktop || (isDesktop && isMultiSelectionActive)
 
   const hasThemeFilter =
     isThemesFilterDisplayed ||
+    (isDesktop && !isMultiSelectionActive) ||
     (!isDesktop && !isMultiSelectionActive && isThemesFilterDisplayed)
 
   return (
@@ -46,7 +45,7 @@ const SearchHeader = ({
         'u-flex-column': isMultiSelectionActive
       })}
     >
-      <div className="u-flex u-w-100 u-mt-half">
+      <div className="u-flex u-w-100 u-flex-items-center">
         <SearchInput
           value={searchValue}
           onChange={ev => setSearchValue(ev.target.value)}
