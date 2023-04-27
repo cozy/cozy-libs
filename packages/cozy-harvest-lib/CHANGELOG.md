@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.17.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.17.0...cozy-harvest-lib@13.17.1) (2023-04-27)
+
+
+### Bug Fixes
+
+* Use realtime.unsubscribe ([b25b1a0](https://github.com/cozy/cozy-libs/commit/b25b1a043e84a4bb98e1a304282e7935a25e6eb4))
+
+
+
+
+
 # [13.17.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.16.0...cozy-harvest-lib@13.17.0) (2023-04-25)
 
 
