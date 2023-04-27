@@ -4,12 +4,14 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
-import { makeActions } from 'cozy-ui/transpiled/react/ActionMenu/Actions/helpers'
+import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions/helpers'
 
 import PaperFabUI from './PaperFabUI'
 import { findPlaceholderByLabelAndCountry } from '../../helpers/findPlaceholders'
 import { createPaper } from '../Actions/Items/createPaper'
 import { createPaperByTheme } from '../Actions/Items/createPaperByTheme'
+import { importAuto } from '../Actions/Items/importAuto'
+import { scanPicture } from '../Actions/Items/scanPicture'
 import { select } from '../Actions/Items/select'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 
@@ -82,9 +84,10 @@ const PapersFabWrapper = ({ children }) => {
     onClick: handleClick,
     innerRef: actionBtnRef,
     a11y: {
-      'aria-controls': showGeneralMenu ? 'fab-menu' : undefined,
+      'aria-controls':
+        showGeneralMenu || showKonnectorMenu ? 'fab-menu' : undefined,
       'aria-haspopup': true,
-      'aria-expanded': showGeneralMenu ? true : undefined
+      'aria-expanded': showGeneralMenu || showKonnectorMenu ? true : undefined
     }
   })
 
@@ -97,9 +100,11 @@ const PapersFabWrapper = ({ children }) => {
     },
     konnectorMenuProps: {
       show: showKonnectorMenu,
-      placeholder: paperDefinition,
-      onClose: () => setShowKonnectorMenu(false),
-      onClick: () => redirectPaperCreation(paperDefinition)
+      actions: makeActions([importAuto, scanPicture], {
+        paperDefinition,
+        scanPictureOnclick: () => redirectPaperCreation(paperDefinition)
+      }),
+      onClose: () => setShowKonnectorMenu(false)
     }
   }
 
