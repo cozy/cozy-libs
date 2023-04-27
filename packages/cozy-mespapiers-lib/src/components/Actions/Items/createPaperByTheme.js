@@ -1,7 +1,10 @@
 import React from 'react'
 
-import ActionMenuItemWrapper from 'cozy-ui/transpiled/react/ActionMenu/ActionMenuItemWrapper'
+import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 
 import { findPlaceholderByLabelAndCountry } from '../../../helpers/findPlaceholders'
 import withLocales from '../../../locales/withLocales'
@@ -15,7 +18,7 @@ export const createPaperByTheme = ({
 }) => {
   return {
     name: 'createPaperByTheme',
-    Component: withLocales(({ className }) => {
+    Component: withLocales(props => {
       const { t } = useI18n()
       const scannerT = useScannerI18n()
       const { papersDefinitions: paperDefinitionsList } = usePapersDefinitions()
@@ -26,15 +29,19 @@ export const createPaperByTheme = ({
       )[0]
 
       return (
-        <ActionMenuItemWrapper
-          className={className}
-          icon={paperDefinition.icon}
+        <ActionsMenuItem
+          {...props}
           onClick={() => showImportDropdown(paperDefinition)}
         >
-          {t('action.createPaperByTheme', {
-            theme: scannerT(`items.${fileTheme}`)
-          })}
-        </ActionMenuItemWrapper>
+          <ListItemIcon>
+            <Icon icon={paperDefinition.icon} />
+          </ListItemIcon>
+          <ListItemText
+            primary={t('action.createPaperByTheme', {
+              theme: scannerT(`items.${fileTheme}`)
+            })}
+          />
+        </ActionsMenuItem>
       )
     })
   }
