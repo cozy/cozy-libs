@@ -1,7 +1,6 @@
 import React from 'react'
 
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
@@ -18,10 +17,11 @@ export const createPaperByTheme = ({
 }) => {
   return {
     name: 'createPaperByTheme',
-    Component: withLocales(props => {
-      const { t } = useI18n()
+    // eslint-disable-next-line no-unused-vars
+    Component: withLocales(({ t, f, lang, ...props }) => {
       const scannerT = useScannerI18n()
       const { papersDefinitions: paperDefinitionsList } = usePapersDefinitions()
+
       const paperDefinition = findPlaceholderByLabelAndCountry(
         paperDefinitionsList,
         fileTheme,
