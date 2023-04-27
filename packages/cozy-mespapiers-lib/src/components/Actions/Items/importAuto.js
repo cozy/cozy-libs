@@ -4,7 +4,6 @@ import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
 import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
@@ -16,8 +15,8 @@ import withLocales from '../../../locales/withLocales'
 export const importAuto = ({ paperDefinition }) => {
   return {
     name: 'importAuto',
-    Component: withLocales(props => {
-      const { t } = useI18n()
+    // eslint-disable-next-line no-unused-vars
+    Component: withLocales(({ t, f, lang, ...props }) => {
       const client = useClient()
 
       const {
