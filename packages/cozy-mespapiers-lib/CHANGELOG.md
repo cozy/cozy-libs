@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [39.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@38.0.1...cozy-mespapiers-lib@39.0.0) (2023-04-27)
+
+
+### Bug Fixes
+
+* Always show ThemeFilter on mobile ([ee3b4aa](https://github.com/cozy/cozy-libs/commit/ee3b4aad411ea8b32ac70da51d4415bed3489532))
+* **mespapiers:** Props from I18n was spread to children in some actions ([6348d64](https://github.com/cozy/cozy-libs/commit/6348d643d7266f24119a556a79f1126cd75677fb))
+
+
+### Features
+
+* **mespapiers:** Update cozy-ui from 84.1.0 to 84.1.3 ([b16d08d](https://github.com/cozy/cozy-libs/commit/b16d08dab6332848e07fe4452bc7729dcabda9e2))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 84.1.3`
+
+
+
+
+
 ## [38.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@38.0.0...cozy-mespapiers-lib@38.0.1) (2023-04-27)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
