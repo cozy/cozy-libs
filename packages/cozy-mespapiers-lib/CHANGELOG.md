@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [38.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@37.0.1...cozy-mespapiers-lib@38.0.0) (2023-04-27)
+
+
+### Features
+
+* **mespapiers:** Add importAuto and scanPicture actions ([2517080](https://github.com/cozy/cozy-libs/commit/2517080f98f2f0ab6640f6d502be806b423c3e78))
+* **mespapiers:** Modify createPaper and createPaperByTheme actions ([defa4fc](https://github.com/cozy/cozy-libs/commit/defa4fc65c42d52982128b1cc089fc768ad27428))
+* **mespapiers:** Remove useless MoreOptions component ([8564dfd](https://github.com/cozy/cozy-libs/commit/8564dfdc3d2f6b27801d6fb6fb8f40da3389af4a))
+* **mespapiers:** Update cozy-ui from 83.2.0 to 84.1.0 ([10b56c8](https://github.com/cozy/cozy-libs/commit/10b56c8a58fb28b3b10d4b753771834d0ffc2bfb))
+* **mespapiers:** Use new actions approach for PaperFab menu ([e316f9e](https://github.com/cozy/cozy-libs/commit/e316f9eb5aa7c1a7d97f96f18a765720c6c5ec9e))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 84.1.0`
+
+
+
+
+
 ## [37.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@37.0.0...cozy-mespapiers-lib@37.0.1) (2023-04-25)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
