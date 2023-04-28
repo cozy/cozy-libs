@@ -38,7 +38,9 @@ const CategoryItemByPaper = ({ papers, category, isLast, onClick }) => {
                 />
               )
             }}
-            renderFallback={() => <Icon icon="file-type-image" size={32} />}
+            renderFallback={() => (
+              <StackedThumbnail fallback isStacked={papers.length > 1} />
+            )}
           />
         </ListItemIcon>
         <ListItemText
