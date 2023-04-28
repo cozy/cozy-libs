@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [40.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@39.0.1...cozy-mespapiers-lib@40.0.0) (2023-04-28)
+
+
+### Features
+
+* **mespapiers:** Update cozy packages ([8fe6219](https://github.com/cozy/cozy-libs/commit/8fe6219206d3c4c3b2261ebcd3df0508a863c9b9))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have:
+- `cozy-client >= 38.2.1`
+- `cozy-doctypes >= 1.88.6`
+- `cozy-flags >= 3.0.1`
+- `cozy-harvest-lib >= 13.17.1`
+- `cozy-intent >= 2.11.1`
+- `cozy-logger >= 1.10.1`
+- `cozy-sharing >= 7.1.3`
+
+
+
+
+
 ## [39.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@39.0.0...cozy-mespapiers-lib@39.0.1) (2023-04-28)
 
 
