@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [39.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@39.0.0...cozy-mespapiers-lib@39.0.1) (2023-04-28)
+
+
+### Bug Fixes
+
+* **mespapiers:** Link to install konnector ([1baa5ba](https://github.com/cozy/cozy-libs/commit/1baa5baa3a50d630c094250f242324b6f190bc7d))
+
+
+
+
+
 # [39.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@38.0.1...cozy-mespapiers-lib@39.0.0) (2023-04-27)
 
 
