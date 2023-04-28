@@ -7220,10 +7220,10 @@ cosmiconfig@^7, cosmiconfig@^7.0.0:
     path-type "^4.0.0"
     yaml "^1.10.0"
 
-cozy-bar@^7.25.0:
-  version "7.25.0"
-  resolved "https://registry.yarnpkg.com/cozy-bar/-/cozy-bar-7.25.0.tgz#b3f3d27a7f383b627141134c2dad04fc1bd8816a"
-  integrity sha512-YIrXpX0KyY5IJxw52zilCh/88EOEjMA1pVIGNIt4+skQWu0t8hcZy14iJDZv40+JrZiz0qcwAvfoXDxlKfvkMg==
+cozy-bar@^7.26.0:
+  version "7.26.0"
+  resolved "https://registry.yarnpkg.com/cozy-bar/-/cozy-bar-7.26.0.tgz#cdd530e83ad9a8e477c1528fffb6cc2b2a386419"
+  integrity sha512-nBam2gy0sG9yt7tvn3MqFkysZopcF5MF50LDukWM2+szyliwBhgT/5sIYD1yRfIJJyjXl8PDe93Q7qjelMdtVA==
   dependencies:
     "@cozy/minilog" "^1.0.0"
     cozy-client "^27.14.4"
@@ -7412,10 +7412,10 @@ cozy-client@^37.2.0:
     sift "^6.0.0"
     url-search-params-polyfill "^8.0.0"
 
-cozy-client@^38.1.0:
-  version "38.1.0"
-  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-38.1.0.tgz#40138876a7dd79dc239e67eda803db16f787d71b"
-  integrity sha512-Sg0LgTCIaG2C8O7JjHVvIRvq6jW+WQ53JjApr4BbJr+xNeBkWJOHAddA/0V0BDh9oELfC7Mcxwa+pUXXNVTzHA==
+cozy-client@^38.2.1:
+  version "38.2.1"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-38.2.1.tgz#b18d002b38de7bd28af17b64b7e570fda36059f1"
+  integrity sha512-WoRtOmOBHpR/WeQhUijaa36IqN5c7uWVoFjXC49eKOdd9NnnF9hpG4Aq3OHLfNtKeZsYtwscDiaeB3f5J/GNtQ==
   dependencies:
     "@cozy/minilog" "1.0.0"
     "@types/jest" "^26.0.20"
