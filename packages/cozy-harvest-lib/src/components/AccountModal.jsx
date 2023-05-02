@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
 import { models, withClient } from 'cozy-client'
+import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Button'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 import Infos from 'cozy-ui/transpiled/react/Infos'
@@ -11,8 +12,9 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
+import AccountModalHeader from './AccountModalWithoutTabs/AccountModalHeader'
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
-import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
+import KonnectorAccountWrapper from './KonnectorConfiguration/KonnectorAccountWrapper'
 import KonnectorModalHeader from './KonnectorModalHeader'
 import { withMountPointProps } from './MountPointContext'
 import withLocales from './hoc/withLocales'
@@ -121,29 +123,39 @@ export class AccountModal extends Component {
       showAccountSelection,
       showNewAccountButton,
       intentsApi,
-      innerAccountModalOverrides
+      innerAccountModalOverrides,
+      Component
     } = this.props
     const { trigger, account, fetching, error } = this.state
 
     return (
       <>
-        <KonnectorModalHeader konnector={konnector}>
-          {showAccountSelection ? (
-            <AccountSelectBox
-              loading={!account}
-              selectedAccount={account}
-              accountsAndTriggers={accountsAndTriggers}
-              onChange={option => {
-                pushHistory(`/accounts/${option.account._id}`)
-              }}
-              onCreate={() => {
-                pushHistory('/new')
-              }}
-            />
-          ) : (
-            <Typography>{models.account.getAccountName(account)}</Typography>
-          )}
-        </KonnectorModalHeader>
+        {flag('harvest.inappconnectors.enabled') ? (
+          <AccountModalHeader
+            konnector={konnector}
+            account={account}
+            accountsAndTriggers={accountsAndTriggers}
+          />
+        ) : (
+          <KonnectorModalHeader konnector={konnector}>
+            {showAccountSelection ? (
+              <AccountSelectBox
+                loading={!account}
+                selectedAccount={account}
+                accountsAndTriggers={accountsAndTriggers}
+                onChange={option => {
+                  pushHistory(`/accounts/${option.account._id}`)
+                }}
+                onCreate={() => {
+                  pushHistory('/new')
+                }}
+              />
+            ) : (
+              <Typography>{models.account.getAccountName(account)}</Typography>
+            )}
+          </KonnectorModalHeader>
+        )}
+
         {(error || fetching) && (
           <DialogContent className="u-pb-2">
             {error && (
@@ -170,7 +182,7 @@ export class AccountModal extends Component {
         )}
         {!error && !fetching && (
           <DialogContent className={isMobile ? 'u-p-0' : 'u-pt-0'}>
-            <KonnectorAccountTabs
+            <KonnectorAccountWrapper
               initialActiveTab={initialActiveTab}
               konnector={konnector}
               initialTrigger={trigger}
@@ -180,6 +192,7 @@ export class AccountModal extends Component {
               showNewAccountButton={showNewAccountButton}
               intentsApi={intentsApi}
               innerAccountModalOverrides={innerAccountModalOverrides}
+              Component={Component}
             />
           </DialogContent>
         )}
@@ -224,7 +237,9 @@ AccountModal.propTypes = {
   showNewAccountButton: PropTypes.bool,
 
   intentsApi: intentsApiProptype,
-  innerAccountModalOverrides: innerAccountModalOverridesProptype
+  innerAccountModalOverrides: innerAccountModalOverridesProptype,
+
+  Component: PropTypes.func
 }
 
 export default flow(

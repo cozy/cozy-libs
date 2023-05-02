@@ -19,7 +19,6 @@ import {
   innerAccountModalOverridesProptype
 } from '../../helpers/proptypes'
 import { findKonnectorPolicy } from '../../konnector-policies'
-import FlowProvider from '../FlowProvider'
 import { OAUTH_SERVICE_OK, openOAuthWindow } from '../OAuthService'
 import RedirectToAccountFormButton from '../RedirectToAccountFormButton'
 import useDOMMutations from '../hooks/useDOMMutations'
@@ -55,7 +54,7 @@ export const KonnectorAccountTabsTabs = ({ tab, onChange }) => {
 
 const domMutationsConfig = { childList: true, subtree: true }
 
-const DumbKonnectorAccountTabs = props => {
+const KonnectorAccountTabs = props => {
   const {
     konnector,
     initialTrigger,
@@ -188,17 +187,6 @@ const DumbKonnectorAccountTabs = props => {
         />
       </SwipeableViews>
     </div>
-  )
-}
-
-export const KonnectorAccountTabs = props => {
-  return (
-    <FlowProvider
-      initialTrigger={props.initialTrigger}
-      konnector={props.konnector}
-    >
-      {({ flow }) => <DumbKonnectorAccountTabs {...props} flow={flow} />}
-    </FlowProvider>
   )
 }
 

@@ -8,6 +8,7 @@ import KonnectorAccountTabs, {
   KonnectorAccountTabsTabs
 } from './KonnectorAccountTabs'
 import AppLike from '../../../test/AppLike'
+import { KonnectorJobError } from '../../helpers/konnectors'
 
 jest.mock('components/hooks/useMaintenanceStatus')
 jest.mock(
@@ -95,6 +96,18 @@ describe('Konnector account tabs content', () => {
       }
     }
 
+    const flow = {
+      on: () => {},
+      removeListener: () => {},
+      konnector,
+      getState: () => ({
+        error: isError ? new KonnectorJobError('LOGIN_FAILED') : null,
+        konnector,
+        trigger,
+        account: accountFixture
+      })
+    }
+
     const root = await render(
       <AppLike client={client}>
         <KonnectorAccountTabs
@@ -106,6 +119,7 @@ describe('Konnector account tabs content', () => {
           initialActiveTab={initialActiveTab}
           intentsApi={{}}
           innerAccountModalOverrides={{}}
+          flow={flow}
         />
       </AppLike>
     )

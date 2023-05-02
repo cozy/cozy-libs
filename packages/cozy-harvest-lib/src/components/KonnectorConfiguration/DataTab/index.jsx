@@ -108,4 +108,6 @@ DataTab.propTypes = {
   account: PropTypes.object
 }
 
+DataTab.displayName = 'DataTab'
+
 export default withClient(DataTab)

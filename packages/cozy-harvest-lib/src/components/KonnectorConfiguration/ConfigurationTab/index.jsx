@@ -233,6 +233,8 @@ const ConfigurationTab = ({
   )
 }
 
+ConfigurationTab.displayName = 'ConfigurationTab'
+
 ConfigurationTab.propTypes = {
   konnector: PropTypes.object.isRequired,
   account: PropTypes.object,

@@ -4,8 +4,6 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import flag from 'cozy-flags'
 
 import AccountModal from '../AccountModal'
-import AccountModalContentWrapper from '../AccountModalWithoutTabs/ForV4Router/AccountModalContentWrapper'
-import AccountModalWithoutTabs from '../AccountModalWithoutTabs/ForV4Router/AccountModalWithoutTabs'
 import EditAccountModal from '../EditAccountModal'
 import HarvestModalRoot from '../HarvestModalRoot'
 import ConfigurationTab from '../KonnectorConfiguration/ConfigurationTab'
@@ -18,7 +16,6 @@ const RoutesV4 = ({
   konnectorRoot,
   konnectorWithTriggers,
   accountsAndTriggers,
-  historyAction,
   onSuccess,
   onDismiss
 }) => {
@@ -62,48 +59,30 @@ const RoutesV4 = ({
             path={`${konnectorRoot}/accounts/:accountId`}
             exact
             render={({ match }) => (
-              <AccountModalWithoutTabs
+              <AccountModal
                 konnector={konnectorWithTriggers}
                 accountId={match.params.accountId}
                 accountsAndTriggers={accountsAndTriggers}
+                onDismiss={onDismiss}
                 showNewAccountButton={!konnectorWithTriggers.clientSide}
                 showAccountSelection={!konnectorWithTriggers.clientSide}
-                onDismiss={onDismiss}
-              >
-                <AccountModalContentWrapper>
-                  <DataTab
-                    konnectorRoot={konnectorRoot}
-                    konnector={konnectorWithTriggers}
-                    showNewAccountButton={!konnectorWithTriggers.clientSide}
-                    onDismiss={onDismiss}
-                  />
-                </AccountModalContentWrapper>
-              </AccountModalWithoutTabs>
+                Component={DataTab}
+              />
             )}
           />
           <Route
             path={`${konnectorRoot}/accounts/:accountId/config`}
             exact
             render={({ match }) => (
-              <AccountModalWithoutTabs
+              <AccountModal
                 konnector={konnectorWithTriggers}
                 accountId={match.params.accountId}
                 accountsAndTriggers={accountsAndTriggers}
+                onDismiss={onDismiss}
                 showNewAccountButton={!konnectorWithTriggers.clientSide}
                 showAccountSelection={!konnectorWithTriggers.clientSide}
-                onDismiss={onDismiss}
-              >
-                <AccountModalContentWrapper>
-                  <ConfigurationTab
-                    konnector={konnectorWithTriggers}
-                    showNewAccountButton={!konnectorWithTriggers.clientSide}
-                    onAccountDeleted={onDismiss}
-                    addAccount={() =>
-                      historyAction(`${konnectorRoot}/new`, 'replace')
-                    }
-                  />
-                </AccountModalContentWrapper>
-              </AccountModalWithoutTabs>
+                Component={ConfigurationTab}
+              />
             )}
           />
         </>
