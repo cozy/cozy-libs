@@ -1,13 +1,12 @@
 import { historyAction } from './withRouter'
 
-const historyMock = { replace: jest.fn(), push: jest.fn() }
-
-const setup = ({ baseRoute, route, method = 'replace' } = {}) => {
-  historyAction({ baseRoute }, historyMock)(route, method)
-}
-
 describe('historyAction', () => {
-  afterEach(() => {
+  const historyMock = { replace: jest.fn(), push: jest.fn() }
+
+  const setup = ({ baseRoute, route, method = 'replace' } = {}) => {
+    historyAction({ baseRoute }, historyMock)(route, method)
+  }
+  beforeEach(() => {
     jest.resetAllMocks()
   })
 
