@@ -8,6 +8,11 @@ import CozyClient from 'cozy-client'
 
 import AppLike from '../../test/AppLike'
 
+jest.mock('react-router-dom', () => {
+  return {
+    useNavigate: () => ({})
+  }
+})
 jest.mock(
   './KonnectorConfiguration/ConfigurationTab/index',
   () =>
@@ -22,6 +27,7 @@ jest.mock('connections/accounts', () => ({
 const t = key => key
 
 beforeEach(() => {
+  jest.resetAllMocks()
   fetchAccount.mockImplementation(() => ({
     _id: '123',
     doctype: 'io.cozy.accounts'

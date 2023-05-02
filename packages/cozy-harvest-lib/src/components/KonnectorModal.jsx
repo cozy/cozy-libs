@@ -20,7 +20,8 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
 import AccountsList from './AccountsList/AccountsList'
-import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
+import DataTab from './KonnectorConfiguration/DataTab'
+import KonnectorAccountWrapper from './KonnectorConfiguration/KonnectorAccountWrapper'
 import TriggerManager from './TriggerManager'
 import KonnectorUpdateInfos from './infos/KonnectorUpdateInfos'
 import { fetchAccount } from '../connections/accounts'
@@ -150,13 +151,14 @@ const DumbKonnectorDialogContent = props => {
     )
   } else {
     return (
-      <KonnectorAccountTabs
+      <KonnectorAccountWrapper
         konnector={konnector}
         initialTrigger={trigger}
         account={account}
         onAccountDeleted={onClose}
         addAccount={requestAccountCreation}
         refetchTrigger={refetchTrigger}
+        Component={DataTab}
       />
     )
   }
@@ -194,7 +196,6 @@ export class KonnectorModal extends PureComponent {
   async componentDidMount() {
     await this.fetchAccounts()
     const { accountsAndTriggers } = this.state
-
     if (this.props.accountId) this.loadSelectedAccountId()
     else if (accountsAndTriggers.length === 1) {
       const { account, trigger } = accountsAndTriggers[0]
@@ -221,14 +222,12 @@ export class KonnectorModal extends PureComponent {
   loadSelectedAccountId() {
     const selectedAccountId = this.props.accountId
     const { accountsAndTriggers } = this.state
-
     const matchingTrigger = get(
       accountsAndTriggers.find(
         account => account.account._id === selectedAccountId
       ),
       'trigger'
     )
-
     if (matchingTrigger) this.fetchAccount(matchingTrigger)
   }
 

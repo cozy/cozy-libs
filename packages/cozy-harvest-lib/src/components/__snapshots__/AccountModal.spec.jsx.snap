@@ -92,7 +92,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
   <ForwardRef(WithStyles)
     className="u-p-0"
   >
-    <KonnectorAccountTabs
+    <KonnectorAccountWrapper
       account={
         Object {
           "_id": "123",
@@ -157,7 +157,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
   <ForwardRef(WithStyles)
     className="u-p-0"
   >
-    <KonnectorAccountTabs
+    <KonnectorAccountWrapper
       account={
         Object {
           "_id": "account_2",

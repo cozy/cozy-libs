@@ -100,7 +100,7 @@ describe('AccountModal', () => {
       component.find('AccountSelectBox').prop('onCreate')()
       expect(mockHistoryPush).toHaveBeenCalledWith('/new')
 
-      const accountTabs = component.find('KonnectorAccountTabs')
+      const accountTabs = component.find('KonnectorAccountWrapper')
       accountTabs.prop('addAccount')()
       expect(mockHistoryPush).toHaveBeenCalledWith('/new')
     })
