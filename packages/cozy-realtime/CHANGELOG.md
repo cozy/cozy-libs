@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 4.4.1 (2023-05-02)
+
+
+### Bug Fixes
+
+* Discard errors when closing the websocket ([0c13fc1](https://github.com/cozy/cozy-libs/commit/0c13fc17f1617700bd8d8894c80bab28e0fb22ff))
+
+
+
+
+
 # 4.4.0 (2023-03-08)
 
 
