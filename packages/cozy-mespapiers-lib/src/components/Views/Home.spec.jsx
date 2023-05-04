@@ -12,8 +12,8 @@ import { useMultiSelection } from '../Hooks/useMultiSelection'
 /* eslint-disable react/display-name */
 jest.mock('../Home/HomeToolbar', () => () => <div data-testid="HomeToolbar" />)
 jest.mock('../Papers/PaperGroup', () => () => <div data-testid="PaperGroup" />)
-jest.mock('../SearchResult/SearchResult', () => () => (
-  <div data-testid="SearchResult" />
+jest.mock('../Home/ContentWhenSearching', () => () => (
+  <div data-testid="ContentWhenSearching" />
 ))
 jest.mock('cozy-ui/transpiled/react/Empty', () => () => (
   <div data-testid="Empty" />
@@ -163,27 +163,27 @@ describe('Home components:', () => {
     expect(queryByTestId('SwitchButton')).toBeInTheDocument()
   })
 
-  it('should not display SearchResult by default', () => {
+  it('should not display ContentWhenSearching by default', () => {
     const { queryByTestId } = setup({
       isLoading: false,
       withData: true
     })
 
-    expect(queryByTestId('SearchResult')).toBeNull()
+    expect(queryByTestId('ContentWhenSearching')).toBeNull()
   })
 
-  it('should display SearchResult instead PaperGroup when ThemesFilter is clicked', () => {
+  it('should display ContentWhenSearching instead PaperGroup when ThemesFilter is clicked', () => {
     const { queryByTestId, queryAllByTestId, getByTestId } = setup({
       isLoading: false,
       withData: true
     })
 
     fireEvent.click(queryAllByTestId('ThemesFilter')[0])
-    expect(getByTestId('SearchResult'))
+    expect(getByTestId('ContentWhenSearching'))
     expect(queryByTestId('PaperGroup')).toBeNull()
   })
 
-  it('should display PaperGroup instead SearchResult when same ThemesFilter is clicked again', () => {
+  it('should display PaperGroup instead ContentWhenSearching when same ThemesFilter is clicked again', () => {
     const { queryByTestId, queryAllByTestId, getByTestId } = setup({
       isLoading: false,
       withData: true
@@ -192,7 +192,7 @@ describe('Home components:', () => {
     fireEvent.click(queryAllByTestId('ThemesFilter')[0])
     fireEvent.click(queryAllByTestId('ThemesFilter')[0])
     expect(getByTestId('PaperGroup'))
-    expect(queryByTestId('SearchResult')).toBeNull()
+    expect(queryByTestId('ContentWhenSearching')).toBeNull()
   })
 
   // TODO The test should pass under these conditions

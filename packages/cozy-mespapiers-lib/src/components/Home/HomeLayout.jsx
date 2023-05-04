@@ -1,9 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useMemo, useState, useEffect } from 'react'
 
-import flag from 'cozy-flags'
-
-import Content from './Content'
 import ContentFlexsearch from './ContentFlexsearch'
 import HomeToolbar from './HomeToolbar'
 import SearchHeader from './SearchHeader'
@@ -13,10 +10,6 @@ import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import FeaturedPlaceholdersList from '../Placeholders/FeaturedPlaceholdersList'
 import { useSearch } from '../Search/SearchProvider'
 
-const ContentBySearch = flag('mespapiers.flexsearch.enabled')
-  ? ContentFlexsearch
-  : Content
-
 const HomeLayout = ({ contacts, papers, konnectors }) => {
   const [selectedTheme, setSelectedTheme] = useState('')
   const [searchValue, setSearchValue] = useState('')
@@ -25,9 +18,7 @@ const HomeLayout = ({ contacts, papers, konnectors }) => {
   const { addAllOnce } = useSearch()
 
   useEffect(() => {
-    if (flag('mespapiers.flexsearch.enabled')) {
-      addAllOnce(papers.concat(contacts))
-    }
+    addAllOnce(papers.concat(contacts))
   }, [addAllOnce, contacts, papers])
 
   const featuredPlaceholders = useMemo(
@@ -49,7 +40,7 @@ const HomeLayout = ({ contacts, papers, konnectors }) => {
         searchValue={searchValue}
         setSearchValue={setSearchValue}
       />
-      <ContentBySearch
+      <ContentFlexsearch
         contacts={contacts}
         papers={papers}
         konnectors={konnectors}
