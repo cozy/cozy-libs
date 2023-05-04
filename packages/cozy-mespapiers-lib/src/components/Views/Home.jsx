@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react'
 
 import { isQueryLoading, useQueryAll } from 'cozy-client'
-import flag from 'cozy-flags'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import {
@@ -10,14 +9,12 @@ import {
   makeKonnectorsAndQualificationLabelWithoutFiles
 } from './helpers'
 import {
-  buildContactsQueryByIds,
   buildContactsQuery,
   buildFilesQueryWithQualificationLabel,
   buildKonnectorsQueryByQualificationLabels
 } from '../../helpers/queries'
 import HomeLayout from '../Home/HomeLayout'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
-import { getContactsRefIdsByFiles } from '../Papers/helpers'
 
 const Home = () => {
   const { papersDefinitions } = usePapersDefinitions()
@@ -39,12 +36,7 @@ const Home = () => {
     [papersDefinitionsLabels, filesWithQualificationLabel]
   )
 
-  const contactIds = flag('mespapiers.flexsearch.enabled')
-    ? null
-    : getContactsRefIdsByFiles(papers)
-  const contactsQuery = flag('mespapiers.flexsearch.enabled')
-    ? buildContactsQuery(!isLoadingFiles)
-    : buildContactsQueryByIds(contactIds, !isLoadingFiles)
+  const contactsQuery = buildContactsQuery(!isLoadingFiles)
   const { data: contacts, ...contactQueryResult } = useQueryAll(
     contactsQuery.definition,
     contactsQuery.options
