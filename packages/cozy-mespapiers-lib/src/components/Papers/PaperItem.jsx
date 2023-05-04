@@ -4,8 +4,6 @@ import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 import { models, useClient } from 'cozy-client'
-import flag from 'cozy-flags'
-import CardMedia from 'cozy-ui/transpiled/react/CardMedia'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 import FileImageLoader from 'cozy-ui/transpiled/react/FileImageLoader'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -128,11 +126,7 @@ const PaperItem = ({
             file={paper}
             linkType="tiny"
             render={src => {
-              return flag('mespapiers.v2-1-0.enabled') ? (
-                <StackedThumbnail image={src} />
-              ) : (
-                <CardMedia component="img" width={32} height={32} image={src} />
-              )
+              return <StackedThumbnail image={src} />
             }}
             renderFallback={() => <Icon icon="file-type-pdf" size={32} />}
           />

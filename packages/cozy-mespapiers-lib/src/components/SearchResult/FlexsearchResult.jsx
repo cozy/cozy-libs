@@ -1,12 +1,10 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import flag from 'cozy-flags'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import { hasExpandedAttributesDisplayed } from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ExpandedAttributes/helpers'
-import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
 
 import FlexsearchResultLine from './FlexsearchResultLine'
 
@@ -24,7 +22,7 @@ const FlexsearchResult = ({
   filteredDocs,
   firstSearchResultMatchingAttributes
 }) => {
-  const { t, f, lang } = useI18n()
+  const { f, lang } = useI18n()
 
   const firstDoc = filteredDocs[0]
   const otherDocs = filteredDocs.slice(1)
@@ -37,29 +35,24 @@ const FlexsearchResult = ({
   })
 
   return (
-    <>
-      {!flag('mespapiers.v2-1-0.enabled') && (
-        <ListSubheader>{t('PapersList.subheader')}</ListSubheader>
+    <List className="u-pv-0">
+      <FlexsearchResultLine
+        doc={firstDoc}
+        expandedAttributesProps={{
+          isExpandedAttributesActive: true,
+          expandedAttributes: firstSearchResultMatchingAttributes
+        }}
+      />
+      {hasOtherDocs && (
+        <SeparatorWrapper
+          hasExpandedAttributes={hasExpandedAttributesToDisplay}
+        >
+          {otherDocs.map(doc => (
+            <FlexsearchResultLine key={doc._id} doc={doc} />
+          ))}
+        </SeparatorWrapper>
       )}
-      <List className="u-pv-0">
-        <FlexsearchResultLine
-          doc={firstDoc}
-          expandedAttributesProps={{
-            isExpandedAttributesActive: true,
-            expandedAttributes: firstSearchResultMatchingAttributes
-          }}
-        />
-        {hasOtherDocs && (
-          <SeparatorWrapper
-            hasExpandedAttributes={hasExpandedAttributesToDisplay}
-          >
-            {otherDocs.map(doc => (
-              <FlexsearchResultLine key={doc._id} doc={doc} />
-            ))}
-          </SeparatorWrapper>
-        )}
-      </List>
-    </>
+    </List>
   )
 }
 

@@ -2,8 +2,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { useClient } from 'cozy-client'
-import flag from 'cozy-flags'
-import MuiCardMedia from 'cozy-ui/transpiled/react/CardMedia'
 import { FileImageLoader } from 'cozy-ui/transpiled/react/FileImageLoader'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
@@ -27,15 +25,8 @@ const CategoryItemByPaper = ({ papers, category, isLast, onClick }) => {
             file={papers[0]}
             linkType="tiny"
             render={src => {
-              return flag('mespapiers.v2-1-0.enabled') ? (
+              return (
                 <StackedThumbnail image={src} isStacked={papers.length > 1} />
-              ) : (
-                <MuiCardMedia
-                  component="img"
-                  width={32}
-                  height={32}
-                  image={src}
-                />
               )
             }}
             renderFallback={() => <Icon icon="file-type-image" size={32} />}
