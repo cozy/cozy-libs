@@ -1,7 +1,4 @@
 import Fuse from 'fuse.js'
-import groupBy from 'lodash/groupBy'
-
-import flag from 'cozy-flags'
 
 const fuse = new Fuse([], {
   findAllMatches: true,
@@ -89,9 +86,6 @@ const compareCategoryByDate = papersGrouped => (a, b) => {
  * @returns {Object} - object with qualification label as key and files as value
  */
 export const makePapersGroupByQualificationLabel = files => {
-  if (!flag('mespapiers.v2-1-0.enabled')) {
-    return groupBy(files, 'metadata.qualification.label')
-  }
   const filesGrouped = files.reduce((acc, file) => {
     const label = file.metadata.qualification.label
     if (!acc[label]) {
