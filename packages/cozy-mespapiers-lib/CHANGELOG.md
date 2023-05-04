@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [40.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@40.0.1...cozy-mespapiers-lib@40.1.0) (2023-05-04)
+
+
+### Features
+
+* Remove `mespapiers.fabExtended.enabled` flag ([31351d4](https://github.com/cozy/cozy-libs/commit/31351d428047925dd0a4a89bf1c9da033f5c0c1b))
+* Remove `mespapiers.flexsearch.enabled` flag ([025bf66](https://github.com/cozy/cozy-libs/commit/025bf66c63ac2f262f1ebbe98362e686d33e4db9))
+* Remove `mespapiers.v2-1-0.enabled` flag ([d9aee1c](https://github.com/cozy/cozy-libs/commit/d9aee1c804d4a8b43640dd3c85afc1225b580f0d))
+
+
+
+
+
 ## [40.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@40.0.0...cozy-mespapiers-lib@40.0.1) (2023-05-02)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
