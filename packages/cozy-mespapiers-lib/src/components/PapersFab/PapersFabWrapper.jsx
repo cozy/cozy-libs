@@ -3,7 +3,6 @@ import React, { cloneElement, useRef, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 import { useClient } from 'cozy-client'
-import flag from 'cozy-flags'
 import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions/helpers'
 
 import PaperFabUI from './PaperFabUI'
@@ -12,7 +11,6 @@ import { createPaper } from '../Actions/Items/createPaper'
 import { createPaperByTheme } from '../Actions/Items/createPaperByTheme'
 import { importAuto } from '../Actions/Items/importAuto'
 import { scanPicture } from '../Actions/Items/scanPicture'
-import { select } from '../Actions/Items/select'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 
 const PapersFabWrapper = ({ children }) => {
@@ -57,15 +55,7 @@ const PapersFabWrapper = ({ children }) => {
     hideGeneralMenu()
   }
 
-  let actionList
-  if (flag('mespapiers.fabExtended.enabled')) {
-    actionList = fileTheme ? [createPaperByTheme, createPaper] : []
-  } else {
-    actionList = fileTheme
-      ? [createPaperByTheme, createPaper, select]
-      : [createPaper, select]
-  }
-
+  const actionList = fileTheme ? [createPaperByTheme, createPaper] : []
   const actions = makeActions(actionList, {
     client,
     hideActionsMenu: hideGeneralMenu,

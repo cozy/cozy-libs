@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import flag from 'cozy-flags'
 import Fab from 'cozy-ui/transpiled/react/Fab'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 
@@ -10,8 +9,7 @@ import { useScroll } from '../Hooks/useScroll'
 
 const PapersFab = ({ t, className, innerRef, onClick, a11y }) => {
   const scroll = useScroll()
-  const isPaperFabFeatureEnabled = flag('mespapiers.fabExtended.enabled')
-  const isOnTop = scroll.scrollTop < 80 && isPaperFabFeatureEnabled
+  const isOnTop = scroll.scrollTop < 80
 
   return (
     <Fab
