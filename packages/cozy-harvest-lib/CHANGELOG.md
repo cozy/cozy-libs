@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.17.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.17.2...cozy-harvest-lib@13.17.3) (2023-05-05)
+
+
+### Bug Fixes
+
+* Avoid FlowProvider reload on trigger launch ([9a065a1](https://github.com/cozy/cozy-libs/commit/9a065a1273c00e17355fcce6ee9650aa46b57232))
+* Make withRouter unit tests more independant ([00f72f7](https://github.com/cozy/cozy-libs/commit/00f72f7d1371588124cef002998d0f9ae4beb120))
+
+
+
+
+
 ## [13.17.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.17.1...cozy-harvest-lib@13.17.2) (2023-05-02)
 
 **Note:** Version bump only for package cozy-harvest-lib

@@ -1,6 +1,6 @@
 {
   "name": "cozy-mespapiers-lib",
-  "version": "40.1.0",
+  "version": "40.1.1",
   "description": "Cozy Mes papiers lib",
   "license": "AGPL-3.0",
   "main": "dist/index.js",
@@ -25,7 +25,7 @@
     "cozy-device-helper": "^2.7.0",
     "cozy-doctypes": "^1.88.6",
     "cozy-flags": "^3.0.1",
-    "cozy-harvest-lib": "^13.17.2",
+    "cozy-harvest-lib": "^13.17.3",
     "cozy-intent": "^2.11.1",
     "cozy-logger": "^1.10.1",
     "cozy-realtime": "^4.4.1",
