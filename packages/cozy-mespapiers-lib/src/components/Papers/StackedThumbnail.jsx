@@ -2,6 +2,7 @@ import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import CozyIcon from 'cozy-ui/transpiled/react/Icon'
 import Skeleton from 'cozy-ui/transpiled/react/Skeleton'
 
 import styles from './Thumbnail.styl'
@@ -64,6 +65,26 @@ const ThumbnailImage = ({ image, isStacked }) => {
   )
 }
 
+const BackgroundThumbnailIcon = ({ icon: Icon }) => {
+  const skeletonSize = getSkeletonSize(true)
+
+  return (
+    <BackgroundThumbnailWrapper>
+      <CozyIcon icon={Icon} height={skeletonSize} width={skeletonSize} />
+    </BackgroundThumbnailWrapper>
+  )
+}
+
+const ThumbnailIcon = ({ icon: Icon, isStacked }) => {
+  const skeletonSize = getSkeletonSize(isStacked)
+
+  return (
+    <ThumbnailWrapper isStacked={isStacked}>
+      <CozyIcon icon={Icon} height={skeletonSize} width={skeletonSize} />
+    </ThumbnailWrapper>
+  )
+}
+
 const BackgroundThumbnailFallback = () => {
   const skeletonSize = getSkeletonSize(true)
 
@@ -97,7 +118,16 @@ const ThumbnailFallback = ({ isStacked }) => {
   )
 }
 
-const Thumbnail = ({ image, isStacked }) => {
+const Thumbnail = ({ image, icon, isStacked }) => {
+  if (icon) {
+    return (
+      <>
+        <ThumbnailIcon icon={icon} isStacked={isStacked} />
+        {isStacked && <BackgroundThumbnailIcon icon={icon} />}
+      </>
+    )
+  }
+
   if (image) {
     return (
       <>
@@ -117,22 +147,27 @@ const Thumbnail = ({ image, isStacked }) => {
 
 /**
  * StackedThumbnail component
+ * The `icon` property takes precedence over the `image` property
  * @param {Object} props
  * @param {string} props.image - Image source
+ * @param {React.ElementType} props.icon - Icon component
  * @param {boolean} props.isStacked - Is the image stacked
  * @example
  * <StackedThumbnail image="https://example.com/image.jpg" isStacked={<condition>} />
+ * <StackedThumbnail icon={IconExample} isStacked={<condition>} />
+ * <StackedThumbnail icon={"icon-example"} isStacked={<condition>} />
  */
-const StackedThumbnail = ({ image, isStacked }) => {
+const StackedThumbnail = ({ image, icon, isStacked }) => {
   return (
     <div className={styles['container']} aria-hidden="true">
-      <Thumbnail image={image} isStacked={isStacked} />
+      <Thumbnail image={image} icon={icon} isStacked={isStacked} />
     </div>
   )
 }
 
 StackedThumbnail.propTypes = {
   image: PropTypes.string,
+  icon: PropTypes.elementType,
   isStacked: PropTypes.bool
 }
 
