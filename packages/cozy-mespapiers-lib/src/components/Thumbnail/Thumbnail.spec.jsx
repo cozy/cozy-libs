@@ -2,15 +2,13 @@ import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 import React from 'react'
 
-import StackedThumbnail from './StackedThumbnail'
+import Thumbnail from '.'
 
 const setup = isStacked => {
-  return render(
-    <StackedThumbnail image="/fakeImagePath" isStacked={isStacked} />
-  )
+  return render(<Thumbnail image="/fakeImagePath" isStacked={isStacked} />)
 }
 
-describe('StackedThumbnail components:', () => {
+describe('Thumbnail components:', () => {
   it('should display only one Thumbnail', () => {
     const { getByTestId, queryByTestId } = setup()
 

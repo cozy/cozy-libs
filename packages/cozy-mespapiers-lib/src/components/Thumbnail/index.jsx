@@ -146,18 +146,18 @@ const Thumbnail = ({ image, icon, isStacked }) => {
 }
 
 /**
- * StackedThumbnail component
+ * Thumbnail component
  * The `icon` property takes precedence over the `image` property
  * @param {Object} props
  * @param {string} props.image - Image source
  * @param {React.ElementType} props.icon - Icon component
  * @param {boolean} props.isStacked - Is the image stacked
  * @example
- * <StackedThumbnail image="https://example.com/image.jpg" isStacked={<condition>} />
- * <StackedThumbnail icon={IconExample} isStacked={<condition>} />
- * <StackedThumbnail icon={"icon-example"} isStacked={<condition>} />
+ * <Thumbnail image="https://example.com/image.jpg" isStacked={<condition>} />
+ * <Thumbnail icon={IconExample} isStacked={<condition>} />
+ * <Thumbnail icon={"icon-example"} isStacked={<condition>} />
  */
-const StackedThumbnail = ({ image, icon, isStacked }) => {
+const ThumbnailContainer = ({ image, icon, isStacked }) => {
   return (
     <div className={styles['container']} aria-hidden="true">
       <Thumbnail image={image} icon={icon} isStacked={isStacked} />
@@ -165,10 +165,10 @@ const StackedThumbnail = ({ image, icon, isStacked }) => {
   )
 }
 
-StackedThumbnail.propTypes = {
+ThumbnailContainer.propTypes = {
   image: PropTypes.string,
   icon: PropTypes.elementType,
   isStacked: PropTypes.bool
 }
 
-export default StackedThumbnail
+export default ThumbnailContainer
