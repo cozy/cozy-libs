@@ -15,6 +15,7 @@ import Thumbnail from '../Thumbnail'
 const CategoryItemByPaper = ({ papers, category, isLast, onClick }) => {
   const client = useClient()
   const scannerT = useScannerI18n()
+  const isStacked = papers.length > 1
 
   return (
     <>
@@ -25,9 +26,9 @@ const CategoryItemByPaper = ({ papers, category, isLast, onClick }) => {
             file={papers[0]}
             linkType="tiny"
             render={src => {
-              return <Thumbnail image={src} isStacked={papers.length > 1} />
+              return <Thumbnail image={src} isStacked={isStacked} />
             }}
-            renderFallback={() => <Icon icon="file-type-image" size={32} />}
+            renderFallback={() => <Thumbnail isStacked={isStacked} />}
           />
         </ListItemIcon>
         <ListItemText
