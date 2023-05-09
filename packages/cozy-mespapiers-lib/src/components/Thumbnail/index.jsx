@@ -47,6 +47,7 @@ const BackgroundThumbnailImage = ({ image }) => {
           styles['image__background'],
           styles['image__multiple']
         )}
+        data-testid="BackgroundThumbnailImage"
       />
     </BackgroundThumbnailWrapper>
   )
@@ -60,6 +61,7 @@ const ThumbnailImage = ({ image, isStacked }) => {
         className={cx(styles['image'], {
           [styles['image__multiple']]: isStacked
         })}
+        data-testid="ThumbnailImage"
       />
     </ThumbnailWrapper>
   )
@@ -70,7 +72,12 @@ const BackgroundThumbnailIcon = ({ icon: Icon }) => {
 
   return (
     <BackgroundThumbnailWrapper>
-      <CozyIcon icon={Icon} height={skeletonSize} width={skeletonSize} />
+      <CozyIcon
+        icon={Icon}
+        height={skeletonSize}
+        width={skeletonSize}
+        data-testid="BackgroundThumbnailIcon"
+      />
     </BackgroundThumbnailWrapper>
   )
 }
@@ -80,7 +87,12 @@ const ThumbnailIcon = ({ icon: Icon, isStacked }) => {
 
   return (
     <ThumbnailWrapper isStacked={isStacked}>
-      <CozyIcon icon={Icon} height={skeletonSize} width={skeletonSize} />
+      <CozyIcon
+        icon={Icon}
+        height={skeletonSize}
+        width={skeletonSize}
+        data-testid="ThumbnailIcon"
+      />
     </ThumbnailWrapper>
   )
 }
