@@ -17,8 +17,8 @@ import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import ExpirationAnnotation from './ExpirationAnnotation'
 import RenameInput from './Renaming/RenameInput'
-import StackedThumbnail from './StackedThumbnail'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
+import Thumbnail from '../Thumbnail'
 
 const { isExpired, isExpiringSoon } = models.paper
 
@@ -126,7 +126,7 @@ const PaperItem = ({
             file={paper}
             linkType="tiny"
             render={src => {
-              return <StackedThumbnail image={src} />
+              return <Thumbnail image={src} />
             }}
             renderFallback={() => <Icon icon="file-type-pdf" size={32} />}
           />

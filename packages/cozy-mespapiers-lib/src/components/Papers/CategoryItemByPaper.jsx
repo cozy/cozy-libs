@@ -9,8 +9,8 @@ import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 
-import StackedThumbnail from './StackedThumbnail'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
+import Thumbnail from '../Thumbnail'
 
 const CategoryItemByPaper = ({ papers, category, isLast, onClick }) => {
   const client = useClient()
@@ -25,9 +25,7 @@ const CategoryItemByPaper = ({ papers, category, isLast, onClick }) => {
             file={papers[0]}
             linkType="tiny"
             render={src => {
-              return (
-                <StackedThumbnail image={src} isStacked={papers.length > 1} />
-              )
+              return <Thumbnail image={src} isStacked={papers.length > 1} />
             }}
             renderFallback={() => <Icon icon="file-type-image" size={32} />}
           />
