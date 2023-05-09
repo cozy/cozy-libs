@@ -7,7 +7,6 @@ import { models, useClient } from 'cozy-client'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 import FileImageLoader from 'cozy-ui/transpiled/react/FileImageLoader'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
@@ -128,7 +127,7 @@ const PaperItem = ({
             render={src => {
               return <Thumbnail image={src} />
             }}
-            renderFallback={() => <Icon icon="file-type-pdf" size={32} />}
+            renderFallback={() => <Thumbnail />}
           />
         </ListItemIcon>
         {isRenaming ? (
