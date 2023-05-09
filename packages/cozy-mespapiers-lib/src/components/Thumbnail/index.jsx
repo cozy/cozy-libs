@@ -42,6 +42,7 @@ const BackgroundThumbnailImage = ({ image }) => {
     <BackgroundThumbnailWrapper>
       <img
         src={image}
+        alt=""
         className={cx(
           styles['image'],
           styles['image__background'],
@@ -58,6 +59,7 @@ const ThumbnailImage = ({ image, isStacked }) => {
     <ThumbnailWrapper isStacked={isStacked}>
       <img
         src={image}
+        alt=""
         className={cx(styles['image'], {
           [styles['image__multiple']]: isStacked
         })}
