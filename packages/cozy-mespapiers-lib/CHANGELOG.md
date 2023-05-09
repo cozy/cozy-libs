@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [40.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@40.1.1...cozy-mespapiers-lib@40.2.0) (2023-05-09)
+
+
+### Bug Fixes
+
+* **mespapiers:** Style of StackedThumbnail component ([fb9908e](https://github.com/cozy/cozy-libs/commit/fb9908e2bfcbd8de25bd1bf7264252288446852b))
+
+
+### Features
+
+* **mespapiers:** Add accessibility attribute to <img> ([e861e28](https://github.com/cozy/cozy-libs/commit/e861e280ed3018d8ae47f6834b32f909a08259ce))
+* **mespapiers:** Add icon prop to StackedThumbnail component ([95f2199](https://github.com/cozy/cozy-libs/commit/95f2199a6f04f8c67bdf6b3406bb7a3ee0cd3f92))
+* **mespapiers:** Thumbnail component usage update ([76a6c46](https://github.com/cozy/cozy-libs/commit/76a6c46d2f65dc67947c0288599588d79edc175f))
+
+
+
+
+
 ## [40.1.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@40.1.0...cozy-mespapiers-lib@40.1.1) (2023-05-05)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
