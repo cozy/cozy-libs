@@ -1,4 +1,5 @@
 import { Document } from 'flexsearch'
+import { encode } from 'flexsearch/dist/module/lang/latin/balance'
 
 import { isFile, hasQualifications } from 'cozy-client/dist/models/file'
 import flag from 'cozy-flags'
@@ -66,6 +67,7 @@ if (!flag('mespapiers.migrated.metadata')) {
  */
 export const index = new Document({
   tokenize: 'full',
+  encode,
   document: {
     id: '_id',
     tag: 'flexsearchProps:tag',
