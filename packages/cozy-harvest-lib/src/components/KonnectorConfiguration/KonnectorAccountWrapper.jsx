@@ -26,7 +26,6 @@ export const KonnectorAccountWrapper = props => {
             <Component
               {...rest}
               trigger={rest.initialTrigger}
-              onAccountDeleted={rest.onDismiss}
               addAccount={() => navigate('new', { replace: true })}
               flow={flow}
             />
