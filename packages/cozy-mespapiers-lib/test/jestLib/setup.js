@@ -14,6 +14,11 @@ jest.mock('cozy-ui/transpiled/react/utils/color', () => ({
   getInvertedCssVariableValue: () => '#000'
 }))
 
+// Fix error "Cannot use import statement outside a module"
+jest.mock('flexsearch/dist/module/lang/latin/balance', () => ({
+  encode: jest.fn()
+}))
+
 window.cozy = {
   bar: {
     BarLeft: () => null,
