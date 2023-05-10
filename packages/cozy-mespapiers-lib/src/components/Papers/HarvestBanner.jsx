@@ -12,7 +12,7 @@ const HarvestBanner = ({ konnector, account }) => {
 
   const queryTriggers = buildTriggersQueryByKonnectorSlug(
     konnectorSlug,
-    Boolean(konnectorSlug) && Boolean(account)
+    Boolean(konnectorSlug)
   )
   const { data: triggers, ...triggersQueryLeft } = useQuery(
     queryTriggers.definition,
@@ -24,7 +24,7 @@ const HarvestBanner = ({ konnector, account }) => {
     trigger => trigger.message.account === account?._id
   )
 
-  if (!konnector || !account || isTriggersLoading) {
+  if (!konnector || isTriggersLoading) {
     return null
   }
 
