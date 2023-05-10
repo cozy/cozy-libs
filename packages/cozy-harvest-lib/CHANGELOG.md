@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.17.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.17.3...cozy-harvest-lib@13.17.4) (2023-05-10)
+
+
+### Bug Fixes
+
+* Do not overwrite onDeleteAccount in KonnectorAccountWrapper ([89605f9](https://github.com/cozy/cozy-libs/commit/89605f9ff24286ca059c3f51d656709f1c73de40))
+
+
+
+
+
 ## [13.17.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.17.2...cozy-harvest-lib@13.17.3) (2023-05-05)
 
 
