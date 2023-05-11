@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [41.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@40.3.0...cozy-mespapiers-lib@41.0.0) (2023-05-11)
+
+
+### Bug Fixes
+
+* **mespapiers:** Harvest banner wasn't shown for disconnected account ([b7e9c10](https://github.com/cozy/cozy-libs/commit/b7e9c1035a940f003b760baff6b90d9fc5e0d354))
+
+
+### Features
+
+* **mespapiers:** Add translate caf file number in search indexes ([2c00840](https://github.com/cozy/cozy-libs/commit/2c0084041dbabaef2d774c752f2d64ea2a21c946))
+* **mespapiers:** Update cozy-ui from 84.1.3 to 84.2.0 ([0f4270c](https://github.com/cozy/cozy-libs/commit/0f4270c14378a15041bb09b2698d569ce27f8350))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 84.2.0`
+
+
+
+
+
 # [40.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@40.2.1...cozy-mespapiers-lib@40.3.0) (2023-05-11)
 
 
