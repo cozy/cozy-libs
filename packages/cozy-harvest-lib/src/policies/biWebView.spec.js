@@ -10,6 +10,10 @@ import {
   isCacheExpired
 } from './biWebView'
 import ConnectionFlow from '../models/ConnectionFlow'
+import {
+  getBIConnectionAccountsList,
+  getBIConnection
+} from '../services/bi-http'
 
 jest.mock('../services/bi-http', () => ({
   createBIConnection: jest
@@ -19,11 +23,6 @@ jest.mock('../services/bi-http', () => ({
   getBIConnectionAccountsList: jest.fn(),
   getBIConnection: jest.fn()
 }))
-
-import {
-  getBIConnectionAccountsList,
-  getBIConnection
-} from '../services/bi-http'
 
 jest.mock('cozy-logger', () => ({
   namespace: () => () => {}
