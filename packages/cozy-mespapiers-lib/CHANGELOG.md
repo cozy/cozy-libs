@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [40.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@40.2.1...cozy-mespapiers-lib@40.3.0) (2023-05-11)
+
+
+### Features
+
+* **mespapiers:** Add more permissive encoder for flexsearch ([89682f2](https://github.com/cozy/cozy-libs/commit/89682f23d8ee868878e4cff901fa29cac4a64c15))
+
+
+
+
+
 ## [40.2.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@40.2.0...cozy-mespapiers-lib@40.2.1) (2023-05-10)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
