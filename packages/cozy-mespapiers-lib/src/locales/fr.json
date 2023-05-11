@@ -376,6 +376,7 @@
         "expirationDate": "Date d'expiration",
         "driver_license": "Numéro du permis",
         "payment_proof_family_allowance": "Numéro de dossier CAF",
+        "caf": "Numéro de dossier CAF",
         "vehicle_registration": "Numéro de la carte grise (VIN)",
         "national_id_card": "Numéro de la carte d'identité",
         "bank_details": "Numéro d'IBAN",
