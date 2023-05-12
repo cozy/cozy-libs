@@ -2,6 +2,8 @@ import { AppManifest, FlagshipUI } from '../../api'
 
 type PostMeDefault = Record<string, (...args: unknown[]) => Promise<null>>
 
+type Base64 = string
+
 interface _NativeMethodsRegister {
   backToHome: () => Promise<null>
   hideSplashScreen: () => Promise<null>
@@ -21,6 +23,7 @@ interface _NativeMethodsRegister {
   ) => Promise<boolean | null>
   isBiometryDenied: () => Promise<boolean>
   isNativePassInstalledOnDevice: () => Promise<boolean>
+  scanDocument: () => Promise<Base64 | undefined>
   openAppOSSettings: () => Promise<null>
 }
 
