@@ -1,25 +1,23 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
+import flag from 'cozy-flags'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import Label from 'cozy-ui/transpiled/react/Label'
+import QualifyIcon from 'cozy-ui/transpiled/react/Icons/Qualify'
 import Input from 'cozy-ui/transpiled/react/Input'
 import InputGroup from 'cozy-ui/transpiled/react/InputGroup'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
+import Label from 'cozy-ui/transpiled/react/Label'
+import GridItem from 'cozy-ui/transpiled/react/Labs/GridItem'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import Grid from 'cozy-ui/transpiled/react/MuiCozyTheme/Grid'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import CategoryGridItem from './CategoryGridItem'
 import DocumentCategory from './DocumentCategory'
-
 import { themes } from './DocumentTypeData'
-import GridItem from 'cozy-ui/transpiled/react/Labs/GridItem'
 import styles from './stylesheet.css'
-
-import QualifyIcon from 'cozy-ui/transpiled/react/Icons/Qualify'
-
-import Typography from 'cozy-ui/transpiled/react/Typography'
 
 const fileExtension = '.jpg'
 const idFileInput = 'filename_input'
@@ -42,9 +40,17 @@ export class DocumentQualification extends Component {
     this.state = {
       selected: { categoryLabel, item },
       filename: this.defaultFilename,
-      hasUserWrittenFileName: false
+      hasUserWrittenFileName: false,
+      overridedThemes: null
     }
     this.textInput = React.createRef()
+  }
+
+  UNSAFE_componentWillMount() {
+    const overridedThemes = flag('hide.healthTheme.enabled')
+      ? themes.filter(theme => theme.label !== 'health')
+      : themes
+    this.setState({ overridedThemes })
   }
 
   getFilenameFromCategory = (item, t) => {
@@ -98,7 +104,9 @@ export class DocumentQualification extends Component {
 
   render() {
     const { t, title, allowEditFileName } = this.props
-    const { selected, filename, hasUserWrittenFileName } = this.state
+    const { selected, filename, hasUserWrittenFileName, overridedThemes } =
+      this.state
+
     return (
       <MuiCozyTheme>
         {allowEditFileName && (
@@ -166,7 +174,7 @@ export class DocumentQualification extends Component {
             />
           </GridItem>
 
-          {themes.map((category, i) => {
+          {overridedThemes?.map((category, i) => {
             return (
               <DocumentCategory
                 onSelect={selected => this.onSelect(selected)}
