@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.17.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.17.4...cozy-harvest-lib@13.17.5) (2023-05-12)
+
+
+### Bug Fixes
+
+* Lint issue on imports ([9292c9e](https://github.com/cozy/cozy-libs/commit/9292c9eadcac16fd204bf99b88a0218570750160))
+
+
+
+
+
 ## [13.17.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.17.3...cozy-harvest-lib@13.17.4) (2023-05-10)
 
 
