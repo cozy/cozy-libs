@@ -51,7 +51,9 @@ describe('NativeService', () => {
       setDefaultRedirection: jest.fn(),
       setFlagshipUI: jest.fn(),
       showSplashScreen: jest.fn(),
-      isNativePassInstalledOnDevice: jest.fn()
+      isNativePassInstalledOnDevice: jest.fn(),
+      scanDocument: jest.fn()
+
     }
   })
 
