@@ -1,8 +1,14 @@
 {
   "Acquisition": {
     "repeat": "Scan an additional page",
-    "retry": "Cancel picture",
-    "success": "The picture was taken."
+    "retry": "Retake picture",
+    "rotate": "Rotate the image 90 degrees counter-clockwise",
+    "success": "The picture was taken.",
+    "tooltip": {
+      "back": "Check if it is indeed the back side and if the photo is well oriented as on the model",
+      "default": "Check if the photo is well oriented as on the model",
+      "front": "Check if it is indeed the front side and if the photo is well oriented as on the model"
+    }
   },
   "action": {
     "createPaper": "Add a paper",
