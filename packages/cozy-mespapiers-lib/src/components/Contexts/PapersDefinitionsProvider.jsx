@@ -7,8 +7,8 @@ import log from 'cozy-logger'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import papersJSONWithNewMetadata from '../../constants/papersDefinitions.json'
-import papersJSON from '../../constants/papersDefinitionsOld.json'
+import papersJSON from '../../constants/papersDefinitions.json'
+import papersJSONWithOldMetadata from '../../constants/papersDefinitionsOld.json'
 import { buildPapersDefinitions } from '../../helpers/buildPapersDefinitions'
 import { fetchContentFileToJson } from '../../utils/fetchContentFileToJson'
 import { fetchCustomPaperDefinitions } from '../../utils/fetchCustomPaperDefinitions'
@@ -71,9 +71,11 @@ const PapersDefinitionsProvider = ({ children }) => {
           name: '',
           path: ''
         })
+
         const papers = flag('mespapiers.migrated.metadata')
-          ? papersJSONWithNewMetadata
-          : papersJSON
+          ? papersJSON
+          : papersJSONWithOldMetadata
+
         setPapersDefinitions(
           buildPapersDefinitions(papers.papersDefinitions, scannerT)
         )
