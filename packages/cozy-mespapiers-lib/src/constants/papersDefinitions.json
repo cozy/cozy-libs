@@ -374,13 +374,6 @@
       ]
     },
     {
-      "label": "health_certificate",
-      "icon": "heart",
-      "featureDate": "issueDate",
-      "maxDisplay": 3,
-      "acquisitionSteps": []
-    },
-    {
       "label": "identity_photo",
       "icon": "people",
       "featureDate": "shootingDate",
@@ -536,13 +529,6 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ]
-    },
-    {
-      "label": "national_health_insurance_card",
-      "icon": "heart",
-      "featureDate": "carObtentionDate",
-      "maxDisplay": 2,
-      "acquisitionSteps": []
     },
     {
       "label": "national_id_card",
@@ -801,14 +787,6 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ]
-    },
-    {
-      "label": "other_health_document",
-      "icon": "heart",
-      "filenameModel": ["labelGivenByUser"],
-      "featureDate": "date",
-      "maxDisplay": 3,
-      "acquisitionSteps": []
     },
     {
       "label": "other_house_document",
@@ -1270,13 +1248,6 @@
       }
     },
     {
-      "label": "pregnancy_medical_certificate",
-      "icon": "heart",
-      "featureDate": "issueDate",
-      "maxDisplay": 3,
-      "acquisitionSteps": []
-    },
-    {
       "label": "rent_receipt",
       "icon": "bill",
       "featureDate": "referencedDate",
@@ -1698,13 +1669,6 @@
       ]
     },
     {
-      "label": "work_disability_recognition",
-      "icon": "carbonCopy",
-      "featureDate": "issueDate",
-      "maxDisplay": 3,
-      "acquisitionSteps": []
-    },
-    {
       "label": "passport",
       "placeholderIndex": 4,
       "icon": "people",
@@ -1831,60 +1795,6 @@
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": false,
-          "text": "PaperJSON.generic.owner.text"
-        }
-      ]
-    },
-    {
-      "label": "health_insurance_card",
-      "placeholderIndex": 8,
-      "icon": "people",
-      "featureDate": "expirationDate",
-      "maxDisplay": 3,
-      "acquisitionSteps": [
-        {
-          "stepIndex": 1,
-          "model": "scan",
-          "multipage": true,
-          "illustration": "IlluGenericNewPage.svg",
-          "text": "PaperJSON.generic.singlePage.text"
-        },
-        {
-          "stepIndex": 2,
-          "model": "information",
-          "illustration": "IlluGenericInputDate.svg",
-          "text": "PaperJSON.card.expirationDate.text",
-          "attributes": [
-            {
-              "name": "expirationDate",
-              "type": "date",
-              "inputLabel": "PaperJSON.card.expirationDate.inputLabel"
-            }
-          ]
-        },
-        {
-          "stepIndex": 3,
-          "model": "information",
-          "illustration": "IlluGenericAlert.svg",
-          "illustrationSize": "small",
-          "text": "PaperJSON.generic.noticePeriod.text",
-          "attributes": [
-            {
-              "name": "noticePeriod",
-              "type": "number",
-              "withAdornment": {
-                "end": "PaperJSON.generic.noticePeriod.endAdornment"
-              },
-              "maxLength": 3,
-              "inputLabel": "PaperJSON.generic.noticePeriod.inputLabel"
-            }
-          ]
-        },
-        {
-          "stepIndex": 4,
-          "illustration": "Account.svg",
-          "model": "contact",
-          "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
       ]
