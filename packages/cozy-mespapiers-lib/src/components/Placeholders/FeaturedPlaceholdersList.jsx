@@ -45,28 +45,31 @@ const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
   }
 
   return (
-    <List className="u-pv-0">
-      {featuredPlaceholders.length > 0 && (
-        <ListSubheader>{t('FeaturedPlaceholdersList.subheader')}</ListSubheader>
-      )}
-      <div className="u-pv-half">
-        {featuredPlaceholders.map((placeholder, idx) => (
-          <Placeholder
-            key={idx}
-            ref={el => (actionBtnRefs.current[idx] = el)}
-            placeholder={placeholder}
-            divider
-            onClick={showImportDropdown(idx)}
-          />
-        ))}
-        <ActionMenuImportDropdown
-          isOpened={isImportDropdownDisplayed}
+    <List
+      subheader={
+        featuredPlaceholders.length > 0 && (
+          <ListSubheader>
+            {t('FeaturedPlaceholdersList.subheader')}
+          </ListSubheader>
+        )
+      }
+    >
+      {featuredPlaceholders.map((placeholder, idx) => (
+        <Placeholder
+          key={idx}
+          ref={el => (actionBtnRefs.current[idx] = el)}
           placeholder={placeholder}
-          onClose={hideImportDropdown}
-          anchorElRef={actionBtnRef}
-          onClick={() => redirectPaperCreation(placeholder)}
+          divider={idx !== featuredPlaceholders.length - 1}
+          onClick={showImportDropdown(idx)}
         />
-      </div>
+      ))}
+      <ActionMenuImportDropdown
+        isOpened={isImportDropdownDisplayed}
+        placeholder={placeholder}
+        onClose={hideImportDropdown}
+        anchorElRef={actionBtnRef}
+        onClick={() => redirectPaperCreation(placeholder)}
+      />
     </List>
   )
 }
