@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
+import { isFlagshipApp } from 'cozy-device-helper'
+import { useWebviewIntent } from 'cozy-intent'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import FileInput from 'cozy-ui/transpiled/react/FileInput'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -10,10 +12,28 @@ const styleBtn = { color: 'var(--primaryTextColor)' }
 
 const ScanMobileActions = ({ openFilePickerModal, onChangeFile }) => {
   const { t } = useI18n()
+  const webviewIntent = useWebviewIntent()
+
+  const [scannedDocument, setScannedDocument] = useState('')
+  const [isScannerAvailable, setIsScannerAvailable] = useState(false)
+
+  const scanDocument = async () => {
+    const base64 = await webviewIntent.call('scanDocument')
+    setScannedDocument(base64)
+  }
+
+  useEffect(() => {
+    const checkScanDocument = async () => {
+      const isAvailable = await webviewIntent.call('isScannerAvailable')
+      setIsScannerAvailable(isAvailable)
+    }
+    checkScanDocument()
+  }, [webviewIntent])
 
   return (
     <>
       <div>
+        <img src={`data:image/png;base64, ${scannedDocument}`} />
         <Divider textAlign="center" className="u-mv-1">
           {t('Scan.divider')}
         </Divider>
@@ -43,22 +63,33 @@ const ScanMobileActions = ({ openFilePickerModal, onChangeFile }) => {
           />
         </FileInput>
       </div>
-      <FileInput
-        onChange={onChangeFile}
-        className="u-w-100 u-ta-center u-ml-0"
-        onClick={e => e.stopPropagation()}
-        capture="environment"
-        accept={'image/*'}
-        data-testid="takePic-btn"
-      >
+      {isFlagshipApp() && isScannerAvailable ? (
         <Button
+          onClick={scanDocument}
           startIcon={<Icon icon="camera" />}
           component="a"
           fullWidth
           className="u-m-0"
           label={t('Scan.takePic')}
         />
-      </FileInput>
+      ) : (
+        <FileInput
+          onChange={onChangeFile}
+          className="u-w-100 u-ta-center u-ml-0"
+          onClick={e => e.stopPropagation()}
+          capture="environment"
+          accept={'image/*'}
+          data-testid="takePic-btn"
+        >
+          <Button
+            startIcon={<Icon icon="camera" />}
+            component="a"
+            fullWidth
+            className="u-m-0"
+            label={t('Scan.takePic')}
+          />
+        </FileInput>
+      )}
     </>
   )
 }
