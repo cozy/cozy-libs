@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.13.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.12.0...cozy-intent@2.13.0) (2023-05-15)
+
+
+### Features
+
+* Add isScannerAvailable type ([69acb4c](https://github.com/cozy/cozy-libs/commit/69acb4c2c3a87fe8d206ccd792d9279e20edfade))
+
+
+
+
+
 # 2.12.0 (2023-05-15)
 
 
