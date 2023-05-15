@@ -3,6 +3,7 @@ import { render } from '@testing-library/react'
 import React from 'react'
 
 import CompositeHeaderImage from './CompositeHeaderImage'
+import MockSVG from '../../assets/icons/IlluGenericNewPage.svg'
 
 const setup = ({ icon, fallbackIcon } = {}) => {
   return render(
@@ -24,9 +25,11 @@ describe('CompositeHeaderImage', () => {
   })
 
   it('should use fallbackIcon if icon is undefined', () => {
-    const { getByTestId } = setup({ fallbackIcon: 'fallback.svg' })
+    const { getByTestId } = setup({
+      fallbackIcon: MockSVG
+    })
 
-    expect(getByTestId('fallback.svg'))
+    expect(getByTestId('test-file-stub'))
   })
 
   it('should use fallback icon for not supported png', () => {
@@ -42,5 +45,11 @@ describe('CompositeHeaderImage', () => {
     const { getByTestId } = setup({ icon: 'IlluIBAN.png' })
 
     expect(getByTestId('test-file-stub'))
+  })
+
+  it('should return null if extension is not supported', () => {
+    const { queryByTestId } = setup({ icon: 'IlluGenericInputDate.gif' })
+
+    expect(queryByTestId('test-file-stub')).toBeNull()
   })
 })
