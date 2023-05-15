@@ -67,6 +67,7 @@ export const mockNativeMethods: NativeMethodsRegister = {
   showSplashScreen: jest.fn(),
   isNativePassInstalledOnDevice: jest.fn(),
   scanDocument: jest.fn(),
+  isScannerAvailable: jest.fn(),
   openSettingBiometry: jest.fn(),
   toggleSetting: jest.fn(),
   isBiometryDenied: jest.fn(),

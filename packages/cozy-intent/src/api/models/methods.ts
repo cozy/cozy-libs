@@ -24,6 +24,7 @@ interface _NativeMethodsRegister {
   isBiometryDenied: () => Promise<boolean>
   isNativePassInstalledOnDevice: () => Promise<boolean>
   scanDocument: () => Promise<Base64 | undefined>
+  isScannerAvailable: () => Promise<boolean>
   openAppOSSettings: () => Promise<null>
 }
 
