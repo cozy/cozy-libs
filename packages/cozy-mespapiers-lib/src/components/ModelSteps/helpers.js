@@ -34,3 +34,49 @@ export const isSameFile = (currentFile, file) => {
   }
   return false
 }
+
+let canvas
+let canvasContext
+export const makeRotatedImage = (image, rotation) => {
+  if (!canvas) {
+    canvas = document.createElement('canvas')
+    canvasContext = canvas.getContext('2d')
+  }
+  if (!image || !canvasContext) return null
+
+  const { width: imageWidth, height: imageHeight, currentSrc } = image
+  const degree = rotation % 360
+
+  if (!degree) {
+    return { src: currentSrc }
+  }
+
+  const { PI, sin, cos, abs } = Math
+  const angle = (degree * PI) / 180
+  const sinAngle = sin(angle)
+  const cosAngle = cos(angle)
+
+  canvas.width = abs(imageWidth * cosAngle) + abs(imageHeight * sinAngle)
+  canvas.height = abs(imageWidth * sinAngle) + abs(imageHeight * cosAngle)
+
+  // The width and height of the canvas will be automatically rounded
+  const { width: canvasWidth, height: canvasHeight } = canvas
+
+  canvasContext.clearRect(0, 0, canvasWidth, canvasHeight)
+  canvasContext.translate(canvasWidth / 2, canvasHeight / 2)
+  canvasContext.rotate(angle)
+
+  canvasContext.drawImage(
+    image,
+    -imageWidth / 2,
+    -imageHeight / 2,
+    imageWidth,
+    imageHeight
+  )
+
+  const src = canvas.toDataURL('image/png')
+  canvas.width = 0
+  canvas.height = 0
+
+  return { src }
+}
