@@ -7,12 +7,21 @@ import log from 'cozy-logger'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import papersJSON from '../../constants/papersDefinitions.json'
+import papersJSON_default from '../../constants/papersDefinitions.json'
 import papersJSONWithOldMetadata from '../../constants/papersDefinitionsOld.json'
+import papersJSON_health from '../../constants/papersDefinitions_health.json'
 import { buildPapersDefinitions } from '../../helpers/buildPapersDefinitions'
 import { fetchContentFileToJson } from '../../utils/fetchContentFileToJson'
 import { fetchCustomPaperDefinitions } from '../../utils/fetchCustomPaperDefinitions'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
+
+const papersJSON = flag('hide.healthTheme.enabled')
+  ? papersJSON_default
+  : {
+      papersDefinitions: papersJSON_default.papersDefinitions.concat(
+        papersJSON_health.papersDefinitions
+      )
+    }
 
 const PapersDefinitionsContext = createContext()
 
