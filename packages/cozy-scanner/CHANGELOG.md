@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 3.0.0 (2023-05-15)
+
+
+### Features
+
+* **cozy-scanner:** Hide health theme ([c76b5cf](https://github.com/cozy/cozy-libs/commit/c76b5cff5e9f975ffb35af5d002ec5af7e31115a))
+* Update cozy-ui package from `82.12.0` to`83.2.0` ([18db8fa](https://github.com/cozy/cozy-libs/commit/18db8fa79de3eac19494fbbb4b0b4133a423d641))
+
+
+### BREAKING CHANGES
+
+* you must have `cozy-ui >= 83.2.0`
+Please looks BC here https://github.com/cozy/cozy-ui/releases/tag/v83.0.0
+
+
+
+
+
 # 2.6.0 (2023-01-31)
 
 
