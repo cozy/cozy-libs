@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.12.0 (2023-05-15)
+
+
+### Features
+
+* Add scanDocument type ([0f97926](https://github.com/cozy/cozy-libs/commit/0f97926db567811b4f812d5662a580dddbc15a57))
+
+
+
+
+
 ## 2.11.1 (2023-04-13)
 
 

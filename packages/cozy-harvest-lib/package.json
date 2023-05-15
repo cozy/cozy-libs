@@ -1,6 +1,6 @@
 {
   "name": "cozy-harvest-lib",
-  "version": "13.17.5",
+  "version": "13.17.6",
   "description": "Provides logic, modules and components for Cozy's harvest applications.",
   "main": "dist/index.js",
   "author": "Cozy",
@@ -57,7 +57,7 @@
     "cozy-client": "^37.1.0",
     "cozy-device-helper": "^2.7.0",
     "cozy-flags": "^3.0.1",
-    "cozy-intent": "^2.11.1",
+    "cozy-intent": "^2.12.0",
     "cozy-keys-lib": "^4.1.9",
     "cozy-realtime": "^4.4.1",
     "cozy-tsconfig": "^1.0.0",
