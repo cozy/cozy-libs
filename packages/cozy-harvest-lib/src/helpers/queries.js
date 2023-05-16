@@ -27,15 +27,20 @@ export const buildAccountQuery = accountId => ({
     fetchPolicy: defaultFetchPolicy
   }
 })
-
-export const buildTriggersQuery = (konnectorSlug, accountId) => ({
+/**
+ *
+ * @param {string} accountId
+ * @param {import('cozy-client/types/types').IOCozyKonnector} konnector
+ * @returns
+ */
+export const buildTriggersQuery = (accountId, konnector) => ({
   definition: Q('io.cozy.triggers').where({
-    type: '@cron',
+    type: konnector.clientSide ? '@client' : '@cron',
     'message.account': accountId,
-    'message.konnector': konnectorSlug
+    'message.konnector': konnector.slug
   }),
   options: {
-    as: `triggers-${konnectorSlug}-${accountId}`,
+    as: `triggers-${konnector.slug}-${accountId}`,
     fetchPolicy: defaultFetchPolicy
   }
 })

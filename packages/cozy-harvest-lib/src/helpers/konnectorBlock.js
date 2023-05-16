@@ -70,9 +70,16 @@ const isInMaintenance = async (client, slug) => {
   )
   return get(konnector, 'maintenance_activated', false)
 }
-
-const isInError = async ({ client, slug, sourceAccount }) => {
-  const query = buildTriggersQuery(slug, sourceAccount)
+/**
+ *
+ * @param {object} param
+ * @param {CozyClient} param.client
+ * @param {String} param.sourceAccount
+ * @param {import('cozy-client/types/types').IOCozyKonnector} param.konnector
+ * @returns
+ */
+const isInError = async ({ client, sourceAccount, konnector }) => {
+  const query = buildTriggersQuery(sourceAccount, konnector)
   const data = await fetchDataFromState(client, query)
   const triggerId = get(data, 'id')
 
@@ -220,8 +227,8 @@ const fetchKonnectorStatus = async ({ client, slug, sourceAccount }) => {
 
     const { error } = await konnectorBlock.isInError({
       client,
-      slug,
-      sourceAccount
+      sourceAccount,
+      konnector
     })
     if (error) {
       return { konnector, status: 'inError', error }
