@@ -97,20 +97,4 @@ describe('FeaturedPlaceholdersList components:', () => {
       search: ''
     })
   })
-
-  it('should navigate to the create modale when "Others" placeholder is clicked', () => {
-    const mockNavigate = jest.fn()
-    const { getAllByTestId } = setup({
-      data: fakePlaceholders,
-      mockNavigate
-    })
-
-    const placeholderComp = getAllByTestId('Placeholder-ListItem')[
-      fakePlaceholders.length
-    ]
-    fireEvent.click(placeholderComp)
-
-    expect(mockNavigate).toBeCalledTimes(1)
-    expect(mockNavigate).toBeCalledWith('create')
-  })
 })

@@ -59,13 +59,6 @@ const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
             onClick={showImportDropdown(idx)}
           />
         ))}
-        <Placeholder
-          placeholder={{
-            label: 'others',
-            placeholderIndex: featuredPlaceholders.length
-          }}
-          onClick={() => navigate('create')}
-        />
         <ActionMenuImportDropdown
           isOpened={isImportDropdownDisplayed}
           placeholder={placeholder}
