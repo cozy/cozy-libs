@@ -2,17 +2,12 @@ import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
-import { models } from 'cozy-client'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import FilterButton from './FilterButton'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import SearchInput from '../SearchInput'
 import ThemesFilter from '../ThemesFilter'
-
-const {
-  themes: { themesList }
-} = models.document
 
 const SearchHeader = ({
   searchValue,
@@ -76,7 +71,6 @@ const SearchHeader = ({
           id="theme-filters"
         >
           <ThemesFilter
-            items={themesList}
             selectedTheme={selectedTheme}
             handleThemeSelection={handleThemeSelection}
           />

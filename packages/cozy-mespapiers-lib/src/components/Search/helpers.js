@@ -1,8 +1,7 @@
 import intersection from 'lodash/intersection'
 
-import { themesList } from 'cozy-client/dist/models/document/documentTypeData'
-
 import { index, addDoc, updateDoc } from './search'
+import { getThemesList } from '../../helpers/themes'
 
 export const addAllOnce =
   ({ isAdded, setIsAdded, scannerT, t }) =>
@@ -103,6 +102,7 @@ export const makeRealtimeConnection = (doctypes, scannerT, t) =>
 
 export const makeFileTags = file => {
   const item = file.metadata?.qualification
+  const themesList = getThemesList()
   const tags = themesList
     .filter(theme => {
       return theme.items.some(it => it.label === item?.label)
