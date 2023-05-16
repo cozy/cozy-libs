@@ -4,6 +4,7 @@ import CircleButton from 'cozy-ui/transpiled/react/CircleButton'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 
+import { getThemesList } from '../../helpers/themes'
 import enLocale from '../../locales/en.json'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 
@@ -13,9 +14,11 @@ const makeLabel = ({ scannerT, t, label }) => {
   return hasLocale ? t(`Scan.themes.${label}`) : scannerT(`themes.${label}`)
 }
 
-const ThemesFilter = ({ items, selectedTheme, handleThemeSelection }) => {
+const ThemesFilter = ({ selectedTheme, handleThemeSelection }) => {
   const scannerT = useScannerI18n()
   const { t } = useI18n()
+
+  const items = getThemesList()
 
   return (
     <>
