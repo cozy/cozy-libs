@@ -1,7 +1,9 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Navigate } from 'react-router-dom'
 
 import { isQueryLoading, useQueryAll, useQuery } from 'cozy-client'
+import { getThemeByItem } from 'cozy-client/dist/models/document/documentTypeDataHelpers'
+import flag from 'cozy-flags'
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 
 import {
@@ -19,8 +21,22 @@ import {
   getCurrentFileTheme
 } from '../Papers/helpers'
 
+const ConditionnalPapersList = props => {
+  const params = useParams()
+
+  if (
+    flag('hide.healthTheme.enabled') &&
+    getThemeByItem({ label: params.fileTheme })?.label === 'health'
+  ) {
+    return <Navigate replace to="/paper" />
+  }
+
+  return <PapersList {...props} />
+}
+
 const PapersList = () => {
   const params = useParams()
+
   const { selectedThemeLabel } = useMultiSelection()
 
   const currentFileTheme = getCurrentFileTheme(params, selectedThemeLabel)
@@ -98,4 +114,4 @@ const PapersList = () => {
   )
 }
 
-export default PapersList
+export default ConditionnalPapersList
