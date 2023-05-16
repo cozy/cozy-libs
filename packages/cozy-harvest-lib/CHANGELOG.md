@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.17.8](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.17.7...cozy-harvest-lib@13.17.8) (2023-05-16)
+
+
+### Bug Fixes
+
+* Load icon from stack first ([3810a30](https://github.com/cozy/cozy-libs/commit/3810a308a13f962739c77537c56b318b2f450a7e))
+
+
+
+
+
 ## [13.17.7](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.17.6...cozy-harvest-lib@13.17.7) (2023-05-15)
 
 **Note:** Version bump only for package cozy-harvest-lib
