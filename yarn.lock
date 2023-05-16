@@ -7412,10 +7412,10 @@ cozy-client@^37.2.0:
     sift "^6.0.0"
     url-search-params-polyfill "^8.0.0"
 
-cozy-client@^38.2.1:
-  version "38.2.1"
-  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-38.2.1.tgz#b18d002b38de7bd28af17b64b7e570fda36059f1"
-  integrity sha512-WoRtOmOBHpR/WeQhUijaa36IqN5c7uWVoFjXC49eKOdd9NnnF9hpG4Aq3OHLfNtKeZsYtwscDiaeB3f5J/GNtQ==
+cozy-client@^38.3.0:
+  version "38.3.0"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-38.3.0.tgz#b94fabb60f8d18188afe5c77a74701f841f85aa3"
+  integrity sha512-XBahWkaoKYGUSLM5U3m+nhn1lVen5JM27Sf3oALR8F6FgRgx/hfVJv35FHM9gFXn4VofxAnt70hT6UE4tMBkzg==
   dependencies:
     "@cozy/minilog" "1.0.0"
     "@types/jest" "^26.0.20"
