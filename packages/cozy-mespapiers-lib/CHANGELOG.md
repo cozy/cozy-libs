@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [42.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@41.0.4...cozy-mespapiers-lib@42.0.0) (2023-05-16)
+
+
+### Bug Fixes
+
+* **mespapiers:** Use correct way to show suggestion list ([379ccfd](https://github.com/cozy/cozy-libs/commit/379ccfdba2aa1bdc70c3799400fe816f2c8aa1c1))
+
+
+### Features
+
+* **mespapiers:** Add `other_administrative_document` paper ([ebe220e](https://github.com/cozy/cozy-libs/commit/ebe220eb6ddc7cd53cbd3ad4ea9d9b0485f6f093))
+* **mespapiers:** Redirect to home for paperList and health theme ([7c328ba](https://github.com/cozy/cozy-libs/commit/7c328ba7d98d5ebf5e54c003031cb2607bae9b53))
+* **mespapiers:** Remove "others" suggestion ([9ced0aa](https://github.com/cozy/cozy-libs/commit/9ced0aaf194fb644b39579518ac001dac0d7dea2))
+* **mespapiers:** Remove health documents from paperDef by flag ([40e2806](https://github.com/cozy/cozy-libs/commit/40e28061c418f2a0e5d7074afe01c25f5676279e))
+* **mespapiers:** Remove health filter by flag ([9d1cf55](https://github.com/cozy/cozy-libs/commit/9d1cf553a7ec510ee42f8969f1796b5aec1f7e0a))
+* **mespapiers:** Update cozy-client from 38.2.1 to 38.3.0 ([6b835df](https://github.com/cozy/cozy-libs/commit/6b835dfad663b17bd507aad71a7810f26b53c637))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-client >=38.3.0`
+
+
+
+
+
 ## [41.0.4](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@41.0.3...cozy-mespapiers-lib@41.0.4) (2023-05-16)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
