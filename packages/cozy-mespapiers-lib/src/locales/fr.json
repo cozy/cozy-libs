@@ -95,6 +95,19 @@
     "Fab": {
       "createPaper": "Ouvrir la menu de toutes les suggestions",
       "forwardPaper": "Envoyer des documents"
+    },
+    "Help": {
+      "title": "Besoin d'aide ?",
+      "content": {
+        "paragraph01": "Vous pouvez obtenir de l’aide directement par téléphone : <a href=\"tel://0483439040\">04 83 43 90 40</a>",
+        "paragraph02": "Appel gratuit du lundi au vendredi de 15h à 17h, le jeudi jusqu'à 19h, et le samedi de 10h à 12h.",
+        "paragraph03": "Vous pouvez trouver aussi de l’aide, nous signaler un problème, ou nous suggérer une bonne idée sur <a href=\"%{url}\" target=\"_blank\" rel=\"noopener\">le site d’assistance utilisateurs</a> Mes Papiers.",
+        "paragraph04": "N'hésitez pas à nous écrire, l'équipe Mes Papiers vous répondra avec plaisir."
+      },
+      "actions": {
+        "later": "Plus tard",
+        "go": "J'y vais"
+      }
     }
   },
   "ImportDropdown": {

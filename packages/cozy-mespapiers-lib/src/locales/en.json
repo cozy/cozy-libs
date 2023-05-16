@@ -95,6 +95,19 @@
     "Fab": {
       "createPaper": "Open the menu of all suggestions",
       "forwardPaper": "Send documents"
+    },
+    "Help": {
+      "title": "Do you need help?",
+      "content": {
+        "paragraph01": "You can get help directly by phone: <a href=\"tel://0483439040\">04 83 43 90 40</a>",
+        "paragraph02": "Free call Monday to Friday from 3pm to 5pm, Thursday until 7pm, and Saturday from 10am to 12pm.",
+        "paragraph03": "You can also find help, report a problem, or suggest a good idea on <a href=\"%{url}\" target=\"_blank\" rel=\"noopener\">the user support site</a> My Papers.",
+        "paragraph04": "Do not hesitate to write to us, the My Papers team will answer you with pleasure."
+      },
+      "actions": {
+        "later": "Later",
+        "go": "I go"
+      }
     }
   },
   "ImportDropdown": {
