@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types'
 import React, { useMemo, useState, useEffect } from 'react'
 
+import flag from 'cozy-flags'
+
 import ContentFlexsearch from './ContentFlexsearch'
+import Help from './Help'
 import HomeToolbar from './HomeToolbar'
 import SearchHeader from './SearchHeader'
 import { getFeaturedPlaceholders } from '../../helpers/findPlaceholders'
@@ -34,6 +37,7 @@ const HomeLayout = ({ contacts, papers, konnectors }) => {
   return (
     <>
       {isMultiSelectionActive && <HomeToolbar />}
+      {flag('mespapiers.show-help.enabled') && <Help />}
       <SearchHeader
         selectedTheme={selectedTheme}
         setSelectedTheme={setSelectedTheme}
