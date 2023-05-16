@@ -44,10 +44,10 @@ const FormDataProvider = ({ children }) => {
         i18n: { t, f, scannerT }
       })
 
-      Alerter.success('common.saveFile.success')
+      Alerter.success('common.saveFile.success', { duration: 4000 })
     } catch (error) {
       log('error', error)
-      Alerter.error('common.saveFile.error')
+      Alerter.error('common.saveFile.error', { duration: 4000 })
     }
   }
 
