@@ -59,6 +59,25 @@ import { RealTimeQueries } from 'cozy-client'
 
 Simple, isn't it?
 
+You can also provide your own method to instantiate Websockets. This can be useful when using `cozy-realtime` from a Node application for example.
+
+```js
+// main.node.js
+import { Agent } from 'http'
+import { WebSocket } from 'ws'
+
+import CozyClient from 'cozy-client'
+import { RealtimePlugin } from 'cozy-realtime'
+
+const agent = new Agent({ keepAlive: true })
+const createWebSocket = (uri, doctype) => {
+  return new WebSocket(uri, doctype, { agent })
+}
+
+const client = new CozyClient({})
+client.registerPlugin(RealtimePlugin, { createWebSocket })
+```
+
 ### Manual subscribe
 
 If your app needs to handle specific events on the data, you need to subscribe/unsubscribe like this:
@@ -131,7 +150,16 @@ Here we subscribe to
 
 import CozyRealtime from 'cozy-realtime'
 
+/**
+ * In Node applications, provide a function to instantiate Websockets:
+ *
+ * const createWebSocket = (uri, doctype) => { ... }
+ *
+ * const realtime = new CozyRealtime({ client: cozyClient, createWebSocket })
+ *
+ */
 const realtime = new CozyRealtime({ client: cozyClient })
+
 const type = 'io.cozy.accounts'
 const id = 'document_id'
 
