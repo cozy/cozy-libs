@@ -220,8 +220,8 @@
         "inputLabel": "Moto (A)"
       },
       "number": {
-        "inputLabel": "Numéro de votre permis",
-        "text": "Quel est le numéro de votre permis ?"
+        "inputLabel": "Numéro de votre permis de conduire",
+        "text": "Quel est le numéro de votre permis de conduire ?"
       },
       "obtentionDate": {
         "text": "Renseignez les dates d'obtention des catégories valables."
@@ -231,6 +231,9 @@
       },
       "DObtentionDate": {
         "inputLabel": "Bus (D)"
+      },
+      "expirationDate": {
+        "text": "Quelle est la date d'expiration du permis de conduire ?"
       },
       "stranger": {
         "country": {
