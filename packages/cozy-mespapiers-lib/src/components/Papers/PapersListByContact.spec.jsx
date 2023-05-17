@@ -71,12 +71,19 @@ describe('PapersList components:', () => {
     it.each`
       data
       ${'Alice'}
+    `(`should display "$data"`, ({ data }) => {
+      const { getByText } = setup()
+      expect(getByText(data))
+    })
+
+    it.each`
+      data
       ${'File05'}
       ${'File06'}
       ${'File07'}
     `(`should display "$data"`, ({ data }) => {
-      const { getByText } = setup()
-      expect(getByText(data))
+      const { getByTestId } = setup()
+      expect(getByTestId(data))
     })
   })
 
@@ -84,12 +91,19 @@ describe('PapersList components:', () => {
     it.each`
       data
       ${'Bob'}
-      ${'File01'}
-      ${'File02'}
       ${'See more (2)'}
     `(`should display "$data"`, ({ data }) => {
       const { getByText } = setup()
       expect(getByText(data))
+    })
+
+    it.each`
+      data
+      ${'File01'}
+      ${'File02'}
+    `(`should display "$data"`, ({ data }) => {
+      const { getByTestId } = setup()
+      expect(getByTestId(data))
     })
   })
 })
