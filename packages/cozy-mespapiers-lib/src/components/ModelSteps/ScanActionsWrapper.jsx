@@ -34,7 +34,7 @@ const ScanActionsWrapper = props => {
 
 ScanActionsWrapper.propTypes = {
   onChangeFile: PropTypes.func,
-  openFilePickerModal: PropTypes.func,
+  onOpenFilePickerModal: PropTypes.func,
   onOpenFlagshipScan: PropTypes.func
 }
 

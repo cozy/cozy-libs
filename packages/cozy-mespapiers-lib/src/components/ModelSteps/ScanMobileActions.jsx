@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
@@ -8,7 +9,7 @@ import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 
 const styleBtn = { color: 'var(--primaryTextColor)' }
 
-const ScanMobileActions = ({ openFilePickerModal, onChangeFile }) => {
+const ScanMobileActions = ({ onOpenFilePickerModal, onChangeFile }) => {
   const { t } = useI18n()
 
   return (
@@ -20,7 +21,7 @@ const ScanMobileActions = ({ openFilePickerModal, onChangeFile }) => {
         <Button
           variant="secondary"
           style={styleBtn}
-          onClick={openFilePickerModal}
+          onClick={onOpenFilePickerModal}
           startIcon={<Icon icon="folder-moveto" />}
           label={t('Scan.selectPicFromCozy')}
           data-testid="selectPicFromCozy-btn"
@@ -61,6 +62,11 @@ const ScanMobileActions = ({ openFilePickerModal, onChangeFile }) => {
       </FileInput>
     </>
   )
+}
+
+ScanMobileActions.propTypes = {
+  onChangeFile: PropTypes.func,
+  onOpenFilePickerModal: PropTypes.func
 }
 
 export default ScanMobileActions

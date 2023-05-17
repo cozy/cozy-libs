@@ -4,12 +4,12 @@ import React from 'react'
 import ScanMobileActions from './ScanMobileActions'
 import AppLike from '../../../test/components/AppLike'
 
-const setup = ({ openFilePickerModal, onChangeFile } = {}) => {
+const setup = ({ onOpenFilePickerModal, onChangeFile } = {}) => {
   return render(
     <AppLike>
       <ScanMobileActions
-        openFilePickerModal={
-          openFilePickerModal ? openFilePickerModal : undefined
+        onOpenFilePickerModal={
+          onOpenFilePickerModal ? onOpenFilePickerModal : undefined
         }
         onChangeFile={onChangeFile ? onChangeFile : undefined}
       />
@@ -18,17 +18,17 @@ const setup = ({ openFilePickerModal, onChangeFile } = {}) => {
 }
 
 describe('ScanMobileActions', () => {
-  it('should called openFilePickerModalAction function', () => {
-    const openFilePickerModalAction = jest.fn()
+  it('should called onOpenFilePickerModal function', () => {
+    const onOpenFilePickerModal = jest.fn()
     const { getByTestId } = setup({
-      openFilePickerModal: openFilePickerModalAction
+      onOpenFilePickerModal
     })
 
     const submitButton = getByTestId('selectPicFromCozy-btn')
 
     fireEvent.click(submitButton)
 
-    expect(openFilePickerModalAction).toBeCalledTimes(1)
+    expect(onOpenFilePickerModal).toBeCalledTimes(1)
   })
 
   it('should have 2 inputs with type file attribute', () => {

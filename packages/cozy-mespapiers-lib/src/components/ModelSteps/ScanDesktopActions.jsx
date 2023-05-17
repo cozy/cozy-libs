@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React, { createRef } from 'react'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
@@ -10,7 +11,7 @@ import { KEYS } from '../../constants/const'
 
 const styleBtn = { color: 'var(--primaryTextColor)' }
 
-const ScanDesktopActions = ({ openFilePickerModal, onChangeFile }) => {
+const ScanDesktopActions = ({ onOpenFilePickerModal, onChangeFile }) => {
   const { t } = useI18n()
   const buttonRef = createRef()
 
@@ -27,7 +28,7 @@ const ScanDesktopActions = ({ openFilePickerModal, onChangeFile }) => {
       <Button
         variant="secondary"
         style={styleBtn}
-        onClick={openFilePickerModal}
+        onClick={onOpenFilePickerModal}
         startIcon={<Icon icon="folder-moveto" />}
         label={t('Scan.selectPicFromCozy')}
         data-testid="selectPicFromCozy-btn"
@@ -49,6 +50,11 @@ const ScanDesktopActions = ({ openFilePickerModal, onChangeFile }) => {
       </FileInput>
     </>
   )
+}
+
+ScanDesktopActions.propTypes = {
+  onChangeFile: PropTypes.func,
+  onOpenFilePickerModal: PropTypes.func
 }
 
 export default ScanDesktopActions

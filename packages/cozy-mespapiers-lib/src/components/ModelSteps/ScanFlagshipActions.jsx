@@ -10,7 +10,7 @@ import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 const styleBtn = { color: 'var(--primaryTextColor)' }
 
 const ScanFlagshipActions = ({
-  openFilePickerModal,
+  onOpenFilePickerModal,
   onChangeFile,
   onOpenFlagshipScan
 }) => {
@@ -25,7 +25,7 @@ const ScanFlagshipActions = ({
         <Button
           variant="secondary"
           style={styleBtn}
-          onClick={openFilePickerModal}
+          onClick={onOpenFilePickerModal}
           startIcon={<Icon icon="folder-moveto" />}
           label={t('Scan.selectPicFromCozy')}
           data-testid="selectPicFromCozy-btn"
@@ -62,7 +62,7 @@ const ScanFlagshipActions = ({
 
 ScanFlagshipActions.propTypes = {
   onChangeFile: PropTypes.func,
-  openFilePickerModal: PropTypes.func,
+  onOpenFilePickerModal: PropTypes.func,
   onOpenFlagshipScan: PropTypes.func
 }
 

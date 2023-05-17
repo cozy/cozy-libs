@@ -27,6 +27,7 @@ const ScanWrapper = ({ currentStep }) => {
   const { formData, setFormData } = useFormData()
   const { stepIndex, multipage, page } = currentStep
   const [currentFile, setCurrentFile] = useState(null)
+  const [isFilePickerModalOpen, setIsFilePickerModalOpen] = useState(false)
   const webviewIntent = useWebviewIntent()
 
   const onChangeFile = file => {
@@ -99,12 +100,21 @@ const ScanWrapper = ({ currentStep }) => {
   }
 
   return (
-    <Scan
-      currentStep={currentStep}
-      onChangeFile={onChangeFile}
-      onChangeFilePicker={onChangeFilePicker}
-      onOpenFlagshipScan={onOpenFlagshipScan}
-    />
+    <>
+      <Scan
+        currentStep={currentStep}
+        onChangeFile={onChangeFile}
+        onOpenFilePickerModal={() => setIsFilePickerModalOpen(true)}
+        onOpenFlagshipScan={onOpenFlagshipScan}
+      />
+
+      {isFilePickerModalOpen && (
+        <FilePicker
+          onChange={onChangeFilePicker}
+          onClose={() => setIsFilePickerModalOpen(false)}
+        />
+      )}
+    </>
   )
 }
 
