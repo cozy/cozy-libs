@@ -3,7 +3,7 @@ import React from 'react'
 
 import { isMobile } from 'cozy-device-helper'
 
-import Scan from './Scan'
+import ScanWrapper from './ScanWrapper'
 import AppLike from '../../../test/components/AppLike'
 import { FormDataProvider } from '../Contexts/FormDataProvider'
 import { useFormData } from '../Hooks/useFormData'
@@ -52,7 +52,7 @@ const setup = ({
   return render(
     <AppLike>
       <FormDataProvider>
-        <Scan currentStep={currentStep} />
+        <ScanWrapper currentStep={currentStep} />
       </FormDataProvider>
     </AppLike>
   )
