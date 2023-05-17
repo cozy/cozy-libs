@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@3.0.0...cozy-scanner@4.0.0) (2023-05-17)
+
+
+### Features
+
+* Remove cozy-flags from cozy-scanner ([720e756](https://github.com/cozy/cozy-libs/commit/720e7562805e2111086e657465175552c3130f43))
+
+
+### BREAKING CHANGES
+
+* cozy-flags is no longer required as dependency
+
+
+
+
+
 # 3.0.0 (2023-05-15)
 
 

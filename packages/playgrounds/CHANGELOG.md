@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.24.0 (2023-05-17)
+
+
+### Features
+
+* Remove `mespapiers.v2-1-0.enabled` flag ([d9aee1c](https://github.com/cozy/cozy-libs/commit/d9aee1c804d4a8b43640dd3c85afc1225b580f0d))
+
+
+
+
+
 ## [1.23.17](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.23.16...cozy-playgrounds@1.23.17) (2023-05-02)
 
 **Note:** Version bump only for package cozy-playgrounds

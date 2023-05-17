@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [42.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@42.0.2...cozy-mespapiers-lib@42.1.0) (2023-05-17)
+
+
+### Bug Fixes
+
+* **mespapiers:** Remove ellipsis on text when no file from konnector ([9591a9e](https://github.com/cozy/cozy-libs/commit/9591a9ef68e40d39b4cb6d7ca77ae39244d18365))
+
+
+### Features
+
+* **mespapiers:** Add expiration date on driver license ([a8d3646](https://github.com/cozy/cozy-libs/commit/a8d36467caebb7bca2c2261490746d673daac6fd))
+
+
+
+
+
 ## [42.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@42.0.1...cozy-mespapiers-lib@42.0.2) (2023-05-17)
 
 **Note:** Version bump only for package cozy-mespapiers-lib

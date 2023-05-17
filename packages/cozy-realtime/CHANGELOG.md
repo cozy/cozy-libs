@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.5.0 (2023-05-17)
+
+
+### Features
+
+* Allow using non-native `WebSocket` ([827f6e4](https://github.com/cozy/cozy-libs/commit/827f6e4c11d383704dae49eaae579bb727b75b15))
+* Remove `mespapiers.v2-1-0.enabled` flag ([d9aee1c](https://github.com/cozy/cozy-libs/commit/d9aee1c804d4a8b43640dd3c85afc1225b580f0d))
+
+
+
+
+
 ## 4.4.1 (2023-05-02)
 
 
