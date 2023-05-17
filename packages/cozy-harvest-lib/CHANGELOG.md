@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.17.9](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.17.8...cozy-harvest-lib@13.17.9) (2023-05-17)
+
+
+### Bug Fixes
+
+* KonnectorBlock works with clientSide konnectors ([44f5014](https://github.com/cozy/cozy-libs/commit/44f50148271f03fc95b3427fe465ce473c3a157e))
+
+
+
+
+
 ## [13.17.8](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.17.7...cozy-harvest-lib@13.17.8) (2023-05-16)
 
 
