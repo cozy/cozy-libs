@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [42.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@42.0.0...cozy-mespapiers-lib@42.0.1) (2023-05-17)
+
+
+### Bug Fixes
+
+* **mespapiers:** The snackbar after adding a paper is now shown for 4sec ([15889a5](https://github.com/cozy/cozy-libs/commit/15889a5b008a817b70606eb6c65218d843099d06))
+
+
+
+
+
 # [42.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@41.0.4...cozy-mespapiers-lib@42.0.0) (2023-05-16)
 
 
