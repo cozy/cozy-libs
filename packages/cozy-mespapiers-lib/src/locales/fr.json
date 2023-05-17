@@ -415,7 +415,7 @@
   "Empty": {
     "konnector": {
       "title": "Aucun papier",
-      "text": "%{konnectorSlug} n’a pas encore publié le papier sur son site. Il sera récupéré ici automatiquement une fois publié par %{konnectorSlug}.",
+      "text": "%{konnectorSlug} n'a pas encore publié le papier sur son site. Il sera récupéré ici automatiquement une fois publié par %{konnectorSlug}.",
       "button": "Ajouter manuellement"
     }
   }

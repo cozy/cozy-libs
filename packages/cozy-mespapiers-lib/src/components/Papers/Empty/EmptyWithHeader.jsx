@@ -25,9 +25,8 @@ const EmptyWithHeader = ({ konnector, account }) => {
       {flag('harvest.inappconnectors.enabled') && (
         <HarvestBanner konnector={konnector} account={account} />
       )}
-      <ListItem>
+      <ListItem ellipsis={false}>
         <ListItemText
-          ellipsis={false}
           primary={t('Empty.konnector.title')}
           secondary={t('Empty.konnector.text', {
             konnectorSlug: konnector?.slug?.toUpperCase()
