@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [42.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@42.1.0...cozy-mespapiers-lib@42.2.0) (2023-05-17)
+
+
+### Features
+
+* **mespapiers:** Replace ellipsis by midellipsis for document name ([b25edae](https://github.com/cozy/cozy-libs/commit/b25edae7ce58829bb1e10d5b2a15912a62780c1e))
+
+
+
+
+
 # [42.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@42.0.2...cozy-mespapiers-lib@42.1.0) (2023-05-17)
 
 
