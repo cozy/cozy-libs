@@ -8,6 +8,7 @@ import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 import FileImageLoader from 'cozy-ui/transpiled/react/FileImageLoader'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
@@ -86,6 +87,10 @@ const PaperItem = ({
     )
   }
 
+  const primaryText = validPageName(paperLabel)
+    ? t(`PapersList.label.${paperLabel}`)
+    : paper.name
+
   const secondaryText = (
     <>
       {contactNames ? contactNames : ''}
@@ -136,9 +141,9 @@ const PaperItem = ({
           <ListItemText
             className="u-mr-1"
             primary={
-              validPageName(paperLabel)
-                ? t(`PapersList.label.${paperLabel}`)
-                : paper.name
+              <span data-testid={primaryText}>
+                <MidEllipsis text={primaryText} />
+              </span>
             }
             secondary={secondaryText}
           />
