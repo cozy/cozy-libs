@@ -7412,10 +7412,10 @@ cozy-client@^37.2.0:
     sift "^6.0.0"
     url-search-params-polyfill "^8.0.0"
 
-cozy-client@^38.3.0:
-  version "38.3.0"
-  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-38.3.0.tgz#b94fabb60f8d18188afe5c77a74701f841f85aa3"
-  integrity sha512-XBahWkaoKYGUSLM5U3m+nhn1lVen5JM27Sf3oALR8F6FgRgx/hfVJv35FHM9gFXn4VofxAnt70hT6UE4tMBkzg==
+cozy-client@^38.4.0:
+  version "38.4.0"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-38.4.0.tgz#99e88f11a73ccf68ddcdb69c9f8c490a98be91d2"
+  integrity sha512-w+xrY8l3EySRfsxDCh98+WQ4AhRtMYnLY2r+O4z388O8Z4t03fO06mc8myOJWfP7cNKSiV82mrtpmVNNmKOCuw==
   dependencies:
     "@cozy/minilog" "1.0.0"
     "@types/jest" "^26.0.20"
@@ -7683,10 +7683,10 @@ cozy-ui@^80.1.1:
     react-swipeable-views "^0.13.3"
     rooks "^5.11.2"
 
-cozy-ui@^84.2.0:
-  version "84.2.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-84.2.0.tgz#6f331d8d0bb25f9e5f1b9e7d273dbb66c7e1b31d"
-  integrity sha512-wcwqmTU+gOJhzeYoC2+S+6mL7o92X9PhvjNXJtf7Sjpzptqg92huk+PuCNAc/AgAYa37pqTTD5W05y0MonId3g==
+cozy-ui@^85.0.2:
+  version "85.0.2"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-85.0.2.tgz#0c41da9409911bdab5fbd08e3773281c44bf9d69"
+  integrity sha512-RRQnQ3CenA6BLQcj3y7IF4zpYZtmQiSe3w7boQ3UhjzMPJVjJgRmaJbHZgl0XVWWEu0MIBpPSOVHJYcjlDe/gQ==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@material-ui/core" "4.12.3"
@@ -15623,6 +15623,17 @@ msgpack5@^4.0.2:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
     safe-buffer "^5.1.2"
+
+"mui-bottom-sheet@git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9":
+  version "1.0.8"
+  uid "3dc4c2a245ab39079bc2f73546bccf80847be14c"
+  resolved "git+https://github.com/cozy/mui-bottom-sheet.git#3dc4c2a245ab39079bc2f73546bccf80847be14c"
+  dependencies:
+    "@juggle/resize-observer" "^3.1.3"
+    jest-environment-jsdom-sixteen "^1.0.3"
+    react-spring "9.0.0-rc.3"
+    react-use-gesture "^7.0.8"
+    react-use-measure "^2.0.0"
 
 "mui-bottom-sheet@https://github.com/cozy/mui-bottom-sheet.git#v1.0.9":
   version "1.0.8"
