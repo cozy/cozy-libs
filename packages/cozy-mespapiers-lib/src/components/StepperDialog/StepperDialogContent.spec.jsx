@@ -6,7 +6,9 @@ import AppLike from '../../../test/components/AppLike'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
 
 /* eslint-disable react/display-name */
-jest.mock('../ModelSteps/Scan', () => () => <div data-testid="Scan" />)
+jest.mock('../ModelSteps/ScanWrapper', () => () => (
+  <div data-testid="ScanWrapper" />
+))
 jest.mock('../ModelSteps/Information', () => () => (
   <div data-testid="Information" />
 ))
@@ -38,7 +40,7 @@ describe('StepperDialogContent', () => {
     })
     const { queryByTestId } = setup()
 
-    expect(queryByTestId('Scan')).toBeTruthy()
+    expect(queryByTestId('ScanWrapper')).toBeTruthy()
     expect(queryByTestId('Information')).toBeNull()
     expect(queryByTestId('ContactWrapper')).toBeNull()
   })
@@ -51,7 +53,7 @@ describe('StepperDialogContent', () => {
     const { queryByTestId } = setup()
 
     expect(queryByTestId('Information')).toBeTruthy()
-    expect(queryByTestId('scan')).toBeNull()
+    expect(queryByTestId('ScanWrapper')).toBeNull()
     expect(queryByTestId('ContactWrapper')).toBeNull()
   })
 
@@ -63,7 +65,7 @@ describe('StepperDialogContent', () => {
     const { queryByTestId } = setup()
 
     expect(queryByTestId('ContactWrapper')).toBeTruthy()
-    expect(queryByTestId('Scan')).toBeNull()
+    expect(queryByTestId('ScanWrapper')).toBeNull()
     expect(queryByTestId('Information')).toBeNull()
   })
 })

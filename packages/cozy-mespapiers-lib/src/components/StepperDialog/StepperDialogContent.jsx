@@ -3,7 +3,7 @@ import React from 'react'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
 import ContactWrapper from '../ModelSteps/ContactWrapper'
 import Information from '../ModelSteps/Information'
-import Scan from '../ModelSteps/Scan'
+import ScanWrapper from '../ModelSteps/ScanWrapper'
 
 const StepperDialogContent = ({ onClose }) => {
   const { allCurrentSteps, currentStepIndex } = useStepperDialog()
@@ -13,7 +13,12 @@ const StepperDialogContent = ({ onClose }) => {
       const modelPage = currentStep.model.toLowerCase()
       switch (modelPage) {
         case 'scan':
-          return <Scan key={currentStep.stepIndex} currentStep={currentStep} />
+          return (
+            <ScanWrapper
+              key={currentStep.stepIndex}
+              currentStep={currentStep}
+            />
+          )
         case 'information':
           return (
             <Information
