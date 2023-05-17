@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React from 'react'
 
 import DialogActions from 'cozy-ui/transpiled/react/DialogActions'
-import FilePicker from 'cozy-ui/transpiled/react/FilePicker'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import ScanActionsWrapper from './ScanActionsWrapper'
@@ -13,13 +12,11 @@ import CompositeHeader from '../CompositeHeader/CompositeHeader'
 const Scan = ({
   currentStep,
   onChangeFile,
-  onChangeFilePicker,
+  onOpenFilePickerModal,
   onOpenFlagshipScan
 }) => {
   const { t } = useI18n()
   const { illustration, text } = currentStep
-
-  const [isFilePickerModalOpen, setIsFilePickerModalOpen] = useState(false)
 
   return (
     <>
@@ -35,17 +32,10 @@ const Scan = ({
       >
         <ScanActionsWrapper
           onChangeFile={onChangeFile}
-          openFilePickerModal={() => setIsFilePickerModalOpen(true)}
           onOpenFlagshipScan={onOpenFlagshipScan}
+          onOpenFilePickerModal={onOpenFilePickerModal}
         />
       </DialogActions>
-
-      {isFilePickerModalOpen && (
-        <FilePicker
-          onChange={onChangeFilePicker}
-          onClose={() => setIsFilePickerModalOpen(false)}
-        />
-      )}
     </>
   )
 }
@@ -53,7 +43,7 @@ const Scan = ({
 Scan.propTypes = {
   currentStep: PaperDefinitionsStepPropTypes,
   onChangeFile: PropTypes.func,
-  onChangeFilePicker: PropTypes.func,
+  onOpenFilePickerModal: PropTypes.func,
   onOpenFlagshipScan: PropTypes.func
 }
 
