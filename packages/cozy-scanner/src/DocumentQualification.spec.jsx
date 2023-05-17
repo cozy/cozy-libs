@@ -1,7 +1,6 @@
 import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
 
-import flag from 'cozy-flags'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 
 import { DocumentQualification } from './DocumentQualification'
@@ -10,7 +9,6 @@ const MockDate = require('mockdate')
 jest.mock('cozy-ui/transpiled/react/utils/color', () => ({
   getCssVariableValue: () => '#fff'
 }))
-jest.mock('cozy-flags')
 // Popper does not work well inside of jest as it heavily relies on DOM APIs (see https://github.com/popperjs/popper-core/issues/478).
 jest.mock('@material-ui/core/Popper', () => {
   return ({ children }) => children
@@ -19,11 +17,9 @@ jest.mock('@material-ui/core/Popper', () => {
 const MOCKED_DATE = '2019-01-01'
 
 const setup = ({
-  isFlag = false,
   onDescribed = jest.fn(),
   onFileNameChanged = jest.fn()
 } = {}) => {
-  flag.mockReturnValue(isFlag)
   return render(
     <MuiCozyTheme>
       <DocumentQualification
@@ -48,7 +44,6 @@ describe('DocumentQualification', () => {
     const onDescribed = jest.fn()
     const onFileNameChanged = jest.fn()
     const { queryByText, getByText, asFragment, getByLabelText } = setup({
-      isFlag: false,
       onDescribed,
       onFileNameChanged
     })
@@ -93,11 +88,5 @@ describe('DocumentQualification', () => {
     fireEvent.click(familyItemNode)
     fireEvent.click(queryByText('Scan.items.birth_certificate'))
     expect(inputFileName.value).toBe('Manual name')
-  })
-
-  it('Hide health theme', () => {
-    const { queryByText } = setup({ isFlag: true })
-
-    expect(queryByText('Scan.themes.health')).toBeNull()
   })
 })

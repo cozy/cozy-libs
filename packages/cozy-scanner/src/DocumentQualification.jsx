@@ -2,7 +2,6 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
-import flag from 'cozy-flags'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import QualifyIcon from 'cozy-ui/transpiled/react/Icons/Qualify'
@@ -47,9 +46,7 @@ export class DocumentQualification extends Component {
   }
 
   UNSAFE_componentWillMount() {
-    const overridedThemes = flag('hide.healthTheme.enabled')
-      ? themes.filter(theme => theme.label !== 'health')
-      : themes
+    const overridedThemes = themes.filter(theme => theme.label !== 'health')
     this.setState({ overridedThemes })
   }
 

@@ -253,51 +253,6 @@ exports[`DocumentQualification Initial render + selection + filename 1`] = `
               width="16"
             >
               <use
-                xlink:href="#heart"
-              />
-            </svg>
-          </div>
-        </div>
-        <div
-          class="u-flex u-flex-column u-ellipsis u-bxz"
-        >
-          <span
-            class="grid-item-theme u-ellipsis"
-          >
-            Scan.themes.health
-          </span>
-        </div>
-      </div>
-    </div>
-    <div
-      class="MuiGrid-root-31 styles__gridItem-container___387sO MuiGrid-item-33 MuiGrid-grid-xs-3-68 MuiGrid-grid-sm-2-81"
-    >
-      <div
-        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
-      >
-        <div
-          class="styles__IconStack-wrapper___10dhG"
-        >
-          <svg
-            class="styles__icon___23x3R"
-            height="32"
-            style="fill: var(--coolGrey);"
-            width="32"
-          >
-            <use
-              xlink:href="#file-duotone"
-            />
-          </svg>
-          <div
-            class="styles__IconStack-foregroundIcon___ZvY-t"
-          >
-            <svg
-              class="styles__icon___23x3R"
-              height="16"
-              style="fill: var(--coolGrey);"
-              width="16"
-            >
-              <use
                 xlink:href="#home"
               />
             </svg>
@@ -678,51 +633,6 @@ exports[`DocumentQualification Initial render + selection + filename 2`] = `
             class="grid-item-theme u-ellipsis"
           >
             Scan.themes.work_study
-          </span>
-        </div>
-      </div>
-    </div>
-    <div
-      class="MuiGrid-root-31 styles__gridItem-container___387sO MuiGrid-item-33 MuiGrid-grid-xs-3-68 MuiGrid-grid-sm-2-81"
-    >
-      <div
-        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
-      >
-        <div
-          class="styles__IconStack-wrapper___10dhG"
-        >
-          <svg
-            class="styles__icon___23x3R"
-            height="32"
-            style="fill: var(--coolGrey);"
-            width="32"
-          >
-            <use
-              xlink:href="#file-duotone"
-            />
-          </svg>
-          <div
-            class="styles__IconStack-foregroundIcon___ZvY-t"
-          >
-            <svg
-              class="styles__icon___23x3R"
-              height="16"
-              style="fill: var(--coolGrey);"
-              width="16"
-            >
-              <use
-                xlink:href="#heart"
-              />
-            </svg>
-          </div>
-        </div>
-        <div
-          class="u-flex u-flex-column u-ellipsis u-bxz"
-        >
-          <span
-            class="grid-item-theme u-ellipsis"
-          >
-            Scan.themes.health
           </span>
         </div>
       </div>
