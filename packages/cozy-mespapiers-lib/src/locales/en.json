@@ -220,8 +220,8 @@
         "inputLabel": "Moto"
       },
       "number": {
-        "inputLabel": "Your license number",
-        "text": "What is your license number?"
+        "inputLabel": "Your driver license number",
+        "text": "What is your driver license number?"
       },
       "obtentionDate": {
         "text": "Fill in the date of each category obtained"
@@ -231,6 +231,9 @@
       },
       "DObtentionDate": {
         "inputLabel": "Bus"
+      },
+      "expirationDate": {
+        "text": "When does your driver license expire?"
       },
       "stranger": {
         "country": {

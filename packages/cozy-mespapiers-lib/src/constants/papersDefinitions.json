@@ -259,6 +259,19 @@
         },
         {
           "stepIndex": 5,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.driverLicense.expirationDate.text",
+          "attributes": [
+            {
+              "name": "expirationDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.expirationDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 6,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
