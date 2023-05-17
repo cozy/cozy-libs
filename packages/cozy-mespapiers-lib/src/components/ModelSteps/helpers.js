@@ -34,3 +34,35 @@ export const isSameFile = (currentFile, file) => {
   }
   return false
 }
+
+/**
+ * Make a File object from a base64 string or an url
+ *
+ * @param {Object} options
+ * @param {string} options.imageSrc - Image url or base64 string
+ * @param {string} options.imageName - Image name
+ * @param {string} options.imageType - Image type
+ * @returns {Promise<File>}
+ * @example
+ * const file = await makeFileFromString({ imageSrc: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAA', imageName: 'logo.png', imageType: 'image/png' })
+ */
+export const makeFileFromImageSource = async ({
+  imageSrc,
+  imageName,
+  imageType
+} = {}) => {
+  try {
+    if (!imageSrc || !imageName || !imageType) {
+      return null
+    }
+    const resp = await fetch(imageSrc)
+    const blob = await resp.blob()
+    const newFile = new File([blob], imageName, {
+      type: imageType
+    })
+
+    return newFile
+  } catch (error) {
+    return null
+  }
+}

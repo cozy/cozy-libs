@@ -10,7 +10,12 @@ import IlluGenericNewPage from '../../assets/icons/IlluGenericNewPage.svg'
 import { PaperDefinitionsStepPropTypes } from '../../constants/PaperDefinitionsPropTypes'
 import CompositeHeader from '../CompositeHeader/CompositeHeader'
 
-const Scan = ({ currentStep, onChangeFile, onChangeFilePicker }) => {
+const Scan = ({
+  currentStep,
+  onChangeFile,
+  onChangeFilePicker,
+  onOpenFlagshipScan
+}) => {
   const { t } = useI18n()
   const { illustration, text } = currentStep
 
@@ -31,6 +36,7 @@ const Scan = ({ currentStep, onChangeFile, onChangeFilePicker }) => {
         <ScanActionsWrapper
           onChangeFile={onChangeFile}
           openFilePickerModal={() => setIsFilePickerModalOpen(true)}
+          onOpenFlagshipScan={onOpenFlagshipScan}
         />
       </DialogActions>
 
@@ -47,7 +53,8 @@ const Scan = ({ currentStep, onChangeFile, onChangeFilePicker }) => {
 Scan.propTypes = {
   currentStep: PaperDefinitionsStepPropTypes,
   onChangeFile: PropTypes.func,
-  onChangeFilePicker: PropTypes.func
+  onChangeFilePicker: PropTypes.func,
+  onOpenFlagshipScan: PropTypes.func
 }
 
 export default Scan

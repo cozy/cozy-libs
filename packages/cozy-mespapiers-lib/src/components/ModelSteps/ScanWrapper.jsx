@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 
 import { useClient, models } from 'cozy-client'
+import { useWebviewIntent } from 'cozy-intent'
+import log from 'cozy-logger'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
+import FilePicker from 'cozy-ui/transpiled/react/FilePicker'
 
 import AcquisitionResult from './AcquisitionResult'
 import Scan from './Scan'
-import { isFileAlreadySelected } from './helpers'
+import { isFileAlreadySelected, makeFileFromImageSource } from './helpers'
 import { PaperDefinitionsStepPropTypes } from '../../constants/PaperDefinitionsPropTypes'
 import { makeBlobWithCustomAttrs } from '../../helpers/makeBlobWithCustomAttrs'
 import { useFormData } from '../Hooks/useFormData'
@@ -24,6 +27,7 @@ const ScanWrapper = ({ currentStep }) => {
   const { formData, setFormData } = useFormData()
   const { stepIndex, multipage, page } = currentStep
   const [currentFile, setCurrentFile] = useState(null)
+  const webviewIntent = useWebviewIntent()
 
   const onChangeFile = file => {
     if (file) {
@@ -61,6 +65,20 @@ const ScanWrapper = ({ currentStep }) => {
     }
   }
 
+  const onOpenFlagshipScan = async () => {
+    try {
+      const base64 = await webviewIntent.call('scanDocument')
+      const file = await makeFileFromImageSource({
+        imageSrc: `data:image/png;base64,${base64}`,
+        imageName: 'flagshipScan',
+        imageType: 'image/png'
+      })
+      onChangeFile(file)
+    } catch (error) {
+      log('error', `Flagship scan error: ${error}`)
+    }
+  }
+
   useEffect(() => {
     const data = formData.data.filter(data => data.stepIndex === stepIndex)
     const { file } = data[data.length - 1] || {}
@@ -85,6 +103,7 @@ const ScanWrapper = ({ currentStep }) => {
       currentStep={currentStep}
       onChangeFile={onChangeFile}
       onChangeFilePicker={onChangeFilePicker}
+      onOpenFlagshipScan={onOpenFlagshipScan}
     />
   )
 }
