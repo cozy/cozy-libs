@@ -2,6 +2,7 @@ import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import log from 'cozy-logger'
 import Icon, { iconPropType } from 'cozy-ui/transpiled/react/Icon'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
@@ -79,6 +80,27 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
+const supportedBitmapExtensions = ['.png', '.jpg', '.jpeg', '.webp']
+
+const isSupportedBitmapExtension = filename => {
+  if (typeof filename !== 'string') return false
+
+  return supportedBitmapExtensions.some(ext => filename.endsWith(ext))
+}
+
+/**
+ * CompositeHeaderImage
+ * @description Display an image or an icon
+ * - If the image is a bitmap (.png, .jpg, .jpeg or .webp), it will be displayed as an image
+ * - If the image is a vector, it will be displayed as an icon
+ * @param {Object} props
+ * @param {string} props.icon - Icon name (with extension)
+ * @param {object} props.fallbackIcon - SVG filetype
+ * @param {string} props.iconSize - Icon size (small, medium, large(default))
+ * @returns {ReactElement|null}
+ * @example
+ * <CompositeHeaderImage icon="icon.svg" fallbackIcon="fallback.svg" iconSize="small" />
+ */
 const CompositeHeaderImage = ({ icon, fallbackIcon, iconSize = 'large' }) => {
   const styles = useStyles()
 
@@ -86,17 +108,29 @@ const CompositeHeaderImage = ({ icon, fallbackIcon, iconSize = 'large' }) => {
     return null
   }
 
-  const iconName = icon && icon.split('.')[0]
+  const iconName = icon?.split('.')[0]
   const src = images[iconName] || fallbackIcon
-  const isBitmap = typeof src === 'string' && src.endsWith('.png')
+  const isVector = icon?.endsWith('.svg') || !!fallbackIcon
+  const isBitmap = isSupportedBitmapExtension(icon)
+
+  if (!isVector && !isBitmap) {
+    log(
+      'info',
+      `Unsupported image ${icon}, please verify supported images here https://github.com/cozy/cozy-libs/blob/9fec28cd9a6303df5f9675d960addd2abd1554ed/packages/cozy-mespapiers-lib/src/components/CompositeHeader/CompositeHeaderImage.jsx#L37`
+    )
+    return null
+  }
 
   if (isBitmap) {
     return (
       <img
         data-testid={src}
         src={src}
-        alt="illustration"
+        alt=""
         style={{ maxWidth: '16.25rem' }}
+        className={cx({
+          [`${styles.image}--${iconSize}`]: iconSize
+        })}
         aria-hidden="true"
       />
     )
@@ -117,7 +151,7 @@ const CompositeHeaderImage = ({ icon, fallbackIcon, iconSize = 'large' }) => {
 
 CompositeHeaderImage.propTypes = {
   icon: iconPropType,
-  fallbackIcon: iconPropType,
+  fallbackIcon: PropTypes.object,
   iconSize: PropTypes.oneOf(['small', 'medium', 'large'])
 }
 
