@@ -1,7 +1,7 @@
 import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
 
-import AcquisitionResult from './AcquisitionResult'
+import ScanResultWrapper from './ScanResultWrapper'
 import AppLike from '../../../test/components/AppLike'
 import { FormDataProvider } from '../Contexts/FormDataProvider'
 import { useFormData } from '../Hooks/useFormData'
@@ -38,7 +38,7 @@ const setup = ({
   return render(
     <AppLike>
       <FormDataProvider>
-        <AcquisitionResult
+        <ScanResultWrapper
           setCurrentFile={setCurrentFile}
           currentFile={currentFile}
           currentStep={currentStep}
