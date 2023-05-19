@@ -22,6 +22,7 @@ const AccountSelectBox = ({
   }
   return (
     <SelectBox
+      menuPosition="fixed"
       size="tiny"
       options={accountsAndTriggers}
       onChange={onChange}
