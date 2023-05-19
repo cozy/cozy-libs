@@ -13,17 +13,6 @@ jest.mock('./TriggerManager', () => ({ onLoginSuccess, onSuccess }) => {
   onSuccessFn = onSuccess
   return null
 })
-jest.mock('./DialogContext', () => {
-  return {
-    useDialogContext: () => {
-      return {
-        dialogTitleProps: {
-          className: 'class'
-        }
-      }
-    }
-  }
-})
 
 describe('NewAccountModal', () => {
   const replaceHistory = jest.fn()
