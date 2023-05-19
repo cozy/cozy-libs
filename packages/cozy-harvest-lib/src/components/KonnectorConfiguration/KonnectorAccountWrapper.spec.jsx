@@ -73,13 +73,14 @@ describe('KonnectorAccountWrapper', () => {
                 initialTrigger={trigger}
                 pushHistory={jest.fn()}
                 Component={ConfigurationTab}
+                showNewAccountButton={true}
               />
             </VaultUnlockProvider>
           </VaultProvider>
         </MountPointProvider>
       </AppLike>
     )
-    return { root, onAccountDeleted }
+    return { root, onAccountDeleted, addAccount }
   }
 
   it('should render a configuration modal when harvest.inappconnectors.enabled flag is enabled and allow account disconnect', async () => {
@@ -93,5 +94,12 @@ describe('KonnectorAccountWrapper', () => {
       fireEvent.click(button)
       await waitFor(() => expect(onAccountDeleted).toHaveBeenCalled())
     })
+  })
+
+  it('should render a configuration modal when harvest.inappconnectors.enabled flag is enabled and allow account creation', async () => {
+    const { root, addAccount } = setup()
+    const button = root.getByText('Add an account')
+    fireEvent.click(button)
+    expect(addAccount).toHaveBeenCalled()
   })
 })
