@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import { useClient, models } from 'cozy-client'
 import { useWebviewIntent } from 'cozy-intent'
 import log from 'cozy-logger'
-import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import FilePicker from 'cozy-ui/transpiled/react/FilePicker'
 
 import Scan from './Scan'
@@ -14,13 +13,6 @@ import AcquisitionResult from '../AcquisitionResult'
 import { isFileAlreadySelected, makeFileFromImageSource } from '../helpers'
 
 const { fetchBlobFileById } = models.file
-
-// TODO Waiting for this type of filter to be implemented on the FilePicker side
-// https://github.com/cozy/cozy-ui/issues/2026
-const validFileType = file => {
-  const regexValidation = /(image\/*)|(application\/pdf)/
-  return regexValidation.test(file.type)
-}
 
 const ScanWrapper = ({ currentStep }) => {
   const client = useClient()
@@ -54,16 +46,10 @@ const ScanWrapper = ({ currentStep }) => {
 
   const onChangeFilePicker = async cozyFileId => {
     const blobFile = await fetchBlobFileById(client, cozyFileId)
-    if (validFileType(blobFile)) {
-      const blobFileCustom = makeBlobWithCustomAttrs(blobFile, {
-        id: cozyFileId
-      })
-      onChangeFile(blobFileCustom)
-    } else {
-      Alerter.error('Scan.modal.validFileType', {
-        duration: 3000
-      })
-    }
+    const blobFileCustom = makeBlobWithCustomAttrs(blobFile, {
+      id: cozyFileId
+    })
+    onChangeFile(blobFileCustom)
   }
 
   const onOpenFlagshipScan = async () => {
@@ -111,6 +97,7 @@ const ScanWrapper = ({ currentStep }) => {
       {isFilePickerModalOpen && (
         <FilePicker
           onChange={onChangeFilePicker}
+          accept="image/jpg,image/jpeg,image/png,application/pdf"
           onClose={() => setIsFilePickerModalOpen(false)}
         />
       )}
