@@ -6,12 +6,12 @@ import log from 'cozy-logger'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import FilePicker from 'cozy-ui/transpiled/react/FilePicker'
 
-import AcquisitionResult from './AcquisitionResult'
 import Scan from './Scan'
-import { isFileAlreadySelected, makeFileFromImageSource } from './helpers'
-import { PaperDefinitionsStepPropTypes } from '../../constants/PaperDefinitionsPropTypes'
-import { makeBlobWithCustomAttrs } from '../../helpers/makeBlobWithCustomAttrs'
-import { useFormData } from '../Hooks/useFormData'
+import { PaperDefinitionsStepPropTypes } from '../../../constants/PaperDefinitionsPropTypes'
+import { makeBlobWithCustomAttrs } from '../../../helpers/makeBlobWithCustomAttrs'
+import { useFormData } from '../../Hooks/useFormData'
+import AcquisitionResult from '../AcquisitionResult'
+import { isFileAlreadySelected, makeFileFromImageSource } from '../helpers'
 
 const { fetchBlobFileById } = models.file
 
@@ -71,7 +71,7 @@ const ScanWrapper = ({ currentStep }) => {
       const base64 = await webviewIntent.call('scanDocument')
       const file = await makeFileFromImageSource({
         imageSrc: `data:image/png;base64,${base64}`,
-        imageName: 'flagshipScan',
+        imageName: 'flagshipScanTemp.png',
         imageType: 'image/png'
       })
       onChangeFile(file)

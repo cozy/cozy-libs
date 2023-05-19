@@ -6,7 +6,7 @@ import AppLike from '../../../test/components/AppLike'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
 
 /* eslint-disable react/display-name */
-jest.mock('../ModelSteps/ScanWrapper', () => () => (
+jest.mock('../ModelSteps/Scan/ScanWrapper', () => () => (
   <div data-testid="ScanWrapper" />
 ))
 jest.mock('../ModelSteps/Information', () => () => (
