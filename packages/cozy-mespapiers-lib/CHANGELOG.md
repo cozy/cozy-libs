@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [42.4.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@42.3.1...cozy-mespapiers-lib@42.4.0) (2023-05-19)
+
+
+### Features
+
+* **mespapiers:** Add ScanFlagshipActions component ([c83b72b](https://github.com/cozy/cozy-libs/commit/c83b72b71eb9b6432059f09147d279790794c6c5))
+* **mespapiers:** Remove useless flag condition ([61b7262](https://github.com/cozy/cozy-libs/commit/61b7262ca996f7133bc3d6a0dbcc1c39de01e3df))
+* **mespapiers:** Use accept prop of FilePicker instead local validation ([f00bd28](https://github.com/cozy/cozy-libs/commit/f00bd28647760a5dc8e982323f9a09d1eb30e476))
+
+
+
+
+
 ## [42.3.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@42.3.0...cozy-mespapiers-lib@42.3.1) (2023-05-19)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
