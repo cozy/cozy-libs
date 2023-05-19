@@ -6,8 +6,8 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import { iconPropType } from 'cozy-ui/transpiled/react/Icon'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
-import Spike from '../../assets/icons/Spike.svg'
-import CompositeHeaderImage from '../CompositeHeader/CompositeHeaderImage'
+import Spike from '../../../assets/icons/Spike.svg'
+import CompositeHeaderImage from '../../CompositeHeader/CompositeHeaderImage'
 
 const ScanResultInfo = ({ icon, text, className }) => {
   return (

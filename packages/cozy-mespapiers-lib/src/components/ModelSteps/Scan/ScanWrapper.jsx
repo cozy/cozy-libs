@@ -9,7 +9,7 @@ import Scan from './Scan'
 import { PaperDefinitionsStepPropTypes } from '../../../constants/PaperDefinitionsPropTypes'
 import { makeFileWithBlob } from '../../../helpers/makeFileWithBlob'
 import { useFormData } from '../../Hooks/useFormData'
-import ScanResultWrapper from '../ScanResultWrapper'
+import ScanResultWrapper from '../ScanResult/ScanResultWrapper'
 import {
   getLastFormDataFile,
   isFileAlreadySelected,

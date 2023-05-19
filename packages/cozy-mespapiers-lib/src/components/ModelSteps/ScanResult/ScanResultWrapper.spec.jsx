@@ -2,10 +2,10 @@ import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
 
 import ScanResultWrapper from './ScanResultWrapper'
-import AppLike from '../../../test/components/AppLike'
-import { FormDataProvider } from '../Contexts/FormDataProvider'
-import { useFormData } from '../Hooks/useFormData'
-import { useStepperDialog } from '../Hooks/useStepperDialog'
+import AppLike from '../../../../test/components/AppLike'
+import { FormDataProvider } from '../../Contexts/FormDataProvider'
+import { useFormData } from '../../Hooks/useFormData'
+import { useStepperDialog } from '../../Hooks/useStepperDialog'
 
 const mockCurrentStep = ({
   page = '',
@@ -18,8 +18,8 @@ const mockFormData = ({ metadata = {}, data = [], contacts = [] } = {}) => ({
   data,
   contacts
 })
-jest.mock('../Hooks/useStepperDialog')
-jest.mock('../Hooks/useFormData')
+jest.mock('../../Hooks/useStepperDialog')
+jest.mock('../../Hooks/useFormData')
 
 const setup = ({
   nextStep = jest.fn(),

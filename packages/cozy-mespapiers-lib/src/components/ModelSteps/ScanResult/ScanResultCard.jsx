@@ -6,9 +6,9 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import ScanResultCardActions from './ScanResultCardActions'
-import { getLastFormDataFile, isSameFile } from './helpers'
-import RotateImage from './widgets/RotateImage'
-import { useFormData } from '../Hooks/useFormData'
+import { useFormData } from '../../Hooks/useFormData'
+import { getLastFormDataFile, isSameFile } from '../helpers'
+import RotateImage from '../widgets/RotateImage'
 
 const isImageType = file => file.type.match(/image\/.*/)
 
