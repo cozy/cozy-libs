@@ -1,6 +1,6 @@
 import cx from 'classnames'
 import PropTypes from 'prop-types'
-import React, { memo } from 'react'
+import React, { useRef, memo } from 'react'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
@@ -15,6 +15,7 @@ import { KEYS } from '../../constants/const'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
 
 const ScanResultWrapper = ({ currentFile, setCurrentFile, currentStep }) => {
+  const imageRef = useRef(null)
   const { page = 'default', illustration } = currentStep
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
@@ -46,6 +47,7 @@ const ScanResultWrapper = ({ currentFile, setCurrentFile, currentStep }) => {
           currentFile={currentFile}
           setCurrentFile={setCurrentFile}
           currentStep={currentStep}
+          ref={imageRef}
         />
       </div>
       <ScanResultActions
