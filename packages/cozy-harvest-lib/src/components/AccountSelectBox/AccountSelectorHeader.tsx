@@ -1,9 +1,11 @@
+import cx from 'classnames'
 import React from 'react'
 
 import DialogBackButton from 'cozy-ui/transpiled/react/CozyDialogs/DialogBackButton'
 import DialogTitle from 'cozy-ui/transpiled/react/Dialog/DialogTitle'
 
 import AccountSelectBox from './AccountSelectBox'
+import { useDialogContext } from '../DialogContext'
 
 interface AccountSelectorHeaderProps {
   konnector: { slug: string }
@@ -18,27 +20,40 @@ export const AccountSelectorHeader = ({
   accountsAndTriggers,
   pushHistory,
   replaceHistory
-}: AccountSelectorHeaderProps): JSX.Element => (
-  <>
-    <DialogBackButton
-      onClick={(): void => replaceHistory(`/accounts/${account._id}`)}
-    />
-    <DialogTitle
-      className="dialogTitleWithBack dialogTitleWithClose"
-      disableTypography
-    >
-      <AccountSelectBox
-        loading={!account}
-        selectedAccount={account}
-        accountsAndTriggers={accountsAndTriggers}
-        onChange={(option: { account: { _id: string } }): void => {
-          pushHistory(`/accounts/${option.account._id}`)
-        }}
-        onCreate={(): void => {
-          pushHistory('/new')
-        }}
-        variant="big"
+}: AccountSelectorHeaderProps): JSX.Element => {
+  // @ts-expect-error IDK
+  const { dialogTitleProps } = useDialogContext()
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { className: dialogTitlePropsClassName, ...rest } = dialogTitleProps
+
+  return (
+    <>
+      <DialogBackButton
+        onClick={(): void => replaceHistory(`/accounts/${account._id}`)}
       />
-    </DialogTitle>
-  </>
-)
+
+      <DialogTitle
+        {...rest}
+        className={cx(
+          'dialogTitleWithBack dialogTitleWithClose',
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+          dialogTitlePropsClassName
+        )}
+        disableTypography
+      >
+        <AccountSelectBox
+          loading={!account}
+          selectedAccount={account}
+          accountsAndTriggers={accountsAndTriggers}
+          onChange={(option: { account: { _id: string } }): void => {
+            pushHistory(`/accounts/${option.account._id}`)
+          }}
+          onCreate={(): void => {
+            pushHistory('/new')
+          }}
+          variant="big"
+        />
+      </DialogTitle>
+    </>
+  )
+}
