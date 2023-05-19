@@ -7,7 +7,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 
-import { KEYS } from '../../constants/const'
+import { KEYS } from '../../../../constants/const'
 
 const styleBtn = { color: 'var(--primaryTextColor)' }
 

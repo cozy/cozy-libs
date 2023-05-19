@@ -5,10 +5,10 @@ import React from 'react'
 import { isMobile, isFlagshipApp } from 'cozy-device-helper'
 import { useWebviewIntent } from 'cozy-intent'
 
-import ScanWrapper from './ScanWrapper'
-import AppLike from '../../../test/components/AppLike'
-import { FormDataProvider } from '../Contexts/FormDataProvider'
-import { useFormData } from '../Hooks/useFormData'
+import AppLike from '../../../../../test/components/AppLike'
+import { FormDataProvider } from '../../../Contexts/FormDataProvider'
+import { useFormData } from '../../../Hooks/useFormData'
+import ScanWrapper from '../ScanWrapper'
 
 const mockCurrentStep = ({
   page = '',
@@ -30,12 +30,12 @@ jest.mock('cozy-device-helper', () => ({
   isMobile: jest.fn(),
   isFlagshipApp: jest.fn()
 }))
-jest.mock('../Hooks/useFormData')
+jest.mock('../../../Hooks/useFormData')
 /* eslint-disable react/display-name */
-jest.mock('../CompositeHeader/CompositeHeader', () => () => (
+jest.mock('../../../CompositeHeader/CompositeHeader', () => () => (
   <div data-testid="CompositeHeader" />
 ))
-jest.mock('./AcquisitionResult', () => () => (
+jest.mock('../../AcquisitionResult', () => () => (
   <div data-testid="AcquisitionResult" />
 ))
 jest.mock('./ScanMobileActions', () => () => (

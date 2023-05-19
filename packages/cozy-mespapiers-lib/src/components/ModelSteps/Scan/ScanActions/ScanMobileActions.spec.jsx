@@ -2,7 +2,7 @@ import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 
 import ScanMobileActions from './ScanMobileActions'
-import AppLike from '../../../test/components/AppLike'
+import AppLike from '../../../../../test/components/AppLike'
 
 const setup = ({ onOpenFilePickerModal, onChangeFile } = {}) => {
   return render(

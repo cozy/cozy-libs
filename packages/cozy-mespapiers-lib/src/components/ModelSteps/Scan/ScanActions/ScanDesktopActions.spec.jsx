@@ -1,28 +1,23 @@
 import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 
-import ScanFlagshipActions from './ScanFlagshipActions'
-import AppLike from '../../../test/components/AppLike'
+import ScanDesktopActions from './ScanDesktopActions'
+import AppLike from '../../../../../test/components/AppLike'
 
-const setup = ({
-  onOpenFilePickerModal,
-  onChangeFile,
-  onOpenFlagshipScan
-} = {}) => {
+const setup = ({ onOpenFilePickerModal, onChangeFile } = {}) => {
   return render(
     <AppLike>
-      <ScanFlagshipActions
+      <ScanDesktopActions
         onOpenFilePickerModal={
           onOpenFilePickerModal ? onOpenFilePickerModal : undefined
         }
         onChangeFile={onChangeFile ? onChangeFile : undefined}
-        onOpenFlagshipScan={onOpenFlagshipScan ? onOpenFlagshipScan : undefined}
       />
     </AppLike>
   )
 }
 
-describe('ScanFlagshipActions', () => {
+describe('ScanDesktopActions', () => {
   it('should called onOpenFilePickerModal function', () => {
     const onOpenFilePickerModal = jest.fn()
     const { getByTestId } = setup({
@@ -36,25 +31,22 @@ describe('ScanFlagshipActions', () => {
     expect(onOpenFilePickerModal).toBeCalledTimes(1)
   })
 
-  it('should have one input with type file attribute', () => {
+  it('should have 1 input with type file attribute', () => {
     const { container } = setup()
     const inputFileButtons = container.querySelectorAll('input[type="file"]')
 
     expect(inputFileButtons).toHaveLength(1)
   })
 
-  it('should called onOpenFlagshipScan function', () => {
-    const onOpenFlagshipScan = jest.fn()
+  it('should called onChangeFileAction function', () => {
+    const onChangeFileAction = jest.fn()
     const { getByTestId } = setup({
-      onOpenFlagshipScan
+      onChangeFile: onChangeFileAction
     })
 
-    const importPicFromFlagshipScanButton = getByTestId(
-      'importPicFromFlagshipScan-btn'
-    )
+    const inputFileButton = getByTestId('importPicFromDesktop-btn')
 
-    fireEvent.click(importPicFromFlagshipScanButton)
-
-    expect(onOpenFlagshipScan).toBeCalledTimes(1)
+    fireEvent.change(inputFileButton)
+    expect(onChangeFileAction).toBeCalledTimes(1)
   })
 })

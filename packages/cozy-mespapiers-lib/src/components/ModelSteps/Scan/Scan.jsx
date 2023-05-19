@@ -4,10 +4,10 @@ import React from 'react'
 import DialogActions from 'cozy-ui/transpiled/react/DialogActions'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import ScanActionsWrapper from './ScanActionsWrapper'
-import IlluGenericNewPage from '../../assets/icons/IlluGenericNewPage.svg'
-import { PaperDefinitionsStepPropTypes } from '../../constants/PaperDefinitionsPropTypes'
-import CompositeHeader from '../CompositeHeader/CompositeHeader'
+import ScanActionsWrapper from './ScanActions/ScanActionsWrapper'
+import IlluGenericNewPage from '../../../assets/icons/IlluGenericNewPage.svg'
+import { PaperDefinitionsStepPropTypes } from '../../../constants/PaperDefinitionsPropTypes'
+import CompositeHeader from '../../CompositeHeader/CompositeHeader'
 
 const Scan = ({
   currentStep,
