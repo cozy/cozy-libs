@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 
 import flag from 'cozy-flags'
 
@@ -13,7 +12,6 @@ import FlowProvider from '../FlowProvider'
 
 export const KonnectorAccountWrapper = props => {
   const { Component, ...rest } = props
-  const navigate = useNavigate()
 
   return (
     <FlowProvider
@@ -23,12 +21,7 @@ export const KonnectorAccountWrapper = props => {
       {({ flow }) => {
         if (flag('harvest.inappconnectors.enabled')) {
           return (
-            <Component
-              {...rest}
-              trigger={rest.initialTrigger}
-              addAccount={() => navigate('new', { replace: true })}
-              flow={flow}
-            />
+            <Component {...rest} trigger={rest.initialTrigger} flow={flow} />
           )
         }
         return <KonnectorAccountTabs {...rest} flow={flow} />
