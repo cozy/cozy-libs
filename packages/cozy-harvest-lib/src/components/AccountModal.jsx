@@ -181,7 +181,12 @@ export class AccountModal extends Component {
           </DialogContent>
         )}
         {!error && !fetching && (
-          <DialogContent className={isMobile ? 'u-p-0' : 'u-pt-0'}>
+          <DialogContent
+            className={isMobile ? 'u-pt-0 u-pr-0 u-pl-0' : 'u-pt-0'}
+            style={{
+              paddingBottom: 'var(--flagship-bottom-height)'
+            }}
+          >
             <KonnectorAccountWrapper
               initialActiveTab={initialActiveTab}
               konnector={konnector}

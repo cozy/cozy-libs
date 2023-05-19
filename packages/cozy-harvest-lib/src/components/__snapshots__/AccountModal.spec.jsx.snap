@@ -90,7 +90,12 @@ exports[`AccountModal with an account should display the AccountSelect & Content
     />
   </KonnectorModalHeader>
   <ForwardRef(WithStyles)
-    className="u-p-0"
+    className="u-pt-0 u-pr-0 u-pl-0"
+    style={
+      Object {
+        "paddingBottom": "var(--flagship-bottom-height)",
+      }
+    }
   >
     <KonnectorAccountWrapper
       account={
@@ -155,7 +160,12 @@ exports[`AccountModal with an account should display the AccountSelect & Content
     />
   </KonnectorModalHeader>
   <ForwardRef(WithStyles)
-    className="u-p-0"
+    className="u-pt-0 u-pr-0 u-pl-0"
+    style={
+      Object {
+        "paddingBottom": "var(--flagship-bottom-height)",
+      }
+    }
   >
     <KonnectorAccountWrapper
       account={
