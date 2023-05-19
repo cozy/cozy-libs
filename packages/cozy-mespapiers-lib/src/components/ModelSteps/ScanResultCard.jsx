@@ -13,9 +13,17 @@ import { useFormData } from '../Hooks/useFormData'
 const isImageType = file => file.type.match(/image\/.*/)
 
 const ScanResultCard = forwardRef(
-  ({ currentFile, setCurrentFile, currentStep }, ref) => {
+  (
+    {
+      currentFile,
+      setCurrentFile,
+      currentStep,
+      setRotationImage,
+      rotationImage
+    },
+    ref
+  ) => {
     const { setFormData, formData } = useFormData()
-    const [rotationImage, setRotationImage] = useState(0)
     const [imgWrapperMinHeight, setImgWrapperMinHeight] = useState(0)
     const { stepIndex } = currentStep
 
