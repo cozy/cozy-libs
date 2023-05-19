@@ -7,7 +7,7 @@ import FilePicker from 'cozy-ui/transpiled/react/FilePicker'
 
 import Scan from './Scan'
 import { PaperDefinitionsStepPropTypes } from '../../../constants/PaperDefinitionsPropTypes'
-import { makeBlobWithCustomAttrs } from '../../../helpers/makeBlobWithCustomAttrs'
+import { makeFileWithBlob } from '../../../helpers/makeFileWithBlob'
 import { useFormData } from '../../Hooks/useFormData'
 import ScanResultWrapper from '../ScanResultWrapper'
 import {
@@ -64,10 +64,10 @@ const ScanWrapper = ({ currentStep }) => {
 
   const onChangeFilePicker = async cozyFileId => {
     const blobFile = await fetchBlobFileById(client, cozyFileId)
-    const blobFileCustom = makeBlobWithCustomAttrs(blobFile, {
-      id: cozyFileId
+    const file = makeFileWithBlob(blobFile, {
+      name: cozyFileId
     })
-    onChangeFile(blobFileCustom)
+    onChangeFile(file)
   }
 
   const onOpenFlagshipScan = async () => {

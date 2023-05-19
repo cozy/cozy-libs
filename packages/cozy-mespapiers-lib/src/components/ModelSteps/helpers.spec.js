@@ -14,20 +14,6 @@ describe('isFileAlreadySelected', () => {
     )
   })
 
-  it('should return true if the Blob is already selected in the same step', () => {
-    const blob = new Blob([])
-    blob.id = '001'
-    const formData = {
-      data: [{ stepIndex: 1, file: blob }]
-    }
-    const currentStepIndex = 1
-    const currentFile = blob
-
-    expect(isFileAlreadySelected(formData, currentStepIndex, currentFile)).toBe(
-      true
-    )
-  })
-
   it('should return false if the file is not already selected in the same step', () => {
     const file01 = new File([], 'abc.pdf', { lastModified: 123456789 })
     const formData = {
@@ -43,21 +29,6 @@ describe('isFileAlreadySelected', () => {
     expect(
       isFileAlreadySelected(formData, currentStepIndex, currentFile02)
     ).toBe(false)
-  })
-
-  it('should return false if the Blob is not already selected in the same step', () => {
-    const blob = new Blob([])
-    blob.id = '001'
-    const formData = {
-      data: [{ stepIndex: 1, file: blob }]
-    }
-    const currentStepIndex = 1
-    const currentFile = new Blob([])
-    currentFile.id = '002'
-
-    expect(isFileAlreadySelected(formData, currentStepIndex, currentFile)).toBe(
-      false
-    )
   })
 
   it('should return false if the File is already selected in another step', () => {
