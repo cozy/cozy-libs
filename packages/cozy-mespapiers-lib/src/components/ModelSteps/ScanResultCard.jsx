@@ -6,28 +6,30 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import ScanResultCardActions from './ScanResultCardActions'
-import { isSameFile } from './helpers'
+import { getLastFormDataFile, isSameFile } from './helpers'
 import RotateImage from './widgets/RotateImage'
 import { useFormData } from '../Hooks/useFormData'
 
 const isImageType = file => file.type.match(/image\/.*/)
 
-const ScanResultCard = ({ currentFile, setCurrentFile }) => {
+const ScanResultCard = ({ currentFile, setCurrentFile, currentStep }) => {
   const imageRef = useRef(null)
   const { setFormData, formData } = useFormData()
   const [rotationImage, setRotationImage] = useState(0)
+  const { stepIndex } = currentStep
 
-  const handleSelectedFile = () => {
-    const newData = formData.data.filter(
-      data => !isSameFile(currentFile, data.file)
-    )
+    const handleSelectedFile = () => {
+      const newData = formData.data.filter(
+        data => !isSameFile(currentFile, data.file)
+      )
+      setCurrentFile(
+        getLastFormDataFile({ formData: { data: newData }, stepIndex })
+      )
 
     setFormData(prev => ({
       ...prev,
       data: newData
     }))
-
-    setCurrentFile(null)
   }
 
   const handleRotate = () => {

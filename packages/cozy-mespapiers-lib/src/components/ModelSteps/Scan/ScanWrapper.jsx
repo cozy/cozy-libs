@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { useClient, models } from 'cozy-client'
 import { useWebviewIntent } from 'cozy-intent'
@@ -10,7 +10,11 @@ import { PaperDefinitionsStepPropTypes } from '../../../constants/PaperDefinitio
 import { makeBlobWithCustomAttrs } from '../../../helpers/makeBlobWithCustomAttrs'
 import { useFormData } from '../../Hooks/useFormData'
 import ScanResultWrapper from '../ScanResultWrapper'
-import { isFileAlreadySelected, makeFileFromBase64 } from '../helpers'
+import {
+  getLastFormDataFile,
+  isFileAlreadySelected,
+  makeFileFromBase64
+} from '../helpers'
 
 const { fetchBlobFileById } = models.file
 
@@ -18,7 +22,9 @@ const ScanWrapper = ({ currentStep }) => {
   const client = useClient()
   const { formData, setFormData } = useFormData()
   const { stepIndex, multipage, page } = currentStep
-  const [currentFile, setCurrentFile] = useState(null)
+  const [currentFile, setCurrentFile] = useState(
+    getLastFormDataFile({ formData: formData, stepIndex })
+  )
   const [isFilePickerModalOpen, setIsFilePickerModalOpen] = useState(false)
   const webviewIntent = useWebviewIntent()
 
@@ -65,15 +71,6 @@ const ScanWrapper = ({ currentStep }) => {
       log('error', `Flagship scan error: ${error}`)
     }
   }
-
-  useEffect(() => {
-    const data = formData.data.filter(data => data.stepIndex === stepIndex)
-    const { file } = data[data.length - 1] || {}
-
-    if (file) {
-      setCurrentFile(file)
-    }
-  }, [formData.data, stepIndex])
 
   if (currentFile) {
     return (
