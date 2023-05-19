@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.17.11](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.17.10...cozy-harvest-lib@13.17.11) (2023-05-19)
+
+
+### Bug Fixes
+
+* Account creation from the config modal is working ([6be9633](https://github.com/cozy/cozy-libs/commit/6be96332bfe57bc47321b3d1fb7d5b1103f8329a))
+* CozyDialogContent for immersive mode ([c29bde5](https://github.com/cozy/cozy-libs/commit/c29bde50e6dc8db5c2d9900f2c779df682bc7532))
+* DialogTitle Alignement on immersive mode ([5d7922f](https://github.com/cozy/cozy-libs/commit/5d7922f89596427990c3b840ad1f050349365ff6))
+* SelectAccount was not well displayed ([5ebf992](https://github.com/cozy/cozy-libs/commit/5ebf992db7eece6fdec4a822d800cd6c42221847))
+* Use style from UI's hook ([d44b0fe](https://github.com/cozy/cozy-libs/commit/d44b0fe429c3ebbe65458394378c489799f85835))
+
+
+
+
+
 ## [13.17.10](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.17.9...cozy-harvest-lib@13.17.10) (2023-05-17)
 
 **Note:** Version bump only for package cozy-harvest-lib
