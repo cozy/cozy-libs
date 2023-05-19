@@ -10,10 +10,10 @@ import ScanResultActions from './ScanResultActions'
 import ScanResultCard from './ScanResultCard'
 import ScanResultInfo from './ScanResultInfo'
 import ScanResultTitle from './ScanResultTitle'
-import { makeFileFromImageSource } from './helpers'
-import { PaperDefinitionsStepPropTypes } from '../../constants/PaperDefinitionsPropTypes'
-import { KEYS } from '../../constants/const'
-import { useStepperDialog } from '../Hooks/useStepperDialog'
+import { PaperDefinitionsStepPropTypes } from '../../../constants/PaperDefinitionsPropTypes'
+import { KEYS } from '../../../constants/const'
+import { useStepperDialog } from '../../Hooks/useStepperDialog'
+import { makeFileFromImageSource } from '../helpers'
 
 const ScanResultWrapper = ({
   currentFile,

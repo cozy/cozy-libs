@@ -37,8 +37,8 @@ jest.mock('../../../Hooks/useFormData')
 jest.mock('../../../CompositeHeader/CompositeHeader', () => () => (
   <div data-testid="CompositeHeader" />
 ))
-jest.mock('../../ScanResultWrapper', () => () => (
-  <div data-testid="AcquisitionResult" />
+jest.mock('../../ScanResult/ScanResultWrapper', () => () => (
+  <div data-testid="ScanResultWrapper" />
 ))
 jest.mock('./ScanMobileActions', () => () => (
   <div data-testid="ScanMobileActions" />
@@ -140,7 +140,7 @@ describe('Scan component:', () => {
     expect(queryByTestId('CompositeHeader')).toBeTruthy()
   })
 
-  it('AcquisitionResult component must be displayed if a file in the current step exists', () => {
+  it('ScanResultWrapper component must be displayed if a file in the current step exists', () => {
     const { queryByTestId } = setup({
       currentStep: mockCurrentStep({ stepIndex: 1 }),
       formData: mockFormData({
@@ -148,6 +148,6 @@ describe('Scan component:', () => {
       })
     })
 
-    expect(queryByTestId('AcquisitionResult')).toBeTruthy()
+    expect(queryByTestId('ScanResultWrapper')).toBeTruthy()
   })
 })

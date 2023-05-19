@@ -7,7 +7,7 @@ import DialogActions from 'cozy-ui/transpiled/react/DialogActions'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
-import { PaperDefinitionsStepPropTypes } from '../../constants/PaperDefinitionsPropTypes'
+import { PaperDefinitionsStepPropTypes } from '../../../constants/PaperDefinitionsPropTypes'
 
 const ScanResultActions = ({ currentStep, onNextStep, onRepeatStep }) => {
   const { t } = useI18n()
