@@ -1,8 +1,14 @@
 {
   "Acquisition": {
     "repeat": "Scanner une page supplémentaire",
-    "retry": "Annuler la photo",
-    "success": "La photo a bien été prise."
+    "retry": "Reprendre la photo",
+    "rotate": "Tourner l'image à 90 degrés dans le sens anti-horaire",
+    "success": "La photo a bien été prise.",
+    "tooltip": {
+      "back": "Vérifier s’il s’agit bien de la face arrière et si la photo est bien orientée comme sur le modèle",
+      "default": "Vérifier si la photo est bien orientée comme sur le modèle",
+      "front": "Vérifier s’il s’agit bien de la face avant et si la photo est bien orientée comme sur le modèle"
+    }
   },
   "action": {
     "createPaper": "Ajouter un papier",
