@@ -155,3 +155,16 @@ export const makeRotatedImage = (image, rotation) => {
 
   return src
 }
+
+/**
+ * @param {Object} options
+ * @param {Array} options.formData - State of the FormDataProvider
+ * @param {number} options.stepIndex - Used to know if the file is already selected for this step (Some paper have two Scan steps)
+ * @returns {File} - Last file selected for this step
+ */
+export const getLastFormDataFile = ({ formData, stepIndex }) => {
+  const data = formData.data.filter(data => data.stepIndex === stepIndex)
+  const { file } = data[data.length - 1] || {}
+
+  return file || null
+}

@@ -45,6 +45,7 @@ const ScanResultWrapper = ({ currentFile, setCurrentFile, currentStep }) => {
         <ScanResultCard
           currentFile={currentFile}
           setCurrentFile={setCurrentFile}
+          currentStep={currentStep}
         />
       </div>
       <ScanResultActions
