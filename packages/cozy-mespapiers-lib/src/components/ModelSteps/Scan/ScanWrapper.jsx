@@ -28,16 +28,28 @@ const ScanWrapper = ({ currentStep }) => {
   const [isFilePickerModalOpen, setIsFilePickerModalOpen] = useState(false)
   const webviewIntent = useWebviewIntent()
 
-  const onChangeFile = file => {
+  const onChangeFile = (file, { replace = false } = {}) => {
     if (file) {
-      setCurrentFile(file)
+      if (replace) {
+        setFormData(prev => ({
+          ...prev,
+          data: prev.data.map(data => {
+            if (data.stepIndex === stepIndex && data.file.name === file.name) {
+              return { ...data, file }
+            }
+            return data
+          })
+        }))
+        return
+      }
       if (!isFileAlreadySelected(formData, stepIndex, file)) {
+        setCurrentFile(file)
         setFormData(prev => ({
           ...prev,
           data: [
             ...prev.data,
             {
-              file: file,
+              file,
               stepIndex,
               fileMetadata: {
                 page: !multipage ? page : '',
@@ -78,6 +90,7 @@ const ScanWrapper = ({ currentStep }) => {
         currentFile={currentFile}
         setCurrentFile={setCurrentFile}
         currentStep={currentStep}
+        onChangeFile={onChangeFile}
       />
     )
   }
