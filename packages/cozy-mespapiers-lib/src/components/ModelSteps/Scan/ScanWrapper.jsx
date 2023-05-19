@@ -9,7 +9,7 @@ import Scan from './Scan'
 import { PaperDefinitionsStepPropTypes } from '../../../constants/PaperDefinitionsPropTypes'
 import { makeBlobWithCustomAttrs } from '../../../helpers/makeBlobWithCustomAttrs'
 import { useFormData } from '../../Hooks/useFormData'
-import AcquisitionResult from '../AcquisitionResult'
+import ScanResultWrapper from '../ScanResultWrapper'
 import { isFileAlreadySelected, makeFileFromBase64 } from '../helpers'
 
 const { fetchBlobFileById } = models.file
@@ -77,7 +77,7 @@ const ScanWrapper = ({ currentStep }) => {
 
   if (currentFile) {
     return (
-      <AcquisitionResult
+      <ScanResultWrapper
         currentFile={currentFile}
         setCurrentFile={setCurrentFile}
         currentStep={currentStep}

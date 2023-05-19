@@ -33,7 +33,7 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-const AcquisitionResult = ({ currentFile, setCurrentFile, currentStep }) => {
+const ScanResultWrapper = ({ currentFile, setCurrentFile, currentStep }) => {
   const styles = useStyles()
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
@@ -138,10 +138,10 @@ const AcquisitionResult = ({ currentFile, setCurrentFile, currentStep }) => {
   )
 }
 
-AcquisitionResult.propTypes = {
+ScanResultWrapper.propTypes = {
   currentFile: PropTypes.object.isRequired,
   setCurrentFile: PropTypes.func.isRequired,
   currentStep: PaperDefinitionsStepPropTypes
 }
 
-export default memo(AcquisitionResult)
+export default memo(ScanResultWrapper)

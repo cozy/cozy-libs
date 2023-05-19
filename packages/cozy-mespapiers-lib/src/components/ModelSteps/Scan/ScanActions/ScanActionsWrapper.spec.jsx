@@ -37,7 +37,7 @@ jest.mock('../../../Hooks/useFormData')
 jest.mock('../../../CompositeHeader/CompositeHeader', () => () => (
   <div data-testid="CompositeHeader" />
 ))
-jest.mock('../../AcquisitionResult', () => () => (
+jest.mock('../../ScanResultWrapper', () => () => (
   <div data-testid="AcquisitionResult" />
 ))
 jest.mock('./ScanMobileActions', () => () => (
