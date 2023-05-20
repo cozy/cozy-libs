@@ -42,7 +42,7 @@ const StepperDialog = ({
   const { dialogProps, dialogTitleProps, fullScreen } = useCozyDialog(rest)
 
   return (
-    <MUIDialog {...dialogProps}>
+    <MUIDialog {...dialogProps} scroll={isMobile ? 'paper' : 'body'}>
       {!fullScreen && onClose && <DialogCloseButton onClick={onClose} />}
       {onBack && <DialogBackButton onClick={onBack} />}
       <DialogTitle
