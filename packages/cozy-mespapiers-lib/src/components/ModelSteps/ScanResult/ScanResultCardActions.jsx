@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const ScanResultCardActions = ({ onRotate, onCancel }) => {
+const ScanResultCardActions = ({ onRotate, onCancel, isImageRotating }) => {
   const classes = useStyles()
   const { t } = useI18n()
 
@@ -37,6 +37,7 @@ const ScanResultCardActions = ({ onRotate, onCancel }) => {
         onClick={onRotate}
         aria-label={t('Acquisition.rotate')}
         title={t('Acquisition.rotate')}
+        disabled={isImageRotating}
       >
         <Icon icon="rotate-left" />
       </IconButton>
@@ -46,7 +47,8 @@ const ScanResultCardActions = ({ onRotate, onCancel }) => {
 
 ScanResultCardActions.propTypes = {
   onCancel: PropTypes.func,
-  onRotate: PropTypes.func
+  onRotate: PropTypes.func,
+  isImageRotating: PropTypes.bool
 }
 
 export default ScanResultCardActions

@@ -25,6 +25,7 @@ const ScanResultCard = forwardRef(
   ) => {
     const { setFormData, formData } = useFormData()
     const [imgWrapperMinHeight, setImgWrapperMinHeight] = useState(0)
+    const [isImageRotating, setIsImageRotating] = useState(false)
     const { stepIndex } = currentStep
 
     const handleSelectedFile = () => {
@@ -42,10 +43,12 @@ const ScanResultCard = forwardRef(
     }
 
     const handleRotate = () => {
+      setIsImageRotating(true)
       setRotationImage(prev => prev - 90)
     }
 
     const handleImageLoaded = () => {
+      setIsImageRotating(false)
       // We don't want to recalculate the size on every rotation
       if (ref.current && imgWrapperMinHeight === 0) {
         const maxSize = Math.max(
@@ -83,6 +86,7 @@ const ScanResultCard = forwardRef(
           <ScanResultCardActions
             onRotate={handleRotate}
             onCancel={handleSelectedFile}
+            isImageRotating={isImageRotating}
           />
         </div>
       </Card>
