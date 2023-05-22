@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.17.12](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.17.11...cozy-harvest-lib@13.17.12) (2023-05-22)
+
+
+### Bug Fixes
+
+* New Banner supports RunnableKonnector ([02d9d7f](https://github.com/cozy/cozy-libs/commit/02d9d7f5bf6dc0c4e6974b8e0580722218fca208))
+
+
+
+
+
 ## [13.17.11](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.17.10...cozy-harvest-lib@13.17.11) (2023-05-19)
 
 
