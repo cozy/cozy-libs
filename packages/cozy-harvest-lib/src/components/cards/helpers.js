@@ -1,23 +1,29 @@
+// @ts-check
 import { formatLocallyDistanceToNow } from 'cozy-ui/transpiled/react/I18n/format'
 
 import { isDisconnected } from '../../helpers/konnectors'
 import { getLastSuccessDate } from '../../helpers/triggers'
 
 const DEFAULT_TIME = 300_000 // To milliseconds (5 minutes)
-
-const getDifferenceInMinutes = date => {
+/**
+ *
+ * @param {Date} date
+ * @returns number
+ */
+const getDifferenceInMillisecondes = date => {
   return Date.now() - new Date(date).getTime()
 }
 
 /**
  * @param {object} options
- * @param {object} options.t - i18n function
- * @param {object} options.konnector - Associated Connector
+ * @param {function} options.t - i18n function
+ * @param {import('cozy-client/types/types').IOCozyKonnector} options.konnector - Associated Connector
  * @param {object} options.trigger - Associated trigger
  * @param {object} options.running - If the connector is running
  * @param {object} options.expectingTriggerLaunch - If the trigger is waiting to be launched
  * @param {object} options.lastSuccessDate - The last date when the trigger was successfully executed
  * @param {object} options.isKonnectorRunnable - If the konnector is runnable
+ * @param {object} options.isInMaintenance - If the konnector is in maintenance
  * @returns {string}
  */
 export const makeLabel = ({
@@ -42,7 +48,7 @@ export const makeLabel = ({
   }
 
   if (lastSuccessDate) {
-    if (getDifferenceInMinutes(lastSuccessDate) < DEFAULT_TIME) {
+    if (getDifferenceInMillisecondes(lastSuccessDate) < DEFAULT_TIME) {
       return `${t('card.launchTrigger.lastSync.justNow')}${mantenanceSuffix}`
     }
 
