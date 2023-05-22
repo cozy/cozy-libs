@@ -17,6 +17,7 @@ const getDifferenceInMinutes = date => {
  * @param {object} options.running - If the connector is running
  * @param {object} options.expectingTriggerLaunch - If the trigger is waiting to be launched
  * @param {object} options.lastSuccessDate - The last date when the trigger was successfully executed
+ * @param {object} options.isKonnectorRunnable - If the konnector is runnable
  * @returns {string}
  */
 export const makeLabel = ({
@@ -25,10 +26,13 @@ export const makeLabel = ({
   trigger,
   running,
   expectingTriggerLaunch,
-  isInMaintenance
+  isInMaintenance,
+  isKonnectorRunnable
 }) => {
   const lastSuccessDate = getLastSuccessDate(trigger)
-
+  if (!isKonnectorRunnable) {
+    return t('accountForm.notClientSide', { name: konnector.name })
+  }
   const mantenanceSuffix = isInMaintenance
     ? ` · ${t('konnectorBlock.inMaintenance')}`
     : ''

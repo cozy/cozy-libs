@@ -5,6 +5,7 @@ import { useClient } from 'cozy-client'
 import Alert from 'cozy-ui/transpiled/react/Alert'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import Info from 'cozy-ui/transpiled/react/Icons/Info'
 import WrenchCircleIcon from 'cozy-ui/transpiled/react/Icons/WrenchCircle'
 import Snackbar from 'cozy-ui/transpiled/react/Snackbar'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
@@ -77,24 +78,29 @@ export const LaunchTriggerAlert = ({
           'push'
         )
     : () => launch({ autoSuccessTimer: false })
-
+  const alertColor = () => {
+    if (isInError) return undefined
+    if (isInMaintenance) return 'var(--grey50)'
+    if (!isKonnectorRunnable) {
+      return 'var(--grey100)'
+    }
+    return 'var(--paperBackgroundColor)'
+  }
   return (
     <>
       <Alert
-        color={
-          isInError
-            ? undefined
-            : isInMaintenance
-            ? 'var(--grey50)'
-            : 'var(--paperBackgroundColor)'
-        }
+        color={alertColor()}
         severity={isInError ? 'error' : undefined}
         block={block}
         icon={
-          isInError ? undefined : isInMaintenance ? (
+          isInError ? undefined : isInMaintenance || !isKonnectorRunnable ? (
             <Icon
-              icon={WrenchCircleIcon}
-              color={isInMaintenance ? 'var(--secondaryTextColor)' : undefined}
+              icon={isInMaintenance ? WrenchCircleIcon : Info}
+              color={
+                isInMaintenance
+                  ? 'var(--secondaryTextColor)'
+                  : 'var(--iconTextColor)'
+              }
             />
           ) : running ? (
             <Spinner className="u-flex" noMargin />
@@ -160,7 +166,8 @@ export const LaunchTriggerAlert = ({
                 trigger,
                 running,
                 expectingTriggerLaunch,
-                isInMaintenance
+                isInMaintenance,
+                isKonnectorRunnable
               })}
             </Typography>
             {block && (
