@@ -12,7 +12,8 @@ describe('makeLabel', () => {
       const res = makeLabel({
         t,
         running: true,
-        expectingTriggerLaunch: false
+        expectingTriggerLaunch: false,
+        isKonnectorRunnable: true
       })
 
       expect(res).toBe('Data recovery…')
@@ -22,7 +23,8 @@ describe('makeLabel', () => {
       const res = makeLabel({
         t,
         running: true,
-        expectingTriggerLaunch: true
+        expectingTriggerLaunch: true,
+        isKonnectorRunnable: true
       })
 
       expect(res).toBe('Data recovery…')
@@ -32,7 +34,8 @@ describe('makeLabel', () => {
       const res = makeLabel({
         t,
         running: false,
-        expectingTriggerLaunch: true
+        expectingTriggerLaunch: true,
+        isKonnectorRunnable: true
       })
 
       expect(res).toBe('Data recovery…')
@@ -42,7 +45,8 @@ describe('makeLabel', () => {
       const res = makeLabel({
         t,
         running: true,
-        expectingTriggerLaunch: true
+        expectingTriggerLaunch: true,
+        isKonnectorRunnable: true
       })
 
       expect(res).toBe('Data recovery…')
@@ -64,7 +68,8 @@ describe('makeLabel', () => {
           current_state: { last_success: '2020-12-25T11:55:00.000Z' }
         },
         running: false,
-        expectingTriggerLaunch: false
+        expectingTriggerLaunch: false,
+        isKonnectorRunnable: true
       })
 
       expect(res).toContain(
@@ -79,7 +84,8 @@ describe('makeLabel', () => {
           current_state: { last_success: '2020-12-25T11:55:01.000Z' }
         },
         running: false,
-        expectingTriggerLaunch: false
+        expectingTriggerLaunch: false,
+        isKonnectorRunnable: true
       })
 
       expect(res).toBe(`${t('card.launchTrigger.lastSync.justNow')}`)
@@ -92,7 +98,8 @@ describe('makeLabel', () => {
           current_state: { last_success: null }
         },
         running: false,
-        expectingTriggerLaunch: false
+        expectingTriggerLaunch: false,
+        isKonnectorRunnable: true
       })
 
       expect(res).toBe('Unknown')
@@ -103,10 +110,29 @@ describe('makeLabel', () => {
         t,
         konnector: {},
         running: false,
-        expectingTriggerLaunch: false
+        expectingTriggerLaunch: false,
+        isKonnectorRunnable: true
       })
 
       expect(res).toBe('Disconnected')
+    })
+  })
+
+  describe('not runnable konnector', () => {
+    it('should display the message when not runnable', () => {
+      const t = x => x
+
+      const res = makeLabel({
+        t,
+        konnector: {
+          name: 'foo'
+        },
+        running: false,
+        expectingTriggerLaunch: false,
+        isKonnectorRunnable: false
+      })
+
+      expect(res).toBe('accountForm.notClientSide')
     })
   })
 })
