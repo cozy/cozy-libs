@@ -27,7 +27,7 @@
       "noAccount": "Als je nog geen account hebt, maak die dan aan op de website van [%{vendorName}](%{vendorLink})."
     },
     "cannotConnectLink": "Ik kan geen verbinding maken",
-    "notClientSide": "%{name} maakt gebruik van een hagelnieuw efficiënt systeem om gegevens op te vragen op je Cozy. Deze action is alleen te gebruiken via de Cozy-smartphone-app.",
+    "notClientSide": "Installeer de Cozy-app op je telefoon of tablet om je %{name}-gegevens te synchroniseren.",
     "clientSide": {
       "title": "Koppelen aan mijn Cozy",
       "submit": "Koppelen",
