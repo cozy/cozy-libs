@@ -3,6 +3,7 @@ import { render, waitFor } from '@testing-library/react'
 import React from 'react'
 
 import { isMobile, isFlagshipApp } from 'cozy-device-helper'
+import flag from 'cozy-flags'
 import { useWebviewIntent } from 'cozy-intent'
 
 import AppLike from '../../../../../test/components/AppLike'
@@ -21,6 +22,7 @@ const mockFormData = ({ metadata = {}, data = [], contacts = [] } = {}) => ({
   data,
   contacts
 })
+jest.mock('cozy-flags')
 jest.mock('cozy-intent', () => ({
   ...jest.requireActual('cozy-intent'),
   useWebviewIntent: jest.fn()
@@ -57,6 +59,7 @@ const setup = ({
   isFlagshipAppMock = false,
   isScannerAvailable = false
 } = {}) => {
+  flag.mockReturnValue(true)
   isMobile.mockReturnValue(isMobileMock || isFlagshipAppMock)
   isFlagshipApp.mockReturnValue(isFlagshipAppMock)
   useWebviewIntent.mockReturnValue({
