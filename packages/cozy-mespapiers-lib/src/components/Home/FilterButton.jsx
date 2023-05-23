@@ -10,7 +10,7 @@ import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 const useStyles = makeStyles(theme => ({
   iconButton: {
     color: theme.palette.text.icon,
-    boxShadow: theme.shadows[2],
+    boxShadow: theme.shadows[1],
     backgroundColor: theme.palette.background.paper,
     marginLeft: '0.5rem'
   }
