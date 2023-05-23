@@ -40,9 +40,7 @@ const ScanWrapper = ({ currentStep }) => {
             return data
           })
         }))
-        return
-      }
-      if (!isFileAlreadySelected(formData, stepIndex, file)) {
+      } else if (!isFileAlreadySelected(formData, stepIndex, file)) {
         setCurrentFile(file)
         setFormData(prev => ({
           ...prev,
