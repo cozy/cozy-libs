@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [42.5.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@42.4.1...cozy-mespapiers-lib@42.5.0) (2023-05-23)
+
+
+### Features
+
+* **mespapiers:** Add notice period on driver licenses ([32cad78](https://github.com/cozy/cozy-libs/commit/32cad7882fa2e44d6b23f61bc5318fab27df00f6))
+
+
+
+
+
 ## [42.4.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@42.4.0...cozy-mespapiers-lib@42.4.1) (2023-05-22)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
