@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 
 import { isFlagshipApp, isMobile } from 'cozy-device-helper'
+import flag from 'cozy-flags'
 import { useWebviewIntent } from 'cozy-intent'
 
 import ScanDesktopActions from './ScanDesktopActions'
@@ -17,10 +18,14 @@ const ScanActionsWrapper = props => {
       const isAvailable = await webviewIntent.call('isScannerAvailable')
       setIsFlagshipScanAvailable(isAvailable)
     }
-    webviewIntent && checkScanDocument()
+    flag('mespapiers.features.v3') && webviewIntent && checkScanDocument()
   }, [webviewIntent])
 
-  if (isFlagshipApp() && isFlagshipScanAvailable) {
+  if (
+    flag('mespapiers.features.v3') &&
+    isFlagshipApp() &&
+    isFlagshipScanAvailable
+  ) {
     return <ScanFlagshipActions {...props} />
   }
 
