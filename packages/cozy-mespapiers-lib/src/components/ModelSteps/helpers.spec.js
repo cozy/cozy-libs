@@ -1,4 +1,4 @@
-import { isFileAlreadySelected } from './helpers'
+import { isFileAlreadySelected, makeFileFromBase64 } from './helpers'
 
 describe('isFileAlreadySelected', () => {
   it('should return true if the File is already selected in the same step', () => {
@@ -71,5 +71,67 @@ describe('isFileAlreadySelected', () => {
     expect(isFileAlreadySelected(formData, currentStepIndex, currentFile)).toBe(
       false
     )
+  })
+})
+
+describe('makeFileFromBase64', () => {
+  it('should return null if no source', () => {
+    const file = makeFileFromBase64({
+      name: 'logo.png',
+      type: 'image/png'
+    })
+    expect(file).toBe(null)
+  })
+
+  it('should return null if no name', () => {
+    const file = makeFileFromBase64({
+      source: 'iVBORw0KGgoAAAANSUhEUgAAAZAA',
+      type: 'image/png'
+    })
+    expect(file).toBe(null)
+  })
+
+  it('should return null if no type', () => {
+    const file = makeFileFromBase64({
+      source: 'iVBORw0KGgoAAAANSUhEUgAAAZAA',
+      name: 'logo.png'
+    })
+    expect(file).toBe(null)
+  })
+
+  it('should return a File object if source contains "data:...;base64,"', () => {
+    const file = makeFileFromBase64({
+      source: 'data:type/ext;base64,iVBORw0KGgoAAAANSUhEUgAAAZAA',
+      name: 'logo.png',
+      type: 'image/png'
+    })
+    expect(file).toBeInstanceOf(File)
+  })
+
+  it('should return a File object', () => {
+    const file = makeFileFromBase64({
+      source: 'iVBORw0KGgoAAAANSUhEUgAAAZAA',
+      name: 'logo.png',
+      type: 'image/png'
+    })
+    expect(file).toBeInstanceOf(File)
+  })
+
+  it('should return a File object with the right name', () => {
+    const file = makeFileFromBase64({
+      source: 'iVBORw0KGgoAAAANSUhEUgAAAZAA',
+      name: 'logo.png',
+      type: 'image/png'
+    })
+    expect(file.name).toBe('logo.png')
+  })
+
+  it('should return a File object with the right type', () => {
+    const file = makeFileFromBase64({
+      source: 'iVBORw0KGgoAAAANSUhEUgAAAZAA',
+      name: 'logo.png',
+      type: 'image/png'
+    })
+    expect(file.type).toBe('image/png')
   })
 })
