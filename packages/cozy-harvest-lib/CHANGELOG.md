@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.18.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.17.12...cozy-harvest-lib@13.18.0) (2023-05-23)
+
+
+### Bug Fixes
+
+* Wrap IntentTriggerManager inside ComponentsPropsProvider ([47c2bb2](https://github.com/cozy/cozy-libs/commit/47c2bb2472c90e779a84cc7dca6a4518ea1e6571))
+
+
+### Features
+
+* Change string for the notClientSide runner ([f5eb499](https://github.com/cozy/cozy-libs/commit/f5eb499364b717308c13afeb4681417af9679858))
+
+
+
+
+
 ## [13.17.12](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.17.11...cozy-harvest-lib@13.17.12) (2023-05-22)
 
 
