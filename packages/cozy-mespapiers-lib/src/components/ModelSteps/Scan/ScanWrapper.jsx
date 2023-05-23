@@ -10,7 +10,7 @@ import { PaperDefinitionsStepPropTypes } from '../../../constants/PaperDefinitio
 import { makeBlobWithCustomAttrs } from '../../../helpers/makeBlobWithCustomAttrs'
 import { useFormData } from '../../Hooks/useFormData'
 import AcquisitionResult from '../AcquisitionResult'
-import { isFileAlreadySelected, makeFileFromImageSource } from '../helpers'
+import { isFileAlreadySelected, makeFileFromBase64 } from '../helpers'
 
 const { fetchBlobFileById } = models.file
 
@@ -55,10 +55,10 @@ const ScanWrapper = ({ currentStep }) => {
   const onOpenFlagshipScan = async () => {
     try {
       const base64 = await webviewIntent.call('scanDocument')
-      const file = await makeFileFromImageSource({
-        imageSrc: `data:image/png;base64,${base64}`,
-        imageName: 'flagshipScanTemp.png',
-        imageType: 'image/png'
+      const file = makeFileFromBase64({
+        source: base64,
+        name: 'flagshipScanTemp.png',
+        type: 'image/png'
       })
       onChangeFile(file)
     } catch (error) {

@@ -36,30 +36,65 @@ export const isSameFile = (currentFile, file) => {
 }
 
 /**
- * Make a File object from a base64 string or an url
+ * Clean a base64 string from its prefix (data:image/png;base64,)
+ * @param {string} base64 - base64 string
+ * @returns {string} base64 without prefix
+ */
+const cleanBase64 = base64 => {
+  if (base64.startsWith('data:')) {
+    const regex = /^data:[a-zA-Z0-9/+]+;base64,/
+    return base64.replace(regex, '')
+  }
+  return base64
+}
+
+/**
+ * Make a File object from a base64 string
  *
  * @param {Object} options
- * @param {string} options.imageSrc - Image url or base64 string
- * @param {string} options.imageName - Image name
- * @param {string} options.imageType - Image type
- * @returns {Promise<File>}
+ * @param {string} options.base64 - base64 string
+ * @param {string} options.name - file name
+ * @param {string} options.type - file type
+ * @returns {File}
  * @example
- * const file = await makeFileFromString({ imageSrc: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAA', imageName: 'logo.png', imageType: 'image/png' })
+ * const file = makeFileFromBase64({ base64: 'iVBORw0KGgoAAAANSUhEUgAAAZAA', name: 'logo.png', type: 'image/png' })
  */
-export const makeFileFromImageSource = async ({
-  imageSrc,
-  imageName,
-  imageType
-} = {}) => {
+export const makeFileFromBase64 = ({ source, name, type } = {}) => {
   try {
-    if (!imageSrc || !imageName || !imageType) {
+    if (!source || !name || !type) {
       return null
     }
-    const resp = await fetch(imageSrc)
-    const blob = await resp.blob()
-    const newFile = new File([blob], imageName, {
-      type: imageType
-    })
+
+    const sourceWithoutPrefix = cleanBase64(source)
+
+    const byteCharacters = atob(sourceWithoutPrefix)
+    const sliceSize = 1024
+    const totalBytes = byteCharacters.length
+    const numSlices = Math.ceil(totalBytes / sliceSize)
+    const byteArrays = new Array(numSlices)
+
+    for (let sliceIndex = 0; sliceIndex < numSlices; sliceIndex++) {
+      const startOffset = sliceIndex * sliceSize
+      const endOffset = Math.min(startOffset + sliceSize, totalBytes)
+      const slice = byteCharacters.slice(startOffset, endOffset)
+      const byteNumbers = new Uint8Array(slice.length)
+
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i)
+      }
+      byteArrays[sliceIndex] = byteNumbers
+    }
+
+    const combinedByteArray = new Uint8Array(totalBytes)
+    let offset = 0
+    for (let i = 0; i < numSlices; i++) {
+      const byteArray = byteArrays[i]
+      combinedByteArray.set(byteArray, offset)
+      offset += byteArray.length
+    }
+
+    const blob = new Blob(byteArrays, { type })
+    const newFile = new File([blob], name, { type })
 
     return newFile
   } catch (error) {
