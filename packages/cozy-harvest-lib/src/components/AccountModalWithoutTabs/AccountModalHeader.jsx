@@ -30,6 +30,7 @@ export const AccountModalHeader = ({
         accountsAndTriggers={accountsAndTriggers}
         pushHistory={pushHistory}
         replaceHistory={replaceHistory}
+        showAccountSelection={showAccountSelection}
       />
     )
 

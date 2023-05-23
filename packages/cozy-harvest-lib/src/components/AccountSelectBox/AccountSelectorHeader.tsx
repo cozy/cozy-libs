@@ -1,8 +1,10 @@
 import cx from 'classnames'
 import React from 'react'
 
+import { models } from 'cozy-client'
 import DialogBackButton from 'cozy-ui/transpiled/react/CozyDialogs/DialogBackButton'
 import DialogTitle from 'cozy-ui/transpiled/react/Dialog/DialogTitle'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import AccountSelectBox from './AccountSelectBox'
 import { useDialogContext } from '../DialogContext'
@@ -13,13 +15,15 @@ interface AccountSelectorHeaderProps {
   accountsAndTriggers: (object | null | undefined)[]
   pushHistory: (path: string) => void
   replaceHistory: (path: string) => void
+  showAccountSelection: boolean
 }
 
 export const AccountSelectorHeader = ({
   account,
   accountsAndTriggers,
   pushHistory,
-  replaceHistory
+  replaceHistory,
+  showAccountSelection
 }: AccountSelectorHeaderProps): JSX.Element => {
   // @ts-expect-error IDK
   const { dialogTitleProps } = useDialogContext()
@@ -41,18 +45,22 @@ export const AccountSelectorHeader = ({
         )}
         disableTypography
       >
-        <AccountSelectBox
-          loading={!account}
-          selectedAccount={account}
-          accountsAndTriggers={accountsAndTriggers}
-          onChange={(option: { account: { _id: string } }): void => {
-            pushHistory(`/accounts/${option.account._id}`)
-          }}
-          onCreate={(): void => {
-            pushHistory('/new')
-          }}
-          variant="big"
-        />
+        {showAccountSelection ? (
+          <AccountSelectBox
+            loading={!account}
+            selectedAccount={account}
+            accountsAndTriggers={accountsAndTriggers}
+            onChange={(option: { account: { _id: string } }): void => {
+              pushHistory(`/accounts/${option.account._id}`)
+            }}
+            onCreate={(): void => {
+              pushHistory('/new')
+            }}
+            variant="big"
+          />
+        ) : (
+          <Typography>{models.account.getAccountName(account)}</Typography>
+        )}
       </DialogTitle>
     </>
   )
