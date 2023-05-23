@@ -25,6 +25,7 @@ const LaunchTriggerAlertMenu = ({ flow, t, konnectorRoot, historyAction }) => {
   } = useMaintenanceStatus(client, konnector)
   const isKonnectorDisconnected = isDisconnected(konnector, trigger)
   const konnectorPolicy = findKonnectorPolicy(konnector)
+  const isKonnectorRunnable = konnectorPolicy.isRunnable()
   const isClick = konnectorPolicy.name === 'clisk'
 
   const anchorRef = useRef()
@@ -53,17 +54,20 @@ const LaunchTriggerAlertMenu = ({ flow, t, konnectorRoot, historyAction }) => {
           autoclose={true}
           onClose={() => setShowOptions(false)}
         >
-          {!running && !isInMaintenance && !isKonnectorDisconnected && (
-            <ActionMenuItem
-              left={<Icon icon={SyncIcon} />}
-              onClick={() => {
-                SyncButtonAction()
-                setShowOptions(false)
-              }}
-            >
-              {t('card.launchTrigger.button.label')}
-            </ActionMenuItem>
-          )}
+          {isKonnectorRunnable &&
+            !running &&
+            !isInMaintenance &&
+            !isKonnectorDisconnected && (
+              <ActionMenuItem
+                left={<Icon icon={SyncIcon} />}
+                onClick={() => {
+                  SyncButtonAction()
+                  setShowOptions(false)
+                }}
+              >
+                {t('card.launchTrigger.button.label')}
+              </ActionMenuItem>
+            )}
           {!isKonnectorDisconnected && (
             <ActionMenuItem
               left={<Icon icon={GearIcon} />}
@@ -81,7 +85,7 @@ const LaunchTriggerAlertMenu = ({ flow, t, konnectorRoot, historyAction }) => {
               {t('card.launchTrigger.configure')}
             </ActionMenuItem>
           )}
-          {isKonnectorDisconnected && (
+          {!isClick && isKonnectorDisconnected && (
             <ActionMenuItem
               left={<Icon icon={GearIcon} />}
               onClick={() => historyAction(`${konnectorRoot}/new`, 'push')}
