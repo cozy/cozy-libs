@@ -60,7 +60,9 @@ export const LaunchTriggerAlert = ({
   const isInError = !!error
   const block = isInError || (!!withMaintenanceDescription && isInMaintenance)
   const styles = useStyles({ block })
-  const isKonnectorRunnable = findKonnectorPolicy(konnector).isRunnable()
+  const konnectorPolicy = findKonnectorPolicy(konnector)
+  const isKonnectorRunnable = konnectorPolicy.isRunnable()
+  const isClick = konnectorPolicy.name === 'clisk'
   const isKonnectorDisconnected = isDisconnected(konnector, trigger)
 
   useEffect(() => {
@@ -69,15 +71,16 @@ export const LaunchTriggerAlert = ({
     }
   }, [status])
 
-  const SyncButtonAction = isInError
-    ? () =>
-        historyAction(
-          konnectorRoot
-            ? `${konnectorRoot}/accounts/${getAccountId(trigger)}/edit`
-            : '/edit',
-          'push'
-        )
-    : () => launch({ autoSuccessTimer: false })
+  const SyncButtonAction =
+    isInError && !isClick
+      ? () =>
+          historyAction(
+            konnectorRoot
+              ? `${konnectorRoot}/accounts/${getAccountId(trigger)}/edit`
+              : '/edit',
+            'push'
+          )
+      : () => launch({ autoSuccessTimer: false })
   const alertColor = () => {
     if (isInError) return undefined
     if (isInMaintenance) return 'var(--grey50)'
