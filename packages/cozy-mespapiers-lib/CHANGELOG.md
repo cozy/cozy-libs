@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [42.6.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@42.6.0...cozy-mespapiers-lib@42.6.1) (2023-05-23)
+
+
+### Bug Fixes
+
+* **mespapiers:** FilterButton wasn't using correct shadow value ([9457325](https://github.com/cozy/cozy-libs/commit/9457325e3f44018cbb5a3e3a3126d0f8254ecbd8))
+
+
+
+
+
 # [42.6.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@42.5.1...cozy-mespapiers-lib@42.6.0) (2023-05-23)
 
 
