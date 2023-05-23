@@ -11,6 +11,7 @@ import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 
 import { isDisconnected } from '../../helpers/konnectors'
 import { getAccountId } from '../../helpers/triggers'
+import { findKonnectorPolicy } from '../../konnector-policies'
 import { useFlowState } from '../../models/withConnectionFlow'
 import withAdaptiveRouter from '../hoc/withRouter'
 import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
@@ -23,20 +24,23 @@ const LaunchTriggerAlertMenu = ({ flow, t, konnectorRoot, historyAction }) => {
     data: { isInMaintenance }
   } = useMaintenanceStatus(client, konnector)
   const isKonnectorDisconnected = isDisconnected(konnector, trigger)
+  const konnectorPolicy = findKonnectorPolicy(konnector)
+  const isClick = konnectorPolicy.name === 'clisk'
 
   const anchorRef = useRef()
   const [showOptions, setShowOptions] = useState(false)
 
   const isInError = !!error
-  const SyncButtonAction = isInError
-    ? () =>
-        historyAction(
-          konnectorRoot
-            ? `${konnectorRoot}/accounts/${getAccountId(trigger)}/edit`
-            : '/edit',
-          'push'
-        )
-    : () => launch({ autoSuccessTimer: false })
+  const SyncButtonAction =
+    isInError && !isClick
+      ? () =>
+          historyAction(
+            konnectorRoot
+              ? `${konnectorRoot}/accounts/${getAccountId(trigger)}/edit`
+              : '/edit',
+            'push'
+          )
+      : () => launch({ autoSuccessTimer: false })
 
   return (
     <>
