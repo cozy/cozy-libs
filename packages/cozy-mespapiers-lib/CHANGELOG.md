@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [42.6.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@42.5.1...cozy-mespapiers-lib@42.6.0) (2023-05-23)
+
+
+### Features
+
+* Wrap scanner feature behind `mespapiers.features.v3` flag ([e467977](https://github.com/cozy/cozy-libs/commit/e467977d283e9ba0cc023a2518d42ab5d238bbc4))
+
+
+
+
+
 ## [42.5.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@42.5.0...cozy-mespapiers-lib@42.5.1) (2023-05-23)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
