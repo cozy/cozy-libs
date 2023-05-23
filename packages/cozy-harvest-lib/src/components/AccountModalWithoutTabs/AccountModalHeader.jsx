@@ -2,6 +2,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { useMatch } from 'react-router-dom'
 
+import { models } from 'cozy-client'
+import Typography from 'cozy-ui/transpiled/react/Typography'
+
 import AccountSelectBox from '../AccountSelectBox/AccountSelectBox'
 import { AccountSelectorHeader } from '../AccountSelectBox/AccountSelectorHeader'
 import KonnectorModalHeader from '../KonnectorModalHeader'
@@ -32,7 +35,7 @@ export const AccountModalHeader = ({
 
   return (
     <KonnectorModalHeader konnector={konnector}>
-      {showAccountSelection && (
+      {showAccountSelection ? (
         <AccountSelectBox
           loading={!account}
           selectedAccount={account}
@@ -44,6 +47,8 @@ export const AccountModalHeader = ({
             pushHistory('/new')
           }}
         />
+      ) : (
+        <Typography>{models.account.getAccountName(account)}</Typography>
       )}
     </KonnectorModalHeader>
   )
@@ -56,7 +61,7 @@ AccountModalHeader.propTypes = {
   konnector: PropTypes.object.isRequired,
   account: PropTypes.object,
   accountsAndTriggers: PropTypes.array.isRequired,
-  showAccountSelection: PropTypes.bool,
+  showAccountSelection: PropTypes.bool.isRequired,
   pushHistory: PropTypes.func.isRequired
 }
 

@@ -135,6 +135,7 @@ export class AccountModal extends Component {
             konnector={konnector}
             account={account}
             accountsAndTriggers={accountsAndTriggers}
+            showAccountSelection={showAccountSelection}
           />
         ) : (
           <KonnectorModalHeader konnector={konnector}>
