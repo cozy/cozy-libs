@@ -27,7 +27,7 @@
       "noAccount": "Si vous n'avez pas de compte il vous faudra en créer un sur le site [%{vendorName}](%{vendorLink})."
     },
     "cannotConnectLink": "Je ne parviens pas à me connecter",
-    "notClientSide": "L'application %{name} utilise un nouveau système plus efficace pour la récupération de vos données dans votre Cozy. Cette action est uniquement accessible depuis l’application mobile Cozy.",
+    "notClientSide": "Pour synchroniser vos données %{name} dans votre Cozy vous devez utiliser l'application Cozy de votre téléphone ou tablette.",
     "clientSide": {
       "title": "Connecter à mon Cozy",
       "submit": "Connecter",
