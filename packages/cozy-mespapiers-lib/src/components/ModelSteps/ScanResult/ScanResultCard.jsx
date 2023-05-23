@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useState, forwardRef } from 'react'
 
+import Box from 'cozy-ui/transpiled/react/Box'
 import Card from 'cozy-ui/transpiled/react/Card'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -61,9 +62,9 @@ const ScanResultCard = forwardRef(
 
     return (
       <Card className="u-ta-center u-p-1 u-flex u-flex-column u-flex-justify-between">
-        <div
+        <Box
           className="u-flex u-flex-justify-center u-flex-items-center u-h-100"
-          style={{ minHeight: imgWrapperMinHeight }}
+          minHeight={imgWrapperMinHeight}
         >
           <div className="u-mah-5">
             {isImageType(currentFile) ? (
@@ -81,14 +82,14 @@ const ScanResultCard = forwardRef(
               </>
             )}
           </div>
-        </div>
-        <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+        </Box>
+        <Box display="flex" gridGap="1rem" marginTop="1rem">
           <ScanResultCardActions
             onRotate={handleRotate}
             onCancel={handleSelectedFile}
             isImageRotating={isImageRotating}
           />
-        </div>
+        </Box>
       </Card>
     )
   }
