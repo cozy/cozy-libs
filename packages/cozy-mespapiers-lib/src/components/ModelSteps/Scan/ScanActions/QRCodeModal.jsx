@@ -3,6 +3,7 @@ import React from 'react'
 
 import { IllustrationDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Link from 'cozy-ui/transpiled/react/Link'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import QRCode from '../../../../assets/images/QRCode.png'
@@ -11,7 +12,7 @@ import playStoreIcon from '../../../../assets/images/playstore.png'
 import { ANDROID_APP_URL, IOS_APP_URL } from '../../../../constants/const'
 
 const QRCodeModal = ({ onClose }) => {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
 
   return (
     <IllustrationDialog
@@ -25,7 +26,14 @@ const QRCodeModal = ({ onClose }) => {
           className="u-flex u-flex-column u-flex-items-center u-flex-justify-center u-pt-3 u-pb-2 u-ph-1-half"
           data-testid="QRCodeModal"
         >
-          <img src={QRCode} width="100%" alt="" aria-hidden />
+          <Link
+            href={`https://cozy.io/${lang}/download`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={QRCode} width="100%" alt="" aria-hidden />
+            <span className="u-visuallyhidden">{t('QRCodeModal.a11n')}</span>
+          </Link>
           <Typography gutterBottom variant="h3" color="textPrimary">
             {t('QRCodeModal.title')}
           </Typography>
