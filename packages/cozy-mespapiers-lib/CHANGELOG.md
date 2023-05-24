@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [43.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@43.0.0...cozy-mespapiers-lib@43.0.1) (2023-05-24)
+
+
+### Bug Fixes
+
+* **mespapiers:** Refactor `makeFileFromImageSource` for CSP compliant ([897c67e](https://github.com/cozy/cozy-libs/commit/897c67e691c1daac6959e5fa290dcccba0aabf03))
+
+
+
+
+
 # [43.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@42.6.2...cozy-mespapiers-lib@43.0.0) (2023-05-24)
 
 
