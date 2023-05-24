@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.18.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.18.1...cozy-harvest-lib@13.18.2) (2023-05-24)
+
+
+### Bug Fixes
+
+* Don't display this link for Clisk ([0bb9aa9](https://github.com/cozy/cozy-libs/commit/0bb9aa930379ea5f3bbc4243576166eb8c37e0dd))
+
+
+
+
+
 ## [13.18.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.18.0...cozy-harvest-lib@13.18.1) (2023-05-24)
 
 
