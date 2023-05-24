@@ -62,7 +62,7 @@ export const LaunchTriggerAlert = ({
   const styles = useStyles({ block })
   const konnectorPolicy = findKonnectorPolicy(konnector)
   const isKonnectorRunnable = konnectorPolicy.isRunnable()
-  const isClick = konnectorPolicy.name === 'clisk'
+  const isClisk = konnectorPolicy.name === 'clisk'
   const isKonnectorDisconnected = isDisconnected(konnector, trigger)
 
   useEffect(() => {
@@ -72,7 +72,7 @@ export const LaunchTriggerAlert = ({
   }, [status])
 
   const SyncButtonAction =
-    isInError && !isClick
+    isInError && !isClisk
       ? () =>
           historyAction(
             konnectorRoot
