@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.18.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.18.0...cozy-harvest-lib@13.18.1) (2023-05-24)
+
+
+### Bug Fixes
+
+* Don't display the Add Account in the config dialog ([dfbdfc5](https://github.com/cozy/cozy-libs/commit/dfbdfc5572ff13347f0475d818ace6b0577cef30))
+* Fixup ([9e531a4](https://github.com/cozy/cozy-libs/commit/9e531a49b118047b258350e3da39a8e132e4c6a5))
+* Respect the showAccountSelection props ([f1de891](https://github.com/cozy/cozy-libs/commit/f1de89107c125da9cd7d6c2c577f19dbef5d613b))
+* Show the right buttons ([70de7cd](https://github.com/cozy/cozy-libs/commit/70de7cd418bc879498d62dfcdc2879f908fcfea5))
+* SyncButtonAction for clisk ([d7b7656](https://github.com/cozy/cozy-libs/commit/d7b76562069603080d82da947a5c308e3da9f851))
+* Typo ([4cff8ef](https://github.com/cozy/cozy-libs/commit/4cff8ef898fde71ed3bfe7037eaf3fba0ac51bdd))
+
+
+
+
+
 # [13.18.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.17.12...cozy-harvest-lib@13.18.0) (2023-05-23)
 
 
