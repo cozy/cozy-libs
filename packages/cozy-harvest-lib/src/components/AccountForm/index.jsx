@@ -304,16 +304,17 @@ export class AccountForm extends PureComponent {
                   inputRefByName={this.inputRefByName}
                   t={t}
                 />
-                {flag('harvest.inappconnectors.enabled') && (
-                  <Link
-                    className="u-mt-1"
-                    variant="body1"
-                    component="button"
-                    onClick={this.showCannotConnectModal}
-                  >
-                    {t('accountForm.cannotConnectLink')}
-                  </Link>
-                )}
+                {flag('harvest.inappconnectors.enabled') &&
+                  !konnector.clientSide && (
+                    <Link
+                      className="u-mt-1"
+                      variant="body1"
+                      component="button"
+                      onClick={this.showCannotConnectModal}
+                    >
+                      {t('accountForm.cannotConnectLink')}
+                    </Link>
+                  )}
                 {konnector.clientSide ? (
                   <ConnectCard
                     title={t('accountForm.clientSide.title')}
