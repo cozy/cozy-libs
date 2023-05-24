@@ -85,7 +85,7 @@ const LaunchTriggerAlertMenu = ({ flow, t, konnectorRoot, historyAction }) => {
               {t('card.launchTrigger.configure')}
             </ActionMenuItem>
           )}
-          {!isClick && isKonnectorDisconnected && (
+          {!isClisk && isKonnectorDisconnected && (
             <ActionMenuItem
               left={<Icon icon={GearIcon} />}
               onClick={() => historyAction(`${konnectorRoot}/new`, 'push')}
