@@ -26,14 +26,14 @@ const LaunchTriggerAlertMenu = ({ flow, t, konnectorRoot, historyAction }) => {
   const isKonnectorDisconnected = isDisconnected(konnector, trigger)
   const konnectorPolicy = findKonnectorPolicy(konnector)
   const isKonnectorRunnable = konnectorPolicy.isRunnable()
-  const isClick = konnectorPolicy.name === 'clisk'
+  const isClisk = konnectorPolicy.name === 'clisk'
 
   const anchorRef = useRef()
   const [showOptions, setShowOptions] = useState(false)
 
   const isInError = !!error
   const SyncButtonAction =
-    isInError && !isClick
+    isInError && !isClisk
       ? () =>
           historyAction(
             konnectorRoot
