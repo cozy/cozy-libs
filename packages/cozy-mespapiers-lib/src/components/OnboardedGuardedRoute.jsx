@@ -5,7 +5,7 @@ import { useQuery, hasQueryBeenLoaded } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import { useOnboarding } from './Hooks/useOnboarding'
-import { getOnboardingStatus } from '../helpers/queries'
+import { getAppSettings } from '../helpers/queries'
 
 const OnboardedGuardedRoute = () => {
   const location = useLocation()
@@ -13,8 +13,8 @@ const OnboardedGuardedRoute = () => {
   const isOnboardingPage = location.pathname === '/paper/onboarding'
 
   const { data: settingsData, ...settingsQuery } = useQuery(
-    getOnboardingStatus.definition,
-    getOnboardingStatus.options
+    getAppSettings.definition,
+    getAppSettings.options
   )
 
   if (!hasQueryBeenLoaded(settingsQuery)) {

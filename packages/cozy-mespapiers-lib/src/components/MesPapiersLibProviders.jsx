@@ -16,15 +16,15 @@ import { MesPapiersLibLayout } from './MesPapiersLibLayout'
 import PapersFabWrapper from './PapersFab/PapersFabWrapper'
 import { FILES_DOCTYPE, CONTACTS_DOCTYPE } from '../doctypes'
 import { getComponents } from '../helpers/defaultComponent'
-import { getOnboardingStatus } from '../helpers/queries'
+import { getAppSettings } from '../helpers/queries'
 
 export const MesPapiersLibProviders = ({ lang, components }) => {
   const polyglot = initTranslation(lang, lang => require(`../locales/${lang}`))
   const { PapersFab, ForwardFab, Onboarding } = getComponents(components)
 
   const { data: settingsData } = useQuery(
-    getOnboardingStatus.definition,
-    getOnboardingStatus.options
+    getAppSettings.definition,
+    getAppSettings.options
   )
 
   const isOnboarded = settingsData?.[0]?.onboarded
