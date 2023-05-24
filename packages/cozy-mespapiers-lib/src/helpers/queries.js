@@ -83,10 +83,10 @@ export const buildFilesQueryByLabel = label => ({
   }
 })
 
-export const getOnboardingStatus = {
+export const getAppSettings = {
   definition: () => Q(SETTINGS_DOCTYPE),
   options: {
-    as: `getOnboardingStatus`,
+    as: SETTINGS_DOCTYPE,
     fetchPolicy: fetchPolicies.noFetch()
   }
 }
