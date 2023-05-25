@@ -13,7 +13,7 @@ import ScanResultTitle from './ScanResultTitle'
 import { PaperDefinitionsStepPropTypes } from '../../../constants/PaperDefinitionsPropTypes'
 import { KEYS } from '../../../constants/const'
 import { useStepperDialog } from '../../Hooks/useStepperDialog'
-import { makeFileFromImageSource } from '../helpers'
+import { makeFileFromBase64 } from '../helpers'
 
 const ScanResultWrapper = ({
   currentFile,
@@ -28,12 +28,12 @@ const ScanResultWrapper = ({
   const { isMobile } = useBreakpoints()
   const { nextStep } = useStepperDialog()
 
-  const onValid = async addPage => {
+  const onValid = addPage => {
     if (rotationImage % 360 !== 0) {
-      const newFile = await makeFileFromImageSource({
-        imageSrc: imageRef.current.src,
-        imageName: currentFile.name,
-        imageType: currentFile.type
+      const newFile = makeFileFromBase64({
+        source: imageRef.current.src,
+        name: currentFile.name,
+        type: currentFile.type
       })
       onChangeFile(newFile, { replace: true })
     }
