@@ -1,27 +1,61 @@
 import PropTypes from 'prop-types'
 import React, { createRef } from 'react'
 
+import { useClient, useQuery, hasQueryBeenLoaded } from 'cozy-client'
+import log from 'cozy-logger'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import FileInput from 'cozy-ui/transpiled/react/FileInput'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 
+import ScanDesktopActionsAlert from './ScanDesktopActionsAlert'
 import { KEYS } from '../../../../constants/const'
+import { SETTINGS_DOCTYPE } from '../../../../doctypes'
+import { getAppSettings } from '../../../../helpers/queries'
 
 const styleBtn = { color: 'var(--primaryTextColor)' }
 
 const ScanDesktopActions = ({ onOpenFilePickerModal, onChangeFile }) => {
   const { t } = useI18n()
   const buttonRef = createRef()
+  const client = useClient()
+
+  const { data: settingsData, ...settingsQueryResult } = useQuery(
+    getAppSettings.definition,
+    getAppSettings.options
+  )
+  const isLoadedSettings = hasQueryBeenLoaded(settingsQueryResult)
+  const showAlert = isLoadedSettings
+    ? settingsData[0].showScanDesktopActionsAlert ?? true
+    : true
 
   const handleKeyDown = ({ key }) => {
     if (key === KEYS.ENTER && buttonRef.current) {
       buttonRef.current.click()
     }
   }
-
   useEventListener(window, 'keydown', handleKeyDown)
+
+  const handleHideAlert = async () => {
+    if (isLoadedSettings) {
+      try {
+        await client.save({
+          ...settingsData[0],
+          showScanDesktopActionsAlert: false,
+          _type: SETTINGS_DOCTYPE
+        })
+      } catch (error) {
+        log('error', 'Error when saving settings in ScanDesktopActions', error)
+      }
+    } else {
+      log(
+        'warn',
+        'Settings are not loaded when clicking to hide ScanDesktopActionsAlert'
+      )
+    }
+  }
 
   return (
     <>
@@ -48,6 +82,12 @@ const ScanDesktopActions = ({ onOpenFilePickerModal, onChangeFile }) => {
           label={t('Scan.importPicFromDesktop')}
         />
       </FileInput>
+      {showAlert && (
+        <div className="u-w-100 u-mv-1">
+          <Divider textAlign="center">{t('Scan.divider')}</Divider>
+        </div>
+      )}
+      {showAlert && <ScanDesktopActionsAlert onClose={handleHideAlert} />}
     </>
   )
 }

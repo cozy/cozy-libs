@@ -428,6 +428,18 @@
       "button": "Ajouter manuellement"
     }
   },
+  "ScanDesktopActionsAlert": {
+    "title": "Scanner avec l’app Cozy Cloud",
+    "text": "Installer l’application Cozy Cloud sur votre mobile pour prendre directement vos papiers en photo et en extraire les informations automatiquement.",
+    "actions": {
+      "hide": "Non, merci",
+      "install": "Installer l'app"
+    }
+  },
+  "QRCodeModal": {
+    "title": "Scanner le QR Code",
+    "text": "Ou rendez vous directement sur <img src=%{iosIconSrc} /> <a href='%{iosUrl}' class='u-link' target='_blank' rel='noopener'>l’app-store</a><br>ou sur <img src=%{androidIconSrc} /> <a href='%{androidUrl}' class='u-link' target='_blank' rel='noopener'>Google Play</a> pour installer l’app Cozy Cloud"
+  },
   "InstallAppModal": {
     "title": "Installer l’application",
     "text": "Installer l'application Cozy Cloud sur votre mobile pour prendre directement vos papiers en photo.",
