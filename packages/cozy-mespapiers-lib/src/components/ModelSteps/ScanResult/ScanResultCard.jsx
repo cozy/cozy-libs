@@ -6,6 +6,7 @@ import Card from 'cozy-ui/transpiled/react/Card'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
+import styles from './ScanResultCard.styl'
 import ScanResultCardActions from './ScanResultCardActions'
 import { useFormData } from '../../Hooks/useFormData'
 import { getLastFormDataFile, isSameFile } from '../helpers'
@@ -62,27 +63,22 @@ const ScanResultCard = forwardRef(
 
     return (
       <Card className="u-ta-center u-p-1 u-flex u-flex-column u-flex-justify-between">
-        <Box
-          className="u-flex u-flex-justify-center u-flex-items-center u-h-100"
-          minHeight={imgWrapperMinHeight}
-        >
-          <div className="u-mah-5">
-            {isImageType(currentFile) ? (
-              <RotateImage
-                image={URL.createObjectURL(currentFile)}
-                onLoaded={handleImageLoaded}
-                rotation={rotationImage}
-                a11n={{ 'aria-hidden': true }}
-                ref={ref}
-              />
-            ) : (
-              <>
-                <Icon icon="file-type-pdf" size={80} aria-hidden="true" />
-                <Typography>{currentFile.name}</Typography>
-              </>
-            )}
-          </div>
-        </Box>
+        <div className={styles['image-container']}>
+          {isImageType(currentFile) ? (
+            <RotateImage
+              image={URL.createObjectURL(currentFile)}
+              onLoaded={handleImageLoaded}
+              rotation={rotationImage}
+              a11n={{ 'aria-hidden': true }}
+              ref={ref}
+            />
+          ) : (
+            <>
+              <Icon icon="file-type-pdf" size={80} aria-hidden="true" />
+              <Typography>{currentFile.name}</Typography>
+            </>
+          )}
+        </div>
         <Box display="flex" gridGap="1rem" marginTop="1rem">
           <ScanResultCardActions
             onRotate={handleRotate}

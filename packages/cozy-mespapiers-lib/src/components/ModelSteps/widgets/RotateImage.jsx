@@ -12,7 +12,7 @@ const RotateImage = forwardRef(
         ref={ref}
         onLoad={onLoaded}
         src={src}
-        style={{ maxWidth: '100%', maxHeight: 'inherit' }}
+        style={{ maxWidth: '100%', objectFit: 'contain' }}
         {...a11n}
         {...props}
       />
