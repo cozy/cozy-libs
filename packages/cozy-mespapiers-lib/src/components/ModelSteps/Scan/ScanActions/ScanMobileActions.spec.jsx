@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 
@@ -35,22 +36,18 @@ describe('ScanMobileActions', () => {
     const { container } = setup()
     const inputFileButtons = container.querySelectorAll('input[type="file"]')
 
-    expect(inputFileButtons).toHaveLength(2)
+    expect(inputFileButtons).toHaveLength(1)
   })
 
-  it('should called onChangeFileAction function', () => {
-    const onChangeFileAction = jest.fn()
-    const { getByTestId } = setup({ onChangeFile: onChangeFileAction })
+  it('should open InstallAppModal modal when click on takePic button', () => {
+    const { getByTestId } = setup()
 
     const takePicButton = getByTestId('takePic-btn')
-    const importPicFromMobileButton = getByTestId('importPicFromMobile-btn')
 
-    fireEvent.change(takePicButton)
-    expect(onChangeFileAction).toBeCalledTimes(1)
+    fireEvent.click(takePicButton)
 
-    jest.clearAllMocks()
+    const installAppModal = getByTestId('InstallAppModal')
 
-    fireEvent.change(importPicFromMobileButton)
-    expect(onChangeFileAction).toBeCalledTimes(1)
+    expect(installAppModal).toBeInTheDocument()
   })
 })
