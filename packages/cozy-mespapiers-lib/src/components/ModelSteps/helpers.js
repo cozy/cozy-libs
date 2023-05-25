@@ -101,3 +101,57 @@ export const makeFileFromBase64 = ({ source, name, type } = {}) => {
     return null
   }
 }
+
+let canvas
+let canvasContext
+/**
+ * @param {HTMLImageElement} image - Image element
+ * @param {number} rotation - Rotation in degrees
+ * @returns {string} - Base64 string
+ */
+export const makeRotatedImage = (image, rotation) => {
+  if (!canvas) {
+    canvas = document.createElement('canvas')
+    canvasContext = canvas.getContext('2d')
+  }
+  if (!image || !canvasContext) return null
+
+  const { width: imageWidth, height: imageHeight } = image
+
+  if (rotation === 0) return image.src
+
+  const { PI, sin, cos, abs } = Math
+  const angle = (rotation * PI) / 180
+  const sinAngle = sin(angle)
+  const cosAngle = cos(angle)
+
+  canvas.width = abs(imageWidth * cosAngle) + abs(imageHeight * sinAngle)
+  canvas.height = abs(imageWidth * sinAngle) + abs(imageHeight * cosAngle)
+
+  // The width and height of the canvas will be automatically rounded
+  const { width: canvasWidth, height: canvasHeight } = canvas
+
+  canvasContext.clearRect(0, 0, canvasWidth, canvasHeight)
+  canvasContext.translate(canvasWidth / 2, canvasHeight / 2)
+  canvasContext.rotate(angle)
+
+  canvasContext.drawImage(
+    image,
+    -imageWidth / 2,
+    -imageHeight / 2,
+    imageWidth,
+    imageHeight
+  )
+
+  /**
+   * A Number between 0 and 1 indicating the image quality to be used when creating images using file formats that support lossy compression (such as image/jpeg or image/webp).
+   * see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
+   */
+  const encoderOptions = 0.6
+
+  const src = canvas.toDataURL('image/webp', encoderOptions)
+  canvas.width = 0
+  canvas.height = 0
+
+  return src
+}
