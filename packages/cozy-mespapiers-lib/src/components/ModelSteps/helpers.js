@@ -1,3 +1,5 @@
+import { ANDROID_APP_URL, IOS_APP_URL } from '../../constants/const'
+
 /**
  * Check if a file is already selected in the state of the FormDataProvider
  * @param {object} formData - State of the FormDataProvider
@@ -164,4 +166,15 @@ export const getLastFormDataFile = ({ formData, stepIndex }) => {
   const { file } = data[data.length - 1] || {}
 
   return file || null
+}
+
+export const getLinkByPlatform = platform => {
+  switch (platform) {
+    case 'ios':
+      return IOS_APP_URL
+    case 'android':
+      return ANDROID_APP_URL
+    case 'web': // Case that should only exist in development, as this component is used in ScanMobileActions
+      return IOS_APP_URL
+  }
 }

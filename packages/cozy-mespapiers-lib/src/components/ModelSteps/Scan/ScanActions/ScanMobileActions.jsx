@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useState } from 'react'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import FileInput from 'cozy-ui/transpiled/react/FileInput'
@@ -7,9 +7,12 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 
+import InstallAppModal from '../InstallAppModal'
+
 const styleBtn = { color: 'var(--primaryTextColor)' }
 
 const ScanMobileActions = ({ onOpenFilePickerModal, onChangeFile }) => {
+  const [showInstallAppModal, setShowInstallAppModal] = useState(false)
   const { t } = useI18n()
 
   return (
@@ -44,22 +47,18 @@ const ScanMobileActions = ({ onOpenFilePickerModal, onChangeFile }) => {
           />
         </FileInput>
       </div>
-      <FileInput
-        onChange={onChangeFile}
-        className="u-w-100 u-ta-center u-ml-0"
-        onClick={e => e.stopPropagation()}
-        capture="environment"
-        accept={'image/*'}
+      <Button
+        startIcon={<Icon icon="camera" />}
+        onClick={() => setShowInstallAppModal(true)}
+        fullWidth
+        className="u-m-0"
+        label={t('Scan.takePic')}
         data-testid="takePic-btn"
-      >
-        <Button
-          startIcon={<Icon icon="camera" />}
-          component="a"
-          fullWidth
-          className="u-m-0"
-          label={t('Scan.takePic')}
-        />
-      </FileInput>
+      />
+
+      {showInstallAppModal && (
+        <InstallAppModal onBack={() => setShowInstallAppModal(false)} />
+      )}
     </>
   )
 }

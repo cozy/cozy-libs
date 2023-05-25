@@ -427,5 +427,14 @@
       "text": "%{konnectorSlug} n'a pas encore publié le papier sur son site. Il sera récupéré ici automatiquement une fois publié par %{konnectorSlug}.",
       "button": "Ajouter manuellement"
     }
+  },
+  "InstallAppModal": {
+    "title": "Installer l’application",
+    "text": "Installer l'application Cozy Cloud sur votre mobile pour prendre directement vos papiers en photo.",
+    "action": {
+      "android": "Installer sur Google Play",
+      "ios": "Installer sur l'App Store",
+      "web": "Installer sur l'App Store"
+    }
   }
 }
