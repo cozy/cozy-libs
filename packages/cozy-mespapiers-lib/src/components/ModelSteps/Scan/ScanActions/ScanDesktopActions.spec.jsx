@@ -1,12 +1,38 @@
-import { fireEvent, render } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import React from 'react'
+
+import { useQuery, hasQueryBeenLoaded } from 'cozy-client'
 
 import ScanDesktopActions from './ScanDesktopActions'
 import AppLike from '../../../../../test/components/AppLike'
 
-const setup = ({ onOpenFilePickerModal, onChangeFile } = {}) => {
+jest.mock('cozy-client/dist/hooks/useQuery', () => jest.fn())
+jest.mock('cozy-client/dist/utils', () => ({
+  ...jest.requireActual('cozy-client/dist/utils'),
+  hasQueryBeenLoaded: jest.fn()
+}))
+
+const setup = ({
+  onOpenFilePickerModal,
+  onChangeFile,
+  showScanDesktopActionsAlert,
+  clientSaveFn = jest.fn(),
+  isLoaded = true
+} = {}) => {
+  const client = { save: clientSaveFn }
+  hasQueryBeenLoaded.mockReturnValue(isLoaded)
+  useQuery.mockReturnValue({
+    data: [
+      {
+        ...(showScanDesktopActionsAlert != null
+          ? { showScanDesktopActionsAlert }
+          : {})
+      }
+    ]
+  })
   return render(
-    <AppLike>
+    <AppLike client={client}>
       <ScanDesktopActions
         onOpenFilePickerModal={
           onOpenFilePickerModal ? onOpenFilePickerModal : undefined
@@ -48,5 +74,50 @@ describe('ScanDesktopActions', () => {
 
     fireEvent.change(inputFileButton)
     expect(onChangeFileAction).toBeCalledTimes(1)
+  })
+
+  it('should display alert information if "showScanDesktopActionsAlert" is undefined', () => {
+    const { getByTestId } = setup()
+    const ScanDesktopActionsAlert = getByTestId('ScanDesktopActionsAlert')
+
+    expect(ScanDesktopActionsAlert).toBeInTheDocument()
+  })
+
+  it('should display alert information if "showScanDesktopActionsAlert" is true', () => {
+    const { getByTestId } = setup({ showScanDesktopActionsAlert: true })
+    const ScanDesktopActionsAlert = getByTestId('ScanDesktopActionsAlert')
+
+    expect(ScanDesktopActionsAlert).toBeInTheDocument()
+  })
+
+  it('should hide alert information if "showScanDesktopActionsAlert" is false', () => {
+    const { queryByTestId } = setup({ showScanDesktopActionsAlert: false })
+    const ScanDesktopActionsAlert = queryByTestId('ScanDesktopActionsAlert')
+
+    expect(ScanDesktopActionsAlert).toBeNull()
+  })
+
+  it('should call client.save when click on "No, thanks" button', async () => {
+    const clientSaveFn = jest.fn()
+    const { getByText } = setup({ clientSaveFn, isLoaded: true })
+    const hideButton = getByText('No, thanks')
+
+    fireEvent.click(hideButton)
+
+    await waitFor(() => {
+      expect(clientSaveFn).toBeCalledTimes(1)
+    })
+  })
+
+  it('should not call client.save when click on "No, thanks" button when settings is not loaded', async () => {
+    const clientSaveFn = jest.fn()
+    const { getByText } = setup({ clientSaveFn, isLoaded: false })
+    const hideButton = getByText('No, thanks')
+
+    fireEvent.click(hideButton)
+
+    await waitFor(() => {
+      expect(clientSaveFn).toBeCalledTimes(0)
+    })
   })
 })
