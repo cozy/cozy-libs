@@ -19,21 +19,20 @@ const QRCodeModal = ({ onClose }) => {
       open
       size="small"
       transitionDuration={0}
-      disableGutters
       onClose={onClose}
-      content={
-        <div
-          className="u-flex u-flex-column u-flex-items-center u-flex-justify-center u-pt-3 u-pb-2 u-ph-1-half"
-          data-testid="QRCodeModal"
+      componentsProps={{ dialogTitle: { className: 'u-pt-2' } }}
+      title={
+        <Link
+          href={`https://cozy.io/${lang}/download`}
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <Link
-            href={`https://cozy.io/${lang}/download`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={QRCode} width="100%" alt="" aria-hidden />
-            <span className="u-visuallyhidden">{t('QRCodeModal.a11n')}</span>
-          </Link>
+          <img src={QRCode} width="100%" alt="" aria-hidden />
+          <span className="u-visuallyhidden">{t('QRCodeModal.a11n')}</span>
+        </Link>
+      }
+      content={
+        <div className="u-ta-center" data-testid="QRCodeModal">
           <Typography gutterBottom variant="h3" color="textPrimary">
             {t('QRCodeModal.title')}
           </Typography>
