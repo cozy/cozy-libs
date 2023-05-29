@@ -12,7 +12,7 @@ import { getCurrentFileTheme } from './helpers'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 
-const PapersListToolbar = ({ selectedThemeLabel, fileCount }) => {
+const PapersListToolbar = ({ selectedThemeLabel }) => {
   const { BarLeft, BarCenter } = cozy.bar
   const params = useParams()
   const navigate = useNavigate()
@@ -21,7 +21,7 @@ const PapersListToolbar = ({ selectedThemeLabel, fileCount }) => {
 
   const currentFileTheme = getCurrentFileTheme(params, selectedThemeLabel)
   const themeLabel = scannerT(`items.${currentFileTheme}`, {
-    smart_count: fileCount
+    smart_count: 2 // We always want to have the plural here, unlike other places
   })
   const onBack = () => navigate('..')
 
