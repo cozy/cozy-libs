@@ -32,9 +32,11 @@ const PapersListToolbar = ({ selectedThemeLabel }) => {
   return (
     <>
       <BarLeft>
-        <IconButton onClick={onBack}>
-          <Icon icon="previous" />
-        </IconButton>
+        <div className="u-flex u-flex-items-center u-mr-half">
+          <IconButton onClick={onBack}>
+            <Icon icon="previous" />
+          </IconButton>
+        </div>
       </BarLeft>
 
       <BarCenter>
