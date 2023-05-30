@@ -1,18 +1,31 @@
 import { useState, useEffect } from 'react'
 
 import { useSearch } from './SearchProvider'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
 
-const useSearchResult = ({ docsToBeSearched, searchValue, selectedTheme }) => {
+const useSearchResult = ({ papers, contacts, searchValue, selectedTheme }) => {
   const { search } = useSearch()
+  const { isMultiSelectionActive } = useMultiSelection()
   const [searchResult, setSearchResult] = useState({
-    pending: true,
+    loading: true,
     hasResult: null,
     filteredDocs: null,
-    firstSearchResultMatchingAttributes: null
+    firstSearchResultMatchingAttributes: null,
+    showResultByGroup: null
   })
 
   useEffect(() => {
+    setSearchResult(state => ({
+      ...state,
+      loading: true
+    }))
+
     const asyncFn = async () => {
+      const allDocs = papers.concat(contacts)
+      const showResultByGroup = searchValue?.length === 0
+      const docsToBeSearched =
+        isMultiSelectionActive || showResultByGroup ? papers : allDocs
+
       const { filteredDocs, firstSearchResultMatchingAttributes } =
         await search({
           docs: docsToBeSearched,
@@ -23,15 +36,23 @@ const useSearchResult = ({ docsToBeSearched, searchValue, selectedTheme }) => {
       const hasResult = filteredDocs?.length > 0
 
       setSearchResult({
-        pending: false,
+        loading: false,
         hasResult,
         filteredDocs,
-        firstSearchResultMatchingAttributes
+        firstSearchResultMatchingAttributes,
+        showResultByGroup
       })
     }
 
     asyncFn()
-  }, [docsToBeSearched, search, searchValue, selectedTheme])
+  }, [
+    papers,
+    contacts,
+    search,
+    searchValue,
+    selectedTheme,
+    isMultiSelectionActive
+  ])
 
   return searchResult
 }
