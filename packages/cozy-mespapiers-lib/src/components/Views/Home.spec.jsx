@@ -97,13 +97,13 @@ describe('Home components:', () => {
   })
 
   it('should display PaperGroup, SearchInput, ThemesFilter & FeaturedPlaceholdersList', () => {
-    const { getByTestId, queryAllByTestId } = setup({
+    const { getByTestId, queryAllByTestId, getByPlaceholderText } = setup({
       isLoading: false,
       withData: true
     })
 
     expect(getByTestId('PaperGroup'))
-    expect(getByTestId('SearchInput'))
+    expect(getByPlaceholderText('Name of the paper, owner or info'))
     expect(queryAllByTestId('ThemesFilter')).not.toHaveLength(0)
     expect(getByTestId('FeaturedPlaceholdersList'))
   })
@@ -127,37 +127,38 @@ describe('Home components:', () => {
   })
 
   it('should hide ThemesFilter when SearchInput is focused, on Mobile', () => {
-    const { queryAllByTestId, getByTestId } = setup({
+    const { queryAllByTestId, getByPlaceholderText } = setup({
       isLoading: false,
       withData: true,
       isDesktop: false
     })
 
     expect(queryAllByTestId('ThemesFilter')).not.toHaveLength(0)
-    fireEvent.focus(getByTestId('SearchInput'))
+    fireEvent.focus(getByPlaceholderText('Name of the paper, owner or info'))
     expect(queryAllByTestId('ThemesFilter')).toHaveLength(0)
   })
 
   it('should display ThemesFilter when click on SwitchButton, on Mobile', () => {
-    const { queryAllByTestId, getByTestId } = setup({
+    const { queryAllByTestId, getByTestId, getByPlaceholderText } = setup({
       isLoading: false,
       withData: true,
       isDesktop: false
     })
-    fireEvent.focus(getByTestId('SearchInput'))
+
+    fireEvent.focus(getByPlaceholderText('Name of the paper, owner or info'))
     expect(queryAllByTestId('ThemesFilter')).toHaveLength(0)
     fireEvent.click(getByTestId('SwitchButton'))
     expect(queryAllByTestId('ThemesFilter')).not.toHaveLength(0)
   })
 
   it('should keep SwitchButton when click on it, on Mobile', () => {
-    const { queryByTestId, getByTestId } = setup({
+    const { queryByTestId, getByTestId, getByPlaceholderText } = setup({
       isLoading: false,
       withData: true,
       isDesktop: false
     })
 
-    fireEvent.focus(getByTestId('SearchInput'))
+    fireEvent.focus(getByPlaceholderText('Name of the paper, owner or info'))
     expect(getByTestId('SwitchButton')).toBeInTheDocument()
     fireEvent.click(getByTestId('SwitchButton'))
     expect(queryByTestId('SwitchButton')).toBeInTheDocument()
@@ -217,14 +218,14 @@ describe('Home components:', () => {
 
   describe('multi-selection mode', () => {
     it('should display PaperGroup & SearchInput', () => {
-      const { getByTestId } = setup({
+      const { getByTestId, getByPlaceholderText } = setup({
         isLoading: false,
         withData: true,
         isMultiSelectionActive: true
       })
 
       expect(getByTestId('PaperGroup'))
-      expect(getByTestId('SearchInput'))
+      expect(getByPlaceholderText('Name of the paper, owner or info'))
     })
 
     it('should display ThemesFilter by default', () => {
