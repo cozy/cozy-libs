@@ -2,11 +2,12 @@ import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import FilterButton from './FilterButton'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
-import SearchInput from '../SearchInput'
 import ThemesFilter from '../ThemesFilter'
 
 const SearchHeader = ({
@@ -15,6 +16,7 @@ const SearchHeader = ({
   selectedTheme,
   setSelectedTheme
 }) => {
+  const { t } = useI18n()
   const { isDesktop } = useBreakpoints()
   const { isMultiSelectionActive } = useMultiSelection()
   const [isThemesFilterDisplayed, setIsThemesFilterDisplayed] = useState(true)
@@ -41,8 +43,9 @@ const SearchHeader = ({
       })}
     >
       <div className="u-flex u-w-100 u-flex-items-center">
-        <SearchInput
-          value={searchValue}
+        <SearchBar
+          placeholder={t('common.search')}
+          defaultValue={searchValue}
           onChange={ev => setSearchValue(ev.target.value)}
           onFocus={handleFocus}
         />
