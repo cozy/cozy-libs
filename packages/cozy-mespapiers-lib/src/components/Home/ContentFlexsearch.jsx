@@ -30,8 +30,6 @@ const ContentFlexsearch = ({
       papers={papers}
       contacts={contacts}
       konnectors={konnectors}
-      searchValue={searchValue}
-      selectedTheme={selectedTheme}
     />
   )
 }
