@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [44.0.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@44.0.2...cozy-mespapiers-lib@44.0.3) (2023-05-30)
+
+
+### Bug Fixes
+
+* **mespapiers:** The back button hover area is oval instead of round ([35d6f4d](https://github.com/cozy/cozy-libs/commit/35d6f4d096bcc75ddf60168b29ae537df98a631b))
+
+
+
+
+
 ## [44.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@44.0.1...cozy-mespapiers-lib@44.0.2) (2023-05-30)
 
 
