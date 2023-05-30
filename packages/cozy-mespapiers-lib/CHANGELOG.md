@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [44.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@44.1.0...cozy-mespapiers-lib@44.2.0) (2023-05-30)
+
+
+### Features
+
+* Add Cozy app Android and iOS URLs ([1f00e1d](https://github.com/cozy/cozy-libs/commit/1f00e1d18ea0183bd1c31d854bf3b3ded267ec0c))
+* Add InstallAppModal component ([9c3bff3](https://github.com/cozy/cozy-libs/commit/9c3bff3894a5fce53f79386b5613c1576a619b3b))
+* Add ScanDesktopActionsAlert component ([bda780c](https://github.com/cozy/cozy-libs/commit/bda780cd1a7f830d36240f60232fab2ea8fbb7c1))
+* **mespapiers:** QRCode accessibility ([67e3383](https://github.com/cozy/cozy-libs/commit/67e3383fe93c9f5c1c7ff0013e056c092b3777ca))
+
+
+
+
+
 # [44.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@44.0.3...cozy-mespapiers-lib@44.1.0) (2023-05-30)
 
 
