@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [44.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@44.0.3...cozy-mespapiers-lib@44.1.0) (2023-05-30)
+
+
+### Bug Fixes
+
+* **mespapiers:** Image keeps same dimensions when rotated ([9b078c4](https://github.com/cozy/cozy-libs/commit/9b078c4ecdd17c69c0e5dda5d6f0ddc16dc8d376))
+* **mespapiers:** ScanResultWrapper use right helper ([5737ab7](https://github.com/cozy/cozy-libs/commit/5737ab7840650656b5b791a9f6a9f4d8877a31a5))
+* **mespapiers:** Scroll from body on Desktop ([bcb75c7](https://github.com/cozy/cozy-libs/commit/bcb75c7403220a9ef7e21de2bce34c1a131a225c))
+
+
+### Features
+
+* Disabled rotate button when is processing ([c602868](https://github.com/cozy/cozy-libs/commit/c602868a4ba505308d56b86915a0dc798c5f3590))
+* **mespapiers:** Add `ScanResultTitle` component ([50b9ed4](https://github.com/cozy/cozy-libs/commit/50b9ed4dc7800f1639b84b215906f0a640dac260))
+* **mespapiers:** Add makeRotatedImage helper ([93afdea](https://github.com/cozy/cozy-libs/commit/93afdeaf13c8ce2cce80af8835ca673be24c73d4))
+* **mespapiers:** Add RotateImage component ([4d8994c](https://github.com/cozy/cozy-libs/commit/4d8994c0b29d4098cafe35c3bdae6dc30003da31))
+* **mespapiers:** Add ScanResultInfo component ([392e02b](https://github.com/cozy/cozy-libs/commit/392e02b1a99c64c8da10f7de3b8a62a033688614))
+* **mespapiers:** Add useRotateImage hook ([7199108](https://github.com/cozy/cozy-libs/commit/7199108dbf94688f02bebbd999c95d2d9f036fe9))
+* **mespapiers:** Added `replace` option to `onChangeFile` ([6a5da83](https://github.com/cozy/cozy-libs/commit/6a5da83f8e5389f8e33dc3cad864e5b41a7ae4b1))
+* **mespapiers:** Improve UX on ScanResult ([75ded76](https://github.com/cozy/cozy-libs/commit/75ded765f2170116809376600a40cadaacef394e))
+* **mespapiers:** Improved CompositeHeaderImage component ([5c2f7d2](https://github.com/cozy/cozy-libs/commit/5c2f7d2518b74241d4f515c4a2825c967168ee8d))
+* **mespapiers:** Normalize File usage instead Blob ([ec24675](https://github.com/cozy/cozy-libs/commit/ec246755ae41f0aaab0f1edeac82230343b4913b))
+* **mespapiers:** Split ScanResultWrapper component ([9b1fd48](https://github.com/cozy/cozy-libs/commit/9b1fd4851407ff3d8e7c3dbabd1c257436266b55))
+* **mespapiers:** Use else condition instead return ([a1f8bff](https://github.com/cozy/cozy-libs/commit/a1f8bffc759703b4db61c599ec808ad1414fb43c))
+
+
+
+
+
 ## [44.0.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@44.0.2...cozy-mespapiers-lib@44.0.3) (2023-05-30)
 
 
