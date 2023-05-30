@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useMemo } from 'react'
+import React from 'react'
 
 import Empty from 'cozy-ui/transpiled/react/Empty'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -7,7 +7,6 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import { makePapersGroupByQualificationLabel } from './helpers'
 import SearchEmpty from '../../assets/icons/SearchEmpty.svg'
-import { useMultiSelection } from '../Hooks/useMultiSelection'
 import PaperGroup from '../Papers/PaperGroup'
 import useSearchResult from '../Search/useSearchResult'
 import FlexsearchResult from '../SearchResult/FlexsearchResult'
@@ -20,25 +19,21 @@ const ContentWhenSearching = ({
   selectedTheme
 }) => {
   const { t } = useI18n()
-  const { isMultiSelectionActive } = useMultiSelection()
-
-  const allDocs = useMemo(() => papers.concat(contacts), [papers, contacts])
-  const showResultByGroup = searchValue?.length === 0
-  const docsToBeSearched =
-    isMultiSelectionActive || showResultByGroup ? papers : allDocs
 
   const {
-    pending,
+    loading,
     hasResult,
     filteredDocs,
-    firstSearchResultMatchingAttributes
+    firstSearchResultMatchingAttributes,
+    showResultByGroup
   } = useSearchResult({
-    docsToBeSearched,
+    papers,
+    contacts,
     searchValue,
     selectedTheme
   })
 
-  if (pending) {
+  if (loading) {
     return (
       <Spinner
         size="xxlarge"
