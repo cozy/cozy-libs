@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [44.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@44.0.1...cozy-mespapiers-lib@44.0.2) (2023-05-30)
+
+
+### Bug Fixes
+
+* Flashing of the title when arriving on the list of a type of paper ([62de99c](https://github.com/cozy/cozy-libs/commit/62de99cbd7e6fb0ca89fde637f13da693c67e53f))
+
+
+
+
+
 ## [44.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@44.0.0...cozy-mespapiers-lib@44.0.1) (2023-05-24)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
