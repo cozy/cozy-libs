@@ -9,10 +9,13 @@ import AppLike from '../../../../test/components/AppLike'
 jest.mock('cozy-flags')
 jest.mock('../HarvestBanner', () => () => <div data-testid="HarvestBanner" />)
 
-const setup = ({ konnector, accounts } = {}) => {
+const setup = ({ konnector, accountsWithFiles, accountsWithoutFiles } = {}) => {
   return render(
     <AppLike>
-      <Empty konnector={konnector} accounts={accounts} />
+      <Empty
+        konnector={konnector}
+        accountsByFiles={{ accountsWithFiles, accountsWithoutFiles }}
+      />
     </AppLike>
   )
 }
@@ -25,7 +28,8 @@ describe('MesPapiersLibProviders', () => {
   it('should display basic text without harvest banner', () => {
     const { queryByTestId, getByText } = setup({
       konnector: undefined,
-      accounts: undefined
+      accountsWithFiles: undefined,
+      accountsWithoutFiles: undefined
     })
 
     expect(queryByTestId('HarvestBanner')).toBeFalsy()
@@ -35,7 +39,8 @@ describe('MesPapiersLibProviders', () => {
   it('should display specific text', () => {
     const { queryByTestId, getByText } = setup({
       konnector: {},
-      accounts: [{}]
+      accountsWithFiles: [],
+      accountsWithoutFiles: [{}]
     })
 
     expect(queryByTestId('HarvestBanner')).toBeFalsy()
@@ -47,7 +52,8 @@ describe('MesPapiersLibProviders', () => {
 
     const { queryByTestId, getByText } = setup({
       konnector: {},
-      accounts: [{}]
+      accountsWithFiles: [],
+      accountsWithoutFiles: [{}]
     })
 
     expect(queryByTestId('HarvestBanner')).toBeTruthy()
@@ -57,7 +63,7 @@ describe('MesPapiersLibProviders', () => {
   it('should display logins', () => {
     const { queryByTestId, getByText } = setup({
       konnector: {},
-      accounts: [
+      accountsWithoutFiles: [
         { auth: { login: 'myLogin' } },
         { auth: { login: 'myOtherLogin' } }
       ]
@@ -73,7 +79,7 @@ describe('MesPapiersLibProviders', () => {
 
     const { queryAllByTestId, getByText } = setup({
       konnector: {},
-      accounts: [
+      accountsWithoutFiles: [
         { auth: { login: 'myLogin' } },
         { auth: { login: 'myOtherLogin' } }
       ]

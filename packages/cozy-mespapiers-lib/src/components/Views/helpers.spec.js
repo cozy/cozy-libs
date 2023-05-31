@@ -1,7 +1,8 @@
 import {
   makePapers,
   makeQualificationLabelWithoutFiles,
-  makeKonnectorsAndQualificationLabelWithoutFiles
+  makeKonnectorsAndQualificationLabelWithoutFiles,
+  makeAccountsByFiles
 } from './helpers'
 
 const papersDefinitionsLabels = ['caf', 'isp_invoice', 'resume']
@@ -103,5 +104,29 @@ describe('makeKonnectorsAndQualificationLabelWithoutFiles', () => {
         konnectorQualifLabelsWithoutFile: []
       }
     ])
+  })
+})
+
+describe('makeAccountsByFiles', () => {
+  it('should return accounts with files and accounts without files', () => {
+    const accounts = [
+      { auth: { login: 'account1' } },
+      { auth: { login: 'account2' } },
+      { auth: { login: 'account3' } }
+    ]
+    const files = [
+      { cozyMetadata: { sourceAccountIdentifier: 'account1' } },
+      { cozyMetadata: { sourceAccountIdentifier: 'account3' } }
+    ]
+
+    const res = makeAccountsByFiles(accounts, files)
+
+    expect(res).toStrictEqual({
+      accountsWithFiles: [
+        { auth: { login: 'account1' } },
+        { auth: { login: 'account3' } }
+      ],
+      accountsWithoutFiles: [{ auth: { login: 'account2' } }]
+    })
   })
 })

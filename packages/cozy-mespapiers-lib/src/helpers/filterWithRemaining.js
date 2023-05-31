@@ -17,7 +17,7 @@
 export const filterWithRemaining = (array, callback) => {
   const [itemsFound, remainingItems] = [[], []]
 
-  array.forEach((arr, index) => {
+  array?.forEach((arr, index) => {
     const currentItem = arr?.model ?? arr
 
     if (callback(currentItem, index)) itemsFound.push(arr)
