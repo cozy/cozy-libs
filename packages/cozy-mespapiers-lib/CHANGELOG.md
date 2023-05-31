@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [45.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@44.2.0...cozy-mespapiers-lib@45.0.0) (2023-05-31)
+
+
+### Bug Fixes
+
+* **mespapiers:** Search result wasn't using correct datas ([6258887](https://github.com/cozy/cozy-libs/commit/625888732f008dcc3f7fdeb6305efad120f4c554))
+
+
+### Features
+
+* **mespapiers:** Replace SearchInput by SearchBar from cozy-ui ([f03271e](https://github.com/cozy/cozy-libs/commit/f03271ec21c1f5a91fae90064bb167d6018f0c7e))
+* **mespapiers:** Update cozy-ui from 85.3.1 to 85.5.0 ([f008689](https://github.com/cozy/cozy-libs/commit/f008689c266f156d81482ee0bc531a8b1d096ad7))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 85.5.0`
+
+
+
+
+
 # [44.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@44.1.0...cozy-mespapiers-lib@44.2.0) (2023-05-30)
 
 
