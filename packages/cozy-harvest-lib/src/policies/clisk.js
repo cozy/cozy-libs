@@ -2,6 +2,7 @@
 /**
  * Clisk specific policy
  */
+import flag from 'cozy-flags'
 
 import { KonnectorJobError } from '../helpers/konnectors'
 import logger from '../logger'
@@ -107,7 +108,8 @@ function startLauncher({ konnector, account, trigger, flow }) {
           connector: konnector, // deprecated
           konnector,
           account,
-          trigger
+          trigger,
+          DEBUG: flag('debug') ? true : false
         }
       })
     )

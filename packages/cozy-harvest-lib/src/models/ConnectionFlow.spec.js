@@ -423,7 +423,8 @@ describe('ConnectionFlow', () => {
             connector: fixtures.clientKonnector,
             konnector: fixtures.clientKonnector,
             account: fixtures.existingAccount,
-            trigger: fixtures.existingTrigger
+            trigger: fixtures.existingTrigger,
+            DEBUG: false
           }
         })
       )
@@ -651,7 +652,8 @@ describe('ConnectionFlow', () => {
           message: 'startLauncher',
           value: {
             connector: fixtures.clientKonnector,
-            konnector: fixtures.clientKonnector
+            konnector: fixtures.clientKonnector,
+            DEBUG: false
           }
         })
       )
