@@ -68,7 +68,8 @@ describe('onLaunch', () => {
         message: 'startLauncher',
         value: {
           connector: { slug: 'testkonnectorslug' },
-          konnector: { slug: 'testkonnectorslug' }
+          konnector: { slug: 'testkonnectorslug' },
+          DEBUG: false
         }
       })
     )
@@ -101,7 +102,8 @@ describe('onLaunch', () => {
           connector: { slug: 'testkonnectorslug' },
           konnector: { slug: 'testkonnectorslug' },
           account: { _id: 'testaccountid' },
-          trigger: { _id: 'testtriggerid' }
+          trigger: { _id: 'testtriggerid' },
+          DEBUG: false
         }
       })
     )
