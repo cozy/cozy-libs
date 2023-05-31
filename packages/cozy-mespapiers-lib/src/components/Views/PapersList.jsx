@@ -6,6 +6,7 @@ import { getThemeByItem } from 'cozy-client/dist/models/document/documentTypeDat
 import flag from 'cozy-flags'
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 
+import { makeAccountsByFiles } from './helpers'
 import {
   buildContactsQueryByIds,
   buildFilesQueryByLabel,
@@ -78,6 +79,11 @@ const PapersList = () => {
   )
   const isAccountsLoading = hasKonnector && isQueryLoading(accountsQueryLeft)
 
+  const { accountsWithFiles, accountsWithoutFiles } = makeAccountsByFiles(
+    accounts,
+    files
+  )
+
   const isLoading =
     isLoadingFiles ||
     isLoadingContacts ||
@@ -87,13 +93,12 @@ const PapersList = () => {
   return (
     <>
       <PapersListToolbar selectedThemeLabel={selectedThemeLabel} />
-      {isLoading && (
+      {isLoading ? (
         <Spinner
           className="u-flex u-flex-justify-center u-mt-2 u-h-5"
           size="xxlarge"
         />
-      )}
-      {!isLoading && (
+      ) : (
         <>
           {hasFiles && (
             <PapersListByContact
@@ -101,10 +106,15 @@ const PapersList = () => {
               files={files}
               contacts={contacts}
               konnectors={konnectors}
-              accounts={accounts}
+              accounts={accountsWithFiles}
             />
           )}
-          {!hasFiles && <Empty konnector={konnectors[0]} accounts={accounts} />}
+          {accountsWithoutFiles.length > 0 && (
+            <Empty
+              konnector={konnectors[0]}
+              accountsByFiles={{ accountsWithFiles, accountsWithoutFiles }}
+            />
+          )}
         </>
       )}
     </>

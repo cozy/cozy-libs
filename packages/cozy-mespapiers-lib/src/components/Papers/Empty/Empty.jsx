@@ -7,7 +7,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import EmptyWithKonnector from './EmptyWithKonnector'
 import HomeCloud from '../../../assets/icons/HomeCloud.svg'
 
-const Empty = ({ konnector, accounts }) => {
+const Empty = ({ konnector, accountsByFiles }) => {
   const { t } = useI18n()
 
   if (!konnector) {
@@ -22,12 +22,20 @@ const Empty = ({ konnector, accounts }) => {
     )
   }
 
-  return <EmptyWithKonnector konnector={konnector} accounts={accounts} />
+  return (
+    <EmptyWithKonnector
+      konnector={konnector}
+      accountsByFiles={accountsByFiles}
+    />
+  )
 }
 
 Empty.propTypes = {
   konnector: PropTypes.object,
-  accounts: PropTypes.array
+  accountsByFiles: PropTypes.shape({
+    accountsWithFiles: PropTypes.array,
+    accountsWithoutFiles: PropTypes.array
+  })
 }
 
 export default Empty
