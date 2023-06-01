@@ -446,8 +446,7 @@
     "text": "Install the Cozy Cloud app on your mobile to take photos of your papers directly.",
     "action": {
       "android": "Install on Google Play",
-      "ios": "Install on App Store",
-      "web": "Install on App Store"
+      "ios": "Install on App Store"
     }
   }
 }

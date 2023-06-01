@@ -446,8 +446,7 @@
     "text": "Installer l'application Cozy Cloud sur votre mobile pour prendre directement vos papiers en photo.",
     "action": {
       "android": "Installer sur Google Play",
-      "ios": "Installer sur l'App Store",
-      "web": "Installer sur l'App Store"
+      "ios": "Installer sur l'App Store"
     }
   }
 }

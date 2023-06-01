@@ -1,3 +1,5 @@
+import { isAndroid, isIOS } from 'cozy-device-helper'
+
 import { ANDROID_APP_URL, IOS_APP_URL } from '../../constants/const'
 
 /**
@@ -168,13 +170,13 @@ export const getLastFormDataFile = ({ formData, stepIndex }) => {
   return file || null
 }
 
-export const getLinkByPlatform = platform => {
-  switch (platform) {
-    case 'ios':
-      return IOS_APP_URL
-    case 'android':
-      return ANDROID_APP_URL
-    case 'web': // Case that should only exist in development, as this component is used in ScanMobileActions
-      return IOS_APP_URL
+export const getLink = () => {
+  if (isIOS()) {
+    return { url: IOS_APP_URL, name: 'ios' }
   }
+  if (isAndroid()) {
+    return { url: ANDROID_APP_URL, name: 'android' }
+  }
+  // Case that should only exist in development, as this component is used in ScanMobileActions
+  return { url: IOS_APP_URL, name: 'ios' }
 }
