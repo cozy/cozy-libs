@@ -25,9 +25,8 @@ const RadioAdapter = ({
     return inputValue === currentValue
   }
 
-  const handelClick = event => {
-    const value = event.target?.attributes?.value?.value || event.target?.value
-    setCurrentValue(value)
+  const handleClick = val => {
+    setCurrentValue(val)
   }
 
   useEffect(() => {
@@ -46,7 +45,7 @@ const RadioAdapter = ({
       <List>
         {options.map((option, index) => (
           <Fragment key={index}>
-            <ListItem button onClick={handelClick}>
+            <ListItem button onClick={() => handleClick(option)}>
               <ListItemIcon>
                 <Radio value={option} checked={isChecked(option)} />
               </ListItemIcon>
