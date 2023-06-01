@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [46.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@45.0.1...cozy-mespapiers-lib@46.0.0) (2023-06-01)
+
+
+### Features
+
+* **mespapiers:** Replace Thumbnail by cozy-ui one ([dd25050](https://github.com/cozy/cozy-libs/commit/dd25050a29f9b7600051227a4d8653a189a727bd))
+* **mespapiers:** Upgrade cozy-ui from 85.5.0 to 85.6.0 ([c9b017d](https://github.com/cozy/cozy-libs/commit/c9b017d036e015d85dec6d5f4eb7409da4980843))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 85.6.0`
+
+
+
+
+
 ## [45.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@45.0.0...cozy-mespapiers-lib@45.0.1) (2023-06-01)
 
 
