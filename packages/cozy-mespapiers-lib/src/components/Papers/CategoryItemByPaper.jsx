@@ -4,13 +4,15 @@ import React from 'react'
 import { useClient } from 'cozy-client'
 import { FileImageLoader } from 'cozy-ui/transpiled/react/FileImageLoader'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import FiletypeTextIcon from 'cozy-ui/transpiled/react/Icons/FileTypeText'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
+import Skeleton from 'cozy-ui/transpiled/react/Skeleton'
+import Thumbnail from 'cozy-ui/transpiled/react/Thumbnail'
 
 import { useScannerI18n } from '../Hooks/useScannerI18n'
-import Thumbnail from '../Thumbnail'
 
 const CategoryItemByPaper = ({ papers, category, isLast, onClick }) => {
   const client = useClient()
@@ -26,9 +28,21 @@ const CategoryItemByPaper = ({ papers, category, isLast, onClick }) => {
             file={papers[0]}
             linkType="tiny"
             render={src => {
-              return <Thumbnail image={src} isStacked={isStacked} />
+              return (
+                <Thumbnail isStacked={isStacked}>
+                  {src ? (
+                    <img src={src} alt="" />
+                  ) : (
+                    <Skeleton variant="rect" animation="wave" />
+                  )}
+                </Thumbnail>
+              )
             }}
-            renderFallback={() => <Thumbnail isStacked={isStacked} />}
+            renderFallback={() => (
+              <Thumbnail>
+                <Icon icon={FiletypeTextIcon} />
+              </Thumbnail>
+            )}
           />
         </ListItemIcon>
         <ListItemText
