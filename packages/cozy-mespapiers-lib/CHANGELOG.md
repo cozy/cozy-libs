@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [45.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@45.0.0...cozy-mespapiers-lib@45.0.1) (2023-06-01)
+
+
+### Bug Fixes
+
+* **mespapiers:** All accounts must appear in the file lists ([0806459](https://github.com/cozy/cozy-libs/commit/0806459ff8b7800ac4463a8d10e8334d496c05a1))
+
+
+
+
+
 # [45.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@44.2.0...cozy-mespapiers-lib@45.0.0) (2023-05-31)
 
 
