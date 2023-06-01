@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [46.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@46.0.0...cozy-mespapiers-lib@46.0.1) (2023-06-01)
+
+
+### Bug Fixes
+
+* **mespapiers:** Redirect to the correct store ([8500ed9](https://github.com/cozy/cozy-libs/commit/8500ed9bc5bd3a2d638a983d32ef932389107473))
+
+
+
+
+
 # [46.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@45.0.1...cozy-mespapiers-lib@46.0.0) (2023-06-01)
 
 
