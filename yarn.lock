@@ -7683,10 +7683,10 @@ cozy-ui@^80.1.1:
     react-swipeable-views "^0.13.3"
     rooks "^5.11.2"
 
-cozy-ui@^85.5.0:
-  version "85.5.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-85.5.0.tgz#023a1f88b926f2eca1e676977bcea6379faeb6cb"
-  integrity sha512-ovjM2IOxBJ0QYk3FT/jokKz+MaQxVrKRvWXUEbXp6uNSWFTRqiPkJc5T2Koi6r46FjsqA1m7nQMszb8tjFeZDA==
+cozy-ui@^85.6.0:
+  version "85.6.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-85.6.0.tgz#730cf1c3dad9762afed938c87355f330d9925322"
+  integrity sha512-4U/CknMfVcFlTY8xPpVAkafMdWaI+LYvXp8wtFvWgNkVCINEnrxiQToV0qHIvXdKyxCIIhLsecrXMjAulF1ARg==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@material-ui/core" "4.12.3"
