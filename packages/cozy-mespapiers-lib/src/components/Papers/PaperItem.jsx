@@ -7,18 +7,21 @@ import { models, useClient } from 'cozy-client'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 import FileImageLoader from 'cozy-ui/transpiled/react/FileImageLoader'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import FiletypeTextIcon from 'cozy-ui/transpiled/react/Icons/FileTypeText'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
+import Skeleton from 'cozy-ui/transpiled/react/Skeleton'
+import Thumbnail from 'cozy-ui/transpiled/react/Thumbnail'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import ExpirationAnnotation from './ExpirationAnnotation'
 import RenameInput from './Renaming/RenameInput'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
-import Thumbnail from '../Thumbnail'
 
 const { isExpired, isExpiringSoon } = models.paper
 
@@ -130,9 +133,21 @@ const PaperItem = ({
             file={paper}
             linkType="tiny"
             render={src => {
-              return <Thumbnail image={src} />
+              return (
+                <Thumbnail>
+                  {src ? (
+                    <img src={src} alt="" />
+                  ) : (
+                    <Skeleton variant="rect" animation="wave" />
+                  )}
+                </Thumbnail>
+              )
             }}
-            renderFallback={() => <Thumbnail />}
+            renderFallback={() => (
+              <Thumbnail>
+                <Icon icon={FiletypeTextIcon} />
+              </Thumbnail>
+            )}
           />
         </ListItemIcon>
         {isRenaming ? (
