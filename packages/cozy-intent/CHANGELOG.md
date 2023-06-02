@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.13.1 (2023-06-02)
+
+
+### Bug Fixes
+
+* Don't display this link for Clisk ([0bb9aa9](https://github.com/cozy/cozy-libs/commit/0bb9aa930379ea5f3bbc4243576166eb8c37e0dd))
+
+
+
+
+
 # [2.13.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.12.0...cozy-intent@2.13.0) (2023-05-15)
 
 
