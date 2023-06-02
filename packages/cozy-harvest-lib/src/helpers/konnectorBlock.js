@@ -3,6 +3,7 @@ import get from 'lodash/get'
 import { triggers } from 'cozy-client/dist/models/trigger'
 import { generateUniversalLink } from 'cozy-ui/transpiled/react/AppLinker'
 
+import { getErrorLocale } from './konnectors'
 import { hasNewVersionAvailable } from './konnectors'
 import {
   buildKonnectorQuery,
@@ -157,7 +158,7 @@ const statusToFormatOptions = {
       },
       iconStatus: 'disabled',
       message: {
-        text: t(`error.job.${error.message}.title`),
+        text: getErrorLocale(error, konnector, t, 'title'),
         color
       }
     })

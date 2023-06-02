@@ -1,4 +1,5 @@
 import { createMockClient } from 'cozy-client'
+import { I18n } from 'cozy-ui/react/I18n'
 
 import konnectorBlock from './konnectorBlock'
 
@@ -8,10 +9,18 @@ client.fetchJSON = jest.fn()
 client.query = jest.fn()
 client.getQueryFromState = jest.fn()
 
+const I18nComponent = new I18n({
+  lang: 'en',
+  dictRequire: lang => require(`../locales/${lang}`)
+})
+
+const mockT = I18nComponent.getChildContext().t
+
 const setup = async ({
   isAccountConnected = true,
   isInMaintenance = false,
-  isInError = { error: null }
+  isInError = { error: null },
+  t = x => x
 } = {}) => {
   jest
     .spyOn(konnectorBlock, 'isAccountConnected')
@@ -23,7 +32,7 @@ const setup = async ({
 
   return await konnectorBlock.fetchKonnectorData({
     client,
-    t: jest.fn(x => x),
+    t: t,
     slug: 'pajemploi',
     sourceAccount: '012345'
   })
@@ -136,7 +145,9 @@ describe('fetchKonnectorData', () => {
 
   it('should return appropriate response if konnector has actionable error', async () => {
     const res = await setup({
-      isInError: { error: { message: 'errorMessage', isActionable: true } }
+      isInError: {
+        error: { message: 'error.job.UNKNOWN_ERROR.title', isActionable: true }
+      }
     })
 
     expect(res).toMatchObject({
@@ -148,13 +159,15 @@ describe('fetchKonnectorData', () => {
         target: '_blank'
       },
       iconStatus: 'disabled',
-      message: { text: 'error.job.errorMessage.title', color: 'error' }
+      message: { text: 'error.job.UNKNOWN_ERROR.title', color: 'error' }
     })
   })
 
   it('should return appropriate response if konnector has not actionable error', async () => {
     const res = await setup({
-      isInError: { error: { message: 'errorMessage', isActionable: false } }
+      isInError: {
+        error: { message: 'error.job.UNKNOWN_ERROR.title', isActionable: false }
+      }
     })
 
     expect(res).toMatchObject({
@@ -166,7 +179,31 @@ describe('fetchKonnectorData', () => {
         target: '_blank'
       },
       iconStatus: 'disabled',
-      message: { text: 'error.job.errorMessage.title', color: 'textSecondary' }
+      message: { text: 'error.job.UNKNOWN_ERROR.title', color: 'textSecondary' }
+    })
+  })
+
+  it('should return generic error if the error doesnt exist', async () => {
+    const res = await setup({
+      isInError: {
+        error: { message: 'error.job.IDONTEXIST.title', isActionable: false }
+      },
+      t: mockT
+    })
+
+    expect(res).toMatchObject({
+      name: 'Pajemploi',
+      link: 'https://links.mycozy.cloud/home/connected/pajemploi?fallback=http%3A%2F%2Fcozy-home.tools%3A8080%2F%23%2Fconnected%2Fpajemploi',
+      vendorLink: {
+        component: 'a',
+        href: 'https://www.pajemploi.urssaf.fr/',
+        target: '_blank'
+      },
+      iconStatus: 'disabled',
+      message: {
+        text: mockT('error.job.UNKNOWN_ERROR.title'),
+        color: 'textSecondary'
+      }
     })
   })
 
