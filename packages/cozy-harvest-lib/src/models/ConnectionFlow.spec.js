@@ -434,7 +434,7 @@ describe('ConnectionFlow', () => {
       delete window.ReactNativeWebView
     })
 
-    it('should set the flow status to idle if the launcher aborts', async () => {
+    it('should reset the flow state on konnector execution end', async () => {
       prepareTriggerAccount.mockImplementation(
         async () => fixtures.existingAccount
       )
@@ -451,6 +451,7 @@ describe('ConnectionFlow', () => {
         postMessage: jest.fn()
       }
 
+      await flow.setState({ accountError: new Error('old account error') })
       await flow.launch()
       await waitFor(() =>
         expect(flow.getState().status).toStrictEqual('PENDING')
@@ -465,6 +466,7 @@ describe('ConnectionFlow', () => {
         '*'
       )
       await waitFor(() => expect(flow.getState().status).toStrictEqual('IDLE'))
+      expect(flow.getState().accountError).toStrictEqual(null)
 
       delete window.cozy
       delete window.ReactNativeWebView

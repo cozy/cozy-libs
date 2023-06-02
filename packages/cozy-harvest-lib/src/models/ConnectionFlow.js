@@ -729,7 +729,10 @@ export class ConnectionFlow {
 
     // @ts-ignore
     logger.info('ConnectionFlow: Launching job...')
-    this.setState({ status: PENDING })
+    this.setState({
+      status: PENDING,
+      accountError: null
+    })
 
     if (this.trigger) {
       this.account = await prepareTriggerAccount(this.client, this.trigger)
