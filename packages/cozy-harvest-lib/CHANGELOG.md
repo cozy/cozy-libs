@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.19.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.18.2...cozy-harvest-lib@13.19.0) (2023-06-02)
+
+
+### Bug Fixes
+
+* Use getErrorLocale to display the right error to the user ([b689dda](https://github.com/cozy/cozy-libs/commit/b689dda7008fd7094d8fa4c4419d7fe14e08195a))
+
+
+### Features
+
+* Send debug if flag is set to true ([7299eea](https://github.com/cozy/cozy-libs/commit/7299eea8d8f495961ba8a3cbb5726fc5aa7ec230))
+
+
+
+
+
 ## [13.18.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.18.1...cozy-harvest-lib@13.18.2) (2023-05-24)
 
 
