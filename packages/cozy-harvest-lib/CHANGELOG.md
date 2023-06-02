@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.19.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.19.1...cozy-harvest-lib@13.19.2) (2023-06-02)
+
+
+### Bug Fixes
+
+* Reset flow.accountError on launch for clisk konnectors ([4f9f1e2](https://github.com/cozy/cozy-libs/commit/4f9f1e2dec95bf19fd5efdf1f6f37e15e1ef8915))
+
+
+
+
+
 ## [13.19.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.19.0...cozy-harvest-lib@13.19.1) (2023-06-02)
 
 **Note:** Version bump only for package cozy-harvest-lib
