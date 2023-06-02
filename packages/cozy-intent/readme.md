@@ -103,6 +103,43 @@ const MyComponent = () => {
 
 Will logout the user from the react-native application. Will not touch webview state.
 
-##### `NativeService.call('openWebview', href)`
+#### `NativeService.call('setFlagshipUi')`
 
-Will open a new webview in a Native app with the href provided.
+Example 1: With bottomBackground and topBackground set
+
+```js
+setFlagshipUI({
+  bottomBackground: '#ff0000', // Red background for the Navigation Bar
+  topBackground: '#0000ff' // Blue background for the Status Bar
+})
+```
+
+![{0A71B7E4-3DF7-40F8-AB89-EAB905819E2F}](https://github.com/cozy/cozy-libs/assets/12577784/051b0db7-8f1a-4196-a866-2258a6c4cecd)
+
+Example 2: With all optional parameters set
+
+```js
+setFlagshipUI({
+  bottomBackground: '#008000', // Green background for the Navigation Bar
+  bottomOverlay: 'rgba(0, 0, 0, 0.5)', // Half-transparent black overlay for the Navigation Bar
+  bottomTheme: 'light', // Light-themed icons for the Navigation Bar
+  topBackground: '#ffff00', // Yellow background for the Status Bar
+  topOverlay: 'rgba(0, 0, 0, 0.5)', // Half-transparent black overlay for the Status Bar
+  topTheme: 'dark' // Dark-themed icons for the Status Bar
+})
+```
+
+![{104CBEC0-96CA-4732-AA35-662B115E0C0A}](https://github.com/cozy/cozy-libs/assets/12577784/a056f9d8-e7f0-4551-86d2-98d293ce557b)
+
+Example 3: With themes and overlays set
+
+```js
+setFlagshipUI({
+  bottomOverlay: 'rgba(255, 255, 255, 0.2)', // Light semi-transparent overlay for the Navigation Bar
+  bottomTheme: 'dark', // Dark-themed icons for the Navigation Bar
+  topOverlay: 'rgba(0, 0, 0, 0.3)', // Dark semi-transparent overlay for the Status Bar
+  topTheme: 'light' // Light-themed icons for the Status Bar
+})
+```
+
+![{AA2C98E5-19CA-4658-97B8-CDEAAD3FC5B5}](https://github.com/cozy/cozy-libs/assets/12577784/5e3dbeec-0d0e-4406-bb0a-c2edd2576de5)
