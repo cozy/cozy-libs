@@ -9,6 +9,7 @@ import { useWebviewIntent } from 'cozy-intent'
 import AppLike from '../../../../../test/components/AppLike'
 import { FormDataProvider } from '../../../Contexts/FormDataProvider'
 import { useFormData } from '../../../Hooks/useFormData'
+import { useStepperDialog } from '../../../Hooks/useStepperDialog'
 import ScanWrapper from '../ScanWrapper'
 
 const mockCurrentStep = ({
@@ -33,12 +34,13 @@ jest.mock('cozy-device-helper', () => ({
   isFlagshipApp: jest.fn()
 }))
 jest.mock('../../../Hooks/useFormData')
+jest.mock('../../../Hooks/useStepperDialog')
 /* eslint-disable react/display-name */
 jest.mock('../../../CompositeHeader/CompositeHeader', () => () => (
   <div data-testid="CompositeHeader" />
 ))
-jest.mock('../../ScanResult/ScanResultWrapper', () => () => (
-  <div data-testid="ScanResultWrapper" />
+jest.mock('../../ScanResult/ScanResultDialog', () => () => (
+  <div data-testid="ScanResultDialog" />
 ))
 jest.mock('./ScanMobileActions', () => () => (
   <div data-testid="ScanMobileActions" />
@@ -68,6 +70,10 @@ const setup = ({
   useFormData.mockReturnValue({
     setFormData,
     formData
+  })
+  useStepperDialog.mockReturnValue({
+    currentDefinition: {},
+    allCurrentSteps: []
   })
 
   return render(
@@ -140,7 +146,7 @@ describe('Scan component:', () => {
     expect(queryByTestId('CompositeHeader')).toBeTruthy()
   })
 
-  it('ScanResultWrapper component must be displayed if a file in the current step exists', () => {
+  it('ScanResultDialog component must be displayed if a file in the current step exists', () => {
     const { queryByTestId } = setup({
       currentStep: mockCurrentStep({ stepIndex: 1 }),
       formData: mockFormData({
@@ -148,6 +154,6 @@ describe('Scan component:', () => {
       })
     })
 
-    expect(queryByTestId('ScanResultWrapper')).toBeTruthy()
+    expect(queryByTestId('ScanResultDialog')).toBeTruthy()
   })
 })

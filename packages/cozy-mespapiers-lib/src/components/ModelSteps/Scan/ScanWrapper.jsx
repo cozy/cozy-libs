@@ -5,7 +5,7 @@ import { useWebviewIntent } from 'cozy-intent'
 import log from 'cozy-logger'
 import FilePicker from 'cozy-ui/transpiled/react/FilePicker'
 
-import Scan from './Scan'
+import ScanDialog from './ScanDialog'
 import { PaperDefinitionsStepPropTypes } from '../../../constants/PaperDefinitionsPropTypes'
 import { makeFileFromBlob } from '../../../helpers/makeFileFromBlob'
 import { useFormData } from '../../Hooks/useFormData'
@@ -18,7 +18,7 @@ import {
 
 const { fetchBlobFileById } = models.file
 
-const ScanWrapper = ({ currentStep }) => {
+const ScanWrapper = ({ currentStep, onClose, onBack }) => {
   const client = useClient()
   const { formData, setFormData } = useFormData()
   const { stepIndex, multipage, page } = currentStep
@@ -95,11 +95,13 @@ const ScanWrapper = ({ currentStep }) => {
 
   return (
     <>
-      <Scan
+      <ScanDialog
         currentStep={currentStep}
         onChangeFile={onChangeFile}
         onOpenFilePickerModal={() => setIsFilePickerModalOpen(true)}
         onOpenFlagshipScan={onOpenFlagshipScan}
+        onClose={onClose}
+        onBack={onBack}
       />
 
       {isFilePickerModalOpen && (
