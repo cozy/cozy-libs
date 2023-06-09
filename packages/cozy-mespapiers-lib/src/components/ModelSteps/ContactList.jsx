@@ -43,6 +43,8 @@ const ContactList = ({
     setContactIdsSelected(prev => {
       if (prev.length === 0) {
         return [currentUser._id]
+      } else {
+        return prev
       }
     })
   }, [setContactIdsSelected, currentUser._id])
