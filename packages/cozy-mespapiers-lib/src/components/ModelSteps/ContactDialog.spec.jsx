@@ -1,11 +1,12 @@
 import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 
-import ContactWrapper from './ContactWrapper'
+import ContactDialog from './ContactDialog'
 import AppLike from '../../../test/components/AppLike'
 import { fetchCurrentUser } from '../../helpers/fetchCurrentUser'
 import { FormDataProvider } from '../Contexts/FormDataProvider'
 import { useFormData } from '../Hooks/useFormData'
+import { useStepperDialog } from '../Hooks/useStepperDialog'
 
 const mockCurrentStep = { illustration: 'Account.svg', text: 'text of step' }
 const mockFormData = ({ metadata = {}, data = [], contacts = [] } = {}) => ({
@@ -15,6 +16,7 @@ const mockFormData = ({ metadata = {}, data = [], contacts = [] } = {}) => ({
 })
 
 jest.mock('../Hooks/useFormData')
+jest.mock('../Hooks/useStepperDialog')
 jest.mock('../../helpers/fetchCurrentUser', () => ({
   fetchCurrentUser: jest.fn()
 }))
@@ -30,6 +32,10 @@ const setup = ({
   onClose = jest.fn(),
   mockFetchCurrentUser = jest.fn()
 } = {}) => {
+  useStepperDialog.mockReturnValue({
+    currentDefinition: {},
+    allCurrentSteps: []
+  })
   fetchCurrentUser.mockImplementation(mockFetchCurrentUser)
   useFormData.mockReturnValue({
     formData,
@@ -40,13 +46,13 @@ const setup = ({
   return render(
     <AppLike>
       <FormDataProvider>
-        <ContactWrapper currentStep={mockCurrentStep} onClose={onClose} />
+        <ContactDialog currentStep={mockCurrentStep} onClose={onClose} />
       </FormDataProvider>
     </AppLike>
   )
 }
 
-describe('ContactWrapper', () => {
+describe('ContactDialog', () => {
   it('should submit when save button is clicked, if the file is from user device', async () => {
     const mockFormSubmit = jest.fn()
     const mockFetchCurrentUser = jest.fn(() => ({ _id: '1234' }))
