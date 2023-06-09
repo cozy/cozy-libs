@@ -9,7 +9,7 @@ import ScanDialog from './ScanDialog'
 import { PaperDefinitionsStepPropTypes } from '../../../constants/PaperDefinitionsPropTypes'
 import { makeFileFromBlob } from '../../../helpers/makeFileFromBlob'
 import { useFormData } from '../../Hooks/useFormData'
-import ScanResultWrapper from '../ScanResult/ScanResultWrapper'
+import ScanResultDialog from '../ScanResult/ScanResultDialog'
 import {
   getLastFormDataFile,
   isFileAlreadySelected,
@@ -84,11 +84,13 @@ const ScanWrapper = ({ currentStep, onClose, onBack }) => {
 
   if (currentFile) {
     return (
-      <ScanResultWrapper
+      <ScanResultDialog
         currentFile={currentFile}
         setCurrentFile={setCurrentFile}
         currentStep={currentStep}
         onChangeFile={onChangeFile}
+        onClose={onClose}
+        onBack={onBack}
       />
     )
   }

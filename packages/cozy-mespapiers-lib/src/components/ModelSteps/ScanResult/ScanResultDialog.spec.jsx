@@ -1,7 +1,7 @@
 import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
 
-import ScanResultWrapper from './ScanResultWrapper'
+import ScanResultDialog from './ScanResultDialog'
 import AppLike from '../../../../test/components/AppLike'
 import { FormDataProvider } from '../../Contexts/FormDataProvider'
 import { useFormData } from '../../Hooks/useFormData'
@@ -29,7 +29,11 @@ const setup = ({
   currentFile = mockFile(),
   currentStep = mockCurrentStep()
 } = {}) => {
-  useStepperDialog.mockReturnValue({ nextStep })
+  useStepperDialog.mockReturnValue({
+    nextStep,
+    currentDefinition: {},
+    allCurrentSteps: []
+  })
   useFormData.mockReturnValue({
     setFormData,
     formData
@@ -38,7 +42,7 @@ const setup = ({
   return render(
     <AppLike>
       <FormDataProvider>
-        <ScanResultWrapper
+        <ScanResultDialog
           setCurrentFile={setCurrentFile}
           currentFile={currentFile}
           currentStep={currentStep}
