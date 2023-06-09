@@ -1,12 +1,12 @@
 import cx from 'classnames'
 import throttle from 'lodash/throttle'
-import React, { useState, useMemo, useCallback } from 'react'
+import PropTypes from 'prop-types'
+import React, { useCallback, useMemo, useState } from 'react'
 
 import { isIOS } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import DialogActions from 'cozy-ui/transpiled/react/DialogActions'
+import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 
 import IlluGenericInputDate from '../../assets/icons/IlluGenericInputDate.svg'
@@ -17,21 +17,22 @@ import { hasNextvalue } from '../../utils/hasNextvalue'
 import CompositeHeader from '../CompositeHeader/CompositeHeader'
 import { useFormData } from '../Hooks/useFormData'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
+import StepperDialogTitle from '../StepperDialog/StepperDialogTitle'
 
-const Information = ({ currentStep }) => {
-  const { t } = useI18n()
+const InformationDialog = ({ currentStep, onClose, onBack }) => {
   const {
     illustration,
     illustrationSize = 'medium',
     text,
     attributes
   } = currentStep
+  const { t } = useI18n()
+  const { currentStepIndex } = useStepperDialog()
   const { formData, setFormData } = useFormData()
   const { nextStep } = useStepperDialog()
   const [value, setValue] = useState({})
   const [validInput, setValidInput] = useState({})
   const [isFocus, setIsFocus] = useState(false)
-  const { isMobile } = useBreakpoints()
 
   const submit = throttle(() => {
     if (value && allInputsValid) {
@@ -72,39 +73,44 @@ const Information = ({ currentStep }) => {
       : IlluGenericInputText
 
   return (
-    <>
-      <CompositeHeader
-        icon={illustration}
-        iconSize={illustrationSize}
-        className={isFocus && isIOS() ? 'is-focused' : ''}
-        fallbackIcon={fallbackIcon}
-        title={t(text)}
-        text={inputs.map(({ Component, attrs }, idx) => (
-          <div
-            key={idx}
-            className={cx({
-              'u-mh-1': !isMobile,
-              ['u-h-3 u-pb-1-half']: hasMarginBottom(idx)
-            })}
-          >
-            <Component
-              attrs={attrs}
-              defaultValue={formData.metadata[attrs.name]}
-              setValue={setValue}
-              setValidInput={setValidInput}
-              setIsFocus={setIsFocus}
-              idx={idx}
-            />
-          </div>
-        ))}
-      />
-      <DialogActions
-        disableSpacing
-        className={cx('columnLayout u-mb-1-half u-mt-0 cozyDialogActions', {
-          'u-mh-1': !isMobile,
-          'u-mh-0': isMobile
-        })}
-      >
+    <Dialog
+      open
+      {...(currentStepIndex > 1 && { transitionDuration: 0 })}
+      onClose={onClose}
+      onBack={onBack}
+      componentsProps={{
+        dialogTitle: {
+          className: 'u-flex u-flex-justify-between u-flex-items-center'
+        }
+      }}
+      title={<StepperDialogTitle />}
+      content={
+        <CompositeHeader
+          icon={illustration}
+          iconSize={illustrationSize}
+          className={isFocus && isIOS() ? 'is-focused' : ''}
+          fallbackIcon={fallbackIcon}
+          title={t(text)}
+          text={inputs.map(({ Component, attrs }, idx) => (
+            <div
+              key={idx}
+              className={cx('u-mh-1', {
+                ['u-h-3 u-pb-1-half']: hasMarginBottom(idx)
+              })}
+            >
+              <Component
+                attrs={attrs}
+                defaultValue={formData.metadata[attrs.name]}
+                setValue={setValue}
+                setValidInput={setValidInput}
+                setIsFocus={setIsFocus}
+                idx={idx}
+              />
+            </div>
+          ))}
+        />
+      }
+      actions={
         <Button
           label={t('common.next')}
           onClick={submit}
@@ -115,9 +121,20 @@ const Information = ({ currentStep }) => {
           }}
           disabled={!allInputsValid}
         />
-      </DialogActions>
-    </>
+      }
+    />
   )
 }
 
-export default React.memo(Information)
+InformationDialog.propTypes = {
+  currentStep: PropTypes.shape({
+    illustration: PropTypes.string,
+    illustrationSize: PropTypes.string,
+    text: PropTypes.string,
+    attributes: PropTypes.arrayOf(PropTypes.object)
+  }).isRequired,
+  onClose: PropTypes.func.isRequired,
+  onBack: PropTypes.func
+}
+
+export default InformationDialog
