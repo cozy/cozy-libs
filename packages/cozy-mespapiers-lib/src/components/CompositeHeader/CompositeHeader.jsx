@@ -18,7 +18,6 @@ const useStyles = makeStyles(() => ({
     textAlign: 'center',
     height: '100%',
     maxWidth: '100%',
-    margin: '2rem 0 1rem',
     '&.is-focused': {
       height: 'initial'
     },
@@ -60,8 +59,7 @@ const CompositeHeader = ({
         (isValidElement(Text) || isArray(Text) ? (
           <div
             className={cx({
-              ['u-mt-1 u-mh-1']:
-                !isMobile || (isArray(Text) && Text.length <= 1),
+              ['u-mt-1']: !isMobile || (isArray(Text) && Text.length <= 1),
               ['u-mt-1 u-mah-5 u-pv-1 u-ov-scroll']:
                 isMobile && isArray(Text) && Text.length > 1
             })}
