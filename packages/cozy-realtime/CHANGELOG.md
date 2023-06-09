@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.6.0 (2023-06-09)
+
+
+### Bug Fixes
+
+* **mespapiers:** The back button hover area is oval instead of round ([35d6f4d](https://github.com/cozy/cozy-libs/commit/35d6f4d096bcc75ddf60168b29ae537df98a631b))
+
+
+### Features
+
+* Allow passing a custom logger to realtime ([8841b71](https://github.com/cozy/cozy-libs/commit/8841b71d6bbdf3b2640de0ab1a0b62725dc68348))
+
+
+
+
+
 # 4.5.0 (2023-05-17)
 
 

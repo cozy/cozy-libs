@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.24.1 (2023-06-09)
+
+
+### Bug Fixes
+
+* **mespapiers:** The back button hover area is oval instead of round ([35d6f4d](https://github.com/cozy/cozy-libs/commit/35d6f4d096bcc75ddf60168b29ae537df98a631b))
+
+
+
+
+
 # 1.24.0 (2023-05-17)
 
 
