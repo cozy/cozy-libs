@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 
-import StepperDialogContent from './StepperDialogContent'
+import StepperDialogWrapper from './StepperDialogWrapper'
 import AppLike from '../../../test/components/AppLike'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
 
@@ -9,11 +9,11 @@ import { useStepperDialog } from '../Hooks/useStepperDialog'
 jest.mock('../ModelSteps/Scan/ScanWrapper', () => () => (
   <div data-testid="ScanWrapper" />
 ))
-jest.mock('../ModelSteps/Information', () => () => (
-  <div data-testid="Information" />
+jest.mock('../ModelSteps/InformationDialog', () => () => (
+  <div data-testid="InformationDialog" />
 ))
-jest.mock('../ModelSteps/ContactWrapper', () => () => (
-  <div data-testid="ContactWrapper" />
+jest.mock('../ModelSteps/ContactDialog', () => () => (
+  <div data-testid="ContactDialog" />
 ))
 jest.mock('../Hooks/useStepperDialog')
 /* eslint-enable react/display-name */
@@ -24,11 +24,11 @@ const mockAllCurrentSteps = [
   { stepIndex: 3, model: 'Contact' }
 ]
 
-describe('StepperDialogContent', () => {
+describe('StepperDialogWrapper', () => {
   const setup = () => {
     return render(
       <AppLike>
-        <StepperDialogContent />
+        <StepperDialogWrapper />
       </AppLike>
     )
   }
@@ -41,20 +41,20 @@ describe('StepperDialogContent', () => {
     const { queryByTestId } = setup()
 
     expect(queryByTestId('ScanWrapper')).toBeTruthy()
-    expect(queryByTestId('Information')).toBeNull()
-    expect(queryByTestId('ContactWrapper')).toBeNull()
+    expect(queryByTestId('InformationDialog')).toBeNull()
+    expect(queryByTestId('ContactDialog')).toBeNull()
   })
 
-  it('should contain only Information component', () => {
+  it('should contain only InformationDialog component', () => {
     useStepperDialog.mockReturnValue({
       allCurrentSteps: mockAllCurrentSteps,
       currentStepIndex: 2
     })
     const { queryByTestId } = setup()
 
-    expect(queryByTestId('Information')).toBeTruthy()
+    expect(queryByTestId('InformationDialog')).toBeTruthy()
     expect(queryByTestId('ScanWrapper')).toBeNull()
-    expect(queryByTestId('ContactWrapper')).toBeNull()
+    expect(queryByTestId('ContactDialog')).toBeNull()
   })
 
   it('should contain only Contact component', () => {
@@ -64,8 +64,8 @@ describe('StepperDialogContent', () => {
     })
     const { queryByTestId } = setup()
 
-    expect(queryByTestId('ContactWrapper')).toBeTruthy()
+    expect(queryByTestId('ContactDialog')).toBeTruthy()
     expect(queryByTestId('ScanWrapper')).toBeNull()
-    expect(queryByTestId('Information')).toBeNull()
+    expect(queryByTestId('InformationDialog')).toBeNull()
   })
 })
