@@ -2,21 +2,14 @@ import React from 'react'
 
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
-import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
-import StepperDialog from '../StepperDialog/StepperDialog'
-import StepperDialogContent from '../StepperDialog/StepperDialogContent'
+import ContactDialog from '../ModelSteps/ContactDialog'
+import InformationDialog from '../ModelSteps/InformationDialog'
+import ScanWrapper from '../ModelSteps/Scan/ScanWrapper'
 
 const StepperDialogWrapper = ({ onClose }) => {
   const { isMobile } = useBreakpoints()
-  const scannerT = useScannerI18n()
-  const {
-    allCurrentSteps,
-    currentDefinition,
-    currentStepIndex,
-    previousStep,
-    stepperDialogTitle
-  } = useStepperDialog()
+  const { allCurrentSteps, currentStepIndex, previousStep } = useStepperDialog()
 
   const handleBack = () => {
     if (currentStepIndex > 1) {
@@ -25,21 +18,40 @@ const StepperDialogWrapper = ({ onClose }) => {
     return isMobile ? onClose : undefined
   }
 
-  return (
-    <StepperDialog
-      open
-      onClose={onClose}
-      onBack={handleBack()}
-      title={
-        Boolean(stepperDialogTitle) &&
-        scannerT(`items.${stepperDialogTitle}`, {
-          country: currentDefinition.country
-        })
+  return allCurrentSteps.map(currentStep => {
+    if (currentStep.stepIndex === currentStepIndex) {
+      const modelPage = currentStep.model.toLowerCase()
+      switch (modelPage) {
+        case 'scan':
+          return (
+            <ScanWrapper
+              key={currentStep.stepIndex}
+              currentStep={currentStep}
+              onClose={onClose}
+              onBack={handleBack()}
+            />
+          )
+        case 'information':
+          return (
+            <InformationDialog
+              key={currentStep.stepIndex}
+              currentStep={currentStep}
+              onClose={onClose}
+              onBack={handleBack()}
+            />
+          )
+        case 'contact':
+          return (
+            <ContactDialog
+              key={currentStep.stepIndex}
+              currentStep={currentStep}
+              onClose={onClose}
+              onBack={handleBack()}
+            />
+          )
       }
-      content={<StepperDialogContent onClose={onClose} />}
-      stepper={`${currentStepIndex}/${allCurrentSteps.length}`}
-    />
-  )
+    }
+  })
 }
 
 export default StepperDialogWrapper
