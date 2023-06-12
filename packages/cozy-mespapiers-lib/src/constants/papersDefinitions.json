@@ -339,6 +339,37 @@
         },
         {
           "stepIndex": 4,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.driverLicense.expirationDate.text",
+          "attributes": [
+            {
+              "name": "expirationDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.expirationDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 5,
+          "model": "information",
+          "illustration": "IlluGenericAlert.svg",
+          "illustrationSize": "small",
+          "text": "PaperJSON.generic.noticePeriod.text",
+          "attributes": [
+            {
+              "name": "noticePeriod",
+              "type": "number",
+              "withAdornment": {
+                "end": "PaperJSON.generic.noticePeriod.endAdornment"
+              },
+              "maxLength": 3,
+              "inputLabel": "PaperJSON.generic.noticePeriod.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 6,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
