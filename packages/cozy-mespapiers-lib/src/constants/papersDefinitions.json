@@ -1670,7 +1670,7 @@
         {
           "stepIndex": 1,
           "model": "scan",
-          "illustration": "IlluVehicleRegistrationContent.png",
+          "illustration": "IlluVehicleRegistration.png",
           "text": "PaperJSON.generic.content.text"
         },
         {
