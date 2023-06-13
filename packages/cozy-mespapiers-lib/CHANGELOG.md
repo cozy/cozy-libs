@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [46.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@46.0.5...cozy-mespapiers-lib@46.1.0) (2023-06-13)
+
+
+### Bug Fixes
+
+* **mespapiers:** Remove old styles ([69adc21](https://github.com/cozy/cozy-libs/commit/69adc21fb078f15601d67c65e4fad4dc7b63c715))
+* **mespapiers:** The contactIdsSelected state must not be undefined ([1819dac](https://github.com/cozy/cozy-libs/commit/1819dac23b9caa958b0bde95117b786628939e8f))
+
+
+### Features
+
+* **mespapiers:** Add expiration date and delay on foreign driver licens ([bc6a8e0](https://github.com/cozy/cozy-libs/commit/bc6a8e0ab60e0d70a73c0d3d6bbdfd9af3a3ded2))
+* **mespapiers:** Add StepperDialogTitle component ([27502fe](https://github.com/cozy/cozy-libs/commit/27502fee2768bf1adc95443b1d953af33684b543))
+* **mespapiers:** Replace ContactWrapper by ContactDialog ([99a929b](https://github.com/cozy/cozy-libs/commit/99a929b9b0023f905711932b3a73249795ddc301))
+* **mespapiers:** Replace Information by InformationDialog ([0dea015](https://github.com/cozy/cozy-libs/commit/0dea0152ac45dffe21e75287c8a25c1061c63117))
+* **mespapiers:** Replace Scan component by ScanDialog ([d80374d](https://github.com/cozy/cozy-libs/commit/d80374d41e58cb262424f02d6ff00f4b452aac12))
+* **mespapiers:** Replace ScanResultWrapper by ScanResultDialog ([bb5cf53](https://github.com/cozy/cozy-libs/commit/bb5cf5340e28e7b55890d2ddefb0537d2d1f33c7))
+* **mespapiers:** Use new Steps dialog component to StepperDialogWrapper ([5672d7c](https://github.com/cozy/cozy-libs/commit/5672d7c4077e6ea2bd7a6939cb4d9881ec26cbf5))
+
+
+
+
+
 ## [46.0.5](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@46.0.4...cozy-mespapiers-lib@46.0.5) (2023-06-09)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
