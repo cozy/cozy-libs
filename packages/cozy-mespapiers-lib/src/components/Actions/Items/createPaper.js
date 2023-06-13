@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
@@ -11,25 +11,28 @@ import withLocales from '../../../locales/withLocales'
 export const createPaper = ({ hideActionsMenu }) => {
   return {
     name: 'createPaper',
-    // eslint-disable-next-line no-unused-vars
-    Component: withLocales(({ t, f, lang, ...props }) => {
-      const navigate = useNavigate()
-      const { pathname } = useLocation()
+    Component: withLocales(
+      // eslint-disable-next-line no-unused-vars, react/display-name
+      forwardRef(({ t, f, lang, ...props }, ref) => {
+        const navigate = useNavigate()
+        const { pathname } = useLocation()
 
-      return (
-        <ActionsMenuItem
-          {...props}
-          onClick={() => {
-            navigate(`${pathname}/create`)
-            hideActionsMenu && hideActionsMenu()
-          }}
-        >
-          <ListItemIcon>
-            <Icon icon="paper" />
-          </ListItemIcon>
-          <ListItemText primary={t('action.createPaper')} />
-        </ActionsMenuItem>
-      )
-    })
+        return (
+          <ActionsMenuItem
+            {...props}
+            ref={ref}
+            onClick={() => {
+              navigate(`${pathname}/create`)
+              hideActionsMenu && hideActionsMenu()
+            }}
+          >
+            <ListItemIcon>
+              <Icon icon="paper" />
+            </ListItemIcon>
+            <ListItemText primary={t('action.createPaper')} />
+          </ActionsMenuItem>
+        )
+      })
+    )
   }
 }
