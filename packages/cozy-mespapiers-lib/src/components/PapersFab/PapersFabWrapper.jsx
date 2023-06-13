@@ -2,7 +2,8 @@ import PropTypes from 'prop-types'
 import React, { cloneElement, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import PaperFabUI from './PaperFabUI'
+import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
+
 import useGeneralActions from './useGeneralActions'
 import useKonnectorsActions from './useKonnectorsActions'
 
@@ -52,21 +53,37 @@ const PapersFabWrapper = ({ children }) => {
     }
   })
 
-  const props = {
-    PapersFabOverrided,
-    generalMenuProps: {
-      show: showGeneralMenu,
-      actions: generalActions,
-      onClose: () => setShowGeneralMenu(false)
-    },
-    konnectorMenuProps: {
-      show: showKonnectorMenu,
-      actions: konnectorsActions,
-      onClose: () => setShowKonnectorMenu(false)
-    }
-  }
+  return (
+    <>
+      {PapersFabOverrided}
 
-  return <PaperFabUI {...props} ref={actionBtnRef} />
+      {showGeneralMenu && (
+        <ActionsMenu
+          ref={actionBtnRef}
+          open={showGeneralMenu}
+          actions={generalActions}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right'
+          }}
+          onClose={() => setShowGeneralMenu(false)}
+        />
+      )}
+
+      {showKonnectorMenu && (
+        <ActionsMenu
+          ref={actionBtnRef}
+          open={showKonnectorMenu}
+          actions={konnectorsActions}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right'
+          }}
+          onClose={() => setShowKonnectorMenu(false)}
+        />
+      )}
+    </>
+  )
 }
 
 PapersFabWrapper.propTypes = {
