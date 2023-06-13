@@ -314,7 +314,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluDriverLicenseNumberHelp.png",
+          "illustration": "Planet.svg",
           "text": "PaperJSON.driverLicense.stranger.country.text",
           "attributes": [
             {
@@ -327,7 +327,7 @@
         {
           "stepIndex": 3,
           "model": "information",
-          "illustration": "IlluDriverLicenseObtentionDateHelp.png",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.driverLicense.stranger.obtentionDate.text",
           "attributes": [
             {
@@ -1747,7 +1747,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericInputDate.png",
+          "illustration": "Planet.svg",
           "text": "PaperJSON.passport.information.country.text",
           "attributes": [
             {
