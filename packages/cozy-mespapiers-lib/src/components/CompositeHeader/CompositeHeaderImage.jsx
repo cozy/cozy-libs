@@ -12,6 +12,7 @@ import IlluGenericAlert from '../../assets/icons/IlluGenericAlert.svg'
 import IlluGenericInputDate from '../../assets/icons/IlluGenericInputDate.svg'
 import IlluGenericInputText from '../../assets/icons/IlluGenericInputText.svg'
 import IlluGenericNewPage from '../../assets/icons/IlluGenericNewPage.svg'
+import Planet from '../../assets/icons/Planet.svg'
 import IlluCafNumberHelp from '../../assets/images/IlluCafNumberHelp.png'
 import IlluCovidVaccineCertificate from '../../assets/images/IlluCovidVaccineCertificate.png'
 import IlluDiploma from '../../assets/images/IlluDiploma.png'
@@ -63,7 +64,8 @@ const images = {
   IlluPassportNumber,
   IlluPassportDate,
   Account,
-  Contract
+  Contract,
+  Planet
 }
 
 const useStyles = makeStyles(() => ({
