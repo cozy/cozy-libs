@@ -1,75 +1,42 @@
 import PropTypes from 'prop-types'
 import React, { cloneElement, useRef, useState } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
-
-import { useClient } from 'cozy-client'
-import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import PaperFabUI from './PaperFabUI'
-import { findPlaceholderByLabelAndCountry } from '../../helpers/findPlaceholders'
-import { createPaper } from '../Actions/Items/createPaper'
-import { createPaperByTheme } from '../Actions/Items/createPaperByTheme'
-import { importAuto } from '../Actions/Items/importAuto'
-import { scanPicture } from '../Actions/Items/scanPicture'
-import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
+import useGeneralActions from './useGeneralActions'
+import useKonnectorsActions from './useKonnectorsActions'
 
 const PapersFabWrapper = ({ children }) => {
+  const navigate = useNavigate()
+  const actionBtnRef = useRef()
+  const { pathname } = useLocation()
   const [showGeneralMenu, setShowGeneralMenu] = useState(false)
   const [showKonnectorMenu, setShowKonnectorMenu] = useState(false)
-  const actionBtnRef = useRef()
-  const client = useClient()
-  const { fileTheme } = useParams()
-  const navigate = useNavigate()
-  const { search, pathname } = useLocation()
-  const { papersDefinitions: paperDefinitionsList } = usePapersDefinitions()
 
-  if (!children) return null
-
-  const country = new URLSearchParams(search).get('country')
-
-  const paperDefinition = findPlaceholderByLabelAndCountry(
-    paperDefinitionsList,
-    fileTheme,
-    country
-  )[0]
-
-  const redirectPaperCreation = placeholder => {
+  const redirectPaperCreation = paperDefinition => {
     setShowKonnectorMenu(false)
     const countrySearchParam = `${
-      placeholder.country ? `country=${placeholder.country}` : ''
+      paperDefinition.country ? `country=${paperDefinition.country}` : ''
     }`
+
     return navigate({
-      pathname: `${pathname}/create/${placeholder.label}`,
+      pathname: `${pathname}/create/${paperDefinition.label}`,
       search: `${countrySearchParam}`
     })
   }
 
-  const showImportDropdown = paperDefinition => {
-    if (paperDefinition.konnectorCriteria) {
-      setShowKonnectorMenu(true)
-    } else {
-      redirectPaperCreation(paperDefinition)
-    }
-    setShowGeneralMenu(false)
-  }
-
-  const actionList = fileTheme ? [createPaperByTheme, createPaper] : []
-  const actionOptions = {
-    client,
-    hideActionsMenu: () => setShowGeneralMenu(false),
-    showImportDropdown,
-    fileTheme,
-    country
-  }
-  const actions = makeActions(actionList, actionOptions)
-
-  const konnectorsActions = makeActions([importAuto, scanPicture], {
-    paperDefinition,
-    scanPictureOnclick: () => redirectPaperCreation(paperDefinition)
+  const generalActions = useGeneralActions({
+    setShowGeneralMenu,
+    setShowKonnectorMenu,
+    redirectPaperCreation
   })
 
+  const konnectorsActions = useKonnectorsActions({ redirectPaperCreation })
+
+  if (!children) return null
+
   const handleClick = () => {
-    return actions.length === 0
+    return generalActions.length === 0
       ? navigate('create')
       : setShowGeneralMenu(prev => !prev)
   }
@@ -89,7 +56,7 @@ const PapersFabWrapper = ({ children }) => {
     PapersFabOverrided,
     generalMenuProps: {
       show: showGeneralMenu,
-      actions,
+      actions: generalActions,
       onClose: () => setShowGeneralMenu(false)
     },
     konnectorMenuProps: {
