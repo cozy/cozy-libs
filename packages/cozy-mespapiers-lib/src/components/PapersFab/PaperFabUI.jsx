@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { forwardRef } from 'react'
 
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 
-const PaperFabUI = React.forwardRef(
+const PaperFabUI = forwardRef(
   ({ PapersFabOverrided, generalMenuProps, konnectorMenuProps }, ref) => {
     const {
       show: showGeneralMenu,
@@ -50,6 +50,7 @@ const PaperFabUI = React.forwardRef(
     )
   }
 )
+
 PaperFabUI.displayName = 'PaperFabUI'
 
 PaperFabUI.propTypes = {

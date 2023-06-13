@@ -3,7 +3,7 @@ import React, { cloneElement, useRef, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 import { useClient } from 'cozy-client'
-import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions/helpers'
+import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 
 import PaperFabUI from './PaperFabUI'
 import { findPlaceholderByLabelAndCountry } from '../../helpers/findPlaceholders'
@@ -21,14 +21,12 @@ const PapersFabWrapper = ({ children }) => {
   const { fileTheme } = useParams()
   const navigate = useNavigate()
   const { search, pathname } = useLocation()
+  const { papersDefinitions: paperDefinitionsList } = usePapersDefinitions()
+
+  if (!children) return null
+
   const country = new URLSearchParams(search).get('country')
 
-  const hideGeneralMenu = () => setShowGeneralMenu(false)
-  const toggleGeneralMenu = () => {
-    setShowGeneralMenu(prev => !prev)
-  }
-
-  const { papersDefinitions: paperDefinitionsList } = usePapersDefinitions()
   const paperDefinition = findPlaceholderByLabelAndCountry(
     paperDefinitionsList,
     fileTheme,
@@ -52,23 +50,29 @@ const PapersFabWrapper = ({ children }) => {
     } else {
       redirectPaperCreation(paperDefinition)
     }
-    hideGeneralMenu()
+    setShowGeneralMenu(false)
   }
 
   const actionList = fileTheme ? [createPaperByTheme, createPaper] : []
-  const actions = makeActions(actionList, {
+  const actionOptions = {
     client,
-    hideActionsMenu: hideGeneralMenu,
+    hideActionsMenu: () => setShowGeneralMenu(false),
     showImportDropdown,
     fileTheme,
     country
+  }
+  const actions = makeActions(actionList, actionOptions)
+
+  const konnectorsActions = makeActions([importAuto, scanPicture], {
+    paperDefinition,
+    scanPictureOnclick: () => redirectPaperCreation(paperDefinition)
   })
 
   const handleClick = () => {
-    return actions.length === 0 ? navigate('create') : toggleGeneralMenu()
+    return actions.length === 0
+      ? navigate('create')
+      : setShowGeneralMenu(prev => !prev)
   }
-
-  if (!children) return null
 
   const PapersFabOverrided = cloneElement(children, {
     onClick: handleClick,
@@ -86,14 +90,11 @@ const PapersFabWrapper = ({ children }) => {
     generalMenuProps: {
       show: showGeneralMenu,
       actions,
-      onClose: hideGeneralMenu
+      onClose: () => setShowGeneralMenu(false)
     },
     konnectorMenuProps: {
       show: showKonnectorMenu,
-      actions: makeActions([importAuto, scanPicture], {
-        paperDefinition,
-        scanPictureOnclick: () => redirectPaperCreation(paperDefinition)
-      }),
+      actions: konnectorsActions,
       onClose: () => setShowKonnectorMenu(false)
     }
   }
