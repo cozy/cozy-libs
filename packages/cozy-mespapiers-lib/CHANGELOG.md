@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [46.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@46.1.0...cozy-mespapiers-lib@46.2.0) (2023-06-13)
+
+
+### Bug Fixes
+
+* **mespapiers:** Name of vehicle registration illustration ([1047318](https://github.com/cozy/cozy-libs/commit/1047318da72a37cf5416bd20edef98031350545b))
+
+
+### Features
+
+* **mespapiers:** Change Passport & driver license illustrations ([02f37e9](https://github.com/cozy/cozy-libs/commit/02f37e971146e7053105f913971899f3b7fa0367))
+
+
+
+
+
 # [46.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@46.0.5...cozy-mespapiers-lib@46.1.0) (2023-06-13)
 
 
