@@ -1108,7 +1108,7 @@
             {
               "name": "contractType",
               "type": "radio",
-              "options": ["cdi", "cdd", "alternate", "internship"],
+              "options": ["cdi", "cdd", "alternate", "internship", "other"],
               "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
             }
           ]

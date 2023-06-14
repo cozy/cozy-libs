@@ -1,22 +1,48 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment, useState } from 'react'
 
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
+import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
+import TextField from 'cozy-ui/transpiled/react/MuiCozyTheme/TextField'
 import Paper from 'cozy-ui/transpiled/react/Paper'
 
 import RadioAdapterItem from './RadioAdapterItem'
 import { defaultProptypes } from './proptypes'
 
-const RadioAdapter = ({ attrs: { name, options }, defaultValue, setValue }) => {
-  const [currentValue, setCurrentValue] = useState(() => defaultValue || '')
+const isUserValue = (options, value) => {
+  return value && !options.includes(value)
+}
+
+const RadioAdapter = ({
+  attrs: { name, options },
+  defaultValue = '',
+  setValue
+}) => {
+  const [optionValue, setOptionValue] = useState(
+    isUserValue(options, defaultValue) ? 'other' : defaultValue
+  )
+  const [textValue, setTextValue] = useState(
+    isUserValue(options, defaultValue) ? defaultValue : ''
+  )
+  const { t } = useI18n()
 
   const handleClick = val => {
-    setCurrentValue(val)
+    setOptionValue(val)
+    setValue(prev => ({
+      ...prev,
+      [name]: val
+    }))
   }
 
-  useEffect(() => {
-    setValue(prev => ({ ...prev, [name]: currentValue }))
-  }, [name, setValue, currentValue])
+  const handleTextChange = e => {
+    const currentValue = e.target.value
+    setTextValue(currentValue)
+    setValue(prev => ({
+      ...prev,
+      [name]: currentValue
+    }))
+  }
 
   return (
     <Paper>
@@ -26,13 +52,28 @@ const RadioAdapter = ({ attrs: { name, options }, defaultValue, setValue }) => {
             <RadioAdapterItem
               option={option}
               onClick={() => handleClick(option)}
-              value={currentValue}
+              value={optionValue}
             />
             {index !== options.length - 1 && (
               <Divider component="li" variant="inset" />
             )}
           </Fragment>
         ))}
+        {optionValue === 'other' && (
+          <ListItem>
+            <TextField
+              type="text"
+              variant="outlined"
+              label={t('RadioAdapter.otherLabel')}
+              value={textValue}
+              inputProps={{
+                'data-testid': 'TextField-other'
+              }}
+              onChange={handleTextChange}
+              fullWidth
+            />
+          </ListItem>
+        )}
       </List>
     </Paper>
   )
