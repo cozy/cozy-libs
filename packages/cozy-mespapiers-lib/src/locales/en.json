@@ -114,6 +114,9 @@
     },
     "title": "Add: %{name}"
   },
+  "RadioAdapter": {
+    "otherLabel": "Contract name"
+  },
   "InputDateAdapter": {
     "invalidDateMessage": "Invalid Date"
   },

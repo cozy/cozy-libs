@@ -18,7 +18,11 @@ const RadioAdapterItem = ({ onClick, option, value }) => {
   return (
     <ListItem button onClick={onClick}>
       <ListItemIcon>
-        <Radio value={option} checked={isChecked(option)} />
+        <Radio
+          inputProps={{ 'aria-label': option }}
+          value={option}
+          checked={isChecked(option)}
+        />
       </ListItemIcon>
       <ListItemText
         primary={
@@ -26,6 +30,7 @@ const RadioAdapterItem = ({ onClick, option, value }) => {
             {scannerT(`attributes.contractType.${option}`)}
           </div>
         }
+        data-testid={`RadioAdapterItem-${option}`}
       />
     </ListItem>
   )
