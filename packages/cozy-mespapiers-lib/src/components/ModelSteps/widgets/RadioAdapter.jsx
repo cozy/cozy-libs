@@ -7,13 +7,7 @@ import Paper from 'cozy-ui/transpiled/react/Paper'
 import RadioAdapterItem from './RadioAdapterItem'
 import { defaultProptypes } from './proptypes'
 
-const RadioAdapter = ({
-  attrs: { name, options, required },
-  idx,
-  defaultValue,
-  setValidInput,
-  setValue
-}) => {
+const RadioAdapter = ({ attrs: { name, options }, defaultValue, setValue }) => {
   const [currentValue, setCurrentValue] = useState(() => defaultValue || '')
 
   const handleClick = val => {
@@ -23,13 +17,6 @@ const RadioAdapter = ({
   useEffect(() => {
     setValue(prev => ({ ...prev, [name]: currentValue }))
   }, [name, setValue, currentValue])
-
-  useEffect(() => {
-    setValidInput(prev => ({
-      ...prev,
-      [idx]: !required || typeof currentValue !== 'undefined'
-    }))
-  }, [idx, setValidInput, currentValue, required])
 
   return (
     <Paper>
