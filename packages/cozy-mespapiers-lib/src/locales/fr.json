@@ -430,7 +430,7 @@
   },
   "ScanDesktopActionsAlert": {
     "title": "Scanner avec l’app Cozy Cloud",
-    "text": "Installer l’application Cozy Cloud sur votre mobile pour prendre directement vos papiers en photo et en extraire les informations automatiquement.",
+    "text": "Installer l’application Cozy Cloud sur votre mobile pour prendre directement vos papiers en photo et en extraire les informations.",
     "actions": {
       "hide": "Non, merci",
       "install": "Installer l'app"
