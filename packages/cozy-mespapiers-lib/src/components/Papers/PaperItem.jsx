@@ -13,6 +13,7 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
+import RenameInput from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemBase/Renaming/RenameInput'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
 import Skeleton from 'cozy-ui/transpiled/react/Skeleton'
@@ -20,7 +21,6 @@ import Thumbnail from 'cozy-ui/transpiled/react/Thumbnail'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import ExpirationAnnotation from './ExpirationAnnotation'
-import RenameInput from './Renaming/RenameInput'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const { isExpired, isExpiringSoon } = models.paper

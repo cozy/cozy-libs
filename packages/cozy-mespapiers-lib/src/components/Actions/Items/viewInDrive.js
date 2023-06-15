@@ -1,39 +1,48 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 
-import { generateWebLink } from 'cozy-client'
-import ActionMenuItemWrapper from 'cozy-ui/transpiled/react/ActionMenu/ActionMenuItemWrapper'
+import { generateWebLink, useClient } from 'cozy-client'
+import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import Link from 'cozy-ui/transpiled/react/Link'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 
 import withLocales from '../../../locales/withLocales'
 
-export const viewInDrive = ({ client }) => {
+export const viewInDrive = () => {
   return {
     name: 'viewInDrive',
-    Component: withLocales(({ onClick, className, docs }) => {
-      const { t } = useI18n()
-      const dirId = docs[0].dir_id
+    Component: withLocales(
+      // eslint-disable-next-line react/display-name
+      forwardRef((props, ref) => {
+        const { t } = useI18n()
+        const client = useClient()
 
-      const webLink = generateWebLink({
-        slug: 'drive',
-        cozyUrl: client.getStackClient().uri,
-        subDomainType: client.getInstanceOptions().subdomain,
-        pathname: '/',
-        hash: `folder/${dirId}`
+        const dirId = props.doc.dir_id
+
+        const webLink = generateWebLink({
+          slug: 'drive',
+          cozyUrl: client.getStackClient().uri,
+          subDomainType: client.getInstanceOptions().subdomain,
+          pathname: '/',
+          hash: `folder/${dirId}`
+        })
+
+        return (
+          <ActionsMenuItem
+            {...props}
+            ref={ref}
+            component="a"
+            href={webLink}
+            target="_blank"
+          >
+            <ListItemIcon>
+              <Icon icon="folder" />
+            </ListItemIcon>
+            <ListItemText primary={t('action.viewInDrive')} />
+          </ActionsMenuItem>
+        )
       })
-
-      return (
-        <ActionMenuItemWrapper
-          className={className}
-          icon="folder"
-          text={t('action.viewInDrive')}
-          onClick={onClick}
-        >
-          <Link href={webLink} target="_blank" className="u-p-0">
-            {t('action.viewInDrive')}
-          </Link>
-        </ActionMenuItemWrapper>
-      )
-    })
+    )
   }
 }

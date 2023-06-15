@@ -3,8 +3,7 @@
 import { isReferencedBy } from 'cozy-client'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 
-import { download } from './Items/download'
-import { forward } from './Items/forward'
+import { download, forward } from './Items'
 import { FILES_DOCTYPE, JOBS_DOCTYPE } from '../../doctypes'
 import { getSharingLink } from '../../utils/getSharingLink'
 import { handleConflictFilename } from '../../utils/handleConflictFilename'

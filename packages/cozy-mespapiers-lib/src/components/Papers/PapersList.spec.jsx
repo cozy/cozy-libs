@@ -9,6 +9,11 @@ jest.mock('cozy-harvest-lib', () => ({
   LaunchTriggerCard: () => <div>LaunchTriggerCard</div>
 }))
 
+jest.mock('cozy-client', () => ({
+  ...jest.requireActual('cozy-client'),
+  generateWebLink: () => ''
+}))
+
 const mockPapers = {
   maxDisplay: 2,
   list: [

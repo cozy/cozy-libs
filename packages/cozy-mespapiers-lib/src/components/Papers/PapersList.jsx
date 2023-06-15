@@ -1,27 +1,23 @@
 import PropTypes from 'prop-types'
 import React, { useMemo, useState } from 'react'
 
-import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
-import { makeActions } from 'cozy-ui/transpiled/react/ActionMenu/Actions/helpers'
+import {
+  makeActions,
+  divider
+} from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import HarvestBanner from './HarvestBanner'
 import { makeAccountFromPapers } from './helpers'
-import { hr } from '../Actions/Items/hr'
-import { open } from '../Actions/Items/open'
-import { rename } from '../Actions/Items/rename'
-import { select } from '../Actions/Items/select'
-import { trash } from '../Actions/Items/trash'
-import { viewInDrive } from '../Actions/Items/viewInDrive'
+import { open, rename, select, trash, viewInDrive } from '../Actions/Items'
 import { makeActionVariant } from '../Actions/utils'
 import { useModal } from '../Hooks/useModal'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import PaperLine from '../Papers/PaperLine'
 
 const PapersList = ({ papers, konnector, accounts, isLast }) => {
-  const client = useClient()
   const { t } = useI18n()
   const { pushModal, popModal } = useModal()
   const [maxDisplay, setMaxDisplay] = useState(papers.maxDisplay)
@@ -35,25 +31,24 @@ const PapersList = ({ papers, konnector, accounts, isLast }) => {
       makeActions(
         [
           select,
-          hr,
+          divider,
           ...actionVariant,
           open,
-          hr,
+          divider,
           rename,
-          hr,
+          divider,
           viewInDrive,
-          hr,
+          divider,
           trash
         ],
         {
-          client,
           addMultiSelectionFile,
           pushModal,
           popModal,
           setPaperBeingRenamedId
         }
       ),
-    [actionVariant, client, addMultiSelectionFile, popModal, pushModal]
+    [actionVariant, addMultiSelectionFile, popModal, pushModal]
   )
 
   const handleClick = () => {
@@ -74,10 +69,10 @@ const PapersList = ({ papers, konnector, accounts, isLast }) => {
               divider={idx !== papers.list.length - 1}
               actions={actions}
               isRenaming={paper.id === paperBeingRenamedId}
-              isLast={isLast}
               setIsRenaming={isRenaming =>
                 setPaperBeingRenamedId(isRenaming ? paper.id : null)
               }
+              isLast={isLast}
             />
           )
       )}
