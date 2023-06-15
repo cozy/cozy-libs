@@ -98,6 +98,7 @@ const NewAccountModal = ({ konnector, onSuccess, onDismiss }) => {
             onSuccess={handleSuccess}
             onVaultDismiss={onDismiss}
             fieldOptions={fieldOptions}
+            onClose={onDismiss}
           />
 
           {!serverSideKonnector && (

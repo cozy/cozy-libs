@@ -68,6 +68,7 @@ const DumbEditAccountModal = withMountPointProps(
               fieldOptions={fieldOptions}
               reconnect={fromReconnect}
               intentsApi={intentsApi}
+              onClose={redirectToAccount}
             />
           )
         }

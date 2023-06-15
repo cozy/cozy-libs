@@ -16,6 +16,7 @@ import { ModalBackButton } from 'cozy-ui/transpiled/react/Modal'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import AccountForm from './AccountForm'
+import AccountsPaywall from './AccountsPaywall/AccountsPaywall'
 import FlowProvider from './FlowProvider'
 import HarvestVaultProvider from './HarvestVaultProvider'
 import OAuthForm from './OAuthForm'
@@ -23,6 +24,7 @@ import ComponentsPropsProvider from './Providers/ComponentsPropsProvider'
 import VaultCiphersList from './VaultCiphersList'
 import VaultUnlockProvider from './VaultUnlockProvider'
 import { fetchAccount } from '../connections/accounts'
+import { checkMaxAccounts } from '../helpers/accounts'
 import manifest from '../helpers/manifest'
 import { intentsApiProptype } from '../helpers/proptypes'
 import { findKonnectorPolicy } from '../konnector-policies'
@@ -31,26 +33,6 @@ import withConnectionFlow from '../models/withConnectionFlow'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
-
-/**
- * If the vault is not going to be unlocked, we go directly to accountForm
- * step
- * If we need the vault unlocker, the `null` step represents
- *
- * - either vault locked
- * - ciphers being loaded
- *
- * TODO Find a way not to have to check konnectorPolicy here and again through
- * KonnectorVaultUnlocker
- */
-const getInitialStep = ({ account, konnector }) => {
-  const konnectorPolicy = findKonnectorPolicy(konnector)
-  if (konnectorPolicy.saveInVault) {
-    return account ? 'accountForm' : null
-  } else {
-    return 'accountForm'
-  }
-}
 
 /**
  * Displays the login form and on submission will create the account, triggers and folders.
@@ -73,10 +55,12 @@ export class DumbTriggerManager extends Component {
     this.state = {
       account,
       error: null,
-      step: getInitialStep(props),
+      // On account creation, we need to check max accounts
+      step: account ? 'accountForm' : null,
       selectedCipher: undefined,
       showBackButton: false,
-      ciphers: []
+      ciphers: [],
+      showPaywall: null
     }
   }
 
@@ -214,32 +198,50 @@ export class DumbTriggerManager extends Component {
       showUnlockForm,
       onVaultDismiss,
       vaultClosable,
-      vaultClient
+      vaultClient,
+      client,
+      account
     } = this.props
-    const konnectorPolicy = findKonnectorPolicy(konnector)
-    if (konnectorPolicy.saveInVault) {
-      if (!vaultClient) {
-        throw new Error(
-          'Konnector policy `saveInVault` is true, but no vault has been passed in the context of the TriggerManager. You can wrap it the TriggerManager in a VaultUnlockProvider or VaultProvider (from cozy-keys-lib).'
-        )
-      }
-      const isVaultLocked = await vaultClient.isLocked()
-      if (isVaultLocked) {
-        showUnlockForm({
-          onDismiss: onVaultDismiss,
-          closable: vaultClosable,
-          onUnlock: this.handleVaultUnlock
-        })
+
+    let paywall = null
+
+    // Only check max accounts on account creation
+    if (account === undefined) {
+      paywall = await checkMaxAccounts(konnector.slug, client)
+    }
+
+    if (paywall === null) {
+      const konnectorPolicy = findKonnectorPolicy(konnector)
+      if (konnectorPolicy.saveInVault) {
+        if (!vaultClient) {
+          throw new Error(
+            'Konnector policy `saveInVault` is true, but no vault has been passed in the context of the TriggerManager. You can wrap it the TriggerManager in a VaultUnlockProvider or VaultProvider (from cozy-keys-lib).'
+          )
+        }
+        const isVaultLocked = await vaultClient.isLocked()
+        if (isVaultLocked) {
+          showUnlockForm({
+            onDismiss: onVaultDismiss,
+            closable: vaultClosable,
+            onUnlock: this.handleVaultUnlock
+          })
+        } else {
+          this.handleVaultUnlock()
+        }
       } else {
-        this.handleVaultUnlock()
+        this.showAccountForm()
       }
     } else {
-      this.showAccountForm()
+      this.setState({ showPaywall: paywall })
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.error && this.props.error !== prevProps.error) {
+    if (
+      this.props.error &&
+      this.props.error !== prevProps.error &&
+      this.state.showPaywall === null
+    ) {
       this.setState({ step: 'accountForm' })
     }
   }
@@ -323,13 +325,20 @@ export class DumbTriggerManager extends Component {
       OAuthFormWrapperComp,
       OAuthFormWrapperCompProps = {},
       reconnect,
-      intentsApi
+      intentsApi,
+      onClose
     } = this.props
 
     const submitting = flowState.running
 
-    const { account, step, selectedCipher, showBackButton, ciphers } =
-      this.state
+    const {
+      account,
+      step,
+      selectedCipher,
+      showBackButton,
+      ciphers,
+      showPaywall
+    } = this.state
 
     const { oauth } = konnector
 
@@ -399,6 +408,13 @@ export class DumbTriggerManager extends Component {
             />
           </>
         )}
+        {showPaywall && (
+          <AccountsPaywall
+            reason={showPaywall}
+            konnector={konnector}
+            onClose={() => onClose()}
+          />
+        )}
       </>
     )
   }
@@ -458,7 +474,9 @@ DumbTriggerManager.propTypes = {
   /** Is it a reconnection or not */
   reconnect: PropTypes.bool,
   // custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment
-  intentsApi: intentsApiProptype
+  intentsApi: intentsApiProptype,
+  /** Used to close the intent modal after paywall was dismiss */
+  onClose: PropTypes.func
 }
 
 const TriggerManager = compose(
