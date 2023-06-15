@@ -130,6 +130,7 @@ const DumbKonnectorDialogContent = props => {
           konnector={konnector}
           onLoginSuccess={endAccountCreation}
           onSuccess={endAccountCreation}
+          onClose={onClose}
         />
       </div>
     )

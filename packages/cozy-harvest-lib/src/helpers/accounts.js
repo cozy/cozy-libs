@@ -4,7 +4,12 @@ import merge from 'lodash/merge'
 
 import manifest from './manifest'
 import assert from '../assert'
+import {
+  hasReachMaxAccountsByKonnector,
+  hasReachMaxAccounts
+} from '../components/AccountsPaywall/helpers'
 import { fetchAccount } from '../connections/accounts'
+import { buildCountTriggersQuery } from '../helpers/queries'
 import * as triggersModel from '../helpers/triggers'
 
 const DEFAULT_TWOFA_CODE_PROVIDER_TYPE = 'default'
@@ -240,6 +245,33 @@ export const loadSelectedAccountId = async (
  */
 export const fetchAccountProcess = async (client, trigger) => {
   return fetchAccount(client, triggersModel.getAccountId(trigger))
+}
+
+/**
+ *
+ * @param {string} slug - Slug of the konnector
+ * @param {CozyClient} client - Instance of CozyClient
+ * @returns {string|null} - Reason for paywall if limit reached otherwise null
+ */
+export const checkMaxAccounts = async (slug, client) => {
+  const triggersQuery = buildCountTriggersQuery()
+  const { data: triggers } = await client.fetchQueryAndGetFromState(
+    triggersQuery
+  )
+
+  if (hasReachMaxAccounts(triggers.length)) {
+    return 'max_accounts'
+  }
+
+  const currentKonnectorTriggers = triggers.filter(
+    trigger => trigger.message?.konnector === slug
+  )
+
+  if (hasReachMaxAccountsByKonnector(slug, currentKonnectorTriggers.length)) {
+    return 'max_accounts_by_konnector'
+  }
+
+  return null
 }
 
 export default {

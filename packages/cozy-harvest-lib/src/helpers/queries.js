@@ -61,3 +61,13 @@ export const buildAppsByIdQuery = appSlug => ({
     singleDocData: true
   }
 })
+
+export const buildCountTriggersQuery = () => ({
+  definition: Q('io.cozy.triggers')
+    .where({ $or: [{ worker: 'client' }, { worker: 'konnector' }] })
+    .indexFields(['worker']),
+  options: {
+    as: 'io.cozy.triggers/by_worker_client_konnector',
+    fetchPolicy: defaultFetchPolicy
+  }
+})

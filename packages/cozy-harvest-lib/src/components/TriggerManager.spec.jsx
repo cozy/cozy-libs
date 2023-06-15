@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import { render, fireEvent, cleanup } from '@testing-library/react'
+import { render, fireEvent, cleanup, screen } from '@testing-library/react'
 import { DumbTriggerManager as TriggerManager } from 'components/TriggerManager'
 import omit from 'lodash/omit'
 import React from 'react'
@@ -9,6 +9,7 @@ import CozyClient from 'cozy-client'
 import ConnectionFlow from '../../src/models/ConnectionFlow'
 import AppLike from '../../test/AppLike'
 import fixtures from '../../test/fixtures'
+import { checkMaxAccounts } from '../helpers/accounts'
 import { findKonnectorPolicy } from '../konnector-policies'
 
 const { findKonnectorPolicy: originalFindKonnectorPolicy } = jest.requireActual(
@@ -89,7 +90,12 @@ const props = {
   vaultClient: mockVaultClient,
   breakpoints: { isMobile: false },
   onVaultDismiss: jest.fn(),
-  fieldOptions: {}
+  fieldOptions: {},
+  client: {
+    query: jest.fn(() => ({
+      data: []
+    }))
+  }
 }
 
 const propsWithAccount = {
@@ -120,6 +126,15 @@ const oAuthProps = {
   konnector: oAuthKonnector,
   flow: new ConnectionFlow(client, undefined, oAuthKonnector)
 }
+
+jest.mock('../helpers/accounts', () => ({
+  ...jest.requireActual('../helpers/accounts'),
+  checkMaxAccounts: jest.fn(() => null)
+}))
+
+jest.mock('./AccountsPaywall/AccountsPaywall', () => ({ reason }) => {
+  return <div>Show paywall for this reason : {reason}</div>
+})
 
 beforeEach(() => {
   findKonnectorPolicy.mockImplementation(originalFindKonnectorPolicy)
@@ -274,6 +289,24 @@ describe('TriggerManager', () => {
 
           await expect(findByText('Isabelle')).resolves.toBeDefined()
         })
+      })
+    })
+
+    describe('when user has reach limit', () => {
+      afterEach(() => {
+        checkMaxAccounts.mockResolvedValue(null)
+      })
+
+      it('should show a paywall', async () => {
+        checkMaxAccounts.mockResolvedValue('max_accounts')
+        render(
+          <AppLike>
+            <TriggerManager {...props} />
+          </AppLike>
+        )
+        expect(
+          await screen.findByText('Show paywall for this reason : max_accounts')
+        ).toBeDefined()
       })
     })
   })
