@@ -23,7 +23,7 @@ const ScanResultDialog = ({
   currentFile,
   setCurrentFile
 }) => {
-  const { illustration, multipage, page = 'default' } = currentStep
+  const { illustration, multipage, page = 'default', tooltip } = currentStep
   const { t } = useI18n()
   const { currentStepIndex } = useStepperDialog()
 
@@ -72,11 +72,13 @@ const ScanResultDialog = ({
       content={
         <div className={cx('u-flex u-flex-column u-flex-justify-center')}>
           <ScanResultTitle />
-          <ScanResultInfo
-            icon={illustration}
-            text={t(`Acquisition.tooltip.${page}`)}
-            className="u-mb-1"
-          />
+          {tooltip && (
+            <ScanResultInfo
+              icon={illustration}
+              text={t(`Acquisition.tooltip.${page}`)}
+              className="u-mb-1"
+            />
+          )}
           <ScanResultCard
             currentFile={currentFile}
             setCurrentFile={setCurrentFile}

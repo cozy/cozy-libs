@@ -32,6 +32,7 @@
 - ### Step `scan`:
   - `stepIndex`: {number} Position of the step.
   - `model`: {string} Model used for the step (`scan`).
+  - `[tooltip]`: {boolean} Allows to display a tooltip to help the user.
   - `[multipage]`: {boolean} Allows to add as many files as the user wants.
   - `illustration`: {string} Name of the illustration used on the step (with extension).
   - `text`: {string} Translation key for the text of the step.
