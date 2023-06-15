@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [46.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@46.2.0...cozy-mespapiers-lib@46.3.0) (2023-06-15)
+
+
+### Features
+
+* **mespapiers:** Add `tooltip` property to scan step ([33f26f5](https://github.com/cozy/cozy-libs/commit/33f26f5a14fae8874eb8ad55caf21de479693c42))
+* **mespapiers:** Update ScanDesktopActionsAlert wording ([338a8c6](https://github.com/cozy/cozy-libs/commit/338a8c6dd5b27daeeac341e66c2abb565aed70e4))
+
+
+
+
+
 # [46.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@46.1.0...cozy-mespapiers-lib@46.2.0) (2023-06-13)
 
 
