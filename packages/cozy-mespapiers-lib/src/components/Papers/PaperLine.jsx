@@ -1,21 +1,15 @@
 import PropTypes from 'prop-types'
 import React, { useState, useRef, memo } from 'react'
 
-import { models } from 'cozy-client'
-import {
-  ActionMenuHeader,
-  ActionMenuWithClose,
-  ActionsItems
-} from 'cozy-ui/transpiled/react/ActionMenu'
+import { splitFilename } from 'cozy-client/dist/models/file'
+import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
+import ActionsMenuMobileHeader from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuMobileHeader'
 import Filename from 'cozy-ui/transpiled/react/Filename'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import PaperItem from '../Papers/PaperItem'
-
-const { splitFilename } = models.file
 
 const PaperLine = ({
   paper,
@@ -25,14 +19,9 @@ const PaperLine = ({
   setIsRenaming,
   isLast
 }) => {
-  const { isMobile } = useBreakpoints()
   const actionBtnRef = useRef()
-
-  const [optionFile, setOptionFile] = useState(false)
-
   const { isMultiSelectionActive } = useMultiSelection()
-  const hideActionsMenu = () => setOptionFile(false)
-  const toggleActionsMenu = () => setOptionFile(prev => !prev)
+  const [showActionMenu, setShowActionMenu] = useState(false)
 
   const { filename, extension } = splitFilename({
     name: paper.name,
@@ -49,25 +38,37 @@ const PaperLine = ({
         {...(isMultiSelectionActive && { withCheckbox: true })}
       >
         {!isMultiSelectionActive && (
-          <IconButton ref={actionBtnRef} onClick={toggleActionsMenu}>
+          <IconButton
+            ref={actionBtnRef}
+            onClick={() => setShowActionMenu(prev => !prev)}
+          >
             <Icon icon="dots" />
           </IconButton>
         )}
       </PaperItem>
-
-      {optionFile && (
-        <ActionMenuWithClose onClose={hideActionsMenu} ref={actionBtnRef}>
-          {isMobile && (
-            <ActionMenuHeader>
-              <Filename
-                icon="file-type-pdf"
-                filename={filename}
-                extension={extension}
-              />
-            </ActionMenuHeader>
-          )}
-          <ActionsItems actions={actions} doc={paper} isLast={isLast} />
-        </ActionMenuWithClose>
+      {showActionMenu && (
+        <ActionsMenu
+          open
+          ref={actionBtnRef}
+          doc={paper}
+          actions={actions}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right'
+          }}
+          componentsProps={{
+            actionsItems: { actionOptions: { isLast } }
+          }}
+          onClose={() => setShowActionMenu(false)}
+        >
+          <ActionsMenuMobileHeader>
+            <Filename
+              icon="file-type-pdf"
+              filename={filename}
+              extension={extension}
+            />
+          </ActionsMenuMobileHeader>
+        </ActionsMenu>
       )}
     </>
   )
@@ -78,7 +79,8 @@ PaperLine.propTypes = {
   divider: PropTypes.bool,
   actions: PropTypes.array,
   isRenaming: PropTypes.bool,
-  setIsRenaming: PropTypes.func
+  setIsRenaming: PropTypes.func,
+  isLast: PropTypes.bool
 }
 
 export default memo(PaperLine)
