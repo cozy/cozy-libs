@@ -12,6 +12,7 @@ import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import LaunchTriggerAlert from './LaunchTriggerAlert'
+import { intentsApiProptype } from '../../helpers/proptypes'
 import * as triggers from '../../helpers/triggers'
 import { findKonnectorPolicy } from '../../konnector-policies'
 import { useFlowState } from '../../models/withConnectionFlow'
@@ -151,7 +152,9 @@ LaunchTriggerCard.propTypes = {
   /**
    * Disables the "run trigger" button
    */
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  intentsApi: intentsApiProptype,
+  account: PropTypes.object
 }
 
 export default translate()(LaunchTriggerCard)
