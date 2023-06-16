@@ -16,6 +16,7 @@ import { useTrackPage } from '../../../components/hoc/tracking'
 import useMaintenanceStatus from '../../../components/hooks/useMaintenanceStatus'
 import KonnectorUpdateInfos from '../../../components/infos/KonnectorUpdateInfos'
 import * as konnectorsModel from '../../../helpers/konnectors'
+import { intentsApiProptype } from '../../../helpers/proptypes'
 import getRelatedAppsSlugs from '../../../models/getRelatedAppsSlugs'
 import Datacards from '../../Datacards'
 
@@ -32,6 +33,7 @@ export const DataTab = ({
   trigger,
   client,
   flow,
+  intentsApi,
   account
 }) => {
   const { isMobile } = useBreakpoints()
@@ -61,6 +63,8 @@ export const DataTab = ({
           <LaunchTriggerCard
             konnectorRoot={konnectorRoot}
             flow={flow}
+            intentsApi={intentsApi}
+            account={account}
             withMaintenanceDescription
           />
           {isMobile && <Divider style={styles.divider} />}
@@ -105,6 +109,7 @@ DataTab.propTypes = {
   trigger: PropTypes.object.isRequired,
   client: PropTypes.object.isRequired,
   flow: PropTypes.object,
+  intentsApi: intentsApiProptype,
   account: PropTypes.object
 }
 

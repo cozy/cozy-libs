@@ -16,10 +16,12 @@ import LaunchTriggerAlertMenu from './LaunchTriggerAlertMenu'
 import { RunningAlert } from './RunningAlert'
 import { makeLabel } from './helpers'
 import { isDisconnected } from '../../helpers/konnectors'
+import { intentsApiProptype } from '../../helpers/proptypes'
 import { getAccountId, getKonnectorSlug } from '../../helpers/triggers'
 import { findKonnectorPolicy } from '../../konnector-policies'
 import { SUCCESS } from '../../models/flowEvents'
 import { useFlowState } from '../../models/withConnectionFlow'
+import OpenOAuthWindowButton from '../AccountModalWithoutTabs/OpenOAuthWindowButton'
 import KonnectorIcon from '../KonnectorIcon'
 import withAdaptiveRouter from '../hoc/withRouter'
 import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
@@ -47,6 +49,8 @@ export const LaunchTriggerAlert = ({
   t,
   konnectorRoot,
   historyAction,
+  intentsApi,
+  account,
   withMaintenanceDescription
 }) => {
   const client = useClient()
@@ -129,16 +133,27 @@ export const LaunchTriggerAlert = ({
         action={
           isKonnectorRunnable && (
             <>
-              {!isInMaintenance && !isKonnectorDisconnected && (
-                <Button
-                  variant="text"
-                  color={isInError ? 'error' : undefined}
-                  size="small"
-                  disabled={running}
-                  label={t('card.launchTrigger.button.label')}
-                  onClick={SyncButtonAction}
-                />
-              )}
+              {!isInMaintenance &&
+                !isKonnectorDisconnected &&
+                (konnectorPolicy.isBIWebView &&
+                isInError &&
+                error.isSolvableViaReconnect() ? (
+                  <OpenOAuthWindowButton
+                    flow={flow}
+                    account={account}
+                    intentsApi={intentsApi}
+                    konnector={konnector}
+                  />
+                ) : (
+                  <Button
+                    variant="text"
+                    color={isInError ? 'error' : undefined}
+                    size="small"
+                    disabled={running}
+                    label={t('card.launchTrigger.button.label')}
+                    onClick={SyncButtonAction}
+                  />
+                ))}
               {!block && (
                 <div
                   style={{
@@ -242,7 +257,9 @@ LaunchTriggerAlert.propTypes = {
   t: PropTypes.func,
   konnectorRoot: PropTypes.string,
   historyAction: PropTypes.func,
-  withDescription: PropTypes.bool
+  withDescription: PropTypes.bool,
+  intentsApi: intentsApiProptype,
+  account: PropTypes.object
 }
 
 export default withAdaptiveRouter(LaunchTriggerAlert)

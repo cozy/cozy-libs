@@ -4,7 +4,7 @@ import React, { useCallback } from 'react'
 import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
 import { useWebviewIntent } from 'cozy-intent'
-import { Button } from 'cozy-ui/transpiled/react/Button'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import { intentsApiProptype } from '../../helpers/proptypes'
@@ -44,11 +44,12 @@ const OpenOAuthWindowButton = ({ flow, account, konnector, intentsApi }) => {
 
   return (
     <Button
-      className="u-ml-0"
-      variant="secondary"
-      label={t('error.reconnect-via-form')}
-      onClick={handleClick}
+      variant="text"
+      color="error"
+      size="small"
       disabled={!extraParams}
+      label={t('card.launchTrigger.button.label')}
+      onClick={handleClick}
       busy={!extraParams}
     />
   )
