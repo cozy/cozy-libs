@@ -58,7 +58,7 @@
     "cozy-device-helper": "^2.7.0",
     "cozy-flags": "^3.0.1",
     "cozy-intent": "^2.13.1",
-    "cozy-keys-lib": "^4.1.9",
+    "cozy-keys-lib": "^4.3.0",
     "cozy-realtime": "^4.6.0",
     "cozy-tsconfig": "^1.0.0",
     "cozy-ui": "^80.1.1",
