@@ -25,6 +25,7 @@ export const buildFilesQueryWithQualificationLabel = () => {
     'metadata.number',
     'metadata.contractType',
     'metadata.refTaxIncome',
+    'cozyMetadata.uploadedBy',
     'created_at',
     'dir_id',
     'updated_at',
@@ -51,9 +52,9 @@ export const buildFilesQueryWithQualificationLabel = () => {
         .partialIndex({
           'metadata.qualification.label': {
             $exists: true
-          }
+          },
+          'cozyMetadata.uploadedBy': { $exists: true }
         })
-        .indexFields(['metadata.qualification.label'])
         .select(select)
         .limitBy(1000),
     options: {
@@ -73,7 +74,8 @@ export const buildFilesQueryByLabel = label => ({
       })
       .partialIndex({
         type: 'file',
-        trashed: false
+        trashed: false,
+        'cozyMetadata.uploadedBy': { $exists: true }
       })
       .indexFields(['created_at', 'metadata.qualification'])
       .sortBy([{ created_at: 'desc' }]),
