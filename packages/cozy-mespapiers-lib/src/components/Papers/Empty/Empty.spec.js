@@ -70,8 +70,8 @@ describe('MesPapiersLibProviders', () => {
     })
 
     expect(queryByTestId('HarvestBanner')).toBeFalsy()
-    expect(getByText('myLogin'))
-    expect(getByText('myOtherLogin'))
+    expect(getByText('Account %{name} : myLogin'))
+    expect(getByText('Account %{name} : myOtherLogin'))
   })
 
   it('should display logins and harvest banner', () => {
@@ -86,7 +86,7 @@ describe('MesPapiersLibProviders', () => {
     })
 
     expect(queryAllByTestId('HarvestBanner')).toBeTruthy()
-    expect(getByText('myLogin'))
-    expect(getByText('myOtherLogin'))
+    expect(getByText('Account %{name} : myLogin'))
+    expect(getByText('Account %{name} : myOtherLogin'))
   })
 })

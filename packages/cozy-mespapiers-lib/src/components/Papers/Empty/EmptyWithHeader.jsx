@@ -18,7 +18,12 @@ const EmptyWithHeader = ({ konnector, account }) => {
     <List
       subheader={
         <ListSubheader>
-          <div className="u-ellipsis">{getAccountName(account)}</div>
+          <div className="u-ellipsis">
+            {t('PapersList.accountName', {
+              name: konnector.name,
+              identifier: getAccountName(account)
+            })}
+          </div>
         </ListSubheader>
       }
     >
