@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [46.3.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@46.3.1...cozy-mespapiers-lib@46.3.2) (2023-06-19)
+
+
+### Bug Fixes
+
+* **mespapiers:** The cozyMetadata property does not always exist ([43141dc](https://github.com/cozy/cozy-libs/commit/43141dc171e3397c2e9fe548a5ef89c63233b65a))
+
+
+
+
+
 ## [46.3.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@46.3.0...cozy-mespapiers-lib@46.3.1) (2023-06-19)
 
 
