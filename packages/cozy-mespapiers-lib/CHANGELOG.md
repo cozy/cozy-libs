@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [46.3.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@46.3.0...cozy-mespapiers-lib@46.3.1) (2023-06-19)
+
+
+### Bug Fixes
+
+* **mespapiers:** Wording of EmptyWithHeader ([4bc8845](https://github.com/cozy/cozy-libs/commit/4bc88455306931c1f233e573fed3d063bd9c40d2))
+
+
+
+
+
 # [46.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@46.2.0...cozy-mespapiers-lib@46.3.0) (2023-06-15)
 
 
