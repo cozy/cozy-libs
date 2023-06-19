@@ -304,6 +304,12 @@
         "inputLabel": "Revenu fiscal de référence",
         "text": "Ajoutez votre revenu fiscal de référence"
       }
+    },
+    "nationalHealthInsuranceCard": {
+      "number": {
+        "inputLabel": "Numéro de la carte vitale",
+        "text": "Saisissez le numéro de la carte vitale"
+      }
     }
   },
   "PapersList": {

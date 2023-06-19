@@ -9,4 +9,6 @@
 | `isp_invoice` | 5 |
 | `tax_notice` | 6 |
 | `resume` | 7 |
-| `health_insurance_card` | 8 |
+| `national_health_insurance_card` | 8 |
+| `health_insurance_card` | 9 |
+| `prescription` | 10 |
