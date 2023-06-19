@@ -304,6 +304,12 @@
         "inputLabel": "Reference tax income",
         "text": "Add your reference tax income"
       }
+    },
+    "nationalHealthInsuranceCard": {
+      "number": {
+        "inputLabel": "Health insurance card number",
+        "text": "Enter your health insurance card number"
+      }
     }
   },
   "PapersList": {

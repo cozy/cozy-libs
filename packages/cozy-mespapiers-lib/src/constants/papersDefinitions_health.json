@@ -1,18 +1,136 @@
 {
   "papersDefinitions": [
     {
+      "label": "prescription",
+      "placeholderIndex": 10,
+      "icon": "heart",
+      "featureDate": "referencedDate",
+      "maxDisplay": 3,
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "multipage": true,
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.generic.multiPages.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "information",
+          "text": "PaperJSON.generic.fileLabel.text",
+          "attributes": [
+            {
+              "name": "labelGivenByUser",
+              "type": "text",
+              "required": true,
+              "maxLength": 40,
+              "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.referencedDate.text",
+          "attributes": [
+            {
+              "name": "referencedDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 4,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
+    },
+    {
       "label": "health_certificate",
       "icon": "heart",
-      "featureDate": "issueDate",
+      "featureDate": "referencedDate",
       "maxDisplay": 3,
-      "acquisitionSteps": []
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "multipage": true,
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.generic.multiPages.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.referencedDate.text",
+          "attributes": [
+            {
+              "name": "referencedDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
     },
     {
       "label": "national_health_insurance_card",
+      "placeholderIndex": 8,
+      "featureDate": "issueDate",
       "icon": "heart",
-      "featureDate": "carObtentionDate",
-      "maxDisplay": 2,
-      "acquisitionSteps": []
+      "maxDisplay": 3,
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "multipage": true,
+          "illustration": "IlluNationalHealthInsuranceCardFront.svg",
+          "text": "PaperJSON.generic.multiPages.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "information",
+          "illustration": "IlluNationalHealthInsuranceCardNumber.png",
+          "text": "PaperJSON.nationalHealthInsuranceCard.number.text",
+          "attributes": [
+            {
+              "name": "number",
+              "type": "text",
+              "maxLength": 15,
+              "inputLabel": "PaperJSON.nationalHealthInsuranceCard.number.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "model": "information",
+          "illustration": "IlluNationalHealthInsuranceCardDateHelp.svg",
+          "text": "PaperJSON.generic.issueDate.text",
+          "attributes": [
+            {
+              "name": "issueDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.issueDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 4,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
     },
     {
       "label": "other_health_document",
@@ -20,25 +138,121 @@
       "filenameModel": ["labelGivenByUser"],
       "featureDate": "date",
       "maxDisplay": 3,
-      "acquisitionSteps": []
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "multipage": true,
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.generic.multiPages.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "information",
+          "text": "PaperJSON.generic.fileLabel.text",
+          "attributes": [
+            {
+              "name": "labelGivenByUser",
+              "type": "text",
+              "required": true,
+              "maxLength": 40,
+              "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.date.text",
+          "attributes": [
+            {
+              "name": "date",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.date.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 4,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "multiple": true,
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
     },
     {
       "label": "pregnancy_medical_certificate",
       "icon": "heart",
-      "featureDate": "issueDate",
+      "featureDate": "referencedDate",
       "maxDisplay": 3,
-      "acquisitionSteps": []
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "multipage": true,
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.generic.multiPages.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.referencedDate.text",
+          "attributes": [
+            {
+              "name": "referencedDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
     },
     {
       "label": "work_disability_recognition",
       "icon": "carbonCopy",
-      "featureDate": "issueDate",
+      "featureDate": "referencedDate",
       "maxDisplay": 3,
-      "acquisitionSteps": []
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "multipage": true,
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.generic.multiPages.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.referencedDate.text",
+          "attributes": [
+            {
+              "name": "referencedDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
     },
     {
       "label": "health_insurance_card",
-      "placeholderIndex": 8,
+      "placeholderIndex": 9,
       "icon": "people",
       "featureDate": "expirationDate",
       "maxDisplay": 3,
