@@ -54,7 +54,7 @@
     "babel-jest": "26.6.3",
     "babel-plugin-inline-react-svg": "1.1.2",
     "babel-preset-cozy-app": "^2.1.0",
-    "cozy-client": "^37.1.0",
+    "cozy-client": "^38.6.0",
     "cozy-device-helper": "^2.7.0",
     "cozy-flags": "^3.0.1",
     "cozy-intent": "^2.13.1",

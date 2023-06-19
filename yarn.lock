@@ -7362,31 +7362,6 @@ cozy-client@^27.14.4:
     sift "^6.0.0"
     url-search-params-polyfill "^8.0.0"
 
-cozy-client@^37.1.0:
-  version "37.1.0"
-  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-37.1.0.tgz#d8d583dd79a58c88de811649304763909799ee76"
-  integrity sha512-4HxFdnyIMR/Q1f34LsGmBKwMwF7IaMGDRQ4d1wiwqSyliwb16uhAecEYmhjAE4tyebmIm/dvZz68zlb+eFyyFg==
-  dependencies:
-    "@cozy/minilog" "1.0.0"
-    "@types/jest" "^26.0.20"
-    "@types/lodash" "^4.14.170"
-    btoa "^1.2.1"
-    cozy-stack-client "^37.0.0"
-    date-fns "2.29.3"
-    json-stable-stringify "^1.0.1"
-    lodash "^4.17.13"
-    microee "^0.0.6"
-    node-fetch "^2.6.1"
-    node-polyglot "2.4.2"
-    open "7.4.2"
-    prop-types "^15.6.2"
-    react-redux "^7.2.0"
-    redux "3 || 4"
-    redux-thunk "^2.3.0"
-    server-destroy "^1.0.1"
-    sift "^6.0.0"
-    url-search-params-polyfill "^8.0.0"
-
 cozy-client@^37.2.0:
   version "37.2.0"
   resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-37.2.0.tgz#0e2070e1a0dd229ac044c68213dfe41cc1afd10b"
@@ -7416,6 +7391,31 @@ cozy-client@^38.5.1:
   version "38.5.1"
   resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-38.5.1.tgz#9b27ef8c3dec956247fbe5921fac5559e2d13669"
   integrity sha512-A4eosfgNxQ7CJBmM5TCHq9+Wg1o496Uqok258WhfUkjrEXHVh0aeZSmwHOURzYyZYDDILhIvQzD7lHON+tLlMQ==
+  dependencies:
+    "@cozy/minilog" "1.0.0"
+    "@types/jest" "^26.0.20"
+    "@types/lodash" "^4.14.170"
+    btoa "^1.2.1"
+    cozy-stack-client "^38.0.2"
+    date-fns "2.29.3"
+    json-stable-stringify "^1.0.1"
+    lodash "^4.17.13"
+    microee "^0.0.6"
+    node-fetch "^2.6.1"
+    node-polyglot "2.4.2"
+    open "7.4.2"
+    prop-types "^15.6.2"
+    react-redux "^7.2.0"
+    redux "3 || 4"
+    redux-thunk "^2.3.0"
+    server-destroy "^1.0.1"
+    sift "^6.0.0"
+    url-search-params-polyfill "^8.0.0"
+
+cozy-client@^38.6.0:
+  version "38.6.0"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-38.6.0.tgz#7cc29bede36d685c54478a597c94defc1fd78ae1"
+  integrity sha512-mYKe0iluvA0S/sronxfIgD+KKxHoVTAkIOVlEzneW2XVFfqs5/Dmoa3oKGRnij8PvNrn6CZeiQlt6ZUktBJ+vA==
   dependencies:
     "@cozy/minilog" "1.0.0"
     "@types/jest" "^26.0.20"
