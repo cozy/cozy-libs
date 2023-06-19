@@ -69,6 +69,8 @@ export const LaunchTriggerAlert = ({
   const isKonnectorRunnable = konnectorPolicy.isRunnable()
   const isClisk = konnectorPolicy.name === 'clisk'
   const isKonnectorDisconnected = isDisconnected(konnector, trigger)
+  const shouldTryOauthReconnect =
+    konnectorPolicy.isBIWebView && isInError && error.isSolvableViaReconnect()
 
   const shouldDisplayRunningAlert = () => {
     if (isInError) return false
@@ -87,7 +89,10 @@ export const LaunchTriggerAlert = ({
   }, [status])
 
   const SyncButtonAction =
-    isInError && !isClisk
+    isInError &&
+    error.isSolvableViaReconnect() &&
+    !isClisk &&
+    !konnectorPolicy.isBIWebView
       ? () =>
           historyAction(
             konnectorRoot
@@ -135,9 +140,7 @@ export const LaunchTriggerAlert = ({
             <>
               {!isInMaintenance &&
                 !isKonnectorDisconnected &&
-                (konnectorPolicy.isBIWebView &&
-                isInError &&
-                error.isSolvableViaReconnect() ? (
+                (shouldTryOauthReconnect ? (
                   <OpenOAuthWindowButton
                     flow={flow}
                     account={account}
@@ -165,6 +168,8 @@ export const LaunchTriggerAlert = ({
                     t={t}
                     konnectorRoot={konnectorRoot}
                     historyAction={historyAction}
+                    account={account}
+                    intentsApi={intentsApi}
                   />
                 </div>
               )}
@@ -210,6 +215,8 @@ export const LaunchTriggerAlert = ({
                   t={t}
                   konnectorRoot={konnectorRoot}
                   historyAction={historyAction}
+                  account={account}
+                  intentsApi={intentsApi}
                 />
               </div>
             )}

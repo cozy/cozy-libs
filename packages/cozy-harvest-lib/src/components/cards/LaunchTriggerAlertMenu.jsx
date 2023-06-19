@@ -10,13 +10,22 @@ import GearIcon from 'cozy-ui/transpiled/react/Icons/Gear'
 import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 
 import { isDisconnected } from '../../helpers/konnectors'
+import { intentsApiProptype } from '../../helpers/proptypes'
 import { getAccountId } from '../../helpers/triggers'
 import { findKonnectorPolicy } from '../../konnector-policies'
 import { useFlowState } from '../../models/withConnectionFlow'
+import OpenOAuthWindowButton from '../AccountModalWithoutTabs/OpenOAuthWindowButton'
 import withAdaptiveRouter from '../hoc/withRouter'
 import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
 
-const LaunchTriggerAlertMenu = ({ flow, t, konnectorRoot, historyAction }) => {
+const LaunchTriggerAlertMenu = ({
+  flow,
+  t,
+  konnectorRoot,
+  historyAction,
+  account,
+  intentsApi
+}) => {
   const client = useClient()
   const { running, trigger, error } = useFlowState(flow)
   const { launch, konnector } = flow
@@ -32,8 +41,13 @@ const LaunchTriggerAlertMenu = ({ flow, t, konnectorRoot, historyAction }) => {
   const [showOptions, setShowOptions] = useState(false)
 
   const isInError = !!error
+  const shouldTryOauthReconnect =
+    konnectorPolicy.isBIWebView && isInError && error.isSolvableViaReconnect()
   const SyncButtonAction =
-    isInError && !isClisk
+    isInError &&
+    error.isSolvableViaReconnect() &&
+    !isClisk &&
+    !konnectorPolicy.isBIWebView
       ? () =>
           historyAction(
             konnectorRoot
@@ -57,7 +71,17 @@ const LaunchTriggerAlertMenu = ({ flow, t, konnectorRoot, historyAction }) => {
           {isKonnectorRunnable &&
             !running &&
             !isInMaintenance &&
-            !isKonnectorDisconnected && (
+            !isKonnectorDisconnected &&
+            (shouldTryOauthReconnect ? (
+              <OpenOAuthWindowButton
+                flow={flow}
+                account={account}
+                intentsApi={intentsApi}
+                konnector={konnector}
+                actionMenuItem={true}
+                onClick={() => setShowOptions(false)}
+              />
+            ) : (
               <ActionMenuItem
                 left={<Icon icon={SyncIcon} />}
                 onClick={() => {
@@ -67,7 +91,7 @@ const LaunchTriggerAlertMenu = ({ flow, t, konnectorRoot, historyAction }) => {
               >
                 {t('card.launchTrigger.button.label')}
               </ActionMenuItem>
-            )}
+            ))}
           {!isKonnectorDisconnected && (
             <ActionMenuItem
               left={<Icon icon={GearIcon} />}
@@ -107,7 +131,9 @@ LaunchTriggerAlertMenu.propTypes = {
   flow: PropTypes.object,
   t: PropTypes.func,
   konnectorRoot: PropTypes.string,
-  historyAction: PropTypes.func
+  historyAction: PropTypes.func,
+  intentsApi: intentsApiProptype,
+  account: PropTypes.object
 }
 
 export default withAdaptiveRouter(LaunchTriggerAlertMenu)

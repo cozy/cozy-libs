@@ -4,14 +4,24 @@ import React, { useCallback } from 'react'
 import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
 import { useWebviewIntent } from 'cozy-intent'
+import { ActionMenuItem } from 'cozy-ui/transpiled/react/ActionMenu'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 
 import { intentsApiProptype } from '../../helpers/proptypes'
 import { OAUTH_SERVICE_OK, openOAuthWindow } from '../OAuthService'
 import useOAuthExtraParams from '../hooks/useOAuthExtraParams'
 
-const OpenOAuthWindowButton = ({ flow, account, konnector, intentsApi }) => {
+const OpenOAuthWindowButton = ({
+  flow,
+  account,
+  konnector,
+  intentsApi,
+  actionMenuItem = false,
+  onClick
+}) => {
   const { t } = useI18n()
   const client = useClient()
   const webviewIntent = useWebviewIntent()
@@ -24,6 +34,9 @@ const OpenOAuthWindowButton = ({ flow, account, konnector, intentsApi }) => {
   })
 
   const handleClick = useCallback(async () => {
+    if (!extraParams) {
+      return
+    }
     const response = await openOAuthWindow({
       client,
       konnector,
@@ -40,9 +53,19 @@ const OpenOAuthWindowButton = ({ flow, account, konnector, intentsApi }) => {
     ) {
       flow.expectTriggerLaunch()
     }
-  }, [account, client, extraParams, flow, konnector, webviewIntent, intentsApi])
+  }, [account, client, flow, konnector, webviewIntent, intentsApi, extraParams])
 
-  return (
+  return actionMenuItem ? (
+    <ActionMenuItem
+      left={<Icon icon={SyncIcon} />}
+      onClick={() => {
+        handleClick()
+        onClick()
+      }}
+    >
+      {t('card.launchTrigger.button.label')}
+    </ActionMenuItem>
+  ) : (
     <Button
       variant="text"
       color="error"
@@ -59,7 +82,9 @@ OpenOAuthWindowButton.propTypes = {
   flow: PropTypes.object.isRequired,
   account: PropTypes.object.isRequired,
   konnector: PropTypes.object.isRequired,
-  intentsApi: intentsApiProptype
+  intentsApi: intentsApiProptype,
+  actionMenuItem: PropTypes.bool,
+  onClick: PropTypes.func
 }
 
 export default OpenOAuthWindowButton
