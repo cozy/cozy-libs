@@ -3,11 +3,14 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import Fab from 'cozy-ui/transpiled/react/Fab'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 
 import withLocales from '../../locales/withLocales'
 
-const ForwardFab = ({ t, className, innerRef, onClick }) => {
+const ForwardFab = ({ className, innerRef, onClick }) => {
+  const { t } = useI18n()
+
   return (
     <Fab
       className={cx('u-mr-half', className)}
@@ -25,8 +28,7 @@ ForwardFab.propTypes = {
   onClick: PropTypes.func,
   innerRef: PropTypes.shape({
     current: PropTypes.instanceOf(Element)
-  }),
-  t: PropTypes.func
+  })
 }
 
 export default withLocales(ForwardFab)
