@@ -12,11 +12,11 @@ const fakeQualificationItems = [
     label: 'isp_invoice'
   }
 ]
-/* eslint-disable react/display-name */
-jest.mock('../../ImportDropdown/ImportDropdownItems', () => () => {
-  return <div data-testid="ImportDropdownItems" />
-})
-/* eslint-enable react/display-name */
+
+jest.mock('cozy-client', () => ({
+  ...jest.requireActual('cozy-client'),
+  generateWebLink: () => ''
+}))
 
 const setup = () => {
   return render(
@@ -43,13 +43,14 @@ describe('PlaceholdersList components:', () => {
   })
 
   it('should display ActionMenu modale when clicked', () => {
-    const { getByText, getAllByTestId } = setup()
+    const { queryByText, getAllByTestId } = setup()
+
+    expect(queryByText('Auto retrieve')).toBeNull()
 
     const ispInvoiceLine = getAllByTestId('PlaceholdersList-ListItem')[1]
-
     fireEvent.click(ispInvoiceLine)
 
-    expect(getByText('Add: ISP invoice'))
+    expect(queryByText('Auto retrieve')).not.toBeNull()
   })
 
   it('should not display ActionMenu modale when clicked', () => {

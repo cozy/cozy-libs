@@ -43,11 +43,10 @@ jest.mock('react-router-dom', () => {
   }
 })
 
-/* eslint-disable react/display-name */
-jest.mock('../ImportDropdown/ImportDropdownItems', () => () => {
-  return <div data-testid="ImportDropdownItems" />
-})
-/* eslint-enable react/display-name */
+jest.mock('cozy-client', () => ({
+  ...jest.requireActual('cozy-client'),
+  generateWebLink: () => ''
+}))
 
 const setup = ({ data = [], mockNavigate = jest.fn() } = {}) => {
   useNavigate.mockImplementation(() => mockNavigate)
@@ -73,12 +72,16 @@ describe('FeaturedPlaceholdersList components:', () => {
   })
 
   it('should display ActionMenu modale when "placeholder" with "konnectorCriteria" is clicked', () => {
-    const { getAllByTestId, getByText } = setup({ data: [fakePlaceholders[0]] })
+    const { getAllByTestId, queryByText } = setup({
+      data: [fakePlaceholders[0]]
+    })
+
+    expect(queryByText('Auto retrieve')).toBeNull()
 
     const placeholderComp = getAllByTestId('Placeholder-ListItem')[0]
     fireEvent.click(placeholderComp)
 
-    expect(getByText('Add: Tax notice')).toBeInTheDocument()
+    expect(queryByText('Auto retrieve')).not.toBeNull()
   })
 
   it('should navigate to "create/<placeholder label>" when "placeholder" without "konnectorCriteria" is clicked', () => {

@@ -7,17 +7,15 @@ import { importAuto } from '../Actions/Items/importAuto'
 import { scanPicture } from '../Actions/Items/scanPicture'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 
-const useKonnectorsActions = ({ redirectPaperCreation }) => {
+const useKonnectorsActions = ({ placeholder, redirectPaperCreation }) => {
   const { search } = useLocation()
   const { fileTheme } = useParams()
   const { papersDefinitions } = usePapersDefinitions()
 
   const country = new URLSearchParams(search).get('country')
-  const paperDefinition = findPlaceholderByLabelAndCountry(
-    papersDefinitions,
-    fileTheme,
-    country
-  )[0]
+  const paperDefinition =
+    placeholder ||
+    findPlaceholderByLabelAndCountry(papersDefinitions, fileTheme, country)[0]
 
   const actions = makeActions([importAuto, scanPicture], {
     paperDefinition,
