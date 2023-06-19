@@ -2,12 +2,14 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import Fab from 'cozy-ui/transpiled/react/Fab'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 
 import withLocales from '../../locales/withLocales'
 import { useScroll } from '../Hooks/useScroll'
 
-const PapersFab = ({ t, className, innerRef, onClick, a11y }) => {
+const PapersFab = ({ className, innerRef, onClick, a11y }) => {
+  const { t } = useI18n()
   const scroll = useScroll()
   const isOnTop = scroll.scrollTop < 80
 
