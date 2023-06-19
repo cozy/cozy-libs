@@ -50,6 +50,7 @@ const EmptyNoHeader = ({ konnector, accounts }) => {
         text={t('Empty.konnector.text', {
           konnectorSlug: konnector?.slug?.toUpperCase()
         })}
+        data-testid="EmptyNoHeader"
       >
         <Button label={t('Empty.konnector.button')} onClick={handleClick} />
       </Empty>

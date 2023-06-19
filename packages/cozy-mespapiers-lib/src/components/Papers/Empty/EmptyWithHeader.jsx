@@ -26,6 +26,7 @@ const EmptyWithHeader = ({ konnector, account }) => {
           </div>
         </ListSubheader>
       }
+      data-testid="EmptyWithHeader"
     >
       {flag('harvest.inappconnectors.enabled') && (
         <HarvestBanner konnector={konnector} account={account} />
