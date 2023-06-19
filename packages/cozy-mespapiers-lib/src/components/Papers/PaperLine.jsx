@@ -1,27 +1,59 @@
 import PropTypes from 'prop-types'
-import React, { useState, useRef, memo } from 'react'
+import React, { useState, useRef, memo, useMemo } from 'react'
 
 import { splitFilename } from 'cozy-client/dist/models/file'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
+import {
+  makeActions,
+  divider
+} from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import ActionsMenuMobileHeader from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuMobileHeader'
 import Filename from 'cozy-ui/transpiled/react/Filename'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 
+import { open, rename, select, trash, viewInDrive } from '../Actions/Items'
+import { makeActionVariant } from '../Actions/utils'
+import { useModal } from '../Hooks/useModal'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import PaperItem from '../Papers/PaperItem'
 
 const PaperLine = ({
   paper,
-  divider,
-  actions,
+  hasDivider,
   isRenaming,
   setIsRenaming,
   isLast
 }) => {
   const actionBtnRef = useRef()
-  const { isMultiSelectionActive } = useMultiSelection()
+  const { isMultiSelectionActive, addMultiSelectionFile } = useMultiSelection()
+  const { pushModal, popModal } = useModal()
   const [showActionMenu, setShowActionMenu] = useState(false)
+
+  const actionVariant = makeActionVariant()
+  const actions = useMemo(
+    () =>
+      makeActions(
+        [
+          select,
+          divider,
+          ...actionVariant,
+          open,
+          divider,
+          rename,
+          divider,
+          viewInDrive,
+          divider,
+          trash
+        ],
+        {
+          addMultiSelectionFile,
+          pushModal,
+          popModal
+        }
+      ),
+    [actionVariant, addMultiSelectionFile, popModal, pushModal]
+  )
 
   const { filename, extension } = splitFilename({
     name: paper.name,
@@ -32,7 +64,7 @@ const PaperLine = ({
     <>
       <PaperItem
         paper={paper}
-        divider={divider}
+        hasDivider={hasDivider}
         isRenaming={isRenaming}
         setIsRenaming={setIsRenaming}
         {...(isMultiSelectionActive && { withCheckbox: true })}
@@ -57,7 +89,7 @@ const PaperLine = ({
             horizontal: 'right'
           }}
           componentsProps={{
-            actionsItems: { actionOptions: { isLast } }
+            actionsItems: { actionOptions: { isLast, setIsRenaming } }
           }}
           onClose={() => setShowActionMenu(false)}
         >
@@ -76,8 +108,7 @@ const PaperLine = ({
 
 PaperLine.propTypes = {
   paper: PropTypes.object.isRequired,
-  divider: PropTypes.bool,
-  actions: PropTypes.array,
+  hasDivider: PropTypes.bool,
   isRenaming: PropTypes.bool,
   setIsRenaming: PropTypes.func,
   isLast: PropTypes.bool
