@@ -39,7 +39,7 @@ const validPageName = page => page === 'front' || page === 'back'
 const PaperItem = ({
   paper,
   contactNames,
-  divider,
+  hasDivider,
   className = '',
   classes = {},
   withCheckbox,
@@ -170,7 +170,7 @@ const PaperItem = ({
         )}
       </ListItem>
 
-      {divider && (
+      {hasDivider && (
         <Divider
           variant="inset"
           component="li"
@@ -185,7 +185,7 @@ const PaperItem = ({
 PaperItem.propTypes = {
   paper: PropTypes.object.isRequired,
   contactNames: PropTypes.string,
-  divider: PropTypes.bool,
+  hasDivider: PropTypes.bool,
   children: PropTypes.node,
   className: PropTypes.string,
   classes: PropTypes.object,

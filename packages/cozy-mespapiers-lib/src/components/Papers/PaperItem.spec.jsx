@@ -28,7 +28,7 @@ const MockChildren = () => <div data-testid="MockChildren" />
 const setup = ({
   paper = mockFile,
   contactNames,
-  divider,
+  hasDivider,
   withCheckbox,
   withChildren,
   allMultiSelectionFiles = [],
@@ -50,7 +50,7 @@ const setup = ({
       <PaperItem
         paper={paper}
         contactNames={contactNames}
-        divider={divider}
+        hasDivider={hasDivider}
         withCheckbox={withCheckbox}
       >
         {withChildren && <MockChildren />}
@@ -80,7 +80,7 @@ describe('PaperItem components', () => {
       expect(queryByTestId('Divider')).toBeNull()
     })
     it('should display if divider prop is true', () => {
-      const { getByTestId } = setup({ divider: true })
+      const { getByTestId } = setup({ hasDivider: true })
 
       expect(getByTestId('Divider'))
     })

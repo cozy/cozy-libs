@@ -8,11 +8,11 @@ import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 
 import withLocales from '../../../locales/withLocales'
 
-export const rename = ({ setPaperBeingRenamedId }) => {
+export const rename = () => {
   return {
-    name: 'renameWithOwnAction',
-    action: doc => {
-      setPaperBeingRenamedId(doc._id)
+    name: 'rename',
+    action: (doc, { setIsRenaming }) => {
+      setIsRenaming(true)
     },
     Component: withLocales(
       // eslint-disable-next-line react/display-name
