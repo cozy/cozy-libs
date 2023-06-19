@@ -4,9 +4,16 @@ import React from 'react'
 import EmptyNoHeader from './EmptyNoHeader'
 import EmptyWithHeader from './EmptyWithHeader'
 
-const EmptyWithKonnector = ({ konnector, accountsByFiles }) => {
+const EmptyWithKonnector = ({ konnector, accountsByFiles, hasFiles }) => {
   const { accountsWithFiles, accountsWithoutFiles } = accountsByFiles
-  if (accountsWithoutFiles?.length === 1 && accountsWithFiles?.length === 0) {
+  /**
+   * If there is only one account without files and no other files
+   */
+  if (
+    accountsWithoutFiles?.length === 1 &&
+    accountsWithFiles?.length === 0 &&
+    !hasFiles
+  ) {
     return (
       <EmptyNoHeader konnector={konnector} accounts={accountsWithoutFiles} />
     )
@@ -19,6 +26,7 @@ const EmptyWithKonnector = ({ konnector, accountsByFiles }) => {
 
 EmptyWithKonnector.propTypes = {
   konnector: PropTypes.object,
+  hasFiles: PropTypes.bool,
   accountsByFiles: PropTypes.shape({
     accountsWithFiles: PropTypes.array,
     accountsWithoutFiles: PropTypes.array
