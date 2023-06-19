@@ -1,41 +1,18 @@
 import PropTypes from 'prop-types'
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useRef } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
+import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
-import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import { findPlaceholdersByQualification } from '../../../helpers/findPlaceholders'
 import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'
 import { useScannerI18n } from '../../Hooks/useScannerI18n'
 import FileIcon from '../../Icons/FileIcon'
-import ActionMenuImportDropdown from '../ActionMenuImportDropdown'
-
-const useStyles = makeStyles(() => ({
-  placeholderList: {
-    minHeight: '15rem',
-    margin: '0.5rem 0',
-    padding: 0
-  },
-  actionMenu: {
-    position: 'absolute',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-
-    '& >div:first-child': {
-      position: 'relative !important',
-      transform: 'none !important'
-    }
-  }
-}))
+import useKonnectorsActions from '../../PapersFab/useKonnectorsActions'
 
 const PlaceholdersList = ({ currentQualifItems }) => {
   const [isImportDropdownDisplayed, setIsImportDropdownDisplayed] =
@@ -44,8 +21,9 @@ const PlaceholdersList = ({ currentQualifItems }) => {
   const { papersDefinitions } = usePapersDefinitions()
   const navigate = useNavigate()
   const { pathname } = useLocation()
-  const styles = useStyles()
   const scannerT = useScannerI18n()
+  const anchorRefs = useRef([])
+  const anchorRef = useRef()
 
   const allPlaceholders = useMemo(
     () =>
@@ -57,9 +35,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
     setPlaceholderSelected(undefined)
   }
 
-  const shouldDisplayImportDropdown = () => {
-    return !!isImportDropdownDisplayed && !!placeholderSelected
-  }
+  const showActionMenu = isImportDropdownDisplayed && !!placeholderSelected
 
   const redirectPaperCreation = placeholder => {
     const countrySearchParam = `${
@@ -71,8 +47,14 @@ const PlaceholdersList = ({ currentQualifItems }) => {
     })
   }
 
-  const showImportDropdown = placeholder => {
+  const actions = useKonnectorsActions({
+    placeholder: placeholderSelected,
+    redirectPaperCreation
+  })
+
+  const showImportDropdown = (idx, placeholder) => {
     if (placeholder.konnectorCriteria) {
+      anchorRef.current = anchorRefs.current[idx]
       setIsImportDropdownDisplayed(true)
       setPlaceholderSelected(placeholder)
     } else {
@@ -82,7 +64,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
 
   return (
     <>
-      <List className={styles.placeholderList}>
+      <List>
         {allPlaceholders.map((placeholder, idx) => {
           const validPlaceholder =
             placeholder.acquisitionSteps.length > 0 ||
@@ -91,9 +73,12 @@ const PlaceholdersList = ({ currentQualifItems }) => {
           return (
             <ListItem
               key={idx}
+              ref={el => (anchorRefs.current[idx] = el)}
               button
               disabled={!validPlaceholder}
-              onClick={() => showImportDropdown(placeholder)}
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={() => showImportDropdown(idx, placeholder)}
               data-testid="PlaceholdersList-ListItem"
             >
               <ListItemIcon>
@@ -108,13 +93,18 @@ const PlaceholdersList = ({ currentQualifItems }) => {
           )
         })}
       </List>
-      <ActionMenuImportDropdown
-        className={styles.actionMenu}
-        isOpened={shouldDisplayImportDropdown()}
-        placeholder={placeholderSelected}
-        onClose={hideImportDropdown}
-        onClick={() => redirectPaperCreation(placeholderSelected)}
-      />
+      {showActionMenu && (
+        <ActionsMenu
+          ref={anchorRef}
+          open
+          actions={actions}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center'
+          }}
+          onClose={hideImportDropdown}
+        />
+      )}
     </>
   )
 }
