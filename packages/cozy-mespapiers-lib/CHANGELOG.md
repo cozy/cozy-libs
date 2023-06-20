@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [49.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@48.0.0...cozy-mespapiers-lib@49.0.0) (2023-06-20)
+
+
+### Features
+
+* **mespapiers:** Add some health papers definitions ([b449f6f](https://github.com/cozy/cozy-libs/commit/b449f6f0b3cee6ebdd0f62a59f0988e72286be7f))
+* **mespapiers:** Remove `mespapiers.migrated.metadata` flag ([c815522](https://github.com/cozy/cozy-libs/commit/c815522f6a7b7c2c5c66ef718b5c68c56ed0a320))
+* **mespapiers:** Upgrade cozy-ui from 86.0.0 to 86.1.0 ([a2ee641](https://github.com/cozy/cozy-libs/commit/a2ee641da98297f8056b81500f47b4ba613930ad))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 86.1.0`
+
+
+
+
+
 # [48.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@47.0.0...cozy-mespapiers-lib@48.0.0) (2023-06-20)
 
 
