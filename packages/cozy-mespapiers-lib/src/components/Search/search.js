@@ -2,7 +2,6 @@ import { Document } from 'flexsearch'
 import { encode } from 'flexsearch/dist/module/lang/latin/balance'
 
 import { isFile, hasQualifications } from 'cozy-client/dist/models/file'
-import flag from 'cozy-flags'
 
 import { makeFileFlexsearchProps, makeContactFlexsearchProps } from './helpers'
 import { CONTACTS_DOCTYPE } from '../../doctypes'
@@ -43,19 +42,6 @@ const flexsearchIndex = [
   'company', // io.cozy.contacts
   'jobTitle' // io.cozy.contacts
 ]
-if (!flag('mespapiers.migrated.metadata')) {
-  flexsearchIndex.splice(
-    10,
-    0,
-    ...[
-      'metadata:ibanNumber',
-      'metadata:passportNumber',
-      'metadata:vinNumber',
-      'metadata:cardNumber',
-      'metadata:cafFileNumber'
-    ]
-  ) // io.cozy.files
-}
 
 /** The index document will store _id for each document having the declared indexed fields,
  * coming from both `io.cozy.files` and `io.cozy.contacts`.

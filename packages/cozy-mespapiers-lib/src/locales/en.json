@@ -202,20 +202,12 @@
       }
     },
     "bankDetails": {
-      "ibanNumber": {
-        "inputLabel": "IBAN",
-        "text": "Enter your IBAN number"
-      },
       "number": {
         "inputLabel": "IBAN",
         "text": "Enter your IBAN number"
       }
     },
     "vehicleRegistration": {
-      "vinNumber": {
-        "inputLabel": "Number in position E. of your vehicle registration",
-        "text": "Enter the Vehicle Identification Number (VIN)"
-      },
       "number": {
         "inputLabel": "Number in position E. of your vehicle registration",
         "text": "Enter the Vehicle Identification Number (VIN)"
@@ -280,10 +272,6 @@
           "inputLabel": "Beneficiary nationality",
           "text": "What is the Nationality of the beneficiary?"
         },
-        "passportNumber": {
-          "inputLabel": "Passport number",
-          "text": "Enter your passport number"
-        },
         "number": {
           "inputLabel": "Passport number",
           "text": "Enter your passport number"
@@ -300,20 +288,12 @@
       }
     },
     "caf": {
-      "cafFileNumber": {
-        "inputLabel": "CAF file number",
-        "text": "Enter you CAF file number"
-      },
       "number": {
         "inputLabel": "CAF file number",
         "text": "Enter you CAF file number"
       }
     },
     "payment_proof_family_allowance": {
-      "cafFileNumber": {
-        "inputLabel": "CAF file number",
-        "text": "Enter you CAF file number"
-      },
       "number": {
         "inputLabel": "CAF file number",
         "text": "Enter you CAF file number"

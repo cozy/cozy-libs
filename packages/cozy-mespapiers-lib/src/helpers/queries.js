@@ -1,5 +1,4 @@
 import { Q, fetchPolicies } from 'cozy-client'
-import flag from 'cozy-flags'
 
 import {
   CONTACTS_DOCTYPE,
@@ -32,15 +31,6 @@ export const buildFilesQueryWithQualificationLabel = () => {
     'type',
     'trashed'
   ]
-  if (!flag('mespapiers.migrated.metadata')) {
-    select.push(
-      'metadata.ibanNumber',
-      'metadata.passportNumber',
-      'metadata.vinNumber',
-      'metadata.cardNumber',
-      'metadata.cafFileNumber'
-    )
-  }
 
   return {
     definition: () =>
