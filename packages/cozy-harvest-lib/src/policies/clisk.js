@@ -143,5 +143,8 @@ export const konnectorPolicy = {
   onAccountCreation: null,
   fetchExtraOAuthUrlParams: null,
   refreshContracts: null,
-  isRunnable
+  isRunnable,
+  // ConnectionFlow always launches the konnector which will handle the error itself if any
+  shouldLaunchRedirectToEdit: () => false,
+  shouldLaunchDisplayOAuthWindow: () => false
 }

@@ -15,7 +15,16 @@ const defaultKonnectorPolicy = {
   needsTriggerLaunch: true,
   needsAccountAndTriggerCreation: true,
   onLaunch: null,
-  isRunnable: () => true
+  isRunnable: () => true,
+  // ConnectionFlow redirects to the edit form page only when there is an error and if this error is solvable with a configuration change. Ex LOGIN_FAILED
+  /**
+   * @param {import('./helpers/konnectors').KonnectorJobError} error - current error in ConnectionFlow
+   * @returns
+   */
+  shouldLaunchRedirectToEdit: error => {
+    return error && error.isSolvableViaReconnect()
+  },
+  shouldLaunchDisplayOAuthWindow: () => false
 }
 
 const policies = [

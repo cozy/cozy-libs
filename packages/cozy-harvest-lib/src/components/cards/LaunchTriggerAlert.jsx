@@ -67,10 +67,7 @@ export const LaunchTriggerAlert = ({
   const styles = useStyles({ block })
   const konnectorPolicy = findKonnectorPolicy(konnector)
   const isKonnectorRunnable = konnectorPolicy.isRunnable()
-  const isClisk = konnectorPolicy.name === 'clisk'
   const isKonnectorDisconnected = isDisconnected(konnector, trigger)
-  const shouldTryOauthReconnect =
-    konnectorPolicy.isBIWebView && isInError && error.isSolvableViaReconnect()
 
   const shouldDisplayRunningAlert = () => {
     if (isInError) return false
@@ -88,19 +85,15 @@ export const LaunchTriggerAlert = ({
     }
   }, [status])
 
-  const SyncButtonAction =
-    isInError &&
-    error.isSolvableViaReconnect() &&
-    !isClisk &&
-    !konnectorPolicy.isBIWebView
-      ? () =>
-          historyAction(
-            konnectorRoot
-              ? `${konnectorRoot}/accounts/${getAccountId(trigger)}/edit`
-              : '/edit',
-            'push'
-          )
-      : () => launch({ autoSuccessTimer: false })
+  const SyncButtonAction = konnectorPolicy.shouldLaunchRedirectToEdit(error)
+    ? () =>
+        historyAction(
+          konnectorRoot
+            ? `${konnectorRoot}/accounts/${getAccountId(trigger)}/edit`
+            : '/edit',
+          'push'
+        )
+    : () => launch({ autoSuccessTimer: false })
   const alertColor = () => {
     if (isInError) return undefined
     if (isInMaintenance) return 'var(--grey50)'
@@ -140,7 +133,7 @@ export const LaunchTriggerAlert = ({
             <>
               {!isInMaintenance &&
                 !isKonnectorDisconnected &&
-                (shouldTryOauthReconnect ? (
+                (konnectorPolicy.shouldLaunchDisplayOAuthWindow(error) ? (
                   <OpenOAuthWindowButton
                     flow={flow}
                     account={account}
