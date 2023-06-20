@@ -40,22 +40,15 @@ const LaunchTriggerAlertMenu = ({
   const anchorRef = useRef()
   const [showOptions, setShowOptions] = useState(false)
 
-  const isInError = !!error
-  const shouldTryOauthReconnect =
-    konnectorPolicy.isBIWebView && isInError && error.isSolvableViaReconnect()
-  const SyncButtonAction =
-    isInError &&
-    error.isSolvableViaReconnect() &&
-    !isClisk &&
-    !konnectorPolicy.isBIWebView
-      ? () =>
-          historyAction(
-            konnectorRoot
-              ? `${konnectorRoot}/accounts/${getAccountId(trigger)}/edit`
-              : '/edit',
-            'push'
-          )
-      : () => launch({ autoSuccessTimer: false })
+  const SyncButtonAction = konnectorPolicy.shouldLaunchRedirectToEdit(error)
+    ? () =>
+        historyAction(
+          konnectorRoot
+            ? `${konnectorRoot}/accounts/${getAccountId(trigger)}/edit`
+            : '/edit',
+          'push'
+        )
+    : () => launch({ autoSuccessTimer: false })
 
   return (
     <>
@@ -72,7 +65,7 @@ const LaunchTriggerAlertMenu = ({
             !running &&
             !isInMaintenance &&
             !isKonnectorDisconnected &&
-            (shouldTryOauthReconnect ? (
+            (konnectorPolicy.shouldLaunchDisplayOAuthWindow(error) ? (
               <OpenOAuthWindowButton
                 flow={flow}
                 account={account}

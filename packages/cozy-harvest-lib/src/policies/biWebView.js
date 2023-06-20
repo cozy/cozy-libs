@@ -506,5 +506,14 @@ export const konnectorPolicy = {
   onAccountCreation: onBIAccountCreation,
   fetchExtraOAuthUrlParams: fetchExtraOAuthUrlParams,
   handleOAuthAccount,
-  refreshContracts
+  refreshContracts,
+  // ConnectionFlow display OAuthWindow only when there is an error and when this error is solvable with it
+  shouldLaunchRedirectToEdit: () => false,
+  /**
+   * @param {import('./../helpers/konnectors').KonnectorJobError} error - current error in ConnectionFlow
+   * @returns
+   */
+  shouldLaunchDisplayOAuthWindow: error => {
+    return error && error.isSolvableViaReconnect()
+  }
 }
