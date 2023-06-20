@@ -103,6 +103,11 @@
         "format": "DD/MM/YYYY",
         "disconnected": "Déconnecté",
         "justNow": "Sync. à l'instant"
+      },
+      "runningAlert": {
+        "title": "Ne fermez pas votre app !",
+        "body": "Pour que la récupération de vos données soit complète, le téléphone doit rester allumé. Vous pouvez cependant continuer à naviguer dans l'app mobile tant qu'elle reste active au premier plan.",
+        "button": "J'ai compris"
       }
     },
     "appLink": {

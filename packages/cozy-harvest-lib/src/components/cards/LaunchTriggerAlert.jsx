@@ -13,6 +13,7 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import LaunchTriggerAlertMenu from './LaunchTriggerAlertMenu'
+import { RunningAlert } from './RunningAlert'
 import { makeLabel } from './helpers'
 import { isDisconnected } from '../../helpers/konnectors'
 import { getAccountId, getKonnectorSlug } from '../../helpers/triggers'
@@ -64,6 +65,16 @@ export const LaunchTriggerAlert = ({
   const isKonnectorRunnable = konnectorPolicy.isRunnable()
   const isClisk = konnectorPolicy.name === 'clisk'
   const isKonnectorDisconnected = isDisconnected(konnector, trigger)
+
+  const shouldDisplayRunningAlert = () => {
+    if (isInError) return false
+    if (isInMaintenance) return false
+    if (!isKonnectorRunnable) return false
+    if (isKonnectorDisconnected) return false
+    if (running && konnector.clientSide) return true
+
+    return false
+  }
 
   useEffect(() => {
     if (status === SUCCESS) {
@@ -202,6 +213,9 @@ export const LaunchTriggerAlert = ({
           )}
         </div>
       </Alert>
+
+      {shouldDisplayRunningAlert() && <RunningAlert />}
+
       <Snackbar
         open={showSuccessSnackbar}
         onClose={() => setShowSuccessSnackbar(false)}

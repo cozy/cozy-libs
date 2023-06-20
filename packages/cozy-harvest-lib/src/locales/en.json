@@ -103,6 +103,11 @@
         "format": "MM/DD/YYYY",
         "disconnected": "Disconnected",
         "justNow": "Sync. just now"
+      },
+      "runningAlert": {
+        "title": "Don't Close Your App!",
+        "body": "For the data recovery to be complete, the phone must remain turned on. However, you can continue to browse within the mobile app as long as it stays active in the foreground.",
+        "button": "I understand"
       }
     },
     "appLink": {
