@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [47.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@46.3.3...cozy-mespapiers-lib@47.0.0) (2023-06-20)
+
+
+### Bug Fixes
+
+* **mespapiers:** Clicking on listItem should check the radio button ([900afb4](https://github.com/cozy/cozy-libs/commit/900afb4aa94f99da5974c184b21917d799b70ec1))
+
+
+### Features
+
+* **mespapiers:** Add `other` option to contract types ([fca1343](https://github.com/cozy/cozy-libs/commit/fca1343c20349874e89fff49f49815e9b77eeefb))
+* **mespapiers:** Radio step is not mandatory ([ae348df](https://github.com/cozy/cozy-libs/commit/ae348df8efe25bf8a79d2864fd13f06f78eacd64))
+* Update cozy-ui & cozy-client ([0af3764](https://github.com/cozy/cozy-libs/commit/0af3764f878c2890c4aa3079256056d1066edacc))
+
+
+### BREAKING CHANGES
+
+* you must have `cozy-client >= 38.5.1`
+and `cozy-ui >= 85.8.0`
+
+
+
+
+
 ## [46.3.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@46.3.2...cozy-mespapiers-lib@46.3.3) (2023-06-19)
 
 
