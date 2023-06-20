@@ -52,7 +52,11 @@ const LaunchTriggerAlertMenu = ({
 
   return (
     <>
-      <IconButton ref={anchorRef} onClick={() => setShowOptions(true)}>
+      <IconButton
+        ref={anchorRef}
+        onClick={() => setShowOptions(true)}
+        data-testid="alert-menu-button"
+      >
         <Icon icon={DotsIcon} />
       </IconButton>
       {showOptions && (
