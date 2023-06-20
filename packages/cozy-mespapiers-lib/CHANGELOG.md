@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [48.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@47.0.0...cozy-mespapiers-lib@48.0.0) (2023-06-20)
+
+
+### Bug Fixes
+
+* **mespapiers:** CreatePaper and createPaperByTheme wasn't spreading ref ([19e0148](https://github.com/cozy/cozy-libs/commit/19e01489f453b34bbe835d3cc535bc53ad894a86))
+
+
+### Features
+
+* **mespapiers:** Upgrade cozy-ui from 85.8.0 to 86.0.0 ([40ab3d0](https://github.com/cozy/cozy-libs/commit/40ab3d090ef6b9531cf9fd700595ccc0183c5cb0))
+* **mespapiers:** Use a11y menu on home actions ([16052a7](https://github.com/cozy/cozy-libs/commit/16052a7a984fefd94adc8acea26df92ea7710179))
+* **mespapiers:** Use a11y menu on PaperLine ([243cd93](https://github.com/cozy/cozy-libs/commit/243cd934773e38194406d4f5d8d062c1b302f4c5))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 86.0.0`
+
+
+
+
+
 # [47.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@46.3.3...cozy-mespapiers-lib@47.0.0) (2023-06-20)
 
 
