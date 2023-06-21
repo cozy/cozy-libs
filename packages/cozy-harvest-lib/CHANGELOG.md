@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.20.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.19.3...cozy-harvest-lib@13.20.0) (2023-06-21)
+
+
+### Features
+
+* **harvest:** Add dismissable alert when running ([bf9f3c5](https://github.com/cozy/cozy-libs/commit/bf9f3c5ef537f3b39a8f199c693c66733e020f17))
+
+
+
+
+
 ## [13.19.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.19.2...cozy-harvest-lib@13.19.3) (2023-06-09)
 
 **Note:** Version bump only for package cozy-harvest-lib
