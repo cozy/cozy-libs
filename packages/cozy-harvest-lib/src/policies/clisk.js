@@ -146,5 +146,13 @@ export const konnectorPolicy = {
   isRunnable,
   // ConnectionFlow always launches the konnector which will handle the error itself if any
   shouldLaunchRedirectToEdit: () => false,
-  shouldLaunchDisplayOAuthWindow: () => false
+  shouldLaunchDisplayOAuthWindow: () => false,
+  /**
+   * Will tell if an alert indicating the need to keep the flagship app in front for the time of the konnector execution should be displayed
+   *
+   * @param {Object} options - options object
+   * @param {boolean} options.running - true if the current konnector is running
+   * @returns {boolean}
+   */
+  shouldDisplayRunningAlert: ({ running }) => running
 }

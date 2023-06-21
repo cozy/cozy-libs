@@ -515,5 +515,6 @@ export const konnectorPolicy = {
    */
   shouldLaunchDisplayOAuthWindow: error => {
     return error && error.isSolvableViaReconnect()
-  }
+  },
+  shouldDisplayRunningAlert: () => false
 }

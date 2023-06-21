@@ -69,16 +69,6 @@ export const LaunchTriggerAlert = ({
   const isKonnectorRunnable = konnectorPolicy.isRunnable()
   const isKonnectorDisconnected = isDisconnected(konnector, trigger)
 
-  const shouldDisplayRunningAlert = () => {
-    if (isInError) return false
-    if (isInMaintenance) return false
-    if (!isKonnectorRunnable) return false
-    if (isKonnectorDisconnected) return false
-    if (running && konnector.clientSide) return true
-
-    return false
-  }
-
   useEffect(() => {
     if (status === SUCCESS) {
       setShowSuccessSnackbar(true)
@@ -229,7 +219,9 @@ export const LaunchTriggerAlert = ({
         </div>
       </Alert>
 
-      {shouldDisplayRunningAlert() && <RunningAlert />}
+      {konnectorPolicy.shouldDisplayRunningAlert({ running }) && (
+        <RunningAlert />
+      )}
 
       <Snackbar
         open={showSuccessSnackbar}
