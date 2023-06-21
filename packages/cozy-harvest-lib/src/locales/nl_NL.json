@@ -21,18 +21,7 @@
     "installFlagship": {
       "label": "Installeer Cozy op je telefoon"
     },
-    "cannotConnectModal": {
-      "title": "Kun je geen verbinding maken?",
-      "content": "Controleer je inloggegevens of herstel je wachtwoord op de website van [%{vendorName}](%{vendorLink}).",
-      "noAccount": "Als je nog geen account hebt, maak die dan aan op de website van [%{vendorName}](%{vendorLink})."
-    },
-    "cannotConnectLink": "Ik kan geen verbinding maken",
-    "notClientSide": "Installeer de Cozy-app op je telefoon of tablet om je %{name}-gegevens te synchroniseren.",
-    "clientSide": {
-      "title": "Koppelen aan mijn Cozy",
-      "submit": "Koppelen",
-      "description": "Koppel %{name} aan je Cozy om te synchroniseren met je account en automatisch al je gegevens op te halen."
-    }
+    "notClientSide": "%{name} maakt gebruik van een hagelnieuw efficiënt systeem om gegevens op te vragen op je Cozy. Deze action is alleen te gebruiken via de Cozy-smartphone-app."
   },
   "contracts": {
     "headers": {
@@ -81,11 +70,8 @@
   "card": {
     "launchTrigger": {
       "button": {
-        "label": "Synchroniseren"
+        "label": "Opnieuw uitvoeren"
       },
-      "configure": "Instellen",
-      "connect": "Koppelen",
-      "success": "De synchronisatie is voltooid",
       "error": "Er is een fout opgetreden.",
       "frequency": {
         "label": "Frequentie:",
@@ -97,12 +83,10 @@
       },
       "lastSync": {
         "label": "Bijwerken:",
-        "syncing": "Gegevensherstel…",
+        "syncing": "Bezig met uitvoeren…",
         "unknown": "Onbekend",
-        "afterSomeTimes": "%{times} geleden gesynchroniseerd",
-        "format": "DD-MM-YYYY",
-        "disconnected": "Losgekoppeld",
-        "justNow": "Zojuist gesynchroniseerd"
+        "afterSomeTimes": "Sync. %{times} geleden",
+        "justNow": "Sync. onmiddellijk"
       }
     },
     "appLink": {
@@ -141,7 +125,6 @@
     "baseDir": "/Administratief"
   },
   "error": {
-    "application-not-found": "Deze app bestaat niet",
     "reconnect-via-form": "Opnieuw koppelen",
     "job": {
       "DISK_QUOTA_EXCEEDED": {
@@ -234,7 +217,7 @@
       },
       "ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED": {
         "title": "Dit account is al toegevoegd",
-        "description": "Je mogelijke aanpassing aan de accountlijst wordt binnen een paar minuten doorgevoerd."
+        "description": "Je hebt al een account met deze identificaties ingesteld."
       }
     }
   },
@@ -398,11 +381,6 @@
       "title": "%{name} koppelen",
       "button": "Account toevoegen"
     },
-    "deleteBIConnection": {
-      "title": "Loskoppelen",
-      "description": "Je verzoek is genoteerd en wordt over enkele ogenblikken uitgevoerd. Eerder geïmporteerde gegevens worden niet verwijderd.",
-      "confirm-deletion": "Sluiten"
-    },
     "deleteAccount": {
       "title": "Loskoppelen",
       "description": "Je account wordt losgekoppeld, maar belangrijke gegevens worden bewaard",
@@ -429,10 +407,7 @@
       "label": "Opnieuw koppelen"
     },
     "connect": {
-      "description": "Koppel %{slug} aan je Cozy om te synchroniseren met je account en automatisch al je gegevens op te halen.",
-      "label": "Koppelen",
-      "submit": "Koppelen",
-      "title": "Koppelen aan mijn Cozy"
+      "label": "Koppelen"
     },
     "window": {
       "title": "OAuth"
@@ -535,10 +510,6 @@
       "primaryText": "Bijwerken",
       "secondaryText": "Annuleren"
     }
-  },
-  "connectionBackdrop": {
-    "connecting": "Bezig met verbinden…",
-    "progress": "We zoeken %{name} op - dit kan max. 30 seconden duren…"
   },
   "disconnectedAccountModal": {
     "disconnected-help": "Dit account is losgekoppeld, maar je gegevens zijn bewaard. Als je opnieuw wilt synchroniseren, stel dan je account opnieuw in middels de knop 'Bank toevoegen'."
