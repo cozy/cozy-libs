@@ -24,7 +24,8 @@ const defaultKonnectorPolicy = {
   shouldLaunchRedirectToEdit: error => {
     return error && error.isSolvableViaReconnect()
   },
-  shouldLaunchDisplayOAuthWindow: () => false
+  shouldLaunchDisplayOAuthWindow: () => false,
+  shouldDisplayRunningAlert: () => false
 }
 
 const policies = [
