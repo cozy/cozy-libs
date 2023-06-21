@@ -11,16 +11,17 @@
 ### Platforms
 
 ```
-import { getPlatform, isWebApp, isMobileApp, isIOSApp, isAndroidApp } from 'cozy-device-helper'
+import { getPlatform, isWebApp, isMobileApp, isIOSApp, isAndroidApp, isFlagshipApp } from 'cozy-device-helper'
 ```
 
 To know the platform:
 
+- `isFlagshipApp()`: return `boolean` if inside the flagship app.
 - `getPlatform()`: return `ios`, `android` or `web`
 - `isWebApp()`: return `boolean`
-- `isMobileApp()`: return `boolean`
-- `isIOSApp()`: return `boolean`
-- `isAndroidApp()`: return `boolean`
+- `isMobileApp()`: return `boolean`. True if its a cordova App. False for others.
+- `isIOSApp()`: return `boolean`. True if its a cordova App on iOS.
+- `isAndroidApp()`: return `boolean`. True if its a cordova App on Android.
 - `isAndroid()`: return `boolean` (check if the user is on an android smartphone (native & browser))
 - `isOS()`: return `boolean` (check if the user is on an iOS smartphone (native & browser))
 - `isMobile()`: return `boolean` (check if the user is on an android or iOS smartphone (native & browser))
