@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.20.0...cozy-harvest-lib@14.0.0) (2023-06-22)
+
+
+### Features
+
+* **cozy-harvest-lib:** Update cozy-client from 37.1.0 to 38.6.0 ([ba6b813](https://github.com/cozy/cozy-libs/commit/ba6b8138be50e330e4f1f419d9fb89ecc1658fde))
+* **cozy-harvest-lib:** Update cozy-ui from 80.1.1 to 85.8.0 ([654fe48](https://github.com/cozy/cozy-libs/commit/654fe48ba05284b9b1a23b14042887848ad63a38))
+* Show a paywall when maximum accounts has been reached ([6ad63de](https://github.com/cozy/cozy-libs/commit/6ad63dea66402a759c9d05ce44fe7cd78c821452))
+
+
+### BREAKING CHANGES
+
+* **cozy-harvest-lib:** You must have cozy-ui >= 85.8.0
+
+
+
+
+
 # [13.20.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.19.3...cozy-harvest-lib@13.20.0) (2023-06-21)
 
 
