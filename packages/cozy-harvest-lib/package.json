@@ -24,7 +24,9 @@
     "lint": "cd .. && yarn eslint --ext js,jsx packages/cozy-harvest-lib",
     "start": "yarn build:watch",
     "cli": "env BABEL_ENV=es5 node src/cli/index.js",
-    "watch:doc:react": "(cd ../.. && TARGET=cozy-harvest-lib yarn watch:doc:react)"
+    "watch:doc:react": "(cd ../.. && TARGET=cozy-harvest-lib yarn watch:doc:react)",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@cozy/minilog": "^1.0.0",
@@ -48,6 +50,13 @@
     "@babel/core": "7.16.12",
     "@babel/register": "7.16.9",
     "@cozy/cli-tree": "^0.7.0",
+    "@storybook/addon-essentials": "^7.0.23",
+    "@storybook/addon-interactions": "^7.0.23",
+    "@storybook/addon-links": "^7.0.23",
+    "@storybook/blocks": "^7.0.23",
+    "@storybook/react": "^7.0.23",
+    "@storybook/react-webpack5": "^7.0.23",
+    "@storybook/testing-library": "^0.0.14-next.2",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "10.4.9",
     "@testing-library/react-hooks": "8.0.1",
@@ -77,7 +86,8 @@
     "react": "16.12.0",
     "react-dom": "16.13.0",
     "react-router": "3.2.6",
-    "react-swipeable-views": "0.13.9"
+    "react-swipeable-views": "0.13.9",
+    "storybook": "^7.0.23"
   },
   "peerDependencies": {
     "@babel/runtime": ">=7.12.5",
