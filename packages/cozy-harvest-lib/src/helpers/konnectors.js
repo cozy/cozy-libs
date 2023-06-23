@@ -111,7 +111,6 @@ export class KonnectorJobError extends Error {
       // since we do not currently *need* to display a 2fa modal
       // for the flow to work. There will be no modal displayed
       // but the user will be able to do the 2fa on its mobile phone.
-      this.code === 'USER_ACTION_NEEDED' ||
       this.code === 'USER_ACTION_NEEDED.SCA_REQUIRED' ||
       this.code === 'USER_ACTION_NEEDED.WEBAUTH_REQUIRED' ||
       this.code === 'USER_ACTION_NEEDED.OAUTH_OUTDATED' ||
