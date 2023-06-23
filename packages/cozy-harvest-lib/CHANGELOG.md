@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@14.0.0...cozy-harvest-lib@14.1.0) (2023-06-23)
+
+
+### Bug Fixes
+
+* Display reconnection webview for powens konnectors ([d94ff26](https://github.com/cozy/cozy-libs/commit/d94ff2693779710b3b9e96a0abc5e8f72b81ccf6))
+* Ignore ActionMenu warning message ([f6d7ba5](https://github.com/cozy/cozy-libs/commit/f6d7ba578bee109e2fdd775f1ad380cf9ae803fb))
+
+
+### Features
+
+* Display reconnection webview for powens konnectors ([a924d3e](https://github.com/cozy/cozy-libs/commit/a924d3e13524f211bc8ae45435a012b8e2125ed8))
+
+
+
+
+
 # [14.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.20.0...cozy-harvest-lib@14.0.0) (2023-06-22)
 
 
