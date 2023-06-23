@@ -347,6 +347,16 @@ export class DumbTriggerManager extends Component {
     const showAccountForm = step === 'accountForm'
     const konnectorPolicy = findKonnectorPolicy(konnector)
 
+    if (showPaywall) {
+      return (
+        <AccountsPaywall
+          reason={showPaywall}
+          konnector={konnector}
+          onClose={() => onClose()}
+        />
+      )
+    }
+
     if (oauth || konnectorPolicy.isBIWebView) {
       const Wrapper = OAuthFormWrapperComp
         ? OAuthFormWrapperComp
@@ -407,13 +417,6 @@ export class DumbTriggerManager extends Component {
               fieldOptions={fieldOptions}
             />
           </>
-        )}
-        {showPaywall && (
-          <AccountsPaywall
-            reason={showPaywall}
-            konnector={konnector}
-            onClose={() => onClose()}
-          />
         )}
       </>
     )
