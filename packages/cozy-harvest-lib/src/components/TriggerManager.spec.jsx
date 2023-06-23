@@ -291,24 +291,6 @@ describe('TriggerManager', () => {
         })
       })
     })
-
-    describe('when user has reach limit', () => {
-      afterEach(() => {
-        checkMaxAccounts.mockResolvedValue(null)
-      })
-
-      it('should show a paywall', async () => {
-        checkMaxAccounts.mockResolvedValue('max_accounts')
-        render(
-          <AppLike>
-            <TriggerManager {...props} />
-          </AppLike>
-        )
-        expect(
-          await screen.findByText('Show paywall for this reason : max_accounts')
-        ).toBeDefined()
-      })
-    })
   })
 
   describe('when given an account', () => {
@@ -452,6 +434,58 @@ describe('TriggerManager', () => {
           })
         )
       })
+    })
+  })
+
+  describe('Accounts paywall', () => {
+    afterEach(() => {
+      jest.clearAllMocks()
+    })
+
+    it('should show a paywall when given no account', async () => {
+      checkMaxAccounts.mockResolvedValue('max_accounts')
+      render(
+        <AppLike>
+          <TriggerManager {...props} />
+        </AppLike>
+      )
+      expect(
+        await screen.findByText('Show paywall for this reason : max_accounts')
+      ).toBeDefined()
+    })
+
+    it('should show the new account form when checkMaxAccounts return null', async () => {
+      checkMaxAccounts.mockResolvedValue(null)
+      const { findByLabelText } = render(
+        <AppLike>
+          <TriggerManager {...props} />
+        </AppLike>
+      )
+
+      await expect(findByLabelText('username')).resolves.toBeDefined()
+      await expect(findByLabelText('passphrase')).resolves.toBeDefined()
+    })
+
+    it('should show a paywall when given an oauth konnector', async () => {
+      checkMaxAccounts.mockResolvedValue('max_accounts')
+      render(
+        <AppLike>
+          <TriggerManager {...oAuthProps} konnector={oAuthKonnector} />
+        </AppLike>
+      )
+      expect(
+        await screen.findByText('Show paywall for this reason : max_accounts')
+      ).toBeDefined()
+    })
+
+    it('should no check the paywall condition when given an account', async () => {
+      render(
+        <AppLike>
+          <TriggerManager {...propsWithAccount} />
+        </AppLike>
+      )
+
+      expect(checkMaxAccounts).not.toBeCalled()
     })
   })
 })
