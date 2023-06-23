@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [14.1.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@14.1.0...cozy-harvest-lib@14.1.1) (2023-06-23)
+
+
+### Bug Fixes
+
+* Do not display reconnection webview for USER_ACTION_NEEDED state ([a0c04fe](https://github.com/cozy/cozy-libs/commit/a0c04fea02d2f401bf4c2d9324236b8d2d29df03))
+* Show accounts paywall for oAuth konnector ([e30c737](https://github.com/cozy/cozy-libs/commit/e30c7370e7e1ce41c8238acc3e97f53380935b74))
+
+
+
+
+
 # [14.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@14.0.0...cozy-harvest-lib@14.1.0) (2023-06-23)
 
 
