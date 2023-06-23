@@ -61,7 +61,7 @@
     "cozy-keys-lib": "^4.1.9",
     "cozy-realtime": "^4.6.0",
     "cozy-tsconfig": "^1.0.0",
-    "cozy-ui": "^85.8.1",
+    "cozy-ui": "^85.9.0",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.6",
     "form-data": "4.0.0",
