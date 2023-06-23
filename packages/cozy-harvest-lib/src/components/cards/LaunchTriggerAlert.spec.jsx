@@ -93,10 +93,19 @@ describe('LaunchTriggerAlert', () => {
     )
     return { root, flow, historyAction, client }
   }
+  // eslint-disable-next-line no-console
+  let originalConsoleWarn = console.warn
 
   beforeEach(() => {
     jest.clearAllMocks()
     jest.resetAllMocks()
+    // FIXME used this dirty fix to avoid blocking a delivery for this message : The ActionMenu component has been deprecated and should be replaced by ActionsMenu. More infos: https://docs.cozy.io/cozy-ui/react/#!/ActionsMenu
+    // eslint-disable-next-line no-console
+    console.warn = message => console.log('warning: ' + message)
+  })
+  afterEach(() => {
+    // eslint-disable-next-line no-console
+    console.warn = originalConsoleWarn
   })
 
   it('should just launch konnector when there is no error', async () => {
