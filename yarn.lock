@@ -5177,7 +5177,7 @@
     remark-slug "^6.0.0"
     ts-dedent "^2.0.0"
 
-"@storybook/addon-essentials@^7.0.23":
+"@storybook/addon-essentials@7.0.23":
   version "7.0.23"
   resolved "https://registry.yarnpkg.com/@storybook/addon-essentials/-/addon-essentials-7.0.23.tgz#d474c3c2bed56ee59ce416349f980a0d6451319d"
   integrity sha512-t4ChTrsd+ctKjmhy6TLsOPmPPzkPjCSP3yVDSW8pOzHsSxfFUa7qSu89Kb9zYrwEDwXxiAie1KIRZE3smUeD0A==
@@ -5206,7 +5206,7 @@
     "@storybook/global" "^5.0.0"
     "@storybook/preview-api" "7.0.23"
 
-"@storybook/addon-interactions@^7.0.23":
+"@storybook/addon-interactions@7.0.23":
   version "7.0.23"
   resolved "https://registry.yarnpkg.com/@storybook/addon-interactions/-/addon-interactions-7.0.23.tgz#5ed6da8e01bd9783c569e6ebde71d4b8efd1fea2"
   integrity sha512-NBI7ejUO/YmjQRRRopD3tuA+87fq5BRwTINbs17AkaEjO84xQ+G1rTixQZ18PkLpO65OlmuDeGIrbfbt8hrmcA==
@@ -5225,7 +5225,7 @@
     polished "^4.2.2"
     ts-dedent "^2.2.0"
 
-"@storybook/addon-links@^7.0.23":
+"@storybook/addon-links@7.0.23":
   version "7.0.23"
   resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-7.0.23.tgz#2f5931035a00186096d28dcd9c2bf5bd082b41b0"
   integrity sha512-e95Y7oVCjsECh8XEs6+SWZtUz+cfUDNuF1mty4/6/d03H8HraWXgUSOfTRhRj+Q076CNcIh7IcqqNgeMxvGdKA==
@@ -5311,7 +5311,7 @@
     "@storybook/client-logger" "7.0.23"
     "@storybook/manager-api" "7.0.23"
 
-"@storybook/blocks@7.0.23", "@storybook/blocks@^7.0.23":
+"@storybook/blocks@7.0.23":
   version "7.0.23"
   resolved "https://registry.yarnpkg.com/@storybook/blocks/-/blocks-7.0.23.tgz#8030506fd2f7c84d997e0d547d75c33d646d93d8"
   integrity sha512-yhdff1m+SY90g+52745h/x6r0uDwKHoMffhjttKTSSKhsHOnvHCaslpPBHsxDxsPNGLrjUT+ueK/GSwKJUJmLA==
@@ -5803,7 +5803,7 @@
   resolved "https://registry.yarnpkg.com/@storybook/react-dom-shim/-/react-dom-shim-7.0.23.tgz#a2175d449733f12be098e7df6069ea3216e0ea84"
   integrity sha512-v4jIaDb3SwYmRADuNZDwR/5r0V65zAc+hJlW+8z3FRZ5xN3gGV/3s08VL2xnItmidsneMndz9ECjlaTHvSGOng==
 
-"@storybook/react-webpack5@^7.0.23":
+"@storybook/react-webpack5@7.0.23":
   version "7.0.23"
   resolved "https://registry.yarnpkg.com/@storybook/react-webpack5/-/react-webpack5-7.0.23.tgz#72a089e4e6358036d202466531c1f5e4573b1595"
   integrity sha512-G5x62Ow+MJLRRB1+e6R27Pr2Wt/R7yDjODEgOi6jQMymMjXkxPmr6s3yMTQz5ku7Wn3zFbs4H+DAoD7ND6v8GQ==
@@ -5813,7 +5813,7 @@
     "@storybook/react" "7.0.23"
     "@types/node" "^16.0.0"
 
-"@storybook/react@7.0.23", "@storybook/react@^7.0.23":
+"@storybook/react@7.0.23":
   version "7.0.23"
   resolved "https://registry.yarnpkg.com/@storybook/react/-/react-7.0.23.tgz#6e279add6859ff24ee306caeba3a48ee97a38ad8"
   integrity sha512-vQQ+OaYXwab9PelUggI/ObJ0a5Luyn5lsAWI9QF3BV1WsiHwCKM862OGsfUEfV3WXaN+uHPx/LpyHC7XTFp2yA==
@@ -5872,7 +5872,7 @@
     nanoid "^3.3.1"
     read-pkg-up "^7.0.1"
 
-"@storybook/testing-library@^0.0.14-next.2":
+"@storybook/testing-library@0.0.14-next.2":
   version "0.0.14-next.2"
   resolved "https://registry.yarnpkg.com/@storybook/testing-library/-/testing-library-0.0.14-next.2.tgz#458e6c7623118e24826ba73b80db0a887f3f57e8"
   integrity sha512-i/SLSGm0o978ELok/SB4Qg1sZ3zr+KuuCkzyFqcCD0r/yf+bG35aQGkFqqxfSAdDxuQom0NO02FE+qys5Eapdg==
@@ -6232,6 +6232,14 @@
   dependencies:
     "@types/node" "*"
 
+"@types/hoist-non-react-statics@^3.3.0":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"
+  integrity sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==
+  dependencies:
+    "@types/react" "*"
+    hoist-non-react-statics "^3.3.0"
+
 "@types/html-minifier-terser@^6.0.0":
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/@types/html-minifier-terser/-/html-minifier-terser-6.1.0.tgz#4fc33a00c1d0c16987b1a20cf92d20614c55ac35"
@@ -6451,6 +6459,16 @@
   integrity sha512-G7vi9vE226diNNXVNbIa8HH/wPxMWHTHkn9iQtQSezaWzO5WNsKZZW2/TOzCehtBDVx4MZieTs6GsdtpBBttMA==
   dependencies:
     "@types/react" "*"
+
+"@types/react-redux@7.1.25":
+  version "7.1.25"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.25.tgz#de841631205b24f9dfb4967dd4a7901e048f9a88"
+  integrity sha512-bAGh4e+w5D8dajd6InASVIyCo4pZLJ66oLb80F9OBLO1gKESbZcRCJpTT6uLXX+HAB57zw1WTdwJdAsewuTweg==
+  dependencies:
+    "@types/hoist-non-react-statics" "^3.3.0"
+    "@types/react" "*"
+    hoist-non-react-statics "^3.3.0"
+    redux "^4.0.0"
 
 "@types/react-test-renderer@*":
   version "16.9.2"
@@ -24980,7 +24998,7 @@ store2@^2.14.2:
   resolved "https://registry.yarnpkg.com/store2/-/store2-2.14.2.tgz#56138d200f9fe5f582ad63bc2704dbc0e4a45068"
   integrity sha512-siT1RiqlfQnGqgT/YzXVUNsom9S0H1OX+dpdGN1xkyYATo4I6sep5NmsRD/40s3IIOvlCq6akxkqG82urIZW1w==
 
-storybook@^7.0.23:
+storybook@7.0.23:
   version "7.0.23"
   resolved "https://registry.yarnpkg.com/storybook/-/storybook-7.0.23.tgz#1f1f5365a6b0fb6a679d3068e1bb601198b78e48"
   integrity sha512-eko4DZ6lheJZCsL55RJhYksXX3UWgdO6rkR52pmfhCjlitxf07We+lEuzVou8+HLg8jnSqLi2GIzDKh+hBS4og==

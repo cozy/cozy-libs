@@ -2,6 +2,7 @@
   "extends": "cozy-tsconfig",
   "include": [
     "src/**/*",
+    ".storybook/**/*",
     "tests"
   ],
   "exclude": [
