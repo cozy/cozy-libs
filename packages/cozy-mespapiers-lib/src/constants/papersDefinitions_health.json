@@ -94,7 +94,7 @@
           "stepIndex": 1,
           "model": "scan",
           "multipage": true,
-          "illustration": "IlluNationalHealthInsuranceCardFront.svg",
+          "illustration": "IlluNationalHealthInsuranceCardFront.png",
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
@@ -114,7 +114,7 @@
         {
           "stepIndex": 3,
           "model": "information",
-          "illustration": "IlluNationalHealthInsuranceCardDateHelp.svg",
+          "illustration": "IlluNationalHealthInsuranceCardDateHelp.png",
           "text": "PaperJSON.generic.issueDate.text",
           "attributes": [
             {
