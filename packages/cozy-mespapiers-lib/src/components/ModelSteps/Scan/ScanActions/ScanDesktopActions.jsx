@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { createRef } from 'react'
 
 import { useClient, useQuery, hasQueryBeenLoaded } from 'cozy-client'
+import flag from 'cozy-flags'
 import log from 'cozy-logger'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import FileInput from 'cozy-ui/transpiled/react/FileInput'
@@ -27,7 +28,9 @@ const ScanDesktopActions = ({ onOpenFilePickerModal, onChangeFile }) => {
     getAppSettings.options
   )
   const isLoadedSettings = hasQueryBeenLoaded(settingsQueryResult)
-  const showAlert = isLoadedSettings
+  const showAlert = flag('mespapiers.aa-suggestion.enabled')
+    ? false
+    : isLoadedSettings
     ? settingsData[0].showScanDesktopActionsAlert ?? true
     : true
 
