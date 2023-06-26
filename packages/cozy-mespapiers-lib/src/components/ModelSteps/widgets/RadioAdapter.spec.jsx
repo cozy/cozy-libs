@@ -15,6 +15,7 @@ const setup = ({
       <RadioAdapter
         attrs={attrs}
         defaultValue={defaultValue}
+        setValidInput={jest.fn()}
         setValue={setValue}
       />
     </AppLike>
