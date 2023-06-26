@@ -155,10 +155,146 @@ ReactDOM.render(
 )
 ```
 
-# API
-
-See the [Styleguidist](https://docs.cozy.io/cozy-libs/cozy-harvest-lib/).
-
 # Doc and example about manifests
 
 <https://docs.cozy.io/en/tutorials/konnector/#the-manifest>
+
+# Working with Storybook
+
+## Run Storybook
+
+```
+yarn storybook
+```
+
+## Build Storybook
+
+```
+yarn build-storybook
+```
+
+## Add a new story
+
+Create a new file next to the component you want to add a story for, with the `.stories.{ts,tsx}` extension (depending if you need to write JSX or not in the story).
+
+### For Javascript components
+
+Storybook expects a component with typed props for better parameter inference, so if your component is not typed, you can still create an interface for the props in the story file.
+
+```ts
+import type { Meta, StoryObj } from '@storybook/react'
+
+// Import with a different name to avoid conflict with the typed Button component
+import _Button from './Button'
+
+// Create a typed alias for the component with the same name and the same props
+const Button = _Button as (props: {
+  onClick: () => void
+  title: string
+  disabled?: boolean
+}) => JSX.Element
+
+// Create a meta object for the story, this is mandatory
+const meta: Meta<typeof Button> = {
+  // Make onClick an action for all stories so that you can see the click events in the Storybook UI
+  argTypes: {
+    onClick: { action: 'onClick' }
+  },
+  component: Button
+}
+
+// Export the meta object as default export so that Storybook can use it automatically
+export default meta
+
+// Create a typed alias for the StoryObj type corresponding to the component
+type Story = StoryObj<typeof Button>
+
+// Create as many stories as you want and cast them to the Story type
+
+// This story will be named "Default" by Storybook
+export const Default: Story = {
+  args: {
+    title: 'Foobar'
+  }
+}
+
+export const Disabled: Story = {
+  // The story can have a custom name if you specify it here
+  name: 'Disabled state',
+  args: {
+    disabled: true,
+    title: 'Barfoo',
+  }
+}
+```
+
+### For Typescript components
+
+If your component is already typed, you can import it directly and use it in the story. Everything else is the same as for Javascript components.
+
+```ts
+import type { Meta, StoryObj } from '@storybook/react'
+
+import Button from './Button'
+
+const meta: Meta<typeof Button> = {
+  argTypes: {
+    onClick: { action: 'onClick' }
+  },
+  component: Button
+}
+
+export default meta
+
+type Story = StoryObj<typeof Button>
+
+export const Default: Story = {
+  args: {
+    title: 'Foobar'
+  }
+}
+
+export const Disabled: Story = {
+  name: 'Disabled state',
+  args: {
+    disabled: true,
+    title: 'Barfoo',
+  }
+}
+```
+
+## Configure Storybook
+
+The Storybook configuration is in the `.storybook` folder.
+
+### Add a new addon
+
+Addons are plugins that add features to Storybook. You can find a list of addons [here](https://storybook.js.org/addons/).
+
+To add a new addon, install it with `yarn add -D` and add it to the `addons` array in `.storybook/main.js`.
+
+### Add a new webpack loader
+
+Webpack loaders are used to load files in Storybook. You can find a list of loaders [here](https://webpack.js.org/loaders/).
+
+To add a new loader, install it with `yarn add -D` and add it to the `webpackFinal` function in `.storybook/main.js`.
+
+### Add a new webpack plugin
+
+Webpack plugins are used to modify the webpack configuration in Storybook. You can find a list of plugins [here](https://webpack.js.org/plugins/).
+
+To add a new plugin, install it with `yarn add -D` and add it to the `webpackFinal` function in `.storybook/main.js`.
+
+### Add a new webpack alias
+
+Webpack aliases are used to create shortcuts to import files in Storybook. You can find more information about aliases [here](https://webpack.js.org/configuration/resolve/#resolvealias).
+
+To add a new alias, add it to the `webpackFinal` function in `.storybook/main.js`.
+
+### Configure the Storybook UI
+
+The Storybook UI can be configured in `.storybook/preview.js` and `preview-head.html`.
+
+## For more information about Storybook
+
+See the [official documentation](https://storybook.js.org/docs/react/get-started/introduction).
