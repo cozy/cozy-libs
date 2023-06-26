@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
@@ -15,9 +15,11 @@ const isUserValue = (options, value) => {
 }
 
 const RadioAdapter = ({
-  attrs: { name, options },
+  attrs: { name, options, required },
   defaultValue = '',
-  setValue
+  setValue,
+  setValidInput,
+  idx
 }) => {
   const [optionValue, setOptionValue] = useState(
     isUserValue(options, defaultValue) ? 'other' : defaultValue
@@ -43,6 +45,14 @@ const RadioAdapter = ({
       [name]: currentValue
     }))
   }
+
+  /* Necessary to validate or not the validation button of the current step */
+  useEffect(() => {
+    setValidInput(prev => ({
+      ...prev,
+      [idx]: !required || optionValue || textValue
+    }))
+  }, [idx, setValidInput, optionValue, textValue, required])
 
   return (
     <Paper>
