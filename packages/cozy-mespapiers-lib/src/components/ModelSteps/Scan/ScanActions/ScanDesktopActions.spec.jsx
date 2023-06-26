@@ -3,10 +3,12 @@ import { fireEvent, render, waitFor } from '@testing-library/react'
 import React from 'react'
 
 import { useQuery, hasQueryBeenLoaded } from 'cozy-client'
+import flag from 'cozy-flags'
 
 import ScanDesktopActions from './ScanDesktopActions'
 import AppLike from '../../../../../test/components/AppLike'
 
+jest.mock('cozy-flags')
 jest.mock('cozy-client/dist/hooks/useQuery', () => jest.fn())
 jest.mock('cozy-client/dist/utils', () => ({
   ...jest.requireActual('cozy-client/dist/utils'),
@@ -18,9 +20,11 @@ const setup = ({
   onChangeFile,
   showScanDesktopActionsAlert,
   clientSaveFn = jest.fn(),
-  isLoaded = true
+  isLoaded = true,
+  flagEnabled = false
 } = {}) => {
   const client = { save: clientSaveFn }
+  flag.mockReturnValue(flagEnabled)
   hasQueryBeenLoaded.mockReturnValue(isLoaded)
   useQuery.mockReturnValue({
     data: [
@@ -119,5 +123,19 @@ describe('ScanDesktopActions', () => {
     await waitFor(() => {
       expect(clientSaveFn).toBeCalledTimes(0)
     })
+  })
+
+  it('should hide alert information if context flag is true', () => {
+    const { queryByTestId } = setup({ flagEnabled: true })
+    const ScanDesktopActionsAlert = queryByTestId('ScanDesktopActionsAlert')
+
+    expect(ScanDesktopActionsAlert).toBeNull()
+  })
+
+  it('should display alert information if context flag is false', () => {
+    const { getByTestId } = setup({ flagEnabled: false })
+    const ScanDesktopActionsAlert = getByTestId('ScanDesktopActionsAlert')
+
+    expect(ScanDesktopActionsAlert).toBeInTheDocument()
   })
 })

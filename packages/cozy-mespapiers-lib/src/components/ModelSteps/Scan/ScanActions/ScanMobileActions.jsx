@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
+import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import FileInput from 'cozy-ui/transpiled/react/FileInput'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -47,17 +48,38 @@ const ScanMobileActions = ({ onOpenFilePickerModal, onChangeFile }) => {
           />
         </FileInput>
       </div>
-      <Button
-        startIcon={<Icon icon="camera" />}
-        onClick={() => setShowInstallAppModal(true)}
-        fullWidth
-        className="u-m-0"
-        label={t('Scan.takePic')}
-        data-testid="takePic-btn"
-      />
+      {flag('mespapiers.aa-suggestion.enabled') ? (
+        <FileInput
+          onChange={onChangeFile}
+          className="u-w-100 u-ta-center u-ml-0"
+          onClick={e => e.stopPropagation()}
+          capture="environment"
+          accept={'image/*'}
+          data-testid="takePic-btn"
+        >
+          <Button
+            startIcon={<Icon icon="camera" />}
+            component="a"
+            fullWidth
+            className="u-m-0"
+            label={t('Scan.takePic')}
+          />
+        </FileInput>
+      ) : (
+        <>
+          <Button
+            startIcon={<Icon icon="camera" />}
+            onClick={() => setShowInstallAppModal(true)}
+            fullWidth
+            className="u-m-0"
+            label={t('Scan.takePic')}
+            data-testid="takePic-btn"
+          />
 
-      {showInstallAppModal && (
-        <InstallAppModal onBack={() => setShowInstallAppModal(false)} />
+          {showInstallAppModal && (
+            <InstallAppModal onBack={() => setShowInstallAppModal(false)} />
+          )}
+        </>
       )}
     </>
   )
