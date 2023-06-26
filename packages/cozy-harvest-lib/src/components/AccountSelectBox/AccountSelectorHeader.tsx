@@ -2,6 +2,7 @@ import cx from 'classnames'
 import React from 'react'
 
 import { models } from 'cozy-client'
+import type { IOCozyAccount } from 'cozy-client/types/types'
 import DialogBackButton from 'cozy-ui/transpiled/react/CozyDialogs/DialogBackButton'
 import DialogTitle from 'cozy-ui/transpiled/react/Dialog/DialogTitle'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -9,9 +10,9 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import AccountSelectBox from './AccountSelectBox'
 import { useDialogContext } from '../DialogContext'
 
-interface AccountSelectorHeaderProps {
+export interface AccountSelectorHeaderProps {
   konnector: { slug: string }
-  account: Record<string, unknown> & { _id: string }
+  account: IOCozyAccount
   accountsAndTriggers: (object | null | undefined)[]
   pushHistory: (path: string) => void
   replaceHistory: (path: string) => void
@@ -33,7 +34,7 @@ export const AccountSelectorHeader = ({
   return (
     <>
       <DialogBackButton
-        onClick={(): void => replaceHistory(`/accounts/${account._id}`)}
+        onClick={(): void => replaceHistory(`/accounts/${String(account._id)}`)}
       />
 
       <DialogTitle
