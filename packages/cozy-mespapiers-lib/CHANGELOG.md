@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [49.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@49.0.4...cozy-mespapiers-lib@49.1.0) (2023-06-26)
+
+
+### Features
+
+* **mespapiers:** Add `mespapiers.aa-suggestion.enabled` flag ([4206b68](https://github.com/cozy/cozy-libs/commit/4206b6877dd79e44e466143a38ddbcad0ff99644))
+
+
+
+
+
 ## [49.0.4](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@49.0.3...cozy-mespapiers-lib@49.0.4) (2023-06-23)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
