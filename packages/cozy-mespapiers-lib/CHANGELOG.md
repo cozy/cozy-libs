@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [49.1.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@49.1.0...cozy-mespapiers-lib@49.1.1) (2023-06-26)
+
+
+### Bug Fixes
+
+* **mespapiers:** Illustration of national health insurance card ([e9ac821](https://github.com/cozy/cozy-libs/commit/e9ac8218c417edad6f6e757728366bf528b45401))
+* **mespapiers:** Step modal with Radio buttons ([8614483](https://github.com/cozy/cozy-libs/commit/86144834118c6f4f2400d4d0a6efe9c566bec644))
+
+
+
+
+
 # [49.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@49.0.4...cozy-mespapiers-lib@49.1.0) (2023-06-26)
 
 
