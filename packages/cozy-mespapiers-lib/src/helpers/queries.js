@@ -25,6 +25,7 @@ export const buildFilesQueryWithQualificationLabel = () => {
     'metadata.contractType',
     'metadata.refTaxIncome',
     'cozyMetadata.uploadedBy',
+    'cozyMetadata.createdByApp',
     'created_at',
     'dir_id',
     'updated_at',

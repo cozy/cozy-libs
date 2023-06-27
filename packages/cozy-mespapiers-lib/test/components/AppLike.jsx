@@ -12,6 +12,7 @@ import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoin
 import { ModalProvider } from '../../src/components/Contexts/ModalProvider'
 import { MultiSelectionProvider } from '../../src/components/Contexts/MultiSelectionProvider'
 import { PapersDefinitionsProvider } from '../../src/components/Contexts/PapersDefinitionsProvider'
+import { PaywallProvider } from '../../src/components/Contexts/PaywallProvider'
 import { ScannerI18nProvider } from '../../src/components/Contexts/ScannerI18nProvider'
 import SearchProvider from '../../src/components/Contexts/SearchProvider'
 import { StepperDialogProvider } from '../../src/components/Contexts/StepperDialogProvider'
@@ -34,25 +35,27 @@ const AppLike = ({ children, client, history }) => {
     <WebviewIntentProvider>
       <CozyProvider client={client || mockClient}>
         <I18n dictRequire={() => enLocale} lang="en">
-          <MultiSelectionProvider>
-            <ScannerI18nProvider lang="en">
-              <SearchProvider doctypes={[FILES_DOCTYPE, CONTACTS_DOCTYPE]}>
-                <MuiCozyTheme>
-                  <BreakpointsProvider>
-                    <PapersDefinitionsProvider>
-                      <StepperDialogProvider>
-                        <ModalProvider>
-                          <HashRouter history={hashHistory}>
-                            {children}
-                          </HashRouter>
-                        </ModalProvider>
-                      </StepperDialogProvider>
-                    </PapersDefinitionsProvider>
-                  </BreakpointsProvider>
-                </MuiCozyTheme>
-              </SearchProvider>
-            </ScannerI18nProvider>
-          </MultiSelectionProvider>
+          <PaywallProvider>
+            <MultiSelectionProvider>
+              <ScannerI18nProvider lang="en">
+                <SearchProvider doctypes={[FILES_DOCTYPE, CONTACTS_DOCTYPE]}>
+                  <MuiCozyTheme>
+                    <BreakpointsProvider>
+                      <PapersDefinitionsProvider>
+                        <StepperDialogProvider>
+                          <ModalProvider>
+                            <HashRouter history={hashHistory}>
+                              {children}
+                            </HashRouter>
+                          </ModalProvider>
+                        </StepperDialogProvider>
+                      </PapersDefinitionsProvider>
+                    </BreakpointsProvider>
+                  </MuiCozyTheme>
+                </SearchProvider>
+              </ScannerI18nProvider>
+            </MultiSelectionProvider>
+          </PaywallProvider>
         </I18n>
       </CozyProvider>
     </WebviewIntentProvider>
