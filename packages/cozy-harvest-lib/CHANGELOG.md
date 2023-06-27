@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@14.1.1...cozy-harvest-lib@14.2.0) (2023-06-27)
+
+
+### Features
+
+* **harvest:** Add first story ([990773d](https://github.com/cozy/cozy-libs/commit/990773d22d1155b166ef163efe1918cd7468229a))
+* **harvest:** Convert Storybook to TS ([02b56a2](https://github.com/cozy/cozy-libs/commit/02b56a20e810e689e5405c32e7a23d8038bd7d35))
+* **harvest:** Implement first Story ([1629b46](https://github.com/cozy/cozy-libs/commit/1629b46ef3ce599c47e3cedb63dee6be1f7fb66e))
+* **harvest:** Install Storybook in the project ([9ec05a4](https://github.com/cozy/cozy-libs/commit/9ec05a4cbb2b97826291089bb2b2059cf74eafa0))
+
+
+
+
+
 ## [14.1.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@14.1.0...cozy-harvest-lib@14.1.1) (2023-06-23)
 
 
