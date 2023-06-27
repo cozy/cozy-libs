@@ -8,6 +8,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 
+import { usePaywall } from '../../../Contexts/PaywallProvider'
 import InstallAppModal from '../InstallAppModal'
 
 const styleBtn = { color: 'var(--primaryTextColor)' }
@@ -15,6 +16,15 @@ const styleBtn = { color: 'var(--primaryTextColor)' }
 const ScanMobileActions = ({ onOpenFilePickerModal, onChangeFile }) => {
   const [showInstallAppModal, setShowInstallAppModal] = useState(false)
   const { t } = useI18n()
+  const { isPaywallActivated, setShowPaywall } = usePaywall()
+
+  const handleEvent = (evt, callback) => {
+    if (isPaywallActivated) {
+      setShowPaywall(true)
+    } else {
+      callback(evt)
+    }
+  }
 
   return (
     <>
@@ -25,13 +35,13 @@ const ScanMobileActions = ({ onOpenFilePickerModal, onChangeFile }) => {
         <Button
           variant="secondary"
           style={styleBtn}
-          onClick={onOpenFilePickerModal}
+          onClick={evt => handleEvent(evt, onOpenFilePickerModal)}
           startIcon={<Icon icon="folder-moveto" />}
           label={t('Scan.selectPicFromCozy')}
           data-testid="selectPicFromCozy-btn"
         />
         <FileInput
-          onChange={onChangeFile}
+          onChange={evt => handleEvent(evt, onChangeFile)}
           className="u-w-100 u-ml-0"
           onClick={e => e.stopPropagation()}
           accept={'image/*,.pdf'}

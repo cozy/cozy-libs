@@ -10,7 +10,9 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import { ModalStack } from './Contexts/ModalProvider'
+import { usePaywall } from './Contexts/PaywallProvider'
 import { usePapersDefinitions } from './Hooks/usePapersDefinitions'
+import PapersPaywall from './PapersPaywall/PapersPaywall'
 import {
   FILES_DOCTYPE,
   TRIGGERS_DOCTYPE,
@@ -21,6 +23,11 @@ import {
 export const MesPapiersLibLayout = () => {
   const { t } = useI18n()
   const { customPapersDefinitions, papersDefinitions } = usePapersDefinitions()
+  const { showPaywall, setShowPaywall } = usePaywall()
+
+  const onClosePaywall = () => {
+    setShowPaywall(false)
+  }
 
   return (
     <>
@@ -47,6 +54,7 @@ export const MesPapiersLibLayout = () => {
       <RealTimeQueries doctype={SETTINGS_DOCTYPE} />
       <Alerter t={t} />
       <ModalStack />
+      {showPaywall && <PapersPaywall onClose={onClosePaywall} />}
     </>
   )
 }

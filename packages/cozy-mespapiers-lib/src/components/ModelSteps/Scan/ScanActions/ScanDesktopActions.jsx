@@ -15,6 +15,7 @@ import ScanDesktopActionsAlert from './ScanDesktopActionsAlert'
 import { KEYS } from '../../../../constants/const'
 import { SETTINGS_DOCTYPE } from '../../../../doctypes'
 import { getAppSettings } from '../../../../helpers/queries'
+import { usePaywall } from '../../../Contexts/PaywallProvider'
 
 const styleBtn = { color: 'var(--primaryTextColor)' }
 
@@ -22,6 +23,7 @@ const ScanDesktopActions = ({ onOpenFilePickerModal, onChangeFile }) => {
   const { t } = useI18n()
   const buttonRef = createRef()
   const client = useClient()
+  const { isPaywallActivated, setShowPaywall } = usePaywall()
 
   const { data: settingsData, ...settingsQueryResult } = useQuery(
     getAppSettings.definition,
@@ -60,18 +62,26 @@ const ScanDesktopActions = ({ onOpenFilePickerModal, onChangeFile }) => {
     }
   }
 
+  const handleEvent = (evt, callback) => {
+    if (isPaywallActivated) {
+      setShowPaywall(true)
+    } else {
+      callback(evt)
+    }
+  }
+
   return (
     <>
       <Button
         variant="secondary"
         style={styleBtn}
-        onClick={onOpenFilePickerModal}
+        onClick={evt => handleEvent(evt, onOpenFilePickerModal)}
         startIcon={<Icon icon="folder-moveto" />}
         label={t('Scan.selectPicFromCozy')}
         data-testid="selectPicFromCozy-btn"
       />
       <FileInput
-        onChange={onChangeFile}
+        onChange={evt => handleEvent(evt, onChangeFile)}
         className="u-w-100 u-ml-0"
         onClick={e => e.stopPropagation()}
         accept={'image/*,.pdf'}
