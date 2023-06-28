@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [50.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@50.0.0...cozy-mespapiers-lib@50.0.1) (2023-06-28)
+
+
+### Bug Fixes
+
+* **mespapiers:** Fix PaywallProvider ([302b02a](https://github.com/cozy/cozy-libs/commit/302b02a833419857df260b3f663cd25d17804461))
+
+
+
+
+
 # [50.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@49.1.2...cozy-mespapiers-lib@50.0.0) (2023-06-28)
 
 
