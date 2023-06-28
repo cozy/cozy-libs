@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { withClient } from 'cozy-client'
-import CozyRealtime from 'cozy-realtime'
 import Button from 'cozy-ui/transpiled/react/Button'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
@@ -21,7 +20,6 @@ import logger from '../logger'
 export class KonnectorAccounts extends React.Component {
   constructor(props) {
     super(props)
-    this.realtime = new CozyRealtime({ client: this.props.client })
     this.handleJobUpdate = this.handleJobUpdate.bind(this)
     this.state = {
       fetchingAccounts: true,
@@ -43,12 +41,13 @@ export class KonnectorAccounts extends React.Component {
    */
   async componentDidMount() {
     await this.fetchAccounts()
-
-    this.realtime.subscribe('updated', 'io.cozy.jobs', this.handleJobUpdate)
+    const realtime = this.props.client.plugins.realtime
+    realtime.subscribe('updated', 'io.cozy.jobs', this.handleJobUpdate)
   }
 
   componentWillUnmount() {
-    this.realtime.unsubscribe('updated', 'io.cozy.jobs', this.handleJobUpdate)
+    const realtime = this.props.client.plugins.realtime
+    realtime.unsubscribe('updated', 'io.cozy.jobs', this.handleJobUpdate)
   }
 
   componentDidUpdate(prevProps) {

@@ -27,6 +27,10 @@ jest.mock('../../src/connections/triggers', () => ({
 
 describe('KonnectorAccounts', () => {
   const client = new CozyClient({})
+  client.plugins.realtime = {
+    subscribe: jest.fn(),
+    unsubscribe: jest.fn()
+  }
   it('should show a spinner', () => {
     const children = jest.fn()
     const component = shallow(
