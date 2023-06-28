@@ -31,3 +31,6 @@ import GridItem from "cozy-ui/transpiled/react/Labs/GridItem"
 
 // not deprecated
 import OtherComp from "cozy-ui/transpiled/react/MockComp"
+import Radios from "cozy-ui/transpiled/react/Radios"
+import Chips from "cozy-ui/transpiled/react/Chips"
+import Buttons from "cozy-ui/transpiled/react/Buttons"
