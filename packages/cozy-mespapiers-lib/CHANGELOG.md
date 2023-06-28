@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [50.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@49.1.2...cozy-mespapiers-lib@50.0.0) (2023-06-28)
+
+
+### Features
+
+* **mespapiers:** Add PapersPaywall ([4b6fe3a](https://github.com/cozy/cozy-libs/commit/4b6fe3a597fbce6be7f357ce4c3dd359f9bd6a35))
+* **mespapiers:** Rename `mespapiers.aa-suggestion.enabled` flag ([e1342c9](https://github.com/cozy/cozy-libs/commit/e1342c9ce27d86304d312b1ab306b0133a269074))
+* **mespapiers:** Update cozy-ui from `86.1.0` to `86.3.0` ([fa9ee19](https://github.com/cozy/cozy-libs/commit/fa9ee19a19c422edfc6c88ee50e751402787f3b2))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 86.3.0`
+
+
+
+
+
 ## [49.1.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@49.1.1...cozy-mespapiers-lib@49.1.2) (2023-06-27)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
