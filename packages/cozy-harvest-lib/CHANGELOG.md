@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [14.2.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@14.2.0...cozy-harvest-lib@14.2.1) (2023-06-28)
+
+
+### Bug Fixes
+
+* Realtime issue on Harvest ([a1e70a6](https://github.com/cozy/cozy-libs/commit/a1e70a62614b024410feb1730e7f37305775095d))
+
+
+
+
+
 # [14.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@14.1.1...cozy-harvest-lib@14.2.0) (2023-06-27)
 
 

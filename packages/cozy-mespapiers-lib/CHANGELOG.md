@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [50.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@50.0.1...cozy-mespapiers-lib@50.0.2) (2023-06-28)
+
+
+### Bug Fixes
+
+* **mespapiers:** Flattened image on some browsers ([76eb3d4](https://github.com/cozy/cozy-libs/commit/76eb3d419ff248e0e9e405f00b01151c0c1c5c56))
+
+
+
+
+
 ## [50.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@50.0.0...cozy-mespapiers-lib@50.0.1) (2023-06-28)
 
 
