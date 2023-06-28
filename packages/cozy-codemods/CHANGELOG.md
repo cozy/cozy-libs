@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.21.0 (2023-06-28)
+
+
+### Features
+
+* **codemods:** Add transform-ui-deprecated-imports ([16a2ed6](https://github.com/cozy/cozy-libs/commit/16a2ed6621d6e46ecf31824cd5c8a520c2a1e108))
+
+
+
+
+
 ## [1.20.3](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.20.2...@cozy/codemods@1.20.3) (2023-03-06)
 
 **Note:** Version bump only for package @cozy/codemods
