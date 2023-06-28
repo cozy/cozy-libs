@@ -18,9 +18,9 @@ const PaywallProvider = ({ children }) => {
   const [showPaywallState, setShowPaywallState] = useState(false)
   const [numberOfFilesCreatedByApp, setNumberOfFilesCreatedByApp] = useState(0)
 
-  const isPaywallActivated = flag('mespapiers.aa-suggestion.enabled')
-    ? numberOfFilesCreatedByApp >= computeMaxPapers()
-    : false
+  const isPaywallActivated = flag('mespapiers.aa-suggestion.disabled')
+    ? false
+    : numberOfFilesCreatedByApp >= computeMaxPapers()
 
   const filesQueryByLabels = buildFilesQueryWithQualificationLabel()
   const { data: files, ...queryResult } = useQueryAll(

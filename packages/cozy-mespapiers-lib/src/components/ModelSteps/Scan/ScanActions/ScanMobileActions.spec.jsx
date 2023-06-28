@@ -31,6 +31,7 @@ describe('ScanMobileActions', () => {
   it('should called onOpenFilePickerModal function', () => {
     const onOpenFilePickerModal = jest.fn()
     const { getByTestId } = setup({
+      flagEnabled: true,
       onOpenFilePickerModal
     })
 

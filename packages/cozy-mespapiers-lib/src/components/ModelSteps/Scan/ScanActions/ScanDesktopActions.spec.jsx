@@ -51,6 +51,7 @@ describe('ScanDesktopActions', () => {
   it('should called onOpenFilePickerModal function', () => {
     const onOpenFilePickerModal = jest.fn()
     const { getByTestId } = setup({
+      flagEnabled: true,
       onOpenFilePickerModal
     })
 
@@ -71,6 +72,7 @@ describe('ScanDesktopActions', () => {
   it('should called onChangeFileAction function', () => {
     const onChangeFileAction = jest.fn()
     const { getByTestId } = setup({
+      flagEnabled: true,
       onChangeFile: onChangeFileAction
     })
 
