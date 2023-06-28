@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.22.1](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.22.0...@cozy/codemods@1.22.1) (2023-06-28)
+
+
+### Bug Fixes
+
+* **codemods:** Now exclude some component in ui-deprecated-imports ([e0f97a9](https://github.com/cozy/cozy-libs/commit/e0f97a9cd80ad01b9bc4dbf97acc889458e40164))
+
+
+
+
+
 # [1.22.0](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.21.0...@cozy/codemods@1.22.0) (2023-06-28)
 
 
