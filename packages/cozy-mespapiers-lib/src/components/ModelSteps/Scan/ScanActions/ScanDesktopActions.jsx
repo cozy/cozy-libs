@@ -28,7 +28,7 @@ const ScanDesktopActions = ({ onOpenFilePickerModal, onChangeFile }) => {
     getAppSettings.options
   )
   const isLoadedSettings = hasQueryBeenLoaded(settingsQueryResult)
-  const showAlert = flag('mespapiers.aa-suggestion.enabled')
+  const showAlert = flag('mespapiers.aa-suggestion.disabled')
     ? false
     : isLoadedSettings
     ? settingsData[0].showScanDesktopActionsAlert ?? true
