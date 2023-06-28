@@ -22,7 +22,6 @@ const useStyles = makeStyles(() => ({
       height: 'initial'
     },
     '& img': {
-      width: 'fit-content',
       margin: '0 auto'
     }
   }
