@@ -48,7 +48,7 @@ const ScanMobileActions = ({ onOpenFilePickerModal, onChangeFile }) => {
           />
         </FileInput>
       </div>
-      {flag('mespapiers.aa-suggestion.enabled') ? (
+      {flag('mespapiers.aa-suggestion.disabled') ? (
         <FileInput
           onChange={onChangeFile}
           className="u-w-100 u-ta-center u-ml-0"
