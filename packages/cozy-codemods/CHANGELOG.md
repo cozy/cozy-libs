@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.22.0](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.21.0...@cozy/codemods@1.22.0) (2023-06-28)
+
+
+### Features
+
+* **codemods:** Add transform-ui-muicozytheme-imports ([fb57318](https://github.com/cozy/cozy-libs/commit/fb5731849ffd792a4e7e55ac66cb5daf22188bb5))
+
+
+
+
+
 # 1.21.0 (2023-06-28)
 
 
