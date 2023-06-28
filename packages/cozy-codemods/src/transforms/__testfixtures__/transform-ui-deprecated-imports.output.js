@@ -1,0 +1,33 @@
+// deprecated
+import ActionMenu from "cozy-ui/transpiled/react/deprecated/ActionMenu"
+import { makeActions, hr, modify, call } from "cozy-ui/transpiled/react/deprecated/ActionMenu/Actions"
+import Alerter from "cozy-ui/transpiled/react/deprecated/Alerter"
+import Button from "cozy-ui/transpiled/react/deprecated/Button"
+import ButtonAction from "cozy-ui/transpiled/react/deprecated/ButtonAction"
+import BottomDrawer from "cozy-ui/transpiled/react/deprecated/BottomDrawer"
+import Chip from "cozy-ui/transpiled/react/deprecated/Chip"
+import CompositeRow from "cozy-ui/transpiled/react/deprecated/CompositeRow"
+import Infos from "cozy-ui/transpiled/react/deprecated/Infos"
+import InfosCarrousel from "cozy-ui/transpiled/react/deprecated/InfosCarrousel"
+import InlineCard from "cozy-ui/transpiled/react/deprecated/InlineCard"
+import IntentModal from "cozy-ui/transpiled/react/deprecated/IntentModal"
+import IntentOpener from "cozy-ui/transpiled/react/deprecated/IntentOpener"
+import Modal from "cozy-ui/transpiled/react/deprecated/Modal"
+import NarrowContent from "cozy-ui/transpiled/react/deprecated/NarrowContent"
+import Media from "cozy-ui/transpiled/react/deprecated/Media/Media"
+import { Bd, Img } from "cozy-ui/transpiled/react/deprecated/Media"
+import Overlay from "cozy-ui/transpiled/react/deprecated/Overlay"
+import PercentageBar from "cozy-ui/transpiled/react/deprecated/PercentageBar"
+import PercentageLine from "cozy-ui/transpiled/react/deprecated/PercentageLine"
+import PushClientButton from "cozy-ui/transpiled/react/deprecated/PushClientButton"
+import QuotaAlert from "cozy-ui/transpiled/react/deprecated/QuotaAlert"
+import Radio from "cozy-ui/transpiled/react/deprecated/Radio"
+import ViewStack from "cozy-ui/transpiled/react/deprecated/ViewStack"
+// in MuiCozyTheme
+import Menus from "cozy-ui/transpiled/react/deprecated/Menus"
+import RaisedList from "cozy-ui/transpiled/react/deprecated/RaisedList"
+// in Labs
+import GridItem from "cozy-ui/transpiled/react/deprecated/GridItem"
+
+// not deprecated
+import OtherComp from "cozy-ui/transpiled/react/MockComp"

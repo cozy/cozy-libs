@@ -1,0 +1,33 @@
+// deprecated
+import ActionMenu from "cozy-ui/transpiled/react/ActionMenu"
+import { makeActions, hr, modify, call } from "cozy-ui/transpiled/react/ActionMenu/Actions"
+import Alerter from "cozy-ui/transpiled/react/Alerter"
+import Button from "cozy-ui/transpiled/react/Button"
+import ButtonAction from "cozy-ui/transpiled/react/ButtonAction"
+import BottomDrawer from "cozy-ui/transpiled/react/BottomDrawer"
+import Chip from "cozy-ui/transpiled/react/Chip"
+import CompositeRow from "cozy-ui/transpiled/react/CompositeRow"
+import Infos from "cozy-ui/transpiled/react/Infos"
+import InfosCarrousel from "cozy-ui/transpiled/react/InfosCarrousel"
+import InlineCard from "cozy-ui/transpiled/react/InlineCard"
+import IntentModal from "cozy-ui/transpiled/react/IntentModal"
+import IntentOpener from "cozy-ui/transpiled/react/IntentOpener"
+import Modal from "cozy-ui/transpiled/react/Modal"
+import NarrowContent from "cozy-ui/transpiled/react/NarrowContent"
+import Media from "cozy-ui/transpiled/react/Media/Media"
+import { Bd, Img } from "cozy-ui/transpiled/react/Media"
+import Overlay from "cozy-ui/transpiled/react/Overlay"
+import PercentageBar from "cozy-ui/transpiled/react/PercentageBar"
+import PercentageLine from "cozy-ui/transpiled/react/PercentageLine"
+import PushClientButton from "cozy-ui/transpiled/react/PushClientButton"
+import QuotaAlert from "cozy-ui/transpiled/react/QuotaAlert"
+import Radio from "cozy-ui/transpiled/react/Radio"
+import ViewStack from "cozy-ui/transpiled/react/ViewStack"
+// in MuiCozyTheme
+import Menus from "cozy-ui/transpiled/react/MuiCozyTheme/Menus"
+import RaisedList from "cozy-ui/transpiled/react/MuiCozyTheme/RaisedList"
+// in Labs
+import GridItem from "cozy-ui/transpiled/react/Labs/GridItem"
+
+// not deprecated
+import OtherComp from "cozy-ui/transpiled/react/MockComp"
