@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.22.2](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.22.1...@cozy/codemods@1.22.2) (2023-06-29)
+
+
+### Bug Fixes
+
+* **codemods:** Ui-deprecated wasn't specific enough ([6a0cf92](https://github.com/cozy/cozy-libs/commit/6a0cf92902e285a449eec09180d95740bc79bb02))
+* **codemods:** Ui-muicozytheme wasn't specific enough ([27a162e](https://github.com/cozy/cozy-libs/commit/27a162e513896fa9a030a56f52ba7b59f7eb401d))
+* Muicozytheme test didn't have correct file name ([d5b2c37](https://github.com/cozy/cozy-libs/commit/d5b2c37274d43916daa60c920b4c554d99364455))
+
+
+
+
+
 ## [1.22.1](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.22.0...@cozy/codemods@1.22.1) (2023-06-28)
 
 
