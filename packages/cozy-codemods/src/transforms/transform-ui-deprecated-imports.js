@@ -30,8 +30,6 @@ const transformUiDeprecatedImports = (file, api) => {
     'react/Labs/GridItem'
   ]
 
-  const excludedPaths = ['react/Radios', 'react/Buttons', 'react/Chips']
-
   root.find(j.ImportDeclaration).forEach(nodePath => {
     const absoluteImportPath = nodePath.value.source.value
     const relativeImportPath = absoluteImportPath.replace(
@@ -39,9 +37,10 @@ const transformUiDeprecatedImports = (file, api) => {
       ''
     )
 
-    const shouldBeTransformed =
-      !excludedPaths.some(path => relativeImportPath.includes(path)) &&
-      deprecatedComponentsPath.some(path => relativeImportPath.includes(path))
+    const shouldBeTransformed = deprecatedComponentsPath.some(path => {
+      const regex = new RegExp('^' + path + '(/.*)?$', 'g')
+      return relativeImportPath.match(regex)
+    })
 
     if (shouldBeTransformed) {
       const newPath = absoluteImportPath
