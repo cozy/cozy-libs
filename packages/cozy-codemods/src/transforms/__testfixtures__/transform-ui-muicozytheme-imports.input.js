@@ -15,3 +15,9 @@ import ListSubheader from "cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader"
 import Menu from "cozy-ui/transpiled/react/MuiCozyTheme/Menu"
 import Switch from "cozy-ui/transpiled/react/MuiCozyTheme/Switch"
 import TextField from "cozy-ui/transpiled/react/MuiCozyTheme/TextField"
+
+// should be modified too
+import Test from "cozy-ui/transpiled/react/MuiCozyTheme/TextField/Test"
+
+// should not be modified
+import TextFieldTest from "cozy-ui/transpiled/react/MuiCozyTheme/TextFieldTest"

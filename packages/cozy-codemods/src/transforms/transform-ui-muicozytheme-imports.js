@@ -28,9 +28,10 @@ const transformUiDeprecatedImports = (file, api) => {
       ''
     )
 
-    const shouldBeTransformed = deprecatedComponentsPath.some(path =>
-      relativeImportPath.includes(path)
-    )
+    const shouldBeTransformed = deprecatedComponentsPath.some(path => {
+      const regex = new RegExp('^' + path + '(/.*)?$', 'g')
+      return relativeImportPath.match(regex)
+    })
 
     if (shouldBeTransformed) {
       const newPath = absoluteImportPath
