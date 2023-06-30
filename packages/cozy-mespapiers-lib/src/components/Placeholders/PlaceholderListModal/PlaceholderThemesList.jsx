@@ -2,12 +2,10 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import List from 'cozy-ui/transpiled/react/List'
+import ListItem from 'cozy-ui/transpiled/react/ListItem'
+import ListItemIcon, { smallSize } from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
-import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
-import ListItemIcon, {
-  smallSize
-} from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 
 import { getThemesList } from '../../../helpers/themes'
 import { useScannerI18n } from '../../Hooks/useScannerI18n'

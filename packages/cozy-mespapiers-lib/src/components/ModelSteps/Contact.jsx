@@ -4,10 +4,10 @@ import { models } from 'cozy-client'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import ListItem from 'cozy-ui/transpiled/react/ListItem'
+import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
+import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
-import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
-import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
 import Radio from 'cozy-ui/transpiled/react/Radios'
 
 const { getDisplayName } = models.contact

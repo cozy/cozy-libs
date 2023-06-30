@@ -3,10 +3,10 @@ import { useLocation } from 'react-router-dom'
 
 import { Q, useClient } from 'cozy-client'
 import { isIOSApp } from 'cozy-device-helper'
-import Overlay from 'cozy-ui/transpiled/react/Overlay'
 import Viewer from 'cozy-ui/transpiled/react/Viewer'
 import FooterActionButtons from 'cozy-ui/transpiled/react/Viewer/Footer/FooterActionButtons'
 import ForwardOrDownloadButton from 'cozy-ui/transpiled/react/Viewer/Footer/ForwardOrDownloadButton'
+import Overlay from 'cozy-ui/transpiled/react/deprecated/Overlay'
 
 import FileViewerLoading from './FileViewerLoading'
 import SelectFileButton from './SelectFileButton'

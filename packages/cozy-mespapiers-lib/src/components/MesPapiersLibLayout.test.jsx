@@ -8,7 +8,7 @@ import { MesPapiersLibLayout } from './MesPapiersLibLayout'
 import AppLike from '../../test/components/AppLike'
 
 /* eslint-disable react/display-name */
-jest.mock('cozy-ui/transpiled/react/Alerter', () => () => (
+jest.mock('cozy-ui/transpiled/react/deprecated/Alerter', () => () => (
   <div data-testid="Alerter" />
 ))
 jest.mock('cozy-client', () => ({

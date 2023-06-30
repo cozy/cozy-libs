@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import Divider from 'cozy-ui/transpiled/react/Divider'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
-import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
-import { hasExpandedAttributesDisplayed } from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ExpandedAttributes/helpers'
+import List from 'cozy-ui/transpiled/react/List'
+import { hasExpandedAttributesDisplayed } from 'cozy-ui/transpiled/react/ListItem/ExpandedAttributes/helpers'
 
 import FlexsearchResultLine from './FlexsearchResultLine'
 
