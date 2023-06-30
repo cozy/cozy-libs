@@ -1,7 +1,7 @@
 import React, { useContext, useCallback } from 'react'
 
-import Button from 'cozy-ui/transpiled/react/Button'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Button from 'cozy-ui/transpiled/react/deprecated/Button'
 
 import { MountPointContext } from './MountPointContext'
 import { getAccountId } from '../helpers/triggers'

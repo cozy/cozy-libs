@@ -5,11 +5,11 @@ import React, { Component } from 'react'
 
 import { models, withClient } from 'cozy-client'
 import flag from 'cozy-flags'
-import Button from 'cozy-ui/transpiled/react/Button'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
-import Infos from 'cozy-ui/transpiled/react/Infos'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import Button from 'cozy-ui/transpiled/react/deprecated/Button'
+import Infos from 'cozy-ui/transpiled/react/deprecated/Infos'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
 import AccountModalHeader from './AccountModalWithoutTabs/AccountModalHeader'

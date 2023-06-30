@@ -12,8 +12,8 @@ import {
   VaultUnlockPlaceholder
 } from 'cozy-keys-lib'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-import { ModalBackButton } from 'cozy-ui/transpiled/react/Modal'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import { ModalBackButton } from 'cozy-ui/transpiled/react/deprecated/Modal'
 
 import AccountForm from './AccountForm'
 import AccountsPaywall from './AccountsPaywall/AccountsPaywall'

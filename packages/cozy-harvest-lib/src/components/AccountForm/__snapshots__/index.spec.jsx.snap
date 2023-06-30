@@ -84,7 +84,7 @@ exports[`AccountForm should render error 1`] = `
   onFocusCapture={[Function]}
   onKeyUp={[Function]}
 >
-  <withI18n(withClient(withKonnectorLocales(TriggerErrorInfo))
+  <ForwardRef
     className="u-mb-1"
     error={[Error: Test error]}
     konnector={

@@ -1,7 +1,7 @@
 import React from 'react'
 
+import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 
 import withLocales from '../hoc/withLocales'
 

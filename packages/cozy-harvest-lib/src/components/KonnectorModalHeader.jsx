@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
-import { Media, Img } from 'cozy-ui/transpiled/react/Media'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { Media, Img } from 'cozy-ui/transpiled/react/deprecated/Media'
 
 import { useDialogContext } from './DialogContext'
 import KonnectorIcon from './KonnectorIcon'

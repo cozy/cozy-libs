@@ -24,10 +24,10 @@ import CompassIcon from 'cozy-ui/transpiled/react/Icons/Compass'
 import FlagIcon from 'cozy-ui/transpiled/react/Icons/Flag'
 import LeftIcon from 'cozy-ui/transpiled/react/Icons/Left'
 import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
-import { Media, Bd, Img } from 'cozy-ui/transpiled/react/Media'
 import Skeleton from 'cozy-ui/transpiled/react/Skeleton'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { Media, Bd, Img } from 'cozy-ui/transpiled/react/deprecated/Media'
 
 import {
   transformTimeSeriesToTrips,

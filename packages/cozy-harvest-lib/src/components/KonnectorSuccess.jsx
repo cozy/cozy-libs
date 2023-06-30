@@ -2,10 +2,10 @@ import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
-import Button from 'cozy-ui/transpiled/react/Button'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import Button from 'cozy-ui/transpiled/react/deprecated/Button'
 
 import BanksLink from './KonnectorConfiguration/Success/BanksLink'
 import DriveLink from './KonnectorConfiguration/Success/DriveLink'

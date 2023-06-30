@@ -2,8 +2,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import Infos from 'cozy-ui/transpiled/react/Infos'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import Infos from 'cozy-ui/transpiled/react/deprecated/Infos'
 
 import KonnectorUpdateLinker from '../KonnectorUpdateLinker'
 

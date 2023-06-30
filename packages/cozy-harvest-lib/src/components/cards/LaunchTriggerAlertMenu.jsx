@@ -2,12 +2,14 @@ import PropTypes from 'prop-types'
 import React, { useRef, useState } from 'react'
 
 import { useClient } from 'cozy-client'
-import ActionMenu, { ActionMenuItem } from 'cozy-ui/transpiled/react/ActionMenu'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
 import GearIcon from 'cozy-ui/transpiled/react/Icons/Gear'
 import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
+import ActionMenu, {
+  ActionMenuItem
+} from 'cozy-ui/transpiled/react/deprecated/ActionMenu'
 
 import { isDisconnected } from '../../helpers/konnectors'
 import { intentsApiProptype } from '../../helpers/proptypes'

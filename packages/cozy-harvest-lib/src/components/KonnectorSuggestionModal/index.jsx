@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 
 import { withClient } from 'cozy-client'
 import AppLinker, { generateWebLink } from 'cozy-ui/transpiled/react/AppLinker'
-import { Button, ButtonLink } from 'cozy-ui/transpiled/react/Button'
 import { DialogCloseButton } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Dialog, {
   DialogActions,
@@ -12,6 +11,7 @@ import Dialog, {
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { Button, ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import DataTypes from './DataTypes'

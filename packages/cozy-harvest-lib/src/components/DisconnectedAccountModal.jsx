@@ -9,8 +9,8 @@ import {
 } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Dialog from 'cozy-ui/transpiled/react/Dialog'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
+import Divider from 'cozy-ui/transpiled/react/Divider'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import { Tab, Tabs } from 'cozy-ui/transpiled/react/MuiTabs'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
