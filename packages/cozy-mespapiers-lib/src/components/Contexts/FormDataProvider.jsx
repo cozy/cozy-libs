@@ -2,8 +2,8 @@ import React, { createContext, useState } from 'react'
 
 import { models, useClient } from 'cozy-client'
 import log from 'cozy-logger'
-import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 
 import { createPdfAndSave } from '../../helpers/createPdfAndSave'
 import getOrCreateAppFolderWithReference from '../../helpers/getFolderWithReference'

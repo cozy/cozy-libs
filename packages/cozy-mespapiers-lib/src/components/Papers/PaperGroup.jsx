@@ -3,7 +3,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
+import List from 'cozy-ui/transpiled/react/List'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import CategoryItemByPaper from './CategoryItemByPaper'

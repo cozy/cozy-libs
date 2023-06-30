@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Overlay from 'cozy-ui/transpiled/react/Overlay'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import Overlay from 'cozy-ui/transpiled/react/deprecated/Overlay'
 
 const FileViewerLoading = () => (
   <Overlay>

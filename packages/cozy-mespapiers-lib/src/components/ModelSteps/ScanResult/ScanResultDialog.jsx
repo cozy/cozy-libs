@@ -1,10 +1,10 @@
 import cx from 'classnames'
 import React, { useRef, useState } from 'react'
 
-import { ButtonLink } from 'cozy-ui/transpiled/react/Button'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import { ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 
 import ScanResultCard from './ScanResultCard'

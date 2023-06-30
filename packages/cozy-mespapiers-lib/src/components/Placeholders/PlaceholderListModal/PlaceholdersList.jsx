@@ -3,10 +3,10 @@ import React, { useState, useMemo, useRef } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
+import List from 'cozy-ui/transpiled/react/List'
+import ListItem from 'cozy-ui/transpiled/react/ListItem'
+import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
-import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
-import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 
 import { findPlaceholdersByQualification } from '../../../helpers/findPlaceholders'
 import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'

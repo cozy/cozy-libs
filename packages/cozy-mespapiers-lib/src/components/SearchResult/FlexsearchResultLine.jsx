@@ -3,7 +3,7 @@ import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 import { isFile } from 'cozy-client/dist/models/file'
-import ListItemByDoc from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem/ListItemByDoc'
+import ListItemByDoc from 'cozy-ui/transpiled/react/ListItem/ListItemByDoc'
 
 import useActions from './useActions'
 import { useMultiSelection } from '../Hooks/useMultiSelection'

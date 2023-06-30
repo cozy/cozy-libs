@@ -1,7 +1,7 @@
 // TODO Move to cozy-client (files model)
 
 import { isReferencedBy } from 'cozy-client'
-import Alerter from 'cozy-ui/transpiled/react/Alerter'
+import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 
 import { download, forward } from './Items'
 import { FILES_DOCTYPE, JOBS_DOCTYPE } from '../../doctypes'

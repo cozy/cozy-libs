@@ -2,9 +2,9 @@ import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Button, { ButtonLink } from 'cozy-ui/transpiled/react/Button'
 import DialogActions from 'cozy-ui/transpiled/react/DialogActions'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Button, { ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import { PaperDefinitionsStepPropTypes } from '../../../constants/PaperDefinitionsPropTypes'
