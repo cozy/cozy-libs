@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [14.2.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@14.2.1...cozy-harvest-lib@14.2.2) (2023-06-30)
+
+
+### Bug Fixes
+
+* Close Harvest modal with the close button in error dialog ([0ea1d49](https://github.com/cozy/cozy-libs/commit/0ea1d49d23757382a2a4c4c3e716128ec2231fc7))
+
+
+
+
+
 ## [14.2.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@14.2.0...cozy-harvest-lib@14.2.1) (2023-06-28)
 
 
