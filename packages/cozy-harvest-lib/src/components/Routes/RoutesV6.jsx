@@ -119,23 +119,21 @@ const RoutesV6 = ({
           </HarvestParamsWrapper>
         }
       />
-      {!flag('harvest.inappconnectors.enabled') && (
-        <Route
-          path="accounts/:accountId/success"
-          element={
-            <HarvestParamsWrapper>
-              {params => (
-                <KonnectorSuccess
-                  konnector={konnectorWithTriggers}
-                  accountId={params.accountId}
-                  accounts={accountsAndTriggers}
-                  onDismiss={onDismiss}
-                />
-              )}
-            </HarvestParamsWrapper>
-          }
-        />
-      )}
+      <Route
+        path="accounts/:accountId/success"
+        element={
+          <HarvestParamsWrapper>
+            {params => (
+              <KonnectorSuccess
+                konnector={konnectorWithTriggers}
+                accountId={params.accountId}
+                accounts={accountsAndTriggers}
+                onDismiss={onDismiss}
+              />
+            )}
+          </HarvestParamsWrapper>
+        }
+      />
 
       <Route
         path="viewer/:accountId/:folderToSaveId/:fileIndex"
