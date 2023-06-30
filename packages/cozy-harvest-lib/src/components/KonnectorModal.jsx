@@ -4,7 +4,6 @@ import React, { PureComponent } from 'react'
 
 import { withClient } from 'cozy-client'
 import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
-import Button from 'cozy-ui/transpiled/react/Button'
 import {
   useCozyDialog,
   DialogCloseButton
@@ -14,9 +13,10 @@ import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
-import Infos from 'cozy-ui/transpiled/react/Infos'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import Button from 'cozy-ui/transpiled/react/deprecated/Button'
+import Infos from 'cozy-ui/transpiled/react/deprecated/Infos'
 
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
 import AccountsList from './AccountsList/AccountsList'

@@ -11,7 +11,7 @@ exports[`KonnectorAccounts should show a spinner 1`] = `
     <div
       className="u-pv-2 u-ta-center"
     >
-      <withI18n(Spinner)
+      <ForwardRef
         size="xxlarge"
       />
     </div>

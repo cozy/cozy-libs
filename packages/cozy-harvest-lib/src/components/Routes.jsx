@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 
 import flag from 'cozy-flags'
 import { useVaultUnlockContext, VaultUnlockPlaceholder } from 'cozy-keys-lib'
-import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import {
   DialogCloseButton,
   useCozyDialog
@@ -10,6 +9,7 @@ import {
 import Dialog from 'cozy-ui/transpiled/react/Dialog'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 import { withStyles } from 'cozy-ui/transpiled/react/styles'
 
 import { DatacardOptions } from './Datacards/DatacardOptionsContext'

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
 import { withClient } from 'cozy-client'
-import { Button } from 'cozy-ui/transpiled/react/Button'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
+import { Button } from 'cozy-ui/transpiled/react/deprecated/Button'
 
 import { i18nContextTypes } from './hoc/withLocales'
 import { deleteAccount } from '../connections/accounts'

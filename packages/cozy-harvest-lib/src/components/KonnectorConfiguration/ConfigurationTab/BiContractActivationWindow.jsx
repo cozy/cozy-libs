@@ -5,8 +5,8 @@ import React, { useState, useEffect } from 'react'
 
 import { useClient } from 'cozy-client'
 import { useWebviewIntent } from 'cozy-intent'
-import Button from 'cozy-ui/transpiled/react/MuiCozyTheme/Buttons'
-import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
+import Button from 'cozy-ui/transpiled/react/Button'
+import ListItem from 'cozy-ui/transpiled/react/ListItem'
 
 import {
   intentsApiProptype,

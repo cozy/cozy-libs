@@ -2,11 +2,11 @@ import compose from 'lodash/flowRight'
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 
-import Button from 'cozy-ui/transpiled/react/Button'
 import { IllustrationDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Field from 'cozy-ui/transpiled/react/Field'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import Button from 'cozy-ui/transpiled/react/deprecated/Button'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
 import KonnectorIcon from './KonnectorIcon'

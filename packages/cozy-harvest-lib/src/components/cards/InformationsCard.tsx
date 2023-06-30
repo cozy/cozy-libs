@@ -1,18 +1,19 @@
-import React from 'react'
+import { ListItemText } from '@material-ui/core'
 import cx from 'classnames'
+import React from 'react'
 
 import Card from 'cozy-ui/transpiled/react/Card'
-import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
-import GlobeIcon from 'cozy-ui/transpiled/react/Icons/Globe'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
-import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
-import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
-import Typography from 'cozy-ui/transpiled/react/Typography'
-import logger from '../../logger'
-import { ListItemText } from '@material-ui/core'
-import { getErrorMessage } from '../../helpers/getErrorMessage'
+import Divider from 'cozy-ui/transpiled/react/Divider'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import GlobeIcon from 'cozy-ui/transpiled/react/Icons/Globe'
+import List from 'cozy-ui/transpiled/react/List'
+import ListItem from 'cozy-ui/transpiled/react/ListItem'
+import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
+import Typography from 'cozy-ui/transpiled/react/Typography'
+
+import { getErrorMessage } from '../../helpers/getErrorMessage'
+import logger from '../../logger'
 
 interface InformationsCardProps {
   className?: string

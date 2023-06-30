@@ -5,7 +5,7 @@ import React from 'react'
 import Card from 'cozy-ui/transpiled/react/Card'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import BottomSelectIcon from 'cozy-ui/transpiled/react/Icons/BottomSelect'
-import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
+import { Media, Img, Bd } from 'cozy-ui/transpiled/react/deprecated/Media'
 
 import KonnectorIcon from '../KonnectorIcon'
 

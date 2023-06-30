@@ -15,7 +15,7 @@ exports[`AccountsListItem should not render the caption since accountLogin is un
       account-1
     </ForwardRef>
   </div>
-  <withI18n(Status)
+  <ForwardRef
     konnector={
       Object {
         "name": "test-konnector",
@@ -50,7 +50,7 @@ exports[`AccountsListItem should render the caption since accountName !== login 
       mylogin
     </ForwardRef>
   </div>
-  <withI18n(Status)
+  <ForwardRef
     konnector={
       Object {
         "name": "test-konnector",

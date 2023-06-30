@@ -5,13 +5,13 @@ exports[`OAuthForm should bypass reconnect button when updating an account 1`] =
 exports[`OAuthForm should handle oauth cancelation 1`] = `
 <div>
   <div
-    class="styles__Infos___2ZZVs styles__Infos--danger___3wKYc u-mb-1"
+    class="styles__Infos___tpCYh styles__Infos--danger___1HWww u-mb-1"
   >
     <div
       class="styles__Stack--m___1tSpV"
     >
       <div
-        class="styles__Infos-description___7P1NP"
+        class="styles__Infos-description___3q8sW"
       >
         <div
           class="styles__Stack--xs___2R5lW"
@@ -58,7 +58,7 @@ exports[`OAuthForm should handle oauth cancelation 1`] = `
     <button
       aria-busy="true"
       aria-disabled="true"
-      class="styles__c-btn___-2Vnj styles__c-btn--center___16_Xh u-mh-auto"
+      class="styles__c-btn___3kXsk styles__c-btn--center___Nny0n u-mh-auto"
       disabled=""
       type="submit"
     >
@@ -93,13 +93,13 @@ exports[`OAuthForm should handle oauth cancelation 1`] = `
 exports[`OAuthForm should handle oauth cancelation 2`] = `
 <div>
   <div
-    class="styles__Infos___2ZZVs styles__Infos--danger___3wKYc u-mb-1"
+    class="styles__Infos___tpCYh styles__Infos--danger___1HWww u-mb-1"
   >
     <div
       class="styles__Stack--m___1tSpV"
     >
       <div
-        class="styles__Infos-description___7P1NP"
+        class="styles__Infos-description___3q8sW"
       >
         <div
           class="styles__Stack--xs___2R5lW"
@@ -144,7 +144,7 @@ exports[`OAuthForm should handle oauth cancelation 2`] = `
       />
     </div>
     <button
-      class="styles__c-btn___-2Vnj styles__c-btn--center___16_Xh u-mh-auto"
+      class="styles__c-btn___3kXsk styles__c-btn--center___Nny0n u-mh-auto"
       type="submit"
     >
       <span>
@@ -181,7 +181,7 @@ exports[`OAuthForm should render 1`] = `
       />
     </div>
     <button
-      class="styles__c-btn___-2Vnj styles__c-btn--center___16_Xh u-mh-auto"
+      class="styles__c-btn___3kXsk styles__c-btn--center___Nny0n u-mh-auto"
       type="submit"
     >
       <span>

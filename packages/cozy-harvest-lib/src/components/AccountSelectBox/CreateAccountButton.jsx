@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Button from 'cozy-ui/transpiled/react/Button'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
+import Button from 'cozy-ui/transpiled/react/deprecated/Button'
 
 /**
  * onClick is not called when we are on mobile device.

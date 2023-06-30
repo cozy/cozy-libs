@@ -1,9 +1,9 @@
 import React from 'react'
 
-import Button from 'cozy-ui/transpiled/react/Button'
 import Card from 'cozy-ui/transpiled/react/Card'
 import Empty from 'cozy-ui/transpiled/react/Empty'
 import CloudSync2 from 'cozy-ui/transpiled/react/Icons/CloudSync2'
+import Button from 'cozy-ui/transpiled/react/deprecated/Button'
 
 interface ConnectCardProps {
   description: string

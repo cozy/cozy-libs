@@ -41,7 +41,7 @@ exports[`AccountModal should display the fetching state by default 1`] = `
     <div
       className="u-ta-center"
     >
-      <withI18n(Spinner)
+      <ForwardRef
         size="xxlarge"
       />
     </div>

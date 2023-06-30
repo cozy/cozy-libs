@@ -3,8 +3,8 @@ import React from 'react'
 
 import { withClient } from 'cozy-client'
 import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
-import { ButtonLink } from 'cozy-ui/transpiled/react/Button'
 import OpenwithIcon from 'cozy-ui/transpiled/react/Icons/Openwith'
+import { ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
 
 import withLocales from '../../hoc/withLocales'
 import useAppLinkWithStoreFallback from '../../hooks/useAppLinkWithStoreFallback'

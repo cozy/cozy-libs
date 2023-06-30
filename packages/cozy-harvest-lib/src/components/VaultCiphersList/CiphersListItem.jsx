@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import CipherIcon from 'cozy-ui/transpiled/react/CipherIcon'
+import ListItem from 'cozy-ui/transpiled/react/ListItem'
+import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
-import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 
 const CiphersListItem = props => {
   const { cipherView, konnector, className, onClick, ...rest } = props
