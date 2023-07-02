@@ -8,13 +8,12 @@ import { StoryContainer } from "./StoryContainer";
 
 const preview: Preview = {
   decorators: [
-    (Story) => (
+    (Story) => 
       <StoryContainer>
         <div style={{position: "relative"}}>
           <Story />
         </div>
       </StoryContainer>
-    ),
   ],
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
@@ -23,7 +22,7 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/,
       },
-    },
+    }
   },
 };
 

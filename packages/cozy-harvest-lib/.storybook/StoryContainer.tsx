@@ -8,19 +8,28 @@ import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoin
 import CozyTheme from 'cozy-ui/transpiled/react/CozyTheme'
 import DialogContext from '../src/components/DialogContext'
 import enLocale from '../src/locales/en.json'
+import { RawMountPointProvider } from '../src/components/MountPointContext'
+import { realtimeMock } from './__mocks__/cozy-realtime'
+import { AccountModalFixtures } from './fixtures/AccountModal.fixtures'
 
-const defaultClient = new CozyClient()
-defaultClient.ensureStore()
+
+export const storybookClient = new CozyClient()
+storybookClient.ensureStore()
+storybookClient.plugins.realtime = realtimeMock
+storybookClient.query = () => Promise.resolve({data: AccountModalFixtures.accountsAndTriggers[0].account})
+
 
 export const StoryContainer = ({ children }: {children: ReactNode}) => {
   return (
-    <CozyClientProvider client={defaultClient}>
+    <CozyClientProvider client={storybookClient}>
       <CozyTheme>
         <BreakpointsProvider>
           <DialogContextApp>
             <I18n lang="en" dictRequire={() => enLocale}>
-              <ReduxProvider store={defaultClient.store}>
-                <div style={{position: "relative"}}>{children}</div>
+              <ReduxProvider store={storybookClient.store}>
+                <RawMountPointProvider>
+                  <div style={{position: "relative"}}>{children}</div>
+                </RawMountPointProvider>
               </ReduxProvider>
             </I18n>
           </DialogContextApp>
