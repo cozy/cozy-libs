@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [15.0.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@15.0.0...cozy-harvest-lib@15.0.1) (2023-07-03)
+
+
+### Bug Fixes
+
+* Display success dialog on powens account creation success ([ac25214](https://github.com/cozy/cozy-libs/commit/ac252145df6e1b567a9ed7705d2adf84f6152713))
+
+
+
+
+
 # [15.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@14.2.2...cozy-harvest-lib@15.0.0) (2023-06-30)
 
 
