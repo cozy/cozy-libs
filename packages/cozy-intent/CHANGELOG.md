@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.14.0 (2023-07-04)
+
+
+### Features
+
+* Expose native intent service ([c76e8cd](https://github.com/cozy/cozy-libs/commit/c76e8cd51dfb6b47f4daf03ba75cb2a013eece59))
+
+
+
+
+
 ## 2.13.1 (2023-06-02)
 
 
