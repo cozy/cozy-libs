@@ -57,9 +57,9 @@ const ConfirmReplaceFile = ({ onReplace, onClose, cozyFilesCount }) => {
 }
 
 ConfirmReplaceFile.propTypes = {
-  onReplace: PropTypes.object.isRequired,
+  onReplace: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
-  nbOfCozyFiles: PropTypes.number.isRequired
+  cozyFilesCount: PropTypes.number.isRequired
 }
 
 export default memo(ConfirmReplaceFile)
