@@ -39,11 +39,16 @@ const StepperDialogProvider = ({ children }) => {
       setCurrentStepIndex(prev => prev + 1)
   }
 
+  const isLastStep = () => {
+    return currentStepIndex === allCurrentSteps.length
+  }
+
   const stepperDialog = {
     allCurrentSteps,
     currentStepIndex,
     stepperDialogTitle,
     currentDefinition,
+    isLastStep,
     setCurrentDefinition,
     previousStep,
     nextStep,
