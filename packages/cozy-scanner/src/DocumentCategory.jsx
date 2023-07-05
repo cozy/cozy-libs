@@ -1,22 +1,20 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconStack from 'cozy-ui/transpiled/react/IconStack'
-import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import ActionMenu, {
   ActionMenuItem,
   ActionMenuHeader
-} from 'cozy-ui/transpiled/react/ActionMenu'
+} from 'cozy-ui/transpiled/react/deprecated/ActionMenu'
+import GridItem from 'cozy-ui/transpiled/react/deprecated/GridItem'
+import { Media, Img, Bd } from 'cozy-ui/transpiled/react/deprecated/Media'
 import palette from 'cozy-ui/transpiled/react/palette'
-import GridItem from 'cozy-ui/transpiled/react/Labs/GridItem'
 
 import CategoryGridItem from './CategoryGridItem'
-
 import styles from './stylesheet.css'
-
-import Typography from 'cozy-ui/transpiled/react/Typography'
 
 /**
  *

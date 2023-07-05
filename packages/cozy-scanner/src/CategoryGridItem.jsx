@@ -1,9 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import palette from 'cozy-ui/transpiled/react/palette'
+import PropTypes from 'prop-types'
+import React from 'react'
+
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconStack from 'cozy-ui/transpiled/react/IconStack'
+import palette from 'cozy-ui/transpiled/react/palette'
+
 import styles from './stylesheet.css'
 
 const CategoryGridItem = ({ isSelected, icon, theme, label }) => {
