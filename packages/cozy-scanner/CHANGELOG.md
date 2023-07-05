@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 5.0.0 (2023-07-05)
+
+
+### Features
+
+* Update cozy-ui to 88 and other deps ([db5acad](https://github.com/cozy/cozy-libs/commit/db5acade39a9d6bbb75ef10e76c3bac84aa99ce7))
+
+
+### BREAKING CHANGES
+
+* - you need to update cozy-ui to 88.2.1
+- you need to update cozy-client to 38.9.2
+
+
+
+
+
 # [4.0.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@3.0.0...cozy-scanner@4.0.0) (2023-05-17)
 
 
