@@ -2,12 +2,14 @@ import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
 
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
+import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import { DocumentQualification } from './DocumentQualification'
 
 const MockDate = require('mockdate')
 jest.mock('cozy-ui/transpiled/react/utils/color', () => ({
-  getCssVariableValue: () => '#fff'
+  getCssVariableValue: () => '#fff',
+  getInvertedCssVariableValue: () => '#fff'
 }))
 // Popper does not work well inside of jest as it heavily relies on DOM APIs (see https://github.com/popperjs/popper-core/issues/478).
 jest.mock('@material-ui/core/Popper', () => {
@@ -21,15 +23,17 @@ const setup = ({
   onFileNameChanged = jest.fn()
 } = {}) => {
   return render(
-    <MuiCozyTheme>
-      <DocumentQualification
-        allowEditFileName={true}
-        onDescribed={onDescribed}
-        onFileNameChanged={onFileNameChanged}
-        title="Edit"
-        t={text => text}
-      />
-    </MuiCozyTheme>
+    <BreakpointsProvider>
+      <MuiCozyTheme>
+        <DocumentQualification
+          allowEditFileName={true}
+          onDescribed={onDescribed}
+          onFileNameChanged={onFileNameChanged}
+          title="Edit"
+          t={text => text}
+        />
+      </MuiCozyTheme>
+    </BreakpointsProvider>
   )
 }
 describe('DocumentQualification', () => {

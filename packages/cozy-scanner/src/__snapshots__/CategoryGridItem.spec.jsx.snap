@@ -11,7 +11,7 @@ exports[`CategoryGridItem should match snapshot if selected and icon 1`] = `
       <svg
         class="styles__icon___23x3R"
         height="32"
-        style="fill: var(--dodgerBlue);"
+        style="fill: #297EF2;"
         width="32"
       >
         <use
@@ -24,7 +24,7 @@ exports[`CategoryGridItem should match snapshot if selected and icon 1`] = `
         <svg
           class="styles__icon___23x3R"
           height="16"
-          style="fill: var(--dodgerBlue);"
+          style="fill: #297EF2;"
           width="16"
         >
           <use

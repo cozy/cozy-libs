@@ -2,16 +2,16 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
+import Grid from 'cozy-ui/transpiled/react/Grid'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import QualifyIcon from 'cozy-ui/transpiled/react/Icons/Qualify'
 import Input from 'cozy-ui/transpiled/react/Input'
 import InputGroup from 'cozy-ui/transpiled/react/InputGroup'
 import Label from 'cozy-ui/transpiled/react/Label'
-import GridItem from 'cozy-ui/transpiled/react/Labs/GridItem'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
-import Grid from 'cozy-ui/transpiled/react/MuiCozyTheme/Grid'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import GridItem from 'cozy-ui/transpiled/react/deprecated/GridItem'
 
 import CategoryGridItem from './CategoryGridItem'
 import DocumentCategory from './DocumentCategory'
@@ -140,7 +140,7 @@ export class DocumentQualification extends Component {
                     )
                   }
                 }}
-                inputRef={this.textInput}
+                ref={this.textInput}
                 id={idFileInput}
               />
             </InputGroup>

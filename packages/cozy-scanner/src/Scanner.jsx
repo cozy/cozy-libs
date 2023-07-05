@@ -1,10 +1,10 @@
-import React from 'react'
-import { withClient } from 'cozy-client'
 import PropTypes from 'prop-types'
-import { CozyFile } from 'cozy-doctypes'
-import { isAndroidApp } from 'cozy-device-helper'
+import React from 'react'
 
-import Overlay from 'cozy-ui/transpiled/react/Overlay'
+import { withClient } from 'cozy-client'
+import { isAndroidApp } from 'cozy-device-helper'
+import { CozyFile } from 'cozy-doctypes'
+import Overlay from 'cozy-ui/transpiled/react/deprecated/Overlay'
 import withOffline from 'cozy-ui/transpiled/react/helpers/withOffline'
 
 import { ModalScannerQualification } from './'

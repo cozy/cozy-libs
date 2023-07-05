@@ -1,7 +1,12 @@
-import React from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
+import React from 'react'
+
+import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
+import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+
 jest.mock('cozy-ui/transpiled/react/utils/color', () => ({
-  getCssVariableValue: () => '#fff'
+  getCssVariableValue: () => '#fff',
+  getInvertedCssVariableValue: () => '#fff'
 }))
 
 // Popper does not work well inside of jest as it heavily relies on DOM APIs (see https://github.com/popperjs/popper-core/issues/478).
@@ -10,32 +15,33 @@ jest.mock('@material-ui/core/Popper', () => {
 })
 
 import DocumentCategory from './DocumentCategory'
-import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 
 describe('DocumentCategory', () => {
   it('should match snapshot if selected and icon', async () => {
     const onSelect = jest.fn()
     const { queryByText, getByText, asFragment } = render(
-      <MuiCozyTheme>
-        <DocumentCategory
-          onSelect={onSelect}
-          category={{
-            icon: 'test',
-            label: 'test',
-            items: [
-              {
-                label: 'Label1'
-              },
-              {
-                label: 'Label2'
-              }
-            ]
-          }}
-          isSelected={true}
-          selectedItem={{ label: 'test' }}
-          t={text => text}
-        />
-      </MuiCozyTheme>
+      <BreakpointsProvider>
+        <MuiCozyTheme>
+          <DocumentCategory
+            onSelect={onSelect}
+            category={{
+              icon: 'test',
+              label: 'test',
+              items: [
+                {
+                  label: 'Label1'
+                },
+                {
+                  label: 'Label2'
+                }
+              ]
+            }}
+            isSelected={true}
+            selectedItem={{ label: 'test' }}
+            t={text => text}
+          />
+        </MuiCozyTheme>
+      </BreakpointsProvider>
     )
     expect(asFragment()).toMatchSnapshot()
     // Click on the item

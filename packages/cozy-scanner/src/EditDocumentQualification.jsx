@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
-import { withClient } from 'cozy-client'
-import Alerter from 'cozy-ui/transpiled/react/Alerter'
-import withOffline from 'cozy-ui/transpiled/react/helpers/withOffline'
+import React, { Component } from 'react'
 
+import { withClient } from 'cozy-client'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import Button from 'cozy-ui/transpiled/react/Button'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
+import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
+import Button from 'cozy-ui/transpiled/react/deprecated/Button'
+import withOffline from 'cozy-ui/transpiled/react/helpers/withOffline'
 
 import DocumentQualification from './DocumentQualification'
 import { getThemeByItem } from './DocumentTypeDataHelpers'
