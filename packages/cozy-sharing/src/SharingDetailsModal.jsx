@@ -2,8 +2,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import Divider from 'cozy-ui/transpiled/react/Divider'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 
 import OwnerIdentity from './components/Recipient/OwnerIdentity'
 import WhoHasAccess from './components/WhoHasAccess'

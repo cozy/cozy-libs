@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Grid from 'cozy-ui/transpiled/react/MuiCozyTheme/Grid'
+import Grid from 'cozy-ui/transpiled/react/Grid'
 import Skeleton from 'cozy-ui/transpiled/react/Skeleton'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 

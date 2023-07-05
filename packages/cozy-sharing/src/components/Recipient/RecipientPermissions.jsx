@@ -1,7 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react'
 
 import { useClient } from 'cozy-client'
-import ActionMenu, { ActionMenuItem } from 'cozy-ui/transpiled/react/ActionMenu'
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -10,6 +9,9 @@ import RenameIcon from 'cozy-ui/transpiled/react/Icons/Rename'
 import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import ActionMenu, {
+  ActionMenuItem
+} from 'cozy-ui/transpiled/react/deprecated/ActionMenu'
 
 const RecipientPermissions = ({
   isOwner,

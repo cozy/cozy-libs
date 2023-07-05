@@ -5,8 +5,8 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import EyeIcon from 'cozy-ui/transpiled/react/Icons/Eye'
 import PaperplaneIcon from 'cozy-ui/transpiled/react/Icons/Paperplane'
 import ToTheCloudIcon from 'cozy-ui/transpiled/react/Icons/ToTheCloud'
-import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { Media, Img, Bd } from 'cozy-ui/transpiled/react/deprecated/Media'
 
 import styles from './recipient.styl'
 
