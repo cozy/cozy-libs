@@ -4,8 +4,8 @@ import snarkdown from 'snarkdown'
 
 import { useClient } from 'cozy-client'
 import Banner from 'cozy-ui/transpiled/react/Banner'
-import Button, { ButtonLink } from 'cozy-ui/transpiled/react/Button'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Button, { ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
 
 import CozyHomeLinkIcon from './CozyHomeLinkIcon'
 import styles from './publicBanner.styl'

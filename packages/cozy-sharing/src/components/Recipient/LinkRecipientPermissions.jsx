@@ -1,16 +1,16 @@
 import React, { useState, useRef } from 'react'
 
-import ActionMenu, {
-  ActionMenuItem,
-  ActionMenuRadio
-} from 'cozy-ui/transpiled/react/ActionMenu'
-import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import ActionMenu, {
+  ActionMenuItem,
+  ActionMenuRadio
+} from 'cozy-ui/transpiled/react/deprecated/ActionMenu'
+import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 
 import { isOnlyReadOnlyLinkAllowed } from '../../helpers/link'
 import { checkIsReadOnlyPermissions } from '../../helpers/permissions'
