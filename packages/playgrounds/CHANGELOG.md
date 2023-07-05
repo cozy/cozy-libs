@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.25.0 (2023-07-05)
+
+
+### Features
+
+* Display reconnection webview for powens konnectors ([a924d3e](https://github.com/cozy/cozy-libs/commit/a924d3e13524f211bc8ae45435a012b8e2125ed8))
+
+
+
+
+
 ## 1.24.1 (2023-06-09)
 
 

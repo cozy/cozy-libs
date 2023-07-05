@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 8.0.0 (2023-07-05)
+
+
+### Features
+
+* Display reconnection webview for powens konnectors ([a924d3e](https://github.com/cozy/cozy-libs/commit/a924d3e13524f211bc8ae45435a012b8e2125ed8))
+* Update cozy-ui to 88 with codemods ([7ba4172](https://github.com/cozy/cozy-libs/commit/7ba41729ff1b67830fb131655434da61e40949a5))
+
+
+### BREAKING CHANGES
+
+* - you need to update cozy-ui to >=88.2.1
+
+
+
+
+
 ## [7.1.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@7.1.2...cozy-sharing@7.1.3) (2023-04-13)
 
 **Note:** Version bump only for package cozy-sharing
