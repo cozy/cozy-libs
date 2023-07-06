@@ -5,6 +5,7 @@ import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
 import ContactDialog from '../ModelSteps/ContactDialog'
 import InformationDialog from '../ModelSteps/InformationDialog'
+import NoteDialog from '../ModelSteps/NoteDialog'
 import ScanWrapper from '../ModelSteps/Scan/ScanWrapper'
 
 const StepperDialogWrapper = ({ onClose }) => {
@@ -43,6 +44,15 @@ const StepperDialogWrapper = ({ onClose }) => {
         case 'contact':
           return (
             <ContactDialog
+              key={currentStep.stepIndex}
+              currentStep={currentStep}
+              onClose={onClose}
+              onBack={handleBack()}
+            />
+          )
+        case 'note':
+          return (
+            <NoteDialog
               key={currentStep.stepIndex}
               currentStep={currentStep}
               onClose={onClose}
