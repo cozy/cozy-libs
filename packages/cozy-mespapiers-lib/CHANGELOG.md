@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [51.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@51.0.3...cozy-mespapiers-lib@51.1.0) (2023-07-06)
+
+
+### Features
+
+* **mespapiers:** Add divider before note item in PlaceholdersLists ([994d819](https://github.com/cozy/cozy-libs/commit/994d819a7e71688a9d74358e46cf92a3651c0bed))
+* **mespapiers:** Add radio at the end of items in PlaceholdersLists ([521bd34](https://github.com/cozy/cozy-libs/commit/521bd34b56503b3d5a6eadab8fe04775c92b3ee0))
+
+
+
+
+
 ## [51.0.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@51.0.2...cozy-mespapiers-lib@51.0.3) (2023-07-05)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
