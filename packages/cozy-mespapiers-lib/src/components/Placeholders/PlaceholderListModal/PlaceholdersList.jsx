@@ -8,6 +8,7 @@ import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import Radio from 'cozy-ui/transpiled/react/Radios'
 
 import { findPlaceholdersByQualification } from '../../../helpers/findPlaceholders'
 import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'
@@ -93,6 +94,9 @@ const PlaceholdersList = ({ currentQualifItems }) => {
                     country: placeholder.country
                   })}
                 />
+                <ListItemIcon>
+                  <Radio />
+                </ListItemIcon>
               </ListItem>
             </Fragment>
           )
