@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types'
-import React, { useState, useMemo, useRef } from 'react'
+import React, { useState, useMemo, useRef, Fragment } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
+import Divider from 'cozy-ui/transpiled/react/Divider'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -71,25 +72,29 @@ const PlaceholdersList = ({ currentQualifItems }) => {
             placeholder.konnectorCriteria
 
           return (
-            <ListItem
-              key={idx}
-              ref={el => (anchorRefs.current[idx] = el)}
-              button
-              disabled={!validPlaceholder}
-              aria-controls="simple-menu"
-              aria-haspopup="true"
-              onClick={() => showImportDropdown(idx, placeholder)}
-              data-testid="PlaceholdersList-ListItem"
-            >
-              <ListItemIcon>
-                <FileIcon icon={placeholder.icon} />
-              </ListItemIcon>
-              <ListItemText
-                primary={scannerT(`items.${placeholder.label}`, {
-                  country: placeholder.country
-                })}
-              />
-            </ListItem>
+            <Fragment key={idx}>
+              {placeholder.label === 'note' && (
+                <Divider className="u-mv-half" variant="inset" />
+              )}
+              <ListItem
+                ref={el => (anchorRefs.current[idx] = el)}
+                button
+                disabled={!validPlaceholder}
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={() => showImportDropdown(idx, placeholder)}
+                data-testid="PlaceholdersList-ListItem"
+              >
+                <ListItemIcon>
+                  <FileIcon icon={placeholder.icon} />
+                </ListItemIcon>
+                <ListItemText
+                  primary={scannerT(`items.${placeholder.label}`, {
+                    country: placeholder.country
+                  })}
+                />
+              </ListItem>
+            </Fragment>
           )
         })}
       </List>
