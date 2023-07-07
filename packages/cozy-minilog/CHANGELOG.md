@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 3.3.0 (2023-07-07)
+
+
+### Bug Fixes
+
+* Show accounts paywall for oAuth konnector ([e30c737](https://github.com/mixu/minilog/commit/e30c7370e7e1ce41c8238acc3e97f53380935b74))
+
+
+### Features
+
+* **minilog:** Recognize ReactNative as modern env ([14d5403](https://github.com/mixu/minilog/commit/14d5403de3021f418f98d2c1b1a1578910f34186))
+
+
+
+
+
 # 3.2.0 (2023-03-10)
 
 
