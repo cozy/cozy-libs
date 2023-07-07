@@ -19,6 +19,7 @@ import AccountForm from './AccountForm'
 import AccountsPaywall from './AccountsPaywall/AccountsPaywall'
 import FlowProvider from './FlowProvider'
 import HarvestVaultProvider from './HarvestVaultProvider'
+import { MountPointProvider } from './MountPointContext'
 import OAuthForm from './OAuthForm'
 import ComponentsPropsProvider from './Providers/ComponentsPropsProvider'
 import VaultCiphersList from './VaultCiphersList'
@@ -536,10 +537,12 @@ export const IntentTriggerManager = ({ vaultUnlockFormProps, ...props }) => {
   return (
     <HarvestVaultProvider>
       <VaultUnlockProvider>
-        <ComponentsPropsProvider>
-          <LegacyTriggerManager {...props} />
-          <VaultUnlockPlaceholder unlockFormProps={vaultUnlockFormProps} />
-        </ComponentsPropsProvider>
+        <MountPointProvider>
+          <ComponentsPropsProvider>
+            <LegacyTriggerManager {...props} />
+            <VaultUnlockPlaceholder unlockFormProps={vaultUnlockFormProps} />
+          </ComponentsPropsProvider>
+        </MountPointProvider>
       </VaultUnlockProvider>
     </HarvestVaultProvider>
   )
