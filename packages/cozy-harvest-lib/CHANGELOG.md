@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [15.0.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@15.0.2...cozy-harvest-lib@15.0.3) (2023-07-10)
+
+
+### Bug Fixes
+
+* We use the mountContext without mounting in ([ab5183d](https://github.com/cozy/cozy-libs/commit/ab5183dc87ea592d7346a5e2a2d12d7d350b7120))
+
+
+
+
+
 ## [15.0.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@15.0.1...cozy-harvest-lib@15.0.2) (2023-07-04)
 
 **Note:** Version bump only for package cozy-harvest-lib
