@@ -14,16 +14,12 @@ import { withStyles } from 'cozy-ui/transpiled/react/styles'
 
 import { DatacardOptions } from './Datacards/DatacardOptionsContext'
 import DialogContext from './DialogContext'
-import HarvestVaultProvider from './HarvestVaultProvider'
+import HarvestWrapper from './HarvestWrapper'
 import KonnectorAccounts from './KonnectorAccounts'
-import { MountPointProvider } from './MountPointContext'
-import ComponentsPropsProvider from './Providers/ComponentsPropsProvider'
 import RoutesV4 from './Routes/RoutesV4'
 import RoutesV6 from './Routes/RoutesV6'
-import VaultUnlockProvider from './VaultUnlockProvider'
 import { isRouterV6 } from './hoc/withRouter'
 import { useKonnectorWithTriggers } from '../helpers/useKonnectorWithTriggers'
-
 const withHarvestDialogStyles = () => {
   /**
    * When this flag is enabled, tabs are removed, and the layout shift between
@@ -92,40 +88,37 @@ const Routes = ({
 
   return (
     <DatacardOptions options={datacardOptions}>
-      <MountPointProvider baseRoute={konnectorRoot}>
+      <HarvestWrapper
+        mountPointProviderProps={{ baseRoute: konnectorRoot }}
+        componentsPropsProviderProps={{ ComponentsProps: ComponentsProps }}
+      >
         <DialogContext.Provider value={dialogContext}>
-          <HarvestVaultProvider>
-            <VaultUnlockProvider>
-              <ComponentsPropsProvider ComponentsProps={ComponentsProps}>
-                <HarvestDialog
-                  {...dialogContext.dialogProps}
-                  aria-label={konnectorWithTriggers.name}
-                >
-                  <DialogCloseButton onClick={onDismiss} />
-                  {fetching ? (
-                    <div className="u-pv-2 u-ta-center">
-                      <Spinner size="xxlarge" />
-                    </div>
-                  ) : (
-                    <KonnectorAccounts konnector={konnectorWithTriggers}>
-                      {accountsAndTriggers => (
-                        <RoutesV4orV6
-                          konnectorRoot={konnectorRoot}
-                          konnectorWithTriggers={konnectorWithTriggers}
-                          accountsAndTriggers={accountsAndTriggers}
-                          onSuccess={onSuccess}
-                          onDismiss={onDismiss}
-                        />
-                      )}
-                    </KonnectorAccounts>
-                  )}
-                </HarvestDialog>
-              </ComponentsPropsProvider>
-              <VaultUnlockPlaceholder />
-            </VaultUnlockProvider>
-          </HarvestVaultProvider>
+          <HarvestDialog
+            {...dialogContext.dialogProps}
+            aria-label={konnectorWithTriggers.name}
+          >
+            <DialogCloseButton onClick={onDismiss} />
+            {fetching ? (
+              <div className="u-pv-2 u-ta-center">
+                <Spinner size="xxlarge" />
+              </div>
+            ) : (
+              <KonnectorAccounts konnector={konnectorWithTriggers}>
+                {accountsAndTriggers => (
+                  <RoutesV4orV6
+                    konnectorRoot={konnectorRoot}
+                    konnectorWithTriggers={konnectorWithTriggers}
+                    accountsAndTriggers={accountsAndTriggers}
+                    onSuccess={onSuccess}
+                    onDismiss={onDismiss}
+                  />
+                )}
+              </KonnectorAccounts>
+            )}
+          </HarvestDialog>
         </DialogContext.Provider>
-      </MountPointProvider>
+        <VaultUnlockPlaceholder />
+      </HarvestWrapper>
     </DatacardOptions>
   )
 }

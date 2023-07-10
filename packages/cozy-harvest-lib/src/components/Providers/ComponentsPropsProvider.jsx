@@ -11,7 +11,7 @@ const ComponentsPropsContext = React.createContext()
 /**
  * @param {object} param
  * @param {JSX.Element} param.children
- * @param {ComponentsProps} param.ComponentsProps
+ * @param {ComponentsProps | undefined} param.ComponentsProps
  * @returns
  */
 const ComponentsPropsProvider = ({ children, ComponentsProps }) => {

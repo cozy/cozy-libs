@@ -18,12 +18,9 @@ import { ModalBackButton } from 'cozy-ui/transpiled/react/deprecated/Modal'
 import AccountForm from './AccountForm'
 import AccountsPaywall from './AccountsPaywall/AccountsPaywall'
 import FlowProvider from './FlowProvider'
-import HarvestVaultProvider from './HarvestVaultProvider'
-import { MountPointProvider } from './MountPointContext'
+import HarvestWrapper from './HarvestWrapper'
 import OAuthForm from './OAuthForm'
-import ComponentsPropsProvider from './Providers/ComponentsPropsProvider'
 import VaultCiphersList from './VaultCiphersList'
-import VaultUnlockProvider from './VaultUnlockProvider'
 import { fetchAccount } from '../connections/accounts'
 import { checkMaxAccounts } from '../helpers/accounts'
 import manifest from '../helpers/manifest'
@@ -31,7 +28,6 @@ import { intentsApiProptype } from '../helpers/proptypes'
 import { findKonnectorPolicy } from '../konnector-policies'
 import logger from '../logger'
 import withConnectionFlow from '../models/withConnectionFlow'
-
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
 
@@ -535,16 +531,10 @@ const LegacyTriggerManager = props => {
 
 export const IntentTriggerManager = ({ vaultUnlockFormProps, ...props }) => {
   return (
-    <HarvestVaultProvider>
-      <VaultUnlockProvider>
-        <MountPointProvider>
-          <ComponentsPropsProvider>
-            <LegacyTriggerManager {...props} />
-            <VaultUnlockPlaceholder unlockFormProps={vaultUnlockFormProps} />
-          </ComponentsPropsProvider>
-        </MountPointProvider>
-      </VaultUnlockProvider>
-    </HarvestVaultProvider>
+    <HarvestWrapper>
+      <LegacyTriggerManager {...props} />
+      <VaultUnlockPlaceholder unlockFormProps={vaultUnlockFormProps} />
+    </HarvestWrapper>
   )
 }
 
