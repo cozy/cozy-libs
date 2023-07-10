@@ -1,15 +1,12 @@
 import FlowProviderWithLocales from './components/FlowProvider'
-import KonnectorModalWithoutLocales from './components/KonnectorModal'
 import KonnectorSuggestionModalWithoutLocales from './components/KonnectorSuggestionModal'
 import RoutesWithoutLocales from './components/Routes'
 import { IntentTriggerManager as IntentTriggerManagerWithoutLocales } from './components/TriggerManager'
 import LaunchTriggerCardWithoutLocales from './components/cards/LaunchTriggerCard'
-import withKonnectorModalWithoutLocales from './components/hoc/withKonnectorModal'
 import withLocales from './components/hoc/withLocales'
 import deprecated from './deprecated'
 
 // All entry point files need to be exported wrapped with the translation context of harvest
-export const KonnectorModal = withLocales(KonnectorModalWithoutLocales)
 export const IntentTriggerManager = withLocales(
   IntentTriggerManagerWithoutLocales
 )
@@ -23,7 +20,6 @@ import { FlowProvider } from "cozy-harvest-lib"
 `
 )(FlowProvider)
 export const Routes = withLocales(RoutesWithoutLocales)
-export const withKonnectorModal = withLocales(withKonnectorModalWithoutLocales)
 export const KonnectorSuggestionModal = withLocales(
   KonnectorSuggestionModalWithoutLocales
 )
