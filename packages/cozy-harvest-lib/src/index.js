@@ -3,9 +3,7 @@ import FlowProviderWithLocales from './components/FlowProvider'
 import KonnectorModalWithoutLocales from './components/KonnectorModal'
 import KonnectorSuggestionModalWithoutLocales from './components/KonnectorSuggestionModal'
 import RoutesWithoutLocales from './components/Routes'
-import LegacyTriggerManagerWithoutLocales, {
-  IntentTriggerManager as IntentTriggerManagerWithoutLocales
-} from './components/TriggerManager'
+import { IntentTriggerManager as IntentTriggerManagerWithoutLocales } from './components/TriggerManager'
 import LaunchTriggerCardWithoutLocales from './components/cards/LaunchTriggerCard'
 import withKonnectorModalWithoutLocales from './components/hoc/withKonnectorModal'
 import withLocales from './components/hoc/withLocales'
@@ -16,7 +14,6 @@ export const DeleteAccountButton = withLocales(
   DeleteAccountButtonWithoutLocales
 )
 export const KonnectorModal = withLocales(KonnectorModalWithoutLocales)
-export const TriggerManager = withLocales(LegacyTriggerManagerWithoutLocales)
 export const IntentTriggerManager = withLocales(
   IntentTriggerManagerWithoutLocales
 )
