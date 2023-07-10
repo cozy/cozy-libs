@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [51.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@51.1.0...cozy-mespapiers-lib@51.2.0) (2023-07-10)
+
+
+### Features
+
+* **mespapiers:** Add NoteDialog that use note intent ([67f1d22](https://github.com/cozy/cozy-libs/commit/67f1d2223b1ff62b4a655a826d2715b1a2a86476))
+* **mespapiers:** Remove useless client initalizer ([7a9c652](https://github.com/cozy/cozy-libs/commit/7a9c6524cd240e0fa2fb51f3a1f1c5c5a9bcca1a))
+
+
+
+
+
 # [51.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@51.0.3...cozy-mespapiers-lib@51.1.0) (2023-07-06)
 
 
