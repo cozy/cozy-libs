@@ -15,7 +15,7 @@ import KonnectorIcon from './KonnectorIcon'
 import KonnectorModalHeader from './KonnectorModalHeader'
 import KonnectorMaintenance from './Maintenance'
 import { MountPointContext } from './MountPointContext'
-import TriggerManager from './TriggerManager'
+import LegacyTriggerManager from './TriggerManager'
 import { InformationsCard } from './cards/InformationsCard'
 import useMaintenanceStatus from './hooks/useMaintenanceStatus'
 import * as triggersModel from '../helpers/triggers'
@@ -92,7 +92,7 @@ const NewAccountModal = ({ konnector, onSuccess, onDismiss }) => {
         </DialogContent>
       ) : (
         <DialogContent className="u-pt-0">
-          <TriggerManager
+          <LegacyTriggerManager
             konnector={konnector}
             onLoginSuccess={handleSuccess}
             onSuccess={handleSuccess}
