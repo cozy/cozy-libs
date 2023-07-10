@@ -9,7 +9,7 @@ import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import { withMountPointProps } from './MountPointContext'
-import TriggerManager from './TriggerManager'
+import LegacyTriggerManager from './TriggerManager'
 import { withTracker } from './hoc/tracking'
 import useTimeout from './hooks/useTimeout'
 import { fetchAccount } from '../connections/accounts'
@@ -58,7 +58,7 @@ const DumbEditAccountModal = withMountPointProps(
               <Spinner size="xxlarge" />
             </div>
           ) : (
-            <TriggerManager
+            <LegacyTriggerManager
               account={account}
               konnector={konnector}
               initialTrigger={trigger}
