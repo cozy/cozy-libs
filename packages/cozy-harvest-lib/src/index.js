@@ -4,7 +4,6 @@ import RoutesWithoutLocales from './components/Routes'
 import { IntentTriggerManager as IntentTriggerManagerWithoutLocales } from './components/TriggerManager'
 import LaunchTriggerCardWithoutLocales from './components/cards/LaunchTriggerCard'
 import withLocales from './components/hoc/withLocales'
-import deprecated from './deprecated'
 
 // All entry point files need to be exported wrapped with the translation context of harvest
 export const IntentTriggerManager = withLocales(
@@ -12,13 +11,6 @@ export const IntentTriggerManager = withLocales(
 )
 export const FlowProvider = withLocales(FlowProviderWithLocales)
 export const LaunchTriggerCard = withLocales(LaunchTriggerCardWithoutLocales)
-export const TriggerLauncher = deprecated(
-  `TriggerLauncher is deprecated, please use FlowProvider now.
-The API has not changed, only the name and import call.
-
-import { FlowProvider } from "cozy-harvest-lib"
-`
-)(FlowProvider)
 export const Routes = withLocales(RoutesWithoutLocales)
 export const KonnectorSuggestionModal = withLocales(
   KonnectorSuggestionModalWithoutLocales
