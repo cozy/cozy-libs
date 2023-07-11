@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@15.0.4...cozy-harvest-lib@16.0.0) (2023-07-11)
+
+
+### Bug Fixes
+
+* Don't export LegacyTriggerManager ([5e3adf6](https://github.com/cozy/cozy-libs/commit/5e3adf6dc5c3a1d5ed1c86343b6aa2a027f2dff1))
+
+
+### Code Refactoring
+
+* Remove DeleteAccountButton ([38e10f0](https://github.com/cozy/cozy-libs/commit/38e10f0ba62e0d0c8552ab9808330d98d27a27ab))
+* Remove KonnectorModal and withKonnectorModal ([6d82687](https://github.com/cozy/cozy-libs/commit/6d826874e731fb265e14a28263b84fbc461fa0d6))
+* Remove TriggerLauncher ([dd6c497](https://github.com/cozy/cozy-libs/commit/dd6c497ee79691b9d60a460bdfe63202c29bd24c))
+
+
+### BREAKING CHANGES
+
+* TriggerLauncher is removed, please use FlowProvider.
+The API has not changed, only the name and import call.
+
+import { FlowProvider } from "cozy-harvest-lib"
+* Those two components should not be used.
+* DeleteAccountButton is removed. It should not be used
+anymore.
+* LegacyTriggerManager should only be used
+internally by Harvest. Third party app / lib, shoud use
+HarvestRoutes or IntentTriggerManager.
+
+
+
+
+
 ## [15.0.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@15.0.3...cozy-harvest-lib@15.0.4) (2023-07-11)
 
 **Note:** Version bump only for package cozy-harvest-lib
