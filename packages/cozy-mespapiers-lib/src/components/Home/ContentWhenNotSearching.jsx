@@ -14,8 +14,6 @@ const ContentWhenNotSearching = ({ papers, contacts, konnectors }) => {
   const allDocs = useMemo(() => papers.concat(contacts), [papers, contacts])
   const hasDocs = allDocs?.length > 0
 
-  const papersByCategories = makePapersGroupByQualificationLabel(papers)
-
   if (!hasDocs) {
     return (
       <Empty
@@ -27,6 +25,8 @@ const ContentWhenNotSearching = ({ papers, contacts, konnectors }) => {
       />
     )
   }
+
+  const papersByCategories = makePapersGroupByQualificationLabel(papers)
 
   return (
     <PaperGroup
