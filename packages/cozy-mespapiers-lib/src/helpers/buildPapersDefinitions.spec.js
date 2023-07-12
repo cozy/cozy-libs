@@ -9,8 +9,10 @@ describe('buildPapersDefinitions', () => {
         return 'b'
       case 'items.other_three':
         return 'c'
-      case 'items.four':
+      case 'items.note_identity_document':
         return 'd'
+      case 'items.four':
+        return 'e'
     }
   })
   const mockPapersDef = [
@@ -32,7 +34,14 @@ describe('buildPapersDefinitions', () => {
         name: 'myKonnector'
       }
     },
-
+    {
+      label: 'note_identity_document',
+      acquisitionSteps: [
+        {
+          stepIndex: 1
+        }
+      ]
+    },
     {
       label: 'four',
       acquisitionSteps: []
@@ -79,6 +88,14 @@ describe('buildPapersDefinitions', () => {
       konnectorCriteria: {
         name: 'myKonnector'
       }
+    },
+    {
+      label: 'note_identity_document',
+      acquisitionSteps: [
+        {
+          stepIndex: 1
+        }
+      ]
     },
     {
       label: 'four',

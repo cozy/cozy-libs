@@ -9,28 +9,36 @@
  * @returns {Object[]} - Array of Papers sorted
  */
 export const buildPapersDefinitions = (papersDefList, scannerT) => {
-  const papersDefListSorted = [...papersDefList].sort((w, x) =>
-    scannerT(`items.${w.label}`) > scannerT(`items.${x.label}`)
+  const papersDefListSorted = [...papersDefList].sort((w, x) => {
+    return scannerT(`items.${w.label}`) > scannerT(`items.${x.label}`)
       ? 1
       : scannerT(`items.${x.label}`) > scannerT(`items.${w.label}`)
       ? -1
       : 0
-  )
+  })
 
-  const [papersUsedList, papersUnUsedList, otherPaperList] =
+  const [papersUsedList, papersUnUsedList, otherPaperList, noteList] =
     papersDefListSorted.reduce(
-      ([used, unUsed, other], currentPaperDef) => {
+      ([used, unUsed, other, note], currentPaperDef) => {
         if (/other_/i.test(currentPaperDef.label)) {
-          return [used, unUsed, [...other, currentPaperDef]]
+          return [used, unUsed, [...other, currentPaperDef], note]
+        }
+        if (/note_/i.test(currentPaperDef.label)) {
+          return [used, unUsed, other, [...note, currentPaperDef]]
         }
 
         return currentPaperDef.acquisitionSteps.length > 0 ||
           currentPaperDef.konnectorCriteria
-          ? [[...used, currentPaperDef], unUsed, other]
-          : [used, [...unUsed, currentPaperDef], other]
+          ? [[...used, currentPaperDef], unUsed, other, note]
+          : [used, [...unUsed, currentPaperDef], other, note]
       },
-      [[], [], []]
+      [[], [], [], []]
     )
 
-  return [...papersUsedList, ...otherPaperList, ...papersUnUsedList]
+  return [
+    ...papersUsedList,
+    ...otherPaperList,
+    ...noteList,
+    ...papersUnUsedList
+  ]
 }
