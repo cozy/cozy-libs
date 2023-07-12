@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import Divider from 'cozy-ui/transpiled/react/Divider'
+import Icon from 'cozy-ui/transpiled/react/Icon'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -71,10 +72,11 @@ const PlaceholdersList = ({ currentQualifItems }) => {
           const validPlaceholder =
             placeholder.acquisitionSteps.length > 0 ||
             placeholder.konnectorCriteria
+          const isReminderNote = placeholder.label.includes('note_')
 
           return (
             <Fragment key={idx}>
-              {placeholder.label === 'note' && (
+              {isReminderNote && (
                 <Divider className="u-mv-half" variant="inset" />
               )}
               <ListItem
@@ -87,7 +89,11 @@ const PlaceholdersList = ({ currentQualifItems }) => {
                 data-testid="PlaceholdersList-ListItem"
               >
                 <ListItemIcon>
-                  <FileIcon icon={placeholder.icon} />
+                  {isReminderNote ? (
+                    <Icon icon={placeholder.icon} size={64} />
+                  ) : (
+                    <FileIcon icon={placeholder.icon} />
+                  )}
                 </ListItemIcon>
                 <ListItemText
                   primary={scannerT(`items.${placeholder.label}`, {
