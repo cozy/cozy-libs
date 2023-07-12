@@ -9,7 +9,7 @@ import {
 } from 'cozy-keys-lib'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
-import DumbTriggerManager from './DumbTriggerManager'
+import { DumbTriggerManager } from './DumbTriggerManager'
 import FlowProvider from './FlowProvider'
 import HarvestWrapper from './HarvestWrapper'
 import withConnectionFlow from '../models/withConnectionFlow'
