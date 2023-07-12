@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [16.0.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@16.0.0...cozy-harvest-lib@16.0.1) (2023-07-12)
+
+
+### Bug Fixes
+
+* Wrong export for DumbTriggerManager ([e7d3860](https://github.com/cozy/cozy-libs/commit/e7d3860fcb7579b809bdd8dfa31e878c762e2993))
+
+
+
+
+
 # [16.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@15.0.4...cozy-harvest-lib@16.0.0) (2023-07-11)
 
 
