@@ -2370,6 +2370,166 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ]
+    },
+    {
+      "label": "note_identity_document",
+      "icon": "file-type-note",
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "note"
+        }
+      ]
+    },
+    {
+      "label": "note_family_document",
+      "icon": "file-type-note",
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "note"
+        }
+      ]
+    },
+    {
+      "label": "note_work_document",
+      "icon": "file-type-note",
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "note"
+        }
+      ]
+    },
+    {
+      "label": "note_identity_document",
+      "icon": "file-type-note",
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "note"
+        }
+      ]
+    },
+    {
+      "label": "note_health_document",
+      "icon": "file-type-note",
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "note"
+        }
+      ]
+    },
+    {
+      "label": "note_house_document",
+      "icon": "file-type-note",
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "note"
+        }
+      ]
+    },
+    {
+      "label": "note_transport_document",
+      "icon": "file-type-note",
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "note"
+        }
+      ]
+    },
+    {
+      "label": "note_activity_document",
+      "icon": "file-type-note",
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "note"
+        }
+      ]
+    },
+    {
+      "label": "note_finance",
+      "icon": "file-type-note",
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "note"
+        }
+      ]
+    },
+    {
+      "label": "note_invoice",
+      "icon": "file-type-note",
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "note"
+        }
+      ]
     }
   ]
 }
