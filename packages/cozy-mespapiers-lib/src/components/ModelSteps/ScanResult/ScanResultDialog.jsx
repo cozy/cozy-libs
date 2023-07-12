@@ -92,9 +92,8 @@ const ScanResultDialog = ({
       actions={
         <>
           <Button
-            className="u-db"
             data-testid="next-button"
-            extension="full"
+            fullWidth
             label={t('common.next')}
             onClick={handleNextStep}
           />
