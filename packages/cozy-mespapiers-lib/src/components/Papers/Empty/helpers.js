@@ -8,7 +8,7 @@ export const makeCountrySearchParam = ({
   const country = new URLSearchParams(search).get('country')
   const placeholders = findPlaceholderByLabelAndCountry(
     papersDefinitions,
-    params.fileTheme,
+    params.qualificationLabel,
     country
   )
   const placeholder = placeholders?.[0]

@@ -4,7 +4,7 @@ import {
   buildFilesByContacts,
   getContactsRefIdsByFiles,
   buildFilesWithContacts,
-  getCurrentFileTheme,
+  getCurrentQualificationLabel,
   makeAccountFromPapers
 } from './helpers'
 
@@ -425,36 +425,42 @@ describe('helpers Papers', () => {
   })
 })
 
-describe('getCurrentFileTheme', () => {
-  it('should be fileTheme event with selectedThemeLabel', () => {
-    const res = getCurrentFileTheme(
-      { fileTheme: 'fileTheme' },
-      'selectedThemeLabel'
+describe('getCurrentQualificationLabel', () => {
+  it('should be "qualificationLabel" event with selectedQualificationLabel', () => {
+    const res = getCurrentQualificationLabel(
+      { qualificationLabel: 'qualificationLabel' },
+      'selectedQualificationLabel'
     )
 
-    expect(res).toBe('fileTheme')
+    expect(res).toBe('qualificationLabel')
   })
 
-  it('should fileTheme with null selectedThemeLabel', () => {
-    const res = getCurrentFileTheme({ fileTheme: 'fileTheme' }, null)
+  it('should qualificationLabel with null selectedQualificationLabel', () => {
+    const res = getCurrentQualificationLabel(
+      { qualificationLabel: 'qualificationLabel' },
+      null
+    )
 
-    expect(res).toBe('fileTheme')
+    expect(res).toBe('qualificationLabel')
   })
 
-  it('should be selectedThemeLabel for null fileTheme', () => {
-    const res = getCurrentFileTheme({ fileTheme: null }, 'selectedThemeLabel')
+  it('should be selectedQualificationLabel for null qualificationLabel', () => {
+    const res = getCurrentQualificationLabel(
+      { qualificationLabel: null },
+      'selectedQualificationLabel'
+    )
 
-    expect(res).toBe('selectedThemeLabel')
+    expect(res).toBe('selectedQualificationLabel')
   })
 
-  it('should be selectedThemeLabel fro null param', () => {
-    const res = getCurrentFileTheme(null, 'selectedThemeLabel')
+  it('should be selectedQualificationLabel fro null param', () => {
+    const res = getCurrentQualificationLabel(null, 'selectedQualificationLabel')
 
-    expect(res).toBe('selectedThemeLabel')
+    expect(res).toBe('selectedQualificationLabel')
   })
 
   it('should be null', () => {
-    const res = getCurrentFileTheme(null, null)
+    const res = getCurrentQualificationLabel(null, null)
 
     expect(res).toBe(null)
   })

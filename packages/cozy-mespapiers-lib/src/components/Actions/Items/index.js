@@ -1,5 +1,5 @@
 export { createPaper } from './createPaper'
-export { createPaperByTheme } from './createPaperByTheme'
+export { createPaperByQualificationLabel } from './createPaperByQualificationLabel'
 export { download } from './download'
 export { forward } from './forward'
 export { hr } from './hr'

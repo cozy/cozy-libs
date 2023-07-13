@@ -19,7 +19,7 @@ import PapersListByContact from '../Papers/PapersListByContact'
 import PapersListToolbar from '../Papers/PapersListToolbar'
 import {
   getContactsRefIdsByFiles,
-  getCurrentFileTheme
+  getCurrentQualificationLabel
 } from '../Papers/helpers'
 
 const ConditionnalPapersList = props => {
@@ -27,7 +27,7 @@ const ConditionnalPapersList = props => {
 
   if (
     flag('hide.healthTheme.enabled') &&
-    getThemeByItem({ label: params.fileTheme })?.label === 'health'
+    getThemeByItem({ label: params.qualificationLabel })?.label === 'health'
   ) {
     return <Navigate replace to="/paper" />
   }
@@ -38,10 +38,13 @@ const ConditionnalPapersList = props => {
 const PapersList = () => {
   const params = useParams()
 
-  const { selectedThemeLabel } = useMultiSelection()
+  const { selectedQualificationLabel } = useMultiSelection()
 
-  const currentFileTheme = getCurrentFileTheme(params, selectedThemeLabel)
-  const filesQueryByLabel = buildFilesQueryByLabel(currentFileTheme)
+  const currentQualificationLabel = getCurrentQualificationLabel(
+    params,
+    selectedQualificationLabel
+  )
+  const filesQueryByLabel = buildFilesQueryByLabel(currentQualificationLabel)
   const { data: files, ...fileQueryResult } = useQueryAll(
     filesQueryByLabel.definition,
     filesQueryByLabel.options
@@ -62,8 +65,9 @@ const PapersList = () => {
   const isLoadingContacts =
     isQueryLoading(contactQueryResult) || contactQueryResult.hasMore
 
-  const queryKonnector =
-    buildKonnectorsQueryByQualificationLabel(currentFileTheme)
+  const queryKonnector = buildKonnectorsQueryByQualificationLabel(
+    currentQualificationLabel
+  )
   const { data: konnectors, ...konnectorsQueryLeft } = useQuery(
     queryKonnector.definition,
     queryKonnector.options
@@ -92,7 +96,9 @@ const PapersList = () => {
 
   return (
     <>
-      <PapersListToolbar selectedThemeLabel={selectedThemeLabel} />
+      <PapersListToolbar
+        selectedQualificationLabel={selectedQualificationLabel}
+      />
       {isLoading ? (
         <Spinner
           className="u-flex u-flex-justify-center u-mt-2 u-h-5"
@@ -102,7 +108,7 @@ const PapersList = () => {
         <>
           {hasFiles && (
             <PapersListByContact
-              selectedThemeLabel={selectedThemeLabel}
+              selectedQualificationLabel={selectedQualificationLabel}
               files={files}
               contacts={contacts}
               konnectors={konnectors}

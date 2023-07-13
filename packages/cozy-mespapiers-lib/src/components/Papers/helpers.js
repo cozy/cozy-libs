@@ -219,8 +219,10 @@ export const buildFilesWithContacts = ({ files, contacts, t }) => {
   })
 }
 
-export const getCurrentFileTheme = (params, selectedThemeLabel) =>
-  params?.fileTheme ?? selectedThemeLabel
+export const getCurrentQualificationLabel = (
+  params,
+  selectedQualificationLabel
+) => params?.qualificationLabel ?? selectedQualificationLabel
 
 export const makeAccountFromPapers = (papers, accounts) => {
   const accountLogin = papers?.list?.[0]?.cozyMetadata?.sourceAccountIdentifier

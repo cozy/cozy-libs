@@ -12,7 +12,7 @@
   },
   "action": {
     "createPaper": "Add a paper",
-    "createPaperByTheme": "Add: %{theme}",
+    "createPaperByQualificationLabel": "Add: %{qualificationLabel}",
     "download": "Download",
     "zipDownload": "Download documents (.ZIP format)",
     "forward": "Send",

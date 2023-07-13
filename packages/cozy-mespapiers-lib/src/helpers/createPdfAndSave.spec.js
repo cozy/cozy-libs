@@ -28,7 +28,10 @@ const mockParams = file => ({
     contacts: []
   },
   qualification: {},
-  currentDefinition: { featureDate: '', label: `themeLabeTest-${file.type}` },
+  currentDefinition: {
+    featureDate: '',
+    label: `qualificationLabelTest-${file.type}`
+  },
   appFolderID: '',
   client: {
     collection: jest.fn(() => ({
@@ -48,10 +51,13 @@ describe('createAndSavePdf', () => {
 
   it('should return array with fileId & theme label', async () => {
     const expectedPDF = [
-      { fileId: '1234', themeLabel: 'themeLabeTest-application/pdf' }
+      {
+        fileId: '1234',
+        qualificationLabel: 'qualificationLabelTest-application/pdf'
+      }
     ]
     const expectedJPG = [
-      { fileId: '1234', themeLabel: 'themeLabeTest-image/jpg' }
+      { fileId: '1234', qualificationLabel: 'qualificationLabelTest-image/jpg' }
     ]
 
     const filePDF = new File(['bob'], 'bob.pdf', { type: 'application/pdf' })

@@ -11,13 +11,13 @@ import withLocales from '../../../locales/withLocales'
 import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'
 import { useScannerI18n } from '../../Hooks/useScannerI18n'
 
-export const createPaperByTheme = ({
+export const createPaperByQualificationLabel = ({
   showImportDropdown,
-  fileTheme,
+  qualificationLabel,
   country
 }) => {
   return {
-    name: 'createPaperByTheme',
+    name: 'createPaperByQualificationLabel',
     Component: withLocales(
       // eslint-disable-next-line react/display-name
       forwardRef((props, ref) => {
@@ -28,7 +28,7 @@ export const createPaperByTheme = ({
 
         const paperDefinition = findPlaceholderByLabelAndCountry(
           paperDefinitionsList,
-          fileTheme,
+          qualificationLabel,
           country
         )[0]
 
@@ -42,8 +42,8 @@ export const createPaperByTheme = ({
               <Icon icon={paperDefinition.icon} />
             </ListItemIcon>
             <ListItemText
-              primary={t('action.createPaperByTheme', {
-                theme: scannerT(`items.${fileTheme}`)
+              primary={t('action.createPaperByQualificationLabel', {
+                qualificationLabel: scannerT(`items.${qualificationLabel}`)
               })}
             />
           </ActionsMenuItem>

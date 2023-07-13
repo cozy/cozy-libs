@@ -9,13 +9,17 @@ import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 
 const useKonnectorsActions = ({ placeholder, redirectPaperCreation }) => {
   const { search } = useLocation()
-  const { fileTheme } = useParams()
+  const { qualificationLabel } = useParams()
   const { papersDefinitions } = usePapersDefinitions()
 
   const country = new URLSearchParams(search).get('country')
   const paperDefinition =
     placeholder ||
-    findPlaceholderByLabelAndCountry(papersDefinitions, fileTheme, country)[0]
+    findPlaceholderByLabelAndCountry(
+      papersDefinitions,
+      qualificationLabel,
+      country
+    )[0]
 
   const actions = makeActions([importAuto, scanPicture], {
     paperDefinition,

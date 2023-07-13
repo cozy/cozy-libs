@@ -4,7 +4,7 @@ import { useClient } from 'cozy-client'
 import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 
 import { createPaper } from '../Actions/Items/createPaper'
-import { createPaperByTheme } from '../Actions/Items/createPaperByTheme'
+import { createPaperByQualificationLabel } from '../Actions/Items/createPaperByQualificationLabel'
 
 const useGeneralActions = ({
   setShowGeneralMenu,
@@ -12,7 +12,7 @@ const useGeneralActions = ({
   redirectPaperCreation
 }) => {
   const client = useClient()
-  const { fileTheme } = useParams()
+  const { qualificationLabel } = useParams()
   const { search } = useLocation()
 
   const country = new URLSearchParams(search).get('country')
@@ -26,12 +26,14 @@ const useGeneralActions = ({
     setShowGeneralMenu(false)
   }
 
-  const actionList = fileTheme ? [createPaperByTheme, createPaper] : []
+  const actionList = qualificationLabel
+    ? [createPaperByQualificationLabel, createPaper]
+    : []
   const actionOptions = {
     client,
     hideActionsMenu: () => setShowGeneralMenu(false),
     showImportDropdown,
-    fileTheme,
+    qualificationLabel,
     country
   }
 

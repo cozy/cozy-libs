@@ -12,7 +12,7 @@ jest.mock('cozy-flags')
 jest.mock('react-router-dom', () => {
   return {
     ...jest.requireActual('react-router-dom'),
-    useParams: jest.fn(() => ({ fileTheme: '' })),
+    useParams: jest.fn(() => ({ qualificationLabel: '' })),
     useNavigate: jest.fn()
   }
 })
@@ -23,13 +23,13 @@ const MockChild = ({ onClick }) => (
 
 const setup = ({
   withChild,
-  withFileThemeParam,
+  withQualificationLabelParam,
   mockNavigate = jest.fn(),
   isFlag = true
 } = {}) => {
   flag.mockReturnValue(isFlag)
-  if (withFileThemeParam) {
-    useParams.mockReturnValue({ fileTheme: 'tax_notice' })
+  if (withQualificationLabelParam) {
+    useParams.mockReturnValue({ qualificationLabel: 'tax_notice' })
   }
 
   useNavigate.mockImplementation(() => mockNavigate)
@@ -77,7 +77,7 @@ describe('PapersFabWrapper', () => {
       const mockNavigate = jest.fn()
       const { getByTestId } = setup({
         withChild: true,
-        withFileThemeParam: true,
+        withQualificationLabelParam: true,
         mockNavigate
       })
 
@@ -89,7 +89,7 @@ describe('PapersFabWrapper', () => {
     it('should display ActionMenuWrapper with additionnal action if click on child', () => {
       const { getByTestId, getByText } = setup({
         withChild: true,
-        withFileThemeParam: true
+        withQualificationLabelParam: true
       })
 
       const btn = getByTestId('MockChild')

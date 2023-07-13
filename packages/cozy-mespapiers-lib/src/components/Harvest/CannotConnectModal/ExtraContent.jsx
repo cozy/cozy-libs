@@ -10,7 +10,7 @@ import withLocales from '../../../locales/withLocales'
 
 const ExtraContent = () => {
   const { t } = useI18n()
-  const { fileTheme } = useParams()
+  const { qualificationLabel } = useParams()
   const navigate = useNavigate()
 
   return (
@@ -22,7 +22,9 @@ const ExtraContent = () => {
         variant="secondary"
         label={t('Harvest.cannotConnectModal.button')}
         onClick={() =>
-          navigate(`/paper/files/${fileTheme}/create/${fileTheme}`)
+          navigate(
+            `/paper/files/${qualificationLabel}/create/${qualificationLabel}`
+          )
         }
         fullWidth
         startIcon={<Icon icon="camera" />}

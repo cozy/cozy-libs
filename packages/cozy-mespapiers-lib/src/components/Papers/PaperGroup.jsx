@@ -13,15 +13,16 @@ import { useMultiSelection } from '../Hooks/useMultiSelection'
 const PaperGroup = ({ papersByCategories, konnectors, selectedTheme }) => {
   const navigate = useNavigate()
   const { t } = useI18n()
-  const { isMultiSelectionActive, setSelectedThemeLabel } = useMultiSelection()
+  const { isMultiSelectionActive, setSelectedQualificationLabel } =
+    useMultiSelection()
 
   const hasPapers = Object.keys(papersByCategories).length > 0
 
-  const goPapersList = category => {
+  const goPapersList = qualificationLabel => {
     if (isMultiSelectionActive) {
-      setSelectedThemeLabel(category)
+      setSelectedQualificationLabel(qualificationLabel)
     } else {
-      navigate(`files/${category}`)
+      navigate(`files/${qualificationLabel}`)
     }
   }
 

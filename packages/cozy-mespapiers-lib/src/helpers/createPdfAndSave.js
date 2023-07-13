@@ -60,7 +60,7 @@ const addContactReferenceToFile = async ({
  * Convert image & pdf file to pdf & save it
  *
  * @param {CreateAndSavePdfParam} param
- * @returns {Promise<{ fileId: string, themeLabel: string }[]>} Return array of object with file id & theme label to find its location
+ * @returns {Promise<{ fileId: string, qualificationLabel: string }[]>} Return array of object with file id & qualification label to find its location
  */
 export const createPdfAndSave = async ({
   formData,
@@ -127,7 +127,10 @@ export const createPdfAndSave = async ({
       )
       await addContactReferenceToFile({ fileCreated, fileCollection, contacts })
 
-      createdFilesList.push({ fileId: fileCreated._id, themeLabel: label })
+      createdFilesList.push({
+        fileId: fileCreated._id,
+        qualificationLabel: label
+      })
     }
 
     // If isn't multipage & not the last page, create new document of PDFDocument

@@ -7,7 +7,7 @@ describe('makeCountrySearchParam', () => {
   it('should return empty string if no match between paperDefinitions and params', () => {
     const res = makeCountrySearchParam({
       papersDefinitions: [{ label: 'caf' }],
-      params: { fileTheme: 'isp_invoice' },
+      params: { qualificationLabel: 'isp_invoice' },
       search: ''
     })
 
@@ -17,7 +17,7 @@ describe('makeCountrySearchParam', () => {
   it('should return empty string if no match between paperDefinitions and params even with a search param', () => {
     const res = makeCountrySearchParam({
       papersDefinitions: [{ label: 'caf' }],
-      params: { fileTheme: 'isp_invoice' },
+      params: { qualificationLabel: 'isp_invoice' },
       search: '?country=fr'
     })
 

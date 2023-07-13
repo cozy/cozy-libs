@@ -9,10 +9,13 @@ import ListSubheader from 'cozy-ui/transpiled/react/ListSubheader'
 import { DEFAULT_MAX_FILES_DISPLAYED } from '../../constants/const'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import PapersList from '../Papers/PapersList'
-import { buildFilesByContacts, getCurrentFileTheme } from '../Papers/helpers'
+import {
+  buildFilesByContacts,
+  getCurrentQualificationLabel
+} from '../Papers/helpers'
 
 const PapersListByContact = ({
-  selectedThemeLabel,
+  selectedQualificationLabel,
   files,
   konnectors,
   accounts,
@@ -22,7 +25,10 @@ const PapersListByContact = ({
   const { t } = useI18n()
   const { papersDefinitions } = usePapersDefinitions()
 
-  const currentFileTheme = getCurrentFileTheme(params, selectedThemeLabel)
+  const currentFileTheme = getCurrentQualificationLabel(
+    params,
+    selectedQualificationLabel
+  )
   const currentDefinition = useMemo(
     () =>
       papersDefinitions.find(paperDef => paperDef.label === currentFileTheme),
@@ -66,7 +72,7 @@ const PapersListByContact = ({
 }
 
 PapersListByContact.propTypes = {
-  selectedThemeLabel: PropTypes.string,
+  selectedQualificationLabel: PropTypes.string,
   files: PropTypes.arrayOf(PropTypes.object),
   konnector: PropTypes.object,
   accounts: PropTypes.array,
