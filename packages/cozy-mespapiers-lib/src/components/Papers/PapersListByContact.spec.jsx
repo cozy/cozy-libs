@@ -48,7 +48,7 @@ const setup = () => {
   return render(
     <AppLike>
       <PapersListByContact
-        selectedThemeLabel={null}
+        selectedQualificationLabel={null}
         files={[{}]}
         contacts={[{}]}
       />

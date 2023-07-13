@@ -8,7 +8,8 @@ const MultiSelectionProvider = ({ children }) => {
   const [currentMultiSelectionFiles, setCurrentMultiSelectionFiles] = useState(
     []
   )
-  const [selectedThemeLabel, setSelectedThemeLabel] = useState(null)
+  const [selectedQualificationLabel, setSelectedQualificationLabel] =
+    useState(null)
 
   const confirmCurrentMultiSelectionFiles = () => {
     removeAllCurrentMultiSelectionFiles()
@@ -64,8 +65,8 @@ const MultiSelectionProvider = ({ children }) => {
     addMultiSelectionFile,
     removeMultiSelectionFile,
     removeAllMultiSelectionFiles,
-    selectedThemeLabel,
-    setSelectedThemeLabel,
+    selectedQualificationLabel,
+    setSelectedQualificationLabel,
 
     currentMultiSelectionFiles,
     removeAllCurrentMultiSelectionFiles,

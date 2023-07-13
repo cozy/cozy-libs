@@ -13,17 +13,20 @@ import styles from './styles.styl'
 import { useMultiSelection } from '../../Hooks/useMultiSelection'
 import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'
 import HarvestBanner from '../HarvestBanner'
-import { getCurrentFileTheme } from '../helpers'
+import { getCurrentQualificationLabel } from '../helpers'
 
 const EmptyNoHeader = ({ konnector, accounts }) => {
   const { t } = useI18n()
   const params = useParams()
   const { search, pathname } = useLocation()
   const navigate = useNavigate()
-  const { selectedThemeLabel } = useMultiSelection()
+  const { selectedQualificationLabel } = useMultiSelection()
   const { papersDefinitions } = usePapersDefinitions()
 
-  const currentFileTheme = getCurrentFileTheme(params, selectedThemeLabel)
+  const currentFileTheme = getCurrentQualificationLabel(
+    params,
+    selectedQualificationLabel
+  )
   const countrySearchParam = makeCountrySearchParam({
     papersDefinitions,
     params,

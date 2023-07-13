@@ -15,8 +15,8 @@ const MultiselectPaperList = ({ setIsFilePickerActive }) => {
     removeAllCurrentMultiSelectionFiles,
     confirmCurrentMultiSelectionFiles,
     currentMultiSelectionFiles,
-    selectedThemeLabel,
-    setSelectedThemeLabel
+    selectedQualificationLabel,
+    setSelectedQualificationLabel
   } = useMultiSelection()
 
   const title =
@@ -28,7 +28,7 @@ const MultiselectPaperList = ({ setIsFilePickerActive }) => {
 
   const closeMultiSelection = () => {
     setIsFilePickerActive(false)
-    setSelectedThemeLabel(null)
+    setSelectedQualificationLabel(null)
   }
 
   const cancelSelection = () => {
@@ -42,7 +42,9 @@ const MultiselectPaperList = ({ setIsFilePickerActive }) => {
   }
 
   const handleBack = () => {
-    selectedThemeLabel ? setSelectedThemeLabel(null) : cancelSelection()
+    selectedQualificationLabel
+      ? setSelectedQualificationLabel(null)
+      : cancelSelection()
   }
 
   return (
@@ -54,7 +56,7 @@ const MultiselectPaperList = ({ setIsFilePickerActive }) => {
       size="medium"
       onBack={handleBack}
       title={title}
-      content={!selectedThemeLabel ? <Home /> : <PapersList />}
+      content={!selectedQualificationLabel ? <Home /> : <PapersList />}
       actions={
         <>
           <Button

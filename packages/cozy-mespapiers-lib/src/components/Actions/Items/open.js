@@ -20,13 +20,13 @@ export const open = () => {
 
         const doc = props.doc
         const fileId = doc?._id
-        const fileTheme = doc?.metadata?.qualification?.label
+        const qualificationLabel = doc?.metadata?.qualification?.label
         const webLink = generateWebLink({
           slug: 'mespapiers',
           cozyUrl: client.getStackClient().uri,
           subDomainType: client.getInstanceOptions().subdomain,
           pathname: '/',
-          hash: `/paper/files/${fileTheme}/${fileId}`
+          hash: `/paper/files/${qualificationLabel}/${fileId}`
         })
 
         return (
