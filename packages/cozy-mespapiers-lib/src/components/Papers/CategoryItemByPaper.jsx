@@ -2,10 +2,10 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { useClient } from 'cozy-client'
+import { isNote } from 'cozy-client/dist/models/file'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import { FileImageLoader } from 'cozy-ui/transpiled/react/FileImageLoader'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import FiletypeTextIcon from 'cozy-ui/transpiled/react/Icons/FileTypeText'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
@@ -40,7 +40,9 @@ const CategoryItemByPaper = ({ papers, category, isLast, onClick }) => {
             }}
             renderFallback={() => (
               <Thumbnail>
-                <Icon icon={FiletypeTextIcon} />
+                <Icon
+                  icon={isNote(papers[0]) ? 'file-type-note' : 'file-type-text'}
+                />
               </Thumbnail>
             )}
           />
