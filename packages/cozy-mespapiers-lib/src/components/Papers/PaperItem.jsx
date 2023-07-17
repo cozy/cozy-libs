@@ -3,13 +3,14 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
-import { models, useClient } from 'cozy-client'
+import { useClient } from 'cozy-client'
+import { isNote } from 'cozy-client/dist/models/file'
+import { isExpired, isExpiringSoon } from 'cozy-client/dist/models/paper'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import FileImageLoader from 'cozy-ui/transpiled/react/FileImageLoader'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import FiletypeTextIcon from 'cozy-ui/transpiled/react/Icons/FileTypeText'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import RenameInput from 'cozy-ui/transpiled/react/ListItem/ListItemBase/Renaming/RenameInput'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -21,9 +22,8 @@ import Thumbnail from 'cozy-ui/transpiled/react/Thumbnail'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import ExpirationAnnotation from './ExpirationAnnotation'
+import { generateReturnUrlToNotesIndex } from './helpers'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
-
-const { isExpired, isExpiringSoon } = models.paper
 
 const useStyles = makeStyles(() => ({
   checkbox: {
@@ -66,13 +66,18 @@ const PaperItem = ({
     ? f(paper?.metadata?.datetime, 'DD/MM/YYYY')
     : null
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (isMultiSelectionChoice) {
       changeCurrentMultiSelectionFile(paper)
     } else {
-      navigate(`/paper/files/${paperTheme}/${paper._id}`, {
-        state: { background: `${pathname}${search}` }
-      })
+      if (isNote(paper)) {
+        const webLink = await generateReturnUrlToNotesIndex(client, paper)
+        window.open(webLink, '_self')
+      } else {
+        navigate(`/paper/files/${paperTheme}/${paper._id}`, {
+          state: { background: `${pathname}${search}` }
+        })
+      }
     }
   }
 
@@ -145,7 +150,9 @@ const PaperItem = ({
             }}
             renderFallback={() => (
               <Thumbnail>
-                <Icon icon={FiletypeTextIcon} />
+                <Icon
+                  icon={isNote(paper) ? 'file-type-note' : 'file-type-text'}
+                />
               </Thumbnail>
             )}
           />

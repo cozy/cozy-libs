@@ -5,8 +5,19 @@ import {
   getContactsRefIdsByFiles,
   buildFilesWithContacts,
   getCurrentQualificationLabel,
-  makeAccountFromPapers
+  makeAccountFromPapers,
+  generateReturnUrlToNotesIndex
 } from './helpers'
+
+// see https://remarkablemark.org/blog/2018/11/17/mock-window-location/
+const { location } = window
+function setLocation(url) {
+  delete window.location
+  window.location = url
+}
+function restoreLocation() {
+  window.location = location
+}
 
 const mockContacts00 = [
   { _id: 'contactId01', name: { givenName: 'Bob', familyName: 'Durand' } },
@@ -522,5 +533,55 @@ describe('makeAccountFromPapers', () => {
     )
 
     expect(res).toStrictEqual({ auth: { login: 'myLogin' } })
+  })
+})
+
+describe('generateReturnUrlToNotesIndex', () => {
+  function createFetchUrl() {
+    return jest.fn().mockImplementation(({ _id }) => ({
+      data: {
+        type: 'io.cozy.notes.url',
+        id: _id,
+        note_id: _id,
+        subdomain: 'flat',
+        protocol: 'https',
+        instance: 'alice.cozy.example',
+        public_name: 'Bob'
+      }
+    }))
+  }
+
+  function createClient() {
+    return {
+      getStackClient: () => ({
+        collection: () => ({ fetchURL: createFetchUrl() })
+      })
+    }
+  }
+
+  function createNote(id = '12345') {
+    return { id, type: 'io.cozy.files' }
+  }
+
+  afterEach(() => {
+    restoreLocation()
+  })
+
+  it('returns an URL string', async () => {
+    const client = createClient()
+    const note = createNote()
+    const urlString = await generateReturnUrlToNotesIndex(client, note)
+    const url = new URL(urlString)
+    expect(url.toString()).toEqual(urlString)
+  })
+
+  it('has a returnUrl key', async () => {
+    const location = 'htt://google.com/index?param=value#hash'
+    setLocation(location)
+    const client = createClient()
+    const note = createNote()
+    const urlString = await generateReturnUrlToNotesIndex(client, note)
+    const url = new URL(urlString)
+    expect(url.searchParams.get('returnUrl')).toEqual(location)
   })
 })
