@@ -3,9 +3,12 @@ import groupBy from 'lodash/groupBy'
 import { models, getReferencedBy } from 'cozy-client'
 import { getAccountName } from 'cozy-client/dist/models/account'
 import { getThemeByItem } from 'cozy-client/dist/models/document/documentTypeDataHelpers'
+import { fetchURL } from 'cozy-client/dist/models/note'
 
 import { CONTACTS_DOCTYPE } from '../../doctypes'
 import { filterWithRemaining } from '../../helpers/filterWithRemaining'
+
+export const RETURN_URL_KEY = 'returnUrl'
 
 const { getDisplayName } = models.contact
 
@@ -248,4 +251,24 @@ export const makeQualificationLabelsWithoutFiles = (
       })
     })
     .filter(x => x)
+}
+
+/**
+ * Create the URL to be used to edit a note
+ *
+ * @param {object} client CozyClient instance
+ * @param {object} file io.cozy.file object
+ * @param {string} returnUrl URL to use as returnUrl if you don't want the current location
+ * @returns {Promise<string>} URL where one can edit the note
+ */
+export const generateReturnUrlToNotesIndex = async (
+  client,
+  file,
+  returnUrl
+) => {
+  const rawUrl = fetchURL(client, file)
+  const back = window.location.toString()
+  const dest = new URL(await rawUrl)
+  dest.searchParams.set(RETURN_URL_KEY, returnUrl || back)
+  return dest.toString()
 }
