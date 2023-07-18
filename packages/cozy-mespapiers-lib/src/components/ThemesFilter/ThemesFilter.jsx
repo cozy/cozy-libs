@@ -1,31 +1,38 @@
 import React from 'react'
 
 import CircleButton from 'cozy-ui/transpiled/react/CircleButton'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 
-import { makeLabel } from './helpers'
+import { useThemeLabel } from './useThemeLabel'
 import { getThemesList } from '../../helpers/themes'
-import { useScannerI18n } from '../Hooks/useScannerI18n'
+
+const FilterButton = ({ item, isSelected, onClick }) => {
+  const label = useThemeLabel(item.label)
+
+  return (
+    <CircleButton
+      label={label}
+      variant={isSelected ? 'active' : 'default'}
+      onClick={onClick}
+      data-testid="ThemesFilter"
+    >
+      <Icon icon={item.icon} />
+    </CircleButton>
+  )
+}
 
 const ThemesFilter = ({ selectedTheme, handleThemeSelection }) => {
-  const scannerT = useScannerI18n()
-  const { t } = useI18n()
-
   const items = getThemesList()
 
   return (
     <>
       {items.map(item => (
-        <CircleButton
+        <FilterButton
           key={item.id}
-          label={makeLabel({ scannerT, t, label: `${item.label}` })}
-          variant={selectedTheme.id === item.id ? 'active' : 'default'}
+          item={item}
+          isSelected={selectedTheme.id === item.id}
           onClick={() => handleThemeSelection(item)}
-          data-testid="ThemesFilter"
-        >
-          <Icon icon={item.icon} />
-        </CircleButton>
+        />
       ))}
     </>
   )
