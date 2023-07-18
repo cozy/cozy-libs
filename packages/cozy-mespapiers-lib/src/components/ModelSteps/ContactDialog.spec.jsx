@@ -1,4 +1,6 @@
-import { fireEvent, render } from '@testing-library/react'
+/* eslint-disable jest/no-focused-tests */
+import '@testing-library/jest-dom'
+import { render } from '@testing-library/react'
 import React from 'react'
 
 import ContactDialog from './ContactDialog'
@@ -24,17 +26,22 @@ jest.mock('../../helpers/fetchCurrentUser', () => ({
 jest.mock('./widgets/ConfirmReplaceFile', () => () => (
   <div data-testid="ConfirmReplaceFile" />
 ))
+jest.mock('./widgets/SubmitButton', () => () => (
+  <div data-testid="SubmitButton" />
+))
 /* eslint-enable react/display-name */
 
 const setup = ({
   formData = mockFormData(),
   formSubmit = jest.fn(),
   onClose = jest.fn(),
-  mockFetchCurrentUser = jest.fn()
+  mockFetchCurrentUser = jest.fn(),
+  isLastStep = jest.fn(() => false)
 } = {}) => {
   useStepperDialog.mockReturnValue({
     currentDefinition: {},
-    allCurrentSteps: []
+    allCurrentSteps: [],
+    isLastStep
   })
   fetchCurrentUser.mockImplementation(mockFetchCurrentUser)
   useFormData.mockReturnValue({
@@ -53,34 +60,20 @@ const setup = ({
 }
 
 describe('ContactDialog', () => {
-  it('should submit when save button is clicked, if the file is from user device', async () => {
-    const mockFormSubmit = jest.fn()
-    const mockFetchCurrentUser = jest.fn(() => ({ _id: '1234' }))
-    const userDeviceFile = new File([{}], 'userDeviceFile')
-    const { findByTestId } = setup({
-      formData: mockFormData({ data: [{ file: userDeviceFile }] }),
-      formSubmit: mockFormSubmit,
-      mockFetchCurrentUser
+  it('should have a SubmitButton if is the last step', () => {
+    const { getByTestId } = setup({
+      isLastStep: jest.fn(() => true)
     })
 
-    const btn = await findByTestId('ButtonSave')
-    fireEvent.click(btn)
-
-    expect(mockFormSubmit).toBeCalledTimes(1)
+    expect(getByTestId('SubmitButton')).toBeInTheDocument()
   })
 
-  it('should not submit when save button is clicked, if the file is from Cozy Drive', () => {
-    const mockFormSubmit = jest.fn()
-    const cozyFile = new Blob()
-    const { getByTestId } = setup({
-      formData: mockFormData({ data: [{ file: cozyFile }] }),
-      formSubmit: mockFormSubmit
+  it('should not have a SubmitButton if is not the last step', () => {
+    const { queryByTestId } = setup({
+      isLastStep: jest.fn(() => false)
     })
 
-    const btn = getByTestId('ButtonSave')
-    fireEvent.click(btn)
-
-    expect(mockFormSubmit).toBeCalledTimes(0)
+    expect(queryByTestId('SubmitButton')).toBeNull()
   })
 
   it('should call fetchCurrentUser once at mount', () => {
@@ -88,33 +81,5 @@ describe('ContactDialog', () => {
     setup({ mockFetchCurrentUser })
 
     expect(mockFetchCurrentUser).toBeCalledTimes(1)
-  })
-
-  it('should not diplay ConfirmReplaceFile modal when save button is clicked, if the file is from User Device', () => {
-    const mockFetchCurrentUser = jest.fn(() => ({ _id: '1234' }))
-    const userDeviceFile = new File([{}], 'userDeviceFile')
-    const { getByTestId, queryByTestId } = setup({
-      formData: mockFormData({ data: [{ file: userDeviceFile }] }),
-      mockFetchCurrentUser
-    })
-
-    const btn = getByTestId('ButtonSave')
-    fireEvent.click(btn)
-
-    expect(queryByTestId('ConfirmReplaceFile')).toBeNull()
-  })
-
-  it('should diplay ConfirmReplaceFile modal when save button is clicked, if the file is from Cozy Drive', async () => {
-    const mockFetchCurrentUser = jest.fn(() => ({ _id: '1234' }))
-    const cozyFile = new Blob()
-    const { findByTestId, getByTestId } = setup({
-      formData: mockFormData({ data: [{ file: cozyFile }] }),
-      mockFetchCurrentUser
-    })
-
-    const btn = await findByTestId('ButtonSave')
-    fireEvent.click(btn)
-
-    expect(getByTestId('ConfirmReplaceFile'))
   })
 })

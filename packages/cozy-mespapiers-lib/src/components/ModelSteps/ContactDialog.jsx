@@ -5,71 +5,25 @@ import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 
 import ContactList from './ContactList'
-import ConfirmReplaceFile from './widgets/ConfirmReplaceFile'
-import { KEYS } from '../../constants/const'
-import { FILES_DOCTYPE } from '../../doctypes'
+import SubmitButton from './widgets/SubmitButton'
 import { fetchCurrentUser } from '../../helpers/fetchCurrentUser'
 import CompositeHeader from '../CompositeHeader/CompositeHeader'
-import { useFormData } from '../Hooks/useFormData'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
 import StepperDialogTitle from '../StepperDialog/StepperDialogTitle'
 
 const ContactDialog = ({ currentStep, onClose, onBack }) => {
   const { t } = useI18n()
   const client = useClient()
-  const { currentStepIndex } = useStepperDialog()
-  const { formSubmit, formData } = useFormData()
-  const [onLoad, setOnLoad] = useState(false)
-  const [confirmReplaceFileModal, setConfirmReplaceFileModal] = useState(false)
+  const { currentStepIndex, nextStep, isLastStep } = useStepperDialog()
   const [currentUser, setCurrentUser] = useState(null)
   const [contactIdsSelected, setContactIdsSelected] = useState([])
   const [contactModalOpened, setContactModalOpened] = useState(false)
   const { illustration, text, multiple } = currentStep
 
-  const cozyFiles = formData.data.filter(d => d.file.from === 'cozy')
-  const saveButtonDisabled =
-    onLoad || contactIdsSelected.length === 0 || contactModalOpened
-
-  const closeConfirmReplaceFileModal = () => setConfirmReplaceFileModal(false)
-  const openConfirmReplaceFileModal = () => setConfirmReplaceFileModal(true)
-
-  const submit = async () => {
-    setOnLoad(true)
-    await formSubmit()
-    onClose()
-  }
-
-  const onClickReplace = async isFileReplaced => {
-    if (isFileReplaced) {
-      for (const { file } of cozyFiles) {
-        await client.destroy({ _id: file.id, _type: FILES_DOCTYPE })
-      }
-    }
-    submit()
-  }
-
-  const handleClick = () => {
-    if (cozyFiles.length > 0) {
-      if (!confirmReplaceFileModal) openConfirmReplaceFileModal()
-      else onClickReplace(true)
-    } else {
-      submit()
-    }
-  }
-
-  const handleKeyDown = ({ key }) => {
-    if (saveButtonDisabled) {
-      return
-    }
-    if (key === KEYS.ENTER) {
-      handleClick()
-    }
-  }
-
-  useEventListener(window, 'keydown', handleKeyDown)
+  const SubmitButtonComponent = isLastStep() ? SubmitButton : null
+  const buttonDisabled = contactIdsSelected.length === 0 || contactModalOpened
 
   useEffect(() => {
     const init = async () => {
@@ -111,23 +65,22 @@ const ContactDialog = ({ currentStep, onClose, onBack }) => {
           />
         }
         actions={
-          <Button
-            fullWidth
-            label={t(!onLoad ? 'ContactStep.save' : 'ContactStep.onLoad')}
-            onClick={handleClick}
-            disabled={saveButtonDisabled}
-            busy={onLoad}
-            data-testid="ButtonSave"
-          />
+          SubmitButtonComponent ? (
+            <SubmitButtonComponent
+              onClose={onClose}
+              disabled={buttonDisabled}
+            />
+          ) : (
+            <Button
+              data-testid="next-button"
+              fullWidth
+              label={t('common.next')}
+              disabled={buttonDisabled}
+              onClick={nextStep}
+            />
+          )
         }
       />
-      {confirmReplaceFileModal && (
-        <ConfirmReplaceFile
-          onClose={closeConfirmReplaceFileModal}
-          onReplace={onClickReplace}
-          cozyFilesCount={cozyFiles.length}
-        />
-      )}
     </>
   )
 }
