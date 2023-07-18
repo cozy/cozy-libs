@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [52.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@51.2.5...cozy-mespapiers-lib@52.0.0) (2023-07-18)
+
+
+### Bug Fixes
+
+* A reminderNote has no longer `note` label but `note_` ([a57626f](https://github.com/cozy/cozy-libs/commit/a57626ffd6be41c2bd93a1cebc6ac4ff62a253c1))
+
+
+### Features
+
+* Add reminderNote in papersDefinition ([eb94fda](https://github.com/cozy/cozy-libs/commit/eb94fda658081bb48b6c04328923195591eed6fc))
+* Add support for notes in PaperItem ([16fa498](https://github.com/cozy/cozy-libs/commit/16fa4987ff87a6b92a392a4b2ee1ce0de30a6962))
+* Add title and version metadatas in query select ([e949170](https://github.com/cozy/cozy-libs/commit/e9491705e22e11001c3645033d288e306ad25eda)), closes [/github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/file.js#L54](https://github.com//github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/file.js/issues/L54)
+* Replace uploadedBy by createdByApp index in query ([72e5f5f](https://github.com/cozy/cozy-libs/commit/72e5f5f073d6ddc575cae4cef26b4ca9624efa54))
+* Upgrade cozy-client from 38.5.1 to 38.10.0 ([8f52552](https://github.com/cozy/cozy-libs/commit/8f52552c6759582afb754ebea78a1220df40f6db))
+* Use note icon for noteReminder in CategoryItemByPaper ([3238459](https://github.com/cozy/cozy-libs/commit/3238459e6a713843373fe6878d67909e149d8b6a))
+
+
+### BREAKING CHANGES
+
+* you must have `cozy-client >= 38.10.0`
+
+
+
+
+
 ## [51.2.5](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@51.2.4...cozy-mespapiers-lib@51.2.5) (2023-07-18)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
