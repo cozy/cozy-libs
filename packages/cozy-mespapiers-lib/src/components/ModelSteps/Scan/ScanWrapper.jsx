@@ -63,7 +63,8 @@ const ScanWrapper = ({ currentStep, onClose, onBack }) => {
   const onChangeFilePicker = async cozyFileId => {
     const blobFile = await fetchBlobFileById(client, cozyFileId)
     const file = makeFileFromBlob(blobFile, {
-      name: cozyFileId
+      name: cozyFileId,
+      from: 'cozy'
     })
     onChangeFile(file)
   }

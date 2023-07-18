@@ -22,4 +22,9 @@ describe('makeFileFromBlob', () => {
     const res = makeFileFromBlob(blob, {})
     expect(res.type).toBe('image/png')
   })
+
+  it('should return File with attributes passed', () => {
+    const res = makeFileFromBlob(blob, { from: 'cozy' })
+    expect(res.from).toBe('cozy')
+  })
 })
