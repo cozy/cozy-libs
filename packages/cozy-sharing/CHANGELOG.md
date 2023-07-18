@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@8.0.0...cozy-sharing@8.0.1) (2023-07-18)
+
+
+### Bug Fixes
+
+* **sharing:** Use `.fetchQueryAndGetFromState` instead `.query` ([95d8f2d](https://github.com/cozy/cozy-libs/commit/95d8f2d43ccdd20a26f1f27d1060cace5f3f60a8)), closes [cozy/cozy-client#931](https://github.com/cozy/cozy-client/issues/931)
+
+
+
+
+
 # 8.0.0 (2023-07-05)
 
 
