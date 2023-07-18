@@ -29,7 +29,7 @@ const ContactDialog = ({ currentStep, onClose, onBack }) => {
   const [contactModalOpened, setContactModalOpened] = useState(false)
   const { illustration, text, multiple } = currentStep
 
-  const cozyFiles = formData.data.filter(d => d.file.constructor === Blob)
+  const cozyFiles = formData.data.filter(d => d.file.from === 'cozy')
   const saveButtonDisabled =
     onLoad || contactIdsSelected.length === 0 || contactModalOpened
 
