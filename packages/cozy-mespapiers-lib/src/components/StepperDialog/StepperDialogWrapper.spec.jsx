@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 import React from 'react'
 
@@ -25,7 +26,15 @@ const mockAllCurrentSteps = [
 ]
 
 describe('StepperDialogWrapper', () => {
-  const setup = () => {
+  const setup = ({
+    allCurrentSteps = mockAllCurrentSteps,
+    currentStepIndex
+  }) => {
+    useStepperDialog.mockReturnValue({
+      allCurrentSteps,
+      currentStepIndex
+    })
+
     return render(
       <AppLike>
         <StepperDialogWrapper />
@@ -34,37 +43,31 @@ describe('StepperDialogWrapper', () => {
   }
 
   it('should contain only Scan component', () => {
-    useStepperDialog.mockReturnValue({
-      allCurrentSteps: mockAllCurrentSteps,
+    const { getByTestId, queryByTestId } = setup({
       currentStepIndex: 1
     })
-    const { queryByTestId } = setup()
 
-    expect(queryByTestId('ScanWrapper')).toBeTruthy()
+    expect(getByTestId('ScanWrapper')).toBeInTheDocument()
     expect(queryByTestId('InformationDialog')).toBeNull()
     expect(queryByTestId('ContactDialog')).toBeNull()
   })
 
   it('should contain only InformationDialog component', () => {
-    useStepperDialog.mockReturnValue({
-      allCurrentSteps: mockAllCurrentSteps,
+    const { getByTestId, queryByTestId } = setup({
       currentStepIndex: 2
     })
-    const { queryByTestId } = setup()
 
-    expect(queryByTestId('InformationDialog')).toBeTruthy()
+    expect(getByTestId('InformationDialog')).toBeInTheDocument()
     expect(queryByTestId('ScanWrapper')).toBeNull()
     expect(queryByTestId('ContactDialog')).toBeNull()
   })
 
   it('should contain only Contact component', () => {
-    useStepperDialog.mockReturnValue({
-      allCurrentSteps: mockAllCurrentSteps,
+    const { getByTestId, queryByTestId } = setup({
       currentStepIndex: 3
     })
-    const { queryByTestId } = setup()
 
-    expect(queryByTestId('ContactDialog')).toBeTruthy()
+    expect(getByTestId('ContactDialog')).toBeInTheDocument()
     expect(queryByTestId('ScanWrapper')).toBeNull()
     expect(queryByTestId('InformationDialog')).toBeNull()
   })
