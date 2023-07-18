@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [52.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@52.0.0...cozy-mespapiers-lib@52.1.0) (2023-07-18)
+
+
+### Bug Fixes
+
+* **mespapiers:** File replacement confirmation ([faec5fd](https://github.com/cozy/cozy-libs/commit/faec5fd2c5cad2599b3ab38126eef2ef3cf32dd3))
+* **mespapiers:** PropTypes on `ConfirmReplaceFile` component ([d0dcc68](https://github.com/cozy/cozy-libs/commit/d0dcc68e562d60316f38d46ca4c13060e17828a1))
+* **mespapiers:** Use correct props for the new `Buttons` ([7914f29](https://github.com/cozy/cozy-libs/commit/7914f29c258678365905f479dd4d249fab33ddfd))
+
+
+### Features
+
+* **mespapiers:** Add `isLastStep` method to `StepperDialogProvider` ([e9f2f9b](https://github.com/cozy/cozy-libs/commit/e9f2f9bdca75889d160142dd07aad64e396b267d))
+* **mespapiers:** Add `SubmitButtonComponent` to `ContactDialog` step ([929c05d](https://github.com/cozy/cozy-libs/commit/929c05d25c2c02f0ba0a2f32d378b7b9fa8dbbcc))
+* **mespapiers:** Create SubmitButton to handle form submission ([fe0d945](https://github.com/cozy/cozy-libs/commit/fe0d94585e85138b3cd0ab7cc72cef461fcdc218))
+* **mespapiers:** Sort `note_*` qualification labels in theme list ([0b58265](https://github.com/cozy/cozy-libs/commit/0b582655b9877598b4071839851f58234f4ef81a))
+
+
+
+
+
 # [52.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@51.2.5...cozy-mespapiers-lib@52.0.0) (2023-07-18)
 
 
