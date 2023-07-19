@@ -1,5 +1,4 @@
-import { models } from 'cozy-client'
-const { Qualification } = models.document
+import { Qualification } from 'cozy-client/dist/models/document'
 
 const buildItems = labels => {
   return labels
@@ -19,9 +18,12 @@ const identityLabels = [
   'national_id_card',
   'passport',
   'residence_permit',
+  'electoral_card',
   'family_record_book',
   'birth_certificate',
   'driver_license',
+  'citizen_registration_certificate',
+  'note_identity_document',
   'other_identity_document'
 ]
 
@@ -30,9 +32,12 @@ const familyLabels = [
   'birth_certificate',
   'wedding',
   'pacs',
+  'single_parent_benefit',
   'divorce',
   'large_family_card',
   'caf',
+  'payment_proof_family_allowance',
+  'note_family_document',
   'other_family_document'
 ]
 
@@ -41,12 +46,16 @@ const workStudyLabels = [
   'work_contract',
   'pay_sheet',
   'unemployment_benefit',
+  'employment_center_certificate',
   'pension',
-  'other_revenue',
+  'work_disability_recognition',
   'gradebook',
   'student_card',
+  'school_attendance_certificate',
+  'school_insurance_certificate',
   'resume',
   'motivation_letter',
+  'note_work_document',
   'other_work_document'
 ]
 
@@ -54,9 +63,14 @@ const healthLabels = [
   'health_certificate',
   'health_book',
   'national_health_insurance_card',
+  'national_health_insurance_right_certificate',
   'health_insurance_card',
   'prescription',
-  'health_invoice'
+  'health_invoice',
+  'work_disability_recognition',
+  'pregnancy_medical_certificate',
+  'note_health_document',
+  'other_health_document'
 ]
 
 const homeLabels = [
@@ -65,14 +79,18 @@ const homeLabels = [
   'telecom_invoice',
   'energy_invoice',
   'water_invoice',
+  'other_invoice',
+  'work_invoice',
   'house_sale_agreeement',
   'building_permit',
   'technical_diagnostic_record',
+  'unfit_for_habitation_declaration',
   'lease',
   'rent_receipt',
+  'accommodation_proof',
   'house_insurance',
   'work_quote',
-  'work_invoice',
+  'note_house_document',
   'other_house_document'
 ]
 
@@ -80,21 +98,37 @@ const transportLabels = [
   'driver_license',
   'vehicle_registration',
   'car_insurance',
+  'transport_card',
   'mechanic_invoice',
   'transport_invoice',
+  'note_transport_document',
   'other_transport_document'
+]
+
+const activityLabels = [
+  'personal_sporting_licence',
+  'fidelity_card',
+  'library_card',
+  'note_activity_document',
+  'other_activity_document'
 ]
 
 const financeLabels = [
   'tax_return',
   'tax_notice',
   'tax_timetable',
+  'real_estate_tax',
+  'pay_sheet',
   'receipt',
+  'single_parent_benefit',
   'other_tax_document',
   'bank_details',
   'bank_statement',
   'loan_agreement',
-  'other_bank_document'
+  'payment_proof_family_allowance',
+  'note_finance',
+  'other_bank_document',
+  'other_revenue'
 ]
 
 const invoiceLabels = [
@@ -109,8 +143,11 @@ const invoiceLabels = [
   'work_invoice',
   'transport_invoice',
   'health_invoice',
+  'note_invoice',
   'other_invoice'
 ]
+
+const othersLabels = ['other_administrative_document']
 
 export const themes = [
   {
@@ -154,14 +191,26 @@ export const themes = [
   },
   {
     id: 'theme7',
+    label: 'activity',
+    icon: 'compass',
+    items: buildItems(activityLabels)
+  },
+  {
+    id: 'theme8',
     label: 'finance',
     icon: 'bank',
     items: buildItems(financeLabels)
   },
   {
-    id: 'theme8',
+    id: 'theme9',
     label: 'invoice',
     icon: 'bill',
     items: buildItems(invoiceLabels)
+  },
+  {
+    id: 'theme10',
+    label: 'others',
+    icon: 'dots',
+    items: buildItems(othersLabels)
   }
 ]

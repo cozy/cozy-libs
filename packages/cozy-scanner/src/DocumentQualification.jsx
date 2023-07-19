@@ -16,6 +16,7 @@ import GridItem from 'cozy-ui/transpiled/react/deprecated/GridItem'
 import CategoryGridItem from './CategoryGridItem'
 import DocumentCategory from './DocumentCategory'
 import { themes } from './DocumentTypeData'
+import { getBoundT } from './locales'
 import styles from './stylesheet.css'
 
 const fileExtension = '.jpg'
@@ -100,9 +101,10 @@ export class DocumentQualification extends Component {
   }
 
   render() {
-    const { t, title, allowEditFileName } = this.props
+    const { t, lang, title, allowEditFileName } = this.props
     const { selected, filename, hasUserWrittenFileName, overridedThemes } =
       this.state
+    const scannerT = getBoundT(lang)
 
     return (
       <MuiCozyTheme>
@@ -167,7 +169,7 @@ export class DocumentQualification extends Component {
           >
             <CategoryGridItem
               isSelected={selected.categoryLabel === null}
-              theme={t(`Scan.themes.undefined`)}
+              theme={scannerT(`Scan.themes.undefined`)}
             />
           </GridItem>
 
@@ -179,7 +181,7 @@ export class DocumentQualification extends Component {
                 key={i}
                 isSelected={selected.categoryLabel === category.label}
                 selectedItem={selected.item || {}}
-                t={t}
+                scannerT={scannerT}
               />
             )
           })}

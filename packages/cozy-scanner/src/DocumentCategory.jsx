@@ -46,16 +46,18 @@ class DocumentCategory extends Component {
   }
   render() {
     const { isMenuDisplayed } = this.state
-    const { category, isSelected, selectedItem, t } = this.props
+    const { category, isSelected, selectedItem, scannerT } = this.props
     return (
       <>
         <GridItem onClick={this.openMenu}>
           <CategoryGridItem
             isSelected={isSelected}
             icon={category.icon}
-            theme={t(`Scan.themes.${category.label}`)}
+            theme={scannerT(`Scan.themes.${category.label}`)}
             label={
-              isSelected ? t(`Scan.items.${selectedItem.label}`) : undefined
+              isSelected
+                ? scannerT(`Scan.items.${selectedItem.label}`)
+                : undefined
             }
           />
         </GridItem>
@@ -89,7 +91,7 @@ class DocumentCategory extends Component {
                 </Img>
                 <Bd className="u-ml-1">
                   <Typography tag="span" ellipsis variant="h6">
-                    {t(`Scan.themes.${category.label}`)}
+                    {scannerT(`Scan.themes.${category.label}`)}
                   </Typography>
                 </Bd>
               </Media>
@@ -105,7 +107,7 @@ class DocumentCategory extends Component {
                   }}
                   key={item.label}
                 >
-                  {t(`Scan.items.${item.label}`)}
+                  {scannerT(`Scan.items.${item.label}`)}
                 </ActionMenuItem>
               )
             })}
@@ -121,7 +123,7 @@ DocumentCategory.propTypes = {
   category: PropTypes.object.isRequired,
   isSelected: PropTypes.bool,
   selectedItem: PropTypes.object.isRequired,
-  t: PropTypes.func.isRequired
+  scannerT: PropTypes.func.isRequired
 }
 
 export default DocumentCategory
