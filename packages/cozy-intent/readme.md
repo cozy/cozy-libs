@@ -22,9 +22,11 @@ The library needs to be installed both in the parent and the children applicatio
 - `method`: messenger function that accept arguments to be handled by the listening messenger.
 - `service`: Cozy specific implementation designed to provide decoupling from `post-me` and easier instanciation/interoperability with React applications.
 
-### Parent
+### Setup
 
-First, we need to provide a React context to our application. This requires a method object that will be available to all Webview children.
+#### Parent (= react-native app)
+
+First, we need to provide a React context to our application. This requires a method object that will be available to all webview children.
 
 ```tsx
 import React from 'react'
@@ -33,9 +35,11 @@ import { NativeIntentProvider } from 'cozy-intent'
 import { ReactNativeApp } from 'react-native-app'
 
 const MyNativeApp = () => (
-  <NativeIntentProvider localMethods={{
-    ping: () => console.log('pong'),
-  }}>
+  <NativeIntentProvider
+    localMethods={{
+      myNativeMethod: () => console.log('I am executed on the native side and I can return data to the webview side'),
+    }}
+  >
     <ReactNativeApp />
   </NativeIntentProvider>
 )
@@ -63,9 +67,9 @@ const MyWebview = () => {
 }
 ```
 
-### Children
+#### Children (= react app running in a webview)
 
-First, we need to provide a React context to our application. This requires a reference to the local window.
+We need to provide a React context to our application.
 
 ```tsx
 import React from 'react'
@@ -74,13 +78,51 @@ import { WebviewIntentProvider } from 'cozy-intent'
 import { ReactApp } from 'react-app'
 
 const MyWebApp = () => (
-  <WebviewIntentProvider windowRef={window}>
+  <WebviewIntentProvider
+     localMethods={{
+      myWebviewMethod: () => console.log('I am executed on the webview side and I can return data to the native side'),
+    }}
+  >
     <ReactApp />
   </WebviewIntentProvider>
 )
 ```
 
-Later on, we can use the service in a component and call a registered method. Here we call the `ping()` method injected in the native messenger.
+### Usage
+
+#### Parent (= react-native app)
+
+We can use the service in a component and call a method registered on the webview side. Here we call the `myWebviewMethod` method injected in the webview messenger.
+
+```tsx
+import React from 'react'
+import { Button } from 'react-native'
+
+import { useNativeIntent } from 'cozy-intent'
+
+const MyComponent = (webviewUri) => {
+  const nativeIntent = useNativeIntent()
+  const handleClick = () => nativeIntent.call(webviewUri, 'myWebviewMethod')
+
+  return <Button onClick={handleClick} />
+}
+```
+
+If you need to call a webview method outside of a React component or before the `<NativeIntentProvider />`, you can get directly the service from cozy-intent.
+
+```tsx
+  import { getNativeIntentService } from 'cozy-intent'
+
+  const myFunction = (webviewUri) => {
+    const nativeIntentService = getNativeIntentService()
+
+    nativeIntentService.call(webviewUri, 'myWebviewMethod')
+  }
+```
+
+#### Children (= react app running in a webview)
+
+We can use the service in a component and call a method registered on the native side. Here we call the `myNativeMethod` method injected in the native messenger.
 
 ```tsx
 import React from 'react'
@@ -89,21 +131,89 @@ import { useWebviewIntent } from 'cozy-intent'
 
 const MyComponent = () => {
   const webviewIntent = useWebviewIntent()
-  const handleClick = () => webviewIntent.call('ping')
+  const handleClick = () => webviewIntent.call('myNativeMethod')
 
-  return <buttton onClick={handleClick} />
+  return <button onClick={handleClick} />
 }
 ```
 
-### Native intents
+## Tutorials
 
-#### Methods
+### Start a native task from a webview and receive progress updates
 
-##### `NativeService.call('logout')`
+#### Receive progress updates with a callback
+
+You can pass callbacks as parameters as described [on post-me documentation](https://github.com/alesgenova/post-me#callbacks). But it will stop to work if the webview is restarted.
+
+#### Receive progress updates with a listener method
+
+You can create a method on the webview side that act as a listener receiving progress updates. This way, we can :
+
+- restart the webview and still receive progress updates
+- send progress updates to multiple webviews implementing the listener method
+
+##### Parent (= react-native app)
+
+```tsx
+import React from 'react'
+
+import { NativeIntentProvider, getNativeIntentService } from 'cozy-intent'
+import { ReactNativeApp } from 'react-native-app'
+
+const MyNativeApp = () => (
+  <NativeIntentProvider
+    localMethods={{
+      upload: async () => {
+        // we need to get the service directly because we can not use the useNativeService() hook here
+        const nativeIntentService = getNativeIntentService()
+
+        await uploadFirstPart()
+
+        nativeIntentService.call(webviewUri, 'updateUploadProgress', { progress: 33.3 })
+
+        await uploadSecondPart()
+
+        nativeIntentService.call(webviewUri, 'updateUploadProgress', { progress: 66.6 })
+
+        await uploadThirdPart()
+
+        nativeIntentService.call(webviewUri, 'updateUploadProgress', { progress: 100 })
+      }
+    }}
+  >
+    <ReactNativeApp />
+  </NativeIntentProvider>
+)
+```
+
+##### Children (= react app running in a webview)
+
+```tsx
+import React from 'react'
+
+import { WebviewIntentProvider } from 'cozy-intent'
+import { ReactApp } from 'react-app'
+
+const MyWebApp = () => (
+  <WebviewIntentProvider
+     localMethods={{
+      updateUploadProgress: ({ progress }) => console.log(`Upload in progress : ${progress}%`), // It will display 33.3, 66.6 and 100
+    }}
+  >
+    <ReactApp />
+  </WebviewIntentProvider>
+)
+```
+
+## cozy-flagship-app intents
+
+### Methods
+
+#### `NativeService.call('logout')`
 
 Will logout the user from the react-native application. Will not touch webview state.
 
-#### `NativeService.call('setFlagshipUi')`
+### `NativeService.call('setFlagshipUi')`
 
 Example 1: With bottomBackground and topBackground set
 
