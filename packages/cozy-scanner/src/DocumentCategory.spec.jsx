@@ -38,7 +38,7 @@ describe('DocumentCategory', () => {
             }}
             isSelected={true}
             selectedItem={{ label: 'test' }}
-            t={text => text}
+            scannerT={text => text}
           />
         </MuiCozyTheme>
       </BreakpointsProvider>

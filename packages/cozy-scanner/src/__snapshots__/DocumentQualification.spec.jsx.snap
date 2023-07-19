@@ -85,7 +85,7 @@ exports[`DocumentQualification Initial render + selection + filename 1`] = `
           <span
             class="grid-item-theme u-ellipsis"
           >
-            Scan.themes.undefined
+            Undefined
           </span>
         </div>
       </div>
@@ -130,7 +130,7 @@ exports[`DocumentQualification Initial render + selection + filename 1`] = `
           <span
             class="grid-item-theme u-ellipsis"
           >
-            Scan.themes.identity
+            Identity
           </span>
         </div>
       </div>
@@ -175,7 +175,7 @@ exports[`DocumentQualification Initial render + selection + filename 1`] = `
           <span
             class="grid-item-theme u-ellipsis"
           >
-            Scan.themes.family
+            Family
           </span>
         </div>
       </div>
@@ -220,7 +220,7 @@ exports[`DocumentQualification Initial render + selection + filename 1`] = `
           <span
             class="grid-item-theme u-ellipsis"
           >
-            Scan.themes.work_study
+            Work
           </span>
         </div>
       </div>
@@ -265,7 +265,7 @@ exports[`DocumentQualification Initial render + selection + filename 1`] = `
           <span
             class="grid-item-theme u-ellipsis"
           >
-            Scan.themes.home
+            Home
           </span>
         </div>
       </div>
@@ -310,7 +310,52 @@ exports[`DocumentQualification Initial render + selection + filename 1`] = `
           <span
             class="grid-item-theme u-ellipsis"
           >
-            Scan.themes.transport
+            Transport
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root-31 styles__gridItem-container___2Xeyk MuiGrid-item-33 MuiGrid-grid-xs-3-68 MuiGrid-grid-sm-2-81"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--coolGrey);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          >
+            <svg
+              class="styles__icon___23x3R"
+              height="16"
+              style="fill: var(--coolGrey);"
+              width="16"
+            >
+              <use
+                xlink:href="#compass"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Activities
           </span>
         </div>
       </div>
@@ -355,7 +400,7 @@ exports[`DocumentQualification Initial render + selection + filename 1`] = `
           <span
             class="grid-item-theme u-ellipsis"
           >
-            Scan.themes.finance
+            Finance
           </span>
         </div>
       </div>
@@ -400,7 +445,52 @@ exports[`DocumentQualification Initial render + selection + filename 1`] = `
           <span
             class="grid-item-theme u-ellipsis"
           >
-            Scan.themes.invoice
+            Invoice
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root-31 styles__gridItem-container___2Xeyk MuiGrid-item-33 MuiGrid-grid-xs-3-68 MuiGrid-grid-sm-2-81"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--coolGrey);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          >
+            <svg
+              class="styles__icon___23x3R"
+              height="16"
+              style="fill: var(--coolGrey);"
+              width="16"
+            >
+              <use
+                xlink:href="#dots"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Others
           </span>
         </div>
       </div>
@@ -494,7 +584,7 @@ exports[`DocumentQualification Initial render + selection + filename 2`] = `
           <span
             class="grid-item-theme u-ellipsis"
           >
-            Scan.themes.undefined
+            Undefined
           </span>
         </div>
       </div>
@@ -539,7 +629,7 @@ exports[`DocumentQualification Initial render + selection + filename 2`] = `
           <span
             class="grid-item-theme u-ellipsis"
           >
-            Scan.themes.identity
+            Identity
           </span>
         </div>
       </div>
@@ -584,12 +674,12 @@ exports[`DocumentQualification Initial render + selection + filename 2`] = `
           <span
             class="grid-item-theme u-ellipsis"
           >
-            Scan.themes.family
+            Family
           </span>
           <span
             class="grid-item-label u-ellipsis"
           >
-            Scan.items.family_record_book
+            Family record book
           </span>
         </div>
       </div>
@@ -634,7 +724,7 @@ exports[`DocumentQualification Initial render + selection + filename 2`] = `
           <span
             class="grid-item-theme u-ellipsis"
           >
-            Scan.themes.work_study
+            Work
           </span>
         </div>
       </div>
@@ -679,7 +769,7 @@ exports[`DocumentQualification Initial render + selection + filename 2`] = `
           <span
             class="grid-item-theme u-ellipsis"
           >
-            Scan.themes.home
+            Home
           </span>
         </div>
       </div>
@@ -724,7 +814,52 @@ exports[`DocumentQualification Initial render + selection + filename 2`] = `
           <span
             class="grid-item-theme u-ellipsis"
           >
-            Scan.themes.transport
+            Transport
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root-31 styles__gridItem-container___2Xeyk MuiGrid-item-33 MuiGrid-grid-xs-3-68 MuiGrid-grid-sm-2-81"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--coolGrey);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          >
+            <svg
+              class="styles__icon___23x3R"
+              height="16"
+              style="fill: var(--coolGrey);"
+              width="16"
+            >
+              <use
+                xlink:href="#compass"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Activities
           </span>
         </div>
       </div>
@@ -769,7 +904,7 @@ exports[`DocumentQualification Initial render + selection + filename 2`] = `
           <span
             class="grid-item-theme u-ellipsis"
           >
-            Scan.themes.finance
+            Finance
           </span>
         </div>
       </div>
@@ -814,7 +949,52 @@ exports[`DocumentQualification Initial render + selection + filename 2`] = `
           <span
             class="grid-item-theme u-ellipsis"
           >
-            Scan.themes.invoice
+            Invoice
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root-31 styles__gridItem-container___2Xeyk MuiGrid-item-33 MuiGrid-grid-xs-3-68 MuiGrid-grid-sm-2-81"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--coolGrey);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          >
+            <svg
+              class="styles__icon___23x3R"
+              height="16"
+              style="fill: var(--coolGrey);"
+              width="16"
+            >
+              <use
+                xlink:href="#dots"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Others
           </span>
         </div>
       </div>

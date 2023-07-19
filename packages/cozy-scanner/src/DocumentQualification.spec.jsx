@@ -31,6 +31,7 @@ const setup = ({
           onFileNameChanged={onFileNameChanged}
           title="Edit"
           t={text => text}
+          scannerT={text => text}
         />
       </MuiCozyTheme>
     </BreakpointsProvider>
@@ -52,14 +53,14 @@ describe('DocumentQualification', () => {
       onFileNameChanged
     })
     expect(asFragment()).toMatchSnapshot()
-    const undefinedItemNode = queryByText(/Scan.themes.undefined/i)
+    const undefinedItemNode = queryByText(/undefined/i)
     const isSelected = undefinedItemNode.closest(
       '.grid-item__selected__without_label'
     )
     expect(Boolean(isSelected)).toBe(true)
 
-    fireEvent.click(getByText('Scan.themes.family'))
-    fireEvent.click(getByText('Scan.items.family_record_book'))
+    fireEvent.click(getByText('Family'))
+    fireEvent.click(getByText('Family record book'))
     expect(onDescribed).toBeCalledWith(
       {
         label: 'family_record_book',
@@ -72,7 +73,7 @@ describe('DocumentQualification', () => {
     )
     const inputFileName = getByLabelText('Scan.filename')
 
-    const familyItemNode = queryByText('Scan.themes.family')
+    const familyItemNode = queryByText('Family')
     const familyItemNodeSelected = familyItemNode.closest(
       '.grid-item__selected'
     )
@@ -90,7 +91,7 @@ describe('DocumentQualification', () => {
     expect(onFileNameChanged).toBeCalledWith('Manual name.jpg')
 
     fireEvent.click(familyItemNode)
-    fireEvent.click(queryByText('Scan.items.birth_certificate'))
+    fireEvent.click(queryByText('Birth certificate'))
     expect(inputFileName.value).toBe('Manual name')
   })
 })
