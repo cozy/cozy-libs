@@ -16,6 +16,7 @@ import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'
 import { useScannerI18n } from '../../Hooks/useScannerI18n'
 import FileIcon from '../../Icons/FileIcon'
 import useKonnectorsActions from '../../PapersFab/useKonnectorsActions'
+import { isReminder } from '../helpers'
 
 const PlaceholdersList = ({ currentQualifItems }) => {
   const [isImportDropdownDisplayed, setIsImportDropdownDisplayed] =
@@ -72,11 +73,10 @@ const PlaceholdersList = ({ currentQualifItems }) => {
           const validPlaceholder =
             placeholder.acquisitionSteps.length > 0 ||
             placeholder.konnectorCriteria
-          const isReminderNote = placeholder.label.includes('note_')
 
           return (
             <Fragment key={idx}>
-              {isReminderNote && (
+              {isReminder(placeholder) && (
                 <Divider className="u-mv-half" variant="inset" />
               )}
               <ListItem
@@ -89,7 +89,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
                 data-testid="PlaceholdersList-ListItem"
               >
                 <ListItemIcon>
-                  {isReminderNote ? (
+                  {isReminder(placeholder) ? (
                     <Icon icon={placeholder.icon} size={64} />
                   ) : (
                     <FileIcon icon={placeholder.icon} />
