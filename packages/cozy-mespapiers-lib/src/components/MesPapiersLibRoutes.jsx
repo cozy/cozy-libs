@@ -22,7 +22,6 @@ import Onboarding from './Views/Onboarding'
 import PageEdit from './Views/PageEdit'
 import PapersList from './Views/PapersList'
 import PlaceholderListModal from './Views/PlaceholderListModal'
-import { QualificationSelector } from './Views/QualificationSelector'
 
 const OutletWrapper = ({ Component }) => (
   <>
@@ -60,7 +59,6 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
             path="files/:qualificationLabel"
             element={<OutletWrapper Component={PapersList} />}
           >
-            <Route path="createReminder" element={<QualificationSelector />} />
             <Route path="create" element={<PlaceholderListModal />} />
             <Route
               path="create/:qualificationLabel"
