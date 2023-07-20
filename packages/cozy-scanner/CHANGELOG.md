@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.1.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@5.0.0...cozy-scanner@5.1.0) (2023-07-20)
+
+
+### Features
+
+* **scanner:** Ascending sort of qualification locales ([f4842ff](https://github.com/cozy/cozy-libs/commit/f4842fff43cfdde40b9822490b7d06ca0120e130))
+* **scanner:** Synchronize qualifications ([7c2c735](https://github.com/cozy/cozy-libs/commit/7c2c73518271dd931993888378b5214498545560))
+
+
+
+
+
 # 5.0.0 (2023-07-05)
 
 
