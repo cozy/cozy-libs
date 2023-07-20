@@ -17,7 +17,7 @@ const useGeneralActions = ({
 
   const country = new URLSearchParams(search).get('country')
 
-  const showImportDropdown = paperDefinition => {
+  const showKonnectorMenuOrRedirect = paperDefinition => {
     if (paperDefinition.konnectorCriteria) {
       setShowKonnectorMenu(true)
     } else {
@@ -32,7 +32,7 @@ const useGeneralActions = ({
   const actionOptions = {
     client,
     hideActionsMenu: () => setShowGeneralMenu(false),
-    showImportDropdown,
+    showKonnectorMenuOrRedirect,
     qualificationLabel,
     country
   }
