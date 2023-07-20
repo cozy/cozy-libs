@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [53.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@52.1.1...cozy-mespapiers-lib@53.0.0) (2023-07-20)
+
+
+### Features
+
+* **mespapiers:** Add QualificationSelector view ([d1c2e29](https://github.com/cozy/cozy-libs/commit/d1c2e29d78cf51350a6478ba87f5a5bca6e78e4e))
+* **mespapiers:** Add routes to QualificationSelector ([ea0c664](https://github.com/cozy/cozy-libs/commit/ea0c664472b057f033422dc5413716c66782f131))
+* **mespapiers:** Upgrade cozy-client and cozy-ui ([5f57dd1](https://github.com/cozy/cozy-libs/commit/5f57dd19c6762d0bc6aab9ec99bfb27432304722))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 90.0.0` and `cozy-client >= 38.11.1`
+
+
+
+
+
 ## [52.1.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@52.1.0...cozy-mespapiers-lib@52.1.1) (2023-07-18)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
