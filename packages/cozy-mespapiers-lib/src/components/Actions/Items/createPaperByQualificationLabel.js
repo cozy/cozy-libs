@@ -12,7 +12,7 @@ import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'
 import { useScannerI18n } from '../../Hooks/useScannerI18n'
 
 export const createPaperByQualificationLabel = ({
-  showImportDropdown,
+  showKonnectorMenuOrRedirect,
   qualificationLabel,
   country
 }) => {
@@ -36,7 +36,7 @@ export const createPaperByQualificationLabel = ({
           <ActionsMenuItem
             {...props}
             ref={ref}
-            onClick={() => showImportDropdown(paperDefinition)}
+            onClick={() => showKonnectorMenuOrRedirect(paperDefinition)}
           >
             <ListItemIcon>
               <Icon icon={paperDefinition.icon} />
