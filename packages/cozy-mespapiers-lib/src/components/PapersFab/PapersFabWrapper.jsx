@@ -6,7 +6,6 @@ import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 
 import useGeneralActions from './useGeneralActions'
 import useKonnectorsActions from './useKonnectorsActions'
-import { isReminder } from '../Placeholders/helpers'
 
 const PapersFabWrapper = ({ children }) => {
   const navigate = useNavigate()
@@ -20,10 +19,6 @@ const PapersFabWrapper = ({ children }) => {
     const countrySearchParam = `${
       paperDefinition.country ? `country=${paperDefinition.country}` : ''
     }`
-
-    if (isReminder(paperDefinition)) {
-      return navigate(`${pathname}/createReminder`)
-    }
 
     return navigate({
       pathname: `${pathname}/create/${paperDefinition.label}`,
