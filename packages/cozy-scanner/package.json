@@ -32,7 +32,7 @@
     "cozy-doctypes": "1.67.0",
     "cozy-flags": ">=2.8.6",
     "cozy-logger": ">=1.10.1",
-    "cozy-ui": "88.2.1",
+    "cozy-ui": "88.6.0",
     "jest": "26.6.3",
     "jest-environment-jsdom-sixteen": "1.0.3",
     "mockdate": "2.0.5",
