@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [53.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@53.0.0...cozy-mespapiers-lib@53.0.1) (2023-07-24)
+
+
+### Bug Fixes
+
+* **mespapiers:** Remove QualificationSelector view ([612cf68](https://github.com/cozy/cozy-libs/commit/612cf68f9c2474ba677a09e8a92c460cc13c160a))
+* **mespapiers:** Remove routes to QualificationSelector ([c58cd89](https://github.com/cozy/cozy-libs/commit/c58cd893a21beeb2deccd3d94e257444ab6abd44))
+
+
+
+
+
 # [53.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@52.1.1...cozy-mespapiers-lib@53.0.0) (2023-07-20)
 
 
