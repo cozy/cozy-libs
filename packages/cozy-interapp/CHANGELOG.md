@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.8.1 (2023-07-25)
+
+
+### Bug Fixes
+
+* **cozy-interapp:** The document wasn't returned in onExposeFrameRemoval ([c4642b0](https://github.com/cozy/cozy-libs/commit/c4642b090b2e990b29c99310627eb06431ea0aef))
+
+
+
+
+
 # 0.8.0 (2023-01-31)
 
 
