@@ -14,7 +14,8 @@ import reducer, {
   getSharedDocIdsBySharings,
   getSharingType,
   getPermissionDocIds,
-  getDocumentSharingType
+  getDocumentSharingType,
+  getSharedParentPath
 } from './state'
 import {
   SHARING_1,
@@ -611,5 +612,34 @@ describe('getDocumentSharingType', () => {
         'folder_1'
       )
     ).toBe('one-way')
+  })
+})
+
+describe('getSharedParentPath', () => {
+  const state = {
+    sharedPaths: [
+      '/folder-1/sub-folder-1',
+      '/folder-2',
+      '/folder-3/sub-folder-3',
+      '/folder-3/sub-folder-4'
+    ]
+  }
+
+  it('should return null if no shared parent', () => {
+    expect(getSharedParentPath(state, '/file-1')).toBeNull()
+  })
+
+  it('should return shared parent path', () => {
+    expect(getSharedParentPath(state, '/folder-1/sub-folder-1/file-2')).toBe(
+      '/folder-1/sub-folder-1'
+    )
+
+    expect(getSharedParentPath(state, '/folder-2/sub-folder-2/file-2')).toBe(
+      '/folder-2'
+    )
+
+    expect(
+      getSharedParentPath(state, '/folder-3/sub-folder-4/sub-folder-5/file-4')
+    ).toBe('/folder-3/sub-folder-4')
   })
 })

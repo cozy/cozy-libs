@@ -364,6 +364,19 @@ export const hasSharedChild = (state, documentPath) => {
   return ret
 }
 
+/**
+ * Returns the path of the shared parent for a given document
+ * @param {object} state - Redux state
+ * @param {string} documentPath - Path of the given document
+ * @returns {string|null} Path of the shared parent
+ */
+export const getSharedParentPath = (state, documentPath) => {
+  if (hasSharedParent(state, documentPath)) {
+    return state.sharedPaths.find(path => documentPath.startsWith(path))
+  }
+  return null
+}
+
 // helpers
 export const getSharedDocIds = doc =>
   doc.type === 'io.cozy.sharings'

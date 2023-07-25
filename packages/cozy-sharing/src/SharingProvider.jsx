@@ -35,7 +35,8 @@ import reducer, {
   getDocumentSharing,
   getDocumentPermissions,
   hasSharedParent,
-  hasSharedChild
+  hasSharedChild,
+  getSharedParentPath
 } from './state'
 
 const SHARING_DOCTYPE = 'io.cozy.sharings'
@@ -59,6 +60,8 @@ export class SharingProvider extends Component {
       getSharingType: docId => getSharingType(this.state, docId, instanceUri),
       getSharingForSelf: docId => getSharingForSelf(this.state, docId),
       getRecipients: docId => getRecipients(this.state, docId),
+      getSharedParentPath: documentPath =>
+        getSharedParentPath(this.state, documentPath),
       getDocumentPermissions: docId =>
         getDocumentPermissions(this.state, docId),
       getSharingLink: docId => getSharingLink(this.state, docId, documentType),
