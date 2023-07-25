@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@8.0.1...cozy-sharing@8.1.0) (2023-07-25)
+
+
+### Features
+
+* Add a helper to get shared parent path ([1264371](https://github.com/cozy/cozy-libs/commit/1264371b6d29641e55d843c335c4b8d34a03c2d8))
+
+
+
+
+
 ## [8.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@8.0.0...cozy-sharing@8.0.1) (2023-07-18)
 
 
