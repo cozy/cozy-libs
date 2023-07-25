@@ -1,5 +1,5 @@
-import { errorSerializer, pickService } from './helpers'
 import * as dom from './dom'
+import { errorSerializer, pickService } from './helpers'
 import IntentListener from './listener'
 
 /**
@@ -78,7 +78,7 @@ export function start(createIntent, intent, element, data, options = {}) {
 
       onExposeFrameRemoval: event => {
         resolve({
-          document: event.document,
+          document: event.data.document,
           removeIntentIframe: () => dom.remove(iframe)
         })
       },
