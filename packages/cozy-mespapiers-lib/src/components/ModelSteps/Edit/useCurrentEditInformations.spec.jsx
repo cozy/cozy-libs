@@ -3,9 +3,12 @@ import React from 'react'
 import { useLocation } from 'react-router-dom'
 
 import { useQuery, isQueryLoading } from 'cozy-client'
+import I18n from 'cozy-ui/transpiled/react/I18n'
 
 import { useCurrentEditInformations } from './useCurrentEditInformations'
-import AppLike from '../../../../test/components/AppLike'
+import enLocale from '../../../locales/en.json'
+import { PapersDefinitionsProvider } from '../../Contexts/PapersDefinitionsProvider'
+import { ScannerI18nProvider } from '../../Contexts/ScannerI18nProvider'
 
 jest.mock('cozy-client/dist/utils', () => ({
   ...jest.requireActual('cozy-client/dist/utils'),
@@ -18,7 +21,7 @@ jest.mock('react-router-dom', () => ({
 }))
 
 const setup = ({ mockedData, searchParams = '', currentEditModel } = {}) => {
-  const { queryDataResult = [], isLoadingQuery = false } = mockedData || {}
+  const { queryDataResult = {}, isLoadingQuery = false } = mockedData || {}
   useQuery.mockReturnValue({
     data: queryDataResult,
     hasMore: isLoadingQuery
@@ -27,7 +30,13 @@ const setup = ({ mockedData, searchParams = '', currentEditModel } = {}) => {
   useLocation.mockImplementation(() => {
     return { search: searchParams }
   })
-  const wrapper = ({ children }) => <AppLike>{children}</AppLike>
+  const wrapper = ({ children }) => (
+    <I18n dictRequire={() => enLocale} lang="en">
+      <ScannerI18nProvider lang="en">
+        <PapersDefinitionsProvider>{children}</PapersDefinitionsProvider>
+      </ScannerI18nProvider>
+    </I18n>
+  )
 
   return renderHook(
     () => useCurrentEditInformations('fileId', currentEditModel),
@@ -55,8 +64,9 @@ describe('useCurrentEditInformations', () => {
       metadataName: 'issueDate'
     })
   })
+
   it('should return correct data', () => {
-    const queryDataResult = [{ metadata: { qualification: { label: 'caf' } } }]
+    const queryDataResult = { metadata: { qualification: { label: 'caf' } } }
     const searchParams = 'metadata=issueDate'
     const isLoadingQuery = false
 
@@ -76,8 +86,9 @@ describe('useCurrentEditInformations', () => {
       metadataName: 'issueDate'
     })
   })
+
   it('should return currentStep to "null" if has no metadata searchParams', () => {
-    const queryDataResult = [{ metadata: { qualification: { label: 'caf' } } }]
+    const queryDataResult = { metadata: { qualification: { label: 'caf' } } }
     const searchParams = ''
     const isLoadingQuery = false
 
@@ -94,10 +105,10 @@ describe('useCurrentEditInformations', () => {
       metadataName: null
     })
   })
+
   it('should return "paperDef" & "currentStep" to "null" if there is no match in the paperDefinitions file', () => {
-    const queryDataResult = [
-      { metadata: { qualification: { label: 'other' } } }
-    ]
+    const queryDataResult = { metadata: { qualification: { label: 'other' } } }
+
     const searchParams = 'metadata=issueDate'
     const isLoadingQuery = false
 

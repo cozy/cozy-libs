@@ -124,11 +124,12 @@ export const buildContactsQuery = (enabled = true) => ({
   }
 })
 
-export const buildFilesQueryById = id => ({
-  definition: () => Q(FILES_DOCTYPE).getById(id),
+export const buildFileQueryById = id => ({
+  definition: Q(FILES_DOCTYPE).getById(id),
   options: {
     as: `${FILES_DOCTYPE}/${id}`,
-    fetchPolicy: defaultFetchPolicy
+    fetchPolicy: defaultFetchPolicy,
+    singleDocData: true
   }
 })
 
