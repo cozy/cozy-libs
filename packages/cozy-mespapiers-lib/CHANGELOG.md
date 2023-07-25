@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [53.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@53.0.2...cozy-mespapiers-lib@53.1.0) (2023-07-25)
+
+
+### Features
+
+* **mespapiers:** Categorize and add contact reference on reminders ([d407ead](https://github.com/cozy/cozy-libs/commit/d407eade336800e5a5398a695abb7342792e58ae))
+
+
+
+
+
 ## [53.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@53.0.1...cozy-mespapiers-lib@53.0.2) (2023-07-25)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
