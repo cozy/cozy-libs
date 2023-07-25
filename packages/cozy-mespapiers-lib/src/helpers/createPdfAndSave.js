@@ -44,7 +44,7 @@ const sanitizeFileMetadata = (fileMetadata, isMultipage) => {
 /**
  * @param {AddContactReferenceToFileParam} param
  */
-const addContactReferenceToFile = async ({
+export const addContactReferenceToFile = async ({
   fileCreated,
   fileCollection,
   contacts
