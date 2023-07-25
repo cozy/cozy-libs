@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 import { isQueryLoading, useQuery } from 'cozy-client'
 
 import { getPaperDefinitionByFile, makeCurrentStep } from './helpers'
-import { buildFilesQueryById } from '../../../helpers/queries'
+import { buildFileQueryById } from '../../../helpers/queries'
 import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'
 
 /**
@@ -16,8 +16,8 @@ export const useCurrentEditInformations = (fileId, model) => {
   const { papersDefinitions } = usePapersDefinitions()
   const metadataName = new URLSearchParams(location.search).get('metadata')
 
-  const buildedFilesQuery = buildFilesQueryById(fileId)
-  const { data: files, ...filesQueryResult } = useQuery(
+  const buildedFilesQuery = buildFileQueryById(fileId)
+  const { data: file, ...filesQueryResult } = useQuery(
     buildedFilesQuery.definition,
     buildedFilesQuery.options
   )
@@ -25,14 +25,13 @@ export const useCurrentEditInformations = (fileId, model) => {
     isQueryLoading(filesQueryResult) || filesQueryResult.hasMore
 
   const paperDef =
-    (!isLoadingFiles &&
-      getPaperDefinitionByFile(papersDefinitions, files[0])) ||
+    (!isLoadingFiles && getPaperDefinitionByFile(papersDefinitions, file)) ||
     null
 
   const currentStep = makeCurrentStep({ paperDef, model, metadataName })
 
   return {
-    file: files?.[0],
+    file,
     paperDef,
     currentStep,
     searchParams: { metadataName },
