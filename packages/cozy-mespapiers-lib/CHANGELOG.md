@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [54.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@54.0.0...cozy-mespapiers-lib@54.1.0) (2023-07-26)
+
+
+### Features
+
+* **mespapiers:** Add contact modifier action on paper item ([8e943fc](https://github.com/cozy/cozy-libs/commit/8e943fc4741bef05ff8a2fd32a4727d479e7759c))
+
+
+
+
+
 # [54.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@53.1.1...cozy-mespapiers-lib@54.0.0) (2023-07-26)
 
 
