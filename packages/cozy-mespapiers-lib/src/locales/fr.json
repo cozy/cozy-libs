@@ -443,5 +443,10 @@
       "android": "Installer sur Google Play",
       "ios": "Installer sur l'App Store"
     }
+  },
+  "InstallAppFromIntent": {
+    "title": "Vous souhaitez ajouter une note ?",
+    "text": "Installer l’application Note dans votre Cozy pour utiliser cette fonctionnalité depuis Mes Papiers !",
+    "action": "Installer"
   }
 }
