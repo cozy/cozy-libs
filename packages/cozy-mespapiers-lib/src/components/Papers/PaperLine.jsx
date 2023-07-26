@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useState, useRef, memo, useMemo } from 'react'
 
-import { splitFilename } from 'cozy-client/dist/models/file'
+import { splitFilename, isNote } from 'cozy-client/dist/models/file'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import {
   makeActions,
@@ -12,7 +12,14 @@ import Filename from 'cozy-ui/transpiled/react/Filename'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 
-import { open, rename, select, trash, viewInDrive } from '../Actions/Items'
+import {
+  open,
+  rename,
+  select,
+  trash,
+  viewInDrive,
+  copyReminderContent
+} from '../Actions/Items'
 import { makeActionVariant } from '../Actions/utils'
 import { useModal } from '../Hooks/useModal'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
@@ -35,6 +42,7 @@ const PaperLine = ({
     () =>
       makeActions(
         [
+          isNote(paper) && copyReminderContent,
           select,
           divider,
           ...actionVariant,
@@ -52,7 +60,7 @@ const PaperLine = ({
           popModal
         }
       ),
-    [actionVariant, addMultiSelectionFile, popModal, pushModal]
+    [actionVariant, addMultiSelectionFile, popModal, pushModal, paper]
   )
 
   const { filename, extension } = splitFilename({

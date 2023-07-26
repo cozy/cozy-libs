@@ -29,6 +29,11 @@
     "themeFilter": "Filter by theme",
     "trash": "Remove",
     "version": "Versions",
+    "copyReminderContent": {
+      "text": "Copy content",
+      "success": "Copied to clipboard",
+      "error": "Cannot copy to clipboard"
+    },
     "viewInDrive": "View in Drive"
   },
   "common": {
