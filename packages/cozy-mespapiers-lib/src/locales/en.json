@@ -443,5 +443,10 @@
       "android": "Install on Google Play",
       "ios": "Install on App Store"
     }
+  },
+  "InstallAppFromIntent": {
+    "title": "Would you like to add a note?",
+    "text": "Install the Note application in your Cozy to use this feature from My Papers!",
+    "action": "Install"
   }
 }
