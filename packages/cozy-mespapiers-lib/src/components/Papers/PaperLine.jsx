@@ -18,6 +18,7 @@ import {
   select,
   trash,
   viewInDrive,
+  editContact,
   copyReminderContent
 } from '../Actions/Items'
 import { makeActionVariant } from '../Actions/utils'
@@ -49,6 +50,7 @@ const PaperLine = ({
           open,
           divider,
           rename,
+          isNote(paper) && editContact,
           divider,
           viewInDrive,
           divider,
@@ -57,7 +59,8 @@ const PaperLine = ({
         {
           addMultiSelectionFile,
           pushModal,
-          popModal
+          popModal,
+          setShowActionMenu
         }
       ),
     [actionVariant, addMultiSelectionFile, popModal, pushModal, paper]
