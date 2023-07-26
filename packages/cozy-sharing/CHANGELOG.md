@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@8.1.0...cozy-sharing@8.2.0) (2023-07-26)
+
+
+### Features
+
+* Add useSharingContext ([cfe9346](https://github.com/cozy/cozy-libs/commit/cfe93462ce8730973f83d0cf3ef5a69233d67fd6))
+
+
+
+
+
 # [8.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@8.0.1...cozy-sharing@8.1.0) (2023-07-25)
 
 
