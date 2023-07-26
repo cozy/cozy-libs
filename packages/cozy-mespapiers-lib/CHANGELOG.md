@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [54.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@53.1.1...cozy-mespapiers-lib@54.0.0) (2023-07-26)
+
+
+### Features
+
+* **mespapiers:** Add copy content action on reminders ([dfa06ee](https://github.com/cozy/cozy-libs/commit/dfa06ee12dc30ff275f4700e8b3e3874e26ca78c))
+* **mespapiers:** Add note content on reminders line secondary text ([6c616e7](https://github.com/cozy/cozy-libs/commit/6c616e7d366ce101b1978ccdfb0a0325d02dad9c))
+* **mespapiers:** Upgrade cozy-ui from 90.0.0 to 90.1.0 ([9382601](https://github.com/cozy/cozy-libs/commit/93826014b8b8401c0d6346aa4c5368ce2b2d1022))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 90.1.0`
+
+
+
+
+
 ## [53.1.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@53.1.0...cozy-mespapiers-lib@53.1.1) (2023-07-26)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
