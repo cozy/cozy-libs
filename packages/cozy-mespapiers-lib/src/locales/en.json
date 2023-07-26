@@ -34,6 +34,7 @@
       "success": "Copied to clipboard",
       "error": "Cannot copy to clipboard"
     },
+    "editContact": "Modify the holder",
     "viewInDrive": "View in Drive"
   },
   "common": {

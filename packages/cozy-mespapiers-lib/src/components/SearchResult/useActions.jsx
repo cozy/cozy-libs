@@ -12,6 +12,7 @@ import {
   select,
   trash,
   viewInDrive,
+  editContact,
   copyReminderContent
 } from '../Actions/Items'
 import { makeActionVariant } from '../Actions/utils'
@@ -34,6 +35,7 @@ const useActions = doc => {
           open,
           divider,
           rename,
+          isNote(doc) && editContact,
           divider,
           viewInDrive,
           divider,

@@ -48,6 +48,7 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
       >
         <Route element={<OnboardedGuardedRoute />}>
           <Route path="/" element={<OutletWrapper Component={Home} />}>
+            <Route path="editcontact/:fileId" element={<ContactEdit />} />
             <Route path="create" element={<PlaceholderListModal />} />
             <Route
               path="create/:qualificationLabel"
@@ -59,6 +60,7 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
             path="files/:qualificationLabel"
             element={<OutletWrapper Component={PapersList} />}
           >
+            <Route path="editcontact/:fileId" element={<ContactEdit />} />
             <Route path="create" element={<PlaceholderListModal />} />
             <Route
               path="create/:qualificationLabel"
