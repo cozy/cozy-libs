@@ -9,6 +9,7 @@ import {
   Outlet
 } from 'react-router-dom'
 
+import InstallAppFromIntent from './InstallAppFromIntent/InstallAppFromIntent'
 import { MesPapiersLibProviders } from './MesPapiersLibProviders'
 import OnboardedGuardedRoute from './OnboardedGuardedRoute'
 import ContactEdit from './Views/ContactEdit'
@@ -49,6 +50,7 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
         <Route element={<OnboardedGuardedRoute />}>
           <Route path="/" element={<OutletWrapper Component={Home} />}>
             <Route path="editcontact/:fileId" element={<ContactEdit />} />
+            <Route path="installAppIntent" element={<InstallAppFromIntent />} />
             <Route path="create" element={<PlaceholderListModal />} />
             <Route
               path="create/:qualificationLabel"
@@ -61,6 +63,7 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
             element={<OutletWrapper Component={PapersList} />}
           >
             <Route path="editcontact/:fileId" element={<ContactEdit />} />
+            <Route path="installAppIntent" element={<InstallAppFromIntent />} />
             <Route path="create" element={<PlaceholderListModal />} />
             <Route
               path="create/:qualificationLabel"

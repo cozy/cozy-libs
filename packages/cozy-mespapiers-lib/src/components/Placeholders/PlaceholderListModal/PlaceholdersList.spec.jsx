@@ -13,6 +13,9 @@ const fakeQualificationItems = [
   }
 ]
 
+jest.mock('cozy-client/dist/models/applications', () => ({
+  isInstalled: jest.fn()
+}))
 jest.mock('cozy-client', () => ({
   ...jest.requireActual('cozy-client'),
   generateWebLink: () => ''
