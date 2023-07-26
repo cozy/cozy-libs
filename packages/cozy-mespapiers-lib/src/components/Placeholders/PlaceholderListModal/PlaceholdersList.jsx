@@ -2,6 +2,8 @@ import PropTypes from 'prop-types'
 import React, { useState, useMemo, useRef, Fragment } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
+import { useQuery } from 'cozy-client'
+import { isInstalled } from 'cozy-client/dist/models/applications'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -12,6 +14,7 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Radio from 'cozy-ui/transpiled/react/Radios'
 
 import { findPlaceholdersByQualification } from '../../../helpers/findPlaceholders'
+import { buildAppsQuery } from '../../../helpers/queries'
 import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'
 import { useScannerI18n } from '../../Hooks/useScannerI18n'
 import FileIcon from '../../Icons/FileIcon'
@@ -29,6 +32,9 @@ const PlaceholdersList = ({ currentQualifItems }) => {
   const anchorRefs = useRef([])
   const anchorRef = useRef()
 
+  const appsQuery = buildAppsQuery()
+  const { data: apps } = useQuery(appsQuery.definition, appsQuery.options)
+
   const allPlaceholders = useMemo(
     () =>
       findPlaceholdersByQualification(papersDefinitions, currentQualifItems),
@@ -45,9 +51,18 @@ const PlaceholdersList = ({ currentQualifItems }) => {
     const countrySearchParam = `${
       placeholder.country ? `country=${placeholder.country}` : ''
     }`
+
+    const isNoteAppInstalled = !!isInstalled(apps, { slug: 'notes' })
+    if (isReminder(placeholder) && !isNoteAppInstalled) {
+      return navigate({
+        pathname: '../installAppIntent',
+        search: `redirect=${pathname}/${placeholder.label}`
+      })
+    }
+
     return navigate({
       pathname: `${pathname}/${placeholder.label}`,
-      search: `${countrySearchParam}`
+      search: countrySearchParam
     })
   }
 

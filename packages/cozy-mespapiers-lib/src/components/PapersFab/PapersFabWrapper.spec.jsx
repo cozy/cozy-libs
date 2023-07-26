@@ -8,6 +8,9 @@ import flag from 'cozy-flags'
 import PapersFabWrapper from './PapersFabWrapper'
 import AppLike from '../../../test/components/AppLike'
 
+jest.mock('cozy-client/dist/models/applications', () => ({
+  isInstalled: jest.fn()
+}))
 jest.mock('cozy-flags')
 jest.mock('react-router-dom', () => {
   return {
