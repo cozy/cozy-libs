@@ -22,6 +22,7 @@ import Thumbnail from 'cozy-ui/transpiled/react/Thumbnail'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import ExpirationAnnotation from './ExpirationAnnotation'
+import { RemindersAnnotation } from './RemindersAnnotation'
 import { generateReturnUrlToNotesIndex } from './helpers'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
@@ -101,6 +102,7 @@ const PaperItem = ({
 
   const secondaryText = (
     <>
+      {isNote(paper) && <RemindersAnnotation file={paper} />}
       {contactNames ? contactNames : ''}
       {contactNames && paperDate ? ' · ' : ''}
       {paperDate ? paperDate : ''}
