@@ -29,6 +29,11 @@
     "themeFilter": "Filtrer par thème",
     "trash": "Supprimer",
     "version": "Versions",
+    "copyReminderContent": {
+      "text": "Copier le contenu",
+      "success": "Copié dans le presse-papier",
+      "error": "Impossible de copier dans le presse-papier"
+    },
     "viewInDrive": "Voir dans Drive"
   },
   "common": {
