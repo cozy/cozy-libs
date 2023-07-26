@@ -6,6 +6,7 @@ export default SharingProvider
 
 export { SharingContext, withLocales }
 
+export { useSharingContext } from './hooks/useSharingContext'
 export { SharedDocument } from './SharedDocument'
 export { SharedStatus } from './SharedStatus'
 export { SharedBadge } from './SharedBadge'
