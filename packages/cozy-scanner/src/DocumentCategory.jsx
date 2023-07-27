@@ -66,7 +66,7 @@ class DocumentCategory extends Component {
           <ActionMenu
             onClose={this.closeMenu}
             autoclose
-            popperOptions={{ strategy: 'fixed' }}
+            popperOptions={{ strategy: 'fixed', placement: 'right' }}
           >
             <ActionMenuHeader>
               <Media>
