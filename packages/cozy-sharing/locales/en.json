@@ -377,5 +377,10 @@
   "ConfirmRecipientModal": {
     "title": "%{smart_count} contact waiting for confirmation |||| %{smart_count} contacts waiting for confirmation",
     "intruction": "Verify identity of their Cozy in order to give them access content you shared with them."
+  },
+  "ShareRecipientsLimitModal": {
+    "title": "Problem with your sharing",
+    "content": "You cannot share %{documentName} with more than %{limit} members.",
+    "confirm": "I understand"
   }
 }
