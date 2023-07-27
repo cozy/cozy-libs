@@ -7,9 +7,11 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 
 import ShareRecipientsInput from './ShareRecipientsInput'
+import { ShareRecipientsLimitModal } from './ShareRecipientsLimitModal'
 import ShareSubmit from './Sharesubmit'
 import ShareTypeSelect from './Sharetypeselect'
 import { getOrCreateFromArray } from '../helpers/contacts'
+import { hasReachRecipientsLimit } from '../helpers/recipients'
 import { getSuccessMessage } from '../helpers/successMessage'
 import { Group } from '../models'
 import { contactsResponseType, groupsResponseType } from '../propTypes'
@@ -32,6 +34,7 @@ export const ShareByEmail = ({
   const [recipients, setRecipients] = useState([])
   const [loading, setLoading] = useState(false)
   const [selectedOption, setSelectedOption] = useState()
+  const [showRecipientsLimit, setRecipientsLimit] = useState(false)
 
   const reset = () => {
     setRecipients([])
@@ -83,6 +86,11 @@ export const ShareByEmail = ({
     // we can't use currentRecipients prop in getSuccessMessage because it may use
     // the updated prop to count the new recipients
     const recipientsBefore = currentRecipients
+
+    if (hasReachRecipientsLimit(recipientsBefore, recipients)) {
+      setRecipientsLimit(true)
+      return
+    }
 
     setLoading(true)
     try {
@@ -165,6 +173,12 @@ export const ShareByEmail = ({
           />
         </div>
       )}
+      {showRecipientsLimit ? (
+        <ShareRecipientsLimitModal
+          documentName={document.name}
+          onConfirm={() => setRecipientsLimit(false)}
+        />
+      ) : null}
     </div>
   )
 }

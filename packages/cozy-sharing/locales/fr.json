@@ -375,5 +375,10 @@
   "ConfirmRecipientModal": {
     "title": "%{smart_count} contact en attente de vérification |||| %{smart_count} contacts en attente de vérification",
     "intruction": "Vérifier l'identité de leur Cozy pour leur permettre d'accéder aux éléments que vous avez partagés avec eux."
+  },
+  "ShareRecipientsLimitModal": {
+    "title": "Problème au niveau de votre partage",
+    "content": "Vous ne pouvez pas partager %{documentName} à plus de %{limit} membres.",
+    "confirm": "J'ai compris"
   }
 }
