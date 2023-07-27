@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [54.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@54.1.2...cozy-mespapiers-lib@54.2.0) (2023-07-27)
+
+
+### Bug Fixes
+
+* **mespapiers:** Remove duplicate paperDefinition ([293c419](https://github.com/cozy/cozy-libs/commit/293c4194ab84e688da18b89365746e184fdd2ec9))
+
+
+### Features
+
+* **mespapiers:** Add `InstallAppFromIntent` component ([2384e35](https://github.com/cozy/cozy-libs/commit/2384e3512bd5e3c934139eaba2098efe28dfb4a3))
+* **mespapiers:** Add `isInstalledApp` helper ([7db71f4](https://github.com/cozy/cozy-libs/commit/7db71f48aedda51bb27a18223ca655d5a0c81fd7))
+* **mespapiers:** Update `redirectPaperCreation` ([8f2fc34](https://github.com/cozy/cozy-libs/commit/8f2fc34208e6b11fc2ecd9468cd3520da5180dcc))
+
+
+
+
+
 ## [54.1.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@54.1.1...cozy-mespapiers-lib@54.1.2) (2023-07-27)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
