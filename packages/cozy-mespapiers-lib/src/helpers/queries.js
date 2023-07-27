@@ -6,7 +6,8 @@ import {
   SETTINGS_DOCTYPE,
   TRIGGERS_DOCTYPE,
   KONNECTORS_DOCTYPE,
-  ACCOUNTS_DOCTYPE
+  ACCOUNTS_DOCTYPE,
+  APPS_DOCTYPE
 } from '../doctypes'
 
 const defaultFetchPolicy = fetchPolicies.olderThan(86_400_000) // 24 hours
@@ -203,3 +204,11 @@ export const queryAccounts = {
     fetchPolicy: defaultFetchPolicy
   }
 }
+
+export const buildAppsQuery = () => ({
+  definition: () => Q(APPS_DOCTYPE),
+  options: {
+    as: APPS_DOCTYPE,
+    fetchPolicy: defaultFetchPolicy
+  }
+})
