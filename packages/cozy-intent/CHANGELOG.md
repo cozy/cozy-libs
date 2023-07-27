@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.15.0 (2023-07-27)
+
+
+### Features
+
+* Replace uploadedBy by createdByApp index in query ([72e5f5f](https://github.com/cozy/cozy-libs/commit/72e5f5f073d6ddc575cae4cef26b4ca9624efa54))
+
+
+
+
+
 # 2.14.0 (2023-07-04)
 
 
