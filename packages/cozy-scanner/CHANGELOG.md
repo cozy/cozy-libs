@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.1](https://github.com/cozy/cozy-libs/compare/cozy-scanner@5.1.0...cozy-scanner@5.1.1) (2023-07-27)
+
+
+### Bug Fixes
+
+* **scanner:** Displaying qualifications ([08d3e48](https://github.com/cozy/cozy-libs/commit/08d3e4812e66bf40fee824fe35b06ab95e2b0af0))
+
+
+
+
+
 # [5.1.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@5.0.0...cozy-scanner@5.1.0) (2023-07-20)
 
 
