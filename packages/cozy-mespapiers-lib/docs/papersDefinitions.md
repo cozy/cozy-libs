@@ -23,7 +23,8 @@
   - [`acquisitionSteps`](#steps-of-the-acquisitionsteps-property): {object\[]} Contains the steps of the creation process.
     - [`scan`](#step-scan) {object} Step to select a file (image/pdf).
     - [`[information]`](#step-information) {object} Step to get more informations about this file.
-    - [`owner`](step-owner) {object} Step to select one or more contacts linked to this file.
+    - [`contact`](#step-contact) {object} Step to select one or more contacts linked to this file.
+    - [`note`](#step-note) {object} Step to add / edit a note.
 
 ***
 
@@ -52,11 +53,17 @@
 
 <br>
 
-- ### Step `owner`:
+- ### Step `contact`:
   - `stepIndex`: {number} Position of the step.
-  - `model`: {string} Model used for the step (`owner`).
+  - `model`: {string} Model used for the step (`contact`).
   - `text`: {string} Translation key for the text of the step.
   - `[multiple]`: {boolean} Allows you to add multiple contacts.
+
+<br>
+
+- ### Step `note`:
+  - `stepIndex`: {number} Position of the step.
+  - `model`: {string} Model used for the step (`note`)
 
 ***
 
