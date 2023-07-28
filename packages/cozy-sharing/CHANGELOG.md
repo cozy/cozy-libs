@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@8.2.0...cozy-sharing@8.3.0) (2023-07-28)
+
+
+### Features
+
+* Limit recipients by document ([f94eaa0](https://github.com/cozy/cozy-libs/commit/f94eaa010e284606dac3fb4f5c599f61e42ccf33))
+
+
+
+
+
 # [8.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@8.1.0...cozy-sharing@8.2.0) (2023-07-26)
 
 
