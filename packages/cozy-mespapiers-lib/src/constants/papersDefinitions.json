@@ -2379,6 +2379,7 @@
           "stepIndex": 1,
           "illustration": "Account.svg",
           "model": "contact",
+          "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         },
         {
@@ -2395,6 +2396,7 @@
           "stepIndex": 1,
           "illustration": "Account.svg",
           "model": "contact",
+          "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         },
         {
@@ -2411,6 +2413,7 @@
           "stepIndex": 1,
           "illustration": "Account.svg",
           "model": "contact",
+          "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         },
         {
@@ -2427,6 +2430,7 @@
           "stepIndex": 1,
           "illustration": "Account.svg",
           "model": "contact",
+          "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         },
         {
@@ -2443,6 +2447,7 @@
           "stepIndex": 1,
           "illustration": "Account.svg",
           "model": "contact",
+          "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         },
         {
@@ -2459,6 +2464,7 @@
           "stepIndex": 1,
           "illustration": "Account.svg",
           "model": "contact",
+          "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         },
         {
@@ -2475,6 +2481,7 @@
           "stepIndex": 1,
           "illustration": "Account.svg",
           "model": "contact",
+          "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         },
         {
@@ -2491,6 +2498,7 @@
           "stepIndex": 1,
           "illustration": "Account.svg",
           "model": "contact",
+          "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         },
         {
@@ -2507,6 +2515,7 @@
           "stepIndex": 1,
           "illustration": "Account.svg",
           "model": "contact",
+          "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         },
         {
