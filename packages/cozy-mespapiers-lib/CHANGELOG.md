@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [54.4.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@54.3.0...cozy-mespapiers-lib@54.4.0) (2023-07-31)
+
+
+### Features
+
+* **mespapiers:** Note can now be multi-contact ([b67a323](https://github.com/cozy/cozy-libs/commit/b67a323c3322eb0cda51d4d957556c4b56234c33))
+* **mespapiers:** Replace wording for contact step ([d97cffb](https://github.com/cozy/cozy-libs/commit/d97cffb7a638aca33f9d88486162d2d73940f85d))
+
+
+
+
+
 # [54.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@54.2.1...cozy-mespapiers-lib@54.3.0) (2023-07-31)
 
 
