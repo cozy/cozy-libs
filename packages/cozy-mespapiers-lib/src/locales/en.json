@@ -170,7 +170,7 @@
       },
       "owner": {
         "inputLabel": "Owner",
-        "text": "Who is the owner of this document?"
+        "text": "Who is concerned by this document?"
       },
       "referencedDate": {
         "inputLabel": "Referenced date",
