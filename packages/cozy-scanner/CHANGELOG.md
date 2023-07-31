@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.2.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@5.1.1...cozy-scanner@5.2.0) (2023-07-31)
+
+
+### Features
+
+* **scanner:** Rename `Reminder` to `Note` ([2c6e96a](https://github.com/cozy/cozy-libs/commit/2c6e96a2134d9d934f31ecf6e6cf44f25a4538e9))
+
+
+
+
+
 ## [5.1.1](https://github.com/cozy/cozy-libs/compare/cozy-scanner@5.1.0...cozy-scanner@5.1.1) (2023-07-27)
 
 
