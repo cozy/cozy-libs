@@ -170,7 +170,7 @@
       },
       "owner": {
         "inputLabel": "Détenteur",
-        "text": "Qui est le détenteur de ce document ?"
+        "text": "Qui est concerné par ce document ?"
       },
       "referencedDate": {
         "inputLabel": "Date de référence",
