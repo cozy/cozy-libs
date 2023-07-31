@@ -16,6 +16,8 @@ jest.mock('cozy-harvest-lib', () => ({
   LaunchTriggerCard: () => <div>LaunchTriggerCard</div>
 }))
 
+jest.mock('copy-text-to-clipboard', () => ({ copy: jest.fn() }))
+
 const mockPaperslistByContact = [
   {
     withHeader: true,

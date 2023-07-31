@@ -14,6 +14,8 @@ jest.mock('cozy-client', () => ({
   generateWebLink: () => ''
 }))
 
+jest.mock('copy-text-to-clipboard', () => ({ copy: jest.fn() }))
+
 const mockPapers = {
   maxDisplay: 2,
   list: [

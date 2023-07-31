@@ -31,6 +31,7 @@ jest.mock('../Hooks/useMultiSelection')
 jest.mock('../../helpers/fetchCurrentUser', () => ({
   fetchCurrentUser: jest.fn(() => ({ displayName: 'Bob' }))
 }))
+jest.mock('copy-text-to-clipboard', () => ({ copy: jest.fn() }))
 
 const setup = ({
   allMultiSelectionFiles = [],
