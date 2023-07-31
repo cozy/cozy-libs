@@ -7,7 +7,8 @@ import {
   TRIGGERS_DOCTYPE,
   KONNECTORS_DOCTYPE,
   ACCOUNTS_DOCTYPE,
-  APPS_DOCTYPE
+  APPS_DOCTYPE,
+  APPS_REGISTRY_DOCTYPE
 } from '../doctypes'
 
 const defaultFetchPolicy = fetchPolicies.olderThan(86_400_000) // 24 hours
@@ -212,3 +213,14 @@ export const buildAppsQuery = () => ({
     fetchPolicy: defaultFetchPolicy
   }
 })
+
+export const buildAppRegistryQueryBySlug = slug => {
+  return {
+    definition: () => Q(APPS_REGISTRY_DOCTYPE).getById(slug),
+    options: {
+      as: `${APPS_REGISTRY_DOCTYPE}/${slug}`,
+      fetchPolicy: defaultFetchPolicy,
+      singleDocData: true
+    }
+  }
+}

@@ -446,7 +446,7 @@
   },
   "InstallAppFromIntent": {
     "title": "Would you like to add a note?",
-    "text": "Install the Note application in your Cozy to use this feature from My Papers!",
+    "text": "Install the %{appName} application in your Cozy to use this feature from My Papers!",
     "action": "Install"
   }
 }
