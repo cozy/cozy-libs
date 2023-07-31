@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [54.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@54.2.1...cozy-mespapiers-lib@54.3.0) (2023-07-31)
+
+
+### Features
+
+* **mespapiers:** Add copy-text-to-clipboard package ([2fe4bb0](https://github.com/cozy/cozy-libs/commit/2fe4bb019fb648e677ff970c6219534ff9879648))
+* Replace navigator.clipboard by copy-text-to-clipboard package ([1c00fc7](https://github.com/cozy/cozy-libs/commit/1c00fc77547915b7e881266565d038b7f36da5e5))
+
+
+
+
+
 ## [54.2.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@54.2.0...cozy-mespapiers-lib@54.2.1) (2023-07-28)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
