@@ -39,7 +39,7 @@ const CategoryItemByPaper = ({ papers, category, isLast, onClick }) => {
               )
             }}
             renderFallback={() => (
-              <Thumbnail>
+              <Thumbnail isStacked={isStacked}>
                 <Icon
                   icon={isNote(papers[0]) ? 'file-type-note' : 'file-type-text'}
                 />
