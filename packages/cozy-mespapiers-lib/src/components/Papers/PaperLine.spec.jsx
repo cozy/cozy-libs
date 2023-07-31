@@ -7,6 +7,8 @@ import { models } from 'cozy-client'
 import PaperLine from './PaperLine'
 import AppLike from '../../../test/components/AppLike'
 
+jest.mock('copy-text-to-clipboard', () => ({ copy: jest.fn() }))
+
 const {
   locales: { getBoundT }
 } = models.document

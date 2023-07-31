@@ -4,6 +4,7 @@ import { makeActionVariant } from './utils'
 
 jest.mock('./Items/download')
 jest.mock('./Items/forward')
+jest.mock('copy-text-to-clipboard', () => ({ copy: jest.fn() }))
 
 describe('Actions utils', () => {
   describe('makeActionVariant', () => {

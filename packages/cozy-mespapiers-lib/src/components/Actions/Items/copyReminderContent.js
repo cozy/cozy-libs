@@ -1,3 +1,4 @@
+import copy from 'copy-text-to-clipboard'
 import React, { forwardRef } from 'react'
 
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
@@ -18,8 +19,12 @@ export const copyReminderContent = () => {
           'GET',
           `/notes/${doc._id}/text`
         )
-        navigator.clipboard.writeText(reminderContent)
-        Alerter.success('action.copyReminderContent.success')
+        const hasCopied = copy(reminderContent)
+        if (hasCopied) {
+          Alerter.success('action.copyReminderContent.success')
+        } else {
+          Alerter.error('action.copyReminderContent.error')
+        }
       } catch {
         Alerter.error('action.copyReminderContent.error')
       }
@@ -28,10 +33,6 @@ export const copyReminderContent = () => {
       // eslint-disable-next-line react/display-name
       forwardRef((props, ref) => {
         const { t } = useI18n()
-
-        if (!navigator?.clipboard) {
-          return null
-        }
 
         return (
           <ActionsMenuItem {...props} ref={ref}>
