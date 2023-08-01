@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [55.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@55.0.1...cozy-mespapiers-lib@55.0.2) (2023-08-01)
+
+
+### Bug Fixes
+
+* **mespapiers:** Use the correct Note app icon and name ([99c4a3d](https://github.com/cozy/cozy-libs/commit/99c4a3df2c67f8ba6d7b7f7613addd1dafcdc162))
+
+
+
+
+
 ## [55.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@55.0.0...cozy-mespapiers-lib@55.0.1) (2023-08-01)
 
 
