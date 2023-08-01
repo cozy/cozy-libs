@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [55.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@55.0.0...cozy-mespapiers-lib@55.0.1) (2023-08-01)
+
+
+### Bug Fixes
+
+* **mespapiers:** Copy content on Note wasn't working on iOS Safari ([c08d6c1](https://github.com/cozy/cozy-libs/commit/c08d6c1583020b22ac6a35b25b317d59a8dbcbf3))
+
+
+
+
+
 # [55.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@54.4.0...cozy-mespapiers-lib@55.0.0) (2023-07-31)
 
 
