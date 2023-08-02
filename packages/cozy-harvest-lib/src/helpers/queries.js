@@ -20,6 +20,17 @@ export const buildKonnectorQuery = (slug, source) => {
   return { definition: queryDef, options: query.options }
 }
 
+export const buildAppsRegistryQueryBySlug = slug => {
+  const query = {
+    definition: () => Q('io.cozy.apps_registry').getById(`${slug}`),
+    options: {
+      as: `io.cozy.apps_registry/${slug}`,
+      fetchPolicy: defaultFetchPolicy
+    }
+  }
+  return { definition: query.definition(), options: query.options }
+}
+
 export const buildAccountQuery = accountId => ({
   definition: Q('io.cozy.accounts').getById(accountId),
   options: {
