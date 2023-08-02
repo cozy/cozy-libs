@@ -94,10 +94,6 @@ describe('fetchKonnectorData', () => {
     spy.mockRejectedValueOnce(error).mockResolvedValue(konnector)
 
     const res = await setup()
-    const firstResponseArg = spy.mock.calls[0][1]
-    expect(firstResponseArg.definition.sources).toStrictEqual(['stack'])
-    const secondResponseArg = spy.mock.calls[1][1]
-    expect(secondResponseArg.definition.sources).toStrictEqual(['registry'])
     expect(res).toMatchObject({
       name: 'Pajemploi',
       link: 'https://links.mycozy.cloud/store/discover/pajemploi?fallback=http%3A%2F%2Fcozy-store.tools%3A8080%2F%23%2Fdiscover%2Fpajemploi',

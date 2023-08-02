@@ -6,7 +6,7 @@ import { generateUniversalLink } from 'cozy-ui/transpiled/react/AppLinker'
 import { getErrorLocale } from './konnectors'
 import { hasNewVersionAvailable } from './konnectors'
 import {
-  buildKonnectorQuery,
+  buildKonnectorQueryBySlug,
   buildAccountQuery,
   buildTriggersQuery,
   buildTriggersByIdQuery,
@@ -211,7 +211,7 @@ const fetchKonnectorStatus = async ({ client, slug, sourceAccount }) => {
   try {
     const konnector = await konnectorBlock.fetchKonnector(
       client,
-      buildKonnectorQuery(slug, 'stack')
+      buildKonnectorQueryBySlug(slug)
     )
 
     const accountConnected = await konnectorBlock.isAccountConnected(

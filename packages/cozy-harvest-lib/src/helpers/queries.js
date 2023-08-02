@@ -5,19 +5,16 @@ const defaultFetchPolicy = CozyClient.fetchPolicies.olderThan(
   DEFAULT_CACHE_TIMEOUT_QUERIES
 )
 
-export const buildKonnectorQuery = (slug, source) => {
+export const buildKonnectorQueryBySlug = slug => {
   const query = {
     definition: () =>
       Q('io.cozy.konnectors').getById(`io.cozy.konnectors/${slug}`),
     options: {
-      as: `io.cozy.konnectors/${slug}-${source}`,
+      as: `io.cozy.konnectors/${slug}`,
       fetchPolicy: defaultFetchPolicy
     }
   }
-  const queryDef = query.definition()
-  queryDef.sources = [source]
-
-  return { definition: queryDef, options: query.options }
+  return { definition: query.definition(), options: query.options }
 }
 
 export const buildAppsRegistryQueryBySlug = slug => {
