@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [56.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@55.0.3...cozy-mespapiers-lib@56.0.0) (2023-08-02)
+
+
+### Features
+
+* **mespapiers:** Remove event listener on note content copy ([b620f85](https://github.com/cozy/cozy-libs/commit/b620f85395644cf2a00a3e8eaf7399a5aa523397))
+* **mespapiers:** Upgrade cozy-ui from 90.2.0 to 90.3.0 ([293584a](https://github.com/cozy/cozy-libs/commit/293584a260f4c55ddf01de5ceb37de1738cae3ce))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 90.3.0`
+
+
+
+
+
 ## [55.0.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@55.0.2...cozy-mespapiers-lib@55.0.3) (2023-08-02)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
