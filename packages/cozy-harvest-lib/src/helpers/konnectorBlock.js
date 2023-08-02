@@ -9,7 +9,8 @@ import {
   buildKonnectorQuery,
   buildAccountQuery,
   buildTriggersQuery,
-  buildTriggersByIdQuery
+  buildTriggersByIdQuery,
+  buildAppsRegistryQueryBySlug
 } from './queries'
 import logger from '../logger'
 import sentryHub from '../sentry'
@@ -67,7 +68,7 @@ const isAccountConnected = async (client, sourceAccount) => {
 const isInMaintenance = async (client, slug) => {
   const konnector = await konnectorBlock.fetchKonnector(
     client,
-    buildKonnectorQuery(slug, 'registry')
+    buildAppsRegistryQueryBySlug(slug)
   )
   return get(konnector, 'maintenance_activated', false)
 }
@@ -246,7 +247,7 @@ const fetchKonnectorStatus = async ({ client, slug, sourceAccount }) => {
       try {
         const konnector = await konnectorBlock.fetchKonnector(
           client,
-          buildKonnectorQuery(slug, 'registry')
+          buildAppsRegistryQueryBySlug(slug)
         )
         return { konnector, status: 'stackNotFound' }
       } catch (error) {
