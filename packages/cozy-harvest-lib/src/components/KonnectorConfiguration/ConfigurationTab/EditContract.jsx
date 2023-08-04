@@ -31,7 +31,6 @@ import Button from 'cozy-ui/transpiled/react/deprecated/Button'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { withStyles } from 'cozy-ui/transpiled/react/styles'
 
-import SyncContractSwitch from './SyncContractSwitch'
 import {
   getAccountLabel,
   getAccountInstitutionLabel,
@@ -39,7 +38,6 @@ import {
 } from './bankAccountHelpers'
 import { updateContract } from './helpers'
 import { buildAppsByIdQuery } from '../../../helpers/queries'
-import { findKonnectorPolicy } from '../../../konnector-policies'
 import { useTracker, useTrackPage } from '../../hoc/tracking'
 import withLocales from '../../hoc/withLocales'
 
@@ -93,15 +91,7 @@ const EditContract = props => {
   const client = useClient()
   const tracker = useTracker()
 
-  const {
-    contract,
-    accountId,
-    konnector,
-    onAfterRemove,
-    onSuccess,
-    onClose,
-    onError
-  } = props
+  const { contract, onAfterRemove, onSuccess, onClose, onError } = props
 
   useTrackPage('editer_contrat')
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
@@ -189,7 +179,6 @@ const EditContract = props => {
 
   const confirmPrimaryText = t('contractForm.confirm-deletion.description')
   const fieldVariant = isMobile ? 'default' : 'inline'
-  const policy = konnector ? findKonnectorPolicy(konnector) : null
 
   return (
     <Dialog {...dialogProps}>
@@ -256,19 +245,6 @@ const EditContract = props => {
         </NonGrowingDialogContent>
       )}
       <Divider />
-      {policy && policy.setSync ? (
-        <>
-          <NonGrowingDialogContent className="u-pv-1">
-            <SyncContractSwitch
-              fieldVariant={fieldVariant}
-              contract={contract}
-              accountId={accountId}
-              konnector={konnector}
-            />
-          </NonGrowingDialogContent>
-          <Divider />
-        </>
-      ) : null}
       <DialogContent className="u-pv-1">
         <Button
           className="u-ml-auto u-error u-ml-0 u-ph-half"

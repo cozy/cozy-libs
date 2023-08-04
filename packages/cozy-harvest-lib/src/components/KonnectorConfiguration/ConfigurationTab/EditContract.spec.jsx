@@ -9,14 +9,6 @@ import AppLike from '../../../../test/AppLike'
 
 jest.mock('cozy-client/dist/hooks/useQuery', () => jest.fn())
 
-jest.mock(
-  './SyncContractSwitch',
-  () =>
-    function SyncContractSwitch() {
-      return <input type="checkbox" role="sync-contract-switch" />
-    }
-)
-
 describe('EditContract', () => {
   const setup = ({ konnector } = {}) => {
     const client = new CozyClient({})
@@ -68,18 +60,6 @@ describe('EditContract', () => {
     )
   })
 
-  it('should show sync contract switch if the konnector policy supports it', () => {
-    const { root } = setup({
-      konnector: {
-        slug: 'banking-konnector',
-        partnership: {
-          domain: 'budget-insight.com'
-        }
-      }
-    })
-    expect(root.getByRole('sync-contract-switch')).not.toBeUndefined()
-  })
-
   it('shows confirmation deletion and allows to delete contract', async () => {
     const { root, client } = setup()
     const btn = root.getByText('Remove the account')
@@ -90,10 +70,5 @@ describe('EditContract', () => {
       fireEvent.click(confirmBtn)
     })
     expect(client.destroy).toHaveBeenCalled()
-  })
-
-  it('should not show sync contract switch if the konnector policy does not support it', () => {
-    const { root } = setup({ konnector: null })
-    expect(root.queryByRole('sync-contract-switch')).toBe(null)
   })
 })
