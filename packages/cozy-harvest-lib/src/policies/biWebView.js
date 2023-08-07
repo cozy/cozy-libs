@@ -146,18 +146,14 @@ export const onBIAccountCreation = async ({
  * Create OAuth extra parameters specific to reconnect or manage webview (which need the same parameters)
  *
  * @param {object} options
- * @param {Array<String>} options.biBankIds - connector bank ids (for webview connectors)
+ * @param {Array<String>} options.uuids - connector bank uuids (for webview connectors)
  * @param {String} options.token - BI temporary token
  * @param {Number|null} options.connId - BI bi connection id
  * @return {Object}
  */
-const getReconnectOrManageExtraOAuthUrlParams = ({
-  biBankIds,
-  token,
-  connId
-}) => {
+const getReconnectOrManageExtraOAuthUrlParams = ({ uuids, token, connId }) => {
   return {
-    id_connector: biBankIds,
+    connector_uuids: uuids,
     code: token,
     connection_id: connId
   }
@@ -181,58 +177,31 @@ export const fetchExtraOAuthUrlParams = async ({
   reconnect = false,
   manage = false
 }) => {
-  const {
-    code: token,
-    biBankIds,
-    ...config
-  } = await createTemporaryToken({
+  const { code: token, ...config } = await createTemporaryToken({
     client,
-    konnector,
-    account
+    konnector
   })
-
   const connId = getWebviewBIConnectionId(account)
 
   if (reconnect || manage) {
     return getReconnectOrManageExtraOAuthUrlParams({
-      biBankIds,
+      uuids: Object.keys(konnector.biUuids),
       token,
       connId
     })
   } else {
-    let bankId
-    if (connId && biBankIds.length > 1) {
-      // we want to get the bi bank id of the connection. This way, the user does not need
+    let uuid
+    if (connId && konnector.biUuids.length > 1) {
+      // we want to get the bi bank uuiid of the connection. This way, the user does not need
       // to choose his bank each time he want to update his synchronizations
       const connection = await getBIConnection(config, connId, token)
-      bankId = connection.id_bank
+      uuid = connection.connector_uuid
     }
     return {
-      id_connector: bankId ? bankId : biBankIds,
+      connector_uuids: uuid ? uuid : Object.keys(konnector.biUuids),
       token
     }
   }
-}
-
-/**
- * Finds the current bankIid in a given konnector or account
- * @param {object} options
- * @param {IoCozyAccount} options.account The account content
- * @param {KonnectorManifest} options.konnector konnector manifest content
- * @return {Array<String>} - list of bank ids
- */
-export const getCozyBankIds = ({ konnector, account }) => {
-  const cozyBankId = konnector?.parameters?.bankId || account?.auth?.bankId
-
-  if (cozyBankId) {
-    return [cozyBankId]
-  }
-
-  const cozyBankIds = konnector?.fields?.bankId?.options.map(opt => opt?.value)
-  if (!cozyBankIds?.length) {
-    logger.error('Could not find any bank id')
-  }
-  return cozyBankIds
 }
 
 /**
@@ -245,8 +214,7 @@ export const getCozyBankIds = ({ konnector, account }) => {
 export const refreshContracts = async ({ client, konnector, account }) => {
   const biConfig = await createTemporaryToken({
     client,
-    konnector,
-    account
+    konnector
   })
   const { code, ...config } = biConfig
   const connectionId = getWebviewBIConnectionId(account)
@@ -337,17 +305,15 @@ export function isCacheExpired(tokenCache, biUser) {
  * @param {object} options
  * @param {CozyClient} options.client CozyClient instance
  * @param {KonnectorManifest} options.konnector konnector manifest content
- * @param {Array<String>} options.cozyBankIds List of cozy bank identifiers
  * @param {createTemporaryTokenResponse} options.tokenCache Previous version of BI temporary token cache
  * @return {Promise<createTemporaryTokenResponse>}
  */
-async function updateCache({ client, konnector, tokenCache, cozyBankIds }) {
+async function updateCache({ client, konnector, tokenCache }) {
   const jobResponse = await client.stackClient.jobs.create(
     'konnector',
     {
       mode: 'getTemporaryToken',
-      konnector: konnector.slug,
-      bankIds: cozyBankIds
+      konnector: konnector.slug
     },
     {},
     true
@@ -377,7 +343,7 @@ async function updateCache({ client, konnector, tokenCache, cozyBankIds }) {
  *
  * @returns {Promise<createTemporaryTokenResponse>}
  */
-export const createTemporaryToken = async ({ client, konnector, account }) => {
+export const createTemporaryToken = async ({ client, konnector }) => {
   // @ts-ignore La propriété 'exec' n'existe pas sur le type 'PromiseCache'.
   return await promiseCache.exec(
     async () => {
@@ -387,7 +353,6 @@ export const createTemporaryToken = async ({ client, konnector, account }) => {
       )
 
       let tokenCache = await getBiTemporaryTokenFromCache({ client })
-      const cozyBankIds = getCozyBankIds({ konnector, account })
 
       const { data: biUser } = await client.query(
         Q('io.cozy.accounts').getById('bi-aggregator-user')
@@ -399,23 +364,9 @@ export const createTemporaryToken = async ({ client, konnector, account }) => {
         tokenCache = await updateCache({
           client,
           konnector,
-          tokenCache,
-          cozyBankIds
+          tokenCache
         })
       }
-
-      assert(
-        cozyBankIds.length,
-        'createTemporaryToken: Could not determine cozyBankIds from account or konnector'
-      )
-
-      assert(
-        tokenCache?.biMapping,
-        'createTemporaryToken: could not find a BI mapping in createTemporaryToken response, you should update your konnector to the last version'
-      )
-      const { biMapping } = tokenCache
-
-      tokenCache.biBankIds = [...new Set(cozyBankIds.map(id => biMapping[id]))]
 
       return tokenCache
     },
