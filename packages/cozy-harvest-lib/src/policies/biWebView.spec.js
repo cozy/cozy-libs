@@ -27,12 +27,10 @@ const realtimeMock = {
   unsubscribe: jest.fn()
 }
 
-const TEST_BANK_COZY_ID = '100000'
-
 const konnector = {
   slug: 'boursorama83',
-  parameters: {
-    bankId: TEST_BANK_COZY_ID
+  biUuids: {
+    'test konnector uuid': 'test konnector'
   },
   partnership: {
     domain: 'https://budget-insight.com'
@@ -61,10 +59,7 @@ describe('checkBIConnection', () => {
     const account = {}
 
     const konnector = {
-      slug: 'bankingconnectortest',
-      parameters: {
-        bankId: TEST_BANK_COZY_ID
-      }
+      slug: 'bankingconnectortest'
     }
 
     jest.spyOn(flow, 'saveAccount').mockImplementation(account => ({
@@ -123,7 +118,6 @@ describe('refreshContracts', () => {
         data: {
           mode: 'prod',
           timestamp: Date.now(),
-          biMapping: {},
           url: 'https://cozy.biapi.pro/2.0',
           clientId: 'test-client-id',
           code: 'bi-temporary-access-token-145613'
@@ -257,8 +251,7 @@ describe('fetchExtraOAuthUrlParams', () => {
     client.query = jest.fn().mockResolvedValue({
       data: {
         timestamp: Date.now(),
-        code: 'bi-temporary-access-token-123',
-        biMapping: {}
+        code: 'bi-temporary-access-token-123'
       }
     })
     const result = await fetchExtraOAuthUrlParams({
@@ -269,35 +262,35 @@ describe('fetchExtraOAuthUrlParams', () => {
     expect(result).toMatchObject({ token: 'bi-temporary-access-token-123' })
   })
 
-  it('should add id_connector param for multiple bank ids', async () => {
+  it('should add connector_uuids param for multiple bank uuids', async () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
     client.query = jest.fn().mockResolvedValue({
       data: {
         timestamp: Date.now(),
-        code: 'bi-temporary-access-token-123',
-        biMapping: { [TEST_BANK_COZY_ID]: 2 }
+        code: 'bi-temporary-access-token-123'
       }
     })
     const result = await fetchExtraOAuthUrlParams({
       client,
-      konnector,
+      konnector: {
+        ...konnector,
+        biUuids: { uuid1: 'bank 1', uuid2: 'bank 2' }
+      },
       account
     })
-    expect(result).toMatchObject({ id_connector: [2] })
+    expect(result).toMatchObject({ connector_uuids: ['uuid1', 'uuid2'] })
   })
 
-  it('should get biBankIds associated to the konnector, even if other bank ids are in cache', async () => {
+  it('should get bank uuids from the konnector', async () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
     client.query = jest.fn().mockResolvedValue({
       data: {
         timestamp: Date.now(),
-        code: 'bi-temporary-access-token-123',
-        biMapping: { [TEST_BANK_COZY_ID]: 2 },
-        biBankIds: [1, 2, 3]
+        code: 'bi-temporary-access-token-123'
       }
     })
     const result = await fetchExtraOAuthUrlParams({
@@ -305,7 +298,7 @@ describe('fetchExtraOAuthUrlParams', () => {
       konnector,
       account
     })
-    expect(result).toMatchObject({ id_connector: [2] })
+    expect(result).toMatchObject({ connector_uuids: ['test konnector uuid'] })
   })
 
   it('should fetch reconnect params', async () => {
@@ -315,8 +308,7 @@ describe('fetchExtraOAuthUrlParams', () => {
     client.query = jest.fn().mockResolvedValue({
       data: {
         timestamp: Date.now(),
-        code: 'bi-temporary-access-token-12',
-        biMapping: { [TEST_BANK_COZY_ID]: 2 }
+        code: 'bi-temporary-access-token-12'
       }
     })
     const result = await fetchExtraOAuthUrlParams({
@@ -338,8 +330,7 @@ describe('fetchExtraOAuthUrlParams', () => {
     client.query = jest.fn().mockResolvedValue({
       data: {
         timestamp: Date.now(),
-        code: 'bi-temporary-access-token-12-manage',
-        biMapping: { [TEST_BANK_COZY_ID]: 2 }
+        code: 'bi-temporary-access-token-12-manage'
       }
     })
     const result = await fetchExtraOAuthUrlParams({
