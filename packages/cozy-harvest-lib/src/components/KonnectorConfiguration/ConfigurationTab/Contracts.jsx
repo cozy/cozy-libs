@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import CozyClient, { Q, queryConnect, RealTimeQueries } from 'cozy-client'
-import flag from 'cozy-flags'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import NavigationList, {
@@ -73,15 +72,13 @@ const DumbContracts = ({
                 />
               )
             })}
-          {flag('harvest.bi.webview') && (
-            <BIContractActivationWindow
-              konnector={konnector}
-              account={account}
-              intentsApi={intentsApi}
-              innerAccountModalOverrides={innerAccountModalOverrides}
-              onAccountDeleted={onAccountDeleted}
-            />
-          )}
+          <BIContractActivationWindow
+            konnector={konnector}
+            account={account}
+            intentsApi={intentsApi}
+            innerAccountModalOverrides={innerAccountModalOverrides}
+            onAccountDeleted={onAccountDeleted}
+          />
         </NavigationListSection>
       </NavigationList>
     </MuiCozyTheme>

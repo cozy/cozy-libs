@@ -19,7 +19,6 @@ import {
   launchTrigger
 } from '../connections/triggers'
 import { KonnectorJobError } from '../helpers/konnectors'
-import { konnectorPolicy as biKonnectorPolicy } from '../policies/budget-insight'
 import sentryHub from '../sentry'
 
 jest.mock('./konnector/KonnectorJobWatcher')
@@ -37,16 +36,6 @@ jest.mock('../connections/files', () => ({
   statDirectoryByPath: jest.fn(),
   createDirectoryByPath: jest.fn()
 }))
-
-jest.mock('../policies/budget-insight', () => {
-  const originalBudgetInsight = jest.requireActual('../policies/budget-insight')
-  return {
-    konnectorPolicy: {
-      ...originalBudgetInsight.konnectorPolicy,
-      onAccountCreation: jest.fn()
-    }
-  }
-})
 
 KonnectorJobWatcher.prototype.watch = jest.fn()
 
@@ -796,25 +785,13 @@ describe('ConnectionFlow', () => {
       ...fixtures.bankingKonnectorAccountAttributes
     }
 
-    const onAccountCreationResult = {
-      auth: {
-        bi: {
-          connId: 7
-        }
-      }
-    }
-
     it('should use custom konnector policy', async () => {
       saveAccount.mockReset().mockImplementation((konnector, acc) => ({
         ...acc,
         _id: fixtures.updatedAccount._id
       }))
 
-      biKonnectorPolicy.onAccountCreation
-        .mockReset()
-        .mockReturnValue(onAccountCreationResult)
-
-      const { flow, client } = setup({ konnector: bankingKonnector })
+      const { flow } = setup({ konnector: bankingKonnector })
 
       jest.spyOn(flow, 'launch')
 
@@ -824,14 +801,7 @@ describe('ConnectionFlow', () => {
         userCredentials: fixtures.bankingKonnectorAccountAttributes.auth
       })
 
-      expect(biKonnectorPolicy.onAccountCreation).toHaveBeenCalledTimes(1)
-      expect(ensureTrigger).toHaveBeenCalledTimes(1)
       expect(flow.launch).toHaveBeenCalledTimes(1)
-      expect(saveAccount).toHaveBeenCalledWith(
-        client,
-        flow.konnector,
-        onAccountCreationResult
-      )
     })
     it('should should call launch when the policy does not need account and trigger creation', async () => {
       const { flow } = setup({ konnector: fixtures.clientKonnector })

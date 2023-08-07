@@ -5,18 +5,17 @@
  * - Deals with the konnector to get temporary tokens
  */
 
+import clone from 'lodash/clone'
+import get from 'lodash/get'
+import keyBy from 'lodash/keyBy'
+import set from 'lodash/set'
+
+import { biErrorMap } from 'cozy-bi-auth'
 import { Q } from 'cozy-client'
 import PromiseCache from 'cozy-client/dist/promise-cache'
 import { receiveMutationResult } from 'cozy-client/dist/store'
 // @ts-ignore (its a peerDep and I don't know how to configure ts for that)
-import flag from 'cozy-flags'
 
-import {
-  setBIConnectionId,
-  findAccountWithBiConnection,
-  convertBIErrortoKonnectorJobError,
-  isBudgetInsightConnector
-} from './budget-insight'
 import assert from '../assert'
 import { KonnectorJobError } from '../helpers/konnectors'
 import logger from '../logger'
@@ -40,7 +39,7 @@ const TEMP_TOKEN_TIMOUT_S = 60
 export const ACCOUNTS_DOCTYPE = 'io.cozy.accounts'
 
 export const isBiWebViewConnector = konnector =>
-  flag('harvest.bi.webview') && isBudgetInsightConnector(konnector)
+  isBudgetInsightConnector(konnector)
 
 /**
  * Runs multiple checks on the bi connection referenced in the given account
@@ -49,7 +48,7 @@ export const isBiWebViewConnector = konnector =>
  * @param {KonnectorManifest} options.konnector konnector manifest content
  * @param {CozyClient} options.client CozyClient object
  *
- * @return {Promise}
+ * @return {Promise<void|KonnectorJobError}
  * @throws KonnectorJobError
  */
 export const checkBIConnection = async ({ connId, client, konnector }) => {
@@ -85,73 +84,9 @@ export const checkBIConnection = async ({ connId, client, konnector }) => {
  * @param {Function} options.t Translation fonction
  * @return {Promise<Boolean>} true if the trigger manager should create the trigger itself
  */
-export const handleOAuthAccount = async ({
-  account,
-  flow,
-  konnector,
-  client,
-  reconnect,
-  t
-}) => {
-  if (flag('harvest.bi.fullwebhooks')) {
-    flow.triggerEvent(LOGIN_SUCCESS_EVENT)
-    return false
-  }
-  if (reconnect) {
-    // No need for specific action here. The trigger will be launched by the trigger manager
-    const connId = getWebviewBIConnectionId(account)
-    return Boolean(connId)
-  }
-  const cozyBankIds = getCozyBankIds({ konnector, account })
-  let biWebviewAccount = {
-    ...account,
-    ...(cozyBankIds ? { auth: { bankIds: cozyBankIds } } : {})
-  }
-
-  const connectionId = getWebviewBIConnectionId(biWebviewAccount)
-
-  if (connectionId) {
-    logger.info(`Found a BI webview connection id: ${connectionId}`)
-    flow.konnector = konnector
-
-    biWebviewAccount = await flow.saveAccount({
-      ...setBIConnectionId(biWebviewAccount, connectionId),
-      ...getBiAggregatorParentRelationship(konnector)
-    })
-
-    await flow.handleFormSubmit({
-      client,
-      account: biWebviewAccount,
-      konnector,
-      t
-    })
-  }
-
-  return Boolean(connectionId)
-}
-
-/**
- * Return the bi aggregator parent relationship configuration for a given konnector
- *
- * @param {KonnectorManifest} konnector connector manifest content
- *
- * @return {Object}
- */
-const getBiAggregatorParentRelationship = konnector => {
-  const biAggregatorId = konnector?.aggregator?.accountId
-  if (!biAggregatorId) {
-    return {}
-  }
-  return {
-    relationships: {
-      parent: {
-        data: {
-          _id: biAggregatorId,
-          _type: ACCOUNTS_DOCTYPE
-        }
-      }
-    }
-  }
+export const handleOAuthAccount = async ({ flow }) => {
+  flow.triggerEvent(LOGIN_SUCCESS_EVENT)
+  return false
 }
 
 /**
@@ -164,15 +99,7 @@ const getBiAggregatorParentRelationship = konnector => {
  * @return {Number|null} Connection Id or null if no connexion
  */
 const getWebviewBIConnectionId = account => {
-  if (flag('harvest.bi.fullwebhooks')) {
-    return Number(account?.data?.auth?.bi?.connId || null)
-  } else {
-    return Number(
-      account?.oauth?.query?.connection_id?.[0] ||
-        account?.data?.auth?.bi?.connId ||
-        null
-    )
-  }
+  return Number(account?.data?.auth?.bi?.connId || null)
 }
 
 /**
@@ -468,6 +395,7 @@ export const createTemporaryToken = async ({ client, konnector, account }) => {
 
       if (isCacheExpired(tokenCache, biUser)) {
         logger.debug('temporaryToken cache is expired. Updating')
+        // @ts-ignore
         tokenCache = await updateCache({
           client,
           konnector,
@@ -497,7 +425,7 @@ export const createTemporaryToken = async ({ client, konnector, account }) => {
 
 export const konnectorPolicy = {
   isBIWebView: true,
-  needsAccountAndTriggerCreation: flag('harvest.bi.fullwebhooks'),
+  needsAccountAndTriggerCreation: false,
   needsTriggerLaunch: true,
   isRunnable: () => true,
   name: 'budget-insight-webview',
@@ -517,4 +445,79 @@ export const konnectorPolicy = {
     return error && error.isSolvableViaReconnect()
   },
   shouldDisplayRunningAlert: () => false
+}
+
+export const setBIConnectionId = (originalAccount, biConnectionId) => {
+  const account = clone(originalAccount)
+  set(account, 'data.auth.bi.connId', biConnectionId)
+  return account
+}
+
+/**
+ * Tries to find an existing account, associated to an existing trigger
+ * with the given bi connection id
+ *
+ * @param  {CozyClient} options.client - Cozy client
+ * @param  {Object} options.konnector - Konnector manifest
+ * @param  {Integer} options.connectionId - BI connection id
+ * @return {Account|null} An account with a trigger with the same identifier if any
+ */
+export const findAccountWithBiConnection = async ({
+  client,
+  konnector,
+  connectionId
+}) => {
+  const [accountsResult, triggersResult] = await Promise.all([
+    client.query(
+      Q('io.cozy.accounts')
+        .where({ data: { auth: { bi: { connId: connectionId } } } })
+        .indexFields(['data.auth.bi.connId'])
+    ),
+    client.query(
+      Q('io.cozy.triggers')
+        .where({
+          message: {
+            konnector: konnector.slug
+          }
+        })
+        .indexFields(['message.konnector'])
+    )
+  ])
+
+  const accountsIndex = keyBy(accountsResult.data, '_id')
+  const trigger = triggersResult.data.find(
+    t => accountsIndex[get(t, 'message.account')]
+  )
+  return trigger ? accountsIndex[trigger.message.account] : null
+}
+
+/**
+ * Converts and chains error
+ */
+export const convertBIErrortoKonnectorJobError = error => {
+  const errorCode = error ? error.code : null
+  const cozyErrorMessage = errorCode
+    ? biErrorMap[errorCode] || extraBIErrorMap[errorCode] || null
+    : null
+  const errorMessage =
+    cozyErrorMessage ||
+    (errorCode ? `UNKNOWN_ERROR.${errorCode}` : 'UNKNOWN_ERROR')
+  const err = new KonnectorJobError(errorMessage)
+  err.original = error
+  throw err
+}
+
+export const isBudgetInsightConnector = konnector =>
+  konnector?.partnership?.domain === 'budget-insight.com'
+
+/**
+ * This error map is not in the bi-auth package since it is not really
+ * satisfying to have "config" mapped to LOGIN_FAILED. It might change.
+ * We should not have this error if we validate the fields in the
+ * front-end.
+ */
+const extraBIErrorMap = {
+  config: 'LOGIN_FAILED',
+  ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED:
+    'ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED'
 }

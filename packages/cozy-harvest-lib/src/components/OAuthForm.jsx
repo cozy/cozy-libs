@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 
 import { useClient } from 'cozy-client'
-import flag from 'cozy-flags'
 import { useWebviewIntent } from 'cozy-intent'
 
 import { MountPointContext } from './MountPointContext'
@@ -74,7 +73,7 @@ export const OAuthForm = props => {
     setShowOAuthWindow(false)
     if (response.result === OAUTH_SERVICE_OK) {
       const konnectorPolicy = findKonnectorPolicy(konnector)
-      if (konnectorPolicy.isBIWebView && flag('harvest.bi.fullwebhooks')) {
+      if (konnectorPolicy.isBIWebView) {
         replaceHistory(`/accounts/bi/success`)
       }
       const accountId = response.key

@@ -1,19 +1,13 @@
 import CozyClient from 'cozy-client'
-import flag from 'cozy-flags'
 
 import {
-  handleOAuthAccount,
   checkBIConnection,
-  isBiWebViewConnector,
   refreshContracts,
   fetchExtraOAuthUrlParams,
   isCacheExpired
 } from './biWebView'
 import ConnectionFlow from '../models/ConnectionFlow'
-import {
-  getBIConnectionAccountsList,
-  getBIConnection
-} from '../services/bi-http'
+import { getBIConnectionAccountsList } from '../services/bi-http'
 
 jest.mock('../services/bi-http', () => ({
   createBIConnection: jest
@@ -26,10 +20,6 @@ jest.mock('../services/bi-http', () => ({
 
 jest.mock('cozy-logger', () => ({
   namespace: () => () => {}
-}))
-
-jest.mock('../services/jobUtils', () => ({
-  waitForRealtimeEvent: jest.fn()
 }))
 
 const realtimeMock = {
@@ -49,84 +39,9 @@ const konnector = {
   }
 }
 
-const konnectorWithMultipleBankIds = {
-  slug: 'cic45',
-  fields: {
-    bankId: {
-      type: 'dropdown',
-      label: 'branchName',
-      options: [
-        {
-          name: 'Autre',
-          value: '45'
-        },
-        {
-          name: 'Bretagne (Particuliers)',
-          value: '46'
-        }
-      ]
-    }
-  }
-}
-
 const account = {
   _id: '1337'
 }
-
-describe('handleOAuthAccount', () => {
-  it('should handle bi webview authentication if any connection is found in the account', async () => {
-    const client = new CozyClient({
-      uri: 'http://testcozy.mycozy.cloud'
-    })
-    client.plugins = { realtime: realtimeMock }
-    const flow = new ConnectionFlow(client, null, konnector)
-    flow.account = account
-    flow.handleFormSubmit = jest.fn()
-    flow.saveAccount = async account => account
-    const account = { oauth: { query: { connection_id: ['12'] } } }
-    const t = jest.fn()
-    await handleOAuthAccount({
-      account,
-      flow,
-      client,
-      konnector,
-      t
-    })
-    expect(flow.handleFormSubmit).toHaveBeenCalledWith({
-      client,
-      konnector,
-      t,
-      account: {
-        ...account,
-        ...{ auth: { bankIds: [TEST_BANK_COZY_ID] } },
-        ...{ data: { auth: { bi: { connId: 12 } } } }
-      }
-    })
-  })
-  it('should handle reconnection', async () => {
-    const client = new CozyClient({
-      uri: 'http://testcozy.mycozy.cloud'
-    })
-    client.plugins = { realtime: realtimeMock }
-    const flow = new ConnectionFlow(client, null, konnector)
-    flow.account = account
-    flow.handleFormSubmit = jest.fn()
-    flow.saveAccount = jest.fn()
-    const account = { data: { auth: { bi: { connId: 15 } } } }
-    const t = jest.fn()
-    const result = await handleOAuthAccount({
-      account,
-      flow,
-      client,
-      konnector,
-      reconnect: true,
-      t
-    })
-    expect(flow.handleFormSubmit).not.toHaveBeenCalled()
-    expect(flow.saveAccount).not.toHaveBeenCalled()
-    expect(result).toEqual(true)
-  })
-})
 
 describe('checkBIConnection', () => {
   const setup = () => {
@@ -192,28 +107,6 @@ describe('checkBIConnection', () => {
         konnector
       })
     ).rejects.toEqual(new Error('ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED'))
-  })
-})
-
-describe('isBiWebViewConnector', () => {
-  const BIConnector = {
-    slug: 'biconnector',
-    partnership: { domain: 'budget-insight.com' }
-  }
-  const notBIConnector = {
-    slug: 'otherconnector'
-  }
-  it('should return true if the connector is a BI connector and if the  "harvest.bi.webview" is activated', () => {
-    flag('harvest.bi.webview', true)
-    expect(isBiWebViewConnector(BIConnector)).toEqual(true)
-  })
-  it('should return false if the connector is not a BI connector', () => {
-    flag('harvest.bi.webview', true)
-    expect(isBiWebViewConnector(notBIConnector)).toEqual(false)
-  })
-  it('should return false if the "harvest.bi.webview" flag is not activated', () => {
-    flag('harvest.bi.webview', false)
-    expect(isBiWebViewConnector(BIConnector)).toEqual(false)
   })
 })
 
@@ -458,31 +351,6 @@ describe('fetchExtraOAuthUrlParams', () => {
     expect(result).toMatchObject({
       connection_id: 15,
       code: 'bi-temporary-access-token-12-manage'
-    })
-  })
-
-  it('should get bi connection bank id if multiple biBankIds are in the mapping', async () => {
-    const client = new CozyClient({
-      uri: 'http://testcozy.mycozy.cloud'
-    })
-    client.query = jest.fn().mockResolvedValue({
-      data: {
-        timestamp: Date.now(),
-        code: 'bi-temporary-access-token-12',
-        biMapping: { [TEST_BANK_COZY_ID]: 2, 12: 2, 45: 3, 46: 4 }
-      }
-    })
-    getBIConnection.mockResolvedValueOnce({
-      id_bank: 4
-    })
-    const result = await fetchExtraOAuthUrlParams({
-      client,
-      konnector: konnectorWithMultipleBankIds,
-      account: { ...account, data: { auth: { bi: { connId: 15 } } } }
-    })
-    expect(result).toEqual({
-      id_connector: 4,
-      token: 'bi-temporary-access-token-12'
     })
   })
 })

@@ -1,6 +1,5 @@
 import logger from './logger'
 import { konnectorPolicy as biWebViewPolicy } from './policies/biWebView'
-import { konnectorPolicy as biKonnectorPolicy } from './policies/budget-insight'
 import { konnectorPolicy as cliskPolicy } from './policies/clisk'
 
 const defaultKonnectorPolicy = {
@@ -28,12 +27,9 @@ const defaultKonnectorPolicy = {
   shouldDisplayRunningAlert: () => false
 }
 
-const policies = [
-  cliskPolicy,
-  biWebViewPolicy,
-  biKonnectorPolicy,
-  defaultKonnectorPolicy
-].filter(Boolean)
+const policies = [cliskPolicy, biWebViewPolicy, defaultKonnectorPolicy].filter(
+  Boolean
+)
 
 logger.info('Available konnector policies', policies)
 
