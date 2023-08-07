@@ -3,7 +3,6 @@ import React, { useState, useRef, useCallback } from 'react'
 import SwipeableViews from 'react-swipeable-views'
 
 import { useClient } from 'cozy-client'
-import flag from 'cozy-flags'
 import { useWebviewIntent } from 'cozy-intent'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Divider from 'cozy-ui/transpiled/react/Divider'
@@ -120,10 +119,7 @@ const KonnectorAccountTabs = props => {
       reconnect: true
     })
 
-    if (
-      response.result === OAUTH_SERVICE_OK &&
-      flag('harvest.bi.fullwebhooks')
-    ) {
+    if (response.result === OAUTH_SERVICE_OK) {
       flow.expectTriggerLaunch()
     }
   }, [account, client, extraParams, flow, intentsApi, konnector, webviewIntent])

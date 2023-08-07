@@ -51,18 +51,6 @@ jest.mock('cozy-doctypes', () => {
   }
 })
 
-jest.mock('../../src/policies/budget-insight', () => {
-  const originalBudgetInsight = jest.requireActual(
-    '../../src/policies/budget-insight'
-  )
-  return {
-    konnectorPolicy: {
-      ...originalBudgetInsight.konnectorPolicy,
-      onAccountCreation: jest.fn()
-    }
-  }
-})
-
 const mockVaultClient = {
   createNewCipher: jest.fn(),
   saveCipher: jest.fn(),

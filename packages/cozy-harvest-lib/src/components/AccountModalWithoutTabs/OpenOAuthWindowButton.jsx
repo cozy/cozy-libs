@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React, { useCallback } from 'react'
 
 import { useClient } from 'cozy-client'
-import flag from 'cozy-flags'
 import { useWebviewIntent } from 'cozy-intent'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -47,10 +46,7 @@ const OpenOAuthWindowButton = ({
       reconnect: true
     })
 
-    if (
-      response.result === OAUTH_SERVICE_OK &&
-      flag('harvest.bi.fullwebhooks')
-    ) {
+    if (response.result === OAUTH_SERVICE_OK) {
       flow.expectTriggerLaunch()
     }
   }, [account, client, flow, konnector, webviewIntent, intentsApi, extraParams])

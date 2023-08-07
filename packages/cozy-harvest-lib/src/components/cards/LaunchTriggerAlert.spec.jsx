@@ -1,8 +1,6 @@
 import { render, waitFor, fireEvent } from '@testing-library/react'
 import React from 'react'
 
-import flag from 'cozy-flags'
-
 import { LaunchTriggerAlert } from './LaunchTriggerAlert'
 import AppLike from '../../../test/AppLike'
 import ConnectionFlow from '../../models/ConnectionFlow'
@@ -150,9 +148,6 @@ describe('LaunchTriggerAlert', () => {
   })
 
   it('should show OpenOAuthWindowButton when there is an error which is solvable via reconnect with a powens konnector', async () => {
-    flag.mockImplementation(key =>
-      key === 'harvest.bi.webview' ? true : false
-    )
     OpenOAuthWindowButton.mockImplementation(() => (
       <>
         <div>OpenOAuthWindowButton</div>
