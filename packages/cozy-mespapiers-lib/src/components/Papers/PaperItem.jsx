@@ -17,7 +17,6 @@ import RenameInput from 'cozy-ui/transpiled/react/ListItem/ListItemBase/Renaming
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
 import Skeleton from 'cozy-ui/transpiled/react/Skeleton'
 import Thumbnail from 'cozy-ui/transpiled/react/Thumbnail'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
@@ -37,8 +36,6 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-const validPageName = page => page === 'front' || page === 'back'
-
 const PaperItem = ({
   paper,
   contactNames,
@@ -51,7 +48,7 @@ const PaperItem = ({
   setIsRenaming
 }) => {
   const style = useStyles()
-  const { f, t } = useI18n()
+  const { f } = useI18n()
   const client = useClient()
   const { isMobile } = useBreakpoints()
   const navigate = useNavigate()
@@ -65,7 +62,6 @@ const PaperItem = ({
 
   const isMultiSelectionChoice = withCheckbox && isMultiSelectionActive
   const paperTheme = paper?.metadata?.qualification?.label
-  const paperLabel = paper?.metadata?.qualification?.page
   const paperDate = paper?.metadata?.datetime
     ? f(paper?.metadata?.datetime, 'DD/MM/YYYY')
     : null
@@ -98,27 +94,6 @@ const PaperItem = ({
       allMultiSelectionFiles.some(file => file._id === paper._id)
     )
   }
-
-  const primaryText = validPageName(paperLabel) ? (
-    <MidEllipsis text={t(`PapersList.label.${paperLabel}`)} />
-  ) : (
-    <Filename
-      variant="body1"
-      midEllipsis={isMobile}
-      filename={
-        splitFilename({
-          name: paper.name,
-          type: 'file'
-        }).filename
-      }
-      extension={
-        splitFilename({
-          name: paper.name,
-          type: 'file'
-        }).extension
-      }
-    />
-  )
 
   const secondaryText = (
     <>
@@ -184,7 +159,24 @@ const PaperItem = ({
         ) : (
           <ListItemText
             className="u-mr-1"
-            primary={primaryText}
+            primary={
+              <Filename
+                variant="body1"
+                midEllipsis={isMobile}
+                filename={
+                  splitFilename({
+                    name: paper.name,
+                    type: 'file'
+                  }).filename
+                }
+                extension={
+                  splitFilename({
+                    name: paper.name,
+                    type: 'file'
+                  }).extension
+                }
+              />
+            }
             secondary={secondaryText}
           />
         )}
