@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [57.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@56.0.0...cozy-mespapiers-lib@57.0.0) (2023-08-08)
+
+
+### Features
+
+* **mespapiers:** Upgrade cozy-ui from 90.3.0 to 90.6.0 ([e24354f](https://github.com/cozy/cozy-libs/commit/e24354f442148105709f76d28fe06193d26387f4))
+* **mespapiers:** Use Filename with midellipsis in PaperItem name ([fdd5270](https://github.com/cozy/cozy-libs/commit/fdd5270debc987d1b833edfbf324801b20dbe4d0))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 90.6.0`
+
+
+
+
+
 # [56.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@55.0.3...cozy-mespapiers-lib@56.0.0) (2023-08-02)
 
 
