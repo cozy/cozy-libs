@@ -4,11 +4,12 @@ import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 import { useClient } from 'cozy-client'
-import { isNote } from 'cozy-client/dist/models/file'
+import { isNote, splitFilename } from 'cozy-client/dist/models/file'
 import { isExpired, isExpiringSoon } from 'cozy-client/dist/models/paper'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import FileImageLoader from 'cozy-ui/transpiled/react/FileImageLoader'
+import Filename from 'cozy-ui/transpiled/react/Filename'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
@@ -19,6 +20,7 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
 import Skeleton from 'cozy-ui/transpiled/react/Skeleton'
 import Thumbnail from 'cozy-ui/transpiled/react/Thumbnail'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import ExpirationAnnotation from './ExpirationAnnotation'
@@ -51,6 +53,7 @@ const PaperItem = ({
   const style = useStyles()
   const { f, t } = useI18n()
   const client = useClient()
+  const { isMobile } = useBreakpoints()
   const navigate = useNavigate()
   const { pathname, search } = useLocation()
   const {
@@ -96,9 +99,26 @@ const PaperItem = ({
     )
   }
 
-  const primaryText = validPageName(paperLabel)
-    ? t(`PapersList.label.${paperLabel}`)
-    : paper.name
+  const primaryText = validPageName(paperLabel) ? (
+    <MidEllipsis text={t(`PapersList.label.${paperLabel}`)} />
+  ) : (
+    <Filename
+      variant="body1"
+      midEllipsis={isMobile}
+      filename={
+        splitFilename({
+          name: paper.name,
+          type: 'file'
+        }).filename
+      }
+      extension={
+        splitFilename({
+          name: paper.name,
+          type: 'file'
+        }).extension
+      }
+    />
+  )
 
   const secondaryText = (
     <>
@@ -164,11 +184,7 @@ const PaperItem = ({
         ) : (
           <ListItemText
             className="u-mr-1"
-            primary={
-              <span data-testid={primaryText}>
-                <MidEllipsis text={primaryText} />
-              </span>
-            }
+            primary={primaryText}
             secondary={secondaryText}
           />
         )}

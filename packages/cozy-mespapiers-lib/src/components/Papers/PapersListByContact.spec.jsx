@@ -84,8 +84,8 @@ describe('PapersList components:', () => {
       ${'File06'}
       ${'File07'}
     `(`should display "$data"`, ({ data }) => {
-      const { getByTestId } = setup()
-      expect(getByTestId(data))
+      const { getByText } = setup()
+      expect(getByText(data))
     })
   })
 
@@ -104,8 +104,8 @@ describe('PapersList components:', () => {
       ${'File01'}
       ${'File02'}
     `(`should display "$data"`, ({ data }) => {
-      const { getByTestId } = setup()
-      expect(getByTestId(data))
+      const { getByText } = setup()
+      expect(getByText(data))
     })
   })
 })
