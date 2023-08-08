@@ -46,8 +46,8 @@ describe('PapersList components:', () => {
     ${'File01'}
     ${'File02'}
   `(`should display "$data"`, ({ data }) => {
-    const { getByTestId } = setup()
-    expect(getByTestId(data))
+    const { getByText } = setup()
+    expect(getByText(data))
   })
 
   it.each`

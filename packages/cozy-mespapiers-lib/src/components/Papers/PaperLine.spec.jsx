@@ -39,15 +39,15 @@ describe('PaperLine components:', () => {
 
   it('should display "ID card"', () => {
     getBoundT.mockReturnValueOnce(() => 'ID card')
-    const { getByTestId } = setup(mockPapers[0])
+    const { getByText } = setup(mockPapers[0])
 
-    expect(getByTestId('ID card'))
+    expect(getByText('ID card'))
   })
 
   it('should display "Passport"', () => {
     getBoundT.mockReturnValueOnce(() => 'Passport')
-    const { getByTestId } = setup(mockPapers[1])
+    const { getByText } = setup(mockPapers[1])
 
-    expect(getByTestId('Passport'))
+    expect(getByText('Passport'))
   })
 })
