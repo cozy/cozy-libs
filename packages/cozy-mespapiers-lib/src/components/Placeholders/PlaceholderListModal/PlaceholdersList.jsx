@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useState, useMemo, useRef, Fragment } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 
 import { useClient, Q } from 'cozy-client'
 import { isInstalled } from 'cozy-client/dist/models/applications'
@@ -32,6 +32,9 @@ const PlaceholdersList = ({ currentQualifItems }) => {
   const anchorRefs = useRef([])
   const anchorRef = useRef()
   const client = useClient()
+  const [searchParams] = useSearchParams()
+
+  const returnUrl = searchParams.get('returnUrl')
 
   const allPlaceholders = useMemo(
     () =>
@@ -46,9 +49,8 @@ const PlaceholdersList = ({ currentQualifItems }) => {
   const showActionMenu = isImportDropdownDisplayed && !!placeholderSelected
 
   const redirectPaperCreation = async placeholder => {
-    const countrySearchParam = `${
-      placeholder.country ? `country=${placeholder.country}` : ''
-    }`
+    !!placeholder.country && searchParams.set('country', placeholder.country)
+    !!returnUrl && searchParams.set('returnUrl', returnUrl)
 
     if (isReminder(placeholder)) {
       const { data: apps } = await client.query(Q(APPS_DOCTYPE))
@@ -64,7 +66,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
 
     return navigate({
       pathname: `${pathname}/${placeholder.label}`,
-      search: countrySearchParam
+      search: searchParams.toString()
     })
   }
 
@@ -74,7 +76,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
   })
 
   const showImportDropdown = (idx, placeholder) => {
-    if (placeholder.konnectorCriteria) {
+    if (!returnUrl && placeholder.konnectorCriteria) {
       anchorRef.current = anchorRefs.current[idx]
       setIsImportDropdownDisplayed(true)
       setPlaceholderSelected(placeholder)

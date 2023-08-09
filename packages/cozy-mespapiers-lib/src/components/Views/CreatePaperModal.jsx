@@ -1,5 +1,5 @@
 import React, { useMemo, useEffect } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useSearchParams, useNavigate, useParams } from 'react-router-dom'
 
 import { findPlaceholderByLabelAndCountry } from '../../helpers/findPlaceholders'
 import { FormDataProvider } from '../Contexts/FormDataProvider'
@@ -9,12 +9,15 @@ import { useStepperDialog } from '../Hooks/useStepperDialog'
 import StepperDialogWrapper from '../StepperDialog/StepperDialogWrapper'
 
 const CreatePaperModal = () => {
-  const { search } = useLocation()
   const navigate = useNavigate()
   const { qualificationLabel } = useParams()
+  const [searchParams] = useSearchParams()
   const { papersDefinitions } = usePapersDefinitions()
   const { setCurrentDefinition, currentDefinition } = useStepperDialog()
-  const country = new URLSearchParams(search).get('country')
+
+  const returnUrl = searchParams.get('returnUrl')
+  const country = searchParams.get('country')
+
   const allPlaceholders = useMemo(
     () =>
       findPlaceholderByLabelAndCountry(
@@ -26,7 +29,9 @@ const CreatePaperModal = () => {
   )
 
   const formModel = allPlaceholders[0]
-  const onClose = () => navigate('..')
+  const onClose = () => {
+    returnUrl ? window.open(returnUrl, '_self') : navigate('..')
+  }
 
   useEffect(() => {
     if (formModel && currentDefinition !== formModel) {
