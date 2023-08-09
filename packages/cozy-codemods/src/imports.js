@@ -1,6 +1,7 @@
 const j = require('jscodeshift')
-const groupBy = require('lodash/groupBy')
 const flatten = require('lodash/flatten')
+const groupBy = require('lodash/groupBy')
+const remove = require('lodash/remove')
 
 const isSameSpec = (eSpec, spec) => {
   if (eSpec.imported) {
@@ -315,6 +316,58 @@ const makeJSXElement = ({
   )
 }
 
+/**
+ *
+ * @param {*} attribute
+ * @returns
+ */
+const getAttributeProperties = attribute =>
+  attribute.value.expression.properties
+
+/**
+ * Move the property from an attribute into an other
+ *
+ * @param {obejct} param
+ * @param {object[]} param.attributes - Attributes of the element
+ * @param {} param.attributeName - Name of attribute to move
+ * @param {} param.targetAttributeName - Name of target attribute where the property will be moved
+ * @param {} param.propertyName - Name of the property inserted in the target attribute
+ */
+const moveAttributeIntoProperty = ({
+  attributes,
+  attributeName,
+  targetAttributeName,
+  propertyName
+}) => {
+  const attribute = getAttributeByName({
+    attributes,
+    name: attributeName
+  })
+
+  if (attribute) {
+    const properties = getAttributeProperties(attribute)
+    const newProperty = j.property(
+      'init',
+      j.identifier(propertyName),
+      j.objectExpression(properties)
+    )
+    const nextAttribute = getAttributeByName({
+      attributes,
+      name: targetAttributeName
+    })
+    if (nextAttribute) {
+      getAttributeProperties(nextAttribute).push(newProperty)
+    } else {
+      const newAttribute = j.jsxAttribute(
+        j.jsxIdentifier(targetAttributeName),
+        j.jsxExpressionContainer(j.objectExpression([newProperty]))
+      )
+      attributes.push(newAttribute)
+    }
+  }
+  remove(attributes, attribute => getAttributeName(attribute) === attributeName)
+}
+
 module.exports = {
   simplify,
   ensure,
@@ -324,5 +377,6 @@ module.exports = {
   getAttributeByName,
   makeAttribute,
   makeJSXElement,
-  renameAttributeByName
+  renameAttributeByName,
+  moveAttributeIntoProperty
 }
