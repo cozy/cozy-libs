@@ -7,7 +7,6 @@ import {
   TRIGGERS_DOCTYPE,
   KONNECTORS_DOCTYPE,
   ACCOUNTS_DOCTYPE,
-  APPS_DOCTYPE,
   APPS_REGISTRY_DOCTYPE
 } from '../doctypes'
 
@@ -205,14 +204,6 @@ export const queryAccounts = {
     fetchPolicy: defaultFetchPolicy
   }
 }
-
-export const buildAppsQuery = () => ({
-  definition: () => Q(APPS_DOCTYPE),
-  options: {
-    as: APPS_DOCTYPE,
-    fetchPolicy: defaultFetchPolicy
-  }
-})
 
 export const buildAppRegistryQueryBySlug = slug => {
   return {
