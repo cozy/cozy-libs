@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
-import { useClient } from 'cozy-client'
+import { useClient, Q } from 'cozy-client'
+import { isInstalled } from 'cozy-client/dist/models/applications'
 import { isNote, splitFilename } from 'cozy-client/dist/models/file'
 import { isExpired, isExpiringSoon } from 'cozy-client/dist/models/paper'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
@@ -25,6 +26,7 @@ import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 import ExpirationAnnotation from './ExpirationAnnotation'
 import { RemindersAnnotation } from './RemindersAnnotation'
 import { generateReturnUrlToNotesIndex } from './helpers'
+import { APPS_DOCTYPE } from '../../doctypes'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const useStyles = makeStyles(() => ({
@@ -71,6 +73,14 @@ const PaperItem = ({
       changeCurrentMultiSelectionFile(paper)
     } else {
       if (isNote(paper)) {
+        const { data: apps } = await client.query(Q(APPS_DOCTYPE))
+        const isNoteAppInstalled = !!isInstalled(apps, { slug: 'notes' })
+        if (!isNoteAppInstalled) {
+          return navigate({
+            pathname: `${pathname}/installAppIntent`,
+            search: `redirect=${pathname}`
+          })
+        }
         const webLink = await generateReturnUrlToNotesIndex(client, paper)
         window.open(webLink, '_self')
       } else {
