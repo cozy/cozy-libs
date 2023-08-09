@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React, { useState, useMemo, useRef, Fragment } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
-import { useQuery } from 'cozy-client'
+import { useClient, Q } from 'cozy-client'
 import { isInstalled } from 'cozy-client/dist/models/applications'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import Divider from 'cozy-ui/transpiled/react/Divider'
@@ -13,8 +13,8 @@ import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Radio from 'cozy-ui/transpiled/react/Radios'
 
+import { APPS_DOCTYPE } from '../../../doctypes'
 import { findPlaceholdersByQualification } from '../../../helpers/findPlaceholders'
-import { buildAppsQuery } from '../../../helpers/queries'
 import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'
 import { useScannerI18n } from '../../Hooks/useScannerI18n'
 import FileIcon from '../../Icons/FileIcon'
@@ -31,9 +31,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
   const scannerT = useScannerI18n()
   const anchorRefs = useRef([])
   const anchorRef = useRef()
-
-  const appsQuery = buildAppsQuery()
-  const { data: apps } = useQuery(appsQuery.definition, appsQuery.options)
+  const client = useClient()
 
   const allPlaceholders = useMemo(
     () =>
@@ -47,17 +45,21 @@ const PlaceholdersList = ({ currentQualifItems }) => {
 
   const showActionMenu = isImportDropdownDisplayed && !!placeholderSelected
 
-  const redirectPaperCreation = placeholder => {
+  const redirectPaperCreation = async placeholder => {
     const countrySearchParam = `${
       placeholder.country ? `country=${placeholder.country}` : ''
     }`
 
-    const isNoteAppInstalled = !!isInstalled(apps, { slug: 'notes' })
-    if (isReminder(placeholder) && !isNoteAppInstalled) {
-      return navigate({
-        pathname: '../installAppIntent',
-        search: `redirect=${pathname}/${placeholder.label}`
-      })
+    if (isReminder(placeholder)) {
+      const { data: apps } = await client.query(Q(APPS_DOCTYPE))
+      const isNoteAppInstalled = !!isInstalled(apps, { slug: 'notes' })
+
+      if (!isNoteAppInstalled) {
+        return navigate({
+          pathname: '../installAppIntent',
+          search: `redirect=${pathname}/${placeholder.label}`
+        })
+      }
     }
 
     return navigate({

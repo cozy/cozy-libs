@@ -2,14 +2,14 @@ import PropTypes from 'prop-types'
 import React, { cloneElement, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import { useQuery } from 'cozy-client'
+import { useClient, Q } from 'cozy-client'
 import { isInstalled } from 'cozy-client/dist/models/applications'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 
 import useGeneralActions from './useGeneralActions'
 import useKonnectorsActions from './useKonnectorsActions'
 import { isReminder } from '../../components/Placeholders/helpers'
-import { buildAppsQuery } from '../../helpers/queries'
+import { APPS_DOCTYPE } from '../../doctypes'
 
 const PapersFabWrapper = ({ children }) => {
   const navigate = useNavigate()
@@ -17,23 +17,25 @@ const PapersFabWrapper = ({ children }) => {
   const { pathname } = useLocation()
   const [showGeneralMenu, setShowGeneralMenu] = useState(false)
   const [showKonnectorMenu, setShowKonnectorMenu] = useState(false)
+  const client = useClient()
 
-  const appsQuery = buildAppsQuery()
-  const { data: apps } = useQuery(appsQuery.definition, appsQuery.options)
-
-  const redirectPaperCreation = paperDefinition => {
+  const redirectPaperCreation = async paperDefinition => {
     setShowKonnectorMenu(false)
     const redirectPath = `${pathname}/create/${paperDefinition.label}`
     const countrySearchParam = `${
       paperDefinition.country ? `country=${paperDefinition.country}` : ''
     }`
 
-    const isNoteAppInstalled = !!isInstalled(apps, { slug: 'notes' })
-    if (isReminder(paperDefinition) && !isNoteAppInstalled) {
-      return navigate({
-        pathname: `${pathname}/installAppIntent`,
-        search: `redirect=${redirectPath}`
-      })
+    if (isReminder(paperDefinition)) {
+      const { data: apps } = await client.query(Q(APPS_DOCTYPE))
+      const isNoteAppInstalled = !!isInstalled(apps, { slug: 'notes' })
+
+      if (!isNoteAppInstalled) {
+        return navigate({
+          pathname: `${pathname}/installAppIntent`,
+          search: `redirect=${redirectPath}`
+        })
+      }
     }
 
     return navigate({
