@@ -1,11 +1,14 @@
 import React, { useMemo, useEffect } from 'react'
 import { useSearchParams, useNavigate, useParams } from 'react-router-dom'
 
+import { getFilesToHandle } from './createPaperModalTemps'
 import { findPlaceholderByLabelAndCountry } from '../../helpers/findPlaceholders'
 import { FormDataProvider } from '../Contexts/FormDataProvider'
 import { StepperDialogProvider } from '../Contexts/StepperDialogProvider'
+import { useFormData } from '../Hooks/useFormData'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
+import { makeFileFromBase64 } from '../ModelSteps/helpers'
 import StepperDialogWrapper from '../StepperDialog/StepperDialogWrapper'
 
 const CreatePaperModal = () => {
@@ -13,7 +16,19 @@ const CreatePaperModal = () => {
   const { qualificationLabel } = useParams()
   const [searchParams] = useSearchParams()
   const { papersDefinitions } = usePapersDefinitions()
-  const { setCurrentDefinition, currentDefinition } = useStepperDialog()
+  const {
+    setCurrentDefinition,
+    currentDefinition,
+    setCurrentStepIndex,
+    allCurrentSteps
+  } = useStepperDialog()
+  const { setFormData } = useFormData()
+  const base64File = getFilesToHandle()
+  const file = makeFileFromBase64({
+    source: base64File,
+    name: 'test.png',
+    type: 'image/png'
+  })
 
   const returnUrl = searchParams.get('returnUrl')
   const country = searchParams.get('country')
@@ -43,6 +58,31 @@ const CreatePaperModal = () => {
       setCurrentDefinition(formModel)
     }
   }, [formModel, currentDefinition, setCurrentDefinition])
+
+  useEffect(() => {
+    // here we should probably condition according to the return of getFilesToHandle
+    // and not according to the presence of returnUrl.
+    // For the moment, getFilesToHandle is mocked, so let's leave it that way.
+    if (allCurrentSteps?.length > 0 && returnUrl) {
+      const nextStep = allCurrentSteps.find(
+        el => el.model !== 'scan' || el.page === 'back'
+      )
+      setFormData(prev => ({
+        ...prev,
+        data: [
+          ...prev.data,
+          {
+            file,
+            stepIndex: 1,
+            fileMetadata: {
+              page: 'front'
+            }
+          }
+        ]
+      }))
+      setCurrentStepIndex(nextStep.stepIndex)
+    }
+  }, [returnUrl, allCurrentSteps]) // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!currentDefinition) {
     return null
