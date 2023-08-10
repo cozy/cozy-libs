@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.0.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@17.0.0...cozy-harvest-lib@17.0.1) (2023-08-10)
+
+
+### Bug Fixes
+
+* English locale for oauth connection ([5be73d0](https://github.com/cozy/cozy-libs/commit/5be73d0027387220cc33c71a8e9aae8b61d4b0e0))
+
+
+
+
+
 # [17.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@16.1.0...cozy-harvest-lib@17.0.0) (2023-08-02)
 
 
