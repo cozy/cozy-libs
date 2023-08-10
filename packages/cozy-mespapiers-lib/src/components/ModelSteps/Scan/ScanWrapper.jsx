@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 import { useClient, models } from 'cozy-client'
 import { useWebviewIntent } from 'cozy-intent'
@@ -9,6 +10,7 @@ import ScanDialog from './ScanDialog'
 import { PaperDefinitionsStepPropTypes } from '../../../constants/PaperDefinitionsPropTypes'
 import { makeFileFromBlob } from '../../../helpers/makeFileFromBlob'
 import { useFormData } from '../../Hooks/useFormData'
+import { useStepperDialog } from '../../Hooks/useStepperDialog'
 import ScanResultDialog from '../ScanResult/ScanResultDialog'
 import {
   getLastFormDataFile,
@@ -20,6 +22,8 @@ const { fetchBlobFileById } = models.file
 
 const ScanWrapper = ({ currentStep, onClose, onBack }) => {
   const client = useClient()
+  const [searchParams] = useSearchParams()
+  const { nextStep } = useStepperDialog()
   const { formData, setFormData } = useFormData()
   const { stepIndex, multipage, page } = currentStep
   const [currentFile, setCurrentFile] = useState(
@@ -27,6 +31,8 @@ const ScanWrapper = ({ currentStep, onClose, onBack }) => {
   )
   const [isFilePickerModalOpen, setIsFilePickerModalOpen] = useState(false)
   const webviewIntent = useWebviewIntent()
+
+  const returnUrl = searchParams.get('returnUrl')
 
   const onChangeFile = (file, { replace = false } = {}) => {
     if (file) {
@@ -81,6 +87,11 @@ const ScanWrapper = ({ currentStep, onClose, onBack }) => {
     } catch (error) {
       log('error', `Flagship scan error: ${error}`)
     }
+  }
+
+  if (!!returnUrl && (page === 'front' || page === undefined)) {
+    nextStep()
+    return null
   }
 
   if (currentFile) {
