@@ -20,9 +20,9 @@ jest.mock('../Hooks/useStepperDialog')
 /* eslint-enable react/display-name */
 
 const mockAllCurrentSteps = [
-  { stepIndex: 1, model: 'Scan' },
-  { stepIndex: 2, model: 'Information' },
-  { stepIndex: 3, model: 'Contact' }
+  { stepIndex: 1, model: 'scan' },
+  { stepIndex: 2, model: 'information' },
+  { stepIndex: 3, model: 'contact' }
 ]
 
 describe('StepperDialogWrapper', () => {
