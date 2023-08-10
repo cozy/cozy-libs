@@ -434,7 +434,7 @@
       "label": "Reconnect"
     },
     "connect": {
-      "description": "Connect %{slug} to your Cozy to synchronize your account and automatically retrieve all your data.",
+      "description": "Connect %{name} to your Cozy to synchronize your account and automatically retrieve all your data.",
       "label": "Connect",
       "submit": "Connect",
       "title": "Connect to your Cozy"
