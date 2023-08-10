@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [57.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@57.0.0...cozy-mespapiers-lib@57.1.0) (2023-08-10)
+
+
+### Bug Fixes
+
+* Installation of cozy-notes by intent when creating a note ([50ec289](https://github.com/cozy/cozy-libs/commit/50ec2896a42461d5ac0f940b31109a42f8494a77))
+
+
+### Features
+
+* Redirect on the install path by Intent when click on a note ([fb2bb30](https://github.com/cozy/cozy-libs/commit/fb2bb30081bc87163014153597e827340be568a2))
+
+
+
+
+
 # [57.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@56.0.0...cozy-mespapiers-lib@57.0.0) (2023-08-08)
 
 
