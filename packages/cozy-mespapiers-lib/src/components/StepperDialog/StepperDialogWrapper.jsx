@@ -8,7 +8,7 @@ import InformationDialog from '../ModelSteps/InformationDialog'
 import NoteDialog from '../ModelSteps/NoteDialog'
 import ScanWrapper from '../ModelSteps/Scan/ScanWrapper'
 
-const StepperDialogWrapper = ({ onClose }) => {
+const StepperDialogWrapper = ({ onClose, onSubmit }) => {
   const { isMobile } = useBreakpoints()
   const { allCurrentSteps, currentStepIndex, previousStep } = useStepperDialog()
 
@@ -29,6 +29,7 @@ const StepperDialogWrapper = ({ onClose }) => {
               key={currentStep.stepIndex}
               currentStep={currentStep}
               onClose={onClose}
+              onSubmit={onSubmit}
               onBack={handleBack()}
             />
           )
@@ -38,6 +39,7 @@ const StepperDialogWrapper = ({ onClose }) => {
               key={currentStep.stepIndex}
               currentStep={currentStep}
               onClose={onClose}
+              onSubmit={onSubmit}
               onBack={handleBack()}
             />
           )
@@ -47,6 +49,7 @@ const StepperDialogWrapper = ({ onClose }) => {
               key={currentStep.stepIndex}
               currentStep={currentStep}
               onClose={onClose}
+              onSubmit={onSubmit}
               onBack={handleBack()}
             />
           )
@@ -56,6 +59,7 @@ const StepperDialogWrapper = ({ onClose }) => {
               key={currentStep.stepIndex}
               currentStep={currentStep}
               onClose={onClose}
+              onSubmit={onSubmit}
               onBack={handleBack()}
             />
           )

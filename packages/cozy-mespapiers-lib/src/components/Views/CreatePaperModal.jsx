@@ -29,8 +29,13 @@ const CreatePaperModal = () => {
   )
 
   const formModel = allPlaceholders[0]
+
   const onClose = () => {
     returnUrl ? window.open(returnUrl, '_self') : navigate('..')
+  }
+
+  const onSubmit = () => {
+    navigate(`/paper/files/${qualificationLabel}`)
   }
 
   useEffect(() => {
@@ -43,7 +48,7 @@ const CreatePaperModal = () => {
     return null
   }
 
-  return <StepperDialogWrapper onClose={onClose} />
+  return <StepperDialogWrapper onClose={onClose} onSubmit={onSubmit} />
 }
 
 const CreatePaperModalWrapper = () => {

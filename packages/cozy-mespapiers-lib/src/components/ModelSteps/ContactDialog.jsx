@@ -13,7 +13,7 @@ import CompositeHeader from '../CompositeHeader/CompositeHeader'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
 import StepperDialogTitle from '../StepperDialog/StepperDialogTitle'
 
-const ContactDialog = ({ currentStep, onClose, onBack }) => {
+const ContactDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
   const { t } = useI18n()
   const client = useClient()
   const { currentStepIndex, nextStep, isLastStep } = useStepperDialog()
@@ -67,7 +67,7 @@ const ContactDialog = ({ currentStep, onClose, onBack }) => {
         actions={
           SubmitButtonComponent ? (
             <SubmitButtonComponent
-              onClose={onClose}
+              onClose={onSubmit}
               disabled={buttonDisabled}
             />
           ) : (
@@ -92,7 +92,8 @@ ContactDialog.propTypes = {
     multiple: PropTypes.bool
   }).isRequired,
   onClose: PropTypes.func.isRequired,
-  onBack: PropTypes.func
+  onBack: PropTypes.func,
+  onSubmit: PropTypes.func
 }
 
 export default ContactDialog
