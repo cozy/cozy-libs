@@ -21,7 +21,18 @@
     "installFlagship": {
       "label": "Installeer Cozy op je telefoon"
     },
-    "notClientSide": "%{name} maakt gebruik van een hagelnieuw efficiënt systeem om gegevens op te vragen op je Cozy. Deze action is alleen te gebruiken via de Cozy-smartphone-app."
+    "cannotConnectModal": {
+      "title": "Kun je geen verbinding maken?",
+      "content": "Controleer je inloggegevens of herstel je wachtwoord op de website van [%{vendorName}](%{vendorLink}).",
+      "noAccount": "Als je nog geen account hebt, maak die dan aan op de website van [%{vendorName}](%{vendorLink})."
+    },
+    "cannotConnectLink": "Ik kan geen verbinding maken",
+    "notClientSide": "Installeer de Cozy-app op je telefoon of tablet om je %{name}-gegevens te synchroniseren.",
+    "clientSide": {
+      "title": "Koppelen aan mijn Cozy",
+      "submit": "Koppelen",
+      "description": "Koppel %{name} aan je Cozy om te synchroniseren met je account en automatisch al je gegevens op te halen."
+    }
   },
   "contracts": {
     "headers": {
@@ -70,8 +81,11 @@
   "card": {
     "launchTrigger": {
       "button": {
-        "label": "Opnieuw uitvoeren"
+        "label": "Synchroniseren"
       },
+      "configure": "Instellen",
+      "connect": "Koppelen",
+      "success": "De synchronisatie is voltooid",
       "error": "Er is een fout opgetreden.",
       "frequency": {
         "label": "Frequentie:",
@@ -83,10 +97,17 @@
       },
       "lastSync": {
         "label": "Bijwerken:",
-        "syncing": "Bezig met uitvoeren…",
+        "syncing": "Gegevensherstel…",
         "unknown": "Onbekend",
-        "afterSomeTimes": "Sync. %{times} geleden",
-        "justNow": "Sync. onmiddellijk"
+        "afterSomeTimes": "%{times} geleden gesynchroniseerd",
+        "format": "DD-MM-YYYY",
+        "disconnected": "Losgekoppeld",
+        "justNow": "Zojuist gesynchroniseerd"
+      },
+      "runningAlert": {
+        "title": "Sluit de app niet!",
+        "body": "De telefoon moet aan blijven om het proces te kunnen voltooien. Je kunt echter gebruik blijven maken van de app.",
+        "button": "Ik begrijp het"
       }
     },
     "appLink": {
@@ -125,6 +146,7 @@
     "baseDir": "/Administratief"
   },
   "error": {
+    "application-not-found": "Deze app bestaat niet",
     "reconnect-via-form": "Opnieuw koppelen",
     "job": {
       "DISK_QUOTA_EXCEEDED": {
@@ -217,7 +239,7 @@
       },
       "ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED": {
         "title": "Dit account is al toegevoegd",
-        "description": "Je hebt al een account met deze identificaties ingesteld."
+        "description": "Je mogelijke aanpassing aan de accountlijst wordt binnen een paar minuten doorgevoerd."
       }
     }
   },
@@ -381,6 +403,11 @@
       "title": "%{name} koppelen",
       "button": "Account toevoegen"
     },
+    "deleteBIConnection": {
+      "title": "Loskoppelen",
+      "description": "Je verzoek is genoteerd en wordt over enkele ogenblikken uitgevoerd. Eerder geïmporteerde gegevens worden niet verwijderd.",
+      "confirm-deletion": "Sluiten"
+    },
     "deleteAccount": {
       "title": "Loskoppelen",
       "description": "Je account wordt losgekoppeld, maar belangrijke gegevens worden bewaard",
@@ -407,7 +434,10 @@
       "label": "Opnieuw koppelen"
     },
     "connect": {
-      "label": "Koppelen"
+      "description": "Koppel %{name} aan je Cozy om te synchroniseren met je account en automatisch al je gegevens op te halen.",
+      "label": "Koppelen",
+      "submit": "Koppelen",
+      "title": "Koppelen aan mijn Cozy"
     },
     "window": {
       "title": "OAuth"
@@ -510,6 +540,10 @@
       "primaryText": "Bijwerken",
       "secondaryText": "Annuleren"
     }
+  },
+  "connectionBackdrop": {
+    "connecting": "Bezig met verbinden…",
+    "progress": "We zoeken %{name} op - dit kan max. 30 seconden duren…"
   },
   "disconnectedAccountModal": {
     "disconnected-help": "Dit account is losgekoppeld, maar je gegevens zijn bewaard. Als je opnieuw wilt synchroniseren, stel dan je account opnieuw in middels de knop 'Bank toevoegen'."
