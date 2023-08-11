@@ -22,20 +22,21 @@ import { useMultiSelection } from '../Hooks/useMultiSelection'
 const useActions = doc => {
   const { pushModal, popModal } = useModal()
   const { addMultiSelectionFile } = useMultiSelection()
+  const isNoteDoc = isFile(doc) ? isNote(doc) : false
 
   const actionVariant = makeActionVariant()
   const actions = useMemo(
     () =>
       makeActions(
         [
-          isNote(doc) && copyReminderContent,
+          isNoteDoc && copyReminderContent,
           select,
           divider,
           ...actionVariant,
           open,
           divider,
           rename,
-          isNote(doc) && editContact,
+          isNoteDoc && editContact,
           divider,
           viewInDrive,
           divider,
@@ -47,7 +48,7 @@ const useActions = doc => {
           popModal
         }
       ),
-    [actionVariant, addMultiSelectionFile, popModal, pushModal, doc]
+    [actionVariant, addMultiSelectionFile, popModal, pushModal, isNoteDoc]
   )
 
   return !isFile(doc) ? undefined : actions
