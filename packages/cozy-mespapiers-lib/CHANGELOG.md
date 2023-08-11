@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [57.1.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@57.1.1...cozy-mespapiers-lib@57.1.2) (2023-08-11)
+
+
+### Bug Fixes
+
+* **mespapiers:** Make sure the doc must be a file before using isNote ([2686603](https://github.com/cozy/cozy-libs/commit/2686603def1cd2d051e1dde065a9177879db5d59))
+
+
+
+
+
 ## [57.1.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@57.1.0...cozy-mespapiers-lib@57.1.1) (2023-08-10)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
