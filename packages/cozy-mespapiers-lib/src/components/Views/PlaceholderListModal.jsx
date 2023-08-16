@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
+import { useWebviewIntent } from 'cozy-intent'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
@@ -16,6 +17,7 @@ const defaultState = {
 
 const PlaceholderListModal = () => {
   const { t } = useI18n()
+  const webviewIntent = useWebviewIntent()
   const navigate = useNavigate()
   const scannerT = useScannerI18n()
   const [searchParams] = useSearchParams()
@@ -23,9 +25,9 @@ const PlaceholderListModal = () => {
 
   const fromFlagshipUpload = searchParams.get('fromFlagshipUpload')
 
-  const handleClose = () => {
+  const handleClose = async () => {
     fromFlagshipUpload
-      ? window.open(fromFlagshipUpload, '_self')
+      ? await webviewIntent?.call('cancelUploadByCozyApp')
       : navigate('..')
   }
 

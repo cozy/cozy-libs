@@ -9,7 +9,7 @@ const allCurrentSteps = mockAllCurrentSteps
 const previousStep = jest.fn()
 const setCurrentStepIndex = jest.fn()
 const onClose = jest.fn()
-window.open = jest.fn()
+const webviewIntent = { call: jest.fn() }
 
 describe('handleBack', () => {
   beforeEach(() => {
@@ -22,13 +22,14 @@ describe('handleBack', () => {
     describe('if isMobile is true', () => {
       const isMobile = true
 
-      it('should call onClose function', () => {
-        handleBack({
+      it('should call onClose function', async () => {
+        await handleBack({
           allCurrentSteps,
           currentStepIndex,
           previousStep,
           setCurrentStepIndex,
           fromFlagshipUpload: '',
+          webviewIntent,
           isMobile,
           onClose
         })
@@ -40,32 +41,34 @@ describe('handleBack', () => {
     describe('if isMobile is false', () => {
       const isMobile = false
 
-      it('should go to fromFlagshipUpload if defined', () => {
-        handleBack({
+      it('should go to fromFlagshipUpload if defined', async () => {
+        await handleBack({
           allCurrentSteps,
           currentStepIndex,
           previousStep,
           setCurrentStepIndex,
           fromFlagshipUpload: 'https://cozy.io/',
+          webviewIntent,
           isMobile,
           onClose
         })
 
-        expect(window.open).toBeCalledWith('https://cozy.io/', '_self')
+        expect(webviewIntent.call).toBeCalledWith('cancelUploadByCozyApp')
       })
 
-      it('should do nothing if no fromFlagshipUpload', () => {
-        const res = handleBack({
+      it('should do nothing if no fromFlagshipUpload', async () => {
+        const res = await handleBack({
           allCurrentSteps,
           currentStepIndex,
           previousStep,
           setCurrentStepIndex,
           fromFlagshipUpload: undefined,
+          webviewIntent,
           isMobile,
           onClose
         })
 
-        expect(window.open).not.toBeCalled()
+        expect(webviewIntent.call).not.toBeCalled()
         expect(onClose).not.toBeCalled()
         expect(res).toBeUndefined()
       })
@@ -80,22 +83,23 @@ describe('handleBack', () => {
       const fromFlagshipUpload = 'https://cozy.io/'
 
       describe('if the previous step is a scan step or front page', () => {
-        it('should go to fromFlagshipUpload if not possible to go 2 steps back', () => {
-          handleBack({
+        it('should go to fromFlagshipUpload if not possible to go 2 steps back', async () => {
+          await handleBack({
             allCurrentSteps,
             currentStepIndex,
             previousStep,
             setCurrentStepIndex,
             fromFlagshipUpload,
+            webviewIntent,
             isMobile,
             onClose
           })
 
-          expect(window.open).toBeCalledWith('https://cozy.io/', '_self')
+          expect(webviewIntent.call).toBeCalledWith('cancelUploadByCozyApp')
         })
 
-        it('should go 2 steps back if possible', () => {
-          handleBack({
+        it('should go 2 steps back if possible', async () => {
+          await handleBack({
             allCurrentSteps: [
               { stepIndex: 1, model: 'information' },
               { stepIndex: 2, model: 'scan' },
@@ -105,31 +109,33 @@ describe('handleBack', () => {
             previousStep,
             setCurrentStepIndex,
             fromFlagshipUpload,
+            webviewIntent,
             isMobile,
             onClose
           })
 
           expect(previousStep).not.toBeCalled()
           expect(setCurrentStepIndex).toBeCalledWith(1)
-          expect(window.open).not.toBeCalled()
+          expect(webviewIntent.call).not.toBeCalled()
         })
       })
 
       describe('if the previous step is not a scan step or front page', () => {
-        it('should go to the previous step', () => {
-          handleBack({
+        it('should go to the previous step', async () => {
+          await handleBack({
             allCurrentSteps,
             currentStepIndex: 3,
             previousStep,
             setCurrentStepIndex,
             fromFlagshipUpload,
+            webviewIntent,
             isMobile,
             onClose
           })
 
           expect(previousStep).toBeCalled()
           expect(setCurrentStepIndex).not.toBeCalled()
-          expect(window.open).not.toBeCalled()
+          expect(webviewIntent.call).not.toBeCalled()
         })
       })
     })
@@ -137,19 +143,20 @@ describe('handleBack', () => {
     describe('for undefined fromFlagshipUpload', () => {
       const fromFlagshipUpload = undefined
 
-      it('should go to previous step', () => {
-        handleBack({
+      it('should go to previous step', async () => {
+        await handleBack({
           allCurrentSteps,
           currentStepIndex,
           previousStep,
           setCurrentStepIndex,
           fromFlagshipUpload,
+          webviewIntent,
           isMobile,
           onClose
         })
 
         expect(previousStep).toBeCalled()
-        expect(window.open).not.toBeCalled()
+        expect(webviewIntent.call).not.toBeCalled()
         expect(onClose).not.toBeCalled()
       })
     })

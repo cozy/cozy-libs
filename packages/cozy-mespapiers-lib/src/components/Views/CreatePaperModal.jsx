@@ -1,6 +1,8 @@
 import React, { useMemo, useEffect } from 'react'
 import { useSearchParams, useNavigate, useParams } from 'react-router-dom'
 
+import { useWebviewIntent } from 'cozy-intent'
+
 import { getFilesToHandle } from './createPaperModalTemps'
 import { findPlaceholderByLabelAndCountry } from '../../helpers/findPlaceholders'
 import { FormDataProvider } from '../Contexts/FormDataProvider'
@@ -22,8 +24,9 @@ const CreatePaperModal = () => {
     setCurrentStepIndex,
     allCurrentSteps
   } = useStepperDialog()
+  const webviewIntent = useWebviewIntent()
   const { setFormData } = useFormData()
-  const base64File = getFilesToHandle()
+  const base64File = getFilesToHandle() // we should use the one from webviewIntent
   const file = makeFileFromBase64({
     source: base64File,
     name: 'test.png',
@@ -45,9 +48,9 @@ const CreatePaperModal = () => {
 
   const formModel = allPlaceholders[0]
 
-  const onClose = () => {
+  const onClose = async () => {
     fromFlagshipUpload
-      ? window.open(fromFlagshipUpload, '_self')
+      ? await webviewIntent?.call('cancelUploadByCozyApp')
       : navigate('..')
   }
 

@@ -1,9 +1,10 @@
-export const handleBack = ({
+export const handleBack = async ({
   allCurrentSteps,
   currentStepIndex,
   previousStep,
   setCurrentStepIndex,
   fromFlagshipUpload,
+  webviewIntent,
   isMobile,
   onClose
 }) => {
@@ -21,13 +22,13 @@ export const handleBack = ({
         ? previousStep()
         : currentStepIndex > 2
         ? setCurrentStepIndex(currentStepIndex - 2)
-        : window.open(fromFlagshipUpload, '_self')
+        : await webviewIntent?.call('cancelUploadByCozyApp')
       : previousStep()
   }
 
   return isMobile
     ? onClose()
     : fromFlagshipUpload
-    ? window.open(fromFlagshipUpload, '_self')
+    ? await webviewIntent?.call('cancelUploadByCozyApp')
     : undefined
 }
