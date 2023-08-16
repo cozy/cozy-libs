@@ -20,7 +20,7 @@ const StepperDialogWrapper = ({ onClose, onSubmit }) => {
     setCurrentStepIndex
   } = useStepperDialog()
 
-  const returnUrl = searchParams.get('returnUrl')
+  const fromFlagshipUpload = searchParams.get('fromFlagshipUpload')
 
   return allCurrentSteps.map(currentStep => {
     if (currentStep.stepIndex === currentStepIndex) {
@@ -39,7 +39,7 @@ const StepperDialogWrapper = ({ onClose, onSubmit }) => {
                   currentStepIndex,
                   previousStep,
                   setCurrentStepIndex,
-                  returnUrl,
+                  fromFlagshipUpload,
                   isMobile,
                   onClose
                 })
@@ -59,7 +59,7 @@ const StepperDialogWrapper = ({ onClose, onSubmit }) => {
                   currentStepIndex,
                   previousStep,
                   setCurrentStepIndex,
-                  returnUrl,
+                  fromFlagshipUpload,
                   isMobile,
                   onClose
                 })
@@ -79,7 +79,7 @@ const StepperDialogWrapper = ({ onClose, onSubmit }) => {
                   currentStepIndex,
                   previousStep,
                   setCurrentStepIndex,
-                  returnUrl,
+                  fromFlagshipUpload,
                   isMobile,
                   onClose
                 })
@@ -99,7 +99,7 @@ const StepperDialogWrapper = ({ onClose, onSubmit }) => {
                   currentStepIndex,
                   previousStep,
                   setCurrentStepIndex,
-                  returnUrl,
+                  fromFlagshipUpload,
                   isMobile,
                   onClose
                 })

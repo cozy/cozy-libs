@@ -30,7 +30,7 @@ const CreatePaperModal = () => {
     type: 'image/png'
   })
 
-  const returnUrl = searchParams.get('returnUrl')
+  const fromFlagshipUpload = searchParams.get('fromFlagshipUpload')
   const country = searchParams.get('country')
 
   const allPlaceholders = useMemo(
@@ -46,7 +46,9 @@ const CreatePaperModal = () => {
   const formModel = allPlaceholders[0]
 
   const onClose = () => {
-    returnUrl ? window.open(returnUrl, '_self') : navigate('..')
+    fromFlagshipUpload
+      ? window.open(fromFlagshipUpload, '_self')
+      : navigate('..')
   }
 
   const onSubmit = () => {
@@ -61,9 +63,9 @@ const CreatePaperModal = () => {
 
   useEffect(() => {
     // here we should probably condition according to the return of getFilesToHandle
-    // and not according to the presence of returnUrl.
+    // and not according to the presence of fromFlagshipUpload.
     // For the moment, getFilesToHandle is mocked, so let's leave it that way.
-    if (allCurrentSteps?.length > 0 && returnUrl) {
+    if (allCurrentSteps?.length > 0 && fromFlagshipUpload) {
       const nextStep = allCurrentSteps.find(
         el => el.model !== 'scan' || el.page === 'back'
       )
@@ -82,7 +84,7 @@ const CreatePaperModal = () => {
       }))
       setCurrentStepIndex(nextStep.stepIndex)
     }
-  }, [returnUrl, allCurrentSteps]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [fromFlagshipUpload, allCurrentSteps]) // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!currentDefinition) {
     return null

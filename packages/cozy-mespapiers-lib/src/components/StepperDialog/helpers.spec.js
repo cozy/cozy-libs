@@ -28,7 +28,7 @@ describe('handleBack', () => {
           currentStepIndex,
           previousStep,
           setCurrentStepIndex,
-          returnUrl: '',
+          fromFlagshipUpload: '',
           isMobile,
           onClose
         })
@@ -40,13 +40,13 @@ describe('handleBack', () => {
     describe('if isMobile is false', () => {
       const isMobile = false
 
-      it('should go to returnUrl if defined', () => {
+      it('should go to fromFlagshipUpload if defined', () => {
         handleBack({
           allCurrentSteps,
           currentStepIndex,
           previousStep,
           setCurrentStepIndex,
-          returnUrl: 'https://cozy.io/',
+          fromFlagshipUpload: 'https://cozy.io/',
           isMobile,
           onClose
         })
@@ -54,13 +54,13 @@ describe('handleBack', () => {
         expect(window.open).toBeCalledWith('https://cozy.io/', '_self')
       })
 
-      it('should do nothing if no returnUrl', () => {
+      it('should do nothing if no fromFlagshipUpload', () => {
         const res = handleBack({
           allCurrentSteps,
           currentStepIndex,
           previousStep,
           setCurrentStepIndex,
-          returnUrl: undefined,
+          fromFlagshipUpload: undefined,
           isMobile,
           onClose
         })
@@ -76,17 +76,17 @@ describe('handleBack', () => {
     const currentStepIndex = 2
     const isMobile = undefined
 
-    describe('for defined returnUrl', () => {
-      const returnUrl = 'https://cozy.io/'
+    describe('for defined fromFlagshipUpload', () => {
+      const fromFlagshipUpload = 'https://cozy.io/'
 
       describe('if the previous step is a scan step or front page', () => {
-        it('should go to returnUrl if not possible to go 2 steps back', () => {
+        it('should go to fromFlagshipUpload if not possible to go 2 steps back', () => {
           handleBack({
             allCurrentSteps,
             currentStepIndex,
             previousStep,
             setCurrentStepIndex,
-            returnUrl,
+            fromFlagshipUpload,
             isMobile,
             onClose
           })
@@ -104,7 +104,7 @@ describe('handleBack', () => {
             currentStepIndex: 3,
             previousStep,
             setCurrentStepIndex,
-            returnUrl,
+            fromFlagshipUpload,
             isMobile,
             onClose
           })
@@ -122,7 +122,7 @@ describe('handleBack', () => {
             currentStepIndex: 3,
             previousStep,
             setCurrentStepIndex,
-            returnUrl,
+            fromFlagshipUpload,
             isMobile,
             onClose
           })
@@ -134,8 +134,8 @@ describe('handleBack', () => {
       })
     })
 
-    describe('for undefined returnUrl', () => {
-      const returnUrl = undefined
+    describe('for undefined fromFlagshipUpload', () => {
+      const fromFlagshipUpload = undefined
 
       it('should go to previous step', () => {
         handleBack({
@@ -143,7 +143,7 @@ describe('handleBack', () => {
           currentStepIndex,
           previousStep,
           setCurrentStepIndex,
-          returnUrl,
+          fromFlagshipUpload,
           isMobile,
           onClose
         })

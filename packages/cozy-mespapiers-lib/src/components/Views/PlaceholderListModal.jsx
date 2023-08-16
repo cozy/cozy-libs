@@ -21,10 +21,12 @@ const PlaceholderListModal = () => {
   const [searchParams] = useSearchParams()
   const [state, setState] = useState(defaultState)
 
-  const returnUrl = searchParams.get('returnUrl')
+  const fromFlagshipUpload = searchParams.get('fromFlagshipUpload')
 
   const handleClose = () => {
-    returnUrl ? window.open(returnUrl, '_self') : navigate('..')
+    fromFlagshipUpload
+      ? window.open(fromFlagshipUpload, '_self')
+      : navigate('..')
   }
 
   const resetCurrentQualif = () => {
