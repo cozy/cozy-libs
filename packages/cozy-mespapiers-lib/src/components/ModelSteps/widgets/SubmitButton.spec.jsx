@@ -23,7 +23,7 @@ jest.mock('./ConfirmReplaceFile', () => () => (
 const setup = ({
   formData = mockFormData(),
   formSubmit = jest.fn(),
-  onClose = jest.fn(),
+  onSubmit = jest.fn(),
   disabled = false
 } = {}) => {
   useFormData.mockReturnValue({
@@ -33,7 +33,7 @@ const setup = ({
   })
   return render(
     <AppLike>
-      <SubmitButton onClose={onClose} disabled={disabled} />
+      <SubmitButton onSubmit={onSubmit} disabled={disabled} />
     </AppLike>
   )
 }

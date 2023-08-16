@@ -11,7 +11,7 @@ import { KEYS } from '../../../constants/const'
 import { FILES_DOCTYPE } from '../../../doctypes'
 import { useFormData } from '../../Hooks/useFormData'
 
-const SubmitButton = ({ onClose, disabled }) => {
+const SubmitButton = ({ onSubmit, disabled }) => {
   const [isBusy, setIsBusy] = useState(false)
   const [confirmReplaceFileModal, setConfirmReplaceFileModal] = useState(false)
   const { formSubmit, formData } = useFormData()
@@ -24,7 +24,7 @@ const SubmitButton = ({ onClose, disabled }) => {
   const submit = async () => {
     setIsBusy(true)
     await formSubmit()
-    onClose()
+    onSubmit()
   }
 
   const handleReplace = async isFileReplaced => {
@@ -73,7 +73,7 @@ const SubmitButton = ({ onClose, disabled }) => {
 }
 
 SubmitButton.propTypes = {
-  onClose: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
   disabled: PropTypes.bool
 }
 

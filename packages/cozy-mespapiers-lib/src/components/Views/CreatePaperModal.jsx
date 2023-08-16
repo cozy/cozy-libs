@@ -26,12 +26,6 @@ const CreatePaperModal = () => {
   } = useStepperDialog()
   const webviewIntent = useWebviewIntent()
   const { setFormData } = useFormData()
-  const base64File = getFilesToHandle() // we should use the one from webviewIntent
-  const file = makeFileFromBase64({
-    source: base64File,
-    name: 'test.png',
-    type: 'image/png'
-  })
 
   const fromFlagshipUpload = searchParams.get('fromFlagshipUpload')
   const country = searchParams.get('country')
@@ -65,29 +59,37 @@ const CreatePaperModal = () => {
   }, [formModel, currentDefinition, setCurrentDefinition])
 
   useEffect(() => {
-    // here we should probably condition according to the return of getFilesToHandle
-    // and not according to the presence of fromFlagshipUpload.
-    // For the moment, getFilesToHandle is mocked, so let's leave it that way.
-    if (allCurrentSteps?.length > 0 && fromFlagshipUpload) {
-      const nextStep = allCurrentSteps.find(
-        el => el.model !== 'scan' || el.page === 'back'
-      )
-      setFormData(prev => ({
-        ...prev,
-        data: [
-          ...prev.data,
-          {
-            file,
-            stepIndex: 1,
-            fileMetadata: {
-              page: 'front'
+    const getFileAndSetFormData = async () => {
+      // TODO: we should use getFilesToHandle from webviewIntent
+      const { source, name, type } = (await getFilesToHandle()) || {}
+      const file = makeFileFromBase64({ source, name, type })
+
+      if (file && allCurrentSteps?.length > 0) {
+        const nextStep = allCurrentSteps.find(
+          el => el.model !== 'scan' || el.page === 'back'
+        )
+        setFormData(prev => ({
+          ...prev,
+          data: [
+            ...prev.data,
+            {
+              file,
+              stepIndex: 1,
+              fileMetadata: {
+                page: 'front'
+              }
             }
-          }
-        ]
-      }))
-      setCurrentStepIndex(nextStep.stepIndex)
+          ]
+        }))
+        setCurrentStepIndex(nextStep.stepIndex)
+      }
     }
-  }, [fromFlagshipUpload, allCurrentSteps]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    // TODO: we should add `webviewIntent` in the condition
+    if (fromFlagshipUpload) {
+      getFileAndSetFormData()
+    }
+  }, [fromFlagshipUpload, allCurrentSteps, setCurrentStepIndex, setFormData])
 
   if (!currentDefinition) {
     return null
