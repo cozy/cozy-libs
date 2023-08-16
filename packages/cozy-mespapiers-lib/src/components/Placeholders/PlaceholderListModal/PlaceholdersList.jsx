@@ -34,7 +34,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
   const client = useClient()
   const [searchParams] = useSearchParams()
 
-  const returnUrl = searchParams.get('returnUrl')
+  const fromFlagshipUpload = searchParams.get('fromFlagshipUpload')
 
   const allPlaceholders = useMemo(
     () =>
@@ -50,7 +50,8 @@ const PlaceholdersList = ({ currentQualifItems }) => {
 
   const redirectPaperCreation = async placeholder => {
     !!placeholder.country && searchParams.set('country', placeholder.country)
-    !!returnUrl && searchParams.set('returnUrl', returnUrl)
+    !!fromFlagshipUpload &&
+      searchParams.set('fromFlagshipUpload', fromFlagshipUpload)
 
     if (isReminder(placeholder)) {
       const { data: apps } = await client.query(Q(APPS_DOCTYPE))
@@ -76,7 +77,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
   })
 
   const showImportDropdown = (idx, placeholder) => {
-    if (!returnUrl && placeholder.konnectorCriteria) {
+    if (!fromFlagshipUpload && placeholder.konnectorCriteria) {
       anchorRef.current = anchorRefs.current[idx]
       setIsImportDropdownDisplayed(true)
       setPlaceholderSelected(placeholder)

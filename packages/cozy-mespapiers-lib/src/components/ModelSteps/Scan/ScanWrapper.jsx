@@ -32,7 +32,7 @@ const ScanWrapper = ({ currentStep, onClose, onBack }) => {
   const [isFilePickerModalOpen, setIsFilePickerModalOpen] = useState(false)
   const webviewIntent = useWebviewIntent()
 
-  const returnUrl = searchParams.get('returnUrl')
+  const fromFlagshipUpload = searchParams.get('fromFlagshipUpload')
 
   const onChangeFile = (file, { replace = false } = {}) => {
     if (file) {
@@ -89,7 +89,7 @@ const ScanWrapper = ({ currentStep, onClose, onBack }) => {
     }
   }
 
-  if (!!returnUrl && (page === 'front' || page === undefined)) {
+  if (!!fromFlagshipUpload && (page === 'front' || page === undefined)) {
     nextStep()
     return null
   }

@@ -3,7 +3,7 @@ export const handleBack = ({
   currentStepIndex,
   previousStep,
   setCurrentStepIndex,
-  returnUrl,
+  fromFlagshipUpload,
   isMobile,
   onClose
 }) => {
@@ -16,18 +16,18 @@ export const handleBack = ({
       (previousDefinition.page === 'front' ||
         previousDefinition.page === undefined)
 
-    return returnUrl
+    return fromFlagshipUpload
       ? !isPreviousScanFront
         ? previousStep()
         : currentStepIndex > 2
         ? setCurrentStepIndex(currentStepIndex - 2)
-        : window.open(returnUrl, '_self')
+        : window.open(fromFlagshipUpload, '_self')
       : previousStep()
   }
 
   return isMobile
     ? onClose()
-    : returnUrl
-    ? window.open(returnUrl, '_self')
+    : fromFlagshipUpload
+    ? window.open(fromFlagshipUpload, '_self')
     : undefined
 }
