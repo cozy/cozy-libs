@@ -27,6 +27,19 @@ const StepperDialogWrapper = ({ onClose, onSubmit }) => {
   return allCurrentSteps.map(currentStep => {
     if (currentStep.stepIndex === currentStepIndex) {
       const modelPage = currentStep.model.toLowerCase()
+
+      const onBack = () =>
+        handleBack({
+          allCurrentSteps,
+          currentStepIndex,
+          previousStep,
+          setCurrentStepIndex,
+          fromFlagshipUpload,
+          webviewIntent,
+          isMobile,
+          onClose
+        })
+
       switch (modelPage) {
         case 'scan':
           return (
@@ -35,17 +48,7 @@ const StepperDialogWrapper = ({ onClose, onSubmit }) => {
               currentStep={currentStep}
               onClose={onClose}
               onSubmit={onSubmit}
-              onBack={() =>
-                handleBack({
-                  allCurrentSteps,
-                  currentStepIndex,
-                  previousStep,
-                  setCurrentStepIndex,
-                  fromFlagshipUpload,
-                  isMobile,
-                  onClose
-                })
-              }
+              onBack={onBack}
             />
           )
         case 'information':
@@ -55,17 +58,7 @@ const StepperDialogWrapper = ({ onClose, onSubmit }) => {
               currentStep={currentStep}
               onClose={onClose}
               onSubmit={onSubmit}
-              onBack={() =>
-                handleBack({
-                  allCurrentSteps,
-                  currentStepIndex,
-                  previousStep,
-                  setCurrentStepIndex,
-                  fromFlagshipUpload,
-                  isMobile,
-                  onClose
-                })
-              }
+              onBack={onBack}
             />
           )
         case 'contact':
@@ -75,18 +68,7 @@ const StepperDialogWrapper = ({ onClose, onSubmit }) => {
               currentStep={currentStep}
               onClose={onClose}
               onSubmit={onSubmit}
-              onBack={() =>
-                handleBack({
-                  allCurrentSteps,
-                  currentStepIndex,
-                  previousStep,
-                  setCurrentStepIndex,
-                  fromFlagshipUpload,
-                  webviewIntent,
-                  isMobile,
-                  onClose
-                })
-              }
+              onBack={onBack}
             />
           )
         case 'note':
@@ -96,18 +78,7 @@ const StepperDialogWrapper = ({ onClose, onSubmit }) => {
               currentStep={currentStep}
               onClose={onClose}
               onSubmit={onSubmit}
-              onBack={() =>
-                handleBack({
-                  allCurrentSteps,
-                  currentStepIndex,
-                  previousStep,
-                  setCurrentStepIndex,
-                  fromFlagshipUpload,
-                  webviewIntent,
-                  isMobile,
-                  onClose
-                })
-              }
+              onBack={onBack}
             />
           )
       }

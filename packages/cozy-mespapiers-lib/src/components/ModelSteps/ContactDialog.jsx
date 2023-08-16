@@ -67,7 +67,7 @@ const ContactDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
         actions={
           SubmitButtonComponent ? (
             <SubmitButtonComponent
-              onClose={onSubmit}
+              onSubmit={onSubmit}
               disabled={buttonDisabled}
             />
           ) : (
