@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSearchParams } from 'react-router-dom'
 
+import { useWebviewIntent } from 'cozy-intent'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import { handleBack } from './helpers'
@@ -12,6 +13,7 @@ import ScanWrapper from '../ModelSteps/Scan/ScanWrapper'
 
 const StepperDialogWrapper = ({ onClose, onSubmit }) => {
   const { isMobile } = useBreakpoints()
+  const webviewIntent = useWebviewIntent()
   const [searchParams] = useSearchParams()
   const {
     allCurrentSteps,
@@ -80,6 +82,7 @@ const StepperDialogWrapper = ({ onClose, onSubmit }) => {
                   previousStep,
                   setCurrentStepIndex,
                   fromFlagshipUpload,
+                  webviewIntent,
                   isMobile,
                   onClose
                 })
@@ -100,6 +103,7 @@ const StepperDialogWrapper = ({ onClose, onSubmit }) => {
                   previousStep,
                   setCurrentStepIndex,
                   fromFlagshipUpload,
+                  webviewIntent,
                   isMobile,
                   onClose
                 })
