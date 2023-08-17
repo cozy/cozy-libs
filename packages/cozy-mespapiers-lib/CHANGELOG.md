@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [57.1.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@57.1.2...cozy-mespapiers-lib@57.1.3) (2023-08-17)
+
+
+### Bug Fixes
+
+* **mespapiers:** Restrict mime type images for paper creation ([225f75c](https://github.com/cozy/cozy-libs/commit/225f75c18523a641d694c2da131e1d2b0fa28f2e))
+
+
+
+
+
 ## [57.1.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@57.1.1...cozy-mespapiers-lib@57.1.2) (2023-08-11)
 
 
