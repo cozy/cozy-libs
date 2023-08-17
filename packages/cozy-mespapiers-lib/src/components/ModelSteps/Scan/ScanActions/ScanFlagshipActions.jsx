@@ -45,7 +45,7 @@ const ScanFlagshipActions = ({
           onChange={evt => handleEvent(evt, onChangeFile)}
           className="u-w-100 u-ml-0"
           onClick={e => e.stopPropagation()}
-          accept={'image/*,.pdf'}
+          accept="application/pdf,image/jpeg,image/png"
           data-testid="importPicFromMobile-btn"
         >
           <Button
