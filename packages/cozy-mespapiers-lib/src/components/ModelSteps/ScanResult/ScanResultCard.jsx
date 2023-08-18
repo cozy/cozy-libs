@@ -9,33 +9,25 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import styles from './ScanResultCard.styl'
 import ScanResultCardActions from './ScanResultCardActions'
 import { useFormData } from '../../Hooks/useFormData'
+import { useStepperDialog } from '../../Hooks/useStepperDialog'
 import { getLastFormDataFile, isSameFile } from '../helpers'
 import RotateImage from '../widgets/RotateImage'
 
 const isImageType = file => file.type.match(/image\/.*/)
 
 const ScanResultCard = forwardRef(
-  (
-    {
-      currentFile,
-      setCurrentFile,
-      currentStep,
-      setRotationImage,
-      rotationImage
-    },
-    ref
-  ) => {
+  ({ currentFile, setCurrentFile, setRotationImage, rotationImage }, ref) => {
     const { setFormData, formData } = useFormData()
+    const { currentStepIndex } = useStepperDialog()
     const [imgWrapperMinHeight, setImgWrapperMinHeight] = useState(0)
     const [isImageRotating, setIsImageRotating] = useState(false)
-    const { stepIndex } = currentStep
 
     const handleSelectedFile = () => {
       const newData = formData.data.filter(
         data => !isSameFile(currentFile, data.file)
       )
       setCurrentFile(
-        getLastFormDataFile({ formData: { data: newData }, stepIndex })
+        getLastFormDataFile({ formData: { data: newData }, currentStepIndex })
       )
 
       setFormData(prev => ({
@@ -94,7 +86,9 @@ ScanResultCard.displayName = 'ScanResultCard'
 
 ScanResultCard.propTypes = {
   currentFile: PropTypes.object.isRequired,
-  setCurrentFile: PropTypes.func.isRequired
+  setCurrentFile: PropTypes.func.isRequired,
+  setRotationImage: PropTypes.func.isRequired,
+  rotationImage: PropTypes.number.isRequired
 }
 
 export default ScanResultCard

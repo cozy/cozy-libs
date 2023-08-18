@@ -25,7 +25,6 @@ const fakePlaceholders = [
     maxDisplay: 2,
     acquisitionSteps: [
       {
-        stepIndex: 1,
         model: 'scan',
         page: 'front',
         illustration: 'IlluDriverLicenseFront.png',

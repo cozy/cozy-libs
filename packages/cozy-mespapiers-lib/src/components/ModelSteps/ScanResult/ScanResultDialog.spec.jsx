@@ -7,11 +7,10 @@ import { FormDataProvider } from '../../Contexts/FormDataProvider'
 import { useFormData } from '../../Hooks/useFormData'
 import { useStepperDialog } from '../../Hooks/useStepperDialog'
 
-const mockCurrentStep = ({
-  page = '',
-  multipage = false,
-  stepIndex = 0
-} = {}) => ({ page, multipage, stepIndex })
+const mockCurrentStep = ({ page = '', multipage = false } = {}) => ({
+  page,
+  multipage
+})
 const mockFile = ({ type = '', name = '' } = {}) => ({ type, name })
 const mockFormData = ({ metadata = {}, data = [], contacts = [] } = {}) => ({
   metadata,
@@ -25,11 +24,13 @@ const setup = ({
   nextStep = jest.fn(),
   setFormData = jest.fn(),
   setCurrentFile = jest.fn(),
+  currentStepIndex = 0,
   formData = mockFormData(),
   currentFile = mockFile(),
   currentStep = mockCurrentStep()
 } = {}) => {
   useStepperDialog.mockReturnValue({
+    currentStepIndex,
     nextStep,
     currentDefinition: {},
     allCurrentSteps: []
@@ -158,7 +159,8 @@ describe('AcquisitionResult component:', () => {
       setup({
         setFormData: mockSetFormData,
         currentFile: mockFile({ name: 'test.pdf' }),
-        currentStep: mockCurrentStep({ stepIndex: 1 }),
+        currentStepIndex: 0,
+        currentStep: mockCurrentStep(),
         formData: mockFormData({
           data: [{ stepIndex: 1, file: { name: 'test.pdf' } }]
         })

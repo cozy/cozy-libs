@@ -1,10 +1,9 @@
 import { filterWithRemaining } from './filterWithRemaining'
 
 const mockObjectInArray = [
-  { stepIndex: 1, model: 'scan' },
-  { stepIndex: 2, model: 'information' },
-  { stepIndex: 3, model: 'owner' },
-  { stepIndex: 4 }
+  { model: 'scan' },
+  { model: 'information' },
+  { model: 'owner' }
 ]
 
 describe('filterWithRemaining', () => {
@@ -13,12 +12,8 @@ describe('filterWithRemaining', () => {
     const res = filterWithRemaining(mockObjectInArray, testFunction)
 
     expect(res).toStrictEqual({
-      itemsFound: [{ stepIndex: 3, model: 'owner' }],
-      remainingItems: [
-        { stepIndex: 1, model: 'scan' },
-        { stepIndex: 2, model: 'information' },
-        { stepIndex: 4 }
-      ]
+      itemsFound: [{ model: 'owner' }],
+      remainingItems: [{ model: 'scan' }, { model: 'information' }]
     })
   })
 
@@ -27,11 +22,8 @@ describe('filterWithRemaining', () => {
     const res = filterWithRemaining(mockObjectInArray, testFunction)
 
     expect(res).toStrictEqual({
-      itemsFound: [
-        { stepIndex: 1, model: 'scan' },
-        { stepIndex: 3, model: 'owner' }
-      ],
-      remainingItems: [{ stepIndex: 2, model: 'information' }, { stepIndex: 4 }]
+      itemsFound: [{ model: 'scan' }, { model: 'owner' }],
+      remainingItems: [{ model: 'information' }]
     })
   })
 
@@ -40,12 +32,8 @@ describe('filterWithRemaining', () => {
     const res = filterWithRemaining(mockObjectInArray, testFunction)
 
     expect(res).toStrictEqual({
-      itemsFound: [{ stepIndex: 2, model: 'information' }],
-      remainingItems: [
-        { stepIndex: 1, model: 'scan' },
-        { stepIndex: 3, model: 'owner' },
-        { stepIndex: 4 }
-      ]
+      itemsFound: [{ model: 'information' }],
+      remainingItems: [{ model: 'scan' }, { model: 'owner' }]
     })
   })
 })

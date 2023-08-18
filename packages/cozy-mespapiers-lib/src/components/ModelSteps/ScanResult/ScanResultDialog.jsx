@@ -60,7 +60,7 @@ const ScanResultDialog = ({
   return (
     <Dialog
       open
-      {...(currentStepIndex > 1 && { onBack })}
+      {...(currentStepIndex > 0 && { onBack })}
       transitionDuration={0}
       onClose={onClose}
       componentsProps={{
@@ -82,7 +82,6 @@ const ScanResultDialog = ({
           <ScanResultCard
             currentFile={currentFile}
             setCurrentFile={setCurrentFile}
-            currentStep={currentStep}
             rotationImage={rotationImage}
             setRotationImage={setRotationImage}
             ref={imageRef}

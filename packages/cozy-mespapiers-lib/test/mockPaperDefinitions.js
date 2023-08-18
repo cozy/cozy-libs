@@ -7,14 +7,12 @@ export const mockPapersDefinitions = [
     maxDisplay: 6,
     acquisitionSteps: [
       {
-        stepIndex: 1,
         model: 'scan',
         multipage: true,
         illustration: 'IlluInvoice.png',
         text: 'PaperJSON.generic.multiPages.text'
       },
       {
-        stepIndex: 2,
         model: 'information',
         illustration: 'IlluGenericDate.svg',
         text: 'PaperJSON.generic.referencedDate.text',
@@ -27,7 +25,6 @@ export const mockPapersDefinitions = [
         ]
       },
       {
-        stepIndex: 3,
         model: 'owner',
         text: 'PaperJSON.generic.owner.text'
       }
@@ -43,14 +40,12 @@ export const mockPapersDefinitions = [
     maxDisplay: 3,
     acquisitionSteps: [
       {
-        stepIndex: 1,
         model: 'scan',
         multipage: true,
         illustration: 'IlluGenericNewPage.svg',
         text: 'PaperJSON.generic.multiPages.text'
       },
       {
-        stepIndex: 2,
         model: 'information',
         illustration: 'IlluGenericDate.svg',
         text: 'PaperJSON.generic.date.text',
@@ -63,7 +58,6 @@ export const mockPapersDefinitions = [
         ]
       },
       {
-        stepIndex: 3,
         model: 'owner',
         text: 'PaperJSON.generic.owner.text'
       }
@@ -99,14 +93,12 @@ export const mockPapersDefinitions = [
     maxDisplay: 2,
     acquisitionSteps: [
       {
-        stepIndex: 1,
         model: 'scan',
         multipage: true,
         illustration: 'IlluGenericNewPage.svg',
         text: 'PaperJSON.generic.multiPages.text'
       },
       {
-        stepIndex: 2,
         model: 'information',
         illustration: 'IlluDriverLicenseNumberHelp.png',
         text: 'PaperJSON.driverLicense.stranger.country.text',
@@ -119,7 +111,6 @@ export const mockPapersDefinitions = [
         ]
       },
       {
-        stepIndex: 3,
         model: 'information',
         illustration: 'IlluDriverLicenseObtentionDateHelp.png',
         text: 'PaperJSON.driverLicense.stranger.obtentionDate.text',
@@ -133,7 +124,6 @@ export const mockPapersDefinitions = [
         ]
       },
       {
-        stepIndex: 4,
         illustration: 'Account.svg',
         model: 'contact',
         text: 'PaperJSON.generic.owner.text'
@@ -148,14 +138,12 @@ export const mockPapersDefinitions = [
     maxDisplay: 2,
     acquisitionSteps: [
       {
-        stepIndex: 1,
         model: 'scan',
         multipage: true,
         illustration: 'IlluGenericNewPage.svg',
         text: 'PaperJSON.generic.multiPages.text'
       },
       {
-        stepIndex: 2,
         model: 'information',
         illustration: 'IlluDriverLicenseNumberHelp.png',
         text: 'PaperJSON.driverLicense.stranger.country.text',
@@ -168,7 +156,6 @@ export const mockPapersDefinitions = [
         ]
       },
       {
-        stepIndex: 3,
         model: 'information',
         illustration: 'IlluDriverLicenseObtentionDateHelp.png',
         text: 'PaperJSON.driverLicense.stranger.obtentionDate.text',
@@ -182,7 +169,6 @@ export const mockPapersDefinitions = [
         ]
       },
       {
-        stepIndex: 4,
         illustration: 'Account.svg',
         model: 'contact',
         text: 'PaperJSON.generic.owner.text'

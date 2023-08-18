@@ -9,3 +9,5 @@
 - For the `illustration` property in [`acquisitionsteps property`](./papersDefinitions#steps-of-the-acquisitionsteps-property), you must import it and add it to the `images` variable of the [`CompositeHeaderImage`](https://github.com/cozy/cozy-libs/blob/master/packages/cozy-mespapiers-lib/src/components/CompositeHeader/CompositeHeaderImage.jsx#L34) component.
 
 - If adding a `placeholderIndex`, complete this [documentation](https://github.com/cozy/cozy-libs/blob/master/packages/cozy-mespapiers-lib/doc/placeholderIndex.md) accordingly.
+
+- The `Steps` take place in the order defined in the [`acquisitionsteps property`](./papersDefinitions#steps-of-the-acquisitionsteps-property).

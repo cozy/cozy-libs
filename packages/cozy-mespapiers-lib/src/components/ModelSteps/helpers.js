@@ -5,13 +5,17 @@ import { ANDROID_APP_URL, IOS_APP_URL } from '../../constants/const'
 /**
  * Check if a file is already selected in the state of the FormDataProvider
  * @param {object} formData - State of the FormDataProvider
- * @param {number} stepIndex - Used to know if the file is already selected for this step (Some paper have two Scan steps)
+ * @param {number} currentStepIndex - Used to know if the file is already selected for this step (Some paper have two Scan steps)
  * @param {File} currentFile - File object
  * @returns
  */
-export const isFileAlreadySelected = (formData, stepIndex, currentFile) => {
+export const isFileAlreadySelected = (
+  formData,
+  currentStepIndex,
+  currentFile
+) => {
   for (const data of formData.data) {
-    if (data.stepIndex === stepIndex) {
+    if (data.stepIndex === currentStepIndex) {
       if (isSameFile(currentFile, data.file)) {
         return true
       }
@@ -160,11 +164,11 @@ export const makeRotatedImage = (image, rotation) => {
 /**
  * @param {Object} options
  * @param {Array} options.formData - State of the FormDataProvider
- * @param {number} options.stepIndex - Used to know if the file is already selected for this step (Some paper have two Scan steps)
+ * @param {number} options.currentStepIndex - Used to know if the file is already selected for this step (Some paper have two Scan steps)
  * @returns {File} - Last file selected for this step
  */
-export const getLastFormDataFile = ({ formData, stepIndex }) => {
-  const data = formData.data.filter(data => data.stepIndex === stepIndex)
+export const getLastFormDataFile = ({ formData, currentStepIndex }) => {
+  const data = formData.data.filter(data => data.stepIndex === currentStepIndex)
   const { file } = data[data.length - 1] || {}
 
   return file || null

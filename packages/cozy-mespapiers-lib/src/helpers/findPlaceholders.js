@@ -7,7 +7,6 @@ import { hasItemByLabel } from '../components/Home/helpers'
  */
 /**
  * @typedef {Object} AcquisitionSteps
- * @property {number} stepIndex - Position of the step.
  * @property {number} occurrence - Number of occurrence for this step.
  * @property {string} illustration - Name of the illustration.
  * @property {string} text - Text of the step.

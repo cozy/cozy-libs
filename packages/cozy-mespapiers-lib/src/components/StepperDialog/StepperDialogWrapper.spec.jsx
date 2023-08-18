@@ -20,9 +20,9 @@ jest.mock('../Hooks/useStepperDialog')
 /* eslint-enable react/display-name */
 
 const mockAllCurrentSteps = [
-  { stepIndex: 1, model: 'scan' },
-  { stepIndex: 2, model: 'information' },
-  { stepIndex: 3, model: 'contact' }
+  { model: 'scan' },
+  { model: 'information' },
+  { model: 'contact' }
 ]
 
 describe('StepperDialogWrapper', () => {
@@ -44,7 +44,7 @@ describe('StepperDialogWrapper', () => {
 
   it('should contain only Scan component', () => {
     const { getByTestId, queryByTestId } = setup({
-      currentStepIndex: 1
+      currentStepIndex: 0
     })
 
     expect(getByTestId('ScanWrapper')).toBeInTheDocument()
@@ -54,7 +54,7 @@ describe('StepperDialogWrapper', () => {
 
   it('should contain only InformationDialog component', () => {
     const { getByTestId, queryByTestId } = setup({
-      currentStepIndex: 2
+      currentStepIndex: 1
     })
 
     expect(getByTestId('InformationDialog')).toBeInTheDocument()
@@ -64,7 +64,7 @@ describe('StepperDialogWrapper', () => {
 
   it('should contain only Contact component', () => {
     const { getByTestId, queryByTestId } = setup({
-      currentStepIndex: 3
+      currentStepIndex: 2
     })
 
     expect(getByTestId('ContactDialog')).toBeInTheDocument()
