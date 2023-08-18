@@ -14,6 +14,7 @@ import { MesPapiersLibProviders } from './MesPapiersLibProviders'
 import OnboardedGuardedRoute from './OnboardedGuardedRoute'
 import ContactEdit from './Views/ContactEdit'
 import CreatePaperModal from './Views/CreatePaperModal'
+import ErrorBoundary from './Views/ErrorBoundary'
 import FilesViewerWithQuery from './Views/FileViewerWithQuery'
 import HarvestRoutes from './Views/HarvestRoutes'
 import Home from './Views/Home'
@@ -47,7 +48,10 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
       <Route
         element={<MesPapiersLibProviders lang={lang} components={components} />}
       >
-        <Route element={<OnboardedGuardedRoute />}>
+        <Route
+          element={<OnboardedGuardedRoute />}
+          errorElement={<ErrorBoundary />}
+        >
           <Route path="/" element={<OutletWrapper Component={Home} />}>
             <Route path="editcontact/:fileId" element={<ContactEdit />} />
             <Route path="installAppIntent" element={<InstallAppFromIntent />} />
