@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@17.0.1...cozy-harvest-lib@17.1.0) (2023-08-18)
+
+
+### Features
+
+* Remove bi.webview* flag in code ([b08a22e](https://github.com/cozy/cozy-libs/commit/b08a22e8e29a79cf1fd992e9c04f253060c2029c))
+* Remove contract edit feature ([a6547a4](https://github.com/cozy/cozy-libs/commit/a6547a47729024c24493a8269f17facc5b1c156b))
+* Removed the use of powens bank ids -> uuids ([f2d5dec](https://github.com/cozy/cozy-libs/commit/f2d5dec165202a2e5ff02f9a1a4f87ffda283c9e))
+
+
+
+
+
 ## [17.0.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@17.0.0...cozy-harvest-lib@17.0.1) (2023-08-10)
 
 
