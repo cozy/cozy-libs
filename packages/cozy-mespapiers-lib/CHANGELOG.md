@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [57.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@57.1.4...cozy-mespapiers-lib@57.2.0) (2023-08-18)
+
+
+### Features
+
+* **mespapiers:** Add onSubmit on stepper and redirect to paper list ([dbd0529](https://github.com/cozy/cozy-libs/commit/dbd0529f30095ab492f243f1c48798fe95124a3f))
+* **mespapiers:** Add possibility to skip onboarding with query param ([9dfb772](https://github.com/cozy/cozy-libs/commit/9dfb772e7faa80f267ac88ff320c5544ba3e8ba5))
+* **mespapiers:** Handle back behavior in stepper for returnUrl querypar ([8997b97](https://github.com/cozy/cozy-libs/commit/8997b97fb7dd0dd0ff03cc1aea7e8337f3c15446))
+* **mespapiers:** Handle back in paper create process with returnUrl ([d18eeec](https://github.com/cozy/cozy-libs/commit/d18eeec2058a885420beb59b6c7cd99f41a5a572))
+* **mespapiers:** Set onboarded true if skipOnboarding query param ([2438da5](https://github.com/cozy/cozy-libs/commit/2438da5b24a1f54309e753173a67f85aa9691bfd))
+* **mespapiers:** Skip scan step for returnUrl query param ([49f8103](https://github.com/cozy/cozy-libs/commit/49f8103cf52e3ca7da0b802dc1a8b88bd70d0675))
+* **mespapiers:** Spread setCurrentStepIndex in StepperDialogProvider ([c60a162](https://github.com/cozy/cozy-libs/commit/c60a1626168753f89e566639e0e9c53eced6838e))
+
+
+
+
+
 ## [57.1.4](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@57.1.3...cozy-mespapiers-lib@57.1.4) (2023-08-18)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
