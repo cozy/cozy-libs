@@ -10,7 +10,7 @@ import {
 } from 'react-router-dom'
 
 import InstallAppFromIntent from './InstallAppFromIntent/InstallAppFromIntent'
-import { MesPapiersLibProviders } from './MesPapiersLibProviders'
+import MesPapiersLibProviders from './MesPapiersLibProviders'
 import OnboardedGuardedRoute from './OnboardedGuardedRoute'
 import ContactEdit from './Views/ContactEdit'
 import CreatePaperModal from './Views/CreatePaperModal'

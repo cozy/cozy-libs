@@ -4,7 +4,7 @@ import React from 'react'
 
 import { useQuery } from 'cozy-client'
 
-import { MesPapiersLibProviders } from './MesPapiersLibProviders'
+import MesPapiersLibProviders from './MesPapiersLibProviders'
 import AppLike from '../../test/components/AppLike'
 
 /* eslint-disable react/display-name */
