@@ -4,6 +4,7 @@ import React from 'react'
 import { useQuery } from 'cozy-client'
 import { I18n, initTranslation } from 'cozy-ui/transpiled/react/I18n'
 
+import { ErrorProvider, useError } from './Contexts/ErrorProvider'
 import { ModalProvider } from './Contexts/ModalProvider'
 import { MultiSelectionProvider } from './Contexts/MultiSelectionProvider'
 import { OnboardingProvider } from './Contexts/OnboardingProvider'
@@ -19,9 +20,10 @@ import { FILES_DOCTYPE, CONTACTS_DOCTYPE } from '../doctypes'
 import { getComponents } from '../helpers/defaultComponent'
 import { getAppSettings } from '../helpers/queries'
 
-export const MesPapiersLibProviders = ({ lang, components }) => {
+const MesPapiersLibProviders = ({ lang, components }) => {
   const polyglot = initTranslation(lang, lang => require(`../locales/${lang}`))
   const { PapersFab, ForwardFab, Onboarding } = getComponents(components)
+  const { hasError } = useError()
 
   const { data: settingsData } = useQuery(
     getAppSettings.definition,
@@ -41,7 +43,7 @@ export const MesPapiersLibProviders = ({ lang, components }) => {
                   <OnboardingProvider OnboardingComponent={Onboarding}>
                     <MesPapiersLibLayout />
                   </OnboardingProvider>
-                  {isOnboarded && (
+                  {isOnboarded && !hasError && (
                     <FabWrapper>
                       {ForwardFab && (
                         <ForwardFabWrapper>
@@ -64,6 +66,16 @@ export const MesPapiersLibProviders = ({ lang, components }) => {
     </I18n>
   )
 }
+
+const MesPapiersLibErrorProviders = props => {
+  return (
+    <ErrorProvider>
+      <MesPapiersLibProviders {...props} />
+    </ErrorProvider>
+  )
+}
+
+export default MesPapiersLibErrorProviders
 
 MesPapiersLibProviders.propTypes = {
   lang: PropTypes.string,
