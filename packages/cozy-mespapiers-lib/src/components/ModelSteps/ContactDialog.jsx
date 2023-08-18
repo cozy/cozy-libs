@@ -37,7 +37,7 @@ const ContactDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
     <>
       <Dialog
         open
-        {...(currentStepIndex > 1 && { transitionDuration: 0, onBack })}
+        {...(currentStepIndex > 0 && { transitionDuration: 0, onBack })}
         onClose={onClose}
         componentsProps={{
           dialogTitle: {

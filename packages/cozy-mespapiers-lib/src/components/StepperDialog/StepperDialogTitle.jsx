@@ -20,7 +20,7 @@ const StepperDialogTitle = () => {
         country: currentDefinition.country
       })}
       <Typography variant="h6">
-        {`${currentStepIndex}/${allCurrentSteps.length}`}
+        {`${currentStepIndex + 1}/${allCurrentSteps.length}`}
       </Typography>
     </>
   )

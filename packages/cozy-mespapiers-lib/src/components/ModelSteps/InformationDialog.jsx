@@ -75,7 +75,7 @@ const InformationDialog = ({ currentStep, onClose, onBack }) => {
   return (
     <Dialog
       open
-      {...(currentStepIndex > 1 && { transitionDuration: 0 })}
+      {...(currentStepIndex > 0 && { transitionDuration: 0 })}
       onClose={onClose}
       onBack={onBack}
       componentsProps={{

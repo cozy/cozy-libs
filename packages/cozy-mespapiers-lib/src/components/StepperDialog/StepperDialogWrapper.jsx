@@ -24,11 +24,11 @@ const StepperDialogWrapper = ({ onClose, onSubmit }) => {
 
   const fromFlagshipUpload = searchParams.get('fromFlagshipUpload')
 
-  return allCurrentSteps.map(currentStep => {
-    if (currentStep.stepIndex === currentStepIndex) {
+  return allCurrentSteps.map((currentStep, idx) => {
+    if (idx === currentStepIndex) {
       const modelPage = currentStep.model.toLowerCase()
 
-      const onBack = () =>
+      const onBack = () => {
         handleBack({
           allCurrentSteps,
           currentStepIndex,
@@ -39,12 +39,13 @@ const StepperDialogWrapper = ({ onClose, onSubmit }) => {
           isMobile,
           onClose
         })
+      }
 
       switch (modelPage) {
         case 'scan':
           return (
             <ScanWrapper
-              key={currentStep.stepIndex}
+              key={idx}
               currentStep={currentStep}
               onClose={onClose}
               onSubmit={onSubmit}
@@ -54,7 +55,7 @@ const StepperDialogWrapper = ({ onClose, onSubmit }) => {
         case 'information':
           return (
             <InformationDialog
-              key={currentStep.stepIndex}
+              key={idx}
               currentStep={currentStep}
               onClose={onClose}
               onSubmit={onSubmit}
@@ -64,7 +65,7 @@ const StepperDialogWrapper = ({ onClose, onSubmit }) => {
         case 'contact':
           return (
             <ContactDialog
-              key={currentStep.stepIndex}
+              key={idx}
               currentStep={currentStep}
               onClose={onClose}
               onSubmit={onSubmit}
@@ -74,7 +75,7 @@ const StepperDialogWrapper = ({ onClose, onSubmit }) => {
         case 'note':
           return (
             <NoteDialog
-              key={currentStep.stepIndex}
+              key={idx}
               currentStep={currentStep}
               onClose={onClose}
               onSubmit={onSubmit}

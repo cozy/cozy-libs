@@ -5,14 +5,14 @@ const StepperDialogContext = createContext()
 const StepperDialogProvider = ({ children }) => {
   const [stepperDialogTitle, setStepperDialogTitle] = useState('')
   const [allCurrentSteps, setAllCurrentSteps] = useState([])
-  const [currentStepIndex, setCurrentStepIndex] = useState(1)
+  const [currentStepIndex, setCurrentStepIndex] = useState(0)
   const [currentDefinition, setCurrentDefinition] = useState(null)
 
   const resetStepperDialog = () => {
     setCurrentDefinition(null)
     setStepperDialogTitle('')
     setAllCurrentSteps([])
-    setCurrentStepIndex(1)
+    setCurrentStepIndex(0)
   }
 
   useEffect(() => {
@@ -20,27 +20,24 @@ const StepperDialogProvider = ({ children }) => {
       setStepperDialogTitle(currentDefinition.label)
       const allCurrentStepsDefinitions = currentDefinition.acquisitionSteps
       if (allCurrentStepsDefinitions.length > 0) {
-        const allCurrentStepsDefinitionsSorted =
-          allCurrentStepsDefinitions.sort((a, b) => a.stepIndex - b.stepIndex)
-
-        setAllCurrentSteps(allCurrentStepsDefinitionsSorted)
+        setAllCurrentSteps(allCurrentStepsDefinitions)
       }
     }
   }, [currentDefinition])
 
   const previousStep = () => {
-    if (currentStepIndex > 1) {
+    if (currentStepIndex > 0) {
       setCurrentStepIndex(prev => prev - 1)
     }
   }
 
   const nextStep = () => {
-    allCurrentSteps.length > currentStepIndex &&
+    allCurrentSteps.length > currentStepIndex + 1 &&
       setCurrentStepIndex(prev => prev + 1)
   }
 
   const isLastStep = () => {
-    return currentStepIndex === allCurrentSteps.length
+    return currentStepIndex + 1 === allCurrentSteps.length
   }
 
   const stepperDialog = {

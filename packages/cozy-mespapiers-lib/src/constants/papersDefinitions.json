@@ -7,14 +7,12 @@
       "maxDisplay": 1,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.issueDate.text",
@@ -27,7 +25,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -41,13 +38,11 @@
       "maxDisplay": 2,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -60,14 +55,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "tooltip": true,
           "illustration": "IlluIBAN.png",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "text": "PaperJSON.bankDetails.number.text",
           "attributes": [
@@ -80,7 +73,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -95,14 +87,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
@@ -115,7 +105,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -130,14 +119,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluCafNumberHelp.png",
           "text": "PaperJSON.caf.number.text",
@@ -150,7 +137,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.issueDate.text",
@@ -163,7 +149,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -180,13 +165,11 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -203,7 +186,6 @@
       "maxDisplay": 2,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "tooltip": true,
           "page": "front",
@@ -211,7 +193,6 @@
           "text": "PaperJSON.generic.front.text"
         },
         {
-          "stepIndex": 2,
           "model": "scan",
           "tooltip": true,
           "page": "back",
@@ -219,7 +200,6 @@
           "text": "PaperJSON.generic.back.text"
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluDriverLicenseNumberHelp.png",
           "text": "PaperJSON.driverLicense.number.text",
@@ -233,7 +213,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "model": "information",
           "illustration": "IlluDriverLicenseObtentionDateHelp.png",
           "text": "PaperJSON.driverLicense.obtentionDate.text",
@@ -261,7 +240,6 @@
           ]
         },
         {
-          "stepIndex": 5,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.driverLicense.expirationDate.text",
@@ -274,7 +252,6 @@
           ]
         },
         {
-          "stepIndex": 6,
           "model": "information",
           "illustration": "IlluGenericAlert.svg",
           "illustrationSize": "small",
@@ -292,7 +269,6 @@
           ]
         },
         {
-          "stepIndex": 7,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -308,14 +284,12 @@
       "maxDisplay": 2,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "Planet.svg",
           "text": "PaperJSON.driverLicense.stranger.country.text",
@@ -328,7 +302,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.driverLicense.stranger.obtentionDate.text",
@@ -341,7 +314,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.driverLicense.expirationDate.text",
@@ -354,7 +326,6 @@
           ]
         },
         {
-          "stepIndex": 5,
           "model": "information",
           "illustration": "IlluGenericAlert.svg",
           "illustrationSize": "small",
@@ -372,7 +343,6 @@
           ]
         },
         {
-          "stepIndex": 6,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -386,7 +356,6 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "tooltip": true,
           "multipage": true,
@@ -394,7 +363,6 @@
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.invoice.referencedDate.text",
@@ -407,7 +375,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -424,14 +391,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
-          "stepIndex": 2,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -446,13 +411,11 @@
       "maxDisplay": 1,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.shootingDate.text",
@@ -465,7 +428,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -480,14 +442,12 @@
       "maxDisplay": 1,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
@@ -500,7 +460,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "text": "PaperJSON.generic.addressLabel.text",
           "attributes": [
@@ -514,7 +473,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -530,7 +488,6 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "tooltip": true,
           "multipage": true,
@@ -538,7 +495,6 @@
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.invoice.referencedDate.text",
@@ -551,7 +507,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -569,14 +524,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.issueDate.text",
@@ -589,7 +542,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -606,7 +558,6 @@
       "maxDisplay": 2,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "tooltip": true,
           "page": "front",
@@ -614,7 +565,6 @@
           "text": "PaperJSON.card.front.text"
         },
         {
-          "stepIndex": 2,
           "model": "scan",
           "tooltip": true,
           "page": "back",
@@ -622,7 +572,6 @@
           "text": "PaperJSON.card.back.text"
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluIdCardNumberHelp.png",
           "text": "PaperJSON.card.number.text",
@@ -636,7 +585,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "model": "information",
           "illustration": "IlluIdCardExpirationDateHelp.png",
           "text": "PaperJSON.card.expirationDate.text",
@@ -649,7 +597,6 @@
           ]
         },
         {
-          "stepIndex": 5,
           "model": "information",
           "illustration": "IlluGenericAlert.svg",
           "illustrationSize": "small",
@@ -667,7 +614,6 @@
           ]
         },
         {
-          "stepIndex": 6,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -681,14 +627,12 @@
       "maxDisplay": 1,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
@@ -701,7 +645,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -716,14 +659,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "text": "PaperJSON.generic.fileLabel.text",
           "attributes": [
@@ -737,7 +678,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
@@ -750,7 +690,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -765,14 +704,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "text": "PaperJSON.generic.fileLabel.text",
           "attributes": [
@@ -786,7 +723,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
@@ -799,7 +735,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -815,14 +750,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "text": "PaperJSON.generic.fileLabel.text",
           "attributes": [
@@ -836,7 +769,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
@@ -849,7 +781,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -865,14 +796,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "text": "PaperJSON.generic.fileLabel.text",
           "attributes": [
@@ -886,7 +815,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
@@ -899,7 +827,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -915,14 +842,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
@@ -935,7 +860,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -951,14 +875,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "text": "PaperJSON.generic.fileLabel.text",
           "attributes": [
@@ -972,7 +894,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
@@ -985,7 +906,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -1000,14 +920,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "text": "PaperJSON.generic.fileLabel.text",
           "attributes": [
@@ -1021,7 +939,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
@@ -1034,7 +951,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -1050,14 +966,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "text": "PaperJSON.generic.fileLabel.text",
           "attributes": [
@@ -1071,7 +985,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
@@ -1084,7 +997,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -1100,7 +1012,6 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "tooltip": true,
           "multipage": true,
@@ -1108,7 +1019,6 @@
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "Contract.svg",
           "text": "PaperJSON.work_contract.contract_type.text",
@@ -1122,7 +1032,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
@@ -1135,7 +1044,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": false,
@@ -1151,14 +1059,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "text": "PaperJSON.generic.fileLabel.text",
           "attributes": [
@@ -1172,7 +1078,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
@@ -1185,7 +1090,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -1200,14 +1104,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
@@ -1220,7 +1122,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -1234,14 +1135,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluCafNumberHelp.png",
           "text": "PaperJSON.payment_proof_family_allowance.number.text",
@@ -1254,7 +1153,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.issueDate.text",
@@ -1267,7 +1165,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -1285,7 +1182,6 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "tooltip": true,
           "multipage": true,
@@ -1293,7 +1189,6 @@
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.invoice.referencedDate.text",
@@ -1306,7 +1201,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -1324,14 +1218,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
@@ -1344,7 +1236,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -1359,7 +1250,6 @@
       "maxDisplay": 2,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "tooltip": true,
           "page": "front",
@@ -1367,7 +1257,6 @@
           "text": "PaperJSON.card.front.text"
         },
         {
-          "stepIndex": 2,
           "model": "scan",
           "tooltip": true,
           "page": "back",
@@ -1375,7 +1264,6 @@
           "text": "PaperJSON.card.back.text"
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluResidencePermitNumberHelp.png",
           "text": "PaperJSON.card.number.text",
@@ -1389,7 +1277,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "model": "information",
           "illustration": "IlluResidencePermitExpirationDateHelp.png",
           "text": "PaperJSON.card.expirationDate.text",
@@ -1402,7 +1289,6 @@
           ]
         },
         {
-          "stepIndex": 5,
           "model": "information",
           "illustration": "IlluGenericAlert.svg",
           "illustrationSize": "small",
@@ -1420,7 +1306,6 @@
           ]
         },
         {
-          "stepIndex": 6,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -1434,14 +1319,12 @@
       "maxDisplay": 1,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
@@ -1454,7 +1337,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -1468,14 +1350,12 @@
       "maxDisplay": 1,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
@@ -1488,7 +1368,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -1503,14 +1382,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputText.svg",
           "text": "PaperJSON.tax_notice.refTaxIncome.text",
@@ -1523,7 +1400,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
@@ -1536,7 +1412,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -1554,14 +1429,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
@@ -1574,7 +1447,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -1592,14 +1464,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
@@ -1612,7 +1482,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -1630,14 +1499,12 @@
       "maxDisplay": 1,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.issueDate.text",
@@ -1650,7 +1517,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "text": "PaperJSON.generic.addressLabel.text",
           "attributes": [
@@ -1664,7 +1530,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -1678,14 +1543,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "tooltip": true,
           "illustration": "IlluVehicleRegistration.png",
           "text": "PaperJSON.generic.content.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "text": "PaperJSON.vehicleRegistration.number.text",
           "attributes": [
@@ -1698,7 +1561,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -1713,7 +1575,6 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "tooltip": true,
           "multipage": true,
@@ -1721,7 +1582,6 @@
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.invoice.referencedDate.text",
@@ -1734,7 +1594,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -1750,7 +1609,6 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "tooltip": true,
           "multipage": true,
@@ -1758,7 +1616,6 @@
           "text": "PaperJSON.passport.scan.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "Planet.svg",
           "text": "PaperJSON.passport.information.country.text",
@@ -1771,7 +1628,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluPassportNumber.png",
           "text": "PaperJSON.passport.information.number.text",
@@ -1785,7 +1641,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "model": "information",
           "illustration": "IlluPassportDate.png",
           "text": "PaperJSON.passport.information.expirationDate.text",
@@ -1798,7 +1653,6 @@
           ]
         },
         {
-          "stepIndex": 5,
           "model": "information",
           "illustration": "IlluGenericAlert.svg",
           "illustrationSize": "small",
@@ -1816,7 +1670,6 @@
           ]
         },
         {
-          "stepIndex": 6,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -1832,14 +1685,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "text": "PaperJSON.generic.fileLabel.text",
           "attributes": [
@@ -1853,7 +1704,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
@@ -1866,7 +1716,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": false,
@@ -1881,14 +1730,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
@@ -1901,7 +1748,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": false,
@@ -1919,7 +1765,6 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "tooltip": true,
           "multipage": true,
@@ -1927,7 +1772,6 @@
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.invoice.referencedDate.text",
@@ -1940,7 +1784,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -1954,13 +1797,11 @@
       "featureDate": "referencedDate",
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
@@ -1973,7 +1814,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -1986,14 +1826,12 @@
       "featureDate": "referencedDate",
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "tooltip": true,
           "illustration": "IlluInvoice.png",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
@@ -2006,7 +1844,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -2020,13 +1857,11 @@
       "featureDate": "referencedDate",
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
@@ -2039,7 +1874,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -2055,13 +1889,11 @@
       "featureDate": "referencedDate",
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
@@ -2074,7 +1906,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -2087,21 +1918,18 @@
       "featureDate": "referencedDate",
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "page": "front",
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.card.front.text"
         },
         {
-          "stepIndex": 2,
           "model": "scan",
           "page": "back",
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.card.back.text"
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.card.expirationDate.text",
@@ -2114,7 +1942,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "model": "information",
           "illustration": "IlluGenericAlert.svg",
           "illustrationSize": "small",
@@ -2132,7 +1959,6 @@
           ]
         },
         {
-          "stepIndex": 5,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -2145,13 +1971,11 @@
       "featureDate": "referencedDate",
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
@@ -2164,7 +1988,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -2178,13 +2001,11 @@
       "featureDate": "referencedDate",
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
@@ -2197,7 +2018,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -2211,21 +2031,18 @@
       "featureDate": "referencedDate",
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "page": "front",
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.card.front.text"
         },
         {
-          "stepIndex": 2,
           "model": "scan",
           "page": "back",
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.card.back.text"
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
@@ -2238,7 +2055,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -2252,21 +2068,18 @@
       "featureDate": "referencedDate",
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "page": "front",
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.card.front.text"
         },
         {
-          "stepIndex": 2,
           "model": "scan",
           "page": "back",
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.card.back.text"
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
@@ -2279,7 +2092,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -2292,13 +2104,11 @@
       "featureDate": "referencedDate",
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
@@ -2311,7 +2121,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -2329,14 +2138,12 @@
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "model": "scan",
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
-          "stepIndex": 2,
           "model": "information",
           "text": "PaperJSON.generic.fileLabel.text",
           "attributes": [
@@ -2350,7 +2157,6 @@
           ]
         },
         {
-          "stepIndex": 3,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
@@ -2363,7 +2169,6 @@
           ]
         },
         {
-          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -2376,14 +2181,12 @@
       "icon": "file-type-note",
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         },
         {
-          "stepIndex": 2,
           "model": "note"
         }
       ]
@@ -2393,14 +2196,12 @@
       "icon": "file-type-note",
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         },
         {
-          "stepIndex": 2,
           "model": "note"
         }
       ]
@@ -2410,14 +2211,12 @@
       "icon": "file-type-note",
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         },
         {
-          "stepIndex": 2,
           "model": "note"
         }
       ]
@@ -2427,14 +2226,12 @@
       "icon": "file-type-note",
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         },
         {
-          "stepIndex": 2,
           "model": "note"
         }
       ]
@@ -2444,14 +2241,12 @@
       "icon": "file-type-note",
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         },
         {
-          "stepIndex": 2,
           "model": "note"
         }
       ]
@@ -2461,14 +2256,12 @@
       "icon": "file-type-note",
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         },
         {
-          "stepIndex": 2,
           "model": "note"
         }
       ]
@@ -2478,14 +2271,12 @@
       "icon": "file-type-note",
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         },
         {
-          "stepIndex": 2,
           "model": "note"
         }
       ]
@@ -2495,14 +2286,12 @@
       "icon": "file-type-note",
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         },
         {
-          "stepIndex": 2,
           "model": "note"
         }
       ]
@@ -2512,14 +2301,12 @@
       "icon": "file-type-note",
       "acquisitionSteps": [
         {
-          "stepIndex": 1,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         },
         {
-          "stepIndex": 2,
           "model": "note"
         }
       ]

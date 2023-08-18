@@ -25,22 +25,14 @@ describe('buildPapersDefinitions', () => {
     },
     {
       label: 'other_three',
-      acquisitionSteps: [
-        {
-          stepIndex: 1
-        }
-      ],
+      acquisitionSteps: [],
       konnectorCriteria: {
         name: 'myKonnector'
       }
     },
     {
       label: 'note_identity_document',
-      acquisitionSteps: [
-        {
-          stepIndex: 1
-        }
-      ]
+      acquisitionSteps: []
     },
     {
       label: 'four',
@@ -48,11 +40,7 @@ describe('buildPapersDefinitions', () => {
     },
     {
       label: 'one',
-      acquisitionSteps: [
-        {
-          stepIndex: 1
-        }
-      ],
+      acquisitionSteps: [],
       konnectorCriteria: {
         name: 'myKonnector'
       }
@@ -62,11 +50,7 @@ describe('buildPapersDefinitions', () => {
   const expectedPapersDef = [
     {
       label: 'one',
-      acquisitionSteps: [
-        {
-          stepIndex: 1
-        }
-      ],
+      acquisitionSteps: [],
       konnectorCriteria: {
         name: 'myKonnector'
       }
@@ -80,22 +64,14 @@ describe('buildPapersDefinitions', () => {
     },
     {
       label: 'other_three',
-      acquisitionSteps: [
-        {
-          stepIndex: 1
-        }
-      ],
+      acquisitionSteps: [],
       konnectorCriteria: {
         name: 'myKonnector'
       }
     },
     {
       label: 'note_identity_document',
-      acquisitionSteps: [
-        {
-          stepIndex: 1
-        }
-      ]
+      acquisitionSteps: []
     },
     {
       label: 'four',

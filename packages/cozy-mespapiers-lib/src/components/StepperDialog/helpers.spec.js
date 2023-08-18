@@ -1,9 +1,9 @@
 import { handleBack } from './helpers'
 
 const mockAllCurrentSteps = [
-  { stepIndex: 1, model: 'scan' },
-  { stepIndex: 2, model: 'information' },
-  { stepIndex: 3, model: 'contact' }
+  { model: 'scan' },
+  { model: 'information' },
+  { model: 'contact' }
 ]
 const allCurrentSteps = mockAllCurrentSteps
 const previousStep = jest.fn()
@@ -16,8 +16,8 @@ describe('handleBack', () => {
     jest.resetAllMocks()
   })
 
-  describe('when currentStepIndex <= 1', () => {
-    const currentStepIndex = 1
+  describe('when currentStepIndex == 0', () => {
+    const currentStepIndex = 0
 
     describe('if isMobile is true', () => {
       const isMobile = true
@@ -75,8 +75,8 @@ describe('handleBack', () => {
     })
   })
 
-  describe('when currentStepIndex > 1', () => {
-    const currentStepIndex = 2
+  describe('when currentStepIndex > 0', () => {
+    const currentStepIndex = 1
     const isMobile = undefined
 
     describe('for defined fromFlagshipUpload', () => {
@@ -101,11 +101,11 @@ describe('handleBack', () => {
         it('should go 2 steps back if possible', async () => {
           await handleBack({
             allCurrentSteps: [
-              { stepIndex: 1, model: 'information' },
-              { stepIndex: 2, model: 'scan' },
-              { stepIndex: 3, model: 'contact' }
+              { model: 'information' },
+              { model: 'scan' },
+              { model: 'contact' }
             ],
-            currentStepIndex: 3,
+            currentStepIndex: 2,
             previousStep,
             setCurrentStepIndex,
             fromFlagshipUpload,
@@ -115,7 +115,7 @@ describe('handleBack', () => {
           })
 
           expect(previousStep).not.toBeCalled()
-          expect(setCurrentStepIndex).toBeCalledWith(1)
+          expect(setCurrentStepIndex).toBeCalledWith(0)
           expect(webviewIntent.call).not.toBeCalled()
         })
       })
@@ -124,7 +124,7 @@ describe('handleBack', () => {
         it('should go to the previous step', async () => {
           await handleBack({
             allCurrentSteps,
-            currentStepIndex: 3,
+            currentStepIndex: 2,
             previousStep,
             setCurrentStepIndex,
             fromFlagshipUpload,

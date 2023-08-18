@@ -23,11 +23,11 @@ const { fetchBlobFileById } = models.file
 const ScanWrapper = ({ currentStep, onClose, onBack }) => {
   const client = useClient()
   const [searchParams] = useSearchParams()
-  const { nextStep } = useStepperDialog()
+  const { nextStep, currentStepIndex } = useStepperDialog()
   const { formData, setFormData } = useFormData()
-  const { stepIndex, multipage, page } = currentStep
+  const { multipage, page } = currentStep
   const [currentFile, setCurrentFile] = useState(
-    getLastFormDataFile({ formData: formData, stepIndex })
+    getLastFormDataFile({ formData: formData, currentStepIndex })
   )
   const [isFilePickerModalOpen, setIsFilePickerModalOpen] = useState(false)
   const webviewIntent = useWebviewIntent()
@@ -40,13 +40,16 @@ const ScanWrapper = ({ currentStep, onClose, onBack }) => {
         setFormData(prev => ({
           ...prev,
           data: prev.data.map(data => {
-            if (data.stepIndex === stepIndex && data.file.name === file.name) {
+            if (
+              data.stepIndex === currentStepIndex &&
+              data.file.name === file.name
+            ) {
               return { ...data, file }
             }
             return data
           })
         }))
-      } else if (!isFileAlreadySelected(formData, stepIndex, file)) {
+      } else if (!isFileAlreadySelected(formData, currentStepIndex, file)) {
         setCurrentFile(file)
         setFormData(prev => ({
           ...prev,
@@ -54,7 +57,7 @@ const ScanWrapper = ({ currentStep, onClose, onBack }) => {
             ...prev.data,
             {
               file,
-              stepIndex,
+              stepIndex: currentStepIndex,
               fileMetadata: {
                 page: !multipage ? page : '',
                 multipage

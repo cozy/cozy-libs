@@ -12,11 +12,10 @@ import { useFormData } from '../../../Hooks/useFormData'
 import { useStepperDialog } from '../../../Hooks/useStepperDialog'
 import ScanWrapper from '../ScanWrapper'
 
-const mockCurrentStep = ({
-  page = '',
-  multipage = false,
-  stepIndex = 0
-} = {}) => ({ page, multipage, stepIndex })
+const mockCurrentStep = ({ page = '', multipage = false } = {}) => ({
+  page,
+  multipage
+})
 const mockFile = ({ type = '', name = '' } = {}) => ({ type, name })
 const mockFormData = ({ metadata = {}, data = [], contacts = [] } = {}) => ({
   metadata,
@@ -57,6 +56,7 @@ const setup = ({
   setFormData = jest.fn(),
   formData = mockFormData(),
   currentStep = mockCurrentStep(),
+  currentStepIndex = 0,
   isMobileMock = false,
   isFlagshipAppMock = false,
   isScannerAvailable = false
@@ -72,6 +72,7 @@ const setup = ({
     formData
   })
   useStepperDialog.mockReturnValue({
+    currentStepIndex,
     currentDefinition: {},
     allCurrentSteps: []
   })
@@ -137,7 +138,8 @@ describe('Scan component:', () => {
 
   it('CompositeHeader component must be displayed if no file of the current step exists', () => {
     const { queryByTestId } = setup({
-      currentStep: mockCurrentStep({ stepIndex: 1 }),
+      currentStepIndex: 0,
+      currentStep: mockCurrentStep(),
       formData: mockFormData({
         data: [{ stepIndex: 2, file: mockFile({ name: 'test.pdf' }) }]
       })
@@ -148,7 +150,8 @@ describe('Scan component:', () => {
 
   it('ScanResultDialog component must be displayed if a file in the current step exists', () => {
     const { queryByTestId } = setup({
-      currentStep: mockCurrentStep({ stepIndex: 1 }),
+      currentStepIndex: 1,
+      currentStep: mockCurrentStep(),
       formData: mockFormData({
         data: [{ stepIndex: 1, file: mockFile({ name: 'test.pdf' }) }]
       })

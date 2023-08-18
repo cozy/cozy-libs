@@ -31,7 +31,6 @@
 ## Steps of the `acquisitionSteps` property:
 
 - ### Step `scan`:
-  - `stepIndex`: {number} Position of the step.
   - `model`: {string} Model used for the step (`scan`).
   - `[tooltip]`: {boolean} Allows to display a tooltip to help the user.
   - `[multipage]`: {boolean} Allows to add as many files as the user wants.
@@ -41,7 +40,6 @@
 <br>
 
 - ### Step `information`:
-  - `stepIndex`: {number} Position of the step.
   - `model`: {string} Model used for the step (`information`).
   - `illustration`: {string} Name of the illustration used on the step (with extension).
   - `[illustrationSize]`: {`small`|`medium`|`large`}(`4rem`|`6rem`|`8rem`) Size of the illustration (default `medium`)
@@ -54,7 +52,6 @@
 <br>
 
 - ### Step `contact`:
-  - `stepIndex`: {number} Position of the step.
   - `model`: {string} Model used for the step (`contact`).
   - `text`: {string} Translation key for the text of the step.
   - `[multiple]`: {boolean} Allows you to add multiple contacts.
@@ -62,7 +59,6 @@
 <br>
 
 - ### Step `note`:
-  - `stepIndex`: {number} Position of the step.
   - `model`: {string} Model used for the step (`note`)
 
 ***

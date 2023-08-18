@@ -8,10 +8,8 @@ export const handleBack = async ({
   isMobile,
   onClose
 }) => {
-  if (currentStepIndex > 1) {
-    const previousDefinition = allCurrentSteps.find(
-      el => el.stepIndex === currentStepIndex - 1
-    )
+  if (currentStepIndex > 0) {
+    const previousDefinition = allCurrentSteps[currentStepIndex - 1]
     const isPreviousScanFront =
       previousDefinition.model === 'scan' &&
       (previousDefinition.page === 'front' ||
@@ -20,7 +18,7 @@ export const handleBack = async ({
     return fromFlagshipUpload
       ? !isPreviousScanFront
         ? previousStep()
-        : currentStepIndex > 2
+        : currentStepIndex > 1
         ? setCurrentStepIndex(currentStepIndex - 2)
         : await webviewIntent?.call('cancelUploadByCozyApp')
       : previousStep()

@@ -6,7 +6,6 @@ const PaperDefinitionsStepAttrPropTypes = PropTypes.shape({
 })
 
 export const PaperDefinitionsStepPropTypes = PropTypes.shape({
-  stepIndex: PropTypes.number.isRequired,
   model: PropTypes.string.isRequired,
   multipage: PropTypes.bool,
   page: PropTypes.string,

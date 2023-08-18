@@ -8,7 +8,6 @@ import {
 import { mockPapersDefinitions } from '../../../../test/mockPaperDefinitions'
 
 const informationStep = {
-  stepIndex: 4,
   model: 'information',
   illustration: 'IlluDriverLicenseObtentionDateHelp.png',
   text: 'PaperJSON.driverLicense.obtentionDate.text',
