@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [57.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@57.2.0...cozy-mespapiers-lib@57.3.0) (2023-08-21)
+
+
+### Features
+
+* **mespapiers:** Add ErrorBoundary component ([a36294e](https://github.com/cozy/cozy-libs/commit/a36294e1d58b26946cce5841cd8b0748b1d359a7))
+* **mespapiers:** Add ErrorBoundary component in Router app ([6378f39](https://github.com/cozy/cozy-libs/commit/6378f39e37d4af9c1c1a34cfd23c311b61aec074))
+* **mespapiers:** Add ErrorProvider ([69e9db1](https://github.com/cozy/cozy-libs/commit/69e9db13c642aa409289a8f9d04b5985d408b014))
+* **mespapiers:** Wrap all Providers by ErrorProvider ([d0f8e4c](https://github.com/cozy/cozy-libs/commit/d0f8e4cbd2f7f389ee4a12880d564dde76deca3c))
+
+
+
+
+
 # [57.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@57.1.4...cozy-mespapiers-lib@57.2.0) (2023-08-18)
 
 
