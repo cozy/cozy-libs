@@ -448,5 +448,10 @@
     "title": "Would you like to add a note?",
     "text": "Install the %{appName} application in your Cozy to use this feature from My Papers!",
     "action": "Install"
+  },
+  "ErrorBoundary": {
+    "title": "Your papers could not be displayed correctly",
+    "text": "Try reloading the page! If the problem persists, please contact support.",
+    "action": "Reload"
   }
 }

@@ -448,5 +448,10 @@
     "title": "Vous souhaitez ajouter une note ?",
     "text": "Installer l’application %{appName} dans votre Cozy pour utiliser cette fonctionnalité depuis Mes Papiers !",
     "action": "Installer"
+  },
+  "ErrorBoundary": {
+    "title": "Vos papiers n’ont pas pu être affichés correctement",
+    "text": "Essayez de recharger la page ! Si le problème persiste n'hésitez pas à contacter le support.",
+    "action": "Recharger"
   }
 }
