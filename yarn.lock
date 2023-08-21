@@ -10166,6 +10166,31 @@ cozy-client@^40.2.0:
     sift "^6.0.0"
     url-search-params-polyfill "^8.0.0"
 
+cozy-client@^40.3.0:
+  version "40.3.0"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-40.3.0.tgz#e03aa60633a736449fb79c959cda9deeb0f10bcc"
+  integrity sha512-CcjsSPQ2CjelSFnRZawW6w2OwJhk+2lAggZjNbNgKUTokTVxDOjAoWADLCB0OsTxTMSnSPH20pIETkLIqfdgEA==
+  dependencies:
+    "@cozy/minilog" "1.0.0"
+    "@types/jest" "^26.0.20"
+    "@types/lodash" "^4.14.170"
+    btoa "^1.2.1"
+    cozy-stack-client "^40.2.1"
+    date-fns "2.29.3"
+    json-stable-stringify "^1.0.1"
+    lodash "^4.17.13"
+    microee "^0.0.6"
+    node-fetch "^2.6.1"
+    node-polyglot "2.4.2"
+    open "7.4.2"
+    prop-types "^15.6.2"
+    react-redux "^7.2.0"
+    redux "3 || 4"
+    redux-thunk "^2.3.0"
+    server-destroy "^1.0.1"
+    sift "^6.0.0"
+    url-search-params-polyfill "^8.0.0"
+
 cozy-device-helper@^1.12.0, cozy-device-helper@^1.16.1, cozy-device-helper@^1.7.3:
   version "1.18.0"
   resolved "https://registry.yarnpkg.com/cozy-device-helper/-/cozy-device-helper-1.18.0.tgz#45b37e68c30ec1104c8c40180b472d3662bc2534"
@@ -10296,6 +10321,15 @@ cozy-stack-client@^40.2.0:
   version "40.2.0"
   resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-40.2.0.tgz#e1b1845dd0360efc1774dfeda3ee57b134484a01"
   integrity sha512-vhLnEoRlsdvrtAVjM3gKX6VPUprtu8b0Uu7mlZwjL0gyPgBVCTaqUF4w2I1kH+xvvZuuLTp//vJFfZhXuF1vkg==
+  dependencies:
+    detect-node "^2.0.4"
+    mime "^2.4.0"
+    qs "^6.7.0"
+
+cozy-stack-client@^40.2.1:
+  version "40.2.1"
+  resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-40.2.1.tgz#ce67d260226d7cd9f4314c15428880fd87016812"
+  integrity sha512-BMhIn1/3y2zzEYx4WmIlMcGUrzfKj7fRZdtrIjYimNapW0Xsy6nJlDCInA3cH1tNKqKBMIC5F4UQn3vTo/9hGg==
   dependencies:
     detect-node "^2.0.4"
     mime "^2.4.0"
@@ -19226,17 +19260,6 @@ msgpack5@^4.0.2:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
     safe-buffer "^5.1.2"
-
-"mui-bottom-sheet@git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9":
-  version "1.0.8"
-  uid "3dc4c2a245ab39079bc2f73546bccf80847be14c"
-  resolved "git+https://github.com/cozy/mui-bottom-sheet.git#3dc4c2a245ab39079bc2f73546bccf80847be14c"
-  dependencies:
-    "@juggle/resize-observer" "^3.1.3"
-    jest-environment-jsdom-sixteen "^1.0.3"
-    react-spring "9.0.0-rc.3"
-    react-use-gesture "^7.0.8"
-    react-use-measure "^2.0.0"
 
 "mui-bottom-sheet@https://github.com/cozy/mui-bottom-sheet.git#v1.0.9":
   version "1.0.8"

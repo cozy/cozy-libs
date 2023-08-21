@@ -21,7 +21,7 @@
     "@testing-library/react-hooks": "8.0.1",
     "babel-preset-cozy-app": "2.0.1",
     "cozy-bar": "^7.26.0",
-    "cozy-client": "^40.2.0",
+    "cozy-client": "^40.3.0",
     "cozy-device-helper": "^2.7.0",
     "cozy-doctypes": "^1.88.6",
     "cozy-flags": "^3.0.1",
@@ -50,7 +50,7 @@
     "react-input-mask": "3.0.0-alpha.2"
   },
   "peerDependencies": {
-    "cozy-client": ">=40.2.0",
+    "cozy-client": ">=40.3.0",
     "cozy-device-helper": ">=2.7.0",
     "cozy-doctypes": ">=1.88.6",
     "cozy-flags": ">=3.0.1",
