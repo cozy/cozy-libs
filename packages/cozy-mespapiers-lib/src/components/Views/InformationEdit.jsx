@@ -39,6 +39,16 @@ const InformationEdit = () => {
     fileId,
     'information'
   )
+  const currentAttributes = currentEditInformations?.currentStep?.attributes
+  const defaultValue =
+    currentEditInformations?.file?.metadata?.[
+      currentEditInformations?.searchParams?.metadataName
+    ]
+  const { Component, attrs } =
+    makeInputsInformationStep(currentAttributes)[0] || {}
+  const dialogTitle = currentEditInformations?.paperDef?.label
+    ? scannerT(`items.${currentEditInformations.paperDef.label}`)
+    : ''
 
   const onClose = () => {
     navigate('..')
@@ -59,15 +69,6 @@ const InformationEdit = () => {
 
     navigate('..')
   }
-
-  const currentAttributes = currentEditInformations?.currentStep?.attributes
-
-  const { Component, attrs } =
-    makeInputsInformationStep(currentAttributes)[0] || {}
-
-  const dialogTitle = currentEditInformations?.paperDef?.label
-    ? scannerT(`items.${currentEditInformations.paperDef.label}`)
-    : ''
 
   if (
     !currentEditInformations.isLoading &&
@@ -104,11 +105,7 @@ const InformationEdit = () => {
                 {Component && (
                   <Component
                     attrs={attrs}
-                    defaultValue={
-                      currentEditInformations.file.metadata[
-                        currentEditInformations.searchParams.metadataName
-                      ]
-                    }
+                    defaultValue={defaultValue}
                     setValue={setValue}
                     setValidInput={setValidInput}
                     setIsFocus={setIsFocus}
