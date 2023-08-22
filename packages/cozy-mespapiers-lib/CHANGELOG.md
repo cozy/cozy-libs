@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [58.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@57.3.0...cozy-mespapiers-lib@58.0.0) (2023-08-22)
+
+
+### Bug Fixes
+
+* **mespapiers:** Now set default value when editing information ([d8b0098](https://github.com/cozy/cozy-libs/commit/d8b00989d6b511d6a1fa25e2fadcb785f84a8ae6))
+
+
+### Features
+
+* **mespapiers:** Upgrade cozy-client from 40.2.0 to 40.3.0 ([21bda3b](https://github.com/cozy/cozy-libs/commit/21bda3bf3d382e690abbffbb41f19b0c6da12a50))
+* **mespapiers:** Upgrade cozy-ui from 90.6.0 to 90.7.1 ([01129b5](https://github.com/cozy/cozy-libs/commit/01129b5e0c072efe5af89f4700cece4fec3921ac))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 90.7.1`
+* **mespapiers:** you must have `cozy-client >=40.3.0`
+
+
+
+
+
 # [57.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@57.2.0...cozy-mespapiers-lib@57.3.0) (2023-08-21)
 
 
