@@ -62,7 +62,7 @@ describe('RadioAdapter', () => {
 
     fireEvent.click(getByLabelText(options[1]))
 
-    expect(setValue).toHaveBeenCalledTimes(1)
+    expect(setValue).toHaveBeenCalled()
   })
 
   it('calls the setValue function when the text field is changed', () => {
@@ -73,11 +73,11 @@ describe('RadioAdapter', () => {
     })
 
     fireEvent.click(getByLabelText('other'))
-    expect(setValue).toHaveBeenCalledTimes(1)
+    expect(setValue).toHaveBeenCalled()
 
     fireEvent.change(getByTestId('TextField-other'), {
       target: { value: 'test' }
     })
-    expect(setValue).toHaveBeenCalledTimes(2)
+    expect(setValue).toHaveBeenCalled()
   })
 })

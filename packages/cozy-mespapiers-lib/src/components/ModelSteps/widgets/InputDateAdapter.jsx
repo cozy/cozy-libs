@@ -63,6 +63,7 @@ const InputDateAdapter = ({
     if (value === '') setSelectedDate(null)
   }
 
+  /* Set default value */
   useEffect(() => {
     setValue(prev => ({ ...prev, [name]: selectedDate }))
   }, [name, selectedDate, setValue])

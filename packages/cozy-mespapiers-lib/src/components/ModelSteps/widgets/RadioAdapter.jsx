@@ -46,6 +46,11 @@ const RadioAdapter = ({
     }))
   }
 
+  /* Set default value */
+  useEffect(() => {
+    setValue(prev => ({ ...prev, [name]: optionValue }))
+  }, [name, setValue, optionValue])
+
   /* Necessary to validate or not the validation button of the current step */
   useEffect(() => {
     setValidInput(prev => ({

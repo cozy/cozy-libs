@@ -72,6 +72,7 @@ const InputTextAdapter = ({
     [currentValue.length, expectedLength, isRequired, isError]
   )
 
+  /* Set default value */
   useEffect(() => {
     setValue(prev => ({ ...prev, [name]: currentValue }))
   }, [name, setValue, currentValue])
