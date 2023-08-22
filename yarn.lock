@@ -10435,10 +10435,10 @@ cozy-ui@^88.1.1:
     react-swipeable-views "^0.13.3"
     rooks "^5.11.2"
 
-cozy-ui@^90.6.0:
-  version "90.6.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-90.6.0.tgz#c85f24e3b587c33f7f8824e4b11515b0ebd2ec97"
-  integrity sha512-u6k35wB43N5n6Bv+AR8S3M+6UuTg/KrO4BFJ3Yg/J23ADlnWesPWMEAsrlnQL8TyAFv2n3mtK3cup6BY4hHSHA==
+cozy-ui@^90.7.1:
+  version "90.7.1"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-90.7.1.tgz#12e9675099aa7b307f2f91360cbf7b1520ea8e71"
+  integrity sha512-hLprGawxRdG10fyqJKCoLkZfcvhMI2EcXyuRXKXdy7WabCyvbpQfC34Jvt7TFNvxm8OFeSVDQSbrE8QSD5rCAQ==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@material-ui/core" "4.12.3"
@@ -19260,6 +19260,17 @@ msgpack5@^4.0.2:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
     safe-buffer "^5.1.2"
+
+"mui-bottom-sheet@git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9":
+  version "1.0.8"
+  uid "3dc4c2a245ab39079bc2f73546bccf80847be14c"
+  resolved "git+https://github.com/cozy/mui-bottom-sheet.git#3dc4c2a245ab39079bc2f73546bccf80847be14c"
+  dependencies:
+    "@juggle/resize-observer" "^3.1.3"
+    jest-environment-jsdom-sixteen "^1.0.3"
+    react-spring "9.0.0-rc.3"
+    react-use-gesture "^7.0.8"
+    react-use-measure "^2.0.0"
 
 "mui-bottom-sheet@https://github.com/cozy/mui-bottom-sheet.git#v1.0.9":
   version "1.0.8"
