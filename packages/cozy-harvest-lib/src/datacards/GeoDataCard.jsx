@@ -11,7 +11,8 @@ import CozyClient, {
   Q,
   queryConnect,
   isQueryLoading,
-  hasQueryBeenLoaded
+  hasQueryBeenLoaded,
+  RealTimeQueries
 } from 'cozy-client'
 import flag from 'cozy-flags'
 import Box from 'cozy-ui/transpiled/react/Box'
@@ -314,6 +315,14 @@ DataGeoDataCard.propTypes = {
   accountId: PropTypes.string.isRequired
 }
 
+const DataGeoDataCardWithRealtime = props => {
+  return (
+    <>
+      <RealTimeQueries doctype="io.cozy.timeseries.geojson" />
+      <DataGeoDataCard {...props} />
+    </>
+  )
+}
 export default queryConnect({
   timeseriesCol: props => makeQueryFromProps(props)
-})(DataGeoDataCard)
+})(DataGeoDataCardWithRealtime)
