@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
-import { useClient } from 'cozy-client'
+import { isQueryLoading, useQuery } from 'cozy-client'
 import flag from 'cozy-flags'
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -9,44 +10,59 @@ import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
 import Konnector from '../../../assets/icons/Konnectors.svg'
-import { getStoreWebLinkByKonnector } from '../../../helpers/getStoreWebLinkByKonnector'
+import { buildKonnectorsQueryBySlug } from '../../../helpers/queries'
 import withLocales from '../../../locales/withLocales'
 
-export const importAuto = ({ paperDefinition }) => {
+export const importAuto = ({ paperDefinition, importAutoOnclick }) => {
   return {
     name: 'importAuto',
     Component: withLocales(
       // eslint-disable-next-line react/display-name
       forwardRef((props, ref) => {
-        const client = useClient()
         const { t } = useI18n()
+        const navigate = useNavigate()
+        const { pathname } = useLocation()
+        const normalizePathname = pathname.split('/create')[0]
 
         const {
           konnectorCriteria: {
-            category: konnectorCategory,
-            name: konnectorName
+            name: konnectorName,
+            category: konnectorCategory
           } = {},
           label
         } = paperDefinition
 
-        const webLink = getStoreWebLinkByKonnector({
-          client,
-          konnectorName,
-          konnectorCategory,
-          redirectionPath: flag('harvest.inappconnectors.enabled')
-            ? `/paper/files/${label}/harvest/${konnectorName || ''}`
-            : undefined
-        })
+        const queryKonnector = buildKonnectorsQueryBySlug(konnectorName)
+        const { data: konnectors, ...konnectorsQueryLeft } = useQuery(
+          queryKonnector.definition,
+          queryKonnector.options
+        )
+        const isKonnectorsLoading = isQueryLoading(konnectorsQueryLeft)
+
+        const redirectPathSearchParam = flag('harvest.inappconnectors.enabled')
+          ? `redirectAfterInstall=/paper/files/${label}/harvest/${
+              konnectorName ? `&slug=${konnectorName}` : ''
+            }${konnectorCategory ? `&category=${konnectorCategory}` : ''}`
+          : ''
+
+        const handleClick = () => {
+          if (konnectors?.length > 0) {
+            navigate(`/paper/files/${label}`)
+          } else {
+            navigate({
+              pathname: `${normalizePathname}/installKonnectorIntent`,
+              search: `${redirectPathSearchParam}`
+            })
+          }
+          importAutoOnclick()
+        }
 
         return (
           <ActionsMenuItem
             {...props}
             ref={ref}
-            component="a"
-            href={webLink}
-            {...(!flag('harvest.inappconnectors.enabled') && {
-              target: '_blank'
-            })}
+            onClick={handleClick}
+            disabled={konnectorName && isKonnectorsLoading}
           >
             <ListItemIcon>
               <Icon icon={Konnector} size={24} />
@@ -54,7 +70,6 @@ export const importAuto = ({ paperDefinition }) => {
             <ListItemText
               primary={t('ImportDropdown.importAuto.title')}
               secondary={t('ImportDropdown.importAuto.text')}
-              ellipsis={false}
             />
           </ActionsMenuItem>
         )

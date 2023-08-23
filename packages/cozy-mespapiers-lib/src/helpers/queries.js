@@ -183,6 +183,15 @@ export const buildKonnectorsQueryByQualificationLabel = label => ({
   }
 })
 
+export const buildKonnectorsQueryBySlug = slug => ({
+  definition: () => Q(KONNECTORS_DOCTYPE).where({ slug }).indexFields(['slug']),
+  options: {
+    as: `${KONNECTORS_DOCTYPE}/slug/${slug}`,
+    fetchPolicy: defaultFetchPolicy,
+    enabled: !!slug
+  }
+})
+
 export const buildAccountsQueryBySlugs = (slugs, enabled = true) => ({
   definition: () =>
     Q(ACCOUNTS_DOCTYPE)
