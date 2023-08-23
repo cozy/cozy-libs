@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom'
 
 import InstallAppFromIntent from './InstallAppFromIntent/InstallAppFromIntent'
+import InstallKonnectorFromIntent from './InstallKonnectorFromIntent/InstallKonnectorFromIntent'
 import MesPapiersLibProviders from './MesPapiersLibProviders'
 import OnboardedGuardedRoute from './OnboardedGuardedRoute'
 import ContactEdit from './Views/ContactEdit'
@@ -55,6 +56,10 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
           <Route path="/" element={<OutletWrapper Component={Home} />}>
             <Route path="editcontact/:fileId" element={<ContactEdit />} />
             <Route path="installAppIntent" element={<InstallAppFromIntent />} />
+            <Route
+              path="installKonnectorIntent"
+              element={<InstallKonnectorFromIntent />}
+            />
             <Route path="create" element={<PlaceholderListModal />} />
             <Route
               path="create/:qualificationLabel"
@@ -68,6 +73,10 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
           >
             <Route path="editcontact/:fileId" element={<ContactEdit />} />
             <Route path="installAppIntent" element={<InstallAppFromIntent />} />
+            <Route
+              path="installKonnectorIntent"
+              element={<InstallKonnectorFromIntent />}
+            />
             <Route path="create" element={<PlaceholderListModal />} />
             <Route
               path="create/:qualificationLabel"
