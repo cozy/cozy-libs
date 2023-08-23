@@ -1,6 +1,6 @@
 {
   "name": "cozy-sharing",
-  "version": "8.3.0",
+  "version": "9.0.0",
   "description": "Provides sharing login for React applications.",
   "main": "dist/index.js",
   "author": "Cozy",
@@ -28,7 +28,7 @@
     "@cozy/minilog": "^1.0.0",
     "classnames": "^2.2.6",
     "copy-text-to-clipboard": "^2.1.1",
-    "cozy-device-helper": "^2.7.0",
+    "cozy-device-helper": "^3.0.0",
     "cozy-doctypes": "^1.88.6",
     "lodash": "^4.17.19",
     "react-autosuggest": "^10.1.0",

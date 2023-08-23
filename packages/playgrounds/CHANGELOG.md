@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.0.0 (2023-08-23)
+
+
+### Features
+
+* **harvest:** Update cozy-client from `38.6.0` to `40.2.0` ([8931b15](https://github.com/cozy/cozy-libs/commit/8931b15ba7b097bf829601d6042d5e522b7f2fd6))
+
+
+### BREAKING CHANGES
+
+* **harvest:** you must have `cozy-client >= 40.2.0`
+
+
+
+
+
 ## [1.25.4](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.25.3...cozy-playgrounds@1.25.4) (2023-07-28)
 
 **Note:** Version bump only for package cozy-playgrounds
