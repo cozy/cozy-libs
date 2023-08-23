@@ -7,7 +7,11 @@ import { importAuto } from '../Actions/Items/importAuto'
 import { scanPicture } from '../Actions/Items/scanPicture'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 
-const useKonnectorsActions = ({ placeholder, redirectPaperCreation }) => {
+const useKonnectorsActions = ({
+  placeholder,
+  redirectPaperCreation,
+  setShowKonnectorMenu
+}) => {
   const { search } = useLocation()
   const { qualificationLabel } = useParams()
   const { papersDefinitions } = usePapersDefinitions()
@@ -23,7 +27,8 @@ const useKonnectorsActions = ({ placeholder, redirectPaperCreation }) => {
 
   const actions = makeActions([importAuto, scanPicture], {
     paperDefinition,
-    scanPictureOnclick: () => redirectPaperCreation(paperDefinition)
+    scanPictureOnclick: () => redirectPaperCreation(paperDefinition),
+    importAutoOnclick: () => setShowKonnectorMenu(false)
   })
 
   return actions
