@@ -73,7 +73,8 @@ const PlaceholdersList = ({ currentQualifItems }) => {
 
   const actions = useKonnectorsActions({
     placeholder: placeholderSelected,
-    redirectPaperCreation
+    redirectPaperCreation,
+    setShowKonnectorMenu: setIsImportDropdownDisplayed
   })
 
   const showImportDropdown = (idx, placeholder) => {

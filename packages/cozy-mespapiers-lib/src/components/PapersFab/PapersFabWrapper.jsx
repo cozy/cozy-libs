@@ -50,7 +50,10 @@ const PapersFabWrapper = ({ children }) => {
     redirectPaperCreation
   })
 
-  const konnectorsActions = useKonnectorsActions({ redirectPaperCreation })
+  const konnectorsActions = useKonnectorsActions({
+    setShowKonnectorMenu,
+    redirectPaperCreation
+  })
 
   if (!children) return null
 
