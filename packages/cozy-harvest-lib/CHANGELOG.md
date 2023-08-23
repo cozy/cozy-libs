@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@17.1.0...cozy-harvest-lib@17.2.0) (2023-08-23)
+
+
+### Features
+
+* Branch Realtime on io.cozy.timeseries.geojson ([a96c922](https://github.com/cozy/cozy-libs/commit/a96c9224575f42dffae954d79784917d3740bf7c))
+* Translate en.json in nl_NL ([d409c6a](https://github.com/cozy/cozy-libs/commit/d409c6af89530d708e98c91effd6e2667b4a6fe9))
+
+
+
+
+
 # [17.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@17.0.1...cozy-harvest-lib@17.1.0) (2023-08-18)
 
 
