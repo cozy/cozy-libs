@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [58.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@58.0.2...cozy-mespapiers-lib@58.1.0) (2023-08-24)
+
+
+### Features
+
+* **mespapiers:** Remove the `stepIndex` property from the config file ([4e38d06](https://github.com/cozy/cozy-libs/commit/4e38d060a19c9a517887d26f75053da607efab3b))
+
+
+
+
+
 ## [58.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@58.0.1...cozy-mespapiers-lib@58.0.2) (2023-08-23)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
