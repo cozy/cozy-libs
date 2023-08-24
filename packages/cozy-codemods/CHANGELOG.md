@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.23.0 (2023-08-24)
+
+
+### Features
+
+* **codemods:** Move ...Props attributes into componentsProps for Viewer ([4a2edf2](https://github.com/cozy/cozy-libs/commit/4a2edf20356daf8f45307ede9e77e4e6caac458c))
+
+
+
+
+
 ## [1.22.2](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.22.1...@cozy/codemods@1.22.2) (2023-06-29)
 
 
