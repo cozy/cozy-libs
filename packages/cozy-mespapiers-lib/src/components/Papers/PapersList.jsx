@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
-import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
@@ -22,9 +21,8 @@ const PapersList = ({ papers, konnector, accounts, isLast }) => {
 
   return (
     <>
-      {flag('harvest.inappconnectors.enabled') && (
-        <HarvestBanner konnector={konnector} account={account} />
-      )}
+      <HarvestBanner konnector={konnector} account={account} />
+
       {papers.list.map(
         (paper, idx) =>
           idx + 1 <= maxDisplay && (

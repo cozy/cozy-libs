@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { getAccountName } from 'cozy-client/dist/models/account'
-import flag from 'cozy-flags'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
@@ -28,9 +27,8 @@ const EmptyWithHeader = ({ konnector, account }) => {
       }
       data-testid="EmptyWithHeader"
     >
-      {flag('harvest.inappconnectors.enabled') && (
-        <HarvestBanner konnector={konnector} account={account} />
-      )}
+      <HarvestBanner konnector={konnector} account={account} />
+
       <ListItem ellipsis={false}>
         <ListItemText
           primary={t('Empty.konnector.title')}
