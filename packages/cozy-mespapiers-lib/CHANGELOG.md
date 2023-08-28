@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [59.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@58.1.0...cozy-mespapiers-lib@59.0.0) (2023-08-28)
+
+
+### Features
+
+* **mespapiers:** Add option to `useKonnectorActions` ([ad8bf05](https://github.com/cozy/cozy-libs/commit/ad8bf0596644e9f82b458ae955295d1b35d128e4))
+* **mespapiers:** Install konnector from intent ([2e8fd9e](https://github.com/cozy/cozy-libs/commit/2e8fd9ed6b5afd56852fd9cb14f5f5e23a0e7d37))
+* **mespapiers:** Remove all `harvest.inappconnectors.enabled` occurence ([1dde315](https://github.com/cozy/cozy-libs/commit/1dde315435a5f0b5674f09978fa0388ce9e86f85))
+* **mespapiers:** Update `importAuto` action ([5e997bf](https://github.com/cozy/cozy-libs/commit/5e997bf3c9ba93cedc6c1f8865abc16718b8839e))
+* **mespapiers:** Upgrade cozy-ui from 90.7.1 to 91.2.0 ([21c7225](https://github.com/cozy/cozy-libs/commit/21c72258d987696f255e5e2fff9119e47e4538d0))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 91.2.0`
+
+
+
+
+
 # [58.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@58.0.2...cozy-mespapiers-lib@58.1.0) (2023-08-24)
 
 
