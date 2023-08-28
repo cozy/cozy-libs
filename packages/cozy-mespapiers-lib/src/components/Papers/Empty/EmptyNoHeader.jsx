@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
 
-import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Empty from 'cozy-ui/transpiled/react/Empty'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -42,9 +41,8 @@ const EmptyNoHeader = ({ konnector, accounts }) => {
 
   return (
     <>
-      {flag('harvest.inappconnectors.enabled') && (
-        <HarvestBanner konnector={konnector} account={accounts?.[0]} />
-      )}
+      <HarvestBanner konnector={konnector} account={accounts?.[0]} />
+
       <Empty
         className={`${styles['emptyWithKonnector']} u-ph-1`}
         icon={PapersIcon}

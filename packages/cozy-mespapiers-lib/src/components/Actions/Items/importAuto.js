@@ -2,7 +2,6 @@ import React, { forwardRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { isQueryLoading, useQuery } from 'cozy-client'
-import flag from 'cozy-flags'
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -39,11 +38,9 @@ export const importAuto = ({ paperDefinition, importAutoOnclick }) => {
         )
         const isKonnectorsLoading = isQueryLoading(konnectorsQueryLeft)
 
-        const redirectPathSearchParam = flag('harvest.inappconnectors.enabled')
-          ? `redirectAfterInstall=/paper/files/${label}/harvest/${
-              konnectorName ? `&slug=${konnectorName}` : ''
-            }${konnectorCategory ? `&category=${konnectorCategory}` : ''}`
-          : ''
+        const redirectPathSearchParam = `redirectAfterInstall=/paper/files/${label}/harvest/${
+          konnectorName ? `&slug=${konnectorName}` : ''
+        }${konnectorCategory ? `&category=${konnectorCategory}` : ''}`
 
         const handleClick = () => {
           if (konnectors?.length > 0) {
