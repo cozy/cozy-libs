@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [60.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@59.0.0...cozy-mespapiers-lib@60.0.0) (2023-08-29)
+
+
+### Features
+
+* **mespapiers:** Sync peerDependencies ([38a23b5](https://github.com/cozy/cozy-libs/commit/38a23b51d52e58dfa2fa1a4b5cadface3c168bcb))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have
+- `cozy-device-helper >= 3.0.0`
+- `cozy-harvest-lib >= 17.2.1`
+- `cozy-intent >= 2.15.0`
+- `cozy-realtime >= 5.0.0`
+- `cozy-sharing >= 9.0.0`
+
+
+
+
+
 # [59.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@58.1.0...cozy-mespapiers-lib@59.0.0) (2023-08-28)
 
 
