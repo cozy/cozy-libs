@@ -1,7 +1,7 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useEffect, useRef } from 'react'
 
-import { NativeContext } from '../../view'
 import { NativeMethodsRegister, NativeService } from '../../api'
+import { NativeContext } from '../../view'
 
 interface Props {
   children: React.ReactChild
@@ -20,11 +20,23 @@ export const getNativeIntentService = (): NativeService => {
   return nativeIntentService
 }
 
+/**
+ * `localMethods` can be updated at any time, it will not trigger a re-render of the context provider
+ */
 export const NativeIntentProvider = ({
   children,
   localMethods
 }: Props): ReactElement => {
-  nativeIntentService = new NativeService(localMethods)
+  const hasRendered = useRef(false)
+
+  useEffect(() => {
+    if (!hasRendered.current) {
+      nativeIntentService = new NativeService(localMethods)
+      hasRendered.current = true
+    }
+
+    nativeIntentService?.updateLocalMethods(localMethods)
+  }, [localMethods])
 
   return (
     <NativeContext.Provider value={nativeIntentService}>
