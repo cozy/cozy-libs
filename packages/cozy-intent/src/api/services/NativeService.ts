@@ -19,7 +19,7 @@ const log = debug('NativeService')
 export class NativeService {
   private readonly messengerService: typeof NativeMessenger
 
-  private readonly localMethods: NativeMethodsRegister
+  private localMethods: NativeMethodsRegister
   private messengerRegister = {} as MessengerRegister
 
   constructor(
@@ -30,8 +30,12 @@ export class NativeService {
     this.localMethods = localMethods
   }
 
+  public updateLocalMethods = (localMethods: NativeMethodsRegister): void => {
+    this.localMethods = localMethods
+  }
+
   private isNativeEvent(object: unknown): object is NativeEvent {
-    return (object as NativeEvent).nativeEvent?.data !== undefined
+    return (object as NativeEvent).nativeEvent.data !== undefined
   }
 
   private getUri = (source: NativeEvent): string =>
