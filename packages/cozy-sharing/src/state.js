@@ -395,6 +395,31 @@ export const getSharingDocIds = sharing => {
   return docs
 }
 
+/**
+ * Get ids of shared documents, but only if sharing is ready so files exist
+ * @param {object} sharing
+ * @param {string} instanceUri
+ * @returns {string[]} List of document ids of a sharing
+ */
+export const getExternalSharingIds = (sharing, instanceUri) => {
+  const member = sharing.attributes.members.find(
+    member => member.instance === instanceUri
+  )
+
+  let docs = []
+  if (member?.status === 'ready') {
+    docs = sharing.attributes.rules
+      .map(r => r.values)
+      .reduce((acc, val) => acc.concat(val), [])
+  }
+
+  if (sharing.attributes.shortcut_id) {
+    docs.push(sharing.attributes.shortcut_id)
+  }
+
+  return docs
+}
+
 // Some permissions can not have values since they can
 // be on a global doctype. In that case, we can't sort
 // them by id

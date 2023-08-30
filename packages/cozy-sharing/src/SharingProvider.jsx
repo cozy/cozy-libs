@@ -27,7 +27,7 @@ import reducer, {
   getOwner,
   getRecipients,
   getSharingById,
-  getSharingDocIds,
+  getExternalSharingIds,
   getSharingForSelf,
   getSharingType,
   getSharingLink,
@@ -155,7 +155,10 @@ export class SharingProvider extends Component {
     if (internalSharing) {
       updateSharingInStore(this.dispatch, newSharing)
     } else {
-      const docsId = getSharingDocIds(newSharing)
+      const docsId = getExternalSharingIds(
+        newSharing,
+        client.getStackClient().uri
+      )
       this.synchronousJobQueue.push({
         function: createSharingInStore,
         arguments: {
