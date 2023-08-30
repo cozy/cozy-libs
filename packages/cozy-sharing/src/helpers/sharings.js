@@ -5,6 +5,7 @@ import {
   updateInternalObjectFromRealtime,
   normalizeDocFromRealtime
 } from './realtime'
+import logger from '../logger'
 import { addSharing, updateSharing } from '../state'
 
 export const getSharingObject = (internalSharing, sharing) => {
@@ -25,17 +26,21 @@ export const createSharingInStore = async ({
   // TODO Check if we can getByIds to avoid query in map
   await Promise.all(
     docsId.map(async id => {
-      const file =
-        doctype === 'io.cozy.files'
-          ? await client.query(Q(doctype).getById(id))
-          : undefined
+      try {
+        const file =
+          doctype === 'io.cozy.files'
+            ? await client.query(Q(doctype).getById(id))
+            : undefined
 
-      const path =
-        file &&
-        (file.data.path ||
-          (await fetchFilesPaths(client, doctype, [file.data])))
+        const path =
+          file &&
+          (file.data.path ||
+            (await fetchFilesPaths(client, doctype, [file.data])))
 
-      dispatch(addSharing(sharing, path))
+        dispatch(addSharing(sharing, path))
+      } catch (e) {
+        logger.log(e)
+      }
     })
   )
 }

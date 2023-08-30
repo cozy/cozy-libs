@@ -15,7 +15,8 @@ import reducer, {
   getSharingType,
   getPermissionDocIds,
   getDocumentSharingType,
-  getSharedParentPath
+  getSharedParentPath,
+  getExternalSharingIds
 } from './state'
 import {
   SHARING_1,
@@ -641,5 +642,76 @@ describe('getSharedParentPath', () => {
     expect(
       getSharedParentPath(state, '/folder-3/sub-folder-4/sub-folder-5/file-4')
     ).toBe('/folder-3/sub-folder-4')
+  })
+})
+
+/* eslint-disable jest/no-focused-tests */
+fdescribe('getExternalSharingIds', () => {
+  const getAttributes = (memberStatus = 'mail-not-sent') => ({
+    rules: [
+      {
+        title: 'Photos',
+        doctype: 'io.cozy.files',
+        values: ['5f8c1090afad686a8f7f56cce07e8098'],
+        add: 'sync',
+        update: 'sync',
+        remove: 'sync'
+      }
+    ],
+    members: [
+      {
+        status: 'owner',
+        name: 'Jane Doe',
+        email: 'jane@doe.com',
+        instance: 'http://cozy.tools:8080'
+      },
+      {
+        status: memberStatus,
+        name: 'John Doe',
+        email: 'john@doe.com',
+        instance: 'http://cozy.local:8080'
+      }
+    ]
+  })
+
+  it('should add shorcut ', () => {
+    const res = getExternalSharingIds(
+      {
+        attributes: {
+          ...getAttributes('ready')
+        }
+      },
+      'http://cozy.local:8080'
+    )
+    expect(res).toStrictEqual(['5f8c1090afad686a8f7f56cce07e8098'])
+  })
+
+  it('should get only shorcut if share is not ready', () => {
+    const res = getExternalSharingIds(
+      {
+        attributes: {
+          ...getAttributes(),
+          shortcut_id: 'c63de58b2c898e457fbdfdc11a24a986'
+        }
+      },
+      'http://cozy.local:8080'
+    )
+    expect(res).toStrictEqual(['c63de58b2c898e457fbdfdc11a24a986'])
+  })
+
+  it('should add shorcut ', () => {
+    const res = getExternalSharingIds(
+      {
+        attributes: {
+          ...getAttributes('ready'),
+          shortcut_id: 'c63de58b2c898e457fbdfdc11a24a986'
+        }
+      },
+      'http://cozy.local:8080'
+    )
+    expect(res).toStrictEqual([
+      '5f8c1090afad686a8f7f56cce07e8098',
+      'c63de58b2c898e457fbdfdc11a24a986'
+    ])
   })
 })
