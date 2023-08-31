@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.16.0 (2023-08-31)
+
+
+### Bug Fixes
+
+* English locale for oauth connection ([5be73d0](https://github.com/cozy/cozy-libs/commit/5be73d0027387220cc33c71a8e9aae8b61d4b0e0))
+
+
+### Features
+
+* **cozy-intent:** Avoid localMethods rerender ([68d6ab0](https://github.com/cozy/cozy-libs/commit/68d6ab06c5957e0b78ed199d46d80682431d8313))
+
+
+
+
+
 # 2.15.0 (2023-07-27)
 
 
