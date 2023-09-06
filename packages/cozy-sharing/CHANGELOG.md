@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@9.0.0...cozy-sharing@9.0.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* Index only existing document after a realtime update ([f678ef7](https://github.com/cozy/cozy-libs/commit/f678ef71f658583b7c10bf0db853b550e24f15d9))
+
+
+
+
+
 # 9.0.0 (2023-08-23)
 
 
