@@ -304,9 +304,18 @@ export const getSharingLink = (state, docId, documentType) => {
   const perms = getDocumentPermissions(state, docId)
   if (perms.length === 0) return null
   const perm = perms[0]
+  // We used to use `email` as `codes` attribute for a sharingByLink.
+  // But when we use cozy-client to create a Permission, by default
+  // the codes attribute is set to `code`. MesPapiers app is using this
+  // default behavior... So the sharing by link created by mes papiers
+  // didn't appear correctly in cozy-sharing.
+  // This is a bit ugly, we should have a better way to know if this is
+  // a sharing by link or not.
   const code =
     get(perm, 'attributes.shortcodes.email') ||
-    get(perm, 'attributes.codes.email')
+    get(perm, 'attributes.shortcodes.code') ||
+    get(perm, 'attributes.codes.email') ||
+    get(perm, 'attributes.codes.code')
   if (code) {
     return buildSharingLink(state, documentType, code)
   } else {
