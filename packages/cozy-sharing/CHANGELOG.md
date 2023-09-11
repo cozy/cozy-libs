@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.0.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@9.0.1...cozy-sharing@9.0.2) (2023-09-11)
+
+
+### Bug Fixes
+
+* BuildSharingLink works also for perm from mes papiers ([64980a8](https://github.com/cozy/cozy-libs/commit/64980a81c769168c927fd0348a320db60a48d1bb))
+
+
+
+
+
 ## [9.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@9.0.0...cozy-sharing@9.0.1) (2023-09-06)
 
 
