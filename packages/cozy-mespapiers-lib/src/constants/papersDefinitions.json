@@ -1265,6 +1265,18 @@
         },
         {
           "model": "information",
+          "illustration": "Planet.svg",
+          "text": "PaperJSON.residence_permit.information.country.text",
+          "attributes": [
+            {
+              "name": "country",
+              "type": "text",
+              "inputLabel": "PaperJSON.residence_permit.information.country.inputLabel"
+            }
+          ]
+        },
+        {
+          "model": "information",
           "illustration": "IlluResidencePermitNumberHelp.png",
           "text": "PaperJSON.card.number.text",
           "attributes": [

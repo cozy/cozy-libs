@@ -288,6 +288,14 @@
         }
       }
     },
+    "residence_permit": {
+      "information": {
+        "country": {
+          "inputLabel": "Beneficiary nationality",
+          "text": "What is the Nationality of the beneficiary?"
+        }
+      }
+    },
     "work_contract": {
       "contract_type": {
         "text": "Select the type of contract"
