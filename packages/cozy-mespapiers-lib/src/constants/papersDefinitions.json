@@ -73,6 +73,18 @@
           ]
         },
         {
+          "model": "information",
+          "text": "PaperJSON.bankDetails.bicNumber.text",
+          "attributes": [
+            {
+              "name": "bicNumber",
+              "type": "text",
+              "maxLength": 11,
+              "inputLabel": "PaperJSON.bankDetails.bicNumber.inputLabel"
+            }
+          ]
+        },
+        {
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,

@@ -25,6 +25,7 @@ const flexsearchIndex = [
   'flexsearchProps:translated:birthday', // io.cozy.contacts
   'flexsearchProps:translated:address', // io.cozy.contacts
   'metadata:number', // io.cozy.files
+  'metadata:bicNumber',
   'metadata:refTaxIncome', // io.cozy.files
   'metadata:expirationDate', // io.cozy.files
   'fullname', // io.cozy.contacts
