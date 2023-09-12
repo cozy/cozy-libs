@@ -211,6 +211,10 @@
       "number": {
         "inputLabel": "IBAN",
         "text": "Saisissez votre numéro d'IBAN"
+      },
+      "bicNumber": {
+        "inputLabel": "BIC",
+        "text": "Saisissez votre numéro BIC"
       }
     },
     "vehicleRegistration": {
