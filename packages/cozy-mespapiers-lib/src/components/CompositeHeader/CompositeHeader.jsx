@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
     height: '100%',
     maxWidth: '100%',
     '&.is-focused': {
-      height: 'initial'
+      height: '100vh'
     },
     '& img': {
       margin: '0 auto'
