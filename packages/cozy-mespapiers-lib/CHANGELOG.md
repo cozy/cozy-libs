@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [60.0.4](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@60.0.3...cozy-mespapiers-lib@60.0.4) (2023-09-13)
+
+
+### Bug Fixes
+
+* **mespapiers:** The text field must not be hidden by the keyboard ([6e93b24](https://github.com/cozy/cozy-libs/commit/6e93b24045c7320d03cd426fdf1c242f5e858ebf))
+
+
+
+
+
 ## [60.0.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@60.0.2...cozy-mespapiers-lib@60.0.3) (2023-09-11)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
