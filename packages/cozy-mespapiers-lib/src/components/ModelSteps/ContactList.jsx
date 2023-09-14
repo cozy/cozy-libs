@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
+import React, { useState, useMemo } from 'react'
 
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import ContactsListModal from 'cozy-ui/transpiled/react/ContactsListModal'
@@ -9,10 +10,8 @@ import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import Paper from 'cozy-ui/transpiled/react/Paper'
 
 import Contact from './Contact'
-import { useFormData } from '../Hooks/useFormData'
 import { useSessionstorage } from '../Hooks/useSessionstorage'
 
 const styleAvatar = {
@@ -23,13 +22,15 @@ const styleAvatar = {
 const ContactList = ({
   multiple,
   currentUser,
-  contactIdsSelected,
-  setContactIdsSelected,
+  className,
   contactModalOpened,
-  setContactModalOpened
+  setContactModalOpened,
+  withoutDivider,
+  selected,
+  onSelection
 }) => {
   const { t } = useI18n()
-  const { setFormData } = useFormData()
+
   const [contactsLocalSession, setContactLocalSession] = useSessionstorage(
     'contactList',
     []
@@ -39,24 +40,7 @@ const ContactList = ({
     ...contactsLocalSession
   ])
 
-  useEffect(() => {
-    setContactIdsSelected(prev => {
-      if (prev.length === 0) {
-        return [currentUser._id]
-      } else {
-        return prev
-      }
-    })
-  }, [setContactIdsSelected, currentUser._id])
-
-  useEffect(() => {
-    setFormData(prev => ({
-      ...prev,
-      contacts: contactsList.filter(contact =>
-        contactIdsSelected.includes(contact._id)
-      )
-    }))
-  }, [contactIdsSelected, contactsList, setFormData])
+  const idsSelected = useMemo(() => selected.map(v => v._id), [selected])
 
   const onClickContactsListModal = contact => {
     const contactAlreadyListed = contactsList.some(cl => cl._id === contact._id)
@@ -64,39 +48,53 @@ const ContactList = ({
       setContactsList(prev => [...prev, contact])
       setContactLocalSession(prev => [...prev, contact])
     }
-    setContactIdsSelected(prev =>
-      multiple ? [...prev, contact._id] : [contact._id]
-    )
+    onSelection(multiple ? [...selected, contact] : [contact])
     setContactModalOpened(false)
+  }
+
+  const onClickContactLine = val => {
+    const newValue = val?.target?.value || val
+
+    if (multiple) {
+      const newContactIdSelected = [...idsSelected]
+      const find = newContactIdSelected.indexOf(newValue)
+
+      if (find > -1) newContactIdSelected.splice(find, 1)
+      else newContactIdSelected.push(newValue)
+
+      onSelection(
+        contactsList.filter(contact =>
+          newContactIdSelected.includes(contact._id)
+        )
+      )
+    } else {
+      onSelection(contactsList.filter(contact => contact.id === newValue))
+    }
   }
 
   return (
     <>
-      <Paper elevation={2} className="u-mt-1 u-mh-half">
-        <List className="u-pv-0">
-          <div className="u-mah-5 u-ov-auto">
-            {contactsList.map(contact => (
-              <Contact
-                key={contact._id}
-                contact={contact}
-                multiple={multiple}
-                contactIdsSelected={contactIdsSelected}
-                setContactIdsSelected={setContactIdsSelected}
-              />
-            ))}
-          </div>
-
-          <Divider variant="inset" component="li" />
-
-          <ListItem button onClick={() => setContactModalOpened(true)}>
-            <ListItemIcon>
-              <Avatar size="small" style={styleAvatar} />
-            </ListItemIcon>
-            <ListItemText primary={t('ContactStep.other')} />
-            <Icon icon="right" size={16} color="var(--secondaryTextColor)" />
-          </ListItem>
-        </List>
-      </Paper>
+      <List className={className}>
+        <div className="u-mah-5 u-ov-auto">
+          {contactsList.map(contact => (
+            <Contact
+              key={contact._id}
+              contact={contact}
+              multiple={multiple}
+              selected={idsSelected.includes(contact._id)}
+              onSelection={onClickContactLine}
+            />
+          ))}
+        </div>
+        {!withoutDivider && <Divider variant="inset" component="li" />}
+        <ListItem button onClick={() => setContactModalOpened(true)}>
+          <ListItemIcon>
+            <Avatar size="small" style={styleAvatar} />
+          </ListItemIcon>
+          <ListItemText primary={t('ContactStep.other')} />
+          <Icon icon="right" size={16} color="var(--secondaryTextColor)" />
+        </ListItem>
+      </List>
       {contactModalOpened && (
         <ContactsListModal
           placeholder={t('ContactStep.contactModal.placeholder')}
@@ -108,6 +106,26 @@ const ContactList = ({
       )}
     </>
   )
+}
+
+ContactList.defaultProps = {
+  withoutDivider: false
+}
+
+ContactList.propTypes = {
+  /** Determine whether the user can select several contacts */
+  multiple: PropTypes.bool.isRequired,
+  /** Contact object representing the current user */
+  currentUser: PropTypes.object.isRequired,
+  className: PropTypes.string,
+  contactModalOpened: PropTypes.bool.isRequired,
+  setContactModalOpened: PropTypes.func.isRequired,
+  /** To remove the separation between the contact list and the add contact button */
+  withoutDivider: PropTypes.bool,
+  /** List of contact to select */
+  selected: PropTypes.array.isRequired,
+  /** Callback with the list of selected contacts as parameter */
+  onSelection: PropTypes.func.isRequired
 }
 
 export default ContactList
