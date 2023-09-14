@@ -199,6 +199,9 @@
         "inputLabel": "Expiration alert",
         "text": "Be alerted before the document expires",
         "endAdornment": "day before |||| days before"
+      },
+      "ocrResult": {
+        "text": "Check the following information"
       }
     },
     "invoice": {
