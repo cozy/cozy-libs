@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [61.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@60.0.4...cozy-mespapiers-lib@61.0.0) (2023-09-14)
+
+
+### Features
+
+* Add BIC number to bank_details ([6a2f3ff](https://github.com/cozy/cozy-libs/commit/6a2f3fffb18878b147976e4a74b71be3a32982a1))
+* Add nationality to residence_permit ([94db363](https://github.com/cozy/cozy-libs/commit/94db363f5f6dd77b69854421179411909b3917f2))
+* Update cozy-ui from 91.2.0 to 92.3.0 ([57bf022](https://github.com/cozy/cozy-libs/commit/57bf02228dda829c70302df87d22471850908f37))
+
+
+### BREAKING CHANGES
+
+* you must have `cozy-ui >= 92.3.0`
+
+
+
+
+
 ## [60.0.4](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@60.0.3...cozy-mespapiers-lib@60.0.4) (2023-09-13)
 
 
