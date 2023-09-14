@@ -100,10 +100,10 @@ const InformationDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
       title={<StepperDialogTitle />}
       content={
         <CompositeHeader
-          icon={illustration}
+          icon={illustration ? illustration : null}
           iconSize={illustrationSize}
           className={isFocus && isIOS() ? 'is-focused' : ''}
-          fallbackIcon={fallbackIcon}
+          fallbackIcon={illustration !== false ? fallbackIcon : null}
           title={t(text)}
           text={inputs.map(({ Component, attrs }, idx) => (
             <div
@@ -150,7 +150,7 @@ const InformationDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
 
 InformationDialog.propTypes = {
   currentStep: PropTypes.shape({
-    illustration: PropTypes.string,
+    illustration: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     illustrationSize: PropTypes.string,
     text: PropTypes.string,
     attributes: PropTypes.arrayOf(PropTypes.object)
