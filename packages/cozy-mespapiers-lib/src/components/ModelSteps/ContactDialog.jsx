@@ -5,33 +5,49 @@ import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Paper from 'cozy-ui/transpiled/react/Paper'
 
 import ContactList from './ContactList'
 import SubmitButton from './widgets/SubmitButton'
 import { fetchCurrentUser } from '../../helpers/fetchCurrentUser'
 import CompositeHeader from '../CompositeHeader/CompositeHeader'
+import { useFormData } from '../Hooks/useFormData'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
 import StepperDialogTitle from '../StepperDialog/StepperDialogTitle'
 
 const ContactDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
   const { t } = useI18n()
   const client = useClient()
+  const { setFormData } = useFormData()
   const { currentStepIndex, nextStep, isLastStep } = useStepperDialog()
   const [currentUser, setCurrentUser] = useState(null)
-  const [contactIdsSelected, setContactIdsSelected] = useState([])
+  const [contactsSelected, setContactsSelected] = useState([])
   const [contactModalOpened, setContactModalOpened] = useState(false)
   const { illustration, text, multiple } = currentStep
 
   const SubmitButtonComponent = isLastStep() ? SubmitButton : null
-  const buttonDisabled = contactIdsSelected.length === 0 || contactModalOpened
+  const buttonDisabled = contactsSelected.length === 0 || contactModalOpened
 
   useEffect(() => {
     const init = async () => {
       const myself = await fetchCurrentUser(client)
       setCurrentUser(myself)
+      setFormData(prev => ({
+        ...prev,
+        contacts: [myself]
+      }))
+      setContactsSelected([myself])
     }
     init()
-  }, [client])
+  }, [client, setFormData])
+
+  const handleContactSelection = contacts => {
+    setContactsSelected(contacts)
+    setFormData(prev => ({
+      ...prev,
+      contacts: contacts
+    }))
+  }
 
   return (
     <>
@@ -52,14 +68,17 @@ const ContactDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
             title={t(text)}
             text={
               currentUser && (
-                <ContactList
-                  multiple={multiple}
-                  currentUser={currentUser}
-                  contactIdsSelected={contactIdsSelected}
-                  setContactIdsSelected={setContactIdsSelected}
-                  contactModalOpened={contactModalOpened}
-                  setContactModalOpened={setContactModalOpened}
-                />
+                <Paper elevation={2} className="u-mt-1 u-mh-half">
+                  <ContactList
+                    className="u-pv-0"
+                    multiple={multiple}
+                    selected={contactsSelected}
+                    currentUser={currentUser}
+                    onSelection={handleContactSelection}
+                    contactModalOpened={contactModalOpened}
+                    setContactModalOpened={setContactModalOpened}
+                  />
+                </Paper>
               )
             }
           />

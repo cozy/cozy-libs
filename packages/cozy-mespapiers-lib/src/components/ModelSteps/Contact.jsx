@@ -17,36 +17,11 @@ const styleAvatar = {
   backgroundColor: 'var(--primaryColorLightest)'
 }
 
-const Contact = ({
-  contact,
-  multiple,
-  contactIdsSelected,
-  setContactIdsSelected
-}) => {
+const Contact = ({ contact, multiple, selected, onSelection }) => {
   const { t } = useI18n()
 
-  const onClickContactLine = val => {
-    const newValue = val?.target?.value || val
-
-    if (multiple) {
-      const newContactIdSelected = [...contactIdsSelected]
-      const find = newContactIdSelected.indexOf(newValue)
-
-      if (find > -1) newContactIdSelected.splice(find, 1)
-      else newContactIdSelected.push(newValue)
-
-      setContactIdsSelected(newContactIdSelected)
-    } else {
-      setContactIdsSelected([newValue])
-    }
-  }
-
   return (
-    <ListItem
-      button
-      key={contact._id}
-      onClick={() => onClickContactLine(contact._id)}
-    >
+    <ListItem button key={contact._id} onClick={() => onSelection(contact._id)}>
       <ListItemIcon>
         <Avatar size="small" style={styleAvatar} />
       </ListItemIcon>
@@ -58,15 +33,15 @@ const Contact = ({
       <ListItemSecondaryAction className="u-mr-half">
         {multiple ? (
           <Checkbox
-            checked={contactIdsSelected.includes(contact._id)}
-            onChange={onClickContactLine}
+            checked={selected}
+            onChange={onSelection}
             value={contact._id}
             name="checkbox-contactsList"
           />
         ) : (
           <Radio
-            checked={contactIdsSelected.includes(contact._id)}
-            onChange={onClickContactLine}
+            checked={selected}
+            onChange={onSelection}
             value={contact._id}
             name="radio-contactsList"
           />
