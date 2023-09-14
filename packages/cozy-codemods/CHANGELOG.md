@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.24.0](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.23.0...@cozy/codemods@1.24.0) (2023-09-14)
+
+
+### Features
+
+* **codemods:** Add transform-ui-providers-imports ([4e6fdd3](https://github.com/cozy/cozy-libs/commit/4e6fdd32a45f7b1738989dcf8904a8e0793f98a4))
+
+
+
+
+
 # 1.23.0 (2023-08-24)
 
 
