@@ -5,7 +5,6 @@ import React, { isValidElement } from 'react'
 
 import { iconPropType } from 'cozy-ui/transpiled/react/Icon'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import CompositeHeaderImage from './CompositeHeaderImage'
@@ -16,7 +15,7 @@ const useStyles = makeStyles(() => ({
     flexDirection: 'column',
     justifyContent: 'center',
     textAlign: 'center',
-    height: '100%',
+    minHeight: '100%',
     maxWidth: '100%',
     '&.is-focused': {
       height: '100vh'
@@ -36,7 +35,6 @@ const CompositeHeader = ({
   className,
   ...restProps
 }) => {
-  const { isMobile } = useBreakpoints()
   const styles = useStyles()
 
   return (
@@ -56,15 +54,7 @@ const CompositeHeader = ({
         ))}
       {Text &&
         (isValidElement(Text) || isArray(Text) ? (
-          <div
-            className={cx({
-              ['u-mt-1']: !isMobile || (isArray(Text) && Text.length <= 1),
-              ['u-mt-1 u-mah-5 u-pv-1 u-ov-scroll']:
-                isMobile && isArray(Text) && Text.length > 1
-            })}
-          >
-            {Text}
-          </div>
+          <div className="u-mt-1">{Text}</div>
         ) : (
           <Typography className="u-mt-1">{Text}</Typography>
         ))}
