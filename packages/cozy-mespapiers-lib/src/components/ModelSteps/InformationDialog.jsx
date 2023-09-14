@@ -9,6 +9,7 @@ import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 
+import SubmitButton from './widgets/SubmitButton'
 import IlluGenericInputDate from '../../assets/icons/IlluGenericInputDate.svg'
 import IlluGenericInputText from '../../assets/icons/IlluGenericInputText.svg'
 import { KEYS } from '../../constants/const'
@@ -19,7 +20,7 @@ import { useFormData } from '../Hooks/useFormData'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
 import StepperDialogTitle from '../StepperDialog/StepperDialogTitle'
 
-const InformationDialog = ({ currentStep, onClose, onBack }) => {
+const InformationDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
   const {
     illustration,
     illustrationSize = 'medium',
@@ -27,9 +28,8 @@ const InformationDialog = ({ currentStep, onClose, onBack }) => {
     attributes
   } = currentStep
   const { t } = useI18n()
-  const { currentStepIndex } = useStepperDialog()
+  const { currentStepIndex, nextStep, isLastStep } = useStepperDialog()
   const { formData, setFormData } = useFormData()
-  const { nextStep } = useStepperDialog()
   const [value, setValue] = useState({})
   const [validInput, setValidInput] = useState({})
   const [isFocus, setIsFocus] = useState(false)
@@ -54,6 +54,17 @@ const InformationDialog = ({ currentStep, onClose, onBack }) => {
     [submit]
   )
 
+  const newFormData = useMemo(
+    () => ({
+      ...formData,
+      metadata: {
+        ...formData.metadata,
+        ...value
+      }
+    }),
+    [formData, value]
+  )
+
   useEventListener(window, 'keydown', handleKeyDown)
 
   const inputs = makeInputsInformationStep(attributes)
@@ -71,6 +82,9 @@ const InformationDialog = ({ currentStep, onClose, onBack }) => {
     attributes?.[0]?.type === 'date'
       ? IlluGenericInputDate
       : IlluGenericInputText
+
+  const showSubmitButton = isLastStep()
+  const isActionButtonDisabled = !allInputsValid
 
   return (
     <Dialog
@@ -111,16 +125,24 @@ const InformationDialog = ({ currentStep, onClose, onBack }) => {
         />
       }
       actions={
-        <Button
-          label={t('common.next')}
-          onClick={submit}
-          fullWidth
-          onTouchEnd={evt => {
-            evt.preventDefault()
-            submit()
-          }}
-          disabled={!allInputsValid}
-        />
+        showSubmitButton ? (
+          <SubmitButton
+            onSubmit={onSubmit}
+            disabled={isActionButtonDisabled}
+            formData={newFormData}
+          />
+        ) : (
+          <Button
+            label={t('common.next')}
+            onClick={submit}
+            fullWidth
+            onTouchEnd={evt => {
+              evt.preventDefault()
+              submit()
+            }}
+            disabled={isActionButtonDisabled}
+          />
+        )
       }
     />
   )
