@@ -48,6 +48,7 @@
     - [`text|number`](#information-field-attributes) : {object} Fields used to fill in more information about the paper.
     - [`date`](#information-field-attributes): {object} Fields used to enter a date (reference, expiration date, etc).
     - [`radio`](#information-field-attributes): {object} Fields used to enter a radio list.
+    - [`contact`](#information-field-attributes): {object} Fields used to select a contact.
 
 <br>
 
@@ -68,7 +69,7 @@
 - Properties of the object to define a field of type `text|number`:
   - `name`: {string} Used for `filenameModel` attributes
   - `inputLabel`: {string} Translation key for the label
-  - `[type]`: {`text`|`number`} Type of field (if no mask)
+  - `[type]`: {`text`|`number`|`contact`} Type of field (if no mask)
   - `[withAdornment]`: {`start`|`end`} Add a text as a prefix or suffix
     - `[start]`: {string} Add a text as a prefix
     - `[end]`: {string} Add a text as a suffix
