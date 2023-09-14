@@ -18,7 +18,7 @@ import StepperDialogTitle from '../StepperDialog/StepperDialogTitle'
 const ContactDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
   const { t } = useI18n()
   const client = useClient()
-  const { setFormData } = useFormData()
+  const { formData, setFormData } = useFormData()
   const { currentStepIndex, nextStep, isLastStep } = useStepperDialog()
   const [currentUser, setCurrentUser] = useState(null)
   const [contactsSelected, setContactsSelected] = useState([])
@@ -86,6 +86,7 @@ const ContactDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
         actions={
           SubmitButtonComponent ? (
             <SubmitButtonComponent
+              formData={formData}
               onSubmit={onSubmit}
               disabled={buttonDisabled}
             />

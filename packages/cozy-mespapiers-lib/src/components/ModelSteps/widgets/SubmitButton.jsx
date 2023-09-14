@@ -2,29 +2,61 @@ import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
 import { useClient } from 'cozy-client'
+import { models } from 'cozy-client'
+import log from 'cozy-logger'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 
 import ConfirmReplaceFile from './ConfirmReplaceFile'
 import { KEYS } from '../../../constants/const'
 import { FILES_DOCTYPE } from '../../../doctypes'
-import { useFormData } from '../../Hooks/useFormData'
+import { createPdfAndSave } from '../../../helpers/createPdfAndSave'
+import getOrCreateAppFolderWithReference from '../../../helpers/getFolderWithReference'
+import { useScannerI18n } from '../../Hooks/useScannerI18n'
+import { useStepperDialog } from '../../Hooks/useStepperDialog'
 
-const SubmitButton = ({ onSubmit, disabled }) => {
+const {
+  document: { Qualification }
+} = models
+
+const SubmitButton = ({ onSubmit, disabled, formData }) => {
   const [isBusy, setIsBusy] = useState(false)
   const [confirmReplaceFileModal, setConfirmReplaceFileModal] = useState(false)
-  const { formSubmit, formData } = useFormData()
   const client = useClient()
-  const { t } = useI18n()
+  const { t, f } = useI18n()
+  const scannerT = useScannerI18n()
+  const { currentDefinition, stepperDialogTitle } = useStepperDialog()
 
   const cozyFiles = formData.data.filter(d => d.file.from === 'cozy')
   const isDisabled = disabled || isBusy
 
   const submit = async () => {
     setIsBusy(true)
-    await formSubmit()
-    onSubmit()
+    try {
+      const qualification = Qualification.getByLabel(stepperDialogTitle)
+      const { _id: appFolderID } = await getOrCreateAppFolderWithReference(
+        client,
+        t
+      )
+
+      await createPdfAndSave({
+        formData,
+        qualification,
+        currentDefinition,
+        appFolderID,
+        client,
+        i18n: { t, f, scannerT }
+      })
+
+      Alerter.success('common.saveFile.success', { duration: 4000 })
+    } catch (error) {
+      log('error', error)
+      Alerter.error('common.saveFile.error', { duration: 4000 })
+    } finally {
+      onSubmit()
+    }
   }
 
   const handleReplace = async isFileReplaced => {
@@ -73,6 +105,7 @@ const SubmitButton = ({ onSubmit, disabled }) => {
 }
 
 SubmitButton.propTypes = {
+  formData: PropTypes.object,
   onSubmit: PropTypes.func.isRequired,
   disabled: PropTypes.bool
 }
