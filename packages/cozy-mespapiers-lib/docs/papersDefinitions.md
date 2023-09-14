@@ -36,6 +36,7 @@
   - `[multipage]`: {boolean} Allows to add as many files as the user wants.
   - `illustration`: {string} Name of the illustration used on the step (with extension).
   - `text`: {string} Translation key for the text of the step.
+  - `[ocr]`: {`only`|`both`} Determine if the step should be shown when OCR is activated.
 
 <br>
 
@@ -49,6 +50,7 @@
     - [`date`](#information-field-attributes): {object} Fields used to enter a date (reference, expiration date, etc).
     - [`radio`](#information-field-attributes): {object} Fields used to enter a radio list.
     - [`contact`](#information-field-attributes): {object} Fields used to select a contact.
+  - `[ocr]`: {`only`|`both`} Determine if the step should be shown when OCR is activated.
 
 <br>
 
@@ -56,13 +58,23 @@
   - `model`: {string} Model used for the step (`contact`).
   - `text`: {string} Translation key for the text of the step.
   - `[multiple]`: {boolean} Allows you to add multiple contacts.
+  - `[ocr]`: {`only`|`both`} Determine if the step should be shown when OCR is activated.
 
 <br>
 
 - ### Step `note`:
   - `model`: {string} Model used for the step (`note`)
+  - `[ocr]`: {`only`|`both`} Determine if the step should be shown when OCR is activated.
 
 ***
+
+## Manage OCR information
+
+The `ocr` property manages the display of steps according to OCR activation. Its different values display the step according to the context:
+
+- `only` displayes the step when OCR is activated
+- `undefined` displayes the step when OCR is disabled
+- `both` displayes the step in any case
 
 ## Information field attributes:
 

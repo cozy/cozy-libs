@@ -1,5 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react'
 
+import { filterSteps } from '../../helpers/filterSteps'
+
 const StepperDialogContext = createContext()
 
 const StepperDialogProvider = ({ children }) => {
@@ -20,7 +22,8 @@ const StepperDialogProvider = ({ children }) => {
       setStepperDialogTitle(currentDefinition.label)
       const allCurrentStepsDefinitions = currentDefinition.acquisitionSteps
       if (allCurrentStepsDefinitions.length > 0) {
-        setAllCurrentSteps(allCurrentStepsDefinitions)
+        const filteredSteps = filterSteps(allCurrentStepsDefinitions)
+        setAllCurrentSteps(filteredSteps)
       }
     }
   }, [currentDefinition])

@@ -35,6 +35,7 @@ const ScanWrapper = ({ currentStep, onClose, onBack }) => {
   const fromFlagshipUpload = searchParams.get('fromFlagshipUpload')
 
   const onChangeFile = (file, { replace = false } = {}) => {
+    // TODO : Integrate the values recovered by the OCR
     if (file) {
       if (replace) {
         setFormData(prev => ({
@@ -81,6 +82,7 @@ const ScanWrapper = ({ currentStep, onClose, onBack }) => {
   const onOpenFlagshipScan = async () => {
     try {
       const base64 = await webviewIntent.call('scanDocument')
+      // TODO : Launch ocr after scanning the document
       const file = makeFileFromBase64({
         source: base64,
         name: 'flagshipScanTemp.png',
