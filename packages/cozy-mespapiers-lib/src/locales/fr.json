@@ -199,6 +199,9 @@
         "inputLabel": "Alerte d'expiration",
         "text": "Être alerté avant l'expiration du document",
         "endAdornment": "jour avant |||| jours avant"
+      },
+      "ocrResult": {
+        "text": "Vérifier les informations suivantes"
       }
     },
     "invoice": {

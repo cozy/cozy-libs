@@ -58,7 +58,31 @@
           "model": "scan",
           "tooltip": true,
           "illustration": "IlluIBAN.png",
-          "text": "PaperJSON.generic.singlePage.text"
+          "text": "PaperJSON.generic.singlePage.text",
+          "ocr": "both"
+        },
+        {
+          "model": "information",
+          "text": "PaperJSON.generic.ocrResult.text",
+          "attributes": [
+            {
+              "name": "number",
+              "type": "text",
+              "mask": "aa** 9999 9999 99** **** **** *99",
+              "inputLabel": "PaperJSON.bankDetails.number.inputLabel"
+            },
+            {
+              "name": "bicNumber",
+              "type": "text",
+              "maxLength": 11,
+              "inputLabel": "PaperJSON.bankDetails.bicNumber.inputLabel"
+            },
+            {
+              "type": "contact",
+              "inputLabel": "PaperJSON.generic.owner.inputLabel"
+            }
+          ],
+          "ocr": "only"
         },
         {
           "model": "information",
@@ -202,14 +226,47 @@
           "tooltip": true,
           "page": "front",
           "illustration": "IlluDriverLicenseFront.png",
-          "text": "PaperJSON.generic.front.text"
+          "text": "PaperJSON.generic.front.text",
+          "ocr": "both"
         },
         {
           "model": "scan",
           "tooltip": true,
           "page": "back",
           "illustration": "IlluDriverLicenseBack.png",
-          "text": "PaperJSON.generic.back.text"
+          "text": "PaperJSON.generic.back.text",
+          "ocr": "both"
+        },
+        {
+          "model": "information",
+          "text": "PaperJSON.generic.ocrResult.text",
+          "attributes": [
+            {
+              "name": "number",
+              "type": "text",
+              "maxLength": 12,
+              "inputLabel": "PaperJSON.driverLicense.number.inputLabel"
+            },
+            {
+              "name": "expirationDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.expirationDate.inputLabel"
+            },
+            {
+              "name": "noticePeriod",
+              "type": "number",
+              "withAdornment": {
+                "end": "PaperJSON.generic.noticePeriod.endAdornment"
+              },
+              "maxLength": 3,
+              "inputLabel": "PaperJSON.generic.noticePeriod.inputLabel"
+            },
+            {
+              "type": "contact",
+              "inputLabel": "PaperJSON.generic.owner.inputLabel"
+            }
+          ],
+          "ocr": "only"
         },
         {
           "model": "information",
@@ -249,7 +306,8 @@
               "type": "date",
               "inputLabel": "PaperJSON.driverLicense.DObtentionDate.inputLabel"
             }
-          ]
+          ],
+          "ocr": "both"
         },
         {
           "model": "information",
@@ -574,14 +632,47 @@
           "tooltip": true,
           "page": "front",
           "illustration": "IlluIdCardFront.png",
-          "text": "PaperJSON.card.front.text"
+          "text": "PaperJSON.card.front.text",
+          "ocr": "both"
         },
         {
           "model": "scan",
           "tooltip": true,
           "page": "back",
           "illustration": "IlluIdCardBack.png",
-          "text": "PaperJSON.card.back.text"
+          "text": "PaperJSON.card.back.text",
+          "ocr": "both"
+        },
+        {
+          "model": "information",
+          "text": "PaperJSON.generic.ocrResult.text",
+          "attributes": [
+            {
+              "name": "number",
+              "type": "text",
+              "maxLength": 12,
+              "inputLabel": "PaperJSON.card.number.inputLabel"
+            },
+            {
+              "name": "expirationDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.card.expirationDate.inputLabel"
+            },
+            {
+              "name": "noticePeriod",
+              "type": "number",
+              "withAdornment": {
+                "end": "PaperJSON.generic.noticePeriod.endAdornment"
+              },
+              "maxLength": 3,
+              "inputLabel": "PaperJSON.generic.noticePeriod.inputLabel"
+            },
+            {
+              "type": "contact",
+              "inputLabel": "PaperJSON.generic.owner.inputLabel"
+            }
+          ],
+          "ocr": "only"
         },
         {
           "model": "information",
@@ -1266,14 +1357,47 @@
           "tooltip": true,
           "page": "front",
           "illustration": "IlluResidencePermitFront.png",
-          "text": "PaperJSON.card.front.text"
+          "text": "PaperJSON.card.front.text",
+          "ocr": "both"
         },
         {
           "model": "scan",
           "tooltip": true,
           "page": "back",
           "illustration": "IlluResidencePermitBack.png",
-          "text": "PaperJSON.card.back.text"
+          "text": "PaperJSON.card.back.text",
+          "ocr": "both"
+        },
+        {
+          "model": "information",
+          "text": "PaperJSON.generic.ocrResult.text",
+          "attributes": [
+            {
+              "name": "number",
+              "type": "number",
+              "maxLength": 12,
+              "inputLabel": "PaperJSON.card.number.inputLabel"
+            },
+            {
+              "name": "expirationDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.card.expirationDate.inputLabel"
+            },
+            {
+              "name": "noticePeriod",
+              "type": "number",
+              "withAdornment": {
+                "end": "PaperJSON.generic.noticePeriod.endAdornment"
+              },
+              "maxLength": 3,
+              "inputLabel": "PaperJSON.generic.noticePeriod.inputLabel"
+            },
+            {
+              "type": "contact",
+              "inputLabel": "PaperJSON.generic.owner.inputLabel"
+            }
+          ],
+          "ocr": "only"
         },
         {
           "model": "information",
@@ -1637,7 +1761,44 @@
           "tooltip": true,
           "multipage": true,
           "illustration": "IlluPassport.png",
-          "text": "PaperJSON.passport.scan.text"
+          "text": "PaperJSON.passport.scan.text",
+          "ocr": "both"
+        },
+        {
+          "model": "information",
+          "text": "PaperJSON.generic.ocrResult.text",
+          "attributes": [
+            {
+              "name": "country",
+              "type": "text",
+              "inputLabel": "PaperJSON.passport.information.country.inputLabel"
+            },
+            {
+              "name": "number",
+              "type": "text",
+              "maxLength": 12,
+              "inputLabel": "PaperJSON.passport.information.number.inputLabel"
+            },
+            {
+              "name": "expirationDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.passport.information.expirationDate.inputLabel"
+            },
+            {
+              "name": "noticePeriod",
+              "type": "number",
+              "withAdornment": {
+                "end": "PaperJSON.generic.noticePeriod.endAdornment"
+              },
+              "maxLength": 3,
+              "inputLabel": "PaperJSON.generic.noticePeriod.inputLabel"
+            },
+            {
+              "type": "contact",
+              "inputLabel": "PaperJSON.generic.owner.inputLabel"
+            }
+          ],
+          "ocr": "only"
         },
         {
           "model": "information",

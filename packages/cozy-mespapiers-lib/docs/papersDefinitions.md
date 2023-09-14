@@ -106,3 +106,11 @@ The `ocr` property manages the display of steps according to OCR activation. Its
 
 - Properties of the object to define a field of type `radio`:
   - `options`: {string\[]} Option values
+
+## List of compatible paper with OCR :
+
+- `bank_details`
+- `national_id_card` with `country: "fr"`
+- `driver_license` with `country: "fr"`
+- `residence_permit`
+- `passport`
