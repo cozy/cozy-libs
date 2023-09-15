@@ -19,7 +19,7 @@
     "items": {
       "accommodation_proof": "Proof of accommodation",
       "appliance_invoice": "Appliance invoice",
-      "bank_details": "IBAN",
+      "bank_details": "Bank detail",
       "bank_statement": "Bank statement",
       "birth_certificate": "Birth certificate",
       "building_permit": "Building permit",
