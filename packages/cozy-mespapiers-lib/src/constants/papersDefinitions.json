@@ -69,7 +69,7 @@
             {
               "name": "number",
               "type": "text",
-              "mask": "aa** 9999 9999 99** **** **** *99",
+              "mask": "aa99 9999 9999 9999 9999 9999 999",
               "inputLabel": "PaperJSON.bankDetails.number.inputLabel"
             },
             {
@@ -92,7 +92,7 @@
             {
               "name": "number",
               "type": "text",
-              "mask": "aa** 9999 9999 99** **** **** *99",
+              "mask": "aa99 9999 9999 9999 9999 9999 999",
               "inputLabel": "PaperJSON.bankDetails.number.inputLabel"
             }
           ]
@@ -246,7 +246,7 @@
             {
               "name": "number",
               "type": "text",
-              "maxLength": 12,
+              "maxLength": 15,
               "inputLabel": "PaperJSON.driverLicense.number.inputLabel"
             },
             {
@@ -278,7 +278,7 @@
             {
               "name": "number",
               "type": "text",
-              "maxLength": 12,
+              "maxLength": 15,
               "inputLabel": "PaperJSON.driverLicense.number.inputLabel"
             }
           ]
@@ -1379,7 +1379,7 @@
             {
               "name": "number",
               "type": "number",
-              "maxLength": 12,
+              "maxLength": 10,
               "inputLabel": "PaperJSON.card.number.inputLabel"
             },
             {
@@ -1423,7 +1423,7 @@
             {
               "name": "number",
               "type": "number",
-              "maxLength": 12,
+              "maxLength": 10,
               "inputLabel": "PaperJSON.card.number.inputLabel"
             }
           ]
@@ -1781,7 +1781,7 @@
             {
               "name": "number",
               "type": "text",
-              "maxLength": 12,
+              "maxLength": 9,
               "inputLabel": "PaperJSON.passport.information.number.inputLabel"
             },
             {
@@ -1825,7 +1825,7 @@
             {
               "name": "number",
               "type": "text",
-              "maxLength": 12,
+              "maxLength": 9,
               "inputLabel": "PaperJSON.passport.information.number.inputLabel"
             }
           ]
