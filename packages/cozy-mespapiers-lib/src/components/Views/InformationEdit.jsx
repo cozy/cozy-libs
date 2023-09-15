@@ -10,10 +10,11 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
+import IlluGenericInputDate from '../../assets/icons/IlluGenericInputDate.svg'
 import IlluGenericInputText from '../../assets/icons/IlluGenericInputText.svg'
 import { FILES_DOCTYPE } from '../../doctypes'
 import { makeInputsInformationStep } from '../../helpers/makeInputsInformationStep'
-import CompositeHeaderImage from '../CompositeHeader/CompositeHeaderImage'
+import CompositeHeader from '../CompositeHeader/CompositeHeader'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import {
   isInformationEditPermitted,
@@ -77,6 +78,13 @@ const InformationEdit = () => {
     return <Navigate to=".." />
   }
 
+  const fallbackIcon =
+    attrs?.[0]?.type === 'date' ? IlluGenericInputDate : IlluGenericInputText
+
+  const text = currentEditInformations.currentStep?.text
+    ? t(currentEditInformations.currentStep.text)
+    : null
+
   return (
     <Dialog
       open
@@ -91,29 +99,30 @@ const InformationEdit = () => {
           {currentEditInformations.isLoading ? (
             <Spinner size="xlarge" />
           ) : (
-            <>
-              <CompositeHeaderImage
-                icon={currentEditInformations.currentStep?.illustration}
-                fallbackIcon={IlluGenericInputText}
-                iconSize="medium"
-              />
-              <div
-                className={cx('u-mt-1', {
-                  'u-mh-1': !isMobile
-                })}
-              >
-                {Component && (
-                  <Component
-                    attrs={attrs}
-                    defaultValue={defaultValue}
-                    setValue={setValue}
-                    setValidInput={setValidInput}
-                    setIsFocus={setIsFocus}
-                    idx={0}
-                  />
-                )}
-              </div>
-            </>
+            <CompositeHeader
+              icon={currentEditInformations.currentStep?.illustration}
+              fallbackIcon={fallbackIcon}
+              iconSize="medium"
+              title={text}
+              text={
+                <div
+                  className={cx('u-mt-1', {
+                    'u-mh-1': !isMobile
+                  })}
+                >
+                  {Component && (
+                    <Component
+                      attrs={attrs}
+                      defaultValue={defaultValue}
+                      setValue={setValue}
+                      setValidInput={setValidInput}
+                      setIsFocus={setIsFocus}
+                      idx={0}
+                    />
+                  )}
+                </div>
+              }
+            />
           )}
         </div>
       }

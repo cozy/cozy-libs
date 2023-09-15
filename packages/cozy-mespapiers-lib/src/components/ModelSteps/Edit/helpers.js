@@ -35,7 +35,8 @@ const makeCurrentInformationStep = (currentPaperDef, metadataName) => {
     ?.filter(
       step =>
         step.model === 'information' &&
-        step.attributes.some(attr => attr.name === metadataName)
+        step.attributes.some(attr => attr.name === metadataName) &&
+        step.ocr !== 'only'
     )
     ?.map(step => {
       return {
