@@ -19,7 +19,7 @@
     "items": {
       "accommodation_proof": "Attestation d'hébergement",
       "appliance_invoice": "Facture d'électroménager",
-      "bank_details": "IBAN",
+      "bank_details": "RIB",
       "bank_statement": "Relevé de compte",
       "birth_certificate": "Certificat de naissance",
       "building_permit": "Permis de construire",
