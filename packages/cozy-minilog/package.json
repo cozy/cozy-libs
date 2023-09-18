@@ -7,6 +7,7 @@
   "files": [
     "dist"
   ],
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-minilog/readme.md",
   "dependencies": {
     "microee": "0.0.6"
   },
@@ -16,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mixu/minilog.git"
+    "url": "https://github.com/cozy/cozy-libs.git"
   },
   "author": {
     "name": "Mikito Takada",
