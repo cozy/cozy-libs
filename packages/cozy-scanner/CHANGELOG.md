@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.1.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@6.0.0...cozy-scanner@6.1.0) (2023-09-18)
+
+
+### Features
+
+* Rename IBAN to RIB ([dc97c61](https://github.com/cozy/cozy-libs/commit/dc97c611d647fe2d4ceecbcae74e197d9c123bea))
+
+
+
+
+
 # 6.0.0 (2023-08-23)
 
 
