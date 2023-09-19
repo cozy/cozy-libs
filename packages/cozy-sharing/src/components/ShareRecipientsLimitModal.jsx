@@ -3,7 +3,7 @@ import React from 'react'
 
 import Buttons from 'cozy-ui/transpiled/react/Buttons'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { computeRecipientsLimit } from '../helpers/recipients'
 

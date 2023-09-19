@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import snarkdown from 'snarkdown'
 
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Paper from 'cozy-ui/transpiled/react/Paper'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import styles from './CozyPassFingerprintDialogContent.styl'
 

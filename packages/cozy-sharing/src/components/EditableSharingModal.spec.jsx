@@ -2,7 +2,7 @@ import { mount } from 'enzyme'
 import React from 'react'
 
 import { createMockClient } from 'cozy-client'
-import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import { EditableSharingModal } from './EditableSharingModal'
 import { default as DumbShareModal } from './ShareModal'
