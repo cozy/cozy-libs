@@ -2,9 +2,9 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 import Button from 'cozy-ui/transpiled/react/deprecated/Button'
+import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import DocumentQualification from './DocumentQualification'
 
