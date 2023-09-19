@@ -10,9 +10,9 @@ import {
 import Dialog from 'cozy-ui/transpiled/react/Dialog'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 import Divider from 'cozy-ui/transpiled/react/Divider'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import { Tab, Tabs } from 'cozy-ui/transpiled/react/MuiTabs'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { Contracts } from './KonnectorConfiguration/ConfigurationTab/Contracts'
 import { getAccountInstitutionLabel } from './KonnectorConfiguration/ConfigurationTab/bankAccountHelpers'

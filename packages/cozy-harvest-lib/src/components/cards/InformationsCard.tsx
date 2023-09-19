@@ -4,7 +4,7 @@ import React from 'react'
 
 import Card from 'cozy-ui/transpiled/react/Card'
 import Divider from 'cozy-ui/transpiled/react/Divider'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import GlobeIcon from 'cozy-ui/transpiled/react/Icons/Globe'
 import List from 'cozy-ui/transpiled/react/List'

@@ -17,7 +17,6 @@ import CozyClient, {
 import flag from 'cozy-flags'
 import Box from 'cozy-ui/transpiled/react/Box'
 import Card from 'cozy-ui/transpiled/react/Card'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import ClockIcon from 'cozy-ui/transpiled/react/Icons/Clock'
@@ -29,6 +28,7 @@ import Skeleton from 'cozy-ui/transpiled/react/Skeleton'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { Media, Bd, Img } from 'cozy-ui/transpiled/react/deprecated/Media'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import {
   transformTimeSeriesToTrips,

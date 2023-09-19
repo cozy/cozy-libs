@@ -5,7 +5,7 @@ import { mount } from 'enzyme'
 import React from 'react'
 
 import CozyClient, { CozyProvider } from 'cozy-client'
-import I18n from 'cozy-ui/transpiled/react/I18n'
+import I18n from 'cozy-ui/transpiled/react/providers/I18n'
 
 import enLocale from '../../locales/en.json'
 import ConnectionFlow from '../../models/ConnectionFlow'

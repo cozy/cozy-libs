@@ -5,7 +5,7 @@ import React, { PureComponent } from 'react'
 import { withClient } from 'cozy-client'
 import { isFlagshipApp } from 'cozy-device-helper'
 import CozyRealtime from 'cozy-realtime'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
+import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import InAppBrowser from './InAppBrowser'
 import Popup from './Popup'

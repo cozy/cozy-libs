@@ -3,7 +3,7 @@ import { mount } from 'enzyme'
 import enLocale from 'locales/en.json'
 import React from 'react'
 
-import I18n from 'cozy-ui/transpiled/react/I18n'
+import I18n from 'cozy-ui/transpiled/react/providers/I18n'
 
 describe('KonnectorMaintenance', () => {
   it('should match the snapshot', () => {

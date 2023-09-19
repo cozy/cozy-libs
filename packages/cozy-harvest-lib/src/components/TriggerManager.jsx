@@ -7,7 +7,7 @@ import {
   withVaultUnlockContext,
   VaultUnlockPlaceholder
 } from 'cozy-keys-lib'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
+import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { DumbTriggerManager } from './DumbTriggerManager'
 import FlowProvider from './FlowProvider'

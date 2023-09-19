@@ -3,10 +3,10 @@ import React from 'react'
 
 import Card from 'cozy-ui/transpiled/react/Card'
 import { DialogContent } from 'cozy-ui/transpiled/react/Dialog'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import Button from 'cozy-ui/transpiled/react/deprecated/Button'
+import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import AccountsListItem from './AccountsListItem'
 

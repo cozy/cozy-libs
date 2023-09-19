@@ -1,5 +1,5 @@
 import { createMockClient } from 'cozy-client'
-import { I18n } from 'cozy-ui/react/I18n'
+import { I18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import konnectorBlock from './konnectorBlock'
 

@@ -2,9 +2,9 @@ import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 
 import { withClient } from 'cozy-client'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import Infos from 'cozy-ui/transpiled/react/deprecated/Infos'
+import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import TriggerErrorDescription from './TriggerErrorDescription'
 import { getErrorLocale } from '../../helpers/konnectors'

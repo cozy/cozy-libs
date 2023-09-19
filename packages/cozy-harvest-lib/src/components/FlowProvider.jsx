@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { createPortal } from 'react-dom'
 
 import { withClient } from 'cozy-client'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
+import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import ConnectionBackdrop from './AccountForm/ConnectionBackdrop'
 import TwoFAModal from './TwoFAModal'

@@ -8,11 +8,11 @@ import Dialog, {
   DialogActions,
   DialogContent
 } from 'cozy-ui/transpiled/react/Dialog'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { Button, ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import DataTypes from './DataTypes'
 import Illustration from './Illustration'

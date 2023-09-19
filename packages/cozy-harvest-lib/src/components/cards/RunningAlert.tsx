@@ -4,7 +4,7 @@ import { isFlagshipApp } from 'cozy-device-helper'
 import Alert from 'cozy-ui/transpiled/react/Alert'
 import AlertTitle from 'cozy-ui/transpiled/react/AlertTitle'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import ArrowUp from 'cozy-ui/transpiled/react/Icons/ArrowUp'
 

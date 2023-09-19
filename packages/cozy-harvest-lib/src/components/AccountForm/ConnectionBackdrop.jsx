@@ -1,11 +1,11 @@
 import React from 'react'
 
 import Backdrop from 'cozy-ui/transpiled/react/Backdrop'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import LinearProgress from 'cozy-ui/transpiled/react/LinearProgress'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 const useStyles = makeStyles({
