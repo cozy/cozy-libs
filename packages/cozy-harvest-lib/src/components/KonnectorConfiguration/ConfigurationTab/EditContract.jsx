@@ -20,7 +20,6 @@ import Dialog, {
 } from 'cozy-ui/transpiled/react/Dialog'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import Field from 'cozy-ui/transpiled/react/Field'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
 import CollectionField from 'cozy-ui/transpiled/react/Labs/CollectionField'
@@ -28,7 +27,8 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 import Button from 'cozy-ui/transpiled/react/deprecated/Button'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { withStyles } from 'cozy-ui/transpiled/react/styles'
 
 import {

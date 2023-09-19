@@ -1,5 +1,5 @@
 // @ts-check
-import { formatLocallyDistanceToNow } from 'cozy-ui/transpiled/react/I18n/format'
+import { formatLocallyDistanceToNow } from 'cozy-ui/transpiled/react/providers/I18n/format'
 
 import { isDisconnected } from '../../helpers/konnectors'
 import { getLastSuccessDate } from '../../helpers/triggers'

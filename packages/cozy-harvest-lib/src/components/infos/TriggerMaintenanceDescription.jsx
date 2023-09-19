@@ -2,8 +2,8 @@ import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import Markdown from '../Markdown'
 

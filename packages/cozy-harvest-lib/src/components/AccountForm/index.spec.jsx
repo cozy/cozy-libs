@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { isMobile } from 'cozy-device-helper'
-import I18n from 'cozy-ui/transpiled/react/I18n'
+import I18n from 'cozy-ui/transpiled/react/providers/I18n'
 
 const polyglot = new Polyglot()
 polyglot.extend(enLocale)

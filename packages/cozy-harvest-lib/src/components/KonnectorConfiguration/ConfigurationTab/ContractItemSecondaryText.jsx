@@ -5,10 +5,10 @@ import dateFnsLocalefr from 'date-fns/locale/fr'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 import UnlinkIcon from 'cozy-ui/transpiled/react/Icons/Unlink'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { isDeleted, isDisabled, isErrored, isImported } from './helpers'
 

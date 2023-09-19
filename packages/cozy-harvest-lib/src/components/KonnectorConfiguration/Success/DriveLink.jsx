@@ -3,9 +3,9 @@ import React, { memo } from 'react'
 
 import { withClient } from 'cozy-client'
 import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
 import OpenwithIcon from 'cozy-ui/transpiled/react/Icons/Openwith'
 import { ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
+import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import useAppLinkWithStoreFallback from '../../hooks/useAppLinkWithStoreFallback'
 

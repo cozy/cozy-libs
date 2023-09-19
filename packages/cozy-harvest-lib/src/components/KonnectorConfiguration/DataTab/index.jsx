@@ -5,7 +5,7 @@ import { withClient } from 'cozy-client'
 import flag from 'cozy-flags'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import Stack from 'cozy-ui/transpiled/react/Stack'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import appLinksProps from '../../../components/KonnectorConfiguration/DataTab/appLinksProps'
 import KonnectorMaintenance from '../../../components/Maintenance'

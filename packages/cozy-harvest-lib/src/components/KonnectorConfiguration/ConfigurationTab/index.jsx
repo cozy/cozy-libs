@@ -7,7 +7,6 @@ import { useClient } from 'cozy-client'
 import { Account } from 'cozy-doctypes'
 import { useVaultClient, useVaultUnlockContext } from 'cozy-keys-lib'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import KeyIcon from 'cozy-ui/transpiled/react/Icons/Key'
 import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
@@ -23,8 +22,9 @@ import NavigationList, {
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 import Button from 'cozy-ui/transpiled/react/deprecated/Button'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import palette from 'cozy-ui/transpiled/react/palette'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 // @ts-ignore peerDep
 
 import { ContractsForAccount } from './Contracts'

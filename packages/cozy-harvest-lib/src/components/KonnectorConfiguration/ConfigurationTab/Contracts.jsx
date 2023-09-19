@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import CozyClient, { Q, queryConnect, RealTimeQueries } from 'cozy-client'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import NavigationList, {
   NavigationListSection,
   NavigationListHeader
 } from 'cozy-ui/transpiled/react/NavigationList'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import BIContractActivationWindow from './BiContractActivationWindow'
 import ContractItem from './ContractItem'

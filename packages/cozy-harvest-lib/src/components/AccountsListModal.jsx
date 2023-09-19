@@ -3,8 +3,8 @@ import React, { useContext } from 'react'
 
 import DialogTitle from 'cozy-ui/transpiled/react/Dialog/DialogTitle'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import AccountsList from './AccountsList/AccountsList'
 import KonnectorIcon from './KonnectorIcon'
