@@ -3,11 +3,11 @@ import React from 'react'
 
 import { useClient } from 'cozy-client'
 import Fade from 'cozy-ui/transpiled/react/Fade'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import RecipientAvatar from './RecipientAvatar'
 import RecipientConfirm from './RecipientConfirm'

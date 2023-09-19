@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
 import { useClient } from 'cozy-client'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import ShareRecipientsInput from './ShareRecipientsInput'
 import { ShareRecipientsLimitModal } from './ShareRecipientsLimitModal'

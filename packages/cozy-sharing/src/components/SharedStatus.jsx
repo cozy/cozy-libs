@@ -1,8 +1,8 @@
 import cx from 'classnames'
 import React from 'react'
 
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import palette from 'cozy-ui/transpiled/react/palette'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { SharingTooltip, TooltipRecipientList } from './Tooltip'
 import styles from './status.styl'

@@ -4,9 +4,9 @@ import React, { useState } from 'react'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import FormControlLabel from 'cozy-ui/transpiled/react/FormControlLabel'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import RadioGroup from 'cozy-ui/transpiled/react/RadioGroup'
 import Radio from 'cozy-ui/transpiled/react/Radios'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 const EditLinkPermissionDialog = ({
   open,
