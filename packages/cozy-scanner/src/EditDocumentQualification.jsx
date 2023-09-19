@@ -3,10 +3,10 @@ import React, { Component } from 'react'
 
 import { withClient } from 'cozy-client'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 import Button from 'cozy-ui/transpiled/react/deprecated/Button'
 import withOffline from 'cozy-ui/transpiled/react/helpers/withOffline'
+import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import DocumentQualification from './DocumentQualification'
 import { getThemeByItem } from './DocumentTypeDataHelpers'

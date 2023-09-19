@@ -2,7 +2,7 @@ import { render, fireEvent, waitFor } from '@testing-library/react'
 import React from 'react'
 
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
-import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 jest.mock('cozy-ui/transpiled/react/utils/color', () => ({
   getCssVariableValue: () => '#fff',
