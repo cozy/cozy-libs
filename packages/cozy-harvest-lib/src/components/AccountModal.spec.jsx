@@ -8,7 +8,7 @@ jest.mock('../../src/connections/accounts', () => ({
   fetchAccount: jest.fn()
 }))
 
-jest.mock('cozy-ui/transpiled/react/hooks/useBreakpoints', () => () => ({
+jest.mock('cozy-ui/transpiled/react/providers/Breakpoints', () => () => ({
   isMobile: false
 }))
 
