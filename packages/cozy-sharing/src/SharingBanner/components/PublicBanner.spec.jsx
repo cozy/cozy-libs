@@ -6,7 +6,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { SharingBannerCozyToCozy } from './PublicBanner'
 
-jest.mock('cozy-ui/transpiled/react/I18n')
+jest.mock('cozy-ui/transpiled/react/providers/I18n')
 jest.mock('cozy-client')
 
 describe('PublicBanner', () => {

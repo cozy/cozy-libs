@@ -1,4 +1,4 @@
-import { act } from '@testing-library/react'
+import { act, render, screen } from '@testing-library/react'
 import { mount } from 'enzyme'
 import React from 'react'
 
@@ -33,7 +33,7 @@ describe('allLoaded', () => {
   })
 
   it('Change to True when all data is loaded', async () => {
-    const component = mount(
+    render(
       <AppWrapper client={client}>
         <SharingContext.Consumer>
           {({ allLoaded }) => <div>{`allLoaded: ${allLoaded}`}</div>}
@@ -41,13 +41,13 @@ describe('allLoaded', () => {
       </AppWrapper>
     )
 
-    expect(component.find('div').text()).toBe('allLoaded: false')
+    expect(screen.getByText('allLoaded: false')).toBeInTheDocument()
 
     await act(async () => {
       await new Promise(resolve => setTimeout(resolve, 100))
     })
 
-    expect(component.find('div').text()).toBe('allLoaded: true')
+    expect(screen.getByText('allLoaded: true')).toBeInTheDocument()
   })
 })
 

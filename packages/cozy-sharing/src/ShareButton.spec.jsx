@@ -12,7 +12,7 @@ jest.mock('cozy-ui/transpiled/react/Button', () => ({
   }
 }))
 
-jest.mock('cozy-ui/transpiled/react/I18n', () => ({
+jest.mock('cozy-ui/transpiled/react/providers/I18n', () => ({
   useI18n: jest.fn().mockReturnValue({ t: jest.fn() })
 }))
 
