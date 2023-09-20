@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [61.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@61.1.0...cozy-mespapiers-lib@61.2.0) (2023-09-20)
+
+
+### Bug Fixes
+
+* Add text for information edit ([67faf3d](https://github.com/cozy/cozy-libs/commit/67faf3d9d17a53ec75b571b1fbe7c89535eb5505))
+
+
+### Features
+
+* Adapt paper maxLength ([9fe9e39](https://github.com/cozy/cozy-libs/commit/9fe9e393ae7e826141653da9c0c5e53357b1300c))
+
+
+
+
+
 # [61.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@61.0.0...cozy-mespapiers-lib@61.1.0) (2023-09-20)
 
 
