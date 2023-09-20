@@ -7,7 +7,7 @@ import { shallow } from 'enzyme'
 import React from 'react'
 
 jest.mock('components/hooks/useMaintenanceStatus')
-jest.mock('cozy-ui/transpiled/react/hooks/useBreakpoints', () => () => ({
+jest.mock('cozy-ui/transpiled/react/providers/Breakpoints', () => () => ({
   isMobile: false
 }))
 

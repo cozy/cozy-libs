@@ -11,7 +11,7 @@ jest.mock('cozy-device-helper', () => ({
 }))
 
 // Mock the translation hook with distinct strings
-jest.mock('cozy-ui/transpiled/react/I18n', () => ({
+jest.mock('cozy-ui/transpiled/react/providers/I18n', () => ({
   useI18n: (): {
     t: jest.Mock
   } => ({ t: jest.fn().mockImplementation(key => key as string) })
