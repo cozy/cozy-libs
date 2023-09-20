@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [61.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@61.0.0...cozy-mespapiers-lib@61.1.0) (2023-09-20)
+
+
+### Features
+
+* Add ocr result page ([67fd4fd](https://github.com/cozy/cozy-libs/commit/67fd4fdadf6a33c1343c348bec5a37d07e4b97bf))
+* Add ocr step to paper thats compatible ([4b9808f](https://github.com/cozy/cozy-libs/commit/4b9808f835b94541983516720ce9b7f454473c17))
+* Create a new contact input for information step ([0f15467](https://github.com/cozy/cozy-libs/commit/0f154670ad8ac33daf1969619bbc085192909a80))
+* Improve design of OCR result page ([f9b5d12](https://github.com/cozy/cozy-libs/commit/f9b5d122ac1b0c00baa578694086b89ef781220c))
+* Submit formData in any step ([c2287f6](https://github.com/cozy/cozy-libs/commit/c2287f6828e089165dda31012d6359ef6a662383))
+
+
+
+
+
 # [61.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@60.0.4...cozy-mespapiers-lib@61.0.0) (2023-09-14)
 
 
