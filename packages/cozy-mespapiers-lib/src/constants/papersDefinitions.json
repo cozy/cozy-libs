@@ -1379,6 +1379,11 @@
           "text": "PaperJSON.generic.ocrResult.text",
           "attributes": [
             {
+              "name": "country",
+              "type": "text",
+              "inputLabel": "PaperJSON.residence_permit.information.country.inputLabel"
+            },
+            {
               "name": "number",
               "type": "number",
               "maxLength": 10,
