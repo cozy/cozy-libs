@@ -76,6 +76,7 @@
               "name": "bicNumber",
               "type": "text",
               "maxLength": 11,
+              "mask": "***********",
               "inputLabel": "PaperJSON.bankDetails.bicNumber.inputLabel"
             },
             {
@@ -105,6 +106,7 @@
               "name": "bicNumber",
               "type": "text",
               "maxLength": 11,
+              "mask": "***********",
               "inputLabel": "PaperJSON.bankDetails.bicNumber.inputLabel"
             }
           ]
