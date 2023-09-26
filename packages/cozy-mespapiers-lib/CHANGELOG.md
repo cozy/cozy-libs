@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [61.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@61.2.0...cozy-mespapiers-lib@61.3.0) (2023-09-26)
+
+
+### Bug Fixes
+
+* Add country to residence permit OCR step ([405441a](https://github.com/cozy/cozy-libs/commit/405441ac35f134afe2e73bd7bce5a298f05ca1a7))
+
+
+### Features
+
+* Add mask to BIC number ([c1837c8](https://github.com/cozy/cozy-libs/commit/c1837c82827930de54afcc2104d45a61369e7fa9))
+
+
+
+
+
 # [61.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@61.1.0...cozy-mespapiers-lib@61.2.0) (2023-09-20)
 
 
