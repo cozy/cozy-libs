@@ -545,6 +545,84 @@ export class ConnectionFlow {
   }
 
   /**
+   * - Creates io.cozy.accounts
+   * - Saves account
+   * - Ensures trigger is existing for account
+   */
+  async createAccountSilently(options) {
+    const { konnector, userCredentials, t } = options
+    try {
+      let { account, trigger } = options
+
+      const client = this.client
+
+      this.setState({
+        status: CREATING_ACCOUNT,
+        firstRun: true // when the user submits new authentication information, this is considered a first run
+      })
+      this.trigger = trigger
+      this.account = account
+
+      this.t = t
+
+      assert(client, 'No client')
+      const konnectorPolicy = this.getKonnectorPolicy()
+      // @ts-ignore
+      logger.log(
+        `ConnectionFlow: Handling submit, with konnector policy ${konnectorPolicy.name}`
+      )
+
+      // @ts-ignore
+      logger.info(
+        'ConnectionFlow: Bypassing cipher creation because of vault may be unlocked'
+      )
+
+      if (konnectorPolicy.needsAccountAndTriggerCreation) {
+        // @ts-ignore
+        logger.debug('ConnectionFlow: Creating/updating account...', account)
+        account = await createOrUpdateAccount({
+          account,
+          client,
+          flow: this,
+          konnector,
+          konnectorPolicy,
+          userCredentials
+        })
+
+        this.account = account
+
+        // @ts-ignore
+        logger.info(`ConnectionFlow: Saved account ${account._id}`)
+
+        // @ts-ignore
+        logger.debug('ConnectionFlow: Ensuring trigger...')
+        this.trigger = await ensureTrigger(client, {
+          trigger,
+          account,
+          konnector,
+          t
+        })
+        // @ts-ignore
+        logger.info(`Trigger is ${this.trigger._id}`)
+      }
+
+      this.setState({ accountError: null })
+    } catch (e) {
+      // @ts-ignore
+      logger.error(e)
+      this.setState({ accountError: e })
+      this.triggerEvent(ERROR_EVENT, e)
+      sentryHub.withScope(scope => {
+        scope.setTag('konnector', konnector.slug)
+
+        // Capture the original exception instead of the user one
+        sentryHub.captureException(e.original || e)
+      })
+      throw e
+    }
+  }
+
+  /**
    * Ensures a trigger is created and launched
    *
    * @param {CozyClient} client - CozyClient instance
