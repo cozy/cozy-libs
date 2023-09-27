@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 3.3.1 (2023-09-27)
+
+
+### Bug Fixes
+
+* Change info in package.json ([adc005e](https://github.com/cozy/cozy-libs/commit/adc005e9059435ad66d4fc045f7ecbf3ffba54c9))
+
+
+
+
+
 # 3.3.0 (2023-07-07)
 
 
