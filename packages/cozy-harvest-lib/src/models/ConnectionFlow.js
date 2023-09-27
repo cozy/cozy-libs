@@ -72,8 +72,8 @@ const isStepEvent = eventName => stepEvents.includes(eventName)
  *
  * @param  {Object} options
  * @param  {import('cozy-client/types/types').IOCozyAccount} options.account - Existing io.cozy.account or object
- * @param  {Object} options.cipher - Vault cipher if vault has been unlocked
- * @param  {String} options.cipher.id - Vault cipher id
+ * @param  {Object} [options.cipher] - Vault cipher if vault has been unlocked
+ * @param  {String} [options.cipher.id] - Vault cipher id
  * @param  {ConnectionFlow} options.flow - Current connection flow
  * @param  {CozyClient} options.client - A CozyClient instance
  * @param  {import('cozy-client/types/types').IOCozyKonnector} options.konnector - Konnector to which the account is linked
