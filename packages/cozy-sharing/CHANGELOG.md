@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@9.0.2...cozy-sharing@10.0.0) (2023-09-29)
+
+
+### Features
+
+* **cozy-sharing:** Update cozy-client from 37.0.0 to 40.5.0 ([7369f1d](https://github.com/cozy/cozy-libs/commit/7369f1d4f7a9e09088e35ab10c37728f425e0db9))
+* **cozy-sharing:** Update cozy-ui from 88.2.1 to 93.1.1 ([94ba194](https://github.com/cozy/cozy-libs/commit/94ba194d2e4e79c3282a0ba2a496a6e9193d41b4))
+
+
+### BREAKING CHANGES
+
+* **cozy-sharing:** You need cozy-ui >= 93.1.1
+* **cozy-sharing:** You need cozy-client >= 40.5.0
+
+
+
+
+
 ## [9.0.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@9.0.1...cozy-sharing@9.0.2) (2023-09-11)
 
 

@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@17.3.0...cozy-harvest-lib@18.0.0) (2023-09-29)
+
+
+### Features
+
+* **cozy-harverst-lib:** Update cozy-ui from 88.1.1 to 93.1.1 ([350cda6](https://github.com/cozy/cozy-libs/commit/350cda6263034e0666aa1b9764f9de33f0db54b2))
+* **cozy-harvest-lib:** Update cozy-client from 40.2.0 to 41.0.0 ([183feef](https://github.com/cozy/cozy-libs/commit/183feef5eb10dc62c133977443593abe27fc2c8a))
+* **cozy-harvest-lib:** Update cozy-keys-lib from 5.0.0 to 6.0.0 ([f3d20fa](https://github.com/cozy/cozy-libs/commit/f3d20fae43671b7d163224fd7b05434edd59370a))
+
+
+### BREAKING CHANGES
+
+* **cozy-harvest-lib:** You need cozy-keys-lib >= 6.0.0
+* **cozy-harvest-lib:** You need cozy-client >= 41.0.0
+* **cozy-harverst-lib:** You need cozy-ui >= 93.1.1
+
+
+
+
+
 # [17.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@17.2.2...cozy-harvest-lib@17.3.0) (2023-09-28)
 
 

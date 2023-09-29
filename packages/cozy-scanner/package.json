@@ -1,6 +1,6 @@
 {
   "name": "cozy-scanner",
-  "version": "6.1.0",
+  "version": "7.0.0",
   "description": "Cozy-Scanner provides a component to take a picture of a document and describe it",
   "main": "dist/index.js",
   "license": "MIT",

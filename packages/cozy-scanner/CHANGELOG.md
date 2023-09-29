@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.0.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@6.1.0...cozy-scanner@7.0.0) (2023-09-29)
+
+
+### Features
+
+* **cozy-scanner:** Update cozy-client from 38.9.2 to 40.5.0 ([7f38c22](https://github.com/cozy/cozy-libs/commit/7f38c225683f0928e442496c35790bd3c79a339c))
+* **cozy-scanner:** Update cozy-ui from 88.2.1 to 93.1.1 ([f53917b](https://github.com/cozy/cozy-libs/commit/f53917b0f0a6c13bf6672432433980486283d944))
+
+
+### BREAKING CHANGES
+
+* **cozy-scanner:** You need cozy-ui >= 93.1.1
+* **cozy-scanner:** You need cozy-client >= 40.5.0
+
+
+
+
+
 # [6.1.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@6.0.0...cozy-scanner@6.1.0) (2023-09-18)
 
 
