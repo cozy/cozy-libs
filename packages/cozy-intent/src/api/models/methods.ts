@@ -25,6 +25,8 @@ interface _NativeMethodsRegister {
   isNativePassInstalledOnDevice: () => Promise<boolean>
   scanDocument: () => Promise<Base64 | undefined>
   isScannerAvailable: () => Promise<boolean>
+  ocr: (base64: string) => unknown
+  isOcrAvailable: () => Promise<boolean>
   openAppOSSettings: () => Promise<null>
 }
 
