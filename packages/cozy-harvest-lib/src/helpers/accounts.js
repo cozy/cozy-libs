@@ -2,6 +2,8 @@ import clone from 'lodash/clone'
 import get from 'lodash/get'
 import merge from 'lodash/merge'
 
+import flag from 'cozy-flags'
+
 import manifest from './manifest'
 import assert from '../assert'
 import {
@@ -255,9 +257,14 @@ export const fetchAccountProcess = async (client, trigger) => {
  */
 export const checkMaxAccounts = async (slug, client) => {
   const triggersQuery = buildCountTriggersQuery()
-  const { data: triggers } = await client.fetchQueryAndGetFromState(
-    triggersQuery
-  )
+  const { data } = await client.fetchQueryAndGetFromState(triggersQuery)
+
+  const triggers = data.filter(trigger => {
+    if (flag('harvest.accounts.exclude-ccc')) {
+      return trigger.worker !== 'client'
+    }
+    return true
+  })
 
   if (hasReachMaxAccounts(triggers.length)) {
     return 'max_accounts'
