@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.17.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.16.0...cozy-intent@2.17.0) (2023-10-03)
+
+
+### Features
+
+* **cozy-intent:** Add `ocr` and `isOcrAvailable` on API methods ([36850c8](https://github.com/cozy/cozy-libs/commit/36850c8f525a25267fe7579e62f518247daf1160)), closes [cozy/cozy-flagship-app#959](https://github.com/cozy/cozy-flagship-app/issues/959)
+
+
+
+
+
 # 2.16.0 (2023-08-31)
 
 
