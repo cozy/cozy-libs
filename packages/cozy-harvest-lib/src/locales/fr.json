@@ -562,11 +562,14 @@
       "modes": {
         "AIR_OR_HSR": "Avion",
         "BICYCLING": "Vélo",
+        "BUS": "Bus",
         "CAR": "Voiture",
-        "SUBWAY": "Métro",
+        "IN_VEHICLE": "Véhicule",
         "TRAIN": "Train",
-        "UNKNOWN": "",
-        "WALKING": "Marche"
+        "UNKNOWN": "Non reconnu",
+        "WALKING": "Marche",
+        "ON_FOOT": "Marche",
+        "RUNNING": "Course"
       }
     },
     "files": {
