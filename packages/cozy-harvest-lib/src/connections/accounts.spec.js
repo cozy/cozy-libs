@@ -417,19 +417,14 @@ describe('Account mutations', () => {
 describe('fetchReusableAccount', () => {
   const setup = ({ accounts, triggers }) => {
     const client = new CozyClient({})
-    client.collection = jest.fn(doctype => {
-      if (doctype === 'io.cozy.triggers') {
-        return {
-          all: jest.fn().mockResolvedValue({ data: triggers })
-        }
-      } else {
-        throw new Error(`client.collection for ${doctype} is not mocked`)
-      }
-    })
     client.query = jest.fn().mockImplementation(() => {
       return {
         data: accounts
       }
+    })
+
+    client.queryAll = jest.fn().mockImplementation(() => {
+      return triggers
     })
     return { client }
   }
