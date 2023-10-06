@@ -237,7 +237,22 @@ export const fetchAccountsWithoutTriggers = async (client, triggers) => {
  * @return {Account} An account without trigger for the given konnector
  */
 export const fetchReusableAccount = async (client, konnector) => {
-  const { data: triggers } = await client.collection('io.cozy.triggers').all()
+  // the where is there because ATM TriggerCollection check if there is
+  // a selector to know if it should call /jobs/triggers or
+  // /data/io.cozy.triggers.
+  // In our case, we only want the triggers without the job, so we want
+  // to use /data/io.cozy.triggers
+  const triggers = await client.queryAll(
+    Q('io.cozy.triggers')
+      .where({
+        _id: { $gt: null }
+      })
+      .partialIndex({
+        worker: { $in: ['konnector', 'client'] }
+      })
+      .indexFields(['_id'])
+  )
+
   const accountsWithoutTrigger = await fetchAccountsWithoutTriggers(
     client,
     triggers
