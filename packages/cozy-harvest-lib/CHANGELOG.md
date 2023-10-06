@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@18.0.1...cozy-harvest-lib@18.1.0) (2023-10-06)
+
+
+### Features
+
+* Add missing translation for modes of transport ([93e669d](https://github.com/cozy/cozy-libs/commit/93e669d00f6a921fbc79fd6394f4ea819a68a9d8))
+* Handle all modes from openpath ([14af8fe](https://github.com/cozy/cozy-libs/commit/14af8fe64e838966ada86fc7fde359ccc1edf130))
+
+
+
+
+
 ## [18.0.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@18.0.0...cozy-harvest-lib@18.0.1) (2023-10-03)
 
 **Note:** Version bump only for package cozy-harvest-lib
