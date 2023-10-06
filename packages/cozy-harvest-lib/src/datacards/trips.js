@@ -66,7 +66,11 @@ export const getModes = trip => {
         }
       })
     )
-      .map(x => (x ? x.split('PredictedModeTypes.')[1] : null))
+      .map(x =>
+        x
+          ? x.split('PredictedModeTypes.')[1] || x.split('MotionTypes.')[1]
+          : null
+      )
       .filter(Boolean)
   )
 }
