@@ -562,11 +562,14 @@
       "modes": {
         "AIR_OR_HSR": "Vliegtuig",
         "BICYCLING": "Fiets",
+        "BUS": "Bus",
         "CAR": "Auto",
-        "SUBWAY": "Metro",
+        "IN_VEHICLE": "Voertuig",
         "TRAIN": "Trein",
-        "UNKNOWN": "",
-        "WALKING": "Wandelen"
+        "UNKNOWN": "Onbekend",
+        "WALKING": "Wandelen",
+        "ON_FOOT": "Wandelen",
+        "RUNNING": "Rennen"
       }
     },
     "files": {
