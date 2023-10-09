@@ -136,9 +136,11 @@
         "install": "Découvrir Coach CO2"
       }
     },
-    "websiteLink": {
+    "information": {
       "title": "Informations utiles",
-      "description": "Site du service"
+      "websiteLink": "Ouvrir le site",
+      "store": "Voir dans le Store Cozy Cloud",
+      "storeDescription": "Accès la fiche descriptive de cette application connecteur"
     }
   },
   "default": {

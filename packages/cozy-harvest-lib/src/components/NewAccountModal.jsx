@@ -102,7 +102,7 @@ const NewAccountModal = ({ konnector, onSuccess, onDismiss }) => {
           />
 
           {!serverSideKonnector && (
-            <InformationsCard className="u-mt-1" link={konnector.vendor_link} />
+            <InformationsCard className="u-mt-1" konnector={konnector} />
           )}
 
           {/*
