@@ -94,9 +94,7 @@ export const DataTab = ({
             trigger={trigger}
             konnector={konnector}
           />
-          {konnector.vendor_link && (
-            <InformationsCard link={konnector.vendor_link} />
-          )}
+          <InformationsCard konnector={konnector} />
         </Stack>
       </div>
     </div>

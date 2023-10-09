@@ -136,9 +136,11 @@
         "install": "Discover CoachCO2"
       }
     },
-    "websiteLink": {
+    "information": {
       "title": "Useful information",
-      "description": "Service website"
+      "websiteLink": "Open the website",
+      "store": "See in Cozy Cloud Store",
+      "storeDescription": "Access the description of this konnector app"
     }
   },
   "default": {

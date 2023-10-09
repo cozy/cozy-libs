@@ -136,9 +136,11 @@
         "install": "Ontdek CoachCO2"
       }
     },
-    "websiteLink": {
+    "information": {
       "title": "Nuttige informatie",
-      "description": "Website van dienst"
+      "websiteLink": "De website openen",
+      "store": "Zie in de Cozy Cloud Store",
+      "storeDescription": "Ga naar de beschrijving van deze konnector app"
     }
   },
   "default": {
