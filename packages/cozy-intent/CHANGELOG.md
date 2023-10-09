@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.17.1](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.17.0...cozy-intent@2.17.1) (2023-10-09)
+
+
+### Bug Fixes
+
+* **cozy-intent:** Use service as ref, not props ([5b7feb0](https://github.com/cozy/cozy-libs/commit/5b7feb0a2a77b876b6c0c37cdcb0de9d0173e7b7))
+
+
+
+
+
 # [2.17.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.16.0...cozy-intent@2.17.0) (2023-10-03)
 
 
