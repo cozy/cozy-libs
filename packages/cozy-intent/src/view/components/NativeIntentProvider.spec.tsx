@@ -1,11 +1,10 @@
+import { render, act } from '@testing-library/react'
+import { NativeMethodsRegister } from 'api'
 import 'mutationobserver-shim'
-import React from 'react'
-import { render } from '@testing-library/react'
+import React, { useEffect } from 'react'
 
 import { mockNativeMethods } from '../../../tests'
-import { NativeIntentProvider } from '../../view'
-
-import { NativeMethodsRegister } from 'api'
+import { NativeIntentProvider, useNativeIntent } from '../../view'
 
 describe('NativeIntentProvider', () => {
   it('Should mount', async () => {
@@ -41,5 +40,28 @@ describe('NativeIntentProvider', () => {
     )
 
     expect(await findByText('Hello')).toBeDefined()
+  })
+
+  it('Should be available to child on first render without rejecting promises', () => {
+    const TestChildComponent = (): JSX.Element => {
+      const nativeService = useNativeIntent()
+
+      useEffect(() => {
+        const callMethodAsync = async (): Promise<void> => {
+          await nativeService?.call('any', 'thing')
+        }
+        void callMethodAsync()
+      }, [nativeService])
+
+      return <div>Child Component</div>
+    }
+
+    act(() => {
+      render(
+        <NativeIntentProvider localMethods={mockNativeMethods}>
+          <TestChildComponent />
+        </NativeIntentProvider>
+      )
+    })
   })
 })

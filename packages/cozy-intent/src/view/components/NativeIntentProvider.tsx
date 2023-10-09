@@ -1,7 +1,10 @@
+import { debug } from 'post-me'
 import React, { ReactElement, useEffect, useRef } from 'react'
 
 import { NativeMethodsRegister, NativeService } from '../../api'
 import { NativeContext } from '../../view'
+
+const log = debug('NativeIntentProvider')
 
 interface Props {
   children: React.ReactChild
@@ -20,26 +23,30 @@ export const getNativeIntentService = (): NativeService => {
   return nativeIntentService
 }
 
-/**
- * `localMethods` can be updated at any time, it will not trigger a re-render of the context provider
- */
+const setNativeIntentService = (service: NativeService): void => {
+  nativeIntentService = service
+}
+
 export const NativeIntentProvider = ({
   children,
   localMethods
 }: Props): ReactElement => {
-  const hasRendered = useRef(false)
+  // Use useRef to hold the service instance in a way that does not trigger re-renders
+  const serviceRef = useRef<NativeService | null>(null)
+
+  if (serviceRef.current === null) {
+    serviceRef.current = new NativeService(localMethods)
+    setNativeIntentService(serviceRef.current)
+  }
 
   useEffect(() => {
-    if (!hasRendered.current) {
-      nativeIntentService = new NativeService(localMethods)
-      hasRendered.current = true
-    }
-
-    nativeIntentService?.updateLocalMethods(localMethods)
+    // Always update methods since either they've changed, or this is the first run
+    log('Updating localMethods on nativeIntentService')
+    serviceRef.current?.updateLocalMethods(localMethods)
   }, [localMethods])
 
   return (
-    <NativeContext.Provider value={nativeIntentService}>
+    <NativeContext.Provider value={serviceRef.current}>
       {children}
     </NativeContext.Provider>
   )
