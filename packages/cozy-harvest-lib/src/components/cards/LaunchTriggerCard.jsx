@@ -107,10 +107,6 @@ export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
   )
 }
 
-const DumbComponent = flag('harvest.inappconnectors.enabled')
-  ? LaunchTriggerAlert
-  : DumbLaunchTriggerCard
-
 /**
  * Shows the state of the trigger and provides the ability to
  * relaunch a trigger
@@ -118,6 +114,9 @@ const DumbComponent = flag('harvest.inappconnectors.enabled')
  * - Will follow the connection flow and re-render in case of change
  */
 const LaunchTriggerCard = props => {
+  const DumbComponent = flag('harvest.inappconnectors.enabled')
+    ? LaunchTriggerAlert
+    : DumbLaunchTriggerCard
   if (props.flow) {
     return <DumbComponent {...props} />
   }
