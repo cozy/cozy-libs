@@ -109,7 +109,7 @@ function startLauncher({ konnector, account, trigger, flow }) {
           konnector,
           account,
           trigger,
-          DEBUG: flag('debug') ? true : false
+          DEBUG: flag('clisk.always-show-worker') ? true : false
         }
       })
     )
