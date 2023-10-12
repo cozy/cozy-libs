@@ -136,9 +136,11 @@
         "install": "Ontdek CoachCO2"
       }
     },
-    "websiteLink": {
+    "information": {
       "title": "Nuttige informatie",
-      "description": "Website van dienst"
+      "websiteLink": "De website openen",
+      "store": "Zie in de Cozy Cloud Store",
+      "storeDescription": "Ga naar de beschrijving van deze konnector app"
     }
   },
   "default": {
@@ -562,14 +564,11 @@
       "modes": {
         "AIR_OR_HSR": "Vliegtuig",
         "BICYCLING": "Fiets",
-        "BUS": "Bus",
         "CAR": "Auto",
-        "IN_VEHICLE": "Voertuig",
+        "SUBWAY": "Metro",
         "TRAIN": "Trein",
-        "UNKNOWN": "Onbekend",
-        "WALKING": "Wandelen",
-        "ON_FOOT": "Wandelen",
-        "RUNNING": "Rennen"
+        "UNKNOWN": "",
+        "WALKING": "Wandelen"
       }
     },
     "files": {
