@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.2.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@18.2.0...cozy-harvest-lib@18.2.1) (2023-10-12)
+
+
+### Bug Fixes
+
+* Change flag name to always show the clisk worker ([d7ee2f7](https://github.com/cozy/cozy-libs/commit/d7ee2f77a8b62f8a29a5099777a3c20c23558d01))
+
+
+
+
+
 # [18.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@18.1.3...cozy-harvest-lib@18.2.0) (2023-10-12)
 
 
