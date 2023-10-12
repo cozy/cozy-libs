@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.1.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@18.1.2...cozy-harvest-lib@18.1.3) (2023-10-12)
+
+
+### Bug Fixes
+
+* Optimize the request ([b948b48](https://github.com/cozy/cozy-libs/commit/b948b487c560db1e208612d7d5496e595bc94f21))
+
+
+
+
+
 ## [18.1.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@18.1.1...cozy-harvest-lib@18.1.2) (2023-10-11)
 
 
