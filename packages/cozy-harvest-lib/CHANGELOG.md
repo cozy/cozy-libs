@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@18.1.3...cozy-harvest-lib@18.2.0) (2023-10-12)
+
+
+### Features
+
+* Add information link redirecting to the store ([e058415](https://github.com/cozy/cozy-libs/commit/e058415ae9ad5e330e106e2e629cff6096355e5b))
+
+
+
+
+
 ## [18.1.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@18.1.2...cozy-harvest-lib@18.1.3) (2023-10-12)
 
 
