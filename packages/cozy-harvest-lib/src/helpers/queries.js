@@ -72,8 +72,13 @@ export const buildAppsByIdQuery = appSlug => ({
 
 export const buildCountTriggersQuery = () => ({
   definition: Q('io.cozy.triggers')
-    .where({ $or: [{ worker: 'client' }, { worker: 'konnector' }] })
-    .indexFields(['worker']),
+    .where({
+      _id: { $gt: null }
+    })
+    .partialIndex({
+      worker: { $in: ['konnector', 'client'] }
+    })
+    .indexFields(['_id']),
   options: {
     as: 'io.cozy.triggers/by_worker_client_konnector',
     fetchPolicy: defaultFetchPolicy
