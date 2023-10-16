@@ -157,7 +157,7 @@ exports[`AccountForm should render normally when client side konnector with laun
           "onClick": [Function],
         }
       }
-      description="Connect testkonnector to your Cozy to synchronize your account and automatically retrieve all your data. "
+      description="Connect testkonnector to your Cozy to synchronize your account and retrieve all your data. "
       title="Connect to your Cozy"
     />
   </React.Fragment>

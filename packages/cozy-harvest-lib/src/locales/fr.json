@@ -31,7 +31,7 @@
     "clientSide": {
       "title": "Connecter à mon Cozy",
       "submit": "Connecter",
-      "description": "Connectez %{name} à votre Cozy pour synchroniser votre compte et récupérer automatiquement vos données."
+      "description": "Connectez %{name} à votre Cozy pour synchroniser votre compte et récupérer vos données."
     }
   },
   "contracts": {
@@ -545,7 +545,7 @@
   },
   "connectionBackdrop": {
     "connecting": "Connexion en cours",
-    "progress": "Nous interrogeons %{name}, cela peut prendre jusqu'à 30 secondes..."
+    "progress": "Établissement de la connexion à %{name}, cela peut prendre jusqu'à 30 secondes.."
   },
   "disconnectedAccountModal": {
     "disconnected-help": "Vous avez déconnecté votre compte. Vous conservez l'historique de vos données déjà importées. Si vous souhaitez reprendre la connexion, reconfigurez votre compte depuis le bouton \"Ajouter une banque\"."
