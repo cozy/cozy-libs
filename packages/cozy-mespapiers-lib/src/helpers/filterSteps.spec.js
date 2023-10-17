@@ -7,31 +7,31 @@ jest.mock('./isOCRActivated', () => ({
 
 describe('filterSteps', () => {
   const steps = [
-    { model: 'scan', ocr: 'both' },
+    { model: 'scan', isDisplayed: 'all' },
     {
       model: 'information',
-      ocr: 'only'
+      isDisplayed: 'ocr'
     },
-    { model: 'information', ocr: 'randomValue' },
+    { model: 'information', isDisplayed: 'randomValue' },
     { model: 'contact' }
   ]
 
-  it('should return step with ocr as only or both when OCR is activated', () => {
+  it('should return step with "isDisplayed" as "ocr" or "all" when OCR is activated', () => {
     isOCRActivated.mockReturnValue(true)
     expect(filterSteps(steps)).toStrictEqual([
-      { model: 'scan', ocr: 'both' },
+      { model: 'scan', isDisplayed: 'all' },
       {
         model: 'information',
-        ocr: 'only'
+        isDisplayed: 'ocr'
       }
     ])
   })
 
-  it('should return step with ocr as undefined or both when OCR is desactivated', () => {
+  it('should return step with "isDisplayed" as "undefined" or "all" when OCR is desactivated', () => {
     isOCRActivated.mockReturnValue(false)
     expect(filterSteps(steps)).toStrictEqual([
-      { model: 'scan', ocr: 'both' },
-      { model: 'information', ocr: 'randomValue' },
+      { model: 'scan', isDisplayed: 'all' },
+      { model: 'information', isDisplayed: 'randomValue' },
       { model: 'contact' }
     ])
   })

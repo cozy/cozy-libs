@@ -107,7 +107,7 @@
           "tooltip": true,
           "illustration": "IlluIBAN.png",
           "text": "PaperJSON.generic.singlePage.text",
-          "ocr": "both"
+          "isDisplayed": "all"
         },
         {
           "model": "information",
@@ -132,7 +132,7 @@
               "inputLabel": "PaperJSON.generic.owner.inputLabel"
             }
           ],
-          "ocr": "only"
+          "isDisplayed": "ocr"
         },
         {
           "model": "information",
@@ -278,7 +278,7 @@
           "page": "front",
           "illustration": "IlluDriverLicenseFront.png",
           "text": "PaperJSON.generic.front.text",
-          "ocr": "both"
+          "isDisplayed": "all"
         },
         {
           "model": "scan",
@@ -286,7 +286,7 @@
           "page": "back",
           "illustration": "IlluDriverLicenseBack.png",
           "text": "PaperJSON.generic.back.text",
-          "ocr": "both"
+          "isDisplayed": "all"
         },
         {
           "model": "information",
@@ -318,7 +318,7 @@
               "inputLabel": "PaperJSON.generic.owner.inputLabel"
             }
           ],
-          "ocr": "only"
+          "isDisplayed": "ocr"
         },
         {
           "model": "information",
@@ -359,7 +359,7 @@
               "inputLabel": "PaperJSON.driverLicense.DObtentionDate.inputLabel"
             }
           ],
-          "ocr": "both"
+          "isDisplayed": "all"
         },
         {
           "model": "information",
@@ -689,7 +689,7 @@
           "page": "front",
           "illustration": "IlluIdCardFront.png",
           "text": "PaperJSON.card.front.text",
-          "ocr": "both"
+          "isDisplayed": "all"
         },
         {
           "model": "scan",
@@ -697,7 +697,7 @@
           "page": "back",
           "illustration": "IlluIdCardBack.png",
           "text": "PaperJSON.card.back.text",
-          "ocr": "both"
+          "isDisplayed": "all"
         },
         {
           "model": "information",
@@ -729,7 +729,7 @@
               "inputLabel": "PaperJSON.generic.owner.inputLabel"
             }
           ],
-          "ocr": "only"
+          "isDisplayed": "ocr"
         },
         {
           "model": "information",
@@ -1441,7 +1441,7 @@
           "page": "front",
           "illustration": "IlluResidencePermitFront.png",
           "text": "PaperJSON.card.front.text",
-          "ocr": "both"
+          "isDisplayed": "all"
         },
         {
           "model": "scan",
@@ -1449,7 +1449,7 @@
           "page": "back",
           "illustration": "IlluResidencePermitBack.png",
           "text": "PaperJSON.card.back.text",
-          "ocr": "both"
+          "isDisplayed": "all"
         },
         {
           "model": "information",
@@ -1486,7 +1486,7 @@
               "inputLabel": "PaperJSON.generic.owner.inputLabel"
             }
           ],
-          "ocr": "only"
+          "isDisplayed": "ocr"
         },
         {
           "model": "information",
@@ -1854,7 +1854,7 @@
           "multipage": true,
           "illustration": "IlluPassport.png",
           "text": "PaperJSON.passport.scan.text",
-          "ocr": "both"
+          "isDisplayed": "all"
         },
         {
           "model": "information",
@@ -1891,7 +1891,7 @@
               "inputLabel": "PaperJSON.generic.owner.inputLabel"
             }
           ],
-          "ocr": "only"
+          "isDisplayed": "ocr"
         },
         {
           "model": "information",
