@@ -189,12 +189,8 @@ exports[`AccountForm should render with specific message when client side konnec
         </ForwardRef>
       </Bd>
     </Media>
-    <ForwardRef
+    <InstallFlagshipButton
       className="u-mt-2 u-mb-1-half"
-      fullWidth={true}
-      label="Install Cozy on mobile"
-      onClick={[Function]}
-      variant="primary"
     />
   </React.Fragment>
 </div>
