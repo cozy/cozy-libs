@@ -184,3 +184,55 @@ export const getLink = () => {
   // Case that should only exist in development, as this component is used in ScanMobileActions
   return { url: IOS_APP_URL, name: 'ios' }
 }
+
+/**
+ * @typedef {Object} FileToHandle
+ * @property {string} name - The name of the file.
+ * @property {string} source - The base64 encoded content of the file.
+ * @property {string} type - The MIME type of the file.
+ */
+
+/**
+ * Validates the structure of a file object received from native.
+ * Ensures that the file has the required properties: type, name, and source.
+ *
+ * @param {FileToHandle} file - The file object to validate.
+ * @throws {Error} If the file object is missing any of the required properties.
+ */
+export const validateFileFromNative = file => {
+  if (!file.type || !file.name || !file.source) {
+    throw new Error('Incomplete file received from native')
+  }
+}
+
+/**
+ * Fetches the files from native via the given `webviewIntent` and returns the first valid file.
+ *
+ * This function is used to retrieve files from native to the webview context.
+ * It ensures that the file contains all required fields such as type, name, and source.
+ *
+ * @param {Object} webviewIntent - The webview intent service to interact with the native environment.
+ * @param {function} webviewIntent.call - A function to call native methods, expecting the method name and its arguments.
+ *
+ * @throws {Error} Throws an error if no valid files are received from native or if the file structure is invalid.
+ *
+ * @return {Promise<FileToHandle>} The first valid file object containing the required fields.
+ *
+ * @example
+ * const validFile = await getFirstFileFromNative(webviewInterface);
+ */
+export const getFirstFileFromNative = async webviewIntent => {
+  // The second argument is true to indicate that we want to receive the file source as a base64 string.
+  const files = await webviewIntent.call('getFilesToHandle', true)
+
+  if (!files) throw new Error('Empty response from getFilesToHandle')
+
+  if (files.length === 0)
+    throw new Error('Empty array received from getFilesToHandle')
+
+  const fileToHandle = files[0]
+
+  validateFileFromNative(fileToHandle)
+
+  return fileToHandle
+}
