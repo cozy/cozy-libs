@@ -1,16 +1,19 @@
-import React, { useMemo, useEffect } from 'react'
+import React, { useMemo, useEffect, useCallback } from 'react'
 import { useSearchParams, useNavigate, useParams } from 'react-router-dom'
 
 import { useWebviewIntent } from 'cozy-intent'
+import log from 'cozy-logger'
 
-import { getFilesToHandle } from './createPaperModalTemps'
 import { findPlaceholderByLabelAndCountry } from '../../helpers/findPlaceholders'
 import { FormDataProvider } from '../Contexts/FormDataProvider'
 import { StepperDialogProvider } from '../Contexts/StepperDialogProvider'
 import { useFormData } from '../Hooks/useFormData'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
-import { makeFileFromBase64 } from '../ModelSteps/helpers'
+import {
+  makeFileFromBase64,
+  getFirstFileFromNative
+} from '../ModelSteps/helpers'
 import StepperDialogWrapper from '../StepperDialog/StepperDialogWrapper'
 
 const CreatePaperModal = () => {
@@ -42,11 +45,11 @@ const CreatePaperModal = () => {
 
   const formModel = allPlaceholders[0]
 
-  const onClose = async () => {
+  const onClose = useCallback(async () => {
     fromFlagshipUpload
       ? await webviewIntent?.call('cancelUploadByCozyApp')
       : navigate('..')
-  }
+  }, [fromFlagshipUpload, navigate, webviewIntent])
 
   const onSubmit = () => {
     navigate(`/paper/files/${qualificationLabel}`)
@@ -60,36 +63,55 @@ const CreatePaperModal = () => {
 
   useEffect(() => {
     const getFileAndSetFormData = async () => {
-      // TODO: we should use getFilesToHandle from webviewIntent
-      const { source, name, type } = (await getFilesToHandle()) || {}
-      const file = makeFileFromBase64({ source, name, type })
+      try {
+        const fileToHandle = await getFirstFileFromNative(webviewIntent)
+        const file = makeFileFromBase64(fileToHandle)
 
-      if (file && allCurrentSteps?.length > 0) {
-        const nextStep = allCurrentSteps.find(
-          el => el.model !== 'scan' || el.page === 'back'
-        )
-        setFormData(prev => ({
-          ...prev,
-          data: [
-            ...prev.data,
-            {
-              file,
-              stepIndex: 1,
-              fileMetadata: {
-                page: 'front'
+        if (file && allCurrentSteps?.length > 0) {
+          const nextStep = allCurrentSteps.find(
+            el => el.model !== 'scan' || el.page === 'back'
+          )
+
+          setFormData(prev => ({
+            ...prev,
+            data: [
+              ...prev.data,
+              {
+                file,
+                stepIndex: 1,
+                fileMetadata: {
+                  page: 'front'
+                }
               }
-            }
-          ]
-        }))
-        setCurrentStepIndex(nextStep.stepIndex)
+            ]
+          }))
+
+          const stepIndex = allCurrentSteps.findIndex(
+            el => el.model === nextStep.model
+          )
+
+          setCurrentStepIndex(stepIndex)
+        }
+      } catch (error) {
+        log(
+          'error',
+          'An error occured during getFileAndSetFormData setup in CreatePaperModal, the modal will be closed.'
+        )
+        log('error', error)
+
+        onClose()
       }
     }
 
-    // TODO: we should add `webviewIntent` in the condition
-    if (fromFlagshipUpload) {
-      getFileAndSetFormData()
-    }
-  }, [fromFlagshipUpload, allCurrentSteps, setCurrentStepIndex, setFormData])
+    if (fromFlagshipUpload && webviewIntent) getFileAndSetFormData()
+  }, [
+    fromFlagshipUpload,
+    allCurrentSteps,
+    setCurrentStepIndex,
+    setFormData,
+    webviewIntent,
+    onClose
+  ])
 
   if (!currentDefinition) {
     return null
