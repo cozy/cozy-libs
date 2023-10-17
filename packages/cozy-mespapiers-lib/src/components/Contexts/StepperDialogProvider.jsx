@@ -39,8 +39,17 @@ const StepperDialogProvider = ({ children }) => {
       setCurrentStepIndex(prev => prev + 1)
   }
 
-  const isLastStep = () => {
-    return currentStepIndex + 1 === allCurrentSteps.length
+  /**
+   * @param {string} modelStep - The model of the step to check
+   * @returns {boolean} - True if the step is the last step of the model
+   */
+  const isLastStep = modelStep => {
+    if (!modelStep) return currentStepIndex + 1 === allCurrentSteps.length
+
+    const lastScanIndex = allCurrentSteps.findLastIndex(
+      step => step.model === modelStep
+    )
+    return lastScanIndex === currentStepIndex
   }
 
   const stepperDialog = {
