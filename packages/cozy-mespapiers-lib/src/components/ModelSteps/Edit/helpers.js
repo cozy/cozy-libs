@@ -36,7 +36,7 @@ const makeCurrentInformationStep = (currentPaperDef, metadataName) => {
       step =>
         step.model === 'information' &&
         step.attributes.some(attr => attr.name === metadataName) &&
-        step.ocr !== 'only'
+        step.isDisplayed !== 'ocr'
     )
     ?.map(step => {
       return {

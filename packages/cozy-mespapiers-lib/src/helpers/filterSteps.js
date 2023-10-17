@@ -9,9 +9,9 @@ const filterSteps = steps => {
   const isOCR = isOCRActivated(steps)
   return steps.filter(step => {
     if (isOCR) {
-      return step.ocr === 'both' || step.ocr === 'only'
+      return step.isDisplayed === 'all' || step.isDisplayed === 'ocr'
     } else {
-      return step?.ocr !== 'only'
+      return step?.isDisplayed !== 'ocr'
     }
   })
 }

@@ -11,11 +11,15 @@ jest.mock('cozy-flags')
 
 describe('isOCRActivated', () => {
   const stepsWithOCR = [
-    { model: 'scan', text: 'PaperJSON.generic.singlePage.text', ocr: 'both' },
+    {
+      model: 'scan',
+      text: 'PaperJSON.generic.singlePage.text',
+      isDisplayed: 'all'
+    },
     {
       model: 'information',
       text: 'PaperJSON.card.number.inputLabel',
-      ocr: 'only'
+      isDisplayed: 'ocr'
     },
     { model: 'contact', text: 'PaperJSON.generic.owner.text' }
   ]
