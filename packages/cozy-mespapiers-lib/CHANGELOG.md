@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [61.4.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@61.3.10...cozy-mespapiers-lib@61.4.0) (2023-10-17)
+
+
+### Features
+
+* Add `getFilesToHandle` from cozy-intent ([0dc2297](https://github.com/cozy/cozy-libs/commit/0dc22979143a6fde787f5831977ac1cd42f9f443))
+
+
+
+
+
 ## [61.3.10](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@61.3.9...cozy-mespapiers-lib@61.3.10) (2023-10-13)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
