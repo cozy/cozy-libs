@@ -16,6 +16,7 @@ import { Media, Img, Bd } from 'cozy-ui/transpiled/react/deprecated/Media'
 
 import AccountFields from './AccountFields'
 import CannotConnectModal from './CannotConnectModal'
+import { InstallFlagshipButton } from './InstallFlagshipButton'
 import ReadOnlyIdentifier from './ReadOnlyIdentifier'
 import fieldHelpers, {
   getEncryptedFieldName,
@@ -232,7 +233,6 @@ export class AccountForm extends PureComponent {
       showError,
       t,
       fieldOptions,
-      historyAction,
       flowState
     } = this.props
     const submitting = flowState.running
@@ -371,12 +371,7 @@ export class AccountForm extends PureComponent {
                     </Typography>
                   </Bd>
                 </Media>
-                <Button
-                  className="u-mt-2 u-mb-1-half"
-                  fullWidth
-                  label={t('accountForm.installFlagship.label')}
-                  onClick={() => historyAction('/', 'push')}
-                />
+                <InstallFlagshipButton className="u-mt-2 u-mb-1-half" />
               </>
             )}
             {this.state.showConfirmationModal && (
