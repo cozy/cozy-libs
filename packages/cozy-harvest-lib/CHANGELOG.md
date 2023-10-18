@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@18.2.2...cozy-harvest-lib@19.0.0) (2023-10-18)
+
+
+### Features
+
+* **cozy-harvest-lib:** Update cozy-client from 41.0.0 to 41.8.1 ([351d981](https://github.com/cozy/cozy-libs/commit/351d98105c625a23a1fa98f6df8a1a0009c16d0b))
+* Redirect users to where they can download the mobile application ([9d71ea6](https://github.com/cozy/cozy-libs/commit/9d71ea6d78b7b6a832a06bc013c6e9690d3f3d74))
+* Small wording improvements linked to CCC ([e8dafde](https://github.com/cozy/cozy-libs/commit/e8dafdea275bfe32b40a350114a564a87ca17f90))
+
+
+### BREAKING CHANGES
+
+* **cozy-harvest-lib:** You need cozy-client >= 41.8.1
+
+
+
+
+
 ## [18.2.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@18.2.1...cozy-harvest-lib@18.2.2) (2023-10-13)
 
 
