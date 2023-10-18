@@ -72,7 +72,7 @@
     "babel-jest": "26.6.3",
     "babel-plugin-inline-react-svg": "1.1.2",
     "babel-preset-cozy-app": "^2.1.0",
-    "cozy-client": "^41.0.0",
+    "cozy-client": "^41.8.1",
     "cozy-device-helper": "^3.0.0",
     "cozy-flags": "^3.0.1",
     "cozy-intent": "^2.17.1",
@@ -100,7 +100,7 @@
   },
   "peerDependencies": {
     "@babel/runtime": ">=7.12.5",
-    "cozy-client": ">=41.0.0",
+    "cozy-client": ">=41.8.1",
     "cozy-device-helper": ">=2.6.0",
     "cozy-flags": ">=2.3.5",
     "cozy-intent": ">=1.14.1",
