@@ -19,6 +19,7 @@ import { findKonnectorPolicy } from '../konnector-policies'
 import logger from '../logger'
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
+
 /**
  * Displays the login form and on submission will create the account, triggers and folders.
  * After that it calls FlowProvider to run the konnector.
@@ -45,7 +46,8 @@ export class DumbTriggerManager extends Component {
       selectedCipher: undefined,
       showBackButton: false,
       ciphers: [],
-      showPaywall: null
+      showPaywall: null,
+      isWaitingPaywallCheck: true
     }
   }
 
@@ -195,6 +197,8 @@ export class DumbTriggerManager extends Component {
       paywall = await checkMaxAccounts(konnector.slug, client)
     }
 
+    this.setState({ isWaitingPaywallCheck: false })
+
     if (paywall === null) {
       const konnectorPolicy = findKonnectorPolicy(konnector)
       if (konnectorPolicy.saveInVault) {
@@ -322,15 +326,28 @@ export class DumbTriggerManager extends Component {
       selectedCipher,
       showBackButton,
       ciphers,
-      showPaywall
+      showPaywall,
+      isWaitingPaywallCheck
     } = this.state
 
     const { oauth } = konnector
 
-    const showSpinner = submitting && selectedCipher && step === 'ciphersList'
     const showCiphersList = step === 'ciphersList'
+    const isSubmittingSelectedCipher =
+      submitting && selectedCipher && showCiphersList
     const showAccountForm = step === 'accountForm'
     const konnectorPolicy = findKonnectorPolicy(konnector)
+
+    if (isWaitingPaywallCheck || isSubmittingSelectedCipher) {
+      return (
+        <div className="u-flex u-flex-column u-flex-items-center u-pv-2">
+          <Spinner size="xxlarge" />
+          {isSubmittingSelectedCipher ? (
+            <p>{t('triggerManager.connecting')}</p>
+          ) : null}
+        </div>
+      )
+    }
 
     if (showPaywall) {
       return (
@@ -358,15 +375,6 @@ export class DumbTriggerManager extends Component {
             intentsApi={intentsApi}
           />
         </Wrapper>
-      )
-    }
-
-    if (showSpinner) {
-      return (
-        <div className="u-flex u-flex-column u-flex-items-center u-pv-2">
-          <Spinner size="xxlarge" />
-          <p>{t('triggerManager.connecting')}</p>
-        </div>
       )
     }
 
