@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React, { useEffect } from 'react'
 
 import flag from 'cozy-flags'
@@ -20,6 +21,7 @@ import RoutesV4 from './Routes/RoutesV4'
 import RoutesV6 from './Routes/RoutesV6'
 import { isRouterV6 } from './hoc/withRouter'
 import { useKonnectorWithTriggers } from '../helpers/useKonnectorWithTriggers'
+
 const withHarvestDialogStyles = () => {
   /**
    * When this flag is enabled, tabs are removed, and the layout shift between
@@ -64,7 +66,8 @@ const Routes = ({
   onSuccess,
   onDismiss,
   datacardOptions,
-  ComponentsProps
+  ComponentsProps,
+  closable
 }) => {
   const RoutesV4orV6 = isRouterV6 ? RoutesV6 : RoutesV4
 
@@ -97,7 +100,9 @@ const Routes = ({
             {...dialogContext.dialogProps}
             aria-label={konnectorWithTriggers.name}
           >
-            <DialogCloseButton onClick={onDismiss} />
+            {closable !== false ? (
+              <DialogCloseButton onClick={onDismiss} />
+            ) : null}
             {fetching ? (
               <div className="u-pv-2 u-ta-center">
                 <Spinner size="xxlarge" />
@@ -121,6 +126,23 @@ const Routes = ({
       </HarvestWrapper>
     </DatacardOptions>
   )
+}
+
+Routes.propTypes = {
+  /** The root URL of the konnector */
+  konnectorRoot: PropTypes.string.isRequired,
+  /** The konnector object */
+  konnector: PropTypes.object.isRequired,
+  /** The slug of the konnector */
+  konnectorSlug: PropTypes.string.isRequired,
+  /** The function to call when the harvest is successful */
+  onSuccess: PropTypes.func.isRequired,
+  /** The function to call when the dialog is dismissed */
+  onDismiss: PropTypes.func.isRequired,
+  /** The props for the components */
+  ComponentsProps: PropTypes.object,
+  /** Whether the dialog is closable or not */
+  closable: PropTypes.bool
 }
 
 export default Routes
