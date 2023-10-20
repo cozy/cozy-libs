@@ -84,3 +84,11 @@ export const buildCountTriggersQuery = () => ({
     fetchPolicy: defaultFetchPolicy
   }
 })
+
+export const buildAppsRegistryMaintenance = () => ({
+  definition: Q('io.cozy.apps_registry').getById('maintenance'),
+  options: {
+    as: 'io.cozy.apps_registry/maintenance',
+    fetchPolicy: defaultFetchPolicy
+  }
+})

@@ -9,7 +9,10 @@ import {
   hasReachMaxAccounts
 } from '../components/AccountsPaywall/helpers'
 import { fetchAccount } from '../connections/accounts'
-import { buildCountTriggersQuery } from '../helpers/queries'
+import {
+  buildCountTriggersQuery,
+  buildAppsRegistryMaintenance
+} from '../helpers/queries'
 import * as triggersModel from '../helpers/triggers'
 
 const DEFAULT_TWOFA_CODE_PROVIDER_TYPE = 'default'
@@ -259,8 +262,25 @@ export const checkMaxAccounts = async (slug, client) => {
     triggersQuery
   )
 
-  if (hasReachMaxAccounts(triggers.length)) {
+  const maintenanceQuery = buildAppsRegistryMaintenance()
+  const { data: maintenance } = await client.fetchQueryAndGetFromState(
+    maintenanceQuery
+  )
+
+  const slugInMaintenance = maintenance.map(app =>
+    app.maintenance_activated ? app.slug : null
+  )
+
+  const activeTrigger = triggers.filter(
+    trigger => !slugInMaintenance.includes(trigger.message.konnector)
+  )
+
+  if (hasReachMaxAccounts(activeTrigger.length)) {
     return 'max_accounts'
+  }
+
+  if (slugInMaintenance.includes(slug)) {
+    return null
   }
 
   const currentKonnectorTriggers = triggers.filter(
