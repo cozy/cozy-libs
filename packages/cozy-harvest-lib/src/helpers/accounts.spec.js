@@ -5,8 +5,13 @@ import {
   updateTwoFaCode,
   resetState,
   getVaultCipherId,
-  setSessionResetIfNecessary
+  setSessionResetIfNecessary,
+  checkMaxAccounts
 } from 'helpers/accounts'
+
+import flag from 'cozy-flags'
+
+jest.mock('cozy-flags')
 
 const fixtures = {
   konnector: {
@@ -171,6 +176,106 @@ describe('Accounts Helper', () => {
           }
         })
       ).toEqual('cipher-id')
+    })
+  })
+
+  describe('checkMaxAccounts', () => {
+    const client = {
+      fetchQueryAndGetFromState: jest.fn()
+    }
+
+    beforeEach(() => {
+      flag.mockImplementation(flag => {
+        switch (flag) {
+          case 'harvest.accounts.maxByKonnector.konnector1':
+            return 1
+          case 'harvest.accounts.maxByKonnector.konnector2':
+            return 2
+          case 'harvest.accounts.max':
+            return 3
+          default:
+            return null
+        }
+      })
+    })
+
+    afterEach(() => {
+      jest.clearAllMocks()
+    })
+
+    it('should return "max_accounts" if there are too many active triggers', async () => {
+      const triggers = [
+        { message: { konnector: 'konnector1' } },
+        { message: { konnector: 'konnector2' } },
+        { message: { konnector: 'konnector1' } },
+        { message: { konnector: 'konnector2' } },
+        { message: { konnector: 'konnector1' } }
+      ]
+      const maintenance = [
+        { slug: 'konnector1', maintenance_activated: false },
+        { slug: 'konnector2', maintenance_activated: true }
+      ]
+      client.fetchQueryAndGetFromState
+        .mockResolvedValueOnce({ data: triggers })
+        .mockResolvedValueOnce({ data: maintenance })
+
+      const result = await checkMaxAccounts('konnector1', client)
+
+      expect(result).toBe('max_accounts')
+    })
+
+    it('should return null if the konnector is in maintenance', async () => {
+      const triggers = [
+        { message: { konnector: 'konnector1' } },
+        { message: { konnector: 'konnector2' } }
+      ]
+      const maintenance = [
+        { slug: 'konnector1', maintenance_activated: true },
+        { slug: 'konnector2', maintenance_activated: false }
+      ]
+      client.fetchQueryAndGetFromState
+        .mockResolvedValueOnce({ data: triggers })
+        .mockResolvedValueOnce({ data: maintenance })
+
+      const result = await checkMaxAccounts('konnector1', client)
+
+      expect(result).toBeNull()
+    })
+
+    it('should return "max_accounts_by_konnector" if there are too many accounts for the konnector', async () => {
+      const triggers = [
+        { message: { konnector: 'konnector1' } },
+        { message: { konnector: 'konnector2' } }
+      ]
+      const maintenance = [
+        { slug: 'konnector1', maintenance_activated: false },
+        { slug: 'konnector2', maintenance_activated: false }
+      ]
+      client.fetchQueryAndGetFromState
+        .mockResolvedValueOnce({ data: triggers })
+        .mockResolvedValueOnce({ data: maintenance })
+
+      const result = await checkMaxAccounts('konnector1', client)
+
+      expect(result).toBe('max_accounts_by_konnector')
+    })
+
+    it('should return null if there are not too many accounts for the konnector', async () => {
+      const triggers = [
+        { message: { konnector: 'konnector1' } },
+        { message: { konnector: 'konnector2' } }
+      ]
+      const maintenance = [
+        { slug: 'konnector1', maintenance_activated: false },
+        { slug: 'konnector2', maintenance_activated: false }
+      ]
+      client.fetchQueryAndGetFromState
+        .mockResolvedValueOnce({ data: triggers })
+        .mockResolvedValueOnce({ data: maintenance })
+
+      const result = await checkMaxAccounts('konnector2', client)
+
+      expect(result).toBeNull()
     })
   })
 })
