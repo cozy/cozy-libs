@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@19.0.1...cozy-harvest-lib@19.1.0) (2023-10-20)
+
+
+### Features
+
+* Be able to disable the modal close button ([74a6492](https://github.com/cozy/cozy-libs/commit/74a64926ed8c35595c7a5ae9676003377658f969))
+
+
+
+
+
 ## [19.0.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@19.0.0...cozy-harvest-lib@19.0.1) (2023-10-19)
 
 

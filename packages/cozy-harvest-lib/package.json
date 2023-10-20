@@ -1,6 +1,6 @@
 {
   "name": "cozy-harvest-lib",
-  "version": "19.0.1",
+  "version": "19.1.0",
   "description": "Provides logic, modules and components for Cozy's harvest applications.",
   "main": "dist/index.js",
   "author": "Cozy",
