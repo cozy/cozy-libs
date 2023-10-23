@@ -71,5 +71,6 @@ export const mockNativeMethods: NativeMethodsRegister = {
   openSettingBiometry: jest.fn(),
   toggleSetting: jest.fn(),
   isBiometryDenied: jest.fn(),
-  openAppOSSettings: jest.fn()
+  openAppOSSettings: jest.fn(),
+  isAvailable: jest.fn()
 }

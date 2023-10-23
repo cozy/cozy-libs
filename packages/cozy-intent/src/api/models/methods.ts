@@ -26,8 +26,8 @@ interface _NativeMethodsRegister {
   scanDocument: () => Promise<Base64 | undefined>
   isScannerAvailable: () => Promise<boolean>
   ocr: (base64: string) => unknown
-  isOcrAvailable: () => Promise<boolean>
   openAppOSSettings: () => Promise<null>
+  isAvailable: (featureName: string) => Promise<boolean>
 }
 
 export type NativeMethodsRegister = _NativeMethodsRegister & PostMeDefault
