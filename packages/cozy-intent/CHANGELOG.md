@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.18.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.17.1...cozy-intent@2.18.0) (2023-10-23)
+
+
+### Features
+
+* Add isAvailable type and remove isOcrAvailable type ([0cf73e2](https://github.com/cozy/cozy-libs/commit/0cf73e2d9ebe0721ad3869433e7e85ad6fe53d17))
+
+
+
+
+
 ## [2.17.1](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.17.0...cozy-intent@2.17.1) (2023-10-09)
 
 
