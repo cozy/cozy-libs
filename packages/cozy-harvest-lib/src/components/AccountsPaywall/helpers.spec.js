@@ -6,7 +6,8 @@ import {
   computeMaxAccountsByKonnector,
   hasReachMaxAccountsByKonnector,
   computeMaxAccounts,
-  hasReachMaxAccounts
+  hasReachMaxAccounts,
+  computeNbAccounts
 } from './helpers'
 
 jest.mock('cozy-flags')
@@ -99,18 +100,186 @@ describe('AccountsPaywall helpers', () => {
 
   describe('hasReachMaxAccounts', () => {
     it('should be true when current account number is equal or upper maximum', () => {
+      const accounts = [
+        { slug: 'konnector1', count: 3 },
+        { slug: 'konnector2', count: 2 },
+        { slug: 'konnector3', count: 1 }
+      ]
       flag.mockImplementation(getCurrentFlag({ maxValue: 5 }))
-      expect(hasReachMaxAccounts(5)).toBe(true)
+      expect(hasReachMaxAccounts(accounts)).toBe(true)
     })
 
     it('should be false when current account number is below maximum', () => {
+      const accounts = [
+        { slug: 'konnector1', count: 1 },
+        { slug: 'konnector2', count: 2 },
+        { slug: 'konnector3', count: 1 }
+      ]
       flag.mockImplementation(getCurrentFlag({ maxValue: 5 }))
-      expect(hasReachMaxAccounts(4)).toBe(false)
+      expect(hasReachMaxAccounts(accounts)).toBe(false)
     })
 
     it('should be false when there is no maximum', () => {
+      const accounts = [
+        { slug: 'konnector1', count: 3 },
+        { slug: 'konnector2', count: 2 },
+        { slug: 'konnector3', count: 1 }
+      ]
       flag.mockImplementation(getCurrentFlag({ maxValue: -1 }))
-      expect(hasReachMaxAccounts(5)).toBe(false)
+      expect(hasReachMaxAccounts(accounts)).toBe(false)
+    })
+  })
+
+  describe('computeNbAccounts', () => {
+    it('should return 0 when given an empty array of accounts', () => {
+      /**
+       * @type {import("./helpers").AccountCountByKonnector[]}
+       */
+      const accounts = []
+      /**
+       * @type {import("./helpers").KonnectorOffer[]}
+       */
+      const offers = []
+      const result = computeNbAccounts(accounts, offers)
+      expect(result).toBe(0)
+    })
+
+    it('should return the sum of all account counts when no offers are available', () => {
+      const accounts = [
+        { slug: 'konnector1', count: 3 },
+        { slug: 'konnector2', count: 2 },
+        { slug: 'konnector3', count: 1 }
+      ]
+      /**
+       * @type {import("./helpers").KonnectorOffer[]}
+       */
+      const offers = []
+      const result = computeNbAccounts(accounts, offers)
+      expect(result).toBe(6)
+    })
+
+    it('should subtract the offer count from the account count when an offer is available', () => {
+      const accounts = [
+        { slug: 'konnector1', count: 3 },
+        { slug: 'konnector2', count: 2 },
+        { slug: 'konnector3', count: 1 }
+      ]
+      const offers = [
+        { slug: 'konnector1', offer: 1 },
+        { slug: 'konnector2', offer: 2 }
+      ]
+      const result = computeNbAccounts(accounts, offers)
+      expect(result).toBe(3)
+    })
+
+    it('should not subtract more than the account count when an offer is available', () => {
+      const accounts = [
+        { slug: 'konnector1', count: 3 },
+        { slug: 'konnector2', count: 2 },
+        { slug: 'konnector3', count: 1 }
+      ]
+      const offers = [
+        { slug: 'konnector1', offer: 5 },
+        { slug: 'konnector2', offer: 3 }
+      ]
+      const result = computeNbAccounts(accounts, offers)
+      expect(result).toBe(1)
+    })
+
+    it('should ignore offers that do not have a matching konnector', () => {
+      const accounts = [
+        { slug: 'konnector1', count: 3 },
+        { slug: 'konnector2', count: 2 },
+        { slug: 'konnector3', count: 1 }
+      ]
+      const offers = [
+        { slug: 'konnector4', offer: 1 },
+        { slug: 'konnector5', offer: 2 }
+      ]
+      const result = computeNbAccounts(accounts, offers)
+      expect(result).toBe(6)
+    })
+
+    it('should ignore offers that do not have a matching offer', () => {
+      const accounts = [
+        { slug: 'konnector1', count: 3 },
+        { slug: 'konnector2', count: 2 },
+        { slug: 'konnector3', count: 1 }
+      ]
+      const offers = [
+        { slug: 'konnector4', offer: 1 },
+        { slug: 'konnector5', offer: 2 }
+      ]
+      const result = computeNbAccounts(accounts, offers)
+      expect(result).toBe(6)
+    })
+
+    it('should subtract offers whose expiration date is less than now', () => {
+      jest
+        .spyOn(global.Date, 'now')
+        .mockImplementationOnce(() =>
+          new Date('2024-01-01T11:01:58.135Z').valueOf()
+        )
+
+      const accounts = [
+        { slug: 'konnector1', count: 3 },
+        { slug: 'konnector2', count: 2 }
+      ]
+      const offers = [{ slug: 'konnector1', offer: 2, expiresAt: '2023-10-24' }]
+
+      const result = computeNbAccounts(accounts, offers)
+      expect(result).toBe(3)
+    })
+
+    it('should ignore offers whose expiration date has exceeded', () => {
+      jest
+        .spyOn(global.Date, 'now')
+        .mockImplementationOnce(() =>
+          new Date('2023-10-01T11:01:58.135Z').valueOf()
+        )
+
+      const accounts = [
+        { slug: 'konnector1', count: 3 },
+        { slug: 'konnector2', count: 2 }
+      ]
+      const offers = [{ slug: 'konnector1', offer: 2, expiresAt: '2023-10-24' }]
+
+      const result = computeNbAccounts(accounts, offers)
+      expect(result).toBe(5)
+    })
+
+    it('should subtract the joker offer from the total ', () => {
+      const accounts = [
+        { slug: 'konnector1', count: 3 },
+        { slug: 'konnector2', count: 2 }
+      ]
+      const offers = [
+        { slug: 'konnector1', offer: 2 },
+        { slug: '*', offer: 1 }
+      ]
+
+      const result = computeNbAccounts(accounts, offers)
+      expect(result).toBe(2)
+    })
+
+    it('should ignore the joker offer when  expiration date has exceeded', () => {
+      jest
+        .spyOn(global.Date, 'now')
+        .mockImplementationOnce(() =>
+          new Date('2023-10-01T11:01:58.135Z').valueOf()
+        )
+
+      const accounts = [
+        { slug: 'konnector1', count: 3 },
+        { slug: 'konnector2', count: 2 }
+      ]
+      const offers = [
+        { slug: 'konnector1', offer: 2 },
+        { slug: '*', offer: 1, expiresAt: '2023-10-24' }
+      ]
+
+      const result = computeNbAccounts(accounts, offers)
+      expect(result).toBe(3)
     })
   })
 })
