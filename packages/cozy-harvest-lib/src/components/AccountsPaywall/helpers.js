@@ -45,11 +45,61 @@ export function computeMaxAccounts() {
 }
 
 /**
+ * @typedef {Object} AccountCountByKonnector
+ * @property {string} slug - Slug of the konnector
+ * @property {number} count - Number of accounts for the konnector
+ */
+
+/**
+ * @typedef {Object} KonnectorOffer
+ * @property {string} slug - Slug of the konnector
+ * @property {number} offer - Number of accounts offered for the konnector
+ * @property {string} [expiresAt] - Date of expiration of the offer
+ */
+
+/**
  *
- * @param {number} nbAccounts the current number of account for the konnector to check
+ * @param {AccountCountByKonnector[]} accounts the accounts to check
+ * @param {KonnectorOffer[]} offers the offers to check
+ * @returns {number} the number of accounts for all konnectors
+ */
+export function computeNbAccounts(accounts, offers = []) {
+  const nbAccounts = accounts.reduce((acc, current) => {
+    const offer = offers.find(offer => offer.slug === current.slug)
+
+    if (
+      offer &&
+      (offer.expiresAt === undefined ||
+        new Date(offer.expiresAt) < new Date(Date.now()))
+    ) {
+      const count = current.count - offer.offer
+      return acc + Math.max(count, 0)
+    }
+    return acc + current.count
+  }, 0)
+
+  const generalOffer = offers.find(offer => offer.slug === '*')
+  if (
+    generalOffer &&
+    (generalOffer.expiresAt === undefined ||
+      new Date(generalOffer.expiresAt) < new Date(Date.now()))
+  ) {
+    return nbAccounts - generalOffer.offer
+  } else {
+    return nbAccounts
+  }
+}
+
+/**
+ *
+ * @param {AccountCountByKonnector[]} accounts list of konnector accounts to check
  * @returns {boolean} whether the number of accounts allowed for all konnectors has been reached
  */
-export function hasReachMaxAccounts(nbAccounts) {
+export function hasReachMaxAccounts(accounts) {
+  const offers = flag('harvest.accounts.offers') || []
+
+  const nbAccounts = computeNbAccounts(accounts, offers)
+
   const maxAccounts = computeMaxAccounts()
   if (isFinite(maxAccounts) && nbAccounts >= maxAccounts) {
     return true
