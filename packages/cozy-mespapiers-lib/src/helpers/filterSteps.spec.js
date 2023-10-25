@@ -1,3 +1,5 @@
+import { act } from '@testing-library/react'
+
 import { filterSteps } from './filterSteps'
 import { isOCRActivated } from './isOCRActivated'
 
@@ -16,20 +18,24 @@ describe('filterSteps', () => {
     { model: 'contact' }
   ]
 
-  it('should return step with "isDisplayed" as "ocr" or "all" when OCR is activated', () => {
+  it('should return step with "isDisplayed" as "ocr" or "all" when OCR is activated', async () => {
     isOCRActivated.mockReturnValue(true)
-    expect(filterSteps(steps)).toStrictEqual([
-      { model: 'scan', isDisplayed: 'all' },
-      {
-        model: 'information',
-        isDisplayed: 'ocr'
-      }
-    ])
+    const stepsFilterd = await filterSteps(steps, { call: jest.fn() })
+    act(() => {
+      expect(stepsFilterd).toStrictEqual([
+        { model: 'scan', isDisplayed: 'all' },
+        {
+          model: 'information',
+          isDisplayed: 'ocr'
+        }
+      ])
+    })
   })
 
-  it('should return step with "isDisplayed" as "undefined" or "all" when OCR is desactivated', () => {
+  it('should return step with "isDisplayed" as "undefined" or "all" when OCR is desactivated', async () => {
     isOCRActivated.mockReturnValue(false)
-    expect(filterSteps(steps)).toStrictEqual([
+    const stepsFilterd = await filterSteps(steps)
+    expect(stepsFilterd).toStrictEqual([
       { model: 'scan', isDisplayed: 'all' },
       { model: 'information', isDisplayed: 'randomValue' },
       { model: 'contact' }

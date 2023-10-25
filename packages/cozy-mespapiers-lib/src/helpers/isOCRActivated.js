@@ -1,13 +1,21 @@
 import { isFlagshipApp } from 'cozy-device-helper'
 import flag from 'cozy-flags'
 
-import { isSomePaperStepsCompliantWithOCR } from './isSomePaperStepsCompliantWithOCR'
+/**
+ * Check if the OCR is activated
+ * @param {Object} [webviewIntent] - The webview intent service to interact with the native environment.
+ * @param {function} webviewIntent.call - A function to call flagshipApp methods, expecting the method name and its arguments.
+ * @returns {Promise<boolean>} true if the OCR feature is available
+ */
+export const isOCRActivated = async webviewIntent => {
+  const isFlagshipAppOcrAvailable = await webviewIntent?.call(
+    'isAvailable',
+    'ocr'
+  )
 
-export const isOCRActivated = steps => {
-  // TODO : Check whether the Flagship application has OCR capability
   if (
     isFlagshipApp() &&
-    isSomePaperStepsCompliantWithOCR(steps) &&
+    isFlagshipAppOcrAvailable &&
     flag('mespapiers.ocr.enabled')
   ) {
     return true
