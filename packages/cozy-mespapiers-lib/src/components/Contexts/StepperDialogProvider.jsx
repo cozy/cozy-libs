@@ -1,5 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react'
 
+import { useWebviewIntent } from 'cozy-intent'
+
 import { filterSteps } from '../../helpers/filterSteps'
 
 const StepperDialogContext = createContext()
@@ -9,6 +11,7 @@ const StepperDialogProvider = ({ children }) => {
   const [allCurrentSteps, setAllCurrentSteps] = useState([])
   const [currentStepIndex, setCurrentStepIndex] = useState(0)
   const [currentDefinition, setCurrentDefinition] = useState(null)
+  const webviewIntent = useWebviewIntent()
 
   const resetStepperDialog = () => {
     setCurrentDefinition(null)
@@ -19,14 +22,20 @@ const StepperDialogProvider = ({ children }) => {
 
   useEffect(() => {
     if (currentDefinition) {
-      setStepperDialogTitle(currentDefinition.label)
-      const allCurrentStepsDefinitions = currentDefinition.acquisitionSteps
-      if (allCurrentStepsDefinitions.length > 0) {
-        const filteredSteps = filterSteps(allCurrentStepsDefinitions)
-        setAllCurrentSteps(filteredSteps)
+      const buildAllCurrentSteps = async () => {
+        setStepperDialogTitle(currentDefinition.label)
+        const allCurrentStepsDefinitions = currentDefinition.acquisitionSteps
+        if (allCurrentStepsDefinitions.length > 0) {
+          const filteredSteps = await filterSteps(
+            allCurrentStepsDefinitions,
+            webviewIntent
+          )
+          setAllCurrentSteps(filteredSteps)
+        }
       }
+      buildAllCurrentSteps()
     }
-  }, [currentDefinition])
+  }, [webviewIntent, currentDefinition])
 
   const previousStep = () => {
     if (currentStepIndex > 0) {
