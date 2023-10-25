@@ -28,7 +28,7 @@ export const useRotatedImage = (imageSrc, rotation) => {
       }
     }
 
-    if (typeof rotation === 'number') {
+    if (typeof rotation === 'number' && rotation % 360 !== 0) {
       rotateImage()
     }
   }, [imageSrc, rotation])
