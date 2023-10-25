@@ -1,6 +1,6 @@
-import { isOCRCompliant } from './isOCRCompliant'
+import { isSomePaperStepsCompliantWithOCR } from './isSomePaperStepsCompliantWithOCR'
 
-describe('isOCRCompliant', () => {
+describe('isSomePaperStepsCompliantWithOCR', () => {
   it('should return "true" if the "isDisplayed" as "all" or "ocr" value in some step', () => {
     const steps = [
       {
@@ -15,7 +15,7 @@ describe('isOCRCompliant', () => {
       },
       { model: 'contact', text: 'PaperJSON.generic.owner.text' }
     ]
-    expect(isOCRCompliant(steps)).toBe(true)
+    expect(isSomePaperStepsCompliantWithOCR(steps)).toBe(true)
   })
   it('should return "false" if the "isDisplayed" attribute does not exist in any step', () => {
     const steps = [
@@ -26,6 +26,6 @@ describe('isOCRCompliant', () => {
       },
       { model: 'contact', text: 'PaperJSON.generic.owner.text' }
     ]
-    expect(isOCRCompliant(steps)).toBe(false)
+    expect(isSomePaperStepsCompliantWithOCR(steps)).toBe(false)
   })
 })
