@@ -8,6 +8,7 @@ import FilePicker from 'cozy-ui/transpiled/react/FilePicker'
 
 import ScanDialog from './ScanDialog'
 import { PaperDefinitionsStepPropTypes } from '../../../constants/PaperDefinitionsPropTypes'
+import { FLAGSHIP_SCAN_TEMP_FILENAME } from '../../../constants/const'
 import { makeFileFromBlob } from '../../../helpers/makeFileFromBlob'
 import { useFormData } from '../../Hooks/useFormData'
 import { useStepperDialog } from '../../Hooks/useStepperDialog'
@@ -85,7 +86,7 @@ const ScanWrapper = ({ currentStep, onClose, onBack }) => {
       // TODO : Launch ocr after scanning the document
       const file = makeFileFromBase64({
         source: base64,
-        name: 'flagshipScanTemp.png',
+        name: FLAGSHIP_SCAN_TEMP_FILENAME,
         type: 'image/png'
       })
       onChangeFile(file)
