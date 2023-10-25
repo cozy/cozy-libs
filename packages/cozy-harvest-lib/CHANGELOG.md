@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [20.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@19.1.1...cozy-harvest-lib@20.0.0) (2023-10-25)
+
+
+### Features
+
+* **cozy-harvest-lib:** Exclude konnectors in maintenance from paywalls ([f0f0fcd](https://github.com/cozy/cozy-libs/commit/f0f0fcd90b61c23098dfc9325ea4b49dc7545c03))
+* **cozy-harvest-lib:** Improve loading experience during paywall check ([d475597](https://github.com/cozy/cozy-libs/commit/d475597e600344a9301ff657c616439d3ff2b5d2))
+* **cozy-harvest-lib:** Update cozy-client from 41.8.1 to 41.9.0 ([73609d8](https://github.com/cozy/cozy-libs/commit/73609d867a98d0f7dc29b3caf45d0a95f37c9e7e))
+
+
+### BREAKING CHANGES
+
+* **cozy-harvest-lib:** You need cozy-client >= 41.9.0
+
+
+
+
+
 ## [19.1.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@19.1.0...cozy-harvest-lib@19.1.1) (2023-10-23)
 
 **Note:** Version bump only for package cozy-harvest-lib
