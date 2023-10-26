@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 
 import { useClient } from 'cozy-client'
+import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
 import Alert from 'cozy-ui/transpiled/react/Alert'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -17,7 +18,7 @@ import { RunningAlert } from './RunningAlert'
 import { makeLabel } from './helpers'
 import { isDisconnected } from '../../helpers/konnectors'
 import { intentsApiProptype } from '../../helpers/proptypes'
-import { getAccountId, getKonnectorSlug } from '../../helpers/triggers'
+import { getKonnectorSlug } from '../../helpers/triggers'
 import { findKonnectorPolicy } from '../../konnector-policies'
 import { SUCCESS } from '../../models/flowEvents'
 import { useFlowState } from '../../models/withConnectionFlow'
@@ -79,7 +80,9 @@ export const LaunchTriggerAlert = ({
     ? () =>
         historyAction(
           konnectorRoot
-            ? `${konnectorRoot}/accounts/${getAccountId(trigger)}/edit`
+            ? `${konnectorRoot}/accounts/${triggersModel.getAccountId(
+                trigger
+              )}/edit`
             : '/edit',
           'push'
         )

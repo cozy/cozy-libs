@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
 import { withClient } from 'cozy-client'
+import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
 import flag from 'cozy-flags'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
@@ -14,7 +15,6 @@ import { withTracker } from './hoc/tracking'
 import useTimeout from './hooks/useTimeout'
 import { fetchAccount } from '../connections/accounts'
 import { intentsApiProptype } from '../helpers/proptypes'
-import * as triggersModel from '../helpers/triggers'
 import logger from '../logger'
 
 const showStyle = { opacity: 1, transition: 'opacity 0.3s ease' }

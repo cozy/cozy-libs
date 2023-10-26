@@ -4,45 +4,6 @@ import get from 'lodash/get'
 import { toFrequency } from './cron'
 import { KonnectorJobError } from './konnectors'
 
-const DEFAULT_CRON = '0 0 0 * * 0' // Once a week, sunday at midnight
-
-/**
- * Build trigger attributes given konnector and account
- * @param  {object} konnector
- * @param  {object} account
- * @return {object} created trigger
- */
-export const buildAttributes = ({
-  account,
-  cron = DEFAULT_CRON,
-  folder,
-  konnector
-}) => {
-  const message = {
-    account: account._id,
-    konnector: konnector.slug
-  }
-
-  if (folder) {
-    message['folder_to_save'] = folder._id
-  }
-
-  const result = {
-    worker: 'konnector',
-    message
-  }
-
-  const options = konnector.clientSide
-    ? { type: '@client' }
-    : { type: '@cron', arguments: cron }
-
-  return { ...result, ...options }
-}
-
-export const getAccountId = trigger => {
-  return get(trigger, 'message.account')
-}
-
 /**
  * Get error for a given trigger document
  * @param  {Object} trigger io.cozy.trigger as returned by stack
@@ -88,9 +49,7 @@ export const getFrequency = trigger => {
 }
 
 const helpers = {
-  buildAttributes,
   isKonnectorRunning,
-  getAccountId,
   getKonnectorJobError,
   getFrequency,
   getKonnectorSlug,

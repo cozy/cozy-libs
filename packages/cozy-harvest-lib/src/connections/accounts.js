@@ -2,9 +2,9 @@ import keyBy from 'lodash/keyBy'
 import merge from 'lodash/merge'
 
 import { Q } from 'cozy-client'
+import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
 
 import assert from '../assert'
-import * as triggersModel from '../helpers/triggers'
 import logger from '../logger'
 
 export const ACCOUNTS_DOCTYPE = 'io.cozy.accounts'

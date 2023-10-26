@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { useRef, useState } from 'react'
 
 import { useClient } from 'cozy-client'
+import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
@@ -13,7 +14,6 @@ import ActionMenu, {
 
 import { isDisconnected } from '../../helpers/konnectors'
 import { intentsApiProptype } from '../../helpers/proptypes'
-import { getAccountId } from '../../helpers/triggers'
 import { findKonnectorPolicy } from '../../konnector-policies'
 import { useFlowState } from '../../models/withConnectionFlow'
 import OpenOAuthWindowButton from '../AccountModalWithoutTabs/OpenOAuthWindowButton'
@@ -46,7 +46,9 @@ const LaunchTriggerAlertMenu = ({
     ? () =>
         historyAction(
           konnectorRoot
-            ? `${konnectorRoot}/accounts/${getAccountId(trigger)}/edit`
+            ? `${konnectorRoot}/accounts/${triggersModel.getAccountId(
+                trigger
+              )}/edit`
             : '/edit',
           'push'
         )
@@ -97,7 +99,7 @@ const LaunchTriggerAlertMenu = ({
               onClick={() =>
                 historyAction(
                   konnectorRoot
-                    ? `${konnectorRoot}/accounts/${getAccountId(
+                    ? `${konnectorRoot}/accounts/${triggersModel.getAccountId(
                         trigger
                       )}/config`
                     : '/config',
