@@ -2,6 +2,8 @@ import clone from 'lodash/clone'
 import get from 'lodash/get'
 import merge from 'lodash/merge'
 
+import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
+
 import manifest from './manifest'
 import assert from '../assert'
 import {
@@ -13,7 +15,6 @@ import {
   buildCountTriggersQuery,
   buildAppsRegistryMaintenance
 } from '../helpers/queries'
-import * as triggersModel from '../helpers/triggers'
 
 const DEFAULT_TWOFA_CODE_PROVIDER_TYPE = 'default'
 

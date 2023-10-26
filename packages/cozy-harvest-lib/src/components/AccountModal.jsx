@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
 import { models, withClient } from 'cozy-client'
+import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
 import flag from 'cozy-flags'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
@@ -23,7 +24,6 @@ import {
   intentsApiProptype,
   innerAccountModalOverridesProptype
 } from '../helpers/proptypes'
-import * as triggersModel from '../helpers/triggers'
 
 /**
  * Takes an accountId and a list of accounts containing their respecting triggers

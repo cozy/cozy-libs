@@ -1,3 +1,4 @@
+import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
 import { CozyFolder as CozyFolderClass } from 'cozy-doctypes'
 
 import { fetchAccount, updateAccount } from './accounts'
@@ -5,7 +6,6 @@ import { statDirectoryByPath, createDirectoryByPath } from './files'
 import * as accounts from '../helpers/accounts'
 import cron from '../helpers/cron'
 import * as konnectors from '../helpers/konnectors'
-import * as triggers from '../helpers/triggers'
 
 const FILES_DOCTYPE = 'io.cozy.files'
 const PERMISSIONS_DOCTYPE = 'io.cozy.permissions'
@@ -45,7 +45,7 @@ export const launchTrigger = async (client, trigger) => {
 }
 
 export const prepareTriggerAccount = async (client, trigger) => {
-  const accountId = triggers.getAccountId(trigger)
+  const accountId = triggersModel.getAccountId(trigger)
   if (!accountId) {
     throw new Error('No account id in the trigger')
   }
@@ -115,7 +115,7 @@ export const ensureTrigger = async (
 
   return await createTrigger(
     client,
-    triggers.buildAttributes({
+    triggersModel.buildTriggerAttributes({
       account,
       cron: cron.fromKonnector(konnector),
       folder,

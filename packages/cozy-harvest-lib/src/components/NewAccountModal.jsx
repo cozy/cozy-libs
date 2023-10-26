@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import React, { useContext } from 'react'
 
 import { useClient } from 'cozy-client'
+import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
 import flag from 'cozy-flags'
 import { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
@@ -18,7 +19,6 @@ import { MountPointContext } from './MountPointContext'
 import LegacyTriggerManager from './TriggerManager'
 import { InformationsCard } from './cards/InformationsCard'
 import useMaintenanceStatus from './hooks/useMaintenanceStatus'
-import * as triggersModel from '../helpers/triggers'
 
 /**
  * We need to deal with `onLoginSuccess` and `onSucess` because we
