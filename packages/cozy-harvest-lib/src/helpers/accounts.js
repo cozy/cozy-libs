@@ -275,7 +275,26 @@ export const checkMaxAccounts = async (slug, client) => {
     trigger => !slugInMaintenance.includes(trigger.message.konnector)
   )
 
-  if (hasReachMaxAccounts(activeTrigger.length)) {
+  const accountCountByKonnector = activeTrigger.reduce(
+    (konnectors, current) => {
+      const slug = current.message.konnector
+      const existingKonnector = konnectors.find(
+        konnector => konnector.slug === slug
+      )
+      if (existingKonnector) {
+        existingKonnector.count += 1
+      } else {
+        konnectors.push({
+          slug,
+          count: 1
+        })
+      }
+      return konnectors
+    },
+    []
+  )
+
+  if (hasReachMaxAccounts(accountCountByKonnector)) {
     return 'max_accounts'
   }
 
