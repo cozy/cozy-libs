@@ -468,5 +468,9 @@
     "title": "Your papers could not be displayed correctly",
     "text": "Try reloading the page! If the problem persists, please contact support.",
     "action": "Reload"
+  },
+  "OcrProcessingDialog": {
+    "title": "Paper analysis in progress",
+    "text": "Please wait…"
   }
 }

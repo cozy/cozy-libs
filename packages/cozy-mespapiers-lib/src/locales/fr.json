@@ -468,5 +468,9 @@
     "title": "Vos papiers n’ont pas pu être affichés correctement",
     "text": "Essayez de recharger la page ! Si le problème persiste n'hésitez pas à contacter le support.",
     "action": "Recharger"
+  },
+  "OcrProcessingDialog": {
+    "title": "Analyse du papier en cours",
+    "text": "Merci de patienter…"
   }
 }
