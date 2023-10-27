@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.1.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.1.0...cozy-harvest-lib@20.1.1) (2023-10-27)
+
+
+### Bug Fixes
+
+* **harvest:** Set FlagshipUI on connectionBackdrop ([b7aa9e6](https://github.com/cozy/cozy-libs/commit/b7aa9e69b77dbdd8a1f43f0a3800a08eadd2dd66))
+
+
+
+
+
 # [20.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.0.0...cozy-harvest-lib@20.1.0) (2023-10-26)
 
 
