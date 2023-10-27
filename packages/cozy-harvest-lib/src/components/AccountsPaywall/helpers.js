@@ -96,7 +96,7 @@ export function computeNbAccounts(accounts, offers = []) {
  * @returns {boolean} whether the number of accounts allowed for all konnectors has been reached
  */
 export function hasReachMaxAccounts(accounts) {
-  const offers = flag('harvest.accounts.offers') || []
+  const offers = flag('harvest.accounts.offers.list') || []
 
   const nbAccounts = computeNbAccounts(accounts, offers)
 
