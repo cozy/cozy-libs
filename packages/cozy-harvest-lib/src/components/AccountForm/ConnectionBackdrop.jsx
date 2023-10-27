@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { createPortal } from 'react-dom'
 
+import { useWebviewIntent } from 'cozy-intent'
 import Backdrop from 'cozy-ui/transpiled/react/Backdrop'
 import LinearProgress from 'cozy-ui/transpiled/react/LinearProgress'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
@@ -55,4 +57,40 @@ const ConnectionBackdrop = ({ name }) => {
   )
 }
 
-export default ConnectionBackdrop
+const ConnectionBackdropWrapper = ({ name }) => {
+  const webviewIntent = useWebviewIntent()
+
+  useEffect(() => {
+    if (webviewIntent) {
+      // On mounting, we want to ensure the UI displays white icone because the backdrop is dark
+      // The WorkerView is then responsible to change back the icons to dark on white theme
+      webviewIntent.call(
+        'setFlagshipUI',
+        {
+          bottomTheme: 'light',
+          topTheme: 'light'
+        },
+        'ConnectionBackdrop Start'
+      )
+    }
+
+    // As a precaution, we set the icons back to dark on white theme when unmounting
+    // This is to ensure the icons are not stuck in white on white theme in unhappy paths
+    return () => {
+      if (webviewIntent) {
+        webviewIntent.call(
+          'setFlagshipUI',
+          {
+            bottomTheme: 'dark',
+            topTheme: 'dark'
+          },
+          'ConnectionBackdrop End'
+        )
+      }
+    }
+  }, [webviewIntent])
+
+  return createPortal(<ConnectionBackdrop name={name} />, document.body)
+}
+
+export default ConnectionBackdropWrapper
