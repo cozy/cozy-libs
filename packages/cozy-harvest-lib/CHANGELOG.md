@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.1.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.1.1...cozy-harvest-lib@20.1.2) (2023-10-27)
+
+
+### Bug Fixes
+
+* Wrap offers into json flag instead an array ([560c1bf](https://github.com/cozy/cozy-libs/commit/560c1bf0d905736182784db51eba93406077a466))
+
+
+
+
+
 ## [20.1.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.1.0...cozy-harvest-lib@20.1.1) (2023-10-27)
 
 
