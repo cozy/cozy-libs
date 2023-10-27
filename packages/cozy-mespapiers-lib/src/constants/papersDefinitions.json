@@ -1,6 +1,52 @@
 {
   "papersDefinitions": [
     {
+      "label": "diploma",
+      "icon": "people",
+      "featureDate": "referencedDate",
+      "filenameModel": ["labelGivenByUser"],
+      "maxDisplay": 3,
+      "acquisitionSteps": [
+        {
+          "model": "scan",
+          "multipage": false,
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.generic.singlePage.text"
+        },
+        {
+          "model": "information",
+          "text": "PaperJSON.generic.fileLabel.text",
+          "attributes": [
+            {
+              "name": "labelGivenByUser",
+              "type": "text",
+              "required": true,
+              "maxLength": 255,
+              "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
+            }
+          ]
+        },
+        {
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.date.text",
+          "attributes": [
+            {
+              "name": "referencedDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.date.inputLabel"
+            }
+          ]
+        },
+        {
+          "illustration": "Account.svg",
+          "model": "contact",
+          "multiple": false,
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
+    },
+    {
       "label": "accommodation_proof",
       "icon": "home",
       "featureDate": "issueDate",
@@ -1895,7 +1941,7 @@
               "name": "labelGivenByUser",
               "type": "text",
               "required": true,
-              "maxLength": 40,
+              "maxLength": 255,
               "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
             }
           ]
