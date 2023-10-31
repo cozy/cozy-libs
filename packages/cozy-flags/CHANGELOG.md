@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 3.1.0 (2023-10-31)
+
+
+### Features
+
+* **cozy-flags:** Output types in dist ([cd5e2b0](https://github.com/cozy/cozy-libs/commit/cd5e2b0d5f49259477667e2d5cf6580efb8ec7db))
+
+
+
+
+
 ## [3.0.1](https://github.com/cozy/cozy-libs/compare/cozy-flags@3.0.0...cozy-flags@3.0.1) (2023-04-13)
 
 
