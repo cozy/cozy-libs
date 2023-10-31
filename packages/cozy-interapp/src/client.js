@@ -98,6 +98,16 @@ export function start(createIntent, intent, element, data, options = {}) {
         } finally {
           dom.show(iframe)
         }
+      },
+      onHideCross: () => {
+        if (options.onHideCross) {
+          options.onHideCross()
+        }
+      },
+      onShowCross: () => {
+        if (options.onShowCross) {
+          options.onShowCross()
+        }
       }
     })
 

@@ -1,7 +1,7 @@
 import * as client from './client'
-import * as service from './service'
-import Request from './request'
 import { pickService, buildRedirectionURL, removeQueryString } from './helpers'
+import Request from './request'
+import * as service from './service'
 
 class Intents {
   constructor({ client } = {}) {
@@ -17,10 +17,17 @@ class Intents {
 
     const createPromise = this.request.post(action, type, data, permissions)
 
-    createPromise.start = (element, onReadyCallback) => {
+    createPromise.start = (
+      element,
+      onReadyCallback,
+      onHideCross,
+      onShowCross
+    ) => {
       const options = {
         filteredServices: data.filteredServices,
-        onReadyCallback: onReadyCallback
+        onReadyCallback: onReadyCallback,
+        onHideCross: onHideCross,
+        onShowCross: onShowCross
       }
 
       delete data.filteredServices

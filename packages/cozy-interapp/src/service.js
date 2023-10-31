@@ -92,6 +92,18 @@ export const start = request => (intentIdArg, serviceWindowArg) => {
       })
     }
 
+    const hideCross = () => {
+      sendMessage({
+        type: `intent-${intent._id}:hideCross`
+      })
+    }
+
+    const showCross = () => {
+      sendMessage({
+        type: `intent-${intent._id}:showCross`
+      })
+    }
+
     const cancel = () => {
       terminate({ type: `intent-${intent._id}:cancel` })
     }
@@ -123,7 +135,9 @@ export const start = request => (intentIdArg, serviceWindowArg) => {
             error: errorSerializer.serialize(error)
           }),
         resizeClient: resizeClient,
-        cancel: cancel
+        cancel: cancel,
+        hideCross: hideCross,
+        showCross: showCross
       }
     })
   })
