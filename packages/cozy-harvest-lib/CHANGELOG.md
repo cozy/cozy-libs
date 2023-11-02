@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.1.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.1.4...cozy-harvest-lib@20.1.5) (2023-11-02)
+
+
+### Bug Fixes
+
+* Improve paywall accounts offers ([fee024a](https://github.com/cozy/cozy-libs/commit/fee024a22a9b1340a82a578d7044bd83953d74c9))
+
+
+
+
+
 ## [20.1.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.1.3...cozy-harvest-lib@20.1.4) (2023-11-02)
 
 **Note:** Version bump only for package cozy-harvest-lib
