@@ -6,7 +6,8 @@ import manifest from './manifest'
 import assert from '../assert'
 import {
   hasReachMaxAccountsByKonnector,
-  hasReachMaxAccounts
+  hasReachMaxAccounts,
+  computeRemainingOfferCreditsByKonnector
 } from '../components/AccountsPaywall/helpers'
 import { fetchAccount } from '../connections/accounts'
 import {
@@ -275,36 +276,22 @@ export const checkMaxAccounts = async (slug, client) => {
     trigger => !slugInMaintenance.includes(trigger.message.konnector)
   )
 
-  const accountCountByKonnector = activeTrigger.reduce(
-    (konnectors, current) => {
-      const slug = current.message.konnector
-      const existingKonnector = konnectors.find(
-        konnector => konnector.slug === slug
-      )
-      if (existingKonnector) {
-        existingKonnector.count += 1
-      } else {
-        konnectors.push({
-          slug,
-          count: 1
-        })
-      }
-      return konnectors
-    },
-    []
+  const currentKonnectorTriggers = triggers.filter(
+    trigger => trigger.message?.konnector === slug
   )
 
-  if (hasReachMaxAccounts(accountCountByKonnector)) {
+  // User can have still add accounts for a konnector if he has an offer
+  if (
+    hasReachMaxAccounts(activeTrigger.length) &&
+    computeRemainingOfferCreditsByKonnector(slug, currentKonnectorTriggers) ===
+      0
+  ) {
     return 'max_accounts'
   }
 
   if (slugInMaintenance.includes(slug)) {
     return null
   }
-
-  const currentKonnectorTriggers = triggers.filter(
-    trigger => trigger.message?.konnector === slug
-  )
 
   if (hasReachMaxAccountsByKonnector(slug, currentKonnectorTriggers.length)) {
     return 'max_accounts_by_konnector'
