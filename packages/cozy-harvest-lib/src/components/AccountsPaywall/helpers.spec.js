@@ -7,7 +7,8 @@ import {
   hasReachMaxAccountsByKonnector,
   computeMaxAccounts,
   hasReachMaxAccounts,
-  computeNbAccounts
+  computeGeneralOfferCredits,
+  computeRemainingOfferCreditsByKonnector
 } from './helpers'
 
 jest.mock('cozy-flags')
@@ -17,9 +18,10 @@ jest.mock('cozy-flags')
  * @param {number} [params.defaultValue] value return by default in maxByKonnector flag
  * @param {number} [params.idValue] value return for a specific konnector in maxByKonnector flag
  * @param {number} [params.maxValue] value return max flag
- * @returns { (flag:string) => number|null } return a function which take a flag name and returns its link number or null
+ * @param {import('./helpers').KonnectorOffer[]} [params.offers] value return for offers flag
+ * @returns { (flag:string) => number|import('./helpers').KonnectorOffer[]|null } return a function which take a flag name and returns its link number or null
  */
-function getCurrentFlag({ defaultValue, idValue, maxValue } = {}) {
+function getCurrentFlag({ defaultValue, idValue, maxValue, offers } = {}) {
   return flag => {
     if (defaultValue && flag === 'harvest.accounts.maxByKonnector.default') {
       return defaultValue
@@ -32,11 +34,19 @@ function getCurrentFlag({ defaultValue, idValue, maxValue } = {}) {
     if (maxValue && flag === 'harvest.accounts.max') {
       return maxValue
     }
+
+    if (offers && flag === 'harvest.accounts.offers.list') {
+      return offers
+    }
     return null
   }
 }
 
 describe('AccountsPaywall helpers', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
   describe('computeMaxAccountsByKonnector', () => {
     it('should return nothing or infinity when there no flag set', () => {
       flag.mockImplementation(() => null)
@@ -100,186 +110,120 @@ describe('AccountsPaywall helpers', () => {
 
   describe('hasReachMaxAccounts', () => {
     it('should be true when current account number is equal or upper maximum', () => {
-      const accounts = [
-        { slug: 'konnector1', count: 3 },
-        { slug: 'konnector2', count: 2 },
-        { slug: 'konnector3', count: 1 }
-      ]
       flag.mockImplementation(getCurrentFlag({ maxValue: 5 }))
-      expect(hasReachMaxAccounts(accounts)).toBe(true)
+      expect(hasReachMaxAccounts(5)).toBe(true)
     })
 
     it('should be false when current account number is below maximum', () => {
-      const accounts = [
-        { slug: 'konnector1', count: 1 },
-        { slug: 'konnector2', count: 2 },
-        { slug: 'konnector3', count: 1 }
-      ]
       flag.mockImplementation(getCurrentFlag({ maxValue: 5 }))
-      expect(hasReachMaxAccounts(accounts)).toBe(false)
+      expect(hasReachMaxAccounts(4)).toBe(false)
     })
 
     it('should be false when there is no maximum', () => {
-      const accounts = [
-        { slug: 'konnector1', count: 3 },
-        { slug: 'konnector2', count: 2 },
-        { slug: 'konnector3', count: 1 }
-      ]
       flag.mockImplementation(getCurrentFlag({ maxValue: -1 }))
-      expect(hasReachMaxAccounts(accounts)).toBe(false)
+      expect(hasReachMaxAccounts(6)).toBe(false)
+    })
+
+    it('should be false when the general offer is greater than the maximum', () => {
+      jest
+        .spyOn(global.Date, 'now')
+        .mockImplementationOnce(() => new Date('2023-10-12').valueOf())
+      flag.mockImplementation(
+        getCurrentFlag({
+          maxValue: 4,
+          offers: [{ slug: '*', credit: 3, startsAt: '2023-10-01' }]
+        })
+      )
+      expect(hasReachMaxAccounts(4)).toBe(false)
     })
   })
 
-  describe('computeNbAccounts', () => {
-    it('should return 0 when given an empty array of accounts', () => {
-      /**
-       * @type {import("./helpers").AccountCountByKonnector[]}
-       */
-      const accounts = []
-      /**
-       * @type {import("./helpers").KonnectorOffer[]}
-       */
-      const offers = []
-      const result = computeNbAccounts(accounts, offers)
+  describe('computeRemainingOfferCreditsByKonnector', () => {
+    it('should return 0 if there are no offers', () => {
+      flag.mockReturnValue(null)
+      const result = computeRemainingOfferCreditsByKonnector('test', [])
       expect(result).toBe(0)
     })
 
-    it('should return the sum of all account counts when no offers are available', () => {
-      const accounts = [
-        { slug: 'konnector1', count: 3 },
-        { slug: 'konnector2', count: 2 },
-        { slug: 'konnector3', count: 1 }
-      ]
-      /**
-       * @type {import("./helpers").KonnectorOffer[]}
-       */
-      const offers = []
-      const result = computeNbAccounts(accounts, offers)
-      expect(result).toBe(6)
+    it('should return 0 if the offer has expired', () => {
+      flag.mockReturnValue([
+        {
+          slug: 'test',
+          credit: 1,
+          endsAt: '2020-01-01T00:00:00Z',
+          startsAt: '2020-01-01T00:00:00Z'
+        }
+      ])
+      const result = computeRemainingOfferCreditsByKonnector('test', [])
+      expect(result).toBe(0)
     })
 
-    it('should subtract the offer count from the account count when an offer is available', () => {
+    it('should return 1 if the account was created before the offer started', () => {
+      flag.mockReturnValue([
+        { slug: 'test', credit: 1, startsAt: '2022-01-01T00:00:00Z' }
+      ])
       const accounts = [
-        { slug: 'konnector1', count: 3 },
-        { slug: 'konnector2', count: 2 },
-        { slug: 'konnector3', count: 1 }
+        { _id: 'a123', cozyMetadata: { createdAt: '2021-01-01T00:00:00Z' } }
       ]
-      const offers = [
-        { slug: 'konnector1', offer: 1 },
-        { slug: 'konnector2', offer: 2 }
-      ]
-      const result = computeNbAccounts(accounts, offers)
-      expect(result).toBe(3)
-    })
-
-    it('should not subtract more than the account count when an offer is available', () => {
-      const accounts = [
-        { slug: 'konnector1', count: 3 },
-        { slug: 'konnector2', count: 2 },
-        { slug: 'konnector3', count: 1 }
-      ]
-      const offers = [
-        { slug: 'konnector1', offer: 5 },
-        { slug: 'konnector2', offer: 3 }
-      ]
-      const result = computeNbAccounts(accounts, offers)
+      const result = computeRemainingOfferCreditsByKonnector('test', accounts)
       expect(result).toBe(1)
     })
 
-    it('should ignore offers that do not have a matching konnector', () => {
+    it('should return 0 if there is an available offer but there is already created an account', () => {
+      flag.mockReturnValue([
+        { slug: 'test', credit: 1, startsAt: '2022-01-01T00:00:00Z' }
+      ])
       const accounts = [
-        { slug: 'konnector1', count: 3 },
-        { slug: 'konnector2', count: 2 },
-        { slug: 'konnector3', count: 1 }
+        { _id: 'a123', cozyMetadata: { createdAt: '2022-01-02T00:00:00Z' } }
       ]
-      const offers = [
-        { slug: 'konnector4', offer: 1 },
-        { slug: 'konnector5', offer: 2 }
-      ]
-      const result = computeNbAccounts(accounts, offers)
-      expect(result).toBe(6)
+      const result = computeRemainingOfferCreditsByKonnector('test', accounts)
+      expect(result).toBe(0)
     })
 
-    it('should ignore offers that do not have a matching offer', () => {
+    it('should return 2 if there are credits remaining, even if accounts have already been created', () => {
+      flag.mockReturnValue([
+        { slug: 'test', credit: 1, startsAt: '2022-01-01T00:00:00Z' },
+        { slug: 'test', credit: 2, startsAt: '2022-01-02T00:00:00Z' },
+        { slug: 'test', credit: 1, startsAt: '2022-01-05T00:00:00Z' },
+        { slug: 'test', credit: 2, startsAt: '2021-01-04T00:00:00Z' },
+        { slug: 'test', credit: 1, startsAt: '2022-04-03T00:00:00Z' }
+      ])
       const accounts = [
-        { slug: 'konnector1', count: 3 },
-        { slug: 'konnector2', count: 2 },
-        { slug: 'konnector3', count: 1 }
+        { _id: 'a123', cozyMetadata: { createdAt: '2022-01-02T00:00:00Z' } },
+        { _id: 'b123', cozyMetadata: { createdAt: '2022-01-04T00:00:00Z' } },
+        { _id: 'c123', cozyMetadata: { createdAt: '2022-01-02T00:00:00Z' } },
+        { _id: 'd123', cozyMetadata: { createdAt: '2022-01-06T00:00:00Z' } },
+        { _id: 'e123', cozyMetadata: { createdAt: '2022-01-07T00:00:00Z' } }
       ]
-      const offers = [
-        { slug: 'konnector4', offer: 1 },
-        { slug: 'konnector5', offer: 2 }
-      ]
-      const result = computeNbAccounts(accounts, offers)
-      expect(result).toBe(6)
-    })
-
-    it('should subtract offers whose expiration date is less than now', () => {
-      jest
-        .spyOn(global.Date, 'now')
-        .mockImplementationOnce(() =>
-          new Date('2024-01-01T11:01:58.135Z').valueOf()
-        )
-
-      const accounts = [
-        { slug: 'konnector1', count: 3 },
-        { slug: 'konnector2', count: 2 }
-      ]
-      const offers = [{ slug: 'konnector1', offer: 2, expiresAt: '2023-10-24' }]
-
-      const result = computeNbAccounts(accounts, offers)
-      expect(result).toBe(3)
-    })
-
-    it('should ignore offers whose expiration date has exceeded', () => {
-      jest
-        .spyOn(global.Date, 'now')
-        .mockImplementationOnce(() =>
-          new Date('2023-10-01T11:01:58.135Z').valueOf()
-        )
-
-      const accounts = [
-        { slug: 'konnector1', count: 3 },
-        { slug: 'konnector2', count: 2 }
-      ]
-      const offers = [{ slug: 'konnector1', offer: 2, expiresAt: '2023-10-24' }]
-
-      const result = computeNbAccounts(accounts, offers)
-      expect(result).toBe(5)
-    })
-
-    it('should subtract the joker offer from the total ', () => {
-      const accounts = [
-        { slug: 'konnector1', count: 3 },
-        { slug: 'konnector2', count: 2 }
-      ]
-      const offers = [
-        { slug: 'konnector1', offer: 2 },
-        { slug: '*', offer: 1 }
-      ]
-
-      const result = computeNbAccounts(accounts, offers)
+      const result = computeRemainingOfferCreditsByKonnector('test', accounts)
       expect(result).toBe(2)
     })
+  })
 
-    it('should ignore the joker offer when  expiration date has exceeded', () => {
-      jest
-        .spyOn(global.Date, 'now')
-        .mockImplementationOnce(() =>
-          new Date('2023-10-01T11:01:58.135Z').valueOf()
-        )
+  describe('computeGeneralOfferCredits', () => {
+    it('should return 0 when no offers are available', () => {
+      flag.mockReturnValue([])
+      expect(computeGeneralOfferCredits()).toBe(0)
+    })
 
-      const accounts = [
-        { slug: 'konnector1', count: 3 },
-        { slug: 'konnector2', count: 2 }
-      ]
-      const offers = [
-        { slug: 'konnector1', offer: 2 },
-        { slug: '*', offer: 1, expiresAt: '2023-10-24' }
-      ]
+    it('should return 0 when no general offers are available', () => {
+      flag.mockReturnValue([{ slug: 'konnector1', credit: 1 }])
+      expect(computeGeneralOfferCredits()).toBe(0)
+    })
 
-      const result = computeNbAccounts(accounts, offers)
-      expect(result).toBe(3)
+    it('should return the total credit of all valid general offers', () => {
+      const now = new Date()
+      const past = new Date(now.getTime() - 1000 * 60 * 60).toISOString()
+      const future = new Date(now.getTime() + 1000 * 60 * 60).toISOString()
+
+      flag.mockReturnValue([
+        { slug: '*', startsAt: past, endsAt: future, credit: 1 },
+        { slug: '*', startsAt: past, endsAt: future, credit: 2 },
+        { slug: '*', startsAt: future, endsAt: future, credit: 3 }, // not started yet
+        { slug: '*', startsAt: past, endsAt: past, credit: 4 }, // already ended
+        { slug: '*', startsAt: past, credit: 2 } // never ends
+      ])
+      expect(computeGeneralOfferCredits()).toBe(5)
     })
   })
 })

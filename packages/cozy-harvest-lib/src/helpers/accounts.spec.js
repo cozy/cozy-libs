@@ -193,6 +193,16 @@ describe('Accounts Helper', () => {
             return 2
           case 'harvest.accounts.max':
             return 3
+          case 'harvest.accounts.offers.list':
+            return [
+              { slug: 'konnector3', credit: 1, startsAt: '2023-10-01' },
+              {
+                slug: 'konnector3',
+                credit: 2,
+                startsAt: '2023-10-01',
+                endsAt: '2023-10-05'
+              }
+            ]
           default:
             return null
         }
@@ -276,6 +286,93 @@ describe('Accounts Helper', () => {
       const result = await checkMaxAccounts('konnector2', client)
 
       expect(result).toBeNull()
+    })
+
+    it('should return null if there is a credit offer for the konnector', async () => {
+      const triggers = [
+        { message: { konnector: 'konnector1' } },
+        { message: { konnector: 'konnector1' } },
+        { message: { konnector: 'konnector2' } },
+        { message: { konnector: 'konnector2' } }
+      ]
+      const maintenance = [
+        { slug: 'konnector1', maintenance_activated: false },
+        { slug: 'konnector2', maintenance_activated: false }
+      ]
+      client.fetchQueryAndGetFromState
+        .mockResolvedValueOnce({ data: triggers })
+        .mockResolvedValueOnce({ data: maintenance })
+
+      const result = await checkMaxAccounts('konnector3', client)
+
+      expect(result).toBeNull()
+    })
+
+    it('should return null if there are remaining credit offers for the konnector', async () => {
+      jest
+        .spyOn(global.Date, 'now')
+        .mockImplementationOnce(() => new Date('2023-10-00').valueOf())
+      const triggers = [
+        {
+          message: { konnector: 'konnector1' }
+        },
+        {
+          message: { konnector: 'konnector1' }
+        },
+        { message: { konnector: 'konnector2' } },
+        { message: { konnector: 'konnector2' } },
+        {
+          message: { konnector: 'konnector3' },
+          cozyMetadata: {
+            createdAt: '2023-09-29'
+          }
+        }
+      ]
+      const maintenance = [
+        { slug: 'konnector1', maintenance_activated: false },
+        { slug: 'konnector2', maintenance_activated: false }
+      ]
+      client.fetchQueryAndGetFromState
+        .mockResolvedValueOnce({ data: triggers })
+        .mockResolvedValueOnce({ data: maintenance })
+
+      const result = await checkMaxAccounts('konnector3', client)
+
+      expect(result).toBeNull()
+    })
+
+    it('should return max_accounts if there are no remaining credit offers for the konnector', async () => {
+      jest
+        .spyOn(global.Date, 'now')
+        .mockImplementationOnce(() => new Date('2023-10-12').valueOf())
+      const triggers = [
+        {
+          message: { konnector: 'konnector1' }
+        },
+        {
+          message: { konnector: 'konnector1' }
+        },
+        { message: { konnector: 'konnector2' } },
+        { message: { konnector: 'konnector2' } },
+        {
+          _id: 'trigger3',
+          message: { konnector: 'konnector3' },
+          cozyMetadata: {
+            createdAt: '2023-10-10'
+          }
+        }
+      ]
+      const maintenance = [
+        { slug: 'konnector1', maintenance_activated: false },
+        { slug: 'konnector2', maintenance_activated: false }
+      ]
+      client.fetchQueryAndGetFromState
+        .mockResolvedValueOnce({ data: triggers })
+        .mockResolvedValueOnce({ data: maintenance })
+
+      const result = await checkMaxAccounts('konnector3', client)
+
+      expect(result).toBe('max_accounts')
     })
   })
 })

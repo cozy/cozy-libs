@@ -45,65 +45,95 @@ export function computeMaxAccounts() {
 }
 
 /**
- * @typedef {Object} AccountCountByKonnector
- * @property {string} slug - Slug of the konnector
- * @property {number} count - Number of accounts for the konnector
- */
-
-/**
  * @typedef {Object} KonnectorOffer
  * @property {string} slug - Slug of the konnector
- * @property {number} offer - Number of accounts offered for the konnector
- * @property {string} [expiresAt] - Date of expiration of the offer
+ * @property {number} credit - Number of account credits for the konnector
+ * @property {string} startsAt - Offer start date
+ * @property {string} [endsAt] - Offer end date
  */
 
 /**
- *
- * @param {AccountCountByKonnector[]} accounts the accounts to check
- * @param {KonnectorOffer[]} offers the offers to check
- * @returns {number} the number of accounts for all konnectors
+ * Compute the number of account credits for all konnectors
+ * @returns {number} - Number of account credits for all konnectors
  */
-export function computeNbAccounts(accounts, offers = []) {
-  const nbAccounts = accounts.reduce((acc, current) => {
-    const offer = offers.find(offer => offer.slug === current.slug)
+export function computeGeneralOfferCredits() {
+  /** @type {KonnectorOffer[]} */
+  const offers = flag('harvest.accounts.offers.list') || []
+  const generalOffers = offers.filter(offer => offer.slug === '*')
 
-    if (
-      offer &&
-      (offer.expiresAt === undefined ||
-        new Date(offer.expiresAt) < new Date(Date.now()))
-    ) {
-      const count = current.count - offer.offer
-      return acc + Math.max(count, 0)
+  return generalOffers.reduce((total, offer) => {
+    const now = new Date()
+    const startsAt = new Date(offer.startsAt)
+    const endsAt = offer.endsAt ? new Date(offer.endsAt) : new Date()
+    if (now >= startsAt && now <= endsAt) {
+      return total + offer.credit
     }
-    return acc + current.count
-  }, 0)
 
-  const generalOffer = offers.find(offer => offer.slug === '*')
-  if (
-    generalOffer &&
-    (generalOffer.expiresAt === undefined ||
-      new Date(generalOffer.expiresAt) < new Date(Date.now()))
-  ) {
-    return nbAccounts - generalOffer.offer
-  } else {
-    return nbAccounts
-  }
+    return total
+  }, 0)
 }
 
 /**
  *
- * @param {AccountCountByKonnector[]} accounts list of konnector accounts to check
+ * @param {number} nbAccounts the current number of account for all konnectors
  * @returns {boolean} whether the number of accounts allowed for all konnectors has been reached
  */
-export function hasReachMaxAccounts(accounts) {
-  const offers = flag('harvest.accounts.offers.list') || []
-
-  const nbAccounts = computeNbAccounts(accounts, offers)
-
+export function hasReachMaxAccounts(nbAccounts) {
+  const generalOffer = computeGeneralOfferCredits()
   const maxAccounts = computeMaxAccounts()
-  if (isFinite(maxAccounts) && nbAccounts >= maxAccounts) {
+
+  if (isFinite(maxAccounts) && nbAccounts >= maxAccounts + generalOffer) {
     return true
   }
 
   return false
+}
+
+/**
+ * Compute the number of account credits for a konnector
+ * @param {string} slug - Slug of the konnector
+ * @param {import('cozy-client/types/types').IOCozyTrigger[]} accounts - List of accounts of the konnector
+ * @returns
+ */
+export const computeRemainingOfferCreditsByKonnector = (
+  slug,
+  accounts = []
+) => {
+  /** @type {KonnectorOffer[]} */
+  const offers = flag('harvest.accounts.offers.list') || []
+  const offersForKonnector = offers.filter(offer => offer.slug === slug)
+
+  if (offersForKonnector.length === 0) {
+    return 0
+  }
+
+  let listOfAccounts = accounts.sort(
+    (a, b) =>
+      new Date(a.cozyMetadata.createdAt) - new Date(b.cozyMetadata.createdAt)
+  )
+
+  return offersForKonnector.reduce((acc, offer) => {
+    const startsAt = new Date(offer.startsAt)
+    const endsAt = offer.endsAt ? new Date(offer.endsAt) : new Date()
+    if (endsAt < new Date()) {
+      return acc
+    }
+
+    let accountCreditAvailable = offer.credit || 0
+    listOfAccounts = listOfAccounts.filter(account => {
+      const accountDate = new Date(account.cozyMetadata.createdAt)
+
+      if (
+        accountCreditAvailable > 0 &&
+        accountDate >= startsAt &&
+        accountDate <= endsAt
+      ) {
+        accountCreditAvailable -= 1
+        return false
+      }
+      return true
+    })
+
+    return acc + accountCreditAvailable
+  }, 0)
 }
