@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 
-import { useClient } from 'cozy-client'
 import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
 import Alert from 'cozy-ui/transpiled/react/Alert'
 import Button from 'cozy-ui/transpiled/react/Buttons'
@@ -54,14 +53,13 @@ export const LaunchTriggerAlert = ({
   account,
   withMaintenanceDescription
 }) => {
-  const client = useClient()
   const [showSuccessSnackbar, setShowSuccessSnackbar] = useState(false)
   const { error, trigger, running, expectingTriggerLaunch, status } =
     useFlowState(flow)
   const { launch, konnector } = flow
   const {
     data: { isInMaintenance, messages: maintenanceMessages }
-  } = useMaintenanceStatus(client, konnector)
+  } = useMaintenanceStatus(konnector.slug)
 
   const isInError = !!error
   const block = isInError || (!!withMaintenanceDescription && isInMaintenance)

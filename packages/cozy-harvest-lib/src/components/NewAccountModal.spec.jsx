@@ -13,6 +13,10 @@ jest.mock('./TriggerManager', () => ({ onLoginSuccess, onSuccess }) => {
   onSuccessFn = onSuccess
   return null
 })
+jest.mock('./hooks/useMaintenanceStatus', () => () => ({
+  fetchStatus: 'loaded',
+  data: { isInMaintenance: false, messages: {} }
+}))
 
 describe('NewAccountModal', () => {
   const replaceHistory = jest.fn()

@@ -21,6 +21,11 @@ jest.mock('../../models/ConnectionFlow', () => {
 
 jest.mock('cozy-flags')
 
+jest.mock('../hooks/useMaintenanceStatus', () => () => ({
+  fetchStatus: 'loaded',
+  data: { isInMaintenance: false, messages: {} }
+}))
+
 const triggerFixture = {
   _id: 'd861818b62204988bf0bb78c182a9149',
   arguments: '0 0 0 * * 0'

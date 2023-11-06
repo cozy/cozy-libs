@@ -1,21 +1,18 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { useClient } from 'cozy-client'
-
 import TriggerErrorAction from './TriggerErrorAction'
 import { intentsApiProptype } from '../../helpers/proptypes'
 import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 
 const TriggerError = ({ flow, konnector, account, trigger, intentsApi }) => {
-  const client = useClient()
   const flowState = flow.getState()
   const { error } = flowState
 
   const {
     data: { isInMaintenance }
-  } = useMaintenanceStatus(client, konnector)
+  } = useMaintenanceStatus(konnector.slug)
 
   if (!error || isInMaintenance) return null
 

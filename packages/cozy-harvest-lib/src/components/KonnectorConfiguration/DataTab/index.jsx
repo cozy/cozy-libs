@@ -54,7 +54,7 @@ export const DataTab = ({
 
   const {
     data: { isInMaintenance, messages: maintenanceMessages }
-  } = useMaintenanceStatus(client, konnector)
+  } = useMaintenanceStatus(konnector.slug)
 
   return (
     <div>
