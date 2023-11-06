@@ -80,7 +80,7 @@ const KonnectorAccountTabs = props => {
   )
   const {
     data: { isInMaintenance }
-  } = useMaintenanceStatus(client, konnector)
+  } = useMaintenanceStatus(konnector.slug)
 
   const webviewIntent = useWebviewIntent()
 

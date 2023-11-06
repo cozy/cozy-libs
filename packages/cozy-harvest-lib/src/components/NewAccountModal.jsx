@@ -2,7 +2,6 @@ import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useContext } from 'react'
 
-import { useClient } from 'cozy-client'
 import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
 import flag from 'cozy-flags'
 import { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
@@ -28,12 +27,11 @@ import useMaintenanceStatus from './hooks/useMaintenanceStatus'
  */
 const NewAccountModal = ({ konnector, onSuccess, onDismiss }) => {
   const { t } = useI18n()
-  const client = useClient()
   const { replaceHistory } = useContext(MountPointContext)
   const {
     fetchStatus,
     data: { isInMaintenance, messages: maintenanceMessages }
-  } = useMaintenanceStatus(client, konnector)
+  } = useMaintenanceStatus(konnector.slug)
   const isMaintenanceLoaded =
     fetchStatus === 'loaded' || fetchStatus === 'failed'
   const serverSideKonnector = !(konnector.oauth || konnector.clientSide)

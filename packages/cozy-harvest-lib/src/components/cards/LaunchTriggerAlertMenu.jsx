@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useRef, useState } from 'react'
 
-import { useClient } from 'cozy-client'
 import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
@@ -28,12 +27,11 @@ const LaunchTriggerAlertMenu = ({
   account,
   intentsApi
 }) => {
-  const client = useClient()
   const { running, trigger, error } = useFlowState(flow)
   const { launch, konnector } = flow
   const {
     data: { isInMaintenance }
-  } = useMaintenanceStatus(client, konnector)
+  } = useMaintenanceStatus(konnector.slug)
   const isKonnectorDisconnected = isDisconnected(konnector, trigger)
   const konnectorPolicy = findKonnectorPolicy(konnector)
   const isKonnectorRunnable = konnectorPolicy.isRunnable()

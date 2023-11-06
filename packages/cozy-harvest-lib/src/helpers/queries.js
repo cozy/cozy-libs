@@ -92,3 +92,12 @@ export const buildAppsRegistryMaintenance = () => ({
     fetchPolicy: defaultFetchPolicy
   }
 })
+
+export const buildAppsRegistryBySlug = slug => ({
+  definition: Q('io.cozy.apps_registry').getById(slug),
+  options: {
+    as: `io.cozy.apps_registry/${slug}`,
+    fetchPolicy: defaultFetchPolicy,
+    singleDocData: true
+  }
+})
