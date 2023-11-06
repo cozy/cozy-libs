@@ -2,8 +2,11 @@ import { renderHook } from '@testing-library/react-hooks'
 import React from 'react'
 
 import { CozyProvider, createMockClient } from 'cozy-client'
+import flag from 'cozy-flags'
 
 import useMaintenanceStatus from './useMaintenanceStatus'
+
+jest.mock('cozy-flags')
 
 describe('useMaintenanceStatus', () => {
   const setup = (slug = 'test') => {
@@ -64,5 +67,16 @@ describe('useMaintenanceStatus', () => {
     expect(result.current.lastError).toEqual(
       new Error('Failed to found konnector')
     )
+  })
+
+  it('should not be consider under maintenance if the slug is declared in the skip flag', async () => {
+    flag.mockReturnValue(['test'])
+
+    const { result } = setup()
+
+    expect(result.current.fetchStatus).toBe('loaded')
+    expect(result.current.data.isInMaintenance).toBe(false)
+    expect(result.current.data.messages).toEqual({})
+    expect(result.current.lastError).toBe(null)
   })
 })
