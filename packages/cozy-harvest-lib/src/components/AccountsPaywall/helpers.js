@@ -113,20 +113,24 @@ export const computeRemainingOfferCreditsByKonnector = (
   )
 
   return offersForKonnector.reduce((acc, offer) => {
-    const startsAt = new Date(offer.startsAt)
-    const endsAt = offer.endsAt ? new Date(offer.endsAt) : new Date()
-    if (endsAt < new Date()) {
+    const startsAt = new Date(offer.startsAt).getTime()
+    const endsAt = offer.endsAt ? new Date(offer.endsAt).getTime() : undefined
+
+    if (
+      (endsAt !== undefined && endsAt < Date.now()) ||
+      startsAt > Date.now()
+    ) {
       return acc
     }
 
     let accountCreditAvailable = offer.credit || 0
     listOfAccounts = listOfAccounts.filter(account => {
-      const accountDate = new Date(account.cozyMetadata.createdAt)
+      const accountDate = new Date(account.cozyMetadata.createdAt).getTime()
 
       if (
         accountCreditAvailable > 0 &&
         accountDate >= startsAt &&
-        accountDate <= endsAt
+        (!endsAt || endsAt >= accountDate)
       ) {
         accountCreditAvailable -= 1
         return false
