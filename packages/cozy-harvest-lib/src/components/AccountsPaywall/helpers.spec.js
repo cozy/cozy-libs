@@ -43,8 +43,15 @@ function getCurrentFlag({ defaultValue, idValue, maxValue, offers } = {}) {
 }
 
 describe('AccountsPaywall helpers', () => {
+  const now = new Date()
+  const past = (days = 1) =>
+    new Date(now.getTime() - 1000 * 60 * 60 * (24 * days)).toISOString()
+  const future = (days = 1) =>
+    new Date(now.getTime() + 1000 * 60 * 60 * (24 * days)).toISOString()
+
   beforeEach(() => {
     jest.clearAllMocks()
+    jest.spyOn(global.Date, 'now').mockImplementationOnce(() => now.getTime())
   })
 
   describe('computeMaxAccountsByKonnector', () => {
@@ -125,13 +132,10 @@ describe('AccountsPaywall helpers', () => {
     })
 
     it('should be false when the general offer is greater than the maximum', () => {
-      jest
-        .spyOn(global.Date, 'now')
-        .mockImplementationOnce(() => new Date('2023-10-12').valueOf())
       flag.mockImplementation(
         getCurrentFlag({
           maxValue: 4,
-          offers: [{ slug: '*', credit: 3, startsAt: '2023-10-01' }]
+          offers: [{ slug: '*', credit: 3, startsAt: past() }]
         })
       )
       expect(hasReachMaxAccounts(4)).toBe(false)
@@ -150,50 +154,52 @@ describe('AccountsPaywall helpers', () => {
         {
           slug: 'test',
           credit: 1,
-          endsAt: '2020-01-01T00:00:00Z',
-          startsAt: '2020-01-01T00:00:00Z'
+          endsAt: past(2),
+          startsAt: past(4)
         }
       ])
       const result = computeRemainingOfferCreditsByKonnector('test', [])
       expect(result).toBe(0)
     })
 
+    it('should return 0 if the offer has not started', () => {
+      flag.mockReturnValue([{ slug: 'test', credit: 2, startsAt: future() }])
+      const accounts = []
+
+      const result = computeRemainingOfferCreditsByKonnector('test', accounts)
+      expect(result).toBe(0)
+    })
+
     it('should return 1 if the account was created before the offer started', () => {
-      flag.mockReturnValue([
-        { slug: 'test', credit: 1, startsAt: '2022-01-01T00:00:00Z' }
-      ])
-      const accounts = [
-        { _id: 'a123', cozyMetadata: { createdAt: '2021-01-01T00:00:00Z' } }
-      ]
+      flag.mockReturnValue([{ slug: 'test', credit: 1, startsAt: past(2) }])
+      const accounts = [{ _id: 'a123', cozyMetadata: { createdAt: past(3) } }]
+
       const result = computeRemainingOfferCreditsByKonnector('test', accounts)
       expect(result).toBe(1)
     })
 
     it('should return 0 if there is an available offer but there is already created an account', () => {
-      flag.mockReturnValue([
-        { slug: 'test', credit: 1, startsAt: '2022-01-01T00:00:00Z' }
-      ])
-      const accounts = [
-        { _id: 'a123', cozyMetadata: { createdAt: '2022-01-02T00:00:00Z' } }
-      ]
+      flag.mockReturnValue([{ slug: 'test', credit: 1, startsAt: past(2) }])
+      const accounts = [{ _id: 'a123', cozyMetadata: { createdAt: past(1) } }]
+
       const result = computeRemainingOfferCreditsByKonnector('test', accounts)
       expect(result).toBe(0)
     })
 
     it('should return 2 if there are credits remaining, even if accounts have already been created', () => {
       flag.mockReturnValue([
-        { slug: 'test', credit: 1, startsAt: '2022-01-01T00:00:00Z' },
-        { slug: 'test', credit: 2, startsAt: '2022-01-02T00:00:00Z' },
-        { slug: 'test', credit: 1, startsAt: '2022-01-05T00:00:00Z' },
-        { slug: 'test', credit: 2, startsAt: '2021-01-04T00:00:00Z' },
-        { slug: 'test', credit: 1, startsAt: '2022-04-03T00:00:00Z' }
+        { slug: 'test', credit: 1, startsAt: past(2) },
+        { slug: 'test', credit: 2, startsAt: past(2) },
+        { slug: 'test', credit: 1, startsAt: past(3) },
+        { slug: 'test', credit: 2, startsAt: past(2) },
+        { slug: 'test', credit: 1, startsAt: past(3) }
       ])
       const accounts = [
-        { _id: 'a123', cozyMetadata: { createdAt: '2022-01-02T00:00:00Z' } },
-        { _id: 'b123', cozyMetadata: { createdAt: '2022-01-04T00:00:00Z' } },
-        { _id: 'c123', cozyMetadata: { createdAt: '2022-01-02T00:00:00Z' } },
-        { _id: 'd123', cozyMetadata: { createdAt: '2022-01-06T00:00:00Z' } },
-        { _id: 'e123', cozyMetadata: { createdAt: '2022-01-07T00:00:00Z' } }
+        { _id: 'a123', cozyMetadata: { createdAt: past(2) } },
+        { _id: 'b123', cozyMetadata: { createdAt: past(1) } },
+        { _id: 'c123', cozyMetadata: { createdAt: past(2) } },
+        { _id: 'd123', cozyMetadata: { createdAt: past(3) } },
+        { _id: 'e123', cozyMetadata: { createdAt: past(2) } }
       ]
       const result = computeRemainingOfferCreditsByKonnector('test', accounts)
       expect(result).toBe(2)
@@ -212,16 +218,12 @@ describe('AccountsPaywall helpers', () => {
     })
 
     it('should return the total credit of all valid general offers', () => {
-      const now = new Date()
-      const past = new Date(now.getTime() - 1000 * 60 * 60).toISOString()
-      const future = new Date(now.getTime() + 1000 * 60 * 60).toISOString()
-
       flag.mockReturnValue([
-        { slug: '*', startsAt: past, endsAt: future, credit: 1 },
-        { slug: '*', startsAt: past, endsAt: future, credit: 2 },
-        { slug: '*', startsAt: future, endsAt: future, credit: 3 }, // not started yet
-        { slug: '*', startsAt: past, endsAt: past, credit: 4 }, // already ended
-        { slug: '*', startsAt: past, credit: 2 } // never ends
+        { slug: '*', startsAt: past(), endsAt: future(), credit: 1 },
+        { slug: '*', startsAt: past(), endsAt: future(), credit: 2 },
+        { slug: '*', startsAt: future(), endsAt: future(), credit: 3 }, // not started yet
+        { slug: '*', startsAt: past(), endsAt: past(), credit: 4 }, // already ended
+        { slug: '*', startsAt: past(), credit: 2 } // never ends
       ])
       expect(computeGeneralOfferCredits()).toBe(5)
     })
