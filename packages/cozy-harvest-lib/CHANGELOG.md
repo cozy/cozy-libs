@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.1.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.1.5...cozy-harvest-lib@20.1.6) (2023-11-07)
+
+
+### Bug Fixes
+
+* Escape the offer that hasn't started ([94628e8](https://github.com/cozy/cozy-libs/commit/94628e8c1c38ec989b4a608a6cd71a099a23f09a))
+
+
+
+
+
 ## [20.1.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.1.4...cozy-harvest-lib@20.1.5) (2023-11-02)
 
 
