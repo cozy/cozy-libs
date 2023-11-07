@@ -1,6 +1,8 @@
 import { isAndroid, isIOS } from 'cozy-device-helper'
+import log from 'cozy-logger'
 
 import { ANDROID_APP_URL, IOS_APP_URL } from '../../constants/const'
+import { findAttributes } from '../../helpers/findAttributes'
 
 /**
  * Check if a file is already selected in the state of the FormDataProvider
@@ -256,4 +258,80 @@ export const getFirstFileFromNative = async webviewIntent => {
   validateFileFromNative(fileToHandle)
 
   return fileToHandle
+}
+
+const _getAttributesFromOcr = async ({
+  file,
+  ocrAttributes,
+  webviewIntent
+}) => {
+  const cleanB64FrontFile = await makeBase64FromFile(file, {
+    prefix: false
+  })
+  const ocrFromFlagshipResult = await webviewIntent.call(
+    'ocr',
+    cleanB64FrontFile
+  )
+  const { attributes: attributesFound } = findAttributes(
+    ocrFromFlagshipResult.OCRResult,
+    ocrFromFlagshipResult.imgSize,
+    ocrAttributes
+  )
+  return attributesFound
+}
+
+/**
+ * Get attributes from OCR
+ * @param {Object} options
+ * @param {Object} options.formData - State of the FormDataProvider
+ * @param {Object} options.ocrAttributes - OCR attributes config of current definition of paper
+ * @param {File} options.currentFile - File object
+ * @param {File} options.currentFileRotated - File object
+ * @param {Object} options.webviewIntent - Webview intent
+ * @returns {Promise<Object[]>} - Attributes found
+ */
+export const getAttributesFromOcr = async ({
+  formData,
+  ocrAttributes,
+  currentFile,
+  currentFileRotated,
+  webviewIntent
+}) => {
+  try {
+    const frontFile = formData.data.find(
+      data => data.fileMetadata.page === 'front'
+    )
+    const backFile = formData.data.find(
+      data => data.fileMetadata.page === 'back'
+    )
+    const isDoubleSidedFile = frontFile && backFile
+
+    if (isDoubleSidedFile) {
+      const attributesFrontFound = await _getAttributesFromOcr({
+        file: frontFile.file,
+        ocrAttributes: ocrAttributes.front,
+        webviewIntent
+      })
+      const attributesBackFound = await _getAttributesFromOcr({
+        file: currentFileRotated || backFile.file,
+        ocrAttributes: ocrAttributes.back,
+        webviewIntent
+      })
+      return attributesFrontFound.concat(attributesBackFound)
+    }
+
+    const attributesFound = await _getAttributesFromOcr({
+      file: currentFileRotated || currentFile,
+      ocrAttributes: ocrAttributes.front,
+      webviewIntent
+    })
+    return attributesFound
+  } catch (error) {
+    log(
+      'error',
+      `Error while getting attributes from OCR: ${error}`,
+      'getAttributesFromOcr'
+    )
+    return []
+  }
 }
