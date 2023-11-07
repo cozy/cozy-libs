@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.9.0 (2023-11-07)
+
+
+### Features
+
+* Add a `hideCross` method ([c770118](https://github.com/cozy/cozy-libs/commit/c7701185c8fa380372d66de70e978067856fe7a3))
+
+
+
+
+
 ## 0.8.1 (2023-07-25)
 
 
