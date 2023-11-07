@@ -67,7 +67,9 @@ const Routes = ({
   onDismiss,
   datacardOptions,
   ComponentsProps,
-  closable
+  closable,
+  intentData,
+  intentId
 }) => {
   const RoutesV4orV6 = isRouterV6 ? RoutesV6 : RoutesV4
 
@@ -94,6 +96,8 @@ const Routes = ({
       <HarvestWrapper
         mountPointProviderProps={{ baseRoute: konnectorRoot }}
         componentsPropsProviderProps={{ ComponentsProps: ComponentsProps }}
+        intentData={intentData}
+        intentId={intentId}
       >
         <DialogContext.Provider value={dialogContext}>
           <HarvestDialog
@@ -142,7 +146,11 @@ Routes.propTypes = {
   /** The props for the components */
   ComponentsProps: PropTypes.object,
   /** Whether the dialog is closable or not */
-  closable: PropTypes.bool
+  closable: PropTypes.bool,
+  /** Data received from the Intent if called from an intent */
+  intentData: PropTypes.object,
+  /** Id of the intent if called from an intent */
+  intentId: PropTypes.string
 }
 
 export default Routes
