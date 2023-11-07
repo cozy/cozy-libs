@@ -107,6 +107,27 @@ export const makeFileFromBase64 = ({ source, name, type } = {}) => {
   }
 }
 
+/**
+ * Make a base64 string from a File object
+ * @param {File} file - File object
+ * @param {Object} [options]
+ * @param {boolean} [options.prefix] - If true, add prefix to base64 string (data:image/png;base64,) (default: true)
+ * @returns {Promise<string | null>} base64 string
+ */
+export const makeBase64FromFile = async (file, { prefix = true } = {}) => {
+  const reader = new FileReader()
+  reader.readAsDataURL(file)
+  return new Promise((resolve, reject) => {
+    reader.onload = () => {
+      const base64 = prefix ? reader.result : cleanBase64(reader.result)
+      resolve(base64)
+    }
+    reader.onerror = err => {
+      reject(err)
+    }
+  })
+}
+
 let canvas
 let canvasContext
 /**
