@@ -14,6 +14,7 @@ import palette from 'cozy-ui/transpiled/react/palette'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
+import { useIntentProviderData } from '../Providers/IntentProvider'
 import useAppLinkWithStoreFallback from '../hooks/useAppLinkWithStoreFallback'
 
 export const AppLinkButton = ({ slug, path }) => {
@@ -26,6 +27,8 @@ export const AppLinkButton = ({ slug, path }) => {
     client,
     path
   )
+
+  const { intentId } = useIntentProviderData()
   return (
     <AppLinker app={{ slug }} nativePath={path} href={url || '#'}>
       {({ onClick, href }) => (
@@ -33,6 +36,7 @@ export const AppLinkButton = ({ slug, path }) => {
           disabled={fetchStatus !== 'loaded'}
           onClick={fetchStatus === 'loaded' ? onClick : null}
           href={href}
+          {...(intentId ? { target: '_blank' } : {})}
           icon={
             isInstalled ? (
               <AppIcon
