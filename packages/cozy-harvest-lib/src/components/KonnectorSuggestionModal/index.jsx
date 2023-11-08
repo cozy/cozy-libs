@@ -1,18 +1,13 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
-import { withClient } from 'cozy-client'
-import AppLinker, { generateWebLink } from 'cozy-ui/transpiled/react/AppLinker'
-import { DialogCloseButton } from 'cozy-ui/transpiled/react/CozyDialogs'
-import Dialog, {
-  DialogActions,
-  DialogContent
-} from 'cozy-ui/transpiled/react/Dialog'
+import { generateWebLink, useClient } from 'cozy-client'
+import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
+import Button from 'cozy-ui/transpiled/react/Buttons'
+import { IllustrationDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { Button, ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
-import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import DataTypes from './DataTypes'
 import Illustration from './Illustration'
@@ -20,15 +15,14 @@ import { getSuggestionReason } from '../../helpers/appSuggestions'
 import { getDataTypes, getKonnectorName } from '../../helpers/manifest'
 
 const KonnectorSuggestionModal = ({
-  t,
-  client,
   konnectorAppSuggestion,
   konnectorManifest,
   onClose,
   onSilence
 }) => {
-  const { isMobile } = useBreakpoints()
   const { slug } = konnectorAppSuggestion
+  const client = useClient()
+  const { t } = useI18n()
   const cozyURL = new URL(client.getStackClient().uri)
   const storeAppName = 'store'
   const nativePath = `/discover/${slug}`
@@ -51,37 +45,36 @@ const KonnectorSuggestionModal = ({
 
   return (
     <MuiCozyTheme>
-      <Dialog
+      <IllustrationDialog
         open
         onClose={onClose}
-        fullScreen={isMobile}
-        fullWidth
-        maxWidth="sm"
-        scroll="body"
-      >
-        <DialogCloseButton onClick={onClose} />
-        <DialogContent>
-          <div className="u-flex u-flex-column u-flex-items-center">
+        content={
+          <div className="u-flex u-flex-column u-flex-items-center u-h-100">
             <Illustration alt={t('app.logo.alt', { name })} app={slug} />
+
             <Typography className="u-mb-half" variant="h4">
               {t('suggestions.title', { name })}
             </Typography>
+
             <DataTypes dataTypes={dataTypes} konnectorName={name} />
-          </div>
-        </DialogContent>
-        <DialogActions>
-          <div className="u-flex u-flex-column u-flex-items-center u-w-100">
+
             {reason === 'FOUND_TRANSACTION' && (
               <Typography
-                className="u-mb-1"
+                className="u-mb-1 u-ta-center u-mt-auto"
                 variant="caption"
                 color="textSecondary"
               >
                 {t('suggestions.why', { name })}
+
                 <br />
+
                 {t('suggestions.reason_bank', { name })}
               </Typography>
             )}
+          </div>
+        }
+        actions={
+          <>
             <AppLinker
               app={{ slug: storeAppName }}
               nativePath={nativePath}
@@ -93,32 +86,29 @@ const KonnectorSuggestionModal = ({
               })}
             >
               {({ onClick, href }) => (
-                <ButtonLink
-                  onClick={onClick}
+                <Button
                   href={href}
+                  onClick={onClick}
                   label={t('suggestions.install')}
-                  extension="full"
-                  className="u-mb-half"
+                  variant="primary"
                 />
               )}
             </AppLinker>
+
             <Button
-              theme="secondary"
+              variant="secondary"
               label={t('suggestions.silence')}
               onClick={silenceSuggestion}
               busy={isSilencing}
-              extension="full"
             />
-          </div>
-        </DialogActions>
-      </Dialog>
+          </>
+        }
+      />
     </MuiCozyTheme>
   )
 }
 
 KonnectorSuggestionModal.propTypes = {
-  t: PropTypes.func.isRequired,
-  client: PropTypes.object.isRequired,
   konnectorAppSuggestion: PropTypes.shape({
     // io.cozy.apps.suggestions, see https://github.com/cozy/cozy-doctypes/blob/master/docs/io.cozy.apps.suggestions.md
     slug: PropTypes.string,
@@ -135,4 +125,4 @@ KonnectorSuggestionModal.propTypes = {
   onSilence: PropTypes.func.isRequired
 }
 
-export default withClient(translate()(KonnectorSuggestionModal))
+export default KonnectorSuggestionModal
