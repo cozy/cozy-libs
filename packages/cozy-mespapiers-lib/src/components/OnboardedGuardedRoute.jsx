@@ -20,6 +20,7 @@ const OnboardedGuardedRoute = () => {
   const { OnboardingComponent } = useOnboarding()
   const client = useClient()
 
+  const fromFlagshipUpload = searchParams.get('fromFlagshipUpload') !== null
   const skipOnboarding = searchParams.get('skipOnboarding') !== null
   const isOnboardingPage = location.pathname === '/paper/onboarding'
 
@@ -76,7 +77,7 @@ const OnboardedGuardedRoute = () => {
     return <Navigate to="/paper" replace />
   }
 
-  if (isNotOnboarded) {
+  if (!fromFlagshipUpload && isNotOnboarded) {
     return <Navigate to="onboarding" replace />
   }
 
