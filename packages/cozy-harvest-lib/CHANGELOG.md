@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [20.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.1.6...cozy-harvest-lib@20.2.0) (2023-11-09)
+
+
+### Features
+
+* Allow to skip maintenance for konnector with a flag ([64da8a7](https://github.com/cozy/cozy-libs/commit/64da8a73ef5abca82e2a7089cbcdccb6695a58ff))
+* Update cozy-client from 41.9.0 to 43.1.0 ([66eeae0](https://github.com/cozy/cozy-libs/commit/66eeae0199fe48bd625be818edf18b993a6b32f6))
+
+
+
+
+
 ## [20.1.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.1.5...cozy-harvest-lib@20.1.6) (2023-11-07)
 
 
