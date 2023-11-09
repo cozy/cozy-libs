@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [61.5.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@61.4.13...cozy-mespapiers-lib@61.5.0) (2023-11-09)
+
+
+### Features
+
+* Ignore onboarding from flagshipUpload ([b26c3e3](https://github.com/cozy/cozy-libs/commit/b26c3e30d48d020a5f9db5925302b82bf4a537d2))
+
+
+
+
+
 ## [61.4.13](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@61.4.12...cozy-mespapiers-lib@61.4.13) (2023-11-09)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
