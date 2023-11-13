@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [62.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@61.6.1...cozy-mespapiers-lib@62.0.0) (2023-11-13)
+
+
+### Features
+
+* **mespapiers:** Update cozy-client, cozy-ui and cozy-harvest ([329bfe6](https://github.com/cozy/cozy-libs/commit/329bfe67c5d9956ba699ccfde66eddb1596ba802))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have
+- `cozy-harvest-lib >= 20.2.1`
+- `cozy-client >= 43.1.0`
+- `cozy-ui >= 95.8.0`
+
+
+
+
+
 ## [61.6.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@61.6.0...cozy-mespapiers-lib@61.6.1) (2023-11-13)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
