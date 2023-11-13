@@ -4,7 +4,9 @@
       "label": "diploma",
       "icon": "people",
       "featureDate": "referencedDate",
-      "filenameModel": ["labelGivenByUser"],
+      "filenameModel": [
+        "labelGivenByUser"
+      ],
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
@@ -558,7 +560,11 @@
       "label": "house_insurance",
       "icon": "contract",
       "featureDate": "referencedDate",
-      "filenameModel": ["label", "labelGivenByUser", "featureDate"],
+      "filenameModel": [
+        "label",
+        "labelGivenByUser",
+        "featureDate"
+      ],
       "maxDisplay": 1,
       "acquisitionSteps": [
         {
@@ -808,7 +814,9 @@
     {
       "label": "other_activity_document",
       "icon": "compass",
-      "filenameModel": ["labelGivenByUser"],
+      "filenameModel": [
+        "labelGivenByUser"
+      ],
       "featureDate": "date",
       "maxDisplay": 3,
       "acquisitionSteps": [
@@ -853,7 +861,9 @@
     {
       "label": "other_bank_document",
       "icon": "bank",
-      "filenameModel": ["labelGivenByUser"],
+      "filenameModel": [
+        "labelGivenByUser"
+      ],
       "featureDate": "date",
       "maxDisplay": 3,
       "acquisitionSteps": [
@@ -899,7 +909,9 @@
     {
       "label": "other_family_document",
       "icon": "team",
-      "filenameModel": ["labelGivenByUser"],
+      "filenameModel": [
+        "labelGivenByUser"
+      ],
       "featureDate": "date",
       "maxDisplay": 3,
       "acquisitionSteps": [
@@ -945,7 +957,9 @@
     {
       "label": "other_house_document",
       "icon": "home",
-      "filenameModel": ["labelGivenByUser"],
+      "filenameModel": [
+        "labelGivenByUser"
+      ],
       "featureDate": "date",
       "maxDisplay": 3,
       "acquisitionSteps": [
@@ -991,7 +1005,9 @@
     {
       "label": "lease",
       "icon": "home",
-      "filenameModel": ["labelGivenByUser"],
+      "filenameModel": [
+        "labelGivenByUser"
+      ],
       "featureDate": "date",
       "maxDisplay": 3,
       "acquisitionSteps": [
@@ -1024,7 +1040,9 @@
     {
       "label": "other_identity_document",
       "icon": "personal-data",
-      "filenameModel": ["labelGivenByUser"],
+      "filenameModel": [
+        "labelGivenByUser"
+      ],
       "featureDate": "date",
       "maxDisplay": 3,
       "acquisitionSteps": [
@@ -1069,7 +1087,9 @@
     {
       "label": "other_transport_document",
       "icon": "car",
-      "filenameModel": ["labelGivenByUser"],
+      "filenameModel": [
+        "labelGivenByUser"
+      ],
       "featureDate": "date",
       "maxDisplay": 3,
       "acquisitionSteps": [
@@ -1115,7 +1135,9 @@
     {
       "label": "other_work_document",
       "icon": "company",
-      "filenameModel": ["labelGivenByUser"],
+      "filenameModel": [
+        "labelGivenByUser"
+      ],
       "featureDate": "date",
       "maxDisplay": 3,
       "acquisitionSteps": [
@@ -1161,7 +1183,9 @@
     {
       "label": "work_contract",
       "icon": "company",
-      "filenameModel": ["labelGivenByUser"],
+      "filenameModel": [
+        "labelGivenByUser"
+      ],
       "featureDate": "date",
       "maxDisplay": 3,
       "acquisitionSteps": [
@@ -1180,7 +1204,13 @@
             {
               "name": "contractType",
               "type": "radio",
-              "options": ["cdi", "cdd", "alternate", "internship", "other"],
+              "options": [
+                "cdi",
+                "cdd",
+                "alternate",
+                "internship",
+                "other"
+              ],
               "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
             }
           ]
@@ -1208,7 +1238,9 @@
     {
       "label": "other_revenue",
       "icon": "bank",
-      "filenameModel": ["labelGivenByUser"],
+      "filenameModel": [
+        "labelGivenByUser"
+      ],
       "featureDate": "referencedDate",
       "maxDisplay": 3,
       "acquisitionSteps": [
@@ -1699,7 +1731,10 @@
     {
       "label": "unfit_for_habitation_declaration",
       "icon": "home",
-      "filenameModel": ["label", "labelGivenByUser"],
+      "filenameModel": [
+        "label",
+        "labelGivenByUser"
+      ],
       "featureDate": "issueDate",
       "maxDisplay": 1,
       "acquisitionSteps": [
@@ -1924,7 +1959,9 @@
       "placeholderIndex": 7,
       "icon": "people",
       "featureDate": "referencedDate",
-      "filenameModel": ["labelGivenByUser"],
+      "filenameModel": [
+        "labelGivenByUser"
+      ],
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
@@ -2377,7 +2414,9 @@
       "label": "other_administrative_document",
       "icon": "dots",
       "featureDate": "referencedDate",
-      "filenameModel": ["labelGivenByUser"],
+      "filenameModel": [
+        "labelGivenByUser"
+      ],
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
@@ -2415,6 +2454,54 @@
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
+    },
+    {
+      "label": "expense_claim",
+      "icon": "bill",
+      "featureDate": "referencedDate",
+      "filenameModel": [
+        "labelGivenByUser"
+      ],
+      "maxDisplay": 3,
+      "acquisitionSteps": [
+        {
+          "model": "scan",
+          "multipage": false,
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.generic.singlePage.text"
+        },
+        {
+          "model": "information",
+          "text": "PaperJSON.generic.fileLabel.text",
+          "attributes": [
+            {
+              "name": "labelGivenByUser",
+              "type": "text",
+              "required": true,
+              "maxLength": 255,
+              "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
+            }
+          ]
+        },
+        {
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.date.text",
+          "attributes": [
+            {
+              "name": "referencedDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.date.inputLabel"
+            }
+          ]
+        },
+        {
+          "illustration": "Account.svg",
+          "model": "contact",
+          "multiple": false,
           "text": "PaperJSON.generic.owner.text"
         }
       ]
