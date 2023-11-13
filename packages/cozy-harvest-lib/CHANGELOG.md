@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.2.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.2.0...cozy-harvest-lib@20.2.1) (2023-11-13)
+
+
+### Bug Fixes
+
+* Update cozy-ui peerDep to >=95.9.0 ([512d291](https://github.com/cozy/cozy-libs/commit/512d291acc6e45936b0e2b061b83963148bf757e))
+
+
+
+
+
 # [20.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.1.6...cozy-harvest-lib@20.2.0) (2023-11-09)
 
 
