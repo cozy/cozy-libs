@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [61.6.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@61.5.0...cozy-mespapiers-lib@61.6.0) (2023-11-13)
+
+
+### Features
+
+* Add paper diploma et max 255 to diploma & resume.json ([2953e86](https://github.com/cozy/cozy-libs/commit/2953e8663533f9e16a3bffb5a3ce2eed179e8e31))
+
+
+
+
+
 # [61.5.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@61.4.13...cozy-mespapiers-lib@61.5.0) (2023-11-09)
 
 
