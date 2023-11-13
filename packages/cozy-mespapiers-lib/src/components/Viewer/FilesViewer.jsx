@@ -6,7 +6,6 @@ import { isIOSApp } from 'cozy-device-helper'
 import Viewer from 'cozy-ui/transpiled/react/Viewer'
 import FooterActionButtons from 'cozy-ui/transpiled/react/Viewer/Footer/FooterActionButtons'
 import ForwardOrDownloadButton from 'cozy-ui/transpiled/react/Viewer/Footer/ForwardOrDownloadButton'
-import Overlay from 'cozy-ui/transpiled/react/deprecated/Overlay'
 
 import FileViewerLoading from './FileViewerLoading'
 import SelectFileButton from './SelectFileButton'
@@ -126,20 +125,18 @@ const FilesViewer = ({ filesQuery, files, fileId, onClose, onChange }) => {
   }
 
   return (
-    <Overlay>
-      <Viewer
-        files={viewerFiles}
-        currentIndex={viewerIndex}
-        onChangeRequest={handleOnChange}
-        onCloseRequest={handleOnClose}
-        editPathByModelProps={editPathByModelProps}
-      >
-        <FooterActionButtons>
-          <ForwardOrDownloadButton />
-          <SelectFileButton file={viewerFiles[viewerIndex]} />
-        </FooterActionButtons>
-      </Viewer>
-    </Overlay>
+    <Viewer
+      files={viewerFiles}
+      currentIndex={viewerIndex}
+      onChangeRequest={handleOnChange}
+      onCloseRequest={handleOnClose}
+      editPathByModelProps={editPathByModelProps}
+    >
+      <FooterActionButtons>
+        <ForwardOrDownloadButton />
+        <SelectFileButton file={viewerFiles[viewerIndex]} />
+      </FooterActionButtons>
+    </Viewer>
   )
 }
 

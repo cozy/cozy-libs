@@ -10116,31 +10116,6 @@ cozy-client@^37.2.0:
     sift "^6.0.0"
     url-search-params-polyfill "^8.0.0"
 
-cozy-client@^40.3.0:
-  version "40.3.0"
-  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-40.3.0.tgz#e03aa60633a736449fb79c959cda9deeb0f10bcc"
-  integrity sha512-CcjsSPQ2CjelSFnRZawW6w2OwJhk+2lAggZjNbNgKUTokTVxDOjAoWADLCB0OsTxTMSnSPH20pIETkLIqfdgEA==
-  dependencies:
-    "@cozy/minilog" "1.0.0"
-    "@types/jest" "^26.0.20"
-    "@types/lodash" "^4.14.170"
-    btoa "^1.2.1"
-    cozy-stack-client "^40.2.1"
-    date-fns "2.29.3"
-    json-stable-stringify "^1.0.1"
-    lodash "^4.17.13"
-    microee "^0.0.6"
-    node-fetch "^2.6.1"
-    node-polyglot "2.4.2"
-    open "7.4.2"
-    prop-types "^15.6.2"
-    react-redux "^7.2.0"
-    redux "3 || 4"
-    redux-thunk "^2.3.0"
-    server-destroy "^1.0.1"
-    sift "^6.0.0"
-    url-search-params-polyfill "^8.0.0"
-
 cozy-client@^43.1.0:
   version "43.1.0"
   resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-43.1.0.tgz#1c7b19c0be3b8e56fd7b2f4a1ed98468bb3149fc"
@@ -10205,6 +10180,35 @@ cozy-flags@^2.5.0, cozy-flags@^2.8.5:
   integrity sha512-s0et8aWChaqY4rMKkNKDACflU2h5s6s9UVU1guU3Il9GqktSPrhvMo+ntHLnQb2l+yLL6xV1S6/rK0qniR1q0A==
   dependencies:
     microee "^0.0.6"
+
+cozy-harvest-lib@^20.2.1:
+  version "20.2.1"
+  resolved "https://registry.yarnpkg.com/cozy-harvest-lib/-/cozy-harvest-lib-20.2.1.tgz#774d58c129845dd80eca80f1ecf5568ebabf6ecf"
+  integrity sha512-DWXTzAhwnt1NnLOjR/blelxjI6y5GwuHboMW6/F8D+PiKNjsCeWtfuVJ41UcvymoDg0h6sbZ5Hz0tyQi3cDCug==
+  dependencies:
+    "@cozy/minilog" "^1.0.0"
+    "@sentry/browser" "^6.0.1"
+    "@storybook/addon-essentials" "7.0.23"
+    "@storybook/addon-interactions" "7.0.23"
+    "@storybook/addon-links" "7.0.23"
+    "@storybook/blocks" "7.0.23"
+    "@storybook/react" "7.0.23"
+    "@storybook/react-webpack5" "7.0.23"
+    "@storybook/testing-library" "0.0.14-next.2"
+    classnames "^2.3.1"
+    cozy-bi-auth "0.0.25"
+    cozy-doctypes "^1.88.7"
+    cozy-logger "^1.10.1"
+    date-fns "^1.30.1"
+    final-form "^4.18.5"
+    lodash "^4.17.19"
+    microee "^0.0.6"
+    node-polyglot "^2.4.0"
+    react-final-form "^3.7.0"
+    react-markdown "^4.2.2"
+    storybook "7.0.23"
+    use-deep-compare-effect "^1.8.1"
+    uuid "^3.3.2"
 
 cozy-interapp@0.4.9:
   version "0.4.9"
@@ -10377,39 +10381,7 @@ cozy-ui@93.1.1:
     react-swipeable-views "^0.13.3"
     rooks "^5.11.2"
 
-cozy-ui@^92.3.0:
-  version "92.3.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-92.3.0.tgz#c80807c4ee5a6b5e31cd50d8fae3efecb7884e64"
-  integrity sha512-oeDdg7e5CGZFet080gtsbK4Q53tEo7/+aQG1ATdc2DVbudDfZ7DkZzdkkkdIyFDQN0MimrX/i9+eg/9dJf5AyQ==
-  dependencies:
-    "@babel/runtime" "^7.3.4"
-    "@material-ui/core" "4.12.3"
-    "@material-ui/lab" "^4.0.0-alpha.61"
-    "@popperjs/core" "^2.4.4"
-    bundlemon "^1.3.2"
-    chart.js "3.7.1"
-    classnames "^2.2.5"
-    copy-text-to-clipboard "3.2.0"
-    cozy-interapp "^0.5.4"
-    date-fns "^1.28.5"
-    filesize "8.0.7"
-    hammerjs "^2.0.8"
-    intersection-observer "0.11.0"
-    mime-types "2.1.35"
-    mui-bottom-sheet "https://github.com/cozy/mui-bottom-sheet.git#v1.0.9"
-    node-polyglot "^2.2.2"
-    normalize.css "^8.0.0"
-    piwik-react-router "0.12.1"
-    react-chartjs-2 "4.1.0"
-    react-markdown "^4.0.8"
-    react-pdf "^5.7.2"
-    react-popper "^2.2.3"
-    react-remove-scroll "^2.4.0"
-    react-select "^4.3.0"
-    react-swipeable-views "^0.13.3"
-    rooks "^5.11.2"
-
-cozy-ui@^95.9.0:
+cozy-ui@^95.8.0, cozy-ui@^95.9.0:
   version "95.9.0"
   resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-95.9.0.tgz#c416715277e073a974605f650b41e5b18d458017"
   integrity sha512-uCc2G0DeZRUWfagQshrEPdl/0ijLqWKEw1e81adPvSRVuS++vam88luNGhq1k7AdhUBCh+cy7gAeQGUDlJdhww==
@@ -19234,17 +19206,6 @@ msgpack5@^4.0.2:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
     safe-buffer "^5.1.2"
-
-"mui-bottom-sheet@git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9":
-  version "1.0.8"
-  uid "3dc4c2a245ab39079bc2f73546bccf80847be14c"
-  resolved "git+https://github.com/cozy/mui-bottom-sheet.git#3dc4c2a245ab39079bc2f73546bccf80847be14c"
-  dependencies:
-    "@juggle/resize-observer" "^3.1.3"
-    jest-environment-jsdom-sixteen "^1.0.3"
-    react-spring "9.0.0-rc.3"
-    react-use-gesture "^7.0.8"
-    react-use-measure "^2.0.0"
 
 "mui-bottom-sheet@https://github.com/cozy/mui-bottom-sheet.git#v1.0.9":
   version "1.0.8"

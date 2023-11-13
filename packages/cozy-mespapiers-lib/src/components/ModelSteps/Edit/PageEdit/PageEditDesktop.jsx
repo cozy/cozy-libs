@@ -2,7 +2,7 @@ import React from 'react'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 const PageEditDesktop = ({ onClose, onConfirm, isBusy, children }) => {
   const { t } = useI18n()

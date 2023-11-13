@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import DialogActions from 'cozy-ui/transpiled/react/DialogActions'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Button, { ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { PaperDefinitionsStepPropTypes } from '../../../constants/PaperDefinitionsPropTypes'
 

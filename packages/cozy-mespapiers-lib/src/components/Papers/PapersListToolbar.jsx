@@ -4,9 +4,9 @@ import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import UIBarTitle from 'cozy-ui/transpiled/react/BarTitle'
-import CozyTheme from 'cozy-ui/transpiled/react/CozyTheme'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
+import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 
 import { getCurrentQualificationLabel } from './helpers'
 import { useMultiSelection } from '../Hooks/useMultiSelection'

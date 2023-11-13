@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { useQuery } from 'cozy-client'
-import { I18n, initTranslation } from 'cozy-ui/transpiled/react/I18n'
+import { I18n, initTranslation } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { ErrorProvider, useError } from './Contexts/ErrorProvider'
 import { ModalProvider } from './Contexts/ModalProvider'

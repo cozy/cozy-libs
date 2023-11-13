@@ -2,9 +2,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { IllustrationDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Link from 'cozy-ui/transpiled/react/Link'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import QRCode from '../../../../assets/images/QRCode.png'
 import appStoreIcon from '../../../../assets/images/appstore.png'

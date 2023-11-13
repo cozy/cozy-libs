@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Box from 'cozy-ui/transpiled/react/Box'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 const makeStyle = (isDesktop, offsetRight) => ({
   display: 'flex',

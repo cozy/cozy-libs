@@ -3,10 +3,10 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 import { isQueryLoading, useQuery } from 'cozy-client'
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import Konnector from '../../../assets/icons/Konnectors.svg'
 import { buildKonnectorsQueryBySlug } from '../../../helpers/queries'

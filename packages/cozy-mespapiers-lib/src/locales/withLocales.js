@@ -1,5 +1,5 @@
-import I18n from 'cozy-ui/transpiled/react/I18n'
-import withOnlyLocales from 'cozy-ui/transpiled/react/I18n/withOnlyLocales'
+import I18n from 'cozy-ui/transpiled/react/providers/I18n'
+import withOnlyLocales from 'cozy-ui/transpiled/react/providers/I18n/withOnlyLocales'
 
 const dictRequire = lang => require(`./${lang}.json`)
 

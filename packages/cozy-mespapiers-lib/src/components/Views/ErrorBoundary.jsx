@@ -3,7 +3,7 @@ import { useParams, useRouteError } from 'react-router-dom'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Empty from 'cozy-ui/transpiled/react/Empty'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import styles from './styles.styl'
 import MesPapiersBroken from '../../assets/icons/MesPapiersBroken.svg'

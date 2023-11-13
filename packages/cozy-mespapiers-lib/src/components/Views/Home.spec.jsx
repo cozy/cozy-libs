@@ -3,7 +3,7 @@ import { render, fireEvent, waitFor } from '@testing-library/react'
 import React from 'react'
 
 import { isQueryLoading, useQueryAll } from 'cozy-client'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import Home from './Home'
 import AppLike from '../../../test/components/AppLike'
@@ -34,8 +34,8 @@ jest.mock('cozy-client/dist/utils', () => ({
   hasQueryBeenLoaded: jest.fn(),
   useQueryAll: jest.fn()
 }))
-jest.mock('cozy-ui/transpiled/react/hooks/useBreakpoints', () => ({
-  ...jest.requireActual('cozy-ui/transpiled/react/hooks/useBreakpoints'),
+jest.mock('cozy-ui/transpiled/react/providers/Breakpoints', () => ({
+  ...jest.requireActual('cozy-ui/transpiled/react/providers/Breakpoints'),
   __esModule: true,
   default: jest.fn(() => ({ isMobile: false }))
 }))

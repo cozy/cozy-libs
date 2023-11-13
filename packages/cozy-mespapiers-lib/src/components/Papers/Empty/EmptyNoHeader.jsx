@@ -4,8 +4,8 @@ import { useNavigate, useParams, useLocation } from 'react-router-dom'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Empty from 'cozy-ui/transpiled/react/Empty'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import PapersIcon from 'cozy-ui/transpiled/react/Icons/Papers'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { makeCountrySearchParam } from './helpers'
 import styles from './styles.styl'
