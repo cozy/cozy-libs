@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import InputMask from 'react-input-mask'
 
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import InputAdornment from 'cozy-ui/transpiled/react/InputAdornment'
 import TextField from 'cozy-ui/transpiled/react/TextField'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { defaultProptypes } from './proptypes'
 import {

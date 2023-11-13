@@ -1,15 +1,15 @@
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import React from 'react'
 
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import MultiselectViewActions from './MultiselectViewActions'
 import AppLike from '../../../test/components/AppLike'
 import { downloadFiles, forwardFile, makeZipFolder } from '../Actions/utils'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
-jest.mock('cozy-ui/transpiled/react/hooks/useBreakpoints', () => ({
-  ...jest.requireActual('cozy-ui/transpiled/react/hooks/useBreakpoints'),
+jest.mock('cozy-ui/transpiled/react/providers/Breakpoints', () => ({
+  ...jest.requireActual('cozy-ui/transpiled/react/providers/Breakpoints'),
   __esModule: true,
   default: jest.fn(() => ({ isMobile: false }))
 }))

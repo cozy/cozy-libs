@@ -2,8 +2,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import Empty from 'cozy-ui/transpiled/react/Empty'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { makePapersGroupByQualificationLabel } from './helpers'
 import SearchEmpty from '../../assets/icons/SearchEmpty.svg'

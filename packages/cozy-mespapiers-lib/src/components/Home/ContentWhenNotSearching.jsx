@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
 
 import Empty from 'cozy-ui/transpiled/react/Empty'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { makePapersGroupByQualificationLabel } from './helpers'
 import HomeCloud from '../../assets/icons/HomeCloud.svg'

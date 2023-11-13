@@ -2,9 +2,9 @@ import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import FilterButton from './FilterButton'
 import { useMultiSelection } from '../Hooks/useMultiSelection'

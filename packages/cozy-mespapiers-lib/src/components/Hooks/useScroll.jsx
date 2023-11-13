@@ -1,8 +1,8 @@
 import debounce from 'lodash/debounce'
 import { useState } from 'react'
 
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 /**
  * Scroll direction

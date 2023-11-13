@@ -2,8 +2,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import Fab from 'cozy-ui/transpiled/react/Fab'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import withLocales from '../../locales/withLocales'
 import { useScroll } from '../Hooks/useScroll'

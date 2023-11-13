@@ -2,7 +2,7 @@ import React from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import { useWebviewIntent } from 'cozy-intent'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import { handleBack } from './helpers'
 import { useStepperDialog } from '../Hooks/useStepperDialog'

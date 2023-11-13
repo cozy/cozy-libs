@@ -2,11 +2,11 @@ import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 
 import { useClient } from 'cozy-client'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import BottomIcon from 'cozy-ui/transpiled/react/Icons/Bottom'
 import InputAdornment from 'cozy-ui/transpiled/react/InputAdornment'
 import TextField from 'cozy-ui/transpiled/react/TextField'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { SingleContactPicker } from './SingleContactPicker'
 import { makeDisplayName } from './helpers'

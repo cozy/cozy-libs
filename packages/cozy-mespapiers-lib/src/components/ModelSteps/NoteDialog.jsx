@@ -6,7 +6,7 @@ import { Qualification } from 'cozy-client/dist/models/document'
 import { saveFileQualification, normalize } from 'cozy-client/dist/models/file'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import IntentIframe from 'cozy-ui/transpiled/react/IntentIframe'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import { FILES_DOCTYPE } from '../../doctypes'
 import { addContactReferenceToFile } from '../../helpers/createPdfAndSave'

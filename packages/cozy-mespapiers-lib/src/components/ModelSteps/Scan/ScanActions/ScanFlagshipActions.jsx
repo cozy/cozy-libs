@@ -4,8 +4,8 @@ import React from 'react'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import FileInput from 'cozy-ui/transpiled/react/FileInput'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { usePaywall } from '../../../Contexts/PaywallProvider'
 

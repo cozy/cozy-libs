@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect, useState } from 'react'
 
 import Divider from 'cozy-ui/transpiled/react/Divider'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import Paper from 'cozy-ui/transpiled/react/Paper'
 import TextField from 'cozy-ui/transpiled/react/TextField'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import RadioAdapterItem from './RadioAdapterItem'
 import { defaultProptypes } from './proptypes'

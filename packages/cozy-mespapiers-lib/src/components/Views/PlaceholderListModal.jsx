@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { useWebviewIntent } from 'cozy-intent'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import PlaceholderThemesList from '../Placeholders/PlaceholderListModal/PlaceholderThemesList'

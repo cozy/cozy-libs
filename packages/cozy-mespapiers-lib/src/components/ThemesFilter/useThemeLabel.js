@@ -1,4 +1,4 @@
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import enLocale from '../../locales/en.json'
 import { useScannerI18n } from '../Hooks/useScannerI18n'

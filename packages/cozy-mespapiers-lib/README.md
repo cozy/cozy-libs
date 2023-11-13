@@ -86,7 +86,7 @@ You have to create a `/paper/*` route (the name is important) in your applicatio
 
 ```jsx
 import { HashRouter, Route, Routes } from 'react-router-dom'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import MesPapiers from 'cozy-mespapiers-lib'
 
 const PaperView = props => {

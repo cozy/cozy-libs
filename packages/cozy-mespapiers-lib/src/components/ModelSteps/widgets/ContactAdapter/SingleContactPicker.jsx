@@ -7,7 +7,7 @@ import BottomSheet, {
 } from 'cozy-ui/transpiled/react/BottomSheet'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Divider from 'cozy-ui/transpiled/react/Divider'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import ContactList from '../../ContactList'
 

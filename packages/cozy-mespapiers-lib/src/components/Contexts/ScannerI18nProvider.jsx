@@ -1,7 +1,7 @@
 import React, { createContext, useMemo, useCallback } from 'react'
 
 import { models } from 'cozy-client'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 const {
   locales: { getBoundT }
 } = models.document

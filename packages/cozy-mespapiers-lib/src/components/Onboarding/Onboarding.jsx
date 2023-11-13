@@ -3,9 +3,9 @@ import React from 'react'
 
 import { Q, useClient } from 'cozy-client'
 import Empty from 'cozy-ui/transpiled/react/Empty'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Button from 'cozy-ui/transpiled/react/deprecated/Button'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import HomeCloud from '../../assets/icons/HomeCloud.svg'
 import { SETTINGS_DOCTYPE } from '../../doctypes'

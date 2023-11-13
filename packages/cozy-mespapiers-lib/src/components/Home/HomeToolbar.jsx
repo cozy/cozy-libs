@@ -3,11 +3,11 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import UIBarTitle from 'cozy-ui/transpiled/react/BarTitle'
-import CozyTheme from 'cozy-ui/transpiled/react/CozyTheme'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 

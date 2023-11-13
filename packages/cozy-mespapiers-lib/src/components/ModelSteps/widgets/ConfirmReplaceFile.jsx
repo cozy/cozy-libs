@@ -2,9 +2,9 @@ import PropTypes from 'prop-types'
 import React, { memo, useCallback } from 'react'
 
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import Button from 'cozy-ui/transpiled/react/deprecated/Button'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 const ConfirmReplaceFile = ({ onReplace, onClose, cozyFilesCount }) => {
   const { t } = useI18n()

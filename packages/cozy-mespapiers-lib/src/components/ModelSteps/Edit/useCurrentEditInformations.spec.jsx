@@ -3,7 +3,7 @@ import React from 'react'
 import { useLocation } from 'react-router-dom'
 
 import { useQuery, isQueryLoading } from 'cozy-client'
-import I18n from 'cozy-ui/transpiled/react/I18n'
+import I18n from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { useCurrentEditInformations } from './useCurrentEditInformations'
 import enLocale from '../../../locales/en.json'

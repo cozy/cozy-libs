@@ -3,9 +3,9 @@ import React, { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import List from 'cozy-ui/transpiled/react/List'
 import ListSubheader from 'cozy-ui/transpiled/react/ListSubheader'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import Placeholder from './Placeholder'
 import useKonnectorsActions from '../PapersFab/useKonnectorsActions'

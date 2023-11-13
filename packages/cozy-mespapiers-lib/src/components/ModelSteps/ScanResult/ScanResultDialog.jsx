@@ -3,9 +3,9 @@ import React, { useRef, useState } from 'react'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import { ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import ScanResultCard from './ScanResultCard'
 import ScanResultInfo from './ScanResultInfo'
