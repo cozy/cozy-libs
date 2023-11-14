@@ -20,7 +20,6 @@ const QRCodeModal = ({ onClose }) => {
       size="small"
       transitionDuration={0}
       onClose={onClose}
-      componentsProps={{ dialogTitle: { className: 'u-pt-2' } }}
       title={
         <Link
           href={`https://cozy.io/${lang}/download`}
