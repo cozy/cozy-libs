@@ -2360,6 +2360,7 @@
       "label": "other_invoice",
       "icon": "bill",
       "featureDate": "referencedDate",
+      "filenameModel": ["labelGivenByUser"],
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
@@ -2368,6 +2369,19 @@
           "multipage": true,
           "illustration": "IlluInvoice.png",
           "text": "PaperJSON.generic.multiPages.text"
+        },
+        {
+          "model": "information",
+          "text": "PaperJSON.generic.fileLabel.text",
+          "attributes": [
+            {
+              "name": "labelGivenByUser",
+              "type": "text",
+              "required": true,
+              "maxLength": 255,
+              "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
+            }
+          ]
         },
         {
           "model": "information",
