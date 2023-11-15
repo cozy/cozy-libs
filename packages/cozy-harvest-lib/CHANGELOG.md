@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.2.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.2.2...cozy-harvest-lib@20.2.3) (2023-11-15)
+
+
+### Bug Fixes
+
+* **harvest:** Wrap SuggestionModal with theme ([f188a1b](https://github.com/cozy/cozy-libs/commit/f188a1b623a3262e8c97852c71d4315317a8e334))
+
+
+
+
+
 ## [20.2.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.2.1...cozy-harvest-lib@20.2.2) (2023-11-15)
 
 
