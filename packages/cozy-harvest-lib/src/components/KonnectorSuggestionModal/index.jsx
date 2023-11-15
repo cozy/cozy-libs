@@ -5,8 +5,8 @@ import { generateWebLink, useClient } from 'cozy-client'
 import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { IllustrationDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import DataTypes from './DataTypes'
@@ -44,7 +44,7 @@ const KonnectorSuggestionModal = ({
   }
 
   return (
-    <MuiCozyTheme>
+    <CozyTheme variant="normal">
       <IllustrationDialog
         open
         onClose={onClose}
@@ -104,7 +104,7 @@ const KonnectorSuggestionModal = ({
           </>
         }
       />
-    </MuiCozyTheme>
+    </CozyTheme>
   )
 }
 
