@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.2.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.2.1...cozy-harvest-lib@20.2.2) (2023-11-15)
+
+
+### Bug Fixes
+
+* **harvest:** Add DialogTitle to SuggestionModal ([11a1823](https://github.com/cozy/cozy-libs/commit/11a182376faeb3d8e83179c3e47e60f0089a5aea))
+
+
+
+
+
 ## [20.2.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.2.0...cozy-harvest-lib@20.2.1) (2023-11-13)
 
 
