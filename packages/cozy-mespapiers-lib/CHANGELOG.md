@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [63.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@62.0.1...cozy-mespapiers-lib@63.0.0) (2023-11-15)
+
+
+### Features
+
+* **mespapiers:** Add expense claim document ([6bba739](https://github.com/cozy/cozy-libs/commit/6bba739f7c77c31b690f55658371229c21915801))
+* Upgrade cozy-client 43.1.0 to 43.2.0 ([c513852](https://github.com/cozy/cozy-libs/commit/c513852403f03e4e34b4a69b68ddc69a95b69fbf))
+
+
+### BREAKING CHANGES
+
+* you must have `cozy-client >= 43.2.0`
+
+
+
+
+
 ## [62.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@62.0.0...cozy-mespapiers-lib@62.0.1) (2023-11-15)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
