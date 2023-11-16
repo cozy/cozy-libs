@@ -1,4 +1,4 @@
-import { isOCRActivated } from './isOCRActivated'
+import { isFlagshipOCRAvailable } from './isFlagshipOCRAvailable'
 import { isSomePaperStepsCompliantWithOCR } from './isSomePaperStepsCompliantWithOCR'
 
 /**
@@ -10,7 +10,7 @@ import { isSomePaperStepsCompliantWithOCR } from './isSomePaperStepsCompliantWit
  */
 export const filterSteps = async (steps, webviewIntent) => {
   const isOCR =
-    (await isOCRActivated(webviewIntent)) &&
+    (await isFlagshipOCRAvailable(webviewIntent)) &&
     isSomePaperStepsCompliantWithOCR(steps)
   return steps.filter(step => {
     if (isOCR) {
