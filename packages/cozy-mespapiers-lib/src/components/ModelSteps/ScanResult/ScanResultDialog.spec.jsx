@@ -1,11 +1,14 @@
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, waitFor } from '@testing-library/react'
 import React from 'react'
 
 import ScanResultDialog from './ScanResultDialog'
 import AppLike from '../../../../test/components/AppLike'
+import { FLAGSHIP_SCAN_TEMP_FILENAME } from '../../../constants/const'
+import { isFlagshipOCRAvailable } from '../../../helpers/isFlagshipOCRAvailable'
 import { FormDataProvider } from '../../Contexts/FormDataProvider'
 import { useFormData } from '../../Hooks/useFormData'
 import { useStepperDialog } from '../../Hooks/useStepperDialog'
+import { getAttributesFromOcr } from '../helpers'
 
 const mockCurrentStep = ({ page = '', multipage = false } = {}) => ({
   page,
@@ -19,21 +22,38 @@ const mockFormData = ({ metadata = {}, data = [], contacts = [] } = {}) => ({
 })
 jest.mock('../../Hooks/useStepperDialog')
 jest.mock('../../Hooks/useFormData')
+jest.mock('../../../helpers/isFlagshipOCRAvailable', () => ({
+  ...jest.requireActual('../../../helpers/isFlagshipOCRAvailable'),
+  isFlagshipOCRAvailable: jest.fn()
+}))
+jest.mock('../helpers', () => ({
+  ...jest.requireActual('../helpers'),
+  makeMetadataFromOcr: jest.fn(),
+  getAttributesFromOcr: jest.fn()
+}))
 
 const setup = ({
   nextStep = jest.fn(),
+  isLastStep = jest.fn(),
   setFormData = jest.fn(),
   setCurrentFile = jest.fn(),
   currentStepIndex = 0,
+  allCurrentSteps = [],
+  currentDefinition = {},
   formData = mockFormData(),
   currentFile = mockFile(),
-  currentStep = mockCurrentStep()
+  currentStep = mockCurrentStep(),
+  mockIsFlagshipOCRAvailable = false,
+  mockGetAttributesFromOcr = jest.fn()
 } = {}) => {
+  getAttributesFromOcr.mockImplementation(mockGetAttributesFromOcr)
+  isFlagshipOCRAvailable.mockReturnValue(mockIsFlagshipOCRAvailable)
   useStepperDialog.mockReturnValue({
     currentStepIndex,
     nextStep,
-    currentDefinition: {},
-    allCurrentSteps: []
+    isLastStep,
+    currentDefinition,
+    allCurrentSteps
   })
   useFormData.mockReturnValue({
     setFormData,
@@ -179,6 +199,45 @@ describe('AcquisitionResult component:', () => {
       fireEvent.click(btn)
 
       expect(mockSetFormData).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  describe('OCR', () => {
+    describe('On flagship app and OCR available', () => {
+      it('should not call the OCR process if the file has not passed through the flagship scanner', async () => {
+        const mockGetAttributesFromOcr = jest.fn()
+        const { getByTestId } = setup({
+          currentFile: mockFile({ name: 'test.pdf' }),
+          mockIsFlagshipOCRAvailable: true,
+          isLastStep: jest.fn(() => true),
+          currentDefinition: { ocrAttributes: {} },
+          allCurrentSteps: [{ isDisplayed: 'ocr' }]
+        })
+        const btn = getByTestId('next-button')
+        fireEvent.click(btn)
+
+        await waitFor(() => {
+          expect(mockGetAttributesFromOcr).toBeCalledTimes(0)
+        })
+      })
+
+      it('should call the OCR process if the file has passed through the flagship scanner', async () => {
+        const mockGetAttributesFromOcr = jest.fn()
+        const { getByTestId } = setup({
+          currentFile: mockFile({ name: FLAGSHIP_SCAN_TEMP_FILENAME }),
+          mockIsFlagshipOCRAvailable: true,
+          isLastStep: jest.fn(() => true),
+          mockGetAttributesFromOcr,
+          currentDefinition: { ocrAttributes: {} },
+          allCurrentSteps: [{ isDisplayed: 'ocr' }]
+        })
+        const btn = getByTestId('next-button')
+        fireEvent.click(btn)
+
+        await waitFor(() => {
+          expect(mockGetAttributesFromOcr).toBeCalledTimes(1)
+        })
+      })
     })
   })
 })

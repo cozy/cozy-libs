@@ -1,19 +1,28 @@
 import cx from 'classnames'
 import React, { useRef, useState } from 'react'
 
+import { useWebviewIntent } from 'cozy-intent'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
+import OcrProcessingDialog from './OcrProcessingDialog'
 import ScanResultCard from './ScanResultCard'
 import ScanResultInfo from './ScanResultInfo'
 import ScanResultTitle from './ScanResultTitle'
-import { KEYS } from '../../../constants/const'
+import { FLAGSHIP_SCAN_TEMP_FILENAME, KEYS } from '../../../constants/const'
+import { isFlagshipOCRAvailable } from '../../../helpers/isFlagshipOCRAvailable'
+import { isSomePaperStepsCompliantWithOCR } from '../../../helpers/isSomePaperStepsCompliantWithOCR'
+import { useFormData } from '../../Hooks/useFormData'
 import { useStepperDialog } from '../../Hooks/useStepperDialog'
 import StepperDialogTitle from '../../StepperDialog/StepperDialogTitle'
-import { makeFileFromBase64 } from '../helpers'
+import {
+  getAttributesFromOcr,
+  makeFileFromBase64,
+  makeMetadataFromOcr
+} from '../helpers'
 
 const ScanResultDialog = ({
   currentStep,
@@ -26,36 +35,74 @@ const ScanResultDialog = ({
   const { illustration, multipage, page = 'default', tooltip } = currentStep
   const { t } = useI18n()
   const { currentStepIndex } = useStepperDialog()
+  const { setFormData, formData } = useFormData()
+  const webviewIntent = useWebviewIntent()
 
   const imageRef = useRef(null)
   const [rotationImage, setRotationImage] = useState(0)
-  const { nextStep } = useStepperDialog()
+  const [ocrProcessing, setOcrProcessing] = useState(false)
+  const { nextStep, isLastStep, allCurrentSteps, currentDefinition } =
+    useStepperDialog()
 
-  const onValid = addPage => {
+  const onValid = async addPage => {
+    let currentFileRotated
+    // If the image has changed rotation, the process has changed it to base64, so we need to transform it back into File before saving it in the formData
     if (rotationImage % 360 !== 0) {
-      const newFile = makeFileFromBase64({
+      currentFileRotated = makeFileFromBase64({
         source: imageRef.current.src,
         name: currentFile.name,
         type: currentFile.type
       })
-      onChangeFile(newFile, { replace: true })
+      onChangeFile(currentFileRotated, { replace: true })
     }
 
     if (addPage) {
       setCurrentFile(null)
     } else {
+      const isOcrPaperAvailable =
+        currentFile.name === FLAGSHIP_SCAN_TEMP_FILENAME && // The file must have been passed through the flagship scanner
+        isLastStep('scan') &&
+        isSomePaperStepsCompliantWithOCR(allCurrentSteps) &&
+        !!currentDefinition.ocrAttributes
+
+      if (isOcrPaperAvailable) {
+        const OcrActivated = await isFlagshipOCRAvailable(webviewIntent)
+        if (OcrActivated) {
+          setOcrProcessing(true)
+          const attributesFound = await getAttributesFromOcr({
+            formData,
+            ocrAttributes: currentDefinition.ocrAttributes,
+            currentFile,
+            currentFileRotated,
+            webviewIntent
+          })
+          const metadataFromOcr = makeMetadataFromOcr(attributesFound)
+
+          setFormData(prev => ({
+            ...prev,
+            metadata: {
+              ...prev.metadata,
+              ...metadataFromOcr
+            }
+          }))
+        }
+      }
       nextStep()
     }
   }
 
-  const handleNextStep = () => onValid(false)
-  const handleRepeatStep = () => onValid(true)
+  const handleNextStep = async () => await onValid(false)
+  const handleRepeatStep = async () => await onValid(true)
 
   const handleKeyDown = ({ key }) => {
     if (key === KEYS.ENTER) handleNextStep()
   }
 
   useEventListener(window, 'keydown', handleKeyDown)
+
+  if (ocrProcessing) {
+    return <OcrProcessingDialog onBack={onBack} />
+  }
 
   return (
     <Dialog
