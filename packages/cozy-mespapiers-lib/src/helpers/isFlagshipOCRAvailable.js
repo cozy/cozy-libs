@@ -7,7 +7,7 @@ import flag from 'cozy-flags'
  * @param {function} webviewIntent.call - A function to call flagshipApp methods, expecting the method name and its arguments.
  * @returns {Promise<boolean>} true if the OCR feature is available
  */
-export const isOCRActivated = async webviewIntent => {
+export const isFlagshipOCRAvailable = async webviewIntent => {
   const isFlagshipAppOcrAvailable = await webviewIntent?.call(
     'isAvailable',
     'ocr'

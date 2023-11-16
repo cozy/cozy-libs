@@ -1,10 +1,10 @@
 import { act } from '@testing-library/react'
 
 import { filterSteps } from './filterSteps'
-import { isOCRActivated } from './isOCRActivated'
+import { isFlagshipOCRAvailable } from './isFlagshipOCRAvailable'
 
-jest.mock('./isOCRActivated', () => ({
-  isOCRActivated: jest.fn()
+jest.mock('./isFlagshipOCRAvailable', () => ({
+  isFlagshipOCRAvailable: jest.fn()
 }))
 
 describe('filterSteps', () => {
@@ -19,7 +19,7 @@ describe('filterSteps', () => {
   ]
 
   it('should return step with "isDisplayed" as "ocr" or "all" when OCR is activated', async () => {
-    isOCRActivated.mockReturnValue(true)
+    isFlagshipOCRAvailable.mockReturnValue(true)
     const stepsFilterd = await filterSteps(steps, { call: jest.fn() })
     act(() => {
       expect(stepsFilterd).toStrictEqual([
@@ -33,7 +33,7 @@ describe('filterSteps', () => {
   })
 
   it('should return step with "isDisplayed" as "undefined" or "all" when OCR is desactivated', async () => {
-    isOCRActivated.mockReturnValue(false)
+    isFlagshipOCRAvailable.mockReturnValue(false)
     const stepsFilterd = await filterSteps(steps)
     expect(stepsFilterd).toStrictEqual([
       { model: 'scan', isDisplayed: 'all' },
