@@ -7,7 +7,7 @@ import { CozyProvider, createMockClient } from 'cozy-client'
 import { WebviewIntentProvider } from 'cozy-intent'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import I18n from 'cozy-ui/transpiled/react/providers/I18n'
+import { I18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { ErrorProvider } from '../../src/components/Contexts/ErrorProvider'
 import { ModalProvider } from '../../src/components/Contexts/ModalProvider'
