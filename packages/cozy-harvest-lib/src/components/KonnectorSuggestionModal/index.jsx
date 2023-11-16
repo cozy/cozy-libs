@@ -44,7 +44,7 @@ const KonnectorSuggestionModal = ({
   }
 
   return (
-    <CozyTheme variant="normal">
+    <CozyTheme variant="normal" className="u-pos-absolute">
       <IllustrationDialog
         open
         onClose={onClose}
