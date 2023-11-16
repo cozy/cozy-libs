@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [65.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@64.0.2...cozy-mespapiers-lib@65.0.0) (2023-11-16)
+
+
+### Bug Fixes
+
+* The rotateImage function does not need to be executed ([dc958eb](https://github.com/cozy/cozy-libs/commit/dc958eb41f052f783f9fc96ad8e5377332e86d9e))
+
+
+### Features
+
+* Add `FLAGSHIP_SCAN_TEMP_FILENAME` constant ([9c2fd47](https://github.com/cozy/cozy-libs/commit/9c2fd479bb14c6c81ef262eef2e09adcdca5f33b))
+* Add `isAvailable` flagship method to `isOCRActivated` helper ([c7ca01a](https://github.com/cozy/cozy-libs/commit/c7ca01a7eca4d4a8dd579c4db9d7d6d22fa98c13))
+* Add helper for make a compliant object with formMetadata ([77f687b](https://github.com/cozy/cozy-libs/commit/77f687b928d7f3a11b534b569b8425b2b5c16854))
+* Add helper for transform File to Base64 ([bb3b22c](https://github.com/cozy/cozy-libs/commit/bb3b22c770365ffa26e057dd6095c96aa0af5d42))
+* Add helper to get attributes from OCR ([450b1ae](https://github.com/cozy/cozy-libs/commit/450b1ae4d0c62d1e1d53d48ebdd1543ea7449046))
+* Add new animated svg for ocr processing ([c988299](https://github.com/cozy/cozy-libs/commit/c9882991e8eb3d9ff554a1a4b9a2aa84ad4ffeca))
+* Add OCR informations to papersDefinitions file ([ecd4adb](https://github.com/cozy/cozy-libs/commit/ecd4adbd9c59a3644683328fab0d84c9eafaa3ab))
+* Add some functions to process OCR result ([58d1de9](https://github.com/cozy/cozy-libs/commit/58d1de9ba52a747c615cf04c9365b5fa33eeed29))
+* Added Dialog for OCR processing ([86660c8](https://github.com/cozy/cozy-libs/commit/86660c85215ec6b251e75aa3f0fe259e6fe0fd84))
+* Integration of the `OCR` functionality in `ScanResultDialog`  ([19d6f96](https://github.com/cozy/cozy-libs/commit/19d6f96b2e818d76d7b3f20618b5c72b55f2c123))
+* **mespapiers:** Helper update to know if we are at the last step ([287f004](https://github.com/cozy/cozy-libs/commit/287f004435858e47c19b3059a25aeaacf8bf1257))
+* Update cozy packages and synchronize peerDeps ([68a8155](https://github.com/cozy/cozy-libs/commit/68a81551a9512fe44d84980c8e63f70fabbd955f))
+* Update ocr informations translations ([9b0a915](https://github.com/cozy/cozy-libs/commit/9b0a9152c0dbce8f53ed52b91f1ad9edb9650217))
+
+
+### BREAKING CHANGES
+
+* you must have
+- `cozy-sharing >= 10.0.0`
+- `cozy-intent >= 2.18.0`
+
+
+
+
+
 ## [64.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@64.0.1...cozy-mespapiers-lib@64.0.2) (2023-11-16)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
