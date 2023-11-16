@@ -1,5 +1,8 @@
+import parse from 'date-fns/parse'
+
 import { isAndroid, isIOS } from 'cozy-device-helper'
 import log from 'cozy-logger'
+import { knownDateMetadataNames } from 'cozy-ui/transpiled/react/Viewer/helpers'
 
 import { ANDROID_APP_URL, IOS_APP_URL } from '../../constants/const'
 import { findAttributes } from '../../helpers/findAttributes'
@@ -334,4 +337,37 @@ export const getAttributesFromOcr = async ({
     )
     return []
   }
+}
+
+/**
+ * Get date from string
+ * @param {string} string - String to parse
+ * @returns {string} - Date in ISO format
+ */
+const getDatefromString = string => {
+  try {
+    const [day, month, year] = string.split(/[ .-]/)
+    const dateFormat = 'ddMMyyyy'
+    const date = parse(`${day}${month}${year}`, dateFormat, new Date())
+    return date.toISOString()
+  } catch (error) {
+    log('info', `Error while parsing date: ${error}`, 'getDatefromString')
+    return string
+  }
+}
+
+/**
+ * Make metadata from OCR attributes
+ * @param {Object[]} ocrAttributes - Attributes found from OCR
+ * @returns {Object} - Metadata
+ */
+export const makeMetadataFromOcr = ocrAttributes => {
+  return ocrAttributes.reduce((acc, { name, value }) => {
+    return {
+      ...acc,
+      [name]: knownDateMetadataNames.includes(name)
+        ? getDatefromString(value)
+        : value
+    }
+  }, {})
 }
