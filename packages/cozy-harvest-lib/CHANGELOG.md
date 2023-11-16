@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.2.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.2.3...cozy-harvest-lib@20.2.4) (2023-11-16)
+
+
+### Bug Fixes
+
+* **harvest:** Remove SuggestionContainer from flow ([24db015](https://github.com/cozy/cozy-libs/commit/24db0153359fd50b46950fa9898c87099d8faa74))
+
+
+
+
+
 ## [20.2.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.2.2...cozy-harvest-lib@20.2.3) (2023-11-15)
 
 
