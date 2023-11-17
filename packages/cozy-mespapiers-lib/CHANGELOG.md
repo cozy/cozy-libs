@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [65.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@65.0.0...cozy-mespapiers-lib@65.1.0) (2023-11-17)
+
+
+### Features
+
+* Add label given by user to paper other_invoice.json ([63af19e](https://github.com/cozy/cozy-libs/commit/63af19e726c0860bc06f6382f6acc9b2c6f35464))
+
+
+
+
+
 # [65.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@64.0.2...cozy-mespapiers-lib@65.0.0) (2023-11-16)
 
 
