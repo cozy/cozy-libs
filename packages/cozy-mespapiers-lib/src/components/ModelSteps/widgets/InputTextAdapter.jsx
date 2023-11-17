@@ -49,7 +49,14 @@ const InputTextAdapter = ({
   setIsFocus,
   idx
 }) => {
-  const { name, inputLabel, mask, withAdornment, maskPlaceholder = 'ˍ' } = attrs
+  const {
+    name,
+    inputLabel,
+    maxLength,
+    mask,
+    withAdornment,
+    maskPlaceholder = 'ˍ'
+  } = attrs
   const { t } = useI18n()
   const [currentValue, setCurrentValue] = useState(defaultValue || '')
   const [isTooShort, setIsTooShort] = useState(false)
@@ -142,6 +149,9 @@ const InputTextAdapter = ({
     ? t('InputTextAdapter.onlySpaces')
     : ' '
 
+  const labelOption = maxLength ? { maxLength } : undefined
+  const label = inputLabel ? t(inputLabel, labelOption) : ''
+
   if (mask) {
     return (
       <InputMask
@@ -156,7 +166,7 @@ const InputTextAdapter = ({
         <TextField
           type="text"
           variant="outlined"
-          label={inputLabel ? t(inputLabel) : ''}
+          label={label}
           error={isError}
           helperText={helperText}
           inputProps={{
@@ -185,7 +195,7 @@ const InputTextAdapter = ({
     <TextField
       type="text"
       variant="outlined"
-      label={inputLabel ? t(inputLabel) : ''}
+      label={label}
       error={isError}
       helperText={helperText}
       value={currentValue}

@@ -189,11 +189,11 @@
       },
       "addressLabel": {
         "text": "Choisissez un libelé court pour ce logement",
-        "inputLabel": "Libellé du logement (10 caractères max.)"
+        "inputLabel": "Libellé du logement (%{maxLength} caractères max.)"
       },
       "fileLabel": {
         "text": "Choisissez un nom pour ce document",
-        "inputLabel": "Nom du document (40 caractères max.)"
+        "inputLabel": "Nom du document (%{maxLength} caractères max.)"
       },
       "noticePeriod": {
         "inputLabel": "Alerte d'expiration",
