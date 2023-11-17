@@ -82,7 +82,7 @@ const CreatePaperModal = () => {
               ...prev.data,
               {
                 file,
-                stepIndex: 1,
+                stepIndex: 0,
                 fileMetadata: {
                   page: 'front'
                 }
