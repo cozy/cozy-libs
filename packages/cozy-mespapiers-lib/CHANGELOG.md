@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [65.2.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@65.2.0...cozy-mespapiers-lib@65.2.1) (2023-11-17)
+
+
+### Bug Fixes
+
+* Saving the upload file in the state of the paper creation process ([3f10f19](https://github.com/cozy/cozy-libs/commit/3f10f194bc8042610a7637f2f8165f7f67ee1a50))
+
+
+
+
+
 # [65.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@65.1.0...cozy-mespapiers-lib@65.2.0) (2023-11-17)
 
 
