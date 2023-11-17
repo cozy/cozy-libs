@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [65.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@65.1.0...cozy-mespapiers-lib@65.2.0) (2023-11-17)
+
+
+### Features
+
+* The label of the information step fields adapts automatically ([7edad6a](https://github.com/cozy/cozy-libs/commit/7edad6aa15209e62362cafc7d1b51aea605a3357))
+
+
+
+
+
 # [65.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@65.0.0...cozy-mespapiers-lib@65.1.0) (2023-11-17)
 
 
