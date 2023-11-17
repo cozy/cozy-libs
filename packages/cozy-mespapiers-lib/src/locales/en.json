@@ -189,11 +189,11 @@
       },
       "addressLabel": {
         "text": "Choose a short label for this accommodation",
-        "inputLabel": "accommodation label (10 letters max.)"
+        "inputLabel": "accommodation label (%{maxLength} letters max.)"
       },
       "fileLabel": {
         "text": "Choose a name for this document",
-        "inputLabel": "Document name (40 letters max.)"
+        "inputLabel": "Document name (%{maxLength} letters max.)"
       },
       "noticePeriod": {
         "inputLabel": "Expiration alert",
