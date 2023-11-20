@@ -118,6 +118,7 @@
               "name": "number",
               "type": "text",
               "mask": "aa99 9999 9999 9999 9999 9999 999",
+              "minLength": 25,
               "inputLabel": "PaperJSON.bankDetails.number.inputLabel"
             },
             {
@@ -141,6 +142,7 @@
               "name": "number",
               "type": "text",
               "mask": "aa99 9999 9999 9999 9999 9999 999",
+              "minLength": 25,
               "inputLabel": "PaperJSON.bankDetails.number.inputLabel"
             }
           ]
