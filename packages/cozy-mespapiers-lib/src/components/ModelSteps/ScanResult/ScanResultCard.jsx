@@ -67,7 +67,7 @@ const ScanResultCard = forwardRef(
           ) : (
             <>
               <Icon icon="file-type-pdf" size={80} aria-hidden="true" />
-              <Typography>{currentFile.name}</Typography>
+              <Typography className="u-mt-half">{currentFile.name}</Typography>
             </>
           )}
         </div>
