@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [65.2.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@65.2.1...cozy-mespapiers-lib@65.2.2) (2023-11-20)
+
+
+### Bug Fixes
+
+* Style for pdf icon in step view when importing a pdf ([6a38676](https://github.com/cozy/cozy-libs/commit/6a38676f3418ddb80b197ce5a1c5289aa8c8f121))
+
+
+
+
+
 ## [65.2.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@65.2.0...cozy-mespapiers-lib@65.2.1) (2023-11-17)
 
 
