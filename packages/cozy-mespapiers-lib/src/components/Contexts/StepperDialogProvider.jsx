@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 import { useWebviewIntent } from 'cozy-intent'
 
@@ -12,6 +13,8 @@ const StepperDialogProvider = ({ children }) => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0)
   const [currentDefinition, setCurrentDefinition] = useState(null)
   const webviewIntent = useWebviewIntent()
+  const [searchParams] = useSearchParams()
+  const fromFlagshipUpload = searchParams.get('fromFlagshipUpload')
 
   const resetStepperDialog = () => {
     setCurrentDefinition(null)
@@ -26,16 +29,17 @@ const StepperDialogProvider = ({ children }) => {
         setStepperDialogTitle(currentDefinition.label)
         const allCurrentStepsDefinitions = currentDefinition.acquisitionSteps
         if (allCurrentStepsDefinitions.length > 0) {
-          const filteredSteps = await filterSteps(
-            allCurrentStepsDefinitions,
-            webviewIntent
-          )
+          const filteredSteps = await filterSteps({
+            steps: allCurrentStepsDefinitions,
+            webviewIntent,
+            fromFlagshipUpload
+          })
           setAllCurrentSteps(filteredSteps)
         }
       }
       buildAllCurrentSteps()
     }
-  }, [webviewIntent, currentDefinition])
+  }, [webviewIntent, currentDefinition, fromFlagshipUpload])
 
   const previousStep = () => {
     if (currentStepIndex > 0) {
