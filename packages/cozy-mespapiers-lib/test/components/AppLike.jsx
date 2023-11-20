@@ -43,15 +43,13 @@ const AppLike = ({ children, client, history }) => {
                   <SearchProvider doctypes={[FILES_DOCTYPE, CONTACTS_DOCTYPE]}>
                     <MuiCozyTheme>
                       <BreakpointsProvider>
-                        <PapersDefinitionsProvider>
-                          <StepperDialogProvider>
-                            <ModalProvider>
-                              <HashRouter history={hashHistory}>
-                                {children}
-                              </HashRouter>
-                            </ModalProvider>
-                          </StepperDialogProvider>
-                        </PapersDefinitionsProvider>
+                        <HashRouter history={hashHistory}>
+                          <PapersDefinitionsProvider>
+                            <StepperDialogProvider>
+                              <ModalProvider>{children}</ModalProvider>
+                            </StepperDialogProvider>
+                          </PapersDefinitionsProvider>
+                        </HashRouter>
                       </BreakpointsProvider>
                     </MuiCozyTheme>
                   </SearchProvider>

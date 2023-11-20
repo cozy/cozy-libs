@@ -8,10 +8,15 @@ import { isSomePaperStepsCompliantWithOCR } from './isSomePaperStepsCompliantWit
  * @param {function} webviewIntent.call - A function to call native methods, expecting the method name and its arguments.
  * @returns {Promise<object[]>} list of step filtered
  */
-export const filterSteps = async (steps, webviewIntent) => {
+export const filterSteps = async ({
+  steps,
+  webviewIntent,
+  fromFlagshipUpload
+}) => {
   const isOCR =
-    (await isFlagshipOCRAvailable(webviewIntent)) &&
-    isSomePaperStepsCompliantWithOCR(steps)
+    !fromFlagshipUpload &&
+    isSomePaperStepsCompliantWithOCR(steps) &&
+    (await isFlagshipOCRAvailable(webviewIntent))
   return steps.filter(step => {
     if (isOCR) {
       return step.isDisplayed === 'all' || step.isDisplayed === 'ocr'
