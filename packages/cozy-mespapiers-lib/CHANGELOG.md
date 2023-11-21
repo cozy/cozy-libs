@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [66.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@65.2.3...cozy-mespapiers-lib@66.0.0) (2023-11-21)
+
+
+### Bug Fixes
+
+* IBAN number must be valid with 25 characters ([d94c59d](https://github.com/cozy/cozy-libs/commit/d94c59d32f91dce44777d1b37ed286384ca1b1fe))
+* Use the "mask" attribute rather than "maxLength" ([8014b3d](https://github.com/cozy/cozy-libs/commit/8014b3dbe078385276b750093976f02a50553707))
+
+
+### Features
+
+* Upgrade cozy-ui to 95.11.1 ([bdd795f](https://github.com/cozy/cozy-libs/commit/bdd795f941cd00c710613bdd217c174acefa388b))
+
+
+### BREAKING CHANGES
+
+* you must have `cozy-ui >= 95.11.1`
+
+This allows you to benefit from the addition
+of the BIC number in the Viewer.
+
+
+
+
+
 ## [65.2.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@65.2.2...cozy-mespapiers-lib@65.2.3) (2023-11-20)
 
 
