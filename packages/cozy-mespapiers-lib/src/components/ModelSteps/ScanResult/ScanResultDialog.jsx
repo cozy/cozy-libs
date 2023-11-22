@@ -1,5 +1,6 @@
 import cx from 'classnames'
 import React, { useRef, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 import { useWebviewIntent } from 'cozy-intent'
 import Button from 'cozy-ui/transpiled/react/Buttons'
@@ -37,12 +38,15 @@ const ScanResultDialog = ({
   const { currentStepIndex } = useStepperDialog()
   const { setFormData, formData } = useFormData()
   const webviewIntent = useWebviewIntent()
+  const [searchParams] = useSearchParams()
 
   const imageRef = useRef(null)
   const [rotationImage, setRotationImage] = useState(0)
   const [ocrProcessing, setOcrProcessing] = useState(false)
   const { nextStep, isLastStep, allCurrentSteps, currentDefinition } =
     useStepperDialog()
+
+  const fromFlagshipUpload = searchParams.get('fromFlagshipUpload')
 
   const onValid = async addPage => {
     let currentFileRotated
@@ -60,6 +64,7 @@ const ScanResultDialog = ({
       setCurrentFile(null)
     } else {
       const isOcrPaperAvailable =
+        !fromFlagshipUpload &&
         currentFile.name === FLAGSHIP_SCAN_TEMP_FILENAME && // The file must have been passed through the flagship scanner
         isLastStep('scan') &&
         isSomePaperStepsCompliantWithOCR(allCurrentSteps) &&
