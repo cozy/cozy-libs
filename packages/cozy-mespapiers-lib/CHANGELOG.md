@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [66.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@66.0.0...cozy-mespapiers-lib@66.0.1) (2023-11-22)
+
+
+### Bug Fixes
+
+* **mespapiers:** OCR process must not be triggered via flagship upload ([e111e83](https://github.com/cozy/cozy-libs/commit/e111e83e3f93b26ab16962e2b2e43d039b2dcd1c))
+
+
+
+
+
 # [66.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@65.2.3...cozy-mespapiers-lib@66.0.0) (2023-11-21)
 
 
