@@ -48,10 +48,9 @@ const KonnectorSuggestionModal = ({
       <IllustrationDialog
         open
         onClose={onClose}
+        title={<Illustration alt={t('app.logo.alt', { name })} app={slug} />}
         content={
-          <div className="u-flex u-flex-column u-flex-items-center u-h-100">
-            <Illustration alt={t('app.logo.alt', { name })} app={slug} />
-
+          <div className="u-flex u-flex-column u-flex-items-center">
             <Typography className="u-mb-half" variant="h4">
               {t('suggestions.title', { name })}
             </Typography>
