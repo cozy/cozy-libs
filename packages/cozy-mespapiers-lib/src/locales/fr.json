@@ -345,7 +345,7 @@
     "PapersListByContact": {
       "seeMore": "Voir plus (%{number})"
     },
-    "empty": "Vous n'avez aucun papier dans ce thème.",
+    "empty": "Sélectionner un papier à ajouter dans la liste ci-dessous ou cliquer sur le bouton “ajouter” en bas à droite de l’écran pour voir la liste complète des papiers.",
     "expired": "Expiré",
     "expiresIn": "Expire dans %{duration}"
   },

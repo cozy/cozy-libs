@@ -345,7 +345,7 @@
     "PapersListByContact": {
       "seeMore": "See more (%{number})"
     },
-    "empty": "You do not have any papers yet in this topic.",
+    "empty": "Select a paper to add from the list below or click on the “add“ button at the bottom right of the screen to see the full list of papers.",
     "expired": "Expired",
     "expiresIn": "Expires in %{duration}"
   },
