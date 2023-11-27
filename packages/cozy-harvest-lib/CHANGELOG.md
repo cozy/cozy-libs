@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.2.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.2.4...cozy-harvest-lib@20.2.5) (2023-11-27)
+
+
+### Bug Fixes
+
+* **harvest:** Illustration as title in Suggestion ([daecc19](https://github.com/cozy/cozy-libs/commit/daecc19961922bc2ddff12874f551489d2519811))
+
+
+
+
+
 ## [20.2.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.2.3...cozy-harvest-lib@20.2.4) (2023-11-16)
 
 
