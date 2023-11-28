@@ -8,7 +8,6 @@ import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import { LinearProgress } from 'cozy-ui/transpiled/react/Progress'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
@@ -16,7 +15,7 @@ import ForwardModal from './ForwardModal'
 import { FILES_DOCTYPE } from '../../doctypes'
 import { fetchCurrentUser } from '../../helpers/fetchCurrentUser'
 import getOrCreateAppFolderWithReference from '../../helpers/getFolderWithReference'
-import { downloadFiles, forwardFile, makeZipFolder } from '../Actions/utils'
+import { makeZipFolder } from '../Actions/utils'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const { getDisplayName } = models.contact
@@ -44,7 +43,6 @@ const MultiselectViewActions = ({ onClose }) => {
   const client = useClient()
   const classes = useStyles()
   const { allMultiSelectionFiles } = useMultiSelection()
-  const { isMobile } = useBreakpoints()
   const [zipFolder, setZipFolder] = useState({ name: '', dirId: '' })
   const [isForwardModalOpen, setIsForwardModalOpen] = useState(false)
   const [isBackdropOpen, setIsBackdropOpen] = useState(false)
@@ -68,15 +66,10 @@ const MultiselectViewActions = ({ onClose }) => {
     }
   })
 
-  const download = async () => {
-    await downloadFiles(client, allMultiSelectionFiles)
-    onClose()
-  }
-
   const forward = async () => {
     if (allMultiSelectionFiles.length === 1) {
-      await forwardFile(client, allMultiSelectionFiles, t)
-      onClose()
+      setFileToForward(allMultiSelectionFiles[0])
+      setIsForwardModalOpen(true)
     } else {
       setIsBackdropOpen(true)
 
@@ -101,8 +94,10 @@ const MultiselectViewActions = ({ onClose }) => {
     }
   }
 
-  const isDesktopOrMobileWithoutShareAPI =
-    (isMobile && !navigator.share) || !isMobile
+  const handleCloseForwardModal = () => {
+    setIsForwardModalOpen(false)
+    setFileToForward(null)
+  }
 
   return (
     <>
@@ -121,31 +116,18 @@ const MultiselectViewActions = ({ onClose }) => {
         </div>
       </Backdrop>
 
-      {isDesktopOrMobileWithoutShareAPI && (
-        <Button
-          variant="secondary"
-          label={t('action.zipDownload')}
-          startIcon={<Icon icon="download" />}
-          onClick={download}
-          disabled={allMultiSelectionFiles.length === 0}
-          data-testid="downloadButton"
-        />
-      )}
-
-      {!isDesktopOrMobileWithoutShareAPI && (
-        <Button
-          variant="secondary"
-          label={t('action.forward')}
+      <Button
+        variant="secondary"
+        label={t('action.forward')}
         startIcon={<Icon icon="reply" />}
-          onClick={forward}
-          disabled={allMultiSelectionFiles.length === 0}
-          data-testid="forwardButton"
-        />
-      )}
+        onClick={forward}
+        disabled={allMultiSelectionFiles.length === 0}
+        data-testid="forwardButton"
+      />
 
       {isForwardModalOpen && (
         <ForwardModal
-          onClose={() => setIsForwardModalOpen(false)}
+          onClose={handleCloseForwardModal}
           onForward={onClose}
           fileToForward={fileToForward}
         />
