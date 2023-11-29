@@ -3,8 +3,6 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import List from 'cozy-ui/transpiled/react/List'
-import Typography from 'cozy-ui/transpiled/react/Typography'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import CategoryItemByPaper from './CategoryItemByPaper'
 import KonnectorsCategories from './KonnectorsCategories'
@@ -12,7 +10,6 @@ import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const PaperGroup = ({ papersByCategories, konnectors, selectedTheme }) => {
   const navigate = useNavigate()
-  const { t } = useI18n()
   const { isMultiSelectionActive, setSelectedQualificationLabel } =
     useMultiSelection()
 
@@ -28,15 +25,6 @@ const PaperGroup = ({ papersByCategories, konnectors, selectedTheme }) => {
 
   return (
     <List>
-      {!hasPapers && (
-        <Typography
-          className="u-ml-1 u-mv-1"
-          variant="body2"
-          color="textSecondary"
-        >
-          {t('PapersList.empty')}
-        </Typography>
-      )}
       {hasPapers &&
         Object.entries(papersByCategories).map(([category, papers], index) => (
           <CategoryItemByPaper
