@@ -34,7 +34,7 @@ export const MesPapiersLibLayout = () => {
       {flag('switcher') && <FlagSwitcher />}
 
       {customPapersDefinitions.isLoaded && (
-        <Typography variant="subtitle2" align="center" color="secondary">
+        <Typography variant="subtitle2" align="center" color="error">
           {t(`PapersDefinitionsProvider.customPapersDefinitions.warning`, {
             name: customPapersDefinitions.name
           })}
