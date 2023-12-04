@@ -24,7 +24,7 @@ import MultiselectView from './Views/MultiselectView'
 import Onboarding from './Views/Onboarding'
 import PageEdit from './Views/PageEdit'
 import PapersList from './Views/PapersList'
-import PlaceholderListModal from './Views/PlaceholderListModal'
+import PlaceholdersSelector from './Views/PlaceholdersSelector'
 
 const OutletWrapper = ({ Component }) => (
   <>
@@ -60,7 +60,7 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
               path="installKonnectorIntent"
               element={<InstallKonnectorFromIntent />}
             />
-            <Route path="create" element={<PlaceholderListModal />} />
+            <Route path="create" element={<PlaceholdersSelector />} />
             <Route
               path="create/:qualificationLabel"
               element={<CreatePaperModal />}
@@ -77,7 +77,7 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
               path="installKonnectorIntent"
               element={<InstallKonnectorFromIntent />}
             />
-            <Route path="create" element={<PlaceholderListModal />} />
+            <Route path="create" element={<PlaceholdersSelector />} />
             <Route
               path="create/:qualificationLabel"
               element={<CreatePaperModal />}
