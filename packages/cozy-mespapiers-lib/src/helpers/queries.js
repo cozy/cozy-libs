@@ -148,6 +148,14 @@ export const buildTriggersQueryByKonnectorSlug = (slug, enabled) => ({
   }
 })
 
+export const buildKonnectorsQuery = () => ({
+  definition: () => Q(KONNECTORS_DOCTYPE),
+  options: {
+    as: `${KONNECTORS_DOCTYPE}`,
+    fetchPolicy: defaultFetchPolicy
+  }
+})
+
 export const buildKonnectorsQueryById = (id, enabled = true) => ({
   definition: () => Q(KONNECTORS_DOCTYPE).getById(id),
   options: {
