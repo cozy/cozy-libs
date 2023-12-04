@@ -129,7 +129,7 @@ const MultiselectViewActions = ({ onClose }) => {
         <ForwardModal
           onClose={handleCloseForwardModal}
           onForward={onClose}
-          fileToForward={fileToForward}
+          file={fileToForward}
         />
       )}
     </>
