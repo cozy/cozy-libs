@@ -10,12 +10,12 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { forwardFile } from '../Actions/utils'
 
-const ForwardModal = ({ onClose, onForward, fileToForward }) => {
+const ForwardModal = ({ onClose, onForward, file }) => {
   const client = useClient()
   const { t } = useI18n()
 
   const handleClick = async () => {
-    await forwardFile(client, [fileToForward], t)
+    await forwardFile(client, [file], t)
     onForward && onForward()
   }
 
@@ -41,7 +41,7 @@ const ForwardModal = ({ onClose, onForward, fileToForward }) => {
 ForwardModal.propTypes = {
   onForward: PropTypes.func,
   onClose: PropTypes.func,
-  fileToForward: PropTypes.object
+  file: PropTypes.object
 }
 
 export default ForwardModal
