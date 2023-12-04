@@ -4,11 +4,20 @@ import React from 'react'
 import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import { FileImageLoader } from 'cozy-ui/transpiled/react/FileImageLoader'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import Skeleton from 'cozy-ui/transpiled/react/Skeleton'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { forwardFile } from '../Actions/utils'
+
+const styles = {
+  image: {
+    maxHeight: 64,
+    maxWidth: 64
+  }
+}
 
 const ForwardModal = ({ onClose, onForward, file }) => {
   const client = useClient()
@@ -26,9 +35,24 @@ const ForwardModal = ({ onClose, onForward, file }) => {
       content={
         <>
           <div className="u-ta-center u-mb-1">
-            <Icon icon="file-type-zip" size={64} />
+            <FileImageLoader
+              client={client}
+              file={file}
+              linkType="tiny"
+              render={src => {
+                return src ? (
+                  <img src={src} alt="" style={styles.image} />
+                ) : (
+                  <Skeleton variant="rect" animation="wave" />
+                )
+              }}
+              renderFallback={() => <Icon icon="file-type-zip" size={64} />}
+            />
+            <Typography variant="h5" className="u-mv-1">
+              {file.name}
+            </Typography>
+            <Typography>{t('ForwardModal.content')}</Typography>
           </div>
-          <Typography>{t('ForwardModal.content')}</Typography>
         </>
       }
       actions={
