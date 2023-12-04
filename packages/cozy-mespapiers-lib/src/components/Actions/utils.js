@@ -60,12 +60,15 @@ export const makeZipFolder = async ({
  * @param {CozyClient} client
  * @param {array} files One or more files to download
  * @param {func} t i18n function
+ * @param {object} options
+ * @param {string} options.ttl Time to live of the sharing link
+ * @param {string} options.password Password of the sharing link
  */
-export const forwardFile = async (client, files, t) => {
+export const forwardFile = async (client, files, t, { ttl, password }) => {
   try {
     // We currently support only one file at a time
     const file = files[0]
-    const url = await getSharingLink(client, [file._id])
+    const url = await getSharingLink(client, [file._id], { ttl, password })
     const isZipFile = file.class === 'zip'
     const shareData = {
       title: t('viewer.shareData.title', {

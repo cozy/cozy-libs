@@ -1,5 +1,6 @@
+import addDays from 'date-fns/addDays'
 import PropTypes from 'prop-types'
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { useClient, useQuery } from 'cozy-client'
@@ -14,7 +15,10 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
+import BoxDate from './BoxDate'
+import BoxPassword from './BoxPassword'
 import { copyToClipboard } from '../../helpers/copyToClipboard'
+import { makeTTL } from '../../helpers/makeTTL'
 import { buildFileQueryById } from '../../helpers/queries'
 import { forwardFile } from '../Actions/utils'
 
@@ -25,6 +29,8 @@ const styles = {
   }
 }
 
+const PASSWORD_MIN_LENGTH = 4
+
 const ForwardModal = ({ onClose, onForward, file }) => {
   const client = useClient()
   const { t } = useI18n()
@@ -32,6 +38,12 @@ const ForwardModal = ({ onClose, onForward, file }) => {
   const { fileId } = useParams()
   const navigate = useNavigate()
   const modalContentRef = useRef(null)
+  const [password, setPassword] = useState('')
+  const [selectedDate, setSelectedDate] = useState(addDays(new Date(), 30))
+  const [isValidDate, setIsValidDate] = useState(true)
+  const [isValidPassword, setIsValidPassword] = useState(true)
+  const [dateToggle, setDateToggle] = useState(true)
+  const [passwordToggle, setPasswordToggle] = useState(false)
 
   const buildedFilesQuery = buildFileQueryById(fileId, !!fileId)
   const { data } = useQuery(
@@ -48,13 +60,56 @@ const ForwardModal = ({ onClose, onForward, file }) => {
   const isMultipleFile = fileToForward.mime === 'application/zip' ? 2 : 1
   const onCloseForwardModal = () => (onClose ? onClose() : navigate('..'))
 
+  // #region Handle BoxPassword
+  const handlePasswordToggle = val => {
+    setPasswordToggle(val)
+  }
+  const handlePassword = evt => {
+    const value = evt.target.value
+    setPassword(value)
+    setIsValidPassword(
+      value.length === 0 || value.length >= PASSWORD_MIN_LENGTH
+    )
+  }
+  const helperTextPassword = !isValidPassword
+    ? t('InputTextAdapter.invalidTextMessage', {
+        smart_count: PASSWORD_MIN_LENGTH - password.length
+      })
+    : null
+  // #endregion
+
+  // #region Handle BoxDate
+  const handleDateToggle = val => {
+    setDateToggle(val)
+  }
+  const handleDateChange = value => {
+    if (value?.toString() !== 'Invalid Date') {
+      setIsValidDate(true)
+      setSelectedDate(value)
+    } else if (value === '') {
+      setIsValidDate(true)
+      setSelectedDate(null)
+    } else {
+      setIsValidDate(false)
+      setSelectedDate(null)
+    }
+  }
+  const helperTextDate = !isValidDate
+    ? t('InputDateAdapter.invalidDateMessage')
+    : null
+  // #endregion
+
   const handleClick = async () => {
+    const ttl = makeTTL(dateToggle && selectedDate)
     if (isDesktopOrMobileWithoutShareAPI) {
-      const url = await getSharingLink(client, [fileToForward._id])
+      const url = await getSharingLink(client, [fileToForward._id], {
+        ttl,
+        password
+      })
       copyToClipboard(url, { target: modalContentRef.current, t, showAlert })
       onCloseForwardModal()
     } else {
-      await forwardFile(client, [fileToForward], t)
+      await forwardFile(client, [fileToForward], t, { ttl, password })
       onForward?.()
     }
   }
@@ -95,9 +150,30 @@ const ForwardModal = ({ onClose, onForward, file }) => {
             </Typography>
             <Typography>{textContent}</Typography>
           </div>
+          <BoxDate
+            onChange={handleDateChange}
+            date={selectedDate}
+            onToggle={handleDateToggle}
+            toggle={dateToggle}
+            helperText={helperTextDate}
+          />
+          <BoxPassword
+            onChange={handlePassword}
+            password={password}
+            onToggle={handlePasswordToggle}
+            toggle={passwordToggle}
+            helperText={helperTextPassword}
+            inputProps={{ minLength: PASSWORD_MIN_LENGTH }}
+          />
         </>
       }
-      actions={<Button label={textAction} onClick={handleClick} />}
+      actions={
+        <Button
+          label={textAction}
+          onClick={handleClick}
+          disabled={!isValidDate || !isValidPassword}
+        />
+      }
     />
   )
 }
