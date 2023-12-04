@@ -125,12 +125,15 @@ export const buildContactsQuery = (enabled = true) => ({
   }
 })
 
-export const buildFileQueryById = id => ({
+// getById must have a thruty value, even if "enabled" is "false"
+// cf: https://github.com/cozy/cozy-client/issues/961
+export const buildFileQueryById = (id = ' ', enabled) => ({
   definition: Q(FILES_DOCTYPE).getById(id),
   options: {
     as: `${FILES_DOCTYPE}/${id}`,
     fetchPolicy: defaultFetchPolicy,
-    singleDocData: true
+    singleDocData: true,
+    enabled
   }
 })
 
