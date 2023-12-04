@@ -106,6 +106,7 @@
     },
     "Fab": {
       "createPaper": "Ouvrir la menu de toutes les suggestions",
+      "tooltip": "Cliquez ici pour transmettre\ndes papiers au(x) destinataire(s)\nde votre choix",
       "forwardPaper": "Envoyer des documents"
     }
   },
