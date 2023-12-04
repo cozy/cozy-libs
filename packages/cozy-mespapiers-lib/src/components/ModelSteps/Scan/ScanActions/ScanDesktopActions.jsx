@@ -8,6 +8,7 @@ import Button from 'cozy-ui/transpiled/react/Buttons'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import FileInput from 'cozy-ui/transpiled/react/FileInput'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import PointerAlert from 'cozy-ui/transpiled/react/PointerAlert'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
@@ -15,7 +16,9 @@ import ScanDesktopActionsAlert from './ScanDesktopActionsAlert'
 import { KEYS } from '../../../../constants/const'
 import { SETTINGS_DOCTYPE } from '../../../../doctypes'
 import { getAppSettings } from '../../../../helpers/queries'
+import { usePapersCreated } from '../../../Contexts/PapersCreatedProvider'
 import { usePaywall } from '../../../Contexts/PaywallProvider'
+import { useStepperDialog } from '../../../Hooks/useStepperDialog'
 
 const styleBtn = { color: 'var(--primaryTextColor)' }
 
@@ -24,6 +27,8 @@ const ScanDesktopActions = ({ onOpenFilePickerModal, onChangeFile }) => {
   const buttonRef = createRef()
   const client = useClient()
   const { isPaywallActivated, setShowPaywall } = usePaywall()
+  const { countPaperCreatedByMesPapiers } = usePapersCreated()
+  const { currentStepIndex } = useStepperDialog()
 
   const { data: settingsData, ...settingsQueryResult } = useQuery(
     getAppSettings.definition,
@@ -101,6 +106,13 @@ const ScanDesktopActions = ({ onOpenFilePickerModal, onChangeFile }) => {
         </div>
       )}
       {showAlert && <ScanDesktopActionsAlert onClose={handleHideAlert} />}
+      {!showAlert &&
+        countPaperCreatedByMesPapiers === 0 &&
+        currentStepIndex === 0 && (
+          <PointerAlert className="u-mb-1 u-ta-center" icon={false}>
+            {t('Scan.helpTooltip')}
+          </PointerAlert>
+        )}
     </>
   )
 }

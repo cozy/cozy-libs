@@ -354,6 +354,7 @@
   },
   "Scan": {
     "divider": "ou",
+    "helpTooltip": "Si vous avez le document au format papier à disposition, cliquer sur le bouton “Prendre en photo” pour le photographier avec votre mobile. Sinon, sélectionnez une autre option.",
     "importPicFromMobile": "Choisir depuis mon téléphone",
     "importPicFromDesktop": "Choisir depuis mon ordinateur",
     "modal": {

@@ -354,6 +354,7 @@
   },
   "Scan": {
     "divider": "or",
+    "helpTooltip": "If you have the document in paper format available, click on the \"Take a photo\" button to photograph it with your mobile. Otherwise, select another option.",
     "importPicFromMobile": "Choose from my phone",
     "importPicFromDesktop": "Choose from my desktop",
     "modal": {
