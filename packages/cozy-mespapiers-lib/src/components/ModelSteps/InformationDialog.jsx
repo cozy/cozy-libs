@@ -6,6 +6,7 @@ import React, { useCallback, useMemo, useState } from 'react'
 import { isIOS } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import PointerAlert from 'cozy-ui/transpiled/react/PointerAlert'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
@@ -28,7 +29,8 @@ const InformationDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
     attributes
   } = currentStep
   const { t } = useI18n()
-  const { currentStepIndex, nextStep, isLastStep } = useStepperDialog()
+  const { currentStepIndex, nextStep, isLastStep, allCurrentSteps } =
+    useStepperDialog()
   const { formData, setFormData } = useFormData()
   const [value, setValue] = useState({})
   const [validInput, setValidInput] = useState({})
@@ -105,23 +107,32 @@ const InformationDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
           className={isFocus && isIOS() ? 'is-focused' : ''}
           fallbackIcon={illustration !== false ? fallbackIcon : null}
           title={t(text)}
-          text={inputs.map(({ Component, attrs }, idx) => (
-            <div
-              key={idx}
-              className={cx('u-mh-1', {
-                ['u-h-3 u-pb-1-half']: hasMarginBottom(idx)
-              })}
-            >
-              <Component
-                attrs={attrs}
-                defaultValue={formData.metadata[attrs.name]}
-                setValue={setValue}
-                setValidInput={setValidInput}
-                setIsFocus={setIsFocus}
-                idx={idx}
-              />
-            </div>
-          ))}
+          text={
+            <>
+              {allCurrentSteps[currentStepIndex].isDisplayed === 'ocr' && (
+                <PointerAlert className="u-mb-1" icon={false}>
+                  {t('OcrInfoDialog.helpTooltip')}
+                </PointerAlert>
+              )}
+              {inputs.map(({ Component, attrs }, idx) => (
+                <div
+                  key={idx}
+                  className={cx('u-mh-1', {
+                    ['u-h-3 u-pb-1-half']: hasMarginBottom(idx)
+                  })}
+                >
+                  <Component
+                    attrs={attrs}
+                    defaultValue={formData.metadata[attrs.name]}
+                    setValue={setValue}
+                    setValidInput={setValidInput}
+                    setIsFocus={setIsFocus}
+                    idx={idx}
+                  />
+                </div>
+              ))}
+            </>
+          }
         />
       }
       actions={
