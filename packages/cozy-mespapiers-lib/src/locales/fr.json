@@ -470,6 +470,9 @@
     "text": "Essayez de recharger la page ! Si le problème persiste n'hésitez pas à contacter le support.",
     "action": "Recharger"
   },
+  "OcrInfoDialog": {
+    "helpTooltip": "Les informations suivantes ont été renseignées automatiquement à partir de ce qui a pu être détectés sur vos photos. Vérifiez-les et complétez-les ci besoin."
+  },
   "OcrProcessingDialog": {
     "title": "Analyse du papier en cours",
     "text": "Merci de patienter…"
