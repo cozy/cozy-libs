@@ -18,7 +18,7 @@ import { useScannerI18n } from '../Hooks/useScannerI18n'
 import FileIcon from '../Icons/FileIcon'
 import { isReminder } from '../Placeholders/helpers'
 
-const PlaceholderListModal = () => {
+const PlaceholdersSelector = () => {
   const { t } = useI18n()
   const webviewIntent = useWebviewIntent()
   const navigate = useNavigate()
@@ -176,4 +176,4 @@ const PlaceholderListModal = () => {
   )
 }
 
-export default PlaceholderListModal
+export default PlaceholdersSelector
