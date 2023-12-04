@@ -106,6 +106,7 @@
     },
     "Fab": {
       "createPaper": "Open the menu of all suggestions",
+      "tooltip": "Click here to send papers\nto the recipient(s)\nof your choice",
       "forwardPaper": "Send documents"
     }
   },
