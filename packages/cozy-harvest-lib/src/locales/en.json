@@ -98,7 +98,7 @@
       "lastSync": {
         "label": "Update:",
         "syncing": "Data recovery…",
-        "unknown": "Unknown",
+        "unknown": "Last sync. unknown",
         "afterSomeTimes": "Sync. %{times} ago",
         "format": "MM/DD/YYYY",
         "disconnected": "Disconnected",
