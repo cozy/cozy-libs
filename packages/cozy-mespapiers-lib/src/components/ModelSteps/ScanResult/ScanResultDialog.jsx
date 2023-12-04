@@ -5,17 +5,18 @@ import { useSearchParams } from 'react-router-dom'
 import { useWebviewIntent } from 'cozy-intent'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import PointerAlert from 'cozy-ui/transpiled/react/PointerAlert'
 import { ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import OcrProcessingDialog from './OcrProcessingDialog'
 import ScanResultCard from './ScanResultCard'
-import ScanResultInfo from './ScanResultInfo'
 import ScanResultTitle from './ScanResultTitle'
 import { FLAGSHIP_SCAN_TEMP_FILENAME, KEYS } from '../../../constants/const'
 import { isFlagshipOCRAvailable } from '../../../helpers/isFlagshipOCRAvailable'
 import { isSomePaperStepsCompliantWithOCR } from '../../../helpers/isSomePaperStepsCompliantWithOCR'
+import CompositeHeaderImage from '../../CompositeHeader/CompositeHeaderImage'
 import { useFormData } from '../../Hooks/useFormData'
 import { useStepperDialog } from '../../Hooks/useStepperDialog'
 import StepperDialogTitle from '../../StepperDialog/StepperDialogTitle'
@@ -125,11 +126,15 @@ const ScanResultDialog = ({
         <div className={cx('u-flex u-flex-column u-flex-justify-center')}>
           <ScanResultTitle />
           {tooltip && (
-            <ScanResultInfo
-              icon={illustration}
-              text={t(`Acquisition.tooltip.${page}`)}
+            <PointerAlert
               className="u-mb-1"
-            />
+              severity="secondary"
+              icon={
+                <CompositeHeaderImage icon={illustration} iconSize="small" />
+              }
+            >
+              {t(`Acquisition.tooltip.${page}`)}
+            </PointerAlert>
           )}
           <ScanResultCard
             currentFile={currentFile}
