@@ -61,7 +61,7 @@ describe('makeLabel', () => {
       expect(res).toBe(`${t('card.launchTrigger.lastSync.justNow')}`)
     })
 
-    it('should return "Unknown" if lastSuccessDate is null', () => {
+    it('should return unknown if lastSuccessDate is null', () => {
       const res = makeLabel({
         t,
         trigger: {
@@ -70,7 +70,7 @@ describe('makeLabel', () => {
         isRunning: false
       })
 
-      expect(res).toBe('Unknown')
+      expect(res).toBe('Last sync. unknown')
     })
 
     it('should return "Disconnected" if no trigger but a konnector', () => {
