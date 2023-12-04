@@ -4,6 +4,7 @@ import React, { useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { useClient, useQuery } from 'cozy-client'
+import { isNote } from 'cozy-client/dist/models/file'
 import { getSharingLink } from 'cozy-client/dist/models/sharing'
 import { isMobile } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Buttons'
@@ -143,7 +144,14 @@ const ForwardModal = ({ onClose, onForward, file }) => {
                   <Skeleton variant="rect" animation="wave" />
                 )
               }}
-              renderFallback={() => <Icon icon="file-type-zip" size={64} />}
+              renderFallback={() => (
+                <Icon
+                  icon={
+                    isNote(fileToForward) ? 'file-type-note' : 'file-type-zip'
+                  }
+                  size={64}
+                />
+              )}
             />
             <Typography variant="h5" className="u-mv-1">
               {fileToForward.name}
