@@ -118,7 +118,7 @@ describe('LaunchTriggerAlert', () => {
     })
     await waitFor(() => root.getByTestId('alert-menu-button'))
     fireEvent.click(root.getByTestId('alert-menu-button'))
-    const buttons = root.getAllByText('card.launchTrigger.button.label')
+    const buttons = root.getAllByText('Synchronize')
     expect(buttons.length).toBe(2)
     for (const button of buttons) {
       fireEvent.click(button)
@@ -133,7 +133,7 @@ describe('LaunchTriggerAlert', () => {
     })
     await waitFor(() => root.getByTestId('alert-menu-button'))
     fireEvent.click(root.getByTestId('alert-menu-button'))
-    const buttons = root.getAllByText('card.launchTrigger.button.label')
+    const buttons = root.getAllByText('Synchronize')
     expect(buttons.length).toBe(2)
     for (const button of buttons) {
       fireEvent.click(button)
@@ -146,8 +146,8 @@ describe('LaunchTriggerAlert', () => {
       trigger: reconnectErrorTriggerFixture,
       konnector: konnectorFixture
     })
-    await waitFor(() => root.getByText('card.launchTrigger.button.label'))
-    fireEvent.click(root.getByText('card.launchTrigger.button.label'))
+    await waitFor(() => root.getByText('Synchronize'))
+    fireEvent.click(root.getByText('Synchronize'))
     expect(historyAction).toHaveBeenCalledWith('/edit', 'push')
     expect(flow.launch).not.toHaveBeenCalled()
   })
@@ -176,7 +176,7 @@ describe('LaunchTriggerAlert', () => {
     })
     await waitFor(() => root.getByTestId('alert-menu-button'))
     fireEvent.click(root.getByTestId('alert-menu-button'))
-    const buttons = root.getAllByText('card.launchTrigger.button.label')
+    const buttons = root.getAllByText('Synchronize')
     expect(buttons.length).toBe(2)
     for (const button of buttons) {
       fireEvent.click(button)
