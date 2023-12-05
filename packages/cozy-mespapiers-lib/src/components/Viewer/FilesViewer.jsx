@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import { Q, useClient } from 'cozy-client'
 import { isIOSApp } from 'cozy-device-helper'
 import Viewer from 'cozy-ui/transpiled/react/Viewer'
 import FooterActionButtons from 'cozy-ui/transpiled/react/Viewer/Footer/FooterActionButtons'
-import ForwardOrDownloadButton from 'cozy-ui/transpiled/react/Viewer/Footer/ForwardOrDownloadButton'
+import ForwardButton from 'cozy-ui/transpiled/react/Viewer/Footer/ForwardButton'
 
 import FileViewerLoading from './FileViewerLoading'
 import SelectFileButton from './SelectFileButton'
@@ -29,6 +29,7 @@ const FilesViewer = ({ filesQuery, files, fileId, onClose, onChange }) => {
   const [fetchingMore, setFetchingMore] = useState(false)
   const client = useClient()
   const { pathname } = useLocation()
+  const navigate = useNavigate()
 
   const editPathByModelProps = {
     information: `#${pathname}/edit/information?metadata=__NAME__`,
@@ -133,7 +134,12 @@ const FilesViewer = ({ filesQuery, files, fileId, onClose, onChange }) => {
       editPathByModelProps={editPathByModelProps}
     >
       <FooterActionButtons>
-        <ForwardOrDownloadButton />
+        <ForwardButton
+          file={viewerFiles[viewerIndex]}
+          onClick={() =>
+            navigate(`${pathname}/forward/${viewerFiles[viewerIndex]._id}`)
+          }
+        />
         <SelectFileButton file={viewerFiles[viewerIndex]} />
       </FooterActionButtons>
     </Viewer>

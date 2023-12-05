@@ -19,9 +19,10 @@ import {
   trash,
   viewInDrive,
   editContact,
-  copyReminderContent
+  copyReminderContent,
+  forward,
+  download
 } from '../Actions/Items'
-import { makeActionVariant } from '../Actions/utils'
 import { useModal } from '../Hooks/useModal'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import PaperItem from '../Papers/PaperItem'
@@ -38,7 +39,6 @@ const PaperLine = ({
   const { pushModal, popModal } = useModal()
   const [showActionMenu, setShowActionMenu] = useState(false)
 
-  const actionVariant = makeActionVariant()
   const actions = useMemo(
     () =>
       makeActions(
@@ -46,7 +46,8 @@ const PaperLine = ({
           isNote(paper) && copyReminderContent,
           select,
           divider,
-          ...actionVariant,
+          forward,
+          download,
           open,
           divider,
           rename,
@@ -63,7 +64,7 @@ const PaperLine = ({
           setShowActionMenu
         }
       ),
-    [actionVariant, addMultiSelectionFile, popModal, pushModal, paper]
+    [addMultiSelectionFile, popModal, pushModal, paper]
   )
 
   const { filename, extension } = splitFilename({

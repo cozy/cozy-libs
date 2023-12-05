@@ -96,8 +96,14 @@
     "text": " Il sera supprimé de l’application Mes Papiers et Drive."
   },
   "ForwardModal": {
-    "action": "Sélectionner un destinataire",
-    "content": "Vos papiers ont bien été rassemblés. Sélectionner un destinataire pour procéder à l’envoi.",
+    "action": {
+      "desktop": "Copier le lien de partage",
+      "mobile": "Sélectionner un destinataire"
+    },
+    "content": {
+      "desktop": "Votre lien de partage est bientôt prêt. |||| Vos papiers ont bien été rassemblés. Votre lien de partage est bientôt prêt.",
+      "mobile": "Sélectionner un destinataire pour procéder à l'envoi. |||| Vos papiers ont bien été rassemblés. Sélectionner un destinataire pour procéder à l’envoi."
+    },
     "password": {
       "input": "Mot de passe",
       "text": "Limiter l'accès par un mot de passe"

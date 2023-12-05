@@ -4,13 +4,8 @@ import { isReferencedBy } from 'cozy-client'
 import { getSharingLink } from 'cozy-client/dist/models/sharing'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 
-import { download, forward } from './Items'
 import { FILES_DOCTYPE, JOBS_DOCTYPE } from '../../doctypes'
 import { handleConflictFilename } from '../../utils/handleConflictFilename'
-
-export const makeActionVariant = () => {
-  return navigator.share ? [forward, download] : [download]
-}
 
 export const isAnyFileReferencedBy = (files, doctype) => {
   for (let i = 0, l = files.length; i < l; ++i) {
