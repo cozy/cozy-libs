@@ -1,11 +1,11 @@
 // TODO Move to cozy-client (files model)
 
 import { isReferencedBy } from 'cozy-client'
+import { getSharingLink } from 'cozy-client/dist/models/sharing'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 
 import { download, forward } from './Items'
 import { FILES_DOCTYPE, JOBS_DOCTYPE } from '../../doctypes'
-import { getSharingLink } from '../../utils/getSharingLink'
 import { handleConflictFilename } from '../../utils/handleConflictFilename'
 
 export const makeActionVariant = () => {
@@ -70,7 +70,7 @@ export const forwardFile = async (client, files, t) => {
   try {
     // We currently support only one file at a time
     const file = files[0]
-    const url = await getSharingLink(client, file, true)
+    const url = await getSharingLink(client, [file._id])
     const isZipFile = file.class === 'zip'
     const shareData = {
       title: t('viewer.shareData.title', {
