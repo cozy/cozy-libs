@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import React from 'react'
 
@@ -68,56 +69,6 @@ describe('MultiselectContent', () => {
     expect(queryByTestId('ForwardModal')).toBeNull()
   })
 
-  describe('Download button', () => {
-    it('should not display download Button on Mobile (if supports "navigator API")', () => {
-      const mockNavigatorShareFunc = jest.fn()
-      const { queryByTestId } = setup({
-        isMobile: true,
-        mockNavigatorShareFunc
-      })
-
-      expect(queryByTestId('downloadButton')).toBeNull()
-    })
-    it('should display download Button on Desktop', () => {
-      const { getByTestId } = setup({ isMobile: false })
-
-      expect(getByTestId('downloadButton'))
-    })
-    it('should display download Button on Mobile if not supports "navigator API"', () => {
-      const { getByTestId } = setup({
-        isMobile: true,
-        mockNavigatorShareFunc: undefined
-      })
-
-      expect(getByTestId('downloadButton'))
-    })
-
-    it('should not call "downloadFiles" when click download Button if there are no files', () => {
-      const mockDownloadFiles = jest.fn()
-      const { getByTestId } = setup({
-        allMultiSelectionFiles: [],
-        mockDownloadFiles
-      })
-
-      const downloadBtn = getByTestId('downloadButton')
-      fireEvent.click(downloadBtn)
-
-      expect(mockDownloadFiles).toBeCalledTimes(0)
-    })
-    it('should call "downloadFiles" when click download Button if there are one or more files', () => {
-      const mockDownloadFiles = jest.fn()
-      const { getByTestId } = setup({
-        allMultiSelectionFiles: [{ _id: '00', name: 'File00' }],
-        mockDownloadFiles
-      })
-
-      const downloadBtn = getByTestId('downloadButton')
-      fireEvent.click(downloadBtn)
-
-      expect(mockDownloadFiles).toBeCalledTimes(1)
-    })
-  })
-
   describe('Forward button', () => {
     it('should display forward Button on Mobile (if supports "navigator API")', () => {
       const mockNavigatorShareFunc = jest.fn()
@@ -127,19 +78,6 @@ describe('MultiselectContent', () => {
       })
 
       expect(getByTestId('forwardButton'))
-    })
-    it('should not display forward Button on Desktop', () => {
-      const { queryByTestId } = setup({ isMobile: false })
-
-      expect(queryByTestId('forwardButton')).toBeNull()
-    })
-    it('should not display forward Button on Mobile if not supports "navigator API"', () => {
-      const { queryByTestId } = setup({
-        isMobile: true,
-        mockNavigatorShareFunc: undefined
-      })
-
-      expect(queryByTestId('forwardButton')).toBeNull()
     })
 
     it('should not call "forwardFile" when click forward Button if there are no files', () => {
@@ -158,11 +96,9 @@ describe('MultiselectContent', () => {
       expect(mockForwardFiles).toBeCalledTimes(0)
     })
     it('should call "forwardFile" when click forward Button if there are one file', () => {
-      const mockForwardFiles = jest.fn()
       const mockNavigatorShareFunc = jest.fn()
       const { getByTestId } = setup({
         allMultiSelectionFiles: [{ _id: '00', name: 'File00' }],
-        mockForwardFiles,
         isMobile: true,
         mockNavigatorShareFunc
       })
@@ -170,28 +106,7 @@ describe('MultiselectContent', () => {
       const forwardBtn = getByTestId('forwardButton')
       fireEvent.click(forwardBtn)
 
-      expect(mockForwardFiles).toBeCalledTimes(1)
-    })
-    it('should call "onClose" after "forwardFile" when click forward Button if there are one file', async () => {
-      const mockOnClose = jest.fn()
-      const mockForwardFiles = jest.fn()
-      const mockNavigatorShareFunc = jest.fn()
-      const { getByTestId } = setup({
-        allMultiSelectionFiles: [{ _id: '00', name: 'File00' }],
-        mockForwardFiles,
-        isMobile: true,
-        mockNavigatorShareFunc,
-        onClose: mockOnClose
-      })
-
-      const forwardBtn = getByTestId('forwardButton')
-      fireEvent.click(forwardBtn)
-
-      expect(mockOnClose).toBeCalledTimes(0)
-      expect(mockForwardFiles).toBeCalledTimes(1)
-      await waitFor(() => {
-        expect(mockOnClose).toBeCalledTimes(1)
-      })
+      expect(getByTestId('ForwardModal')).toBeInTheDocument()
     })
 
     it('should call "makeZipFolder" when click forward Button if there is more than one files', async () => {
