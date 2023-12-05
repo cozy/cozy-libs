@@ -97,7 +97,11 @@
   },
   "ForwardModal": {
     "action": "Sélectionner un destinataire",
-    "content": "Vos papiers ont bien été rassemblés. Sélectionner un destinataire pour procéder à l’envoi."
+    "content": "Vos papiers ont bien été rassemblés. Sélectionner un destinataire pour procéder à l’envoi.",
+    "password": {
+      "input": "Mot de passe",
+      "text": "Limiter l'accès par un mot de passe"
+    }
   },
   "Home": {
     "Empty": {

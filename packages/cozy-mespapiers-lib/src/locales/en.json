@@ -97,7 +97,11 @@
   },
   "ForwardModal": {
     "action": "Select a recipient",
-    "content": "Your papers have been collected. Select a recipient to proceed with the forwarding."
+    "content": "Your papers have been collected. Select a recipient to proceed with the forwarding.",
+    "password": {
+      "input": "Password",
+      "text": "Limit access with a password"
+    }
   },
   "Home": {
     "Empty": {
