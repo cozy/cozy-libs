@@ -130,6 +130,7 @@ const ForwardModal = ({ onClose, onForward, file }) => {
     <ConfirmDialog
       open
       onClose={onCloseForwardModal}
+      data-testid="ForwardModal"
       content={
         <>
           <div className="u-ta-center u-mb-1" ref={modalContentRef}>
