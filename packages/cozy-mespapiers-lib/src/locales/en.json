@@ -96,8 +96,14 @@
     "text": "It will be deleted from the My Papers and Drive app."
   },
   "ForwardModal": {
-    "action": "Select a recipient",
-    "content": "Your papers have been collected. Select a recipient to proceed with the forwarding.",
+    "action": {
+      "desktop": "Copy share link",
+      "mobile": "Select a recipient"
+    },
+    "content": {
+      "desktop": "Your sharing link is almost ready. |||| Your papers have been collected successfully. Your sharing link is almost ready.",
+      "mobile": "Select a recipient to send. |||| Your papers have been collected successfully. Select a recipient to send."
+    },
     "password": {
       "input": "Password",
       "text": "Limit access with a password"

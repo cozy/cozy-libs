@@ -13,9 +13,10 @@ import {
   trash,
   viewInDrive,
   editContact,
-  copyReminderContent
+  copyReminderContent,
+  forward,
+  download
 } from '../Actions/Items'
-import { makeActionVariant } from '../Actions/utils'
 import { useModal } from '../Hooks/useModal'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
@@ -24,7 +25,6 @@ const useActions = doc => {
   const { addMultiSelectionFile } = useMultiSelection()
   const isNoteDoc = isFile(doc) ? isNote(doc) : false
 
-  const actionVariant = makeActionVariant()
   const actions = useMemo(
     () =>
       makeActions(
@@ -32,7 +32,8 @@ const useActions = doc => {
           isNoteDoc && copyReminderContent,
           select,
           divider,
-          ...actionVariant,
+          forward,
+          download,
           open,
           divider,
           rename,
@@ -48,7 +49,7 @@ const useActions = doc => {
           popModal
         }
       ),
-    [actionVariant, addMultiSelectionFile, popModal, pushModal, isNoteDoc]
+    [addMultiSelectionFile, popModal, pushModal, isNoteDoc]
   )
 
   return !isFile(doc) ? undefined : actions
