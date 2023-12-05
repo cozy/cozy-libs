@@ -101,6 +101,10 @@
     "password": {
       "input": "Password",
       "text": "Limit access with a password"
+    },
+    "date": {
+      "input": "Deadline",
+      "text": "Restrict access after a deadline"
     }
   },
   "Home": {

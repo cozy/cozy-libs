@@ -101,6 +101,10 @@
     "password": {
       "input": "Mot de passe",
       "text": "Limiter l'accès par un mot de passe"
+    },
+    "date": {
+      "input": "Date limite",
+      "text": "Restreindre l'accès après une date limite"
     }
   },
   "Home": {
