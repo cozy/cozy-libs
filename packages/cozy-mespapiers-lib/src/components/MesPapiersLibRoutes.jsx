@@ -12,7 +12,7 @@ import {
 import InstallAppFromIntent from './InstallAppFromIntent/InstallAppFromIntent'
 import InstallKonnectorFromIntent from './InstallKonnectorFromIntent/InstallKonnectorFromIntent'
 import MesPapiersLibProviders from './MesPapiersLibProviders'
-import ForwardModal from './Multiselect/ForwardModal'
+import ForwardModalByRoute from './Multiselect/ForwardModalByRoute'
 import OnboardedGuardedRoute from './OnboardedGuardedRoute'
 import ContactEdit from './Views/ContactEdit'
 import CreatePaperModal from './Views/CreatePaperModal'
@@ -72,7 +72,7 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
             path="files/:qualificationLabel"
             element={<OutletWrapper Component={PapersList} />}
           >
-            <Route path="forward/:fileId" element={<ForwardModal />} />
+            <Route path="forward/:fileId" element={<ForwardModalByRoute />} />
             <Route path="editcontact/:fileId" element={<ContactEdit />} />
             <Route path="installAppIntent" element={<InstallAppFromIntent />} />
             <Route
@@ -88,7 +88,7 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
               path=":fileId"
               element={<OutletWrapper Component={FilesViewerWithQuery} />}
             >
-              <Route path="forward/:fileId" element={<ForwardModal />} />
+              <Route path="forward/:fileId" element={<ForwardModalByRoute />} />
               <Route path="edit/information" element={<InformationEdit />} />
               <Route path="edit/page" element={<PageEdit />} />
               <Route path="edit/contact" element={<ContactEdit />} />
