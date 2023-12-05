@@ -6,6 +6,7 @@ import { isInstalled } from 'cozy-client/dist/models/applications'
 import { useWebviewIntent } from 'cozy-intent'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import NestedSelectResponsive from 'cozy-ui/transpiled/react/NestedSelect/NestedSelectResponsive'
+import PointerAlert from 'cozy-ui/transpiled/react/PointerAlert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import Konnector from '../../assets/icons/Konnectors.svg'
@@ -13,6 +14,7 @@ import { APPS_DOCTYPE } from '../../doctypes'
 import { findPlaceholdersByQualification } from '../../helpers/findPlaceholders'
 import { buildKonnectorsQuery } from '../../helpers/queries'
 import { getThemesList } from '../../helpers/themes'
+import { usePapersCreated } from '../Contexts/PapersCreatedProvider'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import FileIcon from '../Icons/FileIcon'
@@ -28,6 +30,7 @@ const PlaceholdersSelector = () => {
   const { papersDefinitions } = usePapersDefinitions()
   const client = useClient()
   const { pathname } = useLocation()
+  const { countPaperCreatedByMesPapiers } = usePapersCreated()
 
   const fromFlagshipUpload = searchParams.get('fromFlagshipUpload')
 
@@ -40,6 +43,18 @@ const PlaceholdersSelector = () => {
 
   const options = useMemo(
     () => ({
+      header: countPaperCreatedByMesPapiers === 0 && (
+        <PointerAlert className="u-mh-1 u-mt-1 u-ta-center" icon={false}>
+          {t('PlaceholdersList.header')}
+        </PointerAlert>
+      ),
+      childrenHeader: level =>
+        level === 1 &&
+        countPaperCreatedByMesPapiers === 0 && (
+          <PointerAlert className="u-mh-1 u-mt-1" icon={false}>
+            {t('PlaceholdersList.childrenHeader')}
+          </PointerAlert>
+        ),
       children: themesList.map((theme, index) => {
         const allPlaceholders = findPlaceholdersByQualification(
           papersDefinitions,
@@ -90,6 +105,7 @@ const PlaceholdersSelector = () => {
       })
     }),
     [
+      countPaperCreatedByMesPapiers,
       fromFlagshipUpload,
       isKonnectorsLoading,
       papersDefinitions,
