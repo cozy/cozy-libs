@@ -351,6 +351,8 @@
     "expiresIn": "Expires in %{duration}"
   },
   "PlaceholdersList": {
+    "header": "Choose the category of information or document you wish to add.",
+    "childrenHeader": "Add a document or create a quick note.",
     "title": "New paper%{name}"
   },
   "Scan": {
