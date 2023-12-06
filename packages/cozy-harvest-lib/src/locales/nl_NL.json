@@ -138,9 +138,9 @@
     },
     "information": {
       "title": "Nuttige informatie",
-      "websiteLink": "Website van dienst",
-      "store": "Bekijken in Cozy Cloud Store",
-      "storeDescription": "Appbeschrijving lezen"
+      "websiteLink": "De website openen",
+      "store": "Zie in de Cozy Cloud Store",
+      "storeDescription": "Ga naar de beschrijving van deze app"
     }
   },
   "default": {
@@ -545,7 +545,7 @@
   },
   "connectionBackdrop": {
     "connecting": "Bezig met verbinden…",
-    "progress": "Bezig met maken van koppeling met ‘%{name}’ (max. 30 seconden)…"
+    "progress": "We zoeken %{name} op - dit kan max. 30 seconden duren…"
   },
   "disconnectedAccountModal": {
     "disconnected-help": "Dit account is losgekoppeld, maar je gegevens zijn bewaard. Als je opnieuw wilt synchroniseren, stel dan je account opnieuw in middels de knop 'Bank toevoegen'."
@@ -564,14 +564,11 @@
       "modes": {
         "AIR_OR_HSR": "Vliegtuig",
         "BICYCLING": "Fiets",
-        "BUS": "Bus",
         "CAR": "Auto",
-        "IN_VEHICLE": "Voertuig",
+        "SUBWAY": "Metro",
         "TRAIN": "Trein",
-        "UNKNOWN": "Onbekend",
-        "WALKING": "Wandelen",
-        "ON_FOOT": "Wandelen",
-        "RUNNING": "Rennen"
+        "UNKNOWN": "",
+        "WALKING": "Wandelen"
       }
     },
     "files": {
