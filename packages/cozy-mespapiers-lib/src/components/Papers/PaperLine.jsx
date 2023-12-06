@@ -1,31 +1,16 @@
 import PropTypes from 'prop-types'
-import React, { useState, useRef, memo, useMemo } from 'react'
+import React, { useState, useRef, memo } from 'react'
 
-import { splitFilename, isNote } from 'cozy-client/dist/models/file'
+import { splitFilename } from 'cozy-client/dist/models/file'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
-import {
-  makeActions,
-  divider
-} from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import ActionsMenuMobileHeader from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuMobileHeader'
 import Filename from 'cozy-ui/transpiled/react/Filename'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 
-import {
-  open,
-  rename,
-  select,
-  trash,
-  viewInDrive,
-  editContact,
-  copyReminderContent,
-  forward,
-  download
-} from '../Actions/Items'
-import { useModal } from '../Hooks/useModal'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import PaperItem from '../Papers/PaperItem'
+import useActions from '../SearchResult/useActions'
 
 const PaperLine = ({
   paper,
@@ -35,37 +20,10 @@ const PaperLine = ({
   isLast
 }) => {
   const actionBtnRef = useRef()
-  const { isMultiSelectionActive, addMultiSelectionFile } = useMultiSelection()
-  const { pushModal, popModal } = useModal()
+  const { isMultiSelectionActive } = useMultiSelection()
   const [showActionMenu, setShowActionMenu] = useState(false)
 
-  const actions = useMemo(
-    () =>
-      makeActions(
-        [
-          isNote(paper) && copyReminderContent,
-          select,
-          divider,
-          forward,
-          download,
-          open,
-          divider,
-          rename,
-          isNote(paper) && editContact,
-          divider,
-          viewInDrive,
-          divider,
-          trash
-        ],
-        {
-          addMultiSelectionFile,
-          pushModal,
-          popModal,
-          setShowActionMenu
-        }
-      ),
-    [addMultiSelectionFile, popModal, pushModal, paper]
-  )
+  const actions = useActions(paper)
 
   const { filename, extension } = splitFilename({
     name: paper.name,
