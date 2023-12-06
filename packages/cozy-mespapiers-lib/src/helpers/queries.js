@@ -15,6 +15,7 @@ const defaultFetchPolicy = fetchPolicies.olderThan(86_400_000) // 24 hours
 export const buildFilesQueryWithQualificationLabel = () => {
   const select = [
     'name',
+    'mime',
     'referenced_by',
     'metadata.country',
     'metadata.datetime',
