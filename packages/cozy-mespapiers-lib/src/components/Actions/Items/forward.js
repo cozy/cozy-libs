@@ -21,7 +21,7 @@ export const forward = () => {
         return (
           <ActionsMenuItem {...props} ref={ref}>
             <ListItemIcon>
-              <Icon icon="paperplane" />
+              <Icon icon="reply" />
             </ListItemIcon>
             <ListItemText primary={t('action.forward')} />
           </ActionsMenuItem>

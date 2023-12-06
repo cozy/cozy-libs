@@ -57,7 +57,7 @@ const ForwardFab = ({ className, innerRef, onClick }) => {
           }}
           aria-label={t('Home.Fab.forwardPaper')}
         >
-          <Icon icon="paperplane" />
+          <Icon icon="reply" />
         </Fab>
       </Tooltip>
     </ClickAwayListener>
