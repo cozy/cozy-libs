@@ -8,6 +8,7 @@ import { ErrorProvider, useError } from './Contexts/ErrorProvider'
 import { ModalProvider } from './Contexts/ModalProvider'
 import { MultiSelectionProvider } from './Contexts/MultiSelectionProvider'
 import { OnboardingProvider } from './Contexts/OnboardingProvider'
+import PapersCreatedProvider from './Contexts/PapersCreatedProvider'
 import { PapersDefinitionsProvider } from './Contexts/PapersDefinitionsProvider'
 import { PaywallProvider } from './Contexts/PaywallProvider'
 import { ScannerI18nProvider } from './Contexts/ScannerI18nProvider'
@@ -34,35 +35,37 @@ const MesPapiersLibProviders = ({ lang, components }) => {
 
   return (
     <I18n lang={lang} polyglot={polyglot}>
-      <PaywallProvider>
-        <MultiSelectionProvider>
-          <ScannerI18nProvider>
-            <SearchProvider doctypes={[FILES_DOCTYPE, CONTACTS_DOCTYPE]}>
-              <PapersDefinitionsProvider>
-                <ModalProvider>
-                  <OnboardingProvider OnboardingComponent={Onboarding}>
-                    <MesPapiersLibLayout />
-                  </OnboardingProvider>
-                  {isOnboarded && !hasError && (
-                    <FabWrapper>
-                      {ForwardFab && (
-                        <ForwardFabWrapper>
-                          <ForwardFab />
-                        </ForwardFabWrapper>
-                      )}
-                      {PapersFab && (
-                        <PapersFabWrapper>
-                          <PapersFab />
-                        </PapersFabWrapper>
-                      )}
-                    </FabWrapper>
-                  )}
-                </ModalProvider>
-              </PapersDefinitionsProvider>
-            </SearchProvider>
-          </ScannerI18nProvider>
-        </MultiSelectionProvider>
-      </PaywallProvider>
+      <PapersCreatedProvider>
+        <PaywallProvider>
+          <MultiSelectionProvider>
+            <ScannerI18nProvider>
+              <SearchProvider doctypes={[FILES_DOCTYPE, CONTACTS_DOCTYPE]}>
+                <PapersDefinitionsProvider>
+                  <ModalProvider>
+                    <OnboardingProvider OnboardingComponent={Onboarding}>
+                      <MesPapiersLibLayout />
+                    </OnboardingProvider>
+                    {isOnboarded && !hasError && (
+                      <FabWrapper>
+                        {ForwardFab && (
+                          <ForwardFabWrapper>
+                            <ForwardFab />
+                          </ForwardFabWrapper>
+                        )}
+                        {PapersFab && (
+                          <PapersFabWrapper>
+                            <PapersFab />
+                          </PapersFabWrapper>
+                        )}
+                      </FabWrapper>
+                    )}
+                  </ModalProvider>
+                </PapersDefinitionsProvider>
+              </SearchProvider>
+            </ScannerI18nProvider>
+          </MultiSelectionProvider>
+        </PaywallProvider>
+      </PapersCreatedProvider>
     </I18n>
   )
 }
