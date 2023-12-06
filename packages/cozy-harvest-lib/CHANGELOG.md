@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.2.5...cozy-harvest-lib@21.0.0) (2023-12-06)
+
+
+### Bug Fixes
+
+* Remove Storybook from dependencies only use them in devDependencies ([c780148](https://github.com/cozy/cozy-libs/commit/c7801485512bef74f7b0f5016f8235908ee0460c))
+
+
+### Features
+
+* Add ErrorAlert ([28a9516](https://github.com/cozy/cozy-libs/commit/28a9516d1d11b760cc9aea8e0a6ed64c3e77759e))
+* Add LaunchButton ([ffc8f63](https://github.com/cozy/cozy-libs/commit/ffc8f6395b6cfd8b1197cde7d5ab1f8f3248486f))
+* Add MaintenanceAlert ([eaf17f5](https://github.com/cozy/cozy-libs/commit/eaf17f5df7a5cdfcb1b5006e029f3346909bb6b9))
+* Add RunnableAlert ([f31525f](https://github.com/cozy/cozy-libs/commit/f31525f627747f0a7079b335c059074b07cc327f))
+* Add TriggerAlert ([0570f44](https://github.com/cozy/cozy-libs/commit/0570f4450b75bcf5b56b5fa9641840d95e06f816))
+* Add TriggerAlertTemplate ([2e17695](https://github.com/cozy/cozy-libs/commit/2e176957be8e1aa540f50a76d5ff675404c65452))
+* Add UnrunnableAlert ([b07cdba](https://github.com/cozy/cozy-libs/commit/b07cdba7ef002e9b4c864b0652f4f2edd37f779b))
+* **TriggerAlert:** Improve wording for unknown ([572a936](https://github.com/cozy/cozy-libs/commit/572a936b3eaad79aa13dbb249c5310c5bcdd2e3c))
+* Update cozy-client from 41.9.0 to 45.0.1 ([2d613a8](https://github.com/cozy/cozy-libs/commit/2d613a8d654964c5c28d790afa493fb4b8169b64))
+
+
+### BREAKING CHANGES
+
+* you must have `cozy-client >= 45.0.1`
+
+
+
+
+
 ## [20.2.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.2.4...cozy-harvest-lib@20.2.5) (2023-11-27)
 
 
