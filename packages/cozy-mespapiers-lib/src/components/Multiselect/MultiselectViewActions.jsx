@@ -136,7 +136,7 @@ const MultiselectViewActions = ({ onClose }) => {
         <Button
           variant="secondary"
           label={t('action.forward')}
-          startIcon={<Icon icon="paperplane" />}
+        startIcon={<Icon icon="reply" />}
           onClick={forward}
           disabled={allMultiSelectionFiles.length === 0}
           data-testid="forwardButton"
