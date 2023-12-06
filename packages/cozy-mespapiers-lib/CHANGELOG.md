@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [66.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@66.2.0...cozy-mespapiers-lib@66.3.0) (2023-12-06)
+
+
+### Features
+
+* **mespapiers:** Add BoxDate component ([a1dc01e](https://github.com/cozy/cozy-libs/commit/a1dc01ee750369587f7410c21dbd645f59216462))
+* **mespapiers:** Add BoxPassword component ([6ed4b35](https://github.com/cozy/cozy-libs/commit/6ed4b35642dbe208fbd247a7f8ce62c65a8203bb))
+* **mespapiers:** Add file thumbnail to ForwardModal ([747912f](https://github.com/cozy/cozy-libs/commit/747912f6f2a468de981dfa8e7d41116dff25279a))
+* **mespapiers:** Add helper for copy to clipboard with alert ([c423824](https://github.com/cozy/cozy-libs/commit/c42382459812f7643276a3bb8fcb166e23457f36))
+* **mespapiers:** Add helper for make ttl (bigduration format) ([7c97f39](https://github.com/cozy/cozy-libs/commit/7c97f39eb0146fedb94691bc7ee1422ad9320f06))
+* **mespapiers:** Add Send option on files in desktop mode ([44a2d8b](https://github.com/cozy/cozy-libs/commit/44a2d8b0ac9917a06efdf036b7c55aeb5cba86a5))
+* **mespapiers:** Forward action redirect to ForwardModal ([46a1333](https://github.com/cozy/cozy-libs/commit/46a1333a0073f62518a39b4ded2b8e84ee207427))
+* **mespapiers:** Make ForwardModal compatible with a Route ([e125651](https://github.com/cozy/cozy-libs/commit/e1256519621174d306dec0cdc6d093a9cf0bed69))
+* **mespapiers:** Multi select on desktop forward files instead download ([c5b8752](https://github.com/cozy/cozy-libs/commit/c5b875230cff6400522bbbe3f8117bc033023ca5))
+* **mespapiers:** Render the correct icon when fallback in ForwardModal ([d594138](https://github.com/cozy/cozy-libs/commit/d594138a35fefb36dcaffc321aca297ae9a0d44d))
+* **mespapiers:** Replace file sharing icon ([cf60470](https://github.com/cozy/cozy-libs/commit/cf60470e5a46e4099aeb12bd60bdc73d4561ae9e))
+* **mespapiers:** Use BoxDate & BoxPassword components in ForwardModal ([9e3617f](https://github.com/cozy/cozy-libs/commit/9e3617f9de9eac2ee587d99b5b6da8598814204d))
+
+
+
+
+
 # [66.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@66.1.0...cozy-mespapiers-lib@66.2.0) (2023-12-06)
 
 
