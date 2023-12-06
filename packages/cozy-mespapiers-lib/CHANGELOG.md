@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [66.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@66.1.0...cozy-mespapiers-lib@66.2.0) (2023-12-06)
+
+
+### Features
+
+* Add help tooltip in paper selector ([9874a97](https://github.com/cozy/cozy-libs/commit/9874a97c0e9f6b1841f9ddef6e1dd15d429c6aaa))
+* Add help tooltip on OCR result page ([62cc04d](https://github.com/cozy/cozy-libs/commit/62cc04df8924a3cc324c22ac9ee2e1202fb22c87))
+* Add help tooltip on Scan actions ([1a9f383](https://github.com/cozy/cozy-libs/commit/1a9f383146549c3073177f452a3c34defc40bba0))
+* Add PapersCreatedProvider ([9e0cee2](https://github.com/cozy/cozy-libs/commit/9e0cee2fc4f040830eba86dddc7a100a8bef087c))
+* Add PointerAlert on placeholders if no papers created by the app ([a17c01e](https://github.com/cozy/cozy-libs/commit/a17c01e07516a2d2a92381c6fd873c02426169b6))
+* Add tooltip on forward Fab ([4e1b3fe](https://github.com/cozy/cozy-libs/commit/4e1b3fe7ae89e5ee5982662addf74572dc23a55f))
+* Adjust wording ([8bd9ee5](https://github.com/cozy/cozy-libs/commit/8bd9ee5b758ce020074acc1f5a511a9ad334dbf8))
+* Change wording when no papers ([521cb72](https://github.com/cozy/cozy-libs/commit/521cb72908ef7028721de294a3433be233edae49))
+* **mespapiers:** Center Onboarding verticaly ([b1aa84a](https://github.com/cozy/cozy-libs/commit/b1aa84a5965f707f8cdfb58a9e3e332dad9fd128))
+* Replace paper selection modale by NestedSelect ([b45bb4d](https://github.com/cozy/cozy-libs/commit/b45bb4d1b6762966e3b77c98331f327645dab453))
+* Replace ScanResultInfo by PointerAlert ([82a1873](https://github.com/cozy/cozy-libs/commit/82a18736eae0a364b83ce1092cec9ab2ad9eb600))
+* Upgrade cozy-ui 97.1.0 to 98.1.0 ([a560c87](https://github.com/cozy/cozy-libs/commit/a560c876316954d193f692d92c37b723c440d226))
+
+
+
+
+
 # [66.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@66.0.2...cozy-mespapiers-lib@66.1.0) (2023-11-29)
 
 
