@@ -22,6 +22,7 @@ import { useStepperDialog } from '../../Hooks/useStepperDialog'
 import StepperDialogTitle from '../../StepperDialog/StepperDialogTitle'
 import {
   getAttributesFromOcr,
+  getFormDataFilesForOcr,
   makeFileFromBase64,
   makeMetadataFromOcr
 } from '../helpers'
@@ -75,11 +76,10 @@ const ScanResultDialog = ({
         const OcrActivated = await isFlagshipOCRAvailable(webviewIntent)
         if (OcrActivated) {
           setOcrProcessing(true)
+          const files = getFormDataFilesForOcr(formData, currentFileRotated)
           const attributesFound = await getAttributesFromOcr({
-            formData,
+            files,
             ocrAttributes: currentDefinition.ocrAttributes,
-            currentFile,
-            currentFileRotated,
             webviewIntent
           })
           const metadataFromOcr = makeMetadataFromOcr(attributesFound)
