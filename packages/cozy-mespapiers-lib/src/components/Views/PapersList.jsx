@@ -4,7 +4,7 @@ import { useParams, Navigate } from 'react-router-dom'
 import { isQueryLoading, useQueryAll, useQuery } from 'cozy-client'
 import { getThemeByItem } from 'cozy-client/dist/models/document/documentTypeDataHelpers'
 import flag from 'cozy-flags'
-import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
+import ListSkeleton from 'cozy-ui/transpiled/react/Skeletons/ListSkeleton'
 
 import { makeAccountsByFiles } from './helpers'
 import {
@@ -100,10 +100,7 @@ const PapersList = () => {
         selectedQualificationLabel={selectedQualificationLabel}
       />
       {isLoading ? (
-        <Spinner
-          className="u-flex u-flex-justify-center u-mt-2 u-h-5"
-          size="xxlarge"
-        />
+        <ListSkeleton count={6} />
       ) : (
         <>
           {hasFiles && (
