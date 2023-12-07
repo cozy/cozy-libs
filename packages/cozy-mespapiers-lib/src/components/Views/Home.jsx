@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react'
 
 import { isQueryLoading, useQueryAll } from 'cozy-client'
-import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
+import HomeSkeletons from './HomeSkeletons'
 import {
   makePapers,
   makeQualificationLabelWithoutFiles,
@@ -58,12 +58,7 @@ const Home = () => {
     isQueryLoading(konnectorsQueryResult) || konnectorsQueryResult.hasMore
 
   if (isLoadingFiles || isLoadingContacts || isLoadingKonnectors) {
-    return (
-      <Spinner
-        size="xxlarge"
-        className="u-flex u-flex-justify-center u-mt-2 u-h-5"
-      />
-    )
+    return <HomeSkeletons withFabs data-testid="HomeSkeletons" />
   }
 
   const konnectorsAndQualificationLabelWithoutFiles =

@@ -67,16 +67,16 @@ describe('Home components:', () => {
     jest.clearAllMocks()
   })
 
-  it('should display Spinner when all data are not loaded', () => {
-    const { getByRole } = setup()
+  it('should display skeletons when all data are not loaded', () => {
+    const { getByTestId } = setup()
 
-    expect(getByRole('progressbar'))
+    expect(getByTestId('HomeSkeletons'))
   })
 
-  it('should not display Spinner when all data are loaded', () => {
-    const { queryByRole } = setup({ isLoading: false })
+  it('should not display skeletons when all data are loaded', () => {
+    const { queryByTestId } = setup({ isLoading: false })
 
-    expect(queryByRole('progressbar')).toBeNull()
+    expect(queryByTestId('HomeSkeletons')).toBeNull()
   })
 
   it('should display Empty when no data exists', () => {
