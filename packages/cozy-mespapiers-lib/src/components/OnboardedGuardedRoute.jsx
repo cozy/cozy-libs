@@ -8,9 +8,9 @@ import {
 
 import { useQuery, hasQueryBeenLoaded, useClient } from 'cozy-client'
 import log from 'cozy-logger'
-import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import { useOnboarding } from './Hooks/useOnboarding'
+import HomeSkeletons from './Views/HomeSkeletons'
 import { SETTINGS_DOCTYPE } from '../doctypes'
 import { getAppSettings } from '../helpers/queries'
 
@@ -56,12 +56,7 @@ const OnboardedGuardedRoute = () => {
   }, [client, settingsData, skipOnboarding])
 
   if (!hasQueryBeenLoaded(settingsQuery)) {
-    return (
-      <Spinner
-        size="xxlarge"
-        className="u-flex u-flex-justify-center u-mt-2 u-h-5"
-      />
-    )
+    return <HomeSkeletons withFabs />
   }
 
   const onboarded = settingsData?.[0]?.onboarded
