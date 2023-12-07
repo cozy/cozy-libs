@@ -1,7 +1,8 @@
 import {
   isFileAlreadySelected,
   makeBase64FromFile,
-  makeFileFromBase64
+  makeFileFromBase64,
+  getFormDataFilesForOcr
 } from './helpers'
 
 describe('ModalSteps helpers', () => {
@@ -136,6 +137,58 @@ describe('ModalSteps helpers', () => {
       const invalidFile = { ...file, size: -1 }
 
       await expect(makeBase64FromFile(invalidFile)).rejects.toThrow()
+    })
+  })
+
+  describe('getFilesForOcr', () => {
+    it('should return an empty array if no files', () => {
+      const formData = {
+        metadata: {},
+        data: [],
+        contacts: []
+      }
+      const filesForOcr = getFormDataFilesForOcr(formData, undefined)
+      expect(filesForOcr).toEqual([])
+    })
+    it('should return an array with a file', () => {
+      const formData = {
+        metadata: {},
+        data: [
+          { file: { name: '001.pdf' }, fileMetadata: { page: undefined } }
+        ],
+        contacts: []
+      }
+      const filesForOcr = getFormDataFilesForOcr(formData, undefined)
+      expect(filesForOcr).toEqual([{ name: '001.pdf' }])
+    })
+    it('should return an array with two file', () => {
+      const formData = {
+        metadata: {},
+        data: [
+          { file: { name: '001.pdf' }, fileMetadata: { page: 'front' } },
+          { file: { name: '002.pdf' }, fileMetadata: { page: 'back' } }
+        ],
+        contacts: []
+      }
+      const filesForOcr = getFormDataFilesForOcr(formData)
+      expect(filesForOcr).toEqual([{ name: '001.pdf' }, { name: '002.pdf' }])
+    })
+    it('should return an array with the last file rotated', () => {
+      const formData = {
+        metadata: {},
+        data: [
+          { file: { name: '001.pdf' }, fileMetadata: { page: 'front' } },
+          { file: { name: '002.pdf' }, fileMetadata: { page: 'back' } }
+        ],
+        contacts: []
+      }
+      const filesForOcr = getFormDataFilesForOcr(formData, {
+        name: '002_rotated.pdf'
+      })
+      expect(filesForOcr).toEqual([
+        { name: '001.pdf' },
+        { name: '002_rotated.pdf' }
+      ])
     })
   })
 })

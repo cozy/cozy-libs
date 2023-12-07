@@ -284,6 +284,22 @@ const _getAttributesFromOcr = async ({
 }
 
 /**
+ * Get formData files for OCR
+ * @param {Object} formData - State of the FormDataProvider
+ * @param {File} lastFileRotated - File object
+ * @returns {File[]} - Files to send to OCR
+ */
+export const getFormDataFilesForOcr = (formData, lastFileRotated) => {
+  return formData.data.length > 1
+    ? [
+        formData.data.find(data => data.fileMetadata.page === 'front')?.file,
+        lastFileRotated ||
+          formData.data.find(data => data.fileMetadata.page === 'back')?.file
+      ].filter(Boolean)
+    : [lastFileRotated || formData.data[0]?.file].filter(Boolean)
+}
+
+/**
  * Get attributes from OCR
  * @param {Object} options
  * @param {Object} options.formData - State of the FormDataProvider
@@ -294,29 +310,21 @@ const _getAttributesFromOcr = async ({
  * @returns {Promise<Object[]>} - Attributes found
  */
 export const getAttributesFromOcr = async ({
-  formData,
+  files,
   ocrAttributes,
-  currentFile,
-  currentFileRotated,
   webviewIntent
 }) => {
   try {
-    const frontFile = formData.data.find(
-      data => data.fileMetadata.page === 'front'
-    )
-    const backFile = formData.data.find(
-      data => data.fileMetadata.page === 'back'
-    )
-    const isDoubleSidedFile = frontFile && backFile
+    const isDoubleSidedFile = files.length > 1
 
     if (isDoubleSidedFile) {
       const attributesFrontFound = await _getAttributesFromOcr({
-        file: frontFile.file,
+        file: files[0],
         ocrAttributes: ocrAttributes.front,
         webviewIntent
       })
       const attributesBackFound = await _getAttributesFromOcr({
-        file: currentFileRotated || backFile.file,
+        file: files[1],
         ocrAttributes: ocrAttributes.back,
         webviewIntent
       })
@@ -324,7 +332,7 @@ export const getAttributesFromOcr = async ({
     }
 
     const attributesFound = await _getAttributesFromOcr({
-      file: currentFileRotated || currentFile,
+      file: files[0],
       ocrAttributes: ocrAttributes.front,
       webviewIntent
     })
