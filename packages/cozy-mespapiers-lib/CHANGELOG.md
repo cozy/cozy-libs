@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [67.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@66.3.1...cozy-mespapiers-lib@67.0.0) (2023-12-07)
+
+
+### Features
+
+* Add print action on files ([76a97d5](https://github.com/cozy/cozy-libs/commit/76a97d50881ad14feaa2f433e609655420833764))
+* Upgrade cozy-ui 98.1.0 to 98.2.0 ([df4fe3a](https://github.com/cozy/cozy-libs/commit/df4fe3aca7bcb299aef9b3ba2a8d1ecdba9cdc9a))
+
+
+### BREAKING CHANGES
+
+* You must have `cozy-ui >= 98.2.0`
+
+
+
+
+
 ## [66.3.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@66.3.0...cozy-mespapiers-lib@66.3.1) (2023-12-06)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
