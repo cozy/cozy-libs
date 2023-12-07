@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [67.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@67.0.0...cozy-mespapiers-lib@67.1.0) (2023-12-07)
+
+
+### Features
+
+* **mespapiers:** Replace spinner by skeletons on papers list ([2303501](https://github.com/cozy/cozy-libs/commit/230350100d4836fa3d9a50777f86252fef81e358))
+* **mespapiers:** Replace spinners by skeletons on home and onboarding ([fdf50a0](https://github.com/cozy/cozy-libs/commit/fdf50a05fe16b891ebc91d6960e7f48674764dfd))
+
+
+
+
+
 # [67.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@66.3.1...cozy-mespapiers-lib@67.0.0) (2023-12-07)
 
 
