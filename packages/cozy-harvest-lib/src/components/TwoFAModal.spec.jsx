@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, waitFor } from '@testing-library/react'
 import React from 'react'
 
 import TwoFAModal from './TwoFAModal'
@@ -82,7 +82,7 @@ describe('TwoFAModal', () => {
     )
   })
 
-  it('should work for several two fa requests', () => {
+  it('should work for several two fa requests', async () => {
     const opts = {
       account: {
         state: 'TWO_FA_NEEDED.SMS'
@@ -103,6 +103,9 @@ describe('TwoFAModal', () => {
     expect(root.getByText('code')).toBeTruthy()
 
     fireEvent.change(input, { target: { value: 'abcd' } })
+    const button = root.getByText('Validate').closest('button')
+    expect(button.getAttribute('aria-disabled')).toBe(null)
+    fireEvent.click(button)
 
     // 2nd 2FA request
     flow.emit('twoFARequest')
@@ -115,12 +118,32 @@ describe('TwoFAModal', () => {
     ).toBeTruthy()
 
     expect(root.getByText('Second code')).toBeTruthy()
+    const input2 = root.getByPlaceholderText('')
+    fireEvent.change(input2, { target: { value: 'abcd' } })
+    await waitFor(() =>
+      expect(
+        root
+          .getByText('Validate')
+          .closest('button')
+          .getAttribute('aria-disabled')
+      ).toBe(null)
+    )
     flow.emit('twoFARequest')
 
     // 3rd 2FA (should not happen, hypothetical case)
     flow.emit('twoFARequest')
 
     expect(getInputValue(root)).toBe('')
+    const input3 = root.getByPlaceholderText('')
+    fireEvent.change(input3, { target: { value: 'abcd' } })
+    await waitFor(() =>
+      expect(
+        root
+          .getByText('Validate')
+          .closest('button')
+          .getAttribute('aria-disabled')
+      ).toBe(null)
+    )
     // First attempt translations are re-used
     expect(
       root.getByText('This code enables you to finish your connexion.')
