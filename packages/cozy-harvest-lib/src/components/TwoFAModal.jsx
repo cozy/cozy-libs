@@ -47,7 +47,7 @@ export class TwoFAModal extends PureComponent {
     const flowState = this.props.flow.getState()
     this.setState({
       hasErrored: flowState.twoFARetry,
-      isJobRunning: flowState.twoFARunning || flowState.konnectorRunning
+      isJobRunning: flowState.twoFARunning
     })
   }
 
