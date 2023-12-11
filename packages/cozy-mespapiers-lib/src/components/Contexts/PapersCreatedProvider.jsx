@@ -30,7 +30,9 @@ const PapersCreatedProvider = ({ children }) => {
       countPaperCreatedByMesPapiers: isLoading
         ? null
         : filesWithQualificationLabel.filter(
-            file => file.cozyMetadata?.createdByApp === 'mespapiers'
+            file =>
+              file.cozyMetadata?.createdByApp === 'mespapiers' ||
+              file.cozyMetadata?.createdByApp === 'notes'
           ).length
     }),
     [filesWithQualificationLabel, isLoading]
