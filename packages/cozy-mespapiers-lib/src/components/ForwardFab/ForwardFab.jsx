@@ -1,6 +1,7 @@
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useLocation } from 'react-router-dom'
 
 import { useClient, Q, useQuery } from 'cozy-client'
 import ClickAwayListener from 'cozy-ui/transpiled/react/ClickAwayListener'
@@ -19,6 +20,7 @@ const styles = { tooltip: { whiteSpace: 'pre-line' } }
 const ForwardFab = ({ className, innerRef, onClick }) => {
   const { t } = useI18n()
   const client = useClient()
+  const { pathname } = useLocation()
   const { countPaperCreatedByMesPapiers } = usePapersCreated()
 
   const { data: settings } = useQuery(
@@ -27,11 +29,13 @@ const ForwardFab = ({ className, innerRef, onClick }) => {
   )
 
   const hideForwardFabTooltip = settings?.[0]?.hideForwardFabTooltip
+  const isHome = pathname === '/paper'
 
-  const open = countPaperCreatedByMesPapiers === 1 && !hideForwardFabTooltip
+  const open =
+    isHome && countPaperCreatedByMesPapiers === 1 && !hideForwardFabTooltip
 
   const hideTooltip = async () => {
-    if (!open) return null
+    if (!open || !isHome) return null
 
     const { data } = await client.query(Q(SETTINGS_DOCTYPE))
     const settings = data?.[0] || {}
@@ -43,7 +47,7 @@ const ForwardFab = ({ className, innerRef, onClick }) => {
   }
 
   return (
-    <ClickAwayListener onClickAway={hideTooltip}>
+    <ClickAwayListener mouseEvent="onMouseDown" onClickAway={hideTooltip}>
       <Tooltip
         open={open}
         title={<div style={styles.tooltip}>{t('Home.Fab.tooltip')}</div>}
