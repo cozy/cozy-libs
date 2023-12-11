@@ -76,6 +76,9 @@ const images = {
 
 const useStyles = makeStyles(() => ({
   image: {
+    '&--xsmall': {
+      height: '3rem'
+    },
     '&--small': {
       height: '4rem'
     },
@@ -104,7 +107,7 @@ const isSupportedBitmapExtension = filename => {
  * @param {Object} props
  * @param {string} props.icon - Icon name (with extension)
  * @param {object} props.fallbackIcon - SVG filetype
- * @param {string} props.iconSize - Icon size (small, medium, large(default))
+ * @param {string} props.iconSize - Icon size (xsmall, small, medium, large(default))
  * @returns {ReactElement|null}
  * @example
  * <CompositeHeaderImage icon="icon.svg" fallbackIcon="fallback.svg" iconSize="small" />
@@ -160,7 +163,7 @@ const CompositeHeaderImage = ({ icon, fallbackIcon, iconSize = 'large' }) => {
 CompositeHeaderImage.propTypes = {
   icon: iconPropType,
   fallbackIcon: PropTypes.object,
-  iconSize: PropTypes.oneOf(['small', 'medium', 'large'])
+  iconSize: PropTypes.oneOf(['xsmall', 'small', 'medium', 'large'])
 }
 
 export default CompositeHeaderImage
