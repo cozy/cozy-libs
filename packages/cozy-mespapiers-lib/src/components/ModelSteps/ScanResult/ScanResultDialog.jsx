@@ -128,7 +128,6 @@ const ScanResultDialog = ({
           {tooltip && (
             <PointerAlert
               className="u-mb-1"
-              severity="secondary"
               icon={
                 <CompositeHeaderImage icon={illustration} iconSize="small" />
               }
