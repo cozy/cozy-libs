@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import Empty from 'cozy-ui/transpiled/react/Empty'
-import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import ListSkeleton from 'cozy-ui/transpiled/react/Skeletons/ListSkeleton'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { makePapersGroupByQualificationLabel } from './helpers'
@@ -34,12 +34,7 @@ const ContentWhenSearching = ({
   })
 
   if (loading) {
-    return (
-      <Spinner
-        size="xxlarge"
-        className="u-flex u-flex-justify-center u-mt-2 u-h-5"
-      />
-    )
+    return <ListSkeleton count={6} />
   }
 
   if (!hasResult) {
