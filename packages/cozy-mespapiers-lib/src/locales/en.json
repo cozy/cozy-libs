@@ -1,9 +1,9 @@
 {
   "Acquisition": {
     "repeat": "Scan an additional page",
-    "retry": "Retake picture",
+    "retry": "Change picture",
     "rotate": "Rotate the image 90 degrees counter-clockwise",
-    "success": "The picture was taken.",
+    "success": "The picture was added.",
     "tooltip": {
       "back": "Check if it is indeed the back side and if the photo is well oriented as on the model",
       "default": "Check if the photo is well oriented as on the model",
@@ -11,8 +11,8 @@
     }
   },
   "action": {
-    "createPaper": "Add a paper",
-    "createPaperByQualificationLabel": "Add: %{qualificationLabel}",
+    "createPaper": "Add a document",
+    "createPaperByQualificationLabel": "Add %{qualificationLabel}",
     "download": "Download",
     "zipDownload": "Download documents (.ZIP format)",
     "forward": "Send",
@@ -491,7 +491,7 @@
     "helpTooltip": "The following information has been filled in automatically based on what was detected in your photos. Check them and complete them if necessary."
   },
   "OcrProcessingDialog": {
-    "title": "Paper analysis in progress",
+    "title": "Document analysis in progress",
     "text": "Please wait…"
   }
 }
