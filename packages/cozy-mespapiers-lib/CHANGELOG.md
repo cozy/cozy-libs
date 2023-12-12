@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [67.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@67.2.0...cozy-mespapiers-lib@67.3.0) (2023-12-12)
+
+
+### Features
+
+* **mespapiers:** Change wording `paper` to `document` ([37967f4](https://github.com/cozy/cozy-libs/commit/37967f46de765d8046a0ebb8bb4750c90a085ab0))
+
+
+
+
+
 # [67.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@67.1.0...cozy-mespapiers-lib@67.2.0) (2023-12-12)
 
 
