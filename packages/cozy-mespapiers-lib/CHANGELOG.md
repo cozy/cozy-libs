@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [67.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@67.1.0...cozy-mespapiers-lib@67.2.0) (2023-12-12)
+
+
+### Bug Fixes
+
+* **mespapiers:** Change wording for home tooltip when no papers ([a0b7857](https://github.com/cozy/cozy-libs/commit/a0b78577b37458c6ec92a5ec9afbdbc8a81913a7))
+* **mespapiers:** ForwardFab tooltip only shown on homepage ([72a75ab](https://github.com/cozy/cozy-libs/commit/72a75abe4f7f02e71fb91f3b7dccce7ed6cfb320))
+* **mespapiers:** Remove tooltips if document are created by Notes ([b2e6fe4](https://github.com/cozy/cozy-libs/commit/b2e6fe402146173fc529b8af487fa7c00b2c37d6))
+* **mespapiers:** Ue primary color for PointerAlert in ScanResultDialog ([ff7c09e](https://github.com/cozy/cozy-libs/commit/ff7c09e808b08aa3fbe0c59c0a51b04ba723ab50))
+* **mespapiers:** Wording on ForwardFab tooltip ([a68829e](https://github.com/cozy/cozy-libs/commit/a68829e612e2631fc870f97efd2ae61382e63546))
+
+
+### Features
+
+* **mespapiers:** Replace Spinner by ListSkeleton in search result ([7dd45a9](https://github.com/cozy/cozy-libs/commit/7dd45a9ea0b12cb3b5287201cea9fc540eb259e1))
+
+
+
+
+
 # [67.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@67.0.0...cozy-mespapiers-lib@67.1.0) (2023-12-07)
 
 
