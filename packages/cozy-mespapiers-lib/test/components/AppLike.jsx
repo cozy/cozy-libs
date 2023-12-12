@@ -5,8 +5,8 @@ import { HashRouter } from 'react-router-dom'
 
 import { CozyProvider, createMockClient } from 'cozy-client'
 import { WebviewIntentProvider } from 'cozy-intent'
-import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import { I18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { ErrorProvider } from '../../src/components/Contexts/ErrorProvider'
@@ -45,7 +45,7 @@ const AppLike = ({ children, client, history }) => {
                     <SearchProvider
                       doctypes={[FILES_DOCTYPE, CONTACTS_DOCTYPE]}
                     >
-                      <MuiCozyTheme>
+                      <CozyTheme>
                         <BreakpointsProvider>
                           <HashRouter history={hashHistory}>
                             <PapersDefinitionsProvider>
@@ -55,7 +55,7 @@ const AppLike = ({ children, client, history }) => {
                             </PapersDefinitionsProvider>
                           </HashRouter>
                         </BreakpointsProvider>
-                      </MuiCozyTheme>
+                      </CozyTheme>
                     </SearchProvider>
                   </ScannerI18nProvider>
                 </MultiSelectionProvider>
