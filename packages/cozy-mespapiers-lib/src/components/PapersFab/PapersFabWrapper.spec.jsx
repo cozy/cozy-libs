@@ -98,8 +98,8 @@ describe('PapersFabWrapper', () => {
       const btn = getByTestId('MockChild')
       fireEvent.click(btn)
 
-      expect(getByText('Add a paper')).toBeInTheDocument()
-      expect(getByText('Add: Tax notice')).toBeInTheDocument()
+      expect(getByText('Add a document')).toBeInTheDocument()
+      expect(getByText('Add Tax notice')).toBeInTheDocument()
     })
   })
 })
