@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [67.3.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@67.3.0...cozy-mespapiers-lib@67.3.1) (2023-12-12)
+
+
+### Bug Fixes
+
+* **mespapiers:** Scan rotation doesn't work at the last rotation ([3b7227d](https://github.com/cozy/cozy-libs/commit/3b7227dba316a4fdc62b4701f1209cf9bd0a6019))
+
+
+
+
+
 # [67.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@67.2.0...cozy-mespapiers-lib@67.3.0) (2023-12-12)
 
 
