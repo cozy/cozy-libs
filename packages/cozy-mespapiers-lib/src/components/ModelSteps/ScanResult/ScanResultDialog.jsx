@@ -17,15 +17,9 @@ import { FLAGSHIP_SCAN_TEMP_FILENAME, KEYS } from '../../../constants/const'
 import { isFlagshipOCRAvailable } from '../../../helpers/isFlagshipOCRAvailable'
 import { isSomePaperStepsCompliantWithOCR } from '../../../helpers/isSomePaperStepsCompliantWithOCR'
 import CompositeHeaderImage from '../../CompositeHeader/CompositeHeaderImage'
-import { useFormData } from '../../Hooks/useFormData'
 import { useStepperDialog } from '../../Hooks/useStepperDialog'
 import StepperDialogTitle from '../../StepperDialog/StepperDialogTitle'
-import {
-  getAttributesFromOcr,
-  getFormDataFilesForOcr,
-  makeFileFromBase64,
-  makeMetadataFromOcr
-} from '../helpers'
+import { makeFileFromBase64 } from '../helpers'
 
 const ScanResultDialog = ({
   currentStep,
@@ -37,21 +31,24 @@ const ScanResultDialog = ({
 }) => {
   const { illustration, multipage, page = 'default', tooltip } = currentStep
   const { t } = useI18n()
-  const { currentStepIndex } = useStepperDialog()
-  const { setFormData, formData } = useFormData()
   const webviewIntent = useWebviewIntent()
   const [searchParams] = useSearchParams()
 
   const imageRef = useRef(null)
   const [rotationImage, setRotationImage] = useState(0)
   const [ocrProcessing, setOcrProcessing] = useState(false)
-  const { nextStep, isLastStep, allCurrentSteps, currentDefinition } =
-    useStepperDialog()
+  const {
+    currentStepIndex,
+    nextStep,
+    isLastStep,
+    allCurrentSteps,
+    currentDefinition
+  } = useStepperDialog()
 
   const fromFlagshipUpload = searchParams.get('fromFlagshipUpload')
+  let currentFileRotated
 
   const onValid = async addPage => {
-    let currentFileRotated
     // If the image has changed rotation, the process has changed it to base64, so we need to transform it back into File before saving it in the formData
     if (rotationImage % 360 !== 0) {
       currentFileRotated = makeFileFromBase64({
@@ -76,24 +73,10 @@ const ScanResultDialog = ({
         const OcrActivated = await isFlagshipOCRAvailable(webviewIntent)
         if (OcrActivated) {
           setOcrProcessing(true)
-          const files = getFormDataFilesForOcr(formData, currentFileRotated)
-          const attributesFound = await getAttributesFromOcr({
-            files,
-            ocrAttributes: currentDefinition.ocrAttributes,
-            webviewIntent
-          })
-          const metadataFromOcr = makeMetadataFromOcr(attributesFound)
-
-          setFormData(prev => ({
-            ...prev,
-            metadata: {
-              ...prev.metadata,
-              ...metadataFromOcr
-            }
-          }))
         }
+      } else {
+        nextStep()
       }
-      nextStep()
     }
   }
 
@@ -107,7 +90,9 @@ const ScanResultDialog = ({
   useEventListener(window, 'keydown', handleKeyDown)
 
   if (ocrProcessing) {
-    return <OcrProcessingDialog onBack={onBack} />
+    return (
+      <OcrProcessingDialog rotatedFile={currentFileRotated} onBack={onBack} />
+    )
   }
 
   return (
