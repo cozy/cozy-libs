@@ -166,30 +166,32 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ],
-      "ocrAttributes": {
-        "front": {
-          "referenceBox": {
-            "text": "IBAN"
-          },
-          "attributesRegex": [
-            {
-              "name": "number",
-              "regex": "^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$"
+      "ocrAttributes": [
+        {
+          "front": {
+            "referenceBox": {
+              "text": "IBAN"
             },
-            {
-              "name": "bicNumber",
-              "regex": "^[A-Z]{4}([A-Z]{2})[A-Z0-9]{2}([A-Z0-9]{3})?$",
-              "oneWord": true,
-              "validationRules": [
-                {
-                  "regexGroupIdx": 1,
-                  "validationFn": "checkCountryCode"
-                }
-              ]
-            }
-          ]
+            "attributesRegex": [
+              {
+                "name": "number",
+                "regex": "^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$"
+              },
+              {
+                "name": "bicNumber",
+                "regex": "^[A-Z]{4}([A-Z]{2})[A-Z0-9]{2}([A-Z0-9]{3})?$",
+                "oneWord": true,
+                "validationRules": [
+                  {
+                    "regexGroupIdx": 1,
+                    "validationFn": "checkCountryCode"
+                  }
+                ]
+              }
+            ]
+          }
         }
-      }
+      ]
     },
     {
       "label": "bank_statement",
@@ -420,153 +422,155 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ],
-      "ocrAttributes": {
-        "front": {
-          "size": {
-            "width": 415,
-            "height": 254
+      "ocrAttributes": [
+        {
+          "front": {
+            "size": {
+              "width": 415,
+              "height": 254
+            },
+            "textBounding": {
+              "bottom": 237,
+              "left": 9,
+              "right": 409,
+              "top": 4
+            },
+            "referenceBox": {
+              "text": "PERMISDECONDUIRE"
+            },
+            "attributesBoxes": [
+              {
+                "type": "string",
+                "name": "lastName",
+                "enabled": true,
+                "fullLine": true,
+                "bounding": {
+                  "height": 18,
+                  "left": 130,
+                  "top": 26
+                },
+                "postTextRules": [
+                  {"regex": "^1."},
+                  {"regex": "^[\\^4n]"},
+                  {"regex": "^\\d", "flag": "g"},
+                  {"regex": "[Aa]$"},
+                  {"regex": "^a|a$", "flag": "g"}
+                ]
+              },
+              {
+                "type": "string",
+                "name": "firstName",
+                "enabled": true,
+                "bounding": {
+                  "height": 13,
+                  "left": 130,
+                  "top": 52
+                },
+                "postTextRules": [
+                  {"regex": "^[\\^4n]"},
+                  {"regex": "^\\d", "flag": "g"},
+                  {"regex": "^a|a$", "flag": "g"}
+                ]
+              },
+              {
+                "type": "date",
+                "name": "issueDate",
+                "dateFormat": "ddMMyyyy",
+                "enabled": true,
+                "bounding": {
+                  "height": 13,
+                  "left": 129,
+                  "top": 96,
+                  "width": 57
+                },
+                "postTextRules": [{"regex": "\\^4a"}, {"regex": "\\^."}]
+              },
+              {
+                "type": "date",
+                "name": "expirationDate",
+                "dateFormat": "ddMMyyyy",
+                "enabled": true,
+                "fixedSize": true,
+                "bounding": {
+                  "height": 16,
+                  "left": 129,
+                  "top": 120,
+                  "width": 71
+                },
+                "postTextRules": [{"regex": "^4b"}, {"regex": "^\\."}]
+              },
+              {
+                "type": "string",
+                "name": "bottomTest",
+                "enabled": false,
+                "fullLine": true,
+                "fixedSize": true,
+                "bounding": {
+                  "height": 94,
+                  "left": 129,
+                  "top": 767,
+                  "width": 2404
+                }
+              }
+            ]
           },
-          "textBounding": {
-            "bottom": 237,
-            "left": 9,
-            "right": 409,
-            "top": 4
-          },
-          "referenceBox": {
-            "text": "PERMISDECONDUIRE"
-          },
-          "attributesBoxes": [
-            {
-              "type": "string",
-              "name": "lastName",
-              "enabled": true,
-              "fullLine": true,
-              "bounding": {
-                "height": 18,
-                "left": 130,
-                "top": 26
-              },
-              "postTextRules": [
-                {"regex": "^1."},
-                {"regex": "^[\\^4n]"},
-                {"regex": "^\\d", "flag": "g"},
-                {"regex": "[Aa]$"},
-                {"regex": "^a|a$", "flag": "g"}
-              ]
+          "back": {
+            "size": {
+              "width": 401,
+              "height": 253
             },
-            {
-              "type": "string",
-              "name": "firstName",
-              "enabled": true,
-              "bounding": {
-                "height": 13,
-                "left": 130,
-                "top": 52
+            "textBounding": {"bottom": 217, "left": 3, "right": 370, "top": 6},
+            "attributesBoxes": [
+              {
+                "type": "string",
+                "name": "cardNumberLine1",
+                "enabled": true,
+                "fixedSize": true,
+                "group": {
+                  "name": "number",
+                  "order": 1
+                },
+                "bounding": {
+                  "left": 26,
+                  "top": 24
+                }
               },
-              "postTextRules": [
-                {"regex": "^[\\^4n]"},
-                {"regex": "^\\d", "flag": "g"},
-                {"regex": "^a|a$", "flag": "g"}
-              ]
-            },
-            {
-              "type": "date",
-              "name": "issueDate",
-              "dateFormat": "ddMMyyyy",
-              "enabled": true,
-              "bounding": {
-                "height": 13,
-                "left": 129,
-                "top": 96,
-                "width": 57
+              {
+                "type": "string",
+                "name": "cardNumberLine2",
+                "enabled": true,
+                "fixedSize": true,
+                "group": {
+                  "name": "number",
+                  "order": 2
+                },
+                "bounding": {
+                  "left": 26,
+                  "top": 42
+                }
               },
-              "postTextRules": [{"regex": "\\^4a"}, {"regex": "\\^."}]
-            },
-            {
-              "type": "date",
-              "name": "expirationDate",
-              "dateFormat": "ddMMyyyy",
-              "enabled": true,
-              "fixedSize": true,
-              "bounding": {
-                "height": 16,
-                "left": 129,
-                "top": 120,
-                "width": 71
+              {
+                "type": "date",
+                "name": "issueDateA",
+                "bounding": {
+                  "left": 163,
+                  "top": 51,
+                  "width": 32,
+                  "height": 7
+                }
               },
-              "postTextRules": [{"regex": "^4b"}, {"regex": "^\\."}]
-            },
-            {
-              "type": "string",
-              "name": "bottomTest",
-              "enabled": false,
-              "fullLine": true,
-              "fixedSize": true,
-              "bounding": {
-                "height": 94,
-                "left": 129,
-                "top": 767,
-                "width": 2404
+              {
+                "type": "date",
+                "name": "issueDateB",
+                "bounding": {
+                  "left": 163,
+                  "top": 75
+                }
               }
-            }
-          ]
-        },
-        "back": {
-          "size": {
-            "width": 401,
-            "height": 253
-          },
-          "textBounding": {"bottom": 217, "left": 3, "right": 370, "top": 6},
-          "attributesBoxes": [
-            {
-              "type": "string",
-              "name": "cardNumberLine1",
-              "enabled": true,
-              "fixedSize": true,
-              "group": {
-                "name": "number",
-                "order": 1
-              },
-              "bounding": {
-                "left": 26,
-                "top": 24
-              }
-            },
-            {
-              "type": "string",
-              "name": "cardNumberLine2",
-              "enabled": true,
-              "fixedSize": true,
-              "group": {
-                "name": "number",
-                "order": 2
-              },
-              "bounding": {
-                "left": 26,
-                "top": 42
-              }
-            },
-            {
-              "type": "date",
-              "name": "issueDateA",
-              "bounding": {
-                "left": 163,
-                "top": 51,
-                "width": 32,
-                "height": 7
-              }
-            },
-            {
-              "type": "date",
-              "name": "issueDateB",
-              "bounding": {
-                "left": 163,
-                "top": 75
-              }
-            }
-          ]
+            ]
+          }
         }
-      }
+      ]
     },
     {
       "label": "driver_license",
@@ -950,67 +954,130 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ],
-      "ocrAttributes": {
-        "front": {
-          "size": {
-            "width": 1333,
-            "height": 909
-          },
-          "textBounding": {
-            "bottom": 845,
-            "left": 41,
-            "right": 1312,
-            "top": 16
-          },
-          "referenceBox": {
-            "text": "CARTENATIONALE"
-          },
-          "attributesRegex": [
-            {
-              "name": "number",
-              "regex": "^(\\d{12})"
-            }
-          ],
-          "attributesBoxes": [
-            {
-              "type": "string",
-              "name": "number",
-              "enabled": true,
-              "fixedSize": true,
-              "bounding": {
-                "height": 39,
-                "left": 598,
-                "top": 96,
-                "width": 252
+      "ocrAttributes": [
+        {
+          "front": {
+            "size": {
+              "width": 1333,
+              "height": 909
+            },
+            "textBounding": {
+              "bottom": 845,
+              "left": 41,
+              "right": 1312,
+              "top": 16
+            },
+            "referenceBox": {
+              "text": "CARTENATIONALE"
+            },
+            "attributesRegex": [
+              {
+                "name": "number",
+                "regex": "^(\\d{12})"
               }
-            }
-          ]
+            ],
+            "attributesBoxes": [
+              {
+                "type": "string",
+                "name": "number",
+                "enabled": true,
+                "fixedSize": true,
+                "bounding": {
+                  "height": 39,
+                  "left": 598,
+                  "top": 96,
+                  "width": 252
+                }
+              }
+            ]
+          },
+          "back": {
+            "size": {
+              "width": 596,
+              "height": 410
+            },
+            "textBounding": {
+              "bottom": 304,
+              "left": 12,
+              "right": 429,
+              "top": 126
+            },
+            "attributesBoxes": [
+              {
+                "type": "date",
+                "dateFormat": "ddMMyyyy",
+                "name": "expirationDate",
+                "bounding": {
+                  "left": 174,
+                  "top": 172
+                },
+                "fullLine": true
+              }
+            ]
+          }
         },
-        "back": {
-          "size": {
-            "width": 596,
-            "height": 410
+        {
+          "front": {
+            "size": {
+              "width": 1333,
+              "height": 909
+            },
+            "textBounding": {
+              "bottom": 845,
+              "left": 41,
+              "right": 1312,
+              "top": 16
+            },
+            "referenceBox": {
+              "text": "CARTENATIONALE"
+            },
+            "attributesRegex": [
+              {
+                "name": "number",
+                "regex": "^(\\d{12})"
+              }
+            ],
+            "attributesBoxes": [
+              {
+                "type": "string",
+                "name": "number",
+                "enabled": true,
+                "fixedSize": true,
+                "bounding": {
+                  "height": 39,
+                  "left": 598,
+                  "top": 96,
+                  "width": 252
+                }
+              }
+            ]
           },
-          "textBounding": {
-            "bottom": 304,
-            "left": 12,
-            "right": 429,
-            "top": 126
-          },
-          "attributesBoxes": [
-            {
-              "type": "date",
-              "dateFormat": "ddMMyyyy",
-              "name": "expirationDate",
-              "bounding": {
-                "left": 174,
-                "top": 172
-              },
-              "fullLine": true
-            }
-          ]
+          "back": {
+            "size": {
+              "width": 596,
+              "height": 410
+            },
+            "textBounding": {
+              "bottom": 304,
+              "left": 12,
+              "right": 429,
+              "top": 126
+            },
+            "attributesBoxes": [
+              {
+                "type": "date",
+                "dateFormat": "ddMMyyyy",
+                "name": "expirationDate",
+                "bounding": {
+                  "left": 174,
+                  "top": 172
+                },
+                "fullLine": true
+              }
+            ]
+          }
         }
-      }
+      ]
     },
     {
       "label": "personal_sporting_licence",
@@ -1780,55 +1847,57 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ],
-      "ocrAttributes": {
-        "front": {
-          "size": {
-            "width": 614,
-            "height": 390
-          },
-          "textBounding": {
-            "bottom": 337,
-            "left": 207,
-            "right": 577,
-            "top": 27
-          },
-          "referenceBox": {
-            "text": "TITREDESEJOUR"
-          },
-          "attributesBoxes": [
-            {
-              "type": "date",
-              "dateFormat": "ddMMyyyy",
-              "name": "expirationDate",
-              "bounding": {
-                "left": 214,
-                "top": 133
-              }
-            }
-          ]
-        },
-        "back": {
-          "size": {
-            "width": 615,
-            "height": 384
-          },
-          "referenceBox": {
-            "text": "TITREDESEJOUR"
-          },
-          "attributesRegex": [
-            {
-              "name": "number",
-              "regex": "<[0-9]{10}<",
-              "postTextRules": [{"regex": "<", "flag": "g"}]
+      "ocrAttributes": [
+        {
+          "front": {
+            "size": {
+              "width": 614,
+              "height": 390
             },
-            {
-              "name": "country",
-              "regex": "[0-9][A-Z]{3}<",
-              "postTextRules": [{"regex": "^[0-9]"}, {"regex": "<$"}]
-            }
-          ]
+            "textBounding": {
+              "bottom": 337,
+              "left": 207,
+              "right": 577,
+              "top": 27
+            },
+            "referenceBox": {
+              "text": "TITREDESEJOUR"
+            },
+            "attributesBoxes": [
+              {
+                "type": "date",
+                "dateFormat": "ddMMyyyy",
+                "name": "expirationDate",
+                "bounding": {
+                  "left": 214,
+                  "top": 133
+                }
+              }
+            ]
+          },
+          "back": {
+            "size": {
+              "width": 615,
+              "height": 384
+            },
+            "referenceBox": {
+              "text": "TITREDESEJOUR"
+            },
+            "attributesRegex": [
+              {
+                "name": "number",
+                "regex": "<[0-9]{10}<",
+                "postTextRules": [{"regex": "<", "flag": "g"}]
+              },
+              {
+                "name": "country",
+                "regex": "[0-9][A-Z]{3}<",
+                "postTextRules": [{"regex": "^[0-9]"}, {"regex": "<$"}]
+              }
+            ]
+          }
         }
-      }
+      ]
     },
     {
       "label": "school_attendance_certificate",
@@ -2234,44 +2303,46 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ],
-      "ocrAttributes": {
-        "front": {
-          "size": {
-            "width": 1607,
-            "height": 1149
-          },
-          "textBounding": {
-            "bottom": 1045,
-            "left": 54,
-            "right": 1511,
-            "top": 18
-          },
-          "referenceBox": {
-            "text": "PASSEPORT"
-          },
-          "attributesBoxes": [
-            {
-              "type": "string",
-              "name": "number",
-              "bounding": {
-                "left": 1122,
-                "top": 129
-              },
-              "validationRules": [{"regex": "^\\d{2}[A-Za-z]{2}\\d{5}"}]
+      "ocrAttributes": [
+        {
+          "front": {
+            "size": {
+              "width": 1607,
+              "height": 1149
             },
-            {
-              "type": "date",
-              "name": "expirationDate",
-              "fullLine": true,
-              "bounding": {
-                "left": 506,
-                "top": 771
+            "textBounding": {
+              "bottom": 1045,
+              "left": 54,
+              "right": 1511,
+              "top": 18
+            },
+            "referenceBox": {
+              "text": "PASSEPORT"
+            },
+            "attributesBoxes": [
+              {
+                "type": "string",
+                "name": "number",
+                "bounding": {
+                  "left": 1122,
+                  "top": 129
+                },
+                "validationRules": [{"regex": "^\\d{2}[A-Za-z]{2}\\d{5}"}]
+              },
+              {
+                "type": "date",
+                "name": "expirationDate",
+                "fullLine": true,
+                "bounding": {
+                  "left": 506,
+                  "top": 771
+                }
               }
-            }
-          ]
-        },
-        "back": {}
-      }
+            ]
+          },
+          "back": {}
+        }
+      ]
     },
     {
       "label": "resume",

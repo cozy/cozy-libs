@@ -263,80 +263,60 @@ export const getFirstFileFromNative = async webviewIntent => {
   return fileToHandle
 }
 
-const _getAttributesFromOcr = async ({
-  file,
-  ocrAttributes,
-  webviewIntent
-}) => {
-  const cleanB64FrontFile = await makeBase64FromFile(file, {
-    prefix: false
-  })
-  const ocrFromFlagshipResult = await webviewIntent.call(
-    'ocr',
-    cleanB64FrontFile
-  )
-  const { attributes: attributesFound } = findAttributes(
-    ocrFromFlagshipResult.OCRResult,
-    ocrFromFlagshipResult.imgSize,
-    ocrAttributes
-  )
-  return attributesFound
+/**
+ * Get OCR from flagship
+ * @param {{ front: File, back?: File }} fileSides - File object
+ * @param {Object} webviewIntent - Webview intent
+ * @returns {Promise<{ front: Object, back?: Object }[]>} - OCR result
+ */
+export const getOcrFromFlagship = async (fileSides, webviewIntent) => {
+  return Object.keys(fileSides).reduce(async (acc, side) => {
+    const cleanB64File = await makeBase64FromFile(fileSides[side], {
+      prefix: false
+    })
+    const ocrFromFlagshipResult = await webviewIntent.call('ocr', cleanB64File)
+    const prevAcc = await acc
+    return { ...prevAcc, [side]: ocrFromFlagshipResult }
+  }, Promise.resolve({}))
 }
 
 /**
  * Get formData files for OCR
  * @param {Object} formData - State of the FormDataProvider
  * @param {File} lastFileRotated - File object
- * @returns {File[]} - Files to send to OCR
+ * @returns {{ front: File, back?: File }} - Files to send to OCR
  */
 export const getFormDataFilesForOcr = (formData, lastFileRotated) => {
-  return formData.data.length > 1
-    ? [
-        formData.data.find(data => data.fileMetadata.page === 'front')?.file,
-        lastFileRotated ||
-          formData.data.find(data => data.fileMetadata.page === 'back')?.file
-      ].filter(Boolean)
-    : [lastFileRotated || formData.data[0]?.file].filter(Boolean)
+  const front =
+    formData.data.find(data => data.fileMetadata.page === 'front')?.file ||
+    formData.data[0]?.file
+  const back =
+    lastFileRotated ||
+    formData.data.find(data => data.fileMetadata.page === 'back')?.file
+
+  return {
+    ...(front && { front }),
+    ...(back && { back })
+  }
 }
 
 /**
  * Get attributes from OCR
- * @param {Object} options
- * @param {Object} options.formData - State of the FormDataProvider
- * @param {Object} options.ocrAttributes - OCR attributes config of current definition of paper
- * @param {File} options.currentFile - File object
- * @param {File} options.currentFileRotated - File object
- * @param {Object} options.webviewIntent - Webview intent
- * @returns {Promise<Object[]>} - Attributes found
+ * @param {{front: Object, back?: Object}[]} ocrFromFlagshipResult - OCR result
+ * @param {Object[]} ocrAttributes - Attributes to find
+ * @returns {Object[]} - Attributes found
  */
-export const getAttributesFromOcr = async ({
-  files,
-  ocrAttributes,
-  webviewIntent
-}) => {
+export const getAttributesFromOcr = (ocrFromFlagshipResult, ocrAttributes) => {
   try {
-    const isDoubleSidedFile = files.length > 1
-
-    if (isDoubleSidedFile) {
-      const attributesFrontFound = await _getAttributesFromOcr({
-        file: files[0],
-        ocrAttributes: ocrAttributes.front,
-        webviewIntent
-      })
-      const attributesBackFound = await _getAttributesFromOcr({
-        file: files[1],
-        ocrAttributes: ocrAttributes.back,
-        webviewIntent
-      })
-      return attributesFrontFound.concat(attributesBackFound)
-    }
-
-    const attributesFound = await _getAttributesFromOcr({
-      file: files[0],
-      ocrAttributes: ocrAttributes.front,
-      webviewIntent
+    return Object.keys(ocrFromFlagshipResult).flatMap(ocrFromFlagship => {
+      const ocrFromFlagshipSide = ocrFromFlagshipResult[ocrFromFlagship]
+      const { attributes } = findAttributes(
+        ocrFromFlagshipSide.OCRResult,
+        ocrFromFlagshipSide.imgSize,
+        ocrAttributes[ocrFromFlagship]
+      )
+      return attributes
     })
-    return attributesFound
   } catch (error) {
     log(
       'error',

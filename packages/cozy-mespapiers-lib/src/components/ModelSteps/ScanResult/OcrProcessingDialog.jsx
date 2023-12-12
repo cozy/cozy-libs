@@ -12,6 +12,7 @@ import { useStepperDialog } from '../../Hooks/useStepperDialog'
 import {
   getAttributesFromOcr,
   getFormDataFilesForOcr,
+  getOcrFromFlagship,
   makeMetadataFromOcr
 } from '../helpers'
 
@@ -24,12 +25,12 @@ const OcrProcessingDialog = ({ onBack, rotatedFile }) => {
 
   useEffect(() => {
     const init = async () => {
-      const files = getFormDataFilesForOcr(formData, rotatedFile)
-      const attributesFound = await getAttributesFromOcr({
-        files,
-        ocrAttributes,
-        webviewIntent
-      })
+      const fileSides = getFormDataFilesForOcr(formData, rotatedFile)
+      const ocrFromFlagship = await getOcrFromFlagship(fileSides, webviewIntent)
+      const attributesFound = getAttributesFromOcr(
+        ocrFromFlagship,
+        ocrAttributes[0]
+      )
 
       const metadataFromOcr = makeMetadataFromOcr(attributesFound)
       setFormData(prev => ({
