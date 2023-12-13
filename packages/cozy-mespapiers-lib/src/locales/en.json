@@ -493,5 +493,12 @@
   "OcrProcessingDialog": {
     "title": "Document analysis in progress",
     "text": "Please wait…"
+  },
+  "SelectPaperFormat": {
+    "title": "Check the format detected for your card",
+    "format": {
+      "2019-02": "Old format",
+      "2020-01": "New format"
+    }
   }
 }

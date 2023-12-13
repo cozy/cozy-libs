@@ -493,5 +493,12 @@
   "OcrProcessingDialog": {
     "title": "Analyse du document en cours",
     "text": "Merci de patienter…"
+  },
+  "SelectPaperFormat": {
+    "title": "Vérifier le format détecté pour votre carte",
+    "format": {
+      "2019-02": "Ancien format",
+      "2020-01": "Nouveau format"
+    }
   }
 }

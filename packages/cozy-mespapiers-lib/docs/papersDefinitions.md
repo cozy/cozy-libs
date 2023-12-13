@@ -29,6 +29,22 @@
 
 ***
 
+## The `ocrAttributes` property:
+
+- `version`: {string} Version of the paper (e.g. "2020.01").
+- `ìllustration`: {string} Illustration of the choice of format displayed to the user.
+- `versionLabel`: {string} Translation key for the name of the format displayed to the user.
+  - `label`: {string} The discriminating label.
+  - `side`: {string} Side where the label is.
+- `front`: {object} All the front panel parameters allowing you to find the information to use.
+  - `referenceRules`: {object\[]} Rules that allow you to define the version of a paper.
+    - `regex`: {string} Regex that will be tested to deduce the paper version. (e.g. "^\[A-Z]")
+    - `[flag]`: {string} Regex flag (e.g. "/gi")
+- `[back]`: {object} All the front panel parameters allowing you to find the information to use.
+  - `referenceRules`: {object\[]} Rules that allow you to define the version of a paper.
+    - `regex`: {string} Regex that will be tested to deduce the paper version. (e.g. "^\[A-Z]")
+    - `[flag]`: {string} Regex flag (e.g. "/gi")
+
 ## Steps of the `acquisitionSteps` property:
 
 - ### Step `scan`:
