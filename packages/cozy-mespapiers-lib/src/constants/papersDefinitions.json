@@ -2277,6 +2277,25 @@
                   "top": 771
                 }
               }
+            ],
+            "attributesRegex": [
+              {
+                "name": "country",
+                "regex": "<[A-Z]{3}",
+                "validationRules": [
+                  {
+                    "stripChars": [
+                      "<"
+                    ],
+                    "validationFn": "checkCountryCode"
+                  }
+                ],
+                "postTextRules": [
+                  {
+                    "regex": "<"
+                  }
+                ]
+              }
             ]
           },
           "back": {}
