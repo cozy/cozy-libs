@@ -956,6 +956,7 @@
       ],
       "ocrAttributes": [
         {
+          "version": "1995.12",
           "front": {
             "size": {
               "width": 1333,
@@ -967,9 +968,14 @@
               "right": 1312,
               "top": 16
             },
-            "referenceBox": {
-              "text": "CARTENATIONALE"
-            },
+            "referenceRules": [
+              {
+                "regex": "CARTENATIONALE"
+              },
+              {
+                "regex": "^IDFRA"
+              }
+            ],
             "attributesRegex": [
               {
                 "name": "number",
@@ -1018,6 +1024,13 @@
         },
         {
           "version": "2021.03",
+          "front": {
+            "referenceRules": [
+              {
+                "regex": "(IDENTITYCARD|\\|DENTITYCARD)"
+              }
+            ]
+          },
           "back": {
             "attributesRegex": [
               {
