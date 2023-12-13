@@ -362,6 +362,17 @@ const checkValidationRulesFn = (attribute, match) => {
       const validationFn = getValidationFnByName(rule.validationFn)
       isValid = validationFn ? validationFn(match[rule.regexGroupIdx]) : false
     }
+    if (rule.validationFn) {
+      const idx = rule.regexGroupIdx || 0
+      let textToValidate = match[idx]
+      if (rule.stripChars) {
+        for (const regex of rule.stripChars) {
+          textToValidate = match[idx].replace(regex, '')
+        }
+      }
+      const validationFn = getValidationFnByName(rule.validationFn)
+      isValid = validationFn ? validationFn(textToValidate) : false
+    }
   }
   return isValid
 }
