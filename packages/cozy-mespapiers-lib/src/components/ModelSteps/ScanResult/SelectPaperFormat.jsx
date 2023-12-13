@@ -29,7 +29,7 @@ const getDefaultSelectedFormat = ({
 }) => {
   const allReferenceRules = ocrAttributes.map(attrs => ({
     version: attrs.version,
-    referencesRules: Object.keys(attrs)
+    referenceRules: Object.keys(attrs)
       .filter(attr => /(front|back)/.test(attr))
       .flatMap(
         side =>
