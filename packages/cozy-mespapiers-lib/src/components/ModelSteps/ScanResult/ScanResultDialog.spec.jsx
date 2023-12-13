@@ -210,7 +210,7 @@ describe('AcquisitionResult component:', () => {
           currentFile: mockFile({ name: 'test.pdf' }),
           mockIsFlagshipOCRAvailable: true,
           isLastStep: jest.fn(() => true),
-          currentDefinition: { ocrAttributes: {} },
+          currentDefinition: { ocrAttributes: [] },
           allCurrentSteps: [{ isDisplayed: 'ocr' }]
         })
         const btn = getByTestId('next-button')
@@ -228,7 +228,7 @@ describe('AcquisitionResult component:', () => {
           mockIsFlagshipOCRAvailable: true,
           isLastStep: jest.fn(() => true),
           mockGetAttributesFromOcr,
-          currentDefinition: { ocrAttributes: {} },
+          currentDefinition: { ocrAttributes: [] },
           allCurrentSteps: [{ isDisplayed: 'ocr' }]
         })
         const btn = getByTestId('next-button')

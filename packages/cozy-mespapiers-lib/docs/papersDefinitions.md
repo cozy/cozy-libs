@@ -25,7 +25,7 @@
     - [`[information]`](#step-information) {object} Step to get more informations about this file.
     - [`contact`](#step-contact) {object} Step to select one or more contacts linked to this file.
     - [`note`](#step-note) {object} Step to add / edit a note.
-  - `[ocrAttributes]`: {object} Contains all the parameters necessary for the OCR process.
+  - `[ocrAttributes]`: {object\[]} Contains all the parameters necessary for the OCR process.
 
 ***
 

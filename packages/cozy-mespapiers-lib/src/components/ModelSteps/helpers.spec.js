@@ -148,9 +148,9 @@ describe('ModalSteps helpers', () => {
         contacts: []
       }
       const filesForOcr = getFormDataFilesForOcr(formData, undefined)
-      expect(filesForOcr).toEqual([])
+      expect(filesForOcr).toEqual({})
     })
-    it('should return an array with a file', () => {
+    it('should return an object with a file', () => {
       const formData = {
         metadata: {},
         data: [
@@ -159,7 +159,7 @@ describe('ModalSteps helpers', () => {
         contacts: []
       }
       const filesForOcr = getFormDataFilesForOcr(formData, undefined)
-      expect(filesForOcr).toEqual([{ name: '001.pdf' }])
+      expect(filesForOcr).toEqual({ front: { name: '001.pdf' } })
     })
     it('should return an array with two file', () => {
       const formData = {
@@ -171,7 +171,10 @@ describe('ModalSteps helpers', () => {
         contacts: []
       }
       const filesForOcr = getFormDataFilesForOcr(formData)
-      expect(filesForOcr).toEqual([{ name: '001.pdf' }, { name: '002.pdf' }])
+      expect(filesForOcr).toEqual({
+        back: { name: '002.pdf' },
+        front: { name: '001.pdf' }
+      })
     })
     it('should return an array with the last file rotated', () => {
       const formData = {
@@ -185,10 +188,10 @@ describe('ModalSteps helpers', () => {
       const filesForOcr = getFormDataFilesForOcr(formData, {
         name: '002_rotated.pdf'
       })
-      expect(filesForOcr).toEqual([
-        { name: '001.pdf' },
-        { name: '002_rotated.pdf' }
-      ])
+      expect(filesForOcr).toEqual({
+        back: { name: '002_rotated.pdf' },
+        front: { name: '001.pdf' }
+      })
     })
   })
 })
