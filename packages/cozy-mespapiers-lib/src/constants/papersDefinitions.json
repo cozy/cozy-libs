@@ -1017,62 +1017,36 @@
           }
         },
         {
-          "front": {
-            "size": {
-              "width": 1333,
-              "height": 909
-            },
-            "textBounding": {
-              "bottom": 845,
-              "left": 41,
-              "right": 1312,
-              "top": 16
-            },
-            "referenceBox": {
-              "text": "CARTENATIONALE"
-            },
+          "version": "2021.03",
+          "back": {
             "attributesRegex": [
               {
-                "name": "number",
-                "regex": "^(\\d{12})"
-              }
-            ],
-            "attributesBoxes": [
+                "name": "cardNumber",
+                "regex": "^[0-9A-Z]{9}[0-9]<$",
+                "validationRules": [
+                  {
+                    "validationFn": "checkIdentityCardNumber"
+                  }
+                ],
+                "postTextRules": [
+                  {
+                    "regex": ".{2}$"
+                  }
+                ]
+              },
               {
-                "type": "string",
-                "name": "number",
-                "enabled": true,
-                "fixedSize": true,
-                "bounding": {
-                  "height": 39,
-                  "left": 598,
-                  "top": 96,
-                  "width": 252
-                }
-              }
-            ]
-          },
-          "back": {
-            "size": {
-              "width": 596,
-              "height": 410
-            },
-            "textBounding": {
-              "bottom": 304,
-              "left": 12,
-              "right": 429,
-              "top": 126
-            },
-            "attributesBoxes": [
-              {
-                "type": "date",
-                "dateFormat": "ddMMyyyy",
                 "name": "expirationDate",
-                "bounding": {
-                  "left": 174,
-                  "top": 172
-                },
-                "fullLine": true
+                "type": "date",
+                "dateFormat": "yyMMdd",
+                "regex": "[MF][0-9]{7}[A-Z]{3}",
+                "postTextRules": [
+                  {
+                    "regex": ".^"
+                  },
+                  {
+                    "regex": ".{4}$"
+                  }
+                ]
               }
             ]
           }
