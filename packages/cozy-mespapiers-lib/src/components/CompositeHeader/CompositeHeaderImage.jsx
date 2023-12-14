@@ -29,6 +29,8 @@ import IlluInvoice from '../../assets/images/IlluInvoice.png'
 import IlluNationalHealthInsuranceCardDateHelp from '../../assets/images/IlluNationalHealthInsuranceCardDateHelp.png'
 import IlluNationalHealthInsuranceCardFront from '../../assets/images/IlluNationalHealthInsuranceCardFront.png'
 import IlluNationalHealthInsuranceCardNumber from '../../assets/images/IlluNationalHealthInsuranceCardNumber.png'
+import IlluNewNationalIdCardFront from '../../assets/images/IlluNewNationalIdCardFront.png'
+import IlluOldNationalIdCardFront from '../../assets/images/IlluOldNationalIdCardFront.png'
 import IlluPassport from '../../assets/images/IlluPassport.png'
 import IlluPassportDate from '../../assets/images/IlluPassportDate.png'
 import IlluPassportNumber from '../../assets/images/IlluPassportNumber.png'
@@ -56,6 +58,8 @@ const images = {
   IlluNationalHealthInsuranceCardDateHelp,
   IlluNationalHealthInsuranceCardFront,
   IlluNationalHealthInsuranceCardNumber,
+  IlluNewNationalIdCardFront,
+  IlluOldNationalIdCardFront,
   IlluResidencePermitBack,
   IlluResidencePermitExpirationDateHelp,
   IlluResidencePermitFront,
