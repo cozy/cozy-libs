@@ -6,6 +6,17 @@ import log from 'cozy-logger'
 const MAX_TEXT_SHIFT_THRESHOLD = 5 // in %
 const MAX_LINE_SHIFT_THRESHOLD = 5 // in px
 
+const normalizeText = text => {
+  // TODO: more normalization might be necessary
+  return text
+    .normalize('NFD')
+    .toUpperCase()
+    .replace(/\s/g, '') // remove space
+    .replace(/ç/g, 'c')
+    .replace(/'/g, '')
+    .replace(/[\u0300-\u036f]/g, '') // remove accents
+}
+
 /**
  * Remove all spaces from a string
  * @param {string} text - text to remove spaces from
@@ -565,26 +576,103 @@ const findAttributesByRegex = (OCRResult, attributesRegex) => {
   return foundAttributes
 }
 
+const hasMatchingText = (blocks, regex) => {
+  const regExp = new RegExp(regex)
+  for (const block of blocks) {
+    for (const line of block.lines) {
+      // Check regexp against line text
+      const normalizedLine = normalizeText(line.text)
+      if (regExp.test(normalizedLine)) {
+        return true
+      }
+      // If the line failed, check by splitted element
+      for (const el of line.elements) {
+        const normalizedEl = normalizeText(el.text)
+        if (regExp.test(normalizedEl)) {
+          return true
+        }
+      }
+    }
+  }
+  return false
+}
+
+const isMatchingRules = (blocks, rules) => {
+  if (!rules) {
+    return null
+  }
+  // All the references must be found
+  for (const refRule of rules) {
+    const match = hasMatchingText(blocks, refRule.regex)
+    if (!match) {
+      return false
+    }
+  }
+  return true
+}
+
 /**
- * The paperType + face are used as fallback when no paper is automatically found
+ * From the given OCR and rules, try to find which version the paper belongs
+ *
+ * For instance, an identity card may have 2 versions.
+ * A set of regex rules is defined to identify each version, against OCR.
+ *
+ * @param {object} OCRWithSides - The OCR for both sides, front and back
+ * @param {Array<object>} versionReferences - The references for each paper version
+ * @returns {object} The matching version
+ */
+export const findPaperVersion = (OCRWithSides, versionReferences) => {
+  const OCRFront = OCRWithSides?.front?.OCRResult
+  const OCRBack = OCRWithSides?.back?.OCRResult
+
+  for (const versionRef of versionReferences) {
+    const frontRules =
+      versionRef?.referenceRules?.filter(ref => ref.side === 'front') || []
+    const backRules =
+      versionRef?.referenceRules?.filter(ref => ref.side === 'back') || []
+
+    const shouldDetectFront = OCRFront && frontRules.length > 0
+    const shouldDetectBack = OCRBack && backRules.length > 0
+    const hasMatchForFront =
+      shouldDetectFront && isMatchingRules(OCRFront, frontRules)
+    const hasMatchForBack =
+      shouldDetectBack && isMatchingRules(OCRBack, backRules)
+
+    if (shouldDetectFront && shouldDetectBack) {
+      if (hasMatchForFront && hasMatchForBack) {
+        return { version: versionRef.version }
+      }
+    } else if (shouldDetectFront && hasMatchForFront) {
+      return { version: versionRef.version }
+    } else if (shouldDetectBack && hasMatchForBack) {
+      return { version: versionRef.version }
+    }
+  }
+  return { version: null }
+}
+
+/**
+ * The paperType + side are used as fallback when no paper is automatically found
+ *
  * @param {object} OCRResult - OCR result
  * @param {object} imgSize - image size
- * @param {object} ocrAttributesFace - OCR attributes
+ * @param {object} ocrAttributesSide - OCR attributes for the document side
  * @returns {object} attributes found
  */
-export const findAttributes = (OCRResult, imgSize, ocrAttributesFace = {}) => {
+export const findAttributes = (OCRResult, imgSize, ocrAttributesSide = {}) => {
   if (!OCRResult || OCRResult.length < 1) {
     return null
   }
-  const { attributesRegex, size } = ocrAttributesFace
+  const { attributesRegex, size } = ocrAttributesSide
   let attributesByBox = []
   if (size?.width && size?.height) {
-    attributesByBox = findAttributesByBox(OCRResult, ocrAttributesFace, imgSize)
+    attributesByBox = findAttributesByBox(OCRResult, ocrAttributesSide, imgSize)
   }
   const attributesByRegex = findAttributesByRegex(OCRResult, attributesRegex)
 
   // TODO: when an attribute is both found by box and regex, which one should be kept?(@paultranvan)
-  // TODO We keep in priority the result found via the regex (@merkur39)
+  // => For now, we keep in priority the result found via the regex (@merkur39)
+  // => Note this implies strict regex to minimize false positives (@paultranvan)
   const foundAttributes = unionBy(attributesByRegex, attributesByBox, 'name')
   const processedAttributes = postProcessing(foundAttributes)
 
