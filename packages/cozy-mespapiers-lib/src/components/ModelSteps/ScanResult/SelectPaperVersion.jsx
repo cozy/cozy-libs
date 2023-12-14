@@ -19,7 +19,7 @@ import { useFormData } from '../../Hooks/useFormData'
 import { useStepperDialog } from '../../Hooks/useStepperDialog'
 import { getAttributesFromOcr, makeMetadataFromOcr } from '../helpers'
 
-const getDefaultSelectedFormat = ({ ocrFromFlagship, ocrAttributes }) => {
+const getDefaultSelectedVersion = ({ ocrFromFlagship, ocrAttributes }) => {
   const allReferenceRules = ocrAttributes.map(attrs => ({
     version: attrs.version,
     referenceRules: makeReferenceRulesByOcrAttributes(attrs)
@@ -29,12 +29,12 @@ const getDefaultSelectedFormat = ({ ocrFromFlagship, ocrAttributes }) => {
   return version
 }
 
-const SelectPaperFormat = ({ onBack, ocrFromFlagship }) => {
+const SelectPaperVersion = ({ onBack, ocrFromFlagship }) => {
   const { t } = useI18n()
   const { setFormData } = useFormData()
   const { currentDefinition, nextStep } = useStepperDialog()
   const [selectedVersion, setSelectedVersion] = useState(() =>
-    getDefaultSelectedFormat({
+    getDefaultSelectedVersion({
       ocrFromFlagship,
       ocrAttributes: currentDefinition.ocrAttributes
     })
@@ -73,7 +73,7 @@ const SelectPaperFormat = ({ onBack, ocrFromFlagship }) => {
       transitionDuration={0}
       content={
         <CompositeHeader
-          title={t('SelectPaperFormat.title')}
+          title={t('SelectPaperVersion.title')}
           text={ocrAttributes.map(attr => (
             <Box
               key={attr.version}
@@ -120,9 +120,9 @@ const SelectPaperFormat = ({ onBack, ocrFromFlagship }) => {
   )
 }
 
-SelectPaperFormat.propTypes = {
+SelectPaperVersion.propTypes = {
   onBack: PropTypes.func.isRequired,
   ocrFromFlagship: PropTypes.object.isRequired
 }
 
-export default SelectPaperFormat
+export default SelectPaperVersion

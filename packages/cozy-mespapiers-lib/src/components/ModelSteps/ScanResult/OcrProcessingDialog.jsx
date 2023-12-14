@@ -6,7 +6,7 @@ import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Empty from 'cozy-ui/transpiled/react/Empty'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-import SelectPaperFormat from './SelectPaperFormat'
+import SelectPaperVersion from './SelectPaperVersion'
 import OcrProcessingIcon from '../../../assets/icons/OcrProcessing.svg'
 import { useFormData } from '../../Hooks/useFormData'
 import { useStepperDialog } from '../../Hooks/useStepperDialog'
@@ -22,7 +22,7 @@ const OcrProcessingDialog = ({ onBack, rotatedFile }) => {
   const { setFormData, formData } = useFormData()
   const webviewIntent = useWebviewIntent()
   const { currentDefinition, nextStep } = useStepperDialog()
-  const [multipleFormat, setMultipleFormat] = useState({
+  const [multipleVersion, setMultipleVersion] = useState({
     enabled: false,
     ocr: null
   })
@@ -34,11 +34,11 @@ const OcrProcessingDialog = ({ onBack, rotatedFile }) => {
       const ocrFromFlagship = await getOcrFromFlagship(fileSides, webviewIntent)
       const fileVersions = ocrAttributes.map(attr => attr.version)
 
-      // If paper has multiple formats, we need to display a dialog to let user confirm the right format
+      // If paper has multiple versions, we need to display a dialog to let user confirm the right version
       if (fileVersions.length > 1) {
-        setMultipleFormat({ enabled: true, ocr: ocrFromFlagship })
+        setMultipleVersion({ enabled: true, ocr: ocrFromFlagship })
       } else {
-        // If paper has no format, we can go to next step
+        // If paper has no multiple versions, we can go to next step
         const attributesFound = getAttributesFromOcr(
           ocrFromFlagship,
           ocrAttributes[0]
@@ -60,9 +60,12 @@ const OcrProcessingDialog = ({ onBack, rotatedFile }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  if (multipleFormat.enabled) {
+  if (multipleVersion.enabled) {
     return (
-      <SelectPaperFormat onBack={onBack} ocrFromFlagship={multipleFormat.ocr} />
+      <SelectPaperVersion
+        onBack={onBack}
+        ocrFromFlagship={multipleVersion.ocr}
+      />
     )
   }
 
