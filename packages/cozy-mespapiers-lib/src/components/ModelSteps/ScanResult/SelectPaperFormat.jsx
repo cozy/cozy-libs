@@ -11,17 +11,34 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Radio from 'cozy-ui/transpiled/react/Radios'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
+import { findPaperVersion } from '../../../helpers/findAttributes'
+import { makeReferenceRulesByOcrAttributes } from '../../../helpers/makeReferenceRulesByOcrAttributes'
 import CompositeHeader from '../../CompositeHeader/CompositeHeader'
 import CompositeHeaderImage from '../../CompositeHeader/CompositeHeaderImage'
 import { useFormData } from '../../Hooks/useFormData'
 import { useStepperDialog } from '../../Hooks/useStepperDialog'
 import { getAttributesFromOcr, makeMetadataFromOcr } from '../helpers'
 
+const getDefaultSelectedFormat = ({ ocrFromFlagship, ocrAttributes }) => {
+  const allReferenceRules = ocrAttributes.map(attrs => ({
+    version: attrs.version,
+    referenceRules: makeReferenceRulesByOcrAttributes(attrs)
+  }))
+
+  const { version } = findPaperVersion(ocrFromFlagship, allReferenceRules)
+  return version
+}
+
 const SelectPaperFormat = ({ onBack, ocrFromFlagship }) => {
   const { t } = useI18n()
   const { setFormData } = useFormData()
   const { currentDefinition, nextStep } = useStepperDialog()
-  const [selectedVersion, setSelectedVersion] = useState()
+  const [selectedVersion, setSelectedVersion] = useState(() =>
+    getDefaultSelectedFormat({
+      ocrFromFlagship,
+      ocrAttributes: currentDefinition.ocrAttributes
+    })
+  )
   const { ocrAttributes } = currentDefinition
 
   const handleClick = () => {
