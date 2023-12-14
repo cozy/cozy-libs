@@ -494,12 +494,12 @@
     "title": "Analyse du document en cours",
     "text": "Merci de patienter…"
   },
-  "SelectPaperFormat": {
-    "title": "Vérifier le format détecté pour votre carte",
-    "format": {
+  "SelectPaperVersion": {
+    "title": "Vérifier la version détectée pour votre carte",
+    "version": {
       "nationalIdCard": {
-        "1995-12": "Ancien format",
-        "2021-03": "Nouveau format"
+        "1995-12": "Ancienne version",
+        "2021-03": "Nouvelle version"
       }
     }
   }
