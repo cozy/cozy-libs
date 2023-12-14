@@ -1015,6 +1015,41 @@
               }
             ]
           }
+        },
+        {
+          "version": "2021.03",
+          "back": {
+            "attributesRegex": [
+              {
+                "name": "cardNumber",
+                "regex": "^[0-9A-Z]{9}[0-9]<$",
+                "validationRules": [
+                  {
+                    "validationFn": "checkIdentityCardNumber"
+                  }
+                ],
+                "postTextRules": [
+                  {
+                    "regex": ".{2}$"
+                  }
+                ]
+              },
+              {
+                "name": "expirationDate",
+                "type": "date",
+                "dateFormat": "yyMMdd",
+                "regex": "[MF][0-9]{7}[A-Z]{3}",
+                "postTextRules": [
+                  {
+                    "regex": ".^"
+                  },
+                  {
+                    "regex": ".{4}$"
+                  }
+                ]
+              }
+            ]
+          }
         }
       ]
     },
