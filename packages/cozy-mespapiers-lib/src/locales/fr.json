@@ -495,6 +495,12 @@
     "text": "Merci de patienter…"
   },
   "SelectPaperFormat": {
-    "title": "Vérifier le format détecté pour votre carte"
+    "title": "Vérifier le format détecté pour votre carte",
+    "format": {
+      "nationalIdCard": {
+        "1995-12": "Ancien format",
+        "2021-03": "Nouveau format"
+      }
+    }
   }
 }

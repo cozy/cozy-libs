@@ -957,6 +957,8 @@
       "ocrAttributes": [
         {
           "version": "1995.12",
+          "illustration": "IlluOldNationalIdCardFront.png",
+          "versionLabel": "SelectPaperFormat.format.nationalIdCard.1995-12",
           "front": {
             "size": {
               "width": 1333,
@@ -1024,6 +1026,8 @@
         },
         {
           "version": "2021.03",
+          "illustration": "IlluNewNationalIdCardFront.png",
+          "versionLabel": "SelectPaperFormat.format.nationalIdCard.2021-03",
           "front": {
             "referenceRules": [
               {
@@ -1034,7 +1038,7 @@
           "back": {
             "attributesRegex": [
               {
-                "name": "cardNumber",
+                "name": "number",
                 "regex": "^[0-9A-Z]{9}[0-9]<$",
                 "validationRules": [
                   {
