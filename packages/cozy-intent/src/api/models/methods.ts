@@ -32,4 +32,4 @@ interface _NativeMethodsRegister {
 
 export type NativeMethodsRegister = _NativeMethodsRegister & PostMeDefault
 
-export type WebviewMethods = Record<string, () => unknown>
+export type WebviewMethods = Record<string, (...args: unknown[]) => unknown>

@@ -107,6 +107,10 @@ export class NativeService {
       messengerToInit.connection = await this.initWebview(
         messengerToInit.messenger
       )
+
+      await messengerToInit.connection
+        .remoteHandle()
+        .call('onInit', this.makeAvailableMethodsJSON())
     } catch (error) {
       log(
         interpolate(strings.errorParentHandshake, {
@@ -135,6 +139,13 @@ export class NativeService {
       return uri
     }
   }
+
+  private makeAvailableMethodsJSON = (): string =>
+    JSON.stringify(
+      Object.fromEntries(
+        Object.entries(this.localMethods).map(([key]) => [key, true])
+      )
+    )
 
   public call = (
     uri: string,

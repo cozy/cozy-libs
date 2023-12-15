@@ -1,5 +1,5 @@
-import React, { ReactElement, useEffect, useState } from 'react'
 import { Connection, ChildHandshake, debug } from 'post-me'
+import React, { ReactElement, useEffect, useState } from 'react'
 
 import {
   CozyBar,
@@ -11,8 +11,8 @@ import {
   DebugWebviewMessenger,
   WebviewMethods
 } from '../../api'
-import { WebviewContext } from '../../view'
 import { isWebDevMode } from '../../utils'
+import { WebviewContext } from '../../view'
 
 declare const cozy: CozyBar | undefined
 
@@ -97,12 +97,23 @@ export const WebviewIntentProvider = ({
     webviewService
   )
   const setBarWebviewContext = setBarContext || getBarInitAPI()
+  const [remoteMethods, setRemoteMethods] = useState<Record<string, boolean>>(
+    {}
+  )
 
   useEffect(() => {
+    const localMethods = {
+      ...methods,
+      onInit: (remoteMethods: string): void => {
+        setRemoteMethods(JSON.parse(remoteMethods) as Record<string, boolean>)
+        methods?.onInit && methods.onInit()
+      }
+    }
+
     !connection &&
       !webviewService &&
       isValidEnv() &&
-      getConnection(setConnection, methods).catch(log)
+      getConnection(setConnection, localMethods as WebviewMethods).catch(log)
   }, [connection, webviewService, methods])
 
   useEffect(() => {
@@ -114,7 +125,7 @@ export const WebviewIntentProvider = ({
   }, [setBarWebviewContext, service])
 
   return (
-    <WebviewContext.Provider value={service}>
+    <WebviewContext.Provider value={{ service, remoteMethods }}>
       {children}
     </WebviewContext.Provider>
   )
