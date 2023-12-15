@@ -2,8 +2,8 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 
 import { RealTimeQueries } from 'cozy-client'
+import CozyDevTools from 'cozy-client/dist/devtools'
 import flag from 'cozy-flags'
-import FlagSwitcher from 'cozy-flags/dist/FlagSwitcher'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
@@ -31,7 +31,7 @@ export const MesPapiersLibLayout = () => {
 
   return (
     <>
-      {flag('switcher') && <FlagSwitcher />}
+      {flag('debug') && <CozyDevTools />}
 
       {customPapersDefinitions.isLoaded && (
         <Typography variant="subtitle2" align="center" color="error">

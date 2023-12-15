@@ -41,12 +41,6 @@ const setup = ({
 }
 
 describe('MesPapiersLibLayout', () => {
-  it('should contain FlagSwitcher when flag "switcher" is activate', () => {
-    const { queryByTestId } = setup({ isFlag: true })
-
-    expect(queryByTestId('FlagSwitcher')).toBeTruthy()
-  })
-
   it('should contain "custom name" text if custom papersDefinitions file is used', () => {
     const { queryByText } = setup({
       customPapersDefinitions: {
