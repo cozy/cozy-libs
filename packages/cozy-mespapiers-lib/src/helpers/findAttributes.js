@@ -663,7 +663,9 @@ export const findAttributes = (OCRResult, imgSize, ocrAttributesSide = {}) => {
   // => For now, we keep in priority the result found via the regex (@merkur39)
   // => Note this implies strict regex to minimize false positives (@paultranvan)
   const foundAttributes = unionBy(attributesByRegex, attributesByBox, 'name')
+  log('info', 'foundAttributes: ' + JSON.stringify(foundAttributes))
   const processedAttributes = postProcessing(foundAttributes)
+  log('info', 'postProcessedAttributes: ' + JSON.stringify(processedAttributes))
 
   return { attributes: processedAttributes }
 }
