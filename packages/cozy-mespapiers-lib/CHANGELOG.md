@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [69.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@68.1.0...cozy-mespapiers-lib@69.0.0) (2023-12-15)
+
+
+### Features
+
+* **mespapiers:** Use CozyDevTools instead FlagSwitcher ([f043279](https://github.com/cozy/cozy-libs/commit/f0432793412fab4210c041379aed55b2c73164cf))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** You must have `react-inspector >= 5.1.1`
+
+CozyDevTools offers better management of flags,
+it provides other useful tools in development
+(visualization of requests, version number of dependencies).
+
+The “switcher” flag is replaced by “debug”,
+to display the CozyDevTools component.
+
+
+
+
+
 # [68.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@68.0.0...cozy-mespapiers-lib@68.1.0) (2023-12-15)
 
 
