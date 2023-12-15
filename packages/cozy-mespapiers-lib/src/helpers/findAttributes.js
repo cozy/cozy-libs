@@ -1,8 +1,8 @@
+import parse from 'date-fns/parse'
 import unionBy from 'lodash/unionBy'
 
 import { checkCountryCode } from 'cozy-client/dist/models/countries'
 import log from 'cozy-logger'
-
 const MAX_TEXT_SHIFT_THRESHOLD = 5 // in %
 const MAX_LINE_SHIFT_THRESHOLD = 5 // in px
 
@@ -67,21 +67,29 @@ const computeDistanceByBoxRatio = (
  * @returns {string} date formatted
  */
 const transformDate = (attribute, text) => {
-  const defaultDateFormat = 'ddMMyyyy'
-  const dateFormat = attribute.dateFormat || defaultDateFormat
-  const dateLength = dateFormat.length
-
-  const newText = text.replace(/[.,-/]/g, '')
-  const dateRegex = new RegExp(`\\d{${dateLength}}$`)
-  const match = newText.match(dateRegex)
-  if (!match) {
+  try {
+    const defaultDateFormat = 'ddMMyyyy'
+    const dateFormat = attribute.dateFormat || defaultDateFormat
+    const dateLength = dateFormat.length
+    const newText = text.replace(/[.,-/]/g, '')
+    const dateRegex = new RegExp(`\\d{${dateLength}}$`)
+    const match = newText.match(dateRegex)
+    if (!match) {
+      return ''
+    }
+    const localDate = parse(match[0], dateFormat, new Date())
+    // Conversion to UTC, to avoid days offset because of timezone
+    const date = new Date(
+      Date.UTC(
+        localDate.getFullYear(),
+        localDate.getMonth(),
+        localDate.getDate()
+      )
+    )
+    return date.toISOString()
+  } catch (err) {
     return ''
   }
-  const date = match[0]
-  const newDate =
-    date.slice(0, 2) + '-' + date.slice(2, 4) + '-' + date.slice(4)
-
-  return newDate
 }
 
 /**
@@ -407,7 +415,9 @@ const findAttributeInText = (searchedAttribute, text) => {
     return {
       name: searchedAttribute.name,
       value: result[0],
-      postTextRules: searchedAttribute.postTextRules
+      postTextRules: searchedAttribute.postTextRules,
+      type: searchedAttribute.type,
+      dateFormat: searchedAttribute.dateFormat
     }
   }
   return null
