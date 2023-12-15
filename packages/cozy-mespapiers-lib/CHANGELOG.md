@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [68.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@68.0.0...cozy-mespapiers-lib@68.1.0) (2023-12-15)
+
+
+### Bug Fixes
+
+* CNI rules ([7eefb4d](https://github.com/cozy/cozy-libs/commit/7eefb4dcefadc6541253cd96a912cfcca9e263fd))
+* Date post-validation ([5f1c659](https://github.com/cozy/cozy-libs/commit/5f1c659a980e13e62647c1c43c96361ab496a653))
+
+
+### Features
+
+* Add debug logs ([c3e8b80](https://github.com/cozy/cozy-libs/commit/c3e8b80e428c35857b2deac984602b68f3f8fce7))
+* Add regex rules for passport attributes ([a30b431](https://github.com/cozy/cozy-libs/commit/a30b43126fd019fb14eb48ac43288ed55bc5a0d1))
+* **mespapiers:** Add `xsmall` size to `CompositeHeaderImage` component ([06e51d9](https://github.com/cozy/cozy-libs/commit/06e51d954395449356f4d0de0f48f18bdceb1065))
+* **mespapiers:** Add configuration for SelectPaperFormat modal ([7ade74e](https://github.com/cozy/cozy-libs/commit/7ade74e44e0f6d1893bac8292d26c6982ebe884f))
+* **mespapiers:** Add country detection for passport ([8b5a9a2](https://github.com/cozy/cozy-libs/commit/8b5a9a2d1673d9955d18754cab588c0785e2912d))
+* **mespapiers:** Add identity card version detection ([ea8475a](https://github.com/cozy/cozy-libs/commit/ea8475a7c8168b2b8c1ca0972f96f64d35e1e21d))
+* **mespapiers:** Add new identity card format (2021) ([a9ba5f1](https://github.com/cozy/cozy-libs/commit/a9ba5f1f3e5713525caca01107126891f6782048))
+* **mespapiers:** Add paper version detection ([c24d06b](https://github.com/cozy/cozy-libs/commit/c24d06b6589af0ef919f1c030222c46145c8c5a3))
+* **mespapiers:** Add SelectPaperFormat component ([5752fb4](https://github.com/cozy/cozy-libs/commit/5752fb41b9c1f9cfd75b4a092a75b774a489221d))
+* **mespapiers:** Add the SelectPaperFormat modal to the process ([dce2992](https://github.com/cozy/cozy-libs/commit/dce29929edde4296db31be0978ce6eebe92e4ccb))
+* **mespapiers:** Rename `format` to `version` in the OCR process ([1b67d84](https://github.com/cozy/cozy-libs/commit/1b67d84fee037e4c0f2e5d9f256b307316b430e9))
+
+
+
+
+
 # [68.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@67.3.1...cozy-mespapiers-lib@68.0.0) (2023-12-14)
 
 
