@@ -31,19 +31,25 @@
 
 ## The `ocrAttributes` property:
 
+This is an array containing information for OCR attributes detection. For instance, recognize a passport number,
+an expiration date, etc.
+
+Each version of a paper is an element in the `ocrAttributes` attribute. When there are several versions, each entry must have a `version` attribute.
+
+Some papers have 2 sides: front and back. Each side is a dedicated object in the OCR definition.
+The `front` and `back` entries have exactly the same structure and attributes.
+
 - `version`: {string} Version of the paper (e.g. "2020.01").
 - `ìllustration`: {string} Illustration of the choice of format displayed to the user.
 - `versionLabel`: {string} Translation key for the name of the format displayed to the user.
   - `label`: {string} The discriminating label.
   - `side`: {string} Side where the label is.
-- `front`: {object} All the front panel parameters allowing you to find the information to use.
+- `front|back`: {object} All the front panel parameters allowing you to find the information to use.
   - `referenceRules`: {object\[]} Rules that allow you to define the version of a paper.
     - `regex`: {string} Regex that will be tested to deduce the paper version. (e.g. "^\[A-Z]")
     - `[flag]`: {string} Regex flag (e.g. "/gi")
-- `[back]`: {object} All the front panel parameters allowing you to find the information to use.
-  - `referenceRules`: {object\[]} Rules that allow you to define the version of a paper.
-    - `regex`: {string} Regex that will be tested to deduce the paper version. (e.g. "^\[A-Z]")
-    - `[flag]`: {string} Regex flag (e.g. "/gi")
+  - `attributesRegex`: {Array<object>} Used to find attributes based on regex rules
+  - `attributesBoxes`: {Array<object>} Used to find attributes based on bouding box coordinates
 
 ## Steps of the `acquisitionSteps` property:
 
