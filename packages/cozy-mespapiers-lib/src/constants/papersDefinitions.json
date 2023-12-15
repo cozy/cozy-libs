@@ -2342,6 +2342,21 @@
                     "regex": "<"
                   }
                 ]
+              },
+              {
+                "name": "number",
+                "regex": "^\\d{2}[A-Za-z]{2}\\d{5}"
+              },
+              {
+                "name": "expirationDate",
+                "type": "date",
+                "dateFormat": "yyMMdd",
+                "regex": "[MF][0-9]{7}<",
+                "postTextRules": [
+                  {
+                    "regex": ".{2}$"
+                  }
+                ]
               }
             ]
           },
