@@ -26,25 +26,6 @@ const removeSpaces = text => {
   return text.replace(/\s/g, '')
 }
 
-// TODO: should be moved elsewhere?
-const checkIdentityCardNumber = identityNumber => {
-  if (!identityNumber || !identityNumber.match(/[0-9A-Z<]*/)) {
-    return false
-  }
-  const sumControl = identityNumber[identityNumber.length - 2]
-  const facteurs = [7, 3, 1]
-  let resultat = 0
-  for (let i = 0; i < identityNumber.length - 1; i++) {
-    const c = identityNumber.charAt(i)
-    if (c === '<') {
-      continue
-    }
-    resultat += parseInt(c, 36) * facteurs[i % 3]
-  }
-
-  return sumControl === resultat % 10
-}
-
 /**
  * Compute the euclidean distance between two boxes
  * @param {object} box1 - normalized box
@@ -368,8 +349,6 @@ const getValidationFnByName = name => {
   switch (name) {
     case 'checkCountryCode':
       return checkCountryCode
-    case 'checkIdentityCardNumber':
-      return checkIdentityCardNumber
     default:
       log('error', 'Unknown validation function', 'getValidationFnByName')
       return null
