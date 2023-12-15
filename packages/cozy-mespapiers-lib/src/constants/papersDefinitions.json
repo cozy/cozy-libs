@@ -1039,12 +1039,7 @@
             "attributesRegex": [
               {
                 "name": "number",
-                "regex": "^[0-9A-Z]{9}[0-9]<$",
-                "validationRules": [
-                  {
-                    "validationFn": "checkIdentityCardNumber"
-                  }
-                ],
+                "regex": "[0-9A-Z]{9}[0-9]<",
                 "postTextRules": [
                   {
                     "regex": ".{2}$"
@@ -1058,7 +1053,7 @@
                 "regex": "[MF][0-9]{7}[A-Z]{3}",
                 "postTextRules": [
                   {
-                    "regex": ".^"
+                    "regex": "^."
                   },
                   {
                     "regex": ".{4}$"
