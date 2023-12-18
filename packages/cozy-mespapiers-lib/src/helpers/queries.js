@@ -50,7 +50,8 @@ export const buildFilesQueryWithQualificationLabel = () => {
           'cozyMetadata.createdByApp': { $exists: true }
         })
         .select(select)
-        .limitBy(1000),
+        .limitBy(1000)
+        .indexFields(['type', 'trashed']),
     options: {
       as: `${FILES_DOCTYPE}/metadata_qualification_label`,
       fetchPolicy: defaultFetchPolicy
@@ -118,7 +119,8 @@ export const buildContactsQuery = (enabled = true) => ({
         'company',
         'jobTitle'
       ])
-      .limitBy(1000),
+      .limitBy(1000)
+      .indexFields(['_id']),
   options: {
     as: CONTACTS_DOCTYPE,
     fetchPolicy: defaultFetchPolicy,
