@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [69.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@69.0.0...cozy-mespapiers-lib@69.0.1) (2023-12-18)
+
+
+### Bug Fixes
+
+* Add indexFields ([6b22f23](https://github.com/cozy/cozy-libs/commit/6b22f238542ea11a75034be82bd40d7e99c31466))
+
+
+
+
+
 # [69.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@68.1.0...cozy-mespapiers-lib@69.0.0) (2023-12-15)
 
 
