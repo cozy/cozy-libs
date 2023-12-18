@@ -11,23 +11,15 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Radio from 'cozy-ui/transpiled/react/Radios'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-import { findPaperVersion } from '../../../helpers/findAttributes'
-import { makeReferenceRulesByOcrAttributes } from '../../../helpers/makeReferenceRulesByOcrAttributes'
 import CompositeHeader from '../../CompositeHeader/CompositeHeader'
 import CompositeHeaderImage from '../../CompositeHeader/CompositeHeaderImage'
 import { useFormData } from '../../Hooks/useFormData'
 import { useStepperDialog } from '../../Hooks/useStepperDialog'
-import { getAttributesFromOcr, makeMetadataFromOcr } from '../helpers'
-
-const getDefaultSelectedVersion = ({ ocrFromFlagship, ocrAttributes }) => {
-  const allReferenceRules = ocrAttributes.map(attrs => ({
-    version: attrs.version,
-    referenceRules: makeReferenceRulesByOcrAttributes(attrs)
-  }))
-
-  const { version } = findPaperVersion(ocrFromFlagship, allReferenceRules)
-  return version
-}
+import {
+  getAttributesFromOcr,
+  getDefaultSelectedVersion,
+  makeMetadataFromOcr
+} from '../helpers'
 
 const SelectPaperVersion = ({ onBack, ocrFromFlagship }) => {
   const { t } = useI18n()
