@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [69.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@69.0.2...cozy-mespapiers-lib@69.1.0) (2023-12-18)
+
+
+### Features
+
+* **mespapiers:** Add bypass to the SelectPaperVersion modal ([c3cb1f7](https://github.com/cozy/cozy-libs/commit/c3cb1f701cadb0ea19fa45b66f95a9f213950956))
+
+
+
+
+
 ## [69.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@69.0.1...cozy-mespapiers-lib@69.0.2) (2023-12-18)
 
 
