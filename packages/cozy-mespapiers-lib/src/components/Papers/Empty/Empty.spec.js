@@ -7,11 +7,15 @@ import AppLike from '../../../../test/components/AppLike'
 jest.mock('cozy-flags')
 jest.mock('../HarvestBanner', () => () => <div data-testid="HarvestBanner" />)
 
-const setup = ({ konnector, accountsWithFiles, accountsWithoutFiles } = {}) => {
+const setup = ({
+  konnectors,
+  accountsWithFiles,
+  accountsWithoutFiles
+} = {}) => {
   return render(
     <AppLike>
       <Empty
-        konnector={konnector}
+        konnectors={konnectors}
         accountsByFiles={{ accountsWithFiles, accountsWithoutFiles }}
       />
     </AppLike>
@@ -25,20 +29,25 @@ describe('MesPapiersLibProviders', () => {
 
   it('should display basic text without harvest banner', () => {
     const { queryByTestId, getByText } = setup({
-      konnector: undefined,
-      accountsWithFiles: undefined,
-      accountsWithoutFiles: undefined
+      konnectors: [],
+      accountsWithFiles: [],
+      accountsWithoutFiles: []
     })
 
     expect(queryByTestId('HarvestBanner')).toBeFalsy()
     expect(getByText('Add your personal documents'))
   })
 
-  it('should display specific text', () => {
+  it('should display specific text if there is at least one konnector, one account without files but no with files ', () => {
     const { getByText } = setup({
-      konnector: {},
+      konnectors: [{ slug: 'slug_1', name: 'Slug 1' }],
       accountsWithFiles: [],
-      accountsWithoutFiles: [{}]
+      accountsWithoutFiles: [
+        {
+          auth: { login: 'myLogin' },
+          account_type: 'slug_1'
+        }
+      ]
     })
 
     expect(getByText('Add manually'))
@@ -46,14 +55,23 @@ describe('MesPapiersLibProviders', () => {
 
   it('should display logins', () => {
     const { getByText } = setup({
-      konnector: {},
+      konnectors: [
+        {
+          slug: 'slug_1',
+          name: 'Slug 1'
+        },
+        {
+          slug: 'slug_2',
+          name: 'Slug 2'
+        }
+      ],
       accountsWithoutFiles: [
-        { auth: { login: 'myLogin' } },
-        { auth: { login: 'myOtherLogin' } }
+        { auth: { login: 'myLogin' }, account_type: 'slug_1' },
+        { auth: { login: 'myOtherLogin' }, account_type: 'slug_2' }
       ]
     })
 
-    expect(getByText('Account %{name} : myLogin'))
-    expect(getByText('Account %{name} : myOtherLogin'))
+    expect(getByText('Account Slug 1 : myLogin'))
+    expect(getByText('Account Slug 2 : myOtherLogin'))
   })
 })
