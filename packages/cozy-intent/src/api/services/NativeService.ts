@@ -86,10 +86,26 @@ export class NativeService {
   ): Promise<Connection> =>
     await ParentHandshake(messenger, this.localMethods, numbers.maxAttempts)
 
-  public tryEmit = async (event: NativeEvent): Promise<void> => {
+  public tryEmit = async (
+    event: NativeEvent,
+    componentId: string
+  ): Promise<void> => {
     if (!this.isNativeEvent(event)) return
 
     const parsedEvent = this.parseNativeEvent(event)
+
+    if (parsedEvent.methodName === 'setFlagshipUI' && parsedEvent.args) {
+      // @ts-expect-error we know that `setFlagshipUI` args are in an array
+      parsedEvent.args[0].componentId = componentId
+    }
+
+    if (parsedEvent.methodName === 'setTheme' && parsedEvent.args) {
+      // @ts-expect-error we know that `setTheme` args is a string and we want to convert it to an object
+      parsedEvent.args[0] = {
+        homeTheme: parsedEvent.args[0],
+        componentId: componentId
+      }
+    }
 
     if (this.isInitMessage(parsedEvent)) return await this.tryInit(event)
 

@@ -80,18 +80,24 @@ describe('NativeService', () => {
 
     nativeService.registerWebview('some_uri', webviewRef)
 
-    await nativeService.tryEmit({
-      nativeEvent: { data: '{"type":"@post-me"}', url: 'http://some_uri' }
-    })
+    await nativeService.tryEmit(
+      {
+        nativeEvent: { data: '{"type":"@post-me"}', url: 'http://some_uri' }
+      },
+      'SOME_COMPONENT_ID'
+    )
 
     expect(onMessageMock).toHaveBeenNthCalledWith(1, { type: '@post-me' })
 
     nativeService.unregisterWebview('some_uri')
 
     await expect(
-      nativeService.tryEmit({
-        nativeEvent: { data: '{"type":"@post-me"}', url: 'http://some_uri' }
-      })
+      nativeService.tryEmit(
+        {
+          nativeEvent: { data: '{"type":"@post-me"}', url: 'http://some_uri' }
+        },
+        'SOME_COMPONENT_ID'
+      )
     ).resolves.not.toThrow()
 
     expect(mockDebug).toHaveBeenCalled()
@@ -198,9 +204,12 @@ describe('NativeService', () => {
     )
 
     it('Should do nothing on non post-me messages', async () => {
-      await nativeService.tryEmit({
-        nativeEvent: { data: '{"not":"postme"}', url: '//bar' }
-      })
+      await nativeService.tryEmit(
+        {
+          nativeEvent: { data: '{"not":"postme"}', url: '//bar' }
+        },
+        'SOME_COMPONENT_ID'
+      )
 
       expect(onMessageMock).not.toHaveBeenCalled()
     })
@@ -215,24 +224,30 @@ describe('NativeService', () => {
         }
       })
 
-      await nativeService.tryEmit({
-        nativeEvent: {
-          data: `{"type": "@post-me", "message": "${strings.webviewIsRendered}", "uri": "http://bar.com"}`,
-          url: 'http://bar.com'
-        }
-      })
+      await nativeService.tryEmit(
+        {
+          nativeEvent: {
+            data: `{"type": "@post-me", "message": "${strings.webviewIsRendered}", "uri": "http://bar.com"}`,
+            url: 'http://bar.com'
+          }
+        },
+        'SOME_COMPONENT_ID'
+      )
 
       expect(ParentHandshake).toHaveBeenCalledTimes(1)
     })
 
     it('Should override existing connection when init existing webview', async () => {
       await expect(
-        nativeService.tryEmit({
-          nativeEvent: {
-            data: `{"type": "@post-me", "message": "${strings.webviewIsRendered}", "uri": "http://bar.com"}`,
-            url: 'http://bar.com'
-          }
-        })
+        nativeService.tryEmit(
+          {
+            nativeEvent: {
+              data: `{"type": "@post-me", "message": "${strings.webviewIsRendered}", "uri": "http://bar.com"}`,
+              url: 'http://bar.com'
+            }
+          },
+          'SOME_COMPONENT_ID'
+        )
       ).resolves.not.toThrow()
 
       expect(mockDebug).not.toHaveBeenCalled()
@@ -241,13 +256,97 @@ describe('NativeService', () => {
 
     it('Should bail out when init an undefined messenger', async () => {
       await expect(
-        nativeService.tryEmit({
-          nativeEvent: {
-            data: `{"type": "@post-me", "message": "${strings.webviewIsRendered}", "uri": "http://taz.com"}`,
-            url: 'http://zat.com'
-          }
-        })
+        nativeService.tryEmit(
+          {
+            nativeEvent: {
+              data: `{"type": "@post-me", "message": "${strings.webviewIsRendered}", "uri": "http://taz.com"}`,
+              url: 'http://zat.com'
+            }
+          },
+          'SOME_COMPONENT_ID'
+        )
       ).resolves.not.toThrow()
+
+      expect(mockDebug).toHaveBeenCalled()
+      expect(ParentHandshake).toHaveBeenCalledTimes(0)
+    })
+
+    it('Should inject component ID in setFlagshipUI calls', async () => {
+      const webviewRef: WebviewRef = {
+        injectJavaScript: jest.fn(),
+        props: {
+          source: {
+            uri: 'http://SOME_URI'
+          }
+        }
+      }
+
+      const nativeService = new NativeService(
+        nativeMethods,
+        MockNativeMessenger
+      )
+
+      nativeService.registerWebview('some_uri', webviewRef)
+
+      await expect(
+        nativeService.tryEmit(
+          {
+            nativeEvent: {
+              data: `{"type": "@post-me", "methodName": "setFlagshipUI", "args": [{"bottomTheme": "dark"}, "SOME_CALLER_NAME"]}`,
+              url: 'http://SOME_URI'
+            }
+          },
+          'SOME_COMPONENT_ID'
+        )
+      ).resolves.not.toThrow()
+
+      expect(onMessageMock).toHaveBeenNthCalledWith(1, {
+        type: '@post-me',
+        methodName: 'setFlagshipUI',
+        args: [
+          { bottomTheme: 'dark', componentId: 'SOME_COMPONENT_ID' },
+          'SOME_CALLER_NAME'
+        ]
+      })
+
+      expect(mockDebug).toHaveBeenCalled()
+      expect(ParentHandshake).toHaveBeenCalledTimes(0)
+    })
+
+    it('Should inject component ID in setTheme calls', async () => {
+      const webviewRef: WebviewRef = {
+        injectJavaScript: jest.fn(),
+        props: {
+          source: {
+            uri: 'http://SOME_URI'
+          }
+        }
+      }
+
+      const nativeService = new NativeService(
+        nativeMethods,
+        MockNativeMessenger
+      )
+
+      nativeService.registerWebview('some_uri', webviewRef)
+
+      await expect(
+        nativeService.tryEmit(
+          {
+            nativeEvent: {
+              data: `{"type": "@post-me", "methodName": "setTheme", "args": ["inverted"]}`,
+              url: 'http://SOME_URI'
+            }
+          },
+          'SOME_COMPONENT_ID'
+        )
+      ).resolves.not.toThrow()
+
+      expect(onMessageMock).toHaveBeenNthCalledWith(1, {
+        type: '@post-me',
+        methodName: 'setTheme',
+        args: [{ homeTheme: 'inverted', componentId: 'SOME_COMPONENT_ID' }]
+      })
 
       expect(mockDebug).toHaveBeenCalled()
       expect(ParentHandshake).toHaveBeenCalledTimes(0)
