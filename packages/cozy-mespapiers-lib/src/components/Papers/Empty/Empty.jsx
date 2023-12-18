@@ -4,13 +4,12 @@ import React from 'react'
 import UiEmpty from 'cozy-ui/transpiled/react/Empty'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-import EmptyWithKonnector from './EmptyWithKonnector'
+import EmptyWithKonnectors from './EmptyWithKonnectors'
 import HomeCloud from '../../../assets/icons/HomeCloud.svg'
 
-const Empty = ({ konnector, accountsByFiles, hasFiles }) => {
+const Empty = ({ konnectors, accountsByFiles, hasFiles }) => {
   const { t } = useI18n()
-
-  if (!konnector) {
+  if (!konnectors || konnectors.length === 0) {
     return (
       <UiEmpty
         className="u-ph-1"
@@ -23,16 +22,16 @@ const Empty = ({ konnector, accountsByFiles, hasFiles }) => {
   }
 
   return (
-    <EmptyWithKonnector
+    <EmptyWithKonnectors
       hasFiles={hasFiles}
-      konnector={konnector}
+      konnectors={konnectors}
       accountsByFiles={accountsByFiles}
     />
   )
 }
 
 Empty.propTypes = {
-  konnector: PropTypes.object,
+  konnectors: PropTypes.array.isRequired,
   hasFiles: PropTypes.bool,
   accountsByFiles: PropTypes.shape({
     accountsWithFiles: PropTypes.array,

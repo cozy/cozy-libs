@@ -115,7 +115,7 @@ const PapersList = () => {
           {accountsWithoutFiles.length > 0 && (
             <Empty
               hasFiles={hasFiles}
-              konnector={konnectors[0]}
+              konnectors={konnectors}
               accountsByFiles={{ accountsWithFiles, accountsWithoutFiles }}
             />
           )}
