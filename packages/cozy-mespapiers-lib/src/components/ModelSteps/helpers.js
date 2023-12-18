@@ -5,7 +5,8 @@ import log from 'cozy-logger'
 import { knownDateMetadataNames } from 'cozy-ui/transpiled/react/Viewer/helpers'
 
 import { ANDROID_APP_URL, IOS_APP_URL } from '../../constants/const'
-import { findAttributes } from '../../helpers/findAttributes'
+import { findAttributes, findPaperVersion } from '../../helpers/findAttributes'
+import { makeReferenceRulesByOcrAttributes } from '../../helpers/makeReferenceRulesByOcrAttributes'
 
 /**
  * Check if a file is already selected in the state of the FormDataProvider
@@ -358,4 +359,17 @@ export const makeMetadataFromOcr = ocrAttributes => {
         : value
     }
   }, {})
+}
+
+export const getDefaultSelectedVersion = ({
+  ocrFromFlagship,
+  ocrAttributes
+}) => {
+  const allReferenceRules = ocrAttributes.map(attrs => ({
+    version: attrs.version,
+    referenceRules: makeReferenceRulesByOcrAttributes(attrs)
+  }))
+
+  const { version } = findPaperVersion(ocrFromFlagship, allReferenceRules)
+  return version
 }

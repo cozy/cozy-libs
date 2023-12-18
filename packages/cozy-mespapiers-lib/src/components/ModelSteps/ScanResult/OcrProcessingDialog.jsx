@@ -12,10 +12,14 @@ import { useFormData } from '../../Hooks/useFormData'
 import { useStepperDialog } from '../../Hooks/useStepperDialog'
 import {
   getAttributesFromOcr,
+  getDefaultSelectedVersion,
   getFormDataFilesForOcr,
   getOcrFromFlagship,
   makeMetadataFromOcr
 } from '../helpers'
+
+// TODO : To improve, the general idea is that for articles with several versions, there is not systematically the SelectPaperVersion modal which appears to ask the user to confirm the version. But to be able to activate it only for certain papers.
+const SHOULD_ASK_CONFIRMATION = false
 
 const OcrProcessingDialog = ({ onBack, rotatedFile }) => {
   const { t } = useI18n()
@@ -33,28 +37,40 @@ const OcrProcessingDialog = ({ onBack, rotatedFile }) => {
       const fileSides = getFormDataFilesForOcr(formData, rotatedFile)
       const ocrFromFlagship = await getOcrFromFlagship(fileSides, webviewIntent)
       const fileVersions = ocrAttributes.map(attr => attr.version)
+      let ocrAttributesSelected = ocrAttributes[0]
 
       // If paper has multiple versions, we need to display a dialog to let user confirm the right version
       if (fileVersions.length > 1) {
-        setMultipleVersion({ enabled: true, ocr: ocrFromFlagship })
-      } else {
-        // If paper has no multiple versions, we can go to next step
-        const attributesFound = getAttributesFromOcr(
+        if (SHOULD_ASK_CONFIRMATION) {
+          setMultipleVersion({ enabled: true, ocr: ocrFromFlagship })
+          return
+        }
+        const selectedVersion = getDefaultSelectedVersion({
           ocrFromFlagship,
-          ocrAttributes[0]
+          ocrAttributes
+        })
+
+        ocrAttributesSelected = ocrAttributes.find(
+          attr => attr.version === selectedVersion
         )
-
-        const metadataFromOcr = makeMetadataFromOcr(attributesFound)
-        setFormData(prev => ({
-          ...prev,
-          metadata: {
-            ...prev.metadata,
-            ...metadataFromOcr
-          }
-        }))
-
-        nextStep()
       }
+
+      // If paper has no multiple versions, we can go to next step
+      const attributesFound = getAttributesFromOcr(
+        ocrFromFlagship,
+        ocrAttributesSelected
+      )
+
+      const metadataFromOcr = makeMetadataFromOcr(attributesFound)
+      setFormData(prev => ({
+        ...prev,
+        metadata: {
+          ...prev.metadata,
+          ...metadataFromOcr
+        }
+      }))
+
+      nextStep()
     }
     init()
     // eslint-disable-next-line react-hooks/exhaustive-deps
