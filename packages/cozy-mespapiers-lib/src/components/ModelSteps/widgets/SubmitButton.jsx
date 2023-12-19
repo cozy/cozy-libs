@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 import { useClient } from 'cozy-client'
 import { models } from 'cozy-client'
-import log from 'cozy-logger'
+import minilog from 'cozy-minilog'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
@@ -16,6 +16,8 @@ import { createPdfAndSave } from '../../../helpers/createPdfAndSave'
 import getOrCreateAppFolderWithReference from '../../../helpers/getFolderWithReference'
 import { useScannerI18n } from '../../Hooks/useScannerI18n'
 import { useStepperDialog } from '../../Hooks/useStepperDialog'
+
+const log = minilog('SubmitButton')
 
 const {
   document: { Qualification }
@@ -52,7 +54,7 @@ const SubmitButton = ({ onSubmit, disabled, formData }) => {
 
       Alerter.success('common.saveFile.success', { duration: 4000 })
     } catch (error) {
-      log('error', error)
+      log.error('Error when submitting', error)
       Alerter.error('common.saveFile.error', { duration: 4000 })
     } finally {
       onSubmit()

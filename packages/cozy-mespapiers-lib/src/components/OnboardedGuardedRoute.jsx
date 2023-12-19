@@ -7,12 +7,14 @@ import {
 } from 'react-router-dom'
 
 import { useQuery, hasQueryBeenLoaded, useClient } from 'cozy-client'
-import log from 'cozy-logger'
+import minilog from 'cozy-minilog'
 
 import { useOnboarding } from './Hooks/useOnboarding'
 import HomeSkeletons from './Views/HomeSkeletons'
 import { SETTINGS_DOCTYPE } from '../doctypes'
 import { getAppSettings } from '../helpers/queries'
+
+const log = minilog('OnboardedGuardedRoute')
 
 const OnboardedGuardedRoute = () => {
   const location = useLocation()
@@ -38,11 +40,7 @@ const OnboardedGuardedRoute = () => {
           _type: SETTINGS_DOCTYPE
         })
       } catch (error) {
-        log(
-          'error',
-          'Error when saving settings in OnboardedGuardedRoute',
-          error
-        )
+        log.error('Error when saving settings in OnboardedGuardedRoute', error)
       }
     }
 

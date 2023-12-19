@@ -2,7 +2,10 @@ import parse from 'date-fns/parse'
 import unionBy from 'lodash/unionBy'
 
 import { checkCountryCode } from 'cozy-client/dist/models/countries'
-import log from 'cozy-logger'
+import minilog from 'cozy-minilog'
+
+const log = minilog('helpers/findAttributes')
+
 const MAX_TEXT_SHIFT_THRESHOLD = 5 // in %
 const MAX_LINE_SHIFT_THRESHOLD = 5 // in px
 
@@ -358,7 +361,7 @@ const getValidationFnByName = name => {
     case 'checkCountryCode':
       return checkCountryCode
     default:
-      log('error', 'Unknown validation function', 'getValidationFnByName')
+      log.error('Unknown validation function', name)
       return null
   }
 }
@@ -663,9 +666,9 @@ export const findAttributes = (OCRResult, imgSize, ocrAttributesSide = {}) => {
   // => For now, we keep in priority the result found via the regex (@merkur39)
   // => Note this implies strict regex to minimize false positives (@paultranvan)
   const foundAttributes = unionBy(attributesByRegex, attributesByBox, 'name')
-  log('info', 'foundAttributes: ' + JSON.stringify(foundAttributes))
+  log.info(`foundAttributes: ${JSON.stringify(foundAttributes)}`)
   const processedAttributes = postProcessing(foundAttributes)
-  log('info', 'postProcessedAttributes: ' + JSON.stringify(processedAttributes))
+  log.info(`postProcessedAttributes: ${JSON.stringify(processedAttributes)}`)
 
   return { attributes: processedAttributes }
 }

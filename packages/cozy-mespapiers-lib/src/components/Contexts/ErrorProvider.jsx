@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useMemo, useState } from 'react'
 
-import log from 'cozy-logger'
+import minilog from 'cozy-minilog'
+
+const log = minilog('ErrorProvider')
 
 const ErrorContext = createContext()
 
@@ -16,10 +18,7 @@ const ErrorProvider = ({ children }) => {
   }, [errorState])
 
   if (errorState) {
-    log(
-      'critical',
-      `Error message: ${errorState.message} || Error stack: ${errorState.stack}`
-    )
+    log.error('Error message', errorState)
   }
 
   return <ErrorContext.Provider value={value}>{children}</ErrorContext.Provider>

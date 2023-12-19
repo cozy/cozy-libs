@@ -3,7 +3,7 @@ import React, { forwardRef } from 'react'
 
 import useFetchJSON from 'cozy-client/dist/hooks/useFetchJSON'
 import { isMobile } from 'cozy-device-helper'
-import log from 'cozy-logger'
+import minilog from 'cozy-minilog'
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -12,6 +12,8 @@ import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import withLocales from '../../../locales/withLocales'
+
+const log = minilog('copyReminderContent')
 
 export const copyReminderContent = () => {
   return {
@@ -31,9 +33,9 @@ export const copyReminderContent = () => {
         }
       } catch (error) {
         Alerter.error('action.copyReminderContent.error')
-        log(
-          'error',
-          `Error in 'copyReminderContent' when trying to copy to clipboard: ${error}`
+        log.error(
+          'Error in "copyReminderContent" when trying to copy to clipboard',
+          error
         )
       }
     },

@@ -2,7 +2,7 @@ import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import log from 'cozy-logger'
+import minilog from 'cozy-minilog'
 import Icon, { iconPropType } from 'cozy-ui/transpiled/react/Icon'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
@@ -40,6 +40,8 @@ import IlluResidencePermitFront from '../../assets/images/IlluResidencePermitFro
 import IlluResidencePermitNumberHelp from '../../assets/images/IlluResidencePermitNumberHelp.png'
 import IlluVehicleRegistration from '../../assets/images/IlluVehicleRegistration.png'
 import IlluWorkContract from '../../assets/images/IlluWorkContract.png'
+
+const log = minilog('CompositeHeaderImage')
 
 const images = {
   IlluCafNumberHelp,
@@ -129,8 +131,7 @@ const CompositeHeaderImage = ({ icon, fallbackIcon, iconSize = 'large' }) => {
   const isBitmap = isSupportedBitmapExtension(icon)
 
   if (!isVector && !isBitmap) {
-    log(
-      'info',
+    log.info(
       `Unsupported image ${icon}, please verify supported images here https://github.com/cozy/cozy-libs/blob/9fec28cd9a6303df5f9675d960addd2abd1554ed/packages/cozy-mespapiers-lib/src/components/CompositeHeader/CompositeHeaderImage.jsx#L37`
     )
     return null
