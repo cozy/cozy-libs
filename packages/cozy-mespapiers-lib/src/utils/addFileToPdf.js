@@ -3,6 +3,9 @@ import { PDFDocument } from 'pdf-lib'
 import { resizeImage, fileToDataUri } from '../utils/image'
 import { fileToArrayBuffer } from '../utils/pdf'
 
+// Should guarantee good resolution for different uses (printing, downloading, etc.)
+const MAX_RESIZE_IMAGE_SIZE = 3840
+
 /**
  * @param {PDFDocument} pdfDoc
  * @param {File} file
@@ -10,7 +13,11 @@ import { fileToArrayBuffer } from '../utils/pdf'
  */
 const addImageToPdf = async (pdfDoc, file) => {
   const fileDataUri = await fileToDataUri(file)
-  const resizedImage = await resizeImage(fileDataUri, file.type)
+  const resizedImage = await resizeImage({
+    base64: fileDataUri,
+    type: file.type,
+    maxSize: MAX_RESIZE_IMAGE_SIZE
+  })
 
   let img
   if (file.type === 'image/png') img = await pdfDoc.embedPng(resizedImage)
