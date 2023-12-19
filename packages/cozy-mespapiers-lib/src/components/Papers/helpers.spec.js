@@ -83,9 +83,7 @@ const mockFilesWithSourceAccount = [
     cozyMetadata: {
       sourceAccount: 'KonnectorAccountId01',
       sourceAccountIdentifier: 'Account 1',
-      uploadedBy: {
-        slug: 'KonnectorOne'
-      }
+      createdByApp: 'KonnectorOne'
     }
   },
   {
@@ -94,9 +92,7 @@ const mockFilesWithSourceAccount = [
     cozyMetadata: {
       sourceAccount: 'KonnectorAccountId01',
       sourceAccountIdentifier: 'Account 1',
-      uploadedBy: {
-        slug: 'KonnectorOne'
-      }
+      createdByApp: 'KonnectorOne'
     }
   },
   {
@@ -105,9 +101,7 @@ const mockFilesWithSourceAccount = [
     cozyMetadata: {
       sourceAccount: 'KonnectorAccountId02',
       sourceAccountIdentifier: 'Account 2',
-      uploadedBy: {
-        slug: 'KonnectorTwo'
-      }
+      createdByApp: 'KonnectorTwo'
     }
   }
 ]
@@ -119,9 +113,7 @@ const mockFilesWithContactsAndSourceAccount = [
     cozyMetadata: {
       sourceAccount: 'KonnectorAccountId02',
       sourceAccountIdentifier: 'Account 2',
-      uploadedBy: {
-        slug: 'KonnectorTwo'
-      }
+      createdByApp: 'KonnectorTwo'
     },
     relationships: {
       referenced_by: {
