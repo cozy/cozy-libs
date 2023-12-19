@@ -77,12 +77,13 @@ export const DataTab = ({
               <KonnectorMaintenance maintenanceMessages={maintenanceMessages} />
             </div>
           )}
-          {konnectorsModel.hasNewVersionAvailable(konnector) && (
-            <KonnectorUpdateInfos
-              konnector={konnector}
-              isBlocking={hasTermsVersionMismatchError}
-            />
-          )}
+          {!isInMaintenance &&
+            konnectorsModel.hasNewVersionAvailable(konnector) && (
+              <KonnectorUpdateInfos
+                konnector={konnector}
+                isBlocking={hasTermsVersionMismatchError}
+              />
+            )}
           {!flag('harvest.inappconnectors.enabled') && (
             <LaunchTriggerCard flow={flow} disabled={isInMaintenance} />
           )}
