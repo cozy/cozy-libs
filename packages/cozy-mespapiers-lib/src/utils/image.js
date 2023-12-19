@@ -1,9 +1,9 @@
 /**
  * @param {HTMLImageElement} image
- * @param {number} [maxSizeInPixel=900] - Max size in pixel
+ * @param {number} [maxSizeInPixel] - Maximum size before being resized
  * @returns {number}
  */
-export const getImageScaleRatio = (image, maxSize = 900) => {
+export const getImageScaleRatio = (image, maxSize) => {
   const longerSideSizeInPixel = Math.max(image.height, image.width)
   let scaleRatio = 1
   if (maxSize < longerSideSizeInPixel) {
@@ -14,18 +14,24 @@ export const getImageScaleRatio = (image, maxSize = 900) => {
 }
 
 /**
- * @param {string} fileDataUri
- * @param {string} fileType
+ * @param {object} opts
+ * @param {string} opts.base64 - Base64 of image
+ * @param {string} opts.type - Type of image
+ * @param {number} opts.maxSize - Maximum size before being resized
  * @returns {Promise<string>}
  */
-export const resizeImage = async (fileDataUri, fileType) => {
+export const resizeImage = async ({
+  base64: fileDataUri,
+  type: fileType,
+  maxSize
+}) => {
   return new Promise((resolve, reject) => {
     const newImage = new Image()
     newImage.src = fileDataUri
     newImage.onerror = reject
     newImage.onload = () => {
       const canvas = document.createElement('canvas')
-      const scaleRatio = getImageScaleRatio(newImage)
+      const scaleRatio = getImageScaleRatio(newImage, maxSize)
       const scaledWidth = scaleRatio * newImage.width
       const scaledHeight = scaleRatio * newImage.height
 
