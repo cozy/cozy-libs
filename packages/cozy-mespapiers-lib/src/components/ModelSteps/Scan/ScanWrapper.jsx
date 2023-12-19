@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 
 import { useClient, models } from 'cozy-client'
 import { useWebviewIntent } from 'cozy-intent'
-import log from 'cozy-logger'
+import minilog from 'cozy-minilog'
 import FilePicker from 'cozy-ui/transpiled/react/FilePicker'
 
 import ScanDialog from './ScanDialog'
@@ -18,6 +18,8 @@ import {
   isFileAlreadySelected,
   makeFileFromBase64
 } from '../helpers'
+
+const log = minilog('ScanWrapper')
 
 const { fetchBlobFileById } = models.file
 
@@ -91,7 +93,7 @@ const ScanWrapper = ({ currentStep, onClose, onBack }) => {
       })
       onChangeFile(file)
     } catch (error) {
-      log('error', `Flagship scan error: ${error}`)
+      log.error('Flagship scan error', error)
     }
   }
 

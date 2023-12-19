@@ -3,7 +3,7 @@ import React, { createContext, useEffect, useState } from 'react'
 import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
 import useFlag from 'cozy-flags/dist/useFlag'
-import log from 'cozy-logger'
+import minilog from 'cozy-minilog'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
@@ -13,6 +13,8 @@ import { buildPapersDefinitions } from '../../helpers/buildPapersDefinitions'
 import { fetchContentFileToJson } from '../../utils/fetchContentFileToJson'
 import { fetchCustomPaperDefinitions } from '../../utils/fetchCustomPaperDefinitions'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
+
+const log = minilog('PapersDefinitionsProvider')
 
 const papersJSON = flag('hide.healthTheme.enabled')
   ? papersJSON_default
@@ -53,7 +55,7 @@ const PapersDefinitionsProvider = ({ children }) => {
           setPapersDefinitions(
             buildPapersDefinitions(data.papersDefinitions, scannerT)
           )
-          log('info', 'Custom PapersDefinitions loaded')
+          log.info('Custom PapersDefinitions loaded')
         } else {
           // If custom papersDefinitions.json not found, fallback on local file
           Alerter.error(
@@ -70,7 +72,7 @@ const PapersDefinitionsProvider = ({ children }) => {
           setPapersDefinitions(
             buildPapersDefinitions(papersJSON.papersDefinitions, scannerT)
           )
-          log('info', 'PapersDefinitions of the app loaded')
+          log.info('PapersDefinitions of the app loaded')
         }
       } else {
         // If has no custom papersDefinitions Flag
@@ -83,7 +85,7 @@ const PapersDefinitionsProvider = ({ children }) => {
         setPapersDefinitions(
           buildPapersDefinitions(papersJSON.papersDefinitions, scannerT)
         )
-        log('info', 'PapersDefinitions of the app loaded')
+        log.info('PapersDefinitions of the app loaded')
       }
     })()
   }, [client, customPapersDefinitionsFlag, scannerT, t])

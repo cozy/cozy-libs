@@ -1,6 +1,8 @@
 import copy from 'copy-text-to-clipboard'
 
-import log from 'cozy-logger'
+import minilog from 'cozy-minilog'
+
+const log = minilog('copyToClipboard')
 
 /**
  * Copy a string to the clipboard
@@ -23,9 +25,9 @@ export const copyToClipboard = (value, { target, t, showAlert } = {}) => {
     }
   } catch (error) {
     showAlert(t('action.copyReminderContent.error'), 'error')
-    log(
-      'error',
-      `Error in 'copyToClipboard' function when trying to copy to clipboard: ${error}`
+    log.error(
+      "Error in 'copyToClipboard' function when trying to copy to clipboard",
+      error
     )
   }
 }

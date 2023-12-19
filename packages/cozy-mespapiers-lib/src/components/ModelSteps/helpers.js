@@ -1,12 +1,14 @@
 import parse from 'date-fns/parse'
 
 import { isAndroid, isIOS } from 'cozy-device-helper'
-import log from 'cozy-logger'
+import minilog from 'cozy-minilog'
 import { knownDateMetadataNames } from 'cozy-ui/transpiled/react/Viewer/helpers'
 
 import { ANDROID_APP_URL, IOS_APP_URL } from '../../constants/const'
 import { findAttributes, findPaperVersion } from '../../helpers/findAttributes'
 import { makeReferenceRulesByOcrAttributes } from '../../helpers/makeReferenceRulesByOcrAttributes'
+
+const log = minilog('ModelSteps/helpers')
 
 /**
  * Check if a file is already selected in the state of the FormDataProvider
@@ -319,11 +321,7 @@ export const getAttributesFromOcr = (ocrFromFlagshipResult, ocrAttributes) => {
       return attributes
     })
   } catch (error) {
-    log(
-      'error',
-      `Error while getting attributes from OCR: ${error}`,
-      'getAttributesFromOcr'
-    )
+    log.error('Error while getting attributes from OCR', error)
     return []
   }
 }
@@ -340,7 +338,7 @@ const getDatefromString = string => {
     const date = parse(`${day}${month}${year}`, dateFormat, new Date())
     return date.toISOString()
   } catch (error) {
-    log('info', `Error while parsing date: ${error}`, 'getDatefromString')
+    log.info(`Error while parsing date: ${error}`, 'getDatefromString')
     return string
   }
 }

@@ -2,7 +2,7 @@ import React, { useMemo, useEffect, useCallback } from 'react'
 import { useSearchParams, useNavigate, useParams } from 'react-router-dom'
 
 import { useWebviewIntent } from 'cozy-intent'
-import log from 'cozy-logger'
+import minilog from 'cozy-minilog'
 
 import { findPlaceholderByLabelAndCountry } from '../../helpers/findPlaceholders'
 import { FormDataProvider } from '../Contexts/FormDataProvider'
@@ -15,6 +15,8 @@ import {
   getFirstFileFromNative
 } from '../ModelSteps/helpers'
 import StepperDialogWrapper from '../StepperDialog/StepperDialogWrapper'
+
+const log = minilog('CreatePaperModal')
 
 const CreatePaperModal = () => {
   const navigate = useNavigate()
@@ -97,11 +99,10 @@ const CreatePaperModal = () => {
           setCurrentStepIndex(stepIndex)
         }
       } catch (error) {
-        log(
-          'error',
-          'An error occured during getFileAndSetFormData setup in CreatePaperModal, the modal will be closed.'
+        log.error(
+          'An error occured during getFileAndSetFormData setup in CreatePaperModal, the modal will be closed.',
+          error
         )
-        log('error', error)
 
         onClose()
       }

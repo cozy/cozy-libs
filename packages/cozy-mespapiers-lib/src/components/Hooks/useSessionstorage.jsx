@@ -1,7 +1,9 @@
 // TODO Move to cozy-client
 import { useState, useCallback } from 'react'
 
-import log from 'cozy-logger'
+import minilog from 'cozy-minilog'
+
+const log = minilog('useSessionstorage')
 
 export const useSessionstorage = (key, initialValue) => {
   const [sessionValue, setSessionValueState] = useState(() => {
@@ -9,7 +11,7 @@ export const useSessionstorage = (key, initialValue) => {
       const item = window.sessionStorage.getItem(key)
       return item ? JSON.parse(item) : initialValue
     } catch (error) {
-      log('error', error)
+      log.error('Get item in sessionStorage failed', error)
       return initialValue
     }
   })
@@ -22,7 +24,7 @@ export const useSessionstorage = (key, initialValue) => {
         setSessionValueState(valueToStore)
         window.sessionStorage.setItem(key, JSON.stringify(valueToStore))
       } catch (error) {
-        log('error', error)
+        log.error('Set item in sessionStorage failed', error)
       }
     },
     [key, sessionValue]

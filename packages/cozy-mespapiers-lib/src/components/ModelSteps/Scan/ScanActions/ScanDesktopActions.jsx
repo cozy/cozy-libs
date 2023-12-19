@@ -3,7 +3,7 @@ import React, { createRef } from 'react'
 
 import { useClient, useQuery, hasQueryBeenLoaded } from 'cozy-client'
 import flag from 'cozy-flags'
-import log from 'cozy-logger'
+import minilog from 'cozy-minilog'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import FileInput from 'cozy-ui/transpiled/react/FileInput'
@@ -19,6 +19,8 @@ import { getAppSettings } from '../../../../helpers/queries'
 import { usePapersCreated } from '../../../Contexts/PapersCreatedProvider'
 import { usePaywall } from '../../../Contexts/PaywallProvider'
 import { useStepperDialog } from '../../../Hooks/useStepperDialog'
+
+const log = minilog('ScanDesktopActions')
 
 const styleBtn = { color: 'var(--primaryTextColor)' }
 
@@ -57,11 +59,10 @@ const ScanDesktopActions = ({ onOpenFilePickerModal, onChangeFile }) => {
           _type: SETTINGS_DOCTYPE
         })
       } catch (error) {
-        log('error', 'Error when saving settings in ScanDesktopActions', error)
+        log.error('Error when saving settings in ScanDesktopActions', error)
       }
     } else {
-      log(
-        'warn',
+      log.warn(
         'Settings are not loaded when clicking to hide ScanDesktopActionsAlert'
       )
     }

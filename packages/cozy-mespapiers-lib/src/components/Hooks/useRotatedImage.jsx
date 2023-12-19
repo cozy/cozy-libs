@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 
-import log from 'cozy-logger'
+import minilog from 'cozy-minilog'
 
 import { makeRotatedImage } from '../ModelSteps/helpers'
+
+const log = minilog('useRotatedImage')
 
 export const useRotatedImage = (imageSrc, rotation) => {
   const imageRef = useRef(null)
@@ -22,8 +24,8 @@ export const useRotatedImage = (imageSrc, rotation) => {
       try {
         await currImage.decode()
         setRotatedImage(makeRotatedImage(currImage, rotation))
-      } catch (e) {
-        log('error', `Rotate image failed : ${e.message}`)
+      } catch (err) {
+        log.error('Rotate image failed', err)
         setRotatedImage(imageSrc)
       }
     }

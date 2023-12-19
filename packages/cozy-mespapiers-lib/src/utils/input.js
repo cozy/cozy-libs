@@ -1,5 +1,6 @@
-import log from 'cozy-logger'
+import minilog from 'cozy-minilog'
 
+const log = minilog('utils/input')
 /**
  * @typedef {object} MakeConstraintsOfInputParam
  * @property {'text'|'number'} [type] - A string specifying the type of input
@@ -55,8 +56,7 @@ export const makeConstraintsOfInput = attrs => {
   }
 
   if (!acceptedTypes.includes(type.toLowerCase())) {
-    log(
-      'warn',
+    log.warn(
       `'type' in 'attributes' property is not defined or unexpected, 'type' set to ${acceptedTypes[1]} by default'`
     )
     result.inputType = acceptedTypes[1]

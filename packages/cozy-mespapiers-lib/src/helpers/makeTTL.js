@@ -1,4 +1,6 @@
-import log from 'cozy-logger'
+import minilog from 'cozy-minilog'
+
+const log = minilog('helpers/makeTTL')
 
 /**
  * Make a TTL string from a date
@@ -25,7 +27,7 @@ export const makeTTL = selectedDate => {
     }
     throw new Error(`Invalid date: ${selectedDate}`)
   } catch (error) {
-    log('error', `Error in 'makeTTL' function: ${error}`)
+    log.error(error)
     return
   }
 }
