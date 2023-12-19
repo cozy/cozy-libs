@@ -128,14 +128,14 @@ export const buildFilesByContacts = ({
     const filesByKonnectors = groupBy(
       filesCreatedByKonnectors,
       file =>
-        `${file.cozyMetadata.uploadedBy.slug}-${file.cozyMetadata.sourceAccountIdentifier}`
+        `${file.cozyMetadata.createdByApp}-${file.cozyMetadata.sourceAccountIdentifier}`
     )
 
     const unsortedlistByKonnector = Object.values(filesByKonnectors).map(
       value => ({
         withHeader: true,
         konnector: konnectors?.find(
-          konnector => konnector.slug === value[0].cozyMetadata.uploadedBy.slug
+          konnector => konnector.slug === value[0].cozyMetadata.createdByApp
         ),
         contact: t('PapersList.accountName', {
           name: value[0].cozyMetadata.createdByApp,
