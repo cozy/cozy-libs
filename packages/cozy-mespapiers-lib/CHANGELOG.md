@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [69.1.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@69.1.1...cozy-mespapiers-lib@69.1.2) (2023-12-19)
+
+
+### Bug Fixes
+
+* An error when file doesn't have a createdByApp cozyMetadata ([8d059b2](https://github.com/cozy/cozy-libs/commit/8d059b2d543784f81b384c3b8d18575514a1277f))
+
+
+
+
+
 ## [69.1.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@69.1.0...cozy-mespapiers-lib@69.1.1) (2023-12-19)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
