@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [21.0.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@21.0.0...cozy-harvest-lib@21.0.1) (2023-12-19)
+
+
+### Bug Fixes
+
+* Don't display the KonnectorUpdateButton if maintenance ([c6e4043](https://github.com/cozy/cozy-libs/commit/c6e40432b9d0fa06607779d36372f4108ffa7245))
+
+
+
+
+
 # [21.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@20.2.5...cozy-harvest-lib@21.0.0) (2023-12-06)
 
 
