@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.1.0 (2023-12-20)
+
+
+### Features
+
+* **mespapiers:** Replace spinner by skeletons on papers list ([2303501](https://github.com/cozy/cozy-libs/commit/230350100d4836fa3d9a50777f86252fef81e358))
+
+
+
+
+
 ## [2.0.4](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.0.3...cozy-playgrounds@2.0.4) (2023-10-31)
 
 **Note:** Version bump only for package cozy-playgrounds

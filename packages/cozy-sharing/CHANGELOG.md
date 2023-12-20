@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 10.1.0 (2023-12-20)
+
+
+### Features
+
+* **mespapiers:** Replace spinner by skeletons on papers list ([2303501](https://github.com/cozy/cozy-libs/commit/230350100d4836fa3d9a50777f86252fef81e358))
+
+
+
+
+
 ## [10.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@10.0.0...cozy-sharing@10.0.1) (2023-10-31)
 
 **Note:** Version bump only for package cozy-sharing

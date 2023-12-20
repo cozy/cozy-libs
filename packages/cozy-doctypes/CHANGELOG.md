@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.89.0 (2023-12-20)
+
+
+### Features
+
+* **mespapiers:** Replace spinner by skeletons on papers list ([2303501](https://github.com/cozy/cozy-libs/commit/230350100d4836fa3d9a50777f86252fef81e358))
+
+
+
+
+
 ## 1.88.7 (2023-10-31)
 
 **Note:** Version bump only for package cozy-doctypes

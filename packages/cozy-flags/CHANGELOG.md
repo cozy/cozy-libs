@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 3.2.0 (2023-12-20)
+
+
+### Bug Fixes
+
+* **cozy-flags:** Add declaration dir in options ([faa5b5c](https://github.com/cozy/cozy-libs/commit/faa5b5cd8905962b2466853db600761b04bd8cc8))
+
+
+### Features
+
+* **mespapiers:** Replace spinner by skeletons on papers list ([2303501](https://github.com/cozy/cozy-libs/commit/230350100d4836fa3d9a50777f86252fef81e358))
+
+
+
+
+
 # 3.1.0 (2023-10-31)
 
 
