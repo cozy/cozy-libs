@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [70.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@69.1.2...cozy-mespapiers-lib@70.0.0) (2023-12-20)
+
+
+### Features
+
+* **mespapiers:** Increase the maximum size of images before integrating ([41a7e5c](https://github.com/cozy/cozy-libs/commit/41a7e5c25b5f7be85f0347692b6844a8eabad6a4))
+* **mespapiers:** Use cozy-minilog instead cozy-logger ([8612f7e](https://github.com/cozy/cozy-libs/commit/8612f7e8048a16c67dec5e49ce622a2aa7e87e31))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** For purposes of improving logs in
+the browser but also in Sentry.
+`cozy-logger` does not log errors, so Sentry couldn't
+intercept the log.
+
+
+
+
+
 ## [69.1.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@69.1.1...cozy-mespapiers-lib@69.1.2) (2023-12-19)
 
 
