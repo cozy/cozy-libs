@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.10.2 (2023-12-21)
+
+
+### Bug Fixes
+
+* **mespapiers:** Remove tooltips if document are created by Notes ([b2e6fe4](https://github.com/cozy/cozy-libs/commit/b2e6fe402146173fc529b8af487fa7c00b2c37d6))
+
+
+
+
+
 ## 1.10.1 (2023-04-13)
 
 
