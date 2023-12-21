@@ -7,7 +7,7 @@ import Empty from 'cozy-ui/transpiled/react/Empty'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import SelectPaperVersion from './SelectPaperVersion'
-import OcrProcessingIcon from '../../../assets/icons/OcrProcessing.svg'
+import OcrProcessingIcon from '../../../assets/images/OcrProcessing.svg'
 import { useFormData } from '../../Hooks/useFormData'
 import { useStepperDialog } from '../../Hooks/useStepperDialog'
 import {
@@ -94,7 +94,7 @@ const OcrProcessingDialog = ({ onBack, rotatedFile }) => {
         <Empty
           centered
           className="u-ph-1"
-          icon={OcrProcessingIcon}
+          icon={<img src={OcrProcessingIcon} />}
           title={t('OcrProcessingDialog.title')}
           text={t('OcrProcessingDialog.text')}
         />
