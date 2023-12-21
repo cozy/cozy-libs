@@ -227,6 +227,10 @@
         "title": "Incorrect strong authentication code",
         "description": "The second-factor code provided is incorrect, please start again."
       },
+      "USER_ACTION_NEEDED.CGU_FORM": {
+        "title": "New terms of service validation needed",
+        "description": "It seems that a new validation of terms of service is needed. Please validate them on the [%{name}](%{link}) website and synchronize again."
+      },
       "VENDOR_DOWN": {
         "title": "Unavailable service",
         "description": "It seems that the [%{name}](%{link}) service is unavailable at the moment. Please rerun the connector later."
