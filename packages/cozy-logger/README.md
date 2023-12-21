@@ -2,7 +2,11 @@
 
 Logger used by connectors.
 
-It is starting to be usable by apps but the code is still in NodeJS (with requires).
+It should only be used for connectors and services.
+For webapps, prefer [cozy-minilog](https://github.com/cozy/cozy-libs/tree/master/packages/cozy-minilog) for the following reasons:
+
+- Better readability
+- Logs can be catched correctly in Sentry
 
 Depending on NODE_ENV, it will either :
 
