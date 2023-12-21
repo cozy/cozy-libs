@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [70.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@70.0.1...cozy-mespapiers-lib@70.0.2) (2023-12-21)
+
+
+### Bug Fixes
+
+* SVG animation didn't work on Safari when processing OCR ([7935cb6](https://github.com/cozy/cozy-libs/commit/7935cb645a2c150215940c6a8c0aae2d667a5408))
+
+
+
+
+
 ## [70.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@70.0.0...cozy-mespapiers-lib@70.0.1) (2023-12-20)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
