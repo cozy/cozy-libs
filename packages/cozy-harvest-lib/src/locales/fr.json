@@ -227,6 +227,10 @@
         "title": "Le code fourni ne semble pas correct",
         "description": "Le second facteur d’authentification fourni est incorrect, veuillez recommencer."
       },
+      "USER_ACTION_NEEDED.CGU_FORM": {
+        "title": "Des nouvelles conditions générales d'utilisation sont à valider",
+        "description": "Il semble que le service ait de nouvelles conditions générales d'utilisation à valider. Merci de valider ces dernières sur le site [%{name}](%{link}) puis de synchroniser à nouveau."
+      },
       "VENDOR_DOWN": {
         "title": "Service non disponible",
         "description": "Il semble que le service [%{name}](%{link}) ne nous ait pas répondu dans les temps. Vous pouvez tenter de synchroniser vos données manuellement maintenant ou ultérieurement."
