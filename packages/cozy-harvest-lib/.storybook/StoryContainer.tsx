@@ -1,3 +1,6 @@
+
+import 'cozy-ui/dist/cozy-ui.min.css'
+import 'cozy-ui/transpiled/react/stylesheet.css'
 import React, { ReactNode } from 'react'
 import { Provider as ReduxProvider } from 'react-redux'
 
