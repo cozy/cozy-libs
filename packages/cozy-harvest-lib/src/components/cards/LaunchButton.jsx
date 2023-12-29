@@ -1,3 +1,4 @@
+// @ts-check on
 import React from 'react'
 
 import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
@@ -23,7 +24,7 @@ function LaunchButton({
 
   const { launch, konnector } = flow
 
-  const isKonnectorDisconnected = isDisconnected(konnector)
+  const isKonnectorDisconnected = isDisconnected(konnector, trigger)
   const konnectorPolicy = findKonnectorPolicy(konnector)
 
   const onSync = () => {
