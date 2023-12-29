@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   }
 })
 
-const ConnectionBackdrop = ({ name }) => {
+export const ConnectionBackdrop = ({ name }) => {
   const styles = useStyles()
   const { isMobile } = useBreakpoints()
   const { t } = useI18n()
