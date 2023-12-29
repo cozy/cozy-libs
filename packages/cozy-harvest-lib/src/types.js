@@ -53,13 +53,16 @@
  * @property {String} name
  * @property {Function} refreshContracts
  * @property {Function} fetchExtraOAuthUrlParams
- * @property {Boolean} isBIWebView
+ * @property {Boolean} [isBIWebView]
  * @property {Function} sendAdditionalInformation
  * @property {Function} getAdditionalInformationNeeded
  * @property {Boolean} needsAccountAndTriggerCreation
  * @property {Boolean} needsTriggerLaunch
  * @property {Function} onLaunch
  * @property {Boolean} isRunnable
+ * @property {Function} shouldLaunchRedirectToEdit
+ * @property {Function} shouldLaunchDisplayOAuthWindow
+ * @property {Function} shouldDisplayRunningAlert
  */
 
 /**
