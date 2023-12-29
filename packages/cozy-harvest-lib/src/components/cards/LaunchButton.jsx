@@ -41,7 +41,7 @@ function LaunchButton({
     }
   }
 
-  if (!isKonnectorDisconnected) {
+  if (isKonnectorDisconnected) {
     return null
   }
 
