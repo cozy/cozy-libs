@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [21.0.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@21.0.3...cozy-harvest-lib@21.0.4) (2023-12-29)
+
+
+### Bug Fixes
+
+* Add more function to policy ([653190d](https://github.com/cozy/cozy-libs/commit/653190dd37ee09163ac4b6e68ee8138e5fcc7f20))
+* isDisconnected should be called with trigger ([f8bcb74](https://github.com/cozy/cozy-libs/commit/f8bcb74c4e02347b1dfc04b65baffd37db7fe05b))
+* We want to display the button if its connected ([bbc5452](https://github.com/cozy/cozy-libs/commit/bbc545293186a80eebcf4feea0d67ae92e715ce9))
+
+
+
+
+
 ## [21.0.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@21.0.2...cozy-harvest-lib@21.0.3) (2023-12-21)
 
 **Note:** Version bump only for package cozy-harvest-lib
