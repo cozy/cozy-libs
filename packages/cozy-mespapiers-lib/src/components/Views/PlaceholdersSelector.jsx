@@ -177,6 +177,10 @@ const PlaceholdersSelector = () => {
       : navigate('..')
   }
 
+  // The "NestedSelect" component does not manage asynchronous options.
+  // See https://github.com/cozy/cozy-ui/issues/2555
+  if (isKonnectorsLoading) return null
+
   return (
     <>
       <NestedSelectResponsive
