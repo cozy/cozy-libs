@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [70.0.6](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@70.0.5...cozy-mespapiers-lib@70.0.6) (2024-01-02)
+
+
+### Bug Fixes
+
+* **mespapiers:** `makeContactFlexsearchProps` must handle string emails ([679cd8a](https://github.com/cozy/cozy-libs/commit/679cd8a6705ee5c731561571d2b357847465e22d)), closes [konnectors/libs#987](https://github.com/konnectors/libs/issues/987)
+
+
+
+
+
 ## [70.0.5](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@70.0.4...cozy-mespapiers-lib@70.0.5) (2024-01-02)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
