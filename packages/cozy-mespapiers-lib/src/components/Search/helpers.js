@@ -196,8 +196,16 @@ export const makeFileFlexsearchProps = ({ doc, scannerT, t }) => ({
   }
 })
 
+/**
+ * @param {object} doc - A contact
+ * @param {object} t - The translation function
+ * @returns {object} - The flexsearch props for a contact
+ */
 export const makeContactFlexsearchProps = (doc, t) => {
-  const flexsearchEmailAddresses = doc.email
+  // TODO On the connector side, the `email` field of the `Contact` object could be a string instead of an object array. Issue fixed here: https://github.com/konnectors/libs/pull/987. Pending the propagation of the fix, it is relevant to predict the case here
+  const normalizeEmail =
+    typeof doc.email === 'string' ? [{ address: doc.email }] : doc.email
+  const flexsearchEmailAddresses = normalizeEmail
     ?.map(email => email.address)
     .reduce((acc, val, idx) => ({ ...acc, [`email[${idx}].address`]: val }), {})
 

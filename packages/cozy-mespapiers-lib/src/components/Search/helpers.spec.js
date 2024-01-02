@@ -5,7 +5,8 @@ import {
   makeFileTags,
   makeContactTags,
   makeFileFlexsearchProps,
-  makeMultipleSearchResultIds
+  makeMultipleSearchResultIds,
+  makeContactFlexsearchProps
 } from './helpers'
 import { index } from './search'
 
@@ -17,6 +18,48 @@ jest.mock('./search', () => ({
 }))
 
 const mockT = x => x
+
+describe('makeContactFlexsearchProps', () => {
+  const expectedResult = {
+    'address[0].formattedAddress': '2 place Victor Hugo',
+    'email[0].address': 'victor@hugo.cc',
+    'phone[0].number': '0123456789',
+    tag: ['identity', 'home', 'work_study'],
+    translated: {
+      address: 'Search.attributeLabel.address',
+      email: 'Search.attributeLabel.email',
+      phone: 'Search.attributeLabel.phone'
+    }
+  }
+  it('should return correct formatted contact for flexsearch', () => {
+    const res = makeContactFlexsearchProps(
+      {
+        name: { givenName: 'Victor', familyName: 'Hugo' },
+        email: [{ address: 'victor@hugo.cc' }],
+        phone: [{ number: '0123456789' }],
+        company: 'Cozy',
+        address: [{ formattedAddress: '2 place Victor Hugo' }]
+      },
+      mockT
+    )
+
+    expect(res).toStrictEqual(expectedResult)
+  })
+  it('should return correct formatted contact for flexsearch when email is a String', () => {
+    const res = makeContactFlexsearchProps(
+      {
+        name: { givenName: 'Victor', familyName: 'Hugo' },
+        email: 'victor@hugo.cc',
+        phone: [{ number: '0123456789' }],
+        company: 'Cozy',
+        address: [{ formattedAddress: '2 place Victor Hugo' }]
+      },
+      mockT
+    )
+
+    expect(res).toStrictEqual(expectedResult)
+  })
+})
 
 describe('makeRealtimeConnection', () => {
   it('should return a well structured object', () => {
