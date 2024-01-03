@@ -33,6 +33,7 @@ const InstallKonnectorFromIntent = () => {
       doctype={APPS_DOCTYPE}
       mobileFullscreen
       options={{
+        terminateIfInstalled: true,
         slug: konnectorSlug,
         pageToDisplay: 'details',
         category: konnectorCategory,
