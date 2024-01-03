@@ -9,7 +9,10 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import Konnector from '../../../assets/icons/Konnectors.svg'
-import { buildKonnectorsQueryBySlug } from '../../../helpers/queries'
+import {
+  buildAccountsQueryBySlugs,
+  buildKonnectorsQueryBySlug
+} from '../../../helpers/queries'
 import withLocales from '../../../locales/withLocales'
 
 export const importAuto = ({ paperDefinition, importAutoOnclick }) => {
@@ -38,12 +41,31 @@ export const importAuto = ({ paperDefinition, importAutoOnclick }) => {
         )
         const isKonnectorsLoading = isQueryLoading(konnectorsQueryLeft)
 
+        const hasKonnector = Boolean(konnectors?.length > 0)
+        const konnectorSlugs = konnectors?.map(konnector => konnector.slug)
+        const queryAccounts = buildAccountsQueryBySlugs(
+          konnectorSlugs,
+          hasKonnector
+        )
+        const { data: accounts, ...accountsQueryLeft } = useQuery(
+          queryAccounts.definition,
+          queryAccounts.options
+        )
+        const isAccountsLoading =
+          hasKonnector && isQueryLoading(accountsQueryLeft)
+
+        const isKonnectorsConnected = accounts?.some(account =>
+          konnectorSlugs?.some(
+            konnectorSlug => account.account_type === konnectorSlug
+          )
+        )
+
         const redirectPathSearchParam = `redirectAfterInstall=/paper/files/${label}/harvest/${
           konnectorName ? `&slug=${konnectorName}` : ''
         }${konnectorCategory ? `&category=${konnectorCategory}` : ''}`
 
         const handleClick = () => {
-          if (konnectors?.length > 0) {
+          if (konnectors?.length > 0 && isKonnectorsConnected) {
             navigate(`/paper/files/${label}`)
           } else {
             navigate({
@@ -54,12 +76,15 @@ export const importAuto = ({ paperDefinition, importAutoOnclick }) => {
           importAutoOnclick()
         }
 
+        const itemDisabled =
+          konnectorName && isKonnectorsLoading && isAccountsLoading
+
         return (
           <ActionsMenuItem
             {...props}
             ref={ref}
             onClick={handleClick}
-            disabled={konnectorName && isKonnectorsLoading}
+            disabled={itemDisabled}
           >
             <ListItemIcon>
               <Icon icon={Konnector} size={24} />

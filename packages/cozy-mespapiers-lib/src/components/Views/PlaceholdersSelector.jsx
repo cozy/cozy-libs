@@ -12,7 +12,10 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import Konnector from '../../assets/icons/Konnectors.svg'
 import { APPS_DOCTYPE } from '../../doctypes'
 import { findPlaceholdersByQualification } from '../../helpers/findPlaceholders'
-import { buildKonnectorsQuery } from '../../helpers/queries'
+import {
+  buildAccountsQueryBySlugs,
+  buildKonnectorsQuery
+} from '../../helpers/queries'
 import { getThemesList } from '../../helpers/themes'
 import { usePapersCreated } from '../Contexts/PapersCreatedProvider'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
@@ -40,6 +43,15 @@ const PlaceholdersSelector = () => {
     queryKonnector.options
   )
   const isKonnectorsLoading = isQueryLoading(konnectorsQueryLeft)
+  const hasKonnector = Boolean(konnectors?.length > 0)
+  const konnectorSlugs = konnectors?.map(konnector => konnector.slug)
+  const queryAccounts = buildAccountsQueryBySlugs(konnectorSlugs, hasKonnector)
+  const { data: accounts, ...accountsQueryLeft } = useQuery(
+    queryAccounts.definition,
+    queryAccounts.options
+  )
+
+  const isAccountsLoading = hasKonnector && isQueryLoading(accountsQueryLeft)
 
   const options = useMemo(
     () => ({
@@ -149,6 +161,11 @@ const PlaceholdersSelector = () => {
       const konnectorsBySlug = konnectors?.filter(
         konnector => konnector.slug === placeholder.konnectorCriteria.name
       )
+      const isKonnectorsConnected = accounts?.some(account =>
+        konnectorsBySlug?.some(
+          konnector => account.account_type === konnector.slug
+        )
+      )
 
       const redirectPathSearchParam = `redirectAfterInstall=/paper/files/${
         placeholder.label
@@ -156,7 +173,7 @@ const PlaceholdersSelector = () => {
         konnectorCategory ? `&category=${konnectorCategory}` : ''
       }`
 
-      if (konnectorsBySlug?.length > 0) {
+      if (konnectorsBySlug?.length > 0 && isKonnectorsConnected) {
         navigate(`/paper/files/${placeholder.label}`)
       } else {
         const normalizePathname = pathname.split('/create')[0]
@@ -179,7 +196,7 @@ const PlaceholdersSelector = () => {
 
   // The "NestedSelect" component does not manage asynchronous options.
   // See https://github.com/cozy/cozy-ui/issues/2555
-  if (isKonnectorsLoading) return null
+  if (isKonnectorsLoading || isAccountsLoading) return null
 
   return (
     <>
