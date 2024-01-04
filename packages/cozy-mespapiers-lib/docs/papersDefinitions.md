@@ -20,6 +20,7 @@
     - - *Only one of the following properties is accepted:*
       - `name`: {string} Name of the konnector.
       - `category`: {string} Konnector category.
+      - `qualificationLabel`: {string} Label of the konnector qualification
   - [`acquisitionSteps`](#steps-of-the-acquisitionsteps-property): {object\[]} Contains the steps of the creation process.
     - [`scan`](#step-scan) {object} Step to select a file (image/pdf).
     - [`[information]`](#step-information) {object} Step to get more informations about this file.

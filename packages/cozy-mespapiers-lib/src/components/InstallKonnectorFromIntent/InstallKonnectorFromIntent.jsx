@@ -12,6 +12,7 @@ const InstallKonnectorFromIntent = () => {
   const client = useClient()
   const konnectorSlug = searchParams.get('slug')
   const konnectorCategory = searchParams.get('category')
+  const qualificationLabel = searchParams.get('qualificationLabel')
 
   const handleTerminate = ({ document }) => {
     const redirectLink = `${searchParams.get('redirectAfterInstall')}${
@@ -37,6 +38,7 @@ const InstallKonnectorFromIntent = () => {
         slug: konnectorSlug,
         pageToDisplay: 'details',
         category: konnectorCategory,
+        qualificationLabels: qualificationLabel,
         configure: false
       }}
       create={client.intents.create}

@@ -14,6 +14,7 @@ import {
   buildKonnectorsQueryBySlug
 } from '../../../helpers/queries'
 import withLocales from '../../../locales/withLocales'
+import { buildURLSearchParamsForInstallKonnectorFromIntent } from '../../Views/helpers'
 
 export const importAuto = ({ paperDefinition, importAutoOnclick }) => {
   return {
@@ -26,13 +27,8 @@ export const importAuto = ({ paperDefinition, importAutoOnclick }) => {
         const { pathname } = useLocation()
         const normalizePathname = pathname.split('/create')[0]
 
-        const {
-          konnectorCriteria: {
-            name: konnectorName,
-            category: konnectorCategory
-          } = {},
-          label
-        } = paperDefinition
+        const { konnectorCriteria, label } = paperDefinition
+        const { name: konnectorName } = konnectorCriteria || {}
 
         const queryKonnector = buildKonnectorsQueryBySlug(konnectorName)
         const { data: konnectors, ...konnectorsQueryLeft } = useQuery(
@@ -60,9 +56,10 @@ export const importAuto = ({ paperDefinition, importAutoOnclick }) => {
           )
         )
 
-        const redirectPathSearchParam = `redirectAfterInstall=/paper/files/${label}/harvest/${
-          konnectorName ? `&slug=${konnectorName}` : ''
-        }${konnectorCategory ? `&category=${konnectorCategory}` : ''}`
+        const searchParams = buildURLSearchParamsForInstallKonnectorFromIntent(
+          konnectorCriteria,
+          label
+        )
 
         const handleClick = () => {
           if (konnectors?.length > 0 && isKonnectorsConnected) {
@@ -70,7 +67,7 @@ export const importAuto = ({ paperDefinition, importAutoOnclick }) => {
           } else {
             navigate({
               pathname: `${normalizePathname}/installKonnectorIntent`,
-              search: `${redirectPathSearchParam}`
+              search: `${searchParams}`
             })
           }
           importAutoOnclick()
