@@ -12,7 +12,13 @@ import {
   numbers,
   WebviewMethods
 } from '../../api'
-import { getErrorMessage, interpolate, isNativeDevMode } from '../../utils'
+import {
+  getErrorMessage,
+  interpolate,
+  isFlagshipUiArgsArray,
+  isNativeDevMode,
+  isThemeArg
+} from '../../utils'
 
 const log = debug('NativeService')
 
@@ -94,13 +100,18 @@ export class NativeService {
 
     const parsedEvent = this.parseNativeEvent(event)
 
-    if (parsedEvent.methodName === 'setFlagshipUI' && parsedEvent.args) {
-      // @ts-expect-error we know that `setFlagshipUI` args are in an array
+    if (
+      parsedEvent.methodName === 'setFlagshipUI' &&
+      isFlagshipUiArgsArray(parsedEvent.args)
+    ) {
       parsedEvent.args[0].componentId = componentId
     }
 
-    if (parsedEvent.methodName === 'setTheme' && parsedEvent.args) {
-      // @ts-expect-error we know that `setTheme` args is a string and we want to convert it to an object
+    if (
+      parsedEvent.methodName === 'setTheme' &&
+      Array.isArray(parsedEvent.args) &&
+      isThemeArg(parsedEvent.args[0])
+    ) {
       parsedEvent.args[0] = {
         homeTheme: parsedEvent.args[0],
         componentId: componentId

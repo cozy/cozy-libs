@@ -68,3 +68,16 @@ export interface FlagshipUI {
    */
   topTheme?: 'dark' | 'light'
 }
+
+export const isFlagshipUI = (item: unknown): item is FlagshipUI => {
+  return (
+    typeof item === 'object' &&
+    item !== null &&
+    ('bottomBackground' in item ||
+      'bottomOverlay' in item ||
+      'bottomTheme' in item ||
+      'topBackground' in item ||
+      'topOverlay' in item ||
+      'topTheme' in item)
+  )
+}
