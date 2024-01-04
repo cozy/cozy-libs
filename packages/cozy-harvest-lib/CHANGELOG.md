@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [22.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@21.0.5...cozy-harvest-lib@22.0.0) (2024-01-04)
+
+
+### Features
+
+* Add context to store Intent data ([1efe0c4](https://github.com/cozy/cozy-libs/commit/1efe0c437342c92c0e779ae13043b33b232236f1))
+
+
+### BREAKING CHANGES
+
+* If you import Harvest's component without using the
+HarvestWrapper or the Route Component, you have to wrap manually the
+component in the IntentProvider.
+
+
+
+
+
 ## [21.0.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@21.0.4...cozy-harvest-lib@21.0.5) (2024-01-02)
 
 **Note:** Version bump only for package cozy-harvest-lib
