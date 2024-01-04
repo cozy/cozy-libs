@@ -14,21 +14,12 @@
     "createPaper": "Add a document",
     "createPaperByQualificationLabel": "Add %{qualificationLabel}",
     "download": "Download",
-    "zipDownload": "Download documents (.ZIP format)",
     "forward": "Send",
-    "help": "Help",
-    "installHomepage": "Install on my mobile's homepage",
-    "moveTo": "Move to…",
     "open": "Open…",
-    "phoneDownload": "Make available offline",
-    "qualify": "Qualify",
     "rename": "Rename",
-    "forwardPapers": "Send documents…",
     "select": "Select",
-    "share": "Share",
     "themeFilter": "Filter by theme",
     "trash": "Remove",
-    "version": "Versions",
     "copyReminderContent": {
       "text": "Copy content",
       "success": "Copied to clipboard",
@@ -52,7 +43,6 @@
       "error": "An error has occurred, please try again in a moment.",
       "success": "The document has been removed from My Papers."
     },
-    "replace": "Replace",
     "saveFile": {
       "error": "An error has occurred, please try again later",
       "success": "Document saved successfully"
@@ -132,8 +122,7 @@
     "scanPicture": {
       "text": "Use your camera or an existing document",
       "title": "Take or select pictures"
-    },
-    "title": "Add: %{name}"
+    }
   },
   "RadioAdapter": {
     "otherLabel": "Contract name"
@@ -356,7 +345,6 @@
       "back": "Back side",
       "front": "Front side"
     },
-    "subheader": "Existing",
     "PapersListByContact": {
       "seeMore": "See more (%{number})"
     },
@@ -374,9 +362,6 @@
     "helpTooltip": "If you have the document in paper format available, click on the \"Take a photo\" button to photograph it with your mobile. Otherwise, select another option.",
     "importPicFromMobile": "Choose from my phone",
     "importPicFromDesktop": "Choose from my desktop",
-    "modal": {
-      "validFileType": "Accepted formats: image or pdf"
-    },
     "selectPicFromCozy": "Choose from my Cozy",
     "takePic": "Take a photo",
     "themes": {
@@ -426,18 +411,6 @@
       "address": "Address"
     }
   },
-  "RenameInput": {
-    "fileExisting": "The element %{name} already exists, please choose a new name.",
-    "filenameMissing": "The file name is missing, please choose a new name.",
-    "filenameIllegalName": "The file name %{name} is invalid, please choose a new name.",
-    "filenameIllegalCharacters": "The file name %{name} contains invalid characters: %{characters}"
-  },
-  "RenameModal": {
-    "title": "Rename",
-    "content": "You are about to change the file extension. Do you want to continue?",
-    "cancel": "Cancel",
-    "submit": "Continue"
-  },
   "PageEdit": {
     "title": "Face of the document",
     "back": "Back",
@@ -471,11 +444,7 @@
   },
   "InstallAppModal": {
     "title": "Install the app",
-    "text": "Install the Cozy Cloud app on your mobile to take photos of your documents directly.",
-    "action": {
-      "android": "Install on Google Play",
-      "ios": "Install on App Store"
-    }
+    "text": "Install the Cozy Cloud app on your mobile to take photos of your documents directly."
   },
   "InstallAppFromIntent": {
     "title": "Would you like to add a note?",

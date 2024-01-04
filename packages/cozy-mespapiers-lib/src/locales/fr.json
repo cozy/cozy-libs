@@ -14,21 +14,12 @@
     "createPaper": "Ajouter un document",
     "createPaperByQualificationLabel": "Ajouter %{qualificationLabel}",
     "download": "Télécharger",
-    "zipDownload": "Télécharger les documents (format .ZIP)",
     "forward": "Envoyer",
-    "help": "Aides",
-    "installHomepage": "Installer sur l’accueil de mon mobile",
-    "moveTo": "Déplacer vers…",
     "open": "Ouvrir…",
-    "phoneDownload": "Rendre accessible hors-ligne",
-    "qualify": "Qualifier",
     "rename": "Renommer",
-    "forwardPapers": "Envoyer des documents",
     "select": "Sélectionner",
-    "share": "Partager",
     "themeFilter": "Filtrer par thème",
     "trash": "Supprimer",
-    "version": "Versions",
     "copyReminderContent": {
       "text": "Copier le contenu",
       "success": "Copié dans le presse-papier",
@@ -52,7 +43,6 @@
       "error": "Une erreur s'est produite, veuillez réessayer dans un moment.",
       "success": "Le document a été retiré de Mes papiers."
     },
-    "replace": "Remplacer",
     "saveFile": {
       "error": "Une erreur est survenue, veuillez réessayer ultérieurement",
       "success": "Document enregistré avec succès"
@@ -132,8 +122,7 @@
     "scanPicture": {
       "text": "Utiliser votre appareil photo ou un document existant",
       "title": "Prendre ou sélectionner des photos"
-    },
-    "title": "Ajout : %{name}"
+    }
   },
   "RadioAdapter": {
     "otherLabel": "Intitulé du contrat"
@@ -356,7 +345,6 @@
       "back": "Face arrière",
       "front": "Face avant"
     },
-    "subheader": "Existants",
     "PapersListByContact": {
       "seeMore": "Voir plus (%{number})"
     },
@@ -374,9 +362,6 @@
     "helpTooltip": "Si vous avez le document au format papier à disposition, cliquer sur le bouton “Prendre en photo” pour le photographier avec votre mobile. Sinon, sélectionnez une autre option.",
     "importPicFromMobile": "Choisir depuis mon téléphone",
     "importPicFromDesktop": "Choisir depuis mon ordinateur",
-    "modal": {
-      "validFileType": "Format acceptés : image ou pdf"
-    },
     "selectPicFromCozy": "Choisir depuis mon Cozy",
     "takePic": "Prendre en photo",
     "themes": {
@@ -426,18 +411,6 @@
       "address": "Adresse"
     }
   },
-  "RenameInput": {
-    "fileExisting": "L'élément %{name} existe déjà, veuillez choisir un nouveau nom.",
-    "filenameMissing": "Le nom de fichier est absent, veuillez choisir un nouveau nom.",
-    "filenameIllegalName": "Le nom de fichier %{name} est invalide, veuillez choisir un nouveau nom.",
-    "filenameIllegalCharacters": "Le nom de fichier %{name} contient des caractères invalides : %{characters}"
-  },
-  "RenameModal": {
-    "title": "Renommer",
-    "content": "Vous êtes sur le point de changer l'extension du fichier. Voulez-vous continuer ?",
-    "cancel": "Annuler",
-    "submit": "Continuer"
-  },
   "PageEdit": {
     "title": "Face du document",
     "back": "Face arrière",
@@ -471,11 +444,7 @@
   },
   "InstallAppModal": {
     "title": "Installer l’application",
-    "text": "Installer l'application Cozy Cloud sur votre mobile pour prendre directement vos documents en photo.",
-    "action": {
-      "android": "Installer sur Google Play",
-      "ios": "Installer sur l'App Store"
-    }
+    "text": "Installer l'application Cozy Cloud sur votre mobile pour prendre directement vos documents en photo."
   },
   "InstallAppFromIntent": {
     "title": "Vous souhaitez ajouter une note ?",
