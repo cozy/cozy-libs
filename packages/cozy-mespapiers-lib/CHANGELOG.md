@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [70.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@70.1.0...cozy-mespapiers-lib@70.2.0) (2024-01-04)
+
+
+### Features
+
+* **mespapiers:** Remove useless translation keys ([6013b8e](https://github.com/cozy/cozy-libs/commit/6013b8e7628d3db85f9dbd781063a79b5e331b99))
+* **mespapiers:** Rename "paper" to "document" ([05e5d56](https://github.com/cozy/cozy-libs/commit/05e5d567eb0edf6001dff1cb71658fb14772bd2b))
+
+
+
+
+
 # [70.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@70.0.8...cozy-mespapiers-lib@70.1.0) (2024-01-04)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.19.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.18.1...cozy-intent@2.19.0) (2024-01-04)
+
+
+### Features
+
+* **cozy-intent:** Add `componentId` parameter to `tryEmit` ([4e3d3df](https://github.com/cozy/cozy-libs/commit/4e3d3df6d43a7fd6051c99e0719b712260a9a861))
+* **cozy-intent:** Improve `tryEmit()` typing ([330d358](https://github.com/cozy/cozy-libs/commit/330d3585aa9110bc8fc22a4160b94de23a9d6590))
+
+
+
+
+
 ## 2.18.1 (2023-12-21)
 
 
