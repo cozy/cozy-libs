@@ -23,7 +23,7 @@
     "phoneDownload": "Rendre accessible hors-ligne",
     "qualify": "Qualifier",
     "rename": "Renommer",
-    "forwardPapers": "Envoyer des papiers",
+    "forwardPapers": "Envoyer des documents",
     "select": "Sélectionner",
     "share": "Partager",
     "themeFilter": "Filtrer par thème",
@@ -61,7 +61,7 @@
       "error": "Une erreur s'est produite, veuillez réessayer dans un moment.",
       "success": "Le document a été déplacé vers la corbeille."
     },
-    "search": "Nom du papier, titulaire ou info"
+    "search": "Nom du document, titulaire ou info"
   },
   "FeaturedPlaceholdersList": {
     "subheader": "Suggestions"
@@ -101,8 +101,8 @@
       "mobile": "Sélectionner un destinataire"
     },
     "content": {
-      "desktop": "Votre lien de partage est bientôt prêt. |||| Vos papiers ont bien été rassemblés. Votre lien de partage est bientôt prêt.",
-      "mobile": "Sélectionner un destinataire pour procéder à l'envoi. |||| Vos papiers ont bien été rassemblés. Sélectionner un destinataire pour procéder à l’envoi."
+      "desktop": "Votre lien de partage est bientôt prêt. |||| Vos documents ont bien été rassemblés. Votre lien de partage est bientôt prêt.",
+      "mobile": "Sélectionner un destinataire pour procéder à l'envoi. |||| Vos documents ont bien été rassemblés. Sélectionner un destinataire pour procéder à l’envoi."
     },
     "password": {
       "input": "Mot de passe",
@@ -360,14 +360,14 @@
     "PapersListByContact": {
       "seeMore": "Voir plus (%{number})"
     },
-    "empty": "Sélectionner un document à ajouter dans la liste ci-dessous ou cliquer sur le bouton “ajouter” en bas à droite de l’écran pour voir la liste complète des papiers.",
+    "empty": "Sélectionner un document à ajouter dans la liste ci-dessous ou cliquer sur le bouton “ajouter” en bas à droite de l’écran pour voir la liste complète des documents.",
     "expired": "Expiré",
     "expiresIn": "Expire dans %{duration}"
   },
   "PlaceholdersList": {
     "header": "Choisissez la catégorie de l’information ou du document que vous souhaitez ajouter.",
     "childrenHeader": "Ajouter un document ou bien créer une note rapide.",
-    "title": "Nouveau papier%{name}"
+    "title": "Nouveau document%{name}"
   },
   "Scan": {
     "divider": "ou",
@@ -392,14 +392,14 @@
     }
   },
   "Multiselect": {
-    "backdrop": "Rassemblement de vos papiers…",
+    "backdrop": "Rassemblement de vos documents…",
     "title": {
       "default": "Ma sélection",
       "nbSelected": "%{smart_count} élément sélectionné |||| %{smart_count} éléments sélectionnés"
     },
-    "empty": "Choisir le(s) papier(s) à envoyer",
+    "empty": "Choisir le(s) document(s) à envoyer",
     "select": "Ajouter à ma sélection",
-    "folderZipName": "%{contactName} - papiers - %{date}.zip"
+    "folderZipName": "%{contactName} - documents - %{date}.zip"
   },
   "Search": {
     "empty": {
@@ -451,14 +451,14 @@
   },
   "Empty": {
     "konnector": {
-      "title": "Aucun papier",
-      "text": "%{konnectorSlug} n'a pas encore publié le papier sur son site. Il sera récupéré ici automatiquement une fois publié par %{konnectorSlug}.",
+      "title": "Aucun document",
+      "text": "%{konnectorSlug} n'a pas encore publié le document sur son site. Il sera récupéré ici automatiquement une fois publié par %{konnectorSlug}.",
       "button": "Ajouter manuellement"
     }
   },
   "ScanDesktopActionsAlert": {
     "title": "Scanner avec l’app Cozy Cloud",
-    "text": "Installer l’application Cozy Cloud sur votre mobile pour prendre directement vos papiers en photo et en extraire les informations.",
+    "text": "Installer l’application Cozy Cloud sur votre mobile pour prendre directement vos documents en photo et en extraire les informations.",
     "actions": {
       "hide": "Non, merci",
       "install": "Installer l'app"
@@ -471,7 +471,7 @@
   },
   "InstallAppModal": {
     "title": "Installer l’application",
-    "text": "Installer l'application Cozy Cloud sur votre mobile pour prendre directement vos papiers en photo.",
+    "text": "Installer l'application Cozy Cloud sur votre mobile pour prendre directement vos documents en photo.",
     "action": {
       "android": "Installer sur Google Play",
       "ios": "Installer sur l'App Store"
@@ -483,7 +483,7 @@
     "action": "Installer"
   },
   "ErrorBoundary": {
-    "title": "Vos papiers n’ont pas pu être affichés correctement",
+    "title": "Vos documents n’ont pas pu être affichés correctement",
     "text": "Essayez de recharger la page ! Si le problème persiste n'hésitez pas à contacter le support.",
     "action": "Recharger"
   },
