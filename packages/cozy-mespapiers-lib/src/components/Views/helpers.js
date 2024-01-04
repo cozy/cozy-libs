@@ -56,3 +56,32 @@ export const makeAccountsByFiles = (accounts, files) => {
 
   return { accountsWithFiles, accountsWithoutFiles }
 }
+
+/**
+ * @param {object} konnectorCriteria - Option of the papersDefinition
+ * @param {string} konnectorCriteria.name - Name of the konnector
+ * @param {string} konnectorCriteria.category - Category of the konnector
+ * @param {string} konnectorCriteria.qualificationLabel - Qualification label of the konnector
+ * @param {string} qualificationLabel - Qualification label of the paperDefinition
+ * @returns {string} - URLSearchParams
+ */
+export const buildURLSearchParamsForInstallKonnectorFromIntent = (
+  konnectorCriteria,
+  qualificationLabel
+) => {
+  const paramsObj = {
+    // Useful for redirecting on the route(harvest) opening the login modal
+    redirectAfterInstall: `/paper/files/${qualificationLabel}/harvest/`,
+    ...(konnectorCriteria.name && {
+      slug: konnectorCriteria.name
+    }),
+    ...(konnectorCriteria.category && {
+      category: konnectorCriteria.category
+    }),
+    ...(konnectorCriteria.qualificationLabel && {
+      qualificationLabel: konnectorCriteria.qualificationLabel
+    })
+  }
+
+  return new URLSearchParams(paramsObj).toString()
+}

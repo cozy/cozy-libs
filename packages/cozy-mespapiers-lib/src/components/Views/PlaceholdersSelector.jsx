@@ -9,6 +9,7 @@ import NestedSelectResponsive from 'cozy-ui/transpiled/react/NestedSelect/Nested
 import PointerAlert from 'cozy-ui/transpiled/react/PointerAlert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
+import { buildURLSearchParamsForInstallKonnectorFromIntent } from './helpers'
 import Konnector from '../../assets/icons/Konnectors.svg'
 import { APPS_DOCTYPE } from '../../doctypes'
 import { findPlaceholdersByQualification } from '../../helpers/findPlaceholders'
@@ -156,8 +157,6 @@ const PlaceholdersSelector = () => {
     isDisabled
   }) => {
     if (!isDisabled && isKonnectorAutoImport) {
-      const konnectorName = placeholder.konnectorCriteria.name
-      const konnectorCategory = placeholder.konnectorCriteria.category
       const konnectorsBySlug = konnectors?.filter(
         konnector => konnector.slug === placeholder.konnectorCriteria.name
       )
@@ -167,11 +166,10 @@ const PlaceholdersSelector = () => {
         )
       )
 
-      const redirectPathSearchParam = `redirectAfterInstall=/paper/files/${
+      const searchParams = buildURLSearchParamsForInstallKonnectorFromIntent(
+        placeholder.konnectorCriteria,
         placeholder.label
-      }/harvest/${konnectorName ? `&slug=${konnectorName}` : ''}${
-        konnectorCategory ? `&category=${konnectorCategory}` : ''
-      }`
+      )
 
       if (konnectorsBySlug?.length > 0 && isKonnectorsConnected) {
         navigate(`/paper/files/${placeholder.label}`)
@@ -180,7 +178,7 @@ const PlaceholdersSelector = () => {
 
         navigate({
           pathname: `${normalizePathname}/installKonnectorIntent`,
-          search: `${redirectPathSearchParam}`
+          search: `${searchParams}`
         })
       }
     } else {

@@ -1597,7 +1597,10 @@
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
         }
-      ]
+      ],
+      "konnectorCriteria": {
+        "qualificationLabel": "pay_sheet"
+      }
     },
     {
       "label": "payment_proof_family_allowance",
