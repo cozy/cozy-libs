@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [70.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@70.0.8...cozy-mespapiers-lib@70.1.0) (2024-01-04)
+
+
+### Features
+
+* **mespapiers:** Add `qualificationLabel` option to `konnectorCriteria` ([707605e](https://github.com/cozy/cozy-libs/commit/707605e020c493ddc8b94301cdbb5fbf73f1aaaf))
+
+
+
+
+
 ## [70.0.8](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@70.0.7...cozy-mespapiers-lib@70.0.8) (2024-01-04)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
