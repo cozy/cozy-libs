@@ -23,7 +23,7 @@
     "phoneDownload": "Make available offline",
     "qualify": "Qualify",
     "rename": "Rename",
-    "forwardPapers": "Send papers…",
+    "forwardPapers": "Send documents…",
     "select": "Select",
     "share": "Share",
     "themeFilter": "Filter by theme",
@@ -61,7 +61,7 @@
       "error": "An error has occurred, please try again in a moment.",
       "success": "The selection has been moved to the Trash."
     },
-    "search": "Name of the paper, owner or info"
+    "search": "Name of the document, owner or info"
   },
   "FeaturedPlaceholdersList": {
     "subheader": "Suggestions"
@@ -101,8 +101,8 @@
       "mobile": "Select a recipient"
     },
     "content": {
-      "desktop": "Your sharing link is almost ready. |||| Your papers have been collected successfully. Your sharing link is almost ready.",
-      "mobile": "Select a recipient to send. |||| Your papers have been collected successfully. Select a recipient to send."
+      "desktop": "Your sharing link is almost ready. |||| Your documents have been collected successfully. Your sharing link is almost ready.",
+      "mobile": "Select a recipient to send. |||| Your documents have been collected successfully. Select a recipient to send."
     },
     "password": {
       "input": "Password",
@@ -367,7 +367,7 @@
   "PlaceholdersList": {
     "header": "Choose the category of information or document you wish to add.",
     "childrenHeader": "Add a document or create a quick note.",
-    "title": "New paper%{name}"
+    "title": "New document%{name}"
   },
   "Scan": {
     "divider": "or",
@@ -392,14 +392,14 @@
     }
   },
   "Multiselect": {
-    "backdrop": "Gather your papers…",
+    "backdrop": "Gather your documents…",
     "title": {
       "default": "My selection",
       "nbSelected": "%{smart_count} selected item |||| %{smart_count} selected items"
     },
-    "empty": "Choose the paper(s) to send",
+    "empty": "Choose the document(s) to send",
     "select": "Add to my selection",
-    "folderZipName": "%{contactName} - papers - %{date}.zip"
+    "folderZipName": "%{contactName} - documents - %{date}.zip"
   },
   "Search": {
     "empty": {
@@ -451,14 +451,14 @@
   },
   "Empty": {
     "konnector": {
-      "title": "No paper",
-      "text": "%{konnectorSlug} has not yet published the paper on its site. It will be retrieved here automatically once published by %{konnectorSlug}.",
+      "title": "No document",
+      "text": "%{konnectorSlug} has not yet published the document on its site. It will be retrieved here automatically once published by %{konnectorSlug}.",
       "button": "Add manually"
     }
   },
   "ScanDesktopActionsAlert": {
     "title": "Scan with the Cozy Cloud app",
-    "text": "Install the Cozy Cloud application on your mobile to take a photo of your papers directly and extract the information.",
+    "text": "Install the Cozy Cloud application on your mobile to take a photo of your documents directly and extract the information.",
     "actions": {
       "hide": "No, thanks",
       "install": "Install the app"
@@ -471,7 +471,7 @@
   },
   "InstallAppModal": {
     "title": "Install the app",
-    "text": "Install the Cozy Cloud app on your mobile to take photos of your papers directly.",
+    "text": "Install the Cozy Cloud app on your mobile to take photos of your documents directly.",
     "action": {
       "android": "Install on Google Play",
       "ios": "Install on App Store"
@@ -483,7 +483,7 @@
     "action": "Install"
   },
   "ErrorBoundary": {
-    "title": "Your papers could not be displayed correctly",
+    "title": "Your documents could not be displayed correctly",
     "text": "Try reloading the page! If the problem persists, please contact support.",
     "action": "Reload"
   },
