@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [71.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@70.2.0...cozy-mespapiers-lib@71.0.0) (2024-01-04)
+
+
+### Features
+
+* **mespapiers:** Sync cozy packages ([753e1e1](https://github.com/cozy/cozy-libs/commit/753e1e1f49fca8f0fe89d26738cfa02b6b50802c))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have
+- `cozy-client >=45.6.0`
+- `cozy-doctypes >= 1.89.1`
+- `cozy-flags >= 3.2.0`
+- `cozy-harvest-lib >= 22.0.1`
+- `cozy-intent >= 2.18.1`
+- `cozy-sharing >= 10.1.1`
+
+
+
+
+
 # [70.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@70.1.0...cozy-mespapiers-lib@70.2.0) (2024-01-04)
 
 
