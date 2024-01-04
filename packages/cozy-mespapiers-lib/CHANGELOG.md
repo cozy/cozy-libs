@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [70.0.7](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@70.0.6...cozy-mespapiers-lib@70.0.7) (2024-01-04)
+
+
+### Bug Fixes
+
+* **mespapiers:** Being able to connect to an already installed konnector ([7926c22](https://github.com/cozy/cozy-libs/commit/7926c2292a7f7b89d97033e22d1a984371f22cfa))
+* **mespapiers:** The NestedSelect component doesn't manage async options ([793b849](https://github.com/cozy/cozy-libs/commit/793b849a354e22eb2eb77721e26945c8cfcbd866))
+
+
+
+
+
 ## [70.0.6](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@70.0.5...cozy-mespapiers-lib@70.0.6) (2024-01-02)
 
 
