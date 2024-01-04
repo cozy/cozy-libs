@@ -12,7 +12,7 @@ export type NativeEvent = {
 
 export type PostMeMessage = {
   action: string
-  args: string
+  args: unknown[]
   message?: string
   methodName: string
   requestId: number

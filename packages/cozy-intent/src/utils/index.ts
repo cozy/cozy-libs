@@ -1,3 +1,5 @@
+import { isFlagshipUI } from '../api'
+
 export const interpolate = (
   str: string,
   params: Record<string, string>
@@ -40,4 +42,18 @@ export const isWebDevMode = (): boolean => {
 export const getErrorMessage = (error: unknown): string => {
   if (error instanceof Error) return error.message
   return String(error)
+}
+
+interface WithComponentId {
+  componentId: string
+}
+
+export const isFlagshipUiArgsArray = (
+  item: unknown
+): item is WithComponentId[] => {
+  return Array.isArray(item) && isFlagshipUI(item[0])
+}
+
+export const isThemeArg = (item: unknown): item is string => {
+  return typeof item === 'string'
 }
