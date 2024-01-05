@@ -1,12 +1,12 @@
 declare module 'cozy-logger' {
-  declare function log(
+  function log(
     type: 'debug' | 'info' | 'warn' | 'error' | 'ok' | 'critical',
     message: string,
     label?: string,
     namespace?: string
   ): void
 
-  declare namespace log {
+  namespace log {
     export const addFilter: (filter: unknown) => number
 
     export const namespace: (
