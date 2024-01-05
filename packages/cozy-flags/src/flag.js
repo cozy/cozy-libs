@@ -71,6 +71,7 @@ export const initializeFromRemote = async client => {
   } = await client.query(
     Q('io.cozy.settings').getById('io.cozy.settings.flags')
   )
+
   enable(attributes)
 }
 
