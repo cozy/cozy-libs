@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.1.2](https://github.com/cozy/cozy-libs/compare/cozy-scanner@7.1.1...cozy-scanner@7.1.2) (2024-01-05)
+
+**Note:** Version bump only for package cozy-scanner
+
+
+
+
+
 ## [7.1.1](https://github.com/cozy/cozy-libs/compare/cozy-scanner@7.1.0...cozy-scanner@7.1.1) (2023-12-21)
 
 **Note:** Version bump only for package cozy-scanner
