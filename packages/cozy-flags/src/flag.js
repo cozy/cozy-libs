@@ -63,7 +63,7 @@ export const enable = flagsToEnable => {
  *
  * @private
  * @see  https://docs.cozy.io/en/cozy-stack/settings/#get-settingsflags
- * @param  {CozyClient} client
+ * @param  {import('cozy-client/types/CozyClient').default} client
  */
 export const initializeFromRemote = async client => {
   const {
@@ -129,7 +129,7 @@ export const initializeFromDOM = async () => {
  * <div data-flags="{{ .Flags }}"></div>
  * ````
  *
- * @param  {CozyClient} client - A CozyClient
+ * @param  {import('cozy-client/types/CozyClient').default} client - A CozyClient
  * @return {Promise} Resolves when flags have been initialized
  */
 export const initialize = async client => {
