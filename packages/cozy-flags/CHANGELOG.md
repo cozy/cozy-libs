@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.2](https://github.com/cozy/cozy-libs/compare/cozy-flags@3.2.1...cozy-flags@3.2.2) (2024-01-05)
+
+
+### Bug Fixes
+
+* Fix types of CozyClient on cozy-flags ([add0637](https://github.com/cozy/cozy-libs/commit/add063752d38357a798eb9699e67039fe8096c5c))
+
+
+
+
+
 ## [3.2.1](https://github.com/cozy/cozy-libs/compare/cozy-flags@3.2.0...cozy-flags@3.2.1) (2024-01-05)
 
 **Note:** Version bump only for package cozy-flags

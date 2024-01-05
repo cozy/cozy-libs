@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.4](https://github.com/cozy/cozy-libs/compare/cozy-logger@1.10.3...cozy-logger@1.10.4) (2024-01-05)
+
+
+### Bug Fixes
+
+* Fix types of cozy-logger ([b6e202a](https://github.com/cozy/cozy-libs/commit/b6e202a4c59fc6d9314170123d4cdbf0b23d960e))
+
+
+
+
+
 ## [1.10.3](https://github.com/cozy/cozy-libs/compare/cozy-logger@1.10.2...cozy-logger@1.10.3) (2024-01-05)
 
 **Note:** Version bump only for package cozy-logger
