@@ -41,7 +41,7 @@
     "babel-plugin-css-modules-transform": "1.6.2",
     "babel-plugin-inline-react-svg": "1.1.2",
     "cozy-client": "40.5.0",
-    "cozy-ui": "93.1.1",
+    "cozy-ui": "100.2.0",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.6",
     "enzyme-to-json": "3.6.2",
