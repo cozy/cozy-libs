@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [22.0.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.0.5...cozy-harvest-lib@22.0.6) (2024-01-08)
+
+
+### Bug Fixes
+
+* Use konnectorFolder from cozy-client ([f81eed9](https://github.com/cozy/cozy-libs/commit/f81eed99e502f2c1378c6c2d0daa157047967f6e))
+
+
+
+
+
 ## [22.0.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.0.4...cozy-harvest-lib@22.0.5) (2024-01-08)
 
 
