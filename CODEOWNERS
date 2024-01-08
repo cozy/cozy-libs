@@ -2,7 +2,7 @@
 *       @acezard
 
 # Based on the Paper of the Technical maintainers of 2022
-packages/cozy-harvest-lib            @doubleface @Merkur39 @JF-Cozy
+packages/cozy-harvest-lib            @doubleface @Merkur39 @JF-Cozy @zatteo
 packages/cozy-doctypes/              @doubleface
 packages/cozy-flags/                 @acezard @Ldoppea
 packages/cozy-app-publish/           @acezard @doubleface
@@ -13,4 +13,4 @@ packages/eslint-config-cozy-app/     @acezard
 packages/renovate-config-cozy/       @doubleface
 packages/renovate-config-cozy-libs/  @doubleface
 packages/cozy-sharing/               @Ldoppea @acezard
-packages/cozy-mespapiers-lib/        @Merkur39 @JF-Cozy
+packages/cozy-mespapiers-lib/        @Merkur39 @JF-Cozy @zatteo
