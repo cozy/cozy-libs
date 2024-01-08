@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [22.0.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.0.4...cozy-harvest-lib@22.0.5) (2024-01-08)
+
+
+### Bug Fixes
+
+* **harvest:** Enhance USER_ACTION_NEEDED messages ([1c26d3f](https://github.com/cozy/cozy-libs/commit/1c26d3f6d94e4e725f2f0ea7e74377303c3e05b8))
+
+
+
+
+
 ## [22.0.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.0.3...cozy-harvest-lib@22.0.4) (2024-01-05)
 
 **Note:** Version bump only for package cozy-harvest-lib
