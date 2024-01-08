@@ -32,11 +32,6 @@ jest.mock('../sentry', () => {
   }
 })
 
-jest.mock('../connections/files', () => ({
-  statDirectoryByPath: jest.fn(),
-  createDirectoryByPath: jest.fn()
-}))
-
 KonnectorJobWatcher.prototype.watch = jest.fn()
 
 jest.mock('date-fns')
