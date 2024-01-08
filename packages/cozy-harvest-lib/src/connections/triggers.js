@@ -1,14 +1,11 @@
+import { ensureKonnectorFolder } from 'cozy-client/dist/models/konnectorFolder'
 import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
-import { CozyFolder as CozyFolderClass } from 'cozy-doctypes'
 
 import { fetchAccount, updateAccount } from './accounts'
-import { statDirectoryByPath, createDirectoryByPath } from './files'
 import * as accounts from '../helpers/accounts'
 import cron from '../helpers/cron'
 import * as konnectors from '../helpers/konnectors'
 
-const FILES_DOCTYPE = 'io.cozy.files'
-const PERMISSIONS_DOCTYPE = 'io.cozy.permissions'
 const TRIGGERS_DOCTYPE = 'io.cozy.triggers'
 
 /**
@@ -71,34 +68,6 @@ export const triggersMutations = client => {
   }
 }
 
-const ensureKonnectorFolder = async (client, { konnector, account, t }) => {
-  const permissions = client.collection(PERMISSIONS_DOCTYPE)
-  const files = client.collection(FILES_DOCTYPE)
-  const CozyFolder = CozyFolderClass.copyWithClient(client)
-  const [adminFolder, photosFolder] = await Promise.all([
-    CozyFolder.ensureMagicFolder(
-      CozyFolder.magicFolders.ADMINISTRATIVE,
-      `/${t('folder.administrative')}`
-    ),
-    CozyFolder.ensureMagicFolder(
-      CozyFolder.magicFolders.PHOTOS,
-      `/${t('folder.photos')}`
-    )
-  ])
-  const path = konnectors.buildFolderPath(konnector, account, {
-    administrative: adminFolder.path,
-    photos: photosFolder.path
-  })
-  const folder =
-    (await statDirectoryByPath(client, path)) ||
-    (await createDirectoryByPath(client, path))
-
-  await permissions.add(konnector, konnectors.buildFolderPermission(folder))
-  await files.addReferencesTo(konnector, [folder])
-
-  return folder
-}
-
 export const ensureTrigger = async (
   client,
   { trigger, account, konnector, t }
@@ -110,7 +79,11 @@ export const ensureTrigger = async (
   let folder
 
   if (konnectors.needsFolder(konnector)) {
-    folder = await ensureKonnectorFolder(client, { konnector, account, t })
+    folder = await ensureKonnectorFolder(client, {
+      konnector,
+      account,
+      t
+    })
   }
 
   return await createTrigger(
