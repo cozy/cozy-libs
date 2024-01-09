@@ -74,10 +74,6 @@ const CreatePaperModal = () => {
         const file = makeFileFromBase64(fileToHandle)
 
         if (file && allCurrentSteps?.length > 0) {
-          const nextStep = allCurrentSteps.find(
-            el => el.model !== 'scan' || el.page === 'back'
-          )
-
           setFormData(prev => ({
             ...prev,
             data: [
@@ -91,12 +87,6 @@ const CreatePaperModal = () => {
               }
             ]
           }))
-
-          const stepIndex = allCurrentSteps.findIndex(
-            el => el.model === nextStep.model
-          )
-
-          setCurrentStepIndex(stepIndex)
         }
       } catch (error) {
         log.error(
