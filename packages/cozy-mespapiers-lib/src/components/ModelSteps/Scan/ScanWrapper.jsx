@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import { useClient, models } from 'cozy-client'
@@ -26,16 +26,20 @@ const { fetchBlobFileById } = models.file
 const ScanWrapper = ({ currentStep, onClose, onBack }) => {
   const client = useClient()
   const [searchParams] = useSearchParams()
-  const { nextStep, currentStepIndex } = useStepperDialog()
+  const { currentStepIndex } = useStepperDialog()
   const { formData, setFormData } = useFormData()
   const { multipage, page } = currentStep
-  const [currentFile, setCurrentFile] = useState(
-    getLastFormDataFile({ formData: formData, currentStepIndex })
-  )
+  const [currentFile, setCurrentFile] = useState(null)
   const [isFilePickerModalOpen, setIsFilePickerModalOpen] = useState(false)
   const webviewIntent = useWebviewIntent()
 
   const fromFlagshipUpload = searchParams.get('fromFlagshipUpload')
+  useEffect(() => {
+    const file = getLastFormDataFile({ formData, currentStepIndex })
+    if (file) {
+      setCurrentFile(file)
+    }
+  }, [formData, currentStepIndex])
 
   const onChangeFile = (file, { replace = false } = {}) => {
     // TODO : Integrate the values recovered by the OCR
@@ -97,8 +101,7 @@ const ScanWrapper = ({ currentStep, onClose, onBack }) => {
     }
   }
 
-  if (!!fromFlagshipUpload && (page === 'front' || page === undefined)) {
-    nextStep()
+  if (!!fromFlagshipUpload && !currentFile && currentStepIndex === 0) {
     return null
   }
 
