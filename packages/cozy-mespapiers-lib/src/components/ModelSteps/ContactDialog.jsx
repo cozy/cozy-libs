@@ -67,19 +67,17 @@ const ContactDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
             iconSize="small"
             title={t(text)}
             text={
-              currentUser && (
-                <Paper elevation={2} className="u-mt-1 u-mh-half">
-                  <ContactList
-                    className="u-pv-0"
-                    multiple={multiple}
-                    selected={contactsSelected}
-                    currentUser={currentUser}
-                    onSelection={handleContactSelection}
-                    contactModalOpened={contactModalOpened}
-                    setContactModalOpened={setContactModalOpened}
-                  />
-                </Paper>
-              )
+              <Paper elevation={2} className="u-mt-1 u-mh-half">
+                <ContactList
+                  className="u-pv-0"
+                  multiple={multiple}
+                  selected={contactsSelected}
+                  currentUser={currentUser}
+                  onSelection={handleContactSelection}
+                  contactModalOpened={contactModalOpened}
+                  setContactModalOpened={setContactModalOpened}
+                />
+              </Paper>
             }
           />
         }
