@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
 
 const InputDateAdapter = ({
   attrs,
-  defaultValue,
+  formDataValue,
   setValue,
   setValidInput,
   setIsFocus,
@@ -39,7 +39,7 @@ const InputDateAdapter = ({
   const classes = useStyles(isDesktop)
   const [locales, setLocales] = useState('')
   const [isValidDate, setIsValidDate] = useState(true)
-  const [selectedDate, setSelectedDate] = useState(defaultValue || null)
+  const [selectedDate, setSelectedDate] = useState(formDataValue || null)
   const [displayHelper, setDisplayHelper] = useState(false)
 
   useEffect(() => {

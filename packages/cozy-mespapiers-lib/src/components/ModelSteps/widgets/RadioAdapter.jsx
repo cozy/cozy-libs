@@ -16,16 +16,16 @@ const isUserValue = (options, value) => {
 
 const RadioAdapter = ({
   attrs: { name, options, required },
-  defaultValue = '',
+  formDataValue = '',
   setValue,
   setValidInput,
   idx
 }) => {
   const [optionValue, setOptionValue] = useState(
-    isUserValue(options, defaultValue) ? 'other' : defaultValue
+    isUserValue(options, formDataValue) ? 'other' : formDataValue
   )
   const [textValue, setTextValue] = useState(
-    isUserValue(options, defaultValue) ? defaultValue : ''
+    isUserValue(options, formDataValue) ? formDataValue : ''
   )
   const { t } = useI18n()
 

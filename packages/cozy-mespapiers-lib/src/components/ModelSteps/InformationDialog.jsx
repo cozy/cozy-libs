@@ -123,7 +123,7 @@ const InformationDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
                 >
                   <Component
                     attrs={attrs}
-                    defaultValue={formData.metadata[attrs.name]}
+                    formDataValue={formData.metadata[attrs.name]}
                     setValue={setValue}
                     setValidInput={setValidInput}
                     setIsFocus={setIsFocus}
