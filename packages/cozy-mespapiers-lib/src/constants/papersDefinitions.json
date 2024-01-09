@@ -333,6 +333,7 @@
             {
               "name": "noticePeriod",
               "type": "number",
+              "defaultValue": 90,
               "withAdornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
@@ -408,6 +409,7 @@
             {
               "name": "noticePeriod",
               "type": "number",
+              "defaultValue": 90,
               "withAdornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
@@ -631,6 +633,7 @@
             {
               "name": "noticePeriod",
               "type": "number",
+              "defaultValue": 90,
               "withAdornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
@@ -893,6 +896,7 @@
             {
               "name": "noticePeriod",
               "type": "number",
+              "defaultValue": 90,
               "withAdornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
@@ -940,6 +944,7 @@
             {
               "name": "noticePeriod",
               "type": "number",
+              "defaultValue": 90,
               "withAdornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
@@ -1763,6 +1768,7 @@
             {
               "name": "noticePeriod",
               "type": "number",
+              "defaultValue": 90,
               "withAdornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
@@ -1822,6 +1828,7 @@
             {
               "name": "noticePeriod",
               "type": "number",
+              "defaultValue": 90,
               "withAdornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
@@ -2219,6 +2226,7 @@
             {
               "name": "noticePeriod",
               "type": "number",
+              "defaultValue": 90,
               "withAdornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
@@ -2278,6 +2286,7 @@
             {
               "name": "noticePeriod",
               "type": "number",
+              "defaultValue": 90,
               "withAdornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
@@ -2657,6 +2666,7 @@
             {
               "name": "noticePeriod",
               "type": "number",
+              "defaultValue": 90,
               "withAdornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },

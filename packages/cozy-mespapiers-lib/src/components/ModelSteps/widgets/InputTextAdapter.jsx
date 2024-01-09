@@ -55,10 +55,13 @@ const InputTextAdapter = ({
     maxLength,
     mask,
     withAdornment,
-    maskPlaceholder = 'ˍ'
+    maskPlaceholder = 'ˍ',
+    defaultValue
   } = attrs
   const { t } = useI18n()
-  const [currentValue, setCurrentValue] = useState(formDataValue || '')
+  const [currentValue, setCurrentValue] = useState(
+    defaultValue?.toString() || formDataValue || ''
+  )
   const [isTooShort, setIsTooShort] = useState(false)
   const [hasOnlySpaces, setHasOnlySpaces] = useState(false)
   const isError = isTooShort || hasOnlySpaces

@@ -15,7 +15,8 @@ const mockAttrs = ({
   minLength,
   required = false,
   mask = null,
-  maskPlaceholder = 'ˍ'
+  maskPlaceholder = 'ˍ',
+  defaultValue
 } = {}) => {
   return {
     name: 'name01',
@@ -25,16 +26,17 @@ const mockAttrs = ({
     maxLength,
     type,
     mask,
-    maskPlaceholder
+    maskPlaceholder,
+    defaultValue
   }
 }
 
-const setup = ({ attrs = mockAttrs(), defaultValue = '' } = {}) => {
+const setup = ({ attrs = mockAttrs(), formDataValue = '' } = {}) => {
   return render(
     <AppLike>
       <InputTextAdapter
         attrs={attrs}
-        defaultValue={defaultValue}
+        formDataValue={formDataValue}
         setValue={jest.fn()}
         setValidInput={jest.fn()}
         setIsFocus={jest.fn()}
@@ -139,6 +141,20 @@ describe('InputTextAdapter components:', () => {
 
       expect(input).toHaveAttribute('inputMode', 'text')
     })
+
+    it('should have the value property at "99" by default', () => {
+      const { getByTestId } = setup({ attrs: { mask: '**', defaultValue: 99 } })
+      const input = getByTestId('InputMask-TextField-input')
+
+      expect(input).toHaveAttribute('value', '99')
+    })
+
+    it('should have no value by default', () => {
+      const { getByTestId } = setup({ attrs: { mask: '**' } })
+      const input = getByTestId('InputMask-TextField-input')
+
+      expect(input).toHaveAttribute('value', 'ˍˍ')
+    })
   })
 
   describe('Without "mask" attribute', () => {
@@ -175,6 +191,20 @@ describe('InputTextAdapter components:', () => {
       const input = getByTestId('TextField-input')
 
       expect(input).toHaveAttribute('inputMode', 'text')
+    })
+
+    it('should have the value property at "99" by default', () => {
+      const { getByTestId } = setup({ attrs: { defaultValue: 99 } })
+      const input = getByTestId('TextField-input')
+
+      expect(input).toHaveAttribute('value', '99')
+    })
+
+    it('should have no value by default', () => {
+      const { getByTestId } = setup()
+      const input = getByTestId('TextField-input')
+
+      expect(input).toHaveAttribute('value', '')
     })
   })
 })
