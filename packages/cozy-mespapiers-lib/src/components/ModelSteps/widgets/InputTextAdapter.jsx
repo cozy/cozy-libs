@@ -43,7 +43,7 @@ const makeInputAdornment = (adornment, currentValue, t) => {
 
 const InputTextAdapter = ({
   attrs,
-  defaultValue,
+  formDataValue,
   setValue,
   setValidInput,
   setIsFocus,
@@ -58,7 +58,7 @@ const InputTextAdapter = ({
     maskPlaceholder = 'ˍ'
   } = attrs
   const { t } = useI18n()
-  const [currentValue, setCurrentValue] = useState(defaultValue || '')
+  const [currentValue, setCurrentValue] = useState(formDataValue || '')
   const [isTooShort, setIsTooShort] = useState(false)
   const [hasOnlySpaces, setHasOnlySpaces] = useState(false)
   const isError = isTooShort || hasOnlySpaces
