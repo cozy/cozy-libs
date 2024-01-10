@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [72.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@72.0.3...cozy-mespapiers-lib@72.1.0) (2024-01-10)
+
+
+### Features
+
+* Display Scan result page when upload file by flagship ([6e507ac](https://github.com/cozy/cozy-libs/commit/6e507ac4d01065ed2a1cb3376f9e4ee870ce061c))
+* **mespapiers:** Add the ability to set a default value on steps ([0a7e657](https://github.com/cozy/cozy-libs/commit/0a7e6570bc69ab0163caa4188d9abe1be820e264))
+
+
+
+
+
 ## [72.0.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@72.0.2...cozy-mespapiers-lib@72.0.3) (2024-01-08)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
