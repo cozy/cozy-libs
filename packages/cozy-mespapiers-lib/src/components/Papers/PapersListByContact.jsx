@@ -6,7 +6,6 @@ import List from 'cozy-ui/transpiled/react/List'
 import ListSubheader from 'cozy-ui/transpiled/react/ListSubheader'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-import { DEFAULT_MAX_FILES_DISPLAYED } from '../../constants/const'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import PapersList from '../Papers/PapersList'
 import {
@@ -41,8 +40,7 @@ const PapersListByContact = ({
         files,
         konnectors,
         contacts,
-        maxDisplay:
-          currentDefinition?.maxDisplay || DEFAULT_MAX_FILES_DISPLAYED,
+        maxDisplay: currentDefinition?.maxDisplay,
         t
       }),
     [contacts, konnectors, currentDefinition, files, t]
@@ -74,7 +72,7 @@ const PapersListByContact = ({
 PapersListByContact.propTypes = {
   selectedQualificationLabel: PropTypes.string,
   files: PropTypes.arrayOf(PropTypes.object),
-  konnector: PropTypes.object,
+  konnectors: PropTypes.arrayOf(PropTypes.object),
   accounts: PropTypes.array,
   contacts: PropTypes.arrayOf(PropTypes.object)
 }
