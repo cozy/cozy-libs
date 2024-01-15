@@ -5,6 +5,7 @@ import { getAccountName } from 'cozy-client/dist/models/account'
 import { getThemeByItem } from 'cozy-client/dist/models/document/documentTypeDataHelpers'
 import { fetchURL } from 'cozy-client/dist/models/note'
 
+import { DEFAULT_MAX_FILES_DISPLAYED } from '../../constants/const'
 import { CONTACTS_DOCTYPE } from '../../doctypes'
 import { filterWithRemaining } from '../../helpers/filterWithRemaining'
 
@@ -118,7 +119,7 @@ export const buildFilesByContacts = ({
   files,
   contacts,
   konnectors = [],
-  maxDisplay,
+  maxDisplay = DEFAULT_MAX_FILES_DISPLAYED,
   t
 }) => {
   const result = []

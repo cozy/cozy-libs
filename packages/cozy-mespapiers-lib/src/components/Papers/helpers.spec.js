@@ -411,6 +411,30 @@ describe('helpers Papers', () => {
 
       expect(result).toStrictEqual(expected)
     })
+
+    it('should return maxDisplay with default value', () => {
+      const result = buildFilesByContacts({
+        files: mockFilesWithContacts,
+        konnectors: undefined,
+        contacts: [],
+        maxDisplay: undefined,
+        t: jest.fn(key => key)
+      })
+
+      const expected = [
+        {
+          withHeader: false,
+          contact: 'PapersList.defaultName',
+          withMyself: false,
+          papers: {
+            maxDisplay: expect.any(Number),
+            list: [mockFilesWithContacts[0]]
+          }
+        }
+      ]
+
+      expect(result).toStrictEqual(expected)
+    })
   })
 
   describe('buildFilesWithContacts', () => {
