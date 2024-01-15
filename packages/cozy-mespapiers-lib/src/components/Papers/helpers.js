@@ -18,8 +18,8 @@ const isFromKonnector = file => Boolean(file.cozyMetadata?.sourceAccount)
 /**
  * Get all contact ids referenced on files
  *
- * @param {IOCozyFile[]} files - Array of IOCozyFile
- * @returns {string[]} - Array of contact ids
+ * @param {import('cozy-client/types/types').IOCozyFile[]} files - Array of IOCozyFile
+ * @returns {string[]} - Array of io.cozy.contacts ids
  */
 export function getContactsRefIdsByFiles(files) {
   if (!files) return []
@@ -40,8 +40,8 @@ export function getContactsRefIdsByFiles(files) {
  * - If there are more than 2 contacts, then "..." is added after the contact names.
  * - If the names of the contacts are identical (and there are only 2 of them), then they are merged (e.g. Alice and Bob Durand)
  *
- * @property {object[]} contacts - Array of io.cozy.contacts
- * @property {Function} t - i18n function
+ * @param {object[]} contacts - Array of io.cozy.contacts
+ * @param {Function} t - i18n function
  * @returns {string} Names of the contacts
  */
 export const harmonizeContactsNames = (contacts, t) => {
@@ -80,9 +80,9 @@ export const harmonizeContactsNames = (contacts, t) => {
 /**
  * Group the IOCozyFiles with their IOCozyContact
  *
- * @property {IOCozyFile[]} filesArg - Array of IOCozyFile
- * @property {IOCozyContact[]} contactsArg - Array of IOCozyContact
- * @returns {{ contacts: IOCozyContact[], files: IOCozyFile[] }}
+ * @param {import('cozy-client/types/types').IOCozyFile[]} filesArg - Array of IOCozyFile
+ * @param {object[]} contactsArg - Array of io.cozy.contact
+ * @returns {{ contacts: object[], files: import('cozy-client/types/types').IOCozyFile[] }}
  */
 export const groupFilesByContacts = (filesArg, contactsArg) => {
   return Object.entries(
@@ -104,10 +104,13 @@ export const groupFilesByContacts = (filesArg, contactsArg) => {
  * or the same list of contacts,
  * or the same sourceAccountIdentifier of the same Konnector.
  * The rest is grouped together at the end in the same list.
- * @property {object[]} files - Array of IOCozyFile
- * @property {object[]} contacts - Array of IOCozyContact
- * @property {number} maxDisplay - Number of displayed files
- * @property {Function} t - i18n function
+ *
+ * @param {object} option
+ * @param {import('cozy-client/types/types').IOCozyFile[]} option.files - Array of IOCozyFile
+ * @param {object[]} option.contacts - Array of io.cozy.contact
+ * @param {import('cozy-client/types/types').IOCozyKonnector[]} option.konnectors - Array of IOCozyKonnector
+ * @param {number} option.maxDisplay - Number of displayed files
+ * @param {Function} option.t - i18n function
  * @returns {{ withHeader: boolean, contact: string, papers: { maxDisplay: number, list: IOCozyFile[] } }[]}
  */
 export const buildFilesByContacts = ({
@@ -204,7 +207,7 @@ export const buildFilesByContacts = ({
  * Group an IOCozyFiles with the names of the associated contacts
  *
  * @param {object} param
- * @param {object[]} param.files - Array of IOCozyFile
+ * @param {import('cozy-client/types/types').IOCozyFile[]} param.files - Array of IOCozyFile
  * @param {object[]} param.contacts - Array of IOCozyContact
  * @param {Function} param.t - i18n function
  * @returns {{ file: object, contacts: string }}
@@ -256,8 +259,8 @@ export const makeQualificationLabelsWithoutFiles = (
 /**
  * Create the URL to be used to edit a note
  *
- * @param {object} client CozyClient instance
- * @param {object} file io.cozy.file object
+ * @param {import('cozy-client/types/CozyClient').default} client CozyClient instance
+ * @param {import('cozy-client/types/types').IOCozyFile} file io.cozy.file object
  * @param {string} returnUrl URL to use as returnUrl if you don't want the current location
  * @returns {Promise<string>} URL where one can edit the note
  */
