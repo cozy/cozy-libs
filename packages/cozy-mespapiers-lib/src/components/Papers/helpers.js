@@ -94,6 +94,7 @@ export const groupFilesByContacts = (filesArg, contactsArg) => {
 
     return {
       contacts: contactListFiltered,
+      withMyself: contactListFiltered.some(contact => contact.me),
       files
     }
   })
@@ -144,6 +145,7 @@ export const buildFilesByContacts = ({
           name: value[0].cozyMetadata.createdByApp,
           identifier: value[0].cozyMetadata.sourceAccountIdentifier
         }),
+        withMyself: false,
         papers: {
           maxDisplay,
           list: value
@@ -172,17 +174,26 @@ export const buildFilesByContacts = ({
     const unsortedListByContacts = filesByContactsWithContacts.map(value => ({
       withHeader: true,
       contact: harmonizeContactsNames(value.contacts, t),
+      withMyself: value.withMyself,
       papers: {
         maxDisplay,
         list: value.files
       }
     }))
 
-    const listByContacts = unsortedListByContacts.sort((a, b) =>
+    const { itemsFound: filesWithMyself, remainingItems: filesWithoutMyself } =
+      filterWithRemaining(
+        unsortedListByContacts,
+        ({ withMyself }) => withMyself
+      )
+    const sortedFilesWithMyself = [...filesWithMyself].sort((a, b) =>
+      a.contact.localeCompare(b.contact)
+    )
+    const sortedFilesWithoutMyself = [...filesWithoutMyself].sort((a, b) =>
       a.contact.localeCompare(b.contact)
     )
 
-    result.push(...listByContacts)
+    result.push(...sortedFilesWithMyself, ...sortedFilesWithoutMyself)
   }
 
   const unspecifiedFiles = filesByContactsWithoutContacts[0]?.files || []
@@ -191,6 +202,7 @@ export const buildFilesByContacts = ({
     const unspecified = {
       withHeader: result.length > 0,
       contact: t('PapersList.defaultName'),
+      withMyself: false,
       papers: {
         maxDisplay,
         list: unspecifiedFiles

@@ -20,7 +20,11 @@ function restoreLocation() {
 }
 
 const mockContacts00 = [
-  { _id: 'contactId01', name: { givenName: 'Bob', familyName: 'Durand' } },
+  {
+    _id: 'contactId01',
+    name: { givenName: 'Bob', familyName: 'Durand' },
+    me: true
+  },
   { _id: 'contactId02', name: { givenName: 'Alice', familyName: 'Durand' } }
 ]
 const mockContacts01 = [
@@ -190,19 +194,23 @@ describe('helpers Papers', () => {
       const expected = [
         {
           contacts: [mockContacts00[0]],
-          files: [mockFilesWithContacts[0]]
+          files: [mockFilesWithContacts[0]],
+          withMyself: true
         },
         {
           contacts: [mockContacts00[1]],
-          files: [mockFilesWithContacts[1]]
+          files: [mockFilesWithContacts[1]],
+          withMyself: false
         },
         {
           contacts: [mockContacts00[0], mockContacts00[1]],
-          files: [mockFilesWithContacts[2]]
+          files: [mockFilesWithContacts[2]],
+          withMyself: true
         },
         {
           contacts: [],
-          files: [mockUnspecifiedFiles[0], mockUnspecifiedFiles[1]]
+          files: [mockUnspecifiedFiles[0], mockUnspecifiedFiles[1]],
+          withMyself: false
         }
       ]
 
@@ -220,15 +228,8 @@ describe('helpers Papers', () => {
       const expected = [
         {
           withHeader: true,
-          contact: 'Alice Durand',
-          papers: {
-            maxDisplay: 3,
-            list: [mockFilesWithContacts[1]]
-          }
-        },
-        {
-          withHeader: true,
           contact: 'Bob Durand',
+          withMyself: true,
           papers: {
             maxDisplay: 3,
             list: [mockFilesWithContacts[0]]
@@ -237,6 +238,7 @@ describe('helpers Papers', () => {
         {
           withHeader: true,
           contact: 'PapersList.contactMerged',
+          withMyself: true,
           papers: {
             maxDisplay: 3,
             list: [mockFilesWithContacts[2]]
@@ -244,7 +246,17 @@ describe('helpers Papers', () => {
         },
         {
           withHeader: true,
+          contact: 'Alice Durand',
+          withMyself: false,
+          papers: {
+            maxDisplay: 3,
+            list: [mockFilesWithContacts[1]]
+          }
+        },
+        {
+          withHeader: true,
           contact: 'PapersList.defaultName',
+          withMyself: false,
           papers: {
             maxDisplay: 3,
             list: [mockUnspecifiedFiles[0], mockUnspecifiedFiles[1]]
@@ -268,6 +280,7 @@ describe('helpers Papers', () => {
         {
           withHeader: false,
           contact: 'PapersList.defaultName',
+          withMyself: false,
           papers: {
             maxDisplay: 3,
             list: [mockUnspecifiedFiles[0], mockUnspecifiedFiles[1]]
@@ -300,6 +313,7 @@ describe('helpers Papers', () => {
           withHeader: true,
           konnector: { slug: 'KonnectorOne' },
           contact: 'PapersList.accountName',
+          withMyself: false,
           papers: {
             maxDisplay: 3,
             list: [mockFilesWithSourceAccount[0], mockFilesWithSourceAccount[1]]
@@ -309,6 +323,7 @@ describe('helpers Papers', () => {
           withHeader: true,
           konnector: { slug: 'KonnectorTwo' },
           contact: 'PapersList.accountName',
+          withMyself: false,
           papers: {
             maxDisplay: 3,
             list: [mockFilesWithSourceAccount[2]]
@@ -317,6 +332,7 @@ describe('helpers Papers', () => {
         {
           withHeader: true,
           contact: 'PapersList.defaultName',
+          withMyself: false,
           papers: {
             maxDisplay: 3,
             list: [mockUnspecifiedFiles[0], mockUnspecifiedFiles[1]]
@@ -345,6 +361,7 @@ describe('helpers Papers', () => {
           withHeader: true,
           konnector: { slug: 'KonnectorOne' },
           contact: 'PapersList.accountName',
+          withMyself: false,
           papers: {
             maxDisplay: 3,
             list: [mockFilesWithSourceAccount[0], mockFilesWithSourceAccount[1]]
@@ -354,6 +371,7 @@ describe('helpers Papers', () => {
           withHeader: true,
           konnector: { slug: 'KonnectorTwo' },
           contact: 'PapersList.accountName',
+          withMyself: false,
           papers: {
             maxDisplay: 3,
             list: [
@@ -364,15 +382,8 @@ describe('helpers Papers', () => {
         },
         {
           withHeader: true,
-          contact: 'Alice Durand',
-          papers: {
-            maxDisplay: 3,
-            list: [mockFilesWithContacts[1]]
-          }
-        },
-        {
-          withHeader: true,
           contact: 'Bob Durand',
+          withMyself: true,
           papers: {
             maxDisplay: 3,
             list: [mockFilesWithContacts[0]]
@@ -381,9 +392,19 @@ describe('helpers Papers', () => {
         {
           withHeader: true,
           contact: 'PapersList.contactMerged',
+          withMyself: true,
           papers: {
             maxDisplay: 3,
             list: [mockFilesWithContacts[2]]
+          }
+        },
+        {
+          withHeader: true,
+          contact: 'Alice Durand',
+          withMyself: false,
+          papers: {
+            maxDisplay: 3,
+            list: [mockFilesWithContacts[1]]
           }
         }
       ]
