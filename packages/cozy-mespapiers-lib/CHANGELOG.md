@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [72.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@72.1.0...cozy-mespapiers-lib@72.2.0) (2024-01-16)
+
+
+### Features
+
+* Show own contact always at the top of the list of documents ([78cbb5c](https://github.com/cozy/cozy-libs/commit/78cbb5c23df6e857330f68635b24c8edd455686b))
+
+
+
+
+
 # [72.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@72.0.3...cozy-mespapiers-lib@72.1.0) (2024-01-10)
 
 
