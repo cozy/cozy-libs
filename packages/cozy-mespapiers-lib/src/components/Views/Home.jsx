@@ -9,12 +9,12 @@ import {
   makeKonnectorsAndQualificationLabelWithoutFiles
 } from './helpers'
 import {
-  buildContactsQuery,
   buildFilesQueryWithQualificationLabel,
   buildKonnectorsQueryByQualificationLabels
 } from '../../helpers/queries'
 import HomeLayout from '../Home/HomeLayout'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
+import useReferencedContact from '../Hooks/useReferencedContact'
 
 const Home = () => {
   const { papersDefinitions } = usePapersDefinitions()
@@ -31,18 +31,14 @@ const Home = () => {
   )
   const isLoadingFiles = isQueryLoading(queryResult) || queryResult.hasMore
 
+  const { contacts, isLoadingContacts } = useReferencedContact(
+    filesWithQualificationLabel
+  )
+
   const papers = useMemo(
     () => makePapers(papersDefinitionsLabels, filesWithQualificationLabel),
     [papersDefinitionsLabels, filesWithQualificationLabel]
   )
-
-  const contactsQuery = buildContactsQuery(!isLoadingFiles)
-  const { data: contacts, ...contactQueryResult } = useQueryAll(
-    contactsQuery.definition,
-    contactsQuery.options
-  )
-  const isLoadingContacts =
-    isQueryLoading(contactQueryResult) || contactQueryResult.hasMore
 
   const qualificationLabelWithoutFiles = useMemo(
     () => makeQualificationLabelWithoutFiles(papersDefinitionsLabels, papers),
