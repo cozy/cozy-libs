@@ -4,15 +4,22 @@ import { CONTACTS_DOCTYPE } from '../../doctypes'
 import { buildContactsQueryByIds } from '../../helpers/queries'
 
 /**
- * Get all contacts document from file
+ * Get all contacts document referenced in files
+ *
+ * @param {import('cozy-client/types/types').IOCozyFile[]} files
+ * @returns {{ contacts: object[], isLoadingContacts: boolean }}
  */
-const useReferencedContact = file => {
-  const contactsReferenced = getReferencedBy(file, CONTACTS_DOCTYPE)
-  const contactIds = contactsReferenced.map(ref => ref.id)
-  const isContactByIdsQueryEnabled = contactIds.length > 0
+const useReferencedContact = files => {
+  const contactIdsReferenced = new Set()
+  for (const file of files) {
+    for (const ref of getReferencedBy(file, CONTACTS_DOCTYPE)) {
+      contactIdsReferenced.add(ref.id)
+    }
+  }
+  const isContactByIdsQueryEnabled = contactIdsReferenced.size > 0
 
   const contactsQueryByIds = buildContactsQueryByIds(
-    contactIds,
+    Array.from(contactIdsReferenced),
     isContactByIdsQueryEnabled
   )
   const { data: contacts, ...contactsQueryResult } = useQuery(

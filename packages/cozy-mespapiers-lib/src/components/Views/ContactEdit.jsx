@@ -24,9 +24,9 @@ const ContactEdit = () => {
   const classes = useStyles()
 
   const currentEditInformation = useCurrentEditInformations(fileId, 'contact')
-  const { isLoadingContacts, contacts } = useReferencedContact(
+  const { isLoadingContacts, contacts } = useReferencedContact([
     currentEditInformation.file
-  )
+  ])
   const [isBusy, setIsBusy] = useState(false)
 
   const onClose = () => {
