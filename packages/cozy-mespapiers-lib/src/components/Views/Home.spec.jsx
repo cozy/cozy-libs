@@ -23,6 +23,10 @@ jest.mock('../Placeholders/FeaturedPlaceholdersList', () => () => (
 ))
 /* eslint-enable react/display-name */
 
+jest.mock('../Hooks/useReferencedContact', () => ({
+  __esModule: true,
+  default: jest.fn(() => ({ contacts: [], isLoadingContacts: false }))
+}))
 jest.mock('../Hooks/useMultiSelection')
 jest.mock('cozy-client/dist/hooks', () => ({
   ...jest.requireActual('cozy-client/dist/hooks'),
