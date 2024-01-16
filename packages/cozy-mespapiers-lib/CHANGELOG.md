@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [72.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@72.2.0...cozy-mespapiers-lib@72.3.0) (2024-01-16)
+
+
+### Features
+
+* **mespapiers:** Improve useReferencedContact ([8ffd780](https://github.com/cozy/cozy-libs/commit/8ffd78052fd5b2d4a4c00ec5b3718e4964e173f9))
+* **mespapiers:** Recover only contacts referenced in files ([765b335](https://github.com/cozy/cozy-libs/commit/765b3350d28111abbca3ba48abf82d5b17b446c2))
+
+
+
+
+
 # [72.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@72.1.0...cozy-mespapiers-lib@72.2.0) (2024-01-16)
 
 
