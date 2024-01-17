@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [73.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@73.0.0...cozy-mespapiers-lib@73.0.1) (2024-01-17)
+
+
+### Bug Fixes
+
+* **mespapiers:** Manage the case where we have no contacts referenced ([202b6db](https://github.com/cozy/cozy-libs/commit/202b6dbd27877acdea658dc0ffae331645ec2478))
+
+
+
+
+
 # [73.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@72.3.0...cozy-mespapiers-lib@73.0.0) (2024-01-17)
 
 
