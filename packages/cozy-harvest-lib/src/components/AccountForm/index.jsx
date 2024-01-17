@@ -71,11 +71,11 @@ export class AccountForm extends PureComponent {
    * @param  {Object} formState See https://github.com/final-form/final-form#formstate
    * @return {Boolean}
    */
-  isSubmittable({ dirty, error, initialValues, valid }) {
-    const modified = !initialValues || dirty
+  isSubmittable({ error, valid }) {
     // Here error is not a validation error but an instance of a
     // KonnectorJobError, so submitting again is possible
-    return modified && (error || valid)
+    const result = error || valid
+    return result
   }
 
   /**
@@ -115,20 +115,15 @@ export class AccountForm extends PureComponent {
    * Handle key up and check if `ENTER` key has been pressed. If so, submit the
    * form if all parmater are ok.
    * @param  {React.SyntheticEvent} event         Key events
-   * @param  {Boolean} dirty         Indicates if form is dirty, i.e. if values
    * have changed
    * @param  {Object} form          The form object injected by ReactFinalForm.
-   * @param  {Object} initialValues Initial data injected into AccountForm
    * @param  {Boolean} valid        Indicates if the form data is valid
    * @param  {Object} values        Actual form values data
    */
-  handleKeyUp(event, { dirty, form, initialValues, valid, values }) {
+  handleKeyUp(event, { form, valid, values }) {
     if (event.key === 'Enter') {
       const changedFocus = isMobile() && !!this.focusNext()
-      if (
-        !changedFocus &&
-        this.isSubmittable({ dirty, initialValues, valid })
-      ) {
+      if (!changedFocus && this.isSubmittable({ valid })) {
         this.handleSubmit(values, form)
       }
     }
@@ -242,7 +237,6 @@ export class AccountForm extends PureComponent {
     const sanitizedFields = manifest.sanitizeFields(fields)
     fieldHelpers.addForceEncryptedPlaceholder(sanitizedFields, fieldOptions)
 
-    const initialValues = account && account.auth
     const values = manifest.getFieldsValues(konnector, account)
 
     const isReadOnlyIdentifier =
@@ -263,13 +257,11 @@ export class AccountForm extends PureComponent {
         initialValues={values}
         onSubmit={onSubmit}
         validate={this.validate(sanitizedFields, values)}
-        render={({ dirty, form, values, valid }) => (
+        render={({ form, values, valid }) => (
           <div
             onKeyUp={event =>
               this.handleKeyUp(event, {
-                dirty,
                 form,
-                initialValues,
                 valid,
                 values
               })
@@ -327,9 +319,7 @@ export class AccountForm extends PureComponent {
                       disabled:
                         submitting ||
                         !this.isSubmittable({
-                          dirty,
                           error,
-                          initialValues,
                           valid
                         }),
                       label: t('accountForm.clientSide.submit'),
@@ -346,9 +336,7 @@ export class AccountForm extends PureComponent {
                     disabled={
                       submitting ||
                       !this.isSubmittable({
-                        dirty,
                         error,
-                        initialValues,
                         valid
                       })
                     }

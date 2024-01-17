@@ -230,40 +230,6 @@ describe('AccountForm', () => {
       assertButtonEnabled(wrapper)
     })
 
-    it('should be disabled with initialValues', () => {
-      const account = {
-        auth: {
-          username: 'foo',
-          passphrase: 'bar'
-        }
-      }
-      const { wrapper } = setup({
-        account
-      })
-
-      assertButtonDisabled(wrapper)
-    })
-
-    /**
-     * This case corresponds to an account edition of a trigger already having
-     * an error. We are not supposed to submit it without modifications.
-     */
-    it('should be disabled with initialValues AND error', () => {
-      const account = {
-        auth: {
-          username: 'foo',
-          passphrase: 'bar'
-        }
-      }
-      const error = new Error('Existing trigger error')
-      const { wrapper } = setup({
-        account,
-        error
-      })
-
-      assertButtonDisabled(wrapper)
-    })
-
     it('should be enabled when an error exists', () => {
       const account = {}
       const error = new Error('Test error')
