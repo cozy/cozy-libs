@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [22.0.7](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.0.6...cozy-harvest-lib@22.0.7) (2024-01-17)
+
+
+### Bug Fixes
+
+* Do not disable submit buton when password is the same ([f431e7f](https://github.com/cozy/cozy-libs/commit/f431e7fda2e1d16618f687c5b16fbfbef83ab0e7))
+
+
+
+
+
 ## [22.0.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.0.5...cozy-harvest-lib@22.0.6) (2024-01-08)
 
 
