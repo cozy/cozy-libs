@@ -31,6 +31,6 @@ const useReferencedContact = files => {
     isContactByIdsQueryEnabled &&
     (isQueryLoading(contactsQueryResult) || contactsQueryResult.hasMore)
 
-  return { contacts, isLoadingContacts }
+  return { contacts: contacts || [], isLoadingContacts }
 }
 export default useReferencedContact
