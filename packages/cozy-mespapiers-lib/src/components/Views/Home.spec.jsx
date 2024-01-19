@@ -107,7 +107,7 @@ describe('Home components:', () => {
     })
 
     expect(getByTestId('PaperGroup'))
-    expect(getByPlaceholderText('Name of the document, owner or info'))
+    expect(getByPlaceholderText('Name of the doc, owner or info'))
     expect(queryAllByTestId('ThemesFilter')).not.toHaveLength(0)
     expect(getByTestId('FeaturedPlaceholdersList'))
   })
@@ -138,7 +138,7 @@ describe('Home components:', () => {
     })
 
     expect(queryAllByTestId('ThemesFilter')).not.toHaveLength(0)
-    fireEvent.focus(getByPlaceholderText('Name of the document, owner or info'))
+    fireEvent.focus(getByPlaceholderText('Name of the doc, owner or info'))
     expect(queryAllByTestId('ThemesFilter')).toHaveLength(0)
   })
 
@@ -149,7 +149,7 @@ describe('Home components:', () => {
       isDesktop: false
     })
 
-    fireEvent.focus(getByPlaceholderText('Name of the document, owner or info'))
+    fireEvent.focus(getByPlaceholderText('Name of the doc, owner or info'))
     expect(queryAllByTestId('ThemesFilter')).toHaveLength(0)
     fireEvent.click(getByTestId('SwitchButton'))
     expect(queryAllByTestId('ThemesFilter')).not.toHaveLength(0)
@@ -162,7 +162,7 @@ describe('Home components:', () => {
       isDesktop: false
     })
 
-    fireEvent.focus(getByPlaceholderText('Name of the document, owner or info'))
+    fireEvent.focus(getByPlaceholderText('Name of the doc, owner or info'))
     expect(getByTestId('SwitchButton')).toBeInTheDocument()
     fireEvent.click(getByTestId('SwitchButton'))
     expect(queryByTestId('SwitchButton')).toBeInTheDocument()
@@ -229,7 +229,7 @@ describe('Home components:', () => {
       })
 
       expect(getByTestId('PaperGroup'))
-      expect(getByPlaceholderText('Name of the document, owner or info'))
+      expect(getByPlaceholderText('Name of the doc, owner or info'))
     })
 
     it('should display ThemesFilter by default', () => {
