@@ -51,7 +51,7 @@
       "error": "Une erreur s'est produite, veuillez réessayer dans un moment.",
       "success": "Le document a été déplacé vers la corbeille."
     },
-    "search": "Nom du document, titulaire ou info"
+    "search": "Nom du doc, titulaire ou info"
   },
   "FeaturedPlaceholdersList": {
     "subheader": "Suggestions"
