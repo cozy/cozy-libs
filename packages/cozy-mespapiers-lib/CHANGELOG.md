@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [73.1.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@73.1.0...cozy-mespapiers-lib@73.1.1) (2024-01-19)
+
+
+### Bug Fixes
+
+* **mespapiers:** The existing value should take priority over the ([b61cdef](https://github.com/cozy/cozy-libs/commit/b61cdefa16f90ab4d79daa40ea88aa2fff369fdc))
+* **mespapiers:** The value passed is not a default value ([e236238](https://github.com/cozy/cozy-libs/commit/e236238cc42a38aead380090ed887b40cdd1ef2a))
+
+
+
+
+
 # [73.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@73.0.2...cozy-mespapiers-lib@73.1.0) (2024-01-19)
 
 
