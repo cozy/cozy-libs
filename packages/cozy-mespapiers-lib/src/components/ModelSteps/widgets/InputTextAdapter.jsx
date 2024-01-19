@@ -60,7 +60,7 @@ const InputTextAdapter = ({
   } = attrs
   const { t } = useI18n()
   const [currentValue, setCurrentValue] = useState(
-    defaultValue?.toString() || formDataValue || ''
+    formDataValue || defaultValue?.toString() || ''
   )
   const [isTooShort, setIsTooShort] = useState(false)
   const [hasOnlySpaces, setHasOnlySpaces] = useState(false)
