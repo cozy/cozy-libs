@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [73.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@73.0.2...cozy-mespapiers-lib@73.1.0) (2024-01-19)
+
+
+### Features
+
+* **mespapiers:** Rename search field placeholder ([4a7f242](https://github.com/cozy/cozy-libs/commit/4a7f242d1cb547c9ca5ebd70f962c01473b8ad20))
+
+
+
+
+
 ## [73.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@73.0.1...cozy-mespapiers-lib@73.0.2) (2024-01-17)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
