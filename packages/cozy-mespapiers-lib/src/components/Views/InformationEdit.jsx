@@ -113,7 +113,7 @@ const InformationEdit = () => {
                   {Component && (
                     <Component
                       attrs={attrs}
-                      defaultValue={defaultValue}
+                      formDataValue={defaultValue}
                       setValue={setValue}
                       setValidInput={setValidInput}
                       setIsFocus={setIsFocus}
