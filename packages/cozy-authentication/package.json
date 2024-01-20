@@ -24,7 +24,7 @@
     "@babel/polyfill": "7.12.1",
     "babel-preset-cozy-app": "^2.1.0",
     "cozy-client": "13.21.0",
-    "cozy-ui": "40.9.1",
+    "cozy-ui": "101.2.0",
     "cssnano-preset-advanced": "4.0.8",
     "date-fns": "1.30.1",
     "enzyme": "3.11.0",
