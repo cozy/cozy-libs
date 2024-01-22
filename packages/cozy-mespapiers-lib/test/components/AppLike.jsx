@@ -1,4 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
+import FileSharingProvider from 'components/Contexts/FileSharingProvider'
 import { createHashHistory } from 'history'
 import React from 'react'
 import { HashRouter } from 'react-router-dom'
@@ -35,35 +36,37 @@ const AppLike = ({ children, client, history }) => {
   const hashHistory = history || createHashHistory()
   return (
     <WebviewIntentProvider>
-      <CozyProvider client={client || mockClient}>
-        <I18n dictRequire={() => enLocale} lang="en">
-          <PapersCreatedProvider>
-            <ErrorProvider>
-              <PaywallProvider>
-                <MultiSelectionProvider>
-                  <ScannerI18nProvider lang="en">
-                    <SearchProvider
-                      doctypes={[FILES_DOCTYPE, CONTACTS_DOCTYPE]}
-                    >
-                      <CozyTheme>
-                        <BreakpointsProvider>
-                          <HashRouter history={hashHistory}>
-                            <PapersDefinitionsProvider>
-                              <StepperDialogProvider>
-                                <ModalProvider>{children}</ModalProvider>
-                              </StepperDialogProvider>
-                            </PapersDefinitionsProvider>
-                          </HashRouter>
-                        </BreakpointsProvider>
-                      </CozyTheme>
-                    </SearchProvider>
-                  </ScannerI18nProvider>
-                </MultiSelectionProvider>
-              </PaywallProvider>
-            </ErrorProvider>
-          </PapersCreatedProvider>
-        </I18n>
-      </CozyProvider>
+      <FileSharingProvider>
+        <CozyProvider client={client || mockClient}>
+          <I18n dictRequire={() => enLocale} lang="en">
+            <PapersCreatedProvider>
+              <ErrorProvider>
+                <PaywallProvider>
+                  <MultiSelectionProvider>
+                    <ScannerI18nProvider lang="en">
+                      <SearchProvider
+                        doctypes={[FILES_DOCTYPE, CONTACTS_DOCTYPE]}
+                      >
+                        <CozyTheme>
+                          <BreakpointsProvider>
+                            <HashRouter history={hashHistory}>
+                              <PapersDefinitionsProvider>
+                                <StepperDialogProvider>
+                                  <ModalProvider>{children}</ModalProvider>
+                                </StepperDialogProvider>
+                              </PapersDefinitionsProvider>
+                            </HashRouter>
+                          </BreakpointsProvider>
+                        </CozyTheme>
+                      </SearchProvider>
+                    </ScannerI18nProvider>
+                  </MultiSelectionProvider>
+                </PaywallProvider>
+              </ErrorProvider>
+            </PapersCreatedProvider>
+          </I18n>
+        </CozyProvider>
+      </FileSharingProvider>
     </WebviewIntentProvider>
   )
 }
