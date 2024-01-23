@@ -18,7 +18,7 @@ export const viewInDrive = () => {
         const { t } = useI18n()
         const client = useClient()
 
-        const dirId = props.doc.dir_id
+        const dirId = props.docs[0].dir_id
 
         const webLink = generateWebLink({
           slug: 'drive',

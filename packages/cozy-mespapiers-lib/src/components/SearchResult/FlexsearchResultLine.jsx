@@ -9,7 +9,7 @@ import useActions from './useActions'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const FlexsearchResultLine = ({ doc, expandedAttributesProps }) => {
-  const actions = useActions(doc)
+  const actions = useActions([doc])
   const navigate = useNavigate()
   const { pathname, search } = useLocation()
   const {

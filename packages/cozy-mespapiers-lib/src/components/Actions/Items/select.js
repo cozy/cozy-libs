@@ -12,9 +12,9 @@ import withLocales from '../../../locales/withLocales'
 export const select = ({ hideActionsMenu, addMultiSelectionFile }) => {
   return {
     name: 'select',
-    action: doc => {
+    action: docs => {
       hideActionsMenu && hideActionsMenu()
-      doc && addMultiSelectionFile && addMultiSelectionFile(doc)
+      docs.length > 0 && addMultiSelectionFile && addMultiSelectionFile(docs[0])
     },
     Component: withLocales(
       // eslint-disable-next-line react/display-name

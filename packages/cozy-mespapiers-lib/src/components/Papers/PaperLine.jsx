@@ -23,7 +23,7 @@ const PaperLine = ({
   const { isMultiSelectionActive } = useMultiSelection()
   const [showActionMenu, setShowActionMenu] = useState(false)
 
-  const actions = useActions(paper)
+  const actions = useActions([paper])
 
   const { filename, extension } = splitFilename({
     name: paper.name,
@@ -52,7 +52,7 @@ const PaperLine = ({
         <ActionsMenu
           open
           ref={actionBtnRef}
-          doc={paper}
+          docs={[paper]}
           actions={actions}
           anchorOrigin={{
             vertical: 'bottom',

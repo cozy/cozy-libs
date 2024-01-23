@@ -18,7 +18,7 @@ export const open = () => {
         const { t } = useI18n()
         const client = useClient()
 
-        const doc = props.doc
+        const doc = props.docs[0]
         const fileId = doc?._id
         const qualificationLabel = doc?.metadata?.qualification?.label
         const webLink = generateWebLink({

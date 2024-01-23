@@ -72,38 +72,39 @@ describe('MultiselectContent', () => {
   describe('Forward button', () => {
     it('should display forward Button on Mobile (if supports "navigator API")', () => {
       const mockNavigatorShareFunc = jest.fn()
-      const { getByTestId } = setup({
+      const { getByRole } = setup({
         isMobile: true,
         mockNavigatorShareFunc
       })
 
-      expect(getByTestId('forwardButton'))
+      expect(getByRole('button', { name: 'Send…' }))
     })
 
     it('should not call "forwardFile" when click forward Button if there are no files', () => {
       const mockForwardFiles = jest.fn()
       const mockNavigatorShareFunc = jest.fn()
-      const { getByTestId } = setup({
+      const { getByRole } = setup({
         allMultiSelectionFiles: [],
         mockForwardFiles,
         isMobile: true,
         mockNavigatorShareFunc
       })
 
-      const forwardBtn = getByTestId('forwardButton')
+      const forwardBtn = getByRole('button', { name: 'Send…' })
       fireEvent.click(forwardBtn)
 
       expect(mockForwardFiles).toBeCalledTimes(0)
     })
+
     it('should call "forwardFile" when click forward Button if there are one file', () => {
       const mockNavigatorShareFunc = jest.fn()
-      const { getByTestId } = setup({
-        allMultiSelectionFiles: [{ _id: '00', name: 'File00' }],
+      const { getByTestId, getByRole } = setup({
+        allMultiSelectionFiles: [{ _id: '00', type: 'file', name: 'File00' }],
         isMobile: true,
         mockNavigatorShareFunc
       })
 
-      const forwardBtn = getByTestId('forwardButton')
+      const forwardBtn = getByRole('button', { name: 'Send…' })
       fireEvent.click(forwardBtn)
 
       expect(getByTestId('ForwardModal')).toBeInTheDocument()
@@ -112,17 +113,17 @@ describe('MultiselectContent', () => {
     it('should call "makeZipFolder" when click forward Button if there is more than one files', async () => {
       const mockMakeZipFolder = jest.fn()
       const mockNavigatorShareFunc = jest.fn()
-      const { getByTestId } = setup({
+      const { getByRole } = setup({
         allMultiSelectionFiles: [
-          { _id: '00', name: 'File00' },
-          { _id: '01', name: 'File01' }
+          { _id: '00', type: 'file', name: 'File00' },
+          { _id: '01', type: 'file', name: 'File01' }
         ],
         mockMakeZipFolder,
         isMobile: true,
         mockNavigatorShareFunc
       })
 
-      const forwardBtn = getByTestId('forwardButton')
+      const forwardBtn = getByRole('button', { name: 'Send…' })
       fireEvent.click(forwardBtn)
 
       await waitFor(() => {
