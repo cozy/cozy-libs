@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [22.0.8](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.0.7...cozy-harvest-lib@22.0.8) (2024-01-23)
+
+
+### Bug Fixes
+
+* No more disabled submit button on 2nd 2FA ([7bdd26c](https://github.com/cozy/cozy-libs/commit/7bdd26c381f8883ea007fafb5515bb8625da67a1))
+
+
+
+
+
 ## [22.0.7](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.0.6...cozy-harvest-lib@22.0.7) (2024-01-17)
 
 
