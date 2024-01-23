@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [74.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@73.2.0...cozy-mespapiers-lib@74.0.0) (2024-01-23)
+
+
+### Features
+
+* Deal with cozy-ui BC and add ActionsBar in multiselection ([6cd70c0](https://github.com/cozy/cozy-libs/commit/6cd70c054b9fe66f0b3e39b3ff2ba33842c3d1ae))
+* Upgrade cozy-ui 101.1.1 to 102.0.0 ([c3995c9](https://github.com/cozy/cozy-libs/commit/c3995c9aaad0159c8236cb743a13586921667b5e))
+
+
+### BREAKING CHANGES
+
+* you must have `cozy-ui >= 102.0.0`
+
+
+
+
+
 # [73.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@73.1.2...cozy-mespapiers-lib@73.2.0) (2024-01-23)
 
 
