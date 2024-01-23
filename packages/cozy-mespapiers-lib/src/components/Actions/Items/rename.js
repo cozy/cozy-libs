@@ -11,7 +11,7 @@ import withLocales from '../../../locales/withLocales'
 export const rename = () => {
   return {
     name: 'rename',
-    action: (doc, { setIsRenaming }) => {
+    action: (docs, { setIsRenaming }) => {
       setIsRenaming(true)
     },
     Component: withLocales(

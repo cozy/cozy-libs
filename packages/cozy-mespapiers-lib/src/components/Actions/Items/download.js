@@ -4,26 +4,29 @@ import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuIte
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import withLocales from '../../../locales/withLocales'
 import { downloadFiles } from '../utils'
 
-export const download = () => {
+export const download = ({ t }) => {
+  const label = t('action.download')
+  const icon = 'download'
+
   return {
     name: 'download',
-    action: (doc, { client }) => downloadFiles(client, [doc]),
+    label,
+    icon,
+    disabled: docs => docs.length === 0,
+    action: (docs, { client }) => downloadFiles(client, docs),
     Component: withLocales(
       // eslint-disable-next-line react/display-name
       forwardRef((props, ref) => {
-        const { t } = useI18n()
-
         return (
           <ActionsMenuItem {...props} ref={ref}>
             <ListItemIcon>
-              <Icon icon="download" />
+              <Icon icon={icon} />
             </ListItemIcon>
-            <ListItemText primary={t('action.download')} />
+            <ListItemText primary={label} />
           </ActionsMenuItem>
         )
       })

@@ -15,6 +15,7 @@
     "createPaperByQualificationLabel": "Add %{qualificationLabel}",
     "download": "Download",
     "forward": "Send",
+    "forwardTo": "Send…",
     "open": "Open…",
     "rename": "Rename",
     "select": "Select",

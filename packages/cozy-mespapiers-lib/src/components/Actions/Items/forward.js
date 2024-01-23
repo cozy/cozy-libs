@@ -25,7 +25,7 @@ export const forward = () => {
             ref={ref}
             onClick={() => {
               props.onClick()
-              navigate(`${pathname}/forward/${props.doc._id}`)
+              navigate(`${pathname}/forward/${props.docs[0]._id}`)
             }}
           >
             <ListItemIcon>

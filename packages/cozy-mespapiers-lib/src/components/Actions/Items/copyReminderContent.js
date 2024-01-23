@@ -18,10 +18,13 @@ const log = minilog('copyReminderContent')
 export const copyReminderContent = () => {
   return {
     name: 'copyReminderContent',
-    action: async (doc, { client, noteContent }) => {
+    action: async (docs, { client, noteContent }) => {
       const data = isMobile()
         ? noteContent
-        : await client.stackClient.fetchJSON('GET', `/notes/${doc._id}/text`)
+        : await client.stackClient.fetchJSON(
+            'GET',
+            `/notes/${docs[0]._id}/text`
+          )
 
       try {
         const hasCopied = copy(data)
@@ -41,9 +44,9 @@ export const copyReminderContent = () => {
     },
     Component: withLocales(
       // eslint-disable-next-line react/display-name
-      forwardRef(({ doc, onClick, ...props }, ref) => {
+      forwardRef(({ docs, onClick, ...props }, ref) => {
         const { t } = useI18n()
-        const { data } = useFetchJSON('GET', `/notes/${doc._id}/text`)
+        const { data } = useFetchJSON('GET', `/notes/${docs[0]._id}/text`)
 
         return (
           <ActionsMenuItem

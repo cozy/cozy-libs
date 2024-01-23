@@ -24,7 +24,7 @@ export const editContact = ({ setShowActionMenu }) => {
             {...props}
             ref={ref}
             onClick={() => {
-              navigate(`${pathname}/editcontact/${props.doc._id}`)
+              navigate(`${pathname}/editcontact/${props.docs[0]._id}`)
               setShowActionMenu && setShowActionMenu(false)
             }}
           >

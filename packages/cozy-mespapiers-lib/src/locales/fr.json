@@ -15,6 +15,7 @@
     "createPaperByQualificationLabel": "Ajouter %{qualificationLabel}",
     "download": "Télécharger",
     "forward": "Envoyer",
+    "forwardTo": "Envoyer…",
     "open": "Ouvrir…",
     "rename": "Renommer",
     "select": "Sélectionner",
@@ -80,10 +81,10 @@
   },
   "DeleteConfirm": {
     "cancel": "Annuler",
-    "choice": "Conserver l'élément sur Drive ?",
+    "choice": "Conserver l'élément sur Drive ? |||| Conserver les éléments sur Drive ?",
     "delete": "Supprimer",
-    "title": "Êtes-vous sûr de vouloir supprimer ce document ?",
-    "text": " Il sera supprimé de l’application Mes Papiers et Drive."
+    "title": "Êtes-vous sûr de vouloir supprimer ce document ? |||| Êtes-vous sûr de vouloir supprimer ces documents ?",
+    "text": "Il sera supprimé de l’application Mes Papiers et Drive. |||| Ils seront supprimés de l’application Mes Papiers et Drive."
   },
   "ForwardModal": {
     "action": {

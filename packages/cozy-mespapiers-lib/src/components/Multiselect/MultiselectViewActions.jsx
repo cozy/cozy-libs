@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
-import { useClient, models } from 'cozy-client'
+import { useClient } from 'cozy-client'
 import useRealtime from 'cozy-realtime/dist/useRealtime'
+import ActionsBar from 'cozy-ui/transpiled/react/ActionsBar'
 import Backdrop from 'cozy-ui/transpiled/react/Backdrop'
-import Button from 'cozy-ui/transpiled/react/Buttons'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import { LinearProgress } from 'cozy-ui/transpiled/react/Progress'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
@@ -13,12 +12,8 @@ import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import ForwardModal from './ForwardModal'
 import { FILES_DOCTYPE } from '../../doctypes'
-import { fetchCurrentUser } from '../../helpers/fetchCurrentUser'
-import getOrCreateAppFolderWithReference from '../../helpers/getFolderWithReference'
-import { makeZipFolder } from '../Actions/utils'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
-
-const { getDisplayName } = models.contact
+import useActions from '../SearchResult/useActions'
 
 const useStyles = makeStyles(theme => ({
   backdropRoot: {
@@ -39,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const MultiselectViewActions = ({ onClose }) => {
-  const { t, f } = useI18n()
+  const { t } = useI18n()
   const client = useClient()
   const classes = useStyles()
   const { allMultiSelectionFiles } = useMultiSelection()
@@ -64,36 +59,14 @@ const MultiselectViewActions = ({ onClose }) => {
     }
   })
 
-  const forward = async () => {
-    if (allMultiSelectionFiles.length === 1) {
-      setFileToForward(allMultiSelectionFiles[0])
-    } else {
-      setIsBackdropOpen(true)
-
-      const currentUser = await fetchCurrentUser(client)
-      const defaultZipFolderName = t('Multiselect.folderZipName', {
-        contactName: getDisplayName(currentUser),
-        date: f(Date.now(), 'YYYY.MM.DD')
-      })
-
-      const { _id: parentFolderId } = await getOrCreateAppFolderWithReference(
-        client,
-        t
-      )
-
-      const zipName = await makeZipFolder({
-        client,
-        files: allMultiSelectionFiles,
-        zipFolderName: defaultZipFolderName,
-        dirId: parentFolderId
-      })
-      setZipFolder({ name: zipName, dirId: parentFolderId })
-    }
-  }
-
   const handleCloseForwardModal = () => {
     setFileToForward(null)
   }
+
+  const actions = useActions(allMultiSelectionFiles, {
+    isActionBar: true,
+    actionsOptions: { setFileToForward, setIsBackdropOpen, setZipFolder }
+  })
 
   return (
     <>
@@ -112,14 +85,7 @@ const MultiselectViewActions = ({ onClose }) => {
         </div>
       </Backdrop>
 
-      <Button
-        variant="secondary"
-        label={t('action.forward')}
-        startIcon={<Icon icon="reply" />}
-        onClick={forward}
-        disabled={allMultiSelectionFiles.length === 0}
-        data-testid="forwardButton"
-      />
+      <ActionsBar actions={actions} docs={allMultiSelectionFiles} />
 
       {!!fileToForward && (
         <ForwardModal

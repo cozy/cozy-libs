@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React, { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -34,29 +35,30 @@ const DeleteConfirm = ({ files, isLast, onClose, children }) => {
     setClearQualification(prev => !prev)
   }
 
-  const createdByDriveOrDesktop = ['drive', 'cozy-desktop'].includes(
-    getCreatedByApp(files[0])
+  const createdByDriveOrDesktop = files.every(file =>
+    ['drive', 'cozy-desktop'].includes(getCreatedByApp(file))
   )
 
   return (
     <ConfirmDialog
       open
       onClose={onClose}
-      title={t('DeleteConfirm.title')}
+      title={t('DeleteConfirm.title', files.length)}
       content={
         <Stack>
           <Typography
             dangerouslySetInnerHTML={{
               __html: t('DeleteConfirm.text', {
-                name: files[0].name
+                name: files[0].name,
+                smart_count: files.length
               })
             }}
           />
           {createdByDriveOrDesktop && (
             <Checkbox
-              value={clearQualification}
+              checked={clearQualification}
               onChange={handleOnChange}
-              label={t('DeleteConfirm.choice')}
+              label={t('DeleteConfirm.choice', files.length)}
             />
           )}
           {children}
@@ -79,6 +81,13 @@ const DeleteConfirm = ({ files, isLast, onClose, children }) => {
       }
     />
   )
+}
+
+DeleteConfirm.propTypes = {
+  files: PropTypes.array,
+  isLast: PropTypes.bool,
+  onClose: PropTypes.func,
+  children: PropTypes.node
 }
 
 export default DeleteConfirm
