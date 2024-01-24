@@ -5,6 +5,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
+import ShareMenu from '../ShareMenu'
 import { forwardDocsByLink } from '../utils'
 
 export const forwardTo = ({
@@ -12,7 +13,11 @@ export const forwardTo = ({
   f,
   setFileToForward,
   setIsBackdropOpen,
-  setZipFolder
+  setZipFolder,
+  isFileSharingAvailable,
+  shareFiles,
+  pushComponent,
+  popComponent
 }) => {
   const label = t('action.forwardTo')
   const icon = 'reply'
@@ -23,6 +28,19 @@ export const forwardTo = ({
     icon,
     disabled: docs => docs.length === 0,
     action: async (docs, { client }) => {
+      if (isFileSharingAvailable) {
+        return pushComponent(
+          <ShareMenu
+            docs={docs}
+            setFileToForward={setFileToForward}
+            setIsBackdropOpen={setIsBackdropOpen}
+            setZipFolder={setZipFolder}
+            shareFiles={shareFiles}
+            onClose={popComponent}
+          />
+        )
+      }
+
       await forwardDocsByLink(client, docs, t, f, {
         setFileToForward,
         setIsBackdropOpen,

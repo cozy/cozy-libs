@@ -12,6 +12,7 @@ import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import ForwardModal from './ForwardModal'
 import { FILES_DOCTYPE } from '../../doctypes'
+import { useFileSharing } from '../Contexts/FileSharingProvider'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import useActions from '../SearchResult/useActions'
 
@@ -42,6 +43,8 @@ const MultiselectViewActions = ({ onClose }) => {
   const [isBackdropOpen, setIsBackdropOpen] = useState(false)
   const [fileToForward, setFileToForward] = useState(null)
 
+  const { isFileSharingAvailable, shareFiles } = useFileSharing()
+
   const onFileCreate = async file => {
     if (
       file &&
@@ -65,7 +68,13 @@ const MultiselectViewActions = ({ onClose }) => {
 
   const actions = useActions(allMultiSelectionFiles, {
     isActionBar: true,
-    actionsOptions: { setFileToForward, setIsBackdropOpen, setZipFolder }
+    actionsOptions: {
+      setFileToForward,
+      setIsBackdropOpen,
+      setZipFolder,
+      isFileSharingAvailable,
+      shareFiles
+    }
   })
 
   return (
