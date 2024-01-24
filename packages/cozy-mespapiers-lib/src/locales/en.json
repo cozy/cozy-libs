@@ -54,6 +54,10 @@
       "error": "An error has occurred, please try again in a moment.",
       "success": "The selection has been moved to the Trash."
     },
+    "forwardFile": {
+      "error": "An error has occurred.",
+      "success": "Document sent successfully |||| Documents sent successfully"
+    },
     "search": "Name of the doc, owner or info"
   },
   "FeaturedPlaceholdersList": {

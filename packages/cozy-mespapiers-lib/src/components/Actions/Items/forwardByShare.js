@@ -5,7 +5,12 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
-export const forwardByShare = ({ t, shareFiles }) => {
+export const forwardByShare = ({
+  t,
+  shareFiles,
+  onForwardSuccess,
+  onForwardError
+}) => {
   const label = t('action.forwardByShare')
   const icon = 'attachment'
 
@@ -16,7 +21,14 @@ export const forwardByShare = ({ t, shareFiles }) => {
     disabled: docs => docs.length === 0,
     action: async docs => {
       const docsToShareIds = docs.map(doc => doc._id)
-      await shareFiles(docsToShareIds)
+      try {
+        await shareFiles(docsToShareIds)
+        onForwardSuccess()
+      } catch (error) {
+        if (error.message === 'User did not share') return
+
+        onForwardError()
+      }
     },
     Component:
       // eslint-disable-next-line react/display-name

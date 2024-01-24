@@ -54,6 +54,10 @@
       "error": "Une erreur s'est produite, veuillez réessayer dans un moment.",
       "success": "Le document a été déplacé vers la corbeille."
     },
+    "forwardFile": {
+      "error": "Une erreur s'est produite.",
+      "success": "Document envoyé avec succès |||| Documents envoyés avec succès"
+    },
     "search": "Nom du doc, titulaire ou info"
   },
   "FeaturedPlaceholdersList": {
