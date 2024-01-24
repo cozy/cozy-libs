@@ -9,7 +9,7 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-import { ModalStack } from './Contexts/ModalProvider'
+import { ComponentStack } from './Contexts/ComponentProvider'
 import { usePaywall } from './Contexts/PaywallProvider'
 import { usePapersDefinitions } from './Hooks/usePapersDefinitions'
 import PapersPaywall from './PapersPaywall/PapersPaywall'
@@ -53,7 +53,7 @@ export const MesPapiersLibLayout = () => {
       <RealTimeQueries doctype={TRIGGERS_DOCTYPE} />
       <RealTimeQueries doctype={SETTINGS_DOCTYPE} />
       <Alerter t={t} />
-      <ModalStack />
+      <ComponentStack />
       {showPaywall && <PapersPaywall onClose={onClosePaywall} />}
     </>
   )

@@ -8,7 +8,7 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import withLocales from '../../../locales/withLocales'
 import DeleteConfirm from '../DeleteConfirm'
 
-export const trash = ({ t, pushModal, popModal }) => {
+export const trash = ({ t, pushComponent, popComponent }) => {
   const label = t('action.trash')
   const icon = 'trash'
 
@@ -18,8 +18,8 @@ export const trash = ({ t, pushModal, popModal }) => {
     icon,
     disabled: docs => docs.length === 0,
     action: (docs, { isLast }) =>
-      pushModal(
-        <DeleteConfirm files={docs} isLast={isLast} onClose={popModal} />
+      pushComponent(
+        <DeleteConfirm files={docs} isLast={isLast} onClose={popComponent} />
       ),
     Component: withLocales(
       // eslint-disable-next-line react/display-name

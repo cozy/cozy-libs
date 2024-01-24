@@ -5,9 +5,9 @@ import { useQuery } from 'cozy-client'
 import AlertProvider from 'cozy-ui/transpiled/react/providers/Alert'
 import { I18n, initTranslation } from 'cozy-ui/transpiled/react/providers/I18n'
 
+import { ComponentProvider } from './Contexts/ComponentProvider'
 import { ErrorProvider, useError } from './Contexts/ErrorProvider'
 import { FileSharingProvider } from './Contexts/FileSharingProvider'
-import { ModalProvider } from './Contexts/ModalProvider'
 import { MultiSelectionProvider } from './Contexts/MultiSelectionProvider'
 import { OnboardingProvider } from './Contexts/OnboardingProvider'
 import PapersCreatedProvider from './Contexts/PapersCreatedProvider'
@@ -45,7 +45,7 @@ const MesPapiersLibProviders = ({ lang, components }) => {
                 <FileSharingProvider>
                   <SearchProvider doctypes={[FILES_DOCTYPE, CONTACTS_DOCTYPE]}>
                     <PapersDefinitionsProvider>
-                      <ModalProvider>
+                      <ComponentProvider>
                         <OnboardingProvider OnboardingComponent={Onboarding}>
                           <MesPapiersLibLayout />
                         </OnboardingProvider>
@@ -63,7 +63,7 @@ const MesPapiersLibProviders = ({ lang, components }) => {
                             )}
                           </FabWrapper>
                         )}
-                      </ModalProvider>
+                      </ComponentProvider>
                     </PapersDefinitionsProvider>
                   </SearchProvider>
                 </FileSharingProvider>

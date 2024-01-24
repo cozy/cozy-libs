@@ -21,13 +21,13 @@ import {
   forwardTo,
   download
 } from '../Actions/Items'
-import { useModal } from '../Hooks/useModal'
+import { useComponent } from '../Hooks/useComponent'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const useActions = (docs, { isActionBar, actionsOptions } = {}) => {
   const webviewIntent = useWebviewIntent()
   const { t, f } = useI18n()
-  const { pushModal, popModal } = useModal()
+  const { pushComponent, popComponent } = useComponent()
   const { addMultiSelectionFile } = useMultiSelection()
   const [isPrintAvailable, setIsPrintAvailable] = useState(false)
 
@@ -63,8 +63,8 @@ const useActions = (docs, { isActionBar, actionsOptions } = {}) => {
           t,
           f,
           addMultiSelectionFile,
-          pushModal,
-          popModal
+          pushComponent,
+          popComponent
         }
       ),
     [
@@ -77,8 +77,8 @@ const useActions = (docs, { isActionBar, actionsOptions } = {}) => {
       t,
       f,
       addMultiSelectionFile,
-      pushModal,
-      popModal
+      pushComponent,
+      popComponent
     ]
   )
 

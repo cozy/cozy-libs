@@ -9,8 +9,8 @@ import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoi
 import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import { I18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
+import { ComponentProvider } from '../../src/components/Contexts/ComponentProvider'
 import { ErrorProvider } from '../../src/components/Contexts/ErrorProvider'
-import { ModalProvider } from '../../src/components/Contexts/ModalProvider'
 import { MultiSelectionProvider } from '../../src/components/Contexts/MultiSelectionProvider'
 import PapersCreatedProvider from '../../src/components/Contexts/PapersCreatedProvider'
 import { PapersDefinitionsProvider } from '../../src/components/Contexts/PapersDefinitionsProvider'
@@ -50,7 +50,9 @@ const AppLike = ({ children, client, history }) => {
                           <HashRouter history={hashHistory}>
                             <PapersDefinitionsProvider>
                               <StepperDialogProvider>
-                                <ModalProvider>{children}</ModalProvider>
+                                <ComponentProvider>
+                                  {children}
+                                </ComponentProvider>
                               </StepperDialogProvider>
                             </PapersDefinitionsProvider>
                           </HashRouter>

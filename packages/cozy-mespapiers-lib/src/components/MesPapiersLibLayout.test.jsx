@@ -59,7 +59,7 @@ describe('MesPapiersLibLayout', () => {
     expect(getByRole('progressbar')).toBeTruthy()
   })
 
-  it('should contain RealTimeQueries(2), Alerter & ModalStack components', () => {
+  it('should contain RealTimeQueries(2), Alerter & ComponentStack components', () => {
     const { queryByTestId, queryAllByTestId } = setup()
 
     expect(queryAllByTestId('RealTimeQueries')).toHaveLength(4)
