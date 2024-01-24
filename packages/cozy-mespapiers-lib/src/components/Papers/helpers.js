@@ -14,7 +14,9 @@ export const RETURN_URL_KEY = 'returnUrl'
 const { getDisplayName } = models.contact
 
 const hasContactsInFile = file => file.contacts.length > 0
-const isFromKonnector = file => Boolean(file.cozyMetadata?.sourceAccount)
+const isFromKonnector = file => {
+  return Boolean(file.cozyMetadata?.sourceAccountIdentifier)
+}
 
 /**
  * Get all contact ids referenced on files
