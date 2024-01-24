@@ -1,12 +1,14 @@
 // TODO Move to cozy-client (files model)
 
 import { isReferencedBy } from 'cozy-client'
+import { getDisplayName } from 'cozy-client/dist/models/contact'
 import { getSharingLink } from 'cozy-client/dist/models/sharing'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 
 import { FILES_DOCTYPE, JOBS_DOCTYPE } from '../../doctypes'
+import { fetchCurrentUser } from '../../helpers/fetchCurrentUser'
+import getOrCreateAppFolderWithReference from '../../helpers/getFolderWithReference'
 import { handleConflictFilename } from '../../utils/handleConflictFilename'
-
 export const isAnyFileReferencedBy = (files, doctype) => {
   for (let i = 0, l = files.length; i < l; ++i) {
     if (isReferencedBy(files[i], doctype)) return true
@@ -167,5 +169,49 @@ export const removeQualification = async (client, files) => {
     Alerter.success('common.removeQualification.success')
   } catch (err) {
     Alerter.error('common.removeQualification.error')
+  }
+}
+
+/**
+ * forwardDocsByLink - Forward one or more docs (direct link to doc or zip folder)
+ * @param {CozyClient} client
+ * @param {array} docs One or more docs to forward
+ * @param {func} t i18n function
+ * @param {func} f date function
+ * @param {object} options
+ * @param {string} options.setFileToForward Set doc if one file is selected
+ * @param {string} options.setIsBackdropOpen
+ * @param {string} options.setZipFolder Set zip if multiple files are selected
+ */
+export const forwardDocsByLink = async (
+  client,
+  docs,
+  t,
+  f,
+  { setFileToForward, setIsBackdropOpen, setZipFolder }
+) => {
+  if (docs.length === 1) {
+    setFileToForward(docs[0])
+  } else {
+    setIsBackdropOpen(true)
+
+    const currentUser = await fetchCurrentUser(client)
+    const defaultZipFolderName = t('Multiselect.folderZipName', {
+      contactName: getDisplayName(currentUser),
+      date: f(Date.now(), 'YYYY.MM.DD')
+    })
+
+    const { _id: parentFolderId } = await getOrCreateAppFolderWithReference(
+      client,
+      t
+    )
+
+    const zipName = await makeZipFolder({
+      client,
+      files: docs,
+      zipFolderName: defaultZipFolderName,
+      dirId: parentFolderId
+    })
+    setZipFolder({ name: zipName, dirId: parentFolderId })
   }
 }

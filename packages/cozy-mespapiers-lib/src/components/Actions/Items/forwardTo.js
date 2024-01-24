@@ -1,14 +1,11 @@
 import React, { forwardRef } from 'react'
 
-import { getDisplayName } from 'cozy-client/dist/models/contact'
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
-import { fetchCurrentUser } from '../../../helpers/fetchCurrentUser'
-import getOrCreateAppFolderWithReference from '../../../helpers/getFolderWithReference'
-import { makeZipFolder } from '../utils'
+import { forwardDocsByLink } from '../utils'
 
 export const forwardTo = ({
   t,
@@ -26,30 +23,11 @@ export const forwardTo = ({
     icon,
     disabled: docs => docs.length === 0,
     action: async (docs, { client }) => {
-      if (docs.length === 1) {
-        setFileToForward(docs[0])
-      } else {
-        setIsBackdropOpen(true)
-
-        const currentUser = await fetchCurrentUser(client)
-        const defaultZipFolderName = t('Multiselect.folderZipName', {
-          contactName: getDisplayName(currentUser),
-          date: f(Date.now(), 'YYYY.MM.DD')
-        })
-
-        const { _id: parentFolderId } = await getOrCreateAppFolderWithReference(
-          client,
-          t
-        )
-
-        const zipName = await makeZipFolder({
-          client,
-          files: docs,
-          zipFolderName: defaultZipFolderName,
-          dirId: parentFolderId
-        })
-        setZipFolder({ name: zipName, dirId: parentFolderId })
-      }
+      await forwardDocsByLink(client, docs, t, f, {
+        setFileToForward,
+        setIsBackdropOpen,
+        setZipFolder
+      })
     },
     Component:
       // eslint-disable-next-line react/display-name
