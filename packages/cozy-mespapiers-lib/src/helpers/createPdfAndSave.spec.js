@@ -1,6 +1,7 @@
+import * as addFileToPdf from 'cozy-ui/transpiled/react/ActionsMenu/Actions/helpers'
+
 import * as buildFilename from './buildFilename'
 import { createPdfAndSave } from './createPdfAndSave'
-import * as addFileToPdf from '../utils/addFileToPdf'
 
 jest.mock('cozy-client', () => ({
   ...jest.requireActual('cozy-client'),
