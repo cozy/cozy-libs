@@ -36,7 +36,7 @@ const useActions = (docs, { isActionBar, actionsOptions } = {}) => {
       ? docs.length > 0 && docs.every(doc => isNote(doc))
       : false
 
-  const isPDFDoc = docs[0]?.mime === 'application/pdf'
+  const isPDFDoc = docs.every(doc => doc.mime === 'application/pdf')
 
   const actions = useMemo(
     () =>
@@ -48,7 +48,7 @@ const useActions = (docs, { isActionBar, actionsOptions } = {}) => {
           !isActionBar && forward,
           isActionBar && forwardTo,
           download,
-          isPrintAvailable && docs.length === 1 && isPDFDoc && print,
+          isPrintAvailable && isPDFDoc && print,
           !isActionBar && open,
           !isActionBar && divider,
           !isActionBar && rename,
@@ -68,7 +68,6 @@ const useActions = (docs, { isActionBar, actionsOptions } = {}) => {
         }
       ),
     [
-      docs,
       actionsOptions,
       isActionBar,
       hasNoteDoc,

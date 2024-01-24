@@ -1,10 +1,10 @@
 import { PDFDocument } from 'pdf-lib'
 
 import { models } from 'cozy-client'
+import { addFileToPdf } from 'cozy-ui/transpiled/react/ActionsMenu/Actions/helpers'
 
 import { CONTACTS_DOCTYPE, FILES_DOCTYPE } from '../doctypes'
 import { buildFilename } from '../helpers/buildFilename'
-import { addFileToPdf } from '../utils/addFileToPdf'
 
 const {
   file: { uploadFileWithConflictStrategy }
