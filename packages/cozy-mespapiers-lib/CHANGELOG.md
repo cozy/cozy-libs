@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [75.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@74.0.1...cozy-mespapiers-lib@75.0.0) (2024-01-25)
+
+
+### Features
+
+* Multiple file can now be printed from selection ([02cf031](https://github.com/cozy/cozy-libs/commit/02cf03116a07b1fef35c63977c64b50fe3a31312))
+* Upgrade cozy-ui 102.0.0 to 102.1.0 ([aa99d7c](https://github.com/cozy/cozy-libs/commit/aa99d7c19a0e58e9aff65e36deb55594014db790))
+
+
+### BREAKING CHANGES
+
+* you must have `cozy-ui >= 102.1.0`
+
+
+
+
+
 ## [74.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@74.0.0...cozy-mespapiers-lib@74.0.1) (2024-01-25)
 
 
