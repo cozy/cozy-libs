@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React, { useMemo, useState, useEffect } from 'react'
 
 import ContentFlexsearch from './ContentFlexsearch'
-import HomeToolbar from './HomeToolbar'
 import SearchHeader from './SearchHeader'
 import { getFeaturedPlaceholders } from '../../helpers/findPlaceholders'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
@@ -33,7 +32,6 @@ const HomeLayout = ({ contacts, papers, konnectors }) => {
 
   return (
     <>
-      {isMultiSelectionActive && <HomeToolbar />}
       <SearchHeader
         selectedTheme={selectedTheme}
         setSelectedTheme={setSelectedTheme}

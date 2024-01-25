@@ -14,7 +14,6 @@ const setup = ({ filesToAdd, removeFile }) => {
   const TestComponent = () => {
     const {
       isMultiSelectionActive,
-      setIsMultiSelectionActive,
       addMultiSelectionFile,
       removeMultiSelectionFile,
       removeAllMultiSelectionFiles,
@@ -37,10 +36,6 @@ const setup = ({ filesToAdd, removeFile }) => {
         <div data-testid="isActive">
           {JSON.stringify(isMultiSelectionActive)}
         </div>
-        <button
-          data-testid="setActiveBtn"
-          onClick={() => setIsMultiSelectionActive(prev => !prev)}
-        />
         <button
           data-testid="addMultiSelectionBtn"
           onClick={() => addMultiSelectionFile(filesToAdd.shift())}
