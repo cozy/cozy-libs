@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
-import { useClient } from 'cozy-client'
-import useRealtime from 'cozy-realtime/dist/useRealtime'
 import ActionsBar from 'cozy-ui/transpiled/react/ActionsBar'
 import Backdrop from 'cozy-ui/transpiled/react/Backdrop'
 import { LinearProgress } from 'cozy-ui/transpiled/react/Progress'
@@ -11,7 +9,6 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import ForwardModal from './ForwardModal'
-import { FILES_DOCTYPE } from '../../doctypes'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import useActions from '../SearchResult/useActions'
 
@@ -35,29 +32,10 @@ const useStyles = makeStyles(theme => ({
 
 const MultiselectViewActions = ({ onClose }) => {
   const { t } = useI18n()
-  const client = useClient()
   const classes = useStyles()
   const { allMultiSelectionFiles } = useMultiSelection()
-  const [zipFolder, setZipFolder] = useState({ name: '', dirId: '' })
   const [isBackdropOpen, setIsBackdropOpen] = useState(false)
   const [fileToForward, setFileToForward] = useState(null)
-
-  const onFileCreate = async file => {
-    if (
-      file &&
-      file.name === zipFolder.name &&
-      file.dir_id === zipFolder.dirId
-    ) {
-      setIsBackdropOpen(false)
-      setFileToForward(file)
-    }
-  }
-
-  useRealtime(client, {
-    [FILES_DOCTYPE]: {
-      created: onFileCreate
-    }
-  })
 
   const handleCloseForwardModal = () => {
     setFileToForward(null)
@@ -65,7 +43,7 @@ const MultiselectViewActions = ({ onClose }) => {
 
   const actions = useActions(allMultiSelectionFiles, {
     isActionBar: true,
-    actionsOptions: { setFileToForward, setIsBackdropOpen, setZipFolder }
+    actionsOptions: { setFileToForward, setIsBackdropOpen }
   })
 
   return (
