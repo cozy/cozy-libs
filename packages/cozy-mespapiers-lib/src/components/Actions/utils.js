@@ -1,12 +1,14 @@
 // TODO Move to cozy-client (files model)
 
 import { isReferencedBy } from 'cozy-client'
+import { getDisplayName } from 'cozy-client/dist/models/contact'
 import { getSharingLink } from 'cozy-client/dist/models/sharing'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 
 import { FILES_DOCTYPE, JOBS_DOCTYPE } from '../../doctypes'
+import { fetchCurrentUser } from '../../helpers/fetchCurrentUser'
+import getOrCreateAppFolderWithReference from '../../helpers/getFolderWithReference'
 import { handleConflictFilename } from '../../utils/handleConflictFilename'
-
 export const isAnyFileReferencedBy = (files, doctype) => {
   for (let i = 0, l = files.length; i < l; ++i) {
     if (isReferencedBy(files[i], doctype)) return true
@@ -36,7 +38,7 @@ const downloadFileError = error => {
  * @param {MakeZipFolderParam} param0
  * @returns {Promise<string>} - Final name of the zip folder
  */
-export const makeZipFolder = async ({
+export const createZipFolderJob = async ({
   client,
   files,
   zipFolderName,
@@ -53,6 +55,35 @@ export const makeZipFolder = async ({
   await jobCollection.create('zip', zipData, {}, true)
 
   return filename
+}
+
+export const makeZipFolder = async ({ client, docs, t, f }) => {
+  const currentUser = await fetchCurrentUser(client)
+  const defaultZipFolderName = t('Multiselect.folderZipName', {
+    contactName: getDisplayName(currentUser),
+    date: f(Date.now(), 'YYYY.MM.DD')
+  })
+
+  const { _id: parentFolderId } = await getOrCreateAppFolderWithReference(
+    client,
+    t
+  )
+
+  const zipName = await createZipFolderJob({
+    client,
+    files: docs,
+    zipFolderName: defaultZipFolderName,
+    dirId: parentFolderId
+  })
+
+  // Should we reject at some time here ?
+  return new Promise(resolve => {
+    client.plugins.realtime.subscribe('created', FILES_DOCTYPE, file => {
+      if (file && file.name === zipName && file.dir_id === parentFolderId) {
+        resolve(file)
+      }
+    })
+  })
 }
 
 /**
