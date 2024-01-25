@@ -7,7 +7,7 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
 import { makeZipFolder } from '../utils'
 
-export const forwardTo = ({ t, f, setFileToForward, setIsBackdropOpen }) => {
+export const forwardTo = ({ t, f, navigate, setIsBackdropOpen }) => {
   const label = t('action.forwardTo')
   const icon = 'reply'
 
@@ -17,17 +17,19 @@ export const forwardTo = ({ t, f, setFileToForward, setIsBackdropOpen }) => {
     icon,
     disabled: docs => docs.length === 0,
     action: async (docs, { client }) => {
+      let fileToForward
+
       if (docs.length === 1) {
-        setFileToForward(docs[0])
+        fileToForward = docs[0]
       } else {
         setIsBackdropOpen(true)
 
-        const res = await makeZipFolder({ client, docs, t, f })
+        fileToForward = await makeZipFolder({ client, docs, t, f })
 
         setIsBackdropOpen(false)
-
-        setFileToForward(res)
       }
+
+      navigate(`./forward/${fileToForward._id}`)
     },
     Component:
       // eslint-disable-next-line react/display-name

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import ActionsBar from 'cozy-ui/transpiled/react/ActionsBar'
 import Backdrop from 'cozy-ui/transpiled/react/Backdrop'
@@ -8,7 +9,6 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
-import ForwardModal from './ForwardModal'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import useActions from '../SearchResult/useActions'
 
@@ -30,20 +30,16 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const MultiselectViewActions = ({ onClose }) => {
+const MultiselectViewActions = () => {
   const { t } = useI18n()
   const classes = useStyles()
   const { allMultiSelectionFiles } = useMultiSelection()
   const [isBackdropOpen, setIsBackdropOpen] = useState(false)
-  const [fileToForward, setFileToForward] = useState(null)
-
-  const handleCloseForwardModal = () => {
-    setFileToForward(null)
-  }
+  const navigate = useNavigate()
 
   const actions = useActions(allMultiSelectionFiles, {
     isActionBar: true,
-    actionsOptions: { setFileToForward, setIsBackdropOpen }
+    actionsOptions: { navigate, setIsBackdropOpen }
   })
 
   return (
@@ -64,20 +60,8 @@ const MultiselectViewActions = ({ onClose }) => {
       </Backdrop>
 
       <ActionsBar actions={actions} docs={allMultiSelectionFiles} />
-
-      {!!fileToForward && (
-        <ForwardModal
-          onClose={handleCloseForwardModal}
-          onForward={onClose}
-          file={fileToForward}
-        />
-      )}
     </>
   )
-}
-
-MultiselectViewActions.propTypes = {
-  onClose: PropTypes.func
 }
 
 export default MultiselectViewActions

@@ -34,7 +34,7 @@ const MultiselectView = () => {
           )}
         </>
       }
-      actions={<MultiselectViewActions onClose={handleClose} />}
+      actions={<MultiselectViewActions />}
     />
   )
 }

@@ -66,7 +66,12 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
               path="create/:qualificationLabel"
               element={<CreatePaperModal />}
             />
-            <Route path="multiselect" element={<MultiselectView />} />
+            <Route
+              path="multiselect"
+              element={<OutletWrapper Component={MultiselectView} />}
+            >
+              <Route path="forward/:fileId" element={<ForwardModalByRoute />} />
+            </Route>
           </Route>
           <Route
             path="files/:qualificationLabel"

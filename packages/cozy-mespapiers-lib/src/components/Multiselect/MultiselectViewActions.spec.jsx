@@ -37,7 +37,6 @@ jest.mock('copy-text-to-clipboard', () => ({ copy: jest.fn() }))
 const setup = ({
   allMultiSelectionFiles = [],
   isMobile = false,
-  onClose = jest.fn(),
   mockDownloadFiles = jest.fn(),
   mockForwardFiles = jest.fn(),
   mockMakeZipFolder = jest.fn(),
@@ -57,7 +56,7 @@ const setup = ({
 
   return render(
     <AppLike>
-      <MultiselectViewActions onClose={onClose} />
+      <MultiselectViewActions />
     </AppLike>
   )
 }
