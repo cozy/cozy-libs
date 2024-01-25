@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [22.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.0.8...cozy-harvest-lib@22.1.0) (2024-01-25)
+
+
+### Features
+
+* Add DoctypeDebugCard component ([0741319](https://github.com/cozy/cozy-libs/commit/07413196c1dd82fa23c37cc96737399eb99ea2e2))
+* Upgrade cozy-client to 45.1.0 ([05e8d65](https://github.com/cozy/cozy-libs/commit/05e8d65289cf40833997bcbacef62e2cd9de3adb))
+
+
+
+
+
 ## [22.0.8](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.0.7...cozy-harvest-lib@22.0.8) (2024-01-23)
 
 
