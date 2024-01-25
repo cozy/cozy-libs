@@ -21,6 +21,7 @@ import {
   forwardTo,
   download
 } from '../Actions/Items'
+import { useFileSharing } from '../Contexts/FileSharingProvider'
 import { useModal } from '../Hooks/useModal'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
@@ -30,6 +31,7 @@ const useActions = (docs, { isActionBar, actionsOptions } = {}) => {
   const { pushModal, popModal } = useModal()
   const { addMultiSelectionFile } = useMultiSelection()
   const [isPrintAvailable, setIsPrintAvailable] = useState(false)
+  const { isFileSharingAvailable } = useFileSharing()
 
   const hasNoteDoc =
     docs.length > 0 && docs.every(doc => isFile(doc))
@@ -64,7 +66,8 @@ const useActions = (docs, { isActionBar, actionsOptions } = {}) => {
           f,
           addMultiSelectionFile,
           pushModal,
-          popModal
+          popModal,
+          isFileSharingAvailable
         }
       ),
     [
@@ -77,7 +80,8 @@ const useActions = (docs, { isActionBar, actionsOptions } = {}) => {
       f,
       addMultiSelectionFile,
       pushModal,
-      popModal
+      popModal,
+      isFileSharingAvailable
     ]
   )
 
