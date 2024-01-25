@@ -10,7 +10,6 @@ import AppLike from '../../../test/components/AppLike'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 /* eslint-disable react/display-name */
-jest.mock('../Home/HomeToolbar', () => () => <div data-testid="HomeToolbar" />)
 jest.mock('../Papers/PaperGroup', () => () => <div data-testid="PaperGroup" />)
 jest.mock('../Home/ContentWhenSearching', () => () => (
   <div data-testid="ContentWhenSearching" />

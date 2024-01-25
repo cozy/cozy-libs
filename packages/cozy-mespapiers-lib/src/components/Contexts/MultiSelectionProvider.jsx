@@ -1,9 +1,11 @@
 import React, { createContext, useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
 const MultiSelectionContext = createContext()
 
 const MultiSelectionProvider = ({ children }) => {
-  const [isMultiSelectionActive, setIsMultiSelectionActive] = useState(false)
+  const location = useLocation()
+  const isMultiSelectionActive = location.pathname.includes('multiselect')
   const [allMultiSelectionFiles, setAllMultiSelectionFiles] = useState([])
   const [currentMultiSelectionFiles, setCurrentMultiSelectionFiles] = useState(
     []
@@ -61,7 +63,6 @@ const MultiSelectionProvider = ({ children }) => {
   const value = {
     isMultiSelectionActive,
     allMultiSelectionFiles,
-    setIsMultiSelectionActive,
     addMultiSelectionFile,
     removeMultiSelectionFile,
     removeAllMultiSelectionFiles,
