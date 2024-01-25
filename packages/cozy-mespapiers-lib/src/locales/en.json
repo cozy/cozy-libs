@@ -104,6 +104,10 @@
       "text": "Restrict access after a deadline"
     }
   },
+  "ShareBottomSheet": {
+    "link": "Share by link",
+    "attachment": "Share as attachment"
+  },
   "Home": {
     "Empty": {
       "text": "Always keep them with you in a secure space to simplify your administrative procedures. They will never be used without your explicit consent.",

@@ -104,6 +104,10 @@
       "text": "Restreindre l'accès après une date limite"
     }
   },
+  "ShareBottomSheet": {
+    "link": "Envoyer par lien",
+    "attachment": "Envoyer en pièce jointe"
+  },
   "Home": {
     "Empty": {
       "text": "Gardez les toujours sur vous dans un espace sécurisé pour simplifier vos démarches administratives. Ils ne seront jamais utilisés sans votre consentement explicite.",

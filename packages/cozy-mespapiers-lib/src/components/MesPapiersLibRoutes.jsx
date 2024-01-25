@@ -13,6 +13,7 @@ import InstallAppFromIntent from './InstallAppFromIntent/InstallAppFromIntent'
 import InstallKonnectorFromIntent from './InstallKonnectorFromIntent/InstallKonnectorFromIntent'
 import MesPapiersLibProviders from './MesPapiersLibProviders'
 import ForwardModalByRoute from './Multiselect/ForwardModalByRoute'
+import ShareBottomSheetByRoute from './Multiselect/ShareBottomSheetByRoute'
 import OnboardedGuardedRoute from './OnboardedGuardedRoute'
 import ContactEdit from './Views/ContactEdit'
 import CreatePaperModal from './Views/CreatePaperModal'
@@ -71,6 +72,7 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
               element={<OutletWrapper Component={MultiselectView} />}
             >
               <Route path="forward/:fileId" element={<ForwardModalByRoute />} />
+              <Route path="share" element={<ShareBottomSheetByRoute />} />
             </Route>
           </Route>
           <Route
@@ -78,6 +80,7 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
             element={<OutletWrapper Component={PapersList} />}
           >
             <Route path="forward/:fileId" element={<ForwardModalByRoute />} />
+            <Route path="share" element={<ShareBottomSheetByRoute />} />
             <Route path="editcontact/:fileId" element={<ContactEdit />} />
             <Route path="installAppIntent" element={<InstallAppFromIntent />} />
             <Route
@@ -94,6 +97,7 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
               element={<OutletWrapper Component={FilesViewerWithQuery} />}
             >
               <Route path="forward/:fileId" element={<ForwardModalByRoute />} />
+              <Route path="share" element={<ShareBottomSheetByRoute />} />
               <Route path="edit/information" element={<InformationEdit />} />
               <Route path="edit/page" element={<PageEdit />} />
               <Route path="edit/contact" element={<ContactEdit />} />
