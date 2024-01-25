@@ -11250,10 +11250,10 @@ cozy-ui@93.1.1:
     react-swipeable-views "^0.13.3"
     rooks "^5.11.2"
 
-cozy-ui@^102.0.0:
-  version "102.0.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-102.0.0.tgz#f3d911a9150aceb1da3396e2fd23953d20b70f0c"
-  integrity sha512-cGqQoa3iv7WHzNR5kli0wPmXTsjQOUzUqnkmZ6U5/Y76m7L3qc1jDe5Y9lsVL//uYKEB+L/Jq/CzhjUHgFj5gw==
+cozy-ui@^102.1.0:
+  version "102.1.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-102.1.0.tgz#1fc4aba21a584a7358b6a7b132c61291f1ffcc12"
+  integrity sha512-gemOdpvW2TuejcN4B5cP8Mo2I15b21K3qgyWiBcCWOlssPZdoG8FLA52qlsreXhZQICadFP1Zv4umRe3wHa5Xw==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@material-ui/core" "4.12.3"
@@ -11272,6 +11272,7 @@ cozy-ui@^102.0.0:
     mui-bottom-sheet "https://github.com/cozy/mui-bottom-sheet.git#v1.0.9"
     node-polyglot "^2.2.2"
     normalize.css "^8.0.0"
+    pdf-lib "1.17.1"
     piwik-react-router "0.12.1"
     react-chartjs-2 "4.1.0"
     react-markdown "^4.0.8"
