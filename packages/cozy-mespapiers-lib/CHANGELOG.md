@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [74.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@74.0.0...cozy-mespapiers-lib@74.0.1) (2024-01-25)
+
+
+### Bug Fixes
+
+* Use sourceAccountIdentifier instead sourceAccount ([28358c6](https://github.com/cozy/cozy-libs/commit/28358c696cfdf74439bcafc0721f012ba96d6e1e))
+
+
+
+
+
 # [74.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@73.2.0...cozy-mespapiers-lib@74.0.0) (2024-01-23)
 
 
