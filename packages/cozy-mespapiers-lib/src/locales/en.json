@@ -106,7 +106,11 @@
   },
   "ShareBottomSheet": {
     "link": "Share by link",
-    "attachment": "Share as attachment"
+    "attachment": "Share as attachment",
+    "attachmentResponse": {
+      "error": "An error has occurred.",
+      "success": "Document sent successfully |||| Documents sent successfully"
+    }
   },
   "Home": {
     "Empty": {

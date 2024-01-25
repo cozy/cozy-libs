@@ -11,6 +11,7 @@ import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { makeZipFolder } from '../Actions/utils'
@@ -20,11 +21,24 @@ const ShareBottomSheet = ({ onClose, fileId, docs }) => {
   const { t, f } = useI18n()
   const navigate = useNavigate()
   const client = useClient()
+  const { showAlert } = useAlert()
   const { shareFiles } = useFileSharing()
 
   const shareAsAttachment = async () => {
     const idsToShare = fileId ? [fileId] : docs.map(doc => doc._id)
-    await shareFiles(idsToShare)
+    try {
+      await shareFiles(idsToShare)
+      showAlert(
+        t('ShareBottomSheet.attachmentResponse.success', {
+          smart_count: idsToShare.length
+        }),
+        'success'
+      )
+    } catch (error) {
+      if (error.message === 'User did not share') return
+
+      showAlert(t('ShareBottomSheet.attachmentResponse.error'), 'error')
+    }
   }
 
   const shareByLink = async () => {

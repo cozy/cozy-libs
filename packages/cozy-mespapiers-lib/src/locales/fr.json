@@ -106,7 +106,11 @@
   },
   "ShareBottomSheet": {
     "link": "Envoyer par lien",
-    "attachment": "Envoyer en pièce jointe"
+    "attachment": "Envoyer en pièce jointe",
+    "attachmentResponse": {
+      "error": "Une erreur s'est produite.",
+      "success": "Document envoyé avec succès |||| Documents envoyés avec succès"
+    }
   },
   "Home": {
     "Empty": {
