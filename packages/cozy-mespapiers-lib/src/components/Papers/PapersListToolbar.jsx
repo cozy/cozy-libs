@@ -1,8 +1,8 @@
-/* global cozy */
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
+import { BarLeft, BarCenter } from 'cozy-bar'
 import UIBarTitle from 'cozy-ui/transpiled/react/BarTitle'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
@@ -13,7 +13,6 @@ import { useMultiSelection } from '../Hooks/useMultiSelection'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 
 const PapersListToolbar = ({ selectedQualificationLabel }) => {
-  const { BarLeft, BarCenter } = cozy.bar
   const params = useParams()
   const navigate = useNavigate()
   const { isMultiSelectionActive } = useMultiSelection()

@@ -1,4 +1,3 @@
-/* global cozy */
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -8,6 +7,7 @@ import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
+import { BarRight, BarLeft, BarCenter } from 'cozy-bar'
 
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
@@ -16,7 +16,6 @@ const HomeToolbar = () => {
   const { isDesktop } = useBreakpoints()
   const navigate = useNavigate()
   const { setIsMultiSelectionActive } = useMultiSelection()
-  const { BarRight, BarLeft, BarCenter } = cozy.bar
 
   return (
     <>
