@@ -1,8 +1,12 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import ReactJsonPrint from 'react-json-print'
-
-import CozyClient, { Q, useQuery, hasQueryBeenLoaded } from 'cozy-client'
+import CozyClient, {
+  Q,
+  useQuery,
+  hasQueryBeenLoaded,
+  RealTimeQueries
+} from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Card from 'cozy-ui/transpiled/react/Card'
 import Divider from 'cozy-ui/transpiled/react/Divider'
@@ -53,6 +57,7 @@ const DoctypeDebugCard = ({ sourceAccountIdentifier, konnector, doctype }) => {
   const clipBoardAvailable = navigator.clipboard?.writeText
   return !failed && loaded ? (
     <Card>
+      <RealTimeQueries doctype={doctype} />
       <Typography variant="button">{doctype}</Typography>
       {clipBoardAvailable ? (
         <Button
