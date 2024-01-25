@@ -9,7 +9,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import withLocales from '../../../locales/withLocales'
 
-export const forward = () => {
+export const forward = ({ isFileSharingAvailable }) => {
   return {
     name: 'forward',
     Component: withLocales(
@@ -25,7 +25,14 @@ export const forward = () => {
             ref={ref}
             onClick={() => {
               props.onClick()
-              navigate(`${pathname}/forward/${props.docs[0]._id}`)
+              const fileId = props.docs[0]._id
+              if (isFileSharingAvailable) {
+                navigate(`${pathname}/share`, {
+                  state: { fileId }
+                })
+              } else {
+                navigate(`${pathname}/forward/${fileId}`)
+              }
             }}
           >
             <ListItemIcon>

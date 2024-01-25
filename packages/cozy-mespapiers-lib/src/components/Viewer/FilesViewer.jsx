@@ -9,6 +9,7 @@ import ForwardButton from 'cozy-ui/transpiled/react/Viewer/Footer/ForwardButton'
 
 import FileViewerLoading from './FileViewerLoading'
 import SelectFileButton from './SelectFileButton'
+import { useFileSharing } from '../Contexts/FileSharingProvider'
 
 const styleStatusBar = switcher => {
   if (window.StatusBar && isIOSApp()) {
@@ -30,6 +31,7 @@ const FilesViewer = ({ filesQuery, files, fileId, onClose, onChange }) => {
   const client = useClient()
   const { pathname } = useLocation()
   const navigate = useNavigate()
+  const { isFileSharingAvailable } = useFileSharing()
 
   const editPathByModelProps = {
     information: `#${pathname}/edit/information?metadata=__NAME__`,
@@ -136,9 +138,16 @@ const FilesViewer = ({ filesQuery, files, fileId, onClose, onChange }) => {
       <FooterActionButtons>
         <ForwardButton
           file={viewerFiles[viewerIndex]}
-          onClick={() =>
-            navigate(`${pathname}/forward/${viewerFiles[viewerIndex]._id}`)
-          }
+          onClick={() => {
+            const fileId = viewerFiles[viewerIndex]._id
+            if (isFileSharingAvailable) {
+              navigate(`${pathname}/share`, {
+                state: { fileId }
+              })
+            } else {
+              navigate(`${pathname}/forward/${fileId}`)
+            }
+          }}
         />
         <SelectFileButton file={viewerFiles[viewerIndex]} />
       </FooterActionButtons>
