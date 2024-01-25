@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react'
 
+import { models } from 'cozy-client'
+
 import { useDatacardOptions } from './DatacardOptionsContext'
 
 const findSuitableDataCards = (datacardOptions, datacardContext) => {
@@ -24,6 +26,7 @@ const Datacards = ({ konnector, account, trigger }) => {
           konnector={konnector}
           trigger={trigger}
           accountId={trigger.message.account}
+          sourceAccountIdentifier={models.account.getAccountLogin(account)}
         />
       ))}
     </>
