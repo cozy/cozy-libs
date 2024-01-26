@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 
-import MultiselectContente from './MultiselectContent'
+import MultiselectContent from './MultiselectContent'
 import AppLike from '../../../test/components/AppLike'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
@@ -20,7 +20,7 @@ const setup = ({ allMultiSelectionFiles }) => {
 
   return render(
     <AppLike>
-      <MultiselectContente />
+      <MultiselectContent />
     </AppLike>
   )
 }
