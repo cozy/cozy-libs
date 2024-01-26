@@ -191,6 +191,10 @@
         "title": "Erreur de Connexion",
         "description": "Une erreur inconnue est survenue. Vous pouvez essayer de synchroniser à nouveau vos données. Si le problème persiste, n'hésitez pas à nous contacter via [%{supportMail}](mailto:%{supportMail})."
       },
+      "UNKNOWN_ERROR.PARTIAL_SYNC": {
+        "title": "Erreur de Connexion",
+        "description": "La synchronisation est terminé mais certains éléments peuvent manquer"
+      },
       "USER_ACTION_NEEDED": {
         "title": "Action nécessaire chez le fournisseur",
         "description": "Il semble que [%{name}](%{link}) ait besoin de revérifier votre connexion. Connectez-vous sur [%{name}](%{link}) avant de synchroniser à nouveau vos données."

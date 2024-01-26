@@ -191,6 +191,10 @@
         "title": "Connection error",
         "description": "An unknown error has occurred. You can try to update your data. If the problem persists, please contact us at [%{supportMail}](mailto:%{supportMail})."
       },
+      "UNKNOWN_ERROR.PARTIAL_SYNC": {
+        "title": "Connection error",
+        "description": "The synchronization is complete but some elements may be missing"
+      },
       "USER_ACTION_NEEDED": {
         "title": "Action needed on the provider's website",
         "description": "It seems that the [%{name}](%{link}) website requires you to log in and to complete a specific action. Please re-run the connector once you have settled the issue on the website."
