@@ -8,7 +8,7 @@ import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 const useStyles = makeStyles(theme => ({
   backdropRoot: {
-    zIndex: 'var(--zIndex-modal)'
+    zIndex: 'calc(var(--zIndex-modal) + 1)'
   },
   barText: {
     color: 'var(--primaryContrastTextColor)'
