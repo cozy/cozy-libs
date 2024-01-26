@@ -35,7 +35,12 @@ const ForwardModalByRoute = () => {
     )
   }
 
-  return <ForwardModal onClose={() => navigate('..')} file={file} />
+  return (
+    <ForwardModal
+      onClose={() => navigate('..', { replace: true })}
+      file={file}
+    />
+  )
 }
 
 export default ForwardModalByRoute
