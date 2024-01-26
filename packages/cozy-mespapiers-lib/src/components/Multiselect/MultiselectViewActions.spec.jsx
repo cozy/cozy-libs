@@ -61,7 +61,7 @@ const setup = ({
   )
 }
 
-describe('MultiselectContent', () => {
+describe('MultiselectViewActions', () => {
   it('should not display ForwardModal by default', () => {
     const { queryByTestId } = setup()
 
