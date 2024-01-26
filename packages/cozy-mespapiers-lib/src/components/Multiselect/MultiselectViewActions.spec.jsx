@@ -110,7 +110,9 @@ describe('MultiselectViewActions', () => {
     })
 
     it('should call "makeZipFolder" when click forward Button if there is more than one files', async () => {
-      const mockMakeZipFolder = jest.fn()
+      const mockMakeZipFolder = jest
+        .fn()
+        .mockReturnValue({ _id: '02', type: 'file', name: 'folder.zip' })
       const mockNavigatorShareFunc = jest.fn()
       const { getByRole } = setup({
         allMultiSelectionFiles: [
