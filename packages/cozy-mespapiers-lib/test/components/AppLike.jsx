@@ -42,25 +42,25 @@ const AppLike = ({ children, client, history }) => {
             <PapersCreatedProvider>
               <ErrorProvider>
                 <PaywallProvider>
-                  <MultiSelectionProvider>
-                    <ScannerI18nProvider lang="en">
-                      <SearchProvider
-                        doctypes={[FILES_DOCTYPE, CONTACTS_DOCTYPE]}
-                      >
-                        <CozyTheme>
-                          <BreakpointsProvider>
-                            <HashRouter history={hashHistory}>
+                  <ScannerI18nProvider lang="en">
+                    <SearchProvider
+                      doctypes={[FILES_DOCTYPE, CONTACTS_DOCTYPE]}
+                    >
+                      <CozyTheme>
+                        <BreakpointsProvider>
+                          <HashRouter history={hashHistory}>
+                            <MultiSelectionProvider>
                               <PapersDefinitionsProvider>
                                 <StepperDialogProvider>
                                   <ModalProvider>{children}</ModalProvider>
                                 </StepperDialogProvider>
                               </PapersDefinitionsProvider>
-                            </HashRouter>
-                          </BreakpointsProvider>
-                        </CozyTheme>
-                      </SearchProvider>
-                    </ScannerI18nProvider>
-                  </MultiSelectionProvider>
+                            </MultiSelectionProvider>
+                          </HashRouter>
+                        </BreakpointsProvider>
+                      </CozyTheme>
+                    </SearchProvider>
+                  </ScannerI18nProvider>
                 </PaywallProvider>
               </ErrorProvider>
             </PapersCreatedProvider>
