@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [22.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.1.0...cozy-harvest-lib@22.2.0) (2024-01-29)
+
+
+### Features
+
+* Add the UNKNOWN_ERROR.PARTIAL_SYNC konnector error message ([8532ee1](https://github.com/cozy/cozy-libs/commit/8532ee1ae2b22f3c3b166ae9e2d6d4e9ac0f343c))
+
+
+
+
+
 # [22.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.0.8...cozy-harvest-lib@22.1.0) (2024-01-25)
 
 
