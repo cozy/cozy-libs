@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [75.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@75.0.2...cozy-mespapiers-lib@75.1.0) (2024-01-29)
+
+
+### Bug Fixes
+
+* Calculate isMultiSelectionActive from current URL ([45844d0](https://github.com/cozy/cozy-libs/commit/45844d076cedc79566172fe7f3a47ecf7b0aad17))
+* Do not allow to go back to ForwardModal ([b24e841](https://github.com/cozy/cozy-libs/commit/b24e8418c3dd630cd93ce54512f0f4ac2c4002ef))
+
+
+### Features
+
+* Add a FileSharingProvider to expose feature from flagship app ([dbf10d4](https://github.com/cozy/cozy-libs/commit/dbf10d4cfb6418ca0ec160fe124ae40afed2c738))
+* Add MultiselectBackdrop to ShareBottomSheet ([661e7e8](https://github.com/cozy/cozy-libs/commit/661e7e83896b8842c6d4b4b37b83615836546a35))
+* Add ShareBottomSheet ([7175f9f](https://github.com/cozy/cozy-libs/commit/7175f9f9634cd37b25a3dcd985362659f69b87c0))
+* Open ShareBottomSheet when sharing on flagship ([6f97b15](https://github.com/cozy/cozy-libs/commit/6f97b15fb0989ec90cbd1f055349fbfeec3f983b))
+* Show success and error alerts at the end of attachment share ([645c922](https://github.com/cozy/cozy-libs/commit/645c92237f1e1582200f4d2cfb0d9992afadbd00))
+
+
+
+
+
 ## [75.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@75.0.1...cozy-mespapiers-lib@75.0.2) (2024-01-29)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
