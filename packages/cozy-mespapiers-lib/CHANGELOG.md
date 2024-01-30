@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [75.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@75.2.0...cozy-mespapiers-lib@75.3.0) (2024-01-30)
+
+
+### Features
+
+* **mespapiers:** Change wording in ForwardModal ([be8c252](https://github.com/cozy/cozy-libs/commit/be8c252dee9bb6d64a0fc806e925d6fe9d6d4a5f))
+
+
+
+
+
 # [75.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@75.1.0...cozy-mespapiers-lib@75.2.0) (2024-01-30)
 
 
