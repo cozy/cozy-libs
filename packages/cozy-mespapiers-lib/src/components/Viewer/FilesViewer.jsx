@@ -10,6 +10,7 @@ import ForwardButton from 'cozy-ui/transpiled/react/Viewer/Footer/ForwardButton'
 import FileViewerLoading from './FileViewerLoading'
 import SelectFileButton from './SelectFileButton'
 import { useFileSharing } from '../Contexts/FileSharingProvider'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const styleStatusBar = switcher => {
   if (window.StatusBar && isIOSApp()) {
@@ -32,6 +33,7 @@ const FilesViewer = ({ filesQuery, files, fileId, onClose, onChange }) => {
   const { pathname } = useLocation()
   const navigate = useNavigate()
   const { isFileSharingAvailable } = useFileSharing()
+  const { isMultiSelectionActive } = useMultiSelection()
 
   const editPathByModelProps = {
     information: `#${pathname}/edit/information?metadata=__NAME__`,
@@ -135,22 +137,24 @@ const FilesViewer = ({ filesQuery, files, fileId, onClose, onChange }) => {
       onCloseRequest={handleOnClose}
       editPathByModelProps={editPathByModelProps}
     >
-      <FooterActionButtons>
-        <ForwardButton
-          file={viewerFiles[viewerIndex]}
-          onClick={() => {
-            const fileId = viewerFiles[viewerIndex]._id
-            if (isFileSharingAvailable) {
-              navigate(`${pathname}/share`, {
-                state: { fileId }
-              })
-            } else {
-              navigate(`${pathname}/forward/${fileId}`)
-            }
-          }}
-        />
-        <SelectFileButton file={viewerFiles[viewerIndex]} />
-      </FooterActionButtons>
+      {!isMultiSelectionActive && (
+        <FooterActionButtons>
+          <ForwardButton
+            file={viewerFiles[viewerIndex]}
+            onClick={() => {
+              const fileId = viewerFiles[viewerIndex]._id
+              if (isFileSharingAvailable) {
+                navigate(`${pathname}/share`, {
+                  state: { fileId }
+                })
+              } else {
+                navigate(`${pathname}/forward/${fileId}`)
+              }
+            }}
+          />
+          <SelectFileButton file={viewerFiles[viewerIndex]} />
+        </FooterActionButtons>
+      )}
     </Viewer>
   )
 }
