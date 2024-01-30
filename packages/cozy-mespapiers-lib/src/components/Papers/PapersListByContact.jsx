@@ -23,6 +23,9 @@ const PapersListByContact = ({
   const params = useParams()
   const { t } = useI18n()
   const { papersDefinitions } = usePapersDefinitions()
+  const { accountsWithFiles, accountsWithoutFiles } = accounts
+  const hasMultipleAccounts =
+    accountsWithFiles.length + accountsWithoutFiles.length > 1
 
   const currentFileTheme = getCurrentQualificationLabel(
     params,
@@ -40,10 +43,11 @@ const PapersListByContact = ({
         files,
         konnectors,
         contacts,
+        hasMultipleAccounts,
         maxDisplay: currentDefinition?.maxDisplay,
         t
       }),
-    [contacts, konnectors, currentDefinition, files, t]
+    [contacts, konnectors, hasMultipleAccounts, currentDefinition, files, t]
   )
 
   return paperslistByContact.map(
@@ -61,7 +65,7 @@ const PapersListByContact = ({
         <PapersList
           papers={papers}
           konnector={konnector}
-          accounts={accounts}
+          accounts={accountsWithFiles}
           isLast={files.length === 1}
         />
       </List>
@@ -73,7 +77,10 @@ PapersListByContact.propTypes = {
   selectedQualificationLabel: PropTypes.string,
   files: PropTypes.arrayOf(PropTypes.object),
   konnectors: PropTypes.arrayOf(PropTypes.object),
-  accounts: PropTypes.array,
+  accounts: PropTypes.shape({
+    accountsWithFiles: PropTypes.array,
+    accountsWithoutFiles: PropTypes.array
+  }),
   contacts: PropTypes.arrayOf(PropTypes.object)
 }
 

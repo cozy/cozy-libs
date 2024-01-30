@@ -7,7 +7,7 @@
       "filenameModel": [
         "labelGivenByUser"
       ],
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -52,7 +52,7 @@
       "label": "accommodation_proof",
       "icon": "home",
       "featureDate": "issueDate",
-      "maxDisplay": 1,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -83,7 +83,7 @@
     {
       "label": "birth_certificate",
       "icon": "people",
-      "maxDisplay": 2,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -100,7 +100,7 @@
     {
       "label": "bank_details",
       "icon": "bank",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -197,7 +197,7 @@
       "label": "bank_statement",
       "icon": "bank",
       "featureDate": "referencedDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -229,7 +229,7 @@
       "label": "caf",
       "icon": "collect",
       "featureDate": "issueDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -275,7 +275,7 @@
     {
       "label": "car_insurance",
       "icon": "car",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -296,7 +296,7 @@
       "placeholderIndex": 2,
       "icon": "car",
       "featureDate": "carObtentionDate",
-      "maxDisplay": 2,
+      "maxDisplay": 4,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -580,7 +580,7 @@
       "country": "stranger",
       "icon": "car",
       "featureDate": "obtentionDate",
-      "maxDisplay": 2,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -653,7 +653,7 @@
       "label": "energy_invoice",
       "icon": "bill",
       "featureDate": "referencedDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -688,7 +688,7 @@
     {
       "label": "family_record_book",
       "icon": "team",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -708,7 +708,7 @@
       "label": "identity_photo",
       "icon": "people",
       "featureDate": "shootingDate",
-      "maxDisplay": 1,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -743,7 +743,7 @@
         "labelGivenByUser",
         "featureDate"
       ],
-      "maxDisplay": 1,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -789,7 +789,7 @@
       "placeholderIndex": 5,
       "icon": "bill",
       "featureDate": "referencedDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -825,7 +825,7 @@
       "label": "loan_agreement",
       "icon": "contract",
       "featureDate": "issueDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -859,7 +859,7 @@
       "placeholderIndex": 1,
       "icon": "people",
       "featureDate": "expirationDate",
-      "maxDisplay": 2,
+      "maxDisplay": 4,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -1074,7 +1074,7 @@
       "label": "personal_sporting_licence",
       "icon": "compass",
       "featureDate": "referencedDate",
-      "maxDisplay": 1,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -1108,7 +1108,7 @@
         "labelGivenByUser"
       ],
       "featureDate": "date",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -1155,7 +1155,7 @@
         "labelGivenByUser"
       ],
       "featureDate": "date",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -1203,7 +1203,7 @@
         "labelGivenByUser"
       ],
       "featureDate": "date",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -1251,7 +1251,7 @@
         "labelGivenByUser"
       ],
       "featureDate": "date",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -1299,7 +1299,7 @@
         "labelGivenByUser"
       ],
       "featureDate": "date",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -1334,7 +1334,7 @@
         "labelGivenByUser"
       ],
       "featureDate": "date",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -1381,7 +1381,7 @@
         "labelGivenByUser"
       ],
       "featureDate": "date",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -1429,7 +1429,7 @@
         "labelGivenByUser"
       ],
       "featureDate": "date",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -1477,7 +1477,7 @@
         "labelGivenByUser"
       ],
       "featureDate": "date",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -1532,7 +1532,7 @@
         "labelGivenByUser"
       ],
       "featureDate": "referencedDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -1577,7 +1577,7 @@
       "label": "pay_sheet",
       "icon": "bill",
       "featureDate": "referencedDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -1611,7 +1611,7 @@
       "label": "payment_proof_family_allowance",
       "icon": "bill",
       "featureDate": "issueDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -1658,7 +1658,7 @@
       "label": "phone_invoice",
       "icon": "bill",
       "featureDate": "referencedDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -1694,7 +1694,7 @@
       "label": "rent_receipt",
       "icon": "bill",
       "featureDate": "referencedDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -1726,7 +1726,7 @@
       "label": "residence_permit",
       "icon": "people",
       "featureDate": "expirationDate",
-      "maxDisplay": 2,
+      "maxDisplay": 4,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -1899,7 +1899,7 @@
       "label": "school_attendance_certificate",
       "icon": "contract",
       "featureDate": "referencedDate",
-      "maxDisplay": 1,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -1930,7 +1930,7 @@
       "label": "student_card",
       "icon": "people",
       "featureDate": "referencedDate",
-      "maxDisplay": 1,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -1962,7 +1962,7 @@
       "placeholderIndex": 6,
       "icon": "bank",
       "featureDate": "referencedDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2009,7 +2009,7 @@
       "label": "tax_return",
       "icon": "bank",
       "featureDate": "referencedDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2044,7 +2044,7 @@
       "label": "unemployment_benefit",
       "icon": "collect",
       "featureDate": "referencedDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2082,7 +2082,7 @@
         "labelGivenByUser"
       ],
       "featureDate": "issueDate",
-      "maxDisplay": 1,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2126,7 +2126,7 @@
     {
       "label": "vehicle_registration",
       "icon": "car",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2158,7 +2158,7 @@
       "label": "water_invoice",
       "icon": "bill",
       "featureDate": "referencedDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2192,7 +2192,7 @@
       "placeholderIndex": 4,
       "icon": "people",
       "featureDate": "issueDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2384,7 +2384,7 @@
       "filenameModel": [
         "labelGivenByUser"
       ],
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2429,7 +2429,7 @@
       "label": "tax_timetable",
       "icon": "bank",
       "featureDate": "referencedDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2465,7 +2465,7 @@
       "icon": "bill",
       "featureDate": "referencedDate",
       "filenameModel": ["labelGivenByUser"],
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2511,6 +2511,7 @@
       "label": "school_insurance_certificate",
       "icon": "contract",
       "featureDate": "referencedDate",
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2540,6 +2541,7 @@
       "label": "transport_invoice",
       "icon": "bill",
       "featureDate": "referencedDate",
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2571,6 +2573,7 @@
       "label": "employment_center_certificate",
       "icon": "collect",
       "featureDate": "referencedDate",
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2603,6 +2606,7 @@
       "label": "electoral_card",
       "icon": "people",
       "featureDate": "referencedDate",
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2632,6 +2636,7 @@
       "label": "transport_card",
       "icon": "people",
       "featureDate": "referencedDate",
+      "maxDisplay": 4,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2686,6 +2691,7 @@
       "label": "pacs",
       "icon": "people",
       "featureDate": "referencedDate",
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2716,6 +2722,7 @@
       "label": "single_parent_benefit",
       "icon": "people",
       "featureDate": "referencedDate",
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2746,6 +2753,7 @@
       "label": "fidelity_card",
       "icon": "people",
       "featureDate": "referencedDate",
+      "maxDisplay": 4,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2783,6 +2791,7 @@
       "label": "library_card",
       "icon": "people",
       "featureDate": "referencedDate",
+      "maxDisplay": 4,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2819,6 +2828,7 @@
       "label": "real_estate_tax",
       "icon": "bill",
       "featureDate": "referencedDate",
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2854,7 +2864,7 @@
       "filenameModel": [
         "labelGivenByUser"
       ],
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2902,7 +2912,7 @@
       "filenameModel": [
         "labelGivenByUser"
       ],
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2946,6 +2956,7 @@
     {
       "label": "note_identity_document",
       "icon": "file-type-note",
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "illustration": "Account.svg",
@@ -2961,6 +2972,7 @@
     {
       "label": "note_family_document",
       "icon": "file-type-note",
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "illustration": "Account.svg",
@@ -2976,6 +2988,7 @@
     {
       "label": "note_work_document",
       "icon": "file-type-note",
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "illustration": "Account.svg",
@@ -2991,6 +3004,7 @@
     {
       "label": "note_health_document",
       "icon": "file-type-note",
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "illustration": "Account.svg",
@@ -3006,6 +3020,7 @@
     {
       "label": "note_house_document",
       "icon": "file-type-note",
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "illustration": "Account.svg",
@@ -3021,6 +3036,7 @@
     {
       "label": "note_transport_document",
       "icon": "file-type-note",
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "illustration": "Account.svg",
@@ -3036,6 +3052,7 @@
     {
       "label": "note_activity_document",
       "icon": "file-type-note",
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "illustration": "Account.svg",
@@ -3051,6 +3068,7 @@
     {
       "label": "note_finance",
       "icon": "file-type-note",
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "illustration": "Account.svg",
@@ -3066,6 +3084,7 @@
     {
       "label": "note_invoice",
       "icon": "file-type-note",
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "illustration": "Account.svg",

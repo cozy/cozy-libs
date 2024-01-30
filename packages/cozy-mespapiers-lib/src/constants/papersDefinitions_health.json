@@ -5,7 +5,7 @@
       "placeholderIndex": 10,
       "icon": "heart",
       "featureDate": "referencedDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -53,7 +53,7 @@
       "label": "health_certificate",
       "icon": "heart",
       "featureDate": "referencedDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -88,7 +88,7 @@
       "placeholderIndex": 8,
       "featureDate": "issueDate",
       "icon": "heart",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -137,7 +137,7 @@
       "icon": "heart",
       "filenameModel": ["labelGivenByUser"],
       "featureDate": "date",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -186,7 +186,7 @@
       "label": "pregnancy_medical_certificate",
       "icon": "heart",
       "featureDate": "referencedDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -220,7 +220,7 @@
       "label": "work_disability_recognition",
       "icon": "carbonCopy",
       "featureDate": "referencedDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "stepIndex": 1,
@@ -255,7 +255,7 @@
       "placeholderIndex": 9,
       "icon": "people",
       "featureDate": "expirationDate",
-      "maxDisplay": 3,
+      "maxDisplay": 5,
       "acquisitionSteps": [
         {
           "stepIndex": 1,

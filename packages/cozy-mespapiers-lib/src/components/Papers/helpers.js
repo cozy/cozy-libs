@@ -112,6 +112,7 @@ export const groupFilesByContacts = (filesArg, contactsArg) => {
  * @param {object} option
  * @param {import('cozy-client/types/types').IOCozyFile[]} option.files - Array of IOCozyFile
  * @param {object[]} option.contacts - Array of io.cozy.contact
+ * @param {boolean} option.hasMultipleAccounts - Has multiple accounts
  * @param {import('cozy-client/types/types').IOCozyKonnector[]} option.konnectors - Array of IOCozyKonnector
  * @param {number} option.maxDisplay - Number of displayed files
  * @param {Function} option.t - i18n function
@@ -120,11 +121,14 @@ export const groupFilesByContacts = (filesArg, contactsArg) => {
 export const buildFilesByContacts = ({
   files,
   contacts,
+  hasMultipleAccounts,
   konnectors = [],
   maxDisplay = DEFAULT_MAX_FILES_DISPLAYED,
   t
 }) => {
   const result = []
+  const isAloneContactOrKonnector =
+    [...contacts, ...konnectors].length <= 1 && !hasMultipleAccounts
 
   const {
     itemsFound: filesCreatedByKonnectors,
@@ -150,7 +154,9 @@ export const buildFilesByContacts = ({
         }),
         withMyself: false,
         papers: {
-          maxDisplay,
+          maxDisplay: isAloneContactOrKonnector
+            ? DEFAULT_MAX_FILES_DISPLAYED
+            : maxDisplay,
           list: value
         }
       })
@@ -179,7 +185,9 @@ export const buildFilesByContacts = ({
       contact: harmonizeContactsNames(value.contacts, t),
       withMyself: value.withMyself,
       papers: {
-        maxDisplay,
+        maxDisplay: isAloneContactOrKonnector
+          ? DEFAULT_MAX_FILES_DISPLAYED
+          : maxDisplay,
         list: value.files
       }
     }))
@@ -207,7 +215,9 @@ export const buildFilesByContacts = ({
       contact: t('PapersList.defaultName'),
       withMyself: false,
       papers: {
-        maxDisplay,
+        maxDisplay: isAloneContactOrKonnector
+          ? DEFAULT_MAX_FILES_DISPLAYED
+          : maxDisplay,
         list: unspecifiedFiles
       }
     }
