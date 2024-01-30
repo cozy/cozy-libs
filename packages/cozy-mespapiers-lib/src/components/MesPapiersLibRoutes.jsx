@@ -28,6 +28,14 @@ import PageEdit from './Views/PageEdit'
 import PapersList from './Views/PapersList'
 import PlaceholdersSelector from './Views/PlaceholdersSelector'
 
+const fileViewerRoutes = [
+  <Route key="01" path="forward/:fileId" element={<ForwardModalByRoute />} />,
+  <Route key="02" path="share" element={<ShareBottomSheetByRoute />} />,
+  <Route key="03" path="edit/information" element={<InformationEdit />} />,
+  <Route key="04" path="edit/page" element={<PageEdit />} />,
+  <Route key="05" path="edit/contact" element={<ContactEdit />} />
+]
+
 const OutletWrapper = ({ Component }) => (
   <>
     <Component />
@@ -73,6 +81,12 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
             >
               <Route path="forward/:fileId" element={<ForwardModalByRoute />} />
               <Route path="share" element={<ShareBottomSheetByRoute />} />
+              <Route
+                path="view/:fileId"
+                element={<OutletWrapper Component={FilesViewerWithQuery} />}
+              >
+                {fileViewerRoutes.map(Component => Component)}
+              </Route>
             </Route>
           </Route>
           <Route
@@ -96,11 +110,7 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
               path=":fileId"
               element={<OutletWrapper Component={FilesViewerWithQuery} />}
             >
-              <Route path="forward/:fileId" element={<ForwardModalByRoute />} />
-              <Route path="share" element={<ShareBottomSheetByRoute />} />
-              <Route path="edit/information" element={<InformationEdit />} />
-              <Route path="edit/page" element={<PageEdit />} />
-              <Route path="edit/contact" element={<ContactEdit />} />
+              {fileViewerRoutes.map(Component => Component)}
             </Route>
             <Route
               path="harvest/:connectorSlug/*"

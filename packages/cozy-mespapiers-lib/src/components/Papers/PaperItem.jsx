@@ -84,7 +84,10 @@ const PaperItem = ({
         const webLink = await generateReturnUrlToNotesIndex(client, paper)
         window.open(webLink, '_self')
       } else {
-        navigate(`/paper/files/${paperTheme}/${paper._id}`, {
+        const route = isMultiSelectionActive
+          ? `multiselect/view`
+          : `files/${paperTheme}`
+        navigate(`/paper/${route}/${paper._id}`, {
           state: { background: `${pathname}${search}` }
         })
       }
