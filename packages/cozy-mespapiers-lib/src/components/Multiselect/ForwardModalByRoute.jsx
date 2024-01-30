@@ -8,6 +8,7 @@ import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import ForwardModal from './ForwardModal'
 import { buildFileQueryById } from '../../helpers/queries'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const useStyles = makeStyles({
   backdropRoot: {
@@ -18,6 +19,7 @@ const useStyles = makeStyles({
 const ForwardModalByRoute = () => {
   const { fileId } = useParams()
   const navigate = useNavigate()
+  const { isMultiSelectionActive } = useMultiSelection()
   const classes = useStyles()
 
   const buildedFilesQuery = buildFileQueryById(fileId)
@@ -37,8 +39,13 @@ const ForwardModalByRoute = () => {
 
   return (
     <ForwardModal
-      onClose={() => navigate('..', { replace: true })}
       file={file}
+      onForward={() =>
+        isMultiSelectionActive
+          ? navigate('/paper', { replace: true })
+          : navigate('..', { replace: true })
+      }
+      onClose={() => navigate('..', { replace: true })}
     />
   )
 }

@@ -95,7 +95,7 @@ const ForwardModal = ({ onClose, onForward, file }) => {
         password
       })
       copyToClipboard(url, { target: modalContentRef.current, t, showAlert })
-      onClose()
+      onForward?.()
     } else {
       await forwardFile(client, [file], t, { ttl, password })
       onForward?.()
