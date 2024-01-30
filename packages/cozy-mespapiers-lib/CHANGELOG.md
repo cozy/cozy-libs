@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [75.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@75.1.0...cozy-mespapiers-lib@75.2.0) (2024-01-30)
+
+
+### Bug Fixes
+
+* **mespapiers:** Routes and file viewer behavior in multiselection ([681d49a](https://github.com/cozy/cozy-libs/commit/681d49abeaa178b211981457459b569a6046e945))
+
+
+### Features
+
+* **mespapiers:** Close multiselection after successful delete/forward ([05e7b4f](https://github.com/cozy/cozy-libs/commit/05e7b4faad0b0c4f9b8cbce3e5ca1656c614f1d6))
+
+
+
+
+
 # [75.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@75.0.2...cozy-mespapiers-lib@75.1.0) (2024-01-29)
 
 
