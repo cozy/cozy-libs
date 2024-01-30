@@ -101,7 +101,7 @@
     },
     "date": {
       "input": "Date limite",
-      "text": "Restreindre l'accès après une date limite"
+      "text": "Supprimer l'accès après une date limite"
     }
   },
   "ShareBottomSheet": {

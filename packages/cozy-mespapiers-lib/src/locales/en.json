@@ -101,7 +101,7 @@
     },
     "date": {
       "input": "Deadline",
-      "text": "Restrict access after a deadline"
+      "text": "Remove access after a deadline"
     }
   },
   "ShareBottomSheet": {
