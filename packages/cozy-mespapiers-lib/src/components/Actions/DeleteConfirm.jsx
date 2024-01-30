@@ -12,10 +12,12 @@ import Button from 'cozy-ui/transpiled/react/deprecated/Button'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { trashFiles, removeQualification } from './utils'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const DeleteConfirm = ({ files, isLast, onClose, children }) => {
   const { t } = useI18n()
   const client = useClient()
+  const { isMultiSelectionActive } = useMultiSelection()
   const [isDeleting, setDeleting] = useState(false)
   const [clearQualification, setClearQualification] = useState(false)
   const navigate = useNavigate()
@@ -28,8 +30,18 @@ const DeleteConfirm = ({ files, isLast, onClose, children }) => {
       await trashFiles(client, files)
     }
     onClose()
-    isLast && navigate('/paper', { replace: true })
-  }, [clearQualification, client, files, isLast, navigate, onClose])
+    if (isLast || isMultiSelectionActive) {
+      navigate('/paper', { replace: true })
+    }
+  }, [
+    clearQualification,
+    client,
+    files,
+    isLast,
+    isMultiSelectionActive,
+    navigate,
+    onClose
+  ])
 
   const handleOnChange = () => {
     setClearQualification(prev => !prev)
