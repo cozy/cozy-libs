@@ -109,7 +109,7 @@ const PapersList = () => {
               files={files}
               contacts={contacts}
               konnectors={konnectors}
-              accounts={accountsWithFiles}
+              accounts={{ accountsWithFiles, accountsWithoutFiles }}
             />
           )}
           {accountsWithoutFiles.length > 0 && (

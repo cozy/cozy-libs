@@ -52,6 +52,7 @@ const setup = () => {
       <PapersListByContact
         selectedQualificationLabel={null}
         files={[{}]}
+        accounts={{ accountsWithFiles: [], accountsWithoutFiles: [] }}
         contacts={[{}]}
       />
     </AppLike>
