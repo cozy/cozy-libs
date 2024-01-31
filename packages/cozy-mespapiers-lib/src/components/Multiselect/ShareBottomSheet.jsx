@@ -17,6 +17,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import MultiselectBackdrop from './MultiselectBackdrop'
 import { makeZipFolder } from '../Actions/utils'
 import { useFileSharing } from '../Contexts/FileSharingProvider'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const ShareBottomSheet = ({ onClose, fileId, docs }) => {
   const { t, f } = useI18n()
@@ -25,6 +26,7 @@ const ShareBottomSheet = ({ onClose, fileId, docs }) => {
   const { showAlert } = useAlert()
   const { shareFiles } = useFileSharing()
   const [isBackdropOpen, setIsBackdropOpen] = useState(false)
+  const { isMultiSelectionActive } = useMultiSelection()
 
   const shareAsAttachment = async () => {
     const idsToShare = fileId ? [fileId] : docs.map(doc => doc._id)
@@ -36,6 +38,11 @@ const ShareBottomSheet = ({ onClose, fileId, docs }) => {
         }),
         'success'
       )
+      if (isMultiSelectionActive) {
+        navigate('/paper', { replace: true })
+      } else {
+        navigate('..', { replace: true })
+      }
     } catch (error) {
       if (error.message === 'User did not share') return
 
