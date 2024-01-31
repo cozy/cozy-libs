@@ -7,6 +7,7 @@ import {
   print,
   divider
 } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import {
@@ -29,6 +30,7 @@ const useActions = (docs, { isActionBar, actionsOptions } = {}) => {
   const webviewIntent = useWebviewIntent()
   const { t, f } = useI18n()
   const { pushModal, popModal } = useModal()
+  const { showAlert } = useAlert()
   const { addMultiSelectionFile } = useMultiSelection()
   const [isPrintAvailable, setIsPrintAvailable] = useState(false)
   const { isFileSharingAvailable } = useFileSharing()
@@ -67,6 +69,7 @@ const useActions = (docs, { isActionBar, actionsOptions } = {}) => {
           addMultiSelectionFile,
           pushModal,
           popModal,
+          showAlert,
           isFileSharingAvailable
         }
       ),
@@ -81,6 +84,7 @@ const useActions = (docs, { isActionBar, actionsOptions } = {}) => {
       addMultiSelectionFile,
       pushModal,
       popModal,
+      showAlert,
       isFileSharingAvailable
     ]
   )
