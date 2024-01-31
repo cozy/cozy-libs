@@ -1,6 +1,6 @@
 import addDays from 'date-fns/addDays'
 import PropTypes from 'prop-types'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 
 import { useClient } from 'cozy-client'
 import { isNote } from 'cozy-client/dist/models/file'
@@ -34,7 +34,6 @@ const ForwardModal = ({ onClose, onForward, file }) => {
   const client = useClient()
   const { t } = useI18n()
   const { showAlert } = useAlert()
-  const modalContentRef = useRef(null)
   const [password, setPassword] = useState('')
   const [selectedDate, setSelectedDate] = useState(addDays(new Date(), 30))
   const [isValidDate, setIsValidDate] = useState(true)
@@ -94,7 +93,7 @@ const ForwardModal = ({ onClose, onForward, file }) => {
         ttl,
         password
       })
-      copyToClipboard(url, { target: modalContentRef.current, t, showAlert })
+      copyToClipboard(url, { t, showAlert })
       onForward?.()
     } else {
       await forwardFile(client, [file], t, { ttl, password })
@@ -120,7 +119,7 @@ const ForwardModal = ({ onClose, onForward, file }) => {
       data-testid="ForwardModal"
       content={
         <>
-          <div className="u-ta-center u-mb-1" ref={modalContentRef}>
+          <div className="u-ta-center u-mb-1">
             <FileImageLoader
               client={client}
               file={file}
