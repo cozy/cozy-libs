@@ -6,6 +6,7 @@ import { HashRouter } from 'react-router-dom'
 
 import { CozyProvider, createMockClient } from 'cozy-client'
 import { WebviewIntentProvider } from 'cozy-intent'
+import AlertProvider from 'cozy-ui/transpiled/react/providers/Alert'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import { I18n } from 'cozy-ui/transpiled/react/providers/I18n'
@@ -48,15 +49,17 @@ const AppLike = ({ children, client, history }) => {
                     >
                       <CozyTheme>
                         <BreakpointsProvider>
-                          <HashRouter history={hashHistory}>
-                            <MultiSelectionProvider>
-                              <PapersDefinitionsProvider>
-                                <StepperDialogProvider>
-                                  <ModalProvider>{children}</ModalProvider>
-                                </StepperDialogProvider>
-                              </PapersDefinitionsProvider>
-                            </MultiSelectionProvider>
-                          </HashRouter>
+                          <AlertProvider>
+                            <HashRouter history={hashHistory}>
+                              <MultiSelectionProvider>
+                                <PapersDefinitionsProvider>
+                                  <StepperDialogProvider>
+                                    <ModalProvider>{children}</ModalProvider>
+                                  </StepperDialogProvider>
+                                </PapersDefinitionsProvider>
+                              </MultiSelectionProvider>
+                            </HashRouter>
+                          </AlertProvider>
                         </BreakpointsProvider>
                       </CozyTheme>
                     </SearchProvider>
