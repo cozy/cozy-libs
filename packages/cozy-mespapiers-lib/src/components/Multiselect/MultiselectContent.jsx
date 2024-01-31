@@ -14,22 +14,19 @@ const MultiselectContent = ({ setIsFilePickerActive }) => {
 
   return (
     <div className="u-mb-2 u-w-100">
-      {allMultiSelectionFiles.length === 0 ? (
-        <Typography variant="h6" className="u-mb-1">
-          {t('Multiselect.empty')}
-        </Typography>
-      ) : (
-        <List className="u-flex u-flex-column u-flex-justify-center u-pv-0">
-          {allMultiSelectionFiles.map((file, idx) => (
-            <PaperCardItem
-              key={`${file._id}${idx}`}
-              paperIndex={idx}
-              paper={file}
-              className="u-mb-half u-w-100"
-            />
-          ))}
-        </List>
-      )}
+      <Typography variant="h6" className="u-mb-1">
+        {t('Multiselect.subtitle')}
+      </Typography>
+      <List className="u-flex u-flex-column u-flex-justify-center u-pv-0">
+        {allMultiSelectionFiles.map((file, idx) => (
+          <PaperCardItem
+            key={`${file._id}${idx}`}
+            paperIndex={idx}
+            paper={file}
+            className="u-mb-half u-w-100"
+          />
+        ))}
+      </List>
       <GhostButton
         label={t('Multiselect.select')}
         fullWidth
