@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 
 import Box from 'cozy-ui/transpiled/react/Box'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -26,7 +26,6 @@ const BoxPassword = ({
 }) => {
   const { t } = useI18n()
   const { showAlert } = useAlert()
-  const containerRef = useRef(null)
   const [displayHelper, setDisplayHelper] = useState(false)
 
   const handlePasswordToggle = val => {
@@ -42,15 +41,11 @@ const BoxPassword = ({
   }
 
   const handleCopy = () => {
-    copyToClipboard(password, { target: containerRef.current, t, showAlert })
+    copyToClipboard(password, { t, showAlert })
   }
 
   return (
-    <Box
-      borderRadius="0.5rem"
-      border="1px solid var(--borderMainColor)"
-      ref={containerRef}
-    >
+    <Box borderRadius="0.5rem" border="1px solid var(--borderMainColor)">
       <List className="u-p-0">
         <ListItem
           button
