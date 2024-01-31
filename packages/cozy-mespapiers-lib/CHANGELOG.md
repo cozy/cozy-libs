@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [75.5.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@75.4.0...cozy-mespapiers-lib@75.5.0) (2024-01-31)
+
+
+### Features
+
+* Navigate after share as attachment success ([a6d0a3c](https://github.com/cozy/cozy-libs/commit/a6d0a3cead44143a0f9edd9c22de1cd2b71fa15a))
+* Update multiselect wording ([0200a14](https://github.com/cozy/cozy-libs/commit/0200a14fc772f672cd5d6bd59059c56d2b9e5db1))
+
+
+
+
+
 # [75.4.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@75.3.1...cozy-mespapiers-lib@75.4.0) (2024-01-31)
 
 
