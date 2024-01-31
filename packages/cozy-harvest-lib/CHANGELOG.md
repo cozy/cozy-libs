@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [22.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.2.0...cozy-harvest-lib@22.3.0) (2024-01-31)
+
+
+### Features
+
+* Add doctype debug cards for bills, files and identities ([1e65d7d](https://github.com/cozy/cozy-libs/commit/1e65d7dde77776a19dc545073968b7b03b09a5b5))
+* Add realtime to doctype debug cards ([36609e5](https://github.com/cozy/cozy-libs/commit/36609e5d9d33ace65e9ae74a56db6b0ed2f86e92))
+* Pass the sourceAccountIdentifier to harvest cards ([309e16c](https://github.com/cozy/cozy-libs/commit/309e16cfb17ca08ded268ac368e8fb27dcd97710))
+
+
+
+
+
 # [22.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.1.0...cozy-harvest-lib@22.2.0) (2024-01-29)
 
 
