@@ -391,7 +391,7 @@
       "default": "Ma sélection",
       "nbSelected": "%{smart_count} élément sélectionné |||| %{smart_count} éléments sélectionnés"
     },
-    "empty": "Choisir le(s) document(s) à envoyer",
+    "subtitle": "Ajouter des documents à votre sélection",
     "select": "Ajouter à ma sélection",
     "folderZipName": "%{contactName} - documents - %{date}.zip"
   },
