@@ -127,21 +127,21 @@ export const buildFilesByContacts = ({
   t
 }) => {
   const result = []
-  const isAloneContactOrKonnector =
-    [...contacts, ...konnectors].length <= 1 && !hasMultipleAccounts
-
   const {
     itemsFound: filesCreatedByKonnectors,
     remainingItems: filesNotCreatedByKonnectors
   } = filterWithRemaining(files, isFromKonnector)
 
-  if (filesCreatedByKonnectors.length > 0) {
-    const filesByKonnectors = groupBy(
-      filesCreatedByKonnectors,
-      file =>
-        `${file.cozyMetadata.createdByApp}-${file.cozyMetadata.sourceAccountIdentifier}`
-    )
+  const filesByKonnectors = groupBy(
+    filesCreatedByKonnectors,
+    file =>
+      `${file.cozyMetadata.createdByApp}-${file.cozyMetadata.sourceAccountIdentifier}`
+  )
+  const isAloneContactOrKonnector =
+    contacts.length + Object.keys(filesByKonnectors).length <= 1 && // Check if there is only one contact or one konnector/account in all files created by konnectors (may have konnectors that are no longer connected/functional)
+    !hasMultipleAccounts // Check if there is only one account in the case of a single konnector (necessary because an account may not have files)
 
+  if (filesCreatedByKonnectors.length > 0) {
     const unsortedlistByKonnector = Object.values(filesByKonnectors).map(
       value => ({
         withHeader: true,
