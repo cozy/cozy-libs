@@ -27,7 +27,6 @@
   "dependencies": {
     "@cozy/minilog": "^1.0.0",
     "classnames": "^2.2.6",
-    "copy-text-to-clipboard": "^2.1.1",
     "cozy-device-helper": "^3.0.0",
     "cozy-doctypes": "^1.89.4",
     "lodash": "^4.17.19",
