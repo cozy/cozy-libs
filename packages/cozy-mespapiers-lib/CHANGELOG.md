@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [75.6.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@75.5.0...cozy-mespapiers-lib@75.6.0) (2024-02-01)
+
+
+### Bug Fixes
+
+* Update copyToClipboard to use navigator.clipboard ([2d82f92](https://github.com/cozy/cozy-libs/commit/2d82f9228d9c0850ce7a765a99dbdbe5a0550513))
+* Use await for copyToClipboard method ([0bff241](https://github.com/cozy/cozy-libs/commit/0bff2415659ea55aab82bc52eaa869d81bf0bfcc))
+* Use copyToClipboard instead of copy-text-to-clipboard package ([d1f7d51](https://github.com/cozy/cozy-libs/commit/d1f7d513e99b26c85050a52db190ccb8af6cf105))
+
+
+### Features
+
+* Remove copy-text-to-clipboard package ([55b75ed](https://github.com/cozy/cozy-libs/commit/55b75ede59c66f4f4761f463b65bf326e2dc0b01))
+* Update cozy-ui to 102.2.1 ([02afc25](https://github.com/cozy/cozy-libs/commit/02afc25f576ada7707ec9f02e6ef0449103e2d56))
+
+
+
+
+
 # [75.5.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@75.4.0...cozy-mespapiers-lib@75.5.0) (2024-01-31)
 
 
