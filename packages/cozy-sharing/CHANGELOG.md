@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 10.2.0 (2024-02-01)
+
+
+### Bug Fixes
+
+* Use navigator.clipboard instead of copy-text-to-clipboard ([6727c26](https://github.com/cozy/cozy-libs/commit/6727c26eaa796735d51300756ff617f999cc56dd))
+
+
+### Features
+
+* Remove copy-text-to-clipboard package ([53e46c8](https://github.com/cozy/cozy-libs/commit/53e46c8dedf33cca5f3a13be6d9d230bfaffa335))
+
+
+
+
+
 ## [10.1.4](https://github.com/cozy/cozy-libs/compare/cozy-sharing@10.1.3...cozy-sharing@10.1.4) (2024-01-05)
 
 **Note:** Version bump only for package cozy-sharing
