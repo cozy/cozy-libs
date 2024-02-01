@@ -40,8 +40,8 @@ const BoxPassword = ({
     setDisplayHelper(true)
   }
 
-  const handleCopy = () => {
-    copyToClipboard(password, { t, showAlert })
+  const handleCopy = async () => {
+    await copyToClipboard(password, { t, showAlert })
   }
 
   return (
