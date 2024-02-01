@@ -1,4 +1,3 @@
-import copy from 'copy-text-to-clipboard'
 import PropTypes from 'prop-types'
 import React, { useState, useEffect, useCallback } from 'react'
 
@@ -25,20 +24,23 @@ const ShareByLink = ({ link, document, documentType, onEnable }) => {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
 
   const copyLinkToClipboard = useCallback(
-    ({ isAutomaticCopy }) => {
-      if (copy(link)) {
+    async ({ isAutomaticCopy }) => {
+      try {
+        await navigator.clipboard.writeText(link)
         setAlert({
           open: true,
           severity: 'success',
           message: t(`${documentType}.share.shareByLink.copied`)
         })
-      } else if (!isAutomaticCopy) {
-        // In case of automatic copy, the browser can block the copy request. This is not shown to the user since it is expected and can be circumvented by clicking directly on the copy link
-        setAlert({
-          open: true,
-          severity: 'error',
-          message: t(`${documentType}.share.shareByLink.failed`)
-        })
+      } catch {
+        if (!isAutomaticCopy) {
+          // In case of automatic copy, the browser can block the copy request. This is not shown to the user since it is expected and can be circumvented by clicking directly on the copy link
+          setAlert({
+            open: true,
+            severity: 'error',
+            message: t(`${documentType}.share.shareByLink.failed`)
+          })
+        }
       }
     },
     [documentType, link, t]
