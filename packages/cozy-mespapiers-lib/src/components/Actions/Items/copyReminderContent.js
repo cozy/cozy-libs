@@ -22,7 +22,7 @@ export const copyReminderContent = () => {
             `/notes/${docs[0]._id}/text`
           )
 
-      copyToClipboard(data, { t, showAlert })
+      await copyToClipboard(data, { t, showAlert })
     },
     Component: withLocales(
       // eslint-disable-next-line react/display-name
