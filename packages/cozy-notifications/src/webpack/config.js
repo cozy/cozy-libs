@@ -7,6 +7,9 @@ export default {
       handlebars: 'handlebars/dist/handlebars.min.js'
     }
   },
+  optimization: {
+    minimize: false
+  },
   module: {
     // mjml-core/lib/helpers/mjmlconfig and encoding/lib/iconv-loader use
     // expressions inside require. We do not need the functionality provided
