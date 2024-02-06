@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [75.6.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@75.6.2...cozy-mespapiers-lib@75.6.3) (2024-02-06)
+
+
+### Bug Fixes
+
+* **mespapiers:** HealthTheme flag value was wrong for paperDef creation ([32a5bf8](https://github.com/cozy/cozy-libs/commit/32a5bf8869a7f89933dc36599564da8b81c90dc7))
+
+
+
+
+
 ## [75.6.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@75.6.1...cozy-mespapiers-lib@75.6.2) (2024-02-01)
 
 
