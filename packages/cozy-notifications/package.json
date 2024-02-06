@@ -23,9 +23,9 @@
   "dependencies": {
     "handlebars": "^4.1.2",
     "handlebars-layouts": "^3.1.4",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "mjml": "4.3.1",
-    "word-wrap": "^1.2.3"
+    "word-wrap": "^1.2.5"
   },
   "peerDependencies": {
     "cozy-ui": ">=40.9.1"
