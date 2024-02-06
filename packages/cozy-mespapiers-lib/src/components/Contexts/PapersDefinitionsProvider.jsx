@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useMemo, useState } from 'react'
 
 import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
@@ -16,14 +16,6 @@ import { useScannerI18n } from '../Hooks/useScannerI18n'
 
 const log = minilog('PapersDefinitionsProvider')
 
-const papersJSON = flag('hide.healthTheme.enabled')
-  ? papersJSON_default
-  : {
-      papersDefinitions: papersJSON_default.papersDefinitions.concat(
-        papersJSON_health.papersDefinitions
-      )
-    }
-
 const PapersDefinitionsContext = createContext()
 
 const PapersDefinitionsProvider = ({ children }) => {
@@ -38,6 +30,20 @@ const PapersDefinitionsProvider = ({ children }) => {
 
   const customPapersDefinitionsFlag = useFlag('customPapersDefinitions')
   const [papersDefinitions, setPapersDefinitions] = useState([])
+
+  const isHealthThemeHidden = flag('hide.healthTheme.enabled')
+
+  const papersJSON = useMemo(
+    () =>
+      isHealthThemeHidden
+        ? papersJSON_default
+        : {
+            papersDefinitions: papersJSON_default.papersDefinitions.concat(
+              papersJSON_health.papersDefinitions
+            )
+          },
+    [isHealthThemeHidden]
+  )
 
   useEffect(() => {
     ;(async () => {
@@ -88,7 +94,13 @@ const PapersDefinitionsProvider = ({ children }) => {
         log.info('PapersDefinitions of the app loaded')
       }
     })()
-  }, [client, customPapersDefinitionsFlag, scannerT, t])
+  }, [
+    client,
+    customPapersDefinitionsFlag,
+    scannerT,
+    t,
+    papersJSON.papersDefinitions
+  ])
 
   return (
     <PapersDefinitionsContext.Provider
