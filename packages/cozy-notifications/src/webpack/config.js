@@ -4,7 +4,7 @@ import path from 'path'
 export default {
   resolve: {
     alias: {
-      handlebars: 'handlebars/runtime.js'
+      handlebars: 'handlebars/dist/handlebars.min.js'
     }
   },
   module: {
