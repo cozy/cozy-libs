@@ -18,13 +18,11 @@ export default {
     exprContextCritical: false
   },
   plugins: [
+    // Fix "Error: Cannot find module '../lib/utils.js'" at runtime
+    // https://github.com/mjmlio/mjml/issues/2132
     new webpack.NormalModuleReplacementPlugin(
       /node_modules\/uglify-js\/tools\/node.js$/,
       path.join(__dirname, './uglify-node.js')
-    ),
-    new webpack.NormalModuleReplacementPlugin(
-      /node_modules\/mimer\/lib\/data\/parser.js$/,
-      path.join('./src/hacks/mimer-parser.js')
     )
   ]
 }
