@@ -15,7 +15,13 @@ export default {
     // expressions inside require. We do not need the functionality provided
     // by the dynamic require
     exprContextRegExp: /$^/,
-    exprContextCritical: false
+    exprContextCritical: false,
+    rules: [
+      {
+        test: /\.hbs$/,
+        loader: 'raw-loader'
+      }
+    ]
   },
   plugins: [
     // Fix "Error: Cannot find module '../lib/utils.js'" at runtime
