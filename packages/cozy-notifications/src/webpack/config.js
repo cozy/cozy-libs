@@ -15,15 +15,7 @@ export default {
     // expressions inside require. We do not need the functionality provided
     // by the dynamic require
     exprContextRegExp: /$^/,
-    exprContextCritical: false,
-
-    rules: [
-      // data-uri has a hashbang at the top of the file
-      {
-        test: /node_modules\/datauri\/index.js$/,
-        loader: 'shebang-loader'
-      }
-    ]
+    exprContextCritical: false
   },
   plugins: [
     new webpack.NormalModuleReplacementPlugin(
