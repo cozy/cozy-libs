@@ -28,7 +28,8 @@
     "word-wrap": "^1.2.5"
   },
   "peerDependencies": {
-    "cozy-ui": ">=40.9.1"
+    "cozy-ui": ">=40.9.1",
+    "raw-loader": ">=4.0.2"
   },
   "devDependencies": {
     "@babel/cli": "7.16.8",
