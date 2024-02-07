@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.15.0 (2024-02-07)
+
+
+### Bug Fixes
+
+* Correct handlebars resolution for webpack config ([6e5e673](https://github.com/cozy/cozy-libs/commit/6e5e673583d593049fc07ae68578543794b2f5aa))
+* Package mjml can not be minimized ([dd7bbf4](https://github.com/cozy/cozy-libs/commit/dd7bbf4af452b51b4287cb145e48b0cba2280daf))
+
+
+### Features
+
+* Add a FileSharingProvider to expose feature from flagship app ([dbf10d4](https://github.com/cozy/cozy-libs/commit/dbf10d4cfb6418ca0ec160fe124ae40afed2c738))
+* Add a rule to load .hbs with raw-loader ([2df8f4f](https://github.com/cozy/cozy-libs/commit/2df8f4f47c0a51f88f65a35ec29ab84d04527c01))
+* Remove shebang-loader rules ([87a9c74](https://github.com/cozy/cozy-libs/commit/87a9c746851ef2c134c009d102629a64a1130701))
+* Remove unused mimer-parser ([647fa35](https://github.com/cozy/cozy-libs/commit/647fa357ec6731b9865ab963a5b895bc32727990))
+* Update packages ([b07dfaf](https://github.com/cozy/cozy-libs/commit/b07dfaf09463d83647b7c0a4982b0aafe92f9635))
+
+
+
+
+
 # 0.14.0 (2023-01-31)
 
 
