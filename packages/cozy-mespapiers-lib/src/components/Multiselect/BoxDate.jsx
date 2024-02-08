@@ -1,3 +1,4 @@
+import format from 'date-fns/format'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -14,7 +15,8 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { DatePicker } from '../ModelSteps/widgets/DatePicker'
 
 const BoxDate = ({ isValid, onChange, date, toggle, onToggle, helperText }) => {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
+  const formatDate = lang === 'fr' ? 'dd/MM/yyyy' : 'MM/dd/yyyy'
 
   const handleDateToggle = val => {
     const value = val?.target?.checked ?? val
@@ -52,7 +54,7 @@ const BoxDate = ({ isValid, onChange, date, toggle, onToggle, helperText }) => {
         <div className="u-pt-half u-ph-1 u-pb-1">
           <DatePicker
             label={t('ForwardModal.date.input')}
-            placeholder="01/01/2022"
+            placeholder={format(new Date(), formatDate)}
             value={date}
             isValid={isValid}
             onChange={onChange}

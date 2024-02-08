@@ -1,3 +1,4 @@
+import format from 'date-fns/format'
 import React, { useState, useEffect } from 'react'
 
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
@@ -30,11 +31,12 @@ const InputDateAdapter = ({
   idx
 }) => {
   const { name, inputLabel } = attrs
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const { isDesktop } = useBreakpoints()
   const classes = useStyles(isDesktop)
   const [isValidDate, setIsValidDate] = useState(true)
   const [selectedDate, setSelectedDate] = useState(formDataValue || null)
+  const formatDate = lang === 'fr' ? 'dd/MM/yyyy' : 'MM/dd/yyyy'
 
   /* Set default value */
   useEffect(() => {
@@ -51,7 +53,7 @@ const InputDateAdapter = ({
   return (
     <DatePicker
       label={inputLabel ? t(inputLabel) : ''}
-      placeholder="01/01/2022"
+      placeholder={format(new Date(), formatDate)}
       className={classes.overrides}
       value={selectedDate}
       isValid={setIsValidDate}
