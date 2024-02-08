@@ -56,6 +56,7 @@ const BoxDate = ({ isValid, onChange, date, toggle, onToggle, helperText }) => {
             label={t('ForwardModal.date.input')}
             placeholder={format(new Date(), formatDate)}
             value={date}
+            minDate={new Date()}
             isValid={isValid}
             onChange={onChange}
             helperText={helperText}
