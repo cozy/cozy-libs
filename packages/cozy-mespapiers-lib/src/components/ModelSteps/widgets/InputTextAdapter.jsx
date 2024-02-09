@@ -46,7 +46,7 @@ const InputTextAdapter = ({
   formDataValue,
   setValue,
   setValidInput,
-  setIsFocus,
+  onFocus,
   idx
 }) => {
   const {
@@ -129,12 +129,12 @@ const InputTextAdapter = ({
   }
 
   const handleOnFocus = () => {
-    setIsFocus(true)
+    onFocus(true)
     setIsTooShort(false)
   }
 
   const handleOnBlur = () => {
-    setIsFocus(false)
+    onFocus(false)
     if (isRequired || currentValue.length !== 0) {
       setIsTooShort(
         expectedLength.min != null && currentValue.length < expectedLength.min

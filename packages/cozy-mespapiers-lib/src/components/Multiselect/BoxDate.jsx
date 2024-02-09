@@ -1,10 +1,5 @@
-import DateFnsUtils from '@date-io/date-fns'
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker
-} from '@material-ui/pickers'
 import PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import Box from 'cozy-ui/transpiled/react/Box'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -16,33 +11,14 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Switch from 'cozy-ui/transpiled/react/Switch'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-const BoxDate = ({ onChange, date, toggle, onToggle, helperText }) => {
-  const { t, lang } = useI18n()
-  const [locales, setLocales] = useState('')
-  const [displayHelper, setDisplayHelper] = useState(false)
+import { DatePicker } from '../ModelSteps/widgets/DatePicker'
 
-  useEffect(() => {
-    let isMounted = true
-    ;(async () => {
-      const src = require(`date-fns/locale/${lang}/index.js`)
-      isMounted && setLocales(src)
-    })()
-
-    return () => {
-      isMounted = false
-    }
-  }, [lang])
+const BoxDate = ({ isValid, onChange, date, toggle, onToggle, helperText }) => {
+  const { t } = useI18n()
 
   const handleDateToggle = val => {
     const value = val?.target?.checked ?? val
     onToggle(value)
-  }
-
-  const handleOnFocus = () => {
-    setDisplayHelper(false)
-  }
-  const handleOnBlur = () => {
-    setDisplayHelper(true)
   }
 
   return (
@@ -74,28 +50,20 @@ const BoxDate = ({ onChange, date, toggle, onToggle, helperText }) => {
       </List>
       {toggle && (
         <div className="u-pt-half u-ph-1 u-pb-1">
-          <MuiPickersUtilsProvider utils={DateFnsUtils} locale={locales}>
-            <KeyboardDatePicker
-              placeholder="01/01/2022"
-              fullWidth
-              inputProps={{
-                inputMode: 'numeric'
-              }}
-              KeyboardButtonProps={{
-                'aria-label': t('ForwardModal.date.input')
-              }}
-              value={date}
-              error={displayHelper && !!helperText}
-              helperText={displayHelper && helperText}
-              label={t('ForwardModal.date.input')}
-              onChange={onChange}
-              onFocus={handleOnFocus}
-              onBlur={handleOnBlur}
-              inputVariant="outlined"
-              cancelLabel={t('common.cancel')}
-              format={lang === 'fr' ? 'dd/MM/yyyy' : 'MM/dd/yyyy'}
-            />
-          </MuiPickersUtilsProvider>
+          <DatePicker
+            label={t('ForwardModal.date.input')}
+            placeholder="01/01/2022"
+            value={date}
+            isValid={isValid}
+            onChange={onChange}
+            helperText={helperText}
+            inputProps={{
+              inputMode: 'numeric'
+            }}
+            KeyboardButtonProps={{
+              'aria-label': t('ForwardModal.date.input')
+            }}
+          />
         </div>
       )}
     </Box>
@@ -103,6 +71,7 @@ const BoxDate = ({ onChange, date, toggle, onToggle, helperText }) => {
 }
 
 BoxDate.propTypes = {
+  isValid: PropTypes.func,
   onChange: PropTypes.func.isRequired,
   date: PropTypes.instanceOf(Date),
   toggle: PropTypes.bool.isRequired,

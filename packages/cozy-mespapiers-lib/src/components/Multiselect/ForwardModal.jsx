@@ -67,23 +67,14 @@ const ForwardModal = ({ onClose, onForward, file }) => {
 
   // #region Handle BoxDate
   const handleDateToggle = val => {
+    if (!val) {
+      setIsValidDate(true)
+    }
+    const defaultValue = val ? addDays(new Date(), 30) : null
+    setSelectedDate(defaultValue)
     setDateToggle(val)
   }
-  const handleDateChange = value => {
-    if (value?.toString() !== 'Invalid Date') {
-      setIsValidDate(true)
-      setSelectedDate(value)
-    } else if (value === '') {
-      setIsValidDate(true)
-      setSelectedDate(null)
-    } else {
-      setIsValidDate(false)
-      setSelectedDate(null)
-    }
-  }
-  const helperTextDate = !isValidDate
-    ? t('InputDateAdapter.invalidDateMessage')
-    : null
+  const helperTextDate = t('InputDateAdapter.invalidDateMessage')
   // #endregion
 
   const handleClick = async () => {
@@ -144,7 +135,8 @@ const ForwardModal = ({ onClose, onForward, file }) => {
             <Typography>{textContent}</Typography>
           </div>
           <BoxDate
-            onChange={handleDateChange}
+            isValid={setIsValidDate}
+            onChange={setSelectedDate}
             date={selectedDate}
             onToggle={handleDateToggle}
             toggle={dateToggle}

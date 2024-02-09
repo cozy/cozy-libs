@@ -126,7 +126,7 @@ const InformationDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
                     formDataValue={formData.metadata[attrs.name]}
                     setValue={setValue}
                     setValidInput={setValidInput}
-                    setIsFocus={setIsFocus}
+                    onFocus={setIsFocus}
                     idx={idx}
                   />
                 </div>

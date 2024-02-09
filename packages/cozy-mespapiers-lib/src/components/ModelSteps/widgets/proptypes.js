@@ -17,6 +17,6 @@ export const defaultProptypes = {
   defaultValue: PropTypes.string,
   setValue: PropTypes.func.isRequired,
   setValidInput: PropTypes.func.isRequired,
-  setIsFocus: PropTypes.func.isRequired,
+  onFocus: PropTypes.func.isRequired,
   idx: PropTypes.number
 }
