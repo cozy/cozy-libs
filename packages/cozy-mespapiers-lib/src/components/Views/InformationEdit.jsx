@@ -116,7 +116,7 @@ const InformationEdit = () => {
                       formDataValue={defaultValue}
                       setValue={setValue}
                       setValidInput={setValidInput}
-                      setIsFocus={setIsFocus}
+                      onFocus={setIsFocus}
                       idx={0}
                     />
                   )}
