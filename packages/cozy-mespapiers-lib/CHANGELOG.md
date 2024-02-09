@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [76.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@76.0.0...cozy-mespapiers-lib@76.1.0) (2024-02-09)
+
+
+### Features
+
+* **mespapiers:** Block selection of a past date for sharing by link ([124d412](https://github.com/cozy/cozy-libs/commit/124d412bf0bb0eda304a8ffb9e793569099ee374))
+* **mespapiers:** Create a DatePicker component to unify uses ([7b09be9](https://github.com/cozy/cozy-libs/commit/7b09be9d54f61c5ea83e9397262f480dc7d3767b))
+* **mespapiers:** Make the input date placeholder dynamic ([dbe3809](https://github.com/cozy/cozy-libs/commit/dbe380909137e020354c7603d453e9c54ce76275))
+
+
+
+
+
 # [76.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@75.6.3...cozy-mespapiers-lib@76.0.0) (2024-02-08)
 
 
