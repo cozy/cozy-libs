@@ -543,7 +543,6 @@
     "otherAccount": "Depuis un autre compte…"
   },
   "triggerManager": {
-    "connecting": "Connexion du compte…",
     "confirmationModal": {
       "title": "Mettre à jour les identifiants ?",
       "description": "Vos identifiants précédents seront perdus. Ajoutez un nouveau compte pour les conserver.",
