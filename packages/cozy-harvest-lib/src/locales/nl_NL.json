@@ -535,7 +535,6 @@
     "otherAccount": "Uit ander account…"
   },
   "triggerManager": {
-    "connecting": "Bezig met koppelen…",
     "confirmationModal": {
       "title": "Inloggegevens bijwerken?",
       "description": "Je vorige inloggegevens worden gewist - voeg een nieuw account toe om ze te bewaren.",

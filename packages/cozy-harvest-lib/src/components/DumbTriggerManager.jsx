@@ -309,7 +309,6 @@ export class DumbTriggerManager extends Component {
       t,
       fieldOptions,
       flow,
-      flowState,
       client,
       OAuthFormWrapperComp,
       OAuthFormWrapperCompProps = {},
@@ -317,8 +316,6 @@ export class DumbTriggerManager extends Component {
       intentsApi,
       onClose
     } = this.props
-
-    const submitting = flowState.running
 
     const {
       account,
@@ -333,18 +330,13 @@ export class DumbTriggerManager extends Component {
     const { oauth } = konnector
 
     const showCiphersList = step === 'ciphersList'
-    const isSubmittingSelectedCipher =
-      submitting && selectedCipher && showCiphersList
     const showAccountForm = step === 'accountForm'
     const konnectorPolicy = findKonnectorPolicy(konnector)
 
-    if (isWaitingPaywallCheck || isSubmittingSelectedCipher) {
+    if (isWaitingPaywallCheck) {
       return (
         <div className="u-flex u-flex-column u-flex-items-center u-pv-2">
           <Spinner size="xxlarge" />
-          {isSubmittingSelectedCipher ? (
-            <p>{t('triggerManager.connecting')}</p>
-          ) : null}
         </div>
       )
     }
@@ -459,7 +451,6 @@ DumbTriggerManager.propTypes = {
    */
   fieldOptions: PropTypes.object,
   flow: PropTypes.object,
-  flowState: PropTypes.object,
   /** Used to inject a component around OAuthForm, and so customize the UI from the app */
   OAuthFormWrapperComp: PropTypes.oneOfType([
     PropTypes.element,
