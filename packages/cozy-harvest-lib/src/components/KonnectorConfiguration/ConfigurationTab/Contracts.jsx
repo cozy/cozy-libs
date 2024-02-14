@@ -4,11 +4,11 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import CozyClient, { Q, queryConnect, RealTimeQueries } from 'cozy-client'
-import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import NavigationList, {
   NavigationListSection,
   NavigationListHeader
 } from 'cozy-ui/transpiled/react/NavigationList'
+import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import BIContractActivationWindow from './BiContractActivationWindow'
@@ -53,7 +53,7 @@ const DumbContracts = ({
   const headerKey = customHeaderPerDoctype[doctype] || 'default'
 
   return (
-    <MuiCozyTheme>
+    <CozyTheme>
       <RealTimeQueries doctype="io.cozy.bank.accounts" />
       <NavigationList>
         <NavigationListHeader>
@@ -81,7 +81,7 @@ const DumbContracts = ({
           />
         </NavigationListSection>
       </NavigationList>
-    </MuiCozyTheme>
+    </CozyTheme>
   )
 }
 

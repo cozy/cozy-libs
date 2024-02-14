@@ -4,9 +4,9 @@ import { createPortal } from 'react-dom'
 import { useWebviewIntent } from 'cozy-intent'
 import Backdrop from 'cozy-ui/transpiled/react/Backdrop'
 import LinearProgress from 'cozy-ui/transpiled/react/LinearProgress'
-import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
@@ -24,7 +24,7 @@ export const ConnectionBackdrop = ({ name }) => {
   const { t } = useI18n()
 
   return (
-    <MuiCozyTheme variant="inverted">
+    <CozyTheme variant="inverted">
       <div className={styles.container}>
         <Backdrop
           open
@@ -53,7 +53,7 @@ export const ConnectionBackdrop = ({ name }) => {
           </div>
         </Backdrop>
       </div>
-    </MuiCozyTheme>
+    </CozyTheme>
   )
 }
 

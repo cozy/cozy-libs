@@ -59,3 +59,9 @@ jest.mock(
     virtual: true
   }
 )
+
+/* Fix error: "TypeError: (0 , _color.createNodeWithThemeCssVars) is not a function" */
+jest.mock('cozy-ui/transpiled/react/utils/color', () => ({
+  createNodeWithThemeCssVars: () => null,
+  getCssVariableValue: () => '#fff'
+}))
