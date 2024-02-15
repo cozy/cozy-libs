@@ -2754,6 +2754,7 @@
       "icon": "people",
       "featureDate": "referencedDate",
       "maxDisplay": 4,
+      "filenameModel": ["labelGivenByUser"],
       "acquisitionSteps": [
         {
           "model": "scan",
@@ -2766,6 +2767,19 @@
           "page": "back",
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.card.back.text"
+        },
+        {
+          "model": "information",
+          "text": "PaperJSON.generic.fileLabel.text",
+          "attributes": [
+            {
+              "name": "labelGivenByUser",
+              "type": "text",
+              "required": true,
+              "maxLength": 255,
+              "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
+            }
+          ]
         },
         {
           "model": "information",
