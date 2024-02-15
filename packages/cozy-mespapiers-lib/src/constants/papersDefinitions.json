@@ -2770,6 +2770,19 @@
         },
         {
           "model": "information",
+          "illustration": "IlluGenericInputText.svg",
+          "text": "PaperJSON.card.number.text",
+          "attributes": [
+            {
+              "name": "number",
+              "type": "text",
+              "maxLength": 255,
+              "inputLabel": "PaperJSON.card.number.inputLabel"
+            }
+          ]
+        },
+        {
+          "model": "information",
           "text": "PaperJSON.generic.fileLabel.text",
           "attributes": [
             {
