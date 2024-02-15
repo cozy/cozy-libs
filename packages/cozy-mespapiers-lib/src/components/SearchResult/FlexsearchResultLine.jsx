@@ -2,15 +2,17 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
-import { isFile } from 'cozy-client/dist/models/file'
+import { useClient } from 'cozy-client'
 import ListItemByDoc from 'cozy-ui/transpiled/react/ListItem/ListItemByDoc'
 
+import { makeFlexsearchResultLineOnClick } from './helpers'
 import useActions from './useActions'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const FlexsearchResultLine = ({ doc, expandedAttributesProps }) => {
   const actions = useActions([doc])
   const navigate = useNavigate()
+  const client = useClient()
   const { pathname, search } = useLocation()
   const {
     isMultiSelectionActive,
@@ -33,19 +35,14 @@ const FlexsearchResultLine = ({ doc, expandedAttributesProps }) => {
     )
   }
 
-  const handleClick = !isFile(doc)
-    ? undefined
-    : () => {
-        const qualificationLabel = doc?.metadata?.qualification?.label
-
-        if (isMultiSelectionActive) {
-          changeCurrentMultiSelectionFile(doc)
-        } else {
-          navigate(`/paper/files/${qualificationLabel}/${doc._id}`, {
-            state: { background: `${pathname}${search}` }
-          })
-        }
-      }
+  const handleClick = makeFlexsearchResultLineOnClick({
+    client,
+    doc,
+    navigate,
+    navigateState: { background: `${pathname}${search}` },
+    isMultiSelectionActive,
+    changeCurrentMultiSelectionFile
+  })
 
   return (
     <>
