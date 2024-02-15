@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [78.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@77.0.0...cozy-mespapiers-lib@78.0.0) (2024-02-15)
+
+
+### Features
+
+* **mespapiers:** Add information step for custom name to fidelity card ([5f6fce7](https://github.com/cozy/cozy-libs/commit/5f6fce72e5374388bac369c9332ed47c303e945b))
+* **mespapiers:** Add information step for number to fidelity card ([a8f3955](https://github.com/cozy/cozy-libs/commit/a8f3955bb323fcc43476ce2fb72aa5c51172d525))
+* **mespapiers:** Add the side of the page to the builded name ([58c9b0c](https://github.com/cozy/cozy-libs/commit/58c9b0cdd39bb7d9462631005d1b97b8aee57039))
+* **mespapiers:** Upgrade cozy from 103.1.0 to 103.4.0 ([edc62e5](https://github.com/cozy/cozy-libs/commit/edc62e5d20d5709c1ead4a5a2d5bd66d138842a9))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 103.4.0`
+
+
+
+
+
 # [77.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@76.2.0...cozy-mespapiers-lib@77.0.0) (2024-02-15)
 
 
