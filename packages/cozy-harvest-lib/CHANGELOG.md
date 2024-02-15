@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [22.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.3.0...cozy-harvest-lib@22.4.0) (2024-02-15)
+
+
+### Features
+
+* **harvest:** Remove useless Spinner during the connection ([19f3216](https://github.com/cozy/cozy-libs/commit/19f32167dfa469459b6fffe94c633435229118c8))
+* **harvest:** Upgrade cozy deps ([af60567](https://github.com/cozy/cozy-libs/commit/af605676e89727b403b73cf898ce4ad7973f4db6))
+* **harvest:** Upgrade cozy-ui from 95.9.0 to 103.2.0 ([adc3937](https://github.com/cozy/cozy-libs/commit/adc393742f022615415c8c4461248100db63ac53))
+
+
+
+
+
 # [22.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.2.0...cozy-harvest-lib@22.3.0) (2024-01-31)
 
 
