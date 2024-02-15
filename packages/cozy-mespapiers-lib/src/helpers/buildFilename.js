@@ -1,13 +1,45 @@
 import { harmonizeContactsNames } from '../components/Papers/helpers'
 
 /**
+ * @param {object} params
+ * @param {string[]} params.filenameModel - Array of property of paerDefinition
+ * @param {string} params.contactName - Name of contact
+ * @param {string} params.filename - Name of the file
+ * @param {string} [params.formatedDate] - Date already formated
+ * @param {object} [params.metadata] - Object with data provided by the user (eg: labelGivenByUser)
+ */
+const buildFilenameWithModel = ({
+  filenameModel,
+  contactName,
+  filename,
+  formatedDate,
+  metadata
+}) => {
+  return filenameModel
+    .map(el => {
+      switch (el) {
+        case 'label':
+          return filename
+        case 'contactName':
+          return contactName
+        case 'featureDate':
+          return formatedDate
+        default:
+          return metadata?.[el]
+      }
+    })
+    .filter(Boolean)
+}
+
+/**
  * Builded Paper name with qualification name & without use filename original
- * @param {string} contacts - Array of contacts
- * @param {string} qualificationName - Name of the paper qualification
- * @param {Array<string>} [filenameModel] - Array of key for build filename
- * @param {object} [metadata] - Object with data of Information input
- * @param {string} [pageName] - Name of page (eg Front)
- * @param {string} [formatedDate] - Date already formated
+ * @param {object} params
+ * @param {string} params.contacts - Array of contacts
+ * @param {string} params.qualificationName - Name of the paper qualification
+ * @param {Array<string>} [params.filenameModel] - Array of key for build filename
+ * @param {object} [params.metadata] - Object with data of Information input
+ * @param {string} [params.pageName] - Name of page (eg Front)
+ * @param {string} [params.formatedDate] - Date already formated
  * @returns {string} Paper name with PDF extension
  */
 export const buildFilename = ({
@@ -34,14 +66,13 @@ export const buildFilename = ({
   if (formatedDate) filename.push(formatedDate)
 
   if (filenameModel?.length > 0) {
-    const filenameWithModel = filenameModel
-      .map(el => {
-        if (el === 'label') return safeFileName
-        if (el === 'contactName') return contactName || ''
-        if (el === 'featureDate') return formatedDate || ''
-        return metadata?.[el] ? metadata[el] : null
-      })
-      .filter(Boolean)
+    const filenameWithModel = buildFilenameWithModel({
+      filenameModel,
+      contactName,
+      filename: safeFileName,
+      formatedDate,
+      metadata
+    })
 
     if (filenameWithModel.length > 0) {
       return `${filenameWithModel.join(' - ')}.pdf`
