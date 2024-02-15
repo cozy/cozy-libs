@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [76.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@76.1.1...cozy-mespapiers-lib@76.2.0) (2024-02-15)
+
+
+### Features
+
+* **mespapiers:** Change behavior when searching a contact ([768ea69](https://github.com/cozy/cozy-libs/commit/768ea69231f756bf5d30c391f2d5cc7d50a3db8a))
+
+
+
+
+
 ## [76.1.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@76.1.0...cozy-mespapiers-lib@76.1.1) (2024-02-15)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
