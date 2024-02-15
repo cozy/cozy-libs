@@ -51,6 +51,21 @@ describe('buildFilename', () => {
   metadata: {}
 }} | ${'2022.01.01.pdf'}
     ${{
+  qualificationName: 'fidelity_card',
+  formatedDate: '2022.01.01',
+  contacts: [],
+  filenameModel: ['labelGivenByUser', 'page'],
+  metadata: { labelGivenByUser: 'Mon fichier' },
+  pageName: 'front'
+}} | ${'Mon fichier - front.pdf'}
+    ${{
+  qualificationName: 'fidelity_card',
+  formatedDate: '2022.01.01',
+  contacts: [],
+  filenameModel: ['labelGivenByUser', 'page'],
+  metadata: { labelGivenByUser: 'Mon fichier' }
+}} | ${'Mon fichier.pdf'}
+    ${{
   qualificationName: 'passport',
   contacts: []
 }} | ${'passport.pdf'}

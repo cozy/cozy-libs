@@ -13,13 +13,16 @@ const buildFilenameWithModel = ({
   contactName,
   filename,
   formatedDate,
-  metadata
+  metadata,
+  pageName
 }) => {
   return filenameModel
     .map(el => {
       switch (el) {
         case 'label':
           return filename
+        case 'page':
+          return pageName
         case 'contactName':
           return contactName
         case 'featureDate':
@@ -71,7 +74,8 @@ export const buildFilename = ({
       contactName,
       filename: safeFileName,
       formatedDate,
-      metadata
+      metadata,
+      pageName
     })
 
     if (filenameWithModel.length > 0) {

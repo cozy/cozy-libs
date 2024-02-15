@@ -2754,7 +2754,7 @@
       "icon": "people",
       "featureDate": "referencedDate",
       "maxDisplay": 4,
-      "filenameModel": ["labelGivenByUser"],
+      "filenameModel": ["labelGivenByUser", "page"],
       "acquisitionSteps": [
         {
           "model": "scan",
