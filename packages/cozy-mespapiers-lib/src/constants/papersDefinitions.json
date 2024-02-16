@@ -295,7 +295,7 @@
       "country": "fr",
       "placeholderIndex": 2,
       "icon": "car",
-      "featureDate": "carObtentionDate",
+      "featureDate": "expirationDate",
       "maxDisplay": 4,
       "acquisitionSteps": [
         {
@@ -579,7 +579,7 @@
       "placeholderIndex": 3,
       "country": "stranger",
       "icon": "car",
-      "featureDate": "obtentionDate",
+      "featureDate": "expirationDate",
       "maxDisplay": 5,
       "acquisitionSteps": [
         {
@@ -2191,7 +2191,7 @@
       "label": "passport",
       "placeholderIndex": 4,
       "icon": "people",
-      "featureDate": "issueDate",
+      "featureDate": "expirationDate",
       "maxDisplay": 5,
       "acquisitionSteps": [
         {
@@ -2635,7 +2635,7 @@
     {
       "label": "transport_card",
       "icon": "people",
-      "featureDate": "referencedDate",
+      "featureDate": "expirationDate",
       "maxDisplay": 4,
       "acquisitionSteps": [
         {
