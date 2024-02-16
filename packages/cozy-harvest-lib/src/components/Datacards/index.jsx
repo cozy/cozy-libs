@@ -26,7 +26,7 @@ const Datacards = ({ konnector, account, trigger }) => {
           konnector={konnector}
           trigger={trigger}
           accountId={trigger.message.account}
-          sourceAccountIdentifier={models.account.getAccountLogin(account)}
+          sourceAccountIdentifier={models.account.getAccountName(account)}
         />
       ))}
     </>
