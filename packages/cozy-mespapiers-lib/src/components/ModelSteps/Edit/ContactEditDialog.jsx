@@ -65,7 +65,13 @@ const ContactEditDialog = ({
       actions={
         <Button
           label={t('common.apply')}
-          onClick={() => onConfirm(contactIdsSelected)}
+          onClick={() =>
+            onConfirm(
+              contactsList.filter(contact =>
+                contactIdsSelected.includes(contact._id)
+              )
+            )
+          }
           fullWidth
           disabled={contactIdsSelected.length === 0}
           busy={isBusy}
