@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [78.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@78.0.0...cozy-mespapiers-lib@78.1.0) (2024-02-16)
+
+
+### Features
+
+* **mespapiers:** Rename file when referenced contact change ([8a47715](https://github.com/cozy/cozy-libs/commit/8a47715bf8b3260907d7bf435ecb55f89a051136))
+
+
+
+
+
 # [78.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@77.0.0...cozy-mespapiers-lib@78.0.0) (2024-02-15)
 
 
