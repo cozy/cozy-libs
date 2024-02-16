@@ -33,8 +33,34 @@ const ContactEdit = () => {
     navigate('..')
   }
 
-  const onConfirm = async contactIdsSelected => {
+  const onConfirm = async contactSelected => {
     setIsBusy(true)
+    const contactIdsSelected = contactSelected.map(contact => contact._id)
+
+    // Rename only if one referenced contact exist and the contact step is not multiple
+    if (
+      contacts.length === 1 &&
+      !currentEditInformation.currentStep?.multiple
+    ) {
+      const oldContactNameSelected = contacts[0].displayName
+      const hasOldContactNameInFilename =
+        currentEditInformation.file.name.includes(oldContactNameSelected)
+      const hasDifferentContactSelected = contactSelected.every(
+        contact => contact.displayName !== oldContactNameSelected
+      )
+
+      // Update filename if the old contact name is in the filename and the new contact selected is different
+      if (hasOldContactNameInFilename && hasDifferentContactSelected) {
+        const newContactNameSelected = contactSelected[0].displayName
+        currentEditInformation.file = {
+          ...currentEditInformation.file,
+          name: currentEditInformation.file.name.replace(
+            oldContactNameSelected,
+            newContactNameSelected
+          )
+        }
+      }
+    }
     await updateReferencedContact({
       client,
       currentFile: currentEditInformation.file,
