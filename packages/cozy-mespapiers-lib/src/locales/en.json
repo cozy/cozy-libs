@@ -348,6 +348,10 @@
       "refTaxIncome": {
         "inputLabel": "Reference tax income",
         "text": "Add your reference tax income"
+      },
+      "refTaxNumber": {
+        "inputLabel": "Reference tax number",
+        "text": "Add your reference tax number"
       }
     },
     "nationalHealthInsuranceCard": {

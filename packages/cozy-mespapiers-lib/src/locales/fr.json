@@ -348,6 +348,10 @@
       "refTaxIncome": {
         "inputLabel": "Revenu fiscal de référence",
         "text": "Ajoutez votre revenu fiscal de référence"
+      },
+      "refTaxNumber": {
+        "inputLabel": "Numéro fiscal de référence",
+        "text": "Ajouter le numéro fiscal de référence"
       }
     },
     "nationalHealthInsuranceCard": {
