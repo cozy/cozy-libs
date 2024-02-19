@@ -224,6 +224,9 @@
         "text": "Être alerté avant l'expiration du document",
         "endAdornment": "jour avant |||| jours avant"
       },
+      "information": {
+        "text": "Renseignez les informations suivantes"
+      },
       "ocrResult": {
         "text": "Vérifier et compléter les informations suivantes"
       }
@@ -342,6 +345,17 @@
       "number": {
         "inputLabel": "Numéro de dossier CAF",
         "text": "Saisissez votre numéro de dossier CAF"
+      }
+    },
+    "pay_sheet": {
+      "number": {
+        "inputLabel": "Rémunération brute"
+      },
+      "netSocialAmount": {
+        "inputLabel": "Montant net social"
+      },
+      "employerName": {
+        "inputLabel": "Nom de l'employeur"
       }
     },
     "tax_notice": {

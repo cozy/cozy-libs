@@ -1592,6 +1592,30 @@
           ]
         },
         {
+          "model": "information",
+          "illustration": "IlluGenericInputText.svg",
+          "text": "PaperJSON.generic.information.text",
+          "attributes": [
+            {
+              "name": "number",
+              "type": "number",
+              "inputLabel": "PaperJSON.pay_sheet.number.inputLabel"
+            },
+            {
+              "name": "netSocialAmount",
+              "type": "number",
+              "inputLabel": "PaperJSON.pay_sheet.netSocialAmount.inputLabel"
+            },
+            {
+              "name": "employerName",
+              "type": "text",
+              "editText": "PaperJSON.pay_sheet.employerName.editText",
+              "inputLabel": "PaperJSON.pay_sheet.employerName.inputLabel"
+            }
+          ],
+          "isDisplayed": "all"
+        },
+        {
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
