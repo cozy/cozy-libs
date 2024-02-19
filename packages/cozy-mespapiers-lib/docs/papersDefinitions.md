@@ -105,6 +105,7 @@ The `isDisplayed` property manages the display of steps. Its different values di
 - Properties of the object to define a field of type `text|number`:
   - `name`: {string} Used for `filenameModel` attributes
   - `inputLabel`: {string} Translation key for the label
+  - `[editText]`: {string} Translation used as title in edition modal. The step text is used by default.
   - `[type]`: {`text`|`number`|`contact`} Type of field (if no mask)
   - `[defaultValue]`: {string|number} Default field value
   - `[withAdornment]`: {`start`|`end`} Add a text as a prefix or suffix

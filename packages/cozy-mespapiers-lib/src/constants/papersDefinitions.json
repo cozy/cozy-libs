@@ -1599,11 +1599,13 @@
             {
               "name": "number",
               "type": "number",
+              "editText": "PaperJSON.pay_sheet.number.editText",
               "inputLabel": "PaperJSON.pay_sheet.number.inputLabel"
             },
             {
               "name": "netSocialAmount",
               "type": "number",
+              "editText": "PaperJSON.pay_sheet.netSocialAmount.editText",
               "inputLabel": "PaperJSON.pay_sheet.netSocialAmount.inputLabel"
             },
             {

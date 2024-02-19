@@ -349,12 +349,15 @@
     },
     "pay_sheet": {
       "number": {
+        "editText": "Enter gross remuneration",
         "inputLabel": "Gross remuneration"
       },
       "netSocialAmount": {
+        "editText": "Enter net social amount",
         "inputLabel": "Net social amount"
       },
       "employerName": {
+        "editText": "Enter name of employer",
         "inputLabel": "Name of employer"
       }
     },
