@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [22.4.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.4.0...cozy-harvest-lib@22.4.1) (2024-02-19)
+
+
+### Bug Fixes
+
+* Get sourceAccountIdentifier with getAccountName ([9b8a446](https://github.com/cozy/cozy-libs/commit/9b8a446275ff3e733ea65ce9f958b6375f4b5009))
+
+
+
+
+
 # [22.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.3.0...cozy-harvest-lib@22.4.0) (2024-02-15)
 
 
