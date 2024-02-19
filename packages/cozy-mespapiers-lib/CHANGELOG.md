@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [78.2.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@78.2.1...cozy-mespapiers-lib@78.2.2) (2024-02-19)
+
+
+### Bug Fixes
+
+* Set correct featureDate in papersDefinitions ([067e9bb](https://github.com/cozy/cozy-libs/commit/067e9bb01f96d5386ef8e76a3b1039ea06bbdd25))
+
+
+
+
+
 ## [78.2.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@78.2.0...cozy-mespapiers-lib@78.2.1) (2024-02-19)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
