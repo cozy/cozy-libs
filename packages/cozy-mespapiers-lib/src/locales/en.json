@@ -224,6 +224,9 @@
         "text": "Be alerted before the document expires",
         "endAdornment": "day before |||| days before"
       },
+      "information": {
+        "text": "Fill in the following informations"
+      },
       "ocrResult": {
         "text": "Check and complete the following information"
       }
@@ -342,6 +345,17 @@
       "number": {
         "inputLabel": "CAF file number",
         "text": "Enter you CAF file number"
+      }
+    },
+    "pay_sheet": {
+      "number": {
+        "inputLabel": "Gross remuneration"
+      },
+      "netSocialAmount": {
+        "inputLabel": "Net social amount"
+      },
+      "employerName": {
+        "inputLabel": "Name of employer"
       }
     },
     "tax_notice": {
