@@ -1967,6 +1967,18 @@
         {
           "model": "information",
           "illustration": "IlluGenericInputText.svg",
+          "text": "PaperJSON.tax_notice.refTaxNumber.text",
+          "attributes": [
+            {
+              "name": "number",
+              "type": "number",
+              "inputLabel": "PaperJSON.tax_notice.refTaxNumber.inputLabel"
+            }
+          ]
+        },
+        {
+          "model": "information",
+          "illustration": "IlluGenericInputText.svg",
           "text": "PaperJSON.tax_notice.refTaxIncome.text",
           "attributes": [
             {
@@ -2010,6 +2022,18 @@
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.multiPages.text"
+        },
+        {
+          "model": "information",
+          "illustration": "IlluGenericInputText.svg",
+          "text": "PaperJSON.tax_notice.refTaxNumber.text",
+          "attributes": [
+            {
+              "name": "number",
+              "type": "number",
+              "inputLabel": "PaperJSON.tax_notice.refTaxNumber.inputLabel"
+            }
+          ]
         },
         {
           "model": "information",
@@ -2430,6 +2454,18 @@
           "multipage": true,
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.multiPages.text"
+        },
+        {
+          "model": "information",
+          "illustration": "IlluGenericInputText.svg",
+          "text": "PaperJSON.tax_notice.refTaxNumber.text",
+          "attributes": [
+            {
+              "name": "number",
+              "type": "number",
+              "inputLabel": "PaperJSON.tax_notice.refTaxNumber.inputLabel"
+            }
+          ]
         },
         {
           "model": "information",
@@ -2906,6 +2942,18 @@
           "model": "scan",
           "illustration": "IlluGenericNewPage.svg",
           "text": "PaperJSON.generic.singlePage.text"
+        },
+        {
+          "model": "information",
+          "illustration": "IlluGenericInputText.svg",
+          "text": "PaperJSON.tax_notice.refTaxNumber.text",
+          "attributes": [
+            {
+              "name": "number",
+              "type": "number",
+              "inputLabel": "PaperJSON.tax_notice.refTaxNumber.inputLabel"
+            }
+          ]
         },
         {
           "model": "information",
