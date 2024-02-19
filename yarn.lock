@@ -10594,10 +10594,10 @@ cozy-client@^37.2.0:
     sift "^6.0.0"
     url-search-params-polyfill "^8.0.0"
 
-cozy-client@^45.6.0:
-  version "45.6.0"
-  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-45.6.0.tgz#3b93030069487ce2a3efc1b588d644b209b98399"
-  integrity sha512-IPtkSg+BWyolza8VpS5PgvzHpEl9Fp1FOZAGrFVaDU9HPB8LwRDo4wXpZcBa6UtIjZrDCs8+Ayw1PHi3ZA2uiQ==
+cozy-client@^45.11.0:
+  version "45.11.0"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-45.11.0.tgz#aa1d04c26a8829e913ebb3da55d1e1804afaa6e8"
+  integrity sha512-ubMZ+ckNHwvIUK5MuZ+3d+Ikvvi7e5RZjzKiYWEqmC0bg9kjAObvA46s1IFLYid85BcHslG9w1s0MKdPXQTT1A==
   dependencies:
     "@cozy/minilog" "1.0.0"
     "@types/jest" "^26.0.20"
@@ -10888,10 +10888,10 @@ cozy-ui@^103.2.0:
     react-swipeable-views "^0.13.3"
     rooks "^5.11.2"
 
-cozy-ui@^103.4.0:
-  version "103.4.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-103.4.0.tgz#2b62c5c8556058f78c921673ab5defc01515f7a4"
-  integrity sha512-fb6qv6zJjNr1jutdxO/Yu6u/IvDGzPuLjVmuZN/PuQFY4i1meC8Db/8GNd4ZhDlQw29ZRr5p/xsuR6xUrENxkQ==
+cozy-ui@^103.6.1:
+  version "103.6.1"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-103.6.1.tgz#e49ce2ec51f895fbde8504fbbbc22c6c2f705283"
+  integrity sha512-kFuFq9uME0GMi6SuGSGk4K1x5zyRLZwd7I5QLLBhW8lHELWtkn1zviLBO0clGtVSZ2SOYQoRl31GJ6SVDLKtjA==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@material-ui/core" "4.12.3"
