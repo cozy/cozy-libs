@@ -349,12 +349,15 @@
     },
     "pay_sheet": {
       "number": {
+        "editText": "Saisir la rémunération brute",
         "inputLabel": "Rémunération brute"
       },
       "netSocialAmount": {
+        "editText": "Saisir le montant net social",
         "inputLabel": "Montant net social"
       },
       "employerName": {
+        "editText": "Saisir le nom de l'employeur",
         "inputLabel": "Nom de l'employeur"
       }
     },

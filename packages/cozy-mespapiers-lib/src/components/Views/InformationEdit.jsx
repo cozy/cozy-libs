@@ -81,7 +81,9 @@ const InformationEdit = () => {
   const fallbackIcon =
     attrs?.[0]?.type === 'date' ? IlluGenericInputDate : IlluGenericInputText
 
-  const text = currentEditInformations.currentStep?.text
+  const text = attrs?.editText
+    ? t(attrs.editText)
+    : currentEditInformations.currentStep?.text
     ? t(currentEditInformations.currentStep.text)
     : null
 
