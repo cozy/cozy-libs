@@ -52,21 +52,21 @@ export const harmonizeContactsNames = (contacts, t) => {
     return
   }
   if (contacts.length === 2) {
-    const firstContactName = contacts[0].name
-    const secondContactName = contacts[1].name
+    const firstContactGivenName = contacts[0].name?.givenName
+    const firstContactFamilyName = contacts[0].name?.familyName
+    const secondContactGivenName = contacts[1].name?.givenName
+    const secondContactFamilyName = contacts[1].name?.familyName
 
     if (
-      firstContactName != null &&
-      secondContactName != null &&
-      firstContactName.givenName !== '' &&
-      secondContactName.givenName !== '' &&
-      firstContactName.familyName !== '' &&
-      firstContactName.familyName === secondContactName.familyName
+      firstContactGivenName &&
+      secondContactGivenName &&
+      firstContactFamilyName &&
+      firstContactFamilyName === secondContactFamilyName
     ) {
       return t('PapersList.contactMerged', {
-        firstGivenName: firstContactName.givenName,
-        secondGivenName: secondContactName.givenName,
-        familyName: firstContactName.familyName
+        firstGivenName: firstContactGivenName,
+        secondGivenName: secondContactGivenName,
+        familyName: firstContactFamilyName
       })
     }
   }
