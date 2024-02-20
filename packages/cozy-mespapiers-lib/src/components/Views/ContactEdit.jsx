@@ -37,11 +37,8 @@ const ContactEdit = () => {
     setIsBusy(true)
     const contactIdsSelected = contactSelected.map(contact => contact._id)
 
-    // Rename only if one referenced contact exist and the contact step is not multiple
-    if (
-      contacts.length === 1 &&
-      !currentEditInformation.currentStep?.multiple
-    ) {
+    // Rename only if one referenced contact exist and one contact is selected
+    if (contacts.length === 1 && contactSelected.length === 1) {
       const oldContactNameSelected = contacts[0].displayName
       const hasOldContactNameInFilename =
         currentEditInformation.file.name.includes(oldContactNameSelected)
