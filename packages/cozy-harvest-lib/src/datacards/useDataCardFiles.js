@@ -21,38 +21,44 @@ const useFolderToSaveFiles = folderToSaveId =>
     }
   )
 
-const useSourceAccountFiles = accountId =>
+const useSourceAccountIdentifierFiles = sourceAccountIdentifier =>
   useQuery(
     Q('io.cozy.files')
-      .where({ 'cozyMetadata.sourceAccount': accountId, trashed: false })
-      .indexFields(['cozyMetadata.sourceAccount', 'cozyMetadata.createdAt'])
+      .where({
+        'cozyMetadata.sourceAccountIdentifier': sourceAccountIdentifier,
+        trashed: false
+      })
+      .indexFields([
+        'cozyMetadata.sourceAccountIdentifier',
+        'cozyMetadata.createdAt'
+      ])
       .sortBy([
-        { 'cozyMetadata.sourceAccount': 'desc' },
+        { 'cozyMetadata.sourceAccountIdentifier': 'desc' },
         { 'cozyMetadata.createdAt': 'desc' }
       ])
       .limitBy(5),
     {
-      as: `fileDataCard_io.cozy.accounts/${accountId}/io.cozy.files`,
+      as: `fileDataCard_io.cozy.accounts.sourceAccountIdentifier/${sourceAccountIdentifier}/io.cozy.files`,
       fetchPolicy: CozyClient.fetchPolicies.olderThan(30 * 1000)
     }
   )
 
-const getResponse = (folderToSaveFiles, sourceAccountFiles) => {
+const getResponse = (folderToSaveFiles, sourceAccountIdentifierFiles) => {
   const loaded = Boolean(
     hasQueryBeenLoaded(folderToSaveFiles) &&
-      hasQueryBeenLoaded(sourceAccountFiles)
+      hasQueryBeenLoaded(sourceAccountIdentifierFiles)
   )
 
   if (
     folderToSaveFiles.fetchStatus === 'failed' &&
-    sourceAccountFiles === 'failed'
+    sourceAccountIdentifierFiles === 'failed'
   )
     return { fetchStatus: 'failed' }
 
   if (
     loaded &&
     folderToSaveFiles.data.length === 0 &&
-    sourceAccountFiles.data.length === 0
+    sourceAccountIdentifierFiles.data.length === 0
   )
     return { fetchStatus: 'empty' }
 
@@ -60,7 +66,7 @@ const getResponse = (folderToSaveFiles, sourceAccountFiles) => {
     return {
       data: sortBy(
         uniq(
-          [...folderToSaveFiles.data, ...sourceAccountFiles.data],
+          [...folderToSaveFiles.data, ...sourceAccountIdentifierFiles.data],
           x => x._id
         ),
         x => get(x, 'cozyMetadata.createdAt')
@@ -73,15 +79,17 @@ const getResponse = (folderToSaveFiles, sourceAccountFiles) => {
   return { fetchStatus: 'loading' }
 }
 
-export const useDataCardFiles = (accountId, folderToSaveId) => {
-  if (!accountId || !folderToSaveId)
+export const useDataCardFiles = (sourceAccountIdentifier, folderToSaveId) => {
+  if (!sourceAccountIdentifier || !folderToSaveId)
     throw new Error('Missing arguments in useDataCardFiles, cannot fetch files')
 
   const folderToSaveFiles = useFolderToSaveFiles(folderToSaveId)
-  const sourceAccountFiles = useSourceAccountFiles(accountId)
+  const sourceAccountIdentifierFiles = useSourceAccountIdentifierFiles(
+    sourceAccountIdentifier
+  )
 
   return useMemo(
-    () => getResponse(folderToSaveFiles, sourceAccountFiles),
-    [folderToSaveFiles, sourceAccountFiles]
+    () => getResponse(folderToSaveFiles, sourceAccountIdentifierFiles),
+    [folderToSaveFiles, sourceAccountIdentifierFiles]
   )
 }

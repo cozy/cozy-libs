@@ -148,9 +148,14 @@ const FileCard = ({ files, loading, konnector, trigger, accountId }) => {
   )
 }
 
-const FileDataCard = ({ accountId, konnector, trigger }) => {
+const FileDataCard = ({
+  konnector,
+  trigger,
+  accountId,
+  sourceAccountIdentifier
+}) => {
   const { data, fetchStatus } = useDataCardFiles(
-    accountId,
+    sourceAccountIdentifier,
     trigger.message.folder_to_save
   )
   const isLoading = fetchStatus === 'loading'
@@ -168,6 +173,7 @@ const FileDataCard = ({ accountId, konnector, trigger }) => {
           konnector={konnector}
           trigger={trigger}
           accountId={accountId}
+          sourceAccountIdentifier={sourceAccountIdentifier}
         />
       )}
     </>
