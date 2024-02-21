@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import ReactJsonPrint from 'react-json-print'
+
 import CozyClient, {
   Q,
   useQuery,
