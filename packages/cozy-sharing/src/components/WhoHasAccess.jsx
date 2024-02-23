@@ -6,9 +6,8 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import LinkRecipient from './Recipient/LinkRecipient'
 import OwnerRecipient from './Recipient/OwnerRecipient'
-import Recipient from './Recipient/Recipient'
+import { RecipientList } from './Recipient/RecipientList'
 import { usePrevious } from '../helpers/hooks'
-import { filterAndReworkRecipients } from '../helpers/recipients'
 
 /**
  * Displays a warning if some contacts are waiting for confirmation of their sharing
@@ -43,14 +42,7 @@ const WhoHasAccess = ({
   onRevokeLink
 }) => {
   const previousLink = usePrevious(link)
-  const previousRecipients = usePrevious(recipients)
-
   const linkHasBeenJustCreated = link && previousLink === null
-
-  const recipientsToDisplay = filterAndReworkRecipients(
-    recipients,
-    previousRecipients
-  )
 
   return (
     <div className={className}>
@@ -74,26 +66,16 @@ const WhoHasAccess = ({
 
         <OwnerRecipient recipients={recipients} />
 
-        {recipientsToDisplay.map(recipient => {
-          const recipientConfirmationData = recipientsToBeConfirmed.find(
-            user => user.email === recipient.email
-          )
-
-          return (
-            <Recipient
-              {...recipient}
-              key={`key_r_${recipient.index}`}
-              isOwner={isOwner}
-              document={document}
-              documentType={documentType}
-              onRevoke={onRevoke}
-              onRevokeSelf={onRevokeSelf}
-              recipientConfirmationData={recipientConfirmationData}
-              verifyRecipient={verifyRecipient}
-              fadeIn={recipient.hasBeenJustAdded}
-            />
-          )
-        })}
+        <RecipientList
+          recipients={recipients}
+          recipientsToBeConfirmed={recipientsToBeConfirmed}
+          isOwner={isOwner}
+          document={document}
+          documentType={documentType}
+          onRevoke={onRevoke}
+          onRevokeSelf={onRevokeSelf}
+          verifyRecipient={verifyRecipient}
+        />
       </List>
     </div>
   )
