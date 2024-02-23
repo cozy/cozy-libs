@@ -7,11 +7,11 @@ import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoi
 import { EditableSharingModal } from './EditableSharingModal'
 import AppLike from '../../../test/AppLike'
 import { SharingProvider } from '../../SharingProvider'
+import { useFetchDocumentPath } from '../../hooks/useFetchDocumentPath'
 import { receivePaths } from '../../state'
 import { default as DumbShareModal } from '../ShareModal'
-import { useFetchDocumentPath } from '../useFetchDocumentPath'
 
-jest.mock('../useFetchDocumentPath', () => ({
+jest.mock('../../hooks/useFetchDocumentPath', () => ({
   useFetchDocumentPath: jest.fn()
 }))
 
