@@ -2,7 +2,7 @@ import omit from 'lodash/omit'
 import React from 'react'
 import { useLocation } from 'react-router'
 
-import { SharingDetailsModal } from '../../SharingDetailsModal'
+import { SharingDetailsModal } from './SharingDetailsModal'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import withLocales from '../../withLocales'
 import EditableSharingModal from '../EditableSharingModal'
