@@ -8,7 +8,7 @@ import Button, { ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import CozyHomeLinkIcon from './CozyHomeLinkIcon'
-import styles from '../../styles/publicBanner.styl'
+import styles from '../../../styles/publicBanner.styl'
 
 const HOME_LINK_HREF = 'https://manager.cozycloud.cc/cozy/create'
 
