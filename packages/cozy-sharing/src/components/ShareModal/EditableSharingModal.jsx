@@ -3,11 +3,11 @@ import React from 'react'
 
 import { useClient, useQueryAll } from 'cozy-client'
 
-import { default as DumbShareModal } from './ShareModal'
-import { useFetchDocumentPath } from './useFetchDocumentPath'
-import SharingContext from '../context'
-import { Contact } from '../models'
-import { buildContactsQuery, buildGroupsQuery } from '../queries/queries'
+import SharingContext from '../../context'
+import { Contact } from '../../models'
+import { buildContactsQuery, buildGroupsQuery } from '../../queries/queries'
+import { default as DumbShareModal } from '../ShareModal'
+import { useFetchDocumentPath } from '../useFetchDocumentPath'
 
 export const EditableSharingModal = ({ document, ...rest }) => {
   const client = useClient()
