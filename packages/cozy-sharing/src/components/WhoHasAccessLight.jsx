@@ -3,7 +3,7 @@ import React from 'react'
 
 import RecipientPlusX from './Recipient/RecipientPlusX'
 import RecipientWithoutStatus from './Recipient/RecipientWithoutStatus'
-import styles from './recipient.styl'
+import styles from '../styles/recipient.styl'
 
 const MAX_DISPLAYED_RECIPIENTS = 2
 

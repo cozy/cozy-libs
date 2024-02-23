@@ -8,9 +8,9 @@ import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 import palette from 'cozy-ui/transpiled/react/palette'
 
 import ContactSuggestion from './ContactSuggestion'
-import styles from './autosuggest.styl'
 import { extractEmails, validateEmail } from '../helpers/email'
 import { getDisplayName, getInitials, Contact } from '../models'
+import styles from '../styles/autosuggest.styl'
 import {
   cozyUrlMatch,
   emailMatch,

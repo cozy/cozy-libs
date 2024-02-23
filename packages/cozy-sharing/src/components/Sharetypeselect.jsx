@@ -9,7 +9,7 @@ import SelectBox, { components } from 'cozy-ui/transpiled/react/SelectBox'
 import palette from 'cozy-ui/transpiled/react/palette'
 
 import logger from '../logger'
-import styles from '../share.styl'
+import styles from '../styles/share.styl'
 
 const DropdownIndicator = props => (
   <components.DropdownIndicator {...props}>

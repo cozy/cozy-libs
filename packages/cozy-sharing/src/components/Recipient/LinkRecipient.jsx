@@ -13,8 +13,8 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import LinkRecipientPermissions from './LinkRecipientPermissions'
 import RecipientConfirm from './RecipientConfirm'
-import styles from './recipient.styl'
 import { FADE_IN_DURATION } from '../../helpers/recipients'
+import styles from '../../styles/recipient.styl'
 
 const LinkRecipient = props => {
   const { t } = useI18n()

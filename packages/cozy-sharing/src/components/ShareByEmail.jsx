@@ -15,8 +15,8 @@ import { hasReachRecipientsLimit } from '../helpers/recipients'
 import { getSuccessMessage } from '../helpers/successMessage'
 import { Group } from '../models'
 import { contactsResponseType, groupsResponseType } from '../propTypes'
-import styles from '../share.styl'
 import { isReadOnlySharing } from '../state'
+import styles from '../styles/share.styl'
 
 export const ShareByEmail = ({
   contacts,

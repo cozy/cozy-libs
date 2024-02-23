@@ -7,8 +7,8 @@ import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
 
 import AvatarPlusX from './AvatarPlusX'
 import RecipientAvatar from './RecipientAvatar'
-import styles from './recipient.styl'
 import { getDisplayName } from '../../models'
+import styles from '../../styles/recipient.styl'
 
 export const MAX_DISPLAYED_RECIPIENTS = 3
 

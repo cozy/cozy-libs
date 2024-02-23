@@ -5,7 +5,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import ShareIcon from 'cozy-ui/transpiled/react/Icons/Share'
 import { Button } from 'cozy-ui/transpiled/react/deprecated/Button'
 
-import styles from './button.styl'
+import styles from '../styles/button.styl'
 
 export const ShareButton = ({ label, onClick, className, ...props }) => (
   <Button

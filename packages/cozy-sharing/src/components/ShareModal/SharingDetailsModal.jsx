@@ -5,8 +5,8 @@ import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-import styles from './share.styl'
 import { getDisplayName } from '../../models'
+import styles from '../../styles/share.styl'
 import OwnerIdentity from '../Recipient/OwnerIdentity'
 import WhoHasAccess from '../WhoHasAccess'
 

@@ -8,7 +8,7 @@ import { default as DumbShareByEmail } from './ShareByEmail'
 import { default as DumbShareByLink } from './ShareByLink'
 import ShareDialogTwoStepsConfirmationContainer from './ShareDialogTwoStepsConfirmationContainer'
 import WhoHasAccess from './WhoHasAccess'
-import styles from '../share.styl'
+import styles from '../styles/share.styl'
 
 /**
  * Displays the sharing interface that can be used when ShareDialogCozyToCozy is in sharing state
