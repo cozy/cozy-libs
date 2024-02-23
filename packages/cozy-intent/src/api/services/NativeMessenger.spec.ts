@@ -1,5 +1,5 @@
-import { NativeMessenger, PostMeMessage } from '../../api'
 import { mockWebviewRef } from '../../../tests'
+import { NativeMessenger, PostMeMessage } from '../../api'
 
 const mockDebug = jest.fn()
 

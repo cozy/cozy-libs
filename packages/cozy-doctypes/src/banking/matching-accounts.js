@@ -1,5 +1,6 @@
-const sortBy = require('lodash/sortBy')
 const get = require('lodash/get')
+const sortBy = require('lodash/sortBy')
+
 const { eitherIncludes } = require('./matching-tools')
 const { getSlugFromInstitutionLabel } = require('./slug-account')
 
@@ -180,7 +181,6 @@ const normalizeAccount = account => {
     account.iban
   )
   return {
-    // eslint-disable-next-line node/no-unsupported-features/es-syntax
     ...account,
     rawNumber: account.number,
     number: normalizedAccountNumber
@@ -271,7 +271,6 @@ const matchAccounts = (fetchedAccountsArg, existingAccounts) => {
         !get(fetchedAccount, 'metadata.disabledAt') ||
         !get(matchResult, 'metadata.disabledAt')
       ) {
-        // eslint-disable-next-line node/no-unsupported-features/es-syntax
         results.push({ account: fetchedAccount, ...matchResult })
       }
     } else {

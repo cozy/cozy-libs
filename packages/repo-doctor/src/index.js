@@ -1,21 +1,22 @@
 #!/usr/bin/env node
 
-const { ArgumentParser } = require('argparse')
 const fs = require('fs')
 const path = require('path')
-const get = require('lodash/get')
-const levn = require('levn')
 
-const { setupRules, runRules } = require('./rules')
-const { fetchRepositoryInfo } = require('./fetch')
-const { ConsoleReporter, MattermostReporter } = require('./reporters')
+const { ArgumentParser } = require('argparse')
+const levn = require('levn')
+const get = require('lodash/get')
+
 const {
   schema: configSchema,
   mergeConfigFromArgs,
   validateConfig
 } = require('./config')
-const { ConfigError } = require('./errors')
 const { autoDetectRepository } = require('./detect')
+const { ConfigError } = require('./errors')
+const { fetchRepositoryInfo } = require('./fetch')
+const { ConsoleReporter, MattermostReporter } = require('./reporters')
+const { setupRules, runRules } = require('./rules')
 
 const reporters = {
   console: ConsoleReporter,

@@ -33,7 +33,6 @@ class BankAccount extends Document {
         ? matching.account._id
         : undefined
       return {
-        // eslint-disable-next-line node/no-unsupported-features/es-syntax
         ...matching.account,
         relationships: merge(
           {},
@@ -87,7 +86,6 @@ class BankAccount extends Document {
       matchings.push({
         forcedReplace: true,
         account: {
-          // eslint-disable-next-line node/no-unsupported-features/es-syntax
           ...localAccount,
           metadata: merge({}, localAccount.metadata, {
             disabledAt: localAccount.metadata?.updatedAt

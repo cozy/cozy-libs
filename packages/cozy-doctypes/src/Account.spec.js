@@ -1,6 +1,6 @@
 /* eslint-env jest */
-const { cozyClient } = require('./testUtils')
 const Account = require('./Account')
+const { cozyClient } = require('./testUtils')
 
 beforeAll(() => {
   Account.registerClient(cozyClient)

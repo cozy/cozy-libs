@@ -1,8 +1,9 @@
-const { DepUpToDate, NoForbiddenDep } = require('./dependencies')
+const { validate } = require('schema-utils')
+
 const DepSameVersion = require('./depSameVersion')
+const { DepUpToDate, NoForbiddenDep } = require('./dependencies')
 const { LocalesInRepo } = require('./locales')
 const { TravisIsOK } = require('./travis')
-const { validate } = require('schema-utils')
 
 const ruleFns = {
   DepUpToDate,

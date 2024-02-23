@@ -1,11 +1,9 @@
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
-import { translate } from 'cozy-ui/transpiled/react/I18n'
 import { Button } from 'cozy-ui/transpiled/react/Button'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 import 'cozy-ui/assets/icons/ui/cloud.svg'
-import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
-
 import {
   Wizard,
   WizardLogo,
@@ -15,6 +13,7 @@ import {
   WizardTitle,
   WizardDescription
 } from 'cozy-ui/transpiled/react/Wizard'
+import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
 import ButtonLinkRegistration from './ButtonLinkRegistration'
 

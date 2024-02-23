@@ -1,8 +1,7 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
 import { Button, Chip, translate } from 'cozy-ui/transpiled/react'
-
 import PenIcon from 'cozy-ui/transpiled/react/Icons/Pen'
 
 const DocumentsNotFullyCompleted = ({

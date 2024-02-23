@@ -1,5 +1,5 @@
-import { createSlice } from 'redux-starter-kit'
 import get from 'lodash/get'
+import { createSlice } from 'redux-starter-kit'
 
 import { AdministrativeProcedure, BankAccountStats } from 'cozy-doctypes'
 

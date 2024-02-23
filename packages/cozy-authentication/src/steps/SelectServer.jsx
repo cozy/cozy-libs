@@ -1,18 +1,18 @@
 /* global __ALLOW_HTTP__ */
+import classNames from 'classnames'
+import isUrl from 'is-url'
+import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import ReactMarkdown from 'react-markdown'
-import classNames from 'classnames'
-import PropTypes from 'prop-types'
-import isUrl from 'is-url'
 
-import { translate } from 'cozy-ui/transpiled/react/I18n'
-import Label from 'cozy-ui/transpiled/react/Label'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
-import 'cozy-ui/assets/icons/ui/previous.svg'
-import 'cozy-ui/assets/icons/ui/next.svg'
 import 'cozy-ui/assets/icons/ui/lock.svg'
-import ButtonLinkRegistration from './ButtonLinkRegistration'
+import 'cozy-ui/assets/icons/ui/next.svg'
+import 'cozy-ui/assets/icons/ui/previous.svg'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import LockIcon from 'cozy-ui/transpiled/react/Icons/Lock'
+import NextIcon from 'cozy-ui/transpiled/react/Icons/Next'
+import Label from 'cozy-ui/transpiled/react/Label'
 import {
   Wizard,
   WizardMain,
@@ -30,9 +30,9 @@ import {
   WizardDualFieldWrapper,
   WizardDualFieldInput
 } from 'cozy-ui/transpiled/react/Wizard'
+import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
-import LockIcon from 'cozy-ui/transpiled/react/Icons/Lock'
-import NextIcon from 'cozy-ui/transpiled/react/Icons/Next'
+import ButtonLinkRegistration from './ButtonLinkRegistration'
 
 require('url-polyfill')
 

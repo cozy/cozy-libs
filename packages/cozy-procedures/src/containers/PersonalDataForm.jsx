@@ -1,5 +1,5 @@
-import connectWithProcedures from '../redux/connectWithProcedures'
 import PersonalDataForm from '../components/PersonalDataForm'
+import connectWithProcedures from '../redux/connectWithProcedures'
 import { getData, update } from '../redux/personalDataSlice'
 
 const mapStateToProps = state => ({

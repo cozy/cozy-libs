@@ -1,6 +1,7 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { withRouter } from 'react-router'
+
 import { withClient } from 'cozy-client'
 import {
   Modal,
@@ -14,8 +15,9 @@ import {
 import AppLinker, {
   generateUniversalLink
 } from 'cozy-ui/transpiled/react/AppLinker'
-import IllustrationOK from '../../assets/ok.svg'
+
 import IllustrationError from '../../assets/error.svg'
+import IllustrationOK from '../../assets/ok.svg'
 
 class EndModal extends React.Component {
   exitProcedure = () => {

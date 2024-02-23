@@ -13,7 +13,6 @@ export const createPaper = ({ hideActionsMenu }) => {
   return {
     name: 'createPaper',
     Component: withLocales(
-      // eslint-disable-next-line react/display-name
       forwardRef((props, ref) => {
         const navigate = useNavigate()
         const { pathname } = useLocation()

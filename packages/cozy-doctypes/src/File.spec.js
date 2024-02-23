@@ -1,7 +1,7 @@
 const MockDate = require('mockdate')
-const { cozyClient } = require('./testUtils')
 
 const CozyFile = require('./File')
+const { cozyClient } = require('./testUtils')
 
 const destroySpy = jest.fn().mockName('destroy')
 const getSpy = jest.fn().mockName('get')

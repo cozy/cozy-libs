@@ -8,15 +8,14 @@ import AppLike from '../../../test/AppLike'
 jest.mock(
   '../KonnectorUpdateLinker',
   () =>
-    ({ konnector, label, isBlocking }) =>
-      (
-        <div
-          data-testtid="KonnectorUpdateLinker"
-          data-label={label}
-          data-konnector={konnector}
-          data-is-blocking={isBlocking}
-        />
-      )
+    ({ konnector, label, isBlocking }) => (
+      <div
+        data-testtid="KonnectorUpdateLinker"
+        data-label={label}
+        data-konnector={konnector}
+        data-is-blocking={isBlocking}
+      />
+    )
 )
 
 // Default props

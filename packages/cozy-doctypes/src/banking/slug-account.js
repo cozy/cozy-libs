@@ -1,4 +1,5 @@
 const log = require('cozy-logger').namespace('slug-account')
+
 const labelSlugs = require('./label-slugs')
 
 const institutionLabelsCompiled = Object.entries(labelSlugs).map(

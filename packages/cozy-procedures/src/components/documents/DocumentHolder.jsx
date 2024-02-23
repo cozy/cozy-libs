@@ -1,5 +1,8 @@
-import React, { Component } from 'react'
+import flow from 'lodash/flow'
 import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+
+import { CozyFile } from 'cozy-doctypes'
 import {
   translate,
   Icon,
@@ -9,11 +12,9 @@ import {
   Viewer
 } from 'cozy-ui/transpiled/react/'
 import Card from 'cozy-ui/transpiled/react/Card'
-import { CozyFile } from 'cozy-doctypes'
-import DocumentsDataFormContainer from '../../containers/DocumentsDataForm'
-import flow from 'lodash/flow'
-
 import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
+
+import DocumentsDataFormContainer from '../../containers/DocumentsDataForm'
 
 class DocumentHolder extends Component {
   state = {

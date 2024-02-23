@@ -1,4 +1,5 @@
 const trimEnd = require('lodash/trimEnd')
+
 const Document = require('./Document')
 
 const FILENAME_WITH_EXTENSION_REGEX = /(.+)(\..*)$/

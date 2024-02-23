@@ -1,5 +1,6 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
+
 import { Textarea } from 'cozy-ui/transpiled/react'
 
 import getInputProps from './getInputProps'

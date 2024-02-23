@@ -1,6 +1,7 @@
 const argparse = require('argparse')
 const merge = require('lodash/merge')
 const omit = require('lodash/omit')
+
 const {
   getCompletionSetupCommands,
   completionHandler

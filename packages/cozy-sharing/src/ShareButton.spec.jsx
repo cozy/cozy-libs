@@ -16,13 +16,9 @@ jest.mock('cozy-ui/transpiled/react/providers/I18n', () => ({
   useI18n: jest.fn().mockReturnValue({ t: jest.fn() })
 }))
 
-jest.mock('./withLocales', () =>
-  // eslint-disable-next-line react/display-name
-  Component => props => <>{Component(props)}</>
-)
+jest.mock('./withLocales', () => Component => props => <>{Component(props)}</>)
 
 jest.mock('./context', () => ({
-  // eslint-disable-next-line react/display-name
   Consumer: props => {
     const Component = () => props.children({ byDocId: { docId: false } })
     return <Component />

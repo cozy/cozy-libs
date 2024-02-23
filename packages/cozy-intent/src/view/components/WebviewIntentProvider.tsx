@@ -1,5 +1,5 @@
-import React, { ReactElement, useEffect, useState } from 'react'
 import { Connection, ChildHandshake, debug } from 'post-me'
+import React, { ReactElement, useEffect, useState } from 'react'
 
 import {
   CozyBar,
@@ -11,8 +11,8 @@ import {
   DebugWebviewMessenger,
   WebviewMethods
 } from '../../api'
-import { WebviewContext } from '../../view'
 import { isWebDevMode } from '../../utils'
+import { WebviewContext } from '../../view'
 
 declare const cozy: CozyBar | undefined
 
@@ -33,6 +33,7 @@ function isWebviewWindow(window: Window): window is WebviewWindow {
 
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
 const getBarInitAPI = (): ((webviewContext: WebviewService) => void) | void => {
   try {
     if (cozy!.bar && cozy!.bar.setWebviewContext === undefined) {

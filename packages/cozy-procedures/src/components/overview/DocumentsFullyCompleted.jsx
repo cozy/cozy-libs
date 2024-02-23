@@ -1,5 +1,5 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
 import { InlineCard, Icon } from 'cozy-ui/transpiled/react'
 import FileTypeFilesIcon from 'cozy-ui/transpiled/react/Icons/FileTypeFiles'

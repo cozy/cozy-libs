@@ -1,5 +1,6 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
+
 import DocumentHolder from './DocumentHolder'
 import EmptyDocumentHolder from './EmptyDocumentHolder'
 import LoadingDocumentHolder from './LoadingDocumentHolder'

@@ -13,8 +13,8 @@ export const buildPapersDefinitions = (papersDefList, scannerT) => {
     return scannerT(`items.${w.label}`) > scannerT(`items.${x.label}`)
       ? 1
       : scannerT(`items.${x.label}`) > scannerT(`items.${w.label}`)
-      ? -1
-      : 0
+        ? -1
+        : 0
   })
 
   const [papersUsedList, papersUnUsedList, otherPaperList, noteList] =

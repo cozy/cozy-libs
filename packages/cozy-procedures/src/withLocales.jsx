@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { I18n, translate } from 'cozy-ui/transpiled/react/I18n'
 
 const locales = {

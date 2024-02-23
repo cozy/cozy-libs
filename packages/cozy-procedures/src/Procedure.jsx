@@ -1,6 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import get from 'lodash/get'
+import PropTypes from 'prop-types'
+import React from 'react'
+
 import { withClient } from 'cozy-client'
 import { Document } from 'cozy-doctypes'
 import { creditApplicationTemplate } from 'cozy-procedures'

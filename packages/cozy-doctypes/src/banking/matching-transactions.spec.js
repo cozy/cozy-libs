@@ -1,6 +1,8 @@
-const fs = require('fs-extra')
 const path = require('path')
+
+const fs = require('fs-extra')
 const sortBy = require('lodash/sortBy')
+
 const { matchTransactions, scoreMatching } = require('./matching-transactions')
 
 const DOCTYPE_OPERATIONS = 'io.cozy.bank.operations'

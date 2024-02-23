@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
-const fs = require('fs-extra')
-const path = require('path')
-const tar = require('tar')
 const { spawn } = require('child_process')
+const path = require('path')
+
+const fs = require('fs-extra')
+const tar = require('tar')
 
 const DOWNCLOUD_UPLOAD_DIR = 'www-upload/'
 const DOWNCLOUD_URL = 'downcloud.cozycloud.cc'
