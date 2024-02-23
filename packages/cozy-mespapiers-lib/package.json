@@ -20,7 +20,7 @@
     "@testing-library/react": "11.2.7",
     "@testing-library/react-hooks": "8.0.1",
     "babel-preset-cozy-app": "2.0.1",
-    "cozy-bar": "^7.26.0",
+    "cozy-bar": "^11.0.0",
     "cozy-client": "^45.11.0",
     "cozy-device-helper": "^3.0.0",
     "cozy-doctypes": "^1.89.4",
