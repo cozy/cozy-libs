@@ -4,30 +4,8 @@ import { useLocation } from 'react-router'
 
 import { SharingDetailsModal } from './SharingDetailsModal'
 import EditableSharingModal from './components/EditableSharingModal'
-import SharingContext from './context'
+import { useSharingContext } from './hooks/useSharingContext'
 import withLocales from './withLocales'
-
-const SharingModal = ({ document, ...rest }) => (
-  <SharingContext.Consumer>
-    {({
-      documentType,
-      getOwner,
-      getSharingType,
-      getRecipients,
-      revokeSelf
-    }) => (
-      <SharingDetailsModal
-        document={document}
-        documentType={documentType}
-        owner={getOwner(document.id)}
-        sharingType={getSharingType(document.id)}
-        recipients={getRecipients(document.id)}
-        onRevoke={revokeSelf}
-        {...rest}
-      />
-    )}
-  </SharingContext.Consumer>
-)
 
 export const ShareModal = withLocales(props => {
   const location = useLocation?.()
@@ -35,17 +13,33 @@ export const ShareModal = withLocales(props => {
   const document = locationProps?.document || props.document
   const rest = omit(locationProps || props, 'document')
 
+  const {
+    byDocId,
+    isOwner,
+    canReshare,
+    documentType,
+    getOwner,
+    getSharingType,
+    getRecipients,
+    revokeSelf
+  } = useSharingContext()
+
+  const isEditable =
+    !byDocId[document.id] || isOwner(document.id) || canReshare(document.id)
+
+  if (isEditable) {
+    return <EditableSharingModal document={document} {...rest} />
+  }
+
   return (
-    <SharingContext.Consumer>
-      {({ byDocId, isOwner, canReshare }) =>
-        !byDocId[document.id] ||
-        isOwner(document.id) ||
-        canReshare(document.id) ? (
-          <EditableSharingModal document={document} {...rest} />
-        ) : (
-          <SharingModal document={document} {...rest} />
-        )
-      }
-    </SharingContext.Consumer>
+    <SharingDetailsModal
+      document={document}
+      documentType={documentType}
+      owner={getOwner(document.id)}
+      sharingType={getSharingType(document.id)}
+      recipients={getRecipients(document.id)}
+      onRevoke={revokeSelf}
+      {...rest}
+    />
   )
 })
