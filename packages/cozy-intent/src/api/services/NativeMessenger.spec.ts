@@ -3,6 +3,17 @@ import { mockWebviewRef } from '../../../tests'
 
 const mockDebug = jest.fn()
 
+const mockWarn: () => void = jest.fn()
+
+jest.mock('cozy-minilog', () => {
+  return {
+    __esModule: true,
+    default: (): object => ({
+      warn: () => mockWarn()
+    })
+  }
+})
+
 jest.mock('post-me', () => ({
   ...jest.requireActual('post-me'),
   debug:
@@ -29,6 +40,20 @@ describe('NativeMessenger', () => {
     expect(mockWebviewRef.injectJavaScript).toBeCalledWith(
       'window.postMessage({"foo":"bar"})'
     )
+
+    expect(mockWarn).not.toBeCalledWith()
+  })
+
+  it('Should handle postMessage with error', () => {
+    const nativeMessenger = new NativeMessenger(mockWebviewRef)
+
+    nativeMessenger.postMessage({ foo: 'bar', error: 'error' })
+
+    expect(mockWebviewRef.injectJavaScript).toBeCalledWith(
+      'window.postMessage({"foo":"bar","error":"error"})'
+    )
+
+    expect(mockWarn).toBeCalledWith()
   })
 
   it('Should handle onMessage', () => {
