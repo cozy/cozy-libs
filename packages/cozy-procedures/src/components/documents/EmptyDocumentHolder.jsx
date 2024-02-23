@@ -1,16 +1,15 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import get from 'lodash/get'
 import flow from 'lodash/flow'
+import get from 'lodash/get'
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
-import { withBreakpoints, Alerter, translate } from 'cozy-ui/transpiled/react/'
-
-import { creditApplicationTemplate } from 'cozy-procedures'
 import { CozyFile } from 'cozy-doctypes'
-import DocumentsDataFormContainer from '../../containers/DocumentsDataForm'
+import { creditApplicationTemplate } from 'cozy-procedures'
+import { withBreakpoints, Alerter, translate } from 'cozy-ui/transpiled/react/'
 
 import MenuUploadMobile from './menuUpload/MenuUploadMobile'
 import MenuUploadWeb from './menuUpload/MenuUploadWeb'
+import DocumentsDataFormContainer from '../../containers/DocumentsDataForm'
 class EmptyDocumentHolder extends Component {
   state = {
     menuDisplayed: false

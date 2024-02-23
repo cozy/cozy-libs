@@ -1,8 +1,10 @@
-import React from 'react'
 import PropTypes from 'prop-types'
-import Modal from 'cozy-ui/transpiled/react/Modal'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
+import React from 'react'
+
 import { withClient } from 'cozy-client'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
+import Modal from 'cozy-ui/transpiled/react/Modal'
+
 import withLocales from './withLocales'
 
 const Revoked = ({ t, onLogBackIn, onLogout }) => (

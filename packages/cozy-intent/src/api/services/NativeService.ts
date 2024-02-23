@@ -82,7 +82,7 @@ export class NativeService {
     if (!this.messengerRegister[uri])
       return log(interpolate(strings.errorUnregisterWebview, { uri }))
 
-    delete this.messengerRegister[uri]
+    Reflect.deleteProperty(this.messengerRegister, uri)
 
     log(strings.logging.unregistered(uri))
   }
@@ -167,7 +167,9 @@ export class NativeService {
     uri: string,
     methodName: keyof WebviewMethods,
     ...args: Parameters<NativeMethodsRegister[keyof NativeMethodsRegister]>
-  ): ReturnType<NativeMethodsRegister[keyof NativeMethodsRegister]> | void =>
+  ):
+    | ReturnType<NativeMethodsRegister[keyof NativeMethodsRegister]>
+    | undefined =>
     this.messengerRegister[this.getHostname(uri)]?.connection
       ?.remoteHandle()
       .call(methodName, ...args)

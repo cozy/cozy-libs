@@ -83,13 +83,11 @@ export class KonnectorSuccess extends Component {
 
 KonnectorSuccess.apps = {
   drive: {
-    // eslint-disable-next-line react/display-name
     successLink: (state, props, context, i) => {
       return (
         <DriveLink key={i} folderId={state.trigger.message.folder_to_save} />
       )
     },
-    // eslint-disable-next-line react/display-name
     footerLink: (state, props) => {
       const { t, successButtonLabel } = props
       return (
@@ -104,7 +102,6 @@ KonnectorSuccess.apps = {
     }
   },
   banks: {
-    // eslint-disable-next-line react/display-name
     successLink: (state, props, context, i) => {
       return <BanksLink key={i} />
     },

@@ -10,15 +10,11 @@ import {
   strings
 } from '../../api'
 
-const mockDebug = jest.fn<void, string[]>()
+const mockDebug = jest.fn<undefined, string[]>()
 
 const onMessageMock = jest.fn()
 
 class MockNativeMessenger extends NativeMessenger {
-  constructor(webviewRef: WebviewRef) {
-    super(webviewRef)
-  }
-
   public postMessage = jest.fn()
 
   public addMessageListener = jest.fn()
@@ -58,7 +54,8 @@ describe('NativeService', () => {
       toggleSetting: jest.fn(),
       isBiometryDenied: jest.fn(),
       openAppOSSettings: jest.fn(),
-      isAvailable: jest.fn()
+      isAvailable: jest.fn(),
+      ocr: jest.fn()
     }
   })
 

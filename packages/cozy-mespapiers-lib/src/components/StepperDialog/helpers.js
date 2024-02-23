@@ -19,14 +19,14 @@ export const handleBack = async ({
       ? !isPreviousScanFront
         ? previousStep()
         : currentStepIndex > 1
-        ? setCurrentStepIndex(currentStepIndex - 2)
-        : await webviewIntent?.call('cancelUploadByCozyApp')
+          ? setCurrentStepIndex(currentStepIndex - 2)
+          : await webviewIntent?.call('cancelUploadByCozyApp')
       : previousStep()
   }
 
   return isMobile
     ? onClose()
     : fromFlagshipUpload
-    ? await webviewIntent?.call('cancelUploadByCozyApp')
-    : undefined
+      ? await webviewIntent?.call('cancelUploadByCozyApp')
+      : undefined
 }

@@ -41,8 +41,8 @@ export const makeConstraintsOfInput = attrs => {
   const minLength = maskLength
     ? Math.min(safeMinLength ?? maskLength, maskLength)
     : safeMaxLength
-    ? Math.min(safeMinLength, safeMaxLength)
-    : safeMinLength
+      ? Math.min(safeMinLength, safeMaxLength)
+      : safeMinLength
   const maxLength = maskLength ?? safeMaxLength
   const acceptedTypes = ['number', 'text']
 

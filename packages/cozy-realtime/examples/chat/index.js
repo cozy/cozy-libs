@@ -1,8 +1,10 @@
 const readline = require('readline')
+
 const { ArgumentParser } = require('argparse')
 const WebSocket = require('ws')
 
 const { createClientInteractive } = require('cozy-client/dist/cli')
+
 const CozyRealtime = require('../../dist').default
 
 global.WebSocket = WebSocket

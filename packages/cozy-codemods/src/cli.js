@@ -2,9 +2,10 @@
 
 /* eslint-disable no-console */
 
+const { spawnSync } = require('child_process')
 const fs = require('fs')
 const path = require('path')
-const { spawnSync } = require('child_process')
+
 const { build, completionHandler } = require('@cozy/cli-tree')
 
 const ignored = new Set(['__testfixtures__', '__tests__'])

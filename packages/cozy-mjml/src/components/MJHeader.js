@@ -1,5 +1,5 @@
-const validator = require('mjml-validator')
 const core = require('mjml-core')
+const validator = require('mjml-validator')
 
 validator.registerDependencies({
   'mj-body': ['mj-header'],

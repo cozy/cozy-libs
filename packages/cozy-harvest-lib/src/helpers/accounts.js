@@ -260,14 +260,12 @@ export const fetchAccountProcess = async (client, trigger) => {
  */
 export const checkMaxAccounts = async (slug, client) => {
   const triggersQuery = buildCountTriggersQuery()
-  const { data: triggers } = await client.fetchQueryAndGetFromState(
-    triggersQuery
-  )
+  const { data: triggers } =
+    await client.fetchQueryAndGetFromState(triggersQuery)
 
   const maintenanceQuery = buildAppsRegistryMaintenance()
-  const { data: maintenance } = await client.fetchQueryAndGetFromState(
-    maintenanceQuery
-  )
+  const { data: maintenance } =
+    await client.fetchQueryAndGetFromState(maintenanceQuery)
 
   const slugInMaintenance = maintenance.map(app =>
     app.maintenance_activated ? app.slug : null

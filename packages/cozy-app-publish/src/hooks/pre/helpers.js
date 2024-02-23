@@ -1,7 +1,9 @@
-const tar = require('tar')
 const { spawn } = require('child_process')
-const fs = require('fs-extra')
 const path = require('path')
+
+const fs = require('fs-extra')
+const tar = require('tar')
+
 const logger = require('../../utils/logger')
 
 const UPLOAD_DIR = 'www-upload/'

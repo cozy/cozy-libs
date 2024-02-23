@@ -18,10 +18,10 @@ export const hasSafariPlugin = (): Promise<boolean> => {
 }
 
 /**
- * Check if the Cordova's cordova-plugin-network-information plugin is installed
- * @see https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-network-information/
+ * Cordova apps are deprecated, we should not use this plugin anymore
+ * Still, we need to expose this function to avoid breaking changes for now
  * @returns {boolean}
  */
 export const hasNetworkInformationPlugin = (): boolean => {
-  return isCordova() && window.navigator.connection !== undefined
+  return false
 }

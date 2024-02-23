@@ -1,5 +1,5 @@
-import connectWithProcedures from '../redux/connectWithProcedures'
 import Amount from '../components/Amount'
+import connectWithProcedures from '../redux/connectWithProcedures'
 import { getAmount, updateAmount } from '../redux/procedureDataSlice'
 
 const mapStateToProps = state => ({

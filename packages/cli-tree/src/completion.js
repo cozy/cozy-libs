@@ -1,8 +1,8 @@
 /* eslint no-console: off */
-const tabtab = require('tabtab')
+const _ = require('lodash')
 const get = require('lodash/get')
 const toPairs = require('lodash/toPairs')
-const _ = require('lodash')
+const tabtab = require('tabtab')
 
 module.exports = {
   getCompletionSetupCommands,

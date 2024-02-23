@@ -23,7 +23,7 @@ const getParams = ({ appId, uri }: AppInfo): { package: string } | string => {
 const exported: {
   startApp?: {
     (arg0: { appId: string; uri: string }): unknown
-    (appInfo: AppInfo): Promise<false | void>
+    (appInfo: AppInfo): Promise<false | undefined>
   }
   checkApp?: (appInfo: AppInfo) => Promise<
     | boolean
@@ -43,7 +43,7 @@ const exported: {
  */
 const startApp = (exported.startApp = async function (
   appInfo: AppInfo
-): Promise<void | false> {
+): Promise<undefined | false> {
   const startAppPlugin = window.startApp
   const isAppInstalled = await exported.checkApp(appInfo)
   if (isAppInstalled) {

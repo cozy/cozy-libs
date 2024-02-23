@@ -1,6 +1,8 @@
-const runHooks = require('./runhooks')
-const request = require('request')
 const crypto = require('crypto')
+
+const request = require('request')
+
+const runHooks = require('./runhooks')
 const logger = require('./utils/logger')
 
 /**

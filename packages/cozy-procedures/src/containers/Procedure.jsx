@@ -1,19 +1,18 @@
+import Procedure from '../Procedure'
 import connectWithProcedures from '../redux/connectWithProcedures'
 import {
-  getInitialized,
-  initializationSuccess
-} from '../redux/procedureDataSlice'
+  init as initDocuments,
+  fetchDocumentsByCategory
+} from '../redux/documentsDataSlice'
 import {
   init as initPersonalData,
   fetchMyself,
   fetchBankAccountsStats
 } from '../redux/personalDataSlice'
 import {
-  init as initDocuments,
-  fetchDocumentsByCategory
-} from '../redux/documentsDataSlice'
-
-import Procedure from '../Procedure'
+  getInitialized,
+  initializationSuccess
+} from '../redux/procedureDataSlice'
 import withLocales from '../withLocales'
 
 const mapStateToProps = state => ({
