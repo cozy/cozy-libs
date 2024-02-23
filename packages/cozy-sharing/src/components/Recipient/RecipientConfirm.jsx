@@ -4,7 +4,7 @@ import React from 'react'
 import Button from 'cozy-ui/transpiled/react/deprecated/Button'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-import modalStyles from '../../share.styl'
+import modalStyles from '../../styles/share.styl'
 
 /**
  * Displays the confirmation interface that allows to confirm or reject a recipient

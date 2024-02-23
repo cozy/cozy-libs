@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import styles from './recipient.styl'
+import styles from '../../styles/recipient.styl'
 
 const Identity = ({ name, details }) => (
   <div className={classNames(styles['recipient-idents'], 'u-ml-1')}>

@@ -3,8 +3,8 @@ import React from 'react'
 
 import AvatarPlusX from './AvatarPlusX'
 import Identity from './Identity'
-import styles from './recipient.styl'
 import { getDisplayName } from '../../models'
+import styles from '../../styles/recipient.styl'
 
 const RecipientPlusX = ({ extraRecipients }, { t }) => (
   <div className={styles['recipient']}>

@@ -8,7 +8,7 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/deprecated/Media'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-import styles from './recipient.styl'
+import styles from '../../styles/recipient.styl'
 
 const RecipientStatus = ({ status, isMe, instance }) => {
   const { t } = useI18n()
