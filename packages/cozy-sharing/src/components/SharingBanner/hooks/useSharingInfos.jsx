@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 
 import { useClient, models } from 'cozy-client'
 
-import logger from '../../logger'
-import { buildSharingsByIdQuery } from '../../queries/queries'
+import logger from '../../../logger'
+import { buildSharingsByIdQuery } from '../../../queries/queries'
 import getQueryParameter from '../helpers/QueryParameter'
 
 const getSharingId = permission => {
