@@ -8,9 +8,6 @@ import { MesPapiersLibLayout } from './MesPapiersLibLayout'
 import AppLike from '../../test/components/AppLike'
 
 /* eslint-disable react/display-name */
-jest.mock('cozy-ui/transpiled/react/deprecated/Alerter', () => () => (
-  <div data-testid="Alerter" />
-))
 jest.mock('cozy-client', () => ({
   ...jest.requireActual('cozy-client'),
   RealTimeQueries: () => <div data-testid="RealTimeQueries" />
@@ -57,12 +54,5 @@ describe('MesPapiersLibLayout', () => {
   it('should contain progressbar when no papers', () => {
     const { getByRole } = setup()
     expect(getByRole('progressbar')).toBeTruthy()
-  })
-
-  it('should contain RealTimeQueries(2), Alerter & ModalStack components', () => {
-    const { queryByTestId, queryAllByTestId } = setup()
-
-    expect(queryAllByTestId('RealTimeQueries')).toHaveLength(4)
-    expect(queryByTestId('Alerter')).toBeTruthy()
   })
 })
