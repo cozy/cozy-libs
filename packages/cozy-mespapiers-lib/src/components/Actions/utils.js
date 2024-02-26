@@ -88,14 +88,14 @@ export const makeZipFolder = async ({ client, docs, t, f }) => {
 
 /**
  * forwardFile - Triggers the download of one or multiple files by the browser
- * @param {CozyClient} client
- * @param {array} files One or more files to download
- * @param {func} t i18n function
  * @param {object} options
+ * @param {import('cozy-client/types/CozyClient').default} options.client
+ * @param {import('cozy-client/types/types').IOCozyFile[]} options.files One or more files to download
+ * @param {Function} options.t i18n function
  * @param {string} options.ttl Time to live of the sharing link
  * @param {string} options.password Password of the sharing link
  */
-export const forwardFile = async (client, files, t, { ttl, password }) => {
+export const forwardFile = async ({ client, files, t, ttl, password }) => {
   try {
     // We currently support only one file at a time
     const file = files[0]
