@@ -129,10 +129,13 @@ export const forwardFile = async ({
 /**
  * downloadFiles - Triggers the download of one or multiple files by the browser
  *
- * @param {import('cozy-client/types/CozyClient').default} client
- * @param {import('cozy-client/types/types').IOCozyFile[]} files One or more files to download
+ * @param {object} options
+ * @param {import('cozy-client/types/CozyClient').default} options.client
+ * @param {import('cozy-client/types/types').IOCozyFile[]} options.files One or more files to download
+ * @param {Function} options.showAlert - Function to display an alert
+ * @param {Function} options.t i18n function
  */
-export const downloadFiles = async (client, files) => {
+export const downloadFiles = async ({ client, files, showAlert, t }) => {
   const fileCollection = client.collection(FILES_DOCTYPE)
   if (files.length === 1) {
     const file = files[0]
@@ -146,7 +149,7 @@ export const downloadFiles = async (client, files) => {
 
       fileCollection.forceFileDownload(`${downloadURL}?Dl=1`, filename)
     } catch (error) {
-      Alerter.error(downloadFileError(error))
+      showAlert(t(downloadFileError(error)), 'error')
     }
   } else {
     const ids = files.map(f => f.id)
