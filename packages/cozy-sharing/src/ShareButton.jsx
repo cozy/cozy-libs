@@ -8,7 +8,7 @@ import {
   SharedWithMeButton
 } from './components/ShareButton'
 import SharingContext from './context'
-import withLocales from './withLocales'
+import withLocales from './hoc/withLocales'
 
 export const ShareButton = withLocales(({ docId, useShortLabel, ...rest }) => {
   const { t } = useI18n()

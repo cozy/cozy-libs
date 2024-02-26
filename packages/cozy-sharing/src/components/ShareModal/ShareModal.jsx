@@ -4,8 +4,8 @@ import { useLocation } from 'react-router'
 
 import EditableSharingModal from './EditableSharingModal'
 import { SharingDetailsModal } from './SharingDetailsModal'
+import withLocales from '../../hoc/withLocales'
 import { useSharingContext } from '../../hooks/useSharingContext'
-import withLocales from '../../withLocales'
 
 export const ShareModal = withLocales(props => {
   const location = useLocation?.()
