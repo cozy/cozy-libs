@@ -114,7 +114,7 @@ ContactList.defaultProps = {
 
 ContactList.propTypes = {
   /** Determine whether the user can select several contacts */
-  multiple: PropTypes.bool.isRequired,
+  multiple: PropTypes.bool,
   /** Contact object representing the current user */
   currentUser: PropTypes.object.isRequired,
   className: PropTypes.string,
