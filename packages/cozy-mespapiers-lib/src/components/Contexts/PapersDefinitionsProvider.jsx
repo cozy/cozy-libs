@@ -4,7 +4,7 @@ import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
 import useFlag from 'cozy-flags/dist/useFlag'
 import minilog from 'cozy-minilog'
-import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import papersJSON_default from '../../constants/papersDefinitions.json'
@@ -22,6 +22,7 @@ const PapersDefinitionsProvider = ({ children }) => {
   const client = useClient()
   const { t } = useI18n()
   const scannerT = useScannerI18n()
+  const { showAlert } = useAlert()
   const [customPapersDefinitions, setCustomPapersDefinitions] = useState({
     isLoaded: false,
     name: '',
@@ -64,16 +65,12 @@ const PapersDefinitionsProvider = ({ children }) => {
           log.info('Custom PapersDefinitions loaded')
         } else {
           // If custom papersDefinitions.json not found, fallback on local file
-          Alerter.error(
+          showAlert(
             t(`PapersDefinitionsProvider.customPapersDefinitions.error`, {
               name: paperConfigFilenameCustom,
               path: appFolderPath
             }),
-            {
-              buttonText: 'Ok',
-              buttonAction: dismiss => dismiss(),
-              duration: 20000
-            }
+            'error'
           )
           setPapersDefinitions(
             buildPapersDefinitions(papersJSON.papersDefinitions, scannerT)
@@ -99,7 +96,8 @@ const PapersDefinitionsProvider = ({ children }) => {
     customPapersDefinitionsFlag,
     scannerT,
     t,
-    papersJSON.papersDefinitions
+    papersJSON.papersDefinitions,
+    showAlert
   ])
 
   return (
