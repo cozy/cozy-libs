@@ -2,7 +2,7 @@ import React from 'react'
 
 import { default as RecipientsList } from './components/WhoHasAccessLight'
 import SharingContext from './context'
-import withLocales from './withLocales'
+import withLocales from './hoc/withLocales'
 
 export const SharedRecipientsList = withLocales(({ docId, ...rest }) => (
   <SharingContext.Consumer>

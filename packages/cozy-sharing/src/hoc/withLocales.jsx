@@ -3,8 +3,8 @@ import React from 'react'
 import { I18n, translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 const locales = {
-  en: require(`../locales/en.json`),
-  fr: require(`../locales/fr.json`)
+  en: require(`../../locales/en.json`),
+  fr: require(`../../locales/fr.json`)
 }
 
 /**
