@@ -9,6 +9,7 @@ import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import Button from 'cozy-ui/transpiled/react/deprecated/Button'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { trashFiles, removeQualification } from './utils'
@@ -21,13 +22,14 @@ const DeleteConfirm = ({ files, isLast, onClose, children }) => {
   const [isDeleting, setDeleting] = useState(false)
   const [clearQualification, setClearQualification] = useState(false)
   const navigate = useNavigate()
+  const { showAlert } = useAlert()
 
   const onDelete = useCallback(async () => {
     setDeleting(true)
     if (clearQualification) {
       await removeQualification(client, files)
     } else {
-      await trashFiles(client, files)
+      await trashFiles({ client, files, showAlert, t })
     }
     onClose()
     if (isLast || isMultiSelectionActive) {
@@ -40,7 +42,9 @@ const DeleteConfirm = ({ files, isLast, onClose, children }) => {
     isLast,
     isMultiSelectionActive,
     navigate,
-    onClose
+    onClose,
+    showAlert,
+    t
   ])
 
   const handleOnChange = () => {

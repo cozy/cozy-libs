@@ -174,19 +174,22 @@ const isAlreadyInTrash = err => {
 /**
  * trashFiles - Moves a set of files to the cozy trash
  *
- * @param {import('cozy-client/types/CozyClient').default} client
- * @param {import('cozy-client/types/types').IOCozyFile[]} files  One or more files to trash
+ * @param {object} options
+ * @param {import('cozy-client/types/CozyClient').default} options.client
+ * @param {import('cozy-client/types/types').IOCozyFile[]} options.files  One or more files to trash
+ * @param {Function} options.showAlert - Function to display an alert
+ * @param {Function} options.t i18n function
  */
-export const trashFiles = async (client, files) => {
+export const trashFiles = async ({ client, files, showAlert, t }) => {
   try {
     for (const file of files) {
       await client.destroy(file)
     }
 
-    Alerter.success('common.trashFile.success')
+    showAlert(t('common.trashFile.success'), 'success')
   } catch (err) {
     if (!isAlreadyInTrash(err)) {
-      Alerter.error('common.trashFile.error')
+      showAlert(t('common.trashFile.error'), 'error')
     }
   }
 }
