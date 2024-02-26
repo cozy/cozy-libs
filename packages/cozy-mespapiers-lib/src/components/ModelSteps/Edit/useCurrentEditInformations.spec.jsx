@@ -15,6 +15,9 @@ jest.mock('cozy-client/dist/utils', () => ({
   isQueryLoading: jest.fn()
 }))
 jest.mock('cozy-client/dist/hooks/useQuery', () => jest.fn())
+jest.mock('cozy-ui/transpiled/react/providers/Alert', () => ({
+  useAlert: jest.fn().mockReturnValue({ showAlert: jest.fn() })
+}))
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useLocation: jest.fn()
