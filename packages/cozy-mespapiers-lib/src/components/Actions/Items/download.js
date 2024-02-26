@@ -8,7 +8,7 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import withLocales from '../../../locales/withLocales'
 import { downloadFiles } from '../utils'
 
-export const download = ({ t }) => {
+export const download = ({ t, showAlert }) => {
   const label = t('action.download')
   const icon = 'download'
 
@@ -17,7 +17,7 @@ export const download = ({ t }) => {
     label,
     icon,
     disabled: docs => docs.length === 0,
-    action: (docs, { client }) => downloadFiles(client, docs),
+    action: (docs, { client }) => downloadFiles({ client, docs, showAlert, t }),
     Component: withLocales(
       // eslint-disable-next-line react/display-name
       forwardRef((props, ref) => {
