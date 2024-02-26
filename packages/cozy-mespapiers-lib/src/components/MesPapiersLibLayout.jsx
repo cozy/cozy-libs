@@ -6,7 +6,6 @@ import CozyDevTools from 'cozy-client/dist/devtools'
 import flag from 'cozy-flags'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { ModalStack } from './Contexts/ModalProvider'
@@ -52,7 +51,6 @@ export const MesPapiersLibLayout = () => {
       <RealTimeQueries doctype={CONTACTS_DOCTYPE} />
       <RealTimeQueries doctype={TRIGGERS_DOCTYPE} />
       <RealTimeQueries doctype={SETTINGS_DOCTYPE} />
-      <Alerter t={t} />
       <ModalStack />
       {showPaywall && <PapersPaywall onClose={onClosePaywall} />}
     </>
