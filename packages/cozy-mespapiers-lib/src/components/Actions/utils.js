@@ -94,8 +94,16 @@ export const makeZipFolder = async ({ client, docs, t, f }) => {
  * @param {Function} options.t i18n function
  * @param {string} options.ttl Time to live of the sharing link
  * @param {string} options.password Password of the sharing link
+ * @param {Function} options.showAlert - Function to display an alert
  */
-export const forwardFile = async ({ client, files, t, ttl, password }) => {
+export const forwardFile = async ({
+  client,
+  files,
+  t,
+  ttl,
+  password,
+  showAlert
+}) => {
   try {
     // We currently support only one file at a time
     const file = files[0]
@@ -114,7 +122,7 @@ export const forwardFile = async ({ client, files, t, ttl, password }) => {
     }
     navigator.share(shareData)
   } catch (error) {
-    Alerter.error('viewer.shareData.error', { error: error })
+    showAlert(t('viewer.shareData.error'), 'error')
   }
 }
 
