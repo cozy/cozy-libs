@@ -27,7 +27,7 @@ const DeleteConfirm = ({ files, isLast, onClose, children }) => {
   const onDelete = useCallback(async () => {
     setDeleting(true)
     if (clearQualification) {
-      await removeQualification(client, files)
+      await removeQualification({ client, files, showAlert, t })
     } else {
       await trashFiles({ client, files, showAlert, t })
     }

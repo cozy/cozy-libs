@@ -3,7 +3,6 @@
 import { isReferencedBy } from 'cozy-client'
 import { getDisplayName } from 'cozy-client/dist/models/contact'
 import { getSharingLink } from 'cozy-client/dist/models/sharing'
-import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 
 import { FILES_DOCTYPE, JOBS_DOCTYPE } from '../../doctypes'
 import { fetchCurrentUser } from '../../helpers/fetchCurrentUser'
@@ -197,10 +196,13 @@ export const trashFiles = async ({ client, files, showAlert, t }) => {
 /**
  * removeQualification - Remove qualification attribute
  *
- * @param {import('cozy-client/types/CozyClient').default} client
- * @param {import('cozy-client/types/types').IOCozyFile[]} files  One or more files
+ * @param {object} options
+ * @param {import('cozy-client/types/CozyClient').default} options.client
+ * @param {import('cozy-client/types/types').IOCozyFile[]} options.files  One or more files to remove qualification
+ * @param {Function} options.showAlert - Function to display an alert
+ * @param {Function} options.t i18n function
  */
-export const removeQualification = async (client, files) => {
+export const removeQualification = async ({ client, files, showAlert, t }) => {
   try {
     const fileCollection = client.collection(FILES_DOCTYPE)
     for (const file of files) {
@@ -209,8 +211,8 @@ export const removeQualification = async (client, files) => {
       })
     }
 
-    Alerter.success('common.removeQualification.success')
+    showAlert(t('common.removeQualification.success'), 'success')
   } catch (err) {
-    Alerter.error('common.removeQualification.error')
+    showAlert(t('common.removeQualification.error'), 'error')
   }
 }
