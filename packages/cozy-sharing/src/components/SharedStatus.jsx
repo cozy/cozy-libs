@@ -5,7 +5,7 @@ import palette from 'cozy-ui/transpiled/react/palette'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { SharingTooltip, TooltipRecipientList } from './Tooltip'
-import LinkIcon from '../../assets/icons/icon-link.svg'
+import LinkIcon from '../assets/icons/icon-link.svg'
 import { getDisplayName } from '../models'
 import styles from '../styles/status.styl'
 
