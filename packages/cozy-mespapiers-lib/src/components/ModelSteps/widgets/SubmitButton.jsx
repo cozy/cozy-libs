@@ -5,8 +5,8 @@ import { useClient } from 'cozy-client'
 import { models } from 'cozy-client'
 import minilog from 'cozy-minilog'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import ConfirmReplaceFile from './ConfirmReplaceFile'
@@ -30,6 +30,7 @@ const SubmitButton = ({ onSubmit, disabled, formData }) => {
   const { t, f } = useI18n()
   const scannerT = useScannerI18n()
   const { currentDefinition, stepperDialogTitle } = useStepperDialog()
+  const { showAlert } = useAlert()
 
   const cozyFiles = formData.data.filter(d => d.file.from === 'cozy')
   const isDisabled = disabled || isBusy
@@ -52,10 +53,10 @@ const SubmitButton = ({ onSubmit, disabled, formData }) => {
         i18n: { t, f, scannerT }
       })
 
-      Alerter.success('common.saveFile.success', { duration: 4000 })
+      showAlert(t('common.saveFile.success'), 'success')
     } catch (error) {
       log.error('Error when submitting', error)
-      Alerter.error('common.saveFile.error', { duration: 4000 })
+      showAlert(t('common.saveFile.error'), 'error')
     } finally {
       onSubmit()
     }
