@@ -771,7 +771,7 @@
               "name": "labelGivenByUser",
               "type": "text",
               "required": true,
-              "maxLength": 10,
+              "maxLength": 255,
               "inputLabel": "PaperJSON.generic.addressLabel.inputLabel"
             }
           ]
@@ -1124,7 +1124,7 @@
               "name": "labelGivenByUser",
               "type": "text",
               "required": true,
-              "maxLength": 40,
+              "maxLength": 255,
               "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
             }
           ]
@@ -1171,7 +1171,7 @@
               "name": "labelGivenByUser",
               "type": "text",
               "required": true,
-              "maxLength": 40,
+              "maxLength": 255,
               "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
             }
           ]
@@ -1219,7 +1219,7 @@
               "name": "labelGivenByUser",
               "type": "text",
               "required": true,
-              "maxLength": 40,
+              "maxLength": 255,
               "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
             }
           ]
@@ -1267,7 +1267,7 @@
               "name": "labelGivenByUser",
               "type": "text",
               "required": true,
-              "maxLength": 40,
+              "maxLength": 255,
               "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
             }
           ]
@@ -1295,9 +1295,6 @@
     {
       "label": "lease",
       "icon": "home",
-      "filenameModel": [
-        "labelGivenByUser"
-      ],
       "featureDate": "date",
       "maxDisplay": 5,
       "acquisitionSteps": [
@@ -1350,7 +1347,7 @@
               "name": "labelGivenByUser",
               "type": "text",
               "required": true,
-              "maxLength": 40,
+              "maxLength": 255,
               "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
             }
           ]
@@ -1397,7 +1394,7 @@
               "name": "labelGivenByUser",
               "type": "text",
               "required": true,
-              "maxLength": 40,
+              "maxLength": 255,
               "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
             }
           ]
@@ -1445,7 +1442,7 @@
               "name": "labelGivenByUser",
               "type": "text",
               "required": true,
-              "maxLength": 40,
+              "maxLength": 255,
               "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
             }
           ]
@@ -1473,9 +1470,6 @@
     {
       "label": "work_contract",
       "icon": "company",
-      "filenameModel": [
-        "labelGivenByUser"
-      ],
       "featureDate": "date",
       "maxDisplay": 5,
       "acquisitionSteps": [
@@ -1548,7 +1542,7 @@
               "name": "labelGivenByUser",
               "type": "text",
               "required": true,
-              "maxLength": 40,
+              "maxLength": 255,
               "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
             }
           ]
@@ -2110,7 +2104,7 @@
               "name": "labelGivenByUser",
               "type": "text",
               "required": true,
-              "maxLength": 10,
+              "maxLength": 255,
               "inputLabel": "PaperJSON.generic.addressLabel.inputLabel"
             }
           ]
@@ -2958,7 +2952,7 @@
               "name": "labelGivenByUser",
               "type": "text",
               "required": true,
-              "maxLength": 40,
+              "maxLength": 255,
               "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
             }
           ]
