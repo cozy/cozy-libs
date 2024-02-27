@@ -3032,6 +3032,51 @@
       ]
     },
     {
+      "label": "condition_report",
+      "icon": "home",
+      "featureDate": "date",
+      "filenameModel": ["labelGivenByUser"],
+      "maxDisplay": 5,
+      "acquisitionSteps": [
+        {
+          "model": "scan",
+          "multipage": true,
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.generic.singlePage.text"
+        },
+        {
+          "model": "information",
+          "text": "PaperJSON.generic.fileLabel.text",
+          "attributes": [
+            {
+              "name": "labelGivenByUser",
+              "type": "text",
+              "required": true,
+              "maxLength": 255,
+              "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
+            }
+          ]
+        },
+        {
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.date.text",
+          "attributes": [
+            {
+              "name": "date",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.date.inputLabel"
+            }
+          ]
+        },
+        {
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
+    },
+    {
       "label": "note_identity_document",
       "icon": "file-type-note",
       "maxDisplay": 5,
