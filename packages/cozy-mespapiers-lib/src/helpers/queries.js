@@ -97,37 +97,6 @@ export const buildContactsQueryByIds = (ids = [], enabled = true) => ({
   }
 })
 
-export const buildContactsQuery = (enabled = true) => ({
-  definition: () =>
-    Q(CONTACTS_DOCTYPE)
-      .where({
-        // `where` should be removed when https://github.com/cozy/cozy-client/issues/1216 fixed
-        _id: {
-          $gt: null
-        }
-      })
-      .select([
-        '_id',
-        'name',
-        'displayName',
-        'fullname',
-        'email',
-        'phone',
-        'address',
-        'birthday',
-        'birthcity',
-        'company',
-        'jobTitle'
-      ])
-      .limitBy(1000)
-      .indexFields(['_id']),
-  options: {
-    as: CONTACTS_DOCTYPE,
-    fetchPolicy: defaultFetchPolicy,
-    enabled
-  }
-})
-
 // getById must have a thruty value, even if "enabled" is "false"
 // cf: https://github.com/cozy/cozy-client/issues/961
 export const buildFileQueryById = id => ({
@@ -182,26 +151,6 @@ export const buildKonnectorsQueryByQualificationLabels = (
     as: `${KONNECTORS_DOCTYPE}/qualificationLabels/${JSON.stringify(labels)}`,
     fetchPolicy: defaultFetchPolicy,
     enabled
-  }
-})
-
-export const buildKonnectorsQueryByQualificationLabel = label => ({
-  definition: () =>
-    Q(KONNECTORS_DOCTYPE)
-      .where({ qualification_labels: { $in: [label] } })
-      .indexFields(['qualification_labels']),
-  options: {
-    as: `${KONNECTORS_DOCTYPE}/qualificationLabel/${label}`,
-    fetchPolicy: defaultFetchPolicy
-  }
-})
-
-export const buildKonnectorsQueryBySlug = slug => ({
-  definition: () => Q(KONNECTORS_DOCTYPE).where({ slug }).indexFields(['slug']),
-  options: {
-    as: `${KONNECTORS_DOCTYPE}/slug/${slug}`,
-    fetchPolicy: defaultFetchPolicy,
-    enabled: !!slug
   }
 })
 
