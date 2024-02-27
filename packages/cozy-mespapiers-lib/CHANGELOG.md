@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [79.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@79.0.0...cozy-mespapiers-lib@79.1.0) (2024-02-27)
+
+
+### Bug Fixes
+
+* **mespapiers:** The `multiple` prop is not mandatory ([2a1f8f5](https://github.com/cozy/cozy-libs/commit/2a1f8f5dfc313277a75c57f72fe045b86591ac04))
+
+
+### Features
+
+* **mespapiers:** Add "work quote" & "divorce" papers ([0aa6c16](https://github.com/cozy/cozy-libs/commit/0aa6c16df2eca5311c88dc470dc272d2fb75f3b3))
+* **mespapiers:** Remove last occurence of Alerter ([7609366](https://github.com/cozy/cozy-libs/commit/760936627c9978636030824be5d2bf031e9c991c))
+* **mespapiers:** Use showAlert instead Alerter into downloadFiles func ([68ec498](https://github.com/cozy/cozy-libs/commit/68ec498d218c87d7fd99b3c321afe7395657c1e9))
+* **mespapiers:** Use showAlert instead Alerter into forwardFile func ([7c402b9](https://github.com/cozy/cozy-libs/commit/7c402b9e9fe4b3741cf255992173b8bbf4b19833))
+* **mespapiers:** Use showAlert instead Alerter into PapersDefinitions ([e9525f1](https://github.com/cozy/cozy-libs/commit/e9525f182341b9f0bcfa60914e2ce364e59dc933))
+* **mespapiers:** Use showAlert instead Alerter into removeQualification ([9807338](https://github.com/cozy/cozy-libs/commit/9807338ed18868b004667e13b070d9cd6f0eae42))
+* **mespapiers:** Use showAlert instead Alerter into SubmitButton comp ([0169c7a](https://github.com/cozy/cozy-libs/commit/0169c7a2057315988955093739a0c690e086c284))
+* **mespapiers:** Use showAlert instead Alerter into trashFiles func ([6e3711c](https://github.com/cozy/cozy-libs/commit/6e3711ce0a5536c333cdb9272d33a13cad726c7d))
+
+
+
+
+
 # [79.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@78.2.3...cozy-mespapiers-lib@79.0.0) (2024-02-20)
 
 
