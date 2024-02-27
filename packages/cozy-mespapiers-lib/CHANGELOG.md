@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [79.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@79.1.0...cozy-mespapiers-lib@79.2.0) (2024-02-27)
+
+
+### Features
+
+* **mespapiers:** Remove useless queries ([d6151a5](https://github.com/cozy/cozy-libs/commit/d6151a544a5d0aa0960b16467dcd2d8be8137e54))
+
+
+
+
+
 # [79.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@79.0.0...cozy-mespapiers-lib@79.1.0) (2024-02-27)
 
 
