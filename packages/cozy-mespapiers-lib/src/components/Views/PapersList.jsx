@@ -10,8 +10,8 @@ import { makeAccountsByFiles } from './helpers'
 import {
   buildContactsQueryByIds,
   buildFilesQueryByLabel,
-  buildKonnectorsQueryByQualificationLabel,
-  buildAccountsQueryBySlugs
+  buildAccountsQueryBySlugs,
+  buildKonnectorsQueryByQualificationLabels
 } from '../../helpers/queries'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import Empty from '../Papers/Empty/Empty'
@@ -65,9 +65,9 @@ const PapersList = () => {
   const isLoadingContacts =
     isQueryLoading(contactQueryResult) || contactQueryResult.hasMore
 
-  const queryKonnector = buildKonnectorsQueryByQualificationLabel(
+  const queryKonnector = buildKonnectorsQueryByQualificationLabels([
     currentQualificationLabel
-  )
+  ])
   const { data: konnectors, ...konnectorsQueryLeft } = useQuery(
     queryKonnector.definition,
     queryKonnector.options
