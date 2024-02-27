@@ -10,11 +10,9 @@
  */
 export const buildPapersDefinitions = (papersDefList, scannerT) => {
   const papersDefListSorted = [...papersDefList].sort((w, x) => {
-    return scannerT(`items.${w.label}`) > scannerT(`items.${x.label}`)
-      ? 1
-      : scannerT(`items.${x.label}`) > scannerT(`items.${w.label}`)
-      ? -1
-      : 0
+    return scannerT(`items.${w.label}`)?.localeCompare(
+      scannerT(`items.${x.label}`)
+    )
   })
 
   const [papersUsedList, papersUnUsedList, otherPaperList, noteList] =
