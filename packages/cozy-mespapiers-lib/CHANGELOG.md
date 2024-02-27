@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [80.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@79.2.0...cozy-mespapiers-lib@80.0.0) (2024-02-27)
+
+
+### Bug Fixes
+
+* **mespapiers:** Also sort letters with an accent ([3d412f0](https://github.com/cozy/cozy-libs/commit/3d412f02b2341f3d05835b90b0dd0646026f4c67))
+
+
+### Features
+
+* **mespapiers:** Add `condition_report ` paper ([8394828](https://github.com/cozy/cozy-libs/commit/83948280e2006a67b12bf86cc7bf384b0048537e))
+* **mespapiers:** Set max length of label given by user to 255 char ([eeff67f](https://github.com/cozy/cozy-libs/commit/eeff67fa8ab17895797b4fb6074c8bda7cd108f2))
+* **mespapiers:** Upgrade cozy-client from 45.11.0 to 45.14.0 ([64d8452](https://github.com/cozy/cozy-libs/commit/64d84526fb8c5e51cc12b385157135fd53628106))
+* **mespapiers:** Upgrade cozy-ui from 103.6.2 to 103.8.0 ([281b96e](https://github.com/cozy/cozy-libs/commit/281b96ed20af8b2719d73bad24635f3162dab021))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 103.8.0`
+* **mespapiers:** you must have `cozy-client >= 45.14.0`
+
+
+
+
+
 # [79.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@79.1.0...cozy-mespapiers-lib@79.2.0) (2024-02-27)
 
 
