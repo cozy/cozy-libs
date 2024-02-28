@@ -132,46 +132,51 @@ exports[`ContactSuggestion component should display contact suggestion for a con
               <ListItemIcon
                 key=".$.$.0"
               >
-                <ForwardRef(ListItemIcon)
-                  classes={
-                    Object {
-                      "alignItemsFlexStart": "MuiListItemIcon-alignItemsFlexStart",
-                      "root": "MuiListItemIcon-root",
-                    }
-                  }
+                <WithStyles(ForwardRef(ListItemIcon))
+                  className="cozyListItemIcon"
                 >
-                  <div
-                    className="MuiListItemIcon-root"
+                  <ForwardRef(ListItemIcon)
+                    className="cozyListItemIcon"
+                    classes={
+                      Object {
+                        "alignItemsFlexStart": "MuiListItemIcon-alignItemsFlexStart",
+                        "root": "MuiListItemIcon-root",
+                      }
+                    }
                   >
-                    <Avatar
-                      className=""
-                      disabled={false}
-                      ghost={false}
-                      icon={[Function]}
-                      image=""
-                      size="small"
-                      style={Object {}}
-                      text="JS"
+                    <div
+                      className="MuiListItemIcon-root cozyListItemIcon"
                     >
-                      <div
-                        className="styles__c-avatar___PpDI- styles__c-avatar--text___2dvna"
-                        data-testid="Avatar"
-                        style={
-                          Object {
-                            "--circleSize": "32px",
-                            "backgroundColor": "#C2ADF4",
-                          }
-                        }
+                      <Avatar
+                        className=""
+                        disabled={false}
+                        ghost={false}
+                        icon={[Function]}
+                        image=""
+                        size="small"
+                        style={Object {}}
+                        text="JS"
                       >
-                        <span
-                          className="styles__c-avatar-initials___310qC"
+                        <div
+                          className="styles__c-avatar___PpDI- styles__c-avatar--text___2dvna"
+                          data-testid="Avatar"
+                          style={
+                            Object {
+                              "--circleSize": "32px",
+                              "backgroundColor": "#C2ADF4",
+                            }
+                          }
                         >
-                          JS
-                        </span>
-                      </div>
-                    </Avatar>
-                  </div>
-                </ForwardRef(ListItemIcon)>
+                          <span
+                            className="styles__c-avatar-initials___310qC"
+                          >
+                            JS
+                          </span>
+                        </div>
+                      </Avatar>
+                    </div>
+                  </ForwardRef(ListItemIcon)>
+                </WithStyles(ForwardRef(ListItemIcon))>
               </ListItemIcon>
               <ListItemText
                 ellipsis={true}
@@ -501,46 +506,51 @@ exports[`ContactSuggestion component should display contact suggestion for a con
               <ListItemIcon
                 key=".$.$.0"
               >
-                <ForwardRef(ListItemIcon)
-                  classes={
-                    Object {
-                      "alignItemsFlexStart": "MuiListItemIcon-alignItemsFlexStart",
-                      "root": "MuiListItemIcon-root",
-                    }
-                  }
+                <WithStyles(ForwardRef(ListItemIcon))
+                  className="cozyListItemIcon"
                 >
-                  <div
-                    className="MuiListItemIcon-root"
+                  <ForwardRef(ListItemIcon)
+                    className="cozyListItemIcon"
+                    classes={
+                      Object {
+                        "alignItemsFlexStart": "MuiListItemIcon-alignItemsFlexStart",
+                        "root": "MuiListItemIcon-root",
+                      }
+                    }
                   >
-                    <Avatar
-                      className=""
-                      disabled={false}
-                      ghost={false}
-                      icon={[Function]}
-                      image=""
-                      size="small"
-                      style={Object {}}
-                      text="J"
+                    <div
+                      className="MuiListItemIcon-root cozyListItemIcon"
                     >
-                      <div
-                        className="styles__c-avatar___PpDI- styles__c-avatar--text___2dvna"
-                        data-testid="Avatar"
-                        style={
-                          Object {
-                            "--circleSize": "32px",
-                            "backgroundColor": "#0DCBCF",
-                          }
-                        }
+                      <Avatar
+                        className=""
+                        disabled={false}
+                        ghost={false}
+                        icon={[Function]}
+                        image=""
+                        size="small"
+                        style={Object {}}
+                        text="J"
                       >
-                        <span
-                          className="styles__c-avatar-initials___310qC"
+                        <div
+                          className="styles__c-avatar___PpDI- styles__c-avatar--text___2dvna"
+                          data-testid="Avatar"
+                          style={
+                            Object {
+                              "--circleSize": "32px",
+                              "backgroundColor": "#0DCBCF",
+                            }
+                          }
                         >
-                          J
-                        </span>
-                      </div>
-                    </Avatar>
-                  </div>
-                </ForwardRef(ListItemIcon)>
+                          <span
+                            className="styles__c-avatar-initials___310qC"
+                          >
+                            J
+                          </span>
+                        </div>
+                      </Avatar>
+                    </div>
+                  </ForwardRef(ListItemIcon)>
+                </WithStyles(ForwardRef(ListItemIcon))>
               </ListItemIcon>
               <ListItemText
                 ellipsis={true}
@@ -921,46 +931,51 @@ exports[`ContactSuggestion component should display contact suggestion for a gro
               <ListItemIcon
                 key=".$.$.0"
               >
-                <ForwardRef(ListItemIcon)
-                  classes={
-                    Object {
-                      "alignItemsFlexStart": "MuiListItemIcon-alignItemsFlexStart",
-                      "root": "MuiListItemIcon-root",
-                    }
-                  }
+                <WithStyles(ForwardRef(ListItemIcon))
+                  className="cozyListItemIcon"
                 >
-                  <div
-                    className="MuiListItemIcon-root"
+                  <ForwardRef(ListItemIcon)
+                    className="cozyListItemIcon"
+                    classes={
+                      Object {
+                        "alignItemsFlexStart": "MuiListItemIcon-alignItemsFlexStart",
+                        "root": "MuiListItemIcon-root",
+                      }
+                    }
                   >
-                    <Avatar
-                      className=""
-                      disabled={false}
-                      ghost={false}
-                      icon={[Function]}
-                      image=""
-                      size="small"
-                      style={Object {}}
-                      text="G"
+                    <div
+                      className="MuiListItemIcon-root cozyListItemIcon"
                     >
-                      <div
-                        className="styles__c-avatar___PpDI- styles__c-avatar--text___2dvna"
-                        data-testid="Avatar"
-                        style={
-                          Object {
-                            "--circleSize": "32px",
-                            "backgroundColor": "#7F6BEE",
-                          }
-                        }
+                      <Avatar
+                        className=""
+                        disabled={false}
+                        ghost={false}
+                        icon={[Function]}
+                        image=""
+                        size="small"
+                        style={Object {}}
+                        text="G"
                       >
-                        <span
-                          className="styles__c-avatar-initials___310qC"
+                        <div
+                          className="styles__c-avatar___PpDI- styles__c-avatar--text___2dvna"
+                          data-testid="Avatar"
+                          style={
+                            Object {
+                              "--circleSize": "32px",
+                              "backgroundColor": "#7F6BEE",
+                            }
+                          }
                         >
-                          G
-                        </span>
-                      </div>
-                    </Avatar>
-                  </div>
-                </ForwardRef(ListItemIcon)>
+                          <span
+                            className="styles__c-avatar-initials___310qC"
+                          >
+                            G
+                          </span>
+                        </div>
+                      </Avatar>
+                    </div>
+                  </ForwardRef(ListItemIcon)>
+                </WithStyles(ForwardRef(ListItemIcon))>
               </ListItemIcon>
               <ListItemText
                 ellipsis={true}

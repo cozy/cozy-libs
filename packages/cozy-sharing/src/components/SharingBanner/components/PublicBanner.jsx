@@ -129,7 +129,7 @@ const SharingBannerByLinkText = () => {
     </a>
   )
   return (
-    <span style={{ color: 'var(--textIconColor)' }}>
+    <span style={{ color: 'var(--iconTextColor)' }}>
       {text} {knowMore}
     </span>
   )
