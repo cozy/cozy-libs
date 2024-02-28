@@ -1,4 +1,8 @@
+import get from 'lodash/get'
+
 import flag from 'cozy-flags'
+
+import { Group } from '../models'
 
 export const filterAndReworkRecipients = (recipients, previousRecipients) => {
   return recipients
@@ -44,4 +48,41 @@ export const hasReachRecipientsLimit = (current, next) => {
     return true
   }
   return false
+}
+
+/**
+ * Merges the recipients list with a new recipient and their associated contacts.
+ * @param {object[]} recipients - The list of recipients.
+ * @param {object} recipient - The new recipient.
+ * @param {object[]} contacts - The list of contacts.
+ * @returns {object[]} - The merged recipients list.
+ */
+export const spreadGroupAndMergeRecipients = (
+  recipients,
+  newRecipient,
+  contacts
+) => {
+  let contactsToAdd
+  if (newRecipient._type === Group.doctype) {
+    const groupId = newRecipient.id
+    contactsToAdd = contacts.data.filter(contact => {
+      const contactGroupIds = get(contact, 'relationships.groups.data', []).map(
+        group => group._id
+      )
+
+      return contactGroupIds.includes(groupId)
+    })
+  } else {
+    contactsToAdd = [newRecipient]
+  }
+
+  const filtered = contactsToAdd
+    .filter(
+      contact =>
+        (contact.email && contact.email.length > 0) ||
+        (contact.cozy && contact.cozy.length > 0)
+    )
+    .filter(contact => !recipients.find(r => r === contact))
+
+  return [...recipients, ...filtered]
 }

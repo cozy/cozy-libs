@@ -1,4 +1,3 @@
-import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
@@ -11,9 +10,11 @@ import { ShareRecipientsLimitModal } from './ShareRecipientsLimitModal'
 import ShareSubmit from './Sharesubmit'
 import ShareTypeSelect from './Sharetypeselect'
 import { getOrCreateFromArray } from '../helpers/contacts'
-import { hasReachRecipientsLimit } from '../helpers/recipients'
+import {
+  spreadGroupAndMergeRecipients,
+  hasReachRecipientsLimit
+} from '../helpers/recipients'
 import { getSuccessMessage } from '../helpers/successMessage'
-import { Group } from '../models'
 import { contactsResponseType, groupsResponseType } from '../propTypes'
 import { isReadOnlySharing } from '../state'
 import styles from '../styles/share.styl'
@@ -46,31 +47,12 @@ export const ShareByEmail = ({
   }
 
   const onRecipientPick = recipient => {
-    let contactsToAdd
-    if (recipient._type === Group.doctype) {
-      const groupId = recipient.id
-      contactsToAdd = contacts.data.filter(contact => {
-        const contactGroupIds = get(
-          contact,
-          'relationships.groups.data',
-          []
-        ).map(group => group._id)
-
-        return contactGroupIds.includes(groupId)
-      })
-    } else {
-      contactsToAdd = [recipient]
-    }
-
-    const filtered = contactsToAdd
-      .filter(
-        contact =>
-          (contact.email && contact.email.length > 0) ||
-          (contact.cozy && contact.cozy.length > 0)
-      )
-      .filter(contact => !recipients.find(r => r === contact))
-
-    setRecipients([...recipients, ...filtered])
+    const mergedRecipients = spreadGroupAndMergeRecipients(
+      recipients,
+      recipient,
+      contacts
+    )
+    setRecipients(mergedRecipients)
   }
 
   const onRecipientRemove = recipient => {
