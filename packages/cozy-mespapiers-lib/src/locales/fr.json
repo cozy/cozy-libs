@@ -1,13 +1,24 @@
 {
   "Acquisition": {
     "repeat": "Scanner une page supplémentaire",
-    "retry": "Changer la photo",
     "rotate": "Tourner l'image à 90 degrés dans le sens anti-horaire",
-    "success": "La photo a bien été ajoutée.",
-    "tooltip": {
-      "back": "Vérifier s’il s’agit bien de la face arrière et si la photo est bien orientée comme sur le modèle",
-      "default": "Vérifier si la photo est bien orientée comme sur le modèle",
-      "front": "Vérifier s’il s’agit bien de la face avant et si la photo est bien orientée comme sur le modèle"
+    "desktop": {
+      "retry": "Changer l'image",
+      "success": "L'image a bien été ajoutée.",
+      "tooltip": {
+        "back": "Vérifier s’il s’agit bien de la face arrière et si l'image est bien orientée comme sur le modèle",
+        "default": "Vérifier si l'image est bien orientée comme sur le modèle",
+        "front": "Vérifier s’il s’agit bien de la face avant et si l'image est bien orientée comme sur le modèle"
+      }
+    },
+    "mobile": {
+      "retry": "Changer la photo",
+      "success": "La photo a bien été ajoutée.",
+      "tooltip": {
+        "back": "Vérifier s’il s’agit bien de la face arrière et si la photo est bien orientée comme sur le modèle",
+        "default": "Vérifier si la photo est bien orientée comme sur le modèle",
+        "front": "Vérifier s’il s’agit bien de la face avant et si la photo est bien orientée comme sur le modèle"
+      }
     }
   },
   "action": {
