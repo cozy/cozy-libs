@@ -229,6 +229,16 @@
       },
       "ocrResult": {
         "text": "Vérifier et compléter les informations suivantes"
+      },
+      "stranger": {
+        "country": {
+          "inputLabel": "Nationalité du bénéficiaire",
+          "text": "Quelle est la nationalité du bénéficiaire ?"
+        },
+        "obtentionDate": {
+          "inputLabel": "Date d'obtention",
+          "text": "Renseignez la date d'obtention"
+        }
       }
     },
     "invoice": {
@@ -275,16 +285,6 @@
       },
       "expirationDate": {
         "text": "Quelle est la date d'expiration du permis de conduire ?"
-      },
-      "stranger": {
-        "country": {
-          "inputLabel": "Nationalité du bénéficiaire",
-          "text": "Quelle est la nationalité du bénéficiaire ?"
-        },
-        "obtentionDate": {
-          "inputLabel": "Date d'obtention",
-          "text": "Renseignez la date d'obtention"
-        }
       }
     },
     "card": {

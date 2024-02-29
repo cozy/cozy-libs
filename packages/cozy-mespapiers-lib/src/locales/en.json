@@ -229,6 +229,16 @@
       },
       "ocrResult": {
         "text": "Check and complete the following information"
+      },
+      "stranger": {
+        "country": {
+          "inputLabel": "Beneficiary nationality",
+          "text": "What is the Nationality of the beneficiary?"
+        },
+        "obtentionDate": {
+          "inputLabel": "Date of obtaining",
+          "text": "Fill in the date of obtaining"
+        }
       }
     },
     "invoice": {
@@ -275,16 +285,6 @@
       },
       "expirationDate": {
         "text": "When does your driver license expire?"
-      },
-      "stranger": {
-        "country": {
-          "inputLabel": "Beneficiary nationality",
-          "text": "What is the Nationality of the beneficiary?"
-        },
-        "obtentionDate": {
-          "inputLabel": "Date of obtaining",
-          "text": "Fill in the date of obtaining"
-        }
       }
     },
     "card": {
