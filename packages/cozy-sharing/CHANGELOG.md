@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 10.3.0 (2024-02-29)
+
+
+### Features
+
+* **mespapiers:** Add information step for custom name to fidelity card ([5f6fce7](https://github.com/cozy/cozy-libs/commit/5f6fce72e5374388bac369c9332ed47c303e945b))
+
+
+
+
+
 # 10.2.0 (2024-02-01)
 
 
