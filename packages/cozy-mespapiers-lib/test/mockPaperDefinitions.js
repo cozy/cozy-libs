@@ -101,25 +101,24 @@ export const mockPapersDefinitions = [
       {
         model: 'information',
         illustration: 'IlluDriverLicenseNumberHelp.png',
-        text: 'PaperJSON.driverLicense.stranger.country.text',
+        text: 'PaperJSON.generic.stranger.country.text',
         attributes: [
           {
             name: 'country',
             type: 'text',
-            inputLabel: 'PaperJSON.driverLicense.stranger.country.inputLabel'
+            inputLabel: 'PaperJSON.generic.stranger.country.inputLabel'
           }
         ]
       },
       {
         model: 'information',
         illustration: 'IlluDriverLicenseObtentionDateHelp.png',
-        text: 'PaperJSON.driverLicense.stranger.obtentionDate.text',
+        text: 'PaperJSON.generic.stranger.obtentionDate.text',
         attributes: [
           {
             name: 'obtentionDate',
             type: 'date',
-            inputLabel:
-              'PaperJSON.driverLicense.stranger.obtentionDate.inputLabel'
+            inputLabel: 'PaperJSON.generic.stranger.obtentionDate.inputLabel'
           }
         ]
       },
@@ -146,25 +145,24 @@ export const mockPapersDefinitions = [
       {
         model: 'information',
         illustration: 'IlluDriverLicenseNumberHelp.png',
-        text: 'PaperJSON.driverLicense.stranger.country.text',
+        text: 'PaperJSON.generic.stranger.country.text',
         attributes: [
           {
             name: 'country',
             type: 'text',
-            inputLabel: 'PaperJSON.driverLicense.stranger.country.inputLabel'
+            inputLabel: 'PaperJSON.generic.stranger.country.inputLabel'
           }
         ]
       },
       {
         model: 'information',
         illustration: 'IlluDriverLicenseObtentionDateHelp.png',
-        text: 'PaperJSON.driverLicense.stranger.obtentionDate.text',
+        text: 'PaperJSON.generic.stranger.obtentionDate.text',
         attributes: [
           {
             name: 'obtentionDate',
             type: 'date',
-            inputLabel:
-              'PaperJSON.driverLicense.stranger.obtentionDate.inputLabel'
+            inputLabel: 'PaperJSON.generic.stranger.obtentionDate.inputLabel'
           }
         ]
       },
