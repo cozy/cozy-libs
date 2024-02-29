@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [80.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@80.0.2...cozy-mespapiers-lib@80.1.0) (2024-02-29)
+
+
+### Features
+
+* **mespapiers:** Change wordings of ScanResult in desktop mode ([00af732](https://github.com/cozy/cozy-libs/commit/00af73230f90ac6d545c3c1be7c31b535ac65723))
+
+
+
+
+
 ## [80.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@80.0.1...cozy-mespapiers-lib@80.0.2) (2024-02-29)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
