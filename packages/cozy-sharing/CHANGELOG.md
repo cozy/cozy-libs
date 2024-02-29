@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.4.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@10.3.0...cozy-sharing@10.4.0) (2024-02-29)
+
+
+### Features
+
+* **sharing:** Upgrade cozy-ui and cozy-client ([f09507c](https://github.com/cozy/cozy-libs/commit/f09507c6cdd89ec9907f60cd50310a498bcd984f))
+
+
+
+
+
 # 10.3.0 (2024-02-29)
 
 
