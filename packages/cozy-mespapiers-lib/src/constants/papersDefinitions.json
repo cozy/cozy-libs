@@ -1071,6 +1071,89 @@
       ]
     },
     {
+      "label": "national_id_card",
+      "country": "stranger",
+      "icon": "people",
+      "featureDate": "expirationDate",
+      "maxDisplay": 4,
+      "acquisitionSteps": [
+        {
+          "model": "scan",
+          "tooltip": true,
+          "page": "front",
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.card.front.text"
+        },
+        {
+          "model": "scan",
+          "tooltip": true,
+          "page": "back",
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.card.back.text"
+        },
+        {
+          "model": "information",
+          "illustration": "Planet.svg",
+          "text": "PaperJSON.generic.stranger.country.text",
+          "attributes": [
+            {
+              "name": "country",
+              "type": "text",
+              "inputLabel": "PaperJSON.generic.stranger.country.inputLabel"
+            }
+          ]
+        },
+        {
+          "model": "information",
+          "illustration": "IlluGenericInputText.svg",
+          "text": "PaperJSON.card.number.text",
+          "attributes": [
+            {
+              "name": "number",
+              "type": "text",
+              "maxLength": 12,
+              "inputLabel": "PaperJSON.card.number.inputLabel"
+            }
+          ]
+        },
+        {
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.card.expirationDate.text",
+          "attributes": [
+            {
+              "name": "expirationDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.card.expirationDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "model": "information",
+          "illustration": "IlluGenericAlert.svg",
+          "illustrationSize": "small",
+          "text": "PaperJSON.generic.noticePeriod.text",
+          "attributes": [
+            {
+              "name": "noticePeriod",
+              "type": "number",
+              "defaultValue": 90,
+              "withAdornment": {
+                "end": "PaperJSON.generic.noticePeriod.endAdornment"
+              },
+              "maxLength": 3,
+              "inputLabel": "PaperJSON.generic.noticePeriod.inputLabel"
+            }
+          ]
+        },
+        {
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
+    },
+    {
       "label": "personal_sporting_licence",
       "icon": "compass",
       "featureDate": "referencedDate",
