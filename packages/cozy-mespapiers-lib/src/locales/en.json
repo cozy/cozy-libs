@@ -1,13 +1,24 @@
 {
   "Acquisition": {
     "repeat": "Scan an additional page",
-    "retry": "Change picture",
     "rotate": "Rotate the image 90 degrees counter-clockwise",
-    "success": "The picture was added.",
-    "tooltip": {
-      "back": "Check if it is indeed the back side and if the photo is well oriented as on the model",
-      "default": "Check if the photo is well oriented as on the model",
-      "front": "Check if it is indeed the front side and if the photo is well oriented as on the model"
+    "desktop": {
+      "retry": "Change picture",
+      "success": "The picture was added.",
+      "tooltip": {
+        "back": "Check if it is indeed the back side and if the picture is well oriented as on the model",
+        "default": "Check if the picture is well oriented as on the model",
+        "front": "Check if it is indeed the front side and if the picture is well oriented as on the model"
+      }
+    },
+    "mobile": {
+      "retry": "Change photo",
+      "success": "The photo was added.",
+      "tooltip": {
+        "back": "Check if it is indeed the back side and if the photo is well oriented as on the model",
+        "default": "Check if the photo is well oriented as on the model",
+        "front": "Check if it is indeed the front side and if the photo is well oriented as on the model"
+      }
     }
   },
   "action": {

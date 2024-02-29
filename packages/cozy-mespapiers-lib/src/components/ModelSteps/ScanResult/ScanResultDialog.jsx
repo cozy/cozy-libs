@@ -8,6 +8,7 @@ import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import PointerAlert from 'cozy-ui/transpiled/react/PointerAlert'
 import { ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import OcrProcessingDialog from './OcrProcessingDialog'
@@ -33,7 +34,9 @@ const ScanResultDialog = ({
   const { t } = useI18n()
   const webviewIntent = useWebviewIntent()
   const [searchParams] = useSearchParams()
+  const { isDesktop } = useBreakpoints()
 
+  const device = isDesktop ? 'desktop' : 'mobile'
   const imageRef = useRef(null)
   const [rotationImage, setRotationImage] = useState(0)
   const [ocrProcessing, setOcrProcessing] = useState(false)
@@ -117,7 +120,7 @@ const ScanResultDialog = ({
                 <CompositeHeaderImage icon={illustration} iconSize="small" />
               }
             >
-              {t(`Acquisition.tooltip.${page}`)}
+              {t(`Acquisition.${device}.tooltip.${page}`)}
             </PointerAlert>
           )}
           <ScanResultCard
