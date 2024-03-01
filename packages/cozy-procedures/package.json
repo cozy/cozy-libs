@@ -34,7 +34,7 @@
   "devDependencies": {
     "@babel/cli": "7.16.8",
     "@material-ui/core": "3.9.4",
-    "@material-ui/lab": "4.0.0-alpha.60",
+    "@material-ui/lab": "4.0.0-alpha.61",
     "babel-plugin-inline-react-svg": "1.1.2",
     "babel-preset-cozy-app": "^2.1.0",
     "cozy-client": "16.19.0",
