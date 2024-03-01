@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.4.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@10.4.0...cozy-sharing@10.4.1) (2024-03-01)
+
+
+### Bug Fixes
+
+* Remove scenario where sharingModal lose state ([43e583a](https://github.com/cozy/cozy-libs/commit/43e583a64855898c009972c52d66efc408c3d1d4))
+
+
+
+
+
 # [10.4.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@10.3.0...cozy-sharing@10.4.0) (2024-02-29)
 
 
