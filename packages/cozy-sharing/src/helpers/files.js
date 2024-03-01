@@ -1,3 +1,12 @@
+/**
+ * Fetches the file paths for the given files.
+ * Should not be used for directories.
+ *
+ * @param {Object} client - The cozy-client instance.
+ * @param {string} doctype - The type of document.
+ * @param {Array} files - The array of files.
+ * @returns {Promise<Array>} - The array of file paths.
+ */
 export const fetchFilesPaths = async (client, doctype, files) => {
   const parentDirIds = files
     .map(f => f.dir_id)
