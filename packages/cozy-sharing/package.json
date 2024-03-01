@@ -21,7 +21,8 @@
     "prepublishOnly": "yarn build",
     "test": "env NODE_ENV=test jest --env=jest-environment-jsdom-sixteen",
     "lint": "cd .. && yarn eslint --ext js,jsx packages/cozy-sharing",
-    "watch": "yarn build --watch",
+    "start": "yarn build --watch",
+    "watch": "yarn run start",
     "watch:doc:react": "(cd ../.. && TARGET=cozy-sharing yarn watch:doc:react)"
   },
   "dependencies": {

@@ -9,6 +9,10 @@ export const useFetchDocumentPath = (client, document) => {
   useEffect(() => {
     ;(async () => {
       try {
+        const isDirectory = document.type === 'directory'
+
+        if (isDirectory) return setDocumentPath(document.path)
+
         const path = await fetchFilesPaths(client, document._type, [document])
         setDocumentPath(path[0])
         // eslint-disable-next-line
