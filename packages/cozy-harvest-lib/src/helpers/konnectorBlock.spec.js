@@ -22,9 +22,10 @@ const setup = async ({
   isInError = { error: null },
   t = x => x
 } = {}) => {
-  jest
-    .spyOn(konnectorBlock, 'isAccountConnected')
-    .mockResolvedValue(isAccountConnected)
+  jest.spyOn(konnectorBlock, 'isAccountConnected').mockResolvedValue({
+    accountConnected: isAccountConnected,
+    sourceAccount: '012345'
+  })
   jest
     .spyOn(konnectorBlock, 'isInMaintenance')
     .mockResolvedValue(isInMaintenance)
@@ -34,7 +35,7 @@ const setup = async ({
     client,
     t: t,
     slug: 'pajemploi',
-    sourceAccount: '012345'
+    sourceAccountIdentifier: 'login'
   })
 }
 

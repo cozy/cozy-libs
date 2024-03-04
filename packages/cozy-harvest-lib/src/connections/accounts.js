@@ -1,7 +1,7 @@
 import keyBy from 'lodash/keyBy'
 import merge from 'lodash/merge'
 
-import { Q } from 'cozy-client'
+import { Q, models } from 'cozy-client'
 import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
 
 import assert from '../assert'
@@ -171,9 +171,19 @@ export const saveAccount = (client, konnector, account) => {
     client && konnector && account,
     'Must pass both client, konnector and account to saveAccount'
   )
+
+  const sourceAccountIdentifier = models.account.getAccountLogin(account)
+  const updatedAccount = { ...account }
+  if (sourceAccountIdentifier) {
+    updatedAccount.cozyMetadata = {
+      ...account.cozyMetadata,
+      sourceAccountIdentifier
+    }
+  }
+
   return account._id
-    ? updateAccount(client, account)
-    : createAccount(client, konnector, account)
+    ? updateAccount(client, updatedAccount)
+    : createAccount(client, konnector, updatedAccount)
 }
 
 /**

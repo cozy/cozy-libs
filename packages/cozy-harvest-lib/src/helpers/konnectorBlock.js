@@ -57,10 +57,14 @@ const fetchDataFromState = async (client, query) => {
 
 const fetchKonnector = (client, query) => fetchDataFromState(client, query)
 
-const isAccountConnected = async (client, sourceAccount) => {
-  const query = buildAccountQuery(sourceAccount)
-  const data = await fetchDataFromState(client, query)
-  return !!data
+const isAccountConnected = async ({
+  client,
+  sourceAccountIdentifier,
+  slug
+}) => {
+  const query = buildAccountQuery({ sourceAccountIdentifier, slug })
+  const account = await fetchDataFromState(client, query)
+  return { accountConnected: !!account, sourceAccount: account._id }
 }
 
 // Only konnectors from the registry have a maintenance status
@@ -207,17 +211,24 @@ const statusToFormatOptions = {
     fatalError({ t, slug, error, consoleMessage: 'This is a registry error' })
 }
 
-const fetchKonnectorStatus = async ({ client, slug, sourceAccount }) => {
+const fetchKonnectorStatus = async ({
+  client,
+  slug,
+  sourceAccountIdentifier
+}) => {
   try {
     const konnector = await konnectorBlock.fetchKonnector(
       client,
       buildKonnectorQueryBySlug(slug)
     )
 
-    const accountConnected = await konnectorBlock.isAccountConnected(
-      client,
-      sourceAccount
-    )
+    const { accountConnected, sourceAccount } =
+      await konnectorBlock.isAccountConnected({
+        client,
+        sourceAccountIdentifier,
+        slug: konnector.slug
+      })
+
     if (!accountConnected) {
       return { konnector, status: 'noAccountConnected' }
     }
@@ -240,7 +251,7 @@ const fetchKonnectorStatus = async ({ client, slug, sourceAccount }) => {
       return { konnector, status: 'hasNewVersionAvailable' }
     }
 
-    return { konnector, status: 'default' }
+    return { konnector, status: 'default', sourceAccount }
   } catch (error) {
     // The konnector can be uninstalled and returned 404
     if (error.status === 404) {
@@ -262,13 +273,14 @@ export const fetchKonnectorData = async ({
   client,
   t,
   slug,
-  sourceAccount
+  sourceAccountIdentifier
 }) => {
-  const { konnector, status, error } = await fetchKonnectorStatus({
-    client,
-    slug,
-    sourceAccount
-  })
+  const { konnector, status, error, sourceAccount } =
+    await fetchKonnectorStatus({
+      client,
+      slug,
+      sourceAccountIdentifier
+    })
 
   return statusToFormatOptions[status]({
     client,

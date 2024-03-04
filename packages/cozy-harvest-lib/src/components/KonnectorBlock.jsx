@@ -32,7 +32,10 @@ const KonnectorBlock = ({ file }) => {
   const client = useClient()
   const { t } = useI18n()
   const slug = get(file, 'cozyMetadata.uploadedBy.slug')
-  const sourceAccount = get(file, 'cozyMetadata.sourceAccount')
+  const sourceAccountIdentifier = get(
+    file,
+    'cozyMetadata.sourceAccountIdentifier'
+  )
 
   // TODO To be removed when UI's AppIcon use getIconURL from Cozy-Client
   // instead of its own see https://github.com/cozy/cozy-ui/issues/1723
@@ -45,17 +48,22 @@ const KonnectorBlock = ({ file }) => {
   }, [client, slug])
 
   useEffect(() => {
-    const fetchKonnector = async ({ client, t, slug, sourceAccount }) => {
+    const fetchKonnector = async ({
+      client,
+      t,
+      slug,
+      sourceAccountIdentifier
+    }) => {
       const konnector = await fetchKonnectorData({
         client,
         t,
         slug,
-        sourceAccount
+        sourceAccountIdentifier
       })
       setKonnector(konnector)
     }
-    fetchKonnector({ client, t, slug, sourceAccount })
-  }, [client, t, slug, sourceAccount])
+    fetchKonnector({ client, t, slug, sourceAccountIdentifier })
+  }, [client, t, slug, sourceAccountIdentifier])
 
   if (!konnector) {
     return (

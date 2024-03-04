@@ -28,10 +28,13 @@ export const buildAppsRegistryQueryBySlug = slug => {
   return { definition: query.definition(), options: query.options }
 }
 
-export const buildAccountQuery = accountId => ({
-  definition: Q('io.cozy.accounts').getById(accountId),
+export const buildAccountQuery = ({ slug, sourceAccountIdentifier }) => ({
+  definition: Q('io.cozy.accounts').where({
+    account_type: slug,
+    'cozyMetadata.sourceAccountIdentifier': sourceAccountIdentifier
+  }),
   options: {
-    as: `io.cozy.accounts/${accountId}`,
+    as: `io.cozy.accounts/account_type/${slug}/sourceAccountIdentifier/${sourceAccountIdentifier}`,
     fetchPolicy: defaultFetchPolicy
   }
 })
