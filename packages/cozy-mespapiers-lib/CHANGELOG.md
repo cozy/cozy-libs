@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [81.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@80.1.1...cozy-mespapiers-lib@81.0.0) (2024-03-04)
+
+
+### Features
+
+* **mespapiers:** Add editText on pay_sheet attributes ([11994d9](https://github.com/cozy/cozy-libs/commit/11994d9a850e4dbf9003e6c10fe00cb3e9757321))
+* **mespapiers:** Add netSocialAmount in search ([f1266d7](https://github.com/cozy/cozy-libs/commit/f1266d7360b4be43a98baf87437184a9d51217bc))
+* **mespapiers:** Add pay_sheet step ([7a36680](https://github.com/cozy/cozy-libs/commit/7a366801755b5752a0677b1cd58bd27cf1d9a669))
+* **mespapiers:** Add ref tax number on multiple papers ([104bdaa](https://github.com/cozy/cozy-libs/commit/104bdaa3a697371cfb3391d8d6a5b3134ad65e58))
+* **mespapiers:** Upgrade cozy-ui 103.8.0 to 103.9.0 ([08bc39d](https://github.com/cozy/cozy-libs/commit/08bc39d5aa74addcd7e9cc93c33f5b656865de18))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 103.9.0`
+
+
+
+
+
 ## [80.1.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@80.1.0...cozy-mespapiers-lib@80.1.1) (2024-03-01)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
