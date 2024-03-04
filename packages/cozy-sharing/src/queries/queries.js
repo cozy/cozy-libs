@@ -59,7 +59,7 @@ export const buildContactsQuery = () => ({
   }
 })
 
-export const buildGroupsQuery = () => ({
+export const buildContactGroupsQuery = () => ({
   definition: Q(Group.doctype),
   options: {
     as: 'io.cozy.contacts.groups'

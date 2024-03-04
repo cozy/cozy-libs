@@ -30,7 +30,7 @@ describe('ShareByEmailComponent', () => {
       contacts: {
         data: []
       },
-      groups: { data: [] },
+      contactGroups: { data: [] },
       documentType: 'Files',
       onShare,
       document,

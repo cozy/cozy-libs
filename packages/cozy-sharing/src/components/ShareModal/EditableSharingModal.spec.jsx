@@ -33,8 +33,8 @@ describe('EditableSharingModal', () => {
         <EditableSharingModal
           client={client}
           contacts={{ data: [] }}
+          contactGroups={{ data: [] }}
           document={document}
-          groups={{ data: [] }}
           t={x => x}
           onClose={() => {}}
         />

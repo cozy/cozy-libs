@@ -2,11 +2,11 @@ import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 
 import ShareAutosuggest from './ShareAutosuggest'
-import { contactsResponseType, groupsResponseType } from '../propTypes'
+import { contactsResponseType, contactGroupsResponseType } from '../propTypes'
 
 const ShareRecipientsInput = ({
   contacts,
-  groups,
+  contactGroups,
   recipients,
   placeholder,
   onPick,
@@ -19,19 +19,19 @@ const ShareRecipientsInput = ({
       loading &&
       !contacts.hasMore &&
       contacts.fetchStatus === 'loaded' &&
-      !groups.hasMore &&
-      groups.fetchStatus === 'loaded'
+      !contactGroups.hasMore &&
+      contactGroups.fetchStatus === 'loaded'
     ) {
       setLoading(false)
     }
-  }, [contacts, groups, loading])
+  }, [contacts, contactGroups, loading])
 
   const onShareAutosuggestFocus = () => {
     if (
       contacts.hasMore ||
       contacts.fetchStatus === 'loading' ||
-      groups.hasMore ||
-      groups.fetchStatus === 'loading'
+      contactGroups.hasMore ||
+      contactGroups.fetchStatus === 'loading'
     ) {
       setLoading(true)
     }
@@ -42,7 +42,7 @@ const ShareRecipientsInput = ({
     if (contacts.hasMore || contacts.fetchStatus === 'loading') {
       return contacts.data
     } else {
-      return [...contacts.data, ...groups.data]
+      return [...contacts.data, ...contactGroups.data]
     }
   }
 
@@ -61,7 +61,7 @@ const ShareRecipientsInput = ({
 
 ShareRecipientsInput.propTypes = {
   contacts: contactsResponseType.isRequired,
-  groups: groupsResponseType.isRequired,
+  contactGroups: contactGroupsResponseType.isRequired,
   recipients: PropTypes.array,
   placeholder: PropTypes.string,
   onPick: PropTypes.func.isRequired,

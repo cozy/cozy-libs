@@ -15,10 +15,10 @@ import styles from '../styles/share.styl'
  */
 const SharingContent = ({
   contacts,
+  contactGroups,
   createContact,
   document,
   documentType,
-  groups,
   hasSharedParent,
   isOwner,
   needsContactsPermission,
@@ -66,11 +66,11 @@ const SharingContent = ({
       {showShareByEmail && (
         <DumbShareByEmail
           contacts={contacts}
+          contactGroups={contactGroups}
           createContact={createContact}
           currentRecipients={recipients}
           document={document}
           documentType={documentType}
-          groups={groups}
           needsContactsPermission={needsContactsPermission}
           onShare={onShare}
           sharing={sharing}
