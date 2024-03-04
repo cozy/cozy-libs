@@ -17,15 +17,13 @@ const RecipientConfirm = ({ recipientConfirmationData, verifyRecipient }) => {
   }
 
   return (
-    <>
-      <Button
-        style={{ position: 'initial' }} // fix z-index bug on iOS when under a BottomDrawer due to relative position
-        theme="text"
-        className={modalStyles['aligned-dropdown-button']}
-        onClick={verify}
-        label={t(`Share.twoStepsConfirmation.verify`)}
-      />
-    </>
+    <Button
+      style={{ position: 'initial' }} // fix z-index bug on iOS when under a BottomDrawer due to relative position
+      theme="text"
+      className={modalStyles['aligned-dropdown-button']}
+      onClick={verify}
+      label={t(`Share.twoStepsConfirmation.verify`)}
+    />
   )
 }
 
