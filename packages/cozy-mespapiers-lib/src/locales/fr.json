@@ -432,6 +432,7 @@
     "attributeLabel": {
       "metadata": {
         "refTaxIncome": "Revenu fiscal de référence",
+        "netSocialAmount": "Montant net social",
         "contractType": "Type de contrat",
         "expirationDate": "Date d'expiration",
         "driver_license": "Numéro du permis",

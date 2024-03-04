@@ -11,6 +11,7 @@ const isContact = doc => doc._type === CONTACTS_DOCTYPE
 const flexsearchIndex = [
   'flexsearchProps:translated:qualificationLabel', // io.cozy.files
   'flexsearchProps:translated:metadata.refTaxIncome', // io.cozy.files
+  'flexsearchProps:translated:metadata.netSocialAmount', // io.cozy.files
   'flexsearchProps:translated:metadata.contractType', // io.cozy.files
   'flexsearchProps:translated:metadata.expirationDate', // io.cozy.files
   'flexsearchProps:translated:driverLicense', // io.cozy.files
@@ -25,8 +26,9 @@ const flexsearchIndex = [
   'flexsearchProps:translated:birthday', // io.cozy.contacts
   'flexsearchProps:translated:address', // io.cozy.contacts
   'metadata:number', // io.cozy.files
-  'metadata:bicNumber',
+  'metadata:bicNumber', // io.cozy.files
   'metadata:refTaxIncome', // io.cozy.files
+  'metadata:netSocialAmount', // io.cozy.files
   'metadata:expirationDate', // io.cozy.files
   'fullname', // io.cozy.contacts
   'name', // io.cozy.files, io.cozy.contacts

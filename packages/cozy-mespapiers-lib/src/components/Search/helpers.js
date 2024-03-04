@@ -156,6 +156,11 @@ export const makeFileFlexsearchProps = ({ doc, scannerT, t }) => ({
     ...(doc.metadata.refTaxIncome && {
       'metadata.refTaxIncome': t('Search.attributeLabel.metadata.refTaxIncome')
     }),
+    ...(doc.metadata.netSocialAmount && {
+      'metadata.netSocialAmount': t(
+        'Search.attributeLabel.metadata.netSocialAmount'
+      )
+    }),
     ...(doc.metadata.contractType && {
       'metadata.contractType': t('Search.attributeLabel.metadata.contractType')
     }),
