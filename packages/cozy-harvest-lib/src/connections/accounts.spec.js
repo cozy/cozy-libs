@@ -88,7 +88,7 @@ const fixtures = {
 describe('Account mutations', () => {
   beforeEach(() => {
     client.create.mockResolvedValue({ data: fixtures.existingAccount })
-    client.save.mockResolvedValue({ data: fixtures.existingAccount })
+    client.save.mockImplementation(async account => ({ data: account }))
   })
 
   afterEach(() => {
@@ -361,7 +361,7 @@ describe('Account mutations', () => {
     it('calls CozyClient::save and returns account', async () => {
       const account = await updateAccount(client, fixtures.simpleAccount)
       expect(client.save).toHaveBeenCalledWith(fixtures.simpleAccount)
-      expect(account).toEqual(fixtures.existingAccount)
+      expect(account).toEqual(fixtures.simpleAccount)
     })
   })
 
@@ -395,10 +395,10 @@ describe('Account mutations', () => {
         newSimpleAccount
       )
 
-      expect(client.create).toHaveBeenCalledWith(
-        'io.cozy.accounts',
-        newSimpleAccount
-      )
+      expect(client.create).toHaveBeenCalledWith('io.cozy.accounts', {
+        ...newSimpleAccount,
+        cozyMetadata: { sourceAccountIdentifier: 'login' }
+      })
       expect(account).toEqual(fixtures.existingAccount)
     })
 
@@ -408,8 +408,14 @@ describe('Account mutations', () => {
         fixtures.konnector,
         fixtures.existingAccount
       )
-      expect(client.save).toHaveBeenCalledWith(fixtures.existingAccount)
-      expect(account).toEqual(fixtures.existingAccount)
+      const accountWithSourceAccountIdentifier = {
+        ...fixtures.existingAccount,
+        cozyMetadata: { sourceAccountIdentifier: 'login' }
+      }
+      expect(client.save).toHaveBeenCalledWith(
+        accountWithSourceAccountIdentifier
+      )
+      expect(account).toStrictEqual(accountWithSourceAccountIdentifier)
     })
   })
 })

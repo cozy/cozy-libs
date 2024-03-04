@@ -38,7 +38,7 @@ const useSourceAccountIdentifierFiles = sourceAccountIdentifier =>
       ])
       .limitBy(5),
     {
-      as: `fileDataCard_io.cozy.accounts.sourceAccountIdentifier/${sourceAccountIdentifier}/io.cozy.files`,
+      as: `fileDataCard_io.cozy.files/sourceAccountIdentifier/${sourceAccountIdentifier}`,
       fetchPolicy: CozyClient.fetchPolicies.olderThan(30 * 1000)
     }
   )
