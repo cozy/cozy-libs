@@ -342,7 +342,7 @@ const getMockProps = () => {
       _id: 'SOME_DOCUMENT_ID'
     },
     documentType: 'Organizations',
-    groups: {
+    contactGroups: {
       id: 'groups',
       definition: {
         doctype: 'io.cozy.contacts.groups'

@@ -6,7 +6,10 @@ import { useClient, useQueryAll } from 'cozy-client'
 import { useFetchDocumentPath } from '../../hooks/useFetchDocumentPath'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import { Contact } from '../../models'
-import { buildContactsQuery, buildGroupsQuery } from '../../queries/queries'
+import {
+  buildContactsQuery,
+  buildContactGroupsQuery
+} from '../../queries/queries'
 import { default as DumbShareModal } from '../ShareModal'
 
 export const EditableSharingModal = ({ document, ...rest }) => {
@@ -19,8 +22,11 @@ export const EditableSharingModal = ({ document, ...rest }) => {
     contactsQuery.options
   )
 
-  const groupsQuery = buildGroupsQuery()
-  const groupsResult = useQueryAll(groupsQuery.definition, groupsQuery.options)
+  const contactGroupsQuery = buildContactGroupsQuery()
+  const contactGroupsResult = useQueryAll(
+    contactGroupsQuery.definition,
+    contactGroupsQuery.options
+  )
 
   const {
     documentType,
@@ -42,10 +48,10 @@ export const EditableSharingModal = ({ document, ...rest }) => {
   return (
     <DumbShareModal
       contacts={contactsResult}
+      contactGroups={contactGroupsResult}
       createContact={contact => client.create(Contact.doctype, contact)}
       document={document}
       documentType={documentType}
-      groups={groupsResult}
       hasSharedChild={documentPath && hasSharedChild(documentPath)}
       hasSharedParent={documentPath && hasSharedParent(documentPath)}
       isOwner={isOwner(document.id)}

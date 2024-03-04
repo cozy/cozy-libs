@@ -33,7 +33,7 @@ describe('ShareRecipientsInput component', () => {
           }
         ]
       },
-      groups: {
+      contactGroups: {
         id: 'groups',
         fetchStatus: 'loaded',
         hasMore: false,
@@ -99,7 +99,7 @@ describe('ShareRecipientsInput component', () => {
           }
         ]
       },
-      groups: {
+      contactGroups: {
         id: 'groups',
         fetchStatus: 'loaded',
         hasMore: false,

@@ -91,10 +91,10 @@ const RejectRecipientActions = ({ reject, cancel }) => {
  */
 const ShareDialogTwoStepsConfirmationContainer = ({
   contacts,
+  contactGroups,
   createContact,
   document,
   documentType,
-  groups,
   hasSharedParent,
   isOwner,
   link,
@@ -211,10 +211,10 @@ const ShareDialogTwoStepsConfirmationContainer = ({
     dialogContent = (
       <DialogContentOnShare
         contacts={contacts}
+        contactGroups={contactGroups}
         createContact={createContact}
         document={document}
         documentType={documentType}
-        groups={groups}
         hasSharedParent={hasSharedParent}
         isOwner={isOwner}
         needsContactsPermission={needsContactsPermission}

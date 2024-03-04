@@ -15,7 +15,7 @@ export const contactsResponseType = PropTypes.shape({
   lastUpdate: PropTypes.number
 })
 
-export const groupsResponseType = PropTypes.shape({
+export const contactGroupsResponseType = PropTypes.shape({
   count: PropTypes.number,
   data: PropTypes.arrayOf(Group.propType),
   definition: PropTypes.object,

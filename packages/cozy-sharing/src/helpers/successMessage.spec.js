@@ -8,7 +8,7 @@ describe('getSuccessMessage method', () => {
       hasMore: false,
       fetchStatus: 'loaded'
     },
-    groups: {
+    contactGroups: {
       id: 'groups',
       data: [],
       hasMore: false,
