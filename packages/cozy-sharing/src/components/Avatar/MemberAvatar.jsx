@@ -5,7 +5,7 @@ import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
 import { getDisplayName, getInitials } from '../../models'
 
-const RecipientAvatar = ({ recipient, ...rest }) => {
+const MemberAvatar = ({ recipient, ...rest }) => {
   const client = useClient()
 
   /**
@@ -35,4 +35,4 @@ const RecipientAvatar = ({ recipient, ...rest }) => {
   )
 }
 
-export default RecipientAvatar
+export { MemberAvatar }

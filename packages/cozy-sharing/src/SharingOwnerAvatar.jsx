@@ -1,6 +1,6 @@
 import React from 'react'
 
-import RecipientAvatar from './components/Avatar/RecipientAvatar'
+import { MemberAvatar } from './components/Avatar/MemberAvatar'
 import SharingContext from './context'
 import withLocales from './hoc/withLocales'
 
@@ -8,7 +8,7 @@ export const SharingOwnerAvatar = withLocales(({ docId, ...rest }) => (
   <SharingContext.Consumer>
     {({ byDocId, getOwner } = {}) => {
       return !byDocId || !byDocId[docId] ? null : (
-        <RecipientAvatar recipient={getOwner(docId)} {...rest} />
+        <MemberAvatar recipient={getOwner(docId)} {...rest} />
       )
     }}
   </SharingContext.Consumer>
