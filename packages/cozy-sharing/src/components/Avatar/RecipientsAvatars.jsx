@@ -6,7 +6,7 @@ import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
 
 import { ExtraAvatar } from './ExtraAvatar'
-import RecipientAvatar from './RecipientAvatar'
+import { MemberAvatar } from './MemberAvatar'
 import { getDisplayName } from '../../models'
 import styles from '../../styles/recipient.styl'
 
@@ -95,7 +95,7 @@ const RecipientsAvatars = ({
           }`}
           key={idx}
         >
-          <RecipientAvatar
+          <MemberAvatar
             recipient={recipient}
             size={size}
             className={cx(styles['recipients-avatars--avatar'])}

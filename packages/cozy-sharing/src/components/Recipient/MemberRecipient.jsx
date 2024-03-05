@@ -14,7 +14,7 @@ import MemberRecipientStatus from './MemberRecipientStatus'
 import RecipientConfirm from './RecipientConfirm'
 import { FADE_IN_DURATION } from '../../helpers/recipients'
 import { getDisplayName } from '../../models'
-import RecipientAvatar from '../Avatar/RecipientAvatar'
+import { MemberAvatar } from '../Avatar/MemberAvatar'
 
 const DEFAULT_DISPLAY_NAME = 'Share.contacts.defaultDisplayName'
 
@@ -50,7 +50,7 @@ const MemberRecipient = props => {
     <Fade in timeout={fadeIn ? FADE_IN_DURATION : 0}>
       <ListItem disableGutters>
         <ListItemIcon>
-          <RecipientAvatar size="small" recipient={props} />
+          <MemberAvatar size="small" recipient={props} />
         </ListItemIcon>
         <ListItemText
           primary={
