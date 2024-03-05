@@ -6,7 +6,7 @@ import Identity from './Identity'
 import { getDisplayName, getInitials } from '../../models'
 import styles from '../../styles/recipient.styl'
 
-const RecipientWithoutStatus = ({ instance, ...rest }) => {
+const MemberIdentity = ({ instance, ...rest }) => {
   const name = getDisplayName(rest)
   return (
     <div className={styles['recipient']}>
@@ -18,4 +18,4 @@ const RecipientWithoutStatus = ({ instance, ...rest }) => {
   )
 }
 
-export default RecipientWithoutStatus
+export { MemberIdentity }
