@@ -7,7 +7,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { getDisplayName } from '../../models'
 import styles from '../../styles/share.styl'
-import OwnerIdentity from '../Recipient/OwnerIdentity'
+import OwnerIdentity from '../Identity/OwnerIdentity'
 import WhoHasAccess from '../WhoHasAccess'
 
 export const SharingDetailsModal = ({

@@ -1,8 +1,8 @@
 import cx from 'classnames'
 import React from 'react'
 
-import RecipientPlusX from './Recipient/RecipientPlusX'
-import RecipientWithoutStatus from './Recipient/RecipientWithoutStatus'
+import RecipientPlusX from './Identity/RecipientPlusX'
+import RecipientWithoutStatus from './Identity/RecipientWithoutStatus'
 import styles from '../styles/recipient.styl'
 
 const MAX_DISPLAYED_RECIPIENTS = 2
