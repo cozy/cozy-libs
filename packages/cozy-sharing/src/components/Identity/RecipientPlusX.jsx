@@ -4,7 +4,7 @@ import React from 'react'
 import Identity from './Identity'
 import { getDisplayName } from '../../models'
 import styles from '../../styles/recipient.styl'
-import AvatarPlusX from '../Recipient/AvatarPlusX'
+import AvatarPlusX from '../Avatar/AvatarPlusX'
 
 const RecipientPlusX = ({ extraRecipients }, { t }) => (
   <div className={styles['recipient']}>

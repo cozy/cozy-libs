@@ -11,10 +11,10 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import MemberRecipientPermissions from './MemberRecipientPermissions'
 import MemberRecipientStatus from './MemberRecipientStatus'
-import RecipientAvatar from './RecipientAvatar'
 import RecipientConfirm from './RecipientConfirm'
 import { FADE_IN_DURATION } from '../../helpers/recipients'
 import { getDisplayName } from '../../models'
+import RecipientAvatar from '../Avatar/RecipientAvatar'
 
 const DEFAULT_DISPLAY_NAME = 'Share.contacts.defaultDisplayName'
 
