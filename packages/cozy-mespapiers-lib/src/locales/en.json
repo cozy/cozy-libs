@@ -436,6 +436,7 @@
       "metadata": {
         "refTaxIncome": "Reference tax income",
         "netSocialAmount": "Net social amount",
+        "pay_sheet": "Gross remuneration",
         "contractType": "Contract type",
         "expirationDate": "Expiration date",
         "driver_license": "License number",

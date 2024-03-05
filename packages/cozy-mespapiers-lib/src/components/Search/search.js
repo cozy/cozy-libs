@@ -19,12 +19,14 @@ const flexsearchIndex = [
   'flexsearchProps:translated:vehicleRegistration', // io.cozy.files
   'flexsearchProps:translated:nationalIdCard', // io.cozy.files
   'flexsearchProps:translated:bankDetails', // io.cozy.files
+  'flexsearchProps:translated:paySheet', // io.cozy.files
   'flexsearchProps:translated:passport', // io.cozy.files
   'flexsearchProps:translated:residencePermit', // io.cozy.files
   'flexsearchProps:translated:phone', // io.cozy.contacts
   'flexsearchProps:translated:email', // io.cozy.contacts
   'flexsearchProps:translated:birthday', // io.cozy.contacts
   'flexsearchProps:translated:address', // io.cozy.contacts
+  // for the following attributes, ensure that they are retrieved by the query if it performs a `select`
   'metadata:number', // io.cozy.files
   'metadata:bicNumber', // io.cozy.files
   'metadata:refTaxIncome', // io.cozy.files
