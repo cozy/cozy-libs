@@ -1,6 +1,6 @@
 import React from 'react'
 
-import RecipientAvatar from './components/Recipient/RecipientAvatar'
+import RecipientAvatar from './components/Avatar/RecipientAvatar'
 import SharingContext from './context'
 import withLocales from './hoc/withLocales'
 
