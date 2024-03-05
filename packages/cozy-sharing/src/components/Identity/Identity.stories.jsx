@@ -1,6 +1,7 @@
 import Identity from './Identity'
 
 const meta = {
+  title: 'Components/Identity/Identity',
   component: Identity,
   args: {}
 }
