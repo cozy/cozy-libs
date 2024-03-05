@@ -1,7 +1,7 @@
 import cx from 'classnames'
 import React from 'react'
 
-import RecipientPlusX from './Identity/RecipientPlusX'
+import { ExtraIdentity } from './Identity/ExtraIdentity'
 import RecipientWithoutStatus from './Identity/RecipientWithoutStatus'
 import styles from '../styles/recipient.styl'
 
@@ -13,7 +13,7 @@ const WhoHasAccessLight = ({ recipients, className }) => (
       <RecipientWithoutStatus {...recipient} key={`key_recipient__${index}`} />
     ))}
     {recipients.length > MAX_DISPLAYED_RECIPIENTS && (
-      <RecipientPlusX
+      <ExtraIdentity
         extraRecipients={recipients.slice(MAX_DISPLAYED_RECIPIENTS)}
       />
     )}

@@ -6,7 +6,7 @@ import { getDisplayName } from '../../models'
 import styles from '../../styles/recipient.styl'
 import { ExtraAvatar } from '../Avatar/ExtraAvatar'
 
-const RecipientPlusX = ({ extraRecipients }, { t }) => (
+const ExtraIdentity = ({ extraRecipients }, { t }) => (
   <div className={styles['recipient']}>
     <ExtraAvatar
       extraRecipients={extraRecipients.map(recipient =>
@@ -21,8 +21,8 @@ const RecipientPlusX = ({ extraRecipients }, { t }) => (
   </div>
 )
 
-RecipientPlusX.contextTypes = {
+ExtraIdentity.contextTypes = {
   t: PropTypes.func.isRequired
 }
 
-export default RecipientPlusX
+export { ExtraIdentity }
