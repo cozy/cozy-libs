@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import MemberRecipient from './MemberRecipient'
 import OwnerRecipientDefault from './OwnerRecipientDefault'
-import Recipient from './Recipient'
 
 const OwnerRecipient = ({ recipients }) => {
   const ownerRecipient = recipients.find(
@@ -10,7 +10,7 @@ const OwnerRecipient = ({ recipients }) => {
   )
 
   if (ownerRecipient) {
-    return <Recipient {...ownerRecipient} />
+    return <MemberRecipient {...ownerRecipient} />
   }
 
   return <OwnerRecipientDefault />

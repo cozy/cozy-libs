@@ -18,7 +18,7 @@ import { getDisplayName } from '../../models'
 
 const DEFAULT_DISPLAY_NAME = 'Share.contacts.defaultDisplayName'
 
-const Recipient = props => {
+const MemberRecipient = props => {
   const { t } = useI18n()
   const client = useClient()
 
@@ -68,7 +68,7 @@ const Recipient = props => {
   )
 }
 
-Recipient.propTypes = {
+MemberRecipient.propTypes = {
   instance: PropTypes.string,
   isOwner: PropTypes.bool,
   status: PropTypes.string,
@@ -76,4 +76,4 @@ Recipient.propTypes = {
   verifyRecipient: PropTypes.func
 }
 
-export default Recipient
+export default MemberRecipient
