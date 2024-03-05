@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useClient, useQuery, hasQueryBeenLoaded } from 'cozy-client'
 
-import Recipient from './Recipient'
+import MemberRecipient from './MemberRecipient'
 import { buildInstanceSettingsQuery } from '../../queries/queries'
 
 const OwnerRecipientDefault = () => {
@@ -16,7 +16,7 @@ const OwnerRecipientDefault = () => {
 
   return (
     hasQueryBeenLoaded(instanceSettingsResult) && (
-      <Recipient
+      <MemberRecipient
         isOwner={true}
         status="owner"
         instance={client.options.uri}

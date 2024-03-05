@@ -1,8 +1,7 @@
-import Recipient from './Recipient'
+import MemberRecipient from './MemberRecipient'
 
 const meta = {
-  title: 'Components/Recipient/Recipient',
-  component: Recipient,
+  component: MemberRecipient,
   args: {
     instance: 'https://example.com',
     isOwner: false,

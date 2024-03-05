@@ -3,10 +3,10 @@ import React from 'react'
 
 import { createMockClient } from 'cozy-client'
 
-import Recipient from './Recipient'
+import MemberRecipient from './MemberRecipient'
 import AppLike from '../../../test/AppLike'
 
-describe('Recipient component', () => {
+describe('MemberRecipient component', () => {
   const client = createMockClient({})
   client.options = {
     uri: 'foo.mycozy.cloud'
@@ -15,7 +15,7 @@ describe('Recipient component', () => {
   const setup = props => {
     return render(
       <AppLike client={client}>
-        <Recipient {...props} />
+        <MemberRecipient {...props} />
       </AppLike>
     )
   }

@@ -3,7 +3,7 @@ import React from 'react'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-import Recipient from './Recipient/Recipient'
+import MemberRecipient from './Recipient/MemberRecipient'
 import ShareDialogTwoStepsConfirmationContainer from './ShareDialogTwoStepsConfirmationContainer'
 
 /**
@@ -20,7 +20,7 @@ const SharingContent = ({ recipientsToBeConfirmed, verifyRecipient }) => {
 
       {recipientsToBeConfirmed.map(recipientConfirmationData => {
         return (
-          <Recipient
+          <MemberRecipient
             {...recipientConfirmationData}
             key={`key_r_${recipientConfirmationData.id}`}
             isOwner={false}

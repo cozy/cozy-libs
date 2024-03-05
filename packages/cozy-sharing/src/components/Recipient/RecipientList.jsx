@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Recipient from './Recipient'
+import MemberRecipient from './MemberRecipient'
 import { usePrevious } from '../../helpers/hooks'
 import { filterAndReworkRecipients } from '../../helpers/recipients'
 
@@ -26,7 +26,7 @@ const RecipientList = ({
     )
 
     return (
-      <Recipient
+      <MemberRecipient
         {...recipient}
         key={`key_r_${recipient.index}`}
         isOwner={isOwner}
