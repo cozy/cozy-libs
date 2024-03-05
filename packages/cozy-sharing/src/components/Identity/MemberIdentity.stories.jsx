@@ -1,7 +1,7 @@
-import RecipientWithoutStatus from './RecipientWithoutStatus'
+import { MemberIdentity } from './MemberIdentity'
 
 const meta = {
-  component: RecipientWithoutStatus,
+  component: MemberIdentity,
   args: {}
 }
 
