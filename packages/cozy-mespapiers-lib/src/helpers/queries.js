@@ -26,6 +26,7 @@ export const buildFilesQueryWithQualificationLabel = () => {
     'metadata.number',
     'metadata.contractType',
     'metadata.refTaxIncome',
+    'metadata.netSocialAmount',
     'metadata.title',
     'metadata.version',
     'cozyMetadata.createdByApp',
