@@ -9,9 +9,9 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
+import MemberRecipientPermissions from './MemberRecipientPermissions'
 import RecipientAvatar from './RecipientAvatar'
 import RecipientConfirm from './RecipientConfirm'
-import RecipientPermissions from './RecipientPermissions'
 import RecipientStatus from './RecipientStatus'
 import { FADE_IN_DURATION } from '../../helpers/recipients'
 import { getDisplayName } from '../../models'
@@ -43,7 +43,7 @@ const MemberRecipient = props => {
       verifyRecipient={verifyRecipient}
     ></RecipientConfirm>
   ) : (
-    <RecipientPermissions {...props} className="u-flex-shrink-0" />
+    <MemberRecipientPermissions {...props} className="u-flex-shrink-0" />
   )
 
   return (
