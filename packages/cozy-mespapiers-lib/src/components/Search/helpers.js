@@ -195,6 +195,9 @@ export const makeFileFlexsearchProps = ({ doc, scannerT, t }) => ({
     ...(doc.metadata.qualification?.label === 'passport' && {
       passport: t('Search.attributeLabel.metadata.passport')
     }),
+    ...(doc.metadata.qualification?.label === 'pay_sheet' && {
+      paySheet: t('Search.attributeLabel.metadata.pay_sheet')
+    }),
     ...(doc.metadata.qualification?.label === 'residence_permit' && {
       residencePermit: t('Search.attributeLabel.metadata.residence_permit')
     })
