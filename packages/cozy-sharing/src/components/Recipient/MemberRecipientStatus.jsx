@@ -10,7 +10,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import styles from '../../styles/recipient.styl'
 
-const RecipientStatus = ({ status, isMe, instance }) => {
+const MemberRecipientStatus = ({ status, isMe, instance }) => {
   const { t } = useI18n()
 
   const isSendingEmail = !isMe && status === 'mail-not-sent'
@@ -45,4 +45,4 @@ const RecipientStatus = ({ status, isMe, instance }) => {
   )
 }
 
-export default RecipientStatus
+export default MemberRecipientStatus

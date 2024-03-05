@@ -1,7 +1,7 @@
-import RecipientStatus from './RecipientStatus'
+import MemberRecipientStatus from './MemberRecipientStatus'
 
 const meta = {
-  component: RecipientStatus,
+  component: MemberRecipientStatus,
   args: {}
 }
 
