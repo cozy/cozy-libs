@@ -1,7 +1,7 @@
-import AvatarPlusX from './AvatarPlusX'
+import { ExtraAvatar } from './ExtraAvatar'
 
 const meta = {
-  component: AvatarPlusX,
+  component: ExtraAvatar,
   args: {}
 }
 

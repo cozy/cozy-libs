@@ -4,11 +4,11 @@ import React from 'react'
 import Identity from './Identity'
 import { getDisplayName } from '../../models'
 import styles from '../../styles/recipient.styl'
-import AvatarPlusX from '../Avatar/AvatarPlusX'
+import { ExtraAvatar } from '../Avatar/ExtraAvatar'
 
 const RecipientPlusX = ({ extraRecipients }, { t }) => (
   <div className={styles['recipient']}>
-    <AvatarPlusX
+    <ExtraAvatar
       extraRecipients={extraRecipients.map(recipient =>
         getDisplayName(recipient)
       )}

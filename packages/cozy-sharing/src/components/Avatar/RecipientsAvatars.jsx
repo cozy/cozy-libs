@@ -5,7 +5,7 @@ import { useClient } from 'cozy-client'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
 
-import AvatarPlusX from './AvatarPlusX'
+import { ExtraAvatar } from './ExtraAvatar'
 import RecipientAvatar from './RecipientAvatar'
 import { getDisplayName } from '../../models'
 import styles from '../../styles/recipient.styl'
@@ -52,7 +52,8 @@ const RecipientsAvatars = ({
       }).reverse()
   // we reverse the recipients array because we use `flex-direction: row-reverse` to display them correctly
 
-  const isAvatarPlusX = filteredRecipients.length > MAX_DISPLAYED_RECIPIENTS
+  const hasExtraRecipients =
+    filteredRecipients.length > MAX_DISPLAYED_RECIPIENTS
   const extraRecipients = filteredRecipients
     .slice(MAX_DISPLAYED_RECIPIENTS)
     .map(recipient => getDisplayName(recipient))
@@ -78,9 +79,9 @@ const RecipientsAvatars = ({
           />
         </span>
       )}
-      {isAvatarPlusX && (
+      {hasExtraRecipients && (
         <span data-testid="recipientsAvatars-plusX">
-          <AvatarPlusX
+          <ExtraAvatar
             className={styles['recipients-avatars--plusX']}
             extraRecipients={extraRecipients}
             size={size}
