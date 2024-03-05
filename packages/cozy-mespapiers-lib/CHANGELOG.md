@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [82.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@81.0.0...cozy-mespapiers-lib@82.0.0) (2024-03-05)
+
+
+### Bug Fixes
+
+* **mespapiers:** Add metadata.netSocialAmount into query select ([73d75a2](https://github.com/cozy/cozy-libs/commit/73d75a2307faee9f436d1baeb36b34a09de3f83c))
+
+
+### Features
+
+* **mespapiers:** Add translated pay_sheet number in flexsearch ([d953623](https://github.com/cozy/cozy-libs/commit/d9536236456bca260a57cd11c2196f761dcc4c95))
+* **mespapiers:** Upgrade cozy-ui 103.9.0 to 103.11.0 ([f01d3c8](https://github.com/cozy/cozy-libs/commit/f01d3c827e491362141d3e99a23e6cf4c617a4ae))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-ui >= 103.11.0`
+
+
+
+
+
 # [81.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@80.1.1...cozy-mespapiers-lib@81.0.0) (2024-03-04)
 
 
