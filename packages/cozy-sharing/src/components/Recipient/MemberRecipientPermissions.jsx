@@ -13,7 +13,7 @@ import ActionMenu, {
 } from 'cozy-ui/transpiled/react/deprecated/ActionMenu'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-const RecipientPermissions = ({
+const MemberRecipientPermissions = ({
   isOwner,
   status,
   instance,
@@ -113,4 +113,4 @@ const RecipientPermissions = ({
   )
 }
 
-export default RecipientPermissions
+export default MemberRecipientPermissions
