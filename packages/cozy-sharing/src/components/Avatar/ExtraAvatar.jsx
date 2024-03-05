@@ -6,7 +6,7 @@ import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
 import { SharingTooltip, TooltipRecipientList } from '../Tooltip'
 
-const AvatarPlusX = ({ className, size, extraRecipients = [] }) => {
+const ExtraAvatar = ({ className, size, extraRecipients = [] }) => {
   const sharingTooltipId = uniqueId('extra-recipients-avatar-')
 
   return (
@@ -27,15 +27,15 @@ const AvatarPlusX = ({ className, size, extraRecipients = [] }) => {
   )
 }
 
-AvatarPlusX.propTypes = {
+ExtraAvatar.propTypes = {
   extraRecipients: PropTypes.arrayOf(PropTypes.string),
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   className: PropTypes.string
 }
 
-AvatarPlusX.defaultProps = {
+ExtraAvatar.defaultProps = {
   extraRecipients: [],
   size: 'medium'
 }
 
-export default AvatarPlusX
+export { ExtraAvatar }
