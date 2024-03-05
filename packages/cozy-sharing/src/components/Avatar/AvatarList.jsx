@@ -33,7 +33,7 @@ export const excludeMeAsOwnerFromRecipients = ({
   })
 }
 
-const RecipientsAvatars = ({
+const AvatarList = ({
   recipients,
   link,
   size,
@@ -71,7 +71,7 @@ const RecipientsAvatars = ({
       onClick={onClick}
     >
       {link && (
-        <span data-testid="recipientsAvatars-link">
+        <span data-testid="AvatarList-link">
           <Avatar
             className={styles['recipients-avatars--link']}
             icon={LinkIcon}
@@ -80,7 +80,7 @@ const RecipientsAvatars = ({
         </span>
       )}
       {hasExtraRecipients && (
-        <span data-testid="recipientsAvatars-plusX">
+        <span data-testid="AvatarList-plusX">
           <ExtraAvatar
             className={styles['recipients-avatars--plusX']}
             extraRecipients={extraRecipients}
@@ -90,7 +90,7 @@ const RecipientsAvatars = ({
       )}
       {shownRecipients.map((recipient, idx) => (
         <span
-          data-testid={`recipientsAvatars-avatar${
+          data-testid={`AvatarList-avatar${
             recipient.status === 'owner' ? '-owner' : ''
           }`}
           key={idx}
@@ -106,4 +106,4 @@ const RecipientsAvatars = ({
   )
 }
 
-export default RecipientsAvatars
+export { AvatarList }

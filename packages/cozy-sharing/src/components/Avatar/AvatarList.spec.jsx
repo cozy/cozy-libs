@@ -3,10 +3,11 @@ import React from 'react'
 
 import { createMockClient } from 'cozy-client'
 
-import RecipientsAvatars, {
+import {
+  AvatarList,
   MAX_DISPLAYED_RECIPIENTS,
   excludeMeAsOwnerFromRecipients
-} from './RecipientsAvatars'
+} from './AvatarList'
 import AppLike from '../../../test/AppLike'
 
 const mockRecipients = new Array(MAX_DISPLAYED_RECIPIENTS - 1)
@@ -42,7 +43,7 @@ const mockMoreRecipientsThanMaxDisplayed = [
   }
 ]
 
-describe('RecipientsAvatars', () => {
+describe('AvatarList', () => {
   const client = createMockClient({})
 
   const setup = ({
@@ -54,7 +55,7 @@ describe('RecipientsAvatars', () => {
   }) => {
     return render(
       <AppLike client={client}>
-        <RecipientsAvatars
+        <AvatarList
           recipients={recipients}
           onClick={onClick}
           isOwner={isOwner}
@@ -70,19 +71,19 @@ describe('RecipientsAvatars', () => {
       link: true
     })
 
-    expect(getByTestId('recipientsAvatars-link')).toBeTruthy()
+    expect(getByTestId('AvatarList-link')).toBeTruthy()
   })
 
   it('should not render link icon if a link is not generated', () => {
     const { queryByTestId } = setup({})
 
-    expect(queryByTestId('recipientsAvatars-link')).toBeNull()
+    expect(queryByTestId('AvatarList-link')).toBeNull()
   })
 
   it('should hide me as owner by default', () => {
     const { queryByTestId } = setup({})
 
-    expect(queryByTestId('recipientsAvatars-avatar-owner')).toBeNull()
+    expect(queryByTestId('AvatarList-avatar-owner')).toBeNull()
   })
 
   it('should show me as owner if required', () => {
@@ -90,7 +91,7 @@ describe('RecipientsAvatars', () => {
       showMeAsOwner: true
     })
 
-    expect(getByTestId('recipientsAvatars-avatar-owner')).toBeTruthy()
+    expect(getByTestId('AvatarList-avatar-owner')).toBeTruthy()
   })
 
   it('should show a +X icon with the correct number if there is more avatars than expected', () => {
@@ -102,7 +103,7 @@ describe('RecipientsAvatars', () => {
     const delta =
       mockMoreRecipientsThanMaxDisplayed.length - MAX_DISPLAYED_RECIPIENTS
 
-    expect(getByTestId('recipientsAvatars-plusX')).toBeTruthy()
+    expect(getByTestId('AvatarList-plusX')).toBeTruthy()
     expect(getByText(`+${delta}`)).toBeTruthy()
   })
 
@@ -113,8 +114,8 @@ describe('RecipientsAvatars', () => {
       link: true
     })
 
-    expect(getByTestId('recipientsAvatars-plusX')).toBeTruthy()
-    expect(getByTestId('recipientsAvatars-link')).toBeTruthy()
+    expect(getByTestId('AvatarList-plusX')).toBeTruthy()
+    expect(getByTestId('AvatarList-link')).toBeTruthy()
   })
 })
 

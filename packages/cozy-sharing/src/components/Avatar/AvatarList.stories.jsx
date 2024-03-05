@@ -1,7 +1,7 @@
-import RecipientsAvatars from './RecipientsAvatars'
+import { AvatarList } from './AvatarList'
 
 const meta = {
-  component: RecipientsAvatars,
+  component: AvatarList,
   args: {}
 }
 
