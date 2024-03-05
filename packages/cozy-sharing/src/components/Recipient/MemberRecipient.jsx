@@ -10,9 +10,9 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import MemberRecipientPermissions from './MemberRecipientPermissions'
+import MemberRecipientStatus from './MemberRecipientStatus'
 import RecipientAvatar from './RecipientAvatar'
 import RecipientConfirm from './RecipientConfirm'
-import RecipientStatus from './RecipientStatus'
 import { FADE_IN_DURATION } from '../../helpers/recipients'
 import { getDisplayName } from '../../models'
 
@@ -59,7 +59,11 @@ const MemberRecipient = props => {
             </Typography>
           }
           secondary={
-            <RecipientStatus status={status} isMe={isMe} instance={instance} />
+            <MemberRecipientStatus
+              status={status}
+              isMe={isMe}
+              instance={instance}
+            />
           }
         />
         {RightPart}
