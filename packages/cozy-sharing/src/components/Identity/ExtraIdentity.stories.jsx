@@ -1,7 +1,7 @@
-import RecipientPlusX from './RecipientPlusX'
+import { ExtraIdentity } from './ExtraIdentity'
 
 const meta = {
-  component: RecipientPlusX,
+  component: ExtraIdentity,
   args: {}
 }
 
