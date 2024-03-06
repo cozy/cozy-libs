@@ -1,8 +1,7 @@
-import React, { ReactElement, useEffect, useState } from 'react'
 import { Connection, ChildHandshake, debug } from 'post-me'
+import React, { ReactElement, useEffect, useState } from 'react'
 
 import {
-  CozyBar,
   WebviewConnection,
   WebviewMessenger,
   WebviewService,
@@ -11,10 +10,8 @@ import {
   DebugWebviewMessenger,
   WebviewMethods
 } from '../../api'
-import { WebviewContext } from '../../view'
 import { isWebDevMode } from '../../utils'
-
-declare const cozy: CozyBar | undefined
+import { WebviewContext } from '../../view'
 
 const log = debug('WebviewIntentProvider')
 
@@ -30,22 +27,6 @@ const assumeWebviewWindow = window as unknown as WebviewWindow
 function isWebviewWindow(window: Window): window is WebviewWindow {
   return (window as WebviewWindow).ReactNativeWebView !== undefined
 }
-
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-const getBarInitAPI = (): ((webviewContext: WebviewService) => void) | void => {
-  try {
-    if (cozy!.bar && cozy!.bar.setWebviewContext === undefined) {
-      return log(strings.errorCozyBarAPIMissing)
-    }
-
-    return cozy!.bar!.setWebviewContext
-  } catch (err) {
-    return undefined
-  }
-}
-/* eslint-enable @typescript-eslint/no-non-null-assertion */
-/* eslint-enable no-console */
 
 const sendSyncMessage = (message: string): void => {
   return assumeWebviewWindow.ReactNativeWebView.postMessage(
@@ -96,7 +77,6 @@ export const WebviewIntentProvider = ({
   const [service, setService] = useState<WebviewService | undefined>(
     webviewService
   )
-  const setBarWebviewContext = setBarContext || getBarInitAPI()
 
   useEffect(() => {
     !connection &&
@@ -110,8 +90,8 @@ export const WebviewIntentProvider = ({
   }, [service, connection])
 
   useEffect(() => {
-    setBarWebviewContext && service && setBarWebviewContext(service)
-  }, [setBarWebviewContext, service])
+    setBarContext && service && setBarContext(service)
+  }, [setBarContext, service])
 
   return (
     <WebviewContext.Provider value={service}>

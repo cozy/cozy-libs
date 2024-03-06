@@ -90,32 +90,6 @@ describe('WebviewIntentProvider', () => {
     expect(mockSetWebviewContext).not.toHaveBeenCalled()
   })
 
-  it('sets cozy-bar context if cozy-bar does exist when provided with a context', async () => {
-    global.cozy.bar = mockCozyBar
-
-    const { findByText } = render(
-      <WebviewIntentProvider webviewService={mockWebviewService}>
-        Hello
-      </WebviewIntentProvider>
-    )
-
-    expect(await findByText('Hello')).toBeTruthy()
-    expect(mockSetWebviewContext).toHaveBeenCalledWith(mockWebviewService)
-    expect(mockSetWebviewContext).toBeCalledTimes(1)
-  })
-
-  it('sets cozy-bar context if cozy-bar does exist when not provided with a context', async () => {
-    global.cozy.bar = mockCozyBar
-
-    const { findByText } = render(
-      <WebviewIntentProvider>Hello</WebviewIntentProvider>
-    )
-
-    expect(await findByText('Hello')).toBeTruthy()
-    expect(mockSetWebviewContext).toBeCalledWith(expect.any(WebviewService))
-    expect(mockSetWebviewContext).toBeCalledTimes(1)
-  })
-
   it('does not throw if cozy-bar api is outdated', async () => {
     global.cozy.bar = { setWebviewContext: undefined }
 
