@@ -1,8 +1,11 @@
 import OwnerRecipient from './OwnerRecipient'
+import { recipients } from '../../../.storybook/fixtures/recipients'
 
 const meta = {
   component: OwnerRecipient,
-  args: {}
+  args: {
+    recipients
+  }
 }
 
 export default meta
