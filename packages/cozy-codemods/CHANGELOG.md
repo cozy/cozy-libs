@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.25.0 (2024-03-06)
+
+
+### Features
+
+* **codemods:** Add transform-ui-deprecated-table ([e20d864](https://github.com/cozy/cozy-libs/commit/e20d8644eae4e89a6f94b8b329b67f3336fc477e)), closes [cozy/cozy-ui#2576](https://github.com/cozy/cozy-ui/issues/2576)
+
+
+
+
+
 # [1.24.0](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.23.0...@cozy/codemods@1.24.0) (2023-09-14)
 
 
