@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [83.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@82.0.0...cozy-mespapiers-lib@83.0.0) (2024-03-06)
+
+
+### Features
+
+* **mespapiers:** Upgrade cozy-bar 7.26.0 to 12.0.0 ([24a1cca](https://github.com/cozy/cozy-libs/commit/24a1cca26305fd10b16dac1f9c05739de1bcb84a))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-bar >= 12.0.0`
+
+
+
+
+
 # [82.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@81.0.0...cozy-mespapiers-lib@82.0.0) (2024-03-05)
 
 

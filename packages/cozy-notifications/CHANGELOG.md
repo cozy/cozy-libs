@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.16.0 (2024-03-06)
+
+
+### Features
+
+* **mespapiers:** Use showAlert instead Alerter into downloadFiles func ([68ec498](https://github.com/cozy/cozy-libs/commit/68ec498d218c87d7fd99b3c321afe7395657c1e9))
+
+
+
+
+
 # 0.15.0 (2024-02-07)
 
 
