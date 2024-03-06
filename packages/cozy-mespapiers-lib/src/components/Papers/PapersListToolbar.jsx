@@ -1,19 +1,17 @@
-/* global cozy */
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
+import { BarLeft, BarCenter } from 'cozy-bar'
 import UIBarTitle from 'cozy-ui/transpiled/react/BarTitle'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 
 import { getCurrentQualificationLabel } from './helpers'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 
 const PapersListToolbar = ({ selectedQualificationLabel }) => {
-  const { BarLeft, BarCenter } = cozy.bar
   const params = useParams()
   const navigate = useNavigate()
   const { isMultiSelectionActive } = useMultiSelection()
@@ -43,10 +41,7 @@ const PapersListToolbar = ({ selectedQualificationLabel }) => {
       </BarLeft>
 
       <BarCenter>
-        {/* Need to repeat the theme since the bar is in another react portal */}
-        <CozyTheme variant="normal">
-          <UIBarTitle>{qualificationLabel}</UIBarTitle>
-        </CozyTheme>
+        <UIBarTitle>{qualificationLabel}</UIBarTitle>
       </BarCenter>
     </>
   )
