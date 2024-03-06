@@ -10814,6 +10814,27 @@ cozy-ui@^103.8.2:
     react-swipeable-views "^0.13.3"
     rooks "^5.11.2"
 
+cozy-ui@^40.9.1:
+  version "40.10.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-40.10.0.tgz#f51f37b4dec9af06cc78c491c1cc940c5bd25730"
+  integrity sha512-7McoMD9Ky34EQFXMqh7qm83ZyWnAV7x8CB3ilMjxCJ9f52x9T1ocvZ+O4m166gtkYEd+5wkJTz0iAeaxLR02rg==
+  dependencies:
+    "@babel/runtime" "^7.3.4"
+    "@popperjs/core" "^2.4.4"
+    classnames "^2.2.5"
+    cozy-interapp "0.5.4"
+    date-fns "^1.28.5"
+    hammerjs "^2.0.8"
+    intersection-observer "0.11.0"
+    node-polyglot "^2.2.2"
+    normalize.css "^7.0.0"
+    react-markdown "^4.0.8"
+    react-pdf "^4.0.5"
+    react-popper "^2.2.3"
+    react-remove-scroll "^2.4.0"
+    react-select "2.2.0"
+    react-swipeable-views "0.13.3"
+
 create-ecdh@^4.0.0:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/create-ecdh/-/create-ecdh-4.0.3.tgz#c9111b6f33045c4697f144787f9254cdc77c45ff"
