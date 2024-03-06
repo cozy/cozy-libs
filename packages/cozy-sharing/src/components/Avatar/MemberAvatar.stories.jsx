@@ -2,7 +2,12 @@ import { MemberAvatar } from './MemberAvatar'
 
 const meta = {
   component: MemberAvatar,
-  args: {}
+  args: {
+    recipient: {
+      avatarPath: null,
+      name: 'John Doe'
+    }
+  }
 }
 
 export default meta

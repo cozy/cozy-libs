@@ -1,8 +1,11 @@
 import { ExtraIdentity } from './ExtraIdentity'
+import { recipients } from '../../../.storybook/fixtures/recipients'
 
 const meta = {
   component: ExtraIdentity,
-  args: {}
+  args: {
+    extraRecipients: recipients
+  }
 }
 
 export default meta

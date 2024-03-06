@@ -1,8 +1,11 @@
 import { AvatarList } from './AvatarList'
+import { recipients } from '../../../.storybook/fixtures/recipients'
 
 const meta = {
   component: AvatarList,
-  args: {}
+  args: {
+    recipients: [...recipients, ...recipients]
+  }
 }
 
 export default meta
