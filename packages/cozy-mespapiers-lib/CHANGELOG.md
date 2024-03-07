@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [84.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@84.0.0...cozy-mespapiers-lib@84.1.0) (2024-03-07)
+
+
+### Features
+
+* **mespapiers:** Add stranger national_id_card ([90b9449](https://github.com/cozy/cozy-libs/commit/90b9449d16f41fbfca54ea596319437a878e6be8))
+
+
+
+
+
 # [84.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@83.0.1...cozy-mespapiers-lib@84.0.0) (2024-03-07)
 
 

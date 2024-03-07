@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [22.5.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.5.0...cozy-harvest-lib@22.5.1) (2024-03-07)
+
+
+### Bug Fixes
+
+* Deep clone account ([1febba9](https://github.com/cozy/cozy-libs/commit/1febba90b97e7c907b126aced41ba64f86452de1)), closes [/github.com/cozy/cozy-libs/pull/2447#discussion_r1514112607](https://github.com//github.com/cozy/cozy-libs/pull/2447/issues/discussion_r1514112607)
+
+
+
+
+
 # 22.5.0 (2024-03-07)
 
 
