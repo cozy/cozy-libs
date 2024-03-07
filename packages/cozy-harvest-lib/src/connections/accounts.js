@@ -1,3 +1,4 @@
+import cloneDeep from 'lodash/cloneDeep'
 import keyBy from 'lodash/keyBy'
 import merge from 'lodash/merge'
 
@@ -173,7 +174,7 @@ export const saveAccount = (client, konnector, account) => {
   )
 
   const sourceAccountIdentifier = models.account.getAccountLogin(account)
-  const updatedAccount = { ...account }
+  const updatedAccount = cloneDeep(account)
   if (sourceAccountIdentifier) {
     updatedAccount.cozyMetadata = {
       ...account.cozyMetadata,
