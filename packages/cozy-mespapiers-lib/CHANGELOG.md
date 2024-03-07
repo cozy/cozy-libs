@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [84.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@83.0.1...cozy-mespapiers-lib@84.0.0) (2024-03-07)
+
+
+### Features
+
+* Upgrade cozy-ui 103.11.1, cozy-sharing 10.1.3 to 10.4.1 ([8b06355](https://github.com/cozy/cozy-libs/commit/8b063559dc71165e21beb7411df0c41646bc766d))
+
+
+### BREAKING CHANGES
+
+* you must have `cozy-ui >= 103.1.1` and `cozy-sharing >= 10.4.1`
+
+
+
+
+
 ## [83.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@83.0.0...cozy-mespapiers-lib@83.0.1) (2024-03-07)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
