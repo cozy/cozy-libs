@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 22.5.0 (2024-03-07)
+
+
+### Bug Fixes
+
+* Lint ([4fd054a](https://github.com/cozy/cozy-libs/commit/4fd054afb659061ef1bc1eb0c4553e4c12de9583))
+
+
+### Features
+
+* **mespapiers:** Use showAlert instead Alerter into PapersDefinitions ([e9525f1](https://github.com/cozy/cozy-libs/commit/e9525f182341b9f0bcfa60914e2ce364e59dc933))
+* Update KonnectorBlock to use sourceAccountIdentifier ([5e2b886](https://github.com/cozy/cozy-libs/commit/5e2b886f69f6018ac714548b30f8744f1c0a9347))
+* Use sourceAccountIdentifier in files datacard ([2446c18](https://github.com/cozy/cozy-libs/commit/2446c18ca2d7b2b01241e6317c8ea3a2bd77ce33))
+
+
+
+
+
 ## [22.4.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.4.0...cozy-harvest-lib@22.4.1) (2024-02-19)
 
 
