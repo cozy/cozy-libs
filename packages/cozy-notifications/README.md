@@ -12,7 +12,7 @@ in konnectors, since mjml and its dependents are not built for node-js).
 
 `webpack.config.js`
 
-```
+```javascript
 const webpackMerge = require('webpack-merge')
 const cozyNotificationsWebpackConfig = require('cozy-notifications/dist/webpack/config')
 
@@ -39,7 +39,7 @@ Notification views are responsible for
 - configuring the notification (`category`, `channels`)
 - deciding if the notification should be sent
 
-```
+```javascript
 class MyNotification {
   async buildData() {
     return {
@@ -54,26 +54,69 @@ class MyNotification {
   getTitle() {
     return 'title'
   }
+
+  getExtraAttributes() {
+    return {
+      data: {
+        // data that will be sent in the notification payload for mobiles
+        redirectLink: "settings/#/subscription"
+      }
+    }
+  }
 }
 
 MyNotification.template = require('./template.hbs')
 ```
 
-## preferredChannels
+### getExtraAttributes
+
+In `getExtraAttributes`, you can pass data that will be sent in the notification payload for mobiles.
+
+```javascript
+getExtraAttributes() {
+  return {
+    data: {
+      // Standardized. When opening the notification, it will open settings app on subscription page.
+      redirectLink: "settings/#/subscription",
+      // Standardized. When opening the notification, it will refresh the app.
+      refresh: true,
+      // You can also pass whatever you want.
+      age: 42
+    }
+  }
+}
+```
+
+In `getExtraAttributes`, you can also pass a `state` (only needed if your notification is `stateful`).
+
+```javascript
+getExtraAttributes() {
+  return {
+    // State to send the notification only 1 time per day.
+    state: new Date().toLocaleDateString('fr-FR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    })
+  }
+}
+```
+
+### preferredChannels
 
 We can define one which channels the user will receive the notification.
 
-```
+```javascript
 MyNotification.preferredChannels = ['mail', 'mobile']
 ```
 
-### mobile
+#### mobile
 
 The mobile channels consists of a push notification. Its title will be
 the result of the `getTitle` method and its content will be the result
 of `getPushContent`.
 
-### mail
+#### mail
 
 Emails need more markup and thus will need the `template` class attribute.
 They are written in `mjml`, making it possible to write good looking emails in every major mail client.
@@ -107,7 +150,7 @@ in your application and then refer to it in each of your email templates.
 
 To provide the content for a particular part, use the following syntax:
 
-```
+```handlebars
 {{#content "part"}}
   Content of the part
 {{/content}}
@@ -173,7 +216,7 @@ A sample template for a particular notification:
 
 We can now use our template for a notification view.
 
-```
+```javascript
 import template from './my-notification.hbs'
 import appTemplate from './app-layout.hbs'
 import { NotificationView } from 'cozy-notifications'
@@ -194,7 +237,7 @@ sent; in other words, only `appURL`, `topLogo`, `content` etc... will be sent,
 instead of the whole content). This is why `cozy-notifications` needs to know
 our *uncompiled* partials. We can destructure `parts` to access rendered parts.
 
-```
+```javascript
 import { renderer } from 'cozy-notifications'
 const render = renderer({ partials, helpers })
 const { parts } = render({ template, data })
