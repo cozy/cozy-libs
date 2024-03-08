@@ -242,3 +242,11 @@ const myNotifView = new MyNotificationView({
   A primary button
  </mj-button>
 ```
+
+## Related documentation
+
+- [Notification configuration and routes on cozy-stack](https://github.com/cozy/cozy-stack/blob/master/docs/notifications.md)
+- [Notification custom behavior for flagship app on cozy-stack](https://github.com/cozy/cozy-stack/blob/master/docs/flagship.md#notifications)
+- [How to debug notifications on flagship app](https://github.com/cozy/cozy-flagship-app/blob/master/docs/how-to-debug-notifications.md)
+- [How to debug notifications on cozy-banks](https://github.com/cozy/cozy-banks/blob/master/docs/notifications.md)
+- [How notifications have been added in devtools on cozy-banks](https://github.com/cozy/cozy-banks/blob/master/src/ducks/devtools/Notifications.jsx)
