@@ -1,7 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import snarkdown from 'snarkdown'
 import capitalize from 'lodash/capitalize'
+import PropTypes from 'prop-types'
+import React from 'react'
+import snarkdown from 'snarkdown'
+
 import { InlineCard, translate, Text } from 'cozy-ui/transpiled/react'
 
 const PersonalDataFullyCompleted = ({ navigateTo, personalData, t }) => {

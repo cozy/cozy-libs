@@ -1,10 +1,12 @@
+import MockDate from 'mockdate'
+
+import CozyClient from 'cozy-client'
+
 import {
   createFileWithContent,
   fetchCheckingsLikeAccounts,
   fetchTransactionsHistory
 } from './helpers'
-import MockDate from 'mockdate'
-import CozyClient from 'cozy-client'
 
 jest.mock('cozy-client')
 

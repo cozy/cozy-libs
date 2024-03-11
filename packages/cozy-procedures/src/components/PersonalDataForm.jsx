@@ -1,12 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router'
-import Form from 'react-jsonschema-form'
 import get from 'lodash/get'
+import PropTypes from 'prop-types'
+import React from 'react'
+import Form from 'react-jsonschema-form'
+import { withRouter } from 'react-router'
+
+import { creditApplicationTemplate } from 'cozy-procedures'
 import { Button, Title } from 'cozy-ui/transpiled/react'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-import ProcedureComponentsPropType from './ProcedureComponentsPropType'
 
+import ProcedureComponentsPropType from './ProcedureComponentsPropType'
+import Topbar from './Topbar'
 import {
   FieldTemplate,
   InputAdapter,
@@ -16,8 +19,6 @@ import {
   TextareaAdapter
 } from './form'
 import CompletedFromMyselfStatus from '../containers/CompletedFromMyselfStatus'
-import Topbar from './Topbar'
-import { creditApplicationTemplate } from 'cozy-procedures'
 
 const widgets = {
   BaseInput: InputAdapter,

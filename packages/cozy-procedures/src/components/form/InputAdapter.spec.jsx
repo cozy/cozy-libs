@@ -1,7 +1,7 @@
 import React from 'react'
 
-import tMock from '../../../test/__mocks__/tMock'
 import { InputAdapter } from './InputAdapter'
+import tMock from '../../../test/__mocks__/tMock'
 
 describe('InputAdapter component', () => {
   it('should match snapshot', () => {

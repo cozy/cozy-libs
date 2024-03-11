@@ -1,8 +1,8 @@
-const PropTypes = require('prop-types')
 const get = require('lodash/get')
+const PropTypes = require('prop-types')
 
-const log = require('../log')
 const Document = require('../Document')
+const log = require('../log')
 
 const getPrimaryOrFirst = property => obj => {
   if (!obj[property] || obj[property].length === 0) return ''

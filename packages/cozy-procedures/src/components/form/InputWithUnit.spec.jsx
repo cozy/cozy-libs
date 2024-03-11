@@ -1,7 +1,7 @@
 import React from 'react'
 
-import tMock from '../../../test/__mocks__/tMock'
 import { InputWithUnit } from './InputWithUnit'
+import tMock from '../../../test/__mocks__/tMock'
 
 describe('InputWithUnit component', () => {
   it('should match snapshot', () => {

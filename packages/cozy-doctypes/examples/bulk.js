@@ -7,8 +7,9 @@
  * created.
  */
 
-const Document = require('../src/Document')
 const { Client } = require('cozy-client-js')
+
+const Document = require('../src/Document')
 
 class Simpson extends Document {}
 Simpson.doctype = 'io.cozy.simpsons'

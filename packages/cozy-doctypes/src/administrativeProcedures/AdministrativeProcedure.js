@@ -1,8 +1,8 @@
-const get = require('lodash/get')
 const flatten = require('lodash/flatten')
+const get = require('lodash/get')
 
-const Contact = require('../contacts/Contact')
 const Document = require('../Document')
+const Contact = require('../contacts/Contact')
 
 class AdministrativeProcedure extends Document {
   /**
@@ -59,7 +59,6 @@ class AdministrativeProcedure extends Document {
     const cozyRules = {
       trashed: false,
       type: 'file',
-      // eslint-disable-next-line node/no-unsupported-features/es-syntax
       ...rules
     }
     // Create an index in order to query and sort

@@ -2,8 +2,6 @@ import 'mutationobserver-shim'
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import { CozyBar, WebviewService } from '../../api'
-import { WebviewIntentProvider } from '../../view'
 import {
   mockChildHandshake,
   mockConnection,
@@ -12,6 +10,8 @@ import {
   mockWebviewService,
   mockWebviewWindow
 } from '../../../tests'
+import { CozyBar, WebviewService } from '../../api'
+import { WebviewIntentProvider } from '../../view'
 
 // eslint-disable-next-line no-global-assign
 window = mockWebviewWindow()

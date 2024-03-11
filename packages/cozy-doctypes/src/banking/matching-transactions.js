@@ -1,5 +1,6 @@
 const groupBy = require('lodash/groupBy')
 const sortBy = require('lodash/sortBy')
+
 const { eitherIncludes } = require('./matching-tools')
 
 const getDateTransaction = op => op.date.substr(0, 10)

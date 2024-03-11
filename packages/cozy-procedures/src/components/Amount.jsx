@@ -1,8 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router'
 import get from 'lodash/get'
-import Topbar from './Topbar'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { withRouter } from 'react-router'
+
+import { creditApplicationTemplate } from 'cozy-procedures'
 import {
   Title,
   translate,
@@ -10,8 +11,9 @@ import {
   Input,
   Button
 } from 'cozy-ui/transpiled/react/'
-import { creditApplicationTemplate } from 'cozy-procedures'
+
 import ProcedureComponentsPropType from './ProcedureComponentsPropType'
+import Topbar from './Topbar'
 
 class Amount extends React.Component {
   render() {

@@ -25,8 +25,7 @@ export const copyReminderContent = () => {
       await copyToClipboard(data, { t, showAlert })
     },
     Component: withLocales(
-      // eslint-disable-next-line react/display-name
-      forwardRef(({ docs, onClick, ...props }, ref) => {
+      forwardRef(({ doc, onClick, ...props }, ref) => {
         const { t } = useI18n()
         const { data } = useFetchJSON('GET', `/notes/${docs[0]._id}/text`)
 

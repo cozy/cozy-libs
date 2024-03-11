@@ -1,16 +1,14 @@
 import React from 'react'
 import { Route, IndexRoute } from 'react-router'
-import creditApplicationTemplate from './templates/creditApplicationTemplate'
 
 import _App from './App'
-
-import _Overview from './containers/Overview'
+import { optionsConsumer, optionsProvider } from './ProcedureOptions'
+import _DocumentsDataForm from './components/Documents'
 import _Amount from './containers/Amount'
 import _Duration from './containers/Duration'
+import _Overview from './containers/Overview'
 import _PersonalDataForm from './containers/PersonalDataForm'
-import _DocumentsDataForm from './components/Documents'
-
-import { optionsConsumer, optionsProvider } from './ProcedureOptions'
+import creditApplicationTemplate from './templates/creditApplicationTemplate'
 
 const Amount = optionsConsumer(_Amount)
 const Duration = optionsConsumer(_Duration)

@@ -1,5 +1,7 @@
 const BankTransaction = require('./BankTransaction')
+
 const flag = require('cozy-flags').default
+
 jest.mock('../Document')
 const Document = require('../Document')
 jest.mock('../log')
@@ -63,7 +65,6 @@ describe('split date', () => {
       BankTransaction.getSplitDate([
         ...testTransactions,
         {
-          // eslint-disable-next-line node/no-unsupported-features/es-syntax
           ...testTransactions[0],
           date: '2050-10-06' // Someone planned a transaction in the future
         }

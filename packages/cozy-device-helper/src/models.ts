@@ -39,7 +39,9 @@ declare global {
       set: (params: { package: string } | string) => {
         check: (onResult, onFail) => void
         start: (
-          resolve: (value: false | void | PromiseLike<false | void>) => void,
+          resolve: (
+            value: false | undefined | PromiseLike<false | undefined>
+          ) => void,
           reject: (reason?: unknown) => void
         ) => void
       }

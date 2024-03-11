@@ -1,4 +1,5 @@
 const { Q } = require('cozy-client/dist/queries/dsl')
+
 const Application = require('./Application')
 const CozyFile = require('./File')
 

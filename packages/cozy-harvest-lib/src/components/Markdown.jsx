@@ -4,7 +4,6 @@ import ReactMarkdown from 'react-markdown'
 import Link from 'cozy-ui/transpiled/react/Link'
 
 const reactMarkdownRendererOptions = ({ linkProps }) => ({
-  // eslint-disable-next-line react/display-name
   paragraph: props => <span className="u-db u-mv-0">{props.children}</span>,
   link: props => (
     <Link href={props.href} rel="noreferrer" target="_blank" {...linkProps}>

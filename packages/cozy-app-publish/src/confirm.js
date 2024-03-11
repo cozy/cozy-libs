@@ -1,4 +1,5 @@
 const prompt = require('prompt')
+
 const colorize = require('./utils/colorize')
 
 const promptConfirm = question =>

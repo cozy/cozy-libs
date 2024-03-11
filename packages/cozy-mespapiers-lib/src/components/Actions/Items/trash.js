@@ -22,7 +22,6 @@ export const trash = ({ t, pushModal, popModal }) => {
         <DeleteConfirm files={docs} isLast={isLast} onClose={popModal} />
       ),
     Component: withLocales(
-      // eslint-disable-next-line react/display-name
       forwardRef((props, ref) => {
         return (
           <ActionsMenuItem {...props} ref={ref}>

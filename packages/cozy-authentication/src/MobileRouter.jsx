@@ -1,17 +1,17 @@
+import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { Router } from 'react-router'
 import { HashRouter, useLocation, useNavigate } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import { withClient } from 'cozy-client'
 
-import Authentication from './Authentication'
-import Revoked from './Revoked'
-import * as onboarding from './utils/onboarding'
+import { withClient } from 'cozy-client'
 import Modal from 'cozy-ui/transpiled/react/Modal'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
-import deeplink from './utils/deeplink'
+import Authentication from './Authentication'
+import Revoked from './Revoked'
 import credentials from './utils/credentials'
+import deeplink from './utils/deeplink'
+import * as onboarding from './utils/onboarding'
 
 // Even if the component is not yet mounted, we save
 // the deeplink

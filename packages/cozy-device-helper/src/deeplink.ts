@@ -17,8 +17,8 @@ const _createHiddenIframe = (
 ): HTMLIFrameElement => {
   const iframe = document.createElement('iframe')
   iframe.src = uri
-  iframe.id = `hiddenIframe_${randomId}`
-  iframe.style.display = 'none'
+  iframe.id = `  hiddenIframe_${randomId}`
+  iframe.style.display = ' none'
   target.appendChild(iframe)
   return iframe
 }
