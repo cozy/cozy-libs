@@ -70,7 +70,11 @@ async function getKonnector(client, slug) {
 
 async function getTriggers(client, slug) {
   const { data: allTriggers } = await client.query(
-    Q(TRIGGERS_DOCTYPE).where({ worker: ['client', 'konnector'] })
+    Q(TRIGGERS_DOCTYPE).where({
+      worker: {
+        $in: ['client', 'konnector']
+      }
+    })
   )
   return allTriggers.filter(
     trigger =>
