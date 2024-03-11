@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@10.4.1...cozy-sharing@11.0.0) (2024-03-11)
+
+
+### Bug Fixes
+
+* Add missing args into stories ([3658ead](https://github.com/cozy/cozy-libs/commit/3658ead89344c20f59d4c8693522c73d40c20761))
+
+
+### Code Refactoring
+
+* Rename RecipientsAvatars into AvatarList ([abef583](https://github.com/cozy/cozy-libs/commit/abef5830bf774855e39e8cf0149e26b49f53a367))
+
+
+### Features
+
+* Add stories to recipient components ([b32f881](https://github.com/cozy/cozy-libs/commit/b32f881e031d61676097f94a2015227e99e1fb67))
+* **sharing:** Add storybook ([fa7a028](https://github.com/cozy/cozy-libs/commit/fa7a0286ee18421ead00a061d9a1aa8f6d755978))
+
+
+### BREAKING CHANGES
+
+* If you were importing RecipientsAvatars directly you should now use `import { AvatarList as RecipientsAvatars } from 'cozy-sharing/dist/components/Avatar/AvatarList'`
+
+
+
+
+
 ## [10.4.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@10.4.0...cozy-sharing@10.4.1) (2024-03-01)
 
 
