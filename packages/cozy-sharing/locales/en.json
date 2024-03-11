@@ -126,16 +126,6 @@
         "hasSharedParent": "it has a shared parent",
         "hasSharedChild": "it contains a shared element"
       },
-      "revoke": {
-        "title": "Remove from sharing",
-        "desc": "This contact will keep a copy but the changes won't be synchrnoized anymore.",
-        "success": "You removed this shared file from %{email}."
-      },
-      "revokeSelf": {
-        "title": "Remove me from sharing",
-        "desc": "You keep the content but it won't be updated between your Cozy anymore.",
-        "success": "You were removed from this sharing."
-      },
       "sharingLink": {
         "title": "Link to share",
         "copy": "Copy",
@@ -201,16 +191,6 @@
         },
         "hasSharedParent": "it has a shared parent",
         "hasSharedChild": "it contains a shared element"
-      },
-      "revoke": {
-        "title": "Remove from sharing",
-        "desc": "This contact will keep a copy but the changes won't be synchrnoized anymore.",
-        "success": "You removed this shared file from %{email}."
-      },
-      "revokeSelf": {
-        "title": "Remove me from sharing",
-        "desc": "You keep the content but it won't be updated between your Cozy anymore.",
-        "success": "You were removed from this sharing."
       },
       "sharingLink": {
         "title": "Link to share",
@@ -338,16 +318,6 @@
         "hasSharedParent": "it has a shared parent",
         "hasSharedChild": "it contains a shared element"
       },
-      "revoke": {
-        "title": "Remove from sharing",
-        "desc": "This contact will keep a copy but the changes won't be synchrnoized anymore.",
-        "success": "You removed this shared file from %{email}."
-      },
-      "revokeSelf": {
-        "title": "Remove me from sharing",
-        "desc": "You keep the content but it won't be updated between your Cozy anymore.",
-        "success": "You were removed from this sharing."
-      },
       "sharingLink": {
         "title": "Link to share",
         "copy": "Copy",
@@ -382,5 +352,15 @@
     "title": "Problem with your sharing",
     "content": "You cannot share %{documentName} with more than %{limit} members.",
     "confirm": "I understand"
+  },
+  "RevokeMemberItem": {
+    "revoke": {
+      "title": "Remove from sharing",
+      "desc": "This contact will keep a copy but the changes won't be synchrnoized anymore."
+    },
+    "revokeSelf": {
+      "title": "Remove me from sharing",
+      "desc": "You keep the content but it won't be updated between your Cozy anymore."
+    }
   }
 }
