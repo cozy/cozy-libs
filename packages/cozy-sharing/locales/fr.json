@@ -125,16 +125,6 @@
         "hasSharedParent": "se trouve dans un dossier partagé.",
         "hasSharedChild": "contient un élément partagé."
       },
-      "revoke": {
-        "title": "Arrêter le partage",
-        "desc": "Votre contact conservera une copie mais vos changements ne seront plus synchronisés.",
-        "success": "Vous avez cessé de partager ce fichier avec %{email}."
-      },
-      "revokeSelf": {
-        "title": "Arrêter le partage",
-        "desc": "Vous conservez le contenu mais il ne sera plus mis à jour entre vos Cozy.",
-        "success": "Vous avez été retiré de ce partage."
-      },
       "sharingLink": {
         "title": "Partager",
         "copy": "Copier",
@@ -200,16 +190,6 @@
         },
         "hasSharedParent": "se trouve dans un dossier partagé.",
         "hasSharedChild": "contient un élément partagé."
-      },
-      "revoke": {
-        "title": "Arrêter le partage",
-        "desc": "Votre contact conservera une copie mais vos changements ne seront plus synchronisés.",
-        "success": "Vous avez cessé de partager ce fichier avec %{email}."
-      },
-      "revokeSelf": {
-        "title": "Arrêter le partage",
-        "desc": "Vous conservez le contenu mais il ne sera plus mis à jour entre vos Cozy.",
-        "success": "Vous avez été retiré de ce partage."
       },
       "sharingLink": {
         "title": "Partager",
@@ -336,16 +316,6 @@
         "hasSharedParent": "se trouve dans un dossier partagé.",
         "hasSharedChild": "contient un élément partagé."
       },
-      "revoke": {
-        "title": "Arrêter le partage",
-        "desc": "Votre contact conservera une copie mais vos changements ne seront plus synchronisés.",
-        "success": "Vous avez cessé de partager ce fichier avec %{email}."
-      },
-      "revokeSelf": {
-        "title": "Arrêter le partage",
-        "desc": "Vous conservez le contenu mais il ne sera plus mis à jour entre vos Cozy.",
-        "success": "Vous avez été retiré de ce partage."
-      },
       "sharingLink": {
         "title": "Partager",
         "copy": "Copier",
@@ -380,5 +350,15 @@
     "title": "Problème au niveau de votre partage",
     "content": "Vous ne pouvez pas partager %{documentName} à plus de %{limit} membres.",
     "confirm": "J'ai compris"
+  },
+  "RevokeMemberItem": {
+    "revoke": {
+      "title": "Arrêter le partage",
+      "desc": "Votre contact conservera une copie mais vos changements ne seront plus synchronisés."
+    },
+    "revokeSelf": {
+      "title": "Arrêter le partage",
+      "desc": "Vous conservez le contenu mais il ne sera plus mis à jour entre vos Cozy."
+    }
   }
 }

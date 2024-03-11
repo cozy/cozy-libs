@@ -8,7 +8,10 @@ const meta = {
     status: 'ready',
     recipientConfirmationData: null,
     verifyRecipient: () => {},
-    fadeIn: true
+    fadeIn: true,
+    type: 'two-way',
+    onRevoke: () => {},
+    onRevokeSelf: () => {}
   },
   argTypes: {
     status: {
@@ -31,6 +34,14 @@ export const Owner = {
   args: {
     isOwner: true,
     status: 'owner'
+  }
+}
+
+export const SameInstance = {
+  name: 'SameInstance',
+  args: {
+    isOwner: false,
+    instance: 'http://alice.cozy.localhost:8080'
   }
 }
 
