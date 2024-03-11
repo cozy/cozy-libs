@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [22.5.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.5.1...cozy-harvest-lib@22.5.2) (2024-03-11)
+
+
+### Bug Fixes
+
+* Avoir losing cozy-client cache after reload ([dd36fcc](https://github.com/cozy/cozy-libs/commit/dd36fcc44c4158ea6a9b86b7bbf315a5bd19715f))
+
+
+
+
+
 ## [22.5.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.5.0...cozy-harvest-lib@22.5.1) (2024-03-07)
 
 
