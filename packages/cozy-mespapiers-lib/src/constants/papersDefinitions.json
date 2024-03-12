@@ -1664,6 +1664,45 @@
         },
         {
           "model": "information",
+          "illustration": "IlluGenericInputText.svg",
+          "text": "PaperJSON.pay_sheet.number.editText",
+          "attributes": [
+            {
+              "name": "number",
+              "type": "number",
+              "editText": "PaperJSON.pay_sheet.number.editText",
+              "inputLabel": "PaperJSON.pay_sheet.number.inputLabel"
+            }
+          ]
+        },
+        {
+          "model": "information",
+          "illustration": "IlluGenericInputText.svg",
+          "text": "PaperJSON.pay_sheet.netSocialAmount.editText",
+          "attributes": [
+            {
+              "name": "netSocialAmount",
+              "type": "number",
+              "editText": "PaperJSON.pay_sheet.netSocialAmount.editText",
+              "inputLabel": "PaperJSON.pay_sheet.netSocialAmount.inputLabel"
+            }
+          ]
+        },
+        {
+          "model": "information",
+          "illustration": "IlluGenericInputText.svg",
+          "text": "PaperJSON.pay_sheet.employerName.editText",
+          "attributes": [
+            {
+              "name": "employerName",
+              "type": "text",
+              "editText": "PaperJSON.pay_sheet.employerName.editText",
+              "inputLabel": "PaperJSON.pay_sheet.employerName.inputLabel"
+            }
+          ]
+        },
+        {
+          "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
           "attributes": [
@@ -1673,32 +1712,6 @@
               "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
             }
           ]
-        },
-        {
-          "model": "information",
-          "illustration": "IlluGenericInputText.svg",
-          "text": "PaperJSON.generic.information.text",
-          "attributes": [
-            {
-              "name": "number",
-              "type": "number",
-              "editText": "PaperJSON.pay_sheet.number.editText",
-              "inputLabel": "PaperJSON.pay_sheet.number.inputLabel"
-            },
-            {
-              "name": "netSocialAmount",
-              "type": "number",
-              "editText": "PaperJSON.pay_sheet.netSocialAmount.editText",
-              "inputLabel": "PaperJSON.pay_sheet.netSocialAmount.inputLabel"
-            },
-            {
-              "name": "employerName",
-              "type": "text",
-              "editText": "PaperJSON.pay_sheet.employerName.editText",
-              "inputLabel": "PaperJSON.pay_sheet.employerName.inputLabel"
-            }
-          ],
-          "isDisplayed": "all"
         },
         {
           "illustration": "Account.svg",
