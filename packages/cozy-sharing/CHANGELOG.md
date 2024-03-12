@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@11.0.0...cozy-sharing@11.0.1) (2024-03-12)
+
+
+### Bug Fixes
+
+* **sharing:** Handle memory leak in self removal ([f9a9384](https://github.com/cozy/cozy-libs/commit/f9a9384fabb8892e35be0a270452ee501bd6b1a6))
+
+
+
+
+
 # [11.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@10.4.1...cozy-sharing@11.0.0) (2024-03-11)
 
 
