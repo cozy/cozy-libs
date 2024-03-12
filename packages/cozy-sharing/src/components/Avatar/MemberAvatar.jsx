@@ -4,9 +4,20 @@ import { useClient } from 'cozy-client'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
 import { getDisplayName, getInitials } from '../../models'
+import logger from '../../logger'
 
 const MemberAvatar = ({ recipient, ...rest }) => {
   const client = useClient()
+
+  // There are cases when due to apparent memory leaks, the recipient does not exist
+  // This will trigger an unhanded error in the Avatar component and crash the app
+  // At the moment, we are not sure where is the root cause of this cascading undefined props
+  // Nevertheless, we can prevent the crash by returning null if the recipient is undefined
+  if (!recipient) {
+    // eslint-disable-next-line
+    logger.warn('RecipientAvatar: recipient is missing, see props:', { recipient, ...rest })
+    return null
+  }
 
   /**
    * avatarPath is always the same for a recipient, but image
