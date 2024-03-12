@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [84.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@84.1.3...cozy-mespapiers-lib@84.2.0) (2024-03-12)
+
+
+### Features
+
+* **mespapiers:** Split paysheet info step into 3 standalone steps ([4630dc0](https://github.com/cozy/cozy-libs/commit/4630dc0e2c241324e92ba47fadabf72eb2be6ee1))
+
+
+
+
+
 ## [84.1.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@84.1.2...cozy-mespapiers-lib@84.1.3) (2024-03-12)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
