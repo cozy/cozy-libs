@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
 import { useClient } from 'cozy-client'
+import flag from 'cozy-flags'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
@@ -11,6 +12,7 @@ import ShareSubmit from './Sharesubmit'
 import ShareTypeSelect from './Sharetypeselect'
 import { getOrCreateFromArray } from '../helpers/contacts'
 import {
+  mergeRecipients,
   spreadGroupAndMergeRecipients,
   hasReachRecipientsLimit
 } from '../helpers/recipients'
@@ -47,11 +49,9 @@ export const ShareByEmail = ({
   }
 
   const onRecipientPick = recipient => {
-    const mergedRecipients = spreadGroupAndMergeRecipients(
-      recipients,
-      recipient,
-      contacts
-    )
+    const mergedRecipients = flag('sharing.show-recipient-groups')
+      ? mergeRecipients(recipients, recipient)
+      : spreadGroupAndMergeRecipients(recipients, recipient, contacts)
     setRecipients(mergedRecipients)
   }
 

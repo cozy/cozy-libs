@@ -86,3 +86,7 @@ export const spreadGroupAndMergeRecipients = (
 
   return [...recipients, ...filtered]
 }
+
+export const mergeRecipients = (recipients, newRecipient) => {
+  return [...recipients, newRecipient]
+}
