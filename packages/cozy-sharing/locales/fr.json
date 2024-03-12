@@ -360,5 +360,19 @@
       "title": "Arrêter le partage",
       "desc": "Vous conservez le contenu mais il ne sera plus mis à jour entre vos Cozy."
     }
+  },
+  "GroupRecipient": {
+    "secondary": "%{nbMemberReady}/%{nbMember} membres",
+    "secondary_you": "dont vous"
+  },
+  "RevokeGroupItem": {
+    "revoke": {
+      "title": "Arrêter le partage pour le groupe",
+      "desc": "Les membres du groupe conserveront une copie mais vos changements ne seront plus synchronisés"
+    },
+    "revokeSelf": {
+      "title": "Quitter le partage",
+      "desc": "Vous conserverez une copie mais vos changements ne seront plus synchronisés."
+    }
   }
 }
