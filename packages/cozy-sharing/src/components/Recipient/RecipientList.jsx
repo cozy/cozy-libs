@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { GroupRecipient } from './GroupRecipient'
 import MemberRecipient from './MemberRecipient'
 import { usePrevious } from '../../helpers/hooks'
 import { filterAndReworkRecipients } from '../../helpers/recipients'
@@ -24,6 +25,22 @@ const RecipientList = ({
     const recipientConfirmationData = recipientsToBeConfirmed.find(
       user => user.email === recipient.email
     )
+
+    const isGroupRecipient = recipient.members
+    if (isGroupRecipient) {
+      return (
+        <GroupRecipient
+          {...recipient}
+          isOwner={isOwner}
+          key={recipient.index}
+          document={document}
+          documentType={documentType}
+          onRevoke={onRevoke}
+          onRevokeSelf={onRevokeSelf}
+          fadeIn={recipient.hasBeenJustAdded}
+        />
+      )
+    }
 
     return (
       <MemberRecipient

@@ -362,5 +362,19 @@
       "title": "Remove me from sharing",
       "desc": "You keep the content but it won't be updated between your Cozy anymore."
     }
+  },
+  "GroupRecipient": {
+    "secondary": "%{nbMemberReady}/%{nbMember} members",
+    "secondary_you": "including you"
+  },
+  "RevokeGroupItem": {
+    "revoke": {
+      "title": "Remove group from sharing",
+      "desc": "Group members will keep a copy but the changes won't be synchrnoized anymore."
+    },
+    "revokeSelf": {
+      "title": "Remove me from sharing",
+      "desc": "You keep the content but it won't be updated between your Cozy anymore."
+    }
   }
 }
