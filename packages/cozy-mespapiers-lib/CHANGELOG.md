@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [85.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@84.2.0...cozy-mespapiers-lib@85.0.0) (2024-03-13)
+
+
+### Features
+
+* **mespapiers:** Adjust buttons styles for Viewer ([dcad271](https://github.com/cozy/cozy-libs/commit/dcad271401654a0ac7c77b88dfe706877d7b7c08))
+* **mespapiers:** Upgrade cozy-ui 103.11.1 to 104.2.0 ([b8bc237](https://github.com/cozy/cozy-libs/commit/b8bc2371df752263e284aebf3212b429d518527c))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-client >=45.15.0` and `cozy-ui >= 104.2.0`
+
+
+
+
+
 # [84.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@84.1.3...cozy-mespapiers-lib@84.2.0) (2024-03-12)
 
 
