@@ -32,12 +32,12 @@ const ShareBottomSheet = ({ onClose, fileId, docs }) => {
     const idsToShare = fileId ? [fileId] : docs.map(doc => doc._id)
     try {
       await shareFiles(idsToShare)
-      showAlert(
-        t('ShareBottomSheet.attachmentResponse.success', {
+      showAlert({
+        message: t('ShareBottomSheet.attachmentResponse.success', {
           smart_count: idsToShare.length
         }),
-        'success'
-      )
+        severity: 'success'
+      })
       if (isMultiSelectionActive) {
         navigate('/paper', { replace: true })
       } else {
@@ -46,7 +46,10 @@ const ShareBottomSheet = ({ onClose, fileId, docs }) => {
     } catch (error) {
       if (error.message === 'User did not share') return
 
-      showAlert(t('ShareBottomSheet.attachmentResponse.error'), 'error')
+      showAlert({
+        message: t('ShareBottomSheet.attachmentResponse.error'),
+        severity: 'error'
+      })
     }
   }
 
