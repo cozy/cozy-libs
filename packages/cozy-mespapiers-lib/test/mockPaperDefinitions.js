@@ -101,24 +101,24 @@ export const mockPapersDefinitions = [
       {
         model: 'information',
         illustration: 'IlluDriverLicenseNumberHelp.png',
-        text: 'PaperJSON.generic.stranger.country.text',
+        text: 'PaperJSON.generic.foreign.country.text',
         attributes: [
           {
             name: 'country',
             type: 'text',
-            inputLabel: 'PaperJSON.generic.stranger.country.inputLabel'
+            inputLabel: 'PaperJSON.generic.foreign.country.inputLabel'
           }
         ]
       },
       {
         model: 'information',
         illustration: 'IlluDriverLicenseObtentionDateHelp.png',
-        text: 'PaperJSON.generic.stranger.obtentionDate.text',
+        text: 'PaperJSON.generic.foreign.obtentionDate.text',
         attributes: [
           {
             name: 'obtentionDate',
             type: 'date',
-            inputLabel: 'PaperJSON.generic.stranger.obtentionDate.inputLabel'
+            inputLabel: 'PaperJSON.generic.foreign.obtentionDate.inputLabel'
           }
         ]
       },
@@ -131,7 +131,7 @@ export const mockPapersDefinitions = [
   },
   {
     label: 'driver_license',
-    country: 'stranger',
+    country: 'foreign',
     icon: 'car',
     featureDate: 'obtentionDate',
     maxDisplay: 2,
@@ -145,24 +145,24 @@ export const mockPapersDefinitions = [
       {
         model: 'information',
         illustration: 'IlluDriverLicenseNumberHelp.png',
-        text: 'PaperJSON.generic.stranger.country.text',
+        text: 'PaperJSON.generic.foreign.country.text',
         attributes: [
           {
             name: 'country',
             type: 'text',
-            inputLabel: 'PaperJSON.generic.stranger.country.inputLabel'
+            inputLabel: 'PaperJSON.generic.foreign.country.inputLabel'
           }
         ]
       },
       {
         model: 'information',
         illustration: 'IlluDriverLicenseObtentionDateHelp.png',
-        text: 'PaperJSON.generic.stranger.obtentionDate.text',
+        text: 'PaperJSON.generic.foreign.obtentionDate.text',
         attributes: [
           {
             name: 'obtentionDate',
             type: 'date',
-            inputLabel: 'PaperJSON.generic.stranger.obtentionDate.inputLabel'
+            inputLabel: 'PaperJSON.generic.foreign.obtentionDate.inputLabel'
           }
         ]
       },

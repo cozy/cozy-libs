@@ -240,14 +240,14 @@ describe('findPlaceholders', () => {
       const placeholders = findPlaceholderByLabelAndCountry(
         mockPapersDefinitions,
         'driver_license',
-        'stranger'
+        'foreign'
       )
 
       expect(placeholders).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
             label: 'driver_license',
-            country: 'stranger'
+            country: 'foreign'
           })
         ])
       )
@@ -263,7 +263,7 @@ describe('findPlaceholders', () => {
         expect.arrayContaining([
           expect.objectContaining({
             label: 'driver_license',
-            country: 'stranger'
+            country: 'foreign'
           })
         ])
       )

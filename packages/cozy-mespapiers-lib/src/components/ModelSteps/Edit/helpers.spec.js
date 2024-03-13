@@ -398,7 +398,7 @@ describe('getPaperDefinitionByFile', () => {
 
       expect(res).toMatchObject({ label: 'driver_license', country: 'fr' })
     })
-    it('should return the paperDefinition "driver_license", with the country "stranger" if defined & not "fr"', () => {
+    it('should return the paperDefinition "driver_license", with the country "foreign" if defined & not "fr"', () => {
       const fakeFile = makeFakeFile({
         qualificationLabel: 'driver_license',
         country: 'en'
@@ -407,10 +407,10 @@ describe('getPaperDefinitionByFile', () => {
 
       expect(res).toMatchObject({
         label: 'driver_license',
-        country: 'stranger'
+        country: 'foreign'
       })
     })
-    it('should return the paperDefinition "driver_license", with the country "stranger" if it empty in file', () => {
+    it('should return the paperDefinition "driver_license", with the country "foreign" if it empty in file', () => {
       const fakeFile = makeFakeFile({
         qualificationLabel: 'driver_license',
         country: ''
@@ -419,7 +419,7 @@ describe('getPaperDefinitionByFile', () => {
 
       expect(res).toMatchObject({
         label: 'driver_license',
-        country: 'stranger'
+        country: 'foreign'
       })
     })
   })

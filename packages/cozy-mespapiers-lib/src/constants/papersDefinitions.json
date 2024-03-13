@@ -577,7 +577,7 @@
     {
       "label": "driver_license",
       "placeholderIndex": 3,
-      "country": "stranger",
+      "country": "foreign",
       "icon": "car",
       "featureDate": "expirationDate",
       "maxDisplay": 5,
@@ -591,24 +591,24 @@
         {
           "model": "information",
           "illustration": "Planet.svg",
-          "text": "PaperJSON.generic.stranger.country.text",
+          "text": "PaperJSON.generic.foreign.country.text",
           "attributes": [
             {
               "name": "country",
               "type": "text",
-              "inputLabel": "PaperJSON.generic.stranger.country.inputLabel"
+              "inputLabel": "PaperJSON.generic.foreign.country.inputLabel"
             }
           ]
         },
         {
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
-          "text": "PaperJSON.generic.stranger.obtentionDate.text",
+          "text": "PaperJSON.generic.foreign.obtentionDate.text",
           "attributes": [
             {
               "name": "obtentionDate",
               "type": "date",
-              "inputLabel": "PaperJSON.generic.stranger.obtentionDate.inputLabel"
+              "inputLabel": "PaperJSON.generic.foreign.obtentionDate.inputLabel"
             }
           ]
         },
@@ -1072,7 +1072,7 @@
     },
     {
       "label": "national_id_card",
-      "country": "stranger",
+      "country": "foreign",
       "icon": "people",
       "featureDate": "expirationDate",
       "maxDisplay": 4,
@@ -1094,12 +1094,12 @@
         {
           "model": "information",
           "illustration": "Planet.svg",
-          "text": "PaperJSON.generic.stranger.country.text",
+          "text": "PaperJSON.generic.foreign.country.text",
           "attributes": [
             {
               "name": "country",
               "type": "text",
-              "inputLabel": "PaperJSON.generic.stranger.country.inputLabel"
+              "inputLabel": "PaperJSON.generic.foreign.country.inputLabel"
             }
           ]
         },

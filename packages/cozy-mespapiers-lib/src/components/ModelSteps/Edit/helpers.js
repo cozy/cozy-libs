@@ -107,7 +107,7 @@ export const getPaperDefinitionByFile = (papersDefinitions, file) => {
       Object.keys(file.metadata).includes('country') && paper.country
         ? file.metadata.country === 'fr'
           ? paper.country === 'fr'
-          : paper.country === 'stranger'
+          : paper.country === 'foreign'
         : true
 
     return paper.label === file.metadata.qualification.label && countryCondition
