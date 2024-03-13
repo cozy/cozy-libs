@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 import { Q, useClient } from 'cozy-client'
 import { isIOSApp } from 'cozy-device-helper'
-import Viewer from 'cozy-ui/transpiled/react/Viewer'
-import FooterActionButtons from 'cozy-ui/transpiled/react/Viewer/Footer/FooterActionButtons'
-import ForwardButton from 'cozy-ui/transpiled/react/Viewer/Footer/ForwardButton'
+import Viewer, {
+  FooterActionButtons,
+  ToolbarButtons
+} from 'cozy-ui/transpiled/react/Viewer'
 
+import ActionsButtons from './ActionsButtons'
 import FileViewerLoading from './FileViewerLoading'
-import SelectFileButton from './SelectFileButton'
-import { useFileSharing } from '../Contexts/FileSharingProvider'
-import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const styleStatusBar = switcher => {
   if (window.StatusBar && isIOSApp()) {
@@ -31,9 +30,6 @@ const FilesViewer = ({ filesQuery, files, fileId, onClose, onChange }) => {
   const [fetchingMore, setFetchingMore] = useState(false)
   const client = useClient()
   const { pathname } = useLocation()
-  const navigate = useNavigate()
-  const { isFileSharingAvailable } = useFileSharing()
-  const { isMultiSelectionActive } = useMultiSelection()
 
   const editPathByModelProps = {
     information: `#${pathname}/edit/information?metadata=__NAME__`,
@@ -137,24 +133,12 @@ const FilesViewer = ({ filesQuery, files, fileId, onClose, onChange }) => {
       onCloseRequest={handleOnClose}
       editPathByModelProps={editPathByModelProps}
     >
-      {!isMultiSelectionActive && (
-        <FooterActionButtons>
-          <ForwardButton
-            file={viewerFiles[viewerIndex]}
-            onClick={() => {
-              const fileId = viewerFiles[viewerIndex]._id
-              if (isFileSharingAvailable) {
-                navigate(`${pathname}/share`, {
-                  state: { fileId }
-                })
-              } else {
-                navigate(`${pathname}/forward/${fileId}`)
-              }
-            }}
-          />
-          <SelectFileButton file={viewerFiles[viewerIndex]} />
-        </FooterActionButtons>
-      )}
+      <ToolbarButtons>
+        <ActionsButtons toolbar />
+      </ToolbarButtons>
+      <FooterActionButtons>
+        <ActionsButtons />
+      </FooterActionButtons>
     </Viewer>
   )
 }
