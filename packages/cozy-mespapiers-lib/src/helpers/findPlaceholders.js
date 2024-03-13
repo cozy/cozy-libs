@@ -93,7 +93,7 @@ const filterPlaceholderByLabelAndCountry = ({
     ? country == null
       ? paperDefinition.country === 'fr'
       : paperDefinition.country === country ||
-        paperDefinition.country === 'stranger'
+        paperDefinition.country === 'foreign'
     : true
 
   return label === paperDefinition.label && countryCondition

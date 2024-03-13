@@ -230,7 +230,7 @@
       "ocrResult": {
         "text": "Check and complete the following information"
       },
-      "stranger": {
+      "foreign": {
         "country": {
           "inputLabel": "Beneficiary nationality",
           "text": "What is the Nationality of the beneficiary?"
