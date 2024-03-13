@@ -65,13 +65,16 @@ const PapersDefinitionsProvider = ({ children }) => {
           log.info('Custom PapersDefinitions loaded')
         } else {
           // If custom papersDefinitions.json not found, fallback on local file
-          showAlert(
-            t(`PapersDefinitionsProvider.customPapersDefinitions.error`, {
-              name: paperConfigFilenameCustom,
-              path: appFolderPath
-            }),
-            'error'
-          )
+          showAlert({
+            message: t(
+              `PapersDefinitionsProvider.customPapersDefinitions.error`,
+              {
+                name: paperConfigFilenameCustom,
+                path: appFolderPath
+              }
+            ),
+            severity: 'error'
+          })
           setPapersDefinitions(
             buildPapersDefinitions(papersJSON.papersDefinitions, scannerT)
           )
