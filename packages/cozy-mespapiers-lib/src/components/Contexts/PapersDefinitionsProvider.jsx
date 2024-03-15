@@ -73,7 +73,8 @@ const PapersDefinitionsProvider = ({ children }) => {
                 path: appFolderPath
               }
             ),
-            severity: 'error'
+            severity: 'error',
+            variant: 'filled'
           })
           setPapersDefinitions(
             buildPapersDefinitions(papersJSON.papersDefinitions, scannerT)

@@ -16,12 +16,14 @@ export const copyToClipboard = async (value, { t, showAlert } = {}) => {
     await navigator.clipboard.writeText(value)
     showAlert({
       message: t('action.copyReminderContent.success'),
-      severity: 'success'
+      severity: 'success',
+      variant: 'filled'
     })
   } catch (error) {
     showAlert({
       message: t('action.copyReminderContent.error'),
-      severity: 'error'
+      severity: 'error',
+      variant: 'filled'
     })
     log.error(
       "Error in 'copyToClipboard' function when trying to copy to clipboard",
