@@ -78,7 +78,8 @@ const PaperItem = ({
         if (!isNoteAppInstalled) {
           return navigate({
             pathname: `${pathname}/installAppIntent`,
-            search: `redirect=${pathname}`
+            // Add fileId to the redirect URL to ease redirecting to the note after the installation
+            search: `redirect=${pathname}&fileId=${paper.id}`
           })
         }
         const webLink = await generateReturnUrlToNotesIndex(client, paper)
