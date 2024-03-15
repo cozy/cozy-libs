@@ -14,6 +14,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { APPS_DOCTYPE } from '../../doctypes'
 import { buildAppRegistryQueryBySlug } from '../../helpers/queries'
+import { generateReturnUrlToNotesIndex } from '../Papers/helpers'
 
 const InstallAppFromIntent = () => {
   const [showIntent, setShowIntent] = useState(false)
@@ -31,10 +32,30 @@ const InstallAppFromIntent = () => {
   const { name: noteName, slug: noteSlug } =
     appData?.latest_version?.manifest || {}
 
-  const handleTerminate = () => {
-    return navigate(`${searchParams.get('redirect')}`, {
-      replace: true
-    })
+  const handleTerminate = async () => {
+    const redirectTo = searchParams.get('redirect')
+    const noteToOpen = searchParams.get('fileId')
+
+    if (redirectTo && !noteToOpen) {
+      return navigate(redirectTo, {
+        replace: true
+      })
+    }
+
+    // In this scenario we have enough information to both open the note and redirect to the redirect URL from Notes if needed
+    if (noteToOpen && redirectTo) {
+      const webLink = await generateReturnUrlToNotesIndex(
+        client,
+        {
+          id: noteToOpen
+        },
+        redirectTo
+      )
+      window.open(webLink, '_self')
+    }
+
+    // In cases where we couldn't get enough information from the searchParams, we just go back
+    return navigate('..')
   }
 
   const handleClose = () => {
@@ -47,7 +68,10 @@ const InstallAppFromIntent = () => {
         action="INSTALL"
         doctype={APPS_DOCTYPE}
         mobileFullscreen
-        options={{ slug: noteSlug }}
+        options={{
+          terminateIfInstalled: true,
+          slug: noteSlug
+        }}
         create={client.intents.create}
         onComplete={handleTerminate}
         dismissAction={handleClose}
