@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [85.1.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@85.1.0...cozy-mespapiers-lib@85.1.1) (2024-03-15)
+
+
+### Bug Fixes
+
+* **mespapiers:** Change variant Alert ([ed3a07e](https://github.com/cozy/cozy-libs/commit/ed3a07e3fc074b64e1a5d4c6ab3e88dfc84d523e))
+
+
+
+
+
 # [85.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@85.0.0...cozy-mespapiers-lib@85.1.0) (2024-03-15)
 
 
