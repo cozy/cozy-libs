@@ -121,7 +121,11 @@ export const forwardFile = async ({
     }
     navigator.share(shareData)
   } catch (error) {
-    showAlert({ message: t('viewer.shareData.error'), severity: 'error' })
+    showAlert({
+      message: t('viewer.shareData.error'),
+      severity: 'error',
+      variant: 'filled'
+    })
   }
 }
 
@@ -148,7 +152,11 @@ export const downloadFiles = async ({ client, files, showAlert, t }) => {
 
       fileCollection.forceFileDownload(`${downloadURL}?Dl=1`, filename)
     } catch (error) {
-      showAlert({ message: t(downloadFileError(error)), severity: 'error' })
+      showAlert({
+        message: t(downloadFileError(error)),
+        severity: 'error',
+        variant: 'filled'
+      })
     }
   } else {
     const ids = files.map(f => f.id)
@@ -185,10 +193,18 @@ export const trashFiles = async ({ client, files, showAlert, t }) => {
       await client.destroy(file)
     }
 
-    showAlert({ message: t('common.trashFile.success'), severity: 'success' })
+    showAlert({
+      message: t('common.trashFile.success'),
+      severity: 'success',
+      variant: 'filled'
+    })
   } catch (err) {
     if (!isAlreadyInTrash(err)) {
-      showAlert({ message: t('common.trashFile.error'), severity: 'error' })
+      showAlert({
+        message: t('common.trashFile.error'),
+        severity: 'error',
+        variant: 'filled'
+      })
     }
   }
 }
@@ -213,12 +229,14 @@ export const removeQualification = async ({ client, files, showAlert, t }) => {
 
     showAlert({
       message: t('common.removeQualification.success'),
-      severity: 'success'
+      severity: 'success',
+      variant: 'filled'
     })
   } catch (err) {
     showAlert({
       message: t('common.removeQualification.error'),
-      severity: 'error'
+      severity: 'error',
+      variant: 'filled'
     })
   }
 }

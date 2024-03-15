@@ -36,7 +36,8 @@ const ShareBottomSheet = ({ onClose, fileId, docs }) => {
         message: t('ShareBottomSheet.attachmentResponse.success', {
           smart_count: idsToShare.length
         }),
-        severity: 'success'
+        severity: 'success',
+        variant: 'filled'
       })
       if (isMultiSelectionActive) {
         navigate('/paper', { replace: true })
@@ -48,7 +49,8 @@ const ShareBottomSheet = ({ onClose, fileId, docs }) => {
 
       showAlert({
         message: t('ShareBottomSheet.attachmentResponse.error'),
-        severity: 'error'
+        severity: 'error',
+        variant: 'filled'
       })
     }
   }

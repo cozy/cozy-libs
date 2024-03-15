@@ -53,10 +53,18 @@ const SubmitButton = ({ onSubmit, disabled, formData }) => {
         i18n: { t, f, scannerT }
       })
 
-      showAlert({ message: t('common.saveFile.success'), severity: 'success' })
+      showAlert({
+        message: t('common.saveFile.success'),
+        severity: 'success',
+        variant: 'filled'
+      })
     } catch (error) {
       log.error('Error when submitting', error)
-      showAlert({ message: t('common.saveFile.error'), severity: 'error' })
+      showAlert({
+        message: t('common.saveFile.error'),
+        severity: 'error',
+        variant: 'filled'
+      })
     } finally {
       onSubmit()
     }
