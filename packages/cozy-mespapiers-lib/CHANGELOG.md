@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [85.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@85.0.0...cozy-mespapiers-lib@85.1.0) (2024-03-15)
+
+
+### Features
+
+* **mespapiers:** Rename "stranger" by "foreign" ([902acf6](https://github.com/cozy/cozy-libs/commit/902acf67b8df174c69e28e7adcb580e2cd2134f4))
+
+
+
+
+
 # [85.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@84.2.0...cozy-mespapiers-lib@85.0.0) (2024-03-13)
 
 
