@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.2](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.16.1...cozy-notifications@0.16.2) (2024-03-15)
+
+
+### Bug Fixes
+
+* Minimize services when cozy-notifications is used ([244f95c](https://github.com/cozy/cozy-libs/commit/244f95cbd4b1738c751ba7498ad3499cb221cf6f))
+
+
+
+
+
 ## [0.16.1](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.16.0...cozy-notifications@0.16.1) (2024-03-11)
 
 **Note:** Version bump only for package cozy-notifications
