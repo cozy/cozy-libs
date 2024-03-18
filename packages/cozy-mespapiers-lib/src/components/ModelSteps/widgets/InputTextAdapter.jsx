@@ -111,9 +111,8 @@ const InputTextAdapter = ({
     }
 
     if (inputType === 'number' && !mask) {
-      const parseIntValue = parseInt(currentValue, 10)
-      if (/^[0-9]*$/.test(parseIntValue)) {
-        setCurrentValue(parseIntValue.toString())
+      if (/^[0-9,.]*$/.test(currentValue)) {
+        setCurrentValue(currentValue)
       } else if (currentValue === '') {
         setCurrentValue(currentValue)
       }
