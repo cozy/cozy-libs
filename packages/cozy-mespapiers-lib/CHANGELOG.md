@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [86.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@86.0.0...cozy-mespapiers-lib@86.1.0) (2024-03-18)
+
+
+### Features
+
+* **mespapiers:** Add support for `,` and `.` in input type number ([6fbe07d](https://github.com/cozy/cozy-libs/commit/6fbe07d77aa483875b2be3414760f91aa5287904))
+
+
+
+
+
 # [86.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@85.1.1...cozy-mespapiers-lib@86.0.0) (2024-03-18)
 
 
