@@ -1,8 +1,8 @@
 import parse from 'date-fns/parse'
 
+import { KNOWN_DATE_METADATA_NAMES } from 'cozy-client/dist/models/paper'
 import { isAndroid, isIOS } from 'cozy-device-helper'
 import minilog from 'cozy-minilog'
-import { knownDateMetadataNames } from 'cozy-ui/transpiled/react/Viewer/helpers'
 
 import { ANDROID_APP_URL, IOS_APP_URL } from '../../constants/const'
 import { findAttributes, findPaperVersion } from '../../helpers/findAttributes'
@@ -352,7 +352,7 @@ export const makeMetadataFromOcr = ocrAttributes => {
   return ocrAttributes.reduce((acc, { name, value }) => {
     return {
       ...acc,
-      [name]: knownDateMetadataNames.includes(name)
+      [name]: KNOWN_DATE_METADATA_NAMES.includes(name)
         ? getDatefromString(value)
         : value
     }
