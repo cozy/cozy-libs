@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [87.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@87.0.0...cozy-mespapiers-lib@87.0.1) (2024-03-19)
+
+
+### Bug Fixes
+
+* **mespapiers:** The knownDateMetadataNames constant has no longer exist ([6cedcac](https://github.com/cozy/cozy-libs/commit/6cedcace4ce7026b1c5c9fe8199e99a48148ec2c))
+
+
+
+
+
 # [87.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@86.1.0...cozy-mespapiers-lib@87.0.0) (2024-03-19)
 
 
