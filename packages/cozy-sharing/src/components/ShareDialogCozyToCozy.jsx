@@ -2,6 +2,7 @@ import cx from 'classnames'
 import React from 'react'
 
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { default as DumbShareByEmail } from './ShareByEmail'
@@ -39,47 +40,49 @@ const SharingContent = ({
   onRevokeLink
 }) => {
   const { t } = useI18n()
+  const { isMobile } = useBreakpoints()
 
   return (
     <div className={cx(styles['share-modal-content'])}>
-      {showShareOnlyByLink && (
-        <div className={styles['share-byemail-onlybylink']}>
-          {t(`${documentType}.share.shareByEmail.onlyByLink`, {
-            type: t(
-              `${documentType}.share.shareByEmail.type.${
-                document.type === 'directory' ? 'folder' : 'file'
-              }`
-            )
-          })}{' '}
-          <strong>
-            {t(
-              `${documentType}.share.shareByEmail.${
-                hasSharedParent ? 'hasSharedParent' : 'hasSharedChild'
-              }`
-            )}
-          </strong>
-        </div>
-      )}
-      <Typography variant="h6" className="u-mb-1-half">
-        {t('Share.contacts.whoHasAccess')}
-      </Typography>
-      {showShareByEmail && (
-        <DumbShareByEmail
-          contacts={contacts}
-          contactGroups={contactGroups}
-          createContact={createContact}
-          currentRecipients={recipients}
-          document={document}
-          documentType={documentType}
-          needsContactsPermission={needsContactsPermission}
-          onShare={onShare}
-          sharing={sharing}
-          sharingDesc={sharingDesc}
-        />
-      )}
+      <div className={cx('u-pt-1-half', isMobile ? 'u-ph-1' : 'u-ph-2')}>
+        {showShareOnlyByLink && (
+          <div className={styles['share-byemail-onlybylink']}>
+            {t(`${documentType}.share.shareByEmail.onlyByLink`, {
+              type: t(
+                `${documentType}.share.shareByEmail.type.${
+                  document.type === 'directory' ? 'folder' : 'file'
+                }`
+              )
+            })}{' '}
+            <strong>
+              {t(
+                `${documentType}.share.shareByEmail.${
+                  hasSharedParent ? 'hasSharedParent' : 'hasSharedChild'
+                }`
+              )}
+            </strong>
+          </div>
+        )}
+        <Typography variant="h6" className="u-mb-1-half">
+          {t('Share.contacts.whoHasAccess')}
+        </Typography>
+        {showShareByEmail && (
+          <DumbShareByEmail
+            contacts={contacts}
+            contactGroups={contactGroups}
+            createContact={createContact}
+            currentRecipients={recipients}
+            document={document}
+            documentType={documentType}
+            needsContactsPermission={needsContactsPermission}
+            onShare={onShare}
+            sharing={sharing}
+            sharingDesc={sharingDesc}
+          />
+        )}
+      </div>
       {showWhoHasAccess && (
         <WhoHasAccess
-          className="u-mt-half"
           document={document}
           documentType={documentType}
           isOwner={isOwner}
@@ -129,6 +132,7 @@ const ShareDialogCozyToCozy = ({
       dialogContentOnShare={SharingContent}
       dialogActionsOnShare={showShareByLink ? DumbShareByLink : null}
       dialogTitleOnShare={SharingTitleFunction({ documentType, document })}
+      disableGutters
     />
   )
 }

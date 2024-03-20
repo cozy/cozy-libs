@@ -7,6 +7,7 @@ import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import MemberRecipientPermissions from './MemberRecipientPermissions'
@@ -21,6 +22,7 @@ const DEFAULT_DISPLAY_NAME = 'Share.contacts.defaultDisplayName'
 const MemberRecipient = props => {
   const { t } = useI18n()
   const client = useClient()
+  const { isMobile } = useBreakpoints()
 
   const {
     instance,
@@ -48,7 +50,7 @@ const MemberRecipient = props => {
 
   return (
     <Fade in timeout={fadeIn ? FADE_IN_DURATION : 0}>
-      <ListItem disableGutters>
+      <ListItem gutters={isMobile ? 'default' : 'double'}>
         <ListItemIcon>
           <MemberAvatar size="small" recipient={props} />
         </ListItemIcon>

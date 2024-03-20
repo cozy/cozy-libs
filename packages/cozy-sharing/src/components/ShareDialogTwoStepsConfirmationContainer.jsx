@@ -282,6 +282,7 @@ const ShareDialogTwoStepsConfirmationContainer = ({
 
   return (
     <FixedDialog
+      disableGutters
       disableEnforceFocus
       open={true}
       onClose={onClose}
