@@ -9,6 +9,7 @@ import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import LinkRecipientPermissions from './LinkRecipientPermissions'
@@ -18,6 +19,7 @@ import styles from '../../styles/recipient.styl'
 
 const LinkRecipient = props => {
   const { t } = useI18n()
+  const { isMobile } = useBreakpoints()
 
   const { recipientConfirmationData, verifyRecipient, link, fadeIn } = props
 
@@ -32,7 +34,7 @@ const LinkRecipient = props => {
 
   return (
     <Fade in timeout={fadeIn ? FADE_IN_DURATION : 0}>
-      <ListItem disableGutters>
+      <ListItem gutters={isMobile ? 'default' : 'double'}>
         <ListItemIcon>
           <Circle size="small" className={styles['link-recipient-icon-circle']}>
             <Icon icon={LinkIcon} />

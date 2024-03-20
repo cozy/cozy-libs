@@ -49,7 +49,7 @@ const WhoHasAccess = ({
       <RecipientWaitingForConfirmationAlert
         recipientsToBeConfirmed={recipientsToBeConfirmed}
       />
-      <List disablePadding>
+      <List>
         {link && (
           <LinkRecipient
             document={document}

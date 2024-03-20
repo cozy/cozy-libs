@@ -7,6 +7,7 @@ import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { GroupRecipientDetail } from './GroupRecipientDetail'
@@ -18,6 +19,7 @@ const GroupRecipient = props => {
   const { name, members, fadeIn, owner } = props
   const { t } = useI18n()
   const client = useClient()
+  const { isMobile } = useBreakpoints()
 
   const [isDetailOpened, setDetailOpened] = useState(false)
 
@@ -40,7 +42,11 @@ const GroupRecipient = props => {
   return (
     <>
       <Fade in timeout={fadeIn ? FADE_IN_DURATION : 0}>
-        <ListItem disableGutters button onClick={toogleDetailOpened}>
+        <ListItem
+          button
+          onClick={toogleDetailOpened}
+          gutters={isMobile ? 'default' : 'double'}
+        >
           <ListItemIcon>
             <GroupAvatar size="small" />
           </ListItemIcon>
@@ -57,7 +63,7 @@ const GroupRecipient = props => {
                 : '')
             }
           />
-          <ListItemSecondaryAction>
+          <ListItemSecondaryAction className={isMobile ? 'u-mr-1' : 'u-mr-2'}>
             <GroupRecipientPermissions {...props} />
           </ListItemSecondaryAction>
         </ListItem>

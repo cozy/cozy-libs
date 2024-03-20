@@ -1,7 +1,9 @@
+import cx from 'classnames'
 import React from 'react'
 
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { default as DumbShareByLink } from './ShareByLink'
@@ -22,8 +24,11 @@ const ShareDialogOnlyByLink = ({
   permissions
 }) => {
   const { t } = useI18n()
+  const { isMobile } = useBreakpoints()
+
   return (
     <Dialog
+      disableGutters
       disableEnforceFocus
       open={true}
       onClose={onClose}
@@ -32,11 +37,13 @@ const ShareDialogOnlyByLink = ({
       })}
       content={
         <>
-          <Typography variant="h6">
+          <Typography
+            variant="h6"
+            className={cx(isMobile ? 'u-ph-1 u-mt-1' : 'u-ph-2 u-mt-1-half')}
+          >
             {t('Share.contacts.whoHasAccess')}
           </Typography>
           <WhoHasAccess
-            className="u-mt-half"
             document={document}
             documentType={documentType}
             isOwner={isOwner}
@@ -48,12 +55,19 @@ const ShareDialogOnlyByLink = ({
             onUpdateShareLinkPermissions={onUpdateShareLinkPermissions}
             onRevokeLink={onRevokeLink}
           />
-          <DumbShareByLink
-            link={link}
-            document={document}
-            documentType={documentType}
-            onEnable={onShareByLink}
-          />
+          <div
+            className={cx(
+              'u-mt-half',
+              isMobile ? 'u-ph-1 u-mb-1' : 'u-ph-2 u-mb-1-half'
+            )}
+          >
+            <DumbShareByLink
+              link={link}
+              document={document}
+              documentType={documentType}
+              onEnable={onShareByLink}
+            />
+          </div>
         </>
       }
     />

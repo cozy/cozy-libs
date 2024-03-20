@@ -1,8 +1,10 @@
+import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Divider from 'cozy-ui/transpiled/react/Divider'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { getDisplayName } from '../../models'
@@ -21,16 +23,23 @@ export const SharingDetailsModal = ({
   onRevokeSelf
 }) => {
   const { t, f } = useI18n()
+  const { isMobile } = useBreakpoints()
 
   return (
     <Dialog
+      disableGutters
       open={true}
       onClose={onClose}
       className={styles['share-modal']}
       title={t(`${documentType}.share.details.title`)}
       content={
         <div className={styles['share-modal-content']}>
-          <div className={styles['share-details']}>
+          <div
+            className={cx(
+              styles['share-details'],
+              isMobile ? 'u-ph-1 u-pt-1-half' : 'u-ph-2 u-pt-1'
+            )}
+          >
             <OwnerIdentity
               name={t(`${documentType}.share.sharedBy`, {
                 name: getDisplayName(owner)
