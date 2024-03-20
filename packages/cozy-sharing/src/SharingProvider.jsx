@@ -20,6 +20,7 @@ import reducer, {
   updateSharingLink,
   revokeSharingLink,
   revokeRecipient,
+  revokeGroup as revokeGroupFromState,
   revokeSelf,
   receivePaths,
   isOwner,
@@ -71,6 +72,7 @@ export class SharingProvider extends Component {
       share: this.share,
       onShared: onShared,
       revoke: this.revoke,
+      revokeGroup: this.revokeGroup,
       revokeSelf: this.revokeSelf,
       shareByLink: this.shareByLink,
       updateDocumentPermissions: this.updateDocumentPermissions,
@@ -284,6 +286,19 @@ export class SharingProvider extends Component {
     await this.sharingCol.revokeRecipient(sharing, recipientIndex)
     this.dispatch(
       revokeRecipient(
+        sharing,
+        recipientIndex,
+        document.path || (await fetchFilesPaths(client, doctype, [document]))
+      )
+    )
+  }
+
+  revokeGroup = async (document, sharingId, recipientIndex) => {
+    const { client, doctype } = this.props
+    const sharing = getSharingById(this.state, sharingId)
+    await this.sharingCol.revokeGroup(sharing, recipientIndex)
+    this.dispatch(
+      revokeGroupFromState(
         sharing,
         recipientIndex,
         document.path || (await fetchFilesPaths(client, doctype, [document]))

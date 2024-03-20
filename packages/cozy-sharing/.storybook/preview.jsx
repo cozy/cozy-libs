@@ -10,6 +10,7 @@ import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import { CozyProvider, createFakeClient } from 'cozy-client'
 
 import enLocale from '../locales/en.json'
+import SharingContext from "../src/context";
 
 const preview = {
   decorators: [
@@ -40,11 +41,16 @@ const preview = {
       <CozyProvider client={fakeClient}>
         <CozyTheme>
           <BreakpointsProvider>
-            <I18n lang="en" dictRequire={() => enLocale}>
-              <div style={{position: "relative"}}>
-                <Story />
-              </div>
-            </I18n>
+            <SharingContext.Provider value={{
+              revokeGroup: () => {},
+              revokeSelf: () => {}
+            }}>
+              <I18n lang="en" dictRequire={() => enLocale}>
+                <div style={{position: "relative"}}>
+                  <Story />
+                </div>
+              </I18n>
+            </SharingContext.Provider>
           </BreakpointsProvider>
         </CozyTheme>
       </CozyProvider>
