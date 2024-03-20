@@ -6,6 +6,7 @@ const RECEIVE_SHARINGS = 'RECEIVE_SHARINGS'
 const ADD_SHARING = 'ADD_SHARING'
 const UPDATE_SHARING = 'UPDATE_SHARING'
 const REVOKE_RECIPIENT = 'REVOKE_RECIPIENT'
+const REVOKE_GROUP = 'REVOKE_GROUP'
 const REVOKE_SELF = 'REVOKE_SELF'
 const ADD_SHARING_LINK = 'ADD_SHARING_LINK'
 const UPDATE_SHARING_LINK = 'UPDATE_SHARING_LINK'
@@ -56,6 +57,30 @@ export const revokeRecipient = (sharing, index, path) => {
             }
           }
           return m
+        })
+      }
+    },
+    path
+  }
+}
+export const revokeGroup = (sharing, index, path) => {
+  return {
+    type: REVOKE_GROUP,
+    /* We can't just simply remove a group,
+    because we use the index to remove the other group
+    */
+    sharing: {
+      ...sharing,
+      attributes: {
+        ...sharing.attributes,
+        groups: sharing.attributes.groups.map((g, idx) => {
+          if (idx === index) {
+            return {
+              ...g,
+              revoked: true
+            }
+          }
+          return g
         })
       }
     },
@@ -149,6 +174,7 @@ const byDocId = (state = {}, action) => {
       )
     case ADD_SHARING:
       return indexSharing(state, action.data)
+    case REVOKE_GROUP:
     case REVOKE_RECIPIENT:
     case UPDATE_SHARING:
       if (areAllRecipientsRevoked(action.sharing)) {
@@ -220,6 +246,7 @@ const sharings = (state = [], action) => {
       const filtered_state = state.filter(s => s.id !== action.data.id)
       return [...filtered_state, action.data]
     case UPDATE_SHARING:
+    case REVOKE_GROUP:
     case REVOKE_RECIPIENT:
       return state.map(s => {
         return s.id !== action.sharing.id ? s : action.sharing
@@ -242,6 +269,7 @@ const sharedPaths = (state = [], action) => {
       // eslint-disable-next-line
       const newState = [...state, action.path]
       return newState
+    case REVOKE_GROUP:
     case REVOKE_RECIPIENT:
       if (areAllRecipientsRevoked(action.sharing)) {
         return state.filter(p => p !== action.path)
