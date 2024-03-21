@@ -15,7 +15,7 @@ import { useStepperDialog } from '../../Hooks/useStepperDialog'
 
 const styleFontMono = 'Segoe UI Mono, SF Mono, Roboto Mono, Courier'
 
-const getInputMode = (inputType, mask) => {
+const getInputMode = (inputType, mask, currentDefinition) => {
   if (mask) {
     // If the mask attribute contains "*" or "a", it can contain text
     // So on mobile, we want to display the text keyboard
@@ -23,7 +23,10 @@ const getInputMode = (inputType, mask) => {
     return hasText ? 'text' : 'numeric'
   }
 
-  return inputType === 'number' ? 'numeric' : 'text'
+  // Quick win, if other paper requires this type of condition we will have to review the approach at a higher level, via a new type for example
+  return inputType === 'number' && currentDefinition?.label === 'pay_sheet'
+    ? 'numeric'
+    : 'text'
 }
 
 const makeInputAdornment = (adornment, currentValue, t) => {
@@ -190,7 +193,7 @@ const InputTextAdapter = ({
                 ? 'var(--primaryTextColor)'
                 : 'var(--hintTextColor)'
             },
-            inputMode: getInputMode(inputType, mask),
+            inputMode: getInputMode(inputType, mask, currentDefinition),
             'data-testid': 'InputMask-TextField-input'
           }}
           required={isRequired}
