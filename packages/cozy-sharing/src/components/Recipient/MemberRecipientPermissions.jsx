@@ -24,7 +24,7 @@ const MemberRecipientPermissions = ({
   onRevoke,
   onRevokeSelf,
   sharingId,
-  index
+  memberIndex
 }) => {
   const { t } = useI18n()
   const buttonRef = useRef()
@@ -47,12 +47,12 @@ const MemberRecipientPermissions = ({
   const handleRevocation = useCallback(async () => {
     setRevoking(true)
     if (isOwner) {
-      await onRevoke(document, sharingId, index)
+      await onRevoke(document, sharingId, memberIndex)
     } else {
       await onRevokeSelf(document)
     }
     setRevoking(false)
-  }, [isOwner, onRevoke, onRevokeSelf, document, sharingId, index])
+  }, [isOwner, onRevoke, onRevokeSelf, document, sharingId, memberIndex])
 
   const actions = makeActions([permission, divider, revokeMember], {
     t,

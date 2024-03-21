@@ -16,7 +16,8 @@ import reducer, {
   getPermissionDocIds,
   getDocumentSharingType,
   getSharedParentPath,
-  getExternalSharingIds
+  getExternalSharingIds,
+  getRecipientsWithGroups
 } from './state'
 import {
   SHARING_1,
@@ -310,7 +311,8 @@ describe('Sharing state', () => {
           instance: 'http://cozy.tools:8080',
           name: 'Jane Doe',
           sharingId: 'sharing_1',
-          index: 0,
+          index: 'sharing-sharing_1-member-0',
+          memberIndex: 0,
           status: 'owner',
           type: 'two-way',
           avatarPath: '/sharings/sharing_1/recipients/0/avatar'
@@ -320,7 +322,8 @@ describe('Sharing state', () => {
           instance: 'http://cozy.local:8080',
           name: 'John Doe',
           sharingId: 'sharing_1',
-          index: 1,
+          index: 'sharing-sharing_1-member-1',
+          memberIndex: 1,
           status: 'ready',
           type: 'two-way',
           avatarPath: '/sharings/sharing_1/recipients/1/avatar'
@@ -330,7 +333,8 @@ describe('Sharing state', () => {
           instance: 'http://cozy.local:8080',
           name: 'John Doe 2',
           sharingId: 'sharing_1',
-          index: 2,
+          index: 'sharing-sharing_1-member-2',
+          memberIndex: 2,
           status: 'ready',
           type: 'two-way',
           avatarPath: '/sharings/sharing_1/recipients/2/avatar'
@@ -340,7 +344,8 @@ describe('Sharing state', () => {
           instance: 'http://cozy.foo:8080',
           name: 'Johnny Doe',
           sharingId: 'sharing_3',
-          index: 1,
+          index: 'sharing-sharing_3-member-1',
+          memberIndex: 1,
           status: 'pending',
           type: 'two-way',
           avatarPath: '/sharings/sharing_3/recipients/1/avatar'
@@ -353,7 +358,8 @@ describe('Sharing state', () => {
           instance: 'http://cozy.tools:8080',
           name: 'Jane Doe',
           sharingId: 'sharing_5',
-          index: 0,
+          index: 'sharing-sharing_5-member-0',
+          memberIndex: 0,
           status: 'owner',
           type: 'one-way',
           avatarPath: '/sharings/sharing_5/recipients/0/avatar'
@@ -363,7 +369,8 @@ describe('Sharing state', () => {
           instance: 'http://cozy.foo:8080',
           name: 'Johnny Doe',
           sharingId: 'sharing_5',
-          index: 1,
+          index: 'sharing-sharing_5-member-1',
+          memberIndex: 1,
           status: 'pending',
           type: 'one-way',
           avatarPath: '/sharings/sharing_5/recipients/1/avatar'
@@ -645,8 +652,7 @@ describe('getSharedParentPath', () => {
   })
 })
 
-/* eslint-disable jest/no-focused-tests */
-fdescribe('getExternalSharingIds', () => {
+describe('getExternalSharingIds', () => {
   const getAttributes = (memberStatus = 'mail-not-sent') => ({
     rules: [
       {
@@ -712,6 +718,221 @@ fdescribe('getExternalSharingIds', () => {
     expect(res).toStrictEqual([
       '5f8c1090afad686a8f7f56cce07e8098',
       'c63de58b2c898e457fbdfdc11a24a986'
+    ])
+  })
+})
+
+describe('getRecipientsWithGroups', () => {
+  it('should return the recipients with groups', () => {
+    const sharings = [
+      {
+        id: 'sharing_1',
+        attributes: {
+          rules: [],
+          members: [
+            {
+              name: 'Jane Doe',
+              email: 'jane@doe.com',
+              instance: 'http://cozy.tools:8080',
+              read_only: false,
+              only_in_groups: true
+            },
+            {
+              name: 'John Doe',
+              email: 'john@doe.com',
+              instance: 'http://cozy.local:8080',
+              read_only: true,
+              only_in_groups: true,
+              groups: [0]
+            }
+          ],
+          groups: [
+            {
+              name: 'Group 1',
+              addedBy: 0
+            }
+          ]
+        }
+      }
+    ]
+
+    const docId = 'folder_1'
+
+    const recipients = getRecipientsWithGroups(sharings, docId)
+
+    expect(recipients).toEqual([
+      {
+        name: 'Group 1',
+        sharingId: 'sharing_1',
+        index: 'sharing-sharing_1-group-0',
+        groupIndex: 0,
+        addedBy: 0,
+        owner: {
+          name: 'Jane Doe',
+          read_only: false,
+          email: 'jane@doe.com',
+          instance: 'http://cozy.tools:8080',
+          type: 'one-way',
+          sharingId: 'sharing_1',
+          index: 'sharing-sharing_1-member-0',
+          only_in_groups: true,
+          memberIndex: 0,
+          avatarPath: '/sharings/sharing_1/recipients/0/avatar'
+        },
+        members: [
+          {
+            name: 'John Doe',
+            email: 'john@doe.com',
+            instance: 'http://cozy.local:8080',
+            type: 'one-way',
+            only_in_groups: true,
+            read_only: true,
+            sharingId: 'sharing_1',
+            index: 'sharing-sharing_1-member-1',
+            memberIndex: 1,
+            groups: [0],
+            avatarPath: '/sharings/sharing_1/recipients/1/avatar'
+          }
+        ]
+      }
+    ])
+  })
+
+  it('should return the owner recipient for group with multiple sharing', () => {
+    const sharings = [
+      {
+        id: 'sharing_1',
+        attributes: {
+          rules: [],
+          members: [
+            {
+              name: 'Jane Doe',
+              email: 'jane@doe.com',
+              instance: 'http://cozy.tools:8080',
+              read_only: false,
+              only_in_groups: true
+            },
+            {
+              name: 'John Doe',
+              email: 'john@doe.com',
+              instance: 'http://cozy.local:8080',
+              read_only: true,
+              only_in_groups: true,
+              groups: [0]
+            }
+          ],
+          groups: [
+            {
+              name: 'Group 1',
+              addedBy: 0
+            }
+          ]
+        }
+      },
+      {
+        id: 'sharing_2',
+        attributes: {
+          rules: [],
+          members: [
+            {
+              name: 'Alice Smith',
+              email: 'alice@smith.com',
+              instance: 'http://cozy.tools:8080',
+              read_only: false,
+              only_in_groups: true,
+              groups: [0]
+            },
+            {
+              name: 'Bob Johnson',
+              email: 'bob@johnson.com',
+              instance: 'http://cozy.local:8080',
+              read_only: true,
+              only_in_groups: true
+            }
+          ],
+          groups: [
+            {
+              name: 'Group 2',
+              addedBy: 1
+            }
+          ]
+        }
+      }
+    ]
+
+    const docId = 'folder_1'
+
+    const recipients = getRecipientsWithGroups(sharings, docId)
+
+    expect(recipients).toEqual([
+      {
+        name: 'Group 1',
+        sharingId: 'sharing_1',
+        index: 'sharing-sharing_1-group-0',
+        addedBy: 0,
+        groupIndex: 0,
+        owner: {
+          name: 'Jane Doe',
+          read_only: false,
+          email: 'jane@doe.com',
+          instance: 'http://cozy.tools:8080',
+          index: 'sharing-sharing_1-member-0',
+          type: 'one-way',
+          sharingId: 'sharing_1',
+          only_in_groups: true,
+          memberIndex: 0,
+          avatarPath: '/sharings/sharing_1/recipients/0/avatar'
+        },
+        members: [
+          {
+            name: 'John Doe',
+            email: 'john@doe.com',
+            instance: 'http://cozy.local:8080',
+            index: 'sharing-sharing_1-member-1',
+            type: 'one-way',
+            only_in_groups: true,
+            read_only: true,
+            sharingId: 'sharing_1',
+            memberIndex: 1,
+            groups: [0],
+            avatarPath: '/sharings/sharing_1/recipients/1/avatar'
+          }
+        ]
+      },
+      {
+        addedBy: 1,
+        groupIndex: 0,
+        index: 'sharing-sharing_2-group-0',
+        members: [
+          {
+            avatarPath: '/sharings/sharing_2/recipients/0/avatar',
+            email: 'alice@smith.com',
+            groups: [0],
+            memberIndex: 0,
+            instance: 'http://cozy.tools:8080',
+            index: 'sharing-sharing_2-member-0',
+            name: 'Alice Smith',
+            only_in_groups: true,
+            read_only: false,
+            sharingId: 'sharing_2',
+            type: 'one-way'
+          }
+        ],
+        name: 'Group 2',
+        owner: {
+          avatarPath: '/sharings/sharing_2/recipients/1/avatar',
+          email: 'bob@johnson.com',
+          memberIndex: 1,
+          instance: 'http://cozy.local:8080',
+          index: 'sharing-sharing_2-member-1',
+          name: 'Bob Johnson',
+          only_in_groups: true,
+          read_only: true,
+          sharingId: 'sharing_2',
+          type: 'one-way'
+        },
+        sharingId: 'sharing_2'
+      }
     ])
   })
 })
