@@ -24,7 +24,7 @@ const getInputMode = (inputType, mask, currentDefinition) => {
   }
 
   // Quick win, if other paper requires this type of condition we will have to review the approach at a higher level, via a new type for example
-  return inputType === 'number' && currentDefinition?.label === 'pay_sheet'
+  return inputType === 'number' && currentDefinition?.label !== 'pay_sheet'
     ? 'numeric'
     : 'text'
 }
