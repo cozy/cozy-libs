@@ -1,6 +1,6 @@
 {
   "name": "cozy-doctypes",
-  "version": "1.89.4",
+  "version": "1.89.5",
   "description": "Definitions for Cozy models",
   "main": "src/index.js",
   "browser": "dist/index.js",

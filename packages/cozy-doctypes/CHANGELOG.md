@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.89.5 (2024-03-21)
+
+
+### Bug Fixes
+
+* Misspelled checkedAttributes -> checkAttributes for bank objects ([68ffa1d](https://github.com/cozy/cozy-libs/commit/68ffa1d3b7e0a70e13a8fe9e38a8a360bf8cc638))
+
+
+
+
+
 ## [1.89.4](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.89.3...cozy-doctypes@1.89.4) (2024-01-05)
 
 **Note:** Version bump only for package cozy-doctypes

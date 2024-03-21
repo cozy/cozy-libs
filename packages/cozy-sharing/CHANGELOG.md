@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@11.1.0...cozy-sharing@12.0.0) (2024-03-21)
+
+
+### Features
+
+* Making it possible to revoke a group ([cc3e998](https://github.com/cozy/cozy-libs/commit/cc3e998d94450d0698373f217a4eea06d1a81ede))
+* Update cozy-client from 45.14.0 to 46.1.0 ([958c55c](https://github.com/cozy/cozy-libs/commit/958c55c5d55a540d0c5b341b6780cb16b1617ff9))
+
+
+### BREAKING CHANGES
+
+* you must have `cozy-client >=46.1.0`
+
+
+
+
+
 # [11.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@11.0.1...cozy-sharing@11.1.0) (2024-03-21)
 
 
