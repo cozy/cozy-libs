@@ -175,7 +175,7 @@ BankAccount.normalizeAccountNumber = matching.normalizeAccountNumber
 BankAccount.doctype = 'io.cozy.bank.accounts'
 BankAccount.idAttributes = ['_id']
 BankAccount.version = 1
-BankAccount.checkedAttributes = null
+BankAccount.checkAttributes = null
 BankAccount.vendorIdAttr = 'vendorId'
 
 module.exports = BankAccount
