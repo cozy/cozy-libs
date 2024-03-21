@@ -29,8 +29,13 @@ const InformationDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
     attributes
   } = currentStep
   const { t } = useI18n()
-  const { currentStepIndex, nextStep, isLastStep, allCurrentSteps } =
-    useStepperDialog()
+  const {
+    currentStepIndex,
+    nextStep,
+    isLastStep,
+    allCurrentSteps,
+    currentDefinition
+  } = useStepperDialog()
   const { formData, setFormData } = useFormData()
   const [value, setValue] = useState({})
   const [validInput, setValidInput] = useState({})
@@ -124,6 +129,7 @@ const InformationDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
                   <Component
                     attrs={attrs}
                     formDataValue={formData.metadata[attrs.name]}
+                    currentDefinition={currentDefinition}
                     setValue={setValue}
                     setValidInput={setValidInput}
                     onFocus={setIsFocus}
