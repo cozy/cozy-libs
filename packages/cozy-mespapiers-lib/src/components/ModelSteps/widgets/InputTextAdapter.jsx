@@ -11,6 +11,7 @@ import {
   checkConstraintsOfIinput,
   makeConstraintsOfInput
 } from '../../../utils/input'
+import { useStepperDialog } from '../../Hooks/useStepperDialog'
 
 const styleFontMono = 'Segoe UI Mono, SF Mono, Roboto Mono, Courier'
 
@@ -70,6 +71,7 @@ const InputTextAdapter = ({
     () => makeConstraintsOfInput(attrs),
     [attrs]
   )
+  const { currentDefinition } = useStepperDialog()
 
   const isValidInputValue = useMemo(
     () =>
@@ -111,7 +113,12 @@ const InputTextAdapter = ({
     }
 
     if (inputType === 'number' && !mask) {
-      if (/^[0-9,.]*$/.test(currentValue)) {
+      // Quick win, if other paper requires this type of condition we will have to review the approach at a higher level, via a new type for example
+      const regex =
+        currentDefinition?.label === 'pay_sheet'
+          ? /^[1-9]+([.,][0-9]{1,2})?$/
+          : /^[0-9]*$/
+      if (regex.test(currentValue)) {
         setCurrentValue(currentValue)
       } else if (currentValue === '') {
         setCurrentValue(currentValue)
