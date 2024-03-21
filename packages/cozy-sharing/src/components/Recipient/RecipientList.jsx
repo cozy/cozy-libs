@@ -28,7 +28,7 @@ const RecipientList = ({
     return (
       <MemberRecipient
         {...recipient}
-        key={`key_r_${recipient.index}`}
+        key={recipient.index}
         isOwner={isOwner}
         document={document}
         documentType={documentType}

@@ -1,5 +1,7 @@
 import get from 'lodash/get'
 
+import flag from 'cozy-flags'
+
 const RECEIVE_SHARINGS = 'RECEIVE_SHARINGS'
 const ADD_SHARING = 'ADD_SHARING'
 const UPDATE_SHARING = 'UPDATE_SHARING'
@@ -280,14 +282,24 @@ export const getOwner = (state, docId) =>
   getRecipients(state, docId).find(r => r.status === 'owner')
 
 export const getRecipients = (state, docId) => {
-  const recipients = getDocumentSharings(state, docId)
+  const sharings = getDocumentSharings(state, docId)
+  if (flag('sharing.show-recipient-groups')) {
+    return getRecipientsWithGroups(sharings, docId)
+  }
+
+  return getRecipientsWithoutGroups(sharings, docId)
+}
+
+const getRecipientsWithoutGroups = (sharings, docId) => {
+  const recipients = sharings
     .map(sharing => {
       const type = getDocumentSharingType(sharing, docId)
       return sharing.attributes.members.map((m, idx) => ({
         ...m,
+        index: `sharing-${sharing.id}-member-${idx}`,
         type: m.read_only ? 'one-way' : type,
         sharingId: sharing.id,
-        index: idx,
+        memberIndex: idx,
         avatarPath: `/sharings/${sharing.id}/recipients/${idx}/avatar`
       }))
     })
@@ -296,6 +308,45 @@ export const getRecipients = (state, docId) => {
   if (recipients[0] && recipients[0].status === 'owner') {
     return [recipients[0], ...recipients.filter(r => r.status !== 'owner')]
   }
+  return recipients
+}
+
+export const getRecipientsWithGroups = (sharings, docId) => {
+  const recipients = sharings.flatMap(sharing => {
+    const type = getDocumentSharingType(sharing, docId)
+    const sharingId = sharing.id
+
+    const members = sharing.attributes.members.map((m, idx) => ({
+      ...m,
+      type: m.read_only ? 'one-way' : type,
+      sharingId,
+      index: `sharing-${sharing.id}-member-${idx}`,
+      memberIndex: idx,
+      avatarPath: `/sharings/${sharingId}/recipients/${idx}/avatar`
+    }))
+
+    const groups =
+      sharing.attributes.groups
+        ?.map((g, idx) => ({
+          ...g,
+          sharingId,
+          index: `sharing-${sharing.id}-group-${idx}`,
+          groupIndex: idx,
+          owner: members[g.addedBy],
+          members: members.filter(member => member.groups?.includes(idx))
+        }))
+        .filter(g => !g.revoked) || []
+
+    return [
+      ...members.filter(m => !m.only_in_groups && m.status !== 'revoked'),
+      ...groups
+    ]
+  })
+
+  if (recipients[0] && recipients[0].status === 'owner') {
+    return [recipients[0], ...recipients.filter(r => r.status !== 'owner')]
+  }
+
   return recipients
 }
 
