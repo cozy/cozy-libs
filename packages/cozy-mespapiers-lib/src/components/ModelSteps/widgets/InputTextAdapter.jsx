@@ -116,7 +116,7 @@ const InputTextAdapter = ({
       // Quick win, if other paper requires this type of condition we will have to review the approach at a higher level, via a new type for example
       const regex =
         currentDefinition?.label === 'pay_sheet'
-          ? /^[1-9]+([.,][0-9]{1,2})?$/
+          ? /^[0-9]+([.,][0-9]{0,2})?$/
           : /^[0-9]*$/
       if (regex.test(currentValue)) {
         setCurrentValue(currentValue)
