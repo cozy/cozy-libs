@@ -11,7 +11,6 @@ import {
   checkConstraintsOfIinput,
   makeConstraintsOfInput
 } from '../../../utils/input'
-import { useStepperDialog } from '../../Hooks/useStepperDialog'
 
 const styleFontMono = 'Segoe UI Mono, SF Mono, Roboto Mono, Courier'
 
@@ -48,6 +47,7 @@ const makeInputAdornment = (adornment, currentValue, t) => {
 const InputTextAdapter = ({
   attrs,
   formDataValue,
+  currentDefinition,
   setValue,
   setValidInput,
   onFocus,
@@ -74,7 +74,6 @@ const InputTextAdapter = ({
     () => makeConstraintsOfInput(attrs),
     [attrs]
   )
-  const { currentDefinition } = useStepperDialog()
 
   const isValidInputValue = useMemo(
     () =>
@@ -219,7 +218,7 @@ const InputTextAdapter = ({
       inputProps={{
         maxLength: expectedLength.max,
         minLength: expectedLength.min,
-        inputMode: getInputMode(inputType),
+        inputMode: getInputMode(inputType, null, currentDefinition),
         'data-testid': 'TextField-input'
       }}
       onChange={handleOnChange}

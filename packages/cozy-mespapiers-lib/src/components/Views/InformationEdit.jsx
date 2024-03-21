@@ -15,7 +15,6 @@ import IlluGenericInputText from '../../assets/icons/IlluGenericInputText.svg'
 import { FILES_DOCTYPE } from '../../doctypes'
 import { makeInputsInformationStep } from '../../helpers/makeInputsInformationStep'
 import CompositeHeader from '../CompositeHeader/CompositeHeader'
-import { StepperDialogProvider } from '../Contexts/StepperDialogProvider'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import {
   isInformationEditPermitted,
@@ -89,58 +88,57 @@ const InformationEdit = () => {
     : null
 
   return (
-    <StepperDialogProvider>
-      <Dialog
-        open
-        onClose={onClose}
-        title={dialogTitle}
-        content={
-          <div
-            className={cx(styles['InformationEdit-Dialog-container'], {
-              'is-focused': isFocus && isIOS()
-            })}
-          >
-            {currentEditInformations.isLoading ? (
-              <Spinner size="xlarge" />
-            ) : (
-              <CompositeHeader
-                icon={currentEditInformations.currentStep?.illustration}
-                fallbackIcon={fallbackIcon}
-                iconSize="medium"
-                title={text}
-                text={
-                  <div
-                    className={cx('u-mt-1', {
-                      'u-mh-1': !isMobile
-                    })}
-                  >
-                    {Component && (
-                      <Component
-                        attrs={attrs}
-                        formDataValue={defaultValue}
-                        setValue={setValue}
-                        setValidInput={setValidInput}
-                        onFocus={setIsFocus}
-                        idx={0}
-                      />
-                    )}
-                  </div>
-                }
-              />
-            )}
-          </div>
-        }
-        actions={
-          <Button
-            label={t('common.apply')}
-            onClick={onConfirm}
-            fullWidth
-            disabled={!validInput[0]}
-            busy={isBusy}
-          />
-        }
-      />
-    </StepperDialogProvider>
+    <Dialog
+      open
+      onClose={onClose}
+      title={dialogTitle}
+      content={
+        <div
+          className={cx(styles['InformationEdit-Dialog-container'], {
+            'is-focused': isFocus && isIOS()
+          })}
+        >
+          {currentEditInformations.isLoading ? (
+            <Spinner size="xlarge" />
+          ) : (
+            <CompositeHeader
+              icon={currentEditInformations.currentStep?.illustration}
+              fallbackIcon={fallbackIcon}
+              iconSize="medium"
+              title={text}
+              text={
+                <div
+                  className={cx('u-mt-1', {
+                    'u-mh-1': !isMobile
+                  })}
+                >
+                  {Component && (
+                    <Component
+                      attrs={attrs}
+                      currentDefinition={currentEditInformations.paperDef}
+                      formDataValue={defaultValue}
+                      setValue={setValue}
+                      setValidInput={setValidInput}
+                      onFocus={setIsFocus}
+                      idx={0}
+                    />
+                  )}
+                </div>
+              }
+            />
+          )}
+        </div>
+      }
+      actions={
+        <Button
+          label={t('common.apply')}
+          onClick={onConfirm}
+          fullWidth
+          disabled={!validInput[0]}
+          busy={isBusy}
+        />
+      }
+    />
   )
 }
 
