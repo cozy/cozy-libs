@@ -228,7 +228,7 @@ class Document {
     } else {
       log(
         'debug',
-        `[updateIfDifferent] No need to update ${update._id} because its \`checkedAttributes\` (${this.checkAttributes}) didn't change.`
+        `[updateIfDifferent] No need to update ${update._id} because its \`checkAttributes\` (${this.checkAttributes}) didn't change.`
       )
       return doc
     }

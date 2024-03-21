@@ -39,6 +39,6 @@ class BalanceHistory extends Document {
 BalanceHistory.doctype = 'io.cozy.bank.balancehistories'
 BalanceHistory.idAttributes = ['year', 'relationships.account.data._id']
 BalanceHistory.version = 1
-BalanceHistory.checkedAttributes = ['balances']
+BalanceHistory.checkAttributes = ['balances']
 
 module.exports = BalanceHistory

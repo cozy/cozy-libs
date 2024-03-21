@@ -330,7 +330,7 @@ Transaction.version = 1
 Transaction.vendorAccountIdAttr = 'vendorAccountId'
 Transaction.vendorIdAttr = 'vendorId'
 Transaction.idAttributes = ['vendorId']
-Transaction.checkedAttributes = [
+Transaction.checkAttributes = [
   'label',
   'originalBankLabel',
   'automaticCategoryId',
