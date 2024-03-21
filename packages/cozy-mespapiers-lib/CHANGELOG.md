@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [88.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@88.0.1...cozy-mespapiers-lib@88.0.2) (2024-03-21)
+
+
+### Bug Fixes
+
+* Accepted number format on pay_sheet ([e00a7f6](https://github.com/cozy/cozy-libs/commit/e00a7f67dcf962772c10b399235efc3f81c526a3))
+
+
+
+
+
 ## [88.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@88.0.0...cozy-mespapiers-lib@88.0.1) (2024-03-21)
 
 
