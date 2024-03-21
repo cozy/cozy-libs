@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [88.0.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@88.0.2...cozy-mespapiers-lib@88.0.3) (2024-03-21)
+
+
+### Bug Fixes
+
+* **mespapiers:** Add StepperDialogProvider to InformationEdit dialog ([9459937](https://github.com/cozy/cozy-libs/commit/945993740d4ce63039ff912aa245d63d500c0db1))
+* **mespapiers:** The pay_sheet condition for inputMode ([9489792](https://github.com/cozy/cozy-libs/commit/9489792071688ad9fce08abf383c1a0e10b30dbe))
+
+
+
+
+
 ## [88.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@88.0.1...cozy-mespapiers-lib@88.0.2) (2024-03-21)
 
 
