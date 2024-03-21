@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@11.0.1...cozy-sharing@11.1.0) (2024-03-21)
+
+
+### Features
+
+* Add groups to recipients ([4be590d](https://github.com/cozy/cozy-libs/commit/4be590d8280fe9198fb56d32d2ff55665864e746))
+* Add groups to recipients if flag ([4ac2199](https://github.com/cozy/cozy-libs/commit/4ac21990174d1312ee8d5b452e524db6c53429a9))
+* Extract logic from onRecipientPick to an helper ([2d08da1](https://github.com/cozy/cozy-libs/commit/2d08da1fb5a767819d8d89bd3e59f8d9927cceea))
+* **RecipientList:** Show recipient groups ([60d155c](https://github.com/cozy/cozy-libs/commit/60d155c53702782863a777c649e786deeb64a314))
+
+
+
+
+
 ## [11.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@11.0.0...cozy-sharing@11.0.1) (2024-03-12)
 
 
