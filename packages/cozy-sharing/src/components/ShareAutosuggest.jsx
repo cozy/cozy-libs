@@ -165,12 +165,7 @@ const ShareAutocomplete = ({
   )
 
   const renderSuggestion = contactOrGroup => (
-    <ContactSuggestion
-      contacts={contactsAndGroups.filter(
-        item => item._type === Contact.doctype
-      )}
-      contactOrGroup={contactOrGroup}
-    />
+    <ContactSuggestion contactOrGroup={contactOrGroup} />
   )
 
   return (
