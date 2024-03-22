@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@12.0.0...cozy-sharing@12.1.0) (2024-03-22)
+
+
+### Features
+
+* Adapt modal design to allow gutters into ListItem ([39dc590](https://github.com/cozy/cozy-libs/commit/39dc5905ee19e07967227e76d376ff04c6145c1e))
+* Show detail of recipient groups ([7d731db](https://github.com/cozy/cozy-libs/commit/7d731db9d313ba763652612352ce393f475bfe5f))
+
+
+
+
+
 # [12.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@11.1.0...cozy-sharing@12.0.0) (2024-03-21)
 
 
