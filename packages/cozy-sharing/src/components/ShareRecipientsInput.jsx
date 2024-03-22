@@ -1,3 +1,4 @@
+import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 
@@ -42,7 +43,24 @@ const ShareRecipientsInput = ({
     if (contacts.hasMore || contacts.fetchStatus === 'loading') {
       return contacts.data
     } else {
-      return [...contacts.data, ...contactGroups.data]
+      const contactGroupsWithCount = contactGroups.data
+        .map(contactGroup => ({
+          ...contactGroup,
+          membersCount: contacts.data.reduce((total, contact) => {
+            if (
+              get(contact, 'relationships.groups.data', [])
+                .map(group => group._id)
+                .includes(contactGroup._id)
+            ) {
+              return total + 1
+            }
+
+            return total
+          }, 0)
+        }))
+        .filter(contactGroup => contactGroup.membersCount > 0)
+
+      return [...contacts.data, ...contactGroupsWithCount]
     }
   }
 
