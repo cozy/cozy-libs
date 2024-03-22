@@ -20,7 +20,7 @@
     "cozy-ui": "40.9.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-redux": "^7.0.3",
+    "react-redux": "^9.1.0",
     "react-router": "6.3.0",
     "redux": "3.7.2"
   },
