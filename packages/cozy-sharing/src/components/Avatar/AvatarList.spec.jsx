@@ -14,7 +14,8 @@ const mockRecipients = new Array(MAX_DISPLAYED_RECIPIENTS - 1)
   .fill(
     {
       status: 'owner',
-      public_name: 'cozy'
+      public_name: 'cozy',
+      index: 'sharing-123-member-0'
     },
     0,
     1
@@ -22,7 +23,8 @@ const mockRecipients = new Array(MAX_DISPLAYED_RECIPIENTS - 1)
   .fill(
     {
       status: 'pending',
-      name: 'Mitch Young'
+      name: 'Mitch Young',
+      index: 'sharing-123-member-1'
     },
     1
   )
@@ -31,15 +33,18 @@ const mockMoreRecipientsThanMaxDisplayed = [
   ...mockRecipients,
   {
     status: 'mail-not-send',
-    name: 'Lyn Webster'
+    name: 'Lyn Webster',
+    index: 'sharing-123-member-2'
   },
   {
     status: 'ready',
-    name: 'Richelle Young'
+    name: 'Richelle Young',
+    index: 'sharing-123-member-3'
   },
   {
     status: 'ready',
-    name: 'John Connor'
+    name: 'John Connor',
+    index: 'sharing-123-member-4'
   }
 ]
 
@@ -120,7 +125,7 @@ describe('AvatarList', () => {
 })
 
 describe('excludeMeAsOwnerFromRecipients', () => {
-  test('excludeMeAsOwnerFromRecipients behavior', () => {
+  it('excludeMeAsOwnerFromRecipients behavior', () => {
     const recipients = [
       {
         status: 'owner',
