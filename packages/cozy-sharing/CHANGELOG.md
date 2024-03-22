@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@12.1.0...cozy-sharing@12.2.0) (2024-03-22)
+
+
+### Features
+
+* Allow to add group with only more than one member ([177dc4a](https://github.com/cozy/cozy-libs/commit/177dc4a4fbceefed1ce52f2a5275c67e46b6430f))
+
+
+
+
+
 # [12.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@12.0.0...cozy-sharing@12.1.0) (2024-03-22)
 
 
