@@ -6,6 +6,7 @@ import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
 
 import { ExtraAvatar } from './ExtraAvatar'
+import { GroupAvatar } from './GroupAvatar'
 import { MemberAvatar } from './MemberAvatar'
 import { getDisplayName } from '../../models'
 import styles from '../../styles/recipient.styl'
@@ -88,20 +89,38 @@ const AvatarList = ({
           />
         </span>
       )}
-      {shownRecipients.map((recipient, idx) => (
-        <span
-          data-testid={`AvatarList-avatar${
-            recipient.status === 'owner' ? '-owner' : ''
-          }`}
-          key={idx}
-        >
-          <MemberAvatar
-            recipient={recipient}
-            size={size}
-            className={cx(styles['recipients-avatars--avatar'])}
-          />
-        </span>
-      ))}
+      {shownRecipients.map(recipient => {
+        if (recipient.members) {
+          return (
+            <span
+              data-testid={`AvatarList-avatar${
+                recipient.status === 'owner' ? '-owner' : ''
+              }`}
+              key={recipient.index}
+            >
+              <GroupAvatar
+                size={size}
+                className={cx(styles['recipients-avatars--avatar'])}
+              />
+            </span>
+          )
+        }
+
+        return (
+          <span
+            data-testid={`AvatarList-avatar${
+              recipient.status === 'owner' ? '-owner' : ''
+            }`}
+            key={recipient.index}
+          >
+            <MemberAvatar
+              recipient={recipient}
+              size={size}
+              className={cx(styles['recipients-avatars--avatar'])}
+            />
+          </span>
+        )
+      })}
     </div>
   )
 }
