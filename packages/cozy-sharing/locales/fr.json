@@ -374,5 +374,18 @@
       "title": "Quitter le partage",
       "desc": "Vous conserverez une copie mais vos changements ne seront plus synchronisés."
     }
+  },
+  "GroupRecipientDetail": {
+    "subtitle": "Géré par %{ownerName}",
+    "withAccess": {
+      "title": "Accès à l’élément"
+    },
+    "withoutAccess": {
+      "title": "Aucun accès",
+      "status": {
+        "mail-not-sent": "Echec de l’invitation",
+        "revoked": "Partage révoqué"
+      }
+    }
   }
 }

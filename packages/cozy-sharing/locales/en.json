@@ -376,5 +376,18 @@
       "title": "Remove me from sharing",
       "desc": "You keep the content but it won't be updated between your Cozy anymore."
     }
+  },
+  "GroupRecipientDetail": {
+    "subtitle": "Managed by %{ownerName}",
+    "withAccess": {
+      "title": "Access to item"
+    },
+    "withoutAccess": {
+      "title": "No access",
+      "status": {
+        "mail-not-sent": "Invitation failed",
+        "revoked": "Sharing revoked"
+      }
+    }
   }
 }

@@ -38,6 +38,9 @@ export const WithGroup = {
         addedBy: 0,
         read_only: false,
         index: 0,
+        owner: {
+          public_name: 'Alice'
+        },
         members: [
           {
             status: 'pending',

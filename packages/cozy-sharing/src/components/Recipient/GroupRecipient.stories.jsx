@@ -4,8 +4,9 @@ const meta = {
   component: GroupRecipient,
   args: {
     name: 'Family',
-    isOwner: true,
-    read_only: false,
+    owner: {
+      public_name: 'Alice'
+    },
     members: [
       { status: 'ready' },
       { status: 'mail-not-sent' },
