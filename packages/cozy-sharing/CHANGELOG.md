@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@12.2.0...cozy-sharing@12.3.0) (2024-03-25)
+
+
+### Features
+
+* Add GroupAvatar into AvatarList ([1c66999](https://github.com/cozy/cozy-libs/commit/1c669995b08d84a3aa8d6dd950fa4abf22566395))
+
+
+
+
+
 # [12.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@12.1.0...cozy-sharing@12.2.0) (2024-03-22)
 
 
