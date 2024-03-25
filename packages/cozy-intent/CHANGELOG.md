@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.20.0 (2024-03-25)
+
+
+### Bug Fixes
+
+* **sharing:** Handle memory leak in self removal ([f9a9384](https://github.com/cozy/cozy-libs/commit/f9a9384fabb8892e35be0a270452ee501bd6b1a6))
+
+
+### Features
+
+* Log every error from native side ([3b198bc](https://github.com/cozy/cozy-libs/commit/3b198bcb5d4e3acff89b16e521d6b4cb3c6d67b1))
+
+
+
+
+
 ## [2.19.2](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.19.1...cozy-intent@2.19.2) (2024-01-05)
 
 **Note:** Version bump only for package cozy-intent
