@@ -26,13 +26,13 @@ const useSourceAccountIdentifierFiles = (sourceAccountIdentifier, slug) =>
     Q('io.cozy.files')
       .where({
         'cozyMetadata.sourceAccountIdentifier': sourceAccountIdentifier,
-        trashed: false,
-        'cozyMetadata.createdByApp': slug
+        'cozyMetadata.createdByApp': slug,
+        trashed: false
       })
       .indexFields([
         'cozyMetadata.sourceAccountIdentifier',
-        'cozyMetadata.createdByApp',
         'cozyMetadata.createdAt',
+        'cozyMetadata.createdByApp',
         'trashed'
       ])
       .sortBy([
@@ -43,7 +43,7 @@ const useSourceAccountIdentifierFiles = (sourceAccountIdentifier, slug) =>
       ])
       .limitBy(5),
     {
-      as: `fileDataCard_io.cozy.files/sourceAccountIdentifier/${sourceAccountIdentifier}/${slug}`,
+      as: `fileDataCard_io.cozy.files/sourceAccountIdentifier/${sourceAccountIdentifier}/createdByApp/${slug}`,
       fetchPolicy: CozyClient.fetchPolicies.olderThan(30 * 1000)
     }
   )
