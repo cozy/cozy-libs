@@ -21,12 +21,13 @@ const useFolderToSaveFiles = folderToSaveId =>
     }
   )
 
-const useSourceAccountIdentifierFiles = sourceAccountIdentifier =>
+const useSourceAccountIdentifierFiles = (sourceAccountIdentifier, slug) =>
   useQuery(
     Q('io.cozy.files')
       .where({
         'cozyMetadata.sourceAccountIdentifier': sourceAccountIdentifier,
-        trashed: false
+        trashed: false,
+        'cozyMetadata.createdByApp': slug
       })
       .indexFields([
         'cozyMetadata.sourceAccountIdentifier',
@@ -79,13 +80,18 @@ const getResponse = (folderToSaveFiles, sourceAccountIdentifierFiles) => {
   return { fetchStatus: 'loading' }
 }
 
-export const useDataCardFiles = (sourceAccountIdentifier, folderToSaveId) => {
+export const useDataCardFiles = (
+  sourceAccountIdentifier,
+  folderToSaveId,
+  slug
+) => {
   if (!sourceAccountIdentifier || !folderToSaveId)
     throw new Error('Missing arguments in useDataCardFiles, cannot fetch files')
 
   const folderToSaveFiles = useFolderToSaveFiles(folderToSaveId)
   const sourceAccountIdentifierFiles = useSourceAccountIdentifierFiles(
-    sourceAccountIdentifier
+    sourceAccountIdentifier,
+    slug
   )
 
   return useMemo(

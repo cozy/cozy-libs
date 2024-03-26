@@ -156,7 +156,8 @@ const FileDataCard = ({
 }) => {
   const { data, fetchStatus } = useDataCardFiles(
     sourceAccountIdentifier,
-    trigger.message.folder_to_save
+    trigger.message.folder_to_save,
+    konnector.slug
   )
   const isLoading = fetchStatus === 'loading'
   const noFiles = fetchStatus === 'empty' || fetchStatus === 'failed'
