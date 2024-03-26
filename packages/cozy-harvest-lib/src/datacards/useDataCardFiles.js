@@ -31,15 +31,19 @@ const useSourceAccountIdentifierFiles = (sourceAccountIdentifier, slug) =>
       })
       .indexFields([
         'cozyMetadata.sourceAccountIdentifier',
-        'cozyMetadata.createdAt'
+        'cozyMetadata.createdByApp',
+        'cozyMetadata.createdAt',
+        'trashed'
       ])
       .sortBy([
         { 'cozyMetadata.sourceAccountIdentifier': 'desc' },
-        { 'cozyMetadata.createdAt': 'desc' }
+        { 'cozyMetadata.createdAt': 'desc' },
+        { 'cozyMetadata.createdByApp': 'desc' },
+        { trashed: 'desc' }
       ])
       .limitBy(5),
     {
-      as: `fileDataCard_io.cozy.files/sourceAccountIdentifier/${sourceAccountIdentifier}`,
+      as: `fileDataCard_io.cozy.files/sourceAccountIdentifier/${sourceAccountIdentifier}/${slug}`,
       fetchPolicy: CozyClient.fetchPolicies.olderThan(30 * 1000)
     }
   )
