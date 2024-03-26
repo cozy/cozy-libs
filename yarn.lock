@@ -10636,6 +10636,28 @@ cozy-flags@^2.5.0:
   dependencies:
     microee "^0.0.6"
 
+cozy-harvest-lib@^22.5.5:
+  version "22.5.5"
+  resolved "https://registry.yarnpkg.com/cozy-harvest-lib/-/cozy-harvest-lib-22.5.5.tgz#71111ac185c104b350d26301f3a18a6e1165f399"
+  integrity sha512-JVD1x7iOwkDU4VTzeWjwd2JzmUAjMCicvrtoHcYk5PXsoLIcmm6celcZ3lx332/8Ak6t5i+/mx5Aq5cG7igXUA==
+  dependencies:
+    "@cozy/minilog" "^1.0.0"
+    "@sentry/browser" "^6.0.1"
+    classnames "^2.3.1"
+    cozy-bi-auth "0.0.25"
+    cozy-doctypes "^1.89.5"
+    cozy-logger "^1.10.4"
+    date-fns "^1.30.1"
+    final-form "^4.18.5"
+    lodash "^4.17.19"
+    microee "^0.0.6"
+    node-polyglot "^2.4.0"
+    react-final-form "^3.7.0"
+    react-json-print "^0.1.3"
+    react-markdown "^4.2.2"
+    use-deep-compare-effect "^1.8.1"
+    uuid "^3.3.2"
+
 cozy-interapp@0.5.4:
   version "0.5.4"
   resolved "https://registry.yarnpkg.com/cozy-interapp/-/cozy-interapp-0.5.4.tgz#2573f1800f073c84c289267d04234954d88eae0c"
@@ -19639,17 +19661,6 @@ msgpack5@^4.0.2:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
     safe-buffer "^5.1.2"
-
-"mui-bottom-sheet@git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9":
-  version "1.0.8"
-  uid "3dc4c2a245ab39079bc2f73546bccf80847be14c"
-  resolved "git+https://github.com/cozy/mui-bottom-sheet.git#3dc4c2a245ab39079bc2f73546bccf80847be14c"
-  dependencies:
-    "@juggle/resize-observer" "^3.1.3"
-    jest-environment-jsdom-sixteen "^1.0.3"
-    react-spring "9.0.0-rc.3"
-    react-use-gesture "^7.0.8"
-    react-use-measure "^2.0.0"
 
 "mui-bottom-sheet@https://github.com/cozy/mui-bottom-sheet.git#v1.0.9":
   version "1.0.8"
