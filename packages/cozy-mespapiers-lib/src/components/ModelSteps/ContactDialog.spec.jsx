@@ -29,6 +29,7 @@ jest.mock('./widgets/ConfirmReplaceFile', () => () => (
 jest.mock('./widgets/SubmitButton', () => () => (
   <div data-testid="SubmitButton" />
 ))
+jest.mock('./ContactList', () => () => <div data-testid="ContactList" />)
 /* eslint-enable react/display-name */
 
 const setup = ({
