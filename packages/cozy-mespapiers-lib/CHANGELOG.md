@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [90.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@89.0.0...cozy-mespapiers-lib@90.0.0) (2024-03-26)
+
+
+### Features
+
+* **mespapiers:** Sync cozy-harvest-lib to 22.5.5 ([923e2d7](https://github.com/cozy/cozy-libs/commit/923e2d7c78b7d60165da7458849830d31bc2d894))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-harvest-lib >= 22.5.5`
+
+
+
+
+
 # [89.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@88.0.11...cozy-mespapiers-lib@89.0.0) (2024-03-26)
 
 
