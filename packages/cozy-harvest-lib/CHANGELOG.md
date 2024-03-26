@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [22.5.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.5.5...cozy-harvest-lib@22.5.6) (2024-03-26)
+
+
+### Bug Fixes
+
+* Use the right index ([74f6a26](https://github.com/cozy/cozy-libs/commit/74f6a2600a8684bc05af1710e26acbdc1554bd78))
+
+
+
+
+
 ## [22.5.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.5.4...cozy-harvest-lib@22.5.5) (2024-03-26)
 
 
