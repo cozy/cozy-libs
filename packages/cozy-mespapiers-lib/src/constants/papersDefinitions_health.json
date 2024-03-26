@@ -1,6 +1,40 @@
 {
   "papersDefinitions": [
     {
+      "label": "national_health_insurance_right_certificate",
+      "icon": "heart",
+      "featureDate": "referencedDate",
+      "maxDisplay": 5,
+      "acquisitionSteps": [
+        {
+          "model": "scan",
+          "multipage": true,
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.generic.multiPages.text"
+        },
+        {
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.referencedDate.text",
+          "attributes": [
+            {
+              "name": "referencedDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ],
+      "konnectorCriteria": {
+        "name": "ameli"
+      }
+    },
+    {
       "label": "prescription",
       "placeholderIndex": 10,
       "icon": "heart",
