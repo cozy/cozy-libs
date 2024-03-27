@@ -38,6 +38,24 @@ export const buildAccountQuery = ({ slug, sourceAccountIdentifier }) => ({
     fetchPolicy: defaultFetchPolicy
   }
 })
+
+/**
+ *  Build an account query for the given konnector.
+ * ("getById" throws an error even if the query is not enabled)
+ * @param {string} accountId - io.cozy.accounts document's id
+ * @returns {object} - a query spec
+ */
+export const buildAccountQueryById = accountId => {
+  return {
+    definition: () => Q('io.cozy.accounts').getById(accountId),
+    options: {
+      as: `io.cozy.accounts/${accountId}`,
+      fetchPolicy: defaultFetchPolicy,
+      singleDocData: true
+    }
+  }
+}
+
 /**
  *
  * @param {string} accountId

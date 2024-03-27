@@ -24,24 +24,6 @@ export const createAccount = async (client, konnector, attributes) => {
   return data
 }
 
-/**
- *  Build an account query for the given konnector.
- * ("getById" throws an error even if the query is not enabled)
- * @param {string} accountId - io.cozy.accounts document's id
- * @returns {object} - a query spec
- */
-export const buildAccountQueryById = accountId => {
-  return {
-    definition: () =>
-      Q(ACCOUNTS_DOCTYPE).where({
-        _id: accountId
-      }),
-    options: {
-      as: `${ACCOUNTS_DOCTYPE}/${accountId}`
-    }
-  }
-}
-
 export const createAccountQuerySpec = accountId => {
   if (!accountId) {
     throw new Error('createAccountQuerySpec called with undefined accountId')
