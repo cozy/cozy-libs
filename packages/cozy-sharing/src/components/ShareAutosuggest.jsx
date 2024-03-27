@@ -7,9 +7,10 @@ import Chip from 'cozy-ui/transpiled/react/Chips'
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 import palette from 'cozy-ui/transpiled/react/palette'
 
+import { GroupAvatar } from './Avatar/GroupAvatar'
 import ContactSuggestion from './ContactSuggestion'
 import { extractEmails, validateEmail } from '../helpers/email'
-import { getDisplayName, getInitials, Contact } from '../models'
+import { getDisplayName, getInitials, Contact, Group } from '../models'
 import styles from '../styles/autosuggest.styl'
 import {
   cozyUrlMatch,
@@ -139,13 +140,20 @@ const ShareAutocomplete = ({
   const renderInput = inputProps => (
     <div className={styles['recipientsContainer']}>
       {recipients.map((recipient, idx) => {
+        const isContactGroup = recipient._type === Group.doctype
         const avatarText = getInitials(recipient)
         const name = getDisplayName(recipient)
         return (
           <Chip
             id={`recipient_${idx}`}
             key={`key_recipient_${idx}`}
-            avatar={<Avatar text={avatarText} size="xsmall" />}
+            avatar={
+              isContactGroup ? (
+                <GroupAvatar size="xsmall" />
+              ) : (
+                <Avatar text={avatarText} size="xsmall" />
+              )
+            }
             label={name}
             onDelete={() => {
               onAutosuggestRemove(recipient)
