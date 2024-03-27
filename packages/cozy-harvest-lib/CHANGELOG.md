@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [22.5.8](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.5.7...cozy-harvest-lib@22.5.8) (2024-03-27)
+
+
+### Bug Fixes
+
+* Use sourceAccountIdentifier and konnector slug to show viewer modal ([4d0957c](https://github.com/cozy/cozy-libs/commit/4d0957c657b5edc91c8557bd2404081f5dfbe42d))
+
+
+
+
+
 ## [22.5.7](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.5.6...cozy-harvest-lib@22.5.7) (2024-03-27)
 
 
