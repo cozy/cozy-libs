@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [22.5.7](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.5.6...cozy-harvest-lib@22.5.7) (2024-03-27)
+
+
+### Bug Fixes
+
+* Index creation into file data card with sourceAccountIdentifier ([81a0418](https://github.com/cozy/cozy-libs/commit/81a0418ebc723957a8bf6230d7b103c3b448143b))
+
+
+
+
+
 ## [22.5.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.5.5...cozy-harvest-lib@22.5.6) (2024-03-26)
 
 
