@@ -1,3 +1,5 @@
+import get from 'lodash/get'
+
 import { harmonizeContactsNames } from '../components/Papers/helpers'
 
 /**
@@ -28,7 +30,7 @@ const buildFilenameWithModel = ({
         case 'featureDate':
           return formatedDate
         default:
-          return metadata?.[el]
+          return get(metadata, el)
       }
     })
     .filter(Boolean)

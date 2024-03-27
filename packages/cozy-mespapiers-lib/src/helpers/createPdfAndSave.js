@@ -1,3 +1,5 @@
+import set from 'lodash/set'
+import transform from 'lodash/transform'
 import { PDFDocument } from 'pdf-lib'
 
 import { models } from 'cozy-client'
@@ -74,7 +76,18 @@ export const createPdfAndSave = async ({
   const { data, metadata, contacts } = { ...formData }
   const fileCollection = client.collection(FILES_DOCTYPE)
   const { featureDate, label, filenameModel } = currentDefinition
-  const date = metadata[featureDate] && f(metadata[featureDate], 'YYYY.MM.DD')
+
+  const normalizedMetadata = transform(
+    metadata,
+    (result, value, key) => {
+      set(result, key, value)
+    },
+    {}
+  )
+
+  const date =
+    normalizedMetadata[featureDate] &&
+    f(normalizedMetadata[featureDate], 'YYYY.MM.DD')
 
   // If all files are to be considered as one.
   const isMultiPage = data.some(({ fileMetadata }) => fileMetadata.multipage)
@@ -89,7 +102,7 @@ export const createPdfAndSave = async ({
 
     const paperName = buildFilename({
       filenameModel,
-      metadata,
+      metadata: normalizedMetadata,
       qualificationName: scannerT(`items.${label}`),
       pageName: fileMetadata.page
         ? t(`PapersList.label.${fileMetadata.page}`)
@@ -105,11 +118,11 @@ export const createPdfAndSave = async ({
         ...qualification
       },
       ...sanitizeFileMetadata(fileMetadata, isMultiPage),
-      ...metadata,
-      datetime: metadata[featureDate]
-        ? metadata[featureDate]
+      ...normalizedMetadata,
+      datetime: normalizedMetadata[featureDate]
+        ? normalizedMetadata[featureDate]
         : pdfDoc.getCreationDate(),
-      datetimeLabel: metadata[featureDate] ? featureDate : 'datetime'
+      datetimeLabel: normalizedMetadata[featureDate] ? featureDate : 'datetime'
     }
 
     // If isn't multipage or the last of multipage, save file

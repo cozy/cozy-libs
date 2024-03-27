@@ -139,7 +139,7 @@
           "text": "PaperJSON.bankDetails.number.text",
           "attributes": [
             {
-              "name": "number",
+              "name": "bank.number",
               "type": "text",
               "mask": "aa99 9999 9999 9999 9999 9999 999",
               "minLength": 25,
@@ -152,7 +152,7 @@
           "text": "PaperJSON.bankDetails.bicNumber.text",
           "attributes": [
             {
-              "name": "bicNumber",
+              "name": "bank.bicNumber",
               "type": "text",
               "mask": "***********",
               "inputLabel": "PaperJSON.bankDetails.bicNumber.inputLabel"
