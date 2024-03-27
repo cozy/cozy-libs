@@ -8,6 +8,7 @@ import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
+import { GroupAvatar } from './Avatar/GroupAvatar'
 import { Contact, Group, getDisplayName, getInitials } from '../models'
 
 const ContactModel = models.contact
@@ -15,7 +16,8 @@ const ContactModel = models.contact
 export const ContactSuggestion = ({ contactOrGroup }) => {
   const { t } = useI18n()
   let avatarText, name, details
-  if (contactOrGroup._type === Group.doctype) {
+  const isContactGroup = contactOrGroup._type === Group.doctype
+  if (isContactGroup) {
     name = contactOrGroup.name
     avatarText = 'G'
     details = t('Share.members.count', {
@@ -30,7 +32,11 @@ export const ContactSuggestion = ({ contactOrGroup }) => {
   return (
     <ListItem button>
       <ListItemIcon>
-        <Avatar text={avatarText} size="small" />
+        {isContactGroup ? (
+          <GroupAvatar size="small" />
+        ) : (
+          <Avatar text={avatarText} size="small" />
+        )}
       </ListItemIcon>
       <ListItemText
         primary={name}
