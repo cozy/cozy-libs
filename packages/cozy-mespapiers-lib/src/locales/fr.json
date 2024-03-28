@@ -259,8 +259,16 @@
     },
     "vehicleRegistration": {
       "number": {
-        "inputLabel": "Numéro en position E. de votre carte crise",
+        "inputLabel": "Numéro en position E. de votre carte grise",
         "text": "Saisissez le Numéro d'identification du véhicule (VIN)"
+      },
+      "licenseNumber": {
+        "inputLabel": "Num. d'immat. de votre carte grise",
+        "text": "Saisissez la plaque d'immatriculation du véhicule"
+      },
+      "confidentialNumber": {
+        "inputLabel": "Code confidentiel",
+        "text": "Saisissez le code confidentiel de votre certificat d’immatriculation"
       }
     },
     "driverLicense": {

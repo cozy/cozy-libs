@@ -261,6 +261,14 @@
       "number": {
         "inputLabel": "Number in position E. of your vehicle registration",
         "text": "Enter the Vehicle Identification Number (VIN)"
+      },
+      "licenseNumber": {
+        "inputLabel": "Your vehicle registration number",
+        "text": "Enter the vehicle registration number"
+      },
+      "confidentialNumber": {
+        "inputLabel": "Confidential code",
+        "text": "Enter the confidential code from your registration certificate"
       }
     },
     "driverLicense": {
