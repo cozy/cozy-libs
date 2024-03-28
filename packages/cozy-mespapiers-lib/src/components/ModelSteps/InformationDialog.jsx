@@ -1,4 +1,7 @@
 import cx from 'classnames'
+import get from 'lodash/get'
+import merge from 'lodash/merge'
+import set from 'lodash/set'
 import throttle from 'lodash/throttle'
 import PropTypes from 'prop-types'
 import React, { useCallback, useMemo, useState } from 'react'
@@ -41,15 +44,20 @@ const InformationDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
   const [validInput, setValidInput] = useState({})
   const [isFocus, setIsFocus] = useState(false)
 
+  const [objKey, objValue] = Object.entries(value)[0] || [undefined, undefined]
+  const newMetadata = useMemo(
+    () => ({ metadata: set({}, objKey, objValue) }),
+    [objKey, objValue]
+  )
+
+  const newFormData = useMemo(
+    () => merge({}, formData, newMetadata),
+    [formData, newMetadata]
+  )
+
   const submit = throttle(() => {
     if (value && allInputsValid) {
-      setFormData(prev => ({
-        ...prev,
-        metadata: {
-          ...prev.metadata,
-          ...value
-        }
-      }))
+      setFormData(newFormData)
       nextStep()
     }
   }, 100)
@@ -59,17 +67,6 @@ const InformationDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
       if (evt.key === KEYS.ENTER) submit()
     },
     [submit]
-  )
-
-  const newFormData = useMemo(
-    () => ({
-      ...formData,
-      metadata: {
-        ...formData.metadata,
-        ...value
-      }
-    }),
-    [formData, value]
   )
 
   useEventListener(window, 'keydown', handleKeyDown)
@@ -128,7 +125,7 @@ const InformationDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
                 >
                   <Component
                     attrs={attrs}
-                    formDataValue={formData.metadata[attrs.name]}
+                    formDataValue={get(formData, `metadata[${attrs.name}]`)}
                     currentDefinition={currentDefinition}
                     setValue={setValue}
                     setValidInput={setValidInput}

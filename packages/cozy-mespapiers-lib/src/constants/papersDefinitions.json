@@ -2276,6 +2276,18 @@
         },
         {
           "model": "information",
+          "text": "PaperJSON.vehicleRegistration.licenseNumber.text",
+          "attributes": [
+            {
+              "name": "vehicle.licenseNumber",
+              "type": "text",
+              "maxLength": 10,
+              "inputLabel": "PaperJSON.vehicleRegistration.licenseNumber.inputLabel"
+            }
+          ]
+        },
+        {
+          "model": "information",
           "text": "PaperJSON.vehicleRegistration.number.text",
           "attributes": [
             {
@@ -2283,6 +2295,18 @@
               "type": "text",
               "mask": "*** ****** ********",
               "inputLabel": "PaperJSON.vehicleRegistration.number.inputLabel"
+            }
+          ]
+        },
+        {
+          "model": "information",
+          "text": "PaperJSON.vehicleRegistration.confidentialNumber.text",
+          "attributes": [
+            {
+              "name": "vehicle.confidentialNumber",
+              "type": "text",
+              "maxLength": 5,
+              "inputLabel": "PaperJSON.vehicleRegistration.confidentialNumber.inputLabel"
             }
           ]
         },
