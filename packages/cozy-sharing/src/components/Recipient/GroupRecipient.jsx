@@ -12,7 +12,10 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { GroupRecipientDetail } from './GroupRecipientDetail'
 import { GroupRecipientPermissions } from './GroupRecipientPermissions'
-import { FADE_IN_DURATION } from '../../helpers/recipients'
+import {
+  FADE_IN_DURATION,
+  getGroupRecipientSecondaryText
+} from '../../helpers/recipients'
 import { GroupAvatar } from '../Avatar/GroupAvatar'
 
 const GroupRecipient = props => {
@@ -27,7 +30,7 @@ const GroupRecipient = props => {
   const nbMemberReady = members.filter(
     member => !['revoked', 'mail-not-sent'].includes(member.status)
   ).length
-  const isCurrentInstanceInsideMembers = members.some(
+  const isUserInsideMembers = members.some(
     member => member.instance === client.options.uri
   )
 
@@ -56,12 +59,12 @@ const GroupRecipient = props => {
                 {name}
               </Typography>
             }
-            secondary={
-              t('GroupRecipient.secondary', { nbMember, nbMemberReady }) +
-              (isCurrentInstanceInsideMembers
-                ? ` (${t('GroupRecipient.secondary_you')})`
-                : '')
-            }
+            secondary={getGroupRecipientSecondaryText({
+              t,
+              nbMember,
+              nbMemberReady,
+              isUserInsideMembers
+            })}
           />
           <ListItemSecondaryAction className={isMobile ? 'u-mr-1' : 'u-mr-2'}>
             <GroupRecipientPermissions {...props} />

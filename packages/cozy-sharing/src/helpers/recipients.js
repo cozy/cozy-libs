@@ -90,3 +90,22 @@ export const spreadGroupAndMergeRecipients = (
 export const mergeRecipients = (recipients, newRecipient) => {
   return [...recipients, newRecipient]
 }
+
+export const getGroupRecipientSecondaryText = ({
+  nbMember,
+  nbMemberReady,
+  t,
+  isUserInsideMembers
+}) => {
+  const memberCount =
+    nbMember === nbMemberReady ? nbMember : [nbMemberReady, nbMember].join('/')
+  const secondary = t('GroupRecipient.secondary', {
+    memberCount,
+    smart_count: nbMember
+  })
+
+  return (
+    secondary +
+    (isUserInsideMembers ? ` (${t('GroupRecipient.secondary_you')})` : '')
+  )
+}

@@ -364,7 +364,7 @@
     }
   },
   "GroupRecipient": {
-    "secondary": "%{nbMemberReady}/%{nbMember} members",
+    "secondary": "%{memberCount} member |||| %{memberCount} members",
     "secondary_you": "including you"
   },
   "RevokeGroupItem": {
