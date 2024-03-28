@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react'
 
-import { useClient } from 'cozy-client'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import {
   makeActions,
@@ -21,24 +20,20 @@ import { GroupAvatar } from '../Avatar/GroupAvatar'
 const GroupRecipientPermissions = ({
   name,
   isOwner,
-  instance,
   sharingId,
   groupIndex,
   read_only: isReadOnly = false,
-  className
+  className,
+  isUserInsideMembers
 }) => {
   const { t } = useI18n()
   const buttonRef = useRef()
-  const client = useClient()
   const { revokeGroup, revokeSelf } = useSharingContext()
 
   const [isMenuDisplayed, setMenuDisplayed] = useState(false)
   const [revoking, setRevoking] = useState(false)
 
-  const instanceMatchesClient =
-    instance !== undefined && instance === client.options.uri
-  const shouldShowMenu =
-    !revoking && ((instanceMatchesClient && !isOwner) || isOwner)
+  const shouldShowMenu = !revoking && (isOwner || isUserInsideMembers)
 
   const toggleMenu = () => setMenuDisplayed(!isMenuDisplayed)
   const hideMenu = () => setMenuDisplayed(false)
