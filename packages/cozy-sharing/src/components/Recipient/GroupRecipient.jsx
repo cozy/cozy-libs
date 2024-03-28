@@ -67,7 +67,10 @@ const GroupRecipient = props => {
             })}
           />
           <ListItemSecondaryAction className={isMobile ? 'u-mr-1' : 'u-mr-2'}>
-            <GroupRecipientPermissions {...props} />
+            <GroupRecipientPermissions
+              isUserInsideMembers={isUserInsideMembers}
+              {...props}
+            />
           </ListItemSecondaryAction>
         </ListItem>
       </Fade>
