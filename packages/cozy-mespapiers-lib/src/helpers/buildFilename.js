@@ -1,5 +1,6 @@
-import { harmonizeContactsNames } from '../components/Papers/helpers'
+import get from 'lodash/get'
 
+import { harmonizeContactsNames } from '../components/Papers/helpers'
 /**
  * @param {object} params
  * @param {string[]} params.filenameModel - Array of property of paerDefinition
@@ -28,7 +29,7 @@ const buildFilenameWithModel = ({
         case 'featureDate':
           return formatedDate
         default:
-          return metadata?.[el]
+          return get(metadata, el)
       }
     })
     .filter(Boolean)
@@ -38,7 +39,9 @@ const buildFilenameWithModel = ({
  * Builded Paper name with qualification name & without use filename original
  * @param {object} params
  * @param {string} params.contacts - Array of contacts
- * @param {string} params.qualificationName - Name of the paper qualification
+ * @param {object} params.qualification - Qualification of the paper
+ * @param {string} params.qualification.name - Name of the paper qualification
+ * @param {string} params.qualification.label - Label of the paper qualification
  * @param {Array<string>} [params.filenameModel] - Array of key for build filename
  * @param {object} [params.metadata] - Object with data of Information input
  * @param {string} [params.pageName] - Name of page (eg Front)
@@ -47,7 +50,7 @@ const buildFilenameWithModel = ({
  */
 export const buildFilename = ({
   contacts,
-  qualificationName,
+  qualification,
   filenameModel,
   metadata,
   pageName,
@@ -58,13 +61,19 @@ export const buildFilename = ({
     Calling the stack's file creation method would trigger a `status: "422", title: "Invalid Parameter"` error if filename contains`/`.
     So we need to remove any occurrence of this character from the filename.
   */
-  const safeFileName = qualificationName.replace(/\//g, '_')
+  const safeFileName = qualification.name.replace(/\//g, '_')
 
   const filename = []
   let contactName = harmonizeContactsNames(contacts, t)
 
   filename.push(safeFileName)
   if (pageName) filename.push(pageName)
+  if (
+    qualification.label === 'vehicle_registration' &&
+    metadata?.vehicle?.licenseNumber
+  ) {
+    filename.push(metadata.vehicle.licenseNumber)
+  }
   if (contactName) filename.push(contactName)
   if (formatedDate) filename.push(formatedDate)
 

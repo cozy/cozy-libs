@@ -90,7 +90,10 @@ export const createPdfAndSave = async ({
     const paperName = buildFilename({
       filenameModel,
       metadata,
-      qualificationName: scannerT(`items.${label}`),
+      qualification: {
+        label,
+        name: scannerT(`items.${label}`)
+      },
       pageName: fileMetadata.page
         ? t(`PapersList.label.${fileMetadata.page}`)
         : null,
