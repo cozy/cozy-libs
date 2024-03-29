@@ -399,7 +399,8 @@
       "status": {
         "mail-not-sent": "Echec de l’invitation",
         "revoked": "Partage révoqué"
-      }
+      },
+      "addEmail": "Renseigner un email pour pouvoir inviter le contact"
     }
   }
 }

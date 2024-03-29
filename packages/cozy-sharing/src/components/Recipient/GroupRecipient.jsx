@@ -19,7 +19,7 @@ import {
 import { GroupAvatar } from '../Avatar/GroupAvatar'
 
 const GroupRecipient = props => {
-  const { name, members, fadeIn, owner } = props
+  const { name, members, fadeIn, owner, isOwner } = props
   const { t } = useI18n()
   const client = useClient()
   const { isMobile } = useBreakpoints()
@@ -76,6 +76,7 @@ const GroupRecipient = props => {
       </Fade>
       {isDetailOpened ? (
         <GroupRecipientDetail
+          isOwner={isOwner}
           owner={owner}
           name={name}
           members={members}

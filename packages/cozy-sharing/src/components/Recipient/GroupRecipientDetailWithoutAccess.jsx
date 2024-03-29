@@ -10,9 +10,10 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
+import { DEFAULT_DISPLAY_NAME } from '../../helpers/recipients'
 import { getInitials, getDisplayName } from '../../models'
 
-const GroupRecipientDetailWithoutAccess = ({ withoutAccess }) => {
+const GroupRecipientDetailWithoutAccess = ({ withoutAccess, isOwner }) => {
   const { t } = useI18n()
 
   return (
@@ -23,10 +24,11 @@ const GroupRecipientDetailWithoutAccess = ({ withoutAccess }) => {
       <List>
         {withoutAccess.map(recipient => {
           const icon = recipient.status === 'revoked' ? ForbiddenIcon : null
-          const name = getDisplayName(recipient)
+          const defaultDisplayName = t(DEFAULT_DISPLAY_NAME)
+          const name = getDisplayName(recipient, defaultDisplayName)
 
           return (
-            <ListItem disableGutters key={recipient.index}>
+            <ListItem disableGutters key={recipient.index} ellipsis={false}>
               <ListItemIcon>
                 <Avatar text={getInitials(recipient)} textId={name} />
               </ListItemIcon>
@@ -46,6 +48,9 @@ const GroupRecipientDetailWithoutAccess = ({ withoutAccess }) => {
                     {t(
                       `GroupRecipientDetail.withoutAccess.status.${recipient.status}`
                     )}
+                    {isOwner
+                      ? ` - ${t('GroupRecipientDetail.withoutAccess.addEmail')}`
+                      : null}
                   </div>
                 }
               />

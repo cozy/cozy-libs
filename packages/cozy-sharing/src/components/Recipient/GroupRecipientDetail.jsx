@@ -7,7 +7,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { GroupRecipientDetailWithAccess } from './GroupRecipientDetailWithAccess'
 import { GroupRecipientDetailWithoutAccess } from './GroupRecipientDetailWithoutAccess'
 
-const GroupRecipientDetail = ({ name, owner, members, onClose }) => {
+const GroupRecipientDetail = ({ name, owner, members, onClose, isOwner }) => {
   const { t } = useI18n()
   const withAccess = members.filter(
     member => !['revoked', 'mail-not-sent'].includes(member.status)
@@ -39,7 +39,10 @@ const GroupRecipientDetail = ({ name, owner, members, onClose }) => {
             <GroupRecipientDetailWithAccess withAccess={withAccess} />
           ) : null}
           {withoutAccess.length > 0 ? (
-            <GroupRecipientDetailWithoutAccess withoutAccess={withoutAccess} />
+            <GroupRecipientDetailWithoutAccess
+              withoutAccess={withoutAccess}
+              isOwner={isOwner}
+            />
           ) : null}
         </div>
       }
