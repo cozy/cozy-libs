@@ -399,7 +399,8 @@
       "status": {
         "mail-not-sent": "Invitation failed",
         "revoked": "Sharing revoked"
-      }
+      },
+      "addEmail": "Enter an email address to invite the contact"
     }
   }
 }

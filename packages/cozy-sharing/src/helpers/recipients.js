@@ -4,6 +4,8 @@ import flag from 'cozy-flags'
 
 import { Group } from '../models'
 
+export const DEFAULT_DISPLAY_NAME = 'Share.contacts.defaultDisplayName'
+
 export const filterAndReworkRecipients = (recipients, previousRecipients) => {
   return recipients
     .filter(recipient => recipient.status !== 'owner')
