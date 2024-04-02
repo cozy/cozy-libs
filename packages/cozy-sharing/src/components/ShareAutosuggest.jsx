@@ -165,10 +165,7 @@ const ShareAutocomplete = ({
       })}
       <input {...inputProps} onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
       {loading && isLoadingDisplayed ? (
-        <Spinner
-          color={palette.dodgerBlue}
-          className="u-flex u-flex-items-center"
-        />
+        <Spinner color={palette.dodgerBlue} />
       ) : null}
     </div>
   )

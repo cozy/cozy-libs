@@ -3,6 +3,7 @@ import React from "react";
 import 'cozy-ui/dist/cozy-ui.min.css'
 import 'cozy-ui/dist/cozy-ui.utils.min.css'
 import 'cozy-ui/transpiled/react/stylesheet.css'
+import '../dist/stylesheet.css'
 
 import I18n from 'cozy-ui/transpiled/react/providers/I18n'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
