@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [90.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@90.0.3...cozy-mespapiers-lib@90.1.0) (2024-04-02)
+
+
+### Features
+
+* **mespapiers:** Add a health paper ([2aadd32](https://github.com/cozy/cozy-libs/commit/2aadd321afe5f2bb38445ffc7a73a2c3d36fd3d2))
+
+
+
+
+
 ## [90.0.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@90.0.2...cozy-mespapiers-lib@90.0.3) (2024-03-27)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
