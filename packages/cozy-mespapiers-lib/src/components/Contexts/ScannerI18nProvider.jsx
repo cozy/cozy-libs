@@ -1,10 +1,7 @@
 import React, { createContext, useMemo, useCallback } from 'react'
 
-import { models } from 'cozy-client'
+import { getBoundT } from 'cozy-client/dist/models/document/locales'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
-const {
-  locales: { getBoundT }
-} = models.document
 
 const ScannerI18nContext = createContext()
 
