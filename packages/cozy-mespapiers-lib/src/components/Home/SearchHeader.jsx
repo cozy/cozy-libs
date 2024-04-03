@@ -63,7 +63,7 @@ const SearchHeader = ({
           <div>
             <FilterButton
               badge={{
-                active: Boolean(selectedThemes.length),
+                active: !hasThemeFilter && Boolean(selectedThemes.length),
                 content: selectedThemes.length
               }}
               onClick={() => setIsThemesFilterDisplayed(prev => !prev)}
