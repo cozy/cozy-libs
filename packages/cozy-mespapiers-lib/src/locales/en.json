@@ -451,6 +451,10 @@
         "payment_proof_family_allowance": "CAF file number",
         "caf": "CAF file number",
         "vehicle_registration": "Vehicle registration number (VIN)",
+        "vehicle": {
+          "licenseNumber": "Vehicle registration number",
+          "confidentialNumber": "Confidential code"
+        },
         "national_id_card": "National ID card number",
         "bank_details": "IBAN number",
         "passport": "Passport number",
