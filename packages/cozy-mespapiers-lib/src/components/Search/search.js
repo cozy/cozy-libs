@@ -14,6 +14,8 @@ const flexsearchIndex = [
   'flexsearchProps:translated:metadata.netSocialAmount', // io.cozy.files
   'flexsearchProps:translated:metadata.contractType', // io.cozy.files
   'flexsearchProps:translated:metadata.expirationDate', // io.cozy.files
+  'flexsearchProps:translated:metadata.vehicle.licenseNumber', // io.cozy.files
+  'flexsearchProps:translated:metadata.vehicle.confidentialNumber', // io.cozy.files
   'flexsearchProps:translated:driverLicense', // io.cozy.files
   'flexsearchProps:translated:paymentProofFamilyAllowance', // io.cozy.files
   'flexsearchProps:translated:vehicleRegistration', // io.cozy.files
@@ -28,6 +30,8 @@ const flexsearchIndex = [
   'flexsearchProps:translated:address', // io.cozy.contacts
   // for the following attributes, ensure that they are retrieved by the query if it performs a `select`
   'metadata:number', // io.cozy.files
+  'metadata:vehicle:licenseNumber', // io.cozy.files
+  'metadata:vehicle:confidentialNumber', // io.cozy.files
   'metadata:bicNumber', // io.cozy.files
   'metadata:refTaxIncome', // io.cozy.files
   'metadata:netSocialAmount', // io.cozy.files

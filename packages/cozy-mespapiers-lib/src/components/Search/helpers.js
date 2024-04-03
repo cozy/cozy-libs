@@ -169,6 +169,16 @@ export const makeFileFlexsearchProps = ({ doc, scannerT, t }) => ({
         'Search.attributeLabel.metadata.expirationDate'
       )
     }),
+    ...(doc.metadata.vehicle?.licenseNumber && {
+      'metadata.vehicle.licenseNumber': t(
+        'Search.attributeLabel.metadata.vehicle.licenseNumber'
+      )
+    }),
+    ...(doc.metadata.vehicle?.confidentialNumber && {
+      'metadata.vehicle.confidentialNumber': t(
+        'Search.attributeLabel.metadata.vehicle.confidentialNumber'
+      )
+    }),
     ...(doc.metadata.qualification?.label === 'driver_license' && {
       driverLicense: t('Search.attributeLabel.metadata.driver_license')
     }),
