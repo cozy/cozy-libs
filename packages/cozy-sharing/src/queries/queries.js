@@ -24,7 +24,7 @@ export const buildSharingsByIdQuery = sharingId => ({
   }
 })
 
-export const buildContactsQuery = () => ({
+export const buildReachableContactsQuery = () => ({
   definition: Q(Contact.doctype)
     .where({
       _id: {
@@ -55,7 +55,7 @@ export const buildContactsQuery = () => ({
     .indexFields(['_id'])
     .limitBy(1000),
   options: {
-    as: 'io.cozy.contacts'
+    as: 'io.cozy.contacts/reachable'
   }
 })
 

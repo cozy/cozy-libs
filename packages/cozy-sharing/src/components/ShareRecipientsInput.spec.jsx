@@ -31,10 +31,9 @@ describe('ShareRecipientsInput component', () => {
   const setup = ({ contacts, contactGroups }) => {
     const mockClient = createMockClient({
       queries: {
-        'io.cozy.contacts': {
+        'io.cozy.contacts/reachable': {
           doctype: 'io.cozy.contacts',
-          data: contacts,
-          meta: { count: 4 }
+          data: contacts
         },
         'io.cozy.contacts.groups': {
           doctype: 'io.cozy.contacts.groups',

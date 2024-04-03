@@ -5,7 +5,10 @@ import React, { useMemo } from 'react'
 import { useQueryAll, isQueryLoading } from 'cozy-client'
 
 import ShareAutosuggest from './ShareAutosuggest'
-import { buildContactsQuery, buildContactGroupsQuery } from '../queries/queries'
+import {
+  buildReachableContactsQuery,
+  buildContactGroupsQuery
+} from '../queries/queries'
 
 const ShareRecipientsInput = ({
   recipients,
@@ -13,10 +16,10 @@ const ShareRecipientsInput = ({
   onPick,
   onRemove
 }) => {
-  const contactsQuery = buildContactsQuery()
-  const contactsResult = useQueryAll(
-    contactsQuery.definition,
-    contactsQuery.options
+  const reachableContactsQuery = buildReachableContactsQuery()
+  const reachableContactsResult = useQueryAll(
+    reachableContactsQuery.definition,
+    reachableContactsQuery.options
   )
 
   const contactGroupsQuery = buildContactGroupsQuery()
@@ -26,27 +29,30 @@ const ShareRecipientsInput = ({
   )
 
   const isLoading =
-    isQueryLoading(contactsResult) ||
-    contactsResult.hasMore ||
+    isQueryLoading(reachableContactsResult) ||
+    reachableContactsResult.hasMore ||
     isQueryLoading(contactGroupsResult) ||
     contactGroupsResult.hasMore
 
   const contactsAndGroups = useMemo(() => {
     // we need contacts to be loaded to be able to  add all group members to recipients
-    if (contactsResult.hasMore || contactsResult.fetchStatus === 'loading') {
-      return contactsResult.data
+    if (
+      reachableContactsResult.hasMore ||
+      reachableContactsResult.fetchStatus === 'loading'
+    ) {
+      return reachableContactsResult.data
     }
 
     if (
-      !contactsResult.hasMore &&
-      contactsResult.fetchStatus === 'loaded' &&
+      !reachableContactsResult.hasMore &&
+      reachableContactsResult.fetchStatus === 'loaded' &&
       !contactGroupsResult.hasMore &&
       contactGroupsResult.fetchStatus === 'loaded'
     ) {
       const contactGroupsWithMembers = contactGroupsResult.data
         .map(contactGroup => ({
           ...contactGroup,
-          members: contactsResult.data.reduce((members, contact) => {
+          members: reachableContactsResult.data.reduce((members, contact) => {
             if (
               get(contact, 'relationships.groups.data', [])
                 .map(group => group._id)
@@ -60,11 +66,11 @@ const ShareRecipientsInput = ({
         }))
         .filter(group => group.members.length > 0)
 
-      return [...contactsResult.data, ...contactGroupsWithMembers]
+      return [...reachableContactsResult.data, ...contactGroupsWithMembers]
     }
 
     return []
-  }, [contactsResult, contactGroupsResult])
+  }, [reachableContactsResult, contactGroupsResult])
 
   return (
     <ShareAutosuggest
