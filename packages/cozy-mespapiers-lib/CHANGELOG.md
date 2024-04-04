@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [91.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@90.1.0...cozy-mespapiers-lib@91.0.0) (2024-04-04)
+
+
+### Features
+
+* Add licenseNumber and confidentialNumber in search ([28149bf](https://github.com/cozy/cozy-libs/commit/28149bf66e0ce58d5caf7a987f28d24617e327d3))
+* Add licenseNumber and confidentialNumber on vehicle_registration ([5ae2469](https://github.com/cozy/cozy-libs/commit/5ae24696d7a99bee73d3ceb28c07432680daaa40))
+* Add vehicle registration license number on file name ([92e1a99](https://github.com/cozy/cozy-libs/commit/92e1a992d0550c6d848dc65d0c79e8b4dbb8b612))
+* Upgrade packages ([0187535](https://github.com/cozy/cozy-libs/commit/0187535b3d90a7952b06a65037f99fe7f0946f3d))
+
+
+### BREAKING CHANGES
+
+* you must have `cozy-client >= 46.4.0` and `cozy-ui >= 105.6.0`
+
+
+
+
+
 # [90.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@90.0.3...cozy-mespapiers-lib@90.1.0) (2024-04-02)
 
 
