@@ -3,7 +3,15 @@ import { useState, useEffect } from 'react'
 import { useSearch } from './SearchProvider'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
-const useSearchResult = ({ papers, contacts, searchValue, selectedTheme }) => {
+/**
+ * @param {Object} params
+ * @param {import('cozy-client/types/types').IOCozyFile[]} params.papers
+ * @param {object[]} params.contacts
+ * @param {string} params.searchValue
+ * @param {import('cozy-client/types/types').Theme[]} params.selectedThemes
+ * @returns {import('../../types').SearchResult} Result of the search
+ */
+const useSearchResult = ({ papers, contacts, searchValue, selectedThemes }) => {
   const { search } = useSearch()
   const { isMultiSelectionActive } = useMultiSelection()
   const [searchResult, setSearchResult] = useState({
@@ -11,7 +19,7 @@ const useSearchResult = ({ papers, contacts, searchValue, selectedTheme }) => {
     hasResult: null,
     filteredDocs: null,
     firstSearchResultMatchingAttributes: null,
-    showResultByGroup: null
+    showResultByGroup: false
   })
 
   useEffect(() => {
@@ -30,7 +38,7 @@ const useSearchResult = ({ papers, contacts, searchValue, selectedTheme }) => {
         await search({
           docs: docsToBeSearched,
           value: searchValue,
-          tag: selectedTheme?.label
+          tag: selectedThemes.map(selectedTheme => selectedTheme.label)
         })
 
       const hasResult = filteredDocs?.length > 0
@@ -50,7 +58,7 @@ const useSearchResult = ({ papers, contacts, searchValue, selectedTheme }) => {
     contacts,
     search,
     searchValue,
-    selectedTheme,
+    selectedThemes,
     isMultiSelectionActive
   ])
 

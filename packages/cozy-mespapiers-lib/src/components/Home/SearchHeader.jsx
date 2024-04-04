@@ -13,8 +13,8 @@ import ThemesFilter from '../ThemesFilter'
 const SearchHeader = ({
   searchValue,
   setSearchValue,
-  selectedTheme,
-  setSelectedTheme
+  selectedThemes,
+  setSelectedThemes
 }) => {
   const { t } = useI18n()
   const { isDesktop } = useBreakpoints()
@@ -25,8 +25,18 @@ const SearchHeader = ({
     if (!isDesktop || isMultiSelectionActive) setIsThemesFilterDisplayed(false)
   }
 
-  const handleThemeSelection = nextValue => {
-    setSelectedTheme(oldValue => (nextValue === oldValue ? '' : nextValue))
+  const handleThemeSelection = theme => {
+    setSelectedThemes(selectedThemes => {
+      const selectedThemeExists = selectedThemes.some(
+        selectedTheme => selectedTheme.label === theme.label
+      )
+      if (selectedThemeExists) {
+        return selectedThemes.filter(
+          selectedTheme => selectedTheme.label !== theme.label
+        )
+      }
+      return [...selectedThemes, theme]
+    })
   }
 
   const hasFilterButton = !isDesktop || (isDesktop && isMultiSelectionActive)
@@ -53,8 +63,8 @@ const SearchHeader = ({
           <div>
             <FilterButton
               badge={{
-                active: Boolean(selectedTheme),
-                content: 1
+                active: Boolean(selectedThemes.length),
+                content: selectedThemes.length
               }}
               onClick={() => setIsThemesFilterDisplayed(prev => !prev)}
             />
@@ -74,7 +84,7 @@ const SearchHeader = ({
           id="theme-filters"
         >
           <ThemesFilter
-            selectedTheme={selectedTheme}
+            selectedThemes={selectedThemes}
             handleThemeSelection={handleThemeSelection}
           />
         </div>
@@ -84,8 +94,8 @@ const SearchHeader = ({
 }
 
 SearchHeader.propTypes = {
-  selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  setSelectedTheme: PropTypes.func,
+  selectedThemes: PropTypes.arrayOf(PropTypes.object),
+  setSelectedThemes: PropTypes.func,
   searchValue: PropTypes.string,
   setSearchValue: PropTypes.func
 }

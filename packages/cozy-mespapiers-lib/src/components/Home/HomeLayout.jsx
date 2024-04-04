@@ -10,7 +10,7 @@ import FeaturedPlaceholdersList from '../Placeholders/FeaturedPlaceholdersList'
 import { useSearch } from '../Search/SearchProvider'
 
 const HomeLayout = ({ contacts, papers, konnectors }) => {
-  const [selectedTheme, setSelectedTheme] = useState('')
+  const [selectedThemes, setSelectedThemes] = useState([])
   const [searchValue, setSearchValue] = useState('')
   const { isMultiSelectionActive } = useMultiSelection()
   const { papersDefinitions } = usePapersDefinitions()
@@ -25,16 +25,16 @@ const HomeLayout = ({ contacts, papers, konnectors }) => {
       getFeaturedPlaceholders({
         papersDefinitions,
         files: papers,
-        selectedTheme
+        selectedThemes
       }),
-    [papersDefinitions, papers, selectedTheme]
+    [papersDefinitions, papers, selectedThemes]
   )
 
   return (
     <>
       <SearchHeader
-        selectedTheme={selectedTheme}
-        setSelectedTheme={setSelectedTheme}
+        selectedThemes={selectedThemes}
+        setSelectedThemes={setSelectedThemes}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
       />
@@ -42,7 +42,7 @@ const HomeLayout = ({ contacts, papers, konnectors }) => {
         contacts={contacts}
         papers={papers}
         konnectors={konnectors}
-        selectedTheme={selectedTheme}
+        selectedThemes={selectedThemes}
         searchValue={searchValue}
       />
       {!isMultiSelectionActive && (
