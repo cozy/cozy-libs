@@ -8,10 +8,10 @@ const ContentFlexsearch = ({
   contacts,
   papers,
   konnectors,
-  selectedTheme,
+  selectedThemes,
   searchValue
 }) => {
-  const isSearching = searchValue.length > 0 || Boolean(selectedTheme)
+  const isSearching = searchValue.length > 0 || Boolean(selectedThemes.length)
 
   if (isSearching) {
     return (
@@ -20,7 +20,7 @@ const ContentFlexsearch = ({
         contacts={contacts}
         konnectors={konnectors}
         searchValue={searchValue}
-        selectedTheme={selectedTheme}
+        selectedThemes={selectedThemes}
       />
     )
   }
@@ -38,7 +38,7 @@ ContentFlexsearch.propTypes = {
   contacts: PropTypes.array,
   papers: PropTypes.array,
   konnectors: PropTypes.array,
-  selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  selectedThemes: PropTypes.arrayOf(PropTypes.object),
   searchValue: PropTypes.string
 }
 

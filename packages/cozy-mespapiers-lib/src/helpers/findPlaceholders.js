@@ -50,21 +50,21 @@ export const isPaperEnabled = paperDefinition =>
  * Filters and sorts the list of featured Placeholders.
  * @param {PaperDefinition[]} papersDefinitions Array of PapersDefinition
  * @param {IOCozyFile[]} files Array of IOCozyFile
- * @param {object} selectedTheme Theme selected
+ * @param {import('cozy-client/types/types').Theme[]} selectedThemes Array of Themes selected
  * @returns {PaperDefinition[]} Array of PapersDefinition filtered with the prop "placeholderIndex"
  */
 export const getFeaturedPlaceholders = ({
   papersDefinitions,
   files = [],
-  selectedTheme = ''
+  selectedThemes = []
 }) => {
   return papersDefinitions
     .filter(
       paperDefinition =>
         hasNoFileWithSameQualificationLabel(files, paperDefinition) &&
         isPaperEnabled(paperDefinition) &&
-        (selectedTheme
-          ? hasItemByLabel(selectedTheme, paperDefinition.label)
+        (selectedThemes.length
+          ? hasItemByLabel(selectedThemes, paperDefinition.label)
           : paperDefinition.placeholderIndex)
     )
     .sort((a, b) => a.placeholderIndex - b.placeholderIndex)

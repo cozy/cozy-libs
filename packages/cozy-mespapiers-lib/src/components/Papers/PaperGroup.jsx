@@ -8,7 +8,7 @@ import CategoryItemByPaper from './CategoryItemByPaper'
 import KonnectorsCategories from './KonnectorsCategories'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
-const PaperGroup = ({ papersByCategories, konnectors, selectedTheme }) => {
+const PaperGroup = ({ papersByCategories, konnectors, selectedThemes }) => {
   const navigate = useNavigate()
   const { isMultiSelectionActive, setSelectedQualificationLabel } =
     useMultiSelection()
@@ -37,7 +37,7 @@ const PaperGroup = ({ papersByCategories, konnectors, selectedTheme }) => {
         ))}
       <KonnectorsCategories
         konnectors={konnectors}
-        selectedTheme={selectedTheme}
+        selectedThemes={selectedThemes}
         onClick={goPapersList}
       />
     </List>
@@ -47,7 +47,7 @@ const PaperGroup = ({ papersByCategories, konnectors, selectedTheme }) => {
 PaperGroup.propTypes = {
   papersByCategories: PropTypes.object,
   konnectors: PropTypes.arrayOf(PropTypes.object),
-  selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+  selectedThemes: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default PaperGroup

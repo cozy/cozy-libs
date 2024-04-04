@@ -16,7 +16,7 @@ const ContentWhenSearching = ({
   contacts,
   konnectors,
   searchValue,
-  selectedTheme
+  selectedThemes
 }) => {
   const { t } = useI18n()
 
@@ -30,7 +30,7 @@ const ContentWhenSearching = ({
     papers,
     contacts,
     searchValue,
-    selectedTheme
+    selectedThemes
   })
 
   if (loading) {
@@ -56,7 +56,7 @@ const ContentWhenSearching = ({
       <PaperGroup
         papersByCategories={papersByCategories}
         konnectors={konnectors}
-        selectedTheme={selectedTheme}
+        selectedThemes={selectedThemes}
       />
     )
   }
@@ -73,7 +73,7 @@ ContentWhenSearching.propTypes = {
   contacts: PropTypes.array,
   papers: PropTypes.array,
   konnectors: PropTypes.array,
-  selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  selectedThemes: PropTypes.arrayOf(PropTypes.object),
   searchValue: PropTypes.string
 }
 

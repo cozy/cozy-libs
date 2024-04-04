@@ -74,9 +74,11 @@ describe('findPlaceholders', () => {
       it('should return list of placeholders', () => {
         const featuredPlaceholders = getFeaturedPlaceholders({
           papersDefinitions: mockPapersDefinitions,
-          selectedTheme: {
-            items: [{ label: 'isp_invoice' }, { label: 'tax_notice' }]
-          }
+          selectedThemes: [
+            {
+              items: [{ label: 'isp_invoice' }, { label: 'tax_notice' }]
+            }
+          ]
         })
 
         expect(featuredPlaceholders).toEqual(
@@ -103,9 +105,11 @@ describe('findPlaceholders', () => {
         const featuredPlaceholders = getFeaturedPlaceholders({
           papersDefinitions: mockPapersDefinitions,
           files: fakeIspInvoiceFile,
-          selectedTheme: {
-            items: [{ label: 'isp_invoice' }, { label: 'tax_notice' }]
-          }
+          selectedThemes: [
+            {
+              items: [{ label: 'isp_invoice' }, { label: 'tax_notice' }]
+            }
+          ]
         })
 
         expect(featuredPlaceholders).toEqual(
@@ -132,9 +136,11 @@ describe('findPlaceholders', () => {
         const featuredPlaceholders = getFeaturedPlaceholders({
           papersDefinitions: mockPapersDefinitions,
           files: fakeIspInvoiceFile,
-          selectedTheme: {
-            items: [{ label: 'health_certificate' }]
-          }
+          selectedThemes: [
+            {
+              items: [{ label: 'health_certificate' }]
+            }
+          ]
         })
 
         expect(featuredPlaceholders).toEqual(

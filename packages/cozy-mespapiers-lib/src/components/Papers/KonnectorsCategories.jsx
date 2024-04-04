@@ -7,7 +7,7 @@ import CategoryItemByKonnector from './CategoryItemByKonnector'
 import { makeQualificationLabelsWithoutFiles } from './helpers'
 import { queryAccounts } from '../../helpers/queries'
 
-const KonnectorsCategories = ({ konnectors, selectedTheme, onClick }) => {
+const KonnectorsCategories = ({ konnectors, selectedThemes, onClick }) => {
   const { data: accounts, ...accountsQueryLeft } = useQuery(
     queryAccounts.definition,
     queryAccounts.options
@@ -23,7 +23,7 @@ const KonnectorsCategories = ({ konnectors, selectedTheme, onClick }) => {
 
   const qualificationLabelsWithoutFiles = makeQualificationLabelsWithoutFiles(
     konnectorsWithAccounts,
-    selectedTheme
+    selectedThemes
   )
 
   return qualificationLabelsWithoutFiles.map((qualificationLabel, index) => (
@@ -39,7 +39,7 @@ const KonnectorsCategories = ({ konnectors, selectedTheme, onClick }) => {
 
 KonnectorsCategories.propTypes = {
   konnectors: PropTypes.arrayOf(PropTypes.object),
-  selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  selectedThemes: PropTypes.arrayOf(PropTypes.object),
   onClick: PropTypes.func
 }
 

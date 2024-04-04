@@ -8,10 +8,15 @@ const fuse = new Fuse([], {
   keys: ['name', 'translatedQualificationLabel', 'contact']
 })
 
-// TODO: hasItemByLabel should be in cozy-client : https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/document/documentTypeDataHelpers.js
-export const hasItemByLabel = (theme, label) => {
-  if (!theme) return true
-  return theme.items.some(item => item.label === label)
+/**
+ * Check if a theme has an item with a specific label
+ * @param {import('cozy-client/types/types').Theme[]} themes - list of themes
+ * @param {string} label - label to check
+ * @returns {boolean} - true if the theme has an item with the label
+ */
+export const hasItemByLabel = (themes, label) => {
+  if (themes.length === 0) return true
+  return themes.some(({ items }) => items.some(item => item.label === label))
 }
 
 export const filterPapersByThemeAndSearchValue = ({
