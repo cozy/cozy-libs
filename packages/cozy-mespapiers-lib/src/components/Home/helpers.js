@@ -1,13 +1,3 @@
-import Fuse from 'fuse.js'
-
-const fuse = new Fuse([], {
-  findAllMatches: true,
-  threshold: 0.3,
-  ignoreLocation: true,
-  ignoreFieldNorm: true,
-  keys: ['name', 'translatedQualificationLabel', 'contact']
-})
-
 /**
  * Check if a theme has an item with a specific label
  * @param {import('cozy-client/types/types').Theme[]} themes - list of themes
@@ -17,48 +7,6 @@ const fuse = new Fuse([], {
 export const hasItemByLabel = (themes, label) => {
   if (themes.length === 0) return true
   return themes.some(({ items }) => items.some(item => item.label === label))
-}
-
-export const filterPapersByThemeAndSearchValue = ({
-  files,
-  theme,
-  search,
-  scannerT
-}) => {
-  let filteredFiles = files
-
-  if (search || theme) {
-    const simpleFiles = files.map(({ file, contact }) => ({
-      _id: file._id,
-      name: file.name,
-      qualificationLabel: file.metadata.qualification.label,
-      translatedQualificationLabel: scannerT(
-        `items.${file.metadata.qualification.label}`
-      ),
-      contact
-    }))
-
-    let filteredSimplesFiles = simpleFiles
-
-    if (search) {
-      fuse.setCollection(simpleFiles)
-      filteredSimplesFiles = fuse.search(search).map(result => result.item)
-    }
-
-    if (theme) {
-      filteredSimplesFiles = filteredSimplesFiles.filter(simpleFile =>
-        hasItemByLabel(theme, simpleFile.qualificationLabel)
-      )
-    }
-
-    filteredFiles = files
-      .filter(({ file }) =>
-        filteredSimplesFiles.some(simpleFile => simpleFile._id === file._id)
-      )
-      .sort((a, b) => b.file.updated_at.localeCompare(a.file.updated_at))
-  }
-
-  return filteredFiles
 }
 
 /**
