@@ -56,7 +56,7 @@ const MemberRecipientPermissions = ({
 
   const actions = makeActions([permission, divider, revokeMember], {
     t,
-    type,
+    type: type ?? 'one-way',
     isOwner,
     handleRevocation
   })
