@@ -1,15 +1,22 @@
-import get from 'lodash/get'
 import PropTypes from 'prop-types'
-import React, { useMemo } from 'react'
+import React from 'react'
 
 import { useQueryAll, isQueryLoading } from 'cozy-client'
+import flag from 'cozy-flags'
 
 import ShareAutosuggest from './ShareAutosuggest'
+import { getContactsFromGroupId } from '../helpers/contacts'
 import {
   buildReachableContactsQuery,
-  buildContactGroupsQuery
+  buildContactGroupsByIdsQuery,
+  buildUnreachableContactsWithGroupsQuery
 } from '../queries/queries'
 
+/**
+ * ShareRecipientsInput is responsible for fetching contacts and groups.
+ * We retrieve all the contacts that are reachable and the groups they belong to.
+ * In order to display the total number of members in each group, we also retrieve the contacts that are not reachable.
+ */
 const ShareRecipientsInput = ({
   recipients,
   placeholder,
@@ -22,55 +29,75 @@ const ShareRecipientsInput = ({
     reachableContactsQuery.options
   )
 
-  const contactGroupsQuery = buildContactGroupsQuery()
-  const contactGroupsResult = useQueryAll(
-    contactGroupsQuery.definition,
-    contactGroupsQuery.options
+  const unreachableContactsWithGroupsQuery =
+    buildUnreachableContactsWithGroupsQuery()
+  const unreachableContactsWithGroupsResult = useQueryAll(
+    unreachableContactsWithGroupsQuery.definition,
+    {
+      ...unreachableContactsWithGroupsQuery.options,
+      enabled: !!flag('sharing.show-recipient-groups')
+    }
+  )
+
+  const contactGroupsByIdsQuery = buildContactGroupsByIdsQuery([
+    ...new Set(
+      (reachableContactsResult.data || []).flatMap(contact => {
+        return (contact.relationships?.groups?.data || []).map(
+          group => group._id
+        )
+      })
+    )
+  ])
+  const contactGroupsByIdsResult = useQueryAll(
+    contactGroupsByIdsQuery.definition,
+    contactGroupsByIdsQuery.options
   )
 
   const isLoading =
     isQueryLoading(reachableContactsResult) ||
     reachableContactsResult.hasMore ||
-    isQueryLoading(contactGroupsResult) ||
-    contactGroupsResult.hasMore
+    isQueryLoading(contactGroupsByIdsResult) ||
+    contactGroupsByIdsResult.hasMore ||
+    (flag('sharing.show-recipient-groups') &&
+      (isQueryLoading(unreachableContactsWithGroupsResult) ||
+        unreachableContactsWithGroupsResult.hasMore))
 
-  const contactsAndGroups = useMemo(() => {
-    // we need contacts to be loaded to be able to  add all group members to recipients
-    if (
-      reachableContactsResult.hasMore ||
-      reachableContactsResult.fetchStatus === 'loading'
-    ) {
-      return reachableContactsResult.data
-    }
+  const contactGroups = (contactGroupsByIdsResult.data || []).map(
+    contactGroup => {
+      const reachableMembers = getContactsFromGroupId(
+        reachableContactsResult.data,
+        contactGroup.id
+      ).map(contact => ({
+        ...contact,
+        isReachable: true
+      }))
 
-    if (
-      !reachableContactsResult.hasMore &&
-      reachableContactsResult.fetchStatus === 'loaded' &&
-      !contactGroupsResult.hasMore &&
-      contactGroupsResult.fetchStatus === 'loaded'
-    ) {
-      const contactGroupsWithMembers = contactGroupsResult.data
-        .map(contactGroup => ({
+      if (flag('sharing.show-recipient-groups') !== true) {
+        return {
           ...contactGroup,
-          members: reachableContactsResult.data.reduce((members, contact) => {
-            if (
-              get(contact, 'relationships.groups.data', [])
-                .map(group => group._id)
-                .includes(contactGroup._id)
-            ) {
-              return [...members, contact]
-            }
+          members: reachableMembers
+        }
+      }
 
-            return members
-          }, [])
-        }))
-        .filter(group => group.members.length > 0)
+      const unreachableMembers = getContactsFromGroupId(
+        unreachableContactsWithGroupsResult.data,
+        contactGroup.id
+      ).map(contact => ({
+        ...contact,
+        isReachable: false
+      }))
 
-      return [...reachableContactsResult.data, ...contactGroupsWithMembers]
+      return {
+        ...contactGroup,
+        members: [...reachableMembers, ...unreachableMembers]
+      }
     }
+  )
 
-    return []
-  }, [reachableContactsResult, contactGroupsResult])
+  const contactsAndGroups = [
+    ...(reachableContactsResult.data || []),
+    ...contactGroups
+  ]
 
   return (
     <ShareAutosuggest

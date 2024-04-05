@@ -39,3 +39,11 @@ export const getOrCreateFromArray = async (client, contacts, createContact) => {
     })
   )
 }
+
+export const getContactsFromGroupId = (contacts = [], groupId) => {
+  return contacts.filter(contact => {
+    return contact.relationships?.groups?.data?.some(
+      group => group._id === groupId
+    )
+  })
+}

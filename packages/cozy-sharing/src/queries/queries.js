@@ -59,10 +59,41 @@ export const buildReachableContactsQuery = () => ({
   }
 })
 
-export const buildContactGroupsQuery = () => ({
-  definition: Q(Group.doctype),
+export const buildContactGroupsByIdsQuery = ids => ({
+  definition: Q(Group.doctype).getByIds(ids),
   options: {
-    as: 'io.cozy.contacts.groups'
+    as: `io.cozy.contacts.groups/by-ids/${ids.join('/')}`,
+    fetchPolicy: defaultFetchPolicy,
+    enabled: ids.length > 0
+  }
+})
+
+export const buildUnreachableContactsWithGroupsQuery = () => ({
+  definition: Q(Contact.doctype)
+    .where({
+      _id: {
+        $gt: null
+      }
+    })
+    .partialIndex({
+      trashed: {
+        $or: [{ $eq: false }, { $exists: false }]
+      },
+      cozy: {
+        $size: 0
+      },
+      email: {
+        $size: 0
+      },
+      'relationships.groups.data': {
+        $exists: true
+      }
+    })
+    .indexFields(['_id'])
+    .limitBy(1000),
+  options: {
+    as: 'io.cozy.contacts/unreachable-with-groups',
+    fetchPolicy: defaultFetchPolicy
   }
 })
 
