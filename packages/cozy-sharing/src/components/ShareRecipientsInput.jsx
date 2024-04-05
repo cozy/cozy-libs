@@ -1,8 +1,8 @@
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
 
-import { useQueryAll } from 'cozy-client'
+import { useQueryAll, isQueryLoading } from 'cozy-client'
 
 import ShareAutosuggest from './ShareAutosuggest'
 import { buildContactsQuery, buildContactGroupsQuery } from '../queries/queries'
@@ -13,8 +13,6 @@ const ShareRecipientsInput = ({
   onPick,
   onRemove
 }) => {
-  const [loading, setLoading] = useState(false)
-
   const contactsQuery = buildContactsQuery()
   const contactsResult = useQueryAll(
     contactsQuery.definition,
@@ -27,28 +25,11 @@ const ShareRecipientsInput = ({
     contactGroupsQuery.options
   )
 
-  useEffect(() => {
-    if (
-      loading &&
-      !contactsResult.hasMore &&
-      contactsResult.fetchStatus === 'loaded' &&
-      !contactGroupsResult.hasMore &&
-      contactGroupsResult.fetchStatus === 'loaded'
-    ) {
-      setLoading(false)
-    }
-  }, [contactsResult, contactGroupsResult, loading])
-
-  const onShareAutosuggestFocus = () => {
-    if (
-      contactsResult.hasMore ||
-      contactsResult.fetchStatus === 'loading' ||
-      contactGroupsResult.hasMore ||
-      contactGroupsResult.fetchStatus === 'loading'
-    ) {
-      setLoading(true)
-    }
-  }
+  const isLoading =
+    isQueryLoading(contactsResult) ||
+    contactsResult.hasMore ||
+    isQueryLoading(contactGroupsResult) ||
+    contactGroupsResult.hasMore
 
   const contactsAndGroups = useMemo(() => {
     // we need contacts to be loaded to be able to  add all group members to recipients
@@ -87,10 +68,9 @@ const ShareRecipientsInput = ({
 
   return (
     <ShareAutosuggest
-      loading={loading}
+      loading={isLoading}
       contactsAndGroups={contactsAndGroups}
       recipients={recipients}
-      onFocus={onShareAutosuggestFocus}
       onPick={onPick}
       onRemove={onRemove}
       placeholder={placeholder}

@@ -1,29 +1,36 @@
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, screen } from '@testing-library/react'
 import React from 'react'
 
 import ShareAutosuggest from './ShareAutosuggest'
 import AppLike from '../../test/AppLike'
 
+jest.mock('cozy-ui/transpiled/react/Spinner', () => ({
+  Spinner: () => <div>loading</div>
+}))
+
 describe('ShareAutosuggest', () => {
-  it('tests if ShareAutosuggest calls onFocus and onPick', () => {
-    const onPick = jest.fn()
-    const onFocus = jest.fn()
-    const onRemove = jest.fn()
-    const { getByPlaceholderText } = render(
+  const setup = ({ onPick, onRemove, loading = false }) => {
+    render(
       <AppLike>
         <ShareAutosuggest
+          loading={loading}
           contactsAndGroups={[]}
           placeholder="myPlaceHolder"
           onPick={onPick}
-          onFocus={onFocus}
           recipients={[]}
           onRemove={onRemove}
         />
       </AppLike>
     )
-    const inputNode = getByPlaceholderText('myPlaceHolder')
-    inputNode.focus()
-    expect(onFocus).toHaveBeenCalled()
+  }
+
+  it('tests if ShareAutosuggest calls onPick', () => {
+    const onPick = jest.fn()
+    const onRemove = jest.fn()
+
+    setup({ onPick, onRemove })
+
+    const inputNode = screen.getByPlaceholderText('myPlaceHolder')
     // It should not call onPick if the value is not an email
     fireEvent.change(inputNode, { target: { value: 'quentin@qq' } })
     fireEvent.keyPress(inputNode, { key: 'Enter', keyCode: 13, charCode: 13 })
@@ -42,5 +49,19 @@ describe('ShareAutosuggest', () => {
     expect(onPick).toHaveBeenCalledWith({
       email: 'quentin.valmori@cozycloud.cc'
     })
+  })
+
+  it('should show loading only after user focus input', () => {
+    const onPick = jest.fn()
+    const onRemove = jest.fn()
+
+    setup({ onPick, onRemove, loading: true })
+
+    const inputNode = screen.getByPlaceholderText('myPlaceHolder')
+
+    expect(screen.queryByText('loading')).toBeNull()
+    fireEvent.focus(inputNode)
+
+    expect(screen.getByText('loading')).toBeInTheDocument()
   })
 })
