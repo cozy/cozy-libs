@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [91.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@91.0.0...cozy-mespapiers-lib@91.1.0) (2024-04-05)
+
+
+### Features
+
+* Filter with several themes ([7d81402](https://github.com/cozy/cozy-libs/commit/7d81402492ebf3a03271e5ed7813a2342f0176c9))
+* Hide the badge on the filter button when themes filter is visible ([ae388df](https://github.com/cozy/cozy-libs/commit/ae388dff487e87edc55312f6f8deb47f4051b2d7))
+* Remove `fuse.js` lib ([9839d99](https://github.com/cozy/cozy-libs/commit/9839d990fd8e5952628f473b66cd9d8a95b7537d))
+
+
+
+
+
 # [91.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@90.1.0...cozy-mespapiers-lib@91.0.0) (2024-04-04)
 
 
