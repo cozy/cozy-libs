@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { CozyProvider, createMockClient } from 'cozy-client'
+import AlertProvider from 'cozy-ui/transpiled/react/providers/Alert'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import { I18n } from 'cozy-ui/transpiled/react/providers/I18n'
@@ -11,9 +12,11 @@ const AppLike = ({ children, client }) => (
   <BreakpointsProvider>
     <CozyTheme>
       <I18n lang="en" dictRequire={() => langEn}>
-        <CozyProvider client={client || createMockClient({})}>
-          {children}
-        </CozyProvider>
+        <AlertProvider>
+          <CozyProvider client={client || createMockClient({})}>
+            {children}
+          </CozyProvider>
+        </AlertProvider>
       </I18n>
     </CozyTheme>
   </BreakpointsProvider>

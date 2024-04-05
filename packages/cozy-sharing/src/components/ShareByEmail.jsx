@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import ShareRecipientsInput from './ShareRecipientsInput'
@@ -34,6 +35,8 @@ export const ShareByEmail = ({
 }) => {
   const client = useClient()
   const { t } = useI18n()
+  const { showAlert } = useAlert()
+
   const [recipients, setRecipients] = useState([])
   const [loading, setLoading] = useState(false)
   const [selectedOption, setSelectedOption] = useState()
@@ -96,9 +99,13 @@ export const ShareByEmail = ({
         openSharing: readWriteRecipients.length > 0
       })
 
-      Alerter.success(
-        t(...getSuccessMessage(recipientsBefore, contacts, documentType))
-      )
+      showAlert({
+        message: t(
+          ...getSuccessMessage(recipientsBefore, contacts, documentType)
+        ),
+        severity: 'success',
+        variant: 'filled'
+      })
       reset()
     } catch (err) {
       Alerter.error('Error.generic')
