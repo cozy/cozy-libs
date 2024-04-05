@@ -23,7 +23,6 @@ const ShareAutocomplete = ({
   loading,
   contactsAndGroups,
   recipients,
-  onFocus,
   onPick,
   onRemove,
   placeholder
@@ -31,6 +30,7 @@ const ShareAutocomplete = ({
   const [inputValue, setInputValue] = useState('')
   const [suggestions, setSuggestions] = useState([])
   const [isPasted, setIsPasted] = useState(false)
+  const [isLoadingDisplayed, setLoadingDisplayed] = useState(false)
 
   const autosuggestRef = useRef(null)
 
@@ -117,7 +117,8 @@ const ShareAutocomplete = ({
   }
 
   const onAutosuggestFocus = () => {
-    onFocus()
+    // We only show the loading state when the user has focus on the input
+    setLoadingDisplayed(true)
   }
 
   const onAutosuggestBlur = () => {
@@ -163,12 +164,12 @@ const ShareAutocomplete = ({
         )
       })}
       <input {...inputProps} onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
-      {loading && (
+      {loading && isLoadingDisplayed ? (
         <Spinner
           color={palette.dodgerBlue}
           className="u-flex u-flex-items-center"
         />
-      )}
+      ) : null}
     </div>
   )
 
@@ -204,7 +205,6 @@ ShareAutocomplete.propTypes = {
   loading: PropTypes.bool,
   contactsAndGroups: PropTypes.array,
   recipients: PropTypes.array.isRequired,
-  onFocus: PropTypes.func.isRequired,
   onPick: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
   placeholder: PropTypes.string
