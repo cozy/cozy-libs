@@ -18,13 +18,10 @@ import {
   hasReachRecipientsLimit
 } from '../helpers/recipients'
 import { getSuccessMessage } from '../helpers/successMessage'
-import { contactsResponseType, contactGroupsResponseType } from '../propTypes'
 import { isReadOnlySharing } from '../state'
 import styles from '../styles/share.styl'
 
 export const ShareByEmail = ({
-  contacts,
-  contactGroups,
   document,
   sharingDesc,
   onShare,
@@ -54,7 +51,7 @@ export const ShareByEmail = ({
   const onRecipientPick = recipient => {
     const mergedRecipients = flag('sharing.show-recipient-groups')
       ? mergeRecipients(recipients, recipient)
-      : spreadGroupAndMergeRecipients(recipients, recipient, contacts)
+      : spreadGroupAndMergeRecipients(recipients, recipient)
     setRecipients(mergedRecipients)
   }
 
@@ -146,8 +143,6 @@ export const ShareByEmail = ({
           }
           onPick={recipient => onRecipientPick(recipient)}
           onRemove={recipient => onRecipientRemove(recipient)}
-          contacts={contacts}
-          contactGroups={contactGroups}
           recipients={recipients}
         />
       </div>
@@ -174,8 +169,6 @@ export const ShareByEmail = ({
 
 ShareByEmail.propTypes = {
   currentRecipients: PropTypes.arrayOf(PropTypes.object),
-  contacts: contactsResponseType.isRequired,
-  contactGroups: contactGroupsResponseType.isRequired,
   document: PropTypes.object.isRequired,
   documentType: PropTypes.string.isRequired,
   sharingDesc: PropTypes.string.isRequired,

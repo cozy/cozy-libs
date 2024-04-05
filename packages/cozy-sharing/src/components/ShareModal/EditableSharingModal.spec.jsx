@@ -32,8 +32,6 @@ describe('EditableSharingModal', () => {
       <AppWrapper client={client}>
         <EditableSharingModal
           client={client}
-          contacts={{ data: [] }}
-          contactGroups={{ data: [] }}
           document={document}
           t={x => x}
           onClose={() => {}}

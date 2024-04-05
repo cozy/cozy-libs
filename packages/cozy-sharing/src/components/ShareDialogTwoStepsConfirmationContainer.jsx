@@ -90,8 +90,6 @@ const RejectRecipientActions = ({ reject, cancel }) => {
  * Displays a sharing dialog that allows to share a document between multiple Cozy users
  */
 const ShareDialogTwoStepsConfirmationContainer = ({
-  contacts,
-  contactGroups,
   createContact,
   document,
   documentType,
@@ -210,8 +208,6 @@ const ShareDialogTwoStepsConfirmationContainer = ({
   } else if (status === 'sharing') {
     dialogContent = (
       <DialogContentOnShare
-        contacts={contacts}
-        contactGroups={contactGroups}
         createContact={createContact}
         document={document}
         documentType={documentType}

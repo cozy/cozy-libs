@@ -257,57 +257,6 @@ const deferablePromise = () => {
 
 const getMockProps = () => {
   return {
-    contacts: {
-      id: 'contacts',
-      definition: {
-        doctype: 'io.cozy.contacts',
-        selector: {
-          _id: {
-            $gt: null
-          }
-        },
-        indexedFields: ['_id'],
-        partialFilter: {
-          trashed: {
-            $or: [
-              {
-                $eq: false
-              },
-              {
-                $exists: false
-              }
-            ]
-          },
-          $or: [
-            {
-              cozy: {
-                $not: {
-                  $size: 0
-                }
-              }
-            },
-            {
-              email: {
-                $not: {
-                  $size: 0
-                }
-              }
-            }
-          ]
-        },
-        limit: 1000
-      },
-      fetchStatus: 'pending',
-      lastFetch: null,
-      lastUpdate: null,
-      lastErrorUpdate: null,
-      lastError: null,
-      hasMore: false,
-      count: 0,
-      data: [],
-      bookmark: null,
-      options: null
-    },
     document: {
       id: 'SOME_DOCUMENT_ID',
       name: 'SOME_DOCUMENT_NAME',
@@ -315,22 +264,6 @@ const getMockProps = () => {
       _id: 'SOME_DOCUMENT_ID'
     },
     documentType: 'Organizations',
-    contactGroups: {
-      id: 'groups',
-      definition: {
-        doctype: 'io.cozy.contacts.groups'
-      },
-      fetchStatus: 'pending',
-      lastFetch: null,
-      lastUpdate: null,
-      lastErrorUpdate: null,
-      lastError: null,
-      hasMore: false,
-      count: 0,
-      data: [],
-      bookmark: null,
-      options: null
-    },
     hasSharedParent: null,
     isOwner: true,
     link: null,

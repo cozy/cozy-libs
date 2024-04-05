@@ -1,32 +1,16 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { useClient, useQueryAll } from 'cozy-client'
+import { useClient } from 'cozy-client'
 
 import { useFetchDocumentPath } from '../../hooks/useFetchDocumentPath'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import { Contact } from '../../models'
-import {
-  buildContactsQuery,
-  buildContactGroupsQuery
-} from '../../queries/queries'
-import { default as DumbShareModal } from '../ShareModal'
+import { ShareModal } from '../ShareModal'
 
 export const EditableSharingModal = ({ document, ...rest }) => {
   const client = useClient()
   const documentPath = useFetchDocumentPath(client, document)
-
-  const contactsQuery = buildContactsQuery()
-  const contactsResult = useQueryAll(
-    contactsQuery.definition,
-    contactsQuery.options
-  )
-
-  const contactGroupsQuery = buildContactGroupsQuery()
-  const contactGroupsResult = useQueryAll(
-    contactGroupsQuery.definition,
-    contactGroupsQuery.options
-  )
 
   const {
     documentType,
@@ -46,9 +30,7 @@ export const EditableSharingModal = ({ document, ...rest }) => {
   } = useSharingContext()
 
   return (
-    <DumbShareModal
-      contacts={contactsResult}
-      contactGroups={contactGroupsResult}
+    <ShareModal
       createContact={contact => client.create(Contact.doctype, contact)}
       document={document}
       documentType={documentType}

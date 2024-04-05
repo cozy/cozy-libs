@@ -15,8 +15,6 @@ import styles from '../styles/share.styl'
  * Displays the sharing interface that can be used when ShareDialogCozyToCozy is in sharing state
  */
 const SharingContent = ({
-  contacts,
-  contactGroups,
   createContact,
   document,
   documentType,
@@ -68,8 +66,6 @@ const SharingContent = ({
         </Typography>
         {showShareByEmail && (
           <DumbShareByEmail
-            contacts={contacts}
-            contactGroups={contactGroups}
             createContact={createContact}
             currentRecipients={recipients}
             document={document}

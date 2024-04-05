@@ -60,7 +60,16 @@ describe('ContactSuggestion component', () => {
       _id: '610718e6-2d7a',
       name: "The Night's Watch",
       _type: 'io.cozy.contacts.groups',
-      membersCount: 2
+      members: [
+        {
+          _id: 'f3a4e501-abbd',
+          fullname: 'Jon Snow'
+        },
+        {
+          _id: 'ab23a451-tzas',
+          fullname: 'Samwell Tarly'
+        }
+      ]
     }
     setup({ contactOrGroup: theNightsWatch })
     expect(screen.getByText("The Night's Watch")).toBeInTheDocument()
