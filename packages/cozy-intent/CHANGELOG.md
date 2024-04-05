@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.21.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.20.0...cozy-intent@2.21.0) (2024-04-05)
+
+
+### Features
+
+* Add useIsAvailable hook ([07a7c09](https://github.com/cozy/cozy-libs/commit/07a7c097eee9ca59a015b9423f1fa5d3b3311fdf))
+
+
+
+
+
 # 2.20.0 (2024-03-25)
 
 
