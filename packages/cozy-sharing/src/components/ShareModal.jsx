@@ -5,10 +5,8 @@ import flag from 'cozy-flags'
 
 import ShareDialogCozyToCozy from './ShareDialogCozyToCozy'
 import ShareDialogOnlyByLink from './ShareDialogOnlyByLink'
-import { contactsResponseType, contactGroupsResponseType } from '../propTypes'
+
 export const ShareModal = ({
-  contacts,
-  contactGroups,
   createContact,
   document,
   documentType = 'Document',
@@ -56,8 +54,6 @@ export const ShareModal = ({
     />
   ) : (
     <ShareDialogCozyToCozy
-      contacts={contacts}
-      contactGroups={contactGroups}
       createContact={createContact}
       document={document}
       documentType={documentType}
@@ -88,8 +84,6 @@ export const ShareModal = ({
 export default ShareModal
 
 ShareModal.propTypes = {
-  contacts: contactsResponseType.isRequired,
-  contactGroups: contactGroupsResponseType.isRequired,
   createContact: PropTypes.func.isRequired,
   document: PropTypes.object.isRequired,
   documentType: PropTypes.string,

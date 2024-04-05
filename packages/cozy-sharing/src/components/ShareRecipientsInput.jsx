@@ -1,13 +1,13 @@
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
+
+import { useQueryAll } from 'cozy-client'
 
 import ShareAutosuggest from './ShareAutosuggest'
-import { contactsResponseType, contactGroupsResponseType } from '../propTypes'
+import { buildContactsQuery, buildContactGroupsQuery } from '../queries/queries'
 
 const ShareRecipientsInput = ({
-  contacts,
-  contactGroups,
   recipients,
   placeholder,
   onPick,
@@ -15,59 +15,80 @@ const ShareRecipientsInput = ({
 }) => {
   const [loading, setLoading] = useState(false)
 
+  const contactsQuery = buildContactsQuery()
+  const contactsResult = useQueryAll(
+    contactsQuery.definition,
+    contactsQuery.options
+  )
+
+  const contactGroupsQuery = buildContactGroupsQuery()
+  const contactGroupsResult = useQueryAll(
+    contactGroupsQuery.definition,
+    contactGroupsQuery.options
+  )
+
   useEffect(() => {
     if (
       loading &&
-      !contacts.hasMore &&
-      contacts.fetchStatus === 'loaded' &&
-      !contactGroups.hasMore &&
-      contactGroups.fetchStatus === 'loaded'
+      !contactsResult.hasMore &&
+      contactsResult.fetchStatus === 'loaded' &&
+      !contactGroupsResult.hasMore &&
+      contactGroupsResult.fetchStatus === 'loaded'
     ) {
       setLoading(false)
     }
-  }, [contacts, contactGroups, loading])
+  }, [contactsResult, contactGroupsResult, loading])
 
   const onShareAutosuggestFocus = () => {
     if (
-      contacts.hasMore ||
-      contacts.fetchStatus === 'loading' ||
-      contactGroups.hasMore ||
-      contactGroups.fetchStatus === 'loading'
+      contactsResult.hasMore ||
+      contactsResult.fetchStatus === 'loading' ||
+      contactGroupsResult.hasMore ||
+      contactGroupsResult.fetchStatus === 'loading'
     ) {
       setLoading(true)
     }
   }
 
-  const getContactsAndGroups = () => {
-    // we need contacts to be loaded to be able to add all group members to recipients
-    if (contacts.hasMore || contacts.fetchStatus === 'loading') {
-      return contacts.data
-    } else {
-      const contactGroupsWithCount = contactGroups.data
+  const contactsAndGroups = useMemo(() => {
+    // we need contacts to be loaded to be able to  add all group members to recipients
+    if (contactsResult.hasMore || contactsResult.fetchStatus === 'loading') {
+      return contactsResult.data
+    }
+
+    if (
+      !contactsResult.hasMore &&
+      contactsResult.fetchStatus === 'loaded' &&
+      !contactGroupsResult.hasMore &&
+      contactGroupsResult.fetchStatus === 'loaded'
+    ) {
+      const contactGroupsWithMembers = contactGroupsResult.data
         .map(contactGroup => ({
           ...contactGroup,
-          membersCount: contacts.data.reduce((total, contact) => {
+          members: contactsResult.data.reduce((members, contact) => {
             if (
               get(contact, 'relationships.groups.data', [])
                 .map(group => group._id)
                 .includes(contactGroup._id)
             ) {
-              return total + 1
+              return [...members, contact]
             }
 
-            return total
-          }, 0)
+            return members
+          }, [])
         }))
-        .filter(contactGroup => contactGroup.membersCount > 0)
+        .filter(group => group.members.length > 0)
 
-      return [...contacts.data, ...contactGroupsWithCount]
+      return [...contactsResult.data, ...contactGroupsWithMembers]
     }
-  }
+
+    return []
+  }, [contactsResult, contactGroupsResult])
 
   return (
     <ShareAutosuggest
       loading={loading}
-      contactsAndGroups={getContactsAndGroups()}
+      contactsAndGroups={contactsAndGroups}
       recipients={recipients}
       onFocus={onShareAutosuggestFocus}
       onPick={onPick}
@@ -78,8 +99,6 @@ const ShareRecipientsInput = ({
 }
 
 ShareRecipientsInput.propTypes = {
-  contacts: contactsResponseType.isRequired,
-  contactGroups: contactGroupsResponseType.isRequired,
   recipients: PropTypes.array,
   placeholder: PropTypes.string,
   onPick: PropTypes.func.isRequired,

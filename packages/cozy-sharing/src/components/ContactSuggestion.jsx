@@ -21,7 +21,7 @@ export const ContactSuggestion = ({ contactOrGroup }) => {
     name = contactOrGroup.name
     avatarText = 'G'
     details = t('Share.members.count', {
-      smart_count: contactOrGroup.membersCount.toString()
+      smart_count: contactOrGroup.members.length.toString()
     })
   } else {
     name = getDisplayName(contactOrGroup)

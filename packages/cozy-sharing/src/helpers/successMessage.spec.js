@@ -2,18 +2,6 @@ import { getSuccessMessage, countNewRecipients } from './successMessage'
 
 describe('getSuccessMessage method', () => {
   const props = {
-    contacts: {
-      id: 'contacts',
-      data: [],
-      hasMore: false,
-      fetchStatus: 'loaded'
-    },
-    contactGroups: {
-      id: 'groups',
-      data: [],
-      hasMore: false,
-      fetchStatus: 'loaded'
-    },
     currentRecipients: [{ email: 'sansa.stark@winterfell.westeros' }],
     documentType: 'Files',
     sharingDesc: 'fake-doc.odt',

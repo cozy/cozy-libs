@@ -27,10 +27,6 @@ describe('ShareByEmailComponent', () => {
     currentRecipients = []
   } = {}) => {
     const props = {
-      contacts: {
-        data: []
-      },
-      contactGroups: { data: [] },
       documentType: 'Files',
       onShare,
       document,

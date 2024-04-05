@@ -1,5 +1,3 @@
-import get from 'lodash/get'
-
 import flag from 'cozy-flags'
 
 import { Group } from '../models'
@@ -59,21 +57,10 @@ export const hasReachRecipientsLimit = (current, next) => {
  * @param {object[]} contacts - The list of contacts.
  * @returns {object[]} - The merged recipients list.
  */
-export const spreadGroupAndMergeRecipients = (
-  recipients,
-  newRecipient,
-  contacts
-) => {
+export const spreadGroupAndMergeRecipients = (recipients, newRecipient) => {
   let contactsToAdd
   if (newRecipient._type === Group.doctype) {
-    const groupId = newRecipient.id
-    contactsToAdd = contacts.data.filter(contact => {
-      const contactGroupIds = get(contact, 'relationships.groups.data', []).map(
-        group => group._id
-      )
-
-      return contactGroupIds.includes(groupId)
-    })
+    contactsToAdd = newRecipient.members
   } else {
     contactsToAdd = [newRecipient]
   }
