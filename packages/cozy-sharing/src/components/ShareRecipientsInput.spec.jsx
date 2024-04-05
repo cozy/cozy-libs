@@ -2,9 +2,15 @@ import { render, screen } from '@testing-library/react'
 import React from 'react'
 
 import { createMockClient } from 'cozy-client'
+import flag from 'cozy-flags'
 
 import ShareRecipientsInput from './ShareRecipientsInput'
 import AppLike from './SharingBanner/test/AppLike'
+
+jest.mock('cozy-flags', () => ({
+  __esModule: true,
+  default: jest.fn()
+}))
 
 jest.mock('./ShareAutosuggest', () => ({
   __esModule: true,
@@ -19,7 +25,11 @@ jest.mock('./ShareAutosuggest', () => ({
               </li>
             )
           } else {
-            return <li key={contactOrGroup.id}>{contactOrGroup.name}</li>
+            return (
+              <li key={contactOrGroup.id}>
+                {contactOrGroup.name} - {contactOrGroup.members.length} members
+              </li>
+            )
           }
         })}
       </ul>
@@ -28,17 +38,20 @@ jest.mock('./ShareAutosuggest', () => ({
 }))
 
 describe('ShareRecipientsInput component', () => {
-  const setup = ({ contacts, contactGroups }) => {
+  const setup = ({ contacts, contactGroups, unreachableContact }) => {
     const mockClient = createMockClient({
       queries: {
         'io.cozy.contacts/reachable': {
           doctype: 'io.cozy.contacts',
           data: contacts
         },
-        'io.cozy.contacts.groups': {
+        'io.cozy.contacts.groups/by-ids/fe86af20-c6c5': {
           doctype: 'io.cozy.contacts.groups',
-          data: contactGroups,
-          hasMore: false
+          data: contactGroups
+        },
+        'io.cozy.contacts/unreachable-with-groups': {
+          doctype: 'io.cozy.contacts',
+          data: unreachableContact
         }
       }
     })
@@ -98,10 +111,14 @@ describe('ShareRecipientsInput component', () => {
 
     expect(screen.getByText('Michale Russel')).toBeInTheDocument()
     expect(screen.getByText('Teagan Wolf')).toBeInTheDocument()
-    expect(screen.getByText("The Night's Watch")).toBeInTheDocument()
+    expect(
+      screen.getByText("The Night's Watch - 1 members")
+    ).toBeInTheDocument()
   })
 
-  it('should include groups only if they have more than one member', async () => {
+  it('should include unreachable members when flag sharing.show-recipient-groups is activated', async () => {
+    flag.mockReturnValue(true)
+
     const contacts = [
       {
         id: 'df563cc4-6440',
@@ -119,6 +136,16 @@ describe('ShareRecipientsInput component', () => {
         name: {
           givenName: 'Teagan',
           familyName: 'Wolf'
+        },
+        relationships: {
+          groups: {
+            data: [
+              {
+                _id: 'fe86af20-c6c5',
+                _type: 'io.cozy.contacts.groups'
+              }
+            ]
+          }
         }
       }
     ]
@@ -132,10 +159,37 @@ describe('ShareRecipientsInput component', () => {
       }
     ]
 
-    setup({ contacts, contactGroups })
+    const unreachableContact = [
+      {
+        id: 'df532cc4-6560',
+        _id: 'df532cc4-6560',
+        _type: 'io.cozy.contacts',
+        name: {
+          givenName: 'Tony',
+          familyName: 'Stark'
+        },
+        relationships: {
+          groups: {
+            data: [
+              {
+                _id: 'fe86af20-c6c5',
+                _type: 'io.cozy.contacts.groups'
+              }
+            ]
+          }
+        }
+      }
+    ]
+
+    setup({ contacts, contactGroups, unreachableContact })
 
     expect(screen.getByText('Michale Russel')).toBeInTheDocument()
     expect(screen.getByText('Teagan Wolf')).toBeInTheDocument()
-    expect(screen.queryByText("The Night's Watch")).toBeNull()
+    // 3 members because cozy-client replay the query with the new data
+    // so the unreachableContact is added to the reachable contact query
+    // TODO: improve createMockClient to handle this case
+    expect(
+      screen.getByText("The Night's Watch - 3 members")
+    ).toBeInTheDocument()
   })
 })

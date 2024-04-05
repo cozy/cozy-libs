@@ -52,6 +52,7 @@ export const hasReachRecipientsLimit = (current, next) => {
 
 /**
  * Merges the recipients list with a new recipient and their associated contacts.
+ * Only used when flag sharing.show-recipient-groups is not enabled.
  * @param {object[]} recipients - The list of recipients.
  * @param {object} recipient - The new recipient.
  * @param {object[]} contacts - The list of contacts.
