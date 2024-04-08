@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@12.3.0...cozy-sharing@13.0.0) (2024-04-08)
+
+
+### Bug Fixes
+
+* **GroupRecipientDetail:** Improve member display ([2bb65cf](https://github.com/cozy/cozy-libs/commit/2bb65cf5218781845a5587433952437b3c764b97))
+* Improve secondary text of GroupRecipient ([d747f9c](https://github.com/cozy/cozy-libs/commit/d747f9c6ad30701c16b9f888d4aee7729a5fc28b))
+* Remove translation error when there is no type like for owner ([830d5fa](https://github.com/cozy/cozy-libs/commit/830d5faaaea118189f574d6cec859ba361ee4cd5))
+* **ShareAutosuggest:** Align correctly loading state ([9d93952](https://github.com/cozy/cozy-libs/commit/9d93952b1740c6974da0ced62bd81d1990311b40))
+* Show all the members from a group even unreachable ones ([e62ec59](https://github.com/cozy/cozy-libs/commit/e62ec5980bcb037a2af28cb64d522abdc9fa0408))
+* Show group avatar into share input ([632658a](https://github.com/cozy/cozy-libs/commit/632658af64a8b8f1bcd4ba72d9b0e563d9a8dfdd))
+* Show permissions when the current user is inside members ([d28d4b4](https://github.com/cozy/cozy-libs/commit/d28d4b46938aafddb39884511e7859d800e953b8))
+
+
+### Features
+
+* Improve the message of success to integrate the notion of groups ([f0945b7](https://github.com/cozy/cozy-libs/commit/f0945b7e054a14d35e5d689f9db65c53df0286c6))
+* **ShareRecipientsInput:** Simplify loading state ([e2ec136](https://github.com/cozy/cozy-libs/commit/e2ec136363df578bec338fde9336ac09ed573bb1))
+* Update cozy-ui from 103.8.2 to 105.3.1 ([e1b21f8](https://github.com/cozy/cozy-libs/commit/e1b21f887fb55e5ddab7348f3f5fd41631318cdf))
+
+
+### BREAKING CHANGES
+
+* you must have `cozy-ui >= 105.3.1`
+
+
+
+
+
 # [12.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@12.2.0...cozy-sharing@12.3.0) (2024-03-25)
 
 
