@@ -75,6 +75,13 @@
       "deactivate": "Désactiver le lien",
       "cancel": "Annuler",
       "confirm": "OK"
+    },
+    "errors": {
+      "groupMemberAlreadyInSharing": "Des membres de %{groupName} ont déjà été invités avec des droits de %{sharingRights}. Impossible d’inviter 2 fois le même contact avec des droits différents. |||| Des contacts ont déjà été invités avec des droits de %{sharingRights}. Impossible d’inviter 2 fois le même contact avec des droits différents.",
+      "sharingRights": {
+        "readOnly": "lecture",
+        "readWrite": "modification"
+      }
     }
   },
   "Sharings": {

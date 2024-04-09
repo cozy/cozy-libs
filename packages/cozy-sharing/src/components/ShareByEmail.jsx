@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 
 import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
-import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
@@ -105,7 +104,39 @@ export const ShareByEmail = ({
       })
       reset()
     } catch (err) {
-      Alerter.error('Error.generic')
+      let showGenericAlert = true
+      if (err.name === 'FetchError' && err.status === 400) {
+        const detail = JSON.parse(err.message).errors[0].detail
+        if (
+          detail.startsWith(
+            'A group member cannot be added as they are already in'
+          )
+        ) {
+          // To know the sharing rights of the other group
+          const sharingRights =
+            selectedOption === 'readOnly' ? 'readWrite' : 'readOnly'
+          showAlert({
+            message: t('Share.errors.groupMemberAlreadyInSharing', {
+              smart_count: recipients.length,
+              groupName: recipients[0].name,
+              sharingRights: t(`Share.errors.sharingRights.${sharingRights}`),
+              icon: false
+            }),
+            severity: 'error',
+            variant: 'filled'
+          })
+          showGenericAlert = false
+        }
+      }
+
+      if (showGenericAlert) {
+        showAlert({
+          message: t(`${documentType}.share.error.generic`),
+          severity: 'error',
+          variant: 'filled'
+        })
+      }
+
       reset()
       throw err
     }
