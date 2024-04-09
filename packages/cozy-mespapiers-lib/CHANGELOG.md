@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [91.2.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@91.2.0...cozy-mespapiers-lib@91.2.1) (2024-04-09)
+
+
+### Bug Fixes
+
+* **mespapiers:** The `selectedThemes` argument of ([66365fc](https://github.com/cozy/cozy-libs/commit/66365fc69d07a51703852586dcecd04d5d5f851e))
+
+
+
+
+
 # [91.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@91.1.2...cozy-mespapiers-lib@91.2.0) (2024-04-09)
 
 
