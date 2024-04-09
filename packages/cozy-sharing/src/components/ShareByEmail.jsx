@@ -35,10 +35,11 @@ export const ShareByEmail = ({
 
   const [recipients, setRecipients] = useState([])
   const [loading, setLoading] = useState(false)
-  const [selectedOption, setSelectedOption] = useState()
+  const [selectedOption, setSelectedOption] = useState('readWrite')
   const [showRecipientsLimit, setRecipientsLimit] = useState(false)
 
   const reset = () => {
+    setSelectedOption('readWrite')
     setRecipients([])
     setLoading(false)
   }
@@ -102,7 +103,6 @@ export const ShareByEmail = ({
         severity: 'success',
         variant: 'filled'
       })
-      reset()
     } catch (err) {
       let showGenericAlert = true
       if (err.name === 'FetchError' && err.status === 400) {
@@ -137,8 +137,9 @@ export const ShareByEmail = ({
         })
       }
 
-      reset()
       throw err
+    } finally {
+      reset()
     }
   }
 
@@ -180,7 +181,11 @@ export const ShareByEmail = ({
       </div>
       {showShareControl && (
         <div className={styles['share-type-control']}>
-          <ShareTypeSelect options={getSharingOptions()} onChange={onChange} />
+          <ShareTypeSelect
+            value={selectedOption}
+            options={getSharingOptions()}
+            onChange={onChange}
+          />
           <ShareSubmit
             label={t(`${documentType}.share.shareByEmail.send`)}
             onSubmit={share}
