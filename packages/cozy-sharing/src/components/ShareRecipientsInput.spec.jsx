@@ -9,7 +9,7 @@ import AppLike from './SharingBanner/test/AppLike'
 
 jest.mock('cozy-flags', () => ({
   __esModule: true,
-  default: jest.fn()
+  default: jest.fn(() => null)
 }))
 
 jest.mock('./ShareAutosuggest', () => ({
