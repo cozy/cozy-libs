@@ -267,7 +267,7 @@ export const makeAccountFromPapers = (papers, accounts) => {
 /**
  * Create a list of qualification labels without files
  * @param {{ konnector: import('cozy-client/types/types').IOCozyKonnector, konnectorQualifLabelsWithoutFile: string[] }[]} konnectorsWithAccounts
- * @param {import('cozy-client/types/types').Theme[]} selectedThemes - Array of selected themes
+ * @param {import('cozy-client/types/types').Theme[]} [selectedThemes] - Array of selected themes
  * @returns {string[]} - Array of qualification labels without files
  */
 export const makeQualificationLabelsWithoutFiles = (
@@ -279,7 +279,7 @@ export const makeQualificationLabelsWithoutFiles = (
       return konnectorQualifLabelsWithoutFile?.map(qualificationLabel => {
         const themeLabel = getThemeByItem({ label: qualificationLabel }).label
         const showCategoryItemByKonnector =
-          !selectedThemes.length ||
+          !selectedThemes?.length ||
           selectedThemes.some(
             selectedTheme => selectedTheme.label === themeLabel
           )
