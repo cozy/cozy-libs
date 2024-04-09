@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 
-import { useClient, Q, isQueryLoading, useQuery } from 'cozy-client'
+import { useClient, Q } from 'cozy-client'
 import { isInstalled } from 'cozy-client/dist/models/applications'
 import { useWebviewIntent } from 'cozy-intent'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -13,10 +13,6 @@ import { buildURLSearchParamsForInstallKonnectorFromIntent } from './helpers'
 import Konnector from '../../assets/icons/Konnectors.svg'
 import { APPS_DOCTYPE } from '../../doctypes'
 import { findPlaceholdersByQualification } from '../../helpers/findPlaceholders'
-import {
-  buildAccountsQueryBySlugs,
-  buildKonnectorsQuery
-} from '../../helpers/queries'
 import { getThemesList } from '../../helpers/themes'
 import { usePapersCreated } from '../Contexts/PapersCreatedProvider'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
@@ -37,22 +33,6 @@ const PlaceholdersSelector = () => {
   const { countPaperCreatedByMesPapiers } = usePapersCreated()
 
   const fromFlagshipUpload = searchParams.get('fromFlagshipUpload')
-
-  const queryKonnector = buildKonnectorsQuery()
-  const { data: konnectors, ...konnectorsQueryLeft } = useQuery(
-    queryKonnector.definition,
-    queryKonnector.options
-  )
-  const isKonnectorsLoading = isQueryLoading(konnectorsQueryLeft)
-  const hasKonnector = Boolean(konnectors?.length > 0)
-  const konnectorSlugs = konnectors?.map(konnector => konnector.slug)
-  const queryAccounts = buildAccountsQueryBySlugs(konnectorSlugs, hasKonnector)
-  const { data: accounts, ...accountsQueryLeft } = useQuery(
-    queryAccounts.definition,
-    queryAccounts.options
-  )
-
-  const isAccountsLoading = hasKonnector && isQueryLoading(accountsQueryLeft)
 
   const options = useMemo(
     () => ({
@@ -99,7 +79,6 @@ const PlaceholdersSelector = () => {
                       description: t('ImportDropdown.importAuto.text'),
                       icon: <Icon icon={Konnector} size={24} />,
                       isKonnectorAutoImport: true,
-                      isDisabled: isKonnectorsLoading,
                       placeholder
                     },
                     {
@@ -120,7 +99,6 @@ const PlaceholdersSelector = () => {
     [
       countPaperCreatedByMesPapiers,
       fromFlagshipUpload,
-      isKonnectorsLoading,
       papersDefinitions,
       scannerT,
       t,
@@ -151,39 +129,21 @@ const PlaceholdersSelector = () => {
     })
   }
 
-  const handleClick = async ({
-    placeholder,
-    isKonnectorAutoImport,
-    isDisabled
-  }) => {
-    if (!isDisabled && isKonnectorAutoImport) {
-      const konnectorsBySlug = konnectors?.filter(
-        konnector => konnector.slug === placeholder.konnectorCriteria.name
-      )
-      const isKonnectorsConnected = accounts?.some(account =>
-        konnectorsBySlug?.some(
-          konnector => account.account_type === konnector.slug
-        )
-      )
-
-      const searchParams = buildURLSearchParamsForInstallKonnectorFromIntent(
-        placeholder.konnectorCriteria,
-        placeholder.label
-      )
-
-      if (konnectorsBySlug?.length > 0 && isKonnectorsConnected) {
-        navigate(`/paper/files/${placeholder.label}`)
-      } else {
-        const normalizePathname = pathname.split('/create')[0]
-
-        navigate({
-          pathname: `${normalizePathname}/installKonnectorIntent`,
-          search: `${searchParams}`
-        })
-      }
-    } else {
-      redirectPaperCreation(placeholder)
+  const handleClick = async ({ placeholder, isKonnectorAutoImport }) => {
+    if (!isKonnectorAutoImport) {
+      return redirectPaperCreation(placeholder)
     }
+
+    const searchParams = buildURLSearchParamsForInstallKonnectorFromIntent(
+      placeholder.konnectorCriteria,
+      placeholder.label
+    )
+    const normalizePathname = pathname.split('/create')[0]
+
+    navigate({
+      pathname: `${normalizePathname}/installKonnectorIntent`,
+      search: `${searchParams}`
+    })
   }
 
   const handleClose = async () => {
@@ -191,10 +151,6 @@ const PlaceholdersSelector = () => {
       ? await webviewIntent?.call('cancelUploadByCozyApp')
       : navigate('..')
   }
-
-  // The "NestedSelect" component does not manage asynchronous options.
-  // See https://github.com/cozy/cozy-ui/issues/2555
-  if (isKonnectorsLoading || isAccountsLoading) return null
 
   return (
     <>
