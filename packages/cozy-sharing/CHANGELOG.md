@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@13.0.0...cozy-sharing@13.1.0) (2024-04-09)
+
+
+### Bug Fixes
+
+* Resetting sharing rights after a share ([5f3ebaa](https://github.com/cozy/cozy-libs/commit/5f3ebaa4b220655c97f07fa6918f2be830568fb5))
+
+
+### Features
+
+* Alert if group shared with members already in it with other rights ([786b1a0](https://github.com/cozy/cozy-libs/commit/786b1a08d9f30db3126e6d1b77c14f25b0f129a5))
+* Hide groups when they are already shared ([f64ee06](https://github.com/cozy/cozy-libs/commit/f64ee06637c0f74b776cde72bdea9ae693c26638))
+
+
+
+
+
 # [13.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@12.3.0...cozy-sharing@13.0.0) (2024-04-08)
 
 

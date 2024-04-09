@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [91.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@91.1.2...cozy-mespapiers-lib@91.2.0) (2024-04-09)
+
+
+### Features
+
+* **mespapiers:** Homogenize the behavior of `importAuto` ([e34f64a](https://github.com/cozy/cozy-libs/commit/e34f64aee0f8b87ea72d3f9c9306ae85f01ec717))
+
+
+
+
+
 ## [91.1.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@91.1.1...cozy-mespapiers-lib@91.1.2) (2024-04-08)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
