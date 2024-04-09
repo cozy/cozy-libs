@@ -174,6 +174,7 @@ export const ShareByEmail = ({
           }
           onPick={recipient => onRecipientPick(recipient)}
           onRemove={recipient => onRecipientRemove(recipient)}
+          currentRecipients={currentRecipients}
           recipients={recipients}
         />
       </div>

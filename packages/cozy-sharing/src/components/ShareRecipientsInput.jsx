@@ -18,6 +18,7 @@ import {
  * In order to display the total number of members in each group, we also retrieve the contacts that are not reachable.
  */
 const ShareRecipientsInput = ({
+  currentRecipients,
   recipients,
   placeholder,
   onPick,
@@ -62,8 +63,16 @@ const ShareRecipientsInput = ({
       (isQueryLoading(unreachableContactsWithGroupsResult) ||
         unreachableContactsWithGroupsResult.hasMore))
 
-  const contactGroups = (contactGroupsByIdsResult.data || []).map(
-    contactGroup => {
+  const currentRecipientGroups = currentRecipients
+    .map(({ id }) => id)
+    .filter(Boolean)
+  const contactGroups = (contactGroupsByIdsResult.data || [])
+    .filter(
+      ({ _id }) =>
+        !flag('sharing.show-recipient-groups') ||
+        !currentRecipientGroups.includes(_id)
+    )
+    .map(contactGroup => {
       const reachableMembers = getContactsFromGroupId(
         reachableContactsResult.data,
         contactGroup.id
@@ -91,8 +100,7 @@ const ShareRecipientsInput = ({
         ...contactGroup,
         members: [...reachableMembers, ...unreachableMembers]
       }
-    }
-  )
+    })
 
   const contactsAndGroups = [
     ...(reachableContactsResult.data || []),
@@ -112,6 +120,7 @@ const ShareRecipientsInput = ({
 }
 
 ShareRecipientsInput.propTypes = {
+  currentRecipients: PropTypes.array,
   recipients: PropTypes.array,
   placeholder: PropTypes.string,
   onPick: PropTypes.func.isRequired,
@@ -119,6 +128,7 @@ ShareRecipientsInput.propTypes = {
 }
 
 ShareRecipientsInput.defaultProps = {
+  currentRecipients: [],
   recipients: []
 }
 
