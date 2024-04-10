@@ -11,23 +11,6 @@ const {
 } = models
 
 /**
- * @typedef {object} AddContactReferenceToFileParam
- * @property {IOCozyFile} fileCreated
- * @property {DocumentCollection} fileCollection
- * @property {object[]} contacts - Array of object of the contacts
- */
-
-/**
- * @typedef {object} CreateAndSavePdfParam
- * @property {{ data: object[], metadata: object }} formData
- * @property {Qualification} qualification
- * @property {Paper} currentDefinition
- * @property {string} appFolderID
- * @property {CozyClient} client
- * @property {{t: Function, f: Function, scannerT: Function}} i18n
- */
-
-/**
  * @param {{multipage: boolean, page: string}} fileMetadata
  * @param {boolean} isMultipage
  * @returns {object}
@@ -42,7 +25,9 @@ const sanitizeFileMetadata = (fileMetadata, isMultipage) => {
 }
 
 /**
- * @param {AddContactReferenceToFileParam} param
+ * @param {import('cozy-client/types/types').IOCozyFile} fileCreated
+ * @param {import('cozy-client/types/types').DocumentCollection} fileCollection
+ * @param {import('cozy-client/types/types').IOCozyContact[]} contacts
  */
 export const addContactReferenceToFile = async ({
   fileCreated,
@@ -59,7 +44,12 @@ export const addContactReferenceToFile = async ({
 /**
  * Convert image & pdf file to pdf & save it
  *
- * @param {CreateAndSavePdfParam} param
+ * @param {{ data: object[], metadata: object }} formData
+ * @param {import('cozy-client/types/types').QualificationAttributes} qualification
+ * @param {import('../types').PaperDefinition} currentDefinition
+ * @param {string} appFolderID
+ * @param {import('cozy-client/types/CozyClient').default} client
+ * @param {{t: Function, f: Function, scannerT: Function}} i18n
  * @returns {Promise<{ fileId: string, qualificationLabel: string }[]>} Return array of object with file id & qualification label to find its location
  */
 export const createPdfAndSave = async ({

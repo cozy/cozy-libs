@@ -24,17 +24,12 @@ const downloadFileError = error => {
 }
 
 /**
- * @typedef {object} MakeZipFolderParam
- * @property {CozyClient} client - Instance of CozyClient
- * @property {IOCozyFile[]} files - List of files to zip
- * @property {string} zipFolderName - Desired name of the Zip folder
- * @property {string} dirId - Id of the destination folder of the zip
- */
-
-/**
  * Create a zip folder with the list of files and save it in a desired folder in Drive
- *
- * @param {MakeZipFolderParam} param0
+ * @param {object} param
+ * @param {import('cozy-client/types/CozyClient').default} param.client - Instance of CozyClient
+ * @param {import('cozy-client/types/types').IOCozyFile[]} param.files - List of files to zip
+ * @param {string} param.zipFolderName - Desired name of the Zip folder
+ * @param {string} param.dirId - Id of the destination folder of the zip
  * @returns {Promise<string>} - Final name of the zip folder
  */
 export const createZipFolderJob = async ({
@@ -56,6 +51,15 @@ export const createZipFolderJob = async ({
   return filename
 }
 
+/**
+ *
+ * @param {object} param
+ * @param {import('cozy-client/types/CozyClient').default} param.client - Instance of CozyClient
+ * @param {import('cozy-client/types/types').IOCozyFile[]} param.docs - List of files to zip
+ * @param {Function} param.t - i18n function
+ * @param {Function} param.f - date formatting function
+ * @returns
+ */
 export const makeZipFolder = async ({ client, docs, t, f }) => {
   const currentUser = await fetchCurrentUser(client)
   const defaultZipFolderName = t('Multiselect.folderZipName', {

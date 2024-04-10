@@ -2,7 +2,7 @@ import { hasItemByLabel } from '../components/Home/helpers'
 
 /**
  * Checks if a file in a list has a qualification label equal to the label in the paper definition
- * @param {IOCozyFile[]} files - Array of IOCozyFile
+ * @param {import('cozy-client/types/types').IOCozyFile[]} files - Array of IOCozyFile
  * @param {import('../types').PaperDefinition} paperDefinition
  * @returns {boolean}
  */
@@ -27,7 +27,7 @@ export const isPaperEnabled = paperDefinition =>
 /**
  * Filters and sorts the list of featured Placeholders.
  * @param {import('../types').PaperDefinition[]} papersDefinitions Array of PapersDefinition
- * @param {IOCozyFile[]} files Array of IOCozyFile
+ * @param {import('cozy-client/types/types').IOCozyFile[]} files Array of IOCozyFile
  * @param {import('cozy-client/types/types').Theme[]} selectedThemes Array of Themes selected
  * @returns {import('../types').PaperDefinition[]} Array of PapersDefinition filtered with the prop "placeholderIndex"
  */
@@ -50,8 +50,9 @@ export const getFeaturedPlaceholders = ({
 
 /**
  * Find placeholders by Qualification
- * @param {Object[]} qualificationItems - Object of qualification
- * @returns {import('../types').PaperDefinition[]} - Array of PaperDefinition
+ * @param {import('../types').PapersDefinitions[]} papersDefinitions - Array of PapersDefinitions
+ * @param {import('cozy-client/types/types').QualificationAttributes[]} qualificationItems - Object of qualification
+ * @returns {import('../types').PapersDefinitions[]} - Array of PapersDefinition
  */
 export const findPlaceholdersByQualification = (
   papersDefinitions,
