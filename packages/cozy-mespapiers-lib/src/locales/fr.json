@@ -480,7 +480,7 @@
   "Empty": {
     "konnector": {
       "title": "Aucun document",
-      "text": "%{konnectorSlug} n'a pas encore publié le document sur son site. Il sera récupéré ici automatiquement une fois publié par %{konnectorSlug}.",
+      "text": "%{konnectorName} n'a pas encore publié le document sur son site. Il sera récupéré ici automatiquement une fois publié par %{konnectorName}.",
       "button": "Ajouter manuellement"
     }
   },

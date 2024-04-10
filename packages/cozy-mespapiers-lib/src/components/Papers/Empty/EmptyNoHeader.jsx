@@ -49,7 +49,7 @@ const EmptyNoHeader = ({ konnector, accounts }) => {
         iconSize="normal"
         title={t('Empty.konnector.title')}
         text={t('Empty.konnector.text', {
-          konnectorSlug: konnector?.slug?.toUpperCase()
+          konnectorName: konnector.name
         })}
         data-testid="EmptyNoHeader"
       >
@@ -60,7 +60,7 @@ const EmptyNoHeader = ({ konnector, accounts }) => {
 }
 
 EmptyNoHeader.propTypes = {
-  konnector: PropTypes.object,
+  konnector: PropTypes.object.isRequired,
   accounts: PropTypes.array
 }
 
