@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [91.4.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@91.3.0...cozy-mespapiers-lib@91.4.0) (2024-04-10)
+
+
+### Features
+
+* Use the connector name instead of the slug in the description ([15a4458](https://github.com/cozy/cozy-libs/commit/15a44584bd2efe2c0d04b3130d26c40feedfa887))
+
+
+
+
+
 # [91.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@91.2.1...cozy-mespapiers-lib@91.3.0) (2024-04-10)
 
 
