@@ -517,6 +517,37 @@ describe('Document used with CozyClient', () => {
         Simpson.addCozyMetadata({ name: 'Marge', son: 'Bart' })
       )
     })
+
+    it('should not update the document if important attributes are the same', async () => {
+      class SpecialSimpson extends Simpson {}
+      SpecialSimpson.checkAttributes = ['name']
+      jest
+        .spyOn(SpecialSimpson, 'queryAll')
+        .mockReturnValueOnce([{ name: 'Marge' }])
+      jest.spyOn(cozyClient, 'save').mockReturnValueOnce({ data: {} })
+
+      await SpecialSimpson.createOrUpdate({ name: 'Marge', son: 'Bart' })
+
+      expect(cozyClient.save).not.toHaveBeenCalled()
+    })
+
+    it('should update the document if important attributes are the same but forceUpdate option is true', async () => {
+      class SpecialSimpson extends Simpson {}
+      SpecialSimpson.checkAttributes = ['name']
+      jest
+        .spyOn(SpecialSimpson, 'queryAll')
+        .mockReturnValueOnce([{ name: 'Marge' }])
+      jest.spyOn(cozyClient, 'save').mockReturnValueOnce({ data: {} })
+
+      await SpecialSimpson.createOrUpdate(
+        { name: 'Marge', son: 'Bart' },
+        { forceUpdate: true }
+      )
+
+      expect(cozyClient.save).toHaveBeenCalledWith(
+        SpecialSimpson.addCozyMetadata({ name: 'Marge', son: 'Bart' })
+      )
+    })
   })
 
   describe('create', () => {

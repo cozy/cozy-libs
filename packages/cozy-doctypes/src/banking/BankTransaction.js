@@ -1,14 +1,16 @@
-const keyBy = require('lodash/keyBy')
-const groupBy = require('lodash/groupBy')
-const maxBy = require('lodash/maxBy')
 const addDays = require('date-fns/add_days')
 const isAfter = require('date-fns/is_after')
-const Document = require('../Document')
-const log = require('../log')
+const cloneDeep = require('lodash/cloneDeep')
+const groupBy = require('lodash/groupBy')
+const keyBy = require('lodash/keyBy')
+const maxBy = require('lodash/maxBy')
+
+const flag = require('cozy-flags').default
+
 const BankAccount = require('./BankAccount')
 const { matchTransactions } = require('./matching-transactions')
-const cloneDeep = require('lodash/cloneDeep')
-const flag = require('cozy-flags').default
+const Document = require('../Document')
+const log = require('../log')
 
 const maxValue = (iterable, fn) => {
   const res = maxBy(iterable, fn)
