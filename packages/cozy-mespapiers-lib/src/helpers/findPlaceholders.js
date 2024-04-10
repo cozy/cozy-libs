@@ -1,31 +1,9 @@
 import { hasItemByLabel } from '../components/Home/helpers'
 
 /**
- * @typedef {Object} StepAttributes
- * @property {string} name - Name of the attribute.
- * @property {string} type - Type of the attribute.
- */
-/**
- * @typedef {Object} AcquisitionSteps
- * @property {number} occurrence - Number of occurrence for this step.
- * @property {string} illustration - Name of the illustration.
- * @property {string} text - Text of the step.
- * @property {StepAttributes[]} attributes - Array of the attributes.
- */
-/**
- * @typedef {Object} PaperDefinition
- * @property {string} label - Label of Paper.
- * @property {string} icon - Icon of Paper.
- * @property {number} placeholderIndex - Position on the Placeholder list.
- * @property {AcquisitionSteps[]} acquisitionSteps - Array of acquisition steps.
- * @property {string} featureDate - Reference the attribute "name" to be used as main date.
- * @property {number} maxDisplay - Number of document beyond which a "see more" button is displayed.
- */
-
-/**
  * Checks if a file in a list has a qualification label equal to the label in the paper definition
  * @param {IOCozyFile[]} files - Array of IOCozyFile
- * @param {PaperDefinition} paperDefinition - PapersDefinition
+ * @param {import('../types').PaperDefinition} paperDefinition
  * @returns {boolean}
  */
 export const hasNoFileWithSameQualificationLabel = (files, paperDefinition) => {
@@ -39,7 +17,7 @@ export const hasNoFileWithSameQualificationLabel = (files, paperDefinition) => {
 
 /**
  * Whether a paper is supported and creatable
- * @param {PaperDefinition} paperDefinition - PapersDefinition
+ * @param {import('../types').PaperDefinition} paperDefinition
  * @returns {boolean}
  */
 export const isPaperEnabled = paperDefinition =>
@@ -48,10 +26,10 @@ export const isPaperEnabled = paperDefinition =>
 
 /**
  * Filters and sorts the list of featured Placeholders.
- * @param {PaperDefinition[]} papersDefinitions Array of PapersDefinition
+ * @param {import('../types').PaperDefinition[]} papersDefinitions Array of PapersDefinition
  * @param {IOCozyFile[]} files Array of IOCozyFile
  * @param {import('cozy-client/types/types').Theme[]} selectedThemes Array of Themes selected
- * @returns {PaperDefinition[]} Array of PapersDefinition filtered with the prop "placeholderIndex"
+ * @returns {import('../types').PaperDefinition[]} Array of PapersDefinition filtered with the prop "placeholderIndex"
  */
 export const getFeaturedPlaceholders = ({
   papersDefinitions,
@@ -73,7 +51,7 @@ export const getFeaturedPlaceholders = ({
 /**
  * Find placeholders by Qualification
  * @param {Object[]} qualificationItems - Object of qualification
- * @returns {PaperDefinition[]} - Array of PapersDefinition
+ * @returns {import('../types').PaperDefinition[]} - Array of PaperDefinition
  */
 export const findPlaceholdersByQualification = (
   papersDefinitions,
@@ -101,10 +79,10 @@ const filterPlaceholderByLabelAndCountry = ({
 
 /**
  * Find placeholders by Qualification
- * @param {Object[]} papersDefinitions - Object of qualification
+ * @param {import('../types').PaperDefinition[]} papersDefinitions - Array of PapersDefinition
  * @param {string} label - Label of qualification
  * @param {string} country - country of document
- * @returns {PaperDefinition[]} - Array of PapersDefinition
+ * @returns {import('../types').PaperDefinition[]} - Array of PapersDefinition
  */
 export const findPlaceholderByLabelAndCountry = (
   papersDefinitions,
