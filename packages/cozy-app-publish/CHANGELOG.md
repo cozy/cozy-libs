@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.34.0 (2024-04-10)
+
+
+### Features
+
+* Allow the possibility to override the mode even on Travis CI ([a565a0a](https://github.com/cozy/cozy-libs/commit/a565a0a58d4ba4989e0895ff912837ff62e8467c))
+
+
+
+
+
 # 0.33.0 (2023-01-31)
 
 
