@@ -2,15 +2,21 @@ import React, { forwardRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-import Konnector from '../../../assets/icons/Konnectors.svg'
 import withLocales from '../../../locales/withLocales'
+import { KonnectorIcon } from '../../Icons/KonnectorIcon'
 import { buildURLSearchParamsForInstallKonnectorFromIntent } from '../../Views/helpers'
 
+/**
+ *
+ * @param {Object} param
+ * @param {import('../../../types').PaperDefinition} param.paperDefinition
+ * @param {Function} param.importAutoOnclick
+ * @returns {{ name: string, Component: JSX.Element }}
+ */
 export const importAuto = ({ paperDefinition, importAutoOnclick }) => {
   return {
     name: 'importAuto',
@@ -41,7 +47,7 @@ export const importAuto = ({ paperDefinition, importAutoOnclick }) => {
         return (
           <ActionsMenuItem {...props} ref={ref} onClick={handleClick}>
             <ListItemIcon>
-              <Icon icon={Konnector} size={24} />
+              <KonnectorIcon konnectorCriteria={konnectorCriteria} size={24} />
             </ListItemIcon>
             <ListItemText
               primary={t('ImportDropdown.importAuto.title')}
