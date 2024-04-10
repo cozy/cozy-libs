@@ -518,7 +518,7 @@ describe('Document used with CozyClient', () => {
       )
     })
 
-    it('should not update the document if important attributes are the same', async () => {
+    it('should not update the document if checked attributes are the same', async () => {
       class SpecialSimpson extends Simpson {}
       SpecialSimpson.checkAttributes = ['name']
       jest
@@ -531,7 +531,7 @@ describe('Document used with CozyClient', () => {
       expect(cozyClient.save).not.toHaveBeenCalled()
     })
 
-    it('should update the document if important attributes are the same but forceUpdate option is true', async () => {
+    it('should update the document if checked attributes are the same but forceUpdate option is true', async () => {
       class SpecialSimpson extends Simpson {}
       SpecialSimpson.checkAttributes = ['name']
       jest
