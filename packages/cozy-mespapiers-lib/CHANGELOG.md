@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [91.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@91.2.1...cozy-mespapiers-lib@91.3.0) (2024-04-10)
+
+
+### Bug Fixes
+
+* The konnector category of the phone_invoice paper ([8039e65](https://github.com/cozy/cozy-libs/commit/8039e658ba39b0a2033ea549d38eae505d2b38d5))
+
+
+### Features
+
+* The `importAuto` action display a contextualize konnector icon ([9511e06](https://github.com/cozy/cozy-libs/commit/9511e061fecc74f8f478b9586f7a0f6dc4ecb48b))
+
+
+
+
+
 ## [91.2.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@91.2.0...cozy-mespapiers-lib@91.2.1) (2024-04-09)
 
 
