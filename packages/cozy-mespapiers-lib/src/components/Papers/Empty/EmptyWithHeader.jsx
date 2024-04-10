@@ -33,7 +33,7 @@ const EmptyWithHeader = ({ konnector, account }) => {
         <ListItemText
           primary={t('Empty.konnector.title')}
           secondary={t('Empty.konnector.text', {
-            konnectorSlug: konnector?.slug?.toUpperCase()
+            konnectorName: konnector.name
           })}
         />
       </ListItem>
@@ -42,7 +42,7 @@ const EmptyWithHeader = ({ konnector, account }) => {
 }
 
 EmptyWithHeader.propTypes = {
-  konnector: PropTypes.object,
+  konnector: PropTypes.object.isRequired,
   account: PropTypes.object.isRequired
 }
 
