@@ -1,6 +1,8 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
-const fs = require('fs-extra')
 const path = require('path')
+
+const fs = require('fs-extra')
+
 const {
   matchAccounts,
   normalizeAccountNumber,

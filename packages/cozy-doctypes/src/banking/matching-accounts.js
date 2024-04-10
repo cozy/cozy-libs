@@ -1,5 +1,6 @@
-const sortBy = require('lodash/sortBy')
 const get = require('lodash/get')
+const sortBy = require('lodash/sortBy')
+
 const { eitherIncludes } = require('./matching-tools')
 const { getSlugFromInstitutionLabel } = require('./slug-account')
 

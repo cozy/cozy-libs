@@ -1,5 +1,7 @@
 const BankTransaction = require('./BankTransaction')
+
 const flag = require('cozy-flags').default
+
 jest.mock('../Document')
 const Document = require('../Document')
 jest.mock('../log')

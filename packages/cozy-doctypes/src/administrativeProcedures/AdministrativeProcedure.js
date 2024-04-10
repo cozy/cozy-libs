@@ -1,8 +1,8 @@
-const get = require('lodash/get')
 const flatten = require('lodash/flatten')
+const get = require('lodash/get')
 
-const Contact = require('../contacts/Contact')
 const Document = require('../Document')
+const Contact = require('../contacts/Contact')
 
 class AdministrativeProcedure extends Document {
   /**

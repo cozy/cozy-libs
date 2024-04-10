@@ -1,5 +1,5 @@
-const { cozyClient } = require('./testUtils')
 const CozyFolder = require('./Folder')
+const { cozyClient } = require('./testUtils')
 
 describe('Folder model', () => {
   beforeAll(() => {

@@ -1,7 +1,8 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
-const Document = require('./Document')
-const pickBy = require('lodash/pickBy')
 const get = require('lodash/get')
+const pickBy = require('lodash/pickBy')
+
+const Document = require('./Document')
 
 const ACCOUNTS_DOCTYPE = 'io.cozy.accounts'
 
