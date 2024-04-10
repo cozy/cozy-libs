@@ -10,7 +10,6 @@ import PointerAlert from 'cozy-ui/transpiled/react/PointerAlert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { buildURLSearchParamsForInstallKonnectorFromIntent } from './helpers'
-import Konnector from '../../assets/icons/Konnectors.svg'
 import { APPS_DOCTYPE } from '../../doctypes'
 import { findPlaceholdersByQualification } from '../../helpers/findPlaceholders'
 import { getThemesList } from '../../helpers/themes'
@@ -18,6 +17,7 @@ import { usePapersCreated } from '../Contexts/PapersCreatedProvider'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import FileIcon from '../Icons/FileIcon'
+import { KonnectorIcon } from '../Icons/KonnectorIcon'
 import { isReminder } from '../Placeholders/helpers'
 
 const PlaceholdersSelector = () => {
@@ -77,7 +77,12 @@ const PlaceholdersSelector = () => {
                     {
                       title: t('ImportDropdown.importAuto.title'),
                       description: t('ImportDropdown.importAuto.text'),
-                      icon: <Icon icon={Konnector} size={24} />,
+                      icon: (
+                        <KonnectorIcon
+                          konnectorCriteria={placeholder.konnectorCriteria}
+                          size={24}
+                        />
+                      ),
                       isKonnectorAutoImport: true,
                       placeholder
                     },
