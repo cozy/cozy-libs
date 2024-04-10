@@ -201,20 +201,28 @@ class Document {
 
   /**
    * Update a document with `update` attributes. If the
-   * `update` does not concern "important" attributes, the original
+   * `update` does not concern deduplication attributes (checkAttributes)
+   * or is not forced with forceUpdate option, the original
    * document is returned. Otherwise, the update document is
    * returned with metadata updated.
    *
+   * @param {object} doc - The document already existing in db
+   * @param {object} update - The update to apply to the document
+   * @param {object} options - Options object
+   * @param {boolean} options.forceUpdate - Should the method force the update even if checkAttributes are identical in db document and updated document
+   * @returns {object} - The updated document with cozy new metadata when an update has been done
+   *
    * @private
    */
-  static applyUpdateIfDifferent(doc, update) {
+  static applyUpdateIfDifferent(doc, update, options) {
     // only update if some fields are different
     if (
       !this.checkAttributes ||
       isDifferent(
         pick(doc, this.checkAttributes),
         pick(update, this.checkAttributes)
-      )
+      ) ||
+      options?.forceUpdate
     ) {
       // do not emit a mail for those attribute updates
       delete update.dateImport
@@ -279,8 +287,8 @@ class Document {
       }
       const doc = results[0]
       const update = omit(attributes, userAttributes)
-      const updatedDoc = this.applyUpdateIfDifferent(doc, update)
-      if (updatedDoc !== doc) {
+      const updatedDoc = this.applyUpdateIfDifferent(doc, update, options)
+      if (options.forceUpdate || updatedDoc !== doc) {
         return this.save(updatedDoc)
       } else {
         return updatedDoc
@@ -312,8 +320,8 @@ class Document {
 
       const doc = results[0]
       const update = omit(attributes, userAttributes)
-      const updatedDoc = this.applyUpdateIfDifferent(doc, update)
-      if (updatedDoc !== doc) {
+      const updatedDoc = this.applyUpdateIfDifferent(doc, update, options)
+      if (options.forceUpdate || updatedDoc !== doc) {
         return this.save(updatedDoc)
       } else {
         return doc
@@ -360,7 +368,14 @@ class Document {
   }
 
   /**
-   * Save many documents concurrently
+   * Save many documents concurrently using the createOrUpdate method
+   *
+   * @param {Array<object>} documents - The document to save
+   * @param {object|number} optionsOrConcurrency - The maximum number of possible concurrent updates OR options object
+   * @param {boolean} optionsOrConcurrency.forceUpdate - Should the method force the update even if checkAttributes are identical in db document and updated document
+   * @param {function} [logProgressOrNothing] - Callback with the progress of the save
+   *
+   * @returns {Array<object>} - The list of updated documents with cozy new metadata when an update has been done
    */
   static bulkSave(documents, optionsOrConcurrency, logProgressOrNothing) {
     if (logProgressOrNothing || typeof optionsOrConcurrency !== 'object') {
