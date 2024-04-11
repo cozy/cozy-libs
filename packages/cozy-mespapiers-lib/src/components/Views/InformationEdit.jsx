@@ -1,4 +1,5 @@
 import cx from 'classnames'
+import get from 'lodash/get'
 import React, { useState } from 'react'
 import { useParams, useNavigate, Navigate } from 'react-router-dom'
 
@@ -41,10 +42,10 @@ const InformationEdit = () => {
     'information'
   )
   const currentAttributes = currentEditInformations?.currentStep?.attributes
-  const defaultValue =
-    currentEditInformations?.file?.metadata?.[
-      currentEditInformations?.searchParams?.metadataName
-    ]
+  const defaultValue = get(
+    currentEditInformations,
+    `file.metadata.${currentEditInformations?.searchParams?.metadataName}`
+  )
   const { Component, attrs } =
     makeInputsInformationStep(currentAttributes)[0] || {}
   const dialogTitle = currentEditInformations?.paperDef?.label

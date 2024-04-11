@@ -1,3 +1,5 @@
+import set from 'lodash/set'
+
 import { getReferencedBy } from 'cozy-client'
 
 import { CONTACTS_DOCTYPE, FILES_DOCTYPE } from '../../../doctypes'
@@ -14,11 +16,17 @@ export const isInformationEditPermitted = currentEditInformation => {
   )
 }
 
+/**
+ *
+ * @param {Object} param
+ * @param {import('cozy-client/types/types').IOCozyFile} param.file - The file to update
+ * @param {String} param.type - The type of the metadata to update (e.g. "text")
+ * @param {String} param.metadataName - The name of the metadata to update (e.g. "number" or "vehicle.confidentialNumber")
+ * @param {{ [k:string]: string }} param.value - The new value of the metadata to update
+ * @returns {import('cozy-client/types/types').FileMetadata} - The updated metadata
+ */
 export const updateFileMetadata = ({ file, type, metadataName, value }) => {
-  let newMetadata = {
-    ...file.metadata,
-    [metadataName]: value[metadataName]
-  }
+  let newMetadata = set(file.metadata, metadataName, value[metadataName])
   // Need to update the "datetime" attribute if the updated metadata == "file.metadata.datetimeLabel" attribute
   // Otherwise, "datetime" might not correspond to any date in the document
   if (type === 'date' && file.metadata.datetimeLabel === metadataName) {
