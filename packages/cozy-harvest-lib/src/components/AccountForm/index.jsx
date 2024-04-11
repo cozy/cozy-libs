@@ -297,7 +297,8 @@ export class AccountForm extends PureComponent {
                   t={t}
                 />
                 {flag('harvest.inappconnectors.enabled') &&
-                  !konnector.clientSide && (
+                  !konnector.clientSide &&
+                  konnector.vendor_link && (
                     <Link
                       className="u-mt-1"
                       variant="body1"
