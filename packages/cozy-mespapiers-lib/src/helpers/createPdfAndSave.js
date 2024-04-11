@@ -102,7 +102,7 @@ export const createPdfAndSave = async ({
       datetime: metadata[featureDate]
         ? metadata[featureDate]
         : pdfDoc.getCreationDate(),
-      datetimeLabel: metadata[featureDate] ? featureDate : 'datetime'
+      datetimeLabel: featureDate || 'datetime'
     }
 
     // If isn't multipage or the last of multipage, save file
