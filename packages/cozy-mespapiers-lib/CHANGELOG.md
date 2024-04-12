@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [92.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@91.4.0...cozy-mespapiers-lib@92.0.0) (2024-04-12)
+
+
+### Bug Fixes
+
+* **mespapiers:** When editing, save or get metadata in the right place ([c3a163d](https://github.com/cozy/cozy-libs/commit/c3a163d148544cf128146af2340f83ce16dca52f))
+* This attribute must be the one provided by the papersDefinitions ([4291159](https://github.com/cozy/cozy-libs/commit/4291159bc933332ef90bc10a27a1bb36477a205b))
+
+
+### Features
+
+* Upgrade cozy-client to 46.6.1 ([2e5aa77](https://github.com/cozy/cozy-libs/commit/2e5aa770ee7885432bcf97f307498468057c928d))
+
+
+### BREAKING CHANGES
+
+* you must have `cozy-client >= 46.6.1`
+
+
+
+
+
 # [91.4.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@91.3.0...cozy-mespapiers-lib@91.4.0) (2024-04-10)
 
 
