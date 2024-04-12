@@ -1578,7 +1578,7 @@
                 "internship",
                 "other"
               ],
-              "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
+              "inputLabel": "RadioAdapter.otherLabel"
             }
           ]
         },
