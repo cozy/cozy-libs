@@ -10,8 +10,14 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import RadioAdapterItem from './RadioAdapterItem'
 import { defaultProptypes } from './proptypes'
 
-const isUserValue = (options, value) => {
-  return value && !options.includes(value)
+const isCustomOptionValue = (options, value) => {
+  return !!value && !options.includes(value)
+}
+const getDefaultOptionValue = (options, value) => {
+  return isCustomOptionValue(options, value) ? 'other' : value
+}
+const getDefaultTextValue = (options, value) => {
+  return isCustomOptionValue(options, value) ? value : ''
 }
 
 const RadioAdapter = ({
@@ -22,10 +28,10 @@ const RadioAdapter = ({
   idx
 }) => {
   const [optionValue, setOptionValue] = useState(
-    isUserValue(options, formDataValue) ? 'other' : formDataValue
+    getDefaultOptionValue(options, formDataValue)
   )
   const [textValue, setTextValue] = useState(
-    isUserValue(options, formDataValue) ? formDataValue : ''
+    getDefaultTextValue(options, formDataValue)
   )
   const { t } = useI18n()
 
