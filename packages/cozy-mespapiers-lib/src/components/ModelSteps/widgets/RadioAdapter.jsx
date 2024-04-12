@@ -21,7 +21,7 @@ const getDefaultTextValue = (options, value) => {
 }
 
 const RadioAdapter = ({
-  attrs: { name, options, required },
+  attrs: { name, options, required, inputLabel },
   formDataValue = '',
   setValue,
   setValidInput,
@@ -86,7 +86,7 @@ const RadioAdapter = ({
             <TextField
               type="text"
               variant="outlined"
-              label={t('RadioAdapter.otherLabel')}
+              label={t(inputLabel)}
               value={textValue}
               inputProps={{
                 'data-testid': 'TextField-other'
