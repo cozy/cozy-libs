@@ -33,7 +33,7 @@ const RadioAdapter = ({
     setOptionValue(val)
     setValue(prev => ({
       ...prev,
-      [name]: val
+      [name]: val !== 'other' ? val : textValue || val
     }))
   }
 
@@ -42,14 +42,15 @@ const RadioAdapter = ({
     setTextValue(currentValue)
     setValue(prev => ({
       ...prev,
-      [name]: currentValue
+      [name]: currentValue || optionValue
     }))
   }
 
   /* Set default value */
   useEffect(() => {
-    setValue(prev => ({ ...prev, [name]: optionValue }))
-  }, [name, setValue, optionValue])
+    setValue(prev => ({ ...prev, [name]: textValue || optionValue }))
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- We don't want to update the value when the text/option changes
+  }, [])
 
   /* Necessary to validate or not the validation button of the current step */
   useEffect(() => {

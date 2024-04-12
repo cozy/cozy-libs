@@ -80,4 +80,29 @@ describe('RadioAdapter', () => {
     })
     expect(setValue).toHaveBeenCalled()
   })
+
+  it('calls the setValue function with the right value when the text field is changed', () => {
+    let nextState
+    const setValue = jest.fn().mockImplementation(callback => {
+      nextState = callback({})
+    })
+    const { getByLabelText, getByTestId } = setup({
+      attrs: { name: 'contractType', options },
+      setValue
+    })
+
+    fireEvent.click(getByLabelText('other'))
+    expect(setValue).toHaveBeenCalled()
+    expect(nextState).toEqual({ contractType: 'other' })
+
+    fireEvent.change(getByTestId('TextField-other'), {
+      target: { value: 'test' }
+    })
+    expect(setValue).toHaveBeenCalled()
+    expect(nextState).toEqual({ contractType: 'test' })
+
+    fireEvent.click(getByLabelText('cdd'))
+    expect(setValue).toHaveBeenCalled()
+    expect(nextState).toEqual({ contractType: 'cdd' })
+  })
 })
