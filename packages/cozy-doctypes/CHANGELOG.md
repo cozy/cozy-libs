@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.90.0 (2024-04-15)
+
+
+### Bug Fixes
+
+* Lint ([645403a](https://github.com/cozy/cozy-libs/commit/645403aac0b2bc0e7890454e56b41391efd5e53e))
+
+
+### Features
+
+* Allow Document.bulkSave to force documents update ([2a42ce8](https://github.com/cozy/cozy-libs/commit/2a42ce8f37514c73481c866a9f119c3fa7ca248c))
+
+
+
+
+
 ## 1.89.5 (2024-03-21)
 
 
