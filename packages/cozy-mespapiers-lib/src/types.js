@@ -17,10 +17,10 @@
 
 /**
  * @typedef {Object} PaperDefinitionStepAttributeOptions
- * @property {string} value - Value of the input.
- * @property {string} label - Label of the inuput.
- * @property {boolean} [checked] - If the input is checked by default.
- * @property {PaperDefinitionStepAttributeOptionsTextFieldAttrs} [textFieldAttrs] - If the input displays a text field.
+ * @property {string|number} value - Value of the option.
+ * @property {string} label - Label of the option.
+ * @property {boolean} [checked] - If the option is checked by default.
+ * @property {PaperDefinitionStepAttributeOptionsTextFieldAttrs} [textFieldAttrs] - If the option displays a text field.
  */
 
 /**
@@ -38,6 +38,7 @@
  * @property {string} [mask] - Mask of the input. (eg: *: all characters, 9: number, a: letter)
  * @property {string} [maskPlaceholder] - Placeholder of the mask.
  * @property {PaperDefinitionStepAttributeOptions[][]} [options] - Array of array of options.
+ * @property {{ endAdornment: string, startAdornment: string }} [adornment] - Adornment of the input.
  */
 
 /**
