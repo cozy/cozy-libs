@@ -8,6 +8,7 @@ import TextField from 'cozy-ui/transpiled/react/TextField'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import RadioAdapterItem from './RadioAdapterItem'
+import { makeInputAdornment } from './helpers'
 import { defaultProptypes } from './proptypes'
 
 /**
@@ -125,6 +126,15 @@ const RadioAdapter = ({
                   variant="outlined"
                   label={t(textFieldAttrs.label)}
                   value={textValue}
+                  {...(textFieldAttrs.adornment && {
+                    InputProps: {
+                      ...makeInputAdornment({
+                        adornment: textFieldAttrs.adornment,
+                        smartcount: textValue,
+                        t
+                      })
+                    }
+                  })}
                   inputProps={{
                     'data-testid': 'TextField-other',
                     inputMode:
