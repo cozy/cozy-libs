@@ -36,7 +36,7 @@ const RadioAdapterItem = ({ onClick, option, value }) => {
 RadioAdapterItem.propTypes = {
   onClick: PropTypes.func.isRequired,
   option: attrsProptypesOption.isRequired,
-  value: PropTypes.string
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 }
 
 export default RadioAdapterItem
