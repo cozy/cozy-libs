@@ -334,7 +334,7 @@
               "name": "noticePeriod",
               "type": "number",
               "defaultValue": 90,
-              "withAdornment": {
+              "adornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
               "maxLength": 3,
@@ -410,7 +410,7 @@
               "name": "noticePeriod",
               "type": "number",
               "defaultValue": 90,
-              "withAdornment": {
+              "adornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
               "maxLength": 3,
@@ -634,7 +634,7 @@
               "name": "noticePeriod",
               "type": "number",
               "defaultValue": 90,
-              "withAdornment": {
+              "adornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
               "maxLength": 3,
@@ -897,7 +897,7 @@
               "name": "noticePeriod",
               "type": "number",
               "defaultValue": 90,
-              "withAdornment": {
+              "adornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
               "maxLength": 3,
@@ -945,7 +945,7 @@
               "name": "noticePeriod",
               "type": "number",
               "defaultValue": 90,
-              "withAdornment": {
+              "adornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
               "maxLength": 3,
@@ -1138,7 +1138,7 @@
               "name": "noticePeriod",
               "type": "number",
               "defaultValue": 90,
-              "withAdornment": {
+              "adornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
               "maxLength": 3,
@@ -1892,7 +1892,7 @@
               "name": "noticePeriod",
               "type": "number",
               "defaultValue": 90,
-              "withAdornment": {
+              "adornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
               "maxLength": 3,
@@ -1952,7 +1952,7 @@
               "name": "noticePeriod",
               "type": "number",
               "defaultValue": 90,
-              "withAdornment": {
+              "adornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
               "maxLength": 3,
@@ -2398,7 +2398,7 @@
               "name": "noticePeriod",
               "type": "number",
               "defaultValue": 90,
-              "withAdornment": {
+              "adornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
               "maxLength": 3,
@@ -2458,7 +2458,7 @@
               "name": "noticePeriod",
               "type": "number",
               "defaultValue": 90,
-              "withAdornment": {
+              "adornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
               "maxLength": 3,
@@ -2855,7 +2855,7 @@
               "name": "noticePeriod",
               "type": "number",
               "defaultValue": 90,
-              "withAdornment": {
+              "adornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
               "maxLength": 3,
