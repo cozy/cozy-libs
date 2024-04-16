@@ -24,7 +24,8 @@ const GroupRecipientPermissions = ({
   groupIndex,
   read_only: isReadOnly = false,
   className,
-  isUserInsideMembers
+  isUserInsideMembers,
+  document
 }) => {
   const { t } = useI18n()
   const buttonRef = useRef()
