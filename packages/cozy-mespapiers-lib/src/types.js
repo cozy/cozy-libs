@@ -9,7 +9,9 @@
 
 /**
  * @typedef {Object} PaperDefinitionStepAttributeOptionsTextFieldAttrs
+ * @property {'text'|'number'} type - Type of the inuput.
  * @property {string} label - Label of the inuput.
+ * @property {boolean} required - If the input is required.
  */
 
 /**
