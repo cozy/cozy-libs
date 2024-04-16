@@ -4,6 +4,10 @@ const attrsProptypesOptionTextFieldAttrs = PropTypes.shape({
   type: PropTypes.string,
   label: PropTypes.string,
   required: PropTypes.bool,
+  adornment: PropTypes.shape({
+    endAdornment: PropTypes.string,
+    startAdornment: PropTypes.string
+  })
 })
 
 export const attrsProptypesOption = PropTypes.shape({

@@ -12,6 +12,7 @@
  * @property {'text'|'number'} type - Type of the inuput.
  * @property {string} label - Label of the inuput.
  * @property {boolean} required - If the input is required.
+ * @property {{ endAdornment: string, startAdornment: string }} adornment - Adornment of the input.
  */
 
 /**
