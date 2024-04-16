@@ -1,3 +1,4 @@
+/* eslint-disable jest/no-focused-tests */
 import '@testing-library/jest-dom'
 import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
@@ -26,15 +27,17 @@ const setup = ({
 
 describe('RadioAdapter', () => {
   const makeOptions = ({ required } = {}) => [
-    { value: 'cdi', label: 'attributes.contractType.cdi' },
-    { value: 'cdd', label: 'attributes.contractType.cdd' },
-    { value: 'alternate', label: 'attributes.contractType.alternate' },
-    { value: 'internship', label: 'attributes.contractType.internship' },
-    {
-      value: 'other',
-      label: 'attributes.contractType.other',
-      textFieldAttrs: { label: 'textFieldAttrs.label', required }
-    }
+    [
+      { value: 'cdi', label: 'attributes.contractType.cdi' },
+      { value: 'cdd', label: 'attributes.contractType.cdd' },
+      { value: 'alternate', label: 'attributes.contractType.alternate' },
+      {
+        value: 'other',
+        label: 'attributes.contractType.other',
+        textFieldAttrs: { label: 'textFieldAttrs.label', required }
+      }
+    ],
+    [{ value: 'internship', label: 'attributes.contractType.internship' }]
   ]
   const optionsTranslated = ['CDI', 'CDD', 'Alternate', 'Internship', 'Other']
 

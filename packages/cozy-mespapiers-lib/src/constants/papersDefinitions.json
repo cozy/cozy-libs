@@ -1572,17 +1572,19 @@
               "name": "contractType",
               "type": "radio",
               "options": [
-                {"value": "cdi", "label": "attributes.contractType.cdi"},
-                {"value": "cdd", "label": "attributes.contractType.cdd"},
-                {"value": "alternate", "label": "attributes.contractType.alternate"},
-                {"value": "internship", "label": "attributes.contractType.internship"},
-                {
-                  "value": "other",
-                  "label": "attributes.contractType.other",
-                  "textFieldAttrs": {
-                    "label": "RadioAdapter.otherLabel"
+                [
+                  {"value": "cdi", "label": "attributes.contractType.cdi"},
+                  {"value": "cdd", "label": "attributes.contractType.cdd"},
+                  {"value": "alternate", "label": "attributes.contractType.alternate"},
+                  {"value": "internship", "label": "attributes.contractType.internship"},
+                  {
+                    "value": "other",
+                    "label": "attributes.contractType.other",
+                    "textFieldAttrs": {
+                      "label": "RadioAdapter.otherLabel"
+                    }
                   }
-                }
+                ]
               ]
             }
           ]

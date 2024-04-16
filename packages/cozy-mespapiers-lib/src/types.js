@@ -36,7 +36,7 @@
  * @property {number} [maxLength] - Maximum length of the input.
  * @property {string} [mask] - Mask of the input. (eg: *: all characters, 9: number, a: letter)
  * @property {string} [maskPlaceholder] - Placeholder of the mask.
- * @property {PaperDefinitionStepAttributeOptions[]} [options] - Array of options.
+ * @property {PaperDefinitionStepAttributeOptions[][]} [options] - Array of array of options.
  */
 
 /**

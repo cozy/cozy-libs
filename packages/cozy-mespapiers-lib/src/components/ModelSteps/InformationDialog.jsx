@@ -120,7 +120,8 @@ const InformationDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
                 <div
                   key={idx}
                   className={cx('u-mh-1', {
-                    ['u-h-3 u-pb-1-half']: hasMarginBottom(idx)
+                    ['u-h-3 u-pb-1-half']: hasMarginBottom(idx),
+                    ['u-stack-m']: attrs.options
                   })}
                 >
                   <Component

@@ -16,7 +16,7 @@ import { defaultProptypes } from './proptypes'
  * @returns {boolean}
  */
 const isCustomOptionValue = (options, value) => {
-  return !!value && !options.some(opt => opt.value === value)
+  return !!value && !options.flat().some(opt => opt.value === value)
 }
 
 /**
@@ -26,10 +26,11 @@ const isCustomOptionValue = (options, value) => {
  */
 const getDefaultOption = (options, value) => {
   if (isCustomOptionValue(options, value)) {
-    return options.find(opt => !!opt.textFieldAttrs)
+    return options.flat().find(opt => !!opt.textFieldAttrs)
   }
   return (
-    options.find(opt => opt.value === value) || options.find(opt => opt.checked)
+    options.flat().find(opt => opt.value === value) ||
+    options.flat().find(opt => opt.checked)
   )
 }
 
@@ -108,40 +109,41 @@ const RadioAdapter = ({
     textFieldAttrs
   ])
 
-  return (
-    <Paper>
+  return options.map((optionGroup, indexOptionGroup) => (
+    <Paper key={indexOptionGroup}>
       <List>
-        {options.map((option, index) => (
-          <Fragment key={index}>
+        {optionGroup.map((option, indexOption) => (
+          <Fragment key={`'${indexOptionGroup}${indexOption}`}>
             <RadioAdapterItem
               option={option}
               onClick={() => handleClick(option)}
               value={currentOptionValue}
             />
-            {index !== options.length - 1 && (
+            {option.textFieldAttrs && textFieldAttrs && (
+              <ListItem>
+                <TextField
+                  variant="outlined"
+                  label={t(textFieldAttrs.label)}
+                  value={textValue}
+                  inputProps={{
+                    'data-testid': 'TextField-other',
+                    inputMode:
+                      textFieldAttrs.type === 'number' ? 'numeric' : 'text'
+                  }}
+                  onChange={handleTextChange}
+                  required={textFieldAttrs.required}
+                  fullWidth
+                />
+              </ListItem>
+            )}
+            {indexOption !== optionGroup.length - 1 && (
               <Divider component="li" variant="inset" />
             )}
           </Fragment>
         ))}
-        {textFieldAttrs && (
-          <ListItem>
-            <TextField
-              variant="outlined"
-              label={t(textFieldAttrs.label)}
-              value={textValue}
-              inputProps={{
-                'data-testid': 'TextField-other',
-                inputMode: textFieldAttrs.type === 'number' ? 'numeric' : 'text'
-              }}
-              onChange={handleTextChange}
-              required={textFieldAttrs.required}
-              fullWidth
-            />
-          </ListItem>
-        )}
       </List>
     </Paper>
-  )
+  ))
 }
 
 RadioAdapter.propTypes = defaultProptypes

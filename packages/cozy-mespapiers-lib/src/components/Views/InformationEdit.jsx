@@ -110,7 +110,8 @@ const InformationEdit = () => {
               text={
                 <div
                   className={cx('u-mt-1', {
-                    'u-mh-1': !isMobile
+                    'u-mh-1': !isMobile,
+                    ['u-stack-m']: attrs.options
                   })}
                 >
                   {Component && (
