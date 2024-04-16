@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import InputMask from 'react-input-mask'
 
-import InputAdornment from 'cozy-ui/transpiled/react/InputAdornment'
 import TextField from 'cozy-ui/transpiled/react/TextField'
-import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
+import { makeInputAdornment } from './helpers'
 import { defaultProptypes } from './proptypes'
 import {
   checkConstraintsOfIinput,
@@ -26,22 +25,6 @@ const getInputMode = (inputType, mask, currentDefinition) => {
   return inputType === 'number' && currentDefinition?.label !== 'pay_sheet'
     ? 'numeric'
     : 'text'
-}
-
-const makeInputAdornment = (adornment, currentValue, t) => {
-  const result = {}
-  Object.entries(adornment).map(([adornmentPosition, adornmentValue]) => {
-    if (!['start', 'end'].includes(adornmentPosition)) return
-
-    result[`${adornmentPosition}Adornment`] = (
-      <InputAdornment position={adornmentPosition}>
-        <Typography>
-          {t(adornmentValue, { smart_count: currentValue })}
-        </Typography>
-      </InputAdornment>
-    )
-  })
-  return result
 }
 
 const InputTextAdapter = ({
@@ -212,7 +195,11 @@ const InputTextAdapter = ({
       value={currentValue}
       {...(withAdornment && {
         InputProps: {
-          ...makeInputAdornment(withAdornment, currentValue, t)
+          ...makeInputAdornment({
+            adornment: withAdornment,
+            smartcount: currentValue,
+            t
+          })
         }
       })}
       inputProps={{
