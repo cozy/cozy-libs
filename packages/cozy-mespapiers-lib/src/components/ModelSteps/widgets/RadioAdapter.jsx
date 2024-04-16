@@ -10,51 +10,83 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import RadioAdapterItem from './RadioAdapterItem'
 import { defaultProptypes } from './proptypes'
 
+/**
+ * @param {import('../../../types').PaperDefinitionStepAttributeOptions[]} options
+ * @param {string} value
+ * @returns {boolean}
+ */
 const isCustomOptionValue = (options, value) => {
-  return !!value && !options.includes(value)
+  return !!value && !options.some(opt => opt.value === value)
 }
-const getDefaultOptionValue = (options, value) => {
-  return isCustomOptionValue(options, value) ? 'other' : value
+
+/**
+ * @param {import('../../../types').PaperDefinitionStepAttributeOptions[]} options
+ * @param {string} value
+ * @returns {import('../../../types').PaperDefinitionStepAttributeOptions}
+ */
+const getDefaultOption = (options, value) => {
+  if (isCustomOptionValue(options, value)) {
+    return options.find(opt => !!opt.textFieldAttrs)
+  }
+  return (
+    options.find(opt => opt.value === value) || options.find(opt => opt.checked)
+  )
 }
+
+/**
+ * @param {import('../../../types').PaperDefinitionStepAttributeOptions[]} options
+ * @param {string} value
+ * @returns {string}
+ */
 const getDefaultTextValue = (options, value) => {
   return isCustomOptionValue(options, value) ? value : ''
 }
 
 const RadioAdapter = ({
-  attrs: { name, options, required, inputLabel },
+  attrs: { name, options, required },
   formDataValue = '',
   setValue,
   setValidInput,
   idx
 }) => {
-  const [optionValue, setOptionValue] = useState(
-    getDefaultOptionValue(options, formDataValue)
-  )
+  const [{ textFieldAttrs, value: currentOptionValue }, setCurrentOption] =
+    useState(getDefaultOption(options, formDataValue) || {})
   const [textValue, setTextValue] = useState(
     getDefaultTextValue(options, formDataValue)
   )
   const { t } = useI18n()
 
-  const handleClick = val => {
-    setOptionValue(val)
+  const handleClick = opt => {
+    setCurrentOption(opt)
     setValue(prev => ({
       ...prev,
-      [name]: val !== 'other' ? val : textValue || val
+      [name]: opt.textFieldAttrs ? textValue || opt.value : opt.value
+    }))
+  }
+
+  const handleText = value => {
+    setTextValue(value)
+    setValue(prev => ({
+      ...prev,
+      [name]: value || currentOptionValue
     }))
   }
 
   const handleTextChange = e => {
     const currentValue = e.target.value
-    setTextValue(currentValue)
-    setValue(prev => ({
-      ...prev,
-      [name]: currentValue || optionValue
-    }))
+    if (textFieldAttrs.type === 'number') {
+      // To force Safari to accept only numbers (regex: numbers or empty values accepted)
+      if (/^(?:[0-9]*|)$/.test(currentValue)) {
+        handleText(currentValue)
+      }
+    } else {
+      handleText(currentValue)
+    }
   }
 
   /* Set default value */
   useEffect(() => {
-    setValue(prev => ({ ...prev, [name]: textValue || optionValue }))
+    setValue(prev => ({ ...prev, [name]: textValue || currentOptionValue }))
     // eslint-disable-next-line react-hooks/exhaustive-deps -- We don't want to update the value when the text/option changes
   }, [])
 
@@ -62,9 +94,19 @@ const RadioAdapter = ({
   useEffect(() => {
     setValidInput(prev => ({
       ...prev,
-      [idx]: !required || optionValue || textValue
+      [idx]:
+        (!required && !textFieldAttrs?.required) ||
+        (!!currentOptionValue && !textFieldAttrs?.required) ||
+        !!textValue
     }))
-  }, [idx, setValidInput, optionValue, textValue, required])
+  }, [
+    idx,
+    setValidInput,
+    currentOptionValue,
+    textValue,
+    required,
+    textFieldAttrs
+  ])
 
   return (
     <Paper>
@@ -74,24 +116,25 @@ const RadioAdapter = ({
             <RadioAdapterItem
               option={option}
               onClick={() => handleClick(option)}
-              value={optionValue}
+              value={currentOptionValue}
             />
             {index !== options.length - 1 && (
               <Divider component="li" variant="inset" />
             )}
           </Fragment>
         ))}
-        {optionValue === 'other' && (
+        {textFieldAttrs && (
           <ListItem>
             <TextField
-              type="text"
               variant="outlined"
-              label={t(inputLabel)}
+              label={t(textFieldAttrs.label)}
               value={textValue}
               inputProps={{
-                'data-testid': 'TextField-other'
+                'data-testid': 'TextField-other',
+                inputMode: textFieldAttrs.type === 'number' ? 'numeric' : 'text'
               }}
               onChange={handleTextChange}
+              required={textFieldAttrs.required}
               fullWidth
             />
           </ListItem>

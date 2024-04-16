@@ -8,42 +8,56 @@ import AppLike from '../../../../test/components/AppLike'
 const setup = ({
   attrs = {},
   defaultValue = '',
-  setValue = jest.fn()
+  setValue = jest.fn(),
+  setValidInput = jest.fn()
 } = {}) => {
   return render(
     <AppLike>
       <RadioAdapter
         attrs={attrs}
         defaultValue={defaultValue}
-        setValidInput={jest.fn()}
+        setValidInput={setValidInput}
         setValue={setValue}
+        idx={0}
       />
     </AppLike>
   )
 }
 
 describe('RadioAdapter', () => {
-  const options = ['cdi', 'cdd', 'alternate', 'internship', 'other']
+  const makeOptions = ({ required } = {}) => [
+    { value: 'cdi', label: 'attributes.contractType.cdi' },
+    { value: 'cdd', label: 'attributes.contractType.cdd' },
+    { value: 'alternate', label: 'attributes.contractType.alternate' },
+    { value: 'internship', label: 'attributes.contractType.internship' },
+    {
+      value: 'other',
+      label: 'attributes.contractType.other',
+      textFieldAttrs: { label: 'textFieldAttrs.label', required }
+    }
+  ]
   const optionsTranslated = ['CDI', 'CDD', 'Alternate', 'Internship', 'Other']
 
   it('renders all options', () => {
-    const { getByText } = setup({ attrs: { name: 'contractType', options } })
+    const { getByText } = setup({
+      attrs: { name: 'contractType', options: makeOptions() }
+    })
 
     optionsTranslated.forEach(option => {
       expect(getByText(option)).toBeInTheDocument()
     })
   })
 
-  it('renders a text field when "other" is selected', () => {
+  it('renders a text field when "Other" is selected', () => {
     const { getByLabelText, getByTestId } = setup({
-      attrs: { name: 'contractType', options }
+      attrs: { name: 'contractType', options: makeOptions() }
     })
 
-    fireEvent.click(getByLabelText('other'))
+    fireEvent.click(getByLabelText('Other'))
 
-    expect(getByLabelText('other')).toBeChecked()
-    expect(getByLabelText('other')).toHaveAttribute('value', 'other')
-    expect(getByLabelText('other')).toHaveAttribute('type', 'radio')
+    expect(getByLabelText('Other')).toBeChecked()
+    expect(getByLabelText('Other')).toHaveAttribute('value', 'other')
+    expect(getByLabelText('Other')).toHaveAttribute('type', 'radio')
 
     expect(getByTestId('TextField-other')).toBeInTheDocument()
     expect(getByTestId('TextField-other')).toHaveAttribute('type', 'text')
@@ -56,11 +70,11 @@ describe('RadioAdapter', () => {
   it('calls the setValue function when an option is clicked', () => {
     const setValue = jest.fn()
     const { getByLabelText } = setup({
-      attrs: { name: 'contractType', options },
+      attrs: { name: 'contractType', options: makeOptions() },
       setValue
     })
 
-    fireEvent.click(getByLabelText(options[1]))
+    fireEvent.click(getByLabelText(optionsTranslated[1]))
 
     expect(setValue).toHaveBeenCalled()
   })
@@ -68,11 +82,11 @@ describe('RadioAdapter', () => {
   it('calls the setValue function when the text field is changed', () => {
     const setValue = jest.fn()
     const { getByLabelText, getByTestId } = setup({
-      attrs: { name: 'contractType', options },
+      attrs: { name: 'contractType', options: makeOptions() },
       setValue
     })
 
-    fireEvent.click(getByLabelText('other'))
+    fireEvent.click(getByLabelText('Other'))
     expect(setValue).toHaveBeenCalled()
 
     fireEvent.change(getByTestId('TextField-other'), {
@@ -87,11 +101,11 @@ describe('RadioAdapter', () => {
       nextState = callback({})
     })
     const { getByLabelText, getByTestId } = setup({
-      attrs: { name: 'contractType', options },
+      attrs: { name: 'contractType', options: makeOptions() },
       setValue
     })
 
-    fireEvent.click(getByLabelText('other'))
+    fireEvent.click(getByLabelText('Other'))
     expect(setValue).toHaveBeenCalled()
     expect(nextState).toEqual({ contractType: 'other' })
 
@@ -101,8 +115,51 @@ describe('RadioAdapter', () => {
     expect(setValue).toHaveBeenCalled()
     expect(nextState).toEqual({ contractType: 'test' })
 
-    fireEvent.click(getByLabelText('cdd'))
+    fireEvent.click(getByLabelText('CDD'))
     expect(setValue).toHaveBeenCalled()
     expect(nextState).toEqual({ contractType: 'cdd' })
+  })
+
+  it('calls the setValidInput function with the right value when "required" is not defined in the attributes of "textFieldAttrs" in the options', () => {
+    let nextState
+    const setValidInput = jest.fn().mockImplementation(callback => {
+      nextState = callback({})
+    })
+    const { getByLabelText, getByTestId } = setup({
+      attrs: {
+        name: 'contractType',
+        options: makeOptions({ required: false })
+      },
+      setValidInput
+    })
+    expect(nextState).toEqual({ 0: true })
+
+    fireEvent.click(getByLabelText('Other'))
+    expect(nextState).toEqual({ 0: true })
+
+    fireEvent.change(getByTestId('TextField-other'), {
+      target: { value: 'test' }
+    })
+    expect(nextState).toEqual({ 0: true })
+  })
+
+  it('calls the setValidInput function with the right value when "required" is defined in the attributes of "textFieldAttrs" in the options', () => {
+    let nextState
+    const setValidInput = jest.fn().mockImplementation(callback => {
+      nextState = callback({})
+    })
+    const { getByLabelText, getByTestId } = setup({
+      attrs: { name: 'contractType', options: makeOptions({ required: true }) },
+      setValidInput
+    })
+    expect(nextState).toEqual({ 0: true })
+
+    fireEvent.click(getByLabelText('Other'))
+    expect(nextState).toEqual({ 0: false })
+
+    fireEvent.change(getByTestId('TextField-other'), {
+      target: { value: 'test' }
+    })
+    expect(nextState).toEqual({ 0: true })
   })
 })
