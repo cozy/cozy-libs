@@ -320,12 +320,28 @@
           "attributes": [
             {
               "name": "noticePeriod",
-              "type": "number",
-              "adornment": {
-                "end": "PaperJSON.generic.noticePeriod.endAdornment"
-              },
-              "maxLength": 3,
-              "inputLabel": "PaperJSON.generic.noticePeriod.inputLabel"
+              "type": "radio",
+              "options": [
+                [
+                  {"value": 7, "label": "attributes.noticePeriod.oneWeek"},
+                  {"value": 30, "label": "attributes.noticePeriod.oneMonth"},
+                  {"value": 90, "label": "attributes.noticePeriod.threeMonth", "checked": true},
+                  {"value": 365, "label": "attributes.noticePeriod.oneYear"},
+                  {
+                    "value": "custom",
+                    "label": "attributes.noticePeriod.custom",
+                    "textFieldAttrs": {
+                      "type": "number",
+                      "required": true,
+                      "label": "PaperJSON.generic.noticePeriod.inputLabel",
+                      "adornment": {"end": "PaperJSON.generic.noticePeriod.endAdornment"}
+                    }
+                  }
+                ],
+                [
+                  {"value": 0, "label": "attributes.noticePeriod.noAlert"}
+                ]
+              ]
             }
           ]
         },
