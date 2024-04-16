@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [93.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@92.0.1...cozy-mespapiers-lib@93.0.0) (2024-04-16)
+
+
+### Bug Fixes
+
+* **mespapiers:** Save the right information in contractType metadata ([8849e7b](https://github.com/cozy/cozy-libs/commit/8849e7bf1c83a3e6fb33fe26bffa94eace1dc059))
+* **mespapiers:** Using the `inputLabel` attribute in the RadioAdapter ([1544227](https://github.com/cozy/cozy-libs/commit/1544227461e8e9fc6a6fc461b06bd3f40849218b))
+
+
+### Features
+
+* **mespapiers:** Add Adornment attribute to TextField in RadioAdapter ([a551d9b](https://github.com/cozy/cozy-libs/commit/a551d9b16417502aeb0d270c6f360ee52950137e))
+* **mespapiers:** Convert options of RadioAdapter component to object ([d9cb7b3](https://github.com/cozy/cozy-libs/commit/d9cb7b39ae75456098b9485e6e8221ebdda313eb))
+* **mespapiers:** Converting `noticePeriod` information steps ([9173877](https://github.com/cozy/cozy-libs/commit/91738778789d72f122353b6e6c5bbc979c3e3e5e))
+* **mespapiers:** Update information steps with a list of radio inputs ([829bdd8](https://github.com/cozy/cozy-libs/commit/829bdd8324da9f20910726765597bbd20653637a))
+* **mespapiers:** Upgrade cozy-client to 46.7.0 ([f9c1223](https://github.com/cozy/cozy-libs/commit/f9c122386a0fb9f158f78654cc15216c29b52c59))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-client >= 46.7.0`
+
+
+
+
+
 ## [92.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@92.0.0...cozy-mespapiers-lib@92.0.1) (2024-04-15)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
