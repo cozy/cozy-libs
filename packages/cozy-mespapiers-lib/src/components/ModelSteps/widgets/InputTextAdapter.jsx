@@ -41,7 +41,7 @@ const InputTextAdapter = ({
     inputLabel,
     maxLength,
     mask,
-    withAdornment,
+    adornment,
     maskPlaceholder = 'ˍ',
     defaultValue
   } = attrs
@@ -193,10 +193,10 @@ const InputTextAdapter = ({
       error={isError}
       helperText={helperText}
       value={currentValue}
-      {...(withAdornment && {
+      {...(adornment && {
         InputProps: {
           ...makeInputAdornment({
-            adornment: withAdornment,
+            adornment,
             smartcount: currentValue,
             t
           })

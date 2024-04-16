@@ -321,7 +321,7 @@
             {
               "name": "noticePeriod",
               "type": "number",
-              "withAdornment": {
+              "adornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
               "maxLength": 3,
