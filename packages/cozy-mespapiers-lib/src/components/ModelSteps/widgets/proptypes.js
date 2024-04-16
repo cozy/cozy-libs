@@ -18,7 +18,7 @@ const attrsProptypesWithOption = PropTypes.shape({
   inputLabel: PropTypes.string,
   type: PropTypes.string,
   required: PropTypes.bool,
-  options: PropTypes.arrayOf(attrsProptypesOption),
+  options: PropTypes.arrayOf(PropTypes.arrayOf(attrsProptypesOption)),
   minLength: PropTypes.number,
   maxLength: PropTypes.number,
   mask: PropTypes.string,
