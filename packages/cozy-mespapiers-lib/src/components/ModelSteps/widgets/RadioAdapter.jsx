@@ -51,8 +51,10 @@ const RadioAdapter = ({
   setValidInput,
   idx
 }) => {
-  const [{ textFieldAttrs, value: currentOptionValue }, setCurrentOption] =
-    useState(getDefaultOption(options, formDataValue) || {})
+  const [
+    { textFieldAttrs: currentOptionTextFieldAttrs, value: currentOptionValue },
+    setCurrentOption
+  ] = useState(getDefaultOption(options, formDataValue) || {})
   const [textValue, setTextValue] = useState(
     getDefaultTextValue(options, formDataValue)
   )
@@ -76,7 +78,7 @@ const RadioAdapter = ({
 
   const handleTextChange = e => {
     const currentValue = e.target.value
-    if (textFieldAttrs.type === 'number') {
+    if (currentOptionTextFieldAttrs.type === 'number') {
       // To force Safari to accept only numbers (regex: numbers or empty values accepted)
       if (/^(?:[0-9]*|)$/.test(currentValue)) {
         handleText(currentValue)
@@ -97,8 +99,8 @@ const RadioAdapter = ({
     setValidInput(prev => ({
       ...prev,
       [idx]:
-        (!required && !textFieldAttrs?.required) ||
-        (!!currentOptionValue && !textFieldAttrs?.required) ||
+        (!required && !currentOptionTextFieldAttrs?.required) ||
+        (!!currentOptionValue && !currentOptionTextFieldAttrs?.required) ||
         !!textValue
     }))
   }, [
@@ -107,7 +109,7 @@ const RadioAdapter = ({
     currentOptionValue,
     textValue,
     required,
-    textFieldAttrs
+    currentOptionTextFieldAttrs
   ])
 
   return options.map((optionGroup, indexOptionGroup) => (
@@ -120,16 +122,16 @@ const RadioAdapter = ({
               onClick={() => handleClick(option)}
               value={currentOptionValue}
             />
-            {option.textFieldAttrs && textFieldAttrs && (
+            {option.textFieldAttrs && currentOptionTextFieldAttrs && (
               <ListItem>
                 <TextField
                   variant="outlined"
-                  label={t(textFieldAttrs.label)}
+                  label={t(currentOptionTextFieldAttrs.label)}
                   value={textValue}
-                  {...(textFieldAttrs.adornment && {
+                  {...(currentOptionTextFieldAttrs.adornment && {
                     InputProps: {
                       ...makeInputAdornment({
-                        adornment: textFieldAttrs.adornment,
+                        adornment: currentOptionTextFieldAttrs.adornment,
                         smartcount: textValue,
                         t
                       })
@@ -138,10 +140,12 @@ const RadioAdapter = ({
                   inputProps={{
                     'data-testid': 'TextField-other',
                     inputMode:
-                      textFieldAttrs.type === 'number' ? 'numeric' : 'text'
+                      currentOptionTextFieldAttrs.type === 'number'
+                        ? 'numeric'
+                        : 'text'
                   }}
                   onChange={handleTextChange}
-                  required={textFieldAttrs.required}
+                  required={currentOptionTextFieldAttrs.required}
                   fullWidth
                 />
               </ListItem>
