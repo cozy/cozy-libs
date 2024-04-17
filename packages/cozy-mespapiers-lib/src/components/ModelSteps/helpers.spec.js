@@ -2,7 +2,8 @@ import {
   isFileAlreadySelected,
   makeBase64FromFile,
   makeFileFromBase64,
-  getFormDataFilesForOcr
+  getFormDataFilesForOcr,
+  normalizeFormdataMetadata
 } from './helpers'
 
 describe('ModalSteps helpers', () => {
@@ -192,6 +193,44 @@ describe('ModalSteps helpers', () => {
         back: { name: '002_rotated.pdf' },
         front: { name: '001.pdf' }
       })
+    })
+  })
+
+  describe('normalizeFormdataMetadata', () => {
+    it('should return the original formData when new metadata is empty', () => {
+      const formData = { metadata: {}, data: [], contacts: [] }
+      const newMetadata = {}
+      const expected = { metadata: {}, data: [], contacts: [] }
+
+      const result = normalizeFormdataMetadata({ formData, newMetadata })
+
+      expect(result).toEqual(expected)
+    })
+
+    it('should merge new metadata into formData metadata', () => {
+      const formData = { metadata: { foo: 'bar' }, data: [], contacts: [] }
+      const newMetadata = { key: 'value' }
+      const expected = {
+        ...formData,
+        metadata: { ...formData.metadata, ...newMetadata }
+      }
+
+      const result = normalizeFormdataMetadata({ formData, newMetadata })
+
+      expect(result).toEqual(expected)
+    })
+
+    it('should merge new "complex" metadata into the metadata of formData', () => {
+      const formData = { metadata: { foo: 'bar' }, data: [], contacts: [] }
+      const newMetadata = { 'key.complex': 'value' }
+      const expected = {
+        ...formData,
+        metadata: { ...formData.metadata, key: { complex: 'value' } }
+      }
+
+      const result = normalizeFormdataMetadata({ formData, newMetadata })
+
+      expect(result).toEqual(expected)
     })
   })
 })

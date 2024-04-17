@@ -1,4 +1,6 @@
 import parse from 'date-fns/parse'
+import merge from 'lodash/merge'
+import set from 'lodash/set'
 
 import { KNOWN_DATE_METADATA_NAMES } from 'cozy-client/dist/models/paper'
 import { isAndroid, isIOS } from 'cozy-device-helper'
@@ -370,4 +372,20 @@ export const getDefaultSelectedVersion = ({
 
   const { version } = findPaperVersion(ocrFromFlagship, allReferenceRules)
   return version
+}
+
+/**
+ * @param {Object} param
+ * @param {import('../../types').FormData} param.formData
+ * @param {import('cozy-client/types/types').FileMetadata} param.newMetadata
+ * @returns {import('../../types').FormData}
+ */
+export const normalizeFormdataMetadata = ({ formData, newMetadata }) => {
+  const metadataNormalized = {
+    metadata: Object.entries(newMetadata).reduce((acc, [key, value]) => {
+      return merge(acc, set({}, key, value))
+    }, {})
+  }
+
+  return merge({}, formData, metadataNormalized)
 }
