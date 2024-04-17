@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [93.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@93.0.1...cozy-mespapiers-lib@93.0.2) (2024-04-17)
+
+
+### Bug Fixes
+
+* **mespapiers:** Merge all metadata when submit information step ([900c3d7](https://github.com/cozy/cozy-libs/commit/900c3d72d0dd1ad64e775a0696ab59308b44a714))
+* **mespapiers:** The `noticePeriod` field must be a TextField during ocr ([74a6a14](https://github.com/cozy/cozy-libs/commit/74a6a14825a2d46ed1c63b3d8833b5f7aba14c2a)), closes [#2515](https://github.com/cozy/cozy-libs/issues/2515)
+
+
+
+
+
 ## [93.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@93.0.0...cozy-mespapiers-lib@93.0.1) (2024-04-17)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
