@@ -1,4 +1,26 @@
 /**
+ * @typedef {Object} FormDataData
+ * @property {File} file
+ * @property {{ page: 'front'|'back', multipage: boolean }} fileMetadata
+ * @property {number} stepIndex
+ */
+
+/**
+ * @typedef {Object} FormData
+ * @property {import('cozy-client/types/types').FileMetadata} metadata
+ * @property {FormDataData[]} data
+ * @property {import('cozy-client/types/types').IOCozyContact[]} contacts
+ */
+
+/**
+ * @typedef {import('react').Dispatch<import('react').SetStateAction<FormData>>} FormDataSetter
+ */
+
+/**
+ * @typedef {{formData: FormData, setFormData: FormDataSetter}} FormDataContext
+ */
+
+/**
  * @typedef {Object} SearchResult
  * @property {boolean} loading
  * @property {boolean} hasResult
