@@ -48,7 +48,7 @@ const GroupRecipientDetailWithoutAccess = ({ withoutAccess, isOwner }) => {
                     {t(
                       `GroupRecipientDetail.withoutAccess.status.${recipient.status}`
                     )}
-                    {isOwner
+                    {isOwner && recipient.status === 'mail-not-sent'
                       ? ` - ${t('GroupRecipientDetail.withoutAccess.addEmail')}`
                       : null}
                   </div>
