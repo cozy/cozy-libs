@@ -32,7 +32,7 @@ export const KonnectorIcon = ({ konnectorCriteria, ...props }) => {
     case 'energy':
       return <Icon icon={KonnectorEnergy} {...props} />
 
-    case 'pay-sheet':
+    case 'pay_sheet':
       return <Icon icon={KonnectorPayslip} {...props} />
 
     default:
