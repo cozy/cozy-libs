@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [94.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@93.0.2...cozy-mespapiers-lib@94.0.0) (2024-04-17)
+
+
+### Bug Fixes
+
+* **mespapiers:** Wrong writing of the `pay_sheet` qualification ([9dafd90](https://github.com/cozy/cozy-libs/commit/9dafd90eeabb104d93c033aebc78f081c0c09499))
+
+
+### Features
+
+* **mespapiers:** Upgrade cozy-client to 46.8.0 ([cf4b0a5](https://github.com/cozy/cozy-libs/commit/cf4b0a592525889afa802336b0c04642a525f1a1))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-client >= 46.8.0`
+
+
+
+
+
 ## [93.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@93.0.1...cozy-mespapiers-lib@93.0.2) (2024-04-17)
 
 
