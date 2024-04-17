@@ -30,7 +30,7 @@
     },
     "create-cozy": "Create my cozy",
     "members": {
-      "count": "1 member |||| %{smart_count} members",
+      "count": "%{smart_count} member |||| %{smart_count} members",
       "others": "and 1 other… |||| and %{smart_count} others…",
       "otherContacts": "other contact |||| other contacts"
     },
@@ -400,6 +400,10 @@
   },
   "GroupRecipientDetail": {
     "subtitle": "Managed by %{ownerName}",
+    "empty": {
+      "content": "Your contact group is empty! Quickly add members to start sharing your valuable documents with them!",
+      "action": "Open Contacts"
+    },
     "withAccess": {
       "title": "Access to item"
     },

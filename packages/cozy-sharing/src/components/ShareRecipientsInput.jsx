@@ -8,7 +8,7 @@ import ShareAutosuggest from './ShareAutosuggest'
 import { getContactsFromGroupId } from '../helpers/contacts'
 import {
   buildReachableContactsQuery,
-  buildContactGroupsByIdsQuery,
+  buildContactGroupsQuery,
   buildUnreachableContactsWithGroupsQuery
 } from '../queries/queries'
 
@@ -40,25 +40,17 @@ const ShareRecipientsInput = ({
     }
   )
 
-  const contactGroupsByIdsQuery = buildContactGroupsByIdsQuery([
-    ...new Set(
-      (reachableContactsResult.data || []).flatMap(contact => {
-        return (contact.relationships?.groups?.data || []).map(
-          group => group._id
-        )
-      })
-    )
-  ])
-  const contactGroupsByIdsResult = useQueryAll(
-    contactGroupsByIdsQuery.definition,
-    contactGroupsByIdsQuery.options
+  const contactGroupsQuery = buildContactGroupsQuery()
+  const contactGroupsResult = useQueryAll(
+    contactGroupsQuery.definition,
+    contactGroupsQuery.options
   )
 
   const isLoading =
     isQueryLoading(reachableContactsResult) ||
     reachableContactsResult.hasMore ||
-    isQueryLoading(contactGroupsByIdsResult) ||
-    contactGroupsByIdsResult.hasMore ||
+    isQueryLoading(contactGroupsResult) ||
+    contactGroupsResult.hasMore ||
     (flag('sharing.show-recipient-groups') &&
       (isQueryLoading(unreachableContactsWithGroupsResult) ||
         unreachableContactsWithGroupsResult.hasMore))
@@ -66,7 +58,7 @@ const ShareRecipientsInput = ({
   const currentRecipientGroups = currentRecipients
     .map(({ id }) => id)
     .filter(Boolean)
-  const contactGroups = (contactGroupsByIdsResult.data || [])
+  const contactGroups = (contactGroupsResult.data || [])
     .filter(
       ({ _id }) =>
         !flag('sharing.show-recipient-groups') ||
