@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.1.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@13.1.1...cozy-sharing@13.1.2) (2024-04-17)
+
+
+### Bug Fixes
+
+* **GroupRecipientPermissions:** Missing document props ([f35471e](https://github.com/cozy/cozy-libs/commit/f35471e61928969b22aa07766823aac944d19aee))
+
+
+
+
+
 ## [13.1.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@13.1.0...cozy-sharing@13.1.1) (2024-04-15)
 
 **Note:** Version bump only for package cozy-sharing
