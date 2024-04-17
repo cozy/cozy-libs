@@ -1,7 +1,5 @@
 import cx from 'classnames'
 import get from 'lodash/get'
-import merge from 'lodash/merge'
-import set from 'lodash/set'
 import throttle from 'lodash/throttle'
 import PropTypes from 'prop-types'
 import React, { useCallback, useMemo, useState } from 'react'
@@ -13,6 +11,7 @@ import PointerAlert from 'cozy-ui/transpiled/react/PointerAlert'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
+import { normalizeFormdataMetadata } from './helpers'
 import SubmitButton from './widgets/SubmitButton'
 import IlluGenericInputDate from '../../assets/icons/IlluGenericInputDate.svg'
 import IlluGenericInputText from '../../assets/icons/IlluGenericInputText.svg'
@@ -44,16 +43,10 @@ const InformationDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
   const [validInput, setValidInput] = useState({})
   const [isFocus, setIsFocus] = useState(false)
 
-  const [objKey, objValue] = Object.entries(value)[0] || [undefined, undefined]
-  const newMetadata = useMemo(
-    () => ({ metadata: set({}, objKey, objValue) }),
-    [objKey, objValue]
-  )
-
-  const newFormData = useMemo(
-    () => merge({}, formData, newMetadata),
-    [formData, newMetadata]
-  )
+  const newFormData = normalizeFormdataMetadata({
+    formData,
+    newMetadata: value
+  })
 
   const submit = throttle(() => {
     if (value && allInputsValid) {
