@@ -30,7 +30,7 @@
     },
     "create-cozy": "Créer mon Cozy",
     "members": {
-      "count": "1 membre |||| %{smart_count} membres",
+      "count": "%{smart_count} membre |||| %{smart_count} membres",
       "others": "et 1 autre… |||| et %{smart_count} autres…",
       "otherContacts": "autre contact |||| autres contacts"
     },
@@ -398,6 +398,10 @@
   },
   "GroupRecipientDetail": {
     "subtitle": "Géré par %{ownerName}",
+    "empty": {
+      "content": "Votre groupe de contacts est vide ! Ajoutez rapidement des membres pour commencer à leur partager vos précieux documents !",
+      "action": "Ouvrir Contacts"
+    },
     "withAccess": {
       "title": "Accès à l’élément"
     },

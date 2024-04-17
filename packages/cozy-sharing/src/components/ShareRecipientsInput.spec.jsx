@@ -45,7 +45,7 @@ describe('ShareRecipientsInput component', () => {
           doctype: 'io.cozy.contacts',
           data: contacts
         },
-        'io.cozy.contacts.groups/by-ids/fe86af20-c6c5': {
+        'io.cozy.contacts.groups': {
           doctype: 'io.cozy.contacts.groups',
           data: contactGroups
         },

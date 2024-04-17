@@ -59,12 +59,11 @@ export const buildReachableContactsQuery = () => ({
   }
 })
 
-export const buildContactGroupsByIdsQuery = ids => ({
-  definition: Q(Group.doctype).getByIds(ids),
+export const buildContactGroupsQuery = () => ({
+  definition: Q(Group.doctype),
   options: {
-    as: `io.cozy.contacts.groups/by-ids/${ids.join('/')}`,
-    fetchPolicy: defaultFetchPolicy,
-    enabled: ids.length > 0
+    as: `io.cozy.contacts.groups`,
+    fetchPolicy: defaultFetchPolicy
   }
 })
 
