@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@13.1.2...cozy-sharing@13.2.0) (2024-04-18)
+
+
+### Bug Fixes
+
+* Only show add email suggestion when we can't send an email ([9212597](https://github.com/cozy/cozy-libs/commit/92125976900b939e985330682f9375ce22f2ab42))
+
+
+### Features
+
+* Allow to add empty group ([a16f535](https://github.com/cozy/cozy-libs/commit/a16f535008a4dbe9426ee026acdbd413280585dd))
+
+
+
+
+
 ## [13.1.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@13.1.1...cozy-sharing@13.1.2) (2024-04-17)
 
 
