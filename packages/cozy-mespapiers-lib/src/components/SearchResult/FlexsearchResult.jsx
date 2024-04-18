@@ -4,7 +4,6 @@ import React from 'react'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import List from 'cozy-ui/transpiled/react/List'
 import { hasExpandedAttributesDisplayed } from 'cozy-ui/transpiled/react/ListItem/ExpandedAttributes/helpers'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import FlexsearchResultLine from './FlexsearchResultLine'
 
@@ -22,16 +21,12 @@ const FlexsearchResult = ({
   filteredDocs,
   firstSearchResultMatchingAttributes
 }) => {
-  const { f, lang } = useI18n()
-
   const firstDoc = filteredDocs[0]
   const otherDocs = filteredDocs.slice(1)
   const hasOtherDocs = otherDocs.length > 0
   const hasExpandedAttributesToDisplay = hasExpandedAttributesDisplayed({
     doc: firstDoc,
-    expandedAttributes: firstSearchResultMatchingAttributes,
-    f,
-    lang
+    expandedAttributes: firstSearchResultMatchingAttributes
   })
 
   return (
