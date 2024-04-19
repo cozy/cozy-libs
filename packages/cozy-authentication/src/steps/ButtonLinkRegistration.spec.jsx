@@ -4,10 +4,12 @@ jest.mock('cozy-device-helper', () => ({
   isAndroidApp: () => false
 }))
 
+import { mount } from 'enzyme'
 import React from 'react'
+
 import CozyClient from 'cozy-client'
 import { nativeLinkOpen } from 'cozy-device-helper'
-import { mount } from 'enzyme'
+
 import { ButtonLinkRegistration } from './ButtonLinkRegistration'
 
 describe('ButtonLinkRegistration', () => {

@@ -1,6 +1,8 @@
-import { PageFooter } from 'cozy-ui/transpiled/react'
-import { optionsProvider, optionsConsumer } from './ProcedureOptions'
 import React from 'react'
+
+import { PageFooter } from 'cozy-ui/transpiled/react'
+
+import { optionsProvider, optionsConsumer } from './ProcedureOptions'
 
 describe('options', () => {
   const DumbWrapper = ({ children }) => <div>{children}</div>

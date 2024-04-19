@@ -1,8 +1,8 @@
 import capitalize from 'lodash/capitalize'
 
 import { isCordova } from './cordova'
-import { hasDevicePlugin } from './plugins'
 import { isIOSApp } from './platform'
+import { hasDevicePlugin } from './plugins'
 
 const DEFAULT_DEVICE = 'Device'
 

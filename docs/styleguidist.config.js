@@ -1,6 +1,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const cozyUIPlugin = require('cozy-ui/stylus')
 const webpack = require('webpack')
+
+const cozyUIPlugin = require('cozy-ui/stylus')
 
 const lib = process.env.TARGET
 const styleguideDir = `./build${lib ? `/${lib}` : ''}`

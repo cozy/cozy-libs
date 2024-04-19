@@ -1,6 +1,7 @@
 const path = require('path')
-const webpack = require('webpack')
+
 const TerserPlugin = require('terser-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = {
   bail: true,

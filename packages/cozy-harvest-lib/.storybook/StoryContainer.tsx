@@ -1,21 +1,22 @@
-
 import 'cozy-ui/dist/cozy-ui.min.css'
 import 'cozy-ui/transpiled/react/stylesheet.css'
+
 import React, { ReactNode } from 'react'
 import { Provider as ReduxProvider } from 'react-redux'
 
 import CozyClient, { CozyProvider as CozyClientProvider } from 'cozy-client'
 import { useCozyDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import I18n from 'cozy-ui/transpiled/react/providers/I18n'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
+import I18n from 'cozy-ui/transpiled/react/providers/I18n'
+
 import DialogContext from '../src/components/DialogContext'
 import enLocale from '../src/locales/en.json'
 
 const defaultClient = new CozyClient()
 defaultClient.ensureStore()
 
-export const StoryContainer = ({ children }: {children: ReactNode}) => {
+export const StoryContainer = ({ children }: { children: ReactNode }) => {
   return (
     <CozyClientProvider client={defaultClient}>
       <CozyTheme>
@@ -23,7 +24,7 @@ export const StoryContainer = ({ children }: {children: ReactNode}) => {
           <DialogContextApp>
             <I18n lang="en" dictRequire={() => enLocale}>
               <ReduxProvider store={defaultClient.store}>
-                <div style={{position: "relative"}}>{children}</div>
+                <div style={{ position: 'relative' }}>{children}</div>
               </ReduxProvider>
             </I18n>
           </DialogContextApp>
@@ -33,7 +34,7 @@ export const StoryContainer = ({ children }: {children: ReactNode}) => {
   )
 }
 
-const DialogContextApp = ({ children }: {children: ReactNode}) => {
+const DialogContextApp = ({ children }: { children: ReactNode }) => {
   const dialogContext = useCozyDialog({
     size: 'l',
     open: true,
@@ -46,5 +47,3 @@ const DialogContextApp = ({ children }: {children: ReactNode}) => {
     </DialogContext.Provider>
   )
 }
-
-

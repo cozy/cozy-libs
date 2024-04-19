@@ -1,5 +1,6 @@
-import { MattermostReporter } from './index'
 import fetch from 'node-fetch'
+
+import { MattermostReporter } from './index'
 
 jest.mock('node-fetch')
 

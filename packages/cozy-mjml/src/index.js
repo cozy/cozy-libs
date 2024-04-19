@@ -18,6 +18,7 @@ try {
 // components and our custom ones.
 require('mjml')
 const registerComponents = require('./components').register
+
 const run = require('mjml-cli/lib/client')
 registerComponents()
 

@@ -1,6 +1,6 @@
-const validator = require('mjml-validator')
-const core = require('mjml-core')
 const reduce = require('lodash/reduce')
+const core = require('mjml-core')
+const validator = require('mjml-validator')
 
 validator.registerDependencies({
   'mj-head': ['mj-defaults'],

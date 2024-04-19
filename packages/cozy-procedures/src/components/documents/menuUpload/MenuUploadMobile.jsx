@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
+import { isAndroidApp } from 'cozy-device-helper'
 import {
   translate,
   Icon,
@@ -11,13 +12,11 @@ import {
   Caption,
   MenuItem
 } from 'cozy-ui/transpiled/react/'
-
 import { ActionMenuHeader } from 'cozy-ui/transpiled/react/ActionMenu'
-import { isAndroidApp } from 'cozy-device-helper'
-import UploadInputLabel from '../UploadInputLabel'
-
-import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import FileIcon from 'cozy-ui/transpiled/react/Icons/File'
+import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
+
+import UploadInputLabel from '../UploadInputLabel'
 
 class MenuUploadMobile extends Component {
   state = {

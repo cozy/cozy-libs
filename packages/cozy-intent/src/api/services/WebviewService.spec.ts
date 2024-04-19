@@ -1,5 +1,5 @@
-import { WebviewService } from '../../api'
 import { mockConnection } from '../../../tests'
+import { WebviewService } from '../../api'
 
 describe('WebviewService', () => {
   it('Should handle call', async () => {

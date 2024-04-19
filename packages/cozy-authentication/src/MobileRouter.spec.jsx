@@ -1,5 +1,5 @@
-import React from 'react'
 import { mount } from 'enzyme'
+import React from 'react'
 
 import CozyClient, { CozyProvider } from 'cozy-client'
 import { I18n } from 'cozy-ui/transpiled/react/I18n'

@@ -1,6 +1,8 @@
 const fs = require('fs')
 const path = require('path')
+
 const mjml2html = require('mjml')
+
 const registerComponents = require('../src/components').register
 
 describe('The example', () => {

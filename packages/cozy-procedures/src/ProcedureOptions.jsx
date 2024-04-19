@@ -1,4 +1,5 @@
 import React, { createContext } from 'react'
+
 import { PageFooter, PageLayout, PageContent } from 'cozy-ui/transpiled/react'
 
 const ProcedureOptionsContext = createContext({})

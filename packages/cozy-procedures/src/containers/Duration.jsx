@@ -1,5 +1,5 @@
-import connectWithProcedures from '../redux/connectWithProcedures'
 import Duration from '../components/Duration'
+import connectWithProcedures from '../redux/connectWithProcedures'
 import {
   getAmount,
   getDuration,

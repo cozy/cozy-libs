@@ -1,8 +1,9 @@
-import React from "react";
+import React from 'react'
 
 import 'cozy-ui/dist/cozy-ui.min.css'
 import 'cozy-ui/dist/cozy-ui.utils.min.css'
 import 'cozy-ui/transpiled/react/stylesheet.css'
+
 import '../dist/stylesheet.css'
 
 import I18n from 'cozy-ui/transpiled/react/providers/I18n'
@@ -11,11 +12,11 @@ import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import { CozyProvider, createFakeClient } from 'cozy-client'
 
 import enLocale from '../locales/en.json'
-import SharingContext from "../src/context";
+import SharingContext from '../src/context'
 
 const preview = {
   decorators: [
-    (Story) => {
+    Story => {
       const fakeClient = createFakeClient({
         queries: {
           'io.cozy.settings/instance': {
@@ -39,33 +40,36 @@ const preview = {
         }
       })
       return (
-      <CozyProvider client={fakeClient}>
-        <CozyTheme>
-          <BreakpointsProvider>
-            <SharingContext.Provider value={{
-              revokeGroup: () => {},
-              revokeSelf: () => {}
-            }}>
-              <I18n lang="en" dictRequire={() => enLocale}>
-                <div style={{position: "relative"}}>
-                  <Story />
-                </div>
-              </I18n>
-            </SharingContext.Provider>
-          </BreakpointsProvider>
-        </CozyTheme>
-      </CozyProvider>
-    )},
+        <CozyProvider client={fakeClient}>
+          <CozyTheme>
+            <BreakpointsProvider>
+              <SharingContext.Provider
+                value={{
+                  revokeGroup: () => {},
+                  revokeSelf: () => {}
+                }}
+              >
+                <I18n lang="en" dictRequire={() => enLocale}>
+                  <div style={{ position: 'relative' }}>
+                    <Story />
+                  </div>
+                </I18n>
+              </SharingContext.Provider>
+            </BreakpointsProvider>
+          </CozyTheme>
+        </CozyProvider>
+      )
+    }
   ],
   parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
+    actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {
         color: /(background|color)$/i,
-        date: /Date$/,
-      },
-    },
-  },
-};
+        date: /Date$/
+      }
+    }
+  }
+}
 
-export default preview;
+export default preview

@@ -1,5 +1,5 @@
-const fetch = require('node-fetch')
 const memoize = require('lodash/memoize')
+const fetch = require('node-fetch')
 
 const depEntryToObject = type => depEntry => ({
   name: depEntry[0],

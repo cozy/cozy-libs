@@ -1,6 +1,7 @@
-const webpack = require('webpack')
-const { CachedInputFileSystem, ResolverFactory } = require('enhanced-resolve')
 const fs = require('fs')
+
+const { CachedInputFileSystem, ResolverFactory } = require('enhanced-resolve')
+const webpack = require('webpack')
 
 const pluginName = 'PackageInfoPlugin'
 
