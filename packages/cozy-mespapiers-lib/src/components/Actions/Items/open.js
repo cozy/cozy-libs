@@ -13,7 +13,6 @@ export const open = () => {
   return {
     name: 'open',
     Component: withLocales(
-      // eslint-disable-next-line react/display-name
       forwardRef((props, ref) => {
         const { t } = useI18n()
         const client = useClient()

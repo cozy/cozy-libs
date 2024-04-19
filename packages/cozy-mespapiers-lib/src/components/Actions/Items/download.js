@@ -19,7 +19,6 @@ export const download = ({ t, showAlert }) => {
     disabled: docs => docs.length === 0,
     action: (docs, { client }) => downloadFiles({ client, docs, showAlert, t }),
     Component: withLocales(
-      // eslint-disable-next-line react/display-name
       forwardRef((props, ref) => {
         return (
           <ActionsMenuItem {...props} ref={ref}>

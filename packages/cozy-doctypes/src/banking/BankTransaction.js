@@ -292,7 +292,6 @@ class Transaction extends Document {
       localModelOverride: false,
       localModelUsageThreshold: this.LOCAL_MODEL_USAGE_THRESHOLD,
       globalModelUsageThreshold: this.GLOBAL_MODEL_USAGE_THRESHOLD,
-      // eslint-disable-next-line node/no-unsupported-features/es-syntax
       ...options
     }
 

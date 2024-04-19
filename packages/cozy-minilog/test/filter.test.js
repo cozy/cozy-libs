@@ -1,7 +1,6 @@
 var assert = require('assert'),
   Filter = require('../src/common/filter.js')
 
-
 var f = new Filter()
 
 function filter(name, level) {

@@ -19,7 +19,6 @@ export const createPaperByQualificationLabel = ({
   return {
     name: 'createPaperByQualificationLabel',
     Component: withLocales(
-      // eslint-disable-next-line react/display-name
       forwardRef((props, ref) => {
         const { t } = useI18n()
         const scannerT = useScannerI18n()

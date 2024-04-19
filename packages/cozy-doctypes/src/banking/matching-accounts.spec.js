@@ -1,4 +1,3 @@
-/* eslint-disable node/no-unsupported-features/es-syntax */
 const path = require('path')
 
 const fs = require('fs-extra')

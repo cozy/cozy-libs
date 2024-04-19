@@ -15,7 +15,6 @@ export const rename = () => {
       setIsRenaming(true)
     },
     Component: withLocales(
-      // eslint-disable-next-line react/display-name
       forwardRef((props, ref) => {
         const { t } = useI18n()
 

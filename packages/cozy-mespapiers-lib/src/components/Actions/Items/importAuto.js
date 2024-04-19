@@ -21,7 +21,6 @@ export const importAuto = ({ paperDefinition, importAutoOnclick }) => {
   return {
     name: 'importAuto',
     Component: withLocales(
-      // eslint-disable-next-line react/display-name
       forwardRef((props, ref) => {
         const { t } = useI18n()
         const navigate = useNavigate()
