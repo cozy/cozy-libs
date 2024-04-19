@@ -21,8 +21,8 @@
     "watch": "yarn build --watch"
   },
   "dependencies": {
-    "handlebars": "^4.1.2",
-    "handlebars-layouts": "^3.1.4",
+    "handlebars": "4.1.2",
+    "handlebars-layouts": "3.1.4",
     "lodash": "^4.17.21",
     "mjml": "4.3.1",
     "word-wrap": "^1.2.5"

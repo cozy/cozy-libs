@@ -23,5 +23,6 @@ export const hasSafariPlugin = (): Promise<boolean> => {
  * @returns {boolean}
  */
 export const hasNetworkInformationPlugin = (): boolean => {
-  return isCordova() && window.navigator.connection !== undefined
+  const navigator = window.navigator as unknown as { connection: unknown }
+  return isCordova() && navigator.connection !== undefined
 }

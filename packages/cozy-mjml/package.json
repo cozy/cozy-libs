@@ -20,7 +20,7 @@
     "webpack-cli": "3.3.8"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider webpack",
     "prepublishOnly": "yarn build",
     "watch": "webpack --watch",
     "test": "jest"
