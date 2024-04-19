@@ -2,9 +2,9 @@
 
 set -e
 
-yarn build
 yarn lint
 yarn lint:md -f
+yarn build
 yarn test
 
 
