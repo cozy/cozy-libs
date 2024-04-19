@@ -10,6 +10,7 @@ import { StoryContainer } from './StoryContainer'
 
 const preview: Preview = {
   decorators: [
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     Story => (
       <StoryContainer>
         <div style={{ position: 'relative' }}>

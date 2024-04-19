@@ -13,7 +13,6 @@ export const viewInDrive = () => {
   return {
     name: 'viewInDrive',
     Component: withLocales(
-      // eslint-disable-next-line react/display-name
       forwardRef((props, ref) => {
         const { t } = useI18n()
         const client = useClient()

@@ -41,7 +41,7 @@ const useRealtime = (client, specs, deps) => {
     subscribeRealtime()
 
     return unsubscribeRealtime
-  }, deps) // eslint-disable-line react-hooks/exhaustive-deps
+  }, deps)
 }
 
 export default useRealtime

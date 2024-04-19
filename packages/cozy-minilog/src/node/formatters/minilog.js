@@ -2,7 +2,6 @@ var Transform = require('../../common/transform.js'),
   style = require('./util.js').style,
   util = require('util')
 
-
 function FormatMinilog() {}
 
 Transform.mixin(FormatMinilog)

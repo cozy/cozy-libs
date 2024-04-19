@@ -1,4 +1,3 @@
-/* eslint-disable node/no-unsupported-features/es-syntax */
 const querystring = require('querystring')
 
 const flatMap = require('lodash/flatMap')

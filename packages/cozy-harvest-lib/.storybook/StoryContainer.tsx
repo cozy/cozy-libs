@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import 'cozy-ui/dist/cozy-ui.min.css'
 import 'cozy-ui/transpiled/react/stylesheet.css'
 
@@ -16,7 +17,11 @@ import enLocale from '../src/locales/en.json'
 const defaultClient = new CozyClient()
 defaultClient.ensureStore()
 
-export const StoryContainer = ({ children }: { children: ReactNode }) => {
+export const StoryContainer = ({
+  children
+}: {
+  children: ReactNode
+}): JSX.Element => {
   return (
     <CozyClientProvider client={defaultClient}>
       <CozyTheme>
@@ -34,7 +39,11 @@ export const StoryContainer = ({ children }: { children: ReactNode }) => {
   )
 }
 
-const DialogContextApp = ({ children }: { children: ReactNode }) => {
+const DialogContextApp = ({
+  children
+}: {
+  children: ReactNode
+}): JSX.Element => {
   const dialogContext = useCozyDialog({
     size: 'l',
     open: true,

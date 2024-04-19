@@ -42,17 +42,15 @@ export const forwardTo = ({
 
       navigate(`./forward/${fileToForward._id}`)
     },
-    Component:
-      // eslint-disable-next-line react/display-name
-      forwardRef((props, ref) => {
-        return (
-          <ActionsMenuItem {...props} ref={ref}>
-            <ListItemIcon>
-              <Icon icon={icon} />
-            </ListItemIcon>
-            <ListItemText primary={label} />
-          </ActionsMenuItem>
-        )
-      })
+    Component: forwardRef((props, ref) => {
+      return (
+        <ActionsMenuItem {...props} ref={ref}>
+          <ListItemIcon>
+            <Icon icon={icon} />
+          </ListItemIcon>
+          <ListItemText primary={label} />
+        </ActionsMenuItem>
+      )
+    })
   }
 }
