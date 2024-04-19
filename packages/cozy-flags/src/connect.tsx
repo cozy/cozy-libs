@@ -37,7 +37,8 @@ const connect = <P extends object>(Component: ComponentType<P>): ReactNode => {
 
   Wrapped.displayName = `withFlags(${Component.displayName ?? Component.name})`
 
-  return Wrapped
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-explicit-any
+  return Wrapped as any
 }
 
 export default connect

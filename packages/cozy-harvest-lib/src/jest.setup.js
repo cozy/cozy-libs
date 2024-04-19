@@ -66,3 +66,9 @@ jest.mock('cozy-ui/transpiled/react/utils/color', () => ({
   createNodeWithThemeCssVars: () => null,
   getCssVariableValue: () => '#fff'
 }))
+
+jest.mock('cozy-device-helper', () => {
+  return {
+    ...jest.requireActual('cozy-device-helper')
+  }
+})
