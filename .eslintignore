@@ -1,9 +1,0 @@
-/node_modules
-/packages/*/node_modules
-/packages/*/coverage
-/packages/*/dist
-
-# Test fixtures for jscodeshifts should be ignored, mainly because jscodeshift
-# adds semicolons to its output, and also because we do not care if variables
-# are defined or not in jscodeshift fixtures.
-__testfixtures__
