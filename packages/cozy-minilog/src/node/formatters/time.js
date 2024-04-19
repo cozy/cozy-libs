@@ -2,6 +2,7 @@ var Transform = require('../../common/transform.js'),
   style = require('./util.js').style,
   util = require('util')
 
+
 function FormatTime() {}
 
 function timestamp() {

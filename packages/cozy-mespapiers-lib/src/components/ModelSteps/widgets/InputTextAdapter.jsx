@@ -140,8 +140,8 @@ const InputTextAdapter = ({
         smart_count: expectedLength.min - currentValue.length
       })
     : hasOnlySpaces
-    ? t('InputTextAdapter.onlySpaces')
-    : ' '
+      ? t('InputTextAdapter.onlySpaces')
+      : ' '
 
   const labelOption = maxLength ? { maxLength } : undefined
   const label = inputLabel ? t(inputLabel, labelOption) : ''

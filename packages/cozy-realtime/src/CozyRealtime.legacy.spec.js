@@ -3,9 +3,10 @@
 // be deleted in a near future. All usefull tests below should
 // have counterpart in CozyRealtime.spec.js
 
-import Minilog from '@cozy/minilog'
 import MicroEE from 'microee'
 import { Server } from 'mock-socket'
+
+import Minilog from '@cozy/minilog'
 
 import CozyRealtime from './CozyRealtime'
 Minilog.disable()

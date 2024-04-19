@@ -1,7 +1,7 @@
 import React from 'react'
 
-import tMock from '../../../test/__mocks__/tMock'
 import { SelectBoxAdapter } from './SelectBoxAdapter'
+import tMock from '../../../test/__mocks__/tMock'
 
 describe('SelectBoxAdapter component', () => {
   it('should match snapshot', () => {

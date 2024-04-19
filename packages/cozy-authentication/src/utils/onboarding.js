@@ -1,4 +1,5 @@
 import get from 'lodash/get'
+
 import * as localStateSecret from './local'
 
 export const checkIfOnboardingLogin = onboardingInformations => {

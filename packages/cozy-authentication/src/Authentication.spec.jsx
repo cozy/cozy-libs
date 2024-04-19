@@ -1,7 +1,9 @@
-import { DumbAuthentication } from './Authentication'
-import React from 'react'
 import { shallow } from 'enzyme'
+import React from 'react'
+
 import CozyClient from 'cozy-client'
+
+import { DumbAuthentication } from './Authentication'
 
 describe('Authentication', () => {
   let root, client, instance, onComplete, onException

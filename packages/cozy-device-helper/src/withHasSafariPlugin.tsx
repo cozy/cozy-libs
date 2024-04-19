@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+
 import { isIOSApp, hasSafariPlugin } from '.'
 
 export const withHasSafariPlugin = () => {

@@ -3,8 +3,8 @@ import React from 'react'
 import { useClient } from 'cozy-client'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
-import { getDisplayName, getInitials } from '../../models'
 import logger from '../../logger'
+import { getDisplayName, getInitials } from '../../models'
 
 const MemberAvatar = ({ recipient, ...rest }) => {
   const client = useClient()

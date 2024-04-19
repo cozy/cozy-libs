@@ -75,8 +75,8 @@ const KonnectorAccountTabs = props => {
     initialActiveTab
       ? tabIndexes[initialActiveTab]
       : hasLoginError
-      ? tabIndexes.configuration
-      : tabIndexes.data
+        ? tabIndexes.configuration
+        : tabIndexes.data
   )
   const {
     data: { isInMaintenance }

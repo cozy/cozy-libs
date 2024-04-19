@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux'
-import procedureDataSlice from './procedureDataSlice'
-import personalDataSlice from './personalDataSlice'
+
 import documentsDataSlice from './documentsDataSlice'
+import personalDataSlice from './personalDataSlice'
+import procedureDataSlice from './procedureDataSlice'
 
 const rootReducer = combineReducers({
   procedureData: procedureDataSlice,

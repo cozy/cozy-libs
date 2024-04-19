@@ -85,8 +85,8 @@ const InformationEdit = () => {
   const text = attrs?.editText
     ? t(attrs.editText)
     : currentEditInformations.currentStep?.text
-    ? t(currentEditInformations.currentStep.text)
-    : null
+      ? t(currentEditInformations.currentStep.text)
+      : null
 
   return (
     <Dialog

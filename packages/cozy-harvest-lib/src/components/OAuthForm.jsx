@@ -118,8 +118,8 @@ export const OAuthForm = props => {
       ? 'oauth.banking.reconnect.label'
       : 'oauth.reconnect.label'
     : isBankingKonnector
-    ? 'oauth.banking.connect.label'
-    : 'oauth.connect.submit'
+      ? 'oauth.banking.connect.label'
+      : 'oauth.connect.submit'
 
   return (
     <>

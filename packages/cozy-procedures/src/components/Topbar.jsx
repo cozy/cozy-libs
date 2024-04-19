@@ -1,8 +1,9 @@
 /* global cozy */
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router'
 import flow from 'lodash/flow'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { withRouter } from 'react-router'
+
 import {
   translate,
   withBreakpoints,
@@ -11,7 +12,6 @@ import {
   BarButton,
   Button
 } from 'cozy-ui/transpiled/react'
-
 import PreviousIcon from 'cozy-ui/transpiled/react/Icons/Previous'
 
 const Topbar = ({ t, title, router, breakpoints: { isMobile } }) => {

@@ -1,6 +1,7 @@
-import * as onboarding from './onboarding'
-import * as localStateSecret from './local'
 import CozyClient from 'cozy-client'
+
+import * as localStateSecret from './local'
+import * as onboarding from './onboarding'
 
 describe('doOnboardingLogin', () => {
   let serverSecret,

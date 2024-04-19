@@ -1,6 +1,5 @@
 import { build } from '@cozy/cli-tree'
 import minilog from '@cozy/minilog'
-
 import { createClientInteractive } from 'cozy-client/dist/cli'
 
 import './polyfill'

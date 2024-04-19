@@ -49,8 +49,8 @@ export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
               {running || expectingTriggerLaunch
                 ? t('card.launchTrigger.lastSync.syncing')
                 : lastSuccessDate
-                ? f(lastSuccessDate, t('card.launchTrigger.lastSync.format'))
-                : t('card.launchTrigger.lastSync.unknown')}
+                  ? f(lastSuccessDate, t('card.launchTrigger.lastSync.format'))
+                  : t('card.launchTrigger.lastSync.unknown')}
             </Typography>
           </li>
           {isKonnectorRunnable ? (
