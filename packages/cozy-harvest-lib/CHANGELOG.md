@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [22.5.11](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.5.10...cozy-harvest-lib@22.5.11) (2024-04-23)
+
+
+### Bug Fixes
+
+* Do not display can't connect link if no vendor link in konnector ([3219052](https://github.com/cozy/cozy-libs/commit/32190523b60d36124db5246d396fa133d3be3964))
+
+
+
+
+
 ## [22.5.10](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.5.9...cozy-harvest-lib@22.5.10) (2024-04-15)
 
 **Note:** Version bump only for package cozy-harvest-lib
