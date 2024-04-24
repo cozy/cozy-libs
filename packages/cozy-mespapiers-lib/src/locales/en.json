@@ -397,9 +397,7 @@
     "PapersListByContact": {
       "seeMore": "See more (%{number})"
     },
-    "empty": "Select a document to add from the list below or click on the “add“ button at the bottom right of the screen to see the full list of papers.",
-    "expired": "Expired",
-    "expiresIn": "Expires in %{duration}"
+    "empty": "Select a document to add from the list below or click on the “add“ button at the bottom right of the screen to see the full list of papers."
   },
   "PlaceholdersList": {
     "header": "Choose the category of information or document you wish to add.",
