@@ -201,10 +201,10 @@ export class DumbTriggerManager extends Component {
 
     if (paywall === null) {
       const konnectorPolicy = findKonnectorPolicy(konnector)
-      if (konnectorPolicy.saveInVault) {
+      if (konnectorPolicy.shouldSaveInVault(konnector)) {
         if (!vaultClient) {
           throw new Error(
-            'Konnector policy `saveInVault` is true, but no vault has been passed in the context of the TriggerManager. You can wrap it the TriggerManager in a VaultUnlockProvider or VaultProvider (from cozy-keys-lib).'
+            'Konnector policy `shouldSaveInVault` is true, but no vault has been passed in the context of the TriggerManager. You can wrap it the TriggerManager in a VaultUnlockProvider or VaultProvider (from cozy-keys-lib).'
           )
         }
         const isVaultLocked = await vaultClient.isLocked()

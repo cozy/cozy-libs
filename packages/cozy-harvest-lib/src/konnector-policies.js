@@ -5,6 +5,7 @@ import { konnectorPolicy as cliskPolicy } from './policies/clisk'
 const defaultKonnectorPolicy = {
   accountContainsAuth: true,
   saveInVault: true,
+  shouldSaveInVault: konnector => Boolean(konnector.vendor_link),
   onAccountCreation: null,
   // eslint-disable-next-line no-unused-vars
   match: konnector => true,

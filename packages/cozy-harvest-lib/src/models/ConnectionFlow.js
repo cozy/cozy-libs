@@ -100,7 +100,7 @@ export const createOrUpdateAccount = async ({
     logger.debug('Creating the account...')
   }
 
-  const { onAccountCreation, saveInVault } = konnectorPolicy
+  const { onAccountCreation, shouldSaveInVault } = konnectorPolicy
 
   let accountToSave = clone(account) || {}
 
@@ -135,7 +135,7 @@ export const createOrUpdateAccount = async ({
     })
   }
 
-  if (cipher && saveInVault) {
+  if (cipher && shouldSaveInVault(konnector)) {
     accountToSave = accounts.setVaultCipherRelationship(
       accountToSave,
       cipher.id
@@ -487,7 +487,7 @@ export class ConnectionFlow {
       )
 
       let cipher
-      if (konnectorPolicy.saveInVault) {
+      if (konnectorPolicy.shouldSaveInVault(konnector)) {
         cipher = await createOrUpdateCipher(vaultClient, cipherId, {
           account,
           konnector,

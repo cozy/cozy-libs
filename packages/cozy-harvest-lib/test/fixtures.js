@@ -5,6 +5,7 @@ const fixtures = {
   },
   konnector: {
     slug: 'konnectest',
+    vendor_link: 'https://cozy.io',
     fields: {
       username: {
         type: 'text'
@@ -23,6 +24,7 @@ const fixtures = {
     _type: 'io.cozy.konnectors',
     name: 'myBills',
     slug: 'mybills',
+    vendor_link: 'https://cozy.io',
     fields: {
       advancedFields: {
         folderPath: {

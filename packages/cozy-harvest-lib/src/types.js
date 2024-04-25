@@ -48,6 +48,7 @@
  * @typedef KonnectorPolicy
  * @property {Boolean} accountContainsAuth
  * @property {Boolean} saveInVault
+ * @property {Function} shouldSaveInVault
  * @property {Function} onAccountCreation
  * @property {Function} match
  * @property {String} name
