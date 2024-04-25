@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [23.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.5.11...cozy-harvest-lib@23.0.0) (2024-04-25)
+
+
+### Bug Fixes
+
+* Do not save identifiers in vault when no vendor_link ([0da4548](https://github.com/cozy/cozy-libs/commit/0da45485afa5e9a9c0ffcf5fd1bba9dbcd8d6f51))
+* Minor upgrade of cozy-ui ([0632813](https://github.com/cozy/cozy-libs/commit/06328132d95247ef3dc0630e08724c1970b8bf9f))
+
+
+### BREAKING CHANGES
+
+* you must have `cozy-ui >= 103.12.0`
+
+
+
+
+
 ## [22.5.11](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.5.10...cozy-harvest-lib@22.5.11) (2024-04-23)
 
 
