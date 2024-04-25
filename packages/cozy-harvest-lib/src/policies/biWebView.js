@@ -381,7 +381,7 @@ export const konnectorPolicy = {
   isRunnable: () => true,
   name: 'budget-insight-webview',
   match: isBiWebViewConnector,
-  saveInVault: false,
+  shouldSaveInVault: () => false,
   onAccountCreation: onBIAccountCreation,
   fetchExtraOAuthUrlParams: fetchExtraOAuthUrlParams,
   handleOAuthAccount,

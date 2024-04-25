@@ -138,7 +138,7 @@ export const konnectorPolicy = {
   needsAccountAndTriggerCreation: false,
   needsTriggerLaunch: false,
   onLaunch,
-  saveInVault: false,
+  shouldSaveInVault: () => false,
   accountContainsAuth: false,
   onAccountCreation: null,
   fetchExtraOAuthUrlParams: null,
