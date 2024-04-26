@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [95.0.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@95.0.2...cozy-mespapiers-lib@95.0.3) (2024-04-26)
+
+
+### Bug Fixes
+
+* **mespapiers:** Create a paper if myself does not exist ([63b6dd7](https://github.com/cozy/cozy-libs/commit/63b6dd780d96f251c08b9f91e0b4a32898608a37))
+* **mespapiers:** Download action calls a function with bad argument ([ae9bbd2](https://github.com/cozy/cozy-libs/commit/ae9bbd2f5bfc3295553d3ae1aaef68c5cb6c63ac))
+
+
+
+
+
 ## [95.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@95.0.1...cozy-mespapiers-lib@95.0.2) (2024-04-25)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
