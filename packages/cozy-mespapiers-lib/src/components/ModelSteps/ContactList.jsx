@@ -36,7 +36,7 @@ const ContactList = ({
     []
   )
   const [contactsList, setContactsList] = useState([
-    currentUser,
+    ...(currentUser ? [currentUser] : []),
     ...contactsLocalSession
   ])
 
@@ -116,7 +116,7 @@ ContactList.propTypes = {
   /** Determine whether the user can select several contacts */
   multiple: PropTypes.bool,
   /** Contact object representing the current user */
-  currentUser: PropTypes.object.isRequired,
+  currentUser: PropTypes.object,
   className: PropTypes.string,
   contactModalOpened: PropTypes.bool.isRequired,
   setContactModalOpened: PropTypes.func.isRequired,

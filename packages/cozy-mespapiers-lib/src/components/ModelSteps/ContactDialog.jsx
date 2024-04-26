@@ -21,6 +21,7 @@ const ContactDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
   const { formData, setFormData } = useFormData()
   const { currentStepIndex, nextStep, isLastStep } = useStepperDialog()
   const [currentUser, setCurrentUser] = useState(null)
+  const [currentUserLoaded, setCurrentUserLoaded] = useState(false)
   const [contactsSelected, setContactsSelected] = useState([])
   const [contactModalOpened, setContactModalOpened] = useState(false)
   const { illustration, text, multiple } = currentStep
@@ -31,12 +32,15 @@ const ContactDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
   useEffect(() => {
     const init = async () => {
       const myself = await fetchCurrentUser(client)
-      setCurrentUser(myself)
-      setFormData(prev => ({
-        ...prev,
-        contacts: [myself]
-      }))
-      setContactsSelected([myself])
+      if (myself) {
+        setCurrentUser(myself)
+        setFormData(prev => ({
+          ...prev,
+          contacts: [myself]
+        }))
+        setContactsSelected([myself])
+      }
+      setCurrentUserLoaded(true)
     }
     init()
   }, [client, setFormData])
@@ -67,7 +71,7 @@ const ContactDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
             iconSize="small"
             title={t(text)}
             text={
-              currentUser && (
+              currentUserLoaded ? (
                 <Paper elevation={2} className="u-mt-1 u-mh-half">
                   <ContactList
                     className="u-pv-0"
@@ -79,7 +83,7 @@ const ContactDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
                     setContactModalOpened={setContactModalOpened}
                   />
                 </Paper>
-              )
+              ) : null
             }
           />
         }
