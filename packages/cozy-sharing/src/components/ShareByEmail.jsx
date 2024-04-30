@@ -16,7 +16,7 @@ import {
   spreadGroupAndMergeRecipients,
   hasReachRecipientsLimit
 } from '../helpers/recipients'
-import { getSuccessMessage } from '../helpers/share'
+import { getSuccessMessage, getErrorMessage } from '../helpers/share'
 import { isReadOnlySharing } from '../state'
 import styles from '../styles/share.styl'
 
@@ -104,40 +104,19 @@ export const ShareByEmail = ({
         variant: 'filled'
       })
     } catch (err) {
-      let showGenericAlert = true
-      if (err.name === 'FetchError' && err.status === 400) {
-        const detail = JSON.parse(err.message).errors[0].detail
-        if (
-          detail.startsWith(
-            'A group member cannot be added as they are already in'
-          )
-        ) {
-          // To know the sharing rights of the other group
-          const sharingRights =
-            selectedOption === 'readOnly' ? 'readWrite' : 'readOnly'
-          showAlert({
-            message: t('Share.errors.groupMemberAlreadyInSharing', {
-              smart_count: recipients.length,
-              groupName: recipients[0].name,
-              sharingRights: t(`Share.errors.sharingRights.${sharingRights}`),
-              icon: false
-            }),
-            severity: 'error',
-            variant: 'filled'
+      showAlert({
+        message: t(
+          ...getErrorMessage({
+            t,
+            err,
+            documentType,
+            recipients,
+            selectedOption
           })
-          showGenericAlert = false
-        }
-      }
-
-      if (showGenericAlert) {
-        showAlert({
-          message: t(`${documentType}.share.error.generic`),
-          severity: 'error',
-          variant: 'filled'
-        })
-      }
-
-      throw err
+        ),
+        severity: 'error',
+        variant: 'filled'
+      })
     } finally {
       reset()
     }

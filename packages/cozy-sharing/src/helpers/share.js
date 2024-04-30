@@ -106,3 +106,32 @@ export const getSuccessMessage = (
     }
   }
 }
+
+export const getErrorMessage = ({
+  t,
+  err,
+  documentType,
+  recipients,
+  selectedOption
+}) => {
+  if (err.name === 'FetchError' && err.status === 400) {
+    const detail = JSON.parse(err.message).errors[0].detail
+    if (
+      detail.startsWith('A group member cannot be added as they are already in')
+    ) {
+      const sharingRights =
+        selectedOption === 'readOnly' ? 'readWrite' : 'readOnly'
+      return [
+        'Share.errors.groupMemberAlreadyInSharing',
+        {
+          smart_count: recipients.length,
+          groupName: recipients[0].name,
+          sharingRights: t(`Share.errors.sharingRights.${sharingRights}`),
+          icon: false
+        }
+      ]
+    }
+  }
+
+  return [`${documentType}.share.error.generic`]
+}
