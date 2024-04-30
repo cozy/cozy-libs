@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [95.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@95.0.4...cozy-mespapiers-lib@95.1.0) (2024-04-30)
+
+
+### Features
+
+* **mespapiers:** Add missing locales for installing app button ([82d2122](https://github.com/cozy/cozy-libs/commit/82d2122b14e084eb30ca3871df31bdc7493f87d4))
+
+
+
+
+
 ## [95.0.4](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@95.0.3...cozy-mespapiers-lib@95.0.4) (2024-04-30)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
