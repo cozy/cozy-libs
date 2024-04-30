@@ -497,7 +497,11 @@
   },
   "InstallAppModal": {
     "title": "Install the app",
-    "text": "Install the Cozy Cloud app on your mobile to take photos of your documents directly."
+    "text": "Install the Cozy Cloud app on your mobile to take photos of your documents directly.",
+    "action": {
+      "android": "Install from Google Play",
+      "ios": "Install from App Store"
+    }
   },
   "InstallAppFromIntent": {
     "title": "Would you like to add a note?",
