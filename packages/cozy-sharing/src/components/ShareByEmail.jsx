@@ -16,7 +16,7 @@ import {
   spreadGroupAndMergeRecipients,
   hasReachRecipientsLimit
 } from '../helpers/recipients'
-import { getSuccessMessage } from '../helpers/successMessage'
+import { getSuccessMessage } from '../helpers/share'
 import { isReadOnlySharing } from '../state'
 import styles from '../styles/share.styl'
 

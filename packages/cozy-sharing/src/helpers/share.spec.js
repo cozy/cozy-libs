@@ -1,4 +1,4 @@
-import { getSuccessMessage, countNewRecipients } from './successMessage'
+import { getSuccessMessage, countNewRecipients } from './share'
 
 describe('getSuccessMessage method', () => {
   const props = {
