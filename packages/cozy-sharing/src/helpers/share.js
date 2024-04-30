@@ -1,6 +1,6 @@
 import { models } from 'cozy-client'
 
-import { Contact, Group } from '../models'
+import { Contact, Group, getDisplayName } from '../models'
 
 export const countNewRecipients = (currentRecipients, newRecipients) => {
   const newRecipientsNotAlreadyIncluded = newRecipients.filter(recipient => {
@@ -119,14 +119,30 @@ export const getErrorMessage = ({
     if (
       detail.startsWith('A group member cannot be added as they are already in')
     ) {
-      const sharingRights =
-        selectedOption === 'readOnly' ? 'readWrite' : 'readOnly'
+      const sharingRights = t(
+        `Share.errors.sharingRights.${
+          selectedOption === 'readOnly' ? 'readWrite' : 'readOnly'
+        }`
+      )
+
+      if (recipients.length === 1 && recipients[0]._type === Contact.doctype) {
+        return [
+          'Share.errors.contactAlreadyInSharing',
+          {
+            smart_count: recipients.length,
+            contactName: getDisplayName(recipients[0]),
+            sharingRights,
+            icon: false
+          }
+        ]
+      }
+
       return [
         'Share.errors.groupMemberAlreadyInSharing',
         {
           smart_count: recipients.length,
           groupName: recipients[0].name,
-          sharingRights: t(`Share.errors.sharingRights.${sharingRights}`),
+          sharingRights,
           icon: false
         }
       ]

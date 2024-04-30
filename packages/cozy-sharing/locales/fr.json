@@ -78,6 +78,7 @@
     },
     "errors": {
       "groupMemberAlreadyInSharing": "Des membres de %{groupName} ont déjà été invités avec des droits de %{sharingRights}. Impossible d’inviter 2 fois le même contact avec des droits différents. |||| Des contacts ont déjà été invités avec des droits de %{sharingRights}. Impossible d’inviter 2 fois le même contact avec des droits différents.",
+      "contactAlreadyInSharing": "%{contactName} a déjà été invité dans un groupe avec des droits de %{sharingRights}. Impossible d’inviter 2 fois le même contact avec des droits différents. |||| Des contacts ont déjà été invités avec des droits de %{sharingRights}. Impossible d’inviter 2 fois le même contact avec des droits différents.",
       "sharingRights": {
         "readOnly": "lecture",
         "readWrite": "modification"

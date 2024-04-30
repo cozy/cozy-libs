@@ -367,6 +367,42 @@ describe('share', () => {
       ])
     })
 
+    it('should return specific text if there is only one recipient and it is a contact', () => {
+      const err = {
+        name: 'FetchError',
+        status: 400,
+        message: JSON.stringify({
+          errors: [
+            { detail: 'A group member cannot be added as they are already in' }
+          ]
+        })
+      }
+      const result = getErrorMessage({
+        t,
+        err,
+        documentType,
+        recipients: [
+          {
+            _type: 'io.cozy.contacts',
+            name: {
+              givenName: 'John',
+              familyName: 'Doe'
+            }
+          }
+        ],
+        selectedOption
+      })
+      expect(result).toEqual([
+        'Share.errors.contactAlreadyInSharing',
+        {
+          smart_count: recipients.length,
+          contactName: 'John Doe',
+          sharingRights: 'Share.errors.sharingRights.readWrite',
+          icon: false
+        }
+      ])
+    })
+
     it('should return generic error message for FetchError with status 400 and different detail', () => {
       const err = {
         name: 'FetchError',
