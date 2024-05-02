@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@13.2.0...cozy-sharing@13.3.0) (2024-05-02)
+
+
+### Features
+
+* **share:** Manage the case of a contact that is already in ([7c979af](https://github.com/cozy/cozy-libs/commit/7c979af7efebd906e45f1e83b43414bf2cb5b984))
+
+
+
+
+
 # [13.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@13.1.2...cozy-sharing@13.2.0) (2024-04-18)
 
 
