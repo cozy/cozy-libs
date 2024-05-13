@@ -29,7 +29,7 @@ const RUNNING = 'RUNNING'
 export class DumbTriggerManager extends Component {
   constructor(props) {
     super(props)
-    const { account } = props
+    const account = props.account || props.flow.account
 
     this.handleOAuthAccountId = this.handleOAuthAccountId.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
