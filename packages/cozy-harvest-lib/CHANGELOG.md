@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [23.0.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@23.0.0...cozy-harvest-lib@23.0.1) (2024-05-14)
+
+
+### Bug Fixes
+
+* Transmit correct account identifiers on reconnect ([a3ccb30](https://github.com/cozy/cozy-libs/commit/a3ccb306b42a33a21e69097acf909742d036868b))
+
+
+
+
+
 # [23.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@22.5.11...cozy-harvest-lib@23.0.0) (2024-04-25)
 
 
