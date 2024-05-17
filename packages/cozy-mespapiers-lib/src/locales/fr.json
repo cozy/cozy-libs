@@ -154,6 +154,10 @@
     "invalidTextMessage": "Il manque %{smart_count} caractère |||| Il manque %{smart_count} caractères",
     "onlySpaces": "Le nom ne contient que des espaces"
   },
+  "CountryListAdapter": {
+    "search": "Rechercher",
+    "seeMore": "Voir plus"
+  },
   "Onboarding": {
     "cta": "C'est parti !"
   },

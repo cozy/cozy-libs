@@ -74,6 +74,7 @@ The `front` and `back` entries have exactly the same structure and attributes.
     - [`date`](#information-field-attributes): {object} Fields used to enter a date (reference, expiration date, etc).
     - [`radio`](#information-field-attributes): {object} Fields used to enter a radio list.
     - [`contact`](#information-field-attributes): {object} Fields used to select a contact.
+    - `country`: {string} Displays a list of nationalities with search fields.
   - `[isDisplayed]`: {`ocr`|`all`} Determine if the step should be shown.
 
 <br>

@@ -1,4 +1,5 @@
 import { ContactAdapter } from '../components/ModelSteps/widgets/ContactAdapter/ContactAdapter'
+import { CountryListAdapter } from '../components/ModelSteps/widgets/CountryListAdapter'
 import InputDateAdapter from '../components/ModelSteps/widgets/InputDateAdapter'
 import InputTextAdapter from '../components/ModelSteps/widgets/InputTextAdapter'
 import RadioAdapter from '../components/ModelSteps/widgets/RadioAdapter'
@@ -14,6 +15,9 @@ const hasRadio = ({ attrs }) => {
 }
 const hasContact = ({ attrs }) => {
   return attrs.type === 'contact'
+}
+const hasCountry = ({ attrs }) => {
+  return attrs.type === 'country'
 }
 
 const inputInformationSpecs = {
@@ -32,6 +36,10 @@ const inputInformationSpecs = {
   contact: {
     condition: hasContact,
     component: ContactAdapter
+  },
+  country: {
+    condition: hasCountry,
+    component: CountryListAdapter
   }
 }
 
