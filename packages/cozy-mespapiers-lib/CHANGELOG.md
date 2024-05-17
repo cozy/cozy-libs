@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [95.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@95.1.4...cozy-mespapiers-lib@95.2.0) (2024-05-17)
+
+
+### Features
+
+* **mespapiers:** Add CountryList type to Information step ([8c7f8be](https://github.com/cozy/cozy-libs/commit/8c7f8be3c61ac288c1343436c17459c03d4b62b4))
+* **mespapiers:** Correction of the style of creation steps ([f9eda04](https://github.com/cozy/cozy-libs/commit/f9eda04f9bd0c6670d9fb89c97f9f7dd8a9f2353))
+* **mespapiers:** Upgrade cozy packages ([d82708e](https://github.com/cozy/cozy-libs/commit/d82708e008b6ac0c721f9426d61cd79e77b79377))
+* **mespapiers:** Use FixedDialog instead Dialog ([cb69653](https://github.com/cozy/cozy-libs/commit/cb696530ce8ae05a899c0158e6938fe7d6069dcb))
+
+
+
+
+
 ## [95.1.4](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@95.1.3...cozy-mespapiers-lib@95.1.4) (2024-05-15)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
