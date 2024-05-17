@@ -154,6 +154,10 @@
     "invalidTextMessage": "%{smart_count} character is missing |||| %{smart_count} characters are missings",
     "onlySpaces": "The name contains only spaces"
   },
+  "CountryListAdapter": {
+    "search": "Search",
+    "seeMore": "See more"
+  },
   "Onboarding": {
     "cta": "Let's go!"
   },

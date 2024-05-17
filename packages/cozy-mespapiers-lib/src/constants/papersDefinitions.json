@@ -2489,7 +2489,7 @@
           "attributes": [
             {
               "name": "country",
-              "type": "text",
+              "type": "country",
               "inputLabel": "PaperJSON.passport.information.country.inputLabel"
             }
           ]
