@@ -42,6 +42,22 @@ export const addContactReferenceToFile = async ({
 }
 
 /**
+ * Add the value of the "country" metadata according to the qualification
+ *
+ * @param {import('cozy-client/types/types').QualificationAttributes} qualification
+ * @returns {{ country: string }}
+ */
+export const addCountryValueByQualification = qualification => {
+  const qualificationsByCode = { FR: ['national_id_card', 'driver_license'] }
+
+  return Object.entries(qualificationsByCode).reduce((acc, [key, val]) => {
+    if (val.includes(qualification.label)) {
+      return { ...acc, country: key }
+    }
+    return acc
+  }, {})
+}
+/**
  * Convert image & pdf file to pdf & save it
  *
  * @param {{ data: object[], metadata: object }} formData
@@ -64,7 +80,15 @@ export const createPdfAndSave = async ({
   const { data, metadata, contacts } = { ...formData }
   const fileCollection = client.collection(FILES_DOCTYPE)
   const { featureDate, label, filenameModel } = currentDefinition
-  const date = metadata[featureDate] && f(metadata[featureDate], 'YYYY.MM.DD')
+
+  // If present, we wish to keep the value in the metadata as a priority (e.g. foreign driver's license).
+  const updatedMetadata = {
+    ...addCountryValueByQualification(qualification),
+    ...metadata
+  }
+  const date =
+    updatedMetadata[featureDate] &&
+    f(updatedMetadata[featureDate], 'YYYY.MM.DD')
 
   // If all files are to be considered as one.
   const isMultiPage = data.some(({ fileMetadata }) => fileMetadata.multipage)
@@ -79,7 +103,7 @@ export const createPdfAndSave = async ({
 
     const paperName = buildFilename({
       filenameModel,
-      metadata,
+      metadata: updatedMetadata,
       qualification: {
         label,
         name: scannerT(`items.${label}`)
@@ -98,9 +122,9 @@ export const createPdfAndSave = async ({
         ...qualification
       },
       ...sanitizeFileMetadata(fileMetadata, isMultiPage),
-      ...metadata,
-      datetime: metadata[featureDate]
-        ? metadata[featureDate]
+      ...updatedMetadata,
+      datetime: updatedMetadata[featureDate]
+        ? updatedMetadata[featureDate]
         : pdfDoc.getCreationDate(),
       datetimeLabel: featureDate || 'datetime'
     }

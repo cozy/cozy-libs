@@ -1,7 +1,10 @@
 import * as addFileToPdf from 'cozy-ui/transpiled/react/ActionsMenu/Actions/helpers'
 
 import * as buildFilename from './buildFilename'
-import { createPdfAndSave } from './createPdfAndSave'
+import {
+  addCountryValueByQualification,
+  createPdfAndSave
+} from './createPdfAndSave'
 
 jest.mock('cozy-client', () => ({
   ...jest.requireActual('cozy-client'),
@@ -69,5 +72,19 @@ describe('createAndSavePdf', () => {
 
     expect(resultPDF).toEqual(expectedPDF)
     expect(resultJPG).toEqual(expectedJPG)
+  })
+})
+
+describe('addCountryValueByQualification', () => {
+  it('should return object with country key', () => {
+    const qualification = { label: 'national_id_card' }
+    const result = addCountryValueByQualification(qualification)
+    expect(result).toEqual({ country: 'FR' })
+  })
+
+  it('should return empty object', () => {
+    const qualification = { label: 'other_revenue' }
+    const result = addCountryValueByQualification(qualification)
+    expect(result).toEqual({})
   })
 })
