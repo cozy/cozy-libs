@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom'
 
 import { useWebviewIntent } from 'cozy-intent'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import PointerAlert from 'cozy-ui/transpiled/react/PointerAlert'
 import { ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
@@ -99,7 +99,7 @@ const ScanResultDialog = ({
   }
 
   return (
-    <Dialog
+    <FixedDialog
       open
       {...(currentStepIndex > 0 && { onBack })}
       transitionDuration={0}

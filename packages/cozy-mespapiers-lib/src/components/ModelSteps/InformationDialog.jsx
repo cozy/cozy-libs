@@ -6,7 +6,7 @@ import React, { useCallback, useMemo, useState } from 'react'
 
 import { isIOS } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import PointerAlert from 'cozy-ui/transpiled/react/PointerAlert'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
@@ -84,7 +84,7 @@ const InformationDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
   const isActionButtonDisabled = !allInputsValid
 
   return (
-    <Dialog
+    <FixedDialog
       open
       {...(currentStepIndex > 0 && { transitionDuration: 0 })}
       onClose={onClose}
