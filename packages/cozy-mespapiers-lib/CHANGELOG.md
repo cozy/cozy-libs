@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [95.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@95.2.0...cozy-mespapiers-lib@95.3.0) (2024-05-17)
+
+
+### Bug Fixes
+
+* **mespapiers:** Translate country metadata only if valid ([4512b99](https://github.com/cozy/cozy-libs/commit/4512b997c9f37005a03022d9076d6d719f918004))
+
+
+### Features
+
+* **mespapiers:** Add CountryList to another papers ([079025a](https://github.com/cozy/cozy-libs/commit/079025a1fd8f3a5fc7a0b4fd4f4098c1e164e209))
+* **mespapiers:** Add default value country metadata to specific papers ([cf3f820](https://github.com/cozy/cozy-libs/commit/cf3f820a57cffe0c257b9ddc9afcb559e520e465))
+* **mespapiers:** Upgrade cozy-client to 47.1.1 ([a6fc326](https://github.com/cozy/cozy-libs/commit/a6fc32686d708199bfb0f569a219f08ea5bc29b3))
+
+
+
+
+
 # [95.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@95.1.4...cozy-mespapiers-lib@95.2.0) (2024-05-17)
 
 
