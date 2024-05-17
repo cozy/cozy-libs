@@ -10452,10 +10452,10 @@ cosmiconfig@^7.0.1:
     path-type "^4.0.0"
     yaml "^1.10.0"
 
-cozy-bar@^12.0.0:
-  version "12.0.0"
-  resolved "https://registry.yarnpkg.com/cozy-bar/-/cozy-bar-12.0.0.tgz#d2d5736a44cd2eba70560b6c4202ab56a7cc128f"
-  integrity sha512-1787vcwybooGHtees6h/kw49QCSlpC/z8QcndF64vprU7HTmuZWnBs9R2sdmQKKPJy59rJoNzYB6QNeyFZi2ng==
+cozy-bar@^12.2.3:
+  version "12.2.3"
+  resolved "https://registry.yarnpkg.com/cozy-bar/-/cozy-bar-12.2.3.tgz#43501e2dc82bbad80ff52c9e87e6dfa03b60bdb2"
+  integrity sha512-FH8+bM0haujVy/O9UbW7E34t0InfvZPafoIAVb/KdsDQaO8/Q5JH4hDyCHw+UNt55Mpw6cE+GK3w11RSAeC86g==
   dependencies:
     hammerjs "2.0.8"
     lodash.debounce "4.0.8"
@@ -10631,16 +10631,16 @@ cozy-client@^45.15.0:
     sift "^6.0.0"
     url-search-params-polyfill "^8.0.0"
 
-cozy-client@^46.8.0:
-  version "46.8.0"
-  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-46.8.0.tgz#36b87266a654d713eb4472c2dc2c6dfbbc854283"
-  integrity sha512-TeLpw2qkp1gX3VmiyOQpsca016tZLu7oVN6JOFUjQuvthgUY3PhOurJbOVAR3N053n4x6LHbh8GVsPYxFbu/xA==
+cozy-client@^47.1.0:
+  version "47.1.0"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-47.1.0.tgz#926ff0c7e8c03f4e3a52ba111f28d83c2ef3b6fc"
+  integrity sha512-x4Zk1RSaRqOlGfDR0mBdb+nne63G1PUnGMqkuelJWUpc27WMDFD5pZrJR3an5Ssn168zPD5H2iWiV0Hzg7xeIA==
   dependencies:
     "@cozy/minilog" "1.0.0"
     "@types/jest" "^26.0.20"
     "@types/lodash" "^4.14.170"
     btoa "^1.2.1"
-    cozy-stack-client "^46.5.0"
+    cozy-stack-client "^47.0.0"
     date-fns "2.29.3"
     json-stable-stringify "^1.0.1"
     lodash "^4.17.13"
@@ -10776,10 +10776,10 @@ cozy-stack-client@^46.1.0:
     mime "^2.4.0"
     qs "^6.7.0"
 
-cozy-stack-client@^46.5.0:
-  version "46.5.0"
-  resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-46.5.0.tgz#9c15410a4b98cfe556b5fac4dfc8ac0f0e2de763"
-  integrity sha512-OmspOAWGozpi7sZG1Mi9PAeNEUgi/JpCy4f3l6O2wnfKamW8x+iaZWRofJhS5rqPfpRW2XbMkJjq9Yz3xOgv0A==
+cozy-stack-client@^47.0.0:
+  version "47.0.0"
+  resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-47.0.0.tgz#3319cc78ddf5bcd5ae02c813490f5d47ed39ad32"
+  integrity sha512-OirSJb2GEvxwGDuL3oEL7wfeQrxWiQwS++H376vMyt6j6MHiJaLWz8Z5K6GnS7H593c52ZgsiOdVxyyYHWBIMQ==
   dependencies:
     detect-node "^2.0.4"
     mime "^2.4.0"
@@ -10870,10 +10870,10 @@ cozy-ui@93.1.1:
     react-swipeable-views "^0.13.3"
     rooks "^5.11.2"
 
-cozy-ui@^105.10.2:
-  version "105.10.2"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-105.10.2.tgz#2213baa6009171d800421d3a13904ed22f4c84fe"
-  integrity sha512-VFwb1vmB+wmAU3VmOzRszfpoZ076Ar8qwsCWksay3irbJpDESpE0yghVULnz8LAQZ9MqMB2fDHdXDHcBt8bQ4g==
+cozy-ui@^106.4.0:
+  version "106.4.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-106.4.0.tgz#7b164a92595f90c6143e0f9eba8ed3c6215c11d7"
+  integrity sha512-m/zg/HdfVS6t0KcocFxREKmWVistvCyUWUqeUyzW2mJEeyVkG9w09l5ge/IygbvdjuYuv+gzAosPDFimcfdj7g==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@material-ui/core" "4.12.3"
@@ -10902,10 +10902,10 @@ cozy-ui@^105.10.2:
     react-swipeable-views "^0.13.3"
     rooks "^5.11.2"
 
-cozy-ui@^106.4.0:
-  version "106.4.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-106.4.0.tgz#7b164a92595f90c6143e0f9eba8ed3c6215c11d7"
-  integrity sha512-m/zg/HdfVS6t0KcocFxREKmWVistvCyUWUqeUyzW2mJEeyVkG9w09l5ge/IygbvdjuYuv+gzAosPDFimcfdj7g==
+cozy-ui@^106.6.0:
+  version "106.6.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-106.6.0.tgz#dff4bb12ea9ccf0db94a712c26a75eba6fbacb33"
+  integrity sha512-jUHlnbxUutjGB68DIwrZCdT2lb/6ip07Yf5E6wbWBHBfWqRQ1hPEBrJ6ChckB5k9vm8HWPS3u4d1IvvuazvLqw==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@material-ui/core" "4.12.3"
@@ -25772,7 +25772,7 @@ string-length@^4.0.1:
     char-regex "^1.0.2"
     strip-ansi "^6.0.0"
 
-"string-width-cjs@npm:string-width@^4.2.0":
+"string-width-cjs@npm:string-width@^4.2.0", "string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -25795,15 +25795,6 @@ string-width@^1.0.1:
   dependencies:
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^4.0.0"
-
-"string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.2.3:
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
-  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
-  dependencies:
-    emoji-regex "^8.0.0"
-    is-fullwidth-code-point "^3.0.0"
-    strip-ansi "^6.0.1"
 
 string-width@^3.0.0, string-width@^3.1.0:
   version "3.1.0"
@@ -25988,7 +25979,7 @@ stringify-object@^3.2.0:
     is-obj "^1.0.1"
     is-regexp "^1.0.0"
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1":
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
@@ -26020,13 +26011,6 @@ strip-ansi@^6.0.0:
   integrity sha512-AuvKTrTfQNYNIctbR1K/YGTR1756GycPsg7b9bdV9Duqur4gv6aKqHXah67Z8ImS7WEz5QVcOtlfW2rZEugt6w==
   dependencies:
     ansi-regex "^5.0.0"
-
-strip-ansi@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
-  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
-  dependencies:
-    ansi-regex "^5.0.1"
 
 strip-ansi@^7.0.1:
   version "7.1.0"
@@ -28273,7 +28257,7 @@ workerpool@6.2.1:
   resolved "https://registry.yarnpkg.com/workerpool/-/workerpool-6.2.1.tgz#46fc150c17d826b86a008e5a4508656777e9c343"
   integrity sha512-ILEIE97kDZvF9Wb9f6h5aXK4swSlKGUcOEGiIYb2OOu/IrDU9iwj0fD//SsA6E5ibwJxpEvhullJY4Sl4GcpAw==
 
-"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0":
+"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
@@ -28301,15 +28285,6 @@ wrap-ansi@^6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-6.2.0.tgz#e9393ba07102e6c91a3b221478f0257cd2856e53"
   integrity sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==
-  dependencies:
-    ansi-styles "^4.0.0"
-    string-width "^4.1.0"
-    strip-ansi "^6.0.0"
-
-wrap-ansi@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
-  integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
   dependencies:
     ansi-styles "^4.0.0"
     string-width "^4.1.0"

@@ -1,7 +1,7 @@
 import parse from 'date-fns/parse'
 import unionBy from 'lodash/unionBy'
 
-import { checkCountryCode } from 'cozy-client/dist/models/countries'
+import { checkCountryCode } from 'cozy-client/dist/models/country/countries'
 import minilog from 'cozy-minilog'
 
 const log = minilog('helpers/findAttributes')
