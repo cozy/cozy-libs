@@ -1,7 +1,10 @@
 import PropType from 'prop-types'
 import React, { useState, useEffect, Fragment } from 'react'
 
-import { getAllCountries } from 'cozy-client/dist/models/country/countries'
+import {
+  getAllCountries,
+  checkCountryCode
+} from 'cozy-client/dist/models/country/countries'
 import { getLocalizer } from 'cozy-client/dist/models/country/locales'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import List from 'cozy-ui/transpiled/react/List'
@@ -20,7 +23,7 @@ export const CountryListAdapter = ({
   idx
 }) => {
   const { t, lang } = useI18n()
-  const translatedFormDataValue = formDataValue
+  const translatedFormDataValue = checkCountryCode(formDataValue)
     ? getLocalizer(lang)(`nationalities.${formDataValue}`)
     : null
   const [searchValue, setSearchValue] = useState(translatedFormDataValue || '')
