@@ -72,7 +72,7 @@ const ContactDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
             title={t(text)}
             text={
               currentUserLoaded ? (
-                <Paper elevation={2} className="u-mt-1 u-mh-half">
+                <Paper elevation={2} className="u-mh-half">
                   <ContactList
                     className="u-pv-0"
                     multiple={multiple}
