@@ -6,7 +6,7 @@ import { useParams, useNavigate, Navigate } from 'react-router-dom'
 import { useClient } from 'cozy-client'
 import { isIOS } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
@@ -89,7 +89,7 @@ const InformationEdit = () => {
     : null
 
   return (
-    <Dialog
+    <FixedDialog
       open
       onClose={onClose}
       title={dialogTitle}
