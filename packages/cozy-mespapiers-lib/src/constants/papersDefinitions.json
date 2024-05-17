@@ -609,7 +609,7 @@
           "attributes": [
             {
               "name": "country",
-              "type": "text",
+              "type": "country",
               "inputLabel": "PaperJSON.generic.foreign.country.inputLabel"
             }
           ]
@@ -1141,7 +1141,7 @@
           "attributes": [
             {
               "name": "country",
-              "type": "text",
+              "type": "country",
               "inputLabel": "PaperJSON.generic.foreign.country.inputLabel"
             }
           ]
@@ -1969,7 +1969,7 @@
           "attributes": [
             {
               "name": "country",
-              "type": "text",
+              "type": "country",
               "inputLabel": "PaperJSON.residence_permit.information.country.inputLabel"
             }
           ]
