@@ -227,6 +227,12 @@ export const makeFileFlexsearchProps = ({ doc, scannerT }) => ({
     ...(doc.metadata.qualification?.label === 'pay_sheet' && {
       paySheet: scannerT('qualification.information.title.pay_sheet.number')
     }),
+    ...(doc.metadata.qualification?.label ===
+      'national_health_insurance_card' && {
+      nationalHealthInsuranceCard: scannerT(
+        'qualification.information.title.national_health_insurance_card.number'
+      )
+    }),
     ...(doc.metadata.qualification?.label === 'residence_permit' && {
       residencePermit: scannerT(
         'qualification.information.title.residence_permit.number'

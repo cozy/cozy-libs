@@ -21,6 +21,7 @@ const flexsearchIndex = [
   'flexsearchProps:translated:paymentProofFamilyAllowance', // io.cozy.files
   'flexsearchProps:translated:vehicleRegistration', // io.cozy.files
   'flexsearchProps:translated:nationalIdCard', // io.cozy.files
+  'flexsearchProps:translated:nationalHealthInsuranceCard', // io.cozy.files
   'flexsearchProps:translated:bankDetails', // io.cozy.files
   'flexsearchProps:translated:paySheet', // io.cozy.files
   'flexsearchProps:translated:passport', // io.cozy.files
