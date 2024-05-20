@@ -230,15 +230,14 @@ describe('makeFileFlexsearchProps', () => {
       doc: {
         metadata: { qualification: { label: 'others' }, refTaxIncome: 123456 }
       },
-      scannerT: mockT,
-      t: mockT
+      scannerT: mockT
     })
 
     expect(res).toStrictEqual({
       tag: [],
       translated: {
         qualificationLabel: 'items.others',
-        'metadata.refTaxIncome': 'Search.attributeLabel.metadata.refTaxIncome'
+        'metadata.refTaxIncome': 'qualification.information.title.refTaxIncome'
       }
     })
   })
@@ -252,17 +251,16 @@ describe('makeFileFlexsearchProps', () => {
           contractType: 'cdi'
         }
       },
-      scannerT: mockT,
-      t: mockT
+      scannerT: mockT
     })
 
     expect(res).toStrictEqual({
       tag: ['identity', 'transport'],
       translated: {
         qualificationLabel: 'items.driver_license',
-        'metadata.refTaxIncome': 'Search.attributeLabel.metadata.refTaxIncome',
-        'metadata.contractType': 'Search.attributeLabel.metadata.contractType',
-        driverLicense: 'Search.attributeLabel.metadata.driver_license'
+        'metadata.refTaxIncome': 'qualification.information.title.refTaxIncome',
+        'metadata.contractType': 'qualification.information.title.contractType',
+        driverLicense: 'qualification.information.title.driver_license.number'
       }
     })
   })

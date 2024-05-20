@@ -153,70 +153,84 @@ export const makeContactTags = contact => {
   return contactTags
 }
 
-export const makeFileFlexsearchProps = ({ doc, scannerT, t }) => ({
+export const makeFileFlexsearchProps = ({ doc, scannerT }) => ({
   tag: makeFileTags(doc),
   translated: {
     qualificationLabel: scannerT(`items.${doc.metadata.qualification.label}`),
     ...(doc.metadata.refTaxIncome && {
-      'metadata.refTaxIncome': t('Search.attributeLabel.metadata.refTaxIncome')
+      'metadata.refTaxIncome': scannerT(
+        'qualification.information.title.refTaxIncome'
+      )
     }),
     ...(doc.metadata.netSocialAmount && {
-      'metadata.netSocialAmount': t(
-        'Search.attributeLabel.metadata.netSocialAmount'
+      'metadata.netSocialAmount': scannerT(
+        'qualification.information.title.netSocialAmount'
       )
     }),
     ...(doc.metadata.contractType && {
-      'metadata.contractType': t('Search.attributeLabel.metadata.contractType')
+      'metadata.contractType': scannerT(
+        'qualification.information.title.contractType'
+      )
     }),
     ...(doc.metadata.expirationDate && {
-      'metadata.expirationDate': t(
-        'Search.attributeLabel.metadata.expirationDate'
+      'metadata.expirationDate': scannerT(
+        'qualification.date.title.expirationDate'
       )
     }),
     ...(doc.metadata.vehicle?.licenseNumber && {
-      'metadata.vehicle.licenseNumber': t(
-        'Search.attributeLabel.metadata.vehicle.licenseNumber'
+      'metadata.vehicle.licenseNumber': scannerT(
+        'qualification.information.title.vehicle.licenseNumber'
       )
     }),
     ...(doc.metadata.vehicle?.confidentialNumber && {
-      'metadata.vehicle.confidentialNumber': t(
-        'Search.attributeLabel.metadata.vehicle.confidentialNumber'
+      'metadata.vehicle.confidentialNumber': scannerT(
+        'qualification.information.title.vehicle.confidentialNumber'
       )
     }),
     ...(doc.metadata.bicNumber && {
-      'metadata.bicNumber': t('Search.attributeLabel.metadata.bicNumber')
+      'metadata.bicNumber': scannerT(
+        'qualification.information.title.bicNumber'
+      )
     }),
     ...(doc.metadata.qualification?.label === 'driver_license' && {
-      driverLicense: t('Search.attributeLabel.metadata.driver_license')
+      driverLicense: scannerT(
+        'qualification.information.title.driver_license.number'
+      )
     }),
     ...(doc.metadata.qualification?.label ===
       'payment_proof_family_allowance' && {
-      paymentProofFamilyAllowance: t(
-        'Search.attributeLabel.metadata.payment_proof_family_allowance'
+      paymentProofFamilyAllowance: scannerT(
+        'qualification.information.title.payment_proof_family_allowance.number'
       )
     }),
     ...(doc.metadata.qualification?.label === 'caf' && {
-      caf: t('Search.attributeLabel.metadata.caf')
+      caf: scannerT('qualification.information.title.caf.number')
     }),
     ...(doc.metadata.qualification?.label === 'vehicle_registration' && {
-      vehicleRegistration: t(
-        'Search.attributeLabel.metadata.vehicle_registration'
+      vehicleRegistration: scannerT(
+        'qualification.information.title.vehicle_registration.number'
       )
     }),
     ...(doc.metadata.qualification?.label === 'national_id_card' && {
-      nationalIdCard: t('Search.attributeLabel.metadata.national_id_card')
+      nationalIdCard: scannerT(
+        'qualification.information.title.national_id_card.number'
+      )
     }),
     ...(doc.metadata.qualification?.label === 'bank_details' && {
-      bankDetails: t('Search.attributeLabel.metadata.bank_details')
+      bankDetails: scannerT(
+        'qualification.information.title.bank_details.number'
+      )
     }),
     ...(doc.metadata.qualification?.label === 'passport' && {
-      passport: t('Search.attributeLabel.metadata.passport')
+      passport: scannerT('qualification.information.title.passport.number')
     }),
     ...(doc.metadata.qualification?.label === 'pay_sheet' && {
-      paySheet: t('Search.attributeLabel.metadata.pay_sheet')
+      paySheet: scannerT('qualification.information.title.pay_sheet.number')
     }),
     ...(doc.metadata.qualification?.label === 'residence_permit' && {
-      residencePermit: t('Search.attributeLabel.metadata.residence_permit')
+      residencePermit: scannerT(
+        'qualification.information.title.residence_permit.number'
+      )
     })
   }
 })

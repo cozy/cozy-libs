@@ -25,8 +25,7 @@ describe('addFileDoc', () => {
         name: 'file01.ext',
         metadata: { qualification: { label: 'tax_return' } }
       },
-      scannerT,
-      t
+      scannerT
     })
 
     expect(index.add).toBeCalledWith({

@@ -443,26 +443,6 @@
       "text": "Essayez de raccourcir ou de reformuler votre recherche."
     },
     "attributeLabel": {
-      "metadata": {
-        "refTaxIncome": "Revenu fiscal de référence",
-        "netSocialAmount": "Montant net social",
-        "bicNumber": "Numéro BIC",
-        "pay_sheet": "Rémunération brute",
-        "contractType": "Type de contrat",
-        "expirationDate": "Date d'expiration",
-        "driver_license": "Numéro du permis",
-        "payment_proof_family_allowance": "Numéro de dossier CAF",
-        "caf": "Numéro de dossier CAF",
-        "vehicle_registration": "Numéro de la carte grise (VIN)",
-        "vehicle": {
-          "licenseNumber": "Plaque d'immatriculation",
-          "confidentialNumber": "Code confidentiel"
-        },
-        "national_id_card": "Numéro de la carte d'identité",
-        "bank_details": "Numéro d'IBAN",
-        "passport": "Numéro du passeport",
-        "residence_permit": "Numéro du permis"
-      },
       "phone": "Numéro de téléphone",
       "email": "Adresse email",
       "birthday": "Date de naissance",

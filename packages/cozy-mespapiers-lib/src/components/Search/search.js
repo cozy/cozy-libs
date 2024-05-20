@@ -70,13 +70,13 @@ export const index = new Document({
   }
 })
 
-export const addFileDoc = ({ index, doc, scannerT, t }) => {
-  if (!t || !scannerT) return null
+export const addFileDoc = ({ index, doc, scannerT }) => {
+  if (!scannerT) return null
 
   if (hasQualifications(doc)) {
     return index.add({
       ...doc,
-      flexsearchProps: makeFileFlexsearchProps({ doc, scannerT, t })
+      flexsearchProps: makeFileFlexsearchProps({ doc, scannerT })
     })
   }
 }
@@ -90,7 +90,7 @@ export const addContactDoc = ({ index, doc, t }) => {
 
 export const addDoc = ({ index, doc, scannerT, t }) => {
   if (isFile(doc)) {
-    addFileDoc({ index, doc, scannerT, t })
+    addFileDoc({ index, doc, scannerT })
   } else if (isContact(doc)) {
     addContactDoc({ index, doc, t })
   }
