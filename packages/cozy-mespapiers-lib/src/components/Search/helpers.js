@@ -28,13 +28,30 @@ export const makeReducedResultIds = flexsearchResult =>
 const makeFirstSearchResultMatchingAttributes = (results, id) =>
   results.map(x => (x.result.includes(id) ? x.field : undefined)).filter(x => x)
 
+/**
+ * @param {array} resultIds
+ * @param {array} docs
+ * @returns
+ */
+export const filterResultIds = (resultIds, docs) =>
+  resultIds
+    ?.map(resultId => docs.find(doc => doc._id === resultId))
+    .filter(x => x !== undefined) || []
+
 export const search = async ({ docs, value, tag }) => {
   const tokens = value?.trim().split(' ')
   const isMultipleSearch = tokens?.length > 1
 
-  return isMultipleSearch
-    ? await computeResultForMultipleSearch({ docs, tokens, tag })
-    : computeResultForSearch({ docs, token: tokens[0], tag })
+  const { results, resultIds } = isMultipleSearch
+    ? await computeResultForMultipleSearch({ tokens, tag })
+    : computeResultForSearch({ token: tokens[0], tag })
+
+  const filteredDocs = filterResultIds(resultIds, docs)
+
+  const firstSearchResultMatchingAttributes =
+    makeFirstSearchResultMatchingAttributes(results, resultIds[0])
+
+  return { filteredDocs, firstSearchResultMatchingAttributes }
 }
 
 export const makeMultipleSearchResultIds = resultsPerTokens => {
@@ -45,7 +62,7 @@ export const makeMultipleSearchResultIds = resultsPerTokens => {
   return intersection(...resultsIdsPerTokens)
 }
 
-const computeResultForMultipleSearch = async ({ docs, tokens, tag }) => {
+const computeResultForMultipleSearch = async ({ tokens, tag }) => {
   const promises = tokens.map(token =>
     index.searchAsync(token, { tag, limit: 9999 })
   )
@@ -53,31 +70,15 @@ const computeResultForMultipleSearch = async ({ docs, tokens, tag }) => {
 
   const resultIds = makeMultipleSearchResultIds(resultsPerTokens)
 
-  const filteredDocs =
-    resultIds
-      ?.map(resultId => docs.find(doc => doc._id === resultId))
-      .filter(x => x !== undefined) || []
-
-  const firstSearchResultMatchingAttributes =
-    makeFirstSearchResultMatchingAttributes(resultsPerTokens[0], resultIds[0])
-
-  return { filteredDocs, firstSearchResultMatchingAttributes }
+  return { results: resultsPerTokens[0], resultIds }
 }
 
-const computeResultForSearch = ({ docs, token, tag }) => {
+const computeResultForSearch = ({ token, tag }) => {
   const results = index.search(token, { tag, limit: 9999 })
 
   const resultIds = makeReducedResultIds(results)
 
-  const filteredDocs =
-    resultIds
-      ?.map(resultId => docs.find(doc => doc._id === resultId))
-      .filter(x => x !== undefined) || []
-
-  const firstSearchResultMatchingAttributes =
-    makeFirstSearchResultMatchingAttributes(results, resultIds[0])
-
-  return { filteredDocs, firstSearchResultMatchingAttributes }
+  return { results, resultIds }
 }
 
 const onCreate = (scannerT, t) => async doc => {

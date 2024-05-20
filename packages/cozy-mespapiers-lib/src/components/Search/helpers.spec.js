@@ -6,6 +6,7 @@ import {
   makeContactTags,
   makeFileFlexsearchProps,
   makeMultipleSearchResultIds,
+  filterResultIds,
   makeContactFlexsearchProps
 } from './helpers'
 import { index } from './search'
@@ -268,7 +269,7 @@ describe('makeFileFlexsearchProps', () => {
 })
 
 describe('makeMultipleSearchResultIds', () => {
-  it('should', () => {
+  it('should return only ids that matches multiple fields ', () => {
     const res = makeMultipleSearchResultIds([
       [
         { field: 'name', result: ['id01', 'id04'] },
@@ -278,5 +279,28 @@ describe('makeMultipleSearchResultIds', () => {
     ])
 
     expect(res).toStrictEqual(['id01'])
+  })
+})
+
+describe('filterResultIds', () => {
+  it('should return only docs that matcheds with ids', () => {
+    const res = filterResultIds(
+      ['id01', 'id02'],
+      [{ _id: 'id01' }, { _id: 'id02' }, { _id: 'id03' }]
+    )
+
+    expect(res).toStrictEqual([{ _id: 'id01' }, { _id: 'id02' }])
+  })
+
+  it('should return empty array if no match', () => {
+    const res = filterResultIds(['id04'], [{ _id: 'id01' }])
+
+    expect(res).toStrictEqual([])
+  })
+
+  it('should return empty array if no result', () => {
+    const res = filterResultIds([], [{ _id: 'id01' }])
+
+    expect(res).toStrictEqual([])
   })
 })
