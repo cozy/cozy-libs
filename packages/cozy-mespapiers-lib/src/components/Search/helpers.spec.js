@@ -292,6 +292,33 @@ describe('filterResultIds', () => {
     expect(res).toStrictEqual([{ _id: 'id01' }, { _id: 'id02' }])
   })
 
+  it('should return docs filtered by date', () => {
+    const res = filterResultIds(
+      ['id01', 'id02'],
+      [
+        {
+          _id: 'id01',
+          metadata: { datetime: '2024-04-01T01:00:00.000Z' }
+        },
+        {
+          _id: 'id02',
+          metadata: { datetime: '2024-05-01T01:00:00.000Z' }
+        }
+      ]
+    )
+
+    expect(res).toStrictEqual([
+      {
+        _id: 'id02',
+        metadata: { datetime: '2024-05-01T01:00:00.000Z' }
+      },
+      {
+        _id: 'id01',
+        metadata: { datetime: '2024-04-01T01:00:00.000Z' }
+      }
+    ])
+  })
+
   it('should return empty array if no match', () => {
     const res = filterResultIds(['id04'], [{ _id: 'id01' }])
 

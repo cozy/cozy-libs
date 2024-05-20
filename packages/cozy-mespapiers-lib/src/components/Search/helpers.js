@@ -36,7 +36,10 @@ const makeFirstSearchResultMatchingAttributes = (results, id) =>
 export const filterResultIds = (resultIds, docs) =>
   resultIds
     ?.map(resultId => docs.find(doc => doc._id === resultId))
-    .filter(x => x !== undefined) || []
+    .filter(x => x !== undefined)
+    .sort(
+      (a, b) => new Date(b.metadata?.datetime) - new Date(a.metadata?.datetime)
+    ) || []
 
 export const search = async ({ docs, value, tag }) => {
   const tokens = value?.trim().split(' ')
