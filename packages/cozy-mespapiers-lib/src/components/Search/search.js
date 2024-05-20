@@ -10,6 +10,7 @@ const isContact = doc => doc._type === CONTACTS_DOCTYPE
 
 const flexsearchIndex = [
   'flexsearchProps:translated:qualificationLabel', // io.cozy.files
+  'flexsearchProps:translated:metadata.bicNumber', // io.cozy.files
   'flexsearchProps:translated:metadata.refTaxIncome', // io.cozy.files
   'flexsearchProps:translated:metadata.netSocialAmount', // io.cozy.files
   'flexsearchProps:translated:metadata.contractType', // io.cozy.files

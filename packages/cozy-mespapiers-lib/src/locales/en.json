@@ -446,6 +446,7 @@
       "metadata": {
         "refTaxIncome": "Reference tax income",
         "netSocialAmount": "Net social amount",
+        "bicNumber": "BIC Number",
         "pay_sheet": "Gross remuneration",
         "contractType": "Contract type",
         "expirationDate": "Expiration date",

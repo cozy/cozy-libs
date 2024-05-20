@@ -179,6 +179,9 @@ export const makeFileFlexsearchProps = ({ doc, scannerT, t }) => ({
         'Search.attributeLabel.metadata.vehicle.confidentialNumber'
       )
     }),
+    ...(doc.metadata.bicNumber && {
+      'metadata.bicNumber': t('Search.attributeLabel.metadata.bicNumber')
+    }),
     ...(doc.metadata.qualification?.label === 'driver_license' && {
       driverLicense: t('Search.attributeLabel.metadata.driver_license')
     }),
