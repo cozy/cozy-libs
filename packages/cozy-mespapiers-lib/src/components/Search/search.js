@@ -40,7 +40,6 @@ const flexsearchIndex = [
   'fullname', // io.cozy.contacts
   'name', // io.cozy.files, io.cozy.contacts
   'birthday', // io.cozy.contacts
-  'birthcity', // io.cozy.contacts
   // We do not use an array here but flat indexes, see https://github.com/nextapps-de/flexsearch/issues/383
   // We use the number 7 arbitrarily, we assume that it is a correct value for emails and phones
   ...Array.from(Array(7), (_, idx) => `flexsearchProps:email[${idx}].address`), // io.cozy.contacts
