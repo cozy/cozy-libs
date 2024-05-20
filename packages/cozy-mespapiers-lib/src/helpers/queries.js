@@ -26,6 +26,7 @@ export const buildFilesQueryWithQualificationLabel = () => {
     'metadata.number',
     'metadata.vehicle.licenseNumber',
     'metadata.vehicle.confidentialNumber',
+    'metadata.bicNumber',
     'metadata.contractType',
     'metadata.refTaxIncome',
     'metadata.netSocialAmount',
