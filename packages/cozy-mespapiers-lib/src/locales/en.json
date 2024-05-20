@@ -443,26 +443,6 @@
       "text": "Try to shorten or rephrase your search"
     },
     "attributeLabel": {
-      "metadata": {
-        "refTaxIncome": "Reference tax income",
-        "netSocialAmount": "Net social amount",
-        "bicNumber": "BIC Number",
-        "pay_sheet": "Gross remuneration",
-        "contractType": "Contract type",
-        "expirationDate": "Expiration date",
-        "driver_license": "License number",
-        "payment_proof_family_allowance": "CAF file number",
-        "caf": "CAF file number",
-        "vehicle_registration": "Vehicle registration number (VIN)",
-        "vehicle": {
-          "licenseNumber": "Vehicle registration number",
-          "confidentialNumber": "Confidential code"
-        },
-        "national_id_card": "National ID card number",
-        "bank_details": "IBAN number",
-        "passport": "Passport number",
-        "residence_permit": "License number"
-      },
       "phone": "Phone number",
       "email": "Email address",
       "birthday": "Birthday",
