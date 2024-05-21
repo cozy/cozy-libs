@@ -17,26 +17,19 @@ const SeparatorWrapper = ({ hasExpandedAttributes, children, ...props }) => {
   )
 }
 
-const FlexsearchResult = ({
-  filteredDocs,
-  firstSearchResultMatchingAttributes
-}) => {
+const FlexsearchResult = ({ filteredDocs }) => {
   const firstDoc = filteredDocs[0]
   const otherDocs = filteredDocs.slice(1)
   const hasOtherDocs = otherDocs.length > 0
   const hasExpandedAttributesToDisplay = hasExpandedAttributesDisplayed({
-    doc: firstDoc,
-    expandedAttributes: firstSearchResultMatchingAttributes
+    doc: firstDoc
   })
 
   return (
     <List className="u-pv-0">
       <FlexsearchResultLine
         doc={firstDoc}
-        expandedAttributesProps={{
-          isExpandedAttributesActive: true,
-          expandedAttributes: firstSearchResultMatchingAttributes
-        }}
+        expandedAttributesProps={{ isExpandedAttributesActive: true }}
       />
       {hasOtherDocs && (
         <SeparatorWrapper
@@ -52,8 +45,7 @@ const FlexsearchResult = ({
 }
 
 FlexsearchResult.propTypes = {
-  filteredDocs: PropTypes.arrayOf(PropTypes.object),
-  firstSearchResultMatchingAttributes: PropTypes.array
+  filteredDocs: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default FlexsearchResult

@@ -18,7 +18,6 @@ const useSearchResult = ({ papers, contacts, searchValue, selectedThemes }) => {
     loading: true,
     hasResult: null,
     filteredDocs: null,
-    firstSearchResultMatchingAttributes: null,
     showResultByGroup: false
   })
 
@@ -34,12 +33,11 @@ const useSearchResult = ({ papers, contacts, searchValue, selectedThemes }) => {
       const docsToBeSearched =
         isMultiSelectionActive || showResultByGroup ? papers : allDocs
 
-      const { filteredDocs, firstSearchResultMatchingAttributes } =
-        await search({
-          docs: docsToBeSearched,
-          value: searchValue,
-          tag: selectedThemes.map(selectedTheme => selectedTheme.label)
-        })
+      const filteredDocs = await search({
+        docs: docsToBeSearched,
+        value: searchValue,
+        tag: selectedThemes.map(selectedTheme => selectedTheme.label)
+      })
 
       const hasResult = filteredDocs?.length > 0
 
@@ -47,7 +45,6 @@ const useSearchResult = ({ papers, contacts, searchValue, selectedThemes }) => {
         loading: false,
         hasResult,
         filteredDocs,
-        firstSearchResultMatchingAttributes,
         showResultByGroup
       })
     }

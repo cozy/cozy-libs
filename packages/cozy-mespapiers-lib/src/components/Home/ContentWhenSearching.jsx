@@ -20,18 +20,13 @@ const ContentWhenSearching = ({
 }) => {
   const { t } = useI18n()
 
-  const {
-    loading,
-    hasResult,
-    filteredDocs,
-    firstSearchResultMatchingAttributes,
-    showResultByGroup
-  } = useSearchResult({
-    papers,
-    contacts,
-    searchValue,
-    selectedThemes
-  })
+  const { loading, hasResult, filteredDocs, showResultByGroup } =
+    useSearchResult({
+      papers,
+      contacts,
+      searchValue,
+      selectedThemes
+    })
 
   if (loading) {
     return <ListSkeleton count={6} />
@@ -61,12 +56,7 @@ const ContentWhenSearching = ({
     )
   }
 
-  return (
-    <FlexsearchResult
-      filteredDocs={filteredDocs}
-      firstSearchResultMatchingAttributes={firstSearchResultMatchingAttributes}
-    />
-  )
+  return <FlexsearchResult filteredDocs={filteredDocs} />
 }
 
 ContentWhenSearching.propTypes = {
