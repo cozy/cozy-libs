@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [98.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@97.0.0...cozy-mespapiers-lib@98.0.0) (2024-05-21)
+
+
+### Bug Fixes
+
+* **mespapiers:** Ensure country code used for translation is valid ([7faf374](https://github.com/cozy/cozy-libs/commit/7faf3749db7e959b722e4ae1af685895f4fcd3d0))
+
+
+### Features
+
+* **mespapiers:** Upgrade cozy-client to 47.2.0 ([7652b74](https://github.com/cozy/cozy-libs/commit/7652b7471a490e92249deb12925e8dc9835bb611))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-client >= 47.2.0`
+
+
+
+
+
 # [97.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@96.0.0...cozy-mespapiers-lib@97.0.0) (2024-05-21)
 
 
