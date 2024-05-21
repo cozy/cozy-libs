@@ -25,9 +25,6 @@ export const makeReducedResultIds = flexsearchResult =>
     return acc
   }, [])
 
-const makeFirstSearchResultMatchingAttributes = (results, id) =>
-  results.map(x => (x.result.includes(id) ? x.field : undefined)).filter(x => x)
-
 /**
  * @param {array} resultIds
  * @param {array} docs
@@ -45,16 +42,13 @@ export const search = async ({ docs, value, tag }) => {
   const tokens = value?.trim().split(' ')
   const isMultipleSearch = tokens?.length > 1
 
-  const { results, resultIds } = isMultipleSearch
+  const resultIds = isMultipleSearch
     ? await computeResultForMultipleSearch({ tokens, tag })
     : computeResultForSearch({ token: tokens[0], tag })
 
   const filteredDocs = filterResultIds(resultIds, docs)
 
-  const firstSearchResultMatchingAttributes =
-    makeFirstSearchResultMatchingAttributes(results, resultIds[0])
-
-  return { filteredDocs, firstSearchResultMatchingAttributes }
+  return filteredDocs
 }
 
 export const makeMultipleSearchResultIds = resultsPerTokens => {
@@ -71,17 +65,13 @@ const computeResultForMultipleSearch = async ({ tokens, tag }) => {
   )
   const resultsPerTokens = await Promise.all(promises)
 
-  const resultIds = makeMultipleSearchResultIds(resultsPerTokens)
-
-  return { results: resultsPerTokens[0], resultIds }
+  return makeMultipleSearchResultIds(resultsPerTokens)
 }
 
 const computeResultForSearch = ({ token, tag }) => {
   const results = index.search(token, { tag, limit: 9999 })
 
-  const resultIds = makeReducedResultIds(results)
-
-  return { results, resultIds }
+  return makeReducedResultIds(results)
 }
 
 const onCreate = (scannerT, t) => async doc => {
