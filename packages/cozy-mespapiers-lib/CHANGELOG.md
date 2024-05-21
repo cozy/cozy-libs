@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [96.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@95.3.0...cozy-mespapiers-lib@96.0.0) (2024-05-21)
+
+
+### Bug Fixes
+
+* **mespapiers:** Bic number wasn't supported well in search ([11a1989](https://github.com/cozy/cozy-libs/commit/11a198966196029018b779b903dd6ec4399ffc65))
+
+
+### Features
+
+* **mespapiers:** Add search on national health insurance card label ([4ac7677](https://github.com/cozy/cozy-libs/commit/4ac76777f2aa5170d5b7280b58200c2f5ab3b87d))
+* **mespapiers:** Add translated BIC number label in search ([2e5bb9c](https://github.com/cozy/cozy-libs/commit/2e5bb9ce8a8cb450c01e26a862b232dfa73480f7))
+* **mespapiers:** Remove search on `birthcity` ([6d29cea](https://github.com/cozy/cozy-libs/commit/6d29ceac8f4ae3e1b9e44ab35547f9259b1c8271))
+* **mespapiers:** Sort search result by date ([7b5ffba](https://github.com/cozy/cozy-libs/commit/7b5ffba9492a446fe8394795aa13faedf384e4f2))
+* Upgrade cozy-client 47.1.1 to 47.1.2 ([7db604e](https://github.com/cozy/cozy-libs/commit/7db604e2e9774ba326103f53bbce741662c8e84d))
+
+
+### BREAKING CHANGES
+
+* you must have `cozy-client >= 47.1.2`
+
+
+
+
+
 # [95.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@95.2.0...cozy-mespapiers-lib@95.3.0) (2024-05-17)
 
 
