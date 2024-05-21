@@ -3,7 +3,7 @@ import React, { useState, useEffect, Fragment } from 'react'
 
 import {
   getAllCountries,
-  checkCountryCode
+  isValidCountryCodeTranslation
 } from 'cozy-client/dist/models/country/countries'
 import { getLocalizer } from 'cozy-client/dist/models/country/locales'
 import Divider from 'cozy-ui/transpiled/react/Divider'
@@ -23,15 +23,22 @@ export const CountryListAdapter = ({
   idx
 }) => {
   const { t, lang } = useI18n()
-  const translatedFormDataValue = checkCountryCode(formDataValue)
-    ? getLocalizer(lang)(`nationalities.${formDataValue}`)
+  const { t: tCountry } = getLocalizer(lang)
+
+  const translatedFormDataValue = isValidCountryCodeTranslation(
+    lang,
+    formDataValue
+  )
+    ? tCountry(`nationalities.${formDataValue}`)
     : null
   const [searchValue, setSearchValue] = useState(translatedFormDataValue || '')
   const [displayedOptionCount, setDisplayedOptionCount] = useState(
     DISPLAYED_OPTION_COUNT
   )
   const [currentOption, setCurrentOption] = useState({
-    value: formDataValue || ''
+    value: isValidCountryCodeTranslation(lang, formDataValue)
+      ? formDataValue
+      : ''
   })
 
   const handleViewMore = () => {
