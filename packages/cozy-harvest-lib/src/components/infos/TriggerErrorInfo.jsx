@@ -28,7 +28,7 @@ export class TriggerErrorInfo extends PureComponent {
         action={action}
         description={
           <>
-            <Typography className="u-error" variant="h6" gutterBottom>
+            <Typography color="initial" variant="h6" gutterBottom>
               {getErrorLocale(error, konnector, t, 'title')}
             </Typography>
             <TriggerErrorDescription error={error} konnector={konnector} />

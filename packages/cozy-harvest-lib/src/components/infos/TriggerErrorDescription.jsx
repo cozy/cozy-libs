@@ -20,7 +20,7 @@ const TriggerErrorDescription = ({ error, konnector, linkProps }) => {
   }
 
   return (
-    <Typography variant="body1" component="div">
+    <Typography variant="body1" color="initial" component="div">
       <Markdown
         source={getErrorLocale(error, konnector, t, 'description', supportMail)}
         linkProps={linkProps}
