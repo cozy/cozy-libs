@@ -90,10 +90,10 @@ const FileCard = ({ files, loading, konnector, trigger, accountId }) => {
           <Img>
             <Circle
               size="small"
-              backgroundColor={palette.puertoRico}
+              backgroundColor={palette['puertoRico']}
               className="u-mr-1"
             >
-              <Icon icon={FileIcon} color={palette.white} />
+              <Icon icon={FileIcon} color={palette['white']} />
             </Circle>
           </Img>
           <Bd>
