@@ -107,8 +107,13 @@ getExtraAttributes() {
 We can define one which channels the user will receive the notification.
 
 ```javascript
-MyNotification.preferredChannels = ['mail', 'mobile']
+MyNotification.preferredChannels = ['mobile', 'mail']
 ```
+
+In this example, we first try to send the notification to a mobile, and if it fails to the email address of the user. Some things to know :
+
+- the stack has a fallback by email mechanism. So `preferredChannels = ['mobile', 'mail']` is equivalent to `preferredChannels = ['mobile']`.
+- the stack do not check the delivery of the email. So if you set `preferredChannels = ['mail', 'mobile']`, it is very unlikely that a mobile notification will be sent.
 
 #### mobile
 
