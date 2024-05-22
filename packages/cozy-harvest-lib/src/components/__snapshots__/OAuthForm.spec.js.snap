@@ -17,12 +17,12 @@ exports[`OAuthForm should handle oauth cancelation 1`] = `
           class="styles__Stack--xs___2R5lW"
         >
           <h6
-            class="MuiTypography-root u-error MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-gutterBottom"
+            class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
           >
             Canceled
           </h6>
           <div
-            class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary"
+            class="MuiTypography-root MuiTypography-body1"
           >
             <span
               class="u-db u-mv-0"
@@ -56,34 +56,37 @@ exports[`OAuthForm should handle oauth cancelation 1`] = `
       />
     </div>
     <button
-      aria-busy="true"
-      aria-disabled="true"
-      class="styles__c-btn___3kXsk styles__c-btn--center___Nny0n u-mh-auto"
+      class="MuiButtonBase-root MuiButton-root MuiButton-contained customColor-primary u-mh-auto MuiButton-containedPrimary MuiButton-disableElevation Mui-disabled Mui-disabled"
       disabled=""
-      type="submit"
+      tabindex="-1"
+      type="button"
     >
-      <span>
-        <span>
-          oauth.connect.submit
-        </span>
-        <svg
-          aria-busy="true"
-          aria-hidden="true"
-          class="u-ml-half styles__icon___23x3R styles__icon--spin___ybfC1"
-          focusable="false"
-          height="16"
-          role="progressbar"
-          viewBox="0 0 32 32"
-          width="16"
+      <span
+        class="MuiButton-label"
+      >
+        oauth.connect.submit
+        <span
+          class="MuiButton-endIcon MuiButton-iconSizeMedium"
         >
-          <path
-            d="M16 0a16 16 0 000 32 16 16 0 000-32m0 4a12 12 0 010 24 12 12 0 010-24"
-            opacity="0.25"
-          />
-          <path
-            d="M16 0a16 16 0 0116 16h-4A12 12 0 0016 4z"
-          />
-        </svg>
+          <svg
+            aria-busy="true"
+            aria-hidden="true"
+            class="styles__icon___23x3R styles__icon--spin___ybfC1"
+            focusable="false"
+            height="16"
+            role="progressbar"
+            viewBox="0 0 32 32"
+            width="16"
+          >
+            <path
+              d="M16 0a16 16 0 000 32 16 16 0 000-32m0 4a12 12 0 010 24 12 12 0 010-24"
+              opacity="0.25"
+            />
+            <path
+              d="M16 0a16 16 0 0116 16h-4A12 12 0 0016 4z"
+            />
+          </svg>
+        </span>
       </span>
     </button>
   </div>
@@ -105,12 +108,12 @@ exports[`OAuthForm should handle oauth cancelation 2`] = `
           class="styles__Stack--xs___2R5lW"
         >
           <h6
-            class="MuiTypography-root u-error MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-gutterBottom"
+            class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
           >
             Canceled
           </h6>
           <div
-            class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary"
+            class="MuiTypography-root MuiTypography-body1"
           >
             <span
               class="u-db u-mv-0"
@@ -144,14 +147,18 @@ exports[`OAuthForm should handle oauth cancelation 2`] = `
       />
     </div>
     <button
-      class="styles__c-btn___3kXsk styles__c-btn--center___Nny0n u-mh-auto"
-      type="submit"
+      class="MuiButtonBase-root MuiButton-root MuiButton-contained customColor-primary u-mh-auto MuiButton-containedPrimary MuiButton-disableElevation"
+      tabindex="0"
+      type="button"
     >
-      <span>
-        <span>
-          oauth.connect.submit
-        </span>
+      <span
+        class="MuiButton-label"
+      >
+        oauth.connect.submit
       </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
     </button>
   </div>
 </div>
@@ -181,14 +188,18 @@ exports[`OAuthForm should render 1`] = `
       />
     </div>
     <button
-      class="styles__c-btn___3kXsk styles__c-btn--center___Nny0n u-mh-auto"
-      type="submit"
+      class="MuiButtonBase-root MuiButton-root MuiButton-contained customColor-primary u-mh-auto MuiButton-containedPrimary MuiButton-disableElevation"
+      tabindex="0"
+      type="button"
     >
-      <span>
-        <span>
-          oauth.connect.submit
-        </span>
+      <span
+        class="MuiButton-label"
+      >
+        oauth.connect.submit
       </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
     </button>
   </div>
 </div>
