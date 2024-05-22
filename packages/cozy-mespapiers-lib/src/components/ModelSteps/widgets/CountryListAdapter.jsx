@@ -67,6 +67,11 @@ export const CountryListAdapter = ({
       opt.value.toLowerCase().includes(searchValue.toLowerCase())
   )
 
+  /* Set default value */
+  useEffect(() => {
+    setValue(prev => ({ ...prev, [name]: currentOption.value }))
+  }, [name, setValue, currentOption.value])
+
   /* Necessary to validate or not the validation button of the current step */
   useEffect(() => {
     setValidInput(prev => ({
