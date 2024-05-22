@@ -22,7 +22,6 @@ import NavigationList, {
 } from 'cozy-ui/transpiled/react/NavigationList'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
-import palette from 'cozy-ui/transpiled/react/palette'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 // @ts-ignore peerDep
@@ -165,7 +164,7 @@ const ConfigurationTab = ({
               onClick={() => pushHistory(`/accounts/${account._id}/edit`)}
             >
               <ListItemIcon>
-                <Icon icon={KeyIcon} color={palette['slateGrey']} />
+                <Icon icon={KeyIcon} color="var(--iconTextColor)" />
               </ListItemIcon>
               <ListItemText
                 primary={t('modal.updateAccount.identifiers')}
@@ -177,7 +176,7 @@ const ConfigurationTab = ({
                   <Icon
                     className="u-mr-1"
                     icon={RightIcon}
-                    color={palette['coolGrey']}
+                    color="var(--iconTextColor)"
                   />
                 </div>
               </ListItemSecondaryAction>

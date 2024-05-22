@@ -3,7 +3,6 @@ import React from 'react'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import BottomIcon from 'cozy-ui/transpiled/react/Icons/Bottom'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import palette from 'cozy-ui/transpiled/react/palette'
 
 const AccountSelectControlBig = ({ name }) => {
   return (
@@ -33,7 +32,7 @@ const AccountSelectControl = ({ name, variant }) => {
         icon={BottomIcon}
         size="12"
         className="u-ml-half"
-        color={palette['coolGrey']}
+        color="var(--iconTextColor)"
       />
     </div>
   )
