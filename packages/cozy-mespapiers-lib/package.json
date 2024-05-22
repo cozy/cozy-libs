@@ -46,7 +46,8 @@
     "date-fns": "2.23.0",
     "flexsearch": "0.7.31",
     "pdf-lib": "1.17.1",
-    "react-input-mask": "3.0.0-alpha.2"
+    "react-input-mask": "3.0.0-alpha.2",
+    "localforage": "1.10.0"
   },
   "peerDependencies": {
     "cozy-bar": ">=12.2.3",
