@@ -66,9 +66,9 @@ exports[`AccountsList should render 1`] = `
         className="u-p-0"
         tag="div"
       >
-        <DefaultButton
+        <ForwardRef
           className="u-bdrs-4"
-          extension="full"
+          fullWidth={true}
           icon={
             <Icon
               icon={[Function]}
@@ -77,7 +77,7 @@ exports[`AccountsList should render 1`] = `
           }
           label="modal.addAccount.button"
           onClick={[MockFunction]}
-          theme="text"
+          variant="text"
         />
       </Card>
     </li>
