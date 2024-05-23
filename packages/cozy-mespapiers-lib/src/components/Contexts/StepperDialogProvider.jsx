@@ -5,6 +5,10 @@ import { useWebviewIntent } from 'cozy-intent'
 
 import { filterSteps } from '../../helpers/filterSteps'
 import { findPlaceholderByLabelAndCountry } from '../../helpers/findPlaceholders'
+import {
+  getAndRemoveIndexedStorageData,
+  FORM_BACKUP_CURRENT_STEP_INDEX_KEY
+} from '../../utils/indexedStorage'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 
 const StepperDialogContext = createContext()
@@ -64,6 +68,20 @@ const StepperDialogProvider = ({ children }) => {
       buildAllCurrentSteps()
     }
   }, [webviewIntent, currentDefinition, fromFlagshipUpload])
+
+  useEffect(() => {
+    const loadFormBackup = async () => {
+      const backupCurrentStepIndex = await getAndRemoveIndexedStorageData(
+        FORM_BACKUP_CURRENT_STEP_INDEX_KEY
+      )
+
+      if (backupCurrentStepIndex) {
+        setCurrentStepIndex(backupCurrentStepIndex)
+      }
+    }
+
+    loadFormBackup()
+  }, [])
 
   const previousStep = () => {
     if (currentStepIndex > 0) {
