@@ -5,6 +5,7 @@ import {
   getFormDataFilesForOcr,
   normalizeFormdataMetadata
 } from './helpers'
+import { FILES_DOCTYPE } from '../../doctypes'
 
 describe('ModalSteps helpers', () => {
   describe('isFileAlreadySelected', () => {
@@ -200,11 +201,12 @@ describe('ModalSteps helpers', () => {
     it('should return the original formData when new metadata is empty', () => {
       const result = normalizeFormdataMetadata({
         formData: { metadata: {}, data: [], contacts: [] },
-        newMetadata: {}
+        newMetadata: {},
+        doctype: FILES_DOCTYPE
       })
 
       expect(result).toEqual({
-        metadata: {},
+        metadata: { [FILES_DOCTYPE]: {} },
         data: [],
         contacts: []
       })
@@ -213,15 +215,16 @@ describe('ModalSteps helpers', () => {
     it('should merge new metadata into formData metadata', () => {
       const result = normalizeFormdataMetadata({
         formData: {
-          metadata: { foo: 'bar' },
+          metadata: { [FILES_DOCTYPE]: { foo: 'bar' } },
           data: [],
           contacts: []
         },
-        newMetadata: { key: 'value' }
+        newMetadata: { key: 'value' },
+        doctype: FILES_DOCTYPE
       })
 
       expect(result).toEqual({
-        metadata: { foo: 'bar', key: 'value' },
+        metadata: { [FILES_DOCTYPE]: { foo: 'bar', key: 'value' } },
         data: [],
         contacts: []
       })
@@ -229,12 +232,19 @@ describe('ModalSteps helpers', () => {
 
     it('should merge new "complex" metadata into the metadata of formData', () => {
       const result = normalizeFormdataMetadata({
-        formData: { metadata: { foo: 'bar' }, data: [], contacts: [] },
-        newMetadata: { 'key.complex': 'value' }
+        formData: {
+          metadata: { [FILES_DOCTYPE]: { foo: 'bar' } },
+          data: [],
+          contacts: []
+        },
+        newMetadata: { 'key.complex': 'value' },
+        doctype: FILES_DOCTYPE
       })
 
       expect(result).toEqual({
-        metadata: { foo: 'bar', key: { complex: 'value' } },
+        metadata: {
+          [FILES_DOCTYPE]: { foo: 'bar', key: { complex: 'value' } }
+        },
         data: [],
         contacts: []
       })
