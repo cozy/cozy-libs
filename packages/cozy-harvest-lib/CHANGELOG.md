@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@25.0.0...cozy-harvest-lib@25.1.0) (2024-05-23)
+
+
+### Features
+
+* **harvest:** Adjust color for connection backdrop ([3e30e2f](https://github.com/cozy/cozy-libs/commit/3e30e2fe5b194cd6c06b45f4dcb51d58a40dae84))
+* **harvest:** Color of TriggerError text ([2f3cf90](https://github.com/cozy/cozy-libs/commit/2f3cf90b401c3cae493a96221c53850213c1a77a))
+* **harvest:** Replace deprecated buttons by actual buttons ([e6b42c8](https://github.com/cozy/cozy-libs/commit/e6b42c80c075e766ab06bd1715e0026563ea7aae))
+* **harvest:** Replace usage of palette direct import ([a3d6148](https://github.com/cozy/cozy-libs/commit/a3d6148010fe7ba126a3e0a0a9dcc5a349722f84))
+* Upgrade cozy-ui 106.4.0 to 106.8.0 ([b2b597a](https://github.com/cozy/cozy-libs/commit/b2b597a0241ce380f204afb0fbe17cc78e3edc1e))
+
+
+
+
+
 # [25.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@24.0.0...cozy-harvest-lib@25.0.0) (2024-05-15)
 
 
