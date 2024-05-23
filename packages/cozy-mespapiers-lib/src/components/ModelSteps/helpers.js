@@ -118,6 +118,41 @@ export const makeFileFromBase64 = ({ source, name, type } = {}) => {
 }
 
 /**
+ * Make a ExportedFormData object from a base64 string
+ *
+ * @param {Object} currentStep
+ * @param {string} base64 - base64 string
+ * @returns {import('../../types').ExportedFormData}
+ */
+export const makeExportedFormDataFromBase64 = (currentStep, base64) => {
+  const buffer = Uint8Array.from(atob(base64), c => c.charCodeAt(0)).buffer
+
+  let stepIndex
+  let fileMetadata
+
+  if (currentStep.multipage) {
+    stepIndex = 0
+    fileMetadata = { page: undefined, multipage: true }
+  } else if (currentStep.page === 'front') {
+    stepIndex = 0
+    fileMetadata = { page: 'front', multipage: undefined }
+  } else if (currentStep.page === 'back') {
+    stepIndex = 1
+    fileMetadata = { page: 'back', multipage: undefined }
+  } else {
+    stepIndex = 0
+    fileMetadata = { page: undefined, multipage: undefined }
+  }
+
+  return {
+    file: buffer,
+    name: 'flagshipScanTemp.png',
+    type: 'image/png',
+    stepIndex,
+    fileMetadata
+  }
+}
+/**
  * Make a base64 string from a File object
  * @param {File} file - File object
  * @param {Object} [options]
