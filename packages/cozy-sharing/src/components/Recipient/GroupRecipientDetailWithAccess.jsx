@@ -27,9 +27,13 @@ const GroupRecipientDetailWithAccess = ({ withAccess }) => {
           const isMe = recipient.instance === client.options.uri
 
           return (
-            <ListItem disableGutters key={recipient.index}>
+            <ListItem disableGutters key={recipient.index} size="small">
               <ListItemIcon>
-                <Avatar text={getInitials(recipient)} textId={name} />
+                <Avatar
+                  size="small"
+                  text={getInitials(recipient)}
+                  textId={name}
+                />
               </ListItemIcon>
               <ListItemText
                 primary={name}

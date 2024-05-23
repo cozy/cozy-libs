@@ -51,7 +51,7 @@ const MemberRecipient = props => {
 
   return (
     <Fade in timeout={fadeIn ? FADE_IN_DURATION : 0}>
-      <ListItem gutters={isMobile ? 'default' : 'double'}>
+      <ListItem gutters={isMobile ? 'default' : 'double'} size="small">
         <ListItemIcon>
           <MemberAvatar size="small" recipient={props} />
         </ListItemIcon>
