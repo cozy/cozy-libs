@@ -380,13 +380,20 @@ export const getDefaultSelectedVersion = ({
  * @param {Object} param
  * @param {import('../../types').FormData} param.formData
  * @param {import('cozy-client/types/types').FileMetadata} param.newMetadata
+ * @param {string} param.doctype
  * @returns {import('../../types').FormData}
  */
-export const normalizeFormdataMetadata = ({ formData, newMetadata }) => {
+export const normalizeFormdataMetadata = ({
+  formData,
+  newMetadata,
+  doctype
+}) => {
   const metadataNormalized = {
-    metadata: Object.entries(newMetadata).reduce((acc, [key, value]) => {
-      return merge(acc, set({}, key, value))
-    }, {})
+    metadata: {
+      [doctype]: Object.entries(newMetadata).reduce((acc, [key, value]) => {
+        return merge(acc, set({}, key, value))
+      }, {})
+    }
   }
 
   return merge({}, formData, metadataNormalized)

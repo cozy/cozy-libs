@@ -56,12 +56,15 @@ export const updateMetadata = ({
 }) => {
   return {
     ...metadata,
-    ...addCountryValueByQualification(qualification),
-    qualification: {
-      ...qualification
-    },
-    datetime: metadata.featureDate ?? pdfDoc.getCreationDate(),
-    datetimeLabel: featureDate || 'datetime'
+    [FILES_DOCTYPE]: {
+      ...metadata[FILES_DOCTYPE],
+      ...addCountryValueByQualification(qualification),
+      qualification: {
+        ...qualification
+      },
+      datetime: metadata[FILES_DOCTYPE].featureDate ?? pdfDoc.getCreationDate(),
+      datetimeLabel: featureDate || 'datetime'
+    }
   }
 }
 
@@ -101,8 +104,8 @@ export const createPdfAndSave = async ({
   })
 
   const date =
-    updatedMetadata[featureDate] &&
-    f(updatedMetadata[featureDate], 'YYYY.MM.DD')
+    updatedMetadata[FILES_DOCTYPE][featureDate] &&
+    f(updatedMetadata[FILES_DOCTYPE][featureDate], 'YYYY.MM.DD')
 
   // If all files are to be considered as one.
   const isMultiPage = data.some(({ fileMetadata }) => fileMetadata.multipage)
@@ -128,8 +131,8 @@ export const createPdfAndSave = async ({
     })
 
     // Created metadata for pdf file
-    const metadataWithPage = {
-      ...updatedMetadata,
+    const fileMetadataWithPage = {
+      ...updatedMetadata[FILES_DOCTYPE],
       ...(fileMetadata.page && { page: fileMetadata.page })
     }
 
@@ -141,7 +144,7 @@ export const createPdfAndSave = async ({
         {
           name: paperName,
           contentType: 'application/pdf',
-          metadata: metadataWithPage,
+          metadata: fileMetadataWithPage,
           dirId: appFolderID,
           conflictStrategy: 'rename'
         }

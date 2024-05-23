@@ -6,6 +6,7 @@ import {
   updateMetadata,
   createPdfAndSave
 } from './createPdfAndSave'
+import { FILES_DOCTYPE } from '../doctypes'
 
 jest.mock('cozy-client/dist/models/file', () => ({
   ...jest.requireActual('cozy-client/dist/models/file'),
@@ -26,7 +27,7 @@ const mockParams = file => ({
         fileMetadata: {}
       }
     ],
-    metadata: {},
+    metadata: { [FILES_DOCTYPE]: {} },
     contacts: []
   },
   qualification: {},
@@ -90,18 +91,20 @@ describe('addCountryValueByQualification', () => {
 describe('updateMetadata', () => {
   it('should return metadata with other keys', () => {
     const result = updateMetadata({
-      metadata: { name: 'name' },
+      metadata: { [FILES_DOCTYPE]: { name: 'name' } },
       qualification: { label: 'national_id_card' },
       featureDate: 'referencedDate',
       pdfDoc: mockPDFDocument
     })
 
     expect(result).toEqual({
-      name: 'name',
-      qualification: { label: 'national_id_card' },
-      datetime: 'mockDate',
-      datetimeLabel: 'referencedDate',
-      country: 'FR'
+      [FILES_DOCTYPE]: {
+        name: 'name',
+        qualification: { label: 'national_id_card' },
+        datetime: 'mockDate',
+        datetimeLabel: 'referencedDate',
+        country: 'FR'
+      }
     })
   })
 })

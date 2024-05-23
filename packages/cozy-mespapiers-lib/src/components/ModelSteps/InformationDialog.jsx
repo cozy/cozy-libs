@@ -16,6 +16,7 @@ import SubmitButton from './widgets/SubmitButton'
 import IlluGenericInputDate from '../../assets/icons/IlluGenericInputDate.svg'
 import IlluGenericInputText from '../../assets/icons/IlluGenericInputText.svg'
 import { KEYS } from '../../constants/const'
+import { FILES_DOCTYPE } from '../../doctypes'
 import { makeInputsInformationStep } from '../../helpers/makeInputsInformationStep'
 import { hasNextvalue } from '../../utils/hasNextvalue'
 import CompositeHeader from '../CompositeHeader/CompositeHeader'
@@ -28,6 +29,7 @@ const InformationDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
     illustration,
     illustrationSize = 'medium',
     text,
+    doctype = FILES_DOCTYPE,
     attributes
   } = currentStep
   const { t } = useI18n()
@@ -45,6 +47,7 @@ const InformationDialog = ({ currentStep, onClose, onBack, onSubmit }) => {
 
   const newFormData = normalizeFormdataMetadata({
     formData,
+    doctype,
     newMetadata: value
   })
 
