@@ -72,11 +72,9 @@ const ScanResultDialog = ({
         isSomePaperStepsCompliantWithOCR(allCurrentSteps) &&
         !!currentDefinition.ocrAttributes
 
-      if (isOcrPaperAvailable) {
-        const OcrActivated = await isFlagshipOCRAvailable(webviewIntent)
-        if (OcrActivated) {
-          setOcrProcessing(true)
-        }
+      const OcrActivated = await isFlagshipOCRAvailable(webviewIntent)
+      if (isOcrPaperAvailable && OcrActivated) {
+        setOcrProcessing(true)
       } else {
         nextStep()
       }
