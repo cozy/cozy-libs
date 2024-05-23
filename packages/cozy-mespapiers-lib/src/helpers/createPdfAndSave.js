@@ -1,28 +1,10 @@
 import { PDFDocument } from 'pdf-lib'
 
-import { models } from 'cozy-client'
+import { uploadFileWithConflictStrategy } from 'cozy-client/dist/models/file'
 import { addFileToPdf } from 'cozy-ui/transpiled/react/ActionsMenu/Actions/helpers'
 
 import { CONTACTS_DOCTYPE, FILES_DOCTYPE } from '../doctypes'
 import { buildFilename } from '../helpers/buildFilename'
-
-const {
-  file: { uploadFileWithConflictStrategy }
-} = models
-
-/**
- * @param {{multipage: boolean, page: string}} fileMetadata
- * @param {boolean} isMultipage
- * @returns {object}
- */
-const sanitizeFileMetadata = (fileMetadata, isMultipage) => {
-  if (isMultipage || !fileMetadata.page) return {}
-
-  // eslint-disable-next-line no-unused-vars
-  const { multipage, ...newFileMetadata } = fileMetadata
-
-  return newFileMetadata
-}
 
 /**
  * @param {import('cozy-client/types/types').IOCozyFile} fileCreated
@@ -57,6 +39,32 @@ export const addCountryValueByQualification = qualification => {
     return acc
   }, {})
 }
+
+/**
+ * @param {object} param0
+ * @param {object} param0.metadata
+ * @param {import('cozy-client/types/types').QualificationAttributes} param0.qualification
+ * @param {string} param0.featureDate
+ * @param {PDFDocument} param0.pdfDoc
+ * @returns {object}
+ */
+export const updateMetadata = ({
+  metadata,
+  qualification,
+  featureDate,
+  pdfDoc
+}) => {
+  return {
+    ...metadata,
+    ...addCountryValueByQualification(qualification),
+    qualification: {
+      ...qualification
+    },
+    datetime: metadata.featureDate ?? pdfDoc.getCreationDate(),
+    datetimeLabel: featureDate || 'datetime'
+  }
+}
+
 /**
  * Convert image & pdf file to pdf & save it
  *
@@ -81,20 +89,23 @@ export const createPdfAndSave = async ({
   const fileCollection = client.collection(FILES_DOCTYPE)
   const { featureDate, label, filenameModel } = currentDefinition
 
+  // Created first document of PDFDocument
+  let pdfDoc = await PDFDocument.create()
+
   // If present, we wish to keep the value in the metadata as a priority (e.g. foreign driver's license).
-  const updatedMetadata = {
-    ...addCountryValueByQualification(qualification),
-    ...metadata
-  }
+  const updatedMetadata = updateMetadata({
+    metadata,
+    qualification,
+    featureDate,
+    pdfDoc
+  })
+
   const date =
     updatedMetadata[featureDate] &&
     f(updatedMetadata[featureDate], 'YYYY.MM.DD')
 
   // If all files are to be considered as one.
   const isMultiPage = data.some(({ fileMetadata }) => fileMetadata.multipage)
-
-  // Created first document of PDFDocument
-  let pdfDoc = await PDFDocument.create()
 
   let createdFilesList = []
   for (let idx = 0; idx < data.length; idx++) {
@@ -117,16 +128,9 @@ export const createPdfAndSave = async ({
     })
 
     // Created metadata for pdf file
-    const newMetadata = {
-      qualification: {
-        ...qualification
-      },
-      ...sanitizeFileMetadata(fileMetadata, isMultiPage),
+    const metadataWithPage = {
       ...updatedMetadata,
-      datetime: updatedMetadata[featureDate]
-        ? updatedMetadata[featureDate]
-        : pdfDoc.getCreationDate(),
-      datetimeLabel: featureDate || 'datetime'
+      ...(fileMetadata.page && { page: fileMetadata.page })
     }
 
     // If isn't multipage or the last of multipage, save file
@@ -137,7 +141,7 @@ export const createPdfAndSave = async ({
         {
           name: paperName,
           contentType: 'application/pdf',
-          metadata: newMetadata,
+          metadata: metadataWithPage,
           dirId: appFolderID,
           conflictStrategy: 'rename'
         }
