@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 
 import { useClient, models } from 'cozy-client'
 import { useWebviewIntent } from 'cozy-intent'
@@ -10,6 +10,13 @@ import ScanDialog from './ScanDialog'
 import { PaperDefinitionsStepPropTypes } from '../../../constants/PaperDefinitionsPropTypes'
 import { FLAGSHIP_SCAN_TEMP_FILENAME } from '../../../constants/const'
 import { makeFileFromBlob } from '../../../helpers/makeFileFromBlob'
+import {
+  storeIndexedStorageData,
+  removeIndexedStorageData,
+  FORM_BACKUP_QUALIFICATION_LABEL_KEY,
+  FORM_BACKUP_CURRENT_STEP_INDEX_KEY,
+  FORM_BACKUP_FORM_DATA_KEY
+} from '../../../utils/indexedStorage'
 import { useFormData } from '../../Hooks/useFormData'
 import { useStepperDialog } from '../../Hooks/useStepperDialog'
 import ScanResultDialog from '../ScanResult/ScanResultDialog'
@@ -26,8 +33,9 @@ const { fetchBlobFileById } = models.file
 const ScanWrapper = ({ currentStep, onClose, onBack }) => {
   const client = useClient()
   const [searchParams] = useSearchParams()
+  const { qualificationLabel } = useParams()
   const { currentStepIndex } = useStepperDialog()
-  const { formData, setFormData } = useFormData()
+  const { formData, setFormData, exportFormData } = useFormData()
   const { multipage, page } = currentStep
   const [currentFile, setCurrentFile] = useState(null)
   const [isFilePickerModalOpen, setIsFilePickerModalOpen] = useState(false)
@@ -88,7 +96,27 @@ const ScanWrapper = ({ currentStep, onClose, onBack }) => {
 
   const onOpenFlagshipScan = async () => {
     try {
+      // We backup the current form state in case the operating system kills
+      // the webview during the 'scanDocument' webview intent
+      const exportedFormData = await exportFormData()
+      await storeIndexedStorageData(
+        FORM_BACKUP_QUALIFICATION_LABEL_KEY,
+        qualificationLabel
+      )
+      await storeIndexedStorageData(
+        FORM_BACKUP_CURRENT_STEP_INDEX_KEY,
+        currentStepIndex
+      )
+      await storeIndexedStorageData(FORM_BACKUP_FORM_DATA_KEY, exportedFormData)
+
       const base64 = await webviewIntent.call('scanDocument')
+
+      // If there was no issues during the 'scanDocument' webview intent,
+      // we do not need to keep the current form state so we clean everything immediately
+      await removeIndexedStorageData(FORM_BACKUP_QUALIFICATION_LABEL_KEY)
+      await removeIndexedStorageData(FORM_BACKUP_CURRENT_STEP_INDEX_KEY)
+      await removeIndexedStorageData(FORM_BACKUP_FORM_DATA_KEY)
+
       // TODO : Launch ocr after scanning the document
       const file = makeFileFromBase64({
         source: base64,
