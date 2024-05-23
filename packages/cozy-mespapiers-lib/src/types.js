@@ -13,6 +13,22 @@
  */
 
 /**
+ * @typedef {Object} ExportedFormDataData
+ * @property {ArrayBuffer} file
+ * @property {{ page: 'front'|'back', multipage: boolean }} fileMetadata
+ * @property {number} stepIndex
+ * @property {string} name
+ * @property {string} type
+ */
+
+/**
+ * @typedef {Object} ExportedFormData
+ * @property {import('cozy-client/types/types').FileMetadata} metadata
+ * @property {ExportedFormDataData[]} data
+ * @property {import('cozy-client/types/types').IOCozyContact[]} contacts
+ */
+
+/**
  * @typedef {import('react').Dispatch<import('react').SetStateAction<FormData>>} FormDataSetter
  */
 
