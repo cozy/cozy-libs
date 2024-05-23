@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [100.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@99.0.1...cozy-mespapiers-lib@100.0.0) (2024-05-23)
+
+
+### Features
+
+* **mespapiers:** Add tax certificate paper ([bff2dcb](https://github.com/cozy/cozy-libs/commit/bff2dcb25864eb8c6c1d7f5b6599772d9a4b0e7d))
+* **mespapiers:** Upgrade cozy-client to `47.5.0` ([459e8f0](https://github.com/cozy/cozy-libs/commit/459e8f0acea54e02576f31479c118748682075bd))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-client >= 47.5.0`
+
+
+
+
+
 ## [99.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@99.0.0...cozy-mespapiers-lib@99.0.1) (2024-05-23)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
