@@ -7,6 +7,7 @@ import {
   hasQueryBeenLoaded,
   useQuery
 } from 'cozy-client'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 import BaseContactPicker from 'cozy-ui/transpiled/react/ContactPicker'
 import {
   DialogCloseButton,
@@ -26,7 +27,6 @@ import CollectionField from 'cozy-ui/transpiled/react/Labs/CollectionField'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
-import Button from 'cozy-ui/transpiled/react/deprecated/Button'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { withStyles } from 'cozy-ui/transpiled/react/styles'
@@ -77,8 +77,12 @@ const DeleteConfirm = ({
       content={<div dangerouslySetInnerHTML={{ __html: description }} />}
       actions={
         <>
-          <Button theme="secondary" label={secondaryText} onClick={onCancel} />
-          <Button theme="danger" label={primaryText} onClick={onConfirm} />
+          <Button
+            variant="secondary"
+            label={secondaryText}
+            onClick={onCancel}
+          />
+          <Button color="error" label={primaryText} onClick={onConfirm} />
         </>
       }
     />

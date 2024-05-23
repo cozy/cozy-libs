@@ -3,8 +3,8 @@ import React from 'react'
 
 import { withClient } from 'cozy-client'
 import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 import OpenwithIcon from 'cozy-ui/transpiled/react/Icons/Openwith'
-import { ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
 
 import withLocales from '../../hoc/withLocales'
 import useAppLinkWithStoreFallback from '../../hooks/useAppLinkWithStoreFallback'
@@ -17,27 +17,29 @@ const BanksLinkRedirectStore = ({ client, t }) => {
     return (
       <AppLinker app={{ slug }} href={url}>
         {({ href, name, onClick }) => (
-          <ButtonLink
+          <Button
+            component="a"
             icon={OpenwithIcon}
             href={href}
             label={t('account.success.banksLinkText', {
               appName: name
             })}
             onClick={onClick}
-            subtle
+            variant="text"
           />
         )}
       </AppLinker>
     )
   } else {
     return (
-      <ButtonLink
+      <Button
+        component="a"
         icon={OpenwithIcon}
         label={t('account.success.banksLinkText', {
           appName: name
         })}
         busy
-        subtle
+        variant="text"
       />
     )
   }

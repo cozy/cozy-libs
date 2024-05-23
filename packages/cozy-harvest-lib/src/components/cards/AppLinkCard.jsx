@@ -4,12 +4,12 @@ import React from 'react'
 import { useClient } from 'cozy-client'
 import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
 import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 import Card from 'cozy-ui/transpiled/react/Card'
 import Circle from 'cozy-ui/transpiled/react/Circle'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
 import palette from 'cozy-ui/transpiled/react/palette'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
@@ -32,12 +32,13 @@ export const AppLinkButton = ({ slug, path }) => {
   return (
     <AppLinker app={{ slug }} nativePath={path} href={url || '#'}>
       {({ onClick, href }) => (
-        <ButtonLink
+        <Button
           disabled={fetchStatus !== 'loaded'}
           onClick={fetchStatus === 'loaded' ? onClick : null}
           href={href}
+          component="a"
           {...(intentId ? { target: '_blank' } : {})}
-          icon={
+          startIcon={
             isInstalled ? (
               <AppIcon
                 app={slug}
@@ -46,10 +47,10 @@ export const AppLinkButton = ({ slug, path }) => {
                 className="u-w-1 u-h-1 u-mr-half"
               />
             ) : (
-              'openwith'
+              <Icon icon="openwith" />
             )
           }
-          theme="secondary"
+          variant="secondary"
           label={t(
             `card.appLink.${slug}.${isInstalled ? 'button' : 'install'}`
           )}

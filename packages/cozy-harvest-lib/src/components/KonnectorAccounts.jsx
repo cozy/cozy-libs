@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { withClient } from 'cozy-client'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import Button from 'cozy-ui/transpiled/react/deprecated/Button'
 import Infos from 'cozy-ui/transpiled/react/deprecated/Infos'
 import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
@@ -127,7 +127,7 @@ export class KonnectorAccounts extends React.Component {
             <Infos
               actionButton={
                 <Button
-                  theme="danger"
+                  color="error"
                   onClick={this.fetchAccounts.bind(this)}
                   label={t('modal.accounts.error.retry')}
                 />

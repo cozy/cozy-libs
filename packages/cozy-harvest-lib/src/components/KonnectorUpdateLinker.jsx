@@ -4,8 +4,8 @@ import React, { memo } from 'react'
 import { useQuery } from 'cozy-client'
 import { Application } from 'cozy-doctypes'
 import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 import EyeIcon from 'cozy-ui/transpiled/react/Icons/Eye'
-import { ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
 
 import { appsConn } from '../connections/apps'
 
@@ -16,14 +16,16 @@ const KonnectorUpdateButton = ({
   onClick,
   label
 }) => (
-  <ButtonLink
+  <Button
     disabled={disabled}
     className="u-m-0"
+    component="a"
     href={href}
     onClick={onClick}
     icon={EyeIcon}
     label={label}
-    theme={isBlocking ? 'danger' : 'secondary'}
+    color={isBlocking ? 'error' : undefined}
+    variant={isBlocking ? undefined : 'secondary'}
   />
 )
 

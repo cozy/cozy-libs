@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Button from 'cozy-ui/transpiled/react/deprecated/Button'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 /**
@@ -13,7 +13,7 @@ import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 const CreateAccount = translate()(({ createAction, t }) => {
   return (
     <Button
-      subtle
+      variant="text"
       size="small"
       className="u-m-half"
       onClick={createAction}

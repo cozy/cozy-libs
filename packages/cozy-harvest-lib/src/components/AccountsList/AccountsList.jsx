@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import Button from 'cozy-ui/transpiled/react/Buttons'
 import Card from 'cozy-ui/transpiled/react/Card'
 import { DialogContent } from 'cozy-ui/transpiled/react/Dialog'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
-import Button from 'cozy-ui/transpiled/react/deprecated/Button'
 import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import AccountsListItem from './AccountsListItem'
@@ -31,8 +31,8 @@ export class AccountsList extends React.PureComponent {
             <Card className="u-p-0">
               <Button
                 label={t('modal.addAccount.button')}
-                theme="text"
-                extension="full"
+                variant="text"
+                fullWidth
                 icon={<Icon icon={PlusIcon} />}
                 className="u-bdrs-4"
                 onClick={addAccount}
