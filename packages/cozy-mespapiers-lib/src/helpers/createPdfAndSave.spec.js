@@ -3,22 +3,20 @@ import * as addFileToPdf from 'cozy-ui/transpiled/react/ActionsMenu/Actions/help
 import * as buildFilename from './buildFilename'
 import {
   addCountryValueByQualification,
+  updateMetadata,
   createPdfAndSave
 } from './createPdfAndSave'
 
-jest.mock('cozy-client', () => ({
-  ...jest.requireActual('cozy-client'),
-  models: {
-    contact: {
-      getFullname: jest.fn()
-    },
-    file: {
-      uploadFileWithConflictStrategy: jest.fn(() => ({
-        data: { _id: '1234' }
-      }))
-    }
-  }
+jest.mock('cozy-client/dist/models/file', () => ({
+  ...jest.requireActual('cozy-client/dist/models/file'),
+  uploadFileWithConflictStrategy: jest.fn(() => ({
+    data: { _id: '1234' }
+  }))
 }))
+
+const mockPDFDocument = {
+  getCreationDate: () => 'mockDate'
+}
 
 const mockParams = file => ({
   formData: {
@@ -86,5 +84,24 @@ describe('addCountryValueByQualification', () => {
     const qualification = { label: 'other_revenue' }
     const result = addCountryValueByQualification(qualification)
     expect(result).toEqual({})
+  })
+})
+
+describe('updateMetadata', () => {
+  it('should return metadata with other keys', () => {
+    const result = updateMetadata({
+      metadata: { name: 'name' },
+      qualification: { label: 'national_id_card' },
+      featureDate: 'referencedDate',
+      pdfDoc: mockPDFDocument
+    })
+
+    expect(result).toEqual({
+      name: 'name',
+      qualification: { label: 'national_id_card' },
+      datetime: 'mockDate',
+      datetimeLabel: 'referencedDate',
+      country: 'FR'
+    })
   })
 })

@@ -198,39 +198,46 @@ describe('ModalSteps helpers', () => {
 
   describe('normalizeFormdataMetadata', () => {
     it('should return the original formData when new metadata is empty', () => {
-      const formData = { metadata: {}, data: [], contacts: [] }
-      const newMetadata = {}
-      const expected = { metadata: {}, data: [], contacts: [] }
+      const result = normalizeFormdataMetadata({
+        formData: { metadata: {}, data: [], contacts: [] },
+        newMetadata: {}
+      })
 
-      const result = normalizeFormdataMetadata({ formData, newMetadata })
-
-      expect(result).toEqual(expected)
+      expect(result).toEqual({
+        metadata: {},
+        data: [],
+        contacts: []
+      })
     })
 
     it('should merge new metadata into formData metadata', () => {
-      const formData = { metadata: { foo: 'bar' }, data: [], contacts: [] }
-      const newMetadata = { key: 'value' }
-      const expected = {
-        ...formData,
-        metadata: { ...formData.metadata, ...newMetadata }
-      }
+      const result = normalizeFormdataMetadata({
+        formData: {
+          metadata: { foo: 'bar' },
+          data: [],
+          contacts: []
+        },
+        newMetadata: { key: 'value' }
+      })
 
-      const result = normalizeFormdataMetadata({ formData, newMetadata })
-
-      expect(result).toEqual(expected)
+      expect(result).toEqual({
+        metadata: { foo: 'bar', key: 'value' },
+        data: [],
+        contacts: []
+      })
     })
 
     it('should merge new "complex" metadata into the metadata of formData', () => {
-      const formData = { metadata: { foo: 'bar' }, data: [], contacts: [] }
-      const newMetadata = { 'key.complex': 'value' }
-      const expected = {
-        ...formData,
-        metadata: { ...formData.metadata, key: { complex: 'value' } }
-      }
+      const result = normalizeFormdataMetadata({
+        formData: { metadata: { foo: 'bar' }, data: [], contacts: [] },
+        newMetadata: { 'key.complex': 'value' }
+      })
 
-      const result = normalizeFormdataMetadata({ formData, newMetadata })
-
-      expect(result).toEqual(expected)
+      expect(result).toEqual({
+        metadata: { foo: 'bar', key: { complex: 'value' } },
+        data: [],
+        contacts: []
+      })
     })
   })
 })
