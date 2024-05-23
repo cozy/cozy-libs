@@ -1,14 +1,12 @@
-import React, { useMemo, useEffect, useCallback } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { useSearchParams, useNavigate, useParams } from 'react-router-dom'
 
 import { useWebviewIntent } from 'cozy-intent'
 import minilog from 'cozy-minilog'
 
-import { findPlaceholderByLabelAndCountry } from '../../helpers/findPlaceholders'
 import { FormDataProvider } from '../Contexts/FormDataProvider'
 import { StepperDialogProvider } from '../Contexts/StepperDialogProvider'
 import { useFormData } from '../Hooks/useFormData'
-import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
 import {
   makeFileFromBase64,
@@ -22,30 +20,11 @@ const CreatePaperModal = () => {
   const navigate = useNavigate()
   const { qualificationLabel } = useParams()
   const [searchParams] = useSearchParams()
-  const { papersDefinitions } = usePapersDefinitions()
-  const {
-    setCurrentDefinition,
-    currentDefinition,
-    setCurrentStepIndex,
-    allCurrentSteps
-  } = useStepperDialog()
+  const { currentDefinition, allCurrentSteps } = useStepperDialog()
   const webviewIntent = useWebviewIntent()
   const { setFormData } = useFormData()
 
   const fromFlagshipUpload = searchParams.get('fromFlagshipUpload')
-  const country = searchParams.get('country')
-
-  const allPlaceholders = useMemo(
-    () =>
-      findPlaceholderByLabelAndCountry(
-        papersDefinitions,
-        qualificationLabel,
-        country
-      ),
-    [qualificationLabel, papersDefinitions, country]
-  )
-
-  const formModel = allPlaceholders[0]
 
   const onClose = useCallback(async () => {
     fromFlagshipUpload
@@ -56,12 +35,6 @@ const CreatePaperModal = () => {
   const onSubmit = () => {
     navigate(`/paper/files/${qualificationLabel}`)
   }
-
-  useEffect(() => {
-    if (formModel && currentDefinition !== formModel) {
-      setCurrentDefinition(formModel)
-    }
-  }, [formModel, currentDefinition, setCurrentDefinition])
 
   useEffect(() => {
     const getFileAndSetFormData = async () => {
@@ -95,14 +68,7 @@ const CreatePaperModal = () => {
     }
 
     if (fromFlagshipUpload && webviewIntent) getFileAndSetFormData()
-  }, [
-    fromFlagshipUpload,
-    allCurrentSteps,
-    setCurrentStepIndex,
-    setFormData,
-    webviewIntent,
-    onClose
-  ])
+  }, [fromFlagshipUpload, allCurrentSteps, setFormData, webviewIntent, onClose])
 
   if (!currentDefinition) {
     return null

@@ -1,9 +1,11 @@
-import React, { createContext, useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import React, { createContext, useEffect, useState, useMemo } from 'react'
+import { useSearchParams, useParams } from 'react-router-dom'
 
 import { useWebviewIntent } from 'cozy-intent'
 
 import { filterSteps } from '../../helpers/filterSteps'
+import { findPlaceholderByLabelAndCountry } from '../../helpers/findPlaceholders'
+import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 
 const StepperDialogContext = createContext()
 
@@ -12,9 +14,13 @@ const StepperDialogProvider = ({ children }) => {
   const [allCurrentSteps, setAllCurrentSteps] = useState([])
   const [currentStepIndex, setCurrentStepIndex] = useState(0)
   const [currentDefinition, setCurrentDefinition] = useState(null)
+  const { papersDefinitions } = usePapersDefinitions()
   const webviewIntent = useWebviewIntent()
   const [searchParams] = useSearchParams()
+  const { qualificationLabel } = useParams()
+
   const fromFlagshipUpload = searchParams.get('fromFlagshipUpload')
+  const country = searchParams.get('country')
 
   const resetStepperDialog = () => {
     setCurrentDefinition(null)
@@ -22,6 +28,24 @@ const StepperDialogProvider = ({ children }) => {
     setAllCurrentSteps([])
     setCurrentStepIndex(0)
   }
+
+  const allPlaceholders = useMemo(
+    () =>
+      findPlaceholderByLabelAndCountry(
+        papersDefinitions,
+        qualificationLabel,
+        country
+      ),
+    [qualificationLabel, papersDefinitions, country]
+  )
+
+  const formModel = allPlaceholders[0]
+
+  useEffect(() => {
+    if (formModel && currentDefinition !== formModel) {
+      setCurrentDefinition(formModel)
+    }
+  }, [formModel, currentDefinition, setCurrentDefinition])
 
   useEffect(() => {
     if (currentDefinition) {
