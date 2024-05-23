@@ -126,7 +126,8 @@ const KonnectorAccountTabs = props => {
   const errorActionButton = konnectorPolicy.isBIWebView ? (
     <Button
       className="u-ml-0"
-      variant="secondary"
+      variant="primary"
+      color="error"
       label={t('error.reconnect-via-form')}
       onClick={handleClick}
       disabled={!extraParams}

@@ -6,10 +6,10 @@ import React, { Component } from 'react'
 import { models, withClient } from 'cozy-client'
 import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
 import flag from 'cozy-flags'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import Button from 'cozy-ui/transpiled/react/deprecated/Button'
 import Infos from 'cozy-ui/transpiled/react/deprecated/Infos'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
@@ -163,7 +163,7 @@ export class AccountModal extends Component {
               <Infos
                 actionButton={
                   <Button
-                    theme="danger"
+                    color="error"
                     onClick={onDismiss}
                     label={t('modal.konnector.error.button')}
                   />

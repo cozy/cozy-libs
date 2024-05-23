@@ -2,12 +2,12 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import flag from 'cozy-flags'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 import Card from 'cozy-ui/transpiled/react/Card'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Info from 'cozy-ui/transpiled/react/Icons/Info'
 import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import Button from 'cozy-ui/transpiled/react/deprecated/Button'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/deprecated/Media'
 import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
@@ -93,11 +93,13 @@ export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
           <div>
             <Button
               label={t('card.launchTrigger.button.label')}
-              icon={<Icon focusable="false" icon={SyncIcon} spin={running} />}
+              startIcon={
+                <Icon focusable="false" icon={SyncIcon} spin={running} />
+              }
               className="u-mh-0 u-mv-0"
               disabled={running || disabled}
               onClick={() => launch({ autoSuccessTimer: false })}
-              subtle
+              variant="text"
               style={{ lineHeight: '1.4' }}
             />
           </div>

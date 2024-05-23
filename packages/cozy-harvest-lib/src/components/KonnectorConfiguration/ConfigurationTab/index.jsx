@@ -6,6 +6,7 @@ import React, { useContext, useState } from 'react'
 import { useClient } from 'cozy-client'
 import { Account } from 'cozy-doctypes'
 import { useVaultClient, useVaultUnlockContext } from 'cozy-keys-lib'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import KeyIcon from 'cozy-ui/transpiled/react/Icons/Key'
@@ -21,7 +22,6 @@ import NavigationList, {
 } from 'cozy-ui/transpiled/react/NavigationList'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
-import Button from 'cozy-ui/transpiled/react/deprecated/Button'
 import palette from 'cozy-ui/transpiled/react/palette'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
@@ -52,12 +52,12 @@ const ConfirmationDialog = ({ onConfirm, onCancel }) => {
       actions={
         <>
           <Button
-            theme="secondary"
+            variant="secondary"
             label={t('modal.deleteAccount.cancel')}
             onClick={onCancel}
           />
           <Button
-            theme="danger"
+            color="error"
             label={t('modal.deleteAccount.confirm')}
             onClick={onConfirm}
           />
@@ -225,7 +225,7 @@ const ConfigurationTab = ({
             onClick={addAccount}
             className="u-ml-0"
             label={t('modal.addAccount.button')}
-            theme="ghost"
+            variant="ghost"
           />
         </div>
       ) : null}
