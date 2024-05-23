@@ -28,9 +28,18 @@ const GroupRecipientDetailWithoutAccess = ({ withoutAccess, isOwner }) => {
           const name = getDisplayName(recipient, defaultDisplayName)
 
           return (
-            <ListItem disableGutters key={recipient.index} ellipsis={false}>
+            <ListItem
+              disableGutters
+              key={recipient.index}
+              ellipsis={false}
+              size="small"
+            >
               <ListItemIcon>
-                <Avatar text={getInitials(recipient)} textId={name} />
+                <Avatar
+                  size="small"
+                  text={getInitials(recipient)}
+                  textId={name}
+                />
               </ListItemIcon>
               <ListItemText
                 primary={name}

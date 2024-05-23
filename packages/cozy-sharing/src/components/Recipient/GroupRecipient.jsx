@@ -49,6 +49,7 @@ const GroupRecipient = props => {
           button
           onClick={toogleDetailOpened}
           gutters={isMobile ? 'default' : 'double'}
+          size="small"
         >
           <ListItemIcon>
             <GroupAvatar size="small" />

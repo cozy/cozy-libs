@@ -34,7 +34,7 @@ const LinkRecipient = props => {
 
   return (
     <Fade in timeout={fadeIn ? FADE_IN_DURATION : 0}>
-      <ListItem gutters={isMobile ? 'default' : 'double'}>
+      <ListItem gutters={isMobile ? 'default' : 'double'} size="small">
         <ListItemIcon>
           <Circle size="small" className={styles['link-recipient-icon-circle']}>
             <Icon icon={LinkIcon} />
