@@ -1,5 +1,10 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 const FormDataContext = createContext()
+
+import {
+  getAndRemoveIndexedStorageData,
+  FORM_BACKUP_FORM_DATA_KEY
+} from '../../utils/indexedStorage'
 
 const FormDataProvider = ({ children }) => {
   /**
@@ -56,6 +61,20 @@ const FormDataProvider = ({ children }) => {
 
     setFormData(importedFormData)
   }
+
+  useEffect(() => {
+    const loadFormBackup = async () => {
+      const backupFormData = await getAndRemoveIndexedStorageData(
+        FORM_BACKUP_FORM_DATA_KEY
+      )
+
+      if (backupFormData) {
+        importFormData(backupFormData)
+      }
+    }
+
+    loadFormBackup()
+  }, [])
 
   return (
     <FormDataContext.Provider
