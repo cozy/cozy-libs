@@ -54,11 +54,7 @@ const CreatePaperModal = () => {
   }, [fromFlagshipUpload, navigate, webviewIntent])
 
   const onSubmit = () => {
-    navigate(
-      `/paper/files/${qualificationLabel}${
-        fromFlagshipUpload ? '?skipOnboarding=true' : ''
-      }`
-    )
+    navigate(`/paper/files/${qualificationLabel}`)
   }
 
   useEffect(() => {

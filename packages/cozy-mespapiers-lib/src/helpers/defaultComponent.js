@@ -1,11 +1,9 @@
 import ForwardFab from '../components/ForwardFab/ForwardFab'
-import Onboarding from '../components/Onboarding/Onboarding'
 import PapersFab from '../components/PapersFab/PapersFab'
 
 const defaultComponents = {
   ForwardFab,
-  PapersFab,
-  Onboarding
+  PapersFab
 }
 
 const getComponentByName = (components, name) => {
@@ -17,7 +15,6 @@ const getComponentByName = (components, name) => {
 export const getComponents = components => {
   return {
     ForwardFab: getComponentByName(components, 'ForwardFab'),
-    PapersFab: getComponentByName(components, 'PapersFab'),
-    Onboarding: getComponentByName(components, 'Onboarding')
+    PapersFab: getComponentByName(components, 'PapersFab')
   }
 }
