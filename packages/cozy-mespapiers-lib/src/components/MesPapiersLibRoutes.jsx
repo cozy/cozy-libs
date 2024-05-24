@@ -14,7 +14,6 @@ import InstallKonnectorFromIntent from './InstallKonnectorFromIntent/InstallKonn
 import MesPapiersLibProviders from './MesPapiersLibProviders'
 import ForwardModalByRoute from './Multiselect/ForwardModalByRoute'
 import ShareBottomSheetByRoute from './Multiselect/ShareBottomSheetByRoute'
-import OnboardedGuardedRoute from './OnboardedGuardedRoute'
 import ContactEdit from './Views/ContactEdit'
 import CreatePaperModal from './Views/CreatePaperModal'
 import ErrorBoundary from './Views/ErrorBoundary'
@@ -23,7 +22,6 @@ import HarvestRoutes from './Views/HarvestRoutes'
 import Home from './Views/Home'
 import InformationEdit from './Views/InformationEdit'
 import MultiselectView from './Views/MultiselectView'
-import Onboarding from './Views/Onboarding'
 import PageEdit from './Views/PageEdit'
 import PapersList from './Views/PapersList'
 import PlaceholdersSelector from './Views/PlaceholdersSelector'
@@ -59,10 +57,7 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
       <Route
         element={<MesPapiersLibProviders lang={lang} components={components} />}
       >
-        <Route
-          element={<OnboardedGuardedRoute />}
-          errorElement={<ErrorBoundary />}
-        >
+        <Route errorElement={<ErrorBoundary />}>
           <Route path="/" element={<OutletWrapper Component={Home} />}>
             <Route path="editcontact/:fileId" element={<ContactEdit />} />
             <Route path="installAppIntent" element={<InstallAppFromIntent />} />
@@ -117,7 +112,6 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
               element={<HarvestRoutes />}
             />
           </Route>
-          <Route path="onboarding" element={<Onboarding />} />
         </Route>
       </Route>
     </Routes>

@@ -158,9 +158,6 @@
     "search": "Search",
     "seeMore": "See more"
   },
-  "Onboarding": {
-    "cta": "Let's go!"
-  },
   "PapersDefinitionsProvider": {
     "customPapersDefinitions": {
       "error": "%{name} not found in %{path}",

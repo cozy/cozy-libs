@@ -158,9 +158,6 @@
     "search": "Rechercher",
     "seeMore": "Voir plus"
   },
-  "Onboarding": {
-    "cta": "C'est parti !"
-  },
   "PapersDefinitionsProvider": {
     "customPapersDefinitions": {
       "error": "%{name} introuvable dans %{path}",
