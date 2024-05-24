@@ -16,12 +16,14 @@ const StepperDialogContext = createContext()
 const StepperDialogProvider = ({ children }) => {
   const [stepperDialogTitle, setStepperDialogTitle] = useState('')
   const [allCurrentSteps, setAllCurrentSteps] = useState([])
-  const [currentStepIndex, setCurrentStepIndex] = useState(0)
+  const [currentStepIndex, setCurrentStepIndex] = useState(-1)
   const [currentDefinition, setCurrentDefinition] = useState(null)
   const { papersDefinitions } = usePapersDefinitions()
   const webviewIntent = useWebviewIntent()
   const [searchParams] = useSearchParams()
   const { qualificationLabel } = useParams()
+
+  const isReady = allCurrentSteps.length > 0 && currentStepIndex !== -1
 
   const fromFlagshipUpload = searchParams.get('fromFlagshipUpload')
   const country = searchParams.get('country')
@@ -77,6 +79,8 @@ const StepperDialogProvider = ({ children }) => {
 
       if (backupCurrentStepIndex) {
         setCurrentStepIndex(backupCurrentStepIndex)
+      } else {
+        setCurrentStepIndex(0)
       }
     }
 
@@ -118,6 +122,10 @@ const StepperDialogProvider = ({ children }) => {
     previousStep,
     nextStep,
     resetStepperDialog
+  }
+
+  if (!isReady) {
+    return null
   }
 
   return (
