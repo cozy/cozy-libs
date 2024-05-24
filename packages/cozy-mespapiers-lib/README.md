@@ -123,7 +123,7 @@ import 'cozy-mespapiers-lib/dist/stylesheet.css'
 
 # Components Overload
 
-You can also overload some components (currently only the `PapersFab` & `Onboarding` components) or not use them (with `null` value).
+You can also overload some components (currently only the `PapersFab` & `ForwardFab` components) or not use them (with `null` value).
 
 Here some examples:
 
@@ -168,7 +168,7 @@ const CustomFab = ({ className, innerRef, onClick, a11y }) => {
 <MesPapiers
   {...props}
   lang={lang}
-  components={{ PapersFab: CustomFab, Onboarding: null }}
+  components={{ PapersFab: CustomFab ForwardFab: null }}
 />
 ```
 
