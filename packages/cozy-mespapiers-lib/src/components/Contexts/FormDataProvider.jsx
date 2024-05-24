@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react'
 const FormDataContext = createContext()
 
-import { useWebviewIntent } from 'cozy-intent'
+import { useWebviewIntent, useIsAvailable } from 'cozy-intent'
 
 import {
   getAndRemoveIndexedStorageData,
@@ -12,6 +12,8 @@ import { makeExportedFormDataFromBase64 } from '../ModelSteps/helpers'
 
 const FormDataProvider = ({ children }) => {
   const webviewIntent = useWebviewIntent()
+  const { isAvailable: isSharedMemoryAvailable } =
+    useIsAvailable('sharedMemory')
   const { allCurrentSteps, currentStepIndex } = useStepperDialog()
 
   const currentStep = allCurrentSteps[currentStepIndex]
@@ -78,19 +80,33 @@ const FormDataProvider = ({ children }) => {
       )
 
       if (backupFormData && webviewIntent) {
-        const lastScanResult = await webviewIntent.call(
-          'getSharedMemory',
-          'mespapiers',
-          'scanDocument'
-        )
-
-        if (lastScanResult) {
-          const lastScanFileData = makeExportedFormDataFromBase64(
-            currentStep,
-            lastScanResult
+        /*
+          If SharedMemory is available and if we have a last scan, we
+          add the last scan to the form data. Otherwise, it is not a problem,
+          we will just restore the form data to the previous state without
+          the new scan.
+        */
+        if (isSharedMemoryAvailable) {
+          const lastScanResult = await webviewIntent.call(
+            'getSharedMemory',
+            'mespapiers',
+            'scanDocument'
           )
 
-          backupFormData.data.push(lastScanFileData)
+          if (lastScanResult) {
+            await webviewIntent.call(
+              'removeSharedMemory',
+              'mespapiers',
+              'scanDocument'
+            )
+
+            const lastScanFileData = makeExportedFormDataFromBase64(
+              currentStep,
+              lastScanResult
+            )
+
+            backupFormData.data.push(lastScanFileData)
+          }
         }
 
         importFormData(backupFormData)
@@ -98,7 +114,7 @@ const FormDataProvider = ({ children }) => {
     }
 
     loadFormBackup()
-  }, [webviewIntent, currentStep])
+  }, [webviewIntent, isSharedMemoryAvailable, currentStep])
 
   return (
     <FormDataContext.Provider
