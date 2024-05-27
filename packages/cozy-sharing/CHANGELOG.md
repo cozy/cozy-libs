@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.3.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@13.3.0...cozy-sharing@13.3.1) (2024-05-27)
+
+
+### Bug Fixes
+
+* **sharing:** Improve size inside recipient list ([747605a](https://github.com/cozy/cozy-libs/commit/747605a944e740bdea32b07d0199df17abc75fb0))
+
+
+
+
+
 # [13.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@13.2.0...cozy-sharing@13.3.0) (2024-05-02)
 
 
