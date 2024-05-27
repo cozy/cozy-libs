@@ -13,6 +13,8 @@ const PaperGroup = ({ papersByCategories, konnectors, selectedThemes }) => {
   const { isMultiSelectionActive, setSelectedQualificationLabel } =
     useMultiSelection()
 
+  const hasPapers = Object.keys(papersByCategories).length > 0
+
   const goPapersList = qualificationLabel => {
     if (isMultiSelectionActive) {
       setSelectedQualificationLabel(qualificationLabel)
@@ -28,6 +30,7 @@ const PaperGroup = ({ papersByCategories, konnectors, selectedThemes }) => {
         onClick={goPapersList}
       />
       <KonnectorsCategories
+        hasPapers={hasPapers}
         konnectors={konnectors}
         selectedThemes={selectedThemes}
         onClick={goPapersList}

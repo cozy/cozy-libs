@@ -7,7 +7,12 @@ import CategoryItemByKonnector from './CategoryItemByKonnector'
 import { makeQualificationLabelsWithoutFiles } from './helpers'
 import { queryAccounts } from '../../helpers/queries'
 
-const KonnectorsCategories = ({ konnectors, selectedThemes, onClick }) => {
+const KonnectorsCategories = ({
+  konnectors,
+  selectedThemes,
+  onClick,
+  hasPapers
+}) => {
   const { data: accounts, ...accountsQueryLeft } = useQuery(
     queryAccounts.definition,
     queryAccounts.options
@@ -30,7 +35,7 @@ const KonnectorsCategories = ({ konnectors, selectedThemes, onClick }) => {
     <CategoryItemByKonnector
       key={`${index} - ${qualificationLabel}`}
       qualificationLabel={qualificationLabel}
-      isFirst={index === 0}
+      isFirst={index === 0 && hasPapers}
       isLast={index === qualificationLabelsWithoutFiles.length - 1}
       onClick={onClick}
     />
@@ -40,7 +45,8 @@ const KonnectorsCategories = ({ konnectors, selectedThemes, onClick }) => {
 KonnectorsCategories.propTypes = {
   konnectors: PropTypes.arrayOf(PropTypes.object),
   selectedThemes: PropTypes.arrayOf(PropTypes.object),
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  hasPapers: PropTypes.bool
 }
 
 export default KonnectorsCategories
