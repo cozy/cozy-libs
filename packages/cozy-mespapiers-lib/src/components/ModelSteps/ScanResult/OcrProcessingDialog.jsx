@@ -1,3 +1,4 @@
+import merge from 'lodash/merge'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 
@@ -62,13 +63,7 @@ const OcrProcessingDialog = ({ onBack, rotatedFile }) => {
       )
 
       const metadataFromOcr = makeMetadataFromOcr(attributesFound)
-      setFormData(prev => ({
-        ...prev,
-        metadata: {
-          ...prev.metadata,
-          ...metadataFromOcr
-        }
-      }))
+      setFormData(prev => merge({}, prev, { metadata: metadataFromOcr }))
 
       nextStep()
     }

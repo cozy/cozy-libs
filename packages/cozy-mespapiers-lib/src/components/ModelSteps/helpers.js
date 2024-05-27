@@ -352,12 +352,14 @@ const getDatefromString = string => {
  */
 export const makeMetadataFromOcr = ocrAttributes => {
   return ocrAttributes.reduce((acc, { name, value }) => {
-    return {
-      ...acc,
-      [name]: KNOWN_DATE_METADATA_NAMES.includes(name)
+    set(
+      acc,
+      name,
+      KNOWN_DATE_METADATA_NAMES.includes(name)
         ? getDatefromString(value)
         : value
-    }
+    )
+    return acc
   }, {})
 }
 
