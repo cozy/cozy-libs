@@ -13,7 +13,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import IlluGenericInputDate from '../../assets/icons/IlluGenericInputDate.svg'
 import IlluGenericInputText from '../../assets/icons/IlluGenericInputText.svg'
-import { FILES_DOCTYPE } from '../../doctypes'
+import { BILLS_DOCTYPE, FILES_DOCTYPE } from '../../doctypes'
 import { makeInputsInformationStep } from '../../helpers/makeInputsInformationStep'
 import CompositeHeader from '../CompositeHeader/CompositeHeader'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
@@ -41,10 +41,16 @@ const InformationEdit = () => {
     fileId,
     'information'
   )
+  const metadataName = currentEditInformations?.searchParams?.metadataName
   const currentAttributes = currentEditInformations?.currentStep?.attributes
+  const isBillsInformation =
+    currentEditInformations.currentStep?.doctype === BILLS_DOCTYPE
+
   const defaultValue = get(
     currentEditInformations,
-    `file.metadata.${currentEditInformations?.searchParams?.metadataName}`
+    isBillsInformation
+      ? `file.bills.data[0].${metadataName}`
+      : `file.metadata.${metadataName}`
   )
   const { Component, attrs } =
     makeInputsInformationStep(currentAttributes)[0] || {}
@@ -58,16 +64,28 @@ const InformationEdit = () => {
 
   const onConfirm = async () => {
     setIsBusy(true)
-    let newMetadata = updateFileMetadata({
-      file: currentEditInformations.file,
-      type: currentEditInformations.currentStep.attributes[0].type,
-      metadataName: currentEditInformations.searchParams.metadataName,
-      value
-    })
 
-    await client
-      .collection(FILES_DOCTYPE)
-      .updateMetadataAttribute(fileId, newMetadata)
+    if (isBillsInformation) {
+      const bill = currentEditInformations.file.bills.data[0]
+      const newBill = { ...bill, ...value }
+      // we have to duplicate `employer` into `vendor` attribute to work with Banks
+      if (metadataName === 'employer') {
+        newBill.vendor = value[metadataName]
+      }
+
+      await client.save(newBill)
+    } else {
+      let newMetadata = updateFileMetadata({
+        file: currentEditInformations.file,
+        type: currentAttributes[0].type,
+        metadataName: metadataName,
+        value
+      })
+
+      await client
+        .collection(FILES_DOCTYPE)
+        .updateMetadataAttribute(fileId, newMetadata)
+    }
 
     navigate('..')
   }

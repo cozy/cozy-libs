@@ -1,6 +1,8 @@
 import get from 'lodash/get'
 
 import { harmonizeContactsNames } from '../components/Papers/helpers'
+import { BILLS_DOCTYPE } from '../doctypes'
+
 /**
  * @param {object} params
  * @param {string[]} params.filenameModel - Array of property of paerDefinition
@@ -62,19 +64,25 @@ export const buildFilename = ({
     So we need to remove any occurrence of this character from the filename.
   */
   const safeFileName = qualification.name.replace(/\//g, '_')
-
-  const filename = []
   let contactName = harmonizeContactsNames(contacts, t)
 
-  filename.push(safeFileName)
+  const filename = [safeFileName]
+
+  if (metadata?.[BILLS_DOCTYPE]?.subtype) {
+    filename.push(metadata[BILLS_DOCTYPE].subtype)
+  }
+
   if (pageName) filename.push(pageName)
+
   if (
     qualification.label === 'vehicle_registration' &&
     metadata?.vehicle?.licenseNumber
   ) {
     filename.push(metadata.vehicle.licenseNumber)
   }
+
   if (contactName) filename.push(contactName)
+
   if (formatedDate) filename.push(formatedDate)
 
   if (filenameModel?.length > 0) {

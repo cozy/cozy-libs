@@ -379,6 +379,16 @@
         "text": "Add your reference tax number"
       }
     },
+    "expense_claim": {
+      "amount": {
+        "inputLabel": "Amount of expenditure",
+        "text": "Enter the amount of expenditure"
+      },
+      "subtype": {
+        "inputLabel": "Purpose of expenditure",
+        "text": "Enter the purpose of expenditure"
+      }
+    },
     "nationalHealthInsuranceCard": {
       "number": {
         "inputLabel": "Health insurance card number",

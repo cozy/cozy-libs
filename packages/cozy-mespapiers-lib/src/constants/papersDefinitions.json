@@ -3389,14 +3389,43 @@
         },
         {
           "model": "information",
-          "text": "PaperJSON.generic.fileLabel.text",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.expense_claim.amount.text",
+          "doctype": "io.cozy.bills",
           "attributes": [
             {
-              "name": "labelGivenByUser",
+              "name": "amount",
+              "type": "number",
+              "editText": "PaperJSON.expense_claim.amount.text",
+              "inputLabel": "PaperJSON.expense_claim.amount.inputLabel"
+            }
+          ]
+        },
+        {
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.expense_claim.subtype.text",
+          "doctype": "io.cozy.bills",
+          "attributes": [
+            {
+              "name": "subtype",
               "type": "text",
-              "required": true,
-              "maxLength": 255,
-              "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
+              "editText": "PaperJSON.expense_claim.subtype.text",
+              "inputLabel": "PaperJSON.expense_claim.subtype.inputLabel"
+            }
+          ]
+        },
+        {
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.pay_sheet.employerName.editText",
+          "doctype": "io.cozy.bills",
+          "attributes": [
+            {
+              "name": "employer",
+              "type": "text",
+              "editText": "PaperJSON.pay_sheet.employerName.editText",
+              "inputLabel": "PaperJSON.pay_sheet.employerName.inputLabel"
             }
           ]
         },
