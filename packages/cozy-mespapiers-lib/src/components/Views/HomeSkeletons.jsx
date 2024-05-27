@@ -10,16 +10,25 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import FabWrapper from '../FabWrapper'
 
+const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    margin: '1rem'
+  }
+}
+
 const HomeSkeletons = ({ withFabs, ...props }) => {
   const { t } = useI18n()
 
   return (
     <>
-      <div {...props} className="u-flex u-flex-column-m u-m-1">
+      <div {...props} style={styles.container}>
         <div className="u-flex u-w-100 u-flex-items-center u-mv-half">
           <SearchBar placeholder=" " disabled />
         </div>
-        <div className="u-flex u-flex-justify-center-m u-mt-half-m u-flex-wrap-m u-ml-0-m u-ml-1-half">
+        <div className="u-flex u-flex-justify-center-m u-mt-half-m u-flex-wrap-m">
           {[...Array(10)].map((_, index) => (
             <CircleButton
               key={index}
