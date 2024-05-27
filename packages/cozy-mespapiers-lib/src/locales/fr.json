@@ -379,6 +379,16 @@
         "text": "Ajouter le numéro fiscal de référence"
       }
     },
+    "expense_claim": {
+      "amount": {
+        "inputLabel": "Montant de la dépense",
+        "text": "Saisir le montant de la dépense"
+      },
+      "subtype": {
+        "inputLabel": "Objet de la dépense",
+        "text": "Saisir l'objet de la dépense"
+      }
+    },
     "nationalHealthInsuranceCard": {
       "number": {
         "inputLabel": "Numéro de la carte vitale",

@@ -3,7 +3,7 @@ import { PDFDocument } from 'pdf-lib'
 import { uploadFileWithConflictStrategy } from 'cozy-client/dist/models/file'
 import { addFileToPdf } from 'cozy-ui/transpiled/react/ActionsMenu/Actions/helpers'
 
-import { CONTACTS_DOCTYPE, FILES_DOCTYPE } from '../doctypes'
+import { CONTACTS_DOCTYPE, FILES_DOCTYPE, BILLS_DOCTYPE } from '../doctypes'
 import { buildFilename } from '../helpers/buildFilename'
 
 /**
@@ -149,7 +149,21 @@ export const createPdfAndSave = async ({
           conflictStrategy: 'rename'
         }
       )
+
       await addContactReferenceToFile({ fileCreated, fileCollection, contacts })
+
+      if (updatedMetadata[BILLS_DOCTYPE]) {
+        const { data: billCreated } = await client.save({
+          ...updatedMetadata[BILLS_DOCTYPE],
+          // we have to duplicate `employer` into `vendor` attribute to work with Banks
+          ...(updatedMetadata[BILLS_DOCTYPE].employer && {
+            vendor: updatedMetadata[BILLS_DOCTYPE].employer
+          }),
+          _type: BILLS_DOCTYPE
+        })
+
+        await fileCollection.addReferencedBy(fileCreated, [billCreated])
+      }
 
       createdFilesList.push({
         fileId: fileCreated._id,
@@ -162,5 +176,6 @@ export const createPdfAndSave = async ({
       pdfDoc = await PDFDocument.create()
     }
   }
+
   return createdFilesList
 }

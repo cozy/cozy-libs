@@ -1,6 +1,7 @@
 export const APPS_DOCTYPE = 'io.cozy.apps'
 export const CONTACTS_DOCTYPE = 'io.cozy.contacts'
 export const FILES_DOCTYPE = 'io.cozy.files'
+export const BILLS_DOCTYPE = 'io.cozy.bills'
 export const PERMISSIONS_DOCTYPE = 'io.cozy.permissions'
 export const SETTINGS_DOCTYPE = 'io.cozy.mespapiers.settings'
 export const JOBS_DOCTYPE = 'io.cozy.jobs'

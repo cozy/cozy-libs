@@ -16,7 +16,7 @@ const FilesViewerWithQuery = () => {
 
   const currentFileId = fileId ?? null
   const buildedFilesQuery = buildViewerFileQuery(currentFileId)
-  const filesQuery = useQuery(
+  const { data: files, ...filesQuery } = useQuery(
     buildedFilesQuery.definition,
     buildedFilesQuery.options
   )
@@ -32,8 +32,8 @@ const FilesViewerWithQuery = () => {
       documentType="Files"
     >
       <FilesViewer
-        fileId={currentFileId}
-        files={filesQuery.data}
+        fileId={fileId}
+        files={files}
         filesQuery={filesQuery}
         onClose={() => navigate('..')}
       />
