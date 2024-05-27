@@ -32,12 +32,14 @@ const HomeLayout = ({ contacts, papers, konnectors }) => {
 
   return (
     <>
-      <SearchHeader
-        selectedThemes={selectedThemes}
-        setSelectedThemes={setSelectedThemes}
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-      />
+      {papers.length > 0 && (
+        <SearchHeader
+          selectedThemes={selectedThemes}
+          setSelectedThemes={setSelectedThemes}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
+      )}
       <ContentFlexsearch
         contacts={contacts}
         papers={papers}
