@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@13.3.1...cozy-sharing@14.0.0) (2024-05-28)
+
+
+### Features
+
+* Replace deprecated buttons by actual ones ([6be1c73](https://github.com/cozy/cozy-libs/commit/6be1c734cc4fcb13ffc2dd1137edec064c0c842e))
+* Replace direct import of palette by colors or variables colors ([4dc9eb7](https://github.com/cozy/cozy-libs/commit/4dc9eb7d56b875acb156eeef037b252237c2cfa5))
+* **sharing:** Replace var colors by semantic var colors ([79c2e70](https://github.com/cozy/cozy-libs/commit/79c2e70430f64973e38d40ea215a23be2ca3a2a0))
+* **sharing:** Upgrade cozy-ui 105.3.1 to 106.8.0 ([b731089](https://github.com/cozy/cozy-libs/commit/b731089dc71325bb80d9cb2687583516596f2b8a))
+
+
+### BREAKING CHANGES
+
+* **sharing:** you must have `cozy-ui >= 106.8.0`
+
+
+
+
+
 ## [13.3.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@13.3.0...cozy-sharing@13.3.1) (2024-05-27)
 
 
