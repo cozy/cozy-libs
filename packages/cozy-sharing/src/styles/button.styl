@@ -1,22 +1,21 @@
-palette=json('settings/palette.json', { hash: true })
 .coz-btn-shared
-    border-color: palette['emerald']
-    background-color: palette['emerald']
-    color: palette['white']
+    border-color: var(--emerald)
+    background-color: var(--emerald)
+    color: var(--primaryContrastTextColor)
     transition all .2s ease-out
 
     &:focus
     &:not([disabled]):not([aria-disabled=true]):hover
-        border-color: palette['malachite']
-        background-color: palette['malachite']
+        border-color: var(--malachite)
+        background-color: var(--malachite)
 
 .coz-btn-sharedWithMe
-    border-color: palette['lightishPurple']
-    background-color: palette['lightishPurple']
-    color: palette['white']
+    border-color: #B449E7
+    background-color: #B449E7
+    color: var(--primaryContrastTextColor)
     transition all .2s ease-out
 
     &:focus
     &:not([disabled]):not([aria-disabled=true]):hover
-        border-color: palette['barney']
-        background-color: palette['barney']
+        border-color: #922BC2
+        background-color: #922BC2

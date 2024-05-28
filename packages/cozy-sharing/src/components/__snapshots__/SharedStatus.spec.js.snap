@@ -15,7 +15,7 @@ exports[`SharedStatus component should display the link if there is a link 1`] =
       height="16"
       style={
         Object {
-          "fill": "var(--coolGrey)",
+          "fill": "var(--iconTextColor)",
         }
       }
       viewBox="0 0 16 16"
@@ -29,7 +29,7 @@ exports[`SharedStatus component should display the link if there is a link 1`] =
         height="16"
         style={
           Object {
-            "fill": "var(--coolGrey)",
+            "fill": "var(--iconTextColor)",
           }
         }
         viewBox="0 0 16 16"

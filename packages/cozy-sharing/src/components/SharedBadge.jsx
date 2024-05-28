@@ -3,7 +3,6 @@ import React from 'react'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import ShareIcon from 'cozy-ui/transpiled/react/Icons/Share'
-import palette from 'cozy-ui/transpiled/react/palette'
 
 import styles from '../styles/badge.styl'
 
@@ -19,7 +18,7 @@ const SharedBadge = ({ byMe, className, small, xsmall }) => (
   >
     <Icon
       icon={ShareIcon}
-      color={palette.white}
+      color="var(--primaryContrastTextColor)"
       className={styles['shared-badge-icon']}
     />
   </div>

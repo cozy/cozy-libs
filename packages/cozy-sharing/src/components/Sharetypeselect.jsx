@@ -6,20 +6,22 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import BottomIcon from 'cozy-ui/transpiled/react/Icons/Bottom'
 import CheckIcon from 'cozy-ui/transpiled/react/Icons/Check'
 import SelectBox, { components } from 'cozy-ui/transpiled/react/SelectBox'
-import palette from 'cozy-ui/transpiled/react/palette'
 
 import logger from '../logger'
 import styles from '../styles/share.styl'
 
 const DropdownIndicator = props => (
   <components.DropdownIndicator {...props}>
-    <Icon icon={BottomIcon} color={palette.coolGrey} />
+    <Icon icon={BottomIcon} color="var(--iconTextColor)" />
   </components.DropdownIndicator>
 )
+
 const Option = props => (
   <components.Option {...props}>
     <div className={cx(styles['select-option'])}>
-      {props.isSelected && <Icon icon={CheckIcon} color={palette.dodgerBlue} />}
+      {props.isSelected && (
+        <Icon icon={CheckIcon} color="var(--primaryColor)" />
+      )}
       <div>
         <div className={styles['select-option-label']}>{props.label}</div>
         <div className={styles['select-option-desc']}>{props.data.desc}</div>
@@ -27,22 +29,25 @@ const Option = props => (
     </div>
   </components.Option>
 )
+
 const customStyles = {
   option: (base, state) => ({
     ...base,
-    color: 'black',
-    backgroundColor: state.isFocused ? palette.paleGrey : null,
+    color: 'var(--primaryTextColor)',
+    backgroundColor: state.isFocused ? 'var(--actionColorHover)' : null,
     padding: 0,
     borderBottom:
       state.options.findIndex(o => o.value === state.value) === 0
-        ? `1px solid ${palette.silver}`
+        ? '1px solid var(--borderMainColor)'
         : null
   }),
   menu: base => ({
     ...base,
+    backgroundColor: 'var(--paperBackgroundColor)',
     width: '204%'
   })
 }
+
 const ShareTypeSelect = ({ options, onChange }) => (
   <div className={styles['select-wrapper']}>
     <SelectBox
