@@ -3,7 +3,7 @@
 @require 'settings/breakpoints.styl'
 
 .share-byemail-onlybylink
-    background var(--paleGrey)
+    background var(--defaultBackgroundColor)
     padding 1rem 2rem
     margin -1.5rem -2rem 1rem
 
@@ -36,7 +36,7 @@
         margin 0
 
     .coz-form-desc
-        color var(--coolGrey)
+        color var(--secondaryTextColor)
 
 .share-type-control
     display flex
@@ -64,7 +64,7 @@
         .select-option-desc
             line-height 1.5
             font-size   .8125rem
-            color var(--coolGrey)
+            color var(--secondaryTextColor)
 
 
 
@@ -75,7 +75,7 @@
 :global
     // dirty hack for react-select: its API doesn't allow to make change to active styles
     .react-select__option:active
-        background-color var(--paleGrey) !important
+        background-color var(--defaultBackgroundColor) !important
 
 input[type=text]
     width 100%
@@ -100,4 +100,4 @@ input[type=text]
     margin        0 0 0.5rem 3.5rem
     padding-left  1.5rem
     line-height   1.5
-    color         var(--coolGrey)
+    color         var(--secondaryTextColor)
