@@ -11,17 +11,21 @@ import PaperGroup from '../Papers/PaperGroup'
 const ContentWhenNotSearching = ({ papers, contacts, konnectors }) => {
   const { t } = useI18n()
 
+  const hasKonnectorWithoutFiles = konnectors.some(
+    ({ konnectorQualifLabelsWithoutFile }) =>
+      konnectorQualifLabelsWithoutFile.length > 0
+  )
+
   const allDocs = useMemo(() => papers.concat(contacts), [papers, contacts])
   const hasDocs = allDocs?.length > 0
 
-  if (!hasDocs) {
+  if (!hasDocs && !hasKonnectorWithoutFiles) {
     return (
       <Empty
         className="u-ph-1"
         icon={HomeCloud}
         iconSize="large"
         title={t('Home.Empty.title')}
-        text={t('Home.Empty.text')}
       />
     )
   }
