@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
+import Button from 'cozy-ui/transpiled/react/Buttons'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import Button from 'cozy-ui/transpiled/react/deprecated/Button'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { useSafeState } from '../helpers/hooks'
@@ -36,12 +36,12 @@ const ConfirmRecipientActions = ({ confirm, reject }) => {
   return (
     <>
       <Button
-        theme="danger-outline"
+        variant="secondary"
+        color="error"
         label={t(`Share.twoStepsConfirmation.reject`)}
         onClick={reject}
       />
       <Button
-        theme="primary"
         label={t(`Share.twoStepsConfirmation.confirm`)}
         onClick={confirm}
       />
@@ -73,15 +73,11 @@ const RejectRecipientActions = ({ reject, cancel }) => {
   return (
     <>
       <Button
-        theme="secondary"
+        variant="secondary"
         label={t(`Share.twoStepsConfirmation.cancel`)}
         onClick={cancel}
       />
-      <Button
-        theme="primary"
-        label={t(`Share.twoStepsConfirmation.reject`)}
-        onClick={reject}
-      />
+      <Button label={t(`Share.twoStepsConfirmation.reject`)} onClick={reject} />
     </>
   )
 }
