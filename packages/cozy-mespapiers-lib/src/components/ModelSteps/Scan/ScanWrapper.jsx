@@ -11,12 +11,9 @@ import { PaperDefinitionsStepPropTypes } from '../../../constants/PaperDefinitio
 import { FLAGSHIP_SCAN_TEMP_FILENAME } from '../../../constants/const'
 import { makeFileFromBlob } from '../../../helpers/makeFileFromBlob'
 import {
-  storeIndexedStorageData,
-  removeIndexedStorageData,
-  FORM_BACKUP_QUALIFICATION_LABEL_KEY,
-  FORM_BACKUP_CURRENT_STEP_INDEX_KEY,
-  FORM_BACKUP_FORM_DATA_KEY
-} from '../../../utils/indexedStorage'
+  storePaperDataBackup,
+  removePaperDataBackup
+} from '../../../helpers/paperDataBackup'
 import { useFormData } from '../../Hooks/useFormData'
 import { useStepperDialog } from '../../Hooks/useStepperDialog'
 import ScanResultDialog from '../ScanResult/ScanResultDialog'
@@ -99,23 +96,18 @@ const ScanWrapper = ({ currentStep, onClose, onBack }) => {
       // We backup the current form state in case the operating system kills
       // the webview during the 'scanDocument' webview intent
       const exportedFormData = await exportFormData()
-      await storeIndexedStorageData(
-        FORM_BACKUP_QUALIFICATION_LABEL_KEY,
-        qualificationLabel
-      )
-      await storeIndexedStorageData(
-        FORM_BACKUP_CURRENT_STEP_INDEX_KEY,
-        currentStepIndex
-      )
-      await storeIndexedStorageData(FORM_BACKUP_FORM_DATA_KEY, exportedFormData)
+
+      await storePaperDataBackup({
+        qualificationLabel,
+        currentStepIndex,
+        exportedFormData
+      })
 
       const base64 = await webviewIntent.call('scanDocument')
 
       // If there was no issues during the 'scanDocument' webview intent,
       // we do not need to keep the current form state so we clean everything immediately
-      await removeIndexedStorageData(FORM_BACKUP_QUALIFICATION_LABEL_KEY)
-      await removeIndexedStorageData(FORM_BACKUP_CURRENT_STEP_INDEX_KEY)
-      await removeIndexedStorageData(FORM_BACKUP_FORM_DATA_KEY)
+      await removePaperDataBackup()
 
       // TODO : Launch ocr after scanning the document
       const file = makeFileFromBase64({
