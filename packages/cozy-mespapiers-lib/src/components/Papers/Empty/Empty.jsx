@@ -16,7 +16,6 @@ const Empty = ({ konnectors, accountsByFiles, hasFiles }) => {
         icon={HomeCloud}
         iconSize="large"
         title={t('Home.Empty.title')}
-        text={t('Home.Empty.text')}
       />
     )
   }
