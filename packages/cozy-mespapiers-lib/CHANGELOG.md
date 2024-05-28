@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [100.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@100.1.0...cozy-mespapiers-lib@100.2.0) (2024-05-28)
+
+
+### Features
+
+* **mespapiers:** Adjusting the display of konnectors without files ([cce3d43](https://github.com/cozy/cozy-libs/commit/cce3d433671044f5d26f7cceee9ef5e21536b9d2))
+* **mespapiers:** Change style home page skeleton ([fdb053b](https://github.com/cozy/cozy-libs/commit/fdb053bb6f1276e7354e6736efbc890f05c09d68))
+* **mespapiers:** Hide search when there are no files ([d9c5d87](https://github.com/cozy/cozy-libs/commit/d9c5d87e79eae45cd0e6a3100c60127c50dd9887))
+* **mespapiers:** Konnector UI management without files ([0afdaf7](https://github.com/cozy/cozy-libs/commit/0afdaf7170f2e97cbfa4b119a001dd30eb5fdef4))
+* **mespapiers:** Remove Onboarding feature ([c2e8b97](https://github.com/cozy/cozy-libs/commit/c2e8b9754dd74940a7d0c17c9f4dcd906737452c))
+* **mespapiers:** Show Empty also when no konnectors have files ([a7635ff](https://github.com/cozy/cozy-libs/commit/a7635ff4478b92b02d9fd17c805a2d5be5ed8d4b))
+
+
+
+
+
 # [100.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@100.0.1...cozy-mespapiers-lib@100.1.0) (2024-05-28)
 
 
