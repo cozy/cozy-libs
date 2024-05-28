@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [100.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@100.0.1...cozy-mespapiers-lib@100.1.0) (2024-05-28)
+
+
+### Bug Fixes
+
+* When using OCR, save or retrieve metadata in the correct place ([9c84c35](https://github.com/cozy/cozy-libs/commit/9c84c353f13fc22999b2a6ecf23550d63520d431))
+
+
+### Features
+
+* **mespapiers:** Add OCR for vehicle registration ([d72706f](https://github.com/cozy/cozy-libs/commit/d72706f3c3b91a0d31a34e32ed34f1efa807694c))
+
+
+
+
+
 ## [100.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@100.0.0...cozy-mespapiers-lib@100.0.1) (2024-05-27)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
