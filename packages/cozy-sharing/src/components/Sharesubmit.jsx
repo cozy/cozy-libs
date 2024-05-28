@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { Button } from 'cozy-ui/transpiled/react/deprecated/Button'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 
 const ShareSubmit = props => (
   <Button
     onClick={() => {
       props.onSubmit()
     }}
+    size="large"
     busy={props.loading}
     label={props.label}
     disabled={props.disabled}
