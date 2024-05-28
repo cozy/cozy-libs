@@ -1,7 +1,6 @@
 import cx from 'classnames'
 import React from 'react'
 
-import palette from 'cozy-ui/transpiled/react/palette'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { SharingTooltip, TooltipRecipientList } from './Tooltip'
@@ -34,7 +33,7 @@ export const SharedStatus = ({ className, docId, recipients, link }) => {
       {link && (
         <>
           <LinkIcon
-            style={{ fill: palette.coolGrey }}
+            style={{ fill: 'var(--iconTextColor)' }}
             data-tip
             data-for={`linkfor${docId}`}
           />

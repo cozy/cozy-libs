@@ -5,7 +5,6 @@ import Autosuggest from 'react-autosuggest'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import Chip from 'cozy-ui/transpiled/react/Chips'
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
-import palette from 'cozy-ui/transpiled/react/palette'
 
 import { GroupAvatar } from './Avatar/GroupAvatar'
 import ContactSuggestion from './ContactSuggestion'
@@ -165,7 +164,7 @@ const ShareAutocomplete = ({
       })}
       <input {...inputProps} onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
       {loading && isLoadingDisplayed ? (
-        <Spinner color={palette.dodgerBlue} />
+        <Spinner color="var(--primaryColor)" />
       ) : null}
     </div>
   )

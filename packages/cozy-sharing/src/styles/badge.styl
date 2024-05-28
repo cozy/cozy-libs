@@ -1,5 +1,3 @@
-palette=json('settings/palette.json', { hash: true })
-
 .shared-badge
     display flex
     align-items center
@@ -8,8 +6,8 @@ palette=json('settings/palette.json', { hash: true })
     background-clip padding-box
 
     &.--small
-        border .125rem solid 
-        border-color: palette['white']
+        border .125rem solid
+        border-color: var(--primaryContrastTextColor)
         width 1.5rem
         height 1.5rem
 
@@ -18,8 +16,8 @@ palette=json('settings/palette.json', { hash: true })
             height .75rem
 
     &.--xsmall
-        border .0625rem solid 
-        border-color: palette['white']
+        border .0625rem solid
+        border-color: var(--primaryContrastTextColor)
         width .75rem
         height .75rem
 
@@ -28,7 +26,7 @@ palette=json('settings/palette.json', { hash: true })
             height .375rem
 
     &.--by-me
-        background-color: palette['emerald']
+        background-color: var(--emerald)
 
     &.--with-me
-        background-color: palette['portage']
+        background-color: #9169F2
