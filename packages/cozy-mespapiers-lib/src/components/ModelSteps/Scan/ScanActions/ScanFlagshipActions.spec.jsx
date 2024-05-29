@@ -1,4 +1,5 @@
 import { fireEvent, render } from '@testing-library/react'
+import { StepperDialogProvider } from 'components/Contexts/StepperDialogProvider'
 import React from 'react'
 
 import ScanFlagshipActions from './ScanFlagshipActions'
@@ -11,13 +12,17 @@ const setup = ({
 } = {}) => {
   return render(
     <AppLike>
-      <ScanFlagshipActions
-        onOpenFilePickerModal={
-          onOpenFilePickerModal ? onOpenFilePickerModal : undefined
-        }
-        onChangeFile={onChangeFile ? onChangeFile : undefined}
-        onOpenFlagshipScan={onOpenFlagshipScan ? onOpenFlagshipScan : undefined}
-      />
+      <StepperDialogProvider>
+        <ScanFlagshipActions
+          onOpenFilePickerModal={
+            onOpenFilePickerModal ? onOpenFilePickerModal : undefined
+          }
+          onChangeFile={onChangeFile ? onChangeFile : undefined}
+          onOpenFlagshipScan={
+            onOpenFlagshipScan ? onOpenFlagshipScan : undefined
+          }
+        />
+      </StepperDialogProvider>
     </AppLike>
   )
 }

@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
+import { StepperDialogProvider } from 'components/Contexts/StepperDialogProvider'
 import React from 'react'
 
 import flag from 'cozy-flags'
@@ -17,12 +18,14 @@ const setup = ({
   flag.mockReturnValue(flagEnabled)
   return render(
     <AppLike>
-      <ScanMobileActions
-        onOpenFilePickerModal={
-          onOpenFilePickerModal ? onOpenFilePickerModal : undefined
-        }
-        onChangeFile={onChangeFile ? onChangeFile : undefined}
-      />
+      <StepperDialogProvider>
+        <ScanMobileActions
+          onOpenFilePickerModal={
+            onOpenFilePickerModal ? onOpenFilePickerModal : undefined
+          }
+          onChangeFile={onChangeFile ? onChangeFile : undefined}
+        />
+      </StepperDialogProvider>
     </AppLike>
   )
 }

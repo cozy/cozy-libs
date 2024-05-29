@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render, waitFor } from '@testing-library/react'
+import { StepperDialogProvider } from 'components/Contexts/StepperDialogProvider'
 import React from 'react'
 
 import { useQuery, hasQueryBeenLoaded } from 'cozy-client'
@@ -37,12 +38,14 @@ const setup = ({
   })
   return render(
     <AppLike client={client}>
-      <ScanDesktopActions
-        onOpenFilePickerModal={
-          onOpenFilePickerModal ? onOpenFilePickerModal : undefined
-        }
-        onChangeFile={onChangeFile ? onChangeFile : undefined}
-      />
+      <StepperDialogProvider>
+        <ScanDesktopActions
+          onOpenFilePickerModal={
+            onOpenFilePickerModal ? onOpenFilePickerModal : undefined
+          }
+          onChangeFile={onChangeFile ? onChangeFile : undefined}
+        />
+      </StepperDialogProvider>
     </AppLike>
   )
 }

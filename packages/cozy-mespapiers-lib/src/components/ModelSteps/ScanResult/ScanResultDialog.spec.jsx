@@ -6,6 +6,7 @@ import AppLike from '../../../../test/components/AppLike'
 import { FLAGSHIP_SCAN_TEMP_FILENAME } from '../../../constants/const'
 import { isFlagshipOCRAvailable } from '../../../helpers/isFlagshipOCRAvailable'
 import { FormDataProvider } from '../../Contexts/FormDataProvider'
+import { StepperDialogProvider } from '../../Contexts/StepperDialogProvider'
 import { useFormData } from '../../Hooks/useFormData'
 import { useStepperDialog } from '../../Hooks/useStepperDialog'
 import { getAttributesFromOcr } from '../helpers'
@@ -62,13 +63,15 @@ const setup = ({
 
   return render(
     <AppLike>
-      <FormDataProvider>
-        <ScanResultDialog
-          setCurrentFile={setCurrentFile}
-          currentFile={currentFile}
-          currentStep={currentStep}
-        />
-      </FormDataProvider>
+      <StepperDialogProvider>
+        <FormDataProvider>
+          <ScanResultDialog
+            setCurrentFile={setCurrentFile}
+            currentFile={currentFile}
+            currentStep={currentStep}
+          />
+        </FormDataProvider>
+      </StepperDialogProvider>
     </AppLike>
   )
 }
