@@ -12,6 +12,14 @@ jest.mock('flexsearch/dist/module/lang/latin/balance', () => ({
   encode: jest.fn()
 }))
 
+// Fix error "No available storage method found."
+jest.mock('localforage', () => ({
+  config: jest.fn(),
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+  removeItem: jest.fn()
+}))
+
 // Don't print console.warn, console.error, console.info & console.debug in tests
 global.console = {
   ...global.console,
