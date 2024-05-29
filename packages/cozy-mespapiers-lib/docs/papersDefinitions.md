@@ -69,6 +69,7 @@ The `front` and `back` entries have exactly the same structure and attributes.
   - `illustration`: {string|boolean} Name of the illustration used on the step (with extension). If false, no illustration will be displayed even the fallback
   - `[illustrationSize]`: {`small`|`medium`|`large`}(`4rem`|`6rem`|`8rem`) Size of the illustration (default `medium`)
   - `text`: {string} Translation key for the text of the step.
+  - `doctype`: {string} Doctype to store the attributes value. Use `io.cozy.files` by default.
   - `attributes`: {object} Type of fields.
     - [`text|number`](#information-field-attributes) : {object} Fields used to fill in more information about the paper.
     - [`date`](#information-field-attributes): {object} Fields used to enter a date (reference, expiration date, etc).

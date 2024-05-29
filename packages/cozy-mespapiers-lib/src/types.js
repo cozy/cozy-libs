@@ -7,7 +7,7 @@
 
 /**
  * @typedef {Object} FormData
- * @property {import('cozy-client/types/types').FileMetadata} metadata
+ * @property {{ ['io.cozy.files'|string]: import('cozy-client/types/types').FileMetadata|object }} metadata
  * @property {FormDataData[]} data
  * @property {import('cozy-client/types/types').IOCozyContact[]} contacts
  */
