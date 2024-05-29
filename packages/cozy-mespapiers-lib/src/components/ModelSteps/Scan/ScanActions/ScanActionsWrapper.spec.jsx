@@ -8,6 +8,7 @@ import { useWebviewIntent } from 'cozy-intent'
 
 import AppLike from '../../../../../test/components/AppLike'
 import { FormDataProvider } from '../../../Contexts/FormDataProvider'
+import { StepperDialogProvider } from '../../../Contexts/StepperDialogProvider'
 import { useFormData } from '../../../Hooks/useFormData'
 import { useStepperDialog } from '../../../Hooks/useStepperDialog'
 import ScanWrapper from '../ScanWrapper'
@@ -79,9 +80,11 @@ const setup = ({
 
   return render(
     <AppLike>
-      <FormDataProvider>
-        <ScanWrapper currentStep={currentStep} />
-      </FormDataProvider>
+      <StepperDialogProvider>
+        <FormDataProvider>
+          <ScanWrapper currentStep={currentStep} />
+        </FormDataProvider>
+      </StepperDialogProvider>
     </AppLike>
   )
 }

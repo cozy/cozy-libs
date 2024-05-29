@@ -1,6 +1,7 @@
 /* eslint-disable jest/no-focused-tests */
 import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
+import { StepperDialogProvider } from 'components/Contexts/StepperDialogProvider'
 import React from 'react'
 
 import SubmitButton from './SubmitButton'
@@ -25,11 +26,13 @@ const setup = ({
 } = {}) => {
   return render(
     <AppLike>
-      <SubmitButton
-        formData={formData}
-        onSubmit={onSubmit}
-        disabled={disabled}
-      />
+      <StepperDialogProvider>
+        <SubmitButton
+          formData={formData}
+          onSubmit={onSubmit}
+          disabled={disabled}
+        />
+      </StepperDialogProvider>
     </AppLike>
   )
 }

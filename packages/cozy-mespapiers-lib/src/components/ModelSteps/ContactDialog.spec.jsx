@@ -7,6 +7,7 @@ import ContactDialog from './ContactDialog'
 import AppLike from '../../../test/components/AppLike'
 import { fetchCurrentUser } from '../../helpers/fetchCurrentUser'
 import { FormDataProvider } from '../Contexts/FormDataProvider'
+import { StepperDialogProvider } from '../Contexts/StepperDialogProvider'
 import { useFormData } from '../Hooks/useFormData'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
 
@@ -52,9 +53,11 @@ const setup = ({
 
   return render(
     <AppLike>
-      <FormDataProvider>
-        <ContactDialog currentStep={mockCurrentStep} onClose={onClose} />
-      </FormDataProvider>
+      <StepperDialogProvider>
+        <FormDataProvider>
+          <ContactDialog currentStep={mockCurrentStep} onClose={onClose} />
+        </FormDataProvider>
+      </StepperDialogProvider>
     </AppLike>
   )
 }

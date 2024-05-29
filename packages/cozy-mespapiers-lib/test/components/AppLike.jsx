@@ -19,7 +19,6 @@ import { PapersDefinitionsProvider } from '../../src/components/Contexts/PapersD
 import { PaywallProvider } from '../../src/components/Contexts/PaywallProvider'
 import { ScannerI18nProvider } from '../../src/components/Contexts/ScannerI18nProvider'
 import SearchProvider from '../../src/components/Contexts/SearchProvider'
-import { StepperDialogProvider } from '../../src/components/Contexts/StepperDialogProvider'
 import { FILES_DOCTYPE, CONTACTS_DOCTYPE } from '../../src/doctypes'
 import enLocale from '../../src/locales/en.json'
 
@@ -53,9 +52,7 @@ const AppLike = ({ children, client, history }) => {
                             <HashRouter history={hashHistory}>
                               <MultiSelectionProvider>
                                 <PapersDefinitionsProvider>
-                                  <StepperDialogProvider>
-                                    <ModalProvider>{children}</ModalProvider>
-                                  </StepperDialogProvider>
+                                  <ModalProvider>{children}</ModalProvider>
                                 </PapersDefinitionsProvider>
                               </MultiSelectionProvider>
                             </HashRouter>
