@@ -122,9 +122,9 @@ export const makeFileFromBase64 = ({ source, name, type } = {}) => {
  *
  * @param {Object} currentStep
  * @param {string} base64 - base64 string
- * @returns {import('../../types').ExportedFormData}
+ * @returns {import('../../types').ExportedFormDataData}
  */
-export const makeExportedFormDataFromBase64 = (currentStep, base64) => {
+export const makeExportedFormDataDataFromBase64 = (currentStep, base64) => {
   const buffer = Uint8Array.from(atob(base64), c => c.charCodeAt(0)).buffer
 
   let stepIndex

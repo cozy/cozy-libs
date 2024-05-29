@@ -11,8 +11,8 @@ import { PaperDefinitionsStepPropTypes } from '../../../constants/PaperDefinitio
 import { FLAGSHIP_SCAN_TEMP_FILENAME } from '../../../constants/const'
 import { makeFileFromBlob } from '../../../helpers/makeFileFromBlob'
 import {
-  storePaperDataBackup,
-  removePaperDataBackup
+  storeCreatePaperDataBackup,
+  removeCreatePaperDataBackup
 } from '../../../helpers/paperDataBackup'
 import { useFormData } from '../../Hooks/useFormData'
 import { useStepperDialog } from '../../Hooks/useStepperDialog'
@@ -97,7 +97,7 @@ const ScanWrapper = ({ currentStep, onClose, onBack }) => {
       // the webview during the 'scanDocument' webview intent
       const exportedFormData = await exportFormData()
 
-      await storePaperDataBackup({
+      await storeCreatePaperDataBackup({
         qualificationLabel,
         currentStepIndex,
         exportedFormData
@@ -107,7 +107,7 @@ const ScanWrapper = ({ currentStep, onClose, onBack }) => {
 
       // If there was no issues during the 'scanDocument' webview intent,
       // we do not need to keep the current form state so we clean everything immediately
-      await removePaperDataBackup()
+      await removeCreatePaperDataBackup()
 
       // TODO : Launch ocr after scanning the document
       const file = makeFileFromBase64({

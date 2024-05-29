@@ -5,10 +5,10 @@ import { useWebviewIntent, useIsAvailable } from 'cozy-intent'
 
 import {
   getAndRemoveIndexedStorageData,
-  FORM_BACKUP_FORM_DATA_KEY
+  CREATE_PAPER_DATA_BACKUP_FORM_DATA
 } from '../../utils/indexedStorage'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
-import { makeExportedFormDataFromBase64 } from '../ModelSteps/helpers'
+import { makeExportedFormDataDataFromBase64 } from '../ModelSteps/helpers'
 
 const FormDataProvider = ({ children }) => {
   const webviewIntent = useWebviewIntent()
@@ -74,12 +74,12 @@ const FormDataProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    const loadFormBackup = async () => {
-      const backupFormData = await getAndRemoveIndexedStorageData(
-        FORM_BACKUP_FORM_DATA_KEY
+    const loadCreatePaperDataBackup = async () => {
+      const formDataBackup = await getAndRemoveIndexedStorageData(
+        CREATE_PAPER_DATA_BACKUP_FORM_DATA
       )
 
-      if (backupFormData && webviewIntent) {
+      if (webviewIntent && formDataBackup) {
         /*
           If SharedMemory is available and if we have a last scan, we
           add the last scan to the form data. Otherwise, it is not a problem,
@@ -100,20 +100,20 @@ const FormDataProvider = ({ children }) => {
               'scanDocument'
             )
 
-            const lastScanFileData = makeExportedFormDataFromBase64(
+            const lastScanFileData = makeExportedFormDataDataFromBase64(
               currentStep,
               lastScanResult
             )
 
-            backupFormData.data.push(lastScanFileData)
+            formDataBackup.data.push(lastScanFileData)
           }
         }
 
-        importFormData(backupFormData)
+        importFormData(formDataBackup)
       }
     }
 
-    loadFormBackup()
+    loadCreatePaperDataBackup()
   }, [webviewIntent, isSharedMemoryAvailable, currentStep])
 
   return (
