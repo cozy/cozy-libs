@@ -1,29 +1,32 @@
 import {
   storeIndexedStorageData,
   removeIndexedStorageData,
-  FORM_BACKUP_QUALIFICATION_LABEL_KEY,
-  FORM_BACKUP_CURRENT_STEP_INDEX_KEY,
-  FORM_BACKUP_FORM_DATA_KEY
+  CREATE_PAPER_DATA_BACKUP_QUALIFICATION_LABEL,
+  CREATE_PAPER_DATA_BACKUP_CURRENT_STEP_INDEX,
+  CREATE_PAPER_DATA_BACKUP_FORM_DATA
 } from '../utils/indexedStorage'
 
-export const storePaperDataBackup = async ({
+export const storeCreatePaperDataBackup = async ({
   qualificationLabel,
   currentStepIndex,
   exportedFormData
 }) => {
   await storeIndexedStorageData(
-    FORM_BACKUP_QUALIFICATION_LABEL_KEY,
+    CREATE_PAPER_DATA_BACKUP_QUALIFICATION_LABEL,
     qualificationLabel
   )
   await storeIndexedStorageData(
-    FORM_BACKUP_CURRENT_STEP_INDEX_KEY,
+    CREATE_PAPER_DATA_BACKUP_CURRENT_STEP_INDEX,
     currentStepIndex
   )
-  await storeIndexedStorageData(FORM_BACKUP_FORM_DATA_KEY, exportedFormData)
+  await storeIndexedStorageData(
+    CREATE_PAPER_DATA_BACKUP_FORM_DATA,
+    exportedFormData
+  )
 }
 
-export const removePaperDataBackup = async () => {
-  await removeIndexedStorageData(FORM_BACKUP_QUALIFICATION_LABEL_KEY)
-  await removeIndexedStorageData(FORM_BACKUP_CURRENT_STEP_INDEX_KEY)
-  await removeIndexedStorageData(FORM_BACKUP_FORM_DATA_KEY)
+export const removeCreatePaperDataBackup = async () => {
+  await removeIndexedStorageData(CREATE_PAPER_DATA_BACKUP_QUALIFICATION_LABEL)
+  await removeIndexedStorageData(CREATE_PAPER_DATA_BACKUP_CURRENT_STEP_INDEX)
+  await removeIndexedStorageData(CREATE_PAPER_DATA_BACKUP_FORM_DATA)
 }

@@ -3,7 +3,7 @@ import { Outlet, useNavigate } from 'react-router-dom'
 
 import {
   getAndRemoveIndexedStorageData,
-  FORM_BACKUP_QUALIFICATION_LABEL_KEY
+  CREATE_PAPER_DATA_BACKUP_QUALIFICATION_LABEL
 } from '../utils/indexedStorage'
 
 const CreatePaperDataBackupRoute = () => {
@@ -11,12 +11,12 @@ const CreatePaperDataBackupRoute = () => {
 
   useEffect(() => {
     const restoreCreatePaperDataBackupIfNeeded = async () => {
-      const formBackupQualificationLabel = await getAndRemoveIndexedStorageData(
-        FORM_BACKUP_QUALIFICATION_LABEL_KEY
+      const qualificationLabel = await getAndRemoveIndexedStorageData(
+        CREATE_PAPER_DATA_BACKUP_QUALIFICATION_LABEL
       )
 
-      if (formBackupQualificationLabel) {
-        navigate(`/paper/create/${formBackupQualificationLabel}`)
+      if (qualificationLabel) {
+        navigate(`/paper/create/${qualificationLabel}`)
       }
     }
 

@@ -7,7 +7,7 @@ import { filterSteps } from '../../helpers/filterSteps'
 import { findPlaceholderByLabelAndCountry } from '../../helpers/findPlaceholders'
 import {
   getAndRemoveIndexedStorageData,
-  FORM_BACKUP_CURRENT_STEP_INDEX_KEY
+  CREATE_PAPER_DATA_BACKUP_CURRENT_STEP_INDEX
 } from '../../utils/indexedStorage'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 
@@ -72,19 +72,19 @@ const StepperDialogProvider = ({ children }) => {
   }, [webviewIntent, currentDefinition, fromFlagshipUpload])
 
   useEffect(() => {
-    const loadFormBackup = async () => {
-      const backupCurrentStepIndex = await getAndRemoveIndexedStorageData(
-        FORM_BACKUP_CURRENT_STEP_INDEX_KEY
+    const loadCreatePaperDataBackup = async () => {
+      const currentStepIndexBackup = await getAndRemoveIndexedStorageData(
+        CREATE_PAPER_DATA_BACKUP_CURRENT_STEP_INDEX
       )
 
-      if (backupCurrentStepIndex) {
-        setCurrentStepIndex(backupCurrentStepIndex)
+      if (currentStepIndexBackup) {
+        setCurrentStepIndex(currentStepIndexBackup)
       } else {
         setCurrentStepIndex(0)
       }
     }
 
-    loadFormBackup()
+    loadCreatePaperDataBackup()
   }, [])
 
   const previousStep = () => {
