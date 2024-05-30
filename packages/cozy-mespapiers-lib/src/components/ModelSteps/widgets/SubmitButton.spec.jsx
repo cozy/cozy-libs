@@ -1,6 +1,6 @@
 /* eslint-disable jest/no-focused-tests */
 import '@testing-library/jest-dom'
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import { StepperDialogProvider } from 'components/Contexts/StepperDialogProvider'
 import React from 'react'
 
@@ -18,6 +18,10 @@ jest.mock('./ConfirmReplaceFile', () => () => (
   <div data-testid="ConfirmReplaceFile" />
 ))
 /* eslint-enable react/display-name */
+// Allow to pass 'isReady' in StepperDialogProvider
+jest.mock('../../../helpers/findPlaceholders', () => ({
+  findPlaceholderByLabelAndCountry: arg => arg
+}))
 
 const setup = ({
   formData = mockFormData(),
@@ -42,27 +46,29 @@ describe('ContactDialog', () => {
     const submitSpy = jest.fn()
     const mockFetchCurrentUser = jest.fn(() => ({ _id: '1234' }))
     const userDeviceFile = new File([{}], 'userDeviceFile')
-    const { findByTestId } = setup({
+    const { queryByTestId } = setup({
       formData: mockFormData({ data: [{ file: userDeviceFile }] }),
       onSubmit: submitSpy,
       mockFetchCurrentUser
     })
 
-    const btn = await findByTestId('ButtonSave')
-    fireEvent.click(btn)
+    await waitFor(() => {
+      const btn = queryByTestId('ButtonSave')
+      fireEvent.click(btn)
 
-    expect(submitSpy).toBeCalledTimes(1)
+      expect(submitSpy).toBeCalledTimes(1)
+    })
   })
 
-  it('should not diplay ConfirmReplaceFile modal when save button is clicked, if the file is from User Device', () => {
+  it('should not diplay ConfirmReplaceFile modal when save button is clicked, if the file is from User Device', async () => {
     const mockFetchCurrentUser = jest.fn(() => ({ _id: '1234' }))
     const userDeviceFile = new File([{}], 'userDeviceFile')
-    const { getByTestId, queryByTestId } = setup({
+    const { findByTestId, queryByTestId } = setup({
       formData: mockFormData({ data: [{ file: userDeviceFile }] }),
       mockFetchCurrentUser
     })
 
-    const btn = getByTestId('ButtonSave')
+    const btn = await findByTestId('ButtonSave')
     fireEvent.click(btn)
 
     expect(queryByTestId('ConfirmReplaceFile')).toBeNull()
@@ -73,16 +79,16 @@ describe('ContactDialog', () => {
     const mockFetchCurrentUser = jest.fn(() => ({ _id: '1234' }))
     const cozyFile = new File([{}], 'cozyFile')
     cozyFile.from = 'cozy'
-    const { getByTestId } = setup({
+    const { findByTestId, queryByTestId } = setup({
       formData: mockFormData({ data: [{ file: cozyFile }] }),
       mockFetchCurrentUser,
       formSubmit: mockFormSubmit
     })
 
-    const btn = getByTestId('ButtonSave')
+    const btn = await findByTestId('ButtonSave')
     fireEvent.click(btn)
     expect(mockFormSubmit).toBeCalledTimes(0)
 
-    expect(getByTestId('ConfirmReplaceFile')).toBeInTheDocument()
+    expect(queryByTestId('ConfirmReplaceFile')).toBeInTheDocument()
   })
 })

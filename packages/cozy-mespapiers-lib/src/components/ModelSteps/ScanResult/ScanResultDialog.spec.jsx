@@ -32,6 +32,10 @@ jest.mock('../helpers', () => ({
   makeMetadataFromOcr: jest.fn(),
   getAttributesFromOcr: jest.fn()
 }))
+// Allow to pass 'isReady' in StepperDialogProvider
+jest.mock('../../../helpers/findPlaceholders', () => ({
+  findPlaceholderByLabelAndCountry: arg => arg
+}))
 
 const setup = ({
   nextStep = jest.fn(),
@@ -88,13 +92,16 @@ describe('AcquisitionResult component:', () => {
     expect(container).toBeDefined()
   })
 
-  it('repeat button should not exist if the step is not multipage', () => {
-    const { container } = setup({
+  it('repeat button should not exist if the step is not multipage', async () => {
+    const { queryByTestId } = setup({
       currentStep: mockCurrentStep({ multipage: false })
     })
-    const btn = container.querySelector('[data-testid="repeat-button"]')
 
-    expect(btn).toBeNull()
+    await waitFor(() => {
+      const btn = queryByTestId('repeat-button')
+
+      expect(btn).toBeNull()
+    })
   })
 
   it('repeat button should exist if the step is multipage', () => {
@@ -107,19 +114,21 @@ describe('AcquisitionResult component:', () => {
   })
 
   describe('setCurrentFile', () => {
-    it('should setCurrentFile must be called once with null when restarting the file selection', () => {
+    it('should setCurrentFile must be called once with null when restarting the file selection', async () => {
       const mockSetCurrentFile = jest.fn()
       const { getByTestId } = setup({ setCurrentFile: mockSetCurrentFile })
 
-      const btn = getByTestId('retry-button')
+      await waitFor(() => {
+        const btn = getByTestId('retry-button')
 
-      fireEvent.click(btn)
+        fireEvent.click(btn)
 
-      expect(mockSetCurrentFile).toHaveBeenCalledWith(null)
-      expect(mockSetCurrentFile).toHaveBeenCalledTimes(1)
+        expect(mockSetCurrentFile).toHaveBeenCalledWith(null)
+        expect(mockSetCurrentFile).toHaveBeenCalledTimes(1)
+      })
     })
 
-    it('should setCurrentFile must be called once with null when add more files', () => {
+    it('should setCurrentFile must be called once with null when add more files', async () => {
       const mockSetCurrentFile = jest.fn()
       const mockNextStep = jest.fn()
       const { getByTestId } = setup({
@@ -128,56 +137,64 @@ describe('AcquisitionResult component:', () => {
         currentStep: mockCurrentStep({ multipage: true })
       })
 
-      const btn = getByTestId('repeat-button')
+      await waitFor(() => {
+        const btn = getByTestId('repeat-button')
 
-      fireEvent.click(btn)
+        fireEvent.click(btn)
 
-      expect(mockSetCurrentFile).toHaveBeenCalledWith(null)
-      expect(mockSetCurrentFile).toHaveBeenCalledTimes(1)
-      expect(mockNextStep).toHaveBeenCalledTimes(0)
+        expect(mockSetCurrentFile).toHaveBeenCalledWith(null)
+        expect(mockSetCurrentFile).toHaveBeenCalledTimes(1)
+        expect(mockNextStep).toHaveBeenCalledTimes(0)
+      })
     })
   })
 
   describe('nextStep', () => {
-    it('should nextStep does not be called when add more files', () => {
+    it('should nextStep does not be called when add more files', async () => {
       const mockNextStep = jest.fn()
       const { getByTestId } = setup({
         nextStep: mockNextStep,
         currentStep: mockCurrentStep({ multipage: true })
       })
 
-      const btn = getByTestId('repeat-button')
+      await waitFor(() => {
+        const btn = getByTestId('repeat-button')
 
-      fireEvent.click(btn)
+        fireEvent.click(btn)
 
-      expect(mockNextStep).toHaveBeenCalledTimes(0)
+        expect(mockNextStep).toHaveBeenCalledTimes(0)
+      })
     })
 
-    it('should nextStep must be called when next button is clicked', () => {
+    it('should nextStep must be called when next button is clicked', async () => {
       const nextStep = jest.fn()
       const { getByTestId } = setup({
         nextStep
       })
 
-      const btn = getByTestId('next-button')
+      await waitFor(() => {
+        const btn = getByTestId('next-button')
 
-      fireEvent.click(btn)
+        fireEvent.click(btn)
 
-      expect(nextStep).toHaveBeenCalledTimes(1)
+        expect(nextStep).toHaveBeenCalledTimes(1)
+      })
     })
 
-    it('should nextStep must be called when Enter key is pressed', () => {
+    it('should nextStep must be called when Enter key is pressed', async () => {
       const nextStep = jest.fn()
       setup({ nextStep })
 
-      fireEvent.keyDown(window, { key: 'Enter', code: 'Enter', keyCode: 13 })
+      await waitFor(() => {
+        fireEvent.keyDown(window, { key: 'Enter', code: 'Enter', keyCode: 13 })
 
-      expect(nextStep).toHaveBeenCalledTimes(1)
+        expect(nextStep).toHaveBeenCalledTimes(1)
+      })
     })
   })
 
   describe('setFormData', () => {
-    it('should setFormData must not be called when component is mounted if file already exists on same stepIndex', () => {
+    it('should setFormData must not be called when component is mounted if file already exists on same stepIndex', async () => {
       const mockSetFormData = jest.fn()
       setup({
         setFormData: mockSetFormData,
@@ -189,19 +206,22 @@ describe('AcquisitionResult component:', () => {
         })
       })
 
-      expect(mockSetFormData).toHaveBeenCalledTimes(0)
+      await waitFor(() => {
+        expect(mockSetFormData).toHaveBeenCalledTimes(0)
+      })
     })
 
-    it('should setFormData must be called once when restarting the file selection', () => {
+    it('should setFormData must be called once when restarting the file selection', async () => {
       const mockSetFormData = jest.fn()
       const { getByTestId } = setup({ setFormData: mockSetFormData })
 
-      expect(mockSetFormData).toHaveBeenCalledTimes(0)
+      await waitFor(() => {
+        expect(mockSetFormData).toHaveBeenCalledTimes(0)
 
-      const btn = getByTestId('retry-button')
-      fireEvent.click(btn)
-
-      expect(mockSetFormData).toHaveBeenCalledTimes(1)
+        const btn = getByTestId('retry-button')
+        fireEvent.click(btn)
+        expect(mockSetFormData).toHaveBeenCalledTimes(1)
+      })
     })
   })
 
@@ -216,17 +236,17 @@ describe('AcquisitionResult component:', () => {
           currentDefinition: { ocrAttributes: [] },
           allCurrentSteps: [{ isDisplayed: 'ocr' }]
         })
-        const btn = getByTestId('next-button')
-        fireEvent.click(btn)
-
         await waitFor(() => {
+          const btn = getByTestId('next-button')
+          fireEvent.click(btn)
+
           expect(mockGetAttributesFromOcr).toBeCalledTimes(0)
         })
       })
 
       it('should call the OCR process if the file has passed through the flagship scanner', async () => {
         const mockGetAttributesFromOcr = jest.fn()
-        const { getByTestId } = setup({
+        const { findByTestId } = setup({
           currentFile: mockFile({ name: FLAGSHIP_SCAN_TEMP_FILENAME }),
           mockIsFlagshipOCRAvailable: true,
           isLastStep: jest.fn(() => true),
@@ -234,10 +254,11 @@ describe('AcquisitionResult component:', () => {
           currentDefinition: { ocrAttributes: [] },
           allCurrentSteps: [{ isDisplayed: 'ocr' }]
         })
-        const btn = getByTestId('next-button')
+
+        const btn = await findByTestId('next-button')
         fireEvent.click(btn)
 
-        await waitFor(() => {
+        waitFor(() => {
           expect(mockGetAttributesFromOcr).toBeCalledTimes(1)
         })
       })

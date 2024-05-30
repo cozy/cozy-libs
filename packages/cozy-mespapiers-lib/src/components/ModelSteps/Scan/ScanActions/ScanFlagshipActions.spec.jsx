@@ -1,9 +1,14 @@
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import { StepperDialogProvider } from 'components/Contexts/StepperDialogProvider'
 import React from 'react'
 
 import ScanFlagshipActions from './ScanFlagshipActions'
 import AppLike from '../../../../../test/components/AppLike'
+
+// Allow to pass 'isReady' in StepperDialogProvider
+jest.mock('../../../../helpers/findPlaceholders', () => ({
+  findPlaceholderByLabelAndCountry: arg => arg
+}))
 
 const setup = ({
   onOpenFilePickerModal,
@@ -28,38 +33,45 @@ const setup = ({
 }
 
 describe('ScanFlagshipActions', () => {
-  it('should called onOpenFilePickerModal function', () => {
+  it('should called onOpenFilePickerModal function', async () => {
     const onOpenFilePickerModal = jest.fn()
     const { getByTestId } = setup({
       onOpenFilePickerModal
     })
 
-    const submitButton = getByTestId('selectPicFromCozy-btn')
+    await waitFor(() => {
+      const submitButton = getByTestId('selectPicFromCozy-btn')
 
-    fireEvent.click(submitButton)
+      fireEvent.click(submitButton)
 
-    expect(onOpenFilePickerModal).toBeCalledTimes(1)
+      expect(onOpenFilePickerModal).toBeCalledTimes(1)
+    })
   })
 
-  it('should have one input with type file attribute', () => {
+  it('should have one input with type file attribute', async () => {
     const { container } = setup()
-    const inputFileButtons = container.querySelectorAll('input[type="file"]')
 
-    expect(inputFileButtons).toHaveLength(1)
+    await waitFor(() => {
+      const inputFileButtons = container.querySelectorAll('input[type="file"]')
+
+      expect(inputFileButtons).toHaveLength(1)
+    })
   })
 
-  it('should called onOpenFlagshipScan function', () => {
+  it('should called onOpenFlagshipScan function', async () => {
     const onOpenFlagshipScan = jest.fn()
     const { getByTestId } = setup({
       onOpenFlagshipScan
     })
 
-    const importPicFromFlagshipScanButton = getByTestId(
-      'importPicFromFlagshipScan-btn'
-    )
+    await waitFor(() => {
+      const importPicFromFlagshipScanButton = getByTestId(
+        'importPicFromFlagshipScan-btn'
+      )
 
-    fireEvent.click(importPicFromFlagshipScanButton)
+      fireEvent.click(importPicFromFlagshipScanButton)
 
-    expect(onOpenFlagshipScan).toBeCalledTimes(1)
+      expect(onOpenFlagshipScan).toBeCalledTimes(1)
+    })
   })
 })
