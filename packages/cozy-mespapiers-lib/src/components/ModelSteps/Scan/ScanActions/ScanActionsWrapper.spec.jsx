@@ -51,6 +51,10 @@ jest.mock('./ScanFlagshipActions', () => () => (
 jest.mock('./ScanDesktopActions', () => () => (
   <div data-testid="ScanDesktopActions" />
 ))
+// Allow to pass 'isReady' in StepperDialogProvider
+jest.mock('../../../../helpers/findPlaceholders', () => ({
+  findPlaceholderByLabelAndCountry: arg => arg
+}))
 /* eslint-enable react/display-name */
 
 const setup = ({
@@ -96,10 +100,12 @@ describe('Scan component:', () => {
     expect(container).toBeDefined()
   })
 
-  it('ScanMobileActions component must be displayed if is on Mobile', () => {
+  it('ScanMobileActions component must be displayed if is on Mobile', async () => {
     const { queryByTestId } = setup({ isMobileMock: true })
 
-    expect(queryByTestId('ScanMobileActions')).toBeTruthy()
+    await waitFor(() => {
+      expect(queryByTestId('ScanMobileActions')).toBeTruthy()
+    })
   })
 
   it('ScanMobileActions component must be displayed if is on flagship app but Scanner is unavailable', async () => {
@@ -123,23 +129,27 @@ describe('Scan component:', () => {
     })
   })
 
-  it('ScanDesktopActions component must be displayed if is on Desktop', () => {
+  it('ScanDesktopActions component must be displayed if is on Desktop', async () => {
     const { queryByTestId } = setup()
 
-    expect(queryByTestId('ScanDesktopActions')).toBeTruthy()
+    await waitFor(() => {
+      expect(queryByTestId('ScanDesktopActions')).toBeTruthy()
+    })
   })
 
-  it('CompositeHeader component must be displayed if no file exists', () => {
+  it('CompositeHeader component must be displayed if no file exists', async () => {
     const { queryByTestId } = setup({
       formData: mockFormData({
         data: []
       })
     })
 
-    expect(queryByTestId('CompositeHeader')).toBeTruthy()
+    await waitFor(() => {
+      expect(queryByTestId('CompositeHeader')).toBeTruthy()
+    })
   })
 
-  it('CompositeHeader component must be displayed if no file of the current step exists', () => {
+  it('CompositeHeader component must be displayed if no file of the current step exists', async () => {
     const { queryByTestId } = setup({
       currentStepIndex: 0,
       currentStep: mockCurrentStep(),
@@ -148,10 +158,12 @@ describe('Scan component:', () => {
       })
     })
 
-    expect(queryByTestId('CompositeHeader')).toBeTruthy()
+    await waitFor(() => {
+      expect(queryByTestId('CompositeHeader')).toBeTruthy()
+    })
   })
 
-  it('ScanResultDialog component must be displayed if a file in the current step exists', () => {
+  it('ScanResultDialog component must be displayed if a file in the current step exists', async () => {
     const { queryByTestId } = setup({
       currentStepIndex: 1,
       currentStep: mockCurrentStep(),
@@ -160,6 +172,8 @@ describe('Scan component:', () => {
       })
     })
 
-    expect(queryByTestId('ScanResultDialog')).toBeTruthy()
+    await waitFor(() => {
+      expect(queryByTestId('ScanResultDialog')).toBeTruthy()
+    })
   })
 })

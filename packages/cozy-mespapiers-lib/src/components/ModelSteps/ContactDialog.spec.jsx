@@ -1,6 +1,6 @@
 /* eslint-disable jest/no-focused-tests */
 import '@testing-library/jest-dom'
-import { render } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 import React from 'react'
 
 import ContactDialog from './ContactDialog'
@@ -22,6 +22,10 @@ jest.mock('../Hooks/useFormData')
 jest.mock('../Hooks/useStepperDialog')
 jest.mock('../../helpers/fetchCurrentUser', () => ({
   fetchCurrentUser: jest.fn()
+}))
+// Allow to pass 'isReady' in StepperDialogProvider
+jest.mock('../../helpers/findPlaceholders', () => ({
+  findPlaceholderByLabelAndCountry: arg => arg
 }))
 /* eslint-disable react/display-name */
 jest.mock('./widgets/ConfirmReplaceFile', () => () => (
@@ -63,26 +67,30 @@ const setup = ({
 }
 
 describe('ContactDialog', () => {
-  it('should have a SubmitButton if is the last step', () => {
+  it('should have a SubmitButton if is the last step', async () => {
     const { getByTestId } = setup({
       isLastStep: jest.fn(() => true)
     })
 
-    expect(getByTestId('SubmitButton')).toBeInTheDocument()
+    await waitFor(() => {
+      expect(getByTestId('SubmitButton')).toBeInTheDocument()
+    })
   })
 
-  it('should not have a SubmitButton if is not the last step', () => {
+  it('should not have a SubmitButton if is not the last step', async () => {
     const { queryByTestId } = setup({
       isLastStep: jest.fn(() => false)
     })
-
-    expect(queryByTestId('SubmitButton')).toBeNull()
+    await waitFor(() => {
+      expect(queryByTestId('SubmitButton')).toBeNull()
+    })
   })
 
-  it('should call fetchCurrentUser once at mount', () => {
+  it('should call fetchCurrentUser once at mount', async () => {
     const mockFetchCurrentUser = jest.fn()
     setup({ mockFetchCurrentUser })
-
-    expect(mockFetchCurrentUser).toBeCalledTimes(1)
+    await waitFor(() => {
+      expect(mockFetchCurrentUser).toBeCalledTimes(1)
+    })
   })
 })
