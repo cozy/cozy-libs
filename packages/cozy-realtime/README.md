@@ -70,8 +70,8 @@ import CozyClient from 'cozy-client'
 import { RealtimePlugin } from 'cozy-realtime'
 
 const agent = new Agent({ keepAlive: true })
-const createWebSocket = (uri, doctype) => {
-  return new WebSocket(uri, doctype, { agent })
+const createWebSocket = (uri, protocol) => {
+  return new WebSocket(uri, protocol, { agent })
 }
 
 const client = new CozyClient({})
@@ -153,7 +153,7 @@ import CozyRealtime from 'cozy-realtime'
 /**
  * In Node applications, provide a function to instantiate Websockets:
  *
- * const createWebSocket = (uri, doctype) => { ... }
+ * const createWebSocket = (uri, protocol) => { ... }
  *
  * const realtime = new CozyRealtime({ client: cozyClient, createWebSocket })
  *
