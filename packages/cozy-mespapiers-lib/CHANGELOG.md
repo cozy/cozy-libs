@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [101.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@100.2.1...cozy-mespapiers-lib@101.0.0) (2024-05-30)
+
+
+### Bug Fixes
+
+* Stuck when OCR was not activated ([406f682](https://github.com/cozy/cozy-libs/commit/406f682b8e670df569e8a96068b0ea444a324272))
+* Support old flagship app in FormDataProvider loadFormBackup ([1e58ad1](https://github.com/cozy/cozy-libs/commit/1e58ad1ec08115aaf9c716309d6f0d0ad99311da))
+* Wait until StepperDialogProvider is ready ([c1e2658](https://github.com/cozy/cozy-libs/commit/c1e2658244a3aabcd8b96c2cce73bf07636bfd39))
+
+
+### Features
+
+* Add an indexed storage wrapper based on localforage ([a8097f9](https://github.com/cozy/cozy-libs/commit/a8097f936ae519e2ee90dae8e213c6b12b07c84c))
+* Add methods to export and import data from FormDataProvider ([6bfa967](https://github.com/cozy/cozy-libs/commit/6bfa9675d62538cd07b375c03d555f0776e37a08))
+* Add support for io.cozy.bills and use it in expense_claim ([ac42025](https://github.com/cozy/cozy-libs/commit/ac42025f43c9f8a1b33e40c2ee6dc6cd59f9e4c4))
+* Backup everything we need before a 'scanDocument' webview ([c746d5d](https://github.com/cozy/cozy-libs/commit/c746d5db39c85f2c828baba00ce4018ec5b13edb))
+* Go to correct step when webview killed in 'scanDocument' ([7040457](https://github.com/cozy/cozy-libs/commit/704045716f57ead408fdd5181c2c42b2d176a77e))
+* Install localforage ([d883a40](https://github.com/cozy/cozy-libs/commit/d883a40dd2f7610053a55046f565785450d80cef))
+* Load new data when webview killed in 'scanDocument' ([ff1a287](https://github.com/cozy/cozy-libs/commit/ff1a2878d52990b2849e7b1a20eed929aff6c6a5))
+* Load previous data when webview killed in 'scanDocument' ([0bdd415](https://github.com/cozy/cozy-libs/commit/0bdd4159807c48982e05c3ed97bad6002547ff23))
+* **mespapiers:** Add possibility to define a specific doctype ([6e315d5](https://github.com/cozy/cozy-libs/commit/6e315d5bc37f622efcd9a1542f6277779336eb47))
+* **mespapiers:** Some change after PR review ([c7f1fa5](https://github.com/cozy/cozy-libs/commit/c7f1fa5b18495db59cc2773dfa8a35809d3248fd))
+* Redirect to /paper/create when webview killed in 'scanDocument' ([19adb35](https://github.com/cozy/cozy-libs/commit/19adb350797764fe6bf8d790ab3334b1f04f769f))
+* Upgrade to cozy-client 47.6.0 and to cozy-ui 107.0.0 ([2ab673c](https://github.com/cozy/cozy-libs/commit/2ab673c9dfb89adf96bd1d18e5c0fa874ae1b76e))
+
+
+### BREAKING CHANGES
+
+* You must add io.cozy.bills relationships in
+cozy-client schema on io.cozy.files, and add permission in manifest
+* you must have `cozy-ui >= 107.0.0` and
+`cozy-client >= 47.6.0`
+
+
+
+
+
 ## [100.2.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@100.2.0...cozy-mespapiers-lib@100.2.1) (2024-05-28)
 
 **Note:** Version bump only for package cozy-mespapiers-lib

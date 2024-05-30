@@ -1,6 +1,6 @@
 {
   "name": "cozy-mespapiers-lib",
-  "version": "100.2.1",
+  "version": "101.0.0",
   "description": "Cozy Mes papiers lib",
   "license": "AGPL-3.0",
   "main": "dist/index.js",
@@ -45,9 +45,9 @@
     "classnames": "2.3.2",
     "date-fns": "2.23.0",
     "flexsearch": "0.7.31",
+    "localforage": "1.10.0",
     "pdf-lib": "1.17.1",
-    "react-input-mask": "3.0.0-alpha.2",
-    "localforage": "1.10.0"
+    "react-input-mask": "3.0.0-alpha.2"
   },
   "peerDependencies": {
     "cozy-bar": ">=12.2.3",
