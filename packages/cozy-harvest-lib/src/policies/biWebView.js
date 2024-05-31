@@ -10,7 +10,6 @@ import get from 'lodash/get'
 import keyBy from 'lodash/keyBy'
 import set from 'lodash/set'
 
-import { biErrorMap } from 'cozy-bi-auth'
 import { Q } from 'cozy-client'
 import PromiseCache from 'cozy-client/dist/promise-cache'
 import { receiveMutationResult } from 'cozy-client/dist/store'
@@ -447,9 +446,7 @@ export const findAccountWithBiConnection = async ({
  */
 export const convertBIErrortoKonnectorJobError = error => {
   const errorCode = error ? error.code : null
-  const cozyErrorMessage = errorCode
-    ? biErrorMap[errorCode] || extraBIErrorMap[errorCode] || null
-    : null
+  const cozyErrorMessage = errorCode ? biErrorMap[errorCode] || null : null
   const errorMessage =
     cozyErrorMessage ||
     (errorCode ? `UNKNOWN_ERROR.${errorCode}` : 'UNKNOWN_ERROR')
@@ -461,13 +458,16 @@ export const convertBIErrortoKonnectorJobError = error => {
 export const isBudgetInsightConnector = konnector =>
   konnector?.partnership?.domain === 'budget-insight.com'
 
-/**
- * This error map is not in the bi-auth package since it is not really
- * satisfying to have "config" mapped to LOGIN_FAILED. It might change.
- * We should not have this error if we validate the fields in the
- * front-end.
- */
-const extraBIErrorMap = {
+const biErrorMap = {
+  actionNeeded: 'USER_ACTION_NEEDED',
+  wrongpass: 'LOGIN_FAILED',
+  decoupled: 'USER_ACTION_NEEDED.TWOFA_NEEDED.APP',
+  passwordExpired: 'USER_ACTION_NEEDED.CHANGE_PASSWORD',
+  SCARequired: 'USER_ACTION_NEEDED.SCA_REQUIRED',
+  webauthRequired: 'USER_ACTION_NEEDED.WEBAUTH_REQUIRED',
+  websiteUnavailable: 'VENDOR_DOWN.BANK_DOWN',
+  additionalInformationNeeded: 'CHALLENGE_ASKED',
+  bug: 'VENDOR_DOWN',
   config: 'LOGIN_FAILED',
   ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED:
     'ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED'
