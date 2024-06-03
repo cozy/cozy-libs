@@ -78,7 +78,7 @@ describe('NativeService', () => {
 
     const nativeService = new NativeService(nativeMethods, MockNativeMessenger)
 
-    nativeService.registerWebview('some_uri', webviewRef)
+    nativeService.registerWebview('some_uri', 'some_slug', webviewRef)
 
     await nativeService.tryEmit(
       {
@@ -117,7 +117,7 @@ describe('NativeService', () => {
 
       const nativeService = new NativeService(nativeMethods)
 
-      nativeService.registerWebview('some_uri', webviewRef)
+      nativeService.registerWebview('some_uri', 'some_slug', webviewRef)
 
       expect(NativeMessenger).toHaveBeenNthCalledWith(1, webviewRef)
     })
@@ -134,10 +134,10 @@ describe('NativeService', () => {
 
       const nativeService = new NativeService(nativeMethods)
 
-      nativeService.registerWebview('some_uri', webviewRef)
+      nativeService.registerWebview('some_uri', 'some_slug', webviewRef)
 
       expect(() => {
-        nativeService.registerWebview('some_uri', webviewRef)
+        nativeService.registerWebview('some_uri', 'some_slug', webviewRef)
       }).not.toThrow()
 
       expect(mockDebug).toHaveBeenCalled()
@@ -156,7 +156,7 @@ describe('NativeService', () => {
 
       const nativeService = new NativeService(nativeMethods)
 
-      nativeService.registerWebview('some_uri', webviewRef)
+      nativeService.registerWebview('some_uri', 'some_slug', webviewRef)
 
       expect(NativeMessenger).toHaveBeenNthCalledWith(1, webviewRef)
     })
@@ -174,8 +174,8 @@ describe('NativeService', () => {
 
       const nativeService = new NativeService(nativeMethods)
 
-      nativeService.registerWebview('some_uri', webviewRef)
-      nativeService.registerWebview('some_uri', webviewRef)
+      nativeService.registerWebview('some_uri', 'some_slug', webviewRef)
+      nativeService.registerWebview('some_uri', 'some_slug', webviewRef)
 
       const baseUrlFromWebview = 'some_uri'
       expect(mockDebug).toHaveBeenLastCalledWith(
@@ -215,7 +215,7 @@ describe('NativeService', () => {
     })
 
     it('Should try to init a webview', async () => {
-      nativeService.registerWebview('bar.com', {
+      nativeService.registerWebview('bar.com', 'bar', {
         injectJavaScript: jest.fn(),
         props: {
           source: {
@@ -286,7 +286,7 @@ describe('NativeService', () => {
         MockNativeMessenger
       )
 
-      nativeService.registerWebview('some_uri', webviewRef)
+      nativeService.registerWebview('some_uri', 'some_slug', webviewRef)
 
       await expect(
         nativeService.tryEmit(
@@ -304,6 +304,7 @@ describe('NativeService', () => {
         type: '@post-me',
         methodName: 'setFlagshipUI',
         args: [
+          { slug: 'some_slug' },
           { bottomTheme: 'dark', componentId: 'SOME_COMPONENT_ID' },
           'SOME_CALLER_NAME'
         ]
@@ -328,7 +329,7 @@ describe('NativeService', () => {
         MockNativeMessenger
       )
 
-      nativeService.registerWebview('some_uri', webviewRef)
+      nativeService.registerWebview('some_uri', 'some_slug', webviewRef)
 
       await expect(
         nativeService.tryEmit(
@@ -345,7 +346,10 @@ describe('NativeService', () => {
       expect(onMessageMock).toHaveBeenNthCalledWith(1, {
         type: '@post-me',
         methodName: 'setTheme',
-        args: [{ homeTheme: 'inverted', componentId: 'SOME_COMPONENT_ID' }]
+        args: [
+          { slug: 'some_slug' },
+          { homeTheme: 'inverted', componentId: 'SOME_COMPONENT_ID' }
+        ]
       })
 
       expect(mockDebug).toHaveBeenCalled()

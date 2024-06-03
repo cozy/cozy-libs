@@ -10,6 +10,10 @@ export type NativeEvent = {
   }
 }
 
+export type PostMeMessageOptions = {
+  slug: string
+}
+
 export type PostMeMessage = {
   action: string
   args: unknown[]

@@ -1,4 +1,4 @@
-import { AppManifest, FlagshipUI } from '../../api'
+import { AppManifest, FlagshipUI, PostMeMessageOptions } from '../../api'
 
 type PostMeDefault = Record<string, (...args: unknown[]) => Promise<null>>
 
@@ -13,10 +13,8 @@ interface _NativeMethodsRegister {
     app: AppManifest,
     iconParams?: DOMRect
   ) => Promise<null>
-  openSettingBiometry: () => Promise<boolean>
   setDefaultRedirection: (defaultRedirection: string) => Promise<null>
   setFlagshipUI: (flagshipUI: FlagshipUI, caller?: string) => Promise<null>
-  showSplashScreen: () => Promise<null>
   toggleSetting: (
     settingName: 'biometryLock' | 'PINLock' | 'autoLock',
     params?: Record<string, unknown>
@@ -31,5 +29,14 @@ interface _NativeMethodsRegister {
 }
 
 export type NativeMethodsRegister = _NativeMethodsRegister & PostMeDefault
+
+type WithOptions<T> = {
+  [K in keyof T]: T[K] extends (...args: infer A) => infer R
+    ? (options: PostMeMessageOptions, ...args: A) => R
+    : never
+}
+
+export type NativeMethodsRegisterWithOptions =
+  WithOptions<NativeMethodsRegister>
 
 export type WebviewMethods = Record<string, () => unknown>

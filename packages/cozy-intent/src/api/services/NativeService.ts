@@ -56,7 +56,11 @@ export class NativeService {
   private isInitMessage = (message: PostMeMessage): boolean =>
     message.message === strings.webviewIsRendered
 
-  public registerWebview = (uri: string, ref: WebviewRef): void => {
+  public registerWebview = (
+    uri: string,
+    slug: string,
+    ref: WebviewRef
+  ): void => {
     log(strings.logging.registering(uri))
 
     if (this.messengerRegister[uri])
@@ -69,7 +73,8 @@ export class NativeService {
       [uri]: {
         messenger: isNativeDevMode()
           ? DebugNativeMessenger(messenger)
-          : messenger
+          : messenger,
+        slug
       }
     }
 
@@ -151,6 +156,10 @@ export class NativeService {
     if (registeredWebview === undefined) {
       return log(interpolate(strings.errorEmitMessage, { webviewUri }))
     }
+
+    message.args?.unshift({
+      slug: registeredWebview.slug
+    })
 
     registeredWebview.messenger.onMessage(message)
   }
