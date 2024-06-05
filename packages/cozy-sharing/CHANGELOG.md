@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@14.0.0...cozy-sharing@14.1.0) (2024-06-05)
+
+
+### Features
+
+* Adjust color of recipient avatar border ([55cf911](https://github.com/cozy/cozy-libs/commit/55cf911400aa7a9e269ef1e395dd1b3e80c9edf8))
+
+
+
+
+
 # [14.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@13.3.1...cozy-sharing@14.0.0) (2024-05-28)
 
 
