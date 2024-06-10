@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [26.0.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@26.0.0...cozy-harvest-lib@26.0.1) (2024-06-10)
+
+
+### Bug Fixes
+
+* **harvest:** TriggerAlertTemplate background wasn't theme responsive ([48df084](https://github.com/cozy/cozy-libs/commit/48df084ef1c92860689af6f9da49697dd8aeb851))
+
+
+
+
+
 # [26.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@25.1.1...cozy-harvest-lib@26.0.0) (2024-06-06)
 
 
