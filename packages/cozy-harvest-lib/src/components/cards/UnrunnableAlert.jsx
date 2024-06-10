@@ -25,7 +25,7 @@ function UnrunnableAlert({
   const { t } = useI18n()
   return (
     <TriggerAlertTemplate
-      color="var(--grey100)"
+      severity="secondary"
       icon={
         withoutIcon ? (
           false
