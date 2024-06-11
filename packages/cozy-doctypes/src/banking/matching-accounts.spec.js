@@ -69,7 +69,7 @@ describe('slug match', () => {
     label: 'Test account',
     number: '19019019002',
     type: 'CreditCard',
-    institutionLabel: 'Boursorama'
+    institutionLabel: 'BoursoBank'
   }
 
   it('should not match an account with a different slug', () => {
