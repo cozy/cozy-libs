@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.91.0 (2024-06-12)
+
+
+### Bug Fixes
+
+* When using OCR, save or retrieve metadata in the correct place ([9c84c35](https://github.com/cozy/cozy-libs/commit/9c84c353f13fc22999b2a6ecf23550d63520d431))
+
+
+### Features
+
+* Update banking konnectors label slugs ([5a91aae](https://github.com/cozy/cozy-libs/commit/5a91aae4868815d624b061132846bbbde1e658e1))
+
+
+
+
+
 # 1.90.0 (2024-04-15)
 
 
