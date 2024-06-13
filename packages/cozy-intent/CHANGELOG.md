@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.22.0 (2024-06-13)
+
+
+### Features
+
+* Add options object in NativeService args ([f207aa4](https://github.com/cozy/cozy-libs/commit/f207aa48869c18737a772a0485860aae3fd13255))
+* **mespapiers:** Remove Onboarding feature ([c2e8b97](https://github.com/cozy/cozy-libs/commit/c2e8b9754dd74940a7d0c17c9f4dcd906737452c))
+
+
+
+
+
 # [2.21.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.20.0...cozy-intent@2.21.0) (2024-04-05)
 
 
