@@ -77,6 +77,10 @@ read_current_version() {
   echo $(cat package.json | jq -rc '.version')
 }
 
+read_current_editor() {
+  echo $(cat $MANIFEST | jq -rc '.editor')
+}
+
 compute_next_version() {
   type=${2:-minor}
   major=`echo $1 | awk -F '.' '{print $1}'`
@@ -158,6 +162,7 @@ tag_beta() {
   if [ ! $NO_PUSH ]; then
     git push $remote $beta_tag
   fi
+  warn_about_editor
 }
 
 tag_stable() {
@@ -176,6 +181,15 @@ tag_stable() {
 
   if [ ! $NO_PUSH ]; then
     git push $remote $current_version
+  fi
+  warn_about_editor
+}
+
+warn_about_editor() {
+  current_editor=`read_current_editor`
+
+  if [ ! $current_editor = "Cozy" ]; then
+    echo "⚠️  You will have to validate this version to make it available to all users"
   fi
 }
 
