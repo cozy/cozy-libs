@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.14.0 (2024-06-26)
+
+
+### Features
+
+* **mespapiers:** Konnector UI management without files ([0afdaf7](https://github.com/cozy/cozy-libs/commit/0afdaf7170f2e97cbfa4b119a001dd30eb5fdef4))
+* Warn the user when editor is not Cozy ([73b864b](https://github.com/cozy/cozy-libs/commit/73b864bf6c385534d5c9b43b959b19a5a2eeb985))
+
+
+
+
+
 # 1.13.0 (2023-01-31)
 
 
