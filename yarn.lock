@@ -10452,10 +10452,10 @@ cosmiconfig@^7.0.1:
     path-type "^4.0.0"
     yaml "^1.10.0"
 
-cozy-bar@^12.2.3:
-  version "12.2.3"
-  resolved "https://registry.yarnpkg.com/cozy-bar/-/cozy-bar-12.2.3.tgz#43501e2dc82bbad80ff52c9e87e6dfa03b60bdb2"
-  integrity sha512-FH8+bM0haujVy/O9UbW7E34t0InfvZPafoIAVb/KdsDQaO8/Q5JH4hDyCHw+UNt55Mpw6cE+GK3w11RSAeC86g==
+cozy-bar@^12.3.0:
+  version "12.3.0"
+  resolved "https://registry.yarnpkg.com/cozy-bar/-/cozy-bar-12.3.0.tgz#697c19df79b1e3c04978334c64adeb9917790f7e"
+  integrity sha512-whvGkUQ2Ye1WBnUWCCelwjlDlYuYeauFtAoShcJCxJZG/hmHANJkZT2LTbLbRjQCu+x28JKlpLyiW6XwVSTIPA==
   dependencies:
     hammerjs "2.0.8"
     lodash.debounce "4.0.8"
