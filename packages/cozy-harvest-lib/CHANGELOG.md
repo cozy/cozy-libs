@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [26.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@26.0.3...cozy-harvest-lib@26.1.0) (2024-07-02)
+
+
+### Features
+
+* **harvest:** Replace background color for MaintenanceAlert ([23d5678](https://github.com/cozy/cozy-libs/commit/23d5678872e27f8ea65aa828b3c73f5d7b9b9902))
+
+
+
+
+
 ## [26.0.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@26.0.2...cozy-harvest-lib@26.0.3) (2024-06-13)
 
 **Note:** Version bump only for package cozy-harvest-lib
