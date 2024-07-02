@@ -48,7 +48,7 @@ function MaintenanceAlert({
 
   return (
     <TriggerAlertTemplate
-      color="var(--grey50)"
+      color="var(--defaultBackgroundColor)"
       icon={<Icon icon={WrenchCircleIcon} color="var(--secondaryTextColor)" />}
       block={isBlock}
       label={label}
