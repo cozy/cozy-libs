@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [26.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@26.1.0...cozy-harvest-lib@26.2.0) (2024-07-05)
+
+
+### Features
+
+* Update cozy-keys-lib from 6.0.0 to 6.1.1 ([dff0db3](https://github.com/cozy/cozy-libs/commit/dff0db3d30bcbe4d93d9399e4916dc01181d750e))
+
+
+
+
+
 # [26.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@26.0.3...cozy-harvest-lib@26.1.0) (2024-07-02)
 
 
