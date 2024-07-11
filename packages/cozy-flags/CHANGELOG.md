@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.0.0 (2024-07-11)
+
+
+### Features
+
+* Add types to flag ([2539957](https://github.com/cozy/cozy-libs/commit/25399570a507417befef8945339902b25d72cd85))
+* **sharing:** Upgrade cozy-ui 105.3.1 to 106.8.0 ([b731089](https://github.com/cozy/cozy-libs/commit/b731089dc71325bb80d9cb2687583516596f2b8a))
+
+
+### BREAKING CHANGES
+
+* **sharing:** you must have `cozy-ui >= 106.8.0`
+
+
+
+
+
 ## [3.2.2](https://github.com/cozy/cozy-libs/compare/cozy-flags@3.2.1...cozy-flags@3.2.2) (2024-01-05)
 
 

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 8.0.0 (2024-07-11)
+
+
+### Features
+
+* **sharing:** Upgrade cozy-ui 105.3.1 to 106.8.0 ([b731089](https://github.com/cozy/cozy-libs/commit/b731089dc71325bb80d9cb2687583516596f2b8a))
+
+
+### BREAKING CHANGES
+
+* **sharing:** you must have `cozy-ui >= 106.8.0`
+
+
+
+
+
 ## [7.1.4](https://github.com/cozy/cozy-libs/compare/cozy-scanner@7.1.3...cozy-scanner@7.1.4) (2024-01-05)
 
 **Note:** Version bump only for package cozy-scanner
