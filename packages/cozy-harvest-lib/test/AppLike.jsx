@@ -3,7 +3,9 @@ import { Provider as ReduxProvider } from 'react-redux'
 
 import CozyClient, { CozyProvider as CozyClientProvider } from 'cozy-client'
 import { useCozyDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import AlertProvider from 'cozy-ui/transpiled/react/providers/Alert'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import I18n from 'cozy-ui/transpiled/react/providers/I18n'
 
 import DialogContext from '../src/components/DialogContext'
@@ -23,13 +25,17 @@ const AppLike = ({
 
   return (
     <CozyClientProvider client={client}>
-      <BreakpointsProvider>
-        <DialogContextApp>
-          <I18n lang="en" dictRequire={() => locale || enLocale}>
-            <ReduxProvider store={store}>{children}</ReduxProvider>
-          </I18n>
-        </DialogContextApp>
-      </BreakpointsProvider>
+      <CozyTheme>
+        <BreakpointsProvider>
+          <AlertProvider>
+            <DialogContextApp>
+              <I18n lang="en" dictRequire={() => locale || enLocale}>
+                <ReduxProvider store={store}>{children}</ReduxProvider>
+              </I18n>
+            </DialogContextApp>
+          </AlertProvider>
+        </BreakpointsProvider>
+      </CozyTheme>
     </CozyClientProvider>
   )
 }

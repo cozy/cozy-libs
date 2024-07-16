@@ -21,7 +21,7 @@ import NavigationList, {
   NavigationListHeader
 } from 'cozy-ui/transpiled/react/NavigationList'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 // @ts-ignore peerDep
@@ -81,6 +81,7 @@ const ConfigurationTab = ({
   const { pushHistory } = useContext(MountPointContext)
   const client = useClient()
   const vaultClient = useVaultClient()
+  const { showAlert } = useAlert()
   const [deleting, setDeleting] = useSafeState(false)
   const [requestingDeletion, setRequestDeletion] = useState(false)
   const tracker = useTracker()
@@ -107,8 +108,10 @@ const ConfigurationTab = ({
     try {
       onAccountDeleted(account)
       await deleteAccount(client, account)
-      // @ts-ignore La propriété 'success' n'existe pas sur le type '(...args: any[]) => any'.
-      Alerter.success(t('modal.updateAccount.delete-account-success'))
+      showAlert({
+        message: t('modal.updateAccount.delete-account-success'),
+        severity: 'success'
+      })
       // @ts-ignore 0 arguments attendus, mais 1 reçus.
       tracker.trackEvent({
         name: 'compte_bancaire_supprime',
@@ -117,8 +120,10 @@ const ConfigurationTab = ({
     } catch (error) {
       // eslint-disable-next-line no-console
       console.warn('Error while deleting account', error)
-      // @ts-ignore La propriété 'error' n'existe pas sur le type '(...args: any[]) => any'.
-      Alerter.error(t('modal.updateAccount.delete-account-error'))
+      showAlert({
+        message: t('modal.updateAccount.delete-account-error'),
+        severity: 'error'
+      })
     } finally {
       setDeleting(false)
     }

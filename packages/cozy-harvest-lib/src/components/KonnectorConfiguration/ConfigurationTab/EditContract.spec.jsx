@@ -37,22 +37,30 @@ describe('EditContract', () => {
 
   it('should show fields of the bank account', () => {
     const { root } = setup()
+
     expect(root.getByPlaceholderText('Label').value).toBe(
       'Mon compte sociétaire'
     )
+
     expect(root.getByPlaceholderText('Bank').value).toBe(
       "Caisse d'Épargne Particuliers"
     )
   })
 
-  it('can edit the label', () => {
+  it('can edit the label', async () => {
     const { root, client } = setup()
     const labelInput = root.getByPlaceholderText('Label')
+
     fireEvent.change(labelInput, {
       target: { value: 'Mes actions sociétaire' }
     })
+
     const btn = root.getByText('Apply').closest('button')
-    fireEvent.click(btn)
+
+    await act(async () => {
+      fireEvent.click(btn)
+    })
+
     expect(client.save).toHaveBeenCalledWith(
       expect.objectContaining({
         shortLabel: 'Mes actions sociétaire'
@@ -66,9 +74,11 @@ describe('EditContract', () => {
     fireEvent.click(btn)
     const confirmBtn = root.getByText('Confirm account deletion')
     expect(client.destroy).not.toHaveBeenCalled()
+
     await act(async () => {
       fireEvent.click(confirmBtn)
     })
+
     expect(client.destroy).toHaveBeenCalled()
   })
 })

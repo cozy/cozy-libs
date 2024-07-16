@@ -9,7 +9,7 @@ import {
 } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Dialog from 'cozy-ui/transpiled/react/Dialog'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { withStyles } from 'cozy-ui/transpiled/react/styles'
 
@@ -80,6 +80,7 @@ const Routes = ({
     onClose: onDismiss,
     disableTitleAutoPadding: true
   })
+  const { showAlert } = useAlert()
 
   const { konnectorWithTriggers, fetching, notFoundError } =
     useKonnectorWithTriggers(konnectorSlug, konnector)
@@ -87,9 +88,12 @@ const Routes = ({
   useEffect(() => {
     if (notFoundError) {
       onDismiss()
-      Alerter.error(t('error.application-not-found'))
+      showAlert({
+        message: t('error.application-not-found'),
+        severity: 'error'
+      })
     }
-  }, [notFoundError, onDismiss, t])
+  }, [notFoundError, onDismiss, t, showAlert])
 
   return (
     <DatacardOptions options={datacardOptions}>
