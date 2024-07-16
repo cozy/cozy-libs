@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [27.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@26.2.1...cozy-harvest-lib@27.0.0) (2024-07-16)
+
+
+### Features
+
+* Replace Alerter by AlertProvider ([3e32363](https://github.com/cozy/cozy-libs/commit/3e32363e72c4d62eabec4b52047e2b1aec3bdf74))
+* Upgrade packages ([dc89875](https://github.com/cozy/cozy-libs/commit/dc8987541f7c1fa385ca733ecfca11f83be8f364))
+
+
+### BREAKING CHANGES
+
+* you must have `cozy-client >= 48.8.8` and `cozy-ui >= 111.0.0`
+* Deprecated `Alerter` is no longer required. You must use `AlertProvider` instead.
+
+
+
+
+
 ## [26.2.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@26.2.0...cozy-harvest-lib@26.2.1) (2024-07-11)
 
 **Note:** Version bump only for package cozy-harvest-lib
