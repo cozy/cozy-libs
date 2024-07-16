@@ -137,6 +137,7 @@ export class TwoFAModal extends PureComponent {
                 label={t('twoFAForm.CTA')}
                 busy={isJobRunning}
                 disabled={isJobRunning || !twoFACode}
+                onClick={this.handleSubmit}
                 fullWidth
               />
             ) : null}
