@@ -26,7 +26,7 @@ import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
 import CollectionField from 'cozy-ui/transpiled/react/Labs/CollectionField'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Stack from 'cozy-ui/transpiled/react/Stack'
-import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { withStyles } from 'cozy-ui/transpiled/react/styles'
@@ -94,6 +94,7 @@ const EditContract = props => {
   const { isMobile } = useBreakpoints()
   const client = useClient()
   const tracker = useTracker()
+  const { showAlert } = useAlert()
 
   const { contract, onAfterRemove, onSuccess, onClose, onError } = props
 
@@ -127,7 +128,10 @@ const EditContract = props => {
         if (onSuccess) {
           onSuccess()
         }
-        Alerter.success(t('contractForm.success'))
+        showAlert({
+          message: t('contractForm.success'),
+          severity: 'success'
+        })
       },
       onError: err => {
         if (onError) {
@@ -135,7 +139,10 @@ const EditContract = props => {
         }
         // eslint-disable-next-line no-console
         console.error(err)
-        Alerter.error(t('contractForm.failure'))
+        showAlert({
+          message: t('contractForm.failure'),
+          severity: 'error'
+        })
       }
     })
   }
@@ -170,7 +177,10 @@ const EditContract = props => {
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error(err)
-      Alerter.error(t('contractForm.deletion_error'))
+      showAlert({
+        message: t('contractForm.deletion_error'),
+        severity: 'error'
+      })
     } finally {
       setDeleting(false)
     }

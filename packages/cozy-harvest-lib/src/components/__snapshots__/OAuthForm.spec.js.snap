@@ -1,94 +1,104 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OAuthForm should bypass reconnect button when updating an account 1`] = `<div />`;
+exports[`OAuthForm should bypass reconnect button when updating an account 1`] = `
+<div>
+  <div
+    class="CozyTheme--light-normal u-dc"
+  />
+</div>
+`;
 
 exports[`OAuthForm should handle oauth cancelation 1`] = `
 <div>
   <div
-    class="styles__Infos___tpCYh styles__Infos--danger___1HWww u-mb-1"
+    class="CozyTheme--light-normal u-dc"
   >
     <div
-      class="styles__Stack--m___1tSpV"
+      class="styles__Infos___tpCYh styles__Infos--danger___1HWww u-mb-1"
     >
       <div
-        class="styles__Infos-description___3q8sW"
+        class="styles__Stack--m___1tSpV"
       >
         <div
-          class="styles__Stack--xs___2R5lW"
+          class="styles__Infos-description___3q8sW"
         >
-          <h6
-            class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
-          >
-            Canceled
-          </h6>
           <div
-            class="MuiTypography-root MuiTypography-body1"
+            class="styles__Stack--xs___2R5lW"
           >
-            <span
-              class="u-db u-mv-0"
+            <h6
+              class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
             >
-              We could not add your bank since you canceled the connection. Click "Add your bank" one more time to try again.
-            </span>
+              Canceled
+            </h6>
+            <div
+              class="MuiTypography-root MuiTypography-body1"
+            >
+              <span
+                class="u-db u-mv-0"
+              >
+                We could not add your bank since you canceled the connection. Click "Add your bank" one more time to try again.
+              </span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div
-    class="styles__c-card___YgP7B u-flex u-flex-wrap"
-  >
     <div
-      class="styles__c-empty___3w5oV"
+      class="styles__c-card___YgP7B u-flex u-flex-wrap"
     >
-      CloudSync2
-      <h3
-        class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-gutterBottom"
-      >
-        oauth.connect.title
-      </h3>
-      <p
-        class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
-      >
-        oauth.connect.description
-      </p>
       <div
-        class="styles__c-empty-text___3HnvR"
-      />
-    </div>
-    <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-contained customColor-primary u-mh-auto MuiButton-containedPrimary MuiButton-disableElevation Mui-disabled Mui-disabled"
-      disabled=""
-      tabindex="-1"
-      type="button"
-    >
-      <span
-        class="MuiButton-label"
+        class="styles__c-empty___3w5oV"
       >
-        oauth.connect.submit
-        <span
-          class="MuiButton-endIcon MuiButton-iconSizeMedium"
+        CloudSync2
+        <h3
+          class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-gutterBottom"
         >
-          <svg
-            aria-busy="true"
-            aria-hidden="true"
-            class="styles__icon___23x3R styles__icon--spin___ybfC1"
-            focusable="false"
-            height="16"
-            role="progressbar"
-            viewBox="0 0 32 32"
-            width="16"
+          oauth.connect.title
+        </h3>
+        <p
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+        >
+          oauth.connect.description
+        </p>
+        <div
+          class="styles__c-empty-text___3HnvR"
+        />
+      </div>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained customColor-primary u-mh-auto MuiButton-containedPrimary MuiButton-disableElevation Mui-disabled Mui-disabled"
+        disabled=""
+        tabindex="-1"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          oauth.connect.submit
+          <span
+            class="MuiButton-endIcon MuiButton-iconSizeMedium"
           >
-            <path
-              d="M16 0a16 16 0 000 32 16 16 0 000-32m0 4a12 12 0 010 24 12 12 0 010-24"
-              opacity="0.25"
-            />
-            <path
-              d="M16 0a16 16 0 0116 16h-4A12 12 0 0016 4z"
-            />
-          </svg>
+            <svg
+              aria-busy="true"
+              aria-hidden="true"
+              class="styles__icon___23x3R styles__icon--spin___ybfC1"
+              focusable="false"
+              height="16"
+              role="progressbar"
+              viewBox="0 0 32 32"
+              width="16"
+            >
+              <path
+                d="M16 0a16 16 0 000 32 16 16 0 000-32m0 4a12 12 0 010 24 12 12 0 010-24"
+                opacity="0.25"
+              />
+              <path
+                d="M16 0a16 16 0 0116 16h-4A12 12 0 0016 4z"
+              />
+            </svg>
+          </span>
         </span>
-      </span>
-    </button>
+      </button>
+    </div>
   </div>
 </div>
 `;
@@ -96,70 +106,74 @@ exports[`OAuthForm should handle oauth cancelation 1`] = `
 exports[`OAuthForm should handle oauth cancelation 2`] = `
 <div>
   <div
-    class="styles__Infos___tpCYh styles__Infos--danger___1HWww u-mb-1"
+    class="CozyTheme--light-normal u-dc"
   >
     <div
-      class="styles__Stack--m___1tSpV"
+      class="styles__Infos___tpCYh styles__Infos--danger___1HWww u-mb-1"
     >
       <div
-        class="styles__Infos-description___3q8sW"
+        class="styles__Stack--m___1tSpV"
       >
         <div
-          class="styles__Stack--xs___2R5lW"
+          class="styles__Infos-description___3q8sW"
         >
-          <h6
-            class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
-          >
-            Canceled
-          </h6>
           <div
-            class="MuiTypography-root MuiTypography-body1"
+            class="styles__Stack--xs___2R5lW"
           >
-            <span
-              class="u-db u-mv-0"
+            <h6
+              class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
             >
-              We could not add your bank since you canceled the connection. Click "Add your bank" one more time to try again.
-            </span>
+              Canceled
+            </h6>
+            <div
+              class="MuiTypography-root MuiTypography-body1"
+            >
+              <span
+                class="u-db u-mv-0"
+              >
+                We could not add your bank since you canceled the connection. Click "Add your bank" one more time to try again.
+              </span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div
-    class="styles__c-card___YgP7B u-flex u-flex-wrap"
-  >
     <div
-      class="styles__c-empty___3w5oV"
+      class="styles__c-card___YgP7B u-flex u-flex-wrap"
     >
-      CloudSync2
-      <h3
-        class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-gutterBottom"
-      >
-        oauth.connect.title
-      </h3>
-      <p
-        class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
-      >
-        oauth.connect.description
-      </p>
       <div
-        class="styles__c-empty-text___3HnvR"
-      />
-    </div>
-    <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-contained customColor-primary u-mh-auto MuiButton-containedPrimary MuiButton-disableElevation"
-      tabindex="0"
-      type="button"
-    >
-      <span
-        class="MuiButton-label"
+        class="styles__c-empty___3w5oV"
       >
-        oauth.connect.submit
-      </span>
-      <span
-        class="MuiTouchRipple-root"
-      />
-    </button>
+        CloudSync2
+        <h3
+          class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-gutterBottom"
+        >
+          oauth.connect.title
+        </h3>
+        <p
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+        >
+          oauth.connect.description
+        </p>
+        <div
+          class="styles__c-empty-text___3HnvR"
+        />
+      </div>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained customColor-primary u-mh-auto MuiButton-containedPrimary MuiButton-disableElevation"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          oauth.connect.submit
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
   </div>
 </div>
 `;
@@ -167,40 +181,44 @@ exports[`OAuthForm should handle oauth cancelation 2`] = `
 exports[`OAuthForm should render 1`] = `
 <div>
   <div
-    class="styles__c-card___YgP7B u-flex u-flex-wrap"
+    class="CozyTheme--light-normal u-dc"
   >
     <div
-      class="styles__c-empty___3w5oV"
+      class="styles__c-card___YgP7B u-flex u-flex-wrap"
     >
-      CloudSync2
-      <h3
-        class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-gutterBottom"
-      >
-        oauth.connect.title
-      </h3>
-      <p
-        class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
-      >
-        oauth.connect.description
-      </p>
       <div
-        class="styles__c-empty-text___3HnvR"
-      />
-    </div>
-    <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-contained customColor-primary u-mh-auto MuiButton-containedPrimary MuiButton-disableElevation"
-      tabindex="0"
-      type="button"
-    >
-      <span
-        class="MuiButton-label"
+        class="styles__c-empty___3w5oV"
       >
-        oauth.connect.submit
-      </span>
-      <span
-        class="MuiTouchRipple-root"
-      />
-    </button>
+        CloudSync2
+        <h3
+          class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-gutterBottom"
+        >
+          oauth.connect.title
+        </h3>
+        <p
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+        >
+          oauth.connect.description
+        </p>
+        <div
+          class="styles__c-empty-text___3HnvR"
+        />
+      </div>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained customColor-primary u-mh-auto MuiButton-containedPrimary MuiButton-disableElevation"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          oauth.connect.submit
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
   </div>
 </div>
 `;
