@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [27.0.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@27.0.0...cozy-harvest-lib@27.0.1) (2024-07-25)
+
+
+### Bug Fixes
+
+* Submit 2FA form on click ([f7a72ce](https://github.com/cozy/cozy-libs/commit/f7a72ce6ee76b497755b8f5d9813420131fb24ea))
+
+
+
+
+
 # [27.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@26.2.1...cozy-harvest-lib@27.0.0) (2024-07-16)
 
 
