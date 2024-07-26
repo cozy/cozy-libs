@@ -26,6 +26,7 @@ interface _NativeMethodsRegister {
   ocr: (base64: string) => unknown
   openAppOSSettings: () => Promise<null>
   isAvailable: (featureName: string) => Promise<boolean>
+  flagshipLinkRequest: (operation: unknown) => Promise<unknown>
 }
 
 export type NativeMethodsRegister = _NativeMethodsRegister & PostMeDefault
