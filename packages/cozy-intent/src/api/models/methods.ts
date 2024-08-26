@@ -27,6 +27,7 @@ interface _NativeMethodsRegister {
   openAppOSSettings: () => Promise<null>
   isAvailable: (featureName: string) => Promise<boolean>
   flagshipLinkRequest: (operation: unknown) => Promise<unknown>
+  downloadFile: (file: unknown) => Promise<unknown>
 }
 
 export type NativeMethodsRegister = _NativeMethodsRegister & PostMeDefault
