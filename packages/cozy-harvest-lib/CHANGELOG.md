@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [27.1.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@27.1.0...cozy-harvest-lib@27.1.1) (2024-08-26)
+
+
+### Bug Fixes
+
+* Remove unused file ([7b3e882](https://github.com/cozy/cozy-libs/commit/7b3e88221c640a410db7adb5ece85169ce6afe7a))
+
+
+
+
+
 # [27.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@27.0.1...cozy-harvest-lib@27.1.0) (2024-08-26)
 
 
