@@ -19,18 +19,8 @@ import {
   launchTrigger
 } from '../connections/triggers'
 import { KonnectorJobError } from '../helpers/konnectors'
-import sentryHub from '../sentry'
 
 jest.mock('./konnector/KonnectorJobWatcher')
-jest.mock('../sentry', () => {
-  const mockScope = {
-    setTag: jest.fn()
-  }
-  return {
-    withScope: cb => cb(mockScope),
-    captureException: jest.fn()
-  }
-})
 
 KonnectorJobWatcher.prototype.watch = jest.fn()
 
@@ -501,7 +491,6 @@ describe('ConnectionFlow', () => {
       } catch (e) {
         // eslint-disable-next-line no-empty
       }
-      expect(sentryHub.captureException).toHaveBeenCalledWith(originalError)
       expect(isSubmitting(flow)).toBe(false)
     })
 

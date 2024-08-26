@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@cozy/minilog": "^1.0.0",
-    "@sentry/browser": "^6.0.1",
+    "@sentry/browser": "7.119.0",
     "classnames": "^2.3.1",
     "cozy-bi-auth": "0.0.25",
     "cozy-doctypes": "^1.91.1",

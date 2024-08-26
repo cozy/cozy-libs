@@ -1,5 +1,6 @@
 // @ts-check
 // @ts-ignore
+import * as Sentry from '@sentry/browser'
 import clone from 'lodash/clone'
 import MicroEE from 'microee'
 
@@ -46,7 +47,6 @@ import { findKonnectorPolicy } from '../konnector-policies'
 import logger from '../logger'
 import { createOrUpdateCipher } from '../models/cipherUtils'
 import { watchKonnectorJob } from '../models/konnector/KonnectorJobWatcher'
-import sentryHub from '../sentry'
 import { sendRealtimeNotification } from '../services/jobUtils'
 import '../types'
 
@@ -465,6 +465,11 @@ export class ConnectionFlow {
    */
   async handleFormSubmit(options) {
     const { konnector, cipherId, vaultClient, userCredentials, t } = options
+    Sentry.addBreadcrumb({
+      category: 'konnector',
+      message: `Slug: ${konnector.slug}`,
+      level: 'info'
+    })
     try {
       let { account, trigger } = options
 
@@ -534,12 +539,6 @@ export class ConnectionFlow {
       logger.error(e)
       this.setState({ accountError: e })
       this.triggerEvent(ERROR_EVENT, e)
-      sentryHub.withScope(scope => {
-        scope.setTag('konnector', konnector.slug)
-
-        // Capture the original exception instead of the user one
-        sentryHub.captureException(e.original || e)
-      })
       throw e
     }
   }
@@ -551,6 +550,11 @@ export class ConnectionFlow {
    */
   async createAccountSilently(options) {
     const { konnector, userCredentials, t } = options
+    Sentry.addBreadcrumb({
+      category: 'konnector',
+      message: `Slug: ${konnector.slug}`,
+      level: 'info'
+    })
     try {
       let { account, trigger } = options
 
@@ -612,12 +616,6 @@ export class ConnectionFlow {
       logger.error(e)
       this.setState({ accountError: e })
       this.triggerEvent(ERROR_EVENT, e)
-      sentryHub.withScope(scope => {
-        scope.setTag('konnector', konnector.slug)
-
-        // Capture the original exception instead of the user one
-        sentryHub.captureException(e.original || e)
-      })
       throw e
     }
   }
