@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/browser'
 import get from 'lodash/get'
 
 import { triggers } from 'cozy-client/dist/models/trigger'
@@ -13,7 +14,6 @@ import {
   buildAppsRegistryQueryBySlug
 } from './queries'
 import logger from '../logger'
-import sentryHub from '../sentry'
 
 const formatKonnector = ({
   client,
@@ -108,11 +108,10 @@ const isInError = async ({ client, sourceAccount, konnector }) => {
 const fatalError = ({ t, slug, error, consoleMessage }) => {
   logger.error(`konnectorBlock : ${consoleMessage}`)
   logger.error(error)
-  sentryHub.withScope(scope => {
-    scope.setTag('konnectorBlock with konnector', slug)
-
-    // Capture the original exception instead of the user one
-    sentryHub.captureException(error.original || error)
+  Sentry.addBreadcrumb({
+    category: 'konnector',
+    message: `Slug: ${slug}`,
+    level: 'info'
   })
   return {
     fatalError: t('konnectorBlock.fatalError', {
