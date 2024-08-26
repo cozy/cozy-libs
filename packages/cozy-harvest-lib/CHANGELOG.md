@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [27.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@27.0.1...cozy-harvest-lib@27.1.0) (2024-08-26)
+
+
+### Features
+
+* **harvest:** Update @sentry/browser from 6.0.1 to 7.119.0 ([9865ec4](https://github.com/cozy/cozy-libs/commit/9865ec48230fce22c3fd2e5ebb4ef88e1acec178))
+
+
+
+
+
 ## [27.0.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@27.0.0...cozy-harvest-lib@27.0.1) (2024-07-25)
 
 
