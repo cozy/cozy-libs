@@ -103,12 +103,12 @@ RunnableAlert.propTypes = {
   label: PropTypes.string.isRequired,
   isRunning: PropTypes.bool.isRequired,
   konnectorSlug: PropTypes.string.isRequired,
-  konnectorRoot: PropTypes.string.isRequired,
+  konnectorRoot: PropTypes.string,
   trigger: PropTypes.object.isRequired,
   error: PropTypes.object,
   historyAction: PropTypes.func.isRequired,
-  flow: PropTypes.object.isRequired,
-  account: PropTypes.object.isRequired,
+  flow: PropTypes.object,
+  account: PropTypes.object,
   intentsApi: PropTypes.object,
   isRunnable: PropTypes.bool.isRequired
 }
