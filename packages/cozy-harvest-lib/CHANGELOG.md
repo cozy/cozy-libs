@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [28.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@27.1.1...cozy-harvest-lib@28.0.0) (2024-08-27)
+
+
+### Features
+
+* **harvest:** Use Sentry as peerDeps ([8a8cdcd](https://github.com/cozy/cozy-libs/commit/8a8cdcd8c0483d3d8030328fbee16ba3ba8d3679))
+
+
+### BREAKING CHANGES
+
+* **harvest:** you must have @sentry/react >= 7.118.0
+
+
+
+
+
 ## [27.1.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@27.1.0...cozy-harvest-lib@27.1.1) (2024-08-26)
 
 

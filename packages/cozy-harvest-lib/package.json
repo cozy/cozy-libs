@@ -1,6 +1,6 @@
 {
   "name": "cozy-harvest-lib",
-  "version": "27.1.1",
+  "version": "28.0.0",
   "description": "Provides logic, modules and components for Cozy's harvest applications.",
   "main": "dist/index.js",
   "author": "Cozy",
@@ -50,6 +50,7 @@
     "@babel/core": "7.16.12",
     "@babel/register": "7.16.9",
     "@cozy/cli-tree": "^0.7.0",
+    "@sentry/react": "7.119.0",
     "@storybook/addon-essentials": "^7.0.23",
     "@storybook/addon-interactions": "^7.0.23",
     "@storybook/addon-links": "^7.0.23",
@@ -89,11 +90,11 @@
     "react-dom": "16.13.0",
     "react-router": "3.2.6",
     "react-swipeable-views": "0.13.9",
-    "storybook": "^7.0.23",
-    "@sentry/react": "7.119.0"
+    "storybook": "^7.0.23"
   },
   "peerDependencies": {
     "@babel/runtime": ">=7.12.5",
+    "@sentry/react": ">=7.118.0",
     "cozy-client": ">=48.8.0",
     "cozy-device-helper": ">=2.6.0",
     "cozy-flags": ">=2.3.5",
@@ -104,8 +105,7 @@
     "cozy-ui": ">=111.0.0",
     "leaflet": "^1.7.1",
     "react-router": "3.2.6",
-    "react-router-dom": ">=4.3.1",
-    "@sentry/react": ">=7.118.0"
+    "react-router-dom": ">=4.3.1"
   },
   "sideEffects": false
 }
