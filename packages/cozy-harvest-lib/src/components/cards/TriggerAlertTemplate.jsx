@@ -1,10 +1,20 @@
+import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import Alert from 'cozy-ui/transpiled/react/Alert'
-import Typography from 'cozy-ui/transpiled/react/Typography'
+import AlertTitle from 'cozy-ui/transpiled/react/AlertTitle'
+import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
+
+const useStyles = makeStyles(theme => ({
+  root: ({ hasChildren }) => ({
+    marginTop: 1,
+    marginBottom: hasChildren ? 8 : -1,
+    fontWeight: theme.typography.fontWeightRegular
+  })
+}))
 
 /**
  * Component that represents the design template for trigger alerts.
@@ -23,22 +33,6 @@ import { makeStyles } from 'cozy-ui/transpiled/react/styles'
  * @param {boolean} [props.showAction=true] - Whether to show the action components.
  * @returns {JSX.Element} The rendered trigger alert template.
  */
-const useStyles = makeStyles({
-  root: {
-    padding: '.5rem 1rem'
-  },
-  message: ({ block }) =>
-    block && {
-      maxWidth: 'calc(100% - 16px - .5rem)' // 16px is the size of the icon
-    },
-  action: {
-    marginRight: '-.5rem'
-  },
-  icon: {
-    marginRight: '.5rem'
-  }
-})
-
 function TriggerAlertTemplate({
   label,
   icon,
@@ -52,11 +46,12 @@ function TriggerAlertTemplate({
   showAction = true,
   className
 } = {}) {
-  const styles = useStyles({ block })
+  const styles = useStyles({ hasChildren: !!children })
   const { isMobile } = useBreakpoints()
 
   return (
     <Alert
+      className={cx('u-pos-relative', className)}
       block={block}
       icon={icon}
       color={color}
@@ -67,44 +62,21 @@ function TriggerAlertTemplate({
           <>
             {button}
             {!block && (
-              <div
-                style={{
-                  margin: '-.5rem -.5rem -.5rem 0'
-                }}
-              >
-                {menu}
-              </div>
+              <ListItemIcon className="u-ml-half">{menu}</ListItemIcon>
             )}
           </>
         )
       }
-      className={className}
-      classes={styles}
     >
-      <div
-        className="u-flex-auto u-flex u-flex-column"
-        style={{ gap: '.5rem' }}
-      >
-        <div className="u-flex u-flex-items-center">
-          <Typography
-            variant="caption"
-            className="u-flex-auto"
-            color={labelColor}
-          >
-            {label}
-          </Typography>
-          {block && showAction && (
-            <div
-              style={{
-                margin: '-1rem -1rem -1rem 0'
-              }}
-            >
-              {menu}
-            </div>
-          )}
-        </div>
-        {children}
-      </div>
+      {block && showAction && (
+        <ListItemIcon className="u-pos-absolute u-top-xs u-right-xs">
+          {menu}
+        </ListItemIcon>
+      )}
+      <AlertTitle classes={styles} variant="caption" color={labelColor}>
+        {label}
+      </AlertTitle>
+      {children}
     </Alert>
   )
 }
