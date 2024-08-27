@@ -1,3 +1,7 @@
+import React from 'react'
+
+import Button from 'cozy-ui/transpiled/react/Buttons'
+
 import { AvatarList } from './AvatarList'
 import { recipients } from '../../../.storybook/fixtures/recipients'
 
@@ -10,13 +14,24 @@ const meta = {
 
 export default meta
 
+const AvatarListWithButton = args => {
+  return (
+    <div className="u-flex">
+      <AvatarList {...args} />
+      <Button label="Add" />
+    </div>
+  )
+}
+
 export const Default = {
   name: 'Default',
+  render: AvatarListWithButton,
   args: {}
 }
 
 export const WithGroups = {
   name: 'With groups',
+  render: AvatarListWithButton,
   args: {
     recipients: [
       ...recipients,
@@ -30,5 +45,13 @@ export const WithGroups = {
         ]
       }
     ]
+  }
+}
+
+export const WithLink = {
+  name: 'With link',
+  render: AvatarListWithButton,
+  args: {
+    link: {}
   }
 }
