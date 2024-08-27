@@ -63,10 +63,10 @@ function TriggerAlertTemplate({
       severity={severity}
       square={isMobile}
       action={
-        showAction ? (
+        showAction && (
           <>
             {button}
-            {!block ? (
+            {!block && (
               <div
                 style={{
                   margin: '-.5rem -.5rem -.5rem 0'
@@ -74,9 +74,9 @@ function TriggerAlertTemplate({
               >
                 {menu}
               </div>
-            ) : null}
+            )}
           </>
-        ) : null
+        )
       }
       className={className}
       classes={styles}
@@ -93,7 +93,7 @@ function TriggerAlertTemplate({
           >
             {label}
           </Typography>
-          {block && showAction ? (
+          {block && showAction && (
             <div
               style={{
                 margin: '-1rem -1rem -1rem 0'
@@ -101,7 +101,7 @@ function TriggerAlertTemplate({
             >
               {menu}
             </div>
-          ) : null}
+          )}
         </div>
         {children}
       </div>
