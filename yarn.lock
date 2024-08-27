@@ -5490,6 +5490,17 @@
     "@sentry/utils" "7.119.0"
     localforage "^1.8.1"
 
+"@sentry/react@7.119.0":
+  version "7.119.0"
+  resolved "https://registry.yarnpkg.com/@sentry/react/-/react-7.119.0.tgz#79f2c9d94322a3afbfa8af9f5b872f7c2e9b0820"
+  integrity sha512-cf8Cei+qdSA26gx+IMAuc/k44PeBImNzIpXi3930SLhUe44ypT5OZ/44L6xTODHZzTIyMSJPduf59vT2+eW9yg==
+  dependencies:
+    "@sentry/browser" "7.119.0"
+    "@sentry/core" "7.119.0"
+    "@sentry/types" "7.119.0"
+    "@sentry/utils" "7.119.0"
+    hoist-non-react-statics "^3.3.2"
+
 "@sentry/replay@7.119.0":
   version "7.119.0"
   resolved "https://registry.yarnpkg.com/@sentry/replay/-/replay-7.119.0.tgz#50881079d013c77f87a994331d8bcad1d49e0960"

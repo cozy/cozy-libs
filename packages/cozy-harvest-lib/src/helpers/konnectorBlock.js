@@ -1,4 +1,4 @@
-import * as Sentry from '@sentry/browser'
+import * as Sentry from '@sentry/react'
 import get from 'lodash/get'
 
 import { triggers } from 'cozy-client/dist/models/trigger'
