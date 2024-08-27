@@ -107,12 +107,12 @@ function ErrorAlert({
 ErrorAlert.propTypes = {
   label: PropTypes.string.isRequired,
   error: PropTypes.object.isRequired,
-  konnectorRoot: PropTypes.string.isRequired,
+  konnectorRoot: PropTypes.string,
   trigger: PropTypes.object.isRequired,
   isRunning: PropTypes.bool.isRequired,
   historyAction: PropTypes.func.isRequired,
-  flow: PropTypes.object.isRequired,
-  account: PropTypes.object.isRequired,
+  flow: PropTypes.object,
+  account: PropTypes.object,
   intentsApi: PropTypes.object,
   isRunnable: PropTypes.bool.isRequired
 }
