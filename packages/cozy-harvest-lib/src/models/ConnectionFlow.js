@@ -1,6 +1,6 @@
 // @ts-check
 // @ts-ignore
-import * as Sentry from '@sentry/browser'
+import * as Sentry from '@sentry/react'
 import clone from 'lodash/clone'
 import MicroEE from 'microee'
 
