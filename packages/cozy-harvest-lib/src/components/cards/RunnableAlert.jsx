@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import { LaunchButton } from './LaunchButton'
 import { LaunchTriggerAlertMenu } from './LaunchTriggerAlertMenu'
@@ -42,6 +43,7 @@ function RunnableAlert({
   intentsApi,
   isRunnable
 }) {
+  const { isMobile } = useBreakpoints()
   const { konnector } = flow
   const isKonnectorDisconnected = isDisconnected(konnector, trigger)
 
@@ -65,7 +67,11 @@ function RunnableAlert({
   return (
     <TriggerAlertTemplate
       label={label}
-      color="var(--paperBackgroundColor)"
+      color={
+        isMobile
+          ? 'var(--paperBackgroundColor)'
+          : 'var(--contrastBackgroundColor)'
+      }
       icon={
         isRunning ? (
           <Spinner className="u-flex" noMargin />
