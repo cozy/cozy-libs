@@ -4,7 +4,6 @@ import React, { PureComponent } from 'react'
 import { withClient } from 'cozy-client'
 import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
 
-// TODO move this to cozy-ui
 class KonnectorIcon extends PureComponent {
   render() {
     const { konnector, ...restProps } = this.props
