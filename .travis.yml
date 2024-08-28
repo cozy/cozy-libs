@@ -20,7 +20,7 @@ jobs:
       deploy:
         - provider: script
           skip-cleanup: true
-          script: 'git checkout master && git remote set-url origin https://cozy-bot:$GITHUB_TOKEN@github.com/cozy/cozy-libs.git && echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc && yarn lerna publish --yes --no-verify-access -m "[skip ci] Publish"'
+          script: 'git checkout master && git remote set-url origin https://cozy-bot:$GITHUB_TOKEN@github.com/cozy/cozy-libs.git && echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc && yarn lerna publish --yes -m "[skip ci] Publish"'
           on:
             branch: master
             repo: cozy/cozy-libs
