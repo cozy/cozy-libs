@@ -45,7 +45,7 @@
   },
   "peerDependencies": {
     "@babel/runtime": ">=7.12.5",
-    "@material-ui/core": ">=3.9.4",
+    "@mui/material": "5.0.0",
     "@material-ui/lab": ">=3.0.0-alpha.30",
     "cozy-client": ">=16.13.1",
     "cozy-doctypes": ">=1.49.3",
