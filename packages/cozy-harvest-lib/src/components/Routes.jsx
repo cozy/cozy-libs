@@ -108,9 +108,9 @@ const Routes = ({
 
 Routes.propTypes = {
   /** The root URL of the konnector */
-  konnectorRoot: PropTypes.string.isRequired,
+  konnectorRoot: PropTypes.string,
   /** The konnector object */
-  konnector: PropTypes.object.isRequired,
+  konnector: PropTypes.object,
   /** The slug of the konnector */
   konnectorSlug: PropTypes.string.isRequired,
   /** The function to call when the harvest is successful */
