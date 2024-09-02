@@ -32,13 +32,6 @@ jest.mock('react-router-dom', () => {
   }
 })
 
-jest.mock('cozy-flags', () => {
-  return flag => {
-    if (flag === 'harvest.inappconnectors.enabled') return true
-    return false
-  }
-})
-
 describe('KonnectorAccountWrapper', () => {
   const setup = () => {
     const mockClient = {
@@ -83,7 +76,7 @@ describe('KonnectorAccountWrapper', () => {
     return { root, onAccountDeleted, addAccount }
   }
 
-  it('should render a configuration modal when harvest.inappconnectors.enabled flag is enabled and allow account disconnect', async () => {
+  it('should render a configuration modal when allow account disconnect', async () => {
     const { root, onAccountDeleted } = setup()
     await act(async () => {
       const button = root.getByText('Disconnect this account')
@@ -96,7 +89,7 @@ describe('KonnectorAccountWrapper', () => {
     })
   })
 
-  it('should render a configuration modal when harvest.inappconnectors.enabled flag is enabled and allow account creation', async () => {
+  it('should render a configuration modal when allow account creation', async () => {
     const { root, addAccount } = setup()
     const button = root.getByText('Add an account')
     fireEvent.click(button)

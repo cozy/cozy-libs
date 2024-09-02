@@ -28,6 +28,7 @@ exports[`AccountForm should not render error 1`] = `
       t={[Function]}
     />
     <ForwardRef
+      busy={false}
       className="u-mt-2 u-mb-1-half"
       data-testid="submit-btn"
       disabled={false}
@@ -67,6 +68,7 @@ exports[`AccountForm should render 1`] = `
       t={[Function]}
     />
     <ForwardRef
+      busy={false}
       className="u-mt-2 u-mb-1-half"
       data-testid="submit-btn"
       disabled={true}
@@ -123,6 +125,7 @@ exports[`AccountForm should render error 1`] = `
       t={[Function]}
     />
     <ForwardRef
+      busy={false}
       className="u-mt-2 u-mb-1-half"
       data-testid="submit-btn"
       disabled={false}
@@ -150,7 +153,7 @@ exports[`AccountForm should render normally when client side konnector with laun
     <ConnectCard
       buttonProps={
         Object {
-          "busy": undefined,
+          "busy": false,
           "data-testid": "submit-btn",
           "disabled": false,
           "label": "Connect",

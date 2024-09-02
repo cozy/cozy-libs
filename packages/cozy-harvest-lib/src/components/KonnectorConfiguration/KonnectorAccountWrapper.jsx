@@ -1,9 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import flag from 'cozy-flags'
-
-import KonnectorAccountTabs from './KonnectorAccountTabs'
 import {
   intentsApiProptype,
   innerAccountModalOverridesProptype
@@ -19,12 +16,7 @@ export const KonnectorAccountWrapper = props => {
       konnector={props.konnector}
     >
       {({ flow }) => {
-        if (flag('harvest.inappconnectors.enabled')) {
-          return (
-            <Component {...rest} trigger={rest.initialTrigger} flow={flow} />
-          )
-        }
-        return <KonnectorAccountTabs {...rest} flow={flow} />
+        return <Component {...rest} trigger={rest.initialTrigger} flow={flow} />
       }}
     </FlowProvider>
   )

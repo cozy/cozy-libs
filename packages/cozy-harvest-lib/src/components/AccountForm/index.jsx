@@ -5,7 +5,6 @@ import React, { PureComponent } from 'react'
 import { Form } from 'react-final-form'
 
 import { isMobile } from 'cozy-device-helper'
-import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -296,18 +295,16 @@ export class AccountForm extends PureComponent {
                   inputRefByName={this.inputRefByName}
                   t={t}
                 />
-                {flag('harvest.inappconnectors.enabled') &&
-                  !konnector.clientSide &&
-                  konnector.vendor_link && (
-                    <Link
-                      className="u-mt-1"
-                      variant="body1"
-                      component="button"
-                      onClick={this.showCannotConnectModal}
-                    >
-                      {t('accountForm.cannotConnectLink')}
-                    </Link>
-                  )}
+                {!konnector.clientSide && konnector.vendor_link && (
+                  <Link
+                    className="u-mt-1"
+                    variant="body1"
+                    component="button"
+                    onClick={this.showCannotConnectModal}
+                  >
+                    {t('accountForm.cannotConnectLink')}
+                  </Link>
+                )}
                 {konnector.clientSide ? (
                   <ConnectCard
                     title={t('accountForm.clientSide.title')}
@@ -315,8 +312,7 @@ export class AccountForm extends PureComponent {
                       name: konnector.name
                     })}
                     buttonProps={{
-                      busy:
-                        submitting && !flag('harvest.inappconnectors.enabled'),
+                      busy: false,
                       disabled:
                         submitting ||
                         !this.isSubmittable({
@@ -330,9 +326,7 @@ export class AccountForm extends PureComponent {
                   />
                 ) : (
                   <Button
-                    busy={
-                      submitting && !flag('harvest.inappconnectors.enabled')
-                    }
+                    busy={false}
                     className="u-mt-2 u-mb-1-half"
                     disabled={
                       submitting ||

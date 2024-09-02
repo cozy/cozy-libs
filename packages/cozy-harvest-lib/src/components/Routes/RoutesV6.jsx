@@ -1,8 +1,6 @@
 import React from 'react'
 import { Routes, Route, Navigate, useParams } from 'react-router-dom'
 
-import flag from 'cozy-flags'
-
 import { ViewerModal } from '../../datacards/ViewerModal'
 import AccountModal from '../AccountModal'
 import EditAccountModal from '../EditAccountModal'
@@ -46,64 +44,43 @@ const RoutesV6 = ({
         }
       />
 
-      {flag('harvest.inappconnectors.enabled') ? (
-        <>
-          <Route
-            path="accounts/:accountId"
-            element={
-              <HarvestParamsWrapper>
-                {params => (
-                  <AccountModal
-                    konnector={konnectorWithTriggers}
-                    accountId={params.accountId}
-                    accountsAndTriggers={accountsAndTriggers}
-                    onDismiss={onDismiss}
-                    showNewAccountButton={!konnectorWithTriggers.clientSide}
-                    showAccountSelection={!konnectorWithTriggers.clientSide}
-                    Component={DataTab}
-                  />
-                )}
-              </HarvestParamsWrapper>
-            }
-          />
-          <Route
-            path="accounts/:accountId/config"
-            element={
-              <HarvestParamsWrapper>
-                {params => (
-                  <AccountModal
-                    konnector={konnectorWithTriggers}
-                    accountId={params.accountId}
-                    accountsAndTriggers={accountsAndTriggers}
-                    onDismiss={onDismiss}
-                    showNewAccountButton={!konnectorWithTriggers.clientSide}
-                    showAccountSelection={!konnectorWithTriggers.clientSide}
-                    Component={ConfigurationTab}
-                  />
-                )}
-              </HarvestParamsWrapper>
-            }
-          />
-        </>
-      ) : (
-        <Route
-          path="accounts/:accountId"
-          element={
-            <HarvestParamsWrapper>
-              {params => (
-                <AccountModal
-                  konnector={konnectorWithTriggers}
-                  accountId={params.accountId}
-                  accountsAndTriggers={accountsAndTriggers}
-                  onDismiss={onDismiss}
-                  showNewAccountButton={!konnectorWithTriggers.clientSide}
-                  showAccountSelection={!konnectorWithTriggers.clientSide}
-                />
-              )}
-            </HarvestParamsWrapper>
-          }
-        />
-      )}
+      <Route
+        path="accounts/:accountId"
+        element={
+          <HarvestParamsWrapper>
+            {params => (
+              <AccountModal
+                konnector={konnectorWithTriggers}
+                accountId={params.accountId}
+                accountsAndTriggers={accountsAndTriggers}
+                onDismiss={onDismiss}
+                showNewAccountButton={!konnectorWithTriggers.clientSide}
+                showAccountSelection={!konnectorWithTriggers.clientSide}
+                Component={DataTab}
+              />
+            )}
+          </HarvestParamsWrapper>
+        }
+      />
+
+      <Route
+        path="accounts/:accountId/config"
+        element={
+          <HarvestParamsWrapper>
+            {params => (
+              <AccountModal
+                konnector={konnectorWithTriggers}
+                accountId={params.accountId}
+                accountsAndTriggers={accountsAndTriggers}
+                onDismiss={onDismiss}
+                showNewAccountButton={!konnectorWithTriggers.clientSide}
+                showAccountSelection={!konnectorWithTriggers.clientSide}
+                Component={ConfigurationTab}
+              />
+            )}
+          </HarvestParamsWrapper>
+        }
+      />
 
       <Route
         path="accounts/:accountId/edit"
@@ -119,6 +96,7 @@ const RoutesV6 = ({
           </HarvestParamsWrapper>
         }
       />
+
       <Route
         path="accounts/:accountId/success"
         element={
