@@ -2,39 +2,34 @@
 
 exports[`AccountModal should display the fetching state by default 1`] = `
 <React.Fragment>
-  <KonnectorModalHeader
+  <withMountPointProps(AccountModalHeader)
+    account={null}
+    accountsAndTriggers={
+      Array [
+        Object {
+          "account": Object {
+            "_id": "123",
+            "name": "account 1",
+          },
+          "trigger": Object {
+            "current_state": Object {},
+            "id": "triggerid",
+          },
+        },
+        Object {
+          "account": Object {
+            "_id": "account_2",
+            "name": "account_2",
+          },
+          "trigger": Object {
+            "id": "trigger_account2",
+          },
+        },
+      ]
+    }
     konnector={Object {}}
-  >
-    <AccountSelectBox
-      accountsAndTriggers={
-        Array [
-          Object {
-            "account": Object {
-              "_id": "123",
-              "name": "account 1",
-            },
-            "trigger": Object {
-              "current_state": Object {},
-              "id": "triggerid",
-            },
-          },
-          Object {
-            "account": Object {
-              "_id": "account_2",
-              "name": "account_2",
-            },
-            "trigger": Object {
-              "id": "trigger_account2",
-            },
-          },
-        ]
-      }
-      loading={true}
-      onChange={[Function]}
-      onCreate={[Function]}
-      selectedAccount={null}
-    />
-  </KonnectorModalHeader>
+    showAccountSelection={true}
+  />
   <ForwardRef(WithStyles)
     className="u-pb-2"
   >
@@ -51,44 +46,39 @@ exports[`AccountModal should display the fetching state by default 1`] = `
 
 exports[`AccountModal with an account should display the AccountSelect & Content if an account is there and we can change the selectedAccount 1`] = `
 <React.Fragment>
-  <KonnectorModalHeader
-    konnector={Object {}}
-  >
-    <AccountSelectBox
-      accountsAndTriggers={
-        Array [
-          Object {
-            "account": Object {
-              "_id": "123",
-              "name": "account 1",
-            },
-            "trigger": Object {
-              "current_state": Object {},
-              "id": "triggerid",
-            },
-          },
-          Object {
-            "account": Object {
-              "_id": "account_2",
-              "name": "account_2",
-            },
-            "trigger": Object {
-              "id": "trigger_account2",
-            },
-          },
-        ]
+  <withMountPointProps(AccountModalHeader)
+    account={
+      Object {
+        "_id": "123",
+        "name": "account 1",
       }
-      loading={false}
-      onChange={[Function]}
-      onCreate={[Function]}
-      selectedAccount={
+    }
+    accountsAndTriggers={
+      Array [
         Object {
-          "_id": "123",
-          "name": "account 1",
-        }
-      }
-    />
-  </KonnectorModalHeader>
+          "account": Object {
+            "_id": "123",
+            "name": "account 1",
+          },
+          "trigger": Object {
+            "current_state": Object {},
+            "id": "triggerid",
+          },
+        },
+        Object {
+          "account": Object {
+            "_id": "account_2",
+            "name": "account_2",
+          },
+          "trigger": Object {
+            "id": "trigger_account2",
+          },
+        },
+      ]
+    }
+    konnector={Object {}}
+    showAccountSelection={true}
+  />
   <ForwardRef(WithStyles)
     className="u-pt-0 u-pr-0 u-pl-0"
     style={
@@ -121,44 +111,39 @@ exports[`AccountModal with an account should display the AccountSelect & Content
 
 exports[`AccountModal with an account should display the AccountSelect & Content if an account is there and we can change the selectedAccount 2`] = `
 <React.Fragment>
-  <KonnectorModalHeader
-    konnector={Object {}}
-  >
-    <AccountSelectBox
-      accountsAndTriggers={
-        Array [
-          Object {
-            "account": Object {
-              "_id": "123",
-              "name": "account 1",
-            },
-            "trigger": Object {
-              "current_state": Object {},
-              "id": "triggerid",
-            },
-          },
-          Object {
-            "account": Object {
-              "_id": "account_2",
-              "name": "account_2",
-            },
-            "trigger": Object {
-              "id": "trigger_account2",
-            },
-          },
-        ]
+  <withMountPointProps(AccountModalHeader)
+    account={
+      Object {
+        "_id": "account_2",
+        "name": "account_2",
       }
-      loading={false}
-      onChange={[Function]}
-      onCreate={[Function]}
-      selectedAccount={
+    }
+    accountsAndTriggers={
+      Array [
         Object {
-          "_id": "account_2",
-          "name": "account_2",
-        }
-      }
-    />
-  </KonnectorModalHeader>
+          "account": Object {
+            "_id": "123",
+            "name": "account 1",
+          },
+          "trigger": Object {
+            "current_state": Object {},
+            "id": "triggerid",
+          },
+        },
+        Object {
+          "account": Object {
+            "_id": "account_2",
+            "name": "account_2",
+          },
+          "trigger": Object {
+            "id": "trigger_account2",
+          },
+        },
+      ]
+    }
+    konnector={Object {}}
+    showAccountSelection={true}
+  />
   <ForwardRef(WithStyles)
     className="u-pt-0 u-pr-0 u-pl-0"
     style={

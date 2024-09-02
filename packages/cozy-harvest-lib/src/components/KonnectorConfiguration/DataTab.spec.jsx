@@ -1,5 +1,4 @@
 import { DataTab } from 'components/KonnectorConfiguration/DataTab'
-import KonnectorMaintenance from 'components/Maintenance'
 import AppLinkCard from 'components/cards/AppLinkCard'
 import LaunchTriggerCard from 'components/cards/LaunchTriggerCard'
 import useMaintenanceStatus from 'components/hooks/useMaintenanceStatus'
@@ -54,11 +53,6 @@ describe('DataTab', () => {
   it('should show the launch card', () => {
     const component = setup()
     expect(component.find(LaunchTriggerCard).length).toEqual(1)
-  })
-
-  it('should show maintenance info', () => {
-    const component = setup({}, { isInMaintenance: true })
-    expect(component.find(KonnectorMaintenance).length).toEqual(1)
   })
 
   describe('links to other apps', () => {

@@ -37,7 +37,6 @@ const accountIdMock = '123'
 
 describe('AccountModal', () => {
   const setup = () => {
-    const mockHistoryPush = jest.fn()
     const mockHistoryReplace = jest.fn()
 
     const component = shallow(
@@ -46,13 +45,12 @@ describe('AccountModal', () => {
         t={x => x}
         accountId={accountIdMock}
         accountsAndTriggers={accountsAndTriggersMock}
-        pushHistory={mockHistoryPush}
         replaceHistory={mockHistoryReplace}
         breakpoints={{ isMobile: true }}
         onDismiss={jest.fn()}
       />
     )
-    return { component, mockHistoryPush, mockHistoryReplace }
+    return { component, mockHistoryReplace }
   }
 
   it('should display the fetching state by default', () => {
@@ -66,9 +64,7 @@ describe('AccountModal', () => {
       name: 'account 1'
     })
 
-    const { component, mockHistoryPush } = setup({
-      fetchAccount
-    })
+    const { component } = setup({ fetchAccount })
 
     it('should display the AccountSelect & Content if an account is there and we can change the selectedAccount', async () => {
       await component.instance().componentDidMount()
@@ -87,22 +83,6 @@ describe('AccountModal', () => {
         .instance()
         .componentDidUpdate({ accountId: accountIdMock })
       expect(component.getElement()).toMatchSnapshot()
-    })
-
-    it('should redirect to the correct locations', async () => {
-      await component.instance().componentDidMount()
-
-      component.find('AccountSelectBox').prop('onChange')({
-        account: { _id: '123' }
-      })
-      expect(mockHistoryPush).toHaveBeenCalledWith('/accounts/123')
-
-      component.find('AccountSelectBox').prop('onCreate')()
-      expect(mockHistoryPush).toHaveBeenCalledWith('/new')
-
-      const accountTabs = component.find('KonnectorAccountWrapper')
-      accountTabs.prop('addAccount')()
-      expect(mockHistoryPush).toHaveBeenCalledWith('/new')
     })
   })
 })

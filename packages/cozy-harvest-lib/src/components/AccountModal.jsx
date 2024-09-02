@@ -3,20 +3,16 @@ import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
-import { models, withClient } from 'cozy-client'
+import { withClient } from 'cozy-client'
 import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
-import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import Typography from 'cozy-ui/transpiled/react/Typography'
 import Infos from 'cozy-ui/transpiled/react/deprecated/Infos'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
 import AccountModalHeader from './AccountModalWithoutTabs/AccountModalHeader'
-import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
 import KonnectorAccountWrapper from './KonnectorConfiguration/KonnectorAccountWrapper'
-import KonnectorModalHeader from './KonnectorModalHeader'
 import { withMountPointProps } from './MountPointContext'
 import withLocales from './hoc/withLocales'
 import { fetchAccount } from '../connections/accounts'
@@ -116,7 +112,6 @@ export class AccountModal extends Component {
       onDismiss,
       accountsAndTriggers,
       t,
-      pushHistory,
       replaceHistory,
       initialActiveTab,
       breakpoints: { isMobile },
@@ -130,33 +125,12 @@ export class AccountModal extends Component {
 
     return (
       <>
-        {flag('harvest.inappconnectors.enabled') ? (
-          <AccountModalHeader
-            konnector={konnector}
-            account={account}
-            accountsAndTriggers={accountsAndTriggers}
-            showAccountSelection={showAccountSelection}
-          />
-        ) : (
-          <KonnectorModalHeader konnector={konnector}>
-            {showAccountSelection ? (
-              <AccountSelectBox
-                loading={!account}
-                selectedAccount={account}
-                accountsAndTriggers={accountsAndTriggers}
-                onChange={option => {
-                  pushHistory(`/accounts/${option.account._id}`)
-                }}
-                onCreate={() => {
-                  pushHistory('/new')
-                }}
-              />
-            ) : (
-              <Typography>{models.account.getAccountName(account)}</Typography>
-            )}
-          </KonnectorModalHeader>
-        )}
-
+        <AccountModalHeader
+          konnector={konnector}
+          account={account}
+          accountsAndTriggers={accountsAndTriggers}
+          showAccountSelection={showAccountSelection}
+        />
         {(error || fetching) && (
           <DialogContent className="u-pb-2">
             {error && (
@@ -206,6 +180,7 @@ export class AccountModal extends Component {
     )
   }
 }
+
 AccountModal.defaultProps = {
   accounts: [],
   showAccountSelection: true,

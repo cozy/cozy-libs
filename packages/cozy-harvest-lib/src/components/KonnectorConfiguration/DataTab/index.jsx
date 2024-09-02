@@ -2,13 +2,11 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { withClient } from 'cozy-client'
-import flag from 'cozy-flags'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import appLinksProps from '../../../components/KonnectorConfiguration/DataTab/appLinksProps'
-import KonnectorMaintenance from '../../../components/Maintenance'
 import AppLinkCard from '../../../components/cards/AppLinkCard'
 import { InformationsCard } from '../../../components/cards/InformationsCard'
 import LaunchTriggerCard from '../../../components/cards/LaunchTriggerCard'
@@ -53,30 +51,21 @@ export const DataTab = ({
     .filter(app => client.appMetadata.slug !== app.slug)
 
   const {
-    data: { isInMaintenance, messages: maintenanceMessages }
+    data: { isInMaintenance }
   } = useMaintenanceStatus(konnector.slug)
 
   return (
     <div>
-      {flag('harvest.inappconnectors.enabled') && (
-        <>
-          <LaunchTriggerCard
-            konnectorRoot={konnectorRoot}
-            flow={flow}
-            intentsApi={intentsApi}
-            account={account}
-            withMaintenanceDescription
-          />
-          {isMobile && <Divider style={styles.divider} />}
-        </>
-      )}
+      <LaunchTriggerCard
+        konnectorRoot={konnectorRoot}
+        flow={flow}
+        intentsApi={intentsApi}
+        account={account}
+        withMaintenanceDescription
+      />
+      {isMobile && <Divider style={styles.divider} />}
       <div className={isMobile ? 'u-p-1' : 'u-pt-1 u-pb-1-half'}>
         <Stack>
-          {!flag('harvest.inappconnectors.enabled') && isInMaintenance && (
-            <div className="u-bg-paleGrey u-p-1">
-              <KonnectorMaintenance maintenanceMessages={maintenanceMessages} />
-            </div>
-          )}
           {!isInMaintenance &&
             konnectorsModel.hasNewVersionAvailable(konnector) && (
               <KonnectorUpdateInfos
@@ -84,9 +73,6 @@ export const DataTab = ({
                 isBlocking={hasTermsVersionMismatchError}
               />
             )}
-          {!flag('harvest.inappconnectors.enabled') && (
-            <LaunchTriggerCard flow={flow} disabled={isInMaintenance} />
-          )}
           {appLinks.map(({ slug, ...otherProps }) => (
             <AppLinkCard key={slug} slug={slug} {...otherProps} />
           ))}

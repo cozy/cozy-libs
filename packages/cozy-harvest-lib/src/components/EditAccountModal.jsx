@@ -5,7 +5,6 @@ import React, { Component } from 'react'
 
 import { withClient } from 'cozy-client'
 import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
-import flag from 'cozy-flags'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
@@ -144,9 +143,7 @@ export class EditAccountModal extends Component {
   redirectToAccount() {
     const { account } = this.state
     if (account) {
-      flag('harvest.inappconnectors.enabled')
-        ? this.props.replaceHistory(`/accounts/${account._id}/config`)
-        : this.props.replaceHistory(`/accounts/${account._id}`)
+      this.props.replaceHistory(`/accounts/${account._id}/config`)
     } else {
       this.props.pushHistory(`/accounts`)
     }

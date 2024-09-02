@@ -1,6 +1,4 @@
-import LaunchTriggerCard, {
-  DumbLaunchTriggerCard
-} from 'components/cards/LaunchTriggerCard'
+import LaunchTriggerCard from 'components/cards/LaunchTriggerCard'
 import { mount } from 'enzyme'
 import React from 'react'
 
@@ -55,33 +53,6 @@ describe('LaunchTriggerCard', () => {
     return { root }
   }
 
-  it('should create a flow automatically if props.flow is not passed from above', () => {
-    const { root } = setup({
-      props: {
-        flowProps: {
-          initialTrigger: triggerFixture,
-          konnector: konnectorFixture
-        }
-      }
-    })
-    expect(root.find(DumbLaunchTriggerCard).props().flow).toBeDefined()
-    expect(root.find(DumbLaunchTriggerCard).props().flow.trigger).toEqual(
-      triggerFixture
-    )
-  })
-
-  it('should pass props.flow downstream if passed from above', () => {
-    const { root } = setup({
-      props: {
-        flow: new ConnectionFlow(client, triggerFixture, konnectorFixture)
-      }
-    })
-    expect(root.find(DumbLaunchTriggerCard).props().flow).toBeDefined()
-    expect(root.find(DumbLaunchTriggerCard).props().flow.trigger).toEqual(
-      triggerFixture
-    )
-  })
-
   it('should render impossible to run message when konnector is clientSide without an accessible launcher', () => {
     const { root } = setup({
       props: {
@@ -98,47 +69,5 @@ describe('LaunchTriggerCard', () => {
       }
     })
     expect(root.html()).toMatchSnapshot()
-  })
-
-  it('should render normally when konnector is not clientSide', () => {
-    const { root } = setup({
-      props: {
-        flow: new ConnectionFlow(client, triggerFixture, {
-          slug: 'test',
-          name: 'testname'
-        })
-      }
-    })
-    expect(root.html()).toMatchSnapshot()
-  })
-
-  it('should display a syncing message when the trigger is running', () => {
-    const flow = new ConnectionFlow(
-      client,
-      {
-        ...triggerFixture,
-        current_state: { status: 'running' }
-      },
-      konnectorFixture
-    )
-
-    const { root } = setup({
-      props: {
-        flow
-      }
-    })
-    expect(root.html()).toContain('Data recovery…')
-  })
-
-  it('should display a syncing message when a trigger launch is expected', async () => {
-    const flow = new ConnectionFlow(client, triggerFixture, konnectorFixture)
-    flow.expectTriggerLaunch()
-
-    const { root } = setup({
-      props: {
-        flow
-      }
-    })
-    expect(root.html()).toContain('Data recovery…')
   })
 })

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import React, { useContext } from 'react'
 
 import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
-import flag from 'cozy-flags'
 import { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
@@ -46,12 +45,6 @@ const NewAccountModal = ({ konnector, onSuccess, onDismiss }) => {
     }
 
     const accountId = triggersModel.getAccountId(trigger)
-    if (
-      !flag('harvest.inappconnectors.enabled') &&
-      trigger.worker !== 'client'
-    ) {
-      replaceHistory(`/accounts/${accountId}/success`)
-    }
     replaceHistory(`/accounts/${accountId}`)
   }
 
