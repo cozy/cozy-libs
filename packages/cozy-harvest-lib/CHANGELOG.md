@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [29.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@29.0.0...cozy-harvest-lib@29.1.0) (2024-09-03)
+
+### Features
+
+- Remove `harvest.inappconnectors.enabled` flag ([d145900](https://github.com/cozy/cozy-libs/commit/d145900f2ce80ed4124a52917a3aa37c7ade4043))
+
 # [29.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@28.0.0...cozy-harvest-lib@29.0.0) (2024-08-29)
 
 ### Bug Fixes
