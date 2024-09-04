@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`LaunchTriggerCard should render impossible to run message when konnector is clientSide without an accessible launcher 1`] = `""`;
-
-exports[`LaunchTriggerCard should render normally when konnector is not clientSide 1`] = `""`;
