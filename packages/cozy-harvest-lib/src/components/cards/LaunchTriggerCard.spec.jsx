@@ -70,4 +70,16 @@ describe('LaunchTriggerCard', () => {
     })
     expect(root.html()).toMatchSnapshot()
   })
+
+  it('should render normally when konnector is not clientSide', () => {
+    const { root } = setup({
+      props: {
+        flow: new ConnectionFlow(client, triggerFixture, {
+          slug: 'test',
+          name: 'testname'
+        })
+      }
+    })
+    expect(root.html()).toMatchSnapshot()
+  })
 })
