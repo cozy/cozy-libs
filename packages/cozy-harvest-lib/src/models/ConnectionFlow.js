@@ -986,6 +986,7 @@ export class ConnectionFlow {
     const konnectorPolicy = this.getKonnectorPolicy()
     const expectingTriggerLaunch = status === EXPECTING_TRIGGER_LAUNCH
     const error =
+      status !== SUCCESS &&
       !running &&
       !expectingTriggerLaunch &&
       (this.getMockError() || accountError || triggerError)
