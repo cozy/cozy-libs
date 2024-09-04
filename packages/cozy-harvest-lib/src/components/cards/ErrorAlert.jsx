@@ -106,7 +106,7 @@ function ErrorAlert({
 
 ErrorAlert.propTypes = {
   label: PropTypes.string.isRequired,
-  error: PropTypes.object.isRequired,
+  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]).isRequired,
   konnectorRoot: PropTypes.string,
   trigger: PropTypes.object.isRequired,
   isRunning: PropTypes.bool.isRequired,

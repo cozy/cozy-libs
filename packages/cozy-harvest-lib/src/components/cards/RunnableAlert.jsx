@@ -111,7 +111,7 @@ RunnableAlert.propTypes = {
   konnectorSlug: PropTypes.string.isRequired,
   konnectorRoot: PropTypes.string,
   trigger: PropTypes.object.isRequired,
-  error: PropTypes.object,
+  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   historyAction: PropTypes.func.isRequired,
   flow: PropTypes.object,
   account: PropTypes.object,
