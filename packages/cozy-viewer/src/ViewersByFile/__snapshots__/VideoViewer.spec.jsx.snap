@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VideoViewer should render a spinner then the video viewer 1`] = `
+<div>
+  <div
+    class="viewer-videoviewer"
+  >
+    <video
+      controls=""
+      src="https://viewerdemo.cozycloud.cc/Nextcloud.mp4"
+    />
+    <p
+      class="viewer-filename"
+    >
+      sample.mp4
+    </p>
+  </div>
+</div>
+`;
