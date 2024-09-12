@@ -17,7 +17,8 @@ module.exports = {
             ? '[local]'
             : '[name]__[local]___[hash:base64:5]'
       }
-    ]
+    ],
+    ['inline-json-import', {}]
   ],
   ignore: ['examples/**/*', '**/*.md', '**/*.styl', '**/*.json', '**/*.snap']
 }
