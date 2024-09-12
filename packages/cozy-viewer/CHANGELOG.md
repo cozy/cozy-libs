@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/cozy/cozy-libs/compare/cozy-viewer@1.1.1...cozy-viewer@1.1.2) (2024-09-12)
+
+### Bug Fixes
+
+- **Viewer:** Css wasn't publish with hash on classes ([eb050b9](https://github.com/cozy/cozy-libs/commit/eb050b92018631e322b7c76eaceda07a835d31af))
+
 ## [1.1.1](https://github.com/cozy/cozy-libs/compare/cozy-viewer@1.1.0...cozy-viewer@1.1.1) (2024-09-12)
 
 ### Bug Fixes
