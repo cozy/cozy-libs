@@ -1,6 +1,14 @@
+const crypto = require('crypto')
 const path = require('path')
-const webpack = require('webpack')
+
 const TerserPlugin = require('terser-webpack-plugin')
+const webpack = require('webpack')
+
+// Required to work from Node version 17+
+// More info: https://github.com/webpack/webpack/issues/13572#issuecomment-923736472
+const crypto_orig_createHash = crypto.createHash
+crypto.createHash = algorithm =>
+  crypto_orig_createHash(algorithm == 'md4' ? 'sha256' : algorithm)
 
 module.exports = {
   bail: true,
