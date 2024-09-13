@@ -1,7 +1,6 @@
 {
   "npmClient": "yarn",
   "version": "independent",
-  "useWorkspaces": true,
   "command": {
     "version": {
       "conventionalCommits": true,
@@ -11,5 +10,6 @@
       "ignoreChanges": ["packages/playgrounds/**/*"],
       "conventionalCommits": true
     }
-  }
+  },
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json"
 }
