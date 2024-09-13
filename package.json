@@ -13,13 +13,10 @@
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
   "scripts": {
-    "build:doc:react": "styleguidist build --config docs/styleguidist.config.js",
-    "deploy:doc": "git-directory-deploy --directory docs/build/ --branch gh-pages",
     "lint": "eslint --ext js,jsx,ts,tsx .",
     "lint:md": "remark . -o",
     "test": "lerna run --concurrency 1 --ignore cozy-procedures --ignore cozy-mespapiers-lib test",
     "build": "lerna run --scope cozy-device-helper build && lerna run --scope cozy-minilog build && lerna run --parallel --ignore cozy-device-helper --ignore cozy-minilog --ignore cozy-mespapiers-lib build",
-    "watch:doc:react": "styleguidist server --config docs/styleguidist.config.js",
     "check-constraints": "node scripts/check-packages-constraints.js"
   },
   "devDependencies": {
@@ -28,16 +25,9 @@
     "@babel/runtime": "7.18.6",
     "babel-loader": "8.2.3",
     "babel-preset-cozy-app": "^1.5.0",
-    "css-loader": "2.1.1",
-    "git-directory-deploy": "1.5.1",
     "husky": "1.3.1",
     "lerna": "8.1.8",
-    "mini-css-extract-plugin": "0.5.0",
-    "react-styleguidist": "9.1.16",
-    "remark-cli": "9.0.0",
-    "stylus": "0.57.0",
-    "stylus-loader": "3.0.2",
-    "webpack": "4.41.2"
+    "remark-cli": "9.0.0"
   },
   "husky": {
     "hooks": {
