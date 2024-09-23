@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [30.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@29.1.3...cozy-harvest-lib@30.0.0) (2024-09-23)
+
+### Features
+
+- **harvest:** Upgrade cozy-ui ([88d17c5](https://github.com/cozy/cozy-libs/commit/88d17c51b77f9784108da65dab884c3f22e1b257))
+
+### BREAKING CHANGES
+
+- **harvest:** you must have `cozy-ui >= 111.12.0`
+
 ## [29.1.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@29.1.2...cozy-harvest-lib@29.1.3) (2024-09-09)
 
 **Note:** Version bump only for package cozy-harvest-lib
