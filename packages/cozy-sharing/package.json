@@ -49,8 +49,8 @@
     "babel-jest": "26.6.3",
     "babel-plugin-css-modules-transform": "1.6.2",
     "babel-plugin-inline-react-svg": "1.1.2",
-    "cozy-client": "^47.6.0",
-    "cozy-ui": "^108.0.0",
+    "cozy-client": "^48.25.0",
+    "cozy-ui": "^111.12.0",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.6",
     "enzyme-to-json": "3.6.2",
@@ -61,9 +61,9 @@
     "storybook": "7.6.0"
   },
   "peerDependencies": {
-    "cozy-client": ">=47.6.0",
+    "cozy-client": ">=48.25.0",
     "cozy-realtime": "^3.11.0",
-    "cozy-ui": ">=108.0.0",
+    "cozy-ui": ">=111.12.0",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-router": "^5.0.1"
