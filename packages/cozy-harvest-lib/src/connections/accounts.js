@@ -191,10 +191,11 @@ export const deleteAccount = async (client, account) => {
  * Returns { trigger, account } list
  */
 export const fetchAccountsFromTriggers = async (client, triggers) => {
-  const accountCol = client.collection('io.cozy.accounts')
   const accountIdToTrigger = keyBy(triggers, triggersModel.getAccountId)
   const accountIds = Object.keys(accountIdToTrigger)
-  const { data: accounts } = await accountCol.getAll(accountIds)
+  const { data: accounts } = await client.query(
+    Q('io.cozy.accounts').getByIds(accountIds)
+  )
   return accounts
     .filter(Boolean)
     .map(account => ({ account, trigger: accountIdToTrigger[account._id] }))
