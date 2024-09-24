@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [30.0.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@30.0.0...cozy-harvest-lib@30.0.1) (2024-09-24)
+
+### Bug Fixes
+
+- **cozy-harvest-lib:** Use a query for fetching accounts ([dc43063](https://github.com/cozy/cozy-libs/commit/dc430630cf11717d94c9a0609bd3cdefa3e6ba94))
+
 # [30.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@29.1.3...cozy-harvest-lib@30.0.0) (2024-09-23)
 
 ### Features
