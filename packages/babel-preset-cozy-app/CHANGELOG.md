@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.2.0 (2024-10-15)
+
+
+### Features
+
+* Migrate to node.js 20 ([4abfe79](https://github.com/cozy/cozy-libs/commit/4abfe79a0220de724ea160c7f57cd507a1480107))
+
+
+
+
+
 # 2.1.0 (2023-01-31)
 
 
