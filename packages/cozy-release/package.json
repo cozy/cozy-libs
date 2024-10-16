@@ -1,6 +1,6 @@
 {
   "name": "cozy-release",
-  "version": "1.14.0",
+  "version": "1.14.1",
   "description": "A tool to manage Cozy application releases",
   "main": "cozy-release.js",
   "bin": {

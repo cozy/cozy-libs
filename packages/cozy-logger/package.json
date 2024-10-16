@@ -1,6 +1,6 @@
 {
   "name": "cozy-logger",
-  "version": "1.10.4",
+  "version": "1.10.5",
   "description": "Logger for Cozy konnector and services",
   "main": "src/index.js",
   "browser": "dist/index.js",

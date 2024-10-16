@@ -1,6 +1,6 @@
 {
   "name": "browserslist-config-cozy",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Shareable browserslist config enforcing the Cozy official supported browsers list",
   "main": "index.js",
   "author": "Cozy",

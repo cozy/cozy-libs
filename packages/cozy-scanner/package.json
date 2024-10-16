@@ -1,6 +1,6 @@
 {
   "name": "cozy-scanner",
-  "version": "8.0.2",
+  "version": "8.0.3",
   "description": "Cozy-Scanner provides a component to take a picture of a document and describe it",
   "main": "dist/index.js",
   "license": "MIT",
@@ -27,11 +27,11 @@
     "@cozy/minilog": ">=1.0.0",
     "@testing-library/react": "10.4.9",
     "babel-jest": "26.6.3",
-    "babel-preset-cozy-app": "^2.2.0",
+    "babel-preset-cozy-app": "^2.2.1",
     "cozy-client": "40.5.0",
     "cozy-doctypes": "1.67.0",
-    "cozy-flags": "^4.0.1",
-    "cozy-logger": "^1.10.4",
+    "cozy-flags": "^4.0.2",
+    "cozy-logger": "^1.10.5",
     "cozy-ui": "93.1.1",
     "jest": "26.6.3",
     "jest-environment-jsdom-sixteen": "1.0.3",
@@ -66,6 +66,6 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "cozy-device-helper": "^3.1.1"
+    "cozy-device-helper": "^3.1.2"
   }
 }
