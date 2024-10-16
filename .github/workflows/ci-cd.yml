@@ -6,6 +6,9 @@ on:
     branches:
       - master
 
+env:
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
 jobs:
   build:
     name: Build and publish
@@ -13,6 +16,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
@@ -30,17 +35,18 @@ jobs:
       - name: Check documentation
         run: |
           git diff --exit-code -- '*.md' || (echo "Docs are not up-to-date, please run yarn lint:md -f and repush" && exit 1)
-      - name: Configure Git
+      - name: Git Identity
+        if: github.ref == 'refs/heads/master'
         run: |
-          git config --global user.email "npm@cozycloud.cc"
-          git config --global user.name "Cozy Bot"
-      - name: Publish to npm
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/$GITHUB_REPOSITORY
+      - name: NPM Identity
         if: github.ref == 'refs/heads/master'
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          git checkout master
-          git remote set-url origin https://cozy-bot:$GH_TOKEN@github.com/cozy/cozy-libs.git
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-          yarn lerna publish --yes -m "[skip ci] Publish"
+      - name: Publish to NPM
+        if: github.ref == 'refs/heads/master'
+        run: yarn lerna publish --yes -m "[skip ci] Publish"
