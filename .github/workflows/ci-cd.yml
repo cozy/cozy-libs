@@ -1,0 +1,46 @@
+name: CI/CD
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build and publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Build
+        run: yarn build
+      - name: Lint
+        run: |
+          yarn lint
+          yarn lint:md -f
+      - name: Test
+        run: yarn test
+      - name: Check documentation
+        run: |
+          git diff --exit-code -- '*.md' || (echo "Docs are not up-to-date, please run yarn lint:md -f and repush" && exit 1)
+      - name: Configure Git
+        run: |
+          git config --global user.email "npm@cozycloud.cc"
+          git config --global user.name "Cozy Bot"
+      - name: Publish to npm
+        if: github.ref == 'refs/heads/master'
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          git checkout master
+          git remote set-url origin https://cozy-bot:$GH_TOKEN@github.com/cozy/cozy-libs.git
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+          yarn lerna publish --yes -m "[skip ci] Publish"
