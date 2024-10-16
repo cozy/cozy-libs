@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.5.3 (2024-10-16)
+
+**Note:** Version bump only for package cozy-ci
+
+
+
+
+
 ## [0.5.2](https://github.com/cozy/cozy-libs/compare/cozy-ci@0.5.1...cozy-ci@0.5.2) (2023-02-10)
 
 
