@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.8.3 (2024-10-23)
+
+**Note:** Version bump only for package commitlint-config-cozy
+
+
+
+
+
 ## 0.8.2 (2024-10-16)
 
 **Note:** Version bump only for package commitlint-config-cozy

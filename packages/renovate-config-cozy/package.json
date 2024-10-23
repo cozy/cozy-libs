@@ -1,6 +1,6 @@
 {
   "name": "renovate-config-cozy",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "Renovate config for Cozy (Cozy Cloud)",
   "renovate-config": {
     "default": {

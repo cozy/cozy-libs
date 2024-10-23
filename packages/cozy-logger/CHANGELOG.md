@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.10.6 (2024-10-23)
+
+**Note:** Version bump only for package cozy-logger
+
+
+
+
+
 ## 1.10.5 (2024-10-16)
 
 **Note:** Version bump only for package cozy-logger

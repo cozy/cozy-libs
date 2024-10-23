@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 101.0.25 (2024-10-23)
+
+**Note:** Version bump only for package cozy-mespapiers-lib
+
+
+
+
+
 ## 101.0.24 (2024-10-16)
 
 **Note:** Version bump only for package cozy-mespapiers-lib

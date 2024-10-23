@@ -1,6 +1,6 @@
 {
   "name": "renovate-config-cozy-libs",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Renovate config for Cozy libs",
   "renovate-config": {
     "default": {

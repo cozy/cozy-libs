@@ -1,6 +1,6 @@
 {
   "name": "webpack-expose-package-info-plugin",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Webpack plugin to expose package info as a variable",
   "main": "src/index.js",
   "repository": "https://github.com/cozy/cozy-libs",

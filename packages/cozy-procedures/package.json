@@ -1,6 +1,6 @@
 {
   "name": "cozy-procedures",
-  "version": "0.51.2",
+  "version": "0.51.3",
   "main": "dist/index.js",
   "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-procedures/README.md",
   "repository": {
@@ -36,7 +36,7 @@
     "@material-ui/core": "3.9.4",
     "@material-ui/lab": "4.0.0-alpha.60",
     "babel-plugin-inline-react-svg": "1.1.2",
-    "babel-preset-cozy-app": "^2.2.1",
+    "babel-preset-cozy-app": "^2.2.2",
     "cozy-client": "16.19.0",
     "cozy-ui": "40.9.1",
     "enzyme-to-json": "3.6.2",
