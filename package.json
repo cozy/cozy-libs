@@ -41,7 +41,8 @@
   },
   "workspaces": {
     "packages": [
-      "packages/*"
+      "packages/*",
+      "config/*"
     ],
     "nohoist": ["**/cozy-ui"]
   }
