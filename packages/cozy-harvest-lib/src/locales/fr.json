@@ -250,6 +250,10 @@
       "ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED": {
         "title": "Ce compte est déjà configuré",
         "description": "Votre éventuelle modification de la liste des comptes synchronisés sera prise en compte sous quelques minutes."
+      },
+      "WRONG_ACCOUNT_IDENTIFIER": {
+        "title": "Mauvais identifiants",
+        "description": "Vous avez saisi des identifiant qui ne sont pas associés à ce compte"
       }
     }
   },
