@@ -250,6 +250,10 @@
       "ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED": {
         "title": "This account already exists",
         "description": "Your possible modification of the list of synchronized accounts will be taken into account within a few minutes."
+      },
+      "WRONG_ACCOUNT_IDENTIFIER": {
+        "title": "These are the wrong identifiers",
+        "description": "You submitted the wrong identifier which are not associated to this account"
       }
     }
   },
