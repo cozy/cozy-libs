@@ -54,7 +54,7 @@ import { Media, Img, Bd } from 'cozy-ui/transpiled/react/deprecated/Media'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import CarbonCopyIcon from 'cozy-ui/transpiled/react/Icons/CarbonCopy'
 // The DemoProvider inserts a fake cozy-client in the React context.
-import DemoProvider from './docs/DemoProvider'
+import DemoProvider from './providers/DemoProvider'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import DownloadIcon from 'cozy-ui/transpiled/react/Icons/Download'
 import ShareIcon from 'cozy-ui/transpiled/react/Icons/Share'

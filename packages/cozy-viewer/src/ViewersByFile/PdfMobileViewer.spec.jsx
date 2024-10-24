@@ -3,10 +3,10 @@ import React from 'react'
 
 import { CozyProvider, createMockClient } from 'cozy-client'
 import logger from 'cozy-logger'
+import EncryptedProvider from 'cozy-ui/transpiled/react/providers/Encrypted'
 import { I18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { PdfMobileViewer } from './PdfMobileViewer'
-import EncryptedProvider from '../providers/EncryptedProvider'
 
 logger.error = logger.warn = jest.fn()
 
