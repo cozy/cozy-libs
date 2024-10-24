@@ -6,7 +6,7 @@ import { isMobileApp } from 'cozy-device-helper'
 
 import ForwardButton from './ForwardButton'
 import { exportFilesNative } from './helpers'
-import DemoProvider from '../docs/DemoProvider'
+import DemoProvider from '../providers/DemoProvider'
 
 jest.mock('cozy-device-helper')
 jest.mock('cozy-client/dist/models/sharing', () => ({

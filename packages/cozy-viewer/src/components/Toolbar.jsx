@@ -12,6 +12,7 @@ import PreviousIcon from 'cozy-ui/transpiled/react/Icons/Previous'
 import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
+import { useEncrypted } from 'cozy-ui/transpiled/react/providers/Encrypted'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
@@ -19,7 +20,6 @@ import PrintButton from './PrintButton'
 import { ToolbarFilePath } from './ToolbarFilePath'
 import styles from './styles.styl'
 import { extractChildrenCompByName } from '../Footer/helpers'
-import { useEncrypted } from '../providers/EncryptedProvider'
 
 const useClasses = makeStyles(theme => ({
   iconButton: {

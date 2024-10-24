@@ -5,6 +5,7 @@ import { isPlainText } from 'cozy-client/dist/models/file'
 import { isMobile as isMobileDevice } from 'cozy-device-helper'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import { FileDoctype } from 'cozy-ui/transpiled/react/proptypes'
+import { useEncrypted } from 'cozy-ui/transpiled/react/providers/Encrypted'
 
 import NoViewer from '../NoViewer'
 import AudioViewer from '../ViewersByFile/AudioViewer'
@@ -16,7 +17,6 @@ import PdfMobileViewer from '../ViewersByFile/PdfMobileViewer'
 import ShortcutViewer from '../ViewersByFile/ShortcutViewer'
 import TextViewer from '../ViewersByFile/TextViewer'
 import VideoViewer from '../ViewersByFile/VideoViewer'
-import { useEncrypted } from '../providers/EncryptedProvider'
 
 const isBlankPaper = doc => doc.metadata?.paperProps?.isBlank
 

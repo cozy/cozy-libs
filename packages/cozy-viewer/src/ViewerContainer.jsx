@@ -7,6 +7,7 @@ import { FileDoctype } from 'cozy-ui/transpiled/react/proptypes'
 import AlertProvider from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useCozyTheme } from 'cozy-ui/transpiled/react/providers/CozyTheme'
+import EncryptedProvider from 'cozy-ui/transpiled/react/providers/Encrypted'
 import { useExtendI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import Viewer from './Viewer'
@@ -15,7 +16,6 @@ import { isValidForPanel } from './helpers'
 import { locales } from './locales'
 import { toolbarPropsPropType } from './proptypes'
 import { ActionMenuProvider } from './providers/ActionMenuProvider'
-import EncryptedProvider from './providers/EncryptedProvider'
 import styles from './styles.styl'
 
 const ViewerContainer = props => {

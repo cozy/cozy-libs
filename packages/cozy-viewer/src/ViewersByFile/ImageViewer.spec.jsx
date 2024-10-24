@@ -3,10 +3,10 @@ import React from 'react'
 
 import { checkImageSource } from 'cozy-ui/transpiled/react/FileImageLoader/checkImageSource'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import EncryptedProvider from 'cozy-ui/transpiled/react/providers/Encrypted'
 
 import ImageViewer from './ImageViewer'
-import DemoProvider from '../docs/DemoProvider'
-import EncryptedProvider from '../providers/EncryptedProvider'
+import DemoProvider from '../providers/DemoProvider'
 
 jest.mock('cozy-ui/transpiled/react/FileImageLoader/checkImageSource', () => ({
   ...jest.requireActual(
