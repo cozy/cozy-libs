@@ -1,6 +1,8 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
+import flag from 'cozy-flags'
+
 import AccountModal from '../AccountModal'
 import EditAccountModal from '../EditAccountModal'
 import HarvestModalRoot from '../HarvestModalRoot'
@@ -59,8 +61,8 @@ const RoutesV4 = ({
             accountId={match.params.accountId}
             accountsAndTriggers={accountsAndTriggers}
             onDismiss={onDismiss}
-            showNewAccountButton={!konnectorWithTriggers.clientSide}
-            showAccountSelection={!konnectorWithTriggers.clientSide}
+            showNewAccountButton={flag('clisk.multi-accounts')}
+            showAccountSelection={flag('clisk.multi-accounts')}
             Component={DataTab}
           />
         )}
@@ -74,8 +76,8 @@ const RoutesV4 = ({
             accountId={match.params.accountId}
             accountsAndTriggers={accountsAndTriggers}
             onDismiss={onDismiss}
-            showNewAccountButton={!konnectorWithTriggers.clientSide}
-            showAccountSelection={!konnectorWithTriggers.clientSide}
+            showNewAccountButton={flag('clisk.multi-accounts')}
+            showAccountSelection={flag('clisk.multi-accounts')}
             Component={ConfigurationTab}
           />
         )}

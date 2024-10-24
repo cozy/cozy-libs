@@ -1,6 +1,8 @@
 import React from 'react'
 import { Routes, Route, Navigate, useParams } from 'react-router-dom'
 
+import flag from 'cozy-flags'
+
 import { ViewerModal } from '../../datacards/ViewerModal'
 import AccountModal from '../AccountModal'
 import EditAccountModal from '../EditAccountModal'
@@ -54,8 +56,8 @@ const RoutesV6 = ({
                 accountId={params.accountId}
                 accountsAndTriggers={accountsAndTriggers}
                 onDismiss={onDismiss}
-                showNewAccountButton={!konnectorWithTriggers.clientSide}
-                showAccountSelection={!konnectorWithTriggers.clientSide}
+                showNewAccountButton={flag('clisk.multi-accounts')}
+                showAccountSelection={flag('clisk.multi-accounts')}
                 Component={DataTab}
               />
             )}
@@ -73,8 +75,8 @@ const RoutesV6 = ({
                 accountId={params.accountId}
                 accountsAndTriggers={accountsAndTriggers}
                 onDismiss={onDismiss}
-                showNewAccountButton={!konnectorWithTriggers.clientSide}
-                showAccountSelection={!konnectorWithTriggers.clientSide}
+                showNewAccountButton={flag('clisk.multi-accounts')}
+                showAccountSelection={flag('clisk.multi-accounts')}
                 Component={ConfigurationTab}
               />
             )}
