@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 5.1.0 (2024-10-25)
+
+
+### Features
+
+* **Viewer:** Replace Encrypted provider by cozy-ui one ([aa81d02](https://github.com/cozy/cozy-libs/commit/aa81d02f0a70de8044f704cbd895b1d54c9f38b8))
+
+
+
+
+
 ## 5.0.5 (2024-10-23)
 
 **Note:** Version bump only for package cozy-realtime
