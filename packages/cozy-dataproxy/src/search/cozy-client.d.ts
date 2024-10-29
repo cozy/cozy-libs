@@ -1,10 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import 'cozy-client'
 import { QueryDefinition, CozyLink } from 'cozy-client'
 import {
-  FileDocument,
-  CozyClientDocument,
   QueryOptions,
   QueryResult,
   ClientCapabilities
@@ -115,7 +111,11 @@ declare module 'cozy-client' {
     locale: string
   }
 
-  export const useClient = (): CozyClient => CozyClient as CozyClient
+  export interface TestType {
+    test: string
+  }
+
+  export const useClient = (): string => 'ABCD'
 
   export interface SplitFilenameResult {
     filename: string
@@ -161,7 +161,7 @@ declare module 'cozy-client' {
     launch: (trigger: any) => any
   }
 
-  export default class CozyClient {
+  export class CozyClient {
     plugins: unknown
     constructor(rawOptions?: ClientOptions)
     getStackClient(): StackClient
@@ -181,7 +181,4 @@ declare module 'cozy-client' {
     capabilities: ClientCapabilities
     registerPlugin: (Plugin: () => void, options: unknown) => void
   }
-
-  export const createMockClient = (options?: ClientOptions): CozyClient =>
-    CozyClient as CozyClient
 }

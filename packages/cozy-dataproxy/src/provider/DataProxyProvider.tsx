@@ -6,6 +6,7 @@ import flag from 'cozy-flags'
 import Minilog from 'cozy-minilog'
 
 const log = Minilog('👷‍♂️ [DataProxyProvider]')
+import { useCozyDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 
 export interface DataProxyInterface {
   dataProxyServicesAvailable: boolean | undefined
@@ -28,6 +29,8 @@ export const useDataProxy = (): DataProxyInterface | undefined => {
 
 export const DataProxyProvider = React.memo(({ children }) => {
   const client = useClient()
+  const dialog = useCozyDialog('abcd')
+  console.log(dialog)
   const [iframeUrl, setIframeUrl] = useState<string>()
   const [dataProxy, setDataProxy] = useState<DataProxyWorker>()
   const [dataProxyServicesAvailable, setDataProxyServicesAvailable] = useState<

@@ -1,6 +1,6 @@
 import FlexSearch from 'flexsearch'
 
-import CozyClient, { Q } from 'cozy-client'
+import { Q, TestType, CozyClient } from 'cozy-client'
 import Minilog from 'cozy-minilog'
 import { RealtimePlugin } from 'cozy-realtime'
 
@@ -43,9 +43,12 @@ export class SearchEngine {
   client: CozyClient
   searchIndexes: SearchIndexes
   debouncedReplication: () => void
+  toto: TestType
 
   constructor(client: CozyClient) {
+    this.toto = { test: 'test' }
     this.client = client
+
     this.searchIndexes = {} as SearchIndexes
 
     this.indexOnChanges()
@@ -109,7 +112,6 @@ export class SearchEngine {
     }
     const searchIndex = this.searchIndexes[doctype]
     if (!searchIndex) {
-      // No index yet: it will be done by querying the local db after first replication
       return
     }
     log.debug('[REALTIME] remove doc from index after update : ', doc)
@@ -171,6 +173,11 @@ export class SearchEngine {
         return null
       }
 
+      const tata = new CozyClient()
+      const req = Q('io.cozy.apps')
+      const tutu = await tata.queryAll<string>(req)
+      console.log(tutu)
+
       log.debug('indexDocsForSearch 2', pouchLink)
       if (!searchIndex) {
         log.debug('indexDocsForSearch 3')
@@ -190,9 +197,9 @@ export class SearchEngine {
         const index = this.buildSearchIndex(doctype, docs)
         const endTimeIndex = performance.now()
         log.debug(
-          `Create ${doctype} index took ${(endTimeIndex - startTimeIndex).toFixed(
-            2
-          )} ms`
+          `Create ${doctype} index took ${(
+            endTimeIndex - startTimeIndex
+          ).toFixed(2)} ms`
         )
 
         log.debug('indexDocsForSearch 4')
