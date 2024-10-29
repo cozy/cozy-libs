@@ -1,2 +1,2 @@
-declare const logger: (severity: string, ...args: unknown[]) => void
+declare const logger: (severitydd: string, ...args: unknown[]) => void
 export default logger

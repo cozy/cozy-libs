@@ -1,7 +1,8 @@
 import CozyClient, { generateWebLink, models } from 'cozy-client'
 import { IOCozyContact } from 'cozy-client/types/types'
 
-import { APPS_DOCTYPE, TYPE_DIRECTORY } from '@/search/consts'
+import { normalizeFileWithStore } from './normalizeFile'
+import { APPS_DOCTYPE, TYPE_DIRECTORY } from '../consts'
 import {
   CozyDoc,
   RawSearchResult,
@@ -9,9 +10,7 @@ import {
   isIOCozyContact,
   isIOCozyFile,
   SearchResult
-} from '@/search/types'
-
-import { normalizeFileWithStore } from './normalizeFile'
+} from '../types'
 
 export const normalizeSearchResult = async (
   client: CozyClient,
@@ -179,7 +178,7 @@ const buildOpenURL = (client: CozyClient, doc: CozyDoc): string | null => {
   return generateWebLink({
     cozyUrl: client.getStackClient().uri,
     slug,
-    // @ts-ignore
+    // @ts-expect-error
     subDomainType: client.getInstanceOptions().subdomain,
     hash: urlHash,
     pathname: '',

@@ -8,7 +8,7 @@ import {
   FILES_DOCTYPE,
   SEARCH_SCHEMA,
   SearchedDoctype
-} from '@/search/consts'
+} from './consts'
 
 export type CozyDoc = IOCozyFile | IOCozyContact | IOCozyApp
 

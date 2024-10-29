@@ -1,15 +1,15 @@
 import CozyClient from 'cozy-client'
 import Minilog from 'cozy-minilog'
 
-import { getPouchLink } from '@/search/helpers/client'
+import { getPouchLink } from './client'
 
 const log = Minilog('🗂️ [Replication]')
 
 export const startReplicationWithDebounce = (
   client: CozyClient,
   interval: number
-) => {
-  let timeoutId: NodeJS.Timeout | null = null
+): (() => void) => {
+  let timeoutId: number | null = null
 
   return (): void => {
     if (timeoutId) {

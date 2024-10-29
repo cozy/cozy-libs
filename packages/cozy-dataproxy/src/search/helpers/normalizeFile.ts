@@ -6,8 +6,8 @@ import {
   TYPE_DIRECTORY,
   ROOT_DIR_ID,
   SHARED_DRIVES_DIR_ID
-} from '@/search/consts'
-import { CozyDoc } from '@/search/types'
+} from '../consts'
+import { CozyDoc } from '../types'
 
 interface FileQueryResult {
   data: IOCozyFile

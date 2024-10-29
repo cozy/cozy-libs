@@ -13,16 +13,13 @@ import {
   LIMIT_DOCTYPE_SEARCH,
   REPLICATION_DEBOUNCE,
   SearchedDoctype
-} from '@/search/consts'
-import { getPouchLink } from '@/search/helpers/client'
-import { getSearchEncoder } from '@/search/helpers/getSearchEncoder'
-import { normalizeSearchResult } from '@/search/helpers/normalizeSearchResult'
-import { startReplicationWithDebounce } from '@/search/helpers/replication'
-import {
-  queryFilesForSearch,
-  queryAllContacts,
-  queryAllApps
-} from '@/search/queries'
+} from './consts'
+import { getPouchLink } from './helpers/client'
+import { getSearchEncoder } from './helpers/getSearchEncoder'
+import { shouldKeepFile } from './helpers/normalizeFile'
+import { normalizeSearchResult } from './helpers/normalizeSearchResult'
+import { startReplicationWithDebounce } from './helpers/replication'
+import { queryFilesForSearch, queryAllContacts, queryAllApps } from './queries'
 import {
   CozyDoc,
   RawSearchResult,
@@ -33,9 +30,7 @@ import {
   SearchIndexes,
   SearchResult,
   isSearchedDoctype
-} from '@/search/types'
-
-import { shouldKeepFile } from './helpers/normalizeFile'
+} from './types'
 
 const log = Minilog('🗂️ [Indexing]')
 
@@ -61,14 +56,14 @@ export class SearchEngine {
   }
 
   indexOnChanges(): void {
-    if (!this.client) {
-      return
-    }
     this.client.on('pouchlink:doctypesync:end', async (doctype: string) => {
       if (isSearchedDoctype(doctype)) {
-        await this.indexDocsForSearch(doctype as keyof typeof SEARCH_SCHEMA)
+        log.debug('Start indexing', doctype)
+        await this.indexDocsForSearch(doctype)
+        log.debug('Indexes', this.searchIndexes)
       }
     })
+
     this.client.on('login', () => {
       // Ensure login is done before plugin register
       this.client.registerPlugin(RealtimePlugin, {})
@@ -82,12 +77,13 @@ export class SearchEngine {
   }
 
   subscribeDoctype(client: CozyClient, doctype: string): void {
-    /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */
+    /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method */
+    // @ts-expect-error Client's plugins are not typed
     const realtime = client.plugins.realtime
     realtime.subscribe('created', doctype, this.handleUpdatedOrCreatedDoc)
     realtime.subscribe('updated', doctype, this.handleUpdatedOrCreatedDoc)
     realtime.subscribe('deleted', doctype, this.handleDeletedDoc)
-    /* eslint-enable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */
+    /* eslint-enable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method */
   }
 
   handleUpdatedOrCreatedDoc(doc: CozyDoc): void {
@@ -95,7 +91,7 @@ export class SearchEngine {
     if (!isSearchedDoctype(doctype)) {
       return
     }
-    const searchIndex = this.searchIndexes?.[doctype]
+    const searchIndex = this.searchIndexes[doctype]
     if (!searchIndex) {
       // No index yet: it will be done by querying the local db after first replication
       return
@@ -111,7 +107,7 @@ export class SearchEngine {
     if (!isSearchedDoctype(doctype)) {
       return
     }
-    const searchIndex = this.searchIndexes?.[doctype]
+    const searchIndex = this.searchIndexes[doctype]
     if (!searchIndex) {
       // No index yet: it will be done by querying the local db after first replication
       return
@@ -131,7 +127,7 @@ export class SearchEngine {
     const flexsearchIndex = new FlexSearch.Document<CozyDoc, true>({
       tokenize: 'forward',
       encode: getSearchEncoder(),
-      // @ts-ignore
+      // @ts-expect-error minlength is not described by Flexsearch types but exists
       minlength: 2,
       document: {
         id: '_id',
@@ -166,62 +162,76 @@ export class SearchEngine {
   async indexDocsForSearch(
     doctype: keyof typeof SEARCH_SCHEMA
   ): Promise<SearchIndex | null> {
-    const searchIndex = this.searchIndexes[doctype]
-    const pouchLink = getPouchLink(this.client)
+    try {
+      log.debug('indexDocsForSearch 1')
+      const searchIndex = this.searchIndexes[doctype]
+      const pouchLink = getPouchLink(this.client)
 
-    if (!pouchLink) {
-      return null
-    }
-
-    if (!searchIndex) {
-      // First creation of search index
-      const startTimeQ = performance.now()
-      const docs = await this.client.queryAll<CozyDoc[]>(
-        Q(doctype).limitBy(null)
-      )
-      const endTimeQ = performance.now()
-      log.debug(
-        `Query ${docs.length} docs doctype ${doctype} took ${(endTimeQ - startTimeQ).toFixed(2)} ms`
-      )
-
-      const startTimeIndex = performance.now()
-      const index = this.buildSearchIndex(doctype, docs)
-      const endTimeIndex = performance.now()
-      log.debug(
-        `Create ${doctype} index took ${(endTimeIndex - startTimeIndex).toFixed(2)} ms`
-      )
-      const info = await pouchLink.getDbInfo(doctype)
-
-      this.searchIndexes[doctype] = {
-        index,
-        lastSeq: info?.update_seq,
-        lastUpdated: new Date().toISOString()
+      if (!pouchLink) {
+        return null
       }
-      return this.searchIndexes[doctype]
-    }
 
-    // Incremental index update
-    // At this point, the search index are supposed to be already up-to-date,
-    // thanks to the realtime.
-    // However, we check it is actually the case for safety, and update the lastSeq
-    const lastSeq = searchIndex.lastSeq || 0
-    const changes = await pouchLink.getChanges(doctype, {
-      include_docs: true,
-      since: lastSeq
-    })
+      log.debug('indexDocsForSearch 2', pouchLink)
+      if (!searchIndex) {
+        log.debug('indexDocsForSearch 3')
+        // First creation of search index
+        const startTimeQ = performance.now()
+        const docs = await this.client.queryAll<CozyDoc[]>(
+          Q(doctype).limitBy(null)
+        )
+        const endTimeQ = performance.now()
+        log.debug(
+          `Query ${docs.length} docs doctype ${doctype} took ${(
+            endTimeQ - startTimeQ
+          ).toFixed(2)} ms`
+        )
 
-    for (const change of changes.results) {
-      if (change.deleted) {
-        searchIndex.index.remove(change.id)
-      } else {
-        const normalizedDoc = { ...change.doc, _type: doctype } as CozyDoc
-        this.addDocToIndex(searchIndex.index, normalizedDoc)
+        const startTimeIndex = performance.now()
+        const index = this.buildSearchIndex(doctype, docs)
+        const endTimeIndex = performance.now()
+        log.debug(
+          `Create ${doctype} index took ${(endTimeIndex - startTimeIndex).toFixed(
+            2
+          )} ms`
+        )
+
+        log.debug('indexDocsForSearch 4')
+        const info = await pouchLink.getDbInfo(doctype)
+
+        log.debug('indexDocsForSearch 5')
+        this.searchIndexes[doctype] = {
+          index,
+          lastSeq: info.update_seq,
+          lastUpdated: new Date().toISOString()
+        }
+        return this.searchIndexes[doctype]
       }
-    }
 
-    searchIndex.lastSeq = changes.last_seq
-    searchIndex.lastUpdated = new Date().toISOString()
-    return searchIndex
+      // Incremental index update
+      // At this point, the search index are supposed to be already up-to-date,
+      // thanks to the realtime.
+      // However, we check it is actually the case for safety, and update the lastSeq
+      const lastSeq = searchIndex.lastSeq || 0
+      const changes = await pouchLink.getChanges(doctype, {
+        include_docs: true,
+        since: lastSeq
+      })
+
+      for (const change of changes.results) {
+        if (change.deleted) {
+          searchIndex.index.remove(change.id)
+        } else {
+          const normalizedDoc = { ...change.doc, _type: doctype } as CozyDoc
+          this.addDocToIndex(searchIndex.index, normalizedDoc)
+        }
+      }
+
+      searchIndex.lastSeq = changes.last_seq
+      searchIndex.lastUpdated = new Date().toISOString()
+      return searchIndex
+    } catch (error) {
+      log.error(`Failed indexing ${doctype}`, error)
+    }
   }
 
   initIndexesFromStack = async (): Promise<SearchIndexes> => {

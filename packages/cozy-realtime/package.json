@@ -16,7 +16,9 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "babel src -d dist",
+    "build": "yarn build:types && yarn build:js",
+    "build:js": "babel --extensions .js,.jsx,.ts,.tsx ./src -d ./dist --verbose",
+    "build:types": "tsc",
     "prepublishOnly": "yarn build",
     "watch": "yarn build --watch"
   },
@@ -46,5 +48,6 @@
   "dependencies": {
     "@cozy/minilog": "^1.0.0",
     "cozy-device-helper": "^3.1.2"
-  }
+  },
+  "types": "dist/index.d.ts"
 }
