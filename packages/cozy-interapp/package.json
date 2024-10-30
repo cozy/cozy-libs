@@ -1,6 +1,6 @@
 {
   "name": "cozy-interapp",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "Cozy Interapp allows applications to interact with each other and not have access to all data",
   "main": "dist/index.js",
   "author": "Cozy",
@@ -22,7 +22,7 @@
     "@babel/cli": "7.16.8",
     "@babel/core": "7.16.12",
     "babel-jest": "26.6.3",
-    "babel-preset-cozy-app": "^2.3.0",
+    "babel-preset-cozy-app": "^2.4.0",
     "jest": "26.6.3"
   },
   "peerDependencies": {

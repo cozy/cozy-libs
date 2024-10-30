@@ -1,6 +1,6 @@
 {
   "name": "cozy-ci",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Utility scripts for Cozy Cloud CI integration",
   "license": "MIT",
   "bin": {
