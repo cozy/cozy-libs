@@ -1,6 +1,10 @@
 import FlexSearch from 'flexsearch'
 
-import { Q, TestType, CozyClient } from 'cozy-client'
+/*
+import { CozyClient, Q, TestType } from 'cozy-client'
+/*/
+import CozyClient, { Q, TestType } from 'cozy-client'
+//*/
 import Minilog from 'cozy-minilog'
 import { RealtimePlugin } from 'cozy-realtime'
 
@@ -175,7 +179,7 @@ export class SearchEngine {
 
       const tata = new CozyClient()
       const req = Q('io.cozy.apps')
-      const tutu = await tata.queryAll<string>(req)
+      const tutu = await tata.queryAll<string>( req)
       console.log(tutu)
 
       log.debug('indexDocsForSearch 2', pouchLink)
