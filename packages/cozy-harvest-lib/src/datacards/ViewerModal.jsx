@@ -2,8 +2,8 @@ import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { models, useQuery } from 'cozy-client'
-import Viewer from 'cozy-ui/transpiled/react/Viewer'
 import Overlay from 'cozy-ui/transpiled/react/deprecated/Overlay'
+import Viewer from 'cozy-viewer'
 
 import { useDataCardFiles } from './useDataCardFiles'
 import { MountPointContext } from '../components/MountPointContext'
