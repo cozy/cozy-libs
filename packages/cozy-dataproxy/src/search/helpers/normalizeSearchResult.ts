@@ -1,7 +1,7 @@
 import CozyClient, { generateWebLink, models } from 'cozy-client'
 import { IOCozyContact } from 'cozy-client/types/types'
 
-import { APPS_DOCTYPE, TYPE_DIRECTORY } from '@/search/consts'
+import { APPS_DOCTYPE, TYPE_DIRECTORY } from '../consts'
 import {
   CozyDoc,
   RawSearchResult,
@@ -9,7 +9,7 @@ import {
   isIOCozyContact,
   isIOCozyFile,
   SearchResult
-} from '@/search/types'
+} from '../types'
 
 export const normalizeSearchResult = (
   client: CozyClient,

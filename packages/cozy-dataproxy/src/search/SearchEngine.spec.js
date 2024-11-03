@@ -1,17 +1,16 @@
 import { createMockClient } from 'cozy-client'
 
-import { APPS_DOCTYPE, CONTACTS_DOCTYPE, FILES_DOCTYPE } from '@/search/consts'
-
 import SearchEngine from './SearchEngine'
+import { APPS_DOCTYPE, CONTACTS_DOCTYPE, FILES_DOCTYPE } from './consts'
 
 jest.mock('cozy-client')
 jest.mock('flexsearch')
 jest.mock('flexsearch/dist/module/lang/latin/balance')
 
-jest.mock('@/search/helpers/client', () => ({
+jest.mock('./helpers/client', () => ({
   getPouchLink: jest.fn()
 }))
-jest.mock('@/search/helpers/getSearchEncoder', () => ({
+jest.mock('./helpers/getSearchEncoder', () => ({
   getSearchEncoder: jest.fn()
 }))
 
