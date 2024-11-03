@@ -9,7 +9,7 @@ jest.mock('./client', () => ({
 }))
 
 interface PouchLink {
-  startReplication: Function
+  startReplication: () => void
 }
 
 describe('startReplicationWithDebounce', () => {

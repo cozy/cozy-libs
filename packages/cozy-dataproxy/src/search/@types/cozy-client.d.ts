@@ -1,9 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import 'cozy-client'
-import { QueryDefinition, CozyLink } from 'cozy-client'
+import { CozyLink } from 'cozy-client'
 import {
-  FileDocument,
   CozyClientDocument,
   QueryOptions,
   QueryResult,
@@ -169,23 +166,20 @@ declare module 'cozy-client' {
     instanceOptions: InstanceOptions
     collection(doctype: string): Collection
     isLogged: boolean
-    on: (event: string, callback: (doctype: string) => void) => void
+    on: (
+      event: string,
+      callback: (doctype: string) => void | Promise<void>
+    ) => void
     removeListener: (event: string, callback: () => void) => void
     logout: () => Promise<void>
     query: (
       queryDefinition: QueryDefinition,
       options?: QueryOptions
     ) => Promise<QueryResult>
-    queryAll: <T>(
-      queryDefinition: QueryDefinition,
-      options?: QueryOptions
-    ) => Promise<T>
+    queryAll: <T>(queryDefinition: QueryDefinition) => Promise<T>
     links: CozyLink[]
     capabilities: ClientCapabilities
-    registerPlugin: (Plugin: Function, options: unknown) => void
-    getCollectionFromState: (doctype: string) => unknown
+    registerPlugin: (Plugin: () => void, options: unknown) => void
+    getCollectionFromState: (type: string) => CozyClientDocument[]
   }
-
-  export const createMockClient = (options?: ClientOptions): CozyClient =>
-    CozyClient as CozyClient
 }

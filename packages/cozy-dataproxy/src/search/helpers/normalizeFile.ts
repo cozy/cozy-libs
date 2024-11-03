@@ -53,6 +53,7 @@ export const addFilePaths = (
       const dir = parentDirs.find(dir => dir._id === file.dir_id)
       if (dir) {
         const idx = normResults.findIndex(res => res.doc._id === file._id)
+        // @ts-expect-error We know that we are manipulating an IOCozyFile here so path exists
         normResults[idx].doc.path = dir.path
       }
     }
