@@ -39,7 +39,7 @@ interface FlexSearchResultWithDoctype
   doctype: SearchedDoctype
 }
 
-class SearchEngine {
+export class SearchEngine {
   client: CozyClient
   searchIndexes: SearchIndexes
   debouncedReplication: () => void
@@ -77,12 +77,13 @@ class SearchEngine {
   }
 
   subscribeDoctype(client: CozyClient, doctype: string): void {
-    /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */
+    /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method */
+    // @ts-expect-error Client's plugins are not typed
     const realtime = client.plugins.realtime
     realtime.subscribe('created', doctype, this.handleUpdatedOrCreatedDoc)
     realtime.subscribe('updated', doctype, this.handleUpdatedOrCreatedDoc)
     realtime.subscribe('deleted', doctype, this.handleDeletedDoc)
-    /* eslint-enable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */
+    /* eslint-enable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method */
   }
 
   handleUpdatedOrCreatedDoc(doc: CozyDoc): void {
@@ -126,7 +127,7 @@ class SearchEngine {
     const flexsearchIndex = new FlexSearch.Document<CozyDoc, true>({
       tokenize: 'forward',
       encode: getSearchEncoder(),
-      // @ts-ignore
+      // @ts-expect-error minlength is not described by Flexsearch types but exists
       minlength: 2,
       document: {
         id: '_id',
@@ -176,14 +177,18 @@ class SearchEngine {
       )
       const endTimeQ = performance.now()
       log.debug(
-        `Query ${docs.length} docs doctype ${doctype} took ${(endTimeQ - startTimeQ).toFixed(2)} ms`
+        `Query ${docs.length} docs doctype ${doctype} took ${(
+          endTimeQ - startTimeQ
+        ).toFixed(2)} ms`
       )
 
       const startTimeIndex = performance.now()
       const index = this.buildSearchIndex(doctype, docs)
       const endTimeIndex = performance.now()
       log.debug(
-        `Create ${doctype} index took ${(endTimeIndex - startTimeIndex).toFixed(2)} ms`
+        `Create ${doctype} index took ${(endTimeIndex - startTimeIndex).toFixed(
+          2
+        )} ms`
       )
       const info = await pouchLink.getDbInfo(doctype)
 
@@ -382,5 +387,3 @@ class SearchEngine {
     return searchResults.slice(0, LIMIT_DOCTYPE_SEARCH)
   }
 }
-
-export default SearchEngine

@@ -26,7 +26,7 @@ export const queryFilesForSearch = async (
       'GET',
       '/data/io.cozy.files/_all_docs?Fields=_id,trashed,dir_id,name,path,type,mime,class,metadata.title,metadata.version&DesignDocs=false&include_docs=true'
     )
-  const files = resp.rows.map(row => ({ id: row.id, ...row.doc }) as IOCozyFile)
+  const files = resp.rows.map(row => ({ id: row.id, ...row.doc } as IOCozyFile))
   const folders = files.filter(file => file.type === TYPE_DIRECTORY)
 
   const filteredFiles = files.filter(file => shouldKeepFile(file))

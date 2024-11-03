@@ -8,8 +8,8 @@ const log = Minilog('🗂️ [Replication]')
 export const startReplicationWithDebounce = (
   client: CozyClient,
   interval: number
-) => {
-  let timeoutId: NodeJS.Timeout | null = null
+): (() => void) => {
+  let timeoutId: number | null = null
 
   return (): void => {
     if (timeoutId) {

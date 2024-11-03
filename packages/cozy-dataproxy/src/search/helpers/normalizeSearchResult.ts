@@ -167,7 +167,6 @@ const buildOpenURL = (client: CozyClient, doc: CozyDoc): string | null => {
   return generateWebLink({
     cozyUrl: client.getStackClient().uri,
     slug,
-    // @ts-ignore
     subDomainType: client.getInstanceOptions().subdomain,
     hash: urlHash,
     pathname: '',
