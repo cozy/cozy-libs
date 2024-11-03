@@ -1,12 +1,12 @@
 import CozyClient, { Q } from 'cozy-client'
 import { IOCozyFile } from 'cozy-client/types/types'
 
-import { CONTACTS_DOCTYPE, APPS_DOCTYPE, TYPE_DIRECTORY } from '@/search/consts'
+import { CONTACTS_DOCTYPE, APPS_DOCTYPE, TYPE_DIRECTORY } from '../consts'
 import {
   normalizeFileWithFolders,
   shouldKeepFile
-} from '@/search/helpers/normalizeFile'
-import { CozyDoc } from '@/search/types'
+} from '../helpers/normalizeFile'
+import { CozyDoc } from '../types'
 
 interface DBRow {
   id: string

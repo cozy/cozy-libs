@@ -7,8 +7,8 @@ import {
   TYPE_FILE,
   ROOT_DIR_ID,
   SHARED_DRIVES_DIR_ID
-} from '@/search/consts'
-import { CozyDoc, isIOCozyFile, RawSearchResult } from '@/search/types'
+} from '../consts'
+import { CozyDoc, isIOCozyFile, RawSearchResult } from '../types'
 
 /**
  * Normalize file for Front usage in <AutoSuggestion> component inside <BarSearchAutosuggest>
