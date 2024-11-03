@@ -1,11 +1,10 @@
 import CozyClient from 'cozy-client'
 
-import { getPouchLink } from '@/search/helpers/client'
-
+import { getPouchLink } from './client'
 import { startReplicationWithDebounce } from './replication'
 
 jest.mock('cozy-client')
-jest.mock('@/search/helpers/client', () => ({
+jest.mock('./client', () => ({
   getPouchLink: jest.fn()
 }))
 

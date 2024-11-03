@@ -13,16 +13,13 @@ import {
   LIMIT_DOCTYPE_SEARCH,
   REPLICATION_DEBOUNCE,
   SearchedDoctype
-} from '@/search/consts'
-import { getPouchLink } from '@/search/helpers/client'
-import { getSearchEncoder } from '@/search/helpers/getSearchEncoder'
-import { normalizeSearchResult } from '@/search/helpers/normalizeSearchResult'
-import { startReplicationWithDebounce } from '@/search/helpers/replication'
-import {
-  queryFilesForSearch,
-  queryAllContacts,
-  queryAllApps
-} from '@/search/queries'
+} from './consts'
+import { getPouchLink } from './helpers/client'
+import { getSearchEncoder } from './helpers/getSearchEncoder'
+import { addFilePaths, shouldKeepFile } from './helpers/normalizeFile'
+import { normalizeSearchResult } from './helpers/normalizeSearchResult'
+import { startReplicationWithDebounce } from './helpers/replication'
+import { queryFilesForSearch, queryAllContacts, queryAllApps } from './queries'
 import {
   CozyDoc,
   RawSearchResult,
@@ -33,9 +30,7 @@ import {
   SearchIndexes,
   SearchResult,
   isSearchedDoctype
-} from '@/search/types'
-
-import { addFilePaths, shouldKeepFile } from './helpers/normalizeFile'
+} from './types'
 
 const log = Minilog('🗂️ [Indexing]')
 

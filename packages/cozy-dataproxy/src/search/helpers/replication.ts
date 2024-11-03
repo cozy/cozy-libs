@@ -1,7 +1,7 @@
 import CozyClient from 'cozy-client'
 import Minilog from 'cozy-minilog'
 
-import { getPouchLink } from '@/search/helpers/client'
+import { getPouchLink } from './client'
 
 const log = Minilog('🗂️ [Replication]')
 
