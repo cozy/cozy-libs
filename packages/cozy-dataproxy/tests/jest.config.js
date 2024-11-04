@@ -1,10 +1,16 @@
 // Sync object
 /** @type {import('@jest/types').Config.InitialOptions} */
 const config = {
+  setupFilesAfterEnv: ['<rootDir>/tests/jest.setup.ts'],
   collectCoverage: true,
-  collectCoverageFrom: ['./**/*.{ts,tsx}'],
+  collectCoverageFrom: ['./src/**/*.{ts,tsx}'],
   coverageDirectory: './tests/coverage',
-  coveragePathIgnorePatterns: ['./tests'],
+  coveragePathIgnorePatterns: [
+    './tests',
+    './src/search/@types/*',
+    './src/search/types.ts',
+    './src/search/helpers/getSearchEncoder.ts'
+  ],
   rootDir: '../',
   testMatch: ['./**/*.spec.{ts,tsx}'],
   coverageThreshold: {
