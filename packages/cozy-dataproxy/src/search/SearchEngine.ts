@@ -11,14 +11,12 @@ import {
   CONTACTS_DOCTYPE,
   DOCTYPE_ORDER,
   LIMIT_DOCTYPE_SEARCH,
-  REPLICATION_DEBOUNCE,
   SearchedDoctype
 } from './consts'
 import { getPouchLink } from './helpers/client'
 import { getSearchEncoder } from './helpers/getSearchEncoder'
 import { addFilePaths, shouldKeepFile } from './helpers/normalizeFile'
 import { normalizeSearchResult } from './helpers/normalizeSearchResult'
-import { startReplicationWithDebounce } from './helpers/replication'
 import { queryFilesForSearch, queryAllContacts, queryAllApps } from './queries'
 import {
   CozyDoc,
@@ -49,10 +47,12 @@ export class SearchEngine {
     this.searchIndexes = {} as SearchIndexes
 
     this.indexOnChanges()
-    this.debouncedReplication = startReplicationWithDebounce(
-      client,
-      REPLICATION_DEBOUNCE
-    )
+    this.debouncedReplication = (): void => {
+      const pouchLink = getPouchLink(client)
+      if (pouchLink) {
+        pouchLink.startReplicationWithDebounce()
+      }
+    }
   }
 
   indexOnChanges(): void {
