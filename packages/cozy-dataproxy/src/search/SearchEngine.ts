@@ -64,6 +64,12 @@ export class SearchEngine {
         await this.indexDocsForSearch(doctype as keyof typeof SEARCH_SCHEMA)
       }
     })
+    this.client.on('pouchlink:sync:start', () => {
+      log.debug('Started pouch replication')
+    })
+    this.client.on('pouchlink:sync:end', () => {
+      log.debug('Ended pouch replication')
+    })
     this.client.on('login', () => {
       // Ensure login is done before plugin register
       this.client.registerPlugin(RealtimePlugin, {})
