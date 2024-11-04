@@ -22,8 +22,6 @@ export const SEARCH_SCHEMA: Record<SearchedDoctype, string[]> = {
   'io.cozy.apps': ['slug', 'name']
 }
 
-export const REPLICATION_DEBOUNCE = 30 * 1000 // 30s
-
 export const FILES_DOCTYPE = 'io.cozy.files'
 export const CONTACTS_DOCTYPE = 'io.cozy.contacts'
 export const APPS_DOCTYPE = 'io.cozy.apps'
