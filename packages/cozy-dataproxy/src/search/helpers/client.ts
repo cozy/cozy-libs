@@ -1,7 +1,7 @@
 import CozyClient from 'cozy-client'
 import PouchLink from 'cozy-pouch-link'
 
-export const getPouchLink = (client: CozyClient): PouchLink | null => {
+export const getPouchLink = (client?: CozyClient): PouchLink | null => {
   if (!client) {
     return null
   }
