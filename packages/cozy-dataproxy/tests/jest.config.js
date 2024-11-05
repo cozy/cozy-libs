@@ -2,7 +2,7 @@
 /** @type {import('@jest/types').Config.InitialOptions} */
 const config = {
   setupFilesAfterEnv: ['<rootDir>/tests/jest.setup.ts'],
-  collectCoverage: true,
+  collectCoverage: false,
   collectCoverageFrom: ['./src/**/*.{ts,tsx}'],
   coverageDirectory: './tests/coverage',
   coveragePathIgnorePatterns: [
