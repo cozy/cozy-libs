@@ -18,14 +18,14 @@ export const normalizeSearchResult = (
 ): SearchResult => {
   const doc = searchResults.doc
   const url = buildOpenURL(client, doc)
-  const type = getSearchResultSlug(doc)
+  const slug = getSearchResultSlug(doc)
   const title = getSearchResultTitle(doc)
-  const name = getSearchResultSubTitle(client, {
+  const subTitle = getSearchResultSubTitle(client, {
     fields: searchResults.fields,
     doc,
     query
   })
-  const normalizedRes = { doc, type, title, name, url }
+  const normalizedRes = { doc, slug, title, subTitle, url }
 
   return normalizedRes
 }
