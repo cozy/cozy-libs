@@ -39,7 +39,10 @@
       "./packages/commitlint-config-cozy"
     ]
   },
-  "workspaces": [
-    "packages/*"
-  ]
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": ["**/cozy-ui"]
+  }
 }
