@@ -35,9 +35,9 @@ describe('Should normalize files results', () => {
 
     expect(result).toStrictEqual({
       doc: doc,
-      type: 'drive',
+      slug: 'drive',
       title: 'SOME_FILE_NAME',
-      name: 'SOME/FILE/PATH',
+      subTitle: 'SOME/FILE/PATH',
       url: 'https://claude-drive.mycozy.cloud/#/folder/SOME_DIR_ID/file/SOME_FILE_ID'
     })
   })
@@ -68,9 +68,9 @@ describe('Should normalize files results', () => {
 
     expect(result).toStrictEqual({
       doc: doc,
-      type: 'notes',
+      slug: 'notes',
       title: 'SOME_NOTE_NAME.cozy-note',
-      name: 'SOME/NOTE/PATH',
+      subTitle: 'SOME/NOTE/PATH',
       url: 'https://claude-notes.mycozy.cloud/#/n/SOME_NOTE_ID'
     })
   })
@@ -96,9 +96,9 @@ describe('Should normalize files results', () => {
 
     expect(result).toStrictEqual({
       doc: doc,
-      type: 'drive',
+      slug: 'drive',
       title: 'SOME_FOLDER_NAME',
-      name: 'SOME/FOLDER/PATH',
+      subTitle: 'SOME/FOLDER/PATH',
       url: 'https://claude-drive.mycozy.cloud/#/folder/SOME_FODLER_ID'
     })
   })
@@ -126,9 +126,9 @@ describe('Should normalize contacts results', () => {
 
     expect(result).toStrictEqual({
       doc: doc,
-      type: 'contacts',
+      slug: 'contacts',
       title: 'John Doe',
-      name: 'Developper',
+      subTitle: 'Developper',
       url: 'https://claude-contacts.mycozy.cloud/#/SOME_CONTACT_ID'
     })
   })
@@ -154,9 +154,9 @@ describe('Should normalize contacts results', () => {
 
     expect(result).toStrictEqual({
       doc: doc,
-      type: 'contacts',
+      slug: 'contacts',
       title: 'John Claude Doe',
-      name: 'Developper',
+      subTitle: 'Developper',
       url: 'https://claude-contacts.mycozy.cloud/#/SOME_CONTACT_ID'
     })
   })
@@ -181,9 +181,9 @@ describe('Should normalize contacts results', () => {
 
     expect(result).toStrictEqual({
       doc: doc,
-      type: 'contacts',
+      slug: 'contacts',
       title: null,
-      name: 'Developper',
+      subTitle: 'Developper',
       url: 'https://claude-contacts.mycozy.cloud/#/SOME_CONTACT_ID'
     })
   })
@@ -209,9 +209,9 @@ describe('Should normalize contacts results', () => {
 
     expect(result).toStrictEqual({
       doc: doc,
-      type: 'contacts',
+      slug: 'contacts',
       title: 'John Doe',
-      name: null,
+      subTitle: null,
       url: 'https://claude-contacts.mycozy.cloud/#/SOME_CONTACT_ID'
     })
   })
@@ -241,9 +241,9 @@ describe('Should normalize contacts results', () => {
 
     expect(result).toStrictEqual({
       doc: doc,
-      type: 'contacts',
+      slug: 'contacts',
       title: 'John Doe',
-      name: 'JohnDoe@cozy.mail',
+      subTitle: 'JohnDoe@cozy.mail',
       url: 'https://claude-contacts.mycozy.cloud/#/SOME_CONTACT_ID'
     })
   })
@@ -276,9 +276,9 @@ describe('Should normalize apps results', () => {
 
     expect(result).toStrictEqual({
       doc: doc,
-      type: 'drive',
+      slug: 'drive',
       title: 'Cozy Drive',
-      name: 'Some app description',
+      subTitle: 'Some app description',
       url: 'https://claude-drive.mycozy.cloud/#/'
     })
   })
@@ -304,9 +304,9 @@ describe('Should normalize apps results', () => {
 
     expect(result).toStrictEqual({
       doc: doc,
-      type: 'drive',
+      slug: 'drive',
       title: 'Cozy Drive',
-      name: 'Cozy Drive',
+      subTitle: 'Cozy Drive',
       url: 'https://claude-drive.mycozy.cloud/#/'
     })
   })
@@ -334,9 +334,9 @@ describe('Should normalize unknown doctypes', () => {
 
     expect(result).toStrictEqual({
       doc: doc,
-      type: null,
+      slug: null,
       title: null,
-      name: null,
+      subTitle: null,
       url: null
     })
   })

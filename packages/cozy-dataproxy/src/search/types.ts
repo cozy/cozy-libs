@@ -43,9 +43,9 @@ export interface RawSearchResult
 
 export interface SearchResult {
   doc: IOCozyFile | IOCozyApp | IOCozyContact
-  type: string | null
+  slug: string | null
   title: string | null
-  name: string | null
+  subTitle: string | null
   url: string | null
 }
 
