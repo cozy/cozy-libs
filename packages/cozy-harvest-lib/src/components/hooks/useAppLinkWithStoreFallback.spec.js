@@ -30,9 +30,7 @@ describe('useAppLinkWithStoreFallback', () => {
     mockClient.query.mockResolvedValue({
       data: [
         {
-          attributes: {
-            slug: testAppSlug
-          },
+          slug: testAppSlug,
           links: { related: 'http://testapp.cozy.io' }
         }
       ]
@@ -52,9 +50,7 @@ describe('useAppLinkWithStoreFallback', () => {
     mockClient.query.mockResolvedValue({
       data: [
         {
-          attributes: {
-            slug: 'store'
-          },
+          slug: 'store',
           links: { related: 'http://store.cozy.io' }
         }
       ]
