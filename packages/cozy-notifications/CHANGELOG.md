@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.19.1 (2024-11-05)
+
+**Note:** Version bump only for package cozy-notifications
+
+
+
+
+
 # 0.19.0 (2024-10-30)
 
 

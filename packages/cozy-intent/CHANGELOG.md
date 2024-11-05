@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.26.1 (2024-11-05)
+
+**Note:** Version bump only for package cozy-intent
+
+
+
+
+
 # 2.26.0 (2024-10-30)
 
 
