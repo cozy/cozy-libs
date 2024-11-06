@@ -1,6 +1,6 @@
 {
   "name": "cozy-mjml",
-  "version": "0.20.0",
+  "version": "0.20.1",
   "description": "Use MJML custom components for Cozy emails",
   "author": "Cozy",
   "license": "MIT",
