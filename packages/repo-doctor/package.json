@@ -1,6 +1,6 @@
 {
   "name": "@cozy/repo-doctor",
-  "version": "0.13.1",
+  "version": "0.14.0",
   "license": "MIT",
   "bin": {
     "repo-doctor": "src/index.js"
