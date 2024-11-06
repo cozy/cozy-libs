@@ -5,6 +5,7 @@ import sortBy from 'lodash/sortBy'
 import React, { useState, useMemo, useCallback } from 'react'
 import { TableInspector, ObjectInspector } from 'react-inspector'
 
+import { useClient } from 'cozy-client'
 import Box from 'cozy-ui/transpiled/react/Box'
 import Grid from 'cozy-ui/transpiled/react/Grid'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
@@ -104,7 +105,8 @@ const makeMatcher = search => {
   return overEvery(conditions)
 }
 
-const QueryData = ({ client, data, doctype }) => {
+const QueryData = ({ data, doctype }) => {
+  const client = useClient()
   const [showTable, setShowTable] = useState(false)
   const documents = client.store.getState().cozy.documents[doctype]
 
@@ -178,7 +180,8 @@ const ObjectInspectorAndStringificator = ({ object }) => {
   )
 }
 
-const QueryStateView = ({ client, name }) => {
+const QueryStateView = ({ name }) => {
+  const client = useClient()
   /**
    * @type {import("../types").QueryState}
    */
@@ -253,16 +256,13 @@ const QueryStateView = ({ client, name }) => {
           </TableBody>
         </Table>
       </TableContainer>
-      <QueryData
-        client={client}
-        data={data}
-        doctype={queryState.definition.doctype}
-      />
+      <QueryData data={data} doctype={queryState.definition.doctype} />
     </>
   )
 }
 
-const QueryListItem = ({ name, selected, client, onClick }) => {
+const QueryListItem = ({ name, selected, onClick }) => {
+  const client = useClient()
   const queryState = client.store.getState().cozy.queries[name]
   const lastUpdate = useMemo(
     () => format(new Date(queryState.lastUpdate), 'HH:mm:ss'),
@@ -307,7 +307,8 @@ const ExecutionTime = ({ queryState }) => {
   )
 }
 
-const QueryPanels = ({ client }) => {
+const QueryPanels = () => {
+  const client = useClient()
   const queries = client.store.getState().cozy.queries
 
   const sortedQueries = useMemo(() => {
@@ -329,7 +330,6 @@ const QueryPanels = ({ client }) => {
         {sortedQueries.map(queryName => {
           return (
             <QueryListItem
-              client={client}
               name={queryName}
               key={queryName}
               onClick={() => setSelectedQuery(queryName)}
@@ -346,9 +346,7 @@ const QueryPanels = ({ client }) => {
       <Box clone p={1} minWidth={400}>
         <Grid item style={styles.panelRight}>
           <Typography variant="subtitle1">{selectedQuery}</Typography>
-          {selectedQuery ? (
-            <QueryStateView client={client} name={selectedQuery} />
-          ) : null}
+          {selectedQuery ? <QueryStateView name={selectedQuery} /> : null}
         </Grid>
       </Box>
     </>

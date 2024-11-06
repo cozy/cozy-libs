@@ -33,8 +33,7 @@ const DoctypeSyncInfo = ({ link, doctype }) => {
 }
 
 /**
- * Allows to view state and manage the PouchLink of the current cozy
- * client.
+ * Allows to view state and manage the PouchLink of the current cozy client
  */
 const PouchDevTool = () => {
   const client = useClient()
