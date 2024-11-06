@@ -32,6 +32,8 @@ jobs:
       - name: Check documentation
         run: |
           git diff --exit-code -- '*.md' || (echo "Docs are not up-to-date, please run yarn lint:md -f and repush" && exit 1)
+      - name: Version
+        run: yarn version --no-push
       - name: Publish to NPM
         if: github.ref == 'refs/heads/master'
         env:
