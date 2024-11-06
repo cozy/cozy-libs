@@ -1,4 +1,4 @@
-# Cozy-dataproxy
+# Cozy-dataproxy-lib
 
 ## Concept
 
@@ -8,7 +8,7 @@ This library is meant to be used by DataProxy apps like [cozy-web-data-proxy](ht
 
 Just run
 
-- `yarn add cozy-dataproxy`
+- `yarn add cozy-dataproxy-lib`
 
 ## API
 
