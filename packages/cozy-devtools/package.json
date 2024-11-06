@@ -1,0 +1,47 @@
+{
+  "name": "cozy-devtools",
+  "version": "0.0.1",
+  "description": "Cozy-Devtools exposes a devtool that can be injected in an app for debug and better developer experience.",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-devtools/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cozy/cozy-libs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cozy/cozy-libs/issues"
+  },
+  "scripts": {
+    "build": "rm -rf ./dist && env BABEL_ENV=transpilation babel --extensions .js,.jsx,.md,.styl,.json,.snap ./src -d ./dist --copy-files --no-copy-ignored --verbose",
+    "start": "yarn build --watch",
+    "prepublishOnly": "yarn build",
+    "test": "env NODE_ENV=test jest --passWithNoTests",
+    "lint": "cd .. && yarn eslint --ext js,jsx packages/cozy-devtools"
+  },
+  "devDependencies": {
+    "babel-preset-cozy-app": "^2.5.0",
+    "cozy-client": "^50.0.0",
+    "cozy-flags": "^4.3.0",
+    "cozy-intent": "^2.26.0",
+    "cozy-pouch-link": "^50.0.0",
+    "cozy-ui": "^111.19.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "stylus": "0.64.0"
+  },
+  "dependencies": {
+    "date-fns": "2.29.3",
+    "lodash": "4.17.13",
+    "react-inspector": "5.1.1"
+  },
+  "peerDependencies": {
+    "cozy-client": ">=50.0.0",
+    "cozy-flags": ">=4.3.0",
+    "cozy-intent": ">=2.26.0",
+    "cozy-pouch-link": ">=50.0.0",
+    "cozy-ui": ">=111.19.0",
+    "react": ">=16.12.0",
+    "react-dom": ">=16.12.0"
+  }
+}
