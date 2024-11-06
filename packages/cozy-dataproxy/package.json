@@ -1,7 +1,7 @@
 {
   "name": "cozy-dataproxy",
   "description": "Event-based library allowing interactions between React-Native and React applications",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "Cozy Cloud",
     "url": "https://github.com/cozy"
@@ -18,13 +18,13 @@
     "@testing-library/react": "10.4.9",
     "@testing-library/react-hooks": "7.0.2",
     "babel-plugin-tsconfig-paths": "^1.0.3",
-    "babel-preset-cozy-app": "^2.2.1",
+    "babel-preset-cozy-app": "^2.8.0",
     "cozy-client": "^50.3.1",
-    "cozy-flags": "^4.0.2",
-    "cozy-logger": "^1.10.4",
-    "cozy-minilog": "^3.3.1",
+    "cozy-flags": "^4.6.0",
+    "cozy-logger": "^1.16.0",
+    "cozy-minilog": "^3.9.0",
     "cozy-pouch-link": "^50.3.1",
-    "cozy-realtime": "^5.0.2",
+    "cozy-realtime": "^5.6.0",
     "cross-fetch": "^4.0.0",
     "jest": "26.6.3",
     "react": "16.12.0",

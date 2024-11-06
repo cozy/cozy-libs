@@ -1,6 +1,6 @@
 {
   "name": "cozy-authentication",
-  "version": "3.5.0",
+  "version": "3.6.0",
   "description": "Component providing login to a Cozy",
   "main": "dist/index.js",
   "files": [
@@ -22,7 +22,7 @@
   "devDependencies": {
     "@babel/cli": "7.16.8",
     "@babel/polyfill": "7.12.1",
-    "babel-preset-cozy-app": "^2.7.0",
+    "babel-preset-cozy-app": "^2.8.0",
     "cozy-client": "13.21.0",
     "cozy-ui": "40.9.1",
     "cssnano-preset-advanced": "4.0.8",
@@ -40,7 +40,7 @@
     "react-router-dom": "6.4.5"
   },
   "dependencies": {
-    "cozy-device-helper": "^3.6.0",
+    "cozy-device-helper": "^3.7.0",
     "localforage": "1.7.3",
     "prop-types": "15.7.2",
     "snarkdown": "1.2.2",
