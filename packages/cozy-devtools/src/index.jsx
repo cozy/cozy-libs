@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo, useRef } from 'react'
 
-import { useClient } from 'cozy-client'
 import Box from 'cozy-ui/transpiled/react/Box'
 import Fab from 'cozy-ui/transpiled/react/Fab'
 import Grid from 'cozy-ui/transpiled/react/Grid'
@@ -119,19 +118,19 @@ const ResizeBar = ({ ...props }) => {
 }
 
 const DevToolsPanel = props => {
-  const { panels: userPanels, open, client } = props
+  const { panels: userPanels, open } = props
   const panels = useMemo(() => {
     if (userPanels) {
       return [...defaultPanels, ...userPanels]
     }
     return defaultPanels
   }, [userPanels])
+
   const [currentPanel, setCurrentPanel] = useLocalState(
     'cozydevtools__panel',
     'queries'
   )
   const ref = useRef()
-
   const [panelHeight, setPanelHeight] = useLocalState(
     'cozydevtools__height',
     DEFAULT_PANEL_HEIGHT
@@ -197,7 +196,7 @@ const DevToolsPanel = props => {
           </ListGridItem>
           {panels.map(panelOptions =>
             currentPanel === panelOptions.id ? (
-              <panelOptions.Component key={panelOptions.id} client={client} />
+              <panelOptions.Component key={panelOptions.id} />
             ) : null
           )}
         </Grid>
@@ -208,15 +207,6 @@ const DevToolsPanel = props => {
 
 const DevTools = ({ panels }) => {
   const classes = useStyles()
-  const client = useClient()
-
-  // eslint-disable-next-line no-console
-  console.info(' ')
-  // eslint-disable-next-line no-console
-  console.info('🟢 client :', client)
-  // eslint-disable-next-line no-console
-  console.info(' ')
-
   const [open, setOpen] = useLocalState('cozydevtools__open', false)
   const handleToggle = useCallback(() => setOpen(state => !state), [setOpen])
 
@@ -227,7 +217,6 @@ const DevTools = ({ panels }) => {
       </Fab>
 
       <DevToolsPanel
-        client={client}
         open={open}
         className={classes.panel}
         onClose={handleToggle}
