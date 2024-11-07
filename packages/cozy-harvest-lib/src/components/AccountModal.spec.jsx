@@ -37,20 +37,18 @@ const accountIdMock = '123'
 
 describe('AccountModal', () => {
   const setup = () => {
-    const mockHistoryReplace = jest.fn()
-
     const component = shallow(
       <AccountModal
         konnector={{}}
         t={x => x}
         accountId={accountIdMock}
         accountsAndTriggers={accountsAndTriggersMock}
-        replaceHistory={mockHistoryReplace}
+        navigate={() => {}}
         breakpoints={{ isMobile: true }}
         onDismiss={jest.fn()}
       />
     )
-    return { component, mockHistoryReplace }
+    return { component }
   }
 
   it('should display the fetching state by default', () => {

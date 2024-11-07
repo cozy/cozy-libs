@@ -2,7 +2,7 @@
 
 exports[`AccountModal should display the fetching state by default 1`] = `
 <React.Fragment>
-  <withMountPointProps(AccountModalHeader)
+  <AccountModalHeader
     account={null}
     accountsAndTriggers={
       Array [
@@ -46,7 +46,7 @@ exports[`AccountModal should display the fetching state by default 1`] = `
 
 exports[`AccountModal with an account should display the AccountSelect & Content if an account is there and we can change the selectedAccount 1`] = `
 <React.Fragment>
-  <withMountPointProps(AccountModalHeader)
+  <AccountModalHeader
     account={
       Object {
         "_id": "123",
@@ -111,7 +111,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
 
 exports[`AccountModal with an account should display the AccountSelect & Content if an account is there and we can change the selectedAccount 2`] = `
 <React.Fragment>
-  <withMountPointProps(AccountModalHeader)
+  <AccountModalHeader
     account={
       Object {
         "_id": "account_2",

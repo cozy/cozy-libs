@@ -2,6 +2,7 @@ import flow from 'lodash/flow'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { withClient } from 'cozy-client'
 import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
@@ -13,7 +14,6 @@ import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
 import AccountModalHeader from './AccountModalWithoutTabs/AccountModalHeader'
 import KonnectorAccountWrapper from './KonnectorConfiguration/KonnectorAccountWrapper'
-import { withMountPointProps } from './MountPointContext'
 import withLocales from './hoc/withLocales'
 import { fetchAccount } from '../connections/accounts'
 import {
@@ -112,7 +112,7 @@ export class AccountModal extends Component {
       onDismiss,
       accountsAndTriggers,
       t,
-      replaceHistory,
+      navigate,
       initialActiveTab,
       breakpoints: { isMobile },
       showAccountSelection,
@@ -168,7 +168,9 @@ export class AccountModal extends Component {
               initialTrigger={trigger}
               account={account}
               onAccountDeleted={onDismiss}
-              addAccount={() => replaceHistory('/new')}
+              addAccount={() => {
+                navigate('new', { replace: true })
+              }}
               showNewAccountButton={showNewAccountButton}
               intentsApi={intentsApi}
               innerAccountModalOverrides={innerAccountModalOverrides}
@@ -205,7 +207,7 @@ AccountModal.propTypes = {
     })
   ).isRequired,
   t: PropTypes.func.isRequired,
-  replaceHistory: PropTypes.func.isRequired,
+  navigate: PropTypes.func.isRequired,
   accountId: PropTypes.string.isRequired,
 
   /** @type {string} Can be set to force the initial active tab */
@@ -223,9 +225,14 @@ AccountModal.propTypes = {
   Component: PropTypes.func
 }
 
+const AccountModalWrapper = props => {
+  const navigate = useNavigate()
+
+  return <AccountModal {...props} navigate={navigate} />
+}
+
 export default flow(
   withClient,
   withLocales,
-  withMountPointProps,
   withBreakpoints()
-)(AccountModal)
+)(AccountModalWrapper)
