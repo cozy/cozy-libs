@@ -1,7 +1,7 @@
 import CozyClient, { Q } from 'cozy-client'
 import { IOCozyFile } from 'cozy-client/types/types'
 
-import { CONTACTS_DOCTYPE, APPS_DOCTYPE, TYPE_DIRECTORY } from '../consts'
+import { TYPE_DIRECTORY } from '../consts'
 import {
   normalizeFileWithFolders,
   shouldKeepFile
@@ -37,10 +37,9 @@ export const queryFilesForSearch = async (
   return normalizedFiles
 }
 
-export const queryAllContacts = (client: CozyClient): Promise<CozyDoc[]> => {
-  return client.queryAll(Q(CONTACTS_DOCTYPE).limitBy(1000))
-}
-
-export const queryAllApps = (client: CozyClient): Promise<CozyDoc[]> => {
-  return client.queryAll(Q(APPS_DOCTYPE).limitBy(1000))
+export const queryAllDocs = async (
+  client: CozyClient,
+  doctype: string
+): Promise<CozyDoc[]> => {
+  return client.queryAll<CozyDoc[]>(Q(doctype).limitBy(null))
 }
