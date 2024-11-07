@@ -1,6 +1,7 @@
 import cx from 'classnames'
 import PropTypes from 'prop-types'
-import React, { useContext } from 'react'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
 import { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
@@ -13,7 +14,6 @@ import { useDialogContext } from './DialogContext'
 import KonnectorIcon from './KonnectorIcon'
 import KonnectorModalHeader from './KonnectorModalHeader'
 import KonnectorMaintenance from './Maintenance'
-import { MountPointContext } from './MountPointContext'
 import LegacyTriggerManager from './TriggerManager'
 import { InformationsCard } from './cards/InformationsCard'
 import useMaintenanceStatus from './hooks/useMaintenanceStatus'
@@ -26,7 +26,8 @@ import useMaintenanceStatus from './hooks/useMaintenanceStatus'
  */
 const NewAccountModal = ({ konnector, onSuccess, onDismiss }) => {
   const { t } = useI18n()
-  const { replaceHistory } = useContext(MountPointContext)
+  const navigate = useNavigate()
+
   const {
     fetchStatus,
     data: { isInMaintenance, messages: maintenanceMessages }
@@ -45,7 +46,7 @@ const NewAccountModal = ({ konnector, onSuccess, onDismiss }) => {
     }
 
     const accountId = triggersModel.getAccountId(trigger)
-    replaceHistory(`/accounts/${accountId}`)
+    navigate(`../accounts/${accountId}`, { replace: true, relative: 'path' })
   }
 
   return (

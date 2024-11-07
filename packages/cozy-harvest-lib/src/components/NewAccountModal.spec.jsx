@@ -1,8 +1,6 @@
-/* eslint-env jest */
 import { render } from '@testing-library/react'
 import React from 'react'
 
-import { MountPointContext } from './MountPointContext'
 import NewAccountModal from './NewAccountModal'
 import AppLike from '../../test/AppLike'
 
@@ -18,12 +16,14 @@ jest.mock('./hooks/useMaintenanceStatus', () => () => ({
   data: { isInMaintenance: false, messages: {} }
 }))
 
-describe('NewAccountModal', () => {
-  const replaceHistory = jest.fn()
-  const mountPointContextValue = {
-    replaceHistory
-  }
+const mockNavigate = jest.fn()
 
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockNavigate
+}))
+
+describe('NewAccountModal', () => {
   const clientTrigger = {
     worker: 'client',
     message: {
@@ -35,31 +35,41 @@ describe('NewAccountModal', () => {
     jest.clearAllMocks()
   })
 
-  it('should redirect to route without success on login success for client triggers', () => {
+  const setup = () => {
     render(
       <AppLike client={{}}>
-        <MountPointContext.Provider value={mountPointContextValue}>
-          <NewAccountModal
-            konnector={{ slug: 'konnectorslug', name: 'konnector slug' }}
-          />
-        </MountPointContext.Provider>
+        <NewAccountModal
+          konnector={{ slug: 'konnectorslug', name: 'konnector slug' }}
+        />
       </AppLike>
     )
+  }
+
+  it('should redirect to route without success on login success for client triggers', () => {
+    setup()
+
     onLoginSuccessFn(clientTrigger)
-    expect(replaceHistory).toHaveBeenCalledWith('/accounts/accountNumberClient')
+
+    expect(mockNavigate).toHaveBeenCalledWith(
+      '../accounts/accountNumberClient',
+      {
+        relative: 'path',
+        replace: true
+      }
+    )
   })
 
   it('should redirect to route without success on success for client triggers', () => {
-    render(
-      <AppLike client={{}}>
-        <MountPointContext.Provider value={mountPointContextValue}>
-          <NewAccountModal
-            konnector={{ slug: 'konnectorslug', name: 'konnector slug' }}
-          />
-        </MountPointContext.Provider>
-      </AppLike>
-    )
+    setup()
+
     onSuccessFn(clientTrigger)
-    expect(replaceHistory).toHaveBeenCalledWith('/accounts/accountNumberClient')
+
+    expect(mockNavigate).toHaveBeenCalledWith(
+      '../accounts/accountNumberClient',
+      {
+        relative: 'path',
+        replace: true
+      }
+    )
   })
 })
