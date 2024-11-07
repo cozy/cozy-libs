@@ -1,17 +1,14 @@
 import PropTypes from 'prop-types'
-import React, { useContext } from 'react'
+import React from 'react'
+import { Navigate } from 'react-router-dom'
 
 import AccountsListModal from './AccountsListModal'
-import { MountPointContext } from './MountPointContext'
 
 const HarvestModalRoot = ({ accounts, konnector }) => {
-  const { replaceHistory } = useContext(MountPointContext)
   if (accounts.length === 0) {
-    replaceHistory('/new')
-    return null
+    return <Navigate to="new" replace />
   } else if (accounts.length === 1) {
-    replaceHistory(`/accounts/${accounts[0].account._id}`)
-    return null
+    return <Navigate to={`accounts/${accounts[0].account._id}`} replace />
   } else {
     return <AccountsListModal konnector={konnector} accounts={accounts} />
   }

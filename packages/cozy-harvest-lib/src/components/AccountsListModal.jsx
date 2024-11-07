@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
-import React, { useContext } from 'react'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import DialogTitle from 'cozy-ui/transpiled/react/Dialog/DialogTitle'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
@@ -8,10 +9,9 @@ import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import AccountsList from './AccountsList/AccountsList'
 import KonnectorIcon from './KonnectorIcon'
-import { MountPointContext } from './MountPointContext'
 
 const AccountsListModal = ({ konnector, accounts, t }) => {
-  const { pushHistory, replaceHistory } = useContext(MountPointContext)
+  const navigate = useNavigate()
   return (
     <>
       <DialogTitle disableTypography className="u-pt-3 u-pt-2-s">
@@ -27,8 +27,12 @@ const AccountsListModal = ({ konnector, accounts, t }) => {
         <AccountsList
           accounts={accounts}
           konnector={konnector}
-          onPick={option => replaceHistory(`/accounts/${option.account._id}`)}
-          addAccount={() => pushHistory('/new')}
+          onPick={option =>
+            navigate(`accounts/${option.account._id}`, {
+              replace: true
+            })
+          }
+          addAccount={() => navigate('new')}
         />
       </DialogContent>
     </>
