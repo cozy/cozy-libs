@@ -2,13 +2,13 @@ import flow from 'lodash/flow'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import { withClient } from 'cozy-client'
 import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
-import { withMountPointProps } from './MountPointContext'
 import LegacyTriggerManager from './TriggerManager'
 import { withTracker } from './hoc/tracking'
 import useTimeout from './hooks/useTimeout'
@@ -19,68 +19,67 @@ import logger from '../logger'
 const showStyle = { opacity: 1, transition: 'opacity 0.3s ease' }
 const hideStyle = { opacity: 0, transition: 'opacity 0.3s ease' }
 
-const DumbEditAccountModal = withMountPointProps(
-  ({
-    konnector,
-    account,
-    trigger,
-    fetching,
-    redirectToAccount,
-    location,
-    reconnect,
-    intentsApi
-  }) => {
-    /**
-     * The TriggerManager can open the vault if necessary when it is mounted.
-     * If the vault is opened, the EditAccountModal will be closed and will reappear
-     * once the vault has been unlocked.
-     * To prevent any jarring effect (open edit modal -> close edit modal -> open
-     * vault modal), we delay a bit the appearing of the edit modal via CSS.
-     */
-    const shouldShow = useTimeout(500)
+const DumbEditAccountModal = ({
+  konnector,
+  account,
+  trigger,
+  fetching,
+  redirectToAccount,
+  reconnect,
+  intentsApi
+}) => {
+  const { search } = useLocation()
 
-    // TODO Avoid passing reconnect in props,
-    // prefer to use location instead.
-    const fromReconnect = reconnect || location.search.endsWith('reconnect')
-    // If we come from the reconnect button so focus on secret field
-    const fieldOptions = {
-      displaySecretPlaceholder: true,
-      focusSecretField: fromReconnect
-    }
+  /**
+   * The TriggerManager can open the vault if necessary when it is mounted.
+   * If the vault is opened, the EditAccountModal will be closed and will reappear
+   * once the vault has been unlocked.
+   * To prevent any jarring effect (open edit modal -> close edit modal -> open
+   * vault modal), we delay a bit the appearing of the edit modal via CSS.
+   */
+  const shouldShow = useTimeout(500)
 
-    return (
-      <Dialog
-        aria-label={konnector.name}
-        content={
-          fetching ? (
-            <div className="u-pv-2 u-ta-center">
-              <Spinner size="xxlarge" />
-            </div>
-          ) : (
-            <LegacyTriggerManager
-              account={account}
-              konnector={konnector}
-              initialTrigger={trigger}
-              onSuccess={redirectToAccount}
-              showError={true}
-              onVaultDismiss={redirectToAccount}
-              fieldOptions={fieldOptions}
-              reconnect={fromReconnect}
-              intentsApi={intentsApi}
-              onClose={redirectToAccount}
-            />
-          )
-        }
-        onBack={redirectToAccount}
-        onClose={redirectToAccount}
-        open
-        size="medium"
-        style={shouldShow ? showStyle : hideStyle}
-        title={konnector.name}
-      />
-    )
+  // TODO Avoid passing reconnect in props,
+  // prefer to use location instead.
+  const fromReconnect = reconnect || search.endsWith('reconnect')
+  // If we come from the reconnect button so focus on secret field
+  const fieldOptions = {
+    displaySecretPlaceholder: true,
+    focusSecretField: fromReconnect
   }
-)
+
+  return (
+    <Dialog
+      aria-label={konnector.name}
+      content={
+        fetching ? (
+          <div className="u-pv-2 u-ta-center">
+            <Spinner size="xxlarge" />
+          </div>
+        ) : (
+          <LegacyTriggerManager
+            account={account}
+            konnector={konnector}
+            initialTrigger={trigger}
+            onSuccess={redirectToAccount}
+            showError={true}
+            onVaultDismiss={redirectToAccount}
+            fieldOptions={fieldOptions}
+            reconnect={fromReconnect}
+            intentsApi={intentsApi}
+            onClose={redirectToAccount}
+          />
+        )
+      }
+      onBack={redirectToAccount}
+      onClose={redirectToAccount}
+      open
+      size="medium"
+      style={shouldShow ? showStyle : hideStyle}
+      title={konnector.name}
+    />
+  )
+}
 
 export class EditAccountModal extends Component {
   constructor(props) {
@@ -142,10 +141,15 @@ export class EditAccountModal extends Component {
 
   redirectToAccount() {
     const { account } = this.state
+
     if (account) {
-      this.props.replaceHistory(`/accounts/${account._id}/config`)
+      this.props.navigate('../config', {
+        replace: true,
+        relative: 'path'
+      })
     } else {
-      this.props.pushHistory(`/accounts`)
+      // If we don't have a account, we go back to the root
+      this.props.navigate('..')
     }
   }
 
@@ -182,8 +186,10 @@ EditAccountModal.propTypes = {
   intentsApi: intentsApiProptype
 }
 
-export default flow(
-  withClient,
-  withMountPointProps,
-  withTracker
-)(EditAccountModal)
+const EditAccountModalWrapper = props => {
+  const navigate = useNavigate()
+
+  return <EditAccountModal {...props} navigate={navigate} />
+}
+
+export default flow(withClient, withTracker)(EditAccountModalWrapper)
