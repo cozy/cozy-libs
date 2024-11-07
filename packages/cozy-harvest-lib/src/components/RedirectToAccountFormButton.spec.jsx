@@ -1,16 +1,18 @@
 import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
 
-import { MountPointContext } from './MountPointContext'
 import RedirectToAccountFormButton from './RedirectToAccountFormButton'
 import AppLike from '../../test/AppLike'
 
+const mockNavigate = jest.fn()
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockNavigate
+}))
+
 describe('redirect to account form button', () => {
-  it('should use replaceHistory to navigate', () => {
-    const replaceHistory = jest.fn()
-    const mountPointContextValue = {
-      replaceHistory
-    }
+  it('should navigate to reconnect page', () => {
     const trigger = {
       message: {
         account: 'account-id-1337'
@@ -18,14 +20,15 @@ describe('redirect to account form button', () => {
     }
     const root = render(
       <AppLike>
-        <MountPointContext.Provider value={mountPointContextValue}>
-          <RedirectToAccountFormButton trigger={trigger} />
-        </MountPointContext.Provider>
+        <RedirectToAccountFormButton trigger={trigger} />
       </AppLike>
     )
     fireEvent.click(root.getByText('Reconnect'))
-    expect(replaceHistory).toHaveBeenCalledWith(
-      '/accounts/account-id-1337/edit?reconnect'
+    expect(mockNavigate).toHaveBeenCalledWith(
+      '../accounts/account-id-1337/edit?reconnect',
+      {
+        replace: true
+      }
     )
   })
 })
