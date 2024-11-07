@@ -1,4 +1,4 @@
-const SEARCHABLE_DOCTYPES = [
+export const SEARCHABLE_DOCTYPES = [
   'io.cozy.files',
   'io.cozy.contacts',
   'io.cozy.apps'

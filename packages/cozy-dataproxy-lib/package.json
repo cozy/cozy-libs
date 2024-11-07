@@ -63,7 +63,8 @@
     "prepublishOnly": "yarn build",
     "test": "jest --config=./tests/jest.config.js",
     "test:watch": "yarn test --watchAll",
-    "start": "yarn build:watch"
+    "start": "yarn build:watch",
+    "lint": "cd .. && yarn eslint --ext js,jsx,ts packages/cozy-dataproxy-lib"
   },
   "types": "dist/index.d.ts"
 }
