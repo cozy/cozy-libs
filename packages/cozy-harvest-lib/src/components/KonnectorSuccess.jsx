@@ -10,7 +10,6 @@ import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 import BanksLink from './KonnectorConfiguration/Success/BanksLink'
 import DriveLink from './KonnectorConfiguration/Success/DriveLink'
 import Markdown from './Markdown'
-import withAdaptiveRouter from './hoc/withRouter'
 import ConnectingIllu from '../assets/connecting-data-in-progress.svg'
 import getRelatedAppsSlugs from '../models/getRelatedAppsSlugs'
 
@@ -123,4 +122,4 @@ KonnectorSuccess.propTypes = {
 
 export { SuccessImage, BanksLink, DriveLink }
 
-export default withAdaptiveRouter(translate()(KonnectorSuccess))
+export default translate()(KonnectorSuccess)
