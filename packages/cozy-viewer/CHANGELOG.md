@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.2](https://github.com/cozy/cozy-libs/compare/cozy-viewer@2.6.1...cozy-viewer@2.6.2) (2024-11-07)
+
+
+### Reverts
+
+* "test: Remove useless test in Viewer" ([b1f1969](https://github.com/cozy/cozy-libs/commit/b1f1969a9daa04179c1c4b782b0629bcc77aa61e))
+
+
+
+
+
 ## 2.6.1 (2024-11-06)
 
 
