@@ -16,7 +16,11 @@ import {
 } from './consts'
 import { getPouchLink } from './helpers/client'
 import { getSearchEncoder } from './helpers/getSearchEncoder'
-import { addFilePaths, shouldKeepFile } from './helpers/normalizeFile'
+import {
+  addFilePaths,
+  computeFileFullpath,
+  shouldKeepFile
+} from './helpers/normalizeFile'
 import { normalizeSearchResult } from './helpers/normalizeSearchResult'
 import { queryAllDocs, queryFilesForSearch } from './queries'
 import {
@@ -131,8 +135,8 @@ export class SearchEngine {
       // No index yet: it will be done by querying the local db after first replication
       return
     }
-    log.debug('[REALTIME] index doc after update : ', doc)
-    this.addDocToIndex(searchIndex.index, doc)
+    log.debug('[REALTIME] Update doc from index after update : ', doc)
+    void this.addDocToIndex(searchIndex.index, doc)
 
     if (this.isLocalSearch) {
       this.debouncedReplication()
@@ -149,7 +153,7 @@ export class SearchEngine {
       // No index yet: it will be done by querying the local db after first replication
       return
     }
-    log.debug('[REALTIME] remove doc from index after update : ', doc)
+    log.debug('[REALTIME] Remove doc from index after update : ', doc)
     this.searchIndexes[doctype].index.remove(doc._id!)
 
     if (this.isLocalSearch) {
@@ -177,8 +181,12 @@ export class SearchEngine {
       }
     })
 
-    for (const doc of docs) {
-      this.addDocToIndex(flexsearchIndex, doc)
+    // There is no persisted path for files: we must add it
+    const completedDocs = this.isLocalSearch
+      ? addFilePaths(this.client, docs)
+      : docs
+    for (const doc of completedDocs) {
+      void this.addDocToIndex(flexsearchIndex, doc)
     }
 
     const endTimeIndex = performance.now()
@@ -190,12 +198,17 @@ export class SearchEngine {
     return flexsearchIndex
   }
 
-  addDocToIndex(
+  async addDocToIndex(
     flexsearchIndex: FlexSearch.Document<CozyDoc, true>,
     doc: CozyDoc
-  ): void {
+  ): Promise<void> {
     if (this.shouldIndexDoc(doc)) {
-      flexsearchIndex.add(doc)
+      let docToIndex = doc
+      if (isIOCozyFile(doc)) {
+        // Add path for files
+        docToIndex = await computeFileFullpath(this.client, doc)
+      }
+      flexsearchIndex.add(docToIndex)
     }
   }
 
@@ -271,7 +284,7 @@ export class SearchEngine {
         searchIndex.index.remove(change.id)
       } else {
         const normalizedDoc = { ...change.doc, _type: doctype } as CozyDoc
-        this.addDocToIndex(searchIndex.index, normalizedDoc)
+        void this.addDocToIndex(searchIndex.index, normalizedDoc)
       }
     }
 
@@ -309,11 +322,7 @@ export class SearchEngine {
     const results = this.limitSearchResults(sortedResults)
 
     const normResults: SearchResult[] = []
-    // Special case for local files: the path is missing
-    const completedResults = this.isLocalSearch
-      ? addFilePaths(this.client, results)
-      : results
-    for (const res of completedResults) {
+    for (const res of results) {
       const normalizedRes = normalizeSearchResult(this.client, res, query)
       normResults.push(normalizedRes)
     }

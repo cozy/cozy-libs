@@ -17,6 +17,10 @@ interface AllDocsResponse {
   rows: DBRow[]
 }
 
+interface QueryResponseSingleDoc {
+  data: CozyDoc
+}
+
 export const queryFilesForSearch = async (
   client: CozyClient
 ): Promise<CozyDoc[]> => {
@@ -42,4 +46,15 @@ export const queryAllDocs = async (
   doctype: string
 ): Promise<CozyDoc[]> => {
   return client.queryAll<CozyDoc[]>(Q(doctype).limitBy(null))
+}
+
+export const queryDocById = async (
+  client: CozyClient,
+  doctype: string,
+  id: string
+): Promise<CozyDoc> => {
+  const resp = (await client.query(Q(doctype).getById(id), {
+    singleDocData: true
+  })) as QueryResponseSingleDoc
+  return resp.data
 }

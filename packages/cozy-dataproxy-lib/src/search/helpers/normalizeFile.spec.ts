@@ -3,10 +3,18 @@ import { IOCozyFile } from 'cozy-client/types/types'
 
 import {
   addFilePaths,
+  computeFileFullpath,
   normalizeFileWithFolders,
   shouldKeepFile
 } from './normalizeFile'
-import { RawSearchResult } from '../types'
+import { queryDocById } from '../queries'
+import { CozyDoc } from '../types'
+
+jest.mock('../queries', () => ({
+  queryDocById: jest.fn()
+}))
+
+const client = new CozyClient()
 
 describe('normalizeFileWithFolders', () => {
   test('should get path for directories', () => {
@@ -107,40 +115,31 @@ describe('addFilePaths', () => {
       ])
     } as unknown as CozyClient
 
-    const results = [
+    const docs = [
       {
-        doctype: 'io.cozy.files',
-        doc: {
-          _id: 'SOME_FILE_ID',
-          _type: 'io.cozy.files',
-          type: 'file',
-          dir_id: 'SOME_DIR_ID'
-        }
+        _id: 'SOME_FILE_ID',
+        _type: 'io.cozy.files',
+        type: 'file',
+        dir_id: 'SOME_DIR_ID'
       }
-    ] as unknown as RawSearchResult[]
+    ] as CozyDoc[]
 
-    const result = addFilePaths(client, results)
+    const result = addFilePaths(client, docs)
 
     expect(result).toStrictEqual([
       {
-        doc: {
-          _id: 'SOME_FILE_ID',
-          _type: 'io.cozy.files',
-          type: 'file',
-          dir_id: 'SOME_DIR_ID',
-          path: 'SOME/PARENT/PATH'
-        },
-        doctype: 'io.cozy.files'
+        _id: 'SOME_FILE_ID',
+        _type: 'io.cozy.files',
+        type: 'file',
+        dir_id: 'SOME_DIR_ID',
+        path: 'SOME/PARENT/PATH'
       }
     ])
   })
 
   test(`should handle no files in results`, () => {
     const client = {} as unknown as CozyClient
-
-    const results = [] as unknown as RawSearchResult[]
-
-    const result = addFilePaths(client, results)
+    const result = addFilePaths(client, [])
 
     expect(result).toStrictEqual([])
   })
@@ -150,29 +149,23 @@ describe('addFilePaths', () => {
       getCollectionFromState: jest.fn().mockReturnValue([])
     } as unknown as CozyClient
 
-    const results = [
+    const docs = [
       {
-        doctype: 'io.cozy.files',
-        doc: {
-          _id: 'SOME_FILE_ID',
-          _type: 'io.cozy.files',
-          type: 'file',
-          dir_id: 'SOME_DIR_ID'
-        }
+        _id: 'SOME_FILE_ID',
+        _type: 'io.cozy.files',
+        type: 'file',
+        dir_id: 'SOME_DIR_ID'
       }
-    ] as unknown as RawSearchResult[]
+    ] as CozyDoc[]
 
-    const result = addFilePaths(client, results)
+    const result = addFilePaths(client, docs)
 
     expect(result).toStrictEqual([
       {
-        doc: {
-          _id: 'SOME_FILE_ID',
-          _type: 'io.cozy.files',
-          type: 'file',
-          dir_id: 'SOME_DIR_ID'
-        },
-        doctype: 'io.cozy.files'
+        _id: 'SOME_FILE_ID',
+        _type: 'io.cozy.files',
+        type: 'file',
+        dir_id: 'SOME_DIR_ID'
       }
     ])
   })
@@ -241,5 +234,62 @@ describe('shouldKeepFile', () => {
     const result = shouldKeepFile(file)
 
     expect(result).toBe(false)
+  })
+})
+
+describe('computeFileFullpath', () => {
+  const dir = {
+    _id: '123',
+    _type: 'io.cozy.files',
+    type: 'directory',
+    dir_id: 'ROOT',
+    name: 'MYDIR',
+    path: 'ROOT/MYDIR'
+  } as IOCozyFile
+  const fileWithFullpath = {
+    _id: '456',
+    _type: 'io.cozy.files',
+    type: 'file',
+    dir_id: '123',
+    name: 'file1',
+    path: 'ROOT/MYDIR/file1'
+  } as IOCozyFile
+  const fileWithStackPath = {
+    _id: '789',
+    _type: 'io.cozy.files',
+    type: 'file',
+    dir_id: '123',
+    name: 'file2',
+    path: 'ROOT/MYDIR'
+  } as IOCozyFile
+  const filewithNoPath = {
+    _id: '000',
+    _type: 'io.cozy.files',
+    type: 'file',
+    dir_id: '123',
+    name: 'file3'
+  } as IOCozyFile
+  it('should handle directory', async () => {
+    const res = await computeFileFullpath(client, dir)
+    expect(res).toEqual(dir)
+  })
+
+  it('should handle file with complete path', async () => {
+    const res = await computeFileFullpath(client, fileWithFullpath)
+    expect(res).toEqual(fileWithFullpath)
+  })
+
+  it('should compute fullpath for file with incomplete path', async () => {
+    const res = await computeFileFullpath(client, fileWithStackPath)
+    expect(res.path).toEqual('ROOT/MYDIR/file2')
+  })
+
+  it('should compute fullpath for file with no path', async () => {
+    // eslint-disable-next-line prettier/prettier
+    (queryDocById as jest.Mock).mockResolvedValue(dir)
+
+    const res = await computeFileFullpath(client, filewithNoPath)
+
+    expect(res.path).toEqual('ROOT/MYDIR/file3')
   })
 })
