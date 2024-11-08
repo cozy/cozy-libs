@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.2.0...cozy-dataproxy-lib@1.3.0) (2024-11-08)
+
+
+### Bug Fixes
+
+* Realtime ([a9e2ad5](https://github.com/cozy/cozy-libs/commit/a9e2ad5a9c66c19bfd9e2e8c40bf114e936ac984))
+
+
+### Features
+
+* Handle search on both path and name ([50bcdf3](https://github.com/cozy/cozy-libs/commit/50bcdf3098e12e2cf5e992d5ab04453a6b9e62e8))
+
+
+
+
+
 # [1.2.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.1.1...cozy-dataproxy-lib@1.2.0) (2024-11-08)
 
 
