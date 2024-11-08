@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.1.1...cozy-dataproxy-lib@1.2.0) (2024-11-08)
+
+
+### Features
+
+* Use local search only for peristent sessions ([dc2b38e](https://github.com/cozy/cozy-libs/commit/dc2b38ec6c2a5ff37517a6697a863d7c83656496))
+
+
+
+
+
 ## 1.1.1 (2024-11-06)
 
 
