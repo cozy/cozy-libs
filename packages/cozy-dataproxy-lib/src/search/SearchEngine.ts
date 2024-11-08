@@ -73,32 +73,42 @@ export class SearchEngine {
         )
       }
     }
+    if (this.isLocalSearch) {
+      this.client.on('pouchlink:doctypesync:end', async (doctype: string) => {
+        if (isSearchedDoctype(doctype)) {
+          // Index doctype after initial replication
+          this.searchIndexes[doctype] = await this.indexDocsForSearch(
+            doctype as keyof typeof SEARCH_SCHEMA
+          )
+        }
+      })
+      this.client.on('pouchlink:sync:start', () => {
+        log.debug('Started pouch replication')
+      })
+      this.client.on('pouchlink:sync:end', () => {
+        log.debug('Ended pouch replication')
+      })
+    }
 
-    this.client.on('pouchlink:doctypesync:end', async (doctype: string) => {
-      if (isSearchedDoctype(doctype)) {
-        // Index doctype after initial replication
-        this.searchIndexes[doctype] = await this.indexDocsForSearch(
-          doctype as keyof typeof SEARCH_SCHEMA
-        )
-      }
-    })
-    this.client.on('pouchlink:sync:start', () => {
-      log.debug('Started pouch replication')
-    })
-    this.client.on('pouchlink:sync:end', () => {
-      log.debug('Ended pouch replication')
-    })
+    if (this.client.isLogged) {
+      this.afterLogin()
+    } else {
+      this.client.on('login', () => {
+        this.afterLogin()
+      })
+    }
+  }
 
-    this.client.on('login', () => {
-      // Ensure login is done before plugin register
-      this.client.registerPlugin(RealtimePlugin, {})
-      this.handleUpdatedOrCreatedDoc = this.handleUpdatedOrCreatedDoc.bind(this)
-      this.handleDeletedDoc = this.handleDeletedDoc.bind(this)
+  afterLogin(): void {
+    // Ensure login is done before plugin register
+    this.client.registerPlugin(RealtimePlugin, {})
 
-      this.subscribeDoctype(this.client, FILES_DOCTYPE)
-      this.subscribeDoctype(this.client, CONTACTS_DOCTYPE)
-      this.subscribeDoctype(this.client, APPS_DOCTYPE)
-    })
+    // Realtime subscription
+    this.handleUpdatedOrCreatedDoc = this.handleUpdatedOrCreatedDoc.bind(this)
+    this.handleDeletedDoc = this.handleDeletedDoc.bind(this)
+    this.subscribeDoctype(this.client, FILES_DOCTYPE)
+    this.subscribeDoctype(this.client, CONTACTS_DOCTYPE)
+    this.subscribeDoctype(this.client, APPS_DOCTYPE)
   }
 
   subscribeDoctype(client: CozyClient, doctype: string): void {
