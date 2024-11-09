@@ -16,7 +16,7 @@ export const normalizeSearchResult = (
   searchResults: RawSearchResult,
   query: string
 ): SearchResult => {
-  const doc = searchResults.doc
+  const doc = cleanFilePath(searchResults.doc)
   const url = buildOpenURL(client, doc)
   const slug = getSearchResultSlug(doc)
   const title = getSearchResultTitle(doc)
@@ -28,6 +28,23 @@ export const normalizeSearchResult = (
   const normalizedRes = { doc, slug, title, subTitle, url }
 
   return normalizedRes
+}
+
+export const cleanFilePath = (doc: CozyDoc): CozyDoc => {
+  if (!isIOCozyFile(doc)) {
+    return doc
+  }
+  const { path, name } = doc
+  if (!path) {
+    return doc
+  }
+  let newPath = path
+  if (path.endsWith(`/${name}`)) {
+    // Remove the name from the path, which is added at indexing time to search on it
+    newPath = path.slice(0, -name.length - 1)
+  }
+
+  return { ...doc, path: newPath }
 }
 
 const getSearchResultTitle = (doc: CozyDoc): string | null => {
