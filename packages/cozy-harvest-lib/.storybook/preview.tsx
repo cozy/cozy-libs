@@ -5,6 +5,8 @@ import 'cozy-ui/dist/cozy-ui.utils.min.css'
 import 'cozy-ui/transpiled/react/stylesheet.css'
 import React from "react";
 import { StoryContainer } from "./StoryContainer";
+import { withRouter } from 'storybook-addon-remix-react-router';
+
 
 const preview: Preview = {
   decorators: [
@@ -15,6 +17,7 @@ const preview: Preview = {
         </div>
       </StoryContainer>
     ),
+    withRouter
   ],
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
@@ -23,7 +26,7 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/,
       },
-    },
+    }
   },
 };
 
