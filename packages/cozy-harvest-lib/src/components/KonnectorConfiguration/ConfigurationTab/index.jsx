@@ -1,7 +1,7 @@
-// @ts-check
 import cx from 'classnames'
 import PropTypes from 'prop-types'
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { useClient } from 'cozy-client'
 import { Account } from 'cozy-doctypes'
@@ -34,7 +34,6 @@ import {
 } from '../../../helpers/proptypes'
 import { findKonnectorPolicy } from '../../../konnector-policies'
 import { unshareCipher } from '../../../models/cipherUtils'
-import { MountPointContext } from '../../MountPointContext'
 import { useTrackPage, useTracker } from '../../hoc/tracking'
 import useSafeState from '../../useSafeState'
 
@@ -78,7 +77,7 @@ const ConfigurationTab = ({
 }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
-  const { pushHistory } = useContext(MountPointContext)
+  const navigate = useNavigate()
   const client = useClient()
   const vaultClient = useVaultClient()
   const { showAlert } = useAlert()
@@ -166,7 +165,7 @@ const ConfigurationTab = ({
             <ListItem
               button
               divider
-              onClick={() => pushHistory(`/accounts/${account._id}/edit`)}
+              onClick={() => navigate(`../accounts/${account._id}/edit`)}
             >
               <ListItemIcon>
                 <Icon icon={KeyIcon} color="var(--iconTextColor)" />

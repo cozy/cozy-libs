@@ -13,7 +13,6 @@ import {
 
 import ConfigurationTab from './index'
 import AppLike from '../../../../test/AppLike'
-import { MountPointProvider } from '../../../components/MountPointContext'
 import { deleteAccount } from '../../../connections/accounts'
 import { findKonnectorPolicy } from '../../../konnector-policies'
 import VaultUnlockProvider from '../../VaultUnlockProvider'
@@ -44,6 +43,11 @@ jest.mock('cozy-keys-lib', () => {
     }
   }
 })
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: jest.fn()
+}))
 
 describe('ConfigurationTab', () => {
   let originalWarn
@@ -86,20 +90,18 @@ describe('ConfigurationTab', () => {
     }
     const root = render(
       <AppLike client={mockClient}>
-        <MountPointProvider baseRoute="/">
-          <VaultProvider instance="http://cozy.tools:8080">
-            <VaultUnlockProvider>
-              <ConfigurationTab
-                konnector={konnector}
-                account={account}
-                addAccount={addAccount}
-                onAccountDeleted={onAccountDeleted}
-                flow={flow}
-              />
-              <VaultUnlockPlaceholder unlockFormProps={unlockFormProps} />
-            </VaultUnlockProvider>
-          </VaultProvider>
-        </MountPointProvider>
+        <VaultProvider instance="http://cozy.tools:8080">
+          <VaultUnlockProvider>
+            <ConfigurationTab
+              konnector={konnector}
+              account={account}
+              addAccount={addAccount}
+              onAccountDeleted={onAccountDeleted}
+              flow={flow}
+            />
+            <VaultUnlockPlaceholder unlockFormProps={unlockFormProps} />
+          </VaultUnlockProvider>
+        </VaultProvider>
       </AppLike>
     )
     return { root }
