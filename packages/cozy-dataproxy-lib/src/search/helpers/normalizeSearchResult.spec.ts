@@ -1,6 +1,8 @@
 import CozyClient from 'cozy-client'
+import { IOCozyContact, IOCozyFile } from 'cozy-client/types/types'
 
-import { normalizeSearchResult } from './normalizeSearchResult'
+import { cleanFilePath, normalizeSearchResult } from './normalizeSearchResult'
+import { FILES_DOCTYPE, TYPE_FILE } from '../consts'
 import { RawSearchResult } from '../types'
 
 const fakeFlatDomainClient = {
@@ -339,5 +341,48 @@ describe('Should normalize unknown doctypes', () => {
       subTitle: null,
       url: null
     })
+  })
+})
+
+describe('cleanFilePath', () => {
+  it('should return the document unchanged if it is not an IOCozyFile', () => {
+    const doc = { fullname: 'name' } as IOCozyContact
+    expect(cleanFilePath(doc)).toEqual(doc)
+  })
+
+  it('should return the document unchanged if path is undefined', () => {
+    const doc = { _type: FILES_DOCTYPE, name: 'name' } as IOCozyFile
+    expect(cleanFilePath(doc)).toEqual(doc)
+  })
+
+  it('should return the document unchanged if not a file', () => {
+    const doc = {
+      _type: FILES_DOCTYPE,
+      name: 'name',
+      type: TYPE_FILE
+    } as IOCozyFile
+    expect(cleanFilePath(doc)).toEqual(doc)
+  })
+
+  it('should remove name from path if path ends with name', () => {
+    const doc = {
+      _type: FILES_DOCTYPE,
+      type: TYPE_FILE,
+      path: '/the/path/myname',
+      name: 'myname'
+    } as IOCozyFile
+    const expected = { ...doc, path: '/the/path' }
+
+    expect(cleanFilePath(doc)).toEqual(expected)
+  })
+
+  it('should return the document unchanged if path does not end with name', () => {
+    const doc = {
+      _type: FILES_DOCTYPE,
+      type: TYPE_FILE,
+      path: '/the/path/othername',
+      name: 'name'
+    } as IOCozyFile
+    expect(cleanFilePath(doc)).toEqual(doc)
   })
 })

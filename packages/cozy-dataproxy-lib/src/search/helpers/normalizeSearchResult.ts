@@ -1,7 +1,7 @@
 import CozyClient, { generateWebLink, models } from 'cozy-client'
 import { IOCozyContact } from 'cozy-client/types/types'
 
-import { APPS_DOCTYPE, TYPE_DIRECTORY } from '../consts'
+import { APPS_DOCTYPE, TYPE_DIRECTORY, TYPE_FILE } from '../consts'
 import {
   CozyDoc,
   RawSearchResult,
@@ -34,8 +34,8 @@ export const cleanFilePath = (doc: CozyDoc): CozyDoc => {
   if (!isIOCozyFile(doc)) {
     return doc
   }
-  const { path, name } = doc
-  if (!path) {
+  const { path, name, type } = doc
+  if (!path || type !== TYPE_FILE) {
     return doc
   }
   let newPath = path
