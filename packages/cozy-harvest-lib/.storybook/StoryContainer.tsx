@@ -18,7 +18,7 @@ defaultClient.ensureStore()
 export const StoryContainer = ({ children }: {children: ReactNode}) => {
   return (
     <CozyClientProvider client={defaultClient}>
-      <CozyTheme>
+      <CozyTheme ignoreCozySettings={true}>
         <BreakpointsProvider>
           <DialogContextApp>
             <I18n lang="en" dictRequire={() => enLocale}>
