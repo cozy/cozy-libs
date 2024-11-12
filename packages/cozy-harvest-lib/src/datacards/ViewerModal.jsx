@@ -1,12 +1,11 @@
-import React, { useContext } from 'react'
-import { useParams } from 'react-router-dom'
+import React from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 
 import { models, useQuery } from 'cozy-client'
 import Overlay from 'cozy-ui/transpiled/react/deprecated/Overlay'
 import Viewer from 'cozy-viewer'
 
 import { useDataCardFiles } from './useDataCardFiles'
-import { MountPointContext } from '../components/MountPointContext'
 import { buildAccountQueryById } from '../helpers/queries'
 
 export const ViewerModal = () => {
@@ -43,15 +42,17 @@ const ViewerModalContent = ({
   accountId,
   fileIndex
 }) => {
-  const { pushHistory, replaceHistory } = useContext(MountPointContext)
+  const navigate = useNavigate()
   const { data, fetchStatus } = useDataCardFiles(
     sourceAccountIdentifier,
     folderToSaveId,
     konnectorSlug
   )
-  const handleCloseViewer = () => replaceHistory(`/accounts/${accountId}`)
+
+  const handleCloseViewer = () =>
+    navigate(`../accounts/${accountId}`, { replace: true })
   const handleFileChange = (_file, newIndex) =>
-    pushHistory(`/viewer/${accountId}/${folderToSaveId}/${newIndex}`)
+    navigate(`../viewer/${accountId}/${folderToSaveId}/${newIndex}`)
 
   if (
     fetchStatus === 'empty' ||
