@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useMatch } from 'react-router-dom'
+import { useMatch, useNavigate } from 'react-router-dom'
 
 import { models } from 'cozy-client'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -8,31 +8,36 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import AccountSelectBox from '../AccountSelectBox/AccountSelectBox'
 import { AccountSelectorHeader } from '../AccountSelectBox/AccountSelectorHeader'
 import KonnectorModalHeader from '../KonnectorModalHeader'
-import { withMountPointProps } from '../MountPointContext'
 
 export const AccountModalHeader = ({
   konnector,
   account,
   accountsAndTriggers,
-  showAccountSelection,
-  pushHistory,
-  replaceHistory
+  showAccountSelection
 }) => {
   const isConfig = useMatch(
     `/connected/${konnector.slug}/accounts/:accountId/config`
   )
+  const navigate = useNavigate()
 
-  if (isConfig)
+  if (isConfig) {
     return (
       <AccountSelectorHeader
         konnector={konnector}
         account={account}
         accountsAndTriggers={accountsAndTriggers}
-        pushHistory={pushHistory}
-        replaceHistory={replaceHistory}
         showAccountSelection={showAccountSelection}
       />
     )
+  }
+
+  const handleChange = option => {
+    navigate(`../accounts/${option.account._id}`)
+  }
+
+  const handleCreate = () => {
+    navigate('../new')
+  }
 
   return (
     <KonnectorModalHeader konnector={konnector}>
@@ -41,12 +46,8 @@ export const AccountModalHeader = ({
           loading={!account}
           selectedAccount={account}
           accountsAndTriggers={accountsAndTriggers}
-          onChange={option => {
-            pushHistory(`/accounts/${option.account._id}`)
-          }}
-          onCreate={() => {
-            pushHistory('/new')
-          }}
+          onChange={handleChange}
+          onCreate={handleCreate}
         />
       ) : (
         <Typography>{models.account.getAccountName(account)}</Typography>
@@ -62,8 +63,7 @@ AccountModalHeader.propTypes = {
   konnector: PropTypes.object.isRequired,
   account: PropTypes.object,
   accountsAndTriggers: PropTypes.array.isRequired,
-  showAccountSelection: PropTypes.bool.isRequired,
-  pushHistory: PropTypes.func.isRequired
+  showAccountSelection: PropTypes.bool.isRequired
 }
 
-export default withMountPointProps(AccountModalHeader)
+export default AccountModalHeader
