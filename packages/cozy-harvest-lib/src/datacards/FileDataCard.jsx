@@ -2,7 +2,8 @@ import 'leaflet/dist/leaflet.css'
 import get from 'lodash/get'
 import keyBy from 'lodash/keyBy'
 import PropTypes from 'prop-types'
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { RealTimeQueries } from 'cozy-client'
 import Card from 'cozy-ui/transpiled/react/Card'
@@ -23,7 +24,6 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { getFileIcon } from './mime-utils'
 import { useDataCardFiles } from './useDataCardFiles'
 import appLinksProps from '../components/KonnectorConfiguration/DataTab/appLinksProps'
-import { MountPointContext } from '../components/MountPointContext'
 import AppLinkCard, { AppLinkButton } from '../components/cards/AppLinkCard'
 
 const LoadingFileListItem = ({ divider }) => {
@@ -75,7 +75,7 @@ const TransitionWrapper = ({ children }) => {
 
 const FileCard = ({ files, loading, konnector, trigger, accountId }) => {
   const { t } = useI18n()
-  const { pushHistory } = useContext(MountPointContext)
+  const navigate = useNavigate()
 
   // Remember files that were there initially so that we do not
   // animate their ListItem.
@@ -123,8 +123,8 @@ const FileCard = ({ files, loading, konnector, trigger, accountId }) => {
               <ItemWrapper key={file._id}>
                 <FileListItem
                   onClick={() => {
-                    pushHistory(
-                      `/viewer/${accountId}/${get(
+                    navigate(
+                      `../viewer/${accountId}/${get(
                         trigger,
                         'message.folder_to_save'
                       )}/${i}`
