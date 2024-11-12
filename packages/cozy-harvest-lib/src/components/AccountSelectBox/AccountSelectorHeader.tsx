@@ -1,5 +1,6 @@
 import cx from 'classnames'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { models } from 'cozy-client'
 import type { IOCozyAccount } from 'cozy-client/types/types'
@@ -14,29 +15,36 @@ export interface AccountSelectorHeaderProps {
   konnector: { slug: string }
   account: IOCozyAccount
   accountsAndTriggers: (object | null | undefined)[]
-  pushHistory: (path: string) => void
-  replaceHistory: (path: string) => void
   showAccountSelection: boolean
 }
 
 export const AccountSelectorHeader = ({
   account,
   accountsAndTriggers,
-  pushHistory,
-  replaceHistory,
   showAccountSelection
 }: AccountSelectorHeaderProps): JSX.Element => {
   // @ts-expect-error IDK
   const { dialogTitleProps } = useDialogContext()
+  const navigate = useNavigate()
+
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { className: dialogTitlePropsClassName, ...rest } = dialogTitleProps
 
+  const handleDismiss = (): void => {
+    navigate('..', { replace: true })
+  }
+
+  const handleChange = (option: { account: { _id: string } }): void => {
+    navigate(`../accounts/${option.account._id}`)
+  }
+
+  const handleCreate = (): void => {
+    navigate(`../new`)
+  }
+
   return (
     <>
-      <DialogBackButton
-        onClick={(): void => replaceHistory(`/accounts/${String(account._id)}`)}
-      />
-
+      <DialogBackButton onClick={handleDismiss} />
       <DialogTitle
         {...rest}
         className={cx(
@@ -51,12 +59,8 @@ export const AccountSelectorHeader = ({
             loading={!account}
             selectedAccount={account}
             accountsAndTriggers={accountsAndTriggers}
-            onChange={(option: { account: { _id: string } }): void => {
-              pushHistory(`/accounts/${option.account._id}`)
-            }}
-            onCreate={(): void => {
-              pushHistory('/new')
-            }}
+            onChange={handleChange}
+            onCreate={handleCreate}
             variant="big"
           />
         ) : (

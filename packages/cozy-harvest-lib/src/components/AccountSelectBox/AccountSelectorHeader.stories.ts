@@ -5,10 +5,6 @@ import { AccountSelectorHeaderFixtures } from '../../../.storybook/fixtures/Acco
 
 const meta: Meta<typeof AccountSelectorHeader> = {
   component: AccountSelectorHeader,
-  argTypes: {
-    replaceHistory: { action: 'replaceHistory' },
-    pushHistory: { action: 'pushHistory' }
-  },
   args: {
     account: AccountSelectorHeaderFixtures.account,
     accountsAndTriggers: AccountSelectorHeaderFixtures.accountsAndTriggers,
