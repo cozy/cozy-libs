@@ -73,7 +73,7 @@
     "cozy-keys-lib": "^6.1.1",
     "cozy-realtime": "^5.6.1",
     "cozy-tsconfig": "^1.8.1",
-    "cozy-ui": "^112.2.0",
+    "cozy-ui": "^113.1.0",
     "cozy-viewer": "^2.9.0",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.6",
