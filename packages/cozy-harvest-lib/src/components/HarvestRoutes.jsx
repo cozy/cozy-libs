@@ -64,7 +64,6 @@ const HarvestRoutes = ({
   return (
     <DatacardOptions options={datacardOptions}>
       <HarvestWrapper
-        mountPointProviderProps={{ baseRoute: konnectorRoot }}
         componentsPropsProviderProps={{ ComponentsProps: ComponentsProps }}
         intentData={intentData}
         intentId={intentId}

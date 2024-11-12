@@ -6,7 +6,6 @@ import React from 'react'
 
 import CozyClient from 'cozy-client'
 
-import { MountPointContext } from './MountPointContext'
 import ConnectionFlow from '../../src/models/ConnectionFlow'
 import AppLike from '../../test/AppLike'
 import fixtures from '../../test/fixtures'
@@ -16,6 +15,11 @@ import { findKonnectorPolicy } from '../konnector-policies'
 const { findKonnectorPolicy: originalFindKonnectorPolicy } = jest.requireActual(
   '../konnector-policies'
 )
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => jest.fn()
+}))
 
 jest.mock('../konnector-policies', () => {
   return {
@@ -144,14 +148,10 @@ describe('TriggerManager', () => {
   describe('when given an oauth konnector', () => {
     it('should not show a form but only a button to connect with oauth', async () => {
       mockVaultClient.getAll.mockResolvedValue([])
-      const mountPointContextValue = {
-        replaceHistory: jest.fn()
-      }
+
       const root = render(
         <AppLike>
-          <MountPointContext.Provider value={mountPointContextValue}>
-            <TriggerManager {...oAuthProps} konnector={oAuthKonnector} />
-          </MountPointContext.Provider>
+          <TriggerManager {...oAuthProps} konnector={oAuthKonnector} />
         </AppLike>
       )
       await expect(root.findByText('Connect')).resolves.toBeDefined()
@@ -161,14 +161,9 @@ describe('TriggerManager', () => {
 
     it('should not show a form but only a button to connect with a banking konnector', async () => {
       mockVaultClient.getAll.mockResolvedValue([])
-      const mountPointContextValue = {
-        replaceHistory: jest.fn()
-      }
       const root = render(
         <AppLike>
-          <MountPointContext.Provider value={mountPointContextValue}>
-            <TriggerManager {...oAuthProps} konnector={bankingKonnector} />
-          </MountPointContext.Provider>
+          <TriggerManager {...oAuthProps} konnector={bankingKonnector} />
         </AppLike>
       )
       await expect(root.findByText('Add your bank')).resolves.toBeDefined()
@@ -467,14 +462,10 @@ describe('TriggerManager', () => {
 
     it('should show a paywall when given an oauth konnector', async () => {
       checkMaxAccounts.mockResolvedValue('max_accounts')
-      const mountPointContextValue = {
-        replaceHistory: jest.fn()
-      }
+
       render(
         <AppLike>
-          <MountPointContext.Provider value={mountPointContextValue}>
-            <TriggerManager {...oAuthProps} konnector={oAuthKonnector} />
-          </MountPointContext.Provider>
+          <TriggerManager {...oAuthProps} konnector={oAuthKonnector} />
         </AppLike>
       )
       expect(
