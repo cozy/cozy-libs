@@ -18,6 +18,7 @@ export const normalizeSearchResult = (
 ): SearchResult => {
   const doc = cleanFilePath(searchResults.doc)
   const url = buildOpenURL(client, doc)
+  const secondaryUrl = buildSecondaryURL(client, doc, url)
   const slug = getSearchResultSlug(doc)
   const title = getSearchResultTitle(doc)
   const subTitle = getSearchResultSubTitle(client, {
@@ -25,7 +26,7 @@ export const normalizeSearchResult = (
     doc,
     query
   })
-  const normalizedRes = { doc, slug, title, subTitle, url }
+  const normalizedRes = { doc, slug, title, subTitle, url, secondaryUrl }
 
   return normalizedRes
 }
@@ -186,6 +187,30 @@ const buildOpenURL = (client: CozyClient, doc: CozyDoc): string | null => {
     slug,
     subDomainType: client.getInstanceOptions().subdomain,
     hash: urlHash,
+    pathname: '',
+    searchParams: []
+  })
+}
+
+const buildSecondaryURL = (
+  client: CozyClient,
+  doc: CozyDoc,
+  url: string | null
+): string | null => {
+  if (!isIOCozyFile(doc) || !url) {
+    return null
+  }
+
+  if (doc.type === TYPE_DIRECTORY) {
+    return url
+  }
+
+  const folderURLHash = `/folder/${doc.dir_id}`
+  return generateWebLink({
+    cozyUrl: client.getStackClient().uri,
+    slug: 'drive',
+    subDomainType: client.getInstanceOptions().subdomain,
+    hash: folderURLHash,
     pathname: '',
     searchParams: []
   })

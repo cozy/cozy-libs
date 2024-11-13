@@ -47,6 +47,7 @@ export interface SearchResult {
   title: string | null
   subTitle: string | null
   url: string | null
+  secondaryUrl: string | null
 }
 
 export interface SearchIndex {
