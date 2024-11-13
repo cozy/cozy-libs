@@ -40,7 +40,8 @@ describe('Should normalize files results', () => {
       slug: 'drive',
       title: 'SOME_FILE_NAME',
       subTitle: 'SOME/FILE/PATH',
-      url: 'https://claude-drive.mycozy.cloud/#/folder/SOME_DIR_ID/file/SOME_FILE_ID'
+      url: 'https://claude-drive.mycozy.cloud/#/folder/SOME_DIR_ID/file/SOME_FILE_ID',
+      secondaryUrl: 'https://claude-drive.mycozy.cloud/#/folder/SOME_DIR_ID'
     })
   })
 
@@ -73,7 +74,8 @@ describe('Should normalize files results', () => {
       slug: 'notes',
       title: 'SOME_NOTE_NAME.cozy-note',
       subTitle: 'SOME/NOTE/PATH',
-      url: 'https://claude-notes.mycozy.cloud/#/n/SOME_NOTE_ID'
+      url: 'https://claude-notes.mycozy.cloud/#/n/SOME_NOTE_ID',
+      secondaryUrl: 'https://claude-drive.mycozy.cloud/#/folder/SOME_DIR_ID'
     })
   })
 
@@ -101,7 +103,8 @@ describe('Should normalize files results', () => {
       slug: 'drive',
       title: 'SOME_FOLDER_NAME',
       subTitle: 'SOME/FOLDER/PATH',
-      url: 'https://claude-drive.mycozy.cloud/#/folder/SOME_FODLER_ID'
+      url: 'https://claude-drive.mycozy.cloud/#/folder/SOME_FODLER_ID',
+      secondaryUrl: 'https://claude-drive.mycozy.cloud/#/folder/SOME_FODLER_ID'
     })
   })
 })
@@ -131,7 +134,8 @@ describe('Should normalize contacts results', () => {
       slug: 'contacts',
       title: 'John Doe',
       subTitle: 'Developper',
-      url: 'https://claude-contacts.mycozy.cloud/#/SOME_CONTACT_ID'
+      url: 'https://claude-contacts.mycozy.cloud/#/SOME_CONTACT_ID',
+      secondaryUrl: null
     })
   })
 
@@ -159,7 +163,8 @@ describe('Should normalize contacts results', () => {
       slug: 'contacts',
       title: 'John Claude Doe',
       subTitle: 'Developper',
-      url: 'https://claude-contacts.mycozy.cloud/#/SOME_CONTACT_ID'
+      url: 'https://claude-contacts.mycozy.cloud/#/SOME_CONTACT_ID',
+      secondaryUrl: null
     })
   })
 
@@ -186,7 +191,8 @@ describe('Should normalize contacts results', () => {
       slug: 'contacts',
       title: null,
       subTitle: 'Developper',
-      url: 'https://claude-contacts.mycozy.cloud/#/SOME_CONTACT_ID'
+      url: 'https://claude-contacts.mycozy.cloud/#/SOME_CONTACT_ID',
+      secondaryUrl: null
     })
   })
 
@@ -214,7 +220,8 @@ describe('Should normalize contacts results', () => {
       slug: 'contacts',
       title: 'John Doe',
       subTitle: null,
-      url: 'https://claude-contacts.mycozy.cloud/#/SOME_CONTACT_ID'
+      url: 'https://claude-contacts.mycozy.cloud/#/SOME_CONTACT_ID',
+      secondaryUrl: null
     })
   })
 
@@ -246,7 +253,8 @@ describe('Should normalize contacts results', () => {
       slug: 'contacts',
       title: 'John Doe',
       subTitle: 'JohnDoe@cozy.mail',
-      url: 'https://claude-contacts.mycozy.cloud/#/SOME_CONTACT_ID'
+      url: 'https://claude-contacts.mycozy.cloud/#/SOME_CONTACT_ID',
+      secondaryUrl: null
     })
   })
 })
@@ -281,7 +289,8 @@ describe('Should normalize apps results', () => {
       slug: 'drive',
       title: 'Cozy Drive',
       subTitle: 'Some app description',
-      url: 'https://claude-drive.mycozy.cloud/#/'
+      url: 'https://claude-drive.mycozy.cloud/#/',
+      secondaryUrl: null
     })
   })
 
@@ -309,7 +318,8 @@ describe('Should normalize apps results', () => {
       slug: 'drive',
       title: 'Cozy Drive',
       subTitle: 'Cozy Drive',
-      url: 'https://claude-drive.mycozy.cloud/#/'
+      url: 'https://claude-drive.mycozy.cloud/#/',
+      secondaryUrl: null
     })
   })
 })
@@ -339,7 +349,8 @@ describe('Should normalize unknown doctypes', () => {
       slug: null,
       title: null,
       subTitle: null,
-      url: null
+      url: null,
+      secondaryUrl: null
     })
   })
 })
