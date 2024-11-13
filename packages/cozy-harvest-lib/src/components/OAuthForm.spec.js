@@ -5,7 +5,6 @@ import React from 'react'
 
 import CozyClient from 'cozy-client'
 
-import { MountPointContext } from './MountPointContext'
 import AppLike from '../../test/AppLike'
 import { KonnectorJobError } from '../helpers/konnectors'
 import { findKonnectorPolicy } from '../konnector-policies'
@@ -33,6 +32,10 @@ const fixtures = {
   }
 }
 
+jest.mock('react-router-dom', () => ({
+  useNavigate: jest.fn()
+}))
+
 describe('OAuthForm', () => {
   const setup = async ({
     account = null,
@@ -51,21 +54,15 @@ describe('OAuthForm', () => {
     const flow = new ConnectionFlow(client, null, konnector)
     flow.getState = jest.fn().mockReturnValue(flowState)
 
-    const mountPointContextValue = {
-      replaceHistory: jest.fn()
-    }
-
     const root = await render(
       <AppLike client={client}>
-        <MountPointContext.Provider value={mountPointContextValue}>
-          <OAuthForm
-            account={account}
-            flow={flow}
-            konnector={fixtures.konnector}
-            reconnect={reconnect}
-            t={t}
-          />
-        </MountPointContext.Provider>
+        <OAuthForm
+          account={account}
+          flow={flow}
+          konnector={fixtures.konnector}
+          reconnect={reconnect}
+          t={t}
+        />
       </AppLike>
     )
     // Wait for next tick so the effects of useOAuthExtraParams are done
