@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.3.0...cozy-dataproxy-lib@1.3.1) (2024-11-13)
+
+
+### Bug Fixes
+
+* Clean path only for files, not directory ([ba015d9](https://github.com/cozy/cozy-libs/commit/ba015d9a7e5ab9ad355ddb8c0867abd2f86ca90f))
+* Remove file name from path after search ([431c37b](https://github.com/cozy/cozy-libs/commit/431c37bc7395525ca51fe4bf009f57f923a254a5))
+
+
+
+
+
 # [1.3.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.2.0...cozy-dataproxy-lib@1.3.0) (2024-11-08)
 
 
