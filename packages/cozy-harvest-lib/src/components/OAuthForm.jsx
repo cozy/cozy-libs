@@ -1,12 +1,12 @@
 import compose from 'lodash/flowRight'
 import isEqual from 'lodash/isEqual'
 import PropTypes from 'prop-types'
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { useClient } from 'cozy-client'
 import { useWebviewIntent } from 'cozy-intent'
 
-import { MountPointContext } from './MountPointContext'
 import {
   OAUTH_SERVICE_ERROR,
   OAUTH_SERVICE_OK,
@@ -32,7 +32,7 @@ export const OAuthForm = props => {
   const client = useClient()
   const flowState = useFlowState(flow)
   const webviewIntent = useWebviewIntent()
-  const { replaceHistory } = useContext(MountPointContext)
+  const navigate = useNavigate()
   const { extraParams, needsExtraParams } = useOAuthExtraParams({
     account,
     client,
@@ -74,7 +74,7 @@ export const OAuthForm = props => {
     if (response.result === OAUTH_SERVICE_OK) {
       const konnectorPolicy = findKonnectorPolicy(konnector)
       if (konnectorPolicy.isBIWebView) {
-        replaceHistory(`/accounts/bi/success`)
+        navigate(`../accounts/bi/success`, { replace: true })
       }
       const accountId = response.key
       if (typeof onSuccess === 'function') onSuccess(accountId)
@@ -90,7 +90,7 @@ export const OAuthForm = props => {
     konnector,
     onSuccess,
     reconnect,
-    replaceHistory,
+    navigate,
     webviewIntent
   ])
 
