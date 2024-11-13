@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.3.1...cozy-dataproxy-lib@1.4.0) (2024-11-13)
+
+
+### Features
+
+* Add secondaryUrl to search result ([eab168c](https://github.com/cozy/cozy-libs/commit/eab168c1603b926cd8de8e6d7b9893e75ddd764c))
+
+
+
+
+
 ## [1.3.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.3.0...cozy-dataproxy-lib@1.3.1) (2024-11-13)
 
 
