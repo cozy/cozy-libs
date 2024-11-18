@@ -1,0 +1,1 @@
+export { getRsbuildConfig } from './getRsbuildConfig'

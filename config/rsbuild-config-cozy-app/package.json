@@ -1,0 +1,34 @@
+{
+  "name": "rsbuild-config-cozy-app",
+  "version": "0.0.0",
+  "description": "Rsbuild config for Cozy Application (Cozy Cloud)",
+  "author": "Cozy Cloud",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cozy/cozy-libs.git"
+  },
+  "homepage": "https://github.com/cozy/cozy-libs/tree/master/packages/rsbuild-config-cozy-app",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cozy/cozy-libs/issues"
+  },
+  "files": [
+    "index.js",
+    "getRsbuildConfig.js"
+  ],
+  "devDependencies": {
+    "@rsbuild/core": "1.1.2",
+    "cozy-ui": "113.2.0"
+  },
+  "dependencies": {
+    "@rsbuild/plugin-node-polyfill": "1.2.0",
+    "@rsbuild/plugin-react": "1.0.7",
+    "@rsbuild/plugin-stylus": "^1.0.6",
+    "@rsdoctor/rspack-plugin": "^0.4.8",
+    "rsbuild-plugin-ejs": "1.0.1"
+  },
+  "peerDependencies": {
+    "@rsbuild/core": ">= 1.1.2",
+    "cozy-ui": ">= 113.2.0"
+  }
+}
