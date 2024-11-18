@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@2.6.2...cozy-viewer@2.7.0) (2024-11-18)
+
+
+### Features
+
+* **Viewer:** Add filter condition to display konnectorBlock ([bb59023](https://github.com/cozy/cozy-libs/commit/bb59023be43e8ad5c6ca22141ece56529f77f5af))
+
+
+
+
+
 ## [2.6.2](https://github.com/cozy/cozy-libs/compare/cozy-viewer@2.6.1...cozy-viewer@2.6.2) (2024-11-07)
 
 
