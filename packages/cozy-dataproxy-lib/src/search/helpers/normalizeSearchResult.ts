@@ -1,7 +1,7 @@
 import CozyClient, { generateWebLink, models } from 'cozy-client'
 import { IOCozyContact } from 'cozy-client/types/types'
 
-import { APPS_DOCTYPE, TYPE_DIRECTORY, TYPE_FILE } from '../consts'
+import { APPS_DOCTYPE, TYPE_DIRECTORY } from '../consts'
 import {
   CozyDoc,
   RawSearchResult,
@@ -35,8 +35,9 @@ export const cleanFilePath = (doc: CozyDoc): CozyDoc => {
   if (!isIOCozyFile(doc)) {
     return doc
   }
-  const { path, name, type } = doc
-  if (!path || type !== TYPE_FILE) {
+  const { path, name } = doc
+  if (!path) {
+    // Paths should be completed for both files and directories, at indexing time
     return doc
   }
   let newPath = path
@@ -212,11 +213,8 @@ const buildSecondaryURL = (
     return null
   }
 
-  if (doc.type === TYPE_DIRECTORY) {
-    return url
-  }
-
   const folderURLHash = `/folder/${doc.dir_id}`
+
   return generateWebLink({
     cozyUrl: client.getStackClient().uri,
     slug: 'drive',
