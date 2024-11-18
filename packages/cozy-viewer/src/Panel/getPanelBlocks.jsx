@@ -27,11 +27,7 @@ export const getPanelBlocksSpecs = (isPublic = false) => ({
     component: Qualification
   },
   konnector: {
-    condition: file =>
-      isFromKonnector(file) &&
-      !isPublic &&
-      // When doc has been edited from mespapiers, we don't want to display the konnector block
-      !file.cozyMetadata?.updatedByApps?.find(app => app.slug === 'mespapiers'),
+    condition: file => isFromKonnector(file) && !isPublic,
     component: KonnectorBlock
   },
   certifications: {
