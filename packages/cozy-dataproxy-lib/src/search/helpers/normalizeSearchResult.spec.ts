@@ -2,7 +2,7 @@ import CozyClient from 'cozy-client'
 import { IOCozyContact, IOCozyFile } from 'cozy-client/types/types'
 
 import { cleanFilePath, normalizeSearchResult } from './normalizeSearchResult'
-import { FILES_DOCTYPE, TYPE_FILE } from '../consts'
+import { FILES_DOCTYPE } from '../consts'
 import { RawSearchResult } from '../types'
 
 const fakeFlatDomainClient = {
@@ -20,7 +20,7 @@ describe('Should normalize files results', () => {
       _id: 'SOME_FILE_ID',
       _type: 'io.cozy.files',
       type: 'file',
-      dir_id: 'SOME_DIR_ID',
+      dir_id: 'PARENT_ID',
       name: 'SOME_FILE_NAME',
       path: 'SOME/FILE/PATH'
     }
@@ -40,8 +40,8 @@ describe('Should normalize files results', () => {
       slug: 'drive',
       title: 'SOME_FILE_NAME',
       subTitle: 'SOME/FILE/PATH',
-      url: 'https://claude-drive.mycozy.cloud/#/folder/SOME_DIR_ID/file/SOME_FILE_ID',
-      secondaryUrl: 'https://claude-drive.mycozy.cloud/#/folder/SOME_DIR_ID'
+      url: 'https://claude-drive.mycozy.cloud/#/folder/PARENT_ID/file/SOME_FILE_ID',
+      secondaryUrl: 'https://claude-drive.mycozy.cloud/#/folder/PARENT_ID'
     })
   })
 
@@ -50,7 +50,7 @@ describe('Should normalize files results', () => {
       _id: 'SOME_NOTE_ID',
       _type: 'io.cozy.files',
       type: 'file',
-      dir_id: 'SOME_DIR_ID',
+      dir_id: 'PARENT_ID',
       name: 'SOME_NOTE_NAME.cozy-note',
       path: 'SOME/NOTE/PATH',
       metadata: {
@@ -75,7 +75,7 @@ describe('Should normalize files results', () => {
       title: 'SOME_NOTE_NAME.cozy-note',
       subTitle: 'SOME/NOTE/PATH',
       url: 'https://claude-notes.mycozy.cloud/#/n/SOME_NOTE_ID',
-      secondaryUrl: 'https://claude-drive.mycozy.cloud/#/folder/SOME_DIR_ID'
+      secondaryUrl: 'https://claude-drive.mycozy.cloud/#/folder/PARENT_ID'
     })
   })
 
@@ -85,7 +85,8 @@ describe('Should normalize files results', () => {
       _type: 'io.cozy.files',
       type: 'directory',
       name: 'SOME_FOLDER_NAME',
-      path: 'SOME/FOLDER/PATH'
+      path: 'SOME/FOLDER/PATH',
+      dir_id: 'PARENT_ID'
     }
     const searchResult = {
       doctype: 'io.cozy.files',
@@ -104,7 +105,7 @@ describe('Should normalize files results', () => {
       title: 'SOME_FOLDER_NAME',
       subTitle: 'SOME/FOLDER/PATH',
       url: 'https://claude-drive.mycozy.cloud/#/folder/SOME_FODLER_ID',
-      secondaryUrl: 'https://claude-drive.mycozy.cloud/#/folder/SOME_FODLER_ID'
+      secondaryUrl: 'https://claude-drive.mycozy.cloud/#/folder/PARENT_ID'
     })
   })
 })
@@ -366,31 +367,19 @@ describe('cleanFilePath', () => {
     expect(cleanFilePath(doc)).toEqual(doc)
   })
 
-  it('should return the document unchanged if not a file', () => {
-    const doc = {
-      _type: FILES_DOCTYPE,
-      name: 'name',
-      type: TYPE_FILE
-    } as IOCozyFile
-    expect(cleanFilePath(doc)).toEqual(doc)
-  })
-
   it('should remove name from path if path ends with name', () => {
     const doc = {
       _type: FILES_DOCTYPE,
-      type: TYPE_FILE,
       path: '/the/path/myname',
       name: 'myname'
     } as IOCozyFile
     const expected = { ...doc, path: '/the/path' }
-
     expect(cleanFilePath(doc)).toEqual(expected)
   })
 
   it('should return the document unchanged if path does not end with name', () => {
     const doc = {
       _type: FILES_DOCTYPE,
-      type: TYPE_FILE,
       path: '/the/path/othername',
       name: 'name'
     } as IOCozyFile
