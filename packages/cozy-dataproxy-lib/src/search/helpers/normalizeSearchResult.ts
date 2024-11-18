@@ -17,9 +17,9 @@ export const normalizeSearchResult = (
   query: string
 ): SearchResult => {
   const doc = cleanFilePath(searchResults.doc)
-  const url = buildOpenURL(client, doc)
+  const slug = getSearchResultSlug(client, doc)
+  const url = buildOpenURL(client, doc, slug)
   const secondaryUrl = buildSecondaryURL(client, doc, url)
-  const slug = getSearchResultSlug(doc)
   const title = getSearchResultTitle(doc)
   const subTitle = getSearchResultSubTitle(client, {
     fields: searchResults.fields,
@@ -132,12 +132,21 @@ const getSearchResultSubTitle = (
   return null
 }
 
-const getSearchResultSlug = (doc: CozyDoc): string | null => {
+const getSearchResultSlug = (
+  client: CozyClient,
+  doc: CozyDoc
+): string | null => {
   if (isIOCozyFile(doc)) {
     if (models.file.isNote(doc)) {
-      return 'notes'
+      const cozyUrl = client.getStackClient().uri
+      const createdOn = doc.cozyMetadata?.createdOn
+      const isSharedNote = createdOn && createdOn !== `${cozyUrl}/`
+      // In case of a shared note, the cozyURL must be the one from the instance who the created it,
+      // and should include the docID coming from this instance.
+      // As we do not have this info, we need to first open the note on Drive, which will handle it
+      // and make the correct redirection.
+      return isSharedNote ? 'drive' : 'notes'
     }
-
     return 'drive'
   }
 
@@ -152,20 +161,22 @@ const getSearchResultSlug = (doc: CozyDoc): string | null => {
   return null
 }
 
-const buildOpenURL = (client: CozyClient, doc: CozyDoc): string | null => {
+const buildOpenURL = (
+  client: CozyClient,
+  doc: CozyDoc,
+  slug: string | null
+): string | null => {
+  // TODO: extract some of this common logic with Drive  in cozy-client
   let urlHash = ''
-  const slug = getSearchResultSlug(doc)
-
   if (isIOCozyFile(doc)) {
     const isDir = doc.type === TYPE_DIRECTORY
     const dirId = isDir ? doc._id : doc.dir_id
     const folderURLHash = `/folder/${dirId}`
 
     if (models.file.isNote(doc)) {
-      urlHash = `/n/${doc._id}`
+      // A note might be opened by Drive if it is shared
+      urlHash = slug === 'notes' ? `/n/${doc._id}` : `/note/${doc._id}`
     } else if (models.file.shouldBeOpenedByOnlyOffice(doc)) {
-      // Ex: https://paultranvan-drive.mycozy.cloud/#/onlyoffice/cf82c604-3e2c-c656-741c-624c328d3404?redirectLink=drive%23%2Ffolder%2Fd2af6f38733f7efd68130804beefbc15
-      // TODO: extract in cozy-client
       urlHash = `/onlyoffice/${doc._id}?redirectLink=drive${folderURLHash}`
     } else if (isDir) {
       urlHash = folderURLHash
