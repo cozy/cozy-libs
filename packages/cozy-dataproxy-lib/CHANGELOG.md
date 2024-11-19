@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.4.1...cozy-dataproxy-lib@1.5.0) (2024-11-19)
+
+
+### Features
+
+* Use parent path in secondary url and subtitle ([d3493db](https://github.com/cozy/cozy-libs/commit/d3493db2a6503ba1be9fafddc076bbaeaba343f7))
+
+
+
+
+
 ## [1.4.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.4.0...cozy-dataproxy-lib@1.4.1) (2024-11-19)
 
 
