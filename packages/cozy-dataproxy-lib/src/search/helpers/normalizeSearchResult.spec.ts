@@ -3,7 +3,7 @@ import { IOCozyContact, IOCozyFile } from 'cozy-client/types/types'
 
 import { cleanFilePath, normalizeSearchResult } from './normalizeSearchResult'
 import { FILES_DOCTYPE } from '../consts'
-import { RawSearchResult } from '../types'
+import { EnrichedSearchResult } from '../types'
 
 const fakeFlatDomainClient = {
   getStackClient: () => ({
@@ -27,7 +27,7 @@ describe('Should normalize files results', () => {
     const searchResult = {
       doctype: 'io.cozy.files',
       doc: doc
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -61,7 +61,7 @@ describe('Should normalize files results', () => {
     const searchResult = {
       doctype: 'io.cozy.files',
       doc: doc
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -91,7 +91,7 @@ describe('Should normalize files results', () => {
     const searchResult = {
       doctype: 'io.cozy.files',
       doc: doc
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -122,7 +122,7 @@ describe('Should normalize contacts results', () => {
       doctype: 'io.cozy.files',
       doc: doc,
       fields: ['displayName', 'jobTitle']
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -151,7 +151,7 @@ describe('Should normalize contacts results', () => {
       doctype: 'io.cozy.files',
       doc: doc,
       fields: ['displayName', 'jobTitle']
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -179,7 +179,7 @@ describe('Should normalize contacts results', () => {
       doctype: 'io.cozy.files',
       doc: doc,
       fields: ['displayName', 'jobTitle']
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -208,7 +208,7 @@ describe('Should normalize contacts results', () => {
       doctype: 'io.cozy.files',
       doc: doc,
       fields: []
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -241,7 +241,7 @@ describe('Should normalize contacts results', () => {
       doctype: 'io.cozy.files',
       doc: doc,
       fields: ['displayName', 'email[]:address']
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -277,7 +277,7 @@ describe('Should normalize apps results', () => {
       doctype: 'io.cozy.files',
       doc: doc,
       fields: ['displayName', 'email[]:address']
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -306,7 +306,7 @@ describe('Should normalize apps results', () => {
       doctype: 'io.cozy.files',
       doc: doc,
       fields: ['displayName', 'email[]:address']
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -337,7 +337,7 @@ describe('Should normalize unknown doctypes', () => {
       doctype: 'io.cozy.files',
       doc: doc,
       fields: ['displayName', 'email[]:address']
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
