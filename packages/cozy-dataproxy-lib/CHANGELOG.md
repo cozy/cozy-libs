@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.5.0...cozy-dataproxy-lib@1.6.0) (2024-11-20)
+
+
+### Features
+
+* Improve indexing time ([6b98c7a](https://github.com/cozy/cozy-libs/commit/6b98c7a3b6bba2aa7cbb0e75b2db936d31e1e611))
+
+
+
+
+
 # [1.5.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.4.1...cozy-dataproxy-lib@1.5.0) (2024-11-19)
 
 
