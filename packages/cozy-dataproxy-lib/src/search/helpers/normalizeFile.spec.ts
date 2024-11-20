@@ -103,18 +103,42 @@ describe('normalizeFileWithFolders', () => {
 })
 
 describe('addFilePaths', () => {
-  test(`should add parent folder's path to files`, () => {
-    const client = {
-      getCollectionFromState: jest.fn().mockReturnValue([
-        {
-          type: 'directory',
-          _type: 'io.cozy.files',
-          _id: 'SOME_DIR_ID',
-          path: 'SOME/PARENT/PATH'
-        }
-      ])
-    } as unknown as CozyClient
+  it(`should add parent folder's path to files`, () => {
+    const docs = [
+      {
+        _id: 'SOME_FILE_ID',
+        _type: 'io.cozy.files',
+        type: 'file',
+        dir_id: 'SOME_DIR_ID',
+        name: 'myfile.txt'
+      },
+      {
+        _id: 'SOME_DIR_ID',
+        _type: 'io.cozy.files',
+        type: 'directory',
+        path: '/mydir',
+        dir_id: 'ROOT_ID'
+      }
+    ] as CozyDoc[]
 
+    const result = addFilePaths(docs)
+
+    expect(result[0]).toStrictEqual({
+      _id: 'SOME_FILE_ID',
+      _type: 'io.cozy.files',
+      type: 'file',
+      dir_id: 'SOME_DIR_ID',
+      name: 'myfile.txt',
+      path: '/mydir/myfile.txt'
+    })
+  })
+
+  it(`should handle no files in results`, () => {
+    const result = addFilePaths([])
+    expect(result).toStrictEqual([])
+  })
+
+  it(`should handle when no parent dir is found`, () => {
     const docs = [
       {
         _id: 'SOME_FILE_ID',
@@ -124,7 +148,7 @@ describe('addFilePaths', () => {
       }
     ] as CozyDoc[]
 
-    const result = addFilePaths(client, docs)
+    const result = addFilePaths(docs)
 
     expect(result).toStrictEqual([
       {
@@ -132,40 +156,7 @@ describe('addFilePaths', () => {
         _type: 'io.cozy.files',
         type: 'file',
         dir_id: 'SOME_DIR_ID',
-        path: 'SOME/PARENT/PATH'
-      }
-    ])
-  })
-
-  test(`should handle no files in results`, () => {
-    const client = {} as unknown as CozyClient
-    const result = addFilePaths(client, [])
-
-    expect(result).toStrictEqual([])
-  })
-
-  test(`should handle when no parent dir is found`, () => {
-    const client = {
-      getCollectionFromState: jest.fn().mockReturnValue([])
-    } as unknown as CozyClient
-
-    const docs = [
-      {
-        _id: 'SOME_FILE_ID',
-        _type: 'io.cozy.files',
-        type: 'file',
-        dir_id: 'SOME_DIR_ID'
-      }
-    ] as CozyDoc[]
-
-    const result = addFilePaths(client, docs)
-
-    expect(result).toStrictEqual([
-      {
-        _id: 'SOME_FILE_ID',
-        _type: 'io.cozy.files',
-        type: 'file',
-        dir_id: 'SOME_DIR_ID'
+        path: ''
       }
     ])
   })

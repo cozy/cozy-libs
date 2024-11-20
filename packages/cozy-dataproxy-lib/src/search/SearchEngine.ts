@@ -68,6 +68,8 @@ export class SearchEngine {
     if (!this.client) {
       return
     }
+    let startReplicationTime = 0,
+      endReplicationTime = 0
     if (!this.isLocalSearch) {
       // In case of non-local search, force the indexing for all doctypes
       // For local search, this will be done automatically after initial replication
@@ -88,9 +90,16 @@ export class SearchEngine {
       })
       this.client.on('pouchlink:sync:start', () => {
         log.debug('Started pouch replication')
+        startReplicationTime = performance.now()
       })
       this.client.on('pouchlink:sync:end', () => {
         log.debug('Ended pouch replication')
+        endReplicationTime = performance.now()
+        log.debug(
+          `Replication took ${(
+            endReplicationTime - startReplicationTime
+          ).toFixed(2)}`
+        )
       })
     }
 
@@ -182,9 +191,7 @@ export class SearchEngine {
     })
 
     // There is no persisted path for files: we must add it
-    const completedDocs = this.isLocalSearch
-      ? addFilePaths(this.client, docs)
-      : docs
+    const completedDocs = this.isLocalSearch ? addFilePaths(docs) : docs
     for (const doc of completedDocs) {
       void this.addDocToIndex(flexsearchIndex, doc)
     }
