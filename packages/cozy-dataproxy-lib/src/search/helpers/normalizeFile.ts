@@ -37,44 +37,33 @@ export const normalizeFileWithFolders = (
   return { ...file, _type: 'io.cozy.files', path }
 }
 
-export const addFilePaths = (
-  client: CozyClient,
-  docs: CozyDoc[]
-): CozyDoc[] => {
+export const addFilePaths = (docs: CozyDoc[]): CozyDoc[] => {
   const completedDocs = [...docs]
-  const filesOrDirs = completedDocs.filter(doc => isIOCozyFile(doc))
-  const files = filesOrDirs.filter(file => file.type === TYPE_FILE)
+  const filesAndDirs = completedDocs.filter(doc => isIOCozyFile(doc))
 
-  if (files.length > 0) {
-    const dirIds = files.map(file => file.dir_id)
-    const parentDirs = getDirsFromStore(client, dirIds)
-    if (parentDirs.length < 1) {
-      return completedDocs
-    }
-    for (const file of files) {
-      const dir = parentDirs.find(dir => dir._id === file.dir_id)
-      if (dir) {
-        const idx = completedDocs.findIndex(doc => doc._id === file._id)
-        // @ts-expect-error We know that we are manipulating an IOCozyFile here so path exists
-        completedDocs[idx].path = dir.path
+  if (filesAndDirs.length > 0) {
+    const directoryPaths = new Map<string, string>()
+
+    filesAndDirs.forEach(file => {
+      if (file.type === TYPE_DIRECTORY) {
+        // Get all directory paths
+        directoryPaths.set(file._id, file.path || '')
       }
-    }
+    })
+
+    return filesAndDirs.map(file => {
+      if (file.type === TYPE_FILE) {
+        const parentPath = directoryPaths.get(file.dir_id) || ''
+        // Add path to all files based on their parent path
+        return {
+          ...file,
+          path: parentPath ? `${parentPath}/${file.name}` : ''
+        }
+      }
+      return file
+    })
   }
   return completedDocs
-}
-
-const getDirsFromStore = (
-  client: CozyClient,
-  dirIds: string[]
-): IOCozyFile[] => {
-  // XXX querying from store is surprisingly slow: 100+ ms for 50 docs, while
-  // this approach takes 2-3ms... It should be investigated in cozy-client
-  const allFiles = client.getCollectionFromState(FILES_DOCTYPE) as IOCozyFile[]
-  if (allFiles) {
-    const dirs = allFiles.filter(file => file.type === TYPE_DIRECTORY)
-    return dirs.filter(dir => dirIds.includes(dir._id))
-  }
-  return []
 }
 
 export const shouldKeepFile = (file: IOCozyFile): boolean => {
@@ -105,7 +94,6 @@ export const computeFileFullpath = async (
     return { ...file, path: newPath }
   }
   // If there is no path at all, let's compute it from the parent path
-
   const fileWithPath = { ...file }
   const parentDir = (await queryDocById(
     client,
