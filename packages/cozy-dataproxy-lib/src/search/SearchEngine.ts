@@ -180,7 +180,7 @@ export class SearchEngine {
     const fieldsToIndex = SEARCH_SCHEMA[doctype]
 
     const flexsearchIndex = new FlexSearch.Document<CozyDoc, true>({
-      tokenize: 'forward',
+      tokenize: 'reverse', // See https://github.com/nextapps-de/flexsearch?tab=readme-ov-file#tokenizer
       encode: getSearchEncoder(),
       // @ts-expect-error minlength is not described by Flexsearch types but exists
       minlength: 2,
