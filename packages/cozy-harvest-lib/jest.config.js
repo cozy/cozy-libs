@@ -17,11 +17,6 @@ module.exports = {
     '\\.(png|gif|jpe?g|svg|css)$': '<rootDir>/src/__mocks__/fileMock.js',
     // identity-obj-proxy module is installed by cozy-scripts
     '.styl$': 'identity-obj-proxy',
-    // Force cozy-client resolving to use harvest's version of cozy-client
-    // Can be removed when cozy-client's version in the workspace is > 14.4.0.
-    // Since otherwise harvest tries to mock unexisting methods from
-    // cozy-client/models/account (getContractSyncStatusFromAccount for ex)
-    '^cozy-client$': '<rootDir>/node_modules/cozy-client/dist/index.js',
     '^cozy-ui(.*)': '<rootDir>/node_modules/cozy-ui/$1'
   },
   transformIgnorePatterns: ['node_modules/(?!(cozy-ui|cozy-keys-lib))'],
