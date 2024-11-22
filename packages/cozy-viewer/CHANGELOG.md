@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@2.8.0...cozy-viewer@2.9.0) (2024-11-22)
+
+
+### Features
+
+* **cozy-viewer:** Exposing the components used by apps at the root ([4a1d9e5](https://github.com/cozy/cozy-libs/commit/4a1d9e5690287bc280edadc2b6e412bc19acd46f))
+
+
+
+
+
 # [2.8.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@2.7.0...cozy-viewer@2.8.0) (2024-11-18)
 
 
