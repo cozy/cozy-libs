@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [30.7.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@30.6.5...cozy-harvest-lib@30.7.0) (2024-11-22)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Make test working after no-hosting cozy-ui ([ead9c6f](https://github.com/cozy/cozy-libs/commit/ead9c6f34f50708f72eb6e0d2f7ced4f354e1d12))
+* **cozy-harvest-lib:** Make test works with cozy-client ([bce0da5](https://github.com/cozy/cozy-libs/commit/bce0da5531afea157da2c2fd72ed3645a831e853))
+
+
+### Features
+
+* **cozy-harvest-lib:** Force light theme inside Storybook ([ec78500](https://github.com/cozy/cozy-libs/commit/ec78500ff71551a27e6036d861a19071d119b4ef))
+* **cozy-harvest-lib:** Update cozy-ui from 112.2.0 to 113.1.0 ([92c0722](https://github.com/cozy/cozy-libs/commit/92c072200b3d223466d55bacd794bdcff1b18359))
+
+
+
+
+
 ## [30.6.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@30.6.4...cozy-harvest-lib@30.6.5) (2024-11-22)
 
 **Note:** Version bump only for package cozy-harvest-lib
