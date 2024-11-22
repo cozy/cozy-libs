@@ -21,7 +21,8 @@ module.exports = {
     // Can be removed when cozy-client's version in the workspace is > 14.4.0.
     // Since otherwise harvest tries to mock unexisting methods from
     // cozy-client/models/account (getContractSyncStatusFromAccount for ex)
-    '^cozy-client$': '<rootDir>/node_modules/cozy-client/dist/index.js'
+    '^cozy-client$': '<rootDir>/node_modules/cozy-client/dist/index.js',
+    '^cozy-ui(.*)': '<rootDir>/node_modules/cozy-ui/$1'
   },
   transformIgnorePatterns: ['node_modules/(?!(cozy-ui|cozy-keys-lib))'],
   setupFilesAfterEnv: ['<rootDir>/src/jest.setup.js']
