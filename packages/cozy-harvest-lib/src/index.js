@@ -1,6 +1,6 @@
 import FlowProviderWithLocales from './components/FlowProvider'
+import HarvestRoutesWithoutLocales from './components/HarvestRoutes'
 import KonnectorSuggestionModalWithoutLocales from './components/KonnectorSuggestionModal'
-import RoutesWithoutLocales from './components/Routes'
 import { IntentTriggerManager as IntentTriggerManagerWithoutLocales } from './components/TriggerManager'
 import LaunchTriggerCardWithoutLocales from './components/cards/LaunchTriggerCard'
 import withLocales from './components/hoc/withLocales'
@@ -11,7 +11,7 @@ export const IntentTriggerManager = withLocales(
 )
 export const FlowProvider = withLocales(FlowProviderWithLocales)
 export const LaunchTriggerCard = withLocales(LaunchTriggerCardWithoutLocales)
-export const Routes = withLocales(RoutesWithoutLocales)
+export const HarvestRoutes = withLocales(HarvestRoutesWithoutLocales)
 export const KonnectorSuggestionModal = withLocales(
   KonnectorSuggestionModalWithoutLocales
 )

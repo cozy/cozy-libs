@@ -29,7 +29,7 @@ const HarvestDialog = props => {
   return <Dialog disableRestoreFocus {...props} />
 }
 
-const Routes = ({
+const HarvestRoutes = ({
   konnectorRoot,
   konnector,
   konnectorSlug,
@@ -106,7 +106,7 @@ const Routes = ({
   )
 }
 
-Routes.propTypes = {
+HarvestRoutes.propTypes = {
   /** The root URL of the konnector */
   konnectorRoot: PropTypes.string,
   /** The konnector object */
@@ -127,4 +127,4 @@ Routes.propTypes = {
   intentId: PropTypes.string
 }
 
-export default Routes
+export default HarvestRoutes
