@@ -15,9 +15,7 @@ import { DatacardOptions } from './Datacards/DatacardOptionsContext'
 import DialogContext from './DialogContext'
 import HarvestWrapper from './HarvestWrapper'
 import KonnectorAccounts from './KonnectorAccounts'
-import RoutesV4 from './Routes/RoutesV4'
 import RoutesV6 from './Routes/RoutesV6'
-import { isRouterV6 } from './hoc/withRouter'
 import { useKonnectorWithTriggers } from '../helpers/useKonnectorWithTriggers'
 
 const HarvestDialog = props => {
@@ -41,8 +39,6 @@ const HarvestRoutes = ({
   intentData,
   intentId
 }) => {
-  const RoutesV4orV6 = isRouterV6 ? RoutesV6 : RoutesV4
-
   const { t } = useI18n()
   const dialogContext = useCozyDialog({
     size: 'l',
@@ -88,7 +84,7 @@ const HarvestRoutes = ({
             ) : (
               <KonnectorAccounts konnector={konnectorWithTriggers}>
                 {accountsAndTriggers => (
-                  <RoutesV4orV6
+                  <RoutesV6
                     konnectorRoot={konnectorRoot}
                     konnectorWithTriggers={konnectorWithTriggers}
                     accountsAndTriggers={accountsAndTriggers}
