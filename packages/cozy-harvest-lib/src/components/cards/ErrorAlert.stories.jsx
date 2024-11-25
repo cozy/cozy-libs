@@ -8,7 +8,6 @@ const meta = {
     error: new KonnectorJobError('LOGIN_FAILED'),
     konnectorRoot: '/konnector/dummy',
     trigger: {},
-    historyAction: () => {},
     flow: {
       konnector: {
         name: 'Dummy',

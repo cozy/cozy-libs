@@ -9,7 +9,6 @@ const meta = {
     konnectorRoot: '/konnector/dummy',
     trigger: {},
     error: undefined,
-    historyAction: () => {},
     flow: {
       konnector: {
         name: 'Dummy',

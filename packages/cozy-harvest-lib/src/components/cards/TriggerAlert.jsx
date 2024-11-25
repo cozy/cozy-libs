@@ -18,7 +18,6 @@ const TriggerAlert = ({
   maintenanceMessages,
   account,
   konnectorRoot,
-  historyAction,
   intentsApi,
   flow
 }) => {
@@ -40,7 +39,6 @@ const TriggerAlert = ({
         withDescription={withMaintenanceDescription}
         messages={maintenanceMessages}
         isRunnable={isRunnable}
-        historyAction={historyAction}
         konnectorRoot={konnectorRoot}
         trigger={trigger}
         konnector={konnector}
@@ -57,7 +55,6 @@ const TriggerAlert = ({
         trigger={trigger}
         isRunning={isRunning}
         isRunnable={isRunnable}
-        historyAction={historyAction}
         flow={flow}
         account={account}
         intentsApi={intentsApi}
@@ -73,7 +70,6 @@ const TriggerAlert = ({
       konnectorRoot={konnectorRoot}
       trigger={trigger}
       error={error}
-      historyAction={historyAction}
       flow={flow}
       account={account}
       intentsApi={intentsApi}

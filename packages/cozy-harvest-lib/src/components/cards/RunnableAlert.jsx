@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
@@ -23,7 +24,6 @@ import KonnectorIcon from '../KonnectorIcon'
  * @param {string} props.konnectorRoot - The root of the konnector.
  * @param {Object} props.trigger - The trigger object.
  * @param {Object} props.error - The error object.
- * @param {Function} props.historyAction - The history action function.
  * @param {Object} props.flow - The flow object.
  * @param {Object} props.account - The account object.
  * @param {Object} props.intentsApi - The intents API object.
@@ -37,13 +37,13 @@ function RunnableAlert({
   konnectorRoot,
   trigger,
   error,
-  historyAction,
   flow,
   account,
   intentsApi,
   isRunnable
 }) {
   const { isMobile } = useBreakpoints()
+  const navigate = useNavigate()
   const { konnector } = flow
   const isKonnectorDisconnected = isDisconnected(konnector, trigger)
 
@@ -53,7 +53,7 @@ function RunnableAlert({
     account,
     intentsApi,
     error,
-    historyAction,
+    navigate,
     konnectorRoot,
     trigger,
     isRunning,
@@ -95,7 +95,6 @@ function RunnableAlert({
           trigger={trigger}
           isRunning={isRunning}
           error={error}
-          historyAction={historyAction}
           flow={flow}
           account={account}
           intentsApi={intentsApi}
@@ -112,7 +111,6 @@ RunnableAlert.propTypes = {
   konnectorRoot: PropTypes.string,
   trigger: PropTypes.object.isRequired,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  historyAction: PropTypes.func.isRequired,
   flow: PropTypes.object,
   account: PropTypes.object,
   intentsApi: PropTypes.object,

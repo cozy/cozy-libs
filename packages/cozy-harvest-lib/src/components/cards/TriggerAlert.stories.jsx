@@ -20,7 +20,6 @@ const meta = {
     },
     account: {},
     konnectorRoot: '/konnector/dummy',
-    historyAction: () => {},
     intentsApi: {},
     flow: {
       konnector: {

@@ -10,19 +10,21 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 const configureAction = ({
   isDisconnected,
-  historyAction,
+  navigate,
   konnectorRoot,
   trigger
 }) => ({
   name: 'configureAction',
   action: () => {
-    historyAction(
+    navigate(
       konnectorRoot
         ? `${konnectorRoot}/accounts/${triggersModel.getAccountId(
             trigger
           )}/config`
-        : '/config',
-      'push'
+        : './config',
+      {
+        relative: 'path'
+      }
     )
   },
   displayCondition: () => !isDisconnected,

@@ -16,7 +16,7 @@ const launchAction = ({
   account,
   intentsApi,
   error,
-  historyAction,
+  navigate,
   konnectorRoot,
   trigger,
   isDisconnected
@@ -32,13 +32,15 @@ const launchAction = ({
 
     const onSync = () => {
       if (konnectorPolicy.shouldLaunchRedirectToEdit(error)) {
-        return historyAction(
+        return navigate(
           konnectorRoot
             ? `${konnectorRoot}/accounts/${triggersModel.getAccountId(
                 trigger
               )}/edit`
-            : '/edit',
-          'push'
+            : './edit',
+          {
+            relative: 'path'
+          }
         )
       } else {
         launch({ autoSuccessTimer: false })

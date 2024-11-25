@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import InfoIcon from 'cozy-ui/transpiled/react/Icons/Info'
@@ -22,7 +23,6 @@ import TriggerErrorDescription from '../infos/TriggerErrorDescription'
  * @param {string} props.konnectorRoot - The root URL of the konnector.
  * @param {Object} props.trigger - The trigger object.
  * @param {boolean} props.isRunning - Indicates if the konnector is running.
- * @param {string} props.historyAction - The history action.
  * @param {Object} props.flow - The flow object.
  * @param {Object} props.account - The account object.
  * @param {Object} props.intentsApi - The intents API object.
@@ -35,12 +35,12 @@ function ErrorAlert({
   konnectorRoot,
   trigger,
   isRunning,
-  historyAction,
   flow,
   account,
   intentsApi,
   isRunnable
 }) {
+  const navigate = useNavigate()
   const { konnector } = flow
   const isKonnectorDisconnected = isDisconnected(konnector, trigger)
 
@@ -50,7 +50,7 @@ function ErrorAlert({
     account,
     intentsApi,
     error,
-    historyAction,
+    navigate,
     konnectorRoot,
     trigger,
     isRunning,
@@ -79,7 +79,6 @@ function ErrorAlert({
             trigger={trigger}
             isInError
             error={error}
-            historyAction={historyAction}
             flow={flow}
             account={account}
             intentsApi={intentsApi}
@@ -110,7 +109,6 @@ ErrorAlert.propTypes = {
   konnectorRoot: PropTypes.string,
   trigger: PropTypes.object.isRequired,
   isRunning: PropTypes.bool.isRequired,
-  historyAction: PropTypes.func.isRequired,
   flow: PropTypes.object,
   account: PropTypes.object,
   intentsApi: PropTypes.object,
