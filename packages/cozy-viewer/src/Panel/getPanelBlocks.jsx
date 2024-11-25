@@ -1,10 +1,13 @@
-import { models } from 'cozy-client'
+import {
+  isFromKonnector,
+  hasQualifications,
+  hasCertifications
+} from 'cozy-client/dist/models/file'
 import KonnectorBlock from 'cozy-harvest-lib/dist/components/KonnectorBlock'
 
 import Certifications from './Certifications'
+import Informations from './Informations'
 import Qualification from './Qualification'
-
-const { isFromKonnector, hasQualifications, hasCertifications } = models.file
 
 /**
  * @typedef {Object} PanelBlockSpec
@@ -29,6 +32,10 @@ export const getPanelBlocksSpecs = (isPublic = false) => ({
   konnector: {
     condition: file => isFromKonnector(file) && !isPublic,
     component: KonnectorBlock
+  },
+  informations: {
+    condition: () => true,
+    component: Informations
   },
   certifications: {
     condition: hasCertifications,
