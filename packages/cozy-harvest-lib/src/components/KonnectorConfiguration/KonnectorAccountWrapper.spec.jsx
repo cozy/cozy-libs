@@ -6,7 +6,6 @@ import { VaultProvider } from 'cozy-keys-lib'
 import ConfigurationTab from './ConfigurationTab'
 import KonnectorAccountWrapper from './KonnectorAccountWrapper'
 import AppLike from '../../../test/AppLike'
-import { MountPointProvider } from '../MountPointContext'
 import VaultUnlockProvider from '../VaultUnlockProvider'
 
 jest.mock('./ConfigurationTab/Contracts.jsx', () => {
@@ -55,22 +54,20 @@ describe('KonnectorAccountWrapper', () => {
     const addAccount = jest.fn()
     const root = render(
       <AppLike client={mockClient}>
-        <MountPointProvider baseRoute="/">
-          <VaultProvider instance="http://cozy.tools:8080">
-            <VaultUnlockProvider>
-              <KonnectorAccountWrapper
-                account={account}
-                addAccount={addAccount}
-                onAccountDeleted={onAccountDeleted}
-                konnector={konnector}
-                initialTrigger={trigger}
-                pushHistory={jest.fn()}
-                Component={ConfigurationTab}
-                showNewAccountButton={true}
-              />
-            </VaultUnlockProvider>
-          </VaultProvider>
-        </MountPointProvider>
+        <VaultProvider instance="http://cozy.tools:8080">
+          <VaultUnlockProvider>
+            <KonnectorAccountWrapper
+              account={account}
+              addAccount={addAccount}
+              onAccountDeleted={onAccountDeleted}
+              konnector={konnector}
+              initialTrigger={trigger}
+              pushHistory={jest.fn()}
+              Component={ConfigurationTab}
+              showNewAccountButton={true}
+            />
+          </VaultUnlockProvider>
+        </VaultProvider>
       </AppLike>
     )
     return { root, onAccountDeleted, addAccount }
