@@ -70,7 +70,7 @@ describe('getPanelBlocksSpecs', () => {
         condition: expect.any(Function),
         component: expect.anything()
       },
-      certifications: {
+      informations: {
         condition: expect.any(Function),
         component: expect.anything()
       }

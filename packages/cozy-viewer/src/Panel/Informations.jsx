@@ -1,10 +1,13 @@
+import has from 'lodash/has'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import CalendarIcon from 'cozy-ui/transpiled/react/Icons/Calendar'
+import CarbonCopyIcon from 'cozy-ui/transpiled/react/Icons/CarbonCopy'
 import FileOutlineIcon from 'cozy-ui/transpiled/react/Icons/FileOutline'
 import FolderIcon from 'cozy-ui/transpiled/react/Icons/Folder'
+import SafeIcon from 'cozy-ui/transpiled/react/Icons/Safe'
 import ServerIcon from 'cozy-ui/transpiled/react/Icons/Server'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
@@ -22,6 +25,8 @@ const Informations = ({ file, t }) => {
   const size = makeSize(file.size)
   const creation = f(file.created_at, makeDate(lang))
   const modification = f(file.updated_at, makeDate(lang))
+  const hasCarbonCopy = has(file, 'metadata.carbonCopy')
+  const hasElectronicSafe = has(file, 'metadata.electronicSafe')
 
   return (
     <List>
@@ -70,6 +75,28 @@ const Informations = ({ file, t }) => {
           secondary={t('Viewer.panel.informations.modification')}
         />
       </ListItem>
+      {hasCarbonCopy && (
+        <ListItem ellipsis={false}>
+          <ListItemIcon>
+            <Icon icon={CarbonCopyIcon} />
+          </ListItemIcon>
+          <ListItemText
+            primary={t('Viewer.panel.certifications.carbonCopy.title')}
+            secondary={t('Viewer.panel.certifications.carbonCopy.caption')}
+          />
+        </ListItem>
+      )}
+      {hasElectronicSafe && (
+        <ListItem ellipsis={false}>
+          <ListItemIcon>
+            <Icon icon={SafeIcon} />
+          </ListItemIcon>
+          <ListItemText
+            primary={t('Viewer.panel.certifications.electronicSafe.title')}
+            secondary={t('Viewer.panel.certifications.electronicSafe.caption')}
+          />
+        </ListItem>
+      )}
     </List>
   )
 }
