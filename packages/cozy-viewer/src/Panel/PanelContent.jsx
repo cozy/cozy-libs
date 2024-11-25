@@ -33,9 +33,7 @@ const PanelContent = ({ file, isPublic, t }) => {
           elevation={2}
           square
         >
-          <Typography variant="h4" className="u-pv-1">
-            <PanelBlock file={file} />
-          </Typography>
+          <PanelBlock file={file} />
         </Paper>
       ))}
     </Stack>
