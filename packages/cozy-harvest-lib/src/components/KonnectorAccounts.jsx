@@ -2,6 +2,7 @@ import compose from 'lodash/flowRight'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useLocation } from 'react-router-dom'
 
 import { withClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
@@ -12,7 +13,6 @@ import Infos from 'cozy-ui/transpiled/react/deprecated/Infos'
 import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import KonnectorModalHeader from './KonnectorModalHeader'
-import withAdaptiveRouter from './hoc/withRouter'
 import { fetchAccountsFromTriggers } from '../connections/accounts'
 import { fetchTrigger } from '../connections/triggers'
 import logger from '../logger'
@@ -161,8 +161,10 @@ KonnectorAccounts.propTypes = {
   t: PropTypes.func.isRequired
 }
 
-export default compose(
-  withAdaptiveRouter,
-  translate(),
-  withClient
-)(KonnectorAccounts)
+const KonnectorAccountsWrapper = props => {
+  const location = useLocation()
+
+  return <KonnectorAccounts {...props} location={location} />
+}
+
+export default compose(translate(), withClient)(KonnectorAccountsWrapper)
