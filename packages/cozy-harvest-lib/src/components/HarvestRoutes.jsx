@@ -14,8 +14,8 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { DatacardOptions } from './Datacards/DatacardOptionsContext'
 import DialogContext from './DialogContext'
 import HarvestWrapper from './HarvestWrapper'
+import { InternalRoutes } from './InternalRoutes'
 import KonnectorAccounts from './KonnectorAccounts'
-import RoutesV6 from './Routes/RoutesV6'
 import { useKonnectorWithTriggers } from '../helpers/useKonnectorWithTriggers'
 
 const HarvestDialog = props => {
@@ -84,7 +84,7 @@ const HarvestRoutes = ({
             ) : (
               <KonnectorAccounts konnector={konnectorWithTriggers}>
                 {accountsAndTriggers => (
-                  <RoutesV6
+                  <InternalRoutes
                     konnectorRoot={konnectorRoot}
                     konnectorWithTriggers={konnectorWithTriggers}
                     accountsAndTriggers={accountsAndTriggers}
