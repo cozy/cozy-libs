@@ -1,5 +1,6 @@
 // @ts-check on
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
 import Button from 'cozy-ui/transpiled/react/Buttons'
@@ -15,12 +16,12 @@ function LaunchButton({
   isInError = false,
   isRunning = false,
   error,
-  historyAction,
   flow,
   account,
   intentsApi
 } = {}) {
   const { t } = useI18n()
+  const navigate = useNavigate()
 
   const { launch, konnector } = flow
 
@@ -29,13 +30,12 @@ function LaunchButton({
 
   const onSync = () => {
     if (konnectorPolicy.shouldLaunchRedirectToEdit(error)) {
-      return historyAction(
+      return navigate(
         konnectorRoot
           ? `${konnectorRoot}/accounts/${triggersModel.getAccountId(
               trigger
             )}/edit`
-          : '/edit',
-        'push'
+          : '/edit'
       )
     } else {
       launch({ autoSuccessTimer: false })

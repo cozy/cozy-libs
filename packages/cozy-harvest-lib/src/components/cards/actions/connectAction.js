@@ -7,10 +7,10 @@ import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-const connectAction = ({ isDisconnected, konnectorRoot, historyAction }) => ({
+const connectAction = ({ isDisconnected, konnectorRoot, navigate }) => ({
   name: 'connectAction',
   action: () => {
-    historyAction(`${konnectorRoot}/new`, 'push')
+    navigate(`${konnectorRoot}/new`)
   },
   displayCondition: () => isDisconnected,
   Component: forwardRef(function ConnectAction(props, ref) {

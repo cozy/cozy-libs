@@ -1,5 +1,6 @@
 import { render, waitFor, fireEvent } from '@testing-library/react'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { LaunchTriggerAlert } from './LaunchTriggerAlert'
 import AppLike from '../../../test/AppLike'
@@ -18,6 +19,11 @@ jest.mock('../../models/ConnectionFlow', () => {
 
   return mockConnectionFlow
 })
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: jest.fn()
+}))
 
 jest.mock('cozy-flags')
 
@@ -67,6 +73,10 @@ const reconnectErrorTriggerFixture = {
 
 describe('LaunchTriggerAlert', () => {
   const setup = ({ trigger, konnector }) => {
+    const navigateMock = jest.fn()
+
+    useNavigate.mockReturnValue(navigateMock)
+
     const client = {
       collection: () => {
         return {
@@ -83,18 +93,12 @@ describe('LaunchTriggerAlert', () => {
 
     const flow = new ConnectionFlow(client, trigger, konnector)
     flow.launch = jest.fn()
-    const historyAction = jest.fn()
     const root = render(
       <AppLike client={client}>
-        <LaunchTriggerAlert
-          t={key => key}
-          flow={flow}
-          historyAction={historyAction}
-          account={{}}
-        />
+        <LaunchTriggerAlert t={key => key} flow={flow} account={{}} />
       </AppLike>
     )
-    return { root, flow, historyAction, client }
+    return { root, flow, navigateMock, client }
   }
   // eslint-disable-next-line no-console
   let originalConsoleWarn = console.warn
@@ -142,13 +146,13 @@ describe('LaunchTriggerAlert', () => {
   })
 
   it('should redirect when there is an error which is solvable via reconnect', async () => {
-    const { root, flow, historyAction } = setup({
+    const { root, navigateMock, flow } = setup({
       trigger: reconnectErrorTriggerFixture,
       konnector: konnectorFixture
     })
     await waitFor(() => root.getByText('Synchronize'))
     fireEvent.click(root.getByText('Synchronize'))
-    expect(historyAction).toHaveBeenCalledWith('/edit', 'push')
+    expect(navigateMock).toHaveBeenCalledWith('/edit')
     expect(flow.launch).not.toHaveBeenCalled()
   })
 

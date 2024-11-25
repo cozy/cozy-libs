@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import WrenchCircleIcon from 'cozy-ui/transpiled/react/Icons/WrenchCircle'
@@ -19,7 +20,6 @@ import TriggerMaintenanceDescription from '../infos/TriggerMaintenanceDescriptio
  * @param {boolean} props.withDescription - Indicates if the alert has a description.
  * @param {Array} props.messages - The maintenance messages to display.
  * @param {string} props.label - The label for the alert.
- * @param {string} props.historyAction - The history action for the alert.
  * @param {string} props.konnectorRoot - The konnector root for the alert.
  * @param {string} props.trigger - The trigger for the alert.
  * @param {string} props.konnector - The konnector for the alert.
@@ -30,19 +30,20 @@ function MaintenanceAlert({
   withDescription,
   messages,
   label,
-  historyAction,
   konnectorRoot,
   trigger,
   konnector
 }) {
+  const navigate = useNavigate()
+
   const isKonnectorDisconnected = isDisconnected(konnector, trigger)
 
   const isBlock = !!withDescription
   const actions = [connectAction, configureAction]
   const options = {
-    historyAction,
     konnectorRoot,
     trigger,
+    navigate,
     isDisconnected: isKonnectorDisconnected
   }
 
@@ -68,7 +69,6 @@ MaintenanceAlert.propTypes = {
   withDescription: PropTypes.bool,
   messages: PropTypes.object,
   label: PropTypes.string,
-  historyAction: PropTypes.func,
   konnectorRoot: PropTypes.string,
   trigger: PropTypes.object,
   konnector: PropTypes.object

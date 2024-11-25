@@ -10,14 +10,12 @@ import { intentsApiProptype } from '../../helpers/proptypes'
 import { findKonnectorPolicy } from '../../konnector-policies'
 import { SUCCESS } from '../../models/flowEvents'
 import { useFlowState } from '../../models/withConnectionFlow'
-import withAdaptiveRouter from '../hoc/withRouter'
 import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
 
 export const LaunchTriggerAlert = ({
   flow,
   t,
   konnectorRoot,
-  historyAction,
   intentsApi,
   account,
   withMaintenanceDescription
@@ -58,7 +56,6 @@ export const LaunchTriggerAlert = ({
           maintenanceMessages={maintenanceMessages}
           account={account}
           konnectorRoot={konnectorRoot}
-          historyAction={historyAction}
           intentsApi={intentsApi}
           flow={flow}
         />
@@ -93,10 +90,9 @@ LaunchTriggerAlert.propTypes = {
   flow: PropTypes.object,
   t: PropTypes.func,
   konnectorRoot: PropTypes.string,
-  historyAction: PropTypes.func,
   withDescription: PropTypes.bool,
   intentsApi: intentsApiProptype,
   account: PropTypes.object
 }
 
-export default withAdaptiveRouter(LaunchTriggerAlert)
+export default LaunchTriggerAlert
