@@ -28,7 +28,6 @@ import withConnectionFlow from '../../models/withConnectionFlow'
 import { ConnectCard } from '../cards/ConnectCard'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
 import withLocales from '../hoc/withLocales'
-import withAdaptiveRouter from '../hoc/withRouter'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
@@ -439,7 +438,6 @@ AccountForm.defaultProps = {
 }
 
 export default compose(
-  withAdaptiveRouter,
   withConnectionFlow(),
   withLocales,
   withKonnectorLocales
