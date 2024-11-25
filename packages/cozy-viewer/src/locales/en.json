@@ -24,6 +24,16 @@
     "openWith": "Open with...",
     "openInOnlyOffice": "Open with Only Office",
     "panel": {
+      "informations": {
+        "format": {
+          "title": "%{format} Document",
+          "subtitle": "Format"
+        },
+        "size": "Size",
+        "location": "Location",
+        "creation": "Creation",
+        "modification": "Last modification"
+      },
       "certifications": {
         "carbonCopy": {
           "title": "Carbon Copy",
