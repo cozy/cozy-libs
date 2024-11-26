@@ -562,7 +562,7 @@
     "disconnected-help": "This account is disconnected. Your data has been kept. If you want to restart the synchronisation, please reconfigure your account with the \"Add a bank\" button."
   },
   "konnectorBlock": {
-    "account": "Customer account",
+    "open": "Open the website",
     "disconnected": "Disconnected",
     "inMaintenance": "In maintenance",
     "hasNewVersionAvailable": "New version available",

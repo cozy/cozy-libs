@@ -562,7 +562,7 @@
     "disconnected-help": "Vous avez déconnecté votre compte. Vous conservez l'historique de vos données déjà importées. Si vous souhaitez reprendre la connexion, reconfigurez votre compte depuis le bouton \"Ajouter une banque\"."
   },
   "konnectorBlock": {
-    "account": "Compte client",
+    "open": "Ouvrir le site",
     "disconnected": "Déconnecté",
     "inMaintenance": "En maintenance",
     "hasNewVersionAvailable": "Nouvelle version disponible",
