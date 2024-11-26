@@ -1,7 +1,7 @@
 import cx from 'classnames'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useClient } from 'cozy-client'
 import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
@@ -12,7 +12,6 @@ import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
-import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -36,16 +35,6 @@ const KonnectorBlock = ({ file }) => {
     file,
     'cozyMetadata.sourceAccountIdentifier'
   )
-
-  // TODO To be removed when UI's AppIcon use getIconURL from Cozy-Client
-  // instead of its own see https://github.com/cozy/cozy-ui/issues/1723
-  const fetchIcon = useCallback(() => {
-    return client.getStackClient().getIconURL({
-      type: 'konnector',
-      slug,
-      priority: 'registry'
-    })
-  }, [client, slug])
 
   useEffect(() => {
     const fetchKonnector = async ({
@@ -85,20 +74,15 @@ const KonnectorBlock = ({ file }) => {
 
   return (
     <List>
-      <ListItem
-        className="u-ph-2 u-h-3"
-        button
-        component="a"
-        href={link}
-        target="_blank"
-      >
+      <ListItem button component="a" href={link} target="_blank">
         <ListItemIcon>
           <AppIcon
             app={slug}
+            type="konnector"
+            priority="registry"
             className={cx({
               'u-filter-gray-100 u-o-50': iconStatus === 'disabled'
             })}
-            fetchIcon={fetchIcon}
           />
         </ListItemIcon>
         <ListItemText
@@ -109,20 +93,16 @@ const KonnectorBlock = ({ file }) => {
             get(message, 'color') && { color: message.color }
           }
         />
-        <ListItemSecondaryAction>
-          <Icon
-            icon={RightIcon}
-            className="u-mr-1"
-            color="var(--secondaryTextColor)"
-          />
-        </ListItemSecondaryAction>
+        <ListItemIcon>
+          <Icon icon={RightIcon} />
+        </ListItemIcon>
       </ListItem>
 
       <Divider component="li" />
 
-      <ListItem className="u-ph-2" button {...vendorLink}>
+      <ListItem button {...vendorLink}>
         <ListItemIcon>
-          <Icon icon={GlobeIcon} color="var(--primaryTextColor)" />
+          <Icon icon={GlobeIcon} />
         </ListItemIcon>
         <ListItemText
           primary={t('konnectorBlock.account')}
