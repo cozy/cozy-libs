@@ -10,9 +10,9 @@ import {
   buildKonnectorQueryBySlug,
   buildAccountQuery,
   buildTriggersQuery,
-  buildTriggersByIdQuery,
   buildAppsRegistryQueryBySlug
 } from './queries'
+import { fetchTrigger } from '../connections/triggers'
 import logger from '../logger'
 
 const formatKonnector = ({
@@ -57,13 +57,7 @@ const fetchDataFromState = async (client, query) => {
 
 const fetchKonnector = (client, query) => fetchDataFromState(client, query)
 
-const isAccountConnected = async ({
-  client,
-  sourceAccountIdentifier,
-  slug
-}) => {
-  const query = buildAccountQuery({ sourceAccountIdentifier, slug })
-  const account = await fetchDataFromState(client, query)
+const isAccountConnected = account => {
   return { accountConnected: !!account, sourceAccount: account._id }
 }
 
@@ -76,22 +70,13 @@ const isInMaintenance = async (client, slug) => {
   )
   return get(konnector, 'maintenance_activated', false)
 }
+
 /**
  *
- * @param {object} param
- * @param {CozyClient} param.client
- * @param {String} param.sourceAccount
- * @param {import('cozy-client/types/types').IOCozyKonnector} param.konnector
+ * @param {import('cozy-client/types/types').IOCozyTrigger} trigger
  * @returns
  */
-const isInError = async ({ client, sourceAccount, konnector }) => {
-  const query = buildTriggersQuery(sourceAccount, konnector)
-  const data = await fetchDataFromState(client, query)
-  const triggerId = get(data, 'id')
-
-  const triggersByIdQuery = buildTriggersByIdQuery(triggerId)
-  const trigger = await fetchDataFromState(client, triggersByIdQuery)
-
+const isInError = trigger => {
   const inError = get(trigger, 'current_state.status') === 'errored'
 
   if (!inError) {
@@ -210,6 +195,21 @@ const statusToFormatOptions = {
     fatalError({ t, slug, error, consoleMessage: 'This is a registry error' })
 }
 
+const fetchAccountAndTrigger = async ({
+  client,
+  konnector,
+  slug,
+  sourceAccountIdentifier
+}) => {
+  const accountQuery = buildAccountQuery({ sourceAccountIdentifier, slug })
+  const account = await fetchDataFromState(client, accountQuery)
+  const triggerQuery = buildTriggersQuery(account._id, konnector)
+  const triggerFromQuery = await fetchDataFromState(client, triggerQuery)
+  const trigger = await fetchTrigger(client, triggerFromQuery._id)
+
+  return { account, trigger }
+}
+
 const fetchKonnectorStatus = async ({
   client,
   slug,
@@ -221,36 +221,35 @@ const fetchKonnectorStatus = async ({
       buildKonnectorQueryBySlug(slug)
     )
 
+    const { account, trigger } = await konnectorBlock.fetchAccountAndTrigger({
+      client,
+      konnector,
+      slug,
+      sourceAccountIdentifier
+    })
+
     const { accountConnected, sourceAccount } =
-      await konnectorBlock.isAccountConnected({
-        client,
-        sourceAccountIdentifier,
-        slug: konnector.slug
-      })
+      konnectorBlock.isAccountConnected(account)
 
     if (!accountConnected) {
-      return { konnector, status: 'noAccountConnected' }
+      return { konnector, trigger, status: 'noAccountConnected' }
     }
 
     const inMaintenance = await konnectorBlock.isInMaintenance(client, slug)
     if (inMaintenance) {
-      return { konnector, status: 'inMaintenance' }
+      return { konnector, trigger, status: 'inMaintenance' }
     }
 
-    const { error } = await konnectorBlock.isInError({
-      client,
-      sourceAccount,
-      konnector
-    })
+    const { error } = await konnectorBlock.isInError(trigger)
     if (error) {
-      return { konnector, status: 'inError', error }
+      return { konnector, trigger, status: 'inError', error }
     }
 
     if (hasNewVersionAvailable(konnector)) {
-      return { konnector, status: 'hasNewVersionAvailable' }
+      return { konnector, trigger, status: 'hasNewVersionAvailable' }
     }
 
-    return { konnector, status: 'default', sourceAccount }
+    return { konnector, trigger, status: 'default', sourceAccount }
   } catch (error) {
     // The konnector can be uninstalled and returned 404
     if (error.status === 404) {
@@ -274,26 +273,30 @@ export const fetchKonnectorData = async ({
   slug,
   sourceAccountIdentifier
 }) => {
-  const { konnector, status, error, sourceAccount } =
+  const { konnector, trigger, status, error, sourceAccount } =
     await fetchKonnectorStatus({
       client,
       slug,
       sourceAccountIdentifier
     })
 
-  return statusToFormatOptions[status]({
-    client,
-    konnector,
-    slug,
-    t,
-    sourceAccount,
-    error
-  })
+  return {
+    ...statusToFormatOptions[status]({
+      client,
+      konnector,
+      slug,
+      t,
+      sourceAccount,
+      error
+    }),
+    trigger
+  }
 }
 
 const konnectorBlock = {
   fetchKonnectorData,
   fetchKonnector,
+  fetchAccountAndTrigger,
   isAccountConnected,
   isInError,
   isInMaintenance

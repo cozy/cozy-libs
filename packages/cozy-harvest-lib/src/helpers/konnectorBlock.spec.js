@@ -22,14 +22,18 @@ const setup = async ({
   isInError = { error: null },
   t = x => x
 } = {}) => {
-  jest.spyOn(konnectorBlock, 'isAccountConnected').mockResolvedValue({
+  jest.spyOn(konnectorBlock, 'fetchAccountAndTrigger').mockResolvedValue({
+    account: { _id: '012345' },
+    trigger: {}
+  })
+  jest.spyOn(konnectorBlock, 'isAccountConnected').mockReturnValue({
     accountConnected: isAccountConnected,
     sourceAccount: '012345'
   })
   jest
     .spyOn(konnectorBlock, 'isInMaintenance')
     .mockResolvedValue(isInMaintenance)
-  jest.spyOn(konnectorBlock, 'isInError').mockResolvedValue(isInError)
+  jest.spyOn(konnectorBlock, 'isInError').mockReturnValue(isInError)
 
   return await konnectorBlock.fetchKonnectorData({
     client,
@@ -65,6 +69,7 @@ describe('fetchKonnectorData', () => {
         href: 'https://www.pajemploi.urssaf.fr/',
         target: '_blank'
       },
+      trigger: {},
       iconStatus: undefined,
       message: undefined
     })
@@ -103,6 +108,7 @@ describe('fetchKonnectorData', () => {
         href: 'https://www.pajemploi.urssaf.fr/',
         target: '_blank'
       },
+      trigger: {},
       iconStatus: 'disabled',
       message: undefined
     })
@@ -119,6 +125,7 @@ describe('fetchKonnectorData', () => {
         href: 'https://www.pajemploi.urssaf.fr/',
         target: '_blank'
       },
+      trigger: {},
       iconStatus: 'disabled',
       message: { text: 'konnectorBlock.disconnected' }
     })
@@ -135,6 +142,7 @@ describe('fetchKonnectorData', () => {
         href: 'https://www.pajemploi.urssaf.fr/',
         target: '_blank'
       },
+      trigger: {},
       iconStatus: 'disabled',
       message: { text: 'konnectorBlock.inMaintenance' }
     })
@@ -155,6 +163,7 @@ describe('fetchKonnectorData', () => {
         href: 'https://www.pajemploi.urssaf.fr/',
         target: '_blank'
       },
+      trigger: {},
       iconStatus: 'disabled',
       message: { text: 'error.job.UNKNOWN_ERROR.title', color: 'error' }
     })
@@ -175,6 +184,7 @@ describe('fetchKonnectorData', () => {
         href: 'https://www.pajemploi.urssaf.fr/',
         target: '_blank'
       },
+      trigger: {},
       iconStatus: 'disabled',
       message: { text: 'error.job.UNKNOWN_ERROR.title', color: 'textSecondary' }
     })
@@ -196,6 +206,7 @@ describe('fetchKonnectorData', () => {
         href: 'https://www.pajemploi.urssaf.fr/',
         target: '_blank'
       },
+      trigger: {},
       iconStatus: 'disabled',
       message: {
         text: mockT('error.job.UNKNOWN_ERROR.title'),
@@ -223,6 +234,7 @@ describe('fetchKonnectorData', () => {
         href: 'https://www.pajemploi.urssaf.fr/',
         target: '_blank'
       },
+      trigger: {},
       iconStatus: undefined,
       message: {
         color: 'primary',
