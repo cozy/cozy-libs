@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.7.0...cozy-dataproxy-lib@1.8.0) (2024-11-26)
+
+
+### Features
+
+* Use forward and reverse tokenization ([8ac96fd](https://github.com/cozy/cozy-libs/commit/8ac96fd6593f7fcd9b3e22944e4e98b60608aa34))
+
+
+
+
+
 # [1.7.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.6.0...cozy-dataproxy-lib@1.7.0) (2024-11-26)
 
 
