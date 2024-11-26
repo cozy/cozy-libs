@@ -3,7 +3,7 @@ import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 
-import { useClient } from 'cozy-client'
+import { useClient, generateWebLink } from 'cozy-client'
 import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -35,6 +35,13 @@ const KonnectorBlock = ({ file }) => {
     file,
     'cozyMetadata.sourceAccountIdentifier'
   )
+  const storeLink = generateWebLink({
+    slug: 'store',
+    cozyUrl: client.getStackClient().uri,
+    subDomainType: client.getInstanceOptions().subdomain,
+    pathname: '/',
+    hash: `/discover/${slug}`
+  })
 
   useEffect(() => {
     const fetchKonnector = async ({
@@ -99,6 +106,18 @@ const KonnectorBlock = ({ file }) => {
       </ListItem>
 
       <Divider component="li" />
+
+      <ListItem button component="a" href={storeLink} target="_blank">
+        <ListItemIcon>
+          <AppIcon app="store" className="u-w-1 u-h-1" />
+        </ListItemIcon>
+        <ListItemText
+          primary={t('konnectorBlock.store.primary')}
+          secondary={t('konnectorBlock.store.secondary')}
+        />
+      </ListItem>
+
+      <Divider component="li" variant="inset" />
 
       <ListItem button {...vendorLink}>
         <ListItemIcon>
