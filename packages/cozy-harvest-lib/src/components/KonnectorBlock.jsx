@@ -18,6 +18,7 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import Markdown from './Markdown'
+import { makeLabel } from './cards/helpers'
 import withLocales from './hoc/withLocales'
 import { fetchKonnectorData } from '../helpers/konnectorBlock'
 
@@ -69,7 +70,8 @@ const KonnectorBlock = ({ file }) => {
     )
   }
 
-  const { name, link, vendorLink, iconStatus, message, fatalError } = konnector
+  const { name, link, vendorLink, iconStatus, message, trigger, fatalError } =
+    konnector
 
   if (fatalError) {
     return (
@@ -78,6 +80,13 @@ const KonnectorBlock = ({ file }) => {
       </Typography>
     )
   }
+
+  const label = makeLabel({
+    t,
+    konnector,
+    trigger,
+    isRunning: trigger.current_state.status === 'running'
+  })
 
   return (
     <List>
@@ -95,7 +104,7 @@ const KonnectorBlock = ({ file }) => {
         <ListItemText
           primary={name}
           primaryTypographyProps={{ variant: 'h6' }}
-          secondary={get(message, 'text')}
+          secondary={get(message, 'text', label)}
           secondaryTypographyProps={
             get(message, 'color') && { color: message.color }
           }

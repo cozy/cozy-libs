@@ -36,6 +36,7 @@ describe('KonnectorBlock', () => {
     fetchKonnectorData.mockResolvedValue({
       name: 'Pajemploi',
       link: 'https://links.mycozy.cloud/home/connected/pajemploi/accounts/012345?fallback=http%3A%2F%2Fcozy-home.tools%3A8080%2F%23%2Fconnected%2Fpajemploi%2Faccounts%2F012345',
+      trigger: { current_state: {} },
       vendorLink: {
         component: 'a',
         href: 'https://www.pajemploi.urssaf.fr/',
@@ -64,7 +65,8 @@ describe('KonnectorBlock', () => {
       expect(
         getByText('https://www.pajemploi.urssaf.fr/').closest('a')
       ).toHaveAttribute('href', 'https://www.pajemploi.urssaf.fr/')
-      expect(getByText(en.konnectorBlock.account))
+      expect(getByText(en.konnectorBlock.store.primary))
+      expect(getByText(en.konnectorBlock.store.secondary))
     })
   })
 
