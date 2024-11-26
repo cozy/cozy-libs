@@ -49,6 +49,7 @@ export class SearchEngine {
   isLocalSearch: boolean
 
   constructor(client: CozyClient) {
+    console.log('sarch engine')
     this.client = client
     this.searchIndexes = {} as SearchIndexes
 
