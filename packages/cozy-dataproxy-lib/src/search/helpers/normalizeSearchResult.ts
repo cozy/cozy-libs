@@ -4,7 +4,7 @@ import { IOCozyContact } from 'cozy-client/types/types'
 import { APPS_DOCTYPE, TYPE_DIRECTORY } from '../consts'
 import {
   CozyDoc,
-  EnrichedSearchResult,
+  RawSearchResult,
   isIOCozyApp,
   isIOCozyContact,
   isIOCozyFile,
@@ -13,7 +13,7 @@ import {
 
 export const normalizeSearchResult = (
   client: CozyClient,
-  searchResults: EnrichedSearchResult,
+  searchResults: RawSearchResult,
   query: string
 ): SearchResult => {
   const doc = cleanFilePath(searchResults.doc)

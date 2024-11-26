@@ -35,14 +35,10 @@ export const isSearchedDoctype = (
   return searchedDoctypes.includes(doctype)
 }
 
-export interface RawSearchResult {
+export interface RawSearchResult
+  extends FlexSearch.EnrichedDocumentSearchResultSetUnitResultUnit<CozyDoc> {
   fields: string[]
   doctype: SearchedDoctype
-  id: string
-}
-
-export interface EnrichedSearchResult extends RawSearchResult {
-  doc: CozyDoc
 }
 
 export interface SearchResult {

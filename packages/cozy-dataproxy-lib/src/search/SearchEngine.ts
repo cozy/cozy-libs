@@ -22,7 +22,7 @@ import {
   shouldKeepFile
 } from './helpers/normalizeFile'
 import { normalizeSearchResult } from './helpers/normalizeSearchResult'
-import { queryAllDocs, queryFilesForSearch, queryDocsByIds } from './queries'
+import { queryAllDocs, queryFilesForSearch } from './queries'
 import {
   CozyDoc,
   RawSearchResult,
@@ -32,14 +32,13 @@ import {
   SearchIndex,
   SearchIndexes,
   SearchResult,
-  isSearchedDoctype,
-  EnrichedSearchResult
+  isSearchedDoctype
 } from './types'
 
 const log = Minilog('🗂️ [Indexing]')
 
 interface FlexSearchResultWithDoctype
-  extends FlexSearch.SimpleDocumentSearchResultSetUnit {
+  extends FlexSearch.EnrichedDocumentSearchResultSetUnit<CozyDoc> {
   doctype: SearchedDoctype
 }
 
@@ -186,7 +185,8 @@ export class SearchEngine {
       minlength: 2,
       document: {
         id: '_id',
-        index: fieldsToIndex
+        index: fieldsToIndex,
+        store: true
       }
     })
 
@@ -316,7 +316,7 @@ export class SearchEngine {
     return this.incrementalIndexation(doctype, searchIndex)
   }
 
-  async search(query: string): Promise<SearchResult[]> {
+  search(query: string): SearchResult[] {
     if (!this.searchIndexes) {
       // TODO: What if the indexing is running but not finished yet?
       log.warn('[SEARCH] No search index available')
@@ -325,8 +325,7 @@ export class SearchEngine {
 
     const allResults = this.searchOnIndexes(query)
     const dedupResults = this.deduplicateAndFlatten(allResults)
-    const enrichedResults = await this.enrichResults(dedupResults)
-    const sortedResults = this.sortSearchResults(enrichedResults)
+    const sortedResults = this.sortSearchResults(dedupResults)
     const results = this.limitSearchResults(sortedResults)
 
     const normResults: SearchResult[] = []
@@ -360,25 +359,8 @@ export class SearchEngine {
       const FLEXSEARCH_LIMIT = 10000
       const indexResults = index.index.search(query, FLEXSEARCH_LIMIT, {
         limit: FLEXSEARCH_LIMIT,
-        enrich: false
+        enrich: true
       })
-      /*
-        Search result example:
-        [
-          {
-              "field": "displayName",
-              "result": [
-                  "604627c6bafee013ec5f27f7f72029f6"
-              ]
-          },
-          {
-              "field": "fullname",
-              "result": [
-                  "604627c6bafee013ec5f27f7f72029f6", "604627c6bafee013ec5f27f3f714568"
-              ]
-          }
-        ]
-      */
 
       const newResults = indexResults.map(res => ({
         ...res,
@@ -394,82 +376,30 @@ export class SearchEngine {
     searchResults: FlexSearchResultWithDoctype[]
   ): RawSearchResult[] {
     const combinedResults = searchResults.flatMap(item =>
-      item.result.map(id => ({
-        id: id.toString(), // Because of flexsearch Id typing
-        doctype: item.doctype,
-        field: item.field
-      }))
+      item.result.map(r => ({ ...r, field: item.field, doctype: item.doctype }))
     )
 
-    const resultMap = new Map<string, RawSearchResult>()
+    type MapItem = Omit<(typeof combinedResults)[number], 'field'> & {
+      fields: string[]
+    }
+    const resultMap = new Map<FlexSearch.Id[], MapItem>()
 
-    combinedResults.forEach(({ id, field, doctype }) => {
+    combinedResults.forEach(({ id, field, ...rest }) => {
       if (resultMap.has(id)) {
         resultMap.get(id)?.fields.push(field)
       } else {
-        resultMap.set(id, { id, fields: [field], doctype })
+        resultMap.set(id, { id, fields: [field], ...rest })
       }
     })
+
     return [...resultMap.values()]
-  }
-
-  async enrichResults(
-    results: RawSearchResult[]
-  ): Promise<EnrichedSearchResult[]> {
-    const enrichedResults = [...results] as EnrichedSearchResult[]
-
-    // Group by doctype
-    const resultsByDoctype = results.reduce<Record<string, string[]>>(
-      (acc, { id, doctype }) => {
-        if (!acc[doctype]) {
-          acc[doctype] = []
-        }
-        acc[doctype].push(id)
-        return acc
-      },
-      {}
-    )
-    let docs = [] as CozyDoc[]
-    for (const doctype of Object.keys(resultsByDoctype)) {
-      const ids = resultsByDoctype[doctype]
-
-      const startQuery = performance.now()
-      let queryDocs
-      // Query docs directly from store, for better performances
-      queryDocs = await queryDocsByIds(this.client, doctype, ids, {
-        fromStore: true
-      })
-      if (queryDocs.length < 1) {
-        log.warn('Ids not found on store: query PouchDB')
-        // This should not happen, but let's add a fallback to query Pouch in case the store
-        // returned nothing. This is not done by default, as querying PouchDB is much slower.
-        queryDocs = await queryDocsByIds(this.client, doctype, ids, {
-          fromStore: false
-        })
-      }
-      const endQuery = performance.now()
-      docs = docs.concat(queryDocs)
-      log.debug(`Query took ${(endQuery - startQuery).toFixed(2)} ms`)
-    }
-    for (const res of enrichedResults) {
-      const id = res.id?.toString() // Because of flexsearch Id typing
-      const doc = docs?.find(doc => doc._id === id)
-      if (!doc) {
-        log.error(`${id} is found in search but not in local data`)
-      } else {
-        res.doc = doc
-      }
-    }
-    return enrichedResults
   }
 
   compareStrings(str1: string, str2: string): number {
     return str1.localeCompare(str2, undefined, { numeric: true })
   }
 
-  sortSearchResults(
-    searchResults: EnrichedSearchResult[]
-  ): EnrichedSearchResult[] {
+  sortSearchResults(searchResults: RawSearchResult[]): RawSearchResult[] {
     return searchResults.sort((a, b) => {
       const doctypeComparison =
         DOCTYPE_ORDER[a.doctype] - DOCTYPE_ORDER[b.doctype]
@@ -498,7 +428,7 @@ export class SearchEngine {
     })
   }
 
-  sortFiles(aRes: EnrichedSearchResult, bRes: EnrichedSearchResult): number {
+  sortFiles(aRes: RawSearchResult, bRes: RawSearchResult): number {
     if (!isIOCozyFile(aRes.doc) || !isIOCozyFile(bRes.doc)) {
       return 0
     }
@@ -514,9 +444,7 @@ export class SearchEngine {
     return this.compareStrings(aRes.doc.name, bRes.doc.name)
   }
 
-  limitSearchResults(
-    searchResults: EnrichedSearchResult[]
-  ): EnrichedSearchResult[] {
+  limitSearchResults(searchResults: RawSearchResult[]): RawSearchResult[] {
     return searchResults.slice(0, LIMIT_DOCTYPE_SEARCH)
   }
 }
