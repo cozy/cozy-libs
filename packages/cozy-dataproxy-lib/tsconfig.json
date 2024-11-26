@@ -5,14 +5,17 @@
   ],
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "**/*.styl"
   ],
   "compilerOptions": {
     "allowJs": true,
+    "checkJs": false,
+    "outDir": "./dist",
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "declarationDir": "./dist",
-    "emitDeclarationOnly": true,
+    "emitDeclarationOnly": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
