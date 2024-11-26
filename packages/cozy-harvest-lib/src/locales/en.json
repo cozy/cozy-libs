@@ -563,6 +563,10 @@
   },
   "konnectorBlock": {
     "open": "Open the website",
+    "store": {
+      "primary": "See in Cozy Cloud store",
+      "secondary": "Access the description of this app"
+    },
     "disconnected": "Disconnected",
     "inMaintenance": "In maintenance",
     "hasNewVersionAvailable": "New version available",
