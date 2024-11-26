@@ -105,7 +105,7 @@ const KonnectorBlock = ({ file }) => {
           <Icon icon={GlobeIcon} />
         </ListItemIcon>
         <ListItemText
-          primary={t('konnectorBlock.account')}
+          primary={t('konnectorBlock.open')}
           secondary={get(vendorLink, 'href')}
         />
       </ListItem>
