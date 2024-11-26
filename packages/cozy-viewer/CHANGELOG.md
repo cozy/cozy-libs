@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@2.9.1...cozy-viewer@3.0.0) (2024-11-26)
+
+
+### Bug Fixes
+
+* **Viewer:** Remove useless typography wrapper around PanelBlock ([d15c875](https://github.com/cozy/cozy-libs/commit/d15c875c13632dbd3b469bc6886ff85a53f43228))
+
+
+### Features
+
+* **Viewer:** Add action menu on information block ([a696472](https://github.com/cozy/cozy-libs/commit/a6964729cb28dd6006aaaec108b5d91ae33be491))
+* **Viewer:** Add Informations block ([8c54678](https://github.com/cozy/cozy-libs/commit/8c546784a63da98a47c993091f73d2dd0e50a7fa))
+* **Viewer:** Move Certifications block inside Informations block ([c583e35](https://github.com/cozy/cozy-libs/commit/c583e3502d307f55920d99bd1674e2f7027b0f78))
+* **Viewer:** Upgrade cozy-ui ([76f7d4f](https://github.com/cozy/cozy-libs/commit/76f7d4f15f9b975834a92d570ad6030206e00261))
+
+
+### BREAKING CHANGES
+
+* **Viewer:** You must have `cozy-ui >= 113.4.0`
+
+
+
+
+
 ## [2.9.1](https://github.com/cozy/cozy-libs/compare/cozy-viewer@2.9.0...cozy-viewer@2.9.1) (2024-11-22)
 
 **Note:** Version bump only for package cozy-viewer
