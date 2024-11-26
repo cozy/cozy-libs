@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.7.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.6.1...cozy-sharing@16.7.0) (2024-11-26)
+
+
+### Features
+
+* Update text to CozyToCozy public banner ([3bd6ea6](https://github.com/cozy/cozy-libs/commit/3bd6ea61e712a763726c5c379e79bba549012a9c))
+
+
+
+
+
 ## 16.6.1 (2024-11-06)
 
 
