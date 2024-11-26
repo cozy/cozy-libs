@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.6.0...cozy-dataproxy-lib@1.7.0) (2024-11-26)
+
+
+### Features
+
+* Do not use flexsearch store ([104ea85](https://github.com/cozy/cozy-libs/commit/104ea850ef9b2bf5ae5094f5d10f81bf8872bcf1))
+
+
+
+
+
 # [1.6.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.5.0...cozy-dataproxy-lib@1.6.0) (2024-11-20)
 
 
