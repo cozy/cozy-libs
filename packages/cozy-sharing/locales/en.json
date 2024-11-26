@@ -56,8 +56,7 @@
     },
     "loadingError": "Loading error",
     "banner": {
-      "shared_from": "Shared from ![avatar](%{image}) %{name}'s cozy.",
-      "synchronise": "Synchronise this content in your cozy to be able to modify it or to keep it in case of cancellation of sharing.",
+      "shared_from": "The items below are displayed from ![avatar](%{image}) %{name}'s Cozy. You can add a link to this share in your Cozy",
       "whats_cozy": "Cozy is a secure digital home for all your data, hosted in France - ",
       "know_more": "More information",
       "sync_to_mine": "Synchronise in my Cozy",

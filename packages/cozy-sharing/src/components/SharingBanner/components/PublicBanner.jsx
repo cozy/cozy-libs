@@ -15,27 +15,11 @@ const HOME_LINK_HREF = 'https://manager.cozycloud.cc/cozy/create'
 const getPublicNameFromSharing = sharing =>
   sharing.attributes.members[0].public_name
 
-const PublicBannerCozyToCozyContent = ({
-  sharing,
-  isSharingShortcutCreated
-}) => {
+const PublicBannerCozyToCozyContent = ({ sharing }) => {
   const { t } = useI18n()
   const client = useClient()
   const name = getPublicNameFromSharing(sharing)
-  const text = isSharingShortcutCreated
-    ? t('Share.banner.synchronise')
-    : t('Share.banner.whats_cozy')
   const avatarURL = `${client.options.uri}/public/avatar?fallback=initials`
-  const knowMore = (
-    <a
-      href="https://cozy.io"
-      target="_blank"
-      className="u-link"
-      rel="noopener noreferrer"
-    >
-      {t('Share.banner.know_more')}
-    </a>
-  )
 
   const withAvatar = snarkdown(
     t('Share.banner.shared_from', {
@@ -45,22 +29,16 @@ const PublicBannerCozyToCozyContent = ({
   )
   const beginning = withAvatar.split('<img src')
   const translated = beginning[1].split('alt="avatar">')
+
   return (
-    <>
-      <span className={styles['bannermarkdown']}>
-        {beginning[0]}
-        <img src={avatarURL} alt="avatar" />
-        {translated[1]}
-      </span>
-      <span>
-        {' '}
-        {text} {knowMore}
-      </span>
-    </>
+    <span className={styles['bannermarkdown']}>
+      {beginning[0]}
+      <img src={avatarURL} alt="avatar" />
+      {translated[1]}
+    </span>
   )
 }
 PublicBannerCozyToCozyContent.propTypes = {
-  isSharingShortcutCreated: PropTypes.bool.isRequired,
   sharing: PropTypes.object.isRequired
 }
 
@@ -89,12 +67,7 @@ const SharingBannerCozyToCozy = ({
   return (
     <Banner
       bgcolor="var(--defaultBackgroundColor)"
-      text={
-        <PublicBannerCozyToCozyContent
-          isSharingShortcutCreated={isSharingShortcutCreated}
-          sharing={sharing}
-        />
-      }
+      text={<PublicBannerCozyToCozyContent sharing={sharing} />}
       buttonOne={
         <Button
           variant="text"

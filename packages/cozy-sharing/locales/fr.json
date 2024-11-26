@@ -56,8 +56,7 @@
     },
     "loadingError": "Erreur de chargement",
     "banner": {
-      "shared_from": "Partagé depuis le cozy de ![avatar](%{image}) %{name}.",
-      "synchronise": "Synchronisez ce contenu dans votre cozy pour pouvoir le modifier ou pour le conserver en cas d'annulation de partage.",
+      "shared_from": "Les éléments ci-dessous sont affichés depuis le Cozy de ![avatar](%{image}) %{name}. Vous pouvez ajouter un lien vers ce partage dans votre Cozy.",
       "whats_cozy": "Cozy est un domicile numérique sécurisé pour toutes vos données, hébergé en France - ",
       "know_more": "En savoir plus",
       "sync_to_mine": "Synchroniser dans mon Cozy",
