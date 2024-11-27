@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [30.8.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@30.7.1...cozy-harvest-lib@30.8.0) (2024-11-27)
+
+
+### Features
+
+* **Harvest:** Add last sync time in KonnectorBlock ([2642af1](https://github.com/cozy/cozy-libs/commit/2642af127192d187b40c0c7b2c424a6abf8fc0fa))
+* **Harvest:** Add link to store in KonnectorBlock ([ceb4608](https://github.com/cozy/cozy-libs/commit/ceb4608bd2c9a7aa2c34c41e58993ea799dc9a60))
+* **Harvest:** Adjust KonnectorBlock style ([94e413b](https://github.com/cozy/cozy-libs/commit/94e413bae050d4ebad71de4fd1728fe9f12e2112))
+* **Harvest:** Change wording in KonnectorBlock ([3b9cdfb](https://github.com/cozy/cozy-libs/commit/3b9cdfbba91ebe0c89071f75c12992ccd7c44ab8))
+
+
+
+
+
 ## [30.7.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@30.7.0...cozy-harvest-lib@30.7.1) (2024-11-26)
 
 **Note:** Version bump only for package cozy-harvest-lib
