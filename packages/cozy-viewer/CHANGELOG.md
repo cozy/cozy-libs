@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@4.0.0...cozy-viewer@5.0.0) (2024-11-27)
+
+
+### Features
+
+* **Viewer:** Add summary block ([ceebd77](https://github.com/cozy/cozy-libs/commit/ceebd77ba11c5033368fa891810abd0e8c5b391d))
+* **Viewer:** Upgrade cozy-ui ([1c9c1ba](https://github.com/cozy/cozy-libs/commit/1c9c1ba7314daa07967a02c4de6eb574d9908e48))
+
+
+### BREAKING CHANGES
+
+* **Viewer:** You must have `cozy-ui >= 113.7.0`
+
+
+
+
+
 # [4.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@3.0.1...cozy-viewer@4.0.0) (2024-11-27)
 
 
