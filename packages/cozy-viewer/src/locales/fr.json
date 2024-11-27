@@ -8,6 +8,8 @@
       "preparing": "Preparation de vos fichiers…"
     },
     "close": "Fermer",
+    "cancel": "Annuler",
+    "ok": "Ok",
     "download": "Télécharger",
     "complete": "Compléter le document",
     "noImage": "Aucune image",
@@ -24,6 +26,7 @@
     "openWith": "Ouvrir avec...",
     "openInOnlyOffice": "Ouvrir avec Only Office",
     "panel": {
+      "summary": "Résumé",
       "informations": {
         "format": {
           "title": "Document %{format}",

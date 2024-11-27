@@ -6,6 +6,7 @@ import KonnectorBlock from 'cozy-harvest-lib/dist/components/KonnectorBlock'
 
 import Informations from './Informations'
 import Qualification from './Qualification'
+import Summary from './Summary'
 
 /**
  * @typedef {Object} PanelBlockSpec
@@ -23,6 +24,10 @@ import Qualification from './Qualification'
  * @returns {PanelBlocksSpecs}
  */
 export const getPanelBlocksSpecs = (isPublic = false) => ({
+  summary: {
+    condition: () => true,
+    component: Summary
+  },
   qualifications: {
     condition: hasQualifications,
     component: Qualification

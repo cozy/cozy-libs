@@ -23,7 +23,7 @@ const QualificationListItemText = ({ primary, secondary, disabled }) => {
 }
 
 QualificationListItemText.propTypes = {
-  primary: PropTypes.string.isRequired,
+  primary: PropTypes.string,
   secondary: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired
 }
 
