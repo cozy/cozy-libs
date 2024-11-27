@@ -52,7 +52,7 @@
   "peerDependencies": {
     "cozy-client": ">=50.0.0",
     "cozy-device-helper": ">=2.0.0",
-    "cozy-harvest-lib": ">=30.2.0",
+    "cozy-harvest-lib": ">=30.8.0",
     "cozy-intent": ">=2.26.0",
     "cozy-logger": ">=1.9.0",
     "cozy-sharing": ">=14.1.0",
