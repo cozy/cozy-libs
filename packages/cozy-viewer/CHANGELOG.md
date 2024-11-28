@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.1.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@5.0.0...cozy-viewer@5.1.0) (2024-11-28)
+
+
+### Features
+
+* **Viewer:** Add header in location action on mobile ([b512315](https://github.com/cozy/cozy-libs/commit/b5123157d802040241d3803443af2594cf03775d))
+
+
+
+
+
 # [5.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@4.0.0...cozy-viewer@5.0.0) (2024-11-27)
 
 
