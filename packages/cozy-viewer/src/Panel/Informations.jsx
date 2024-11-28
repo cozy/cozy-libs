@@ -7,6 +7,7 @@ import {
   makeActions,
   viewInDrive
 } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
+import ActionsMenuMobileHeader from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuMobileHeader'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import CalendarIcon from 'cozy-ui/transpiled/react/Icons/Calendar'
@@ -86,7 +87,14 @@ const Informations = ({ file, t }) => {
           }}
           autoClose
           onClose={() => setShowMenu(false)}
-        />
+        >
+          <ActionsMenuMobileHeader>
+            <ListItemText
+              primary={t('Viewer.panel.informations.location')}
+              primaryTypographyProps={{ align: 'center', variant: 'h6' }}
+            />
+          </ActionsMenuMobileHeader>
+        </ActionsMenu>
       )}
       <ListItem>
         <ListItemIcon>
