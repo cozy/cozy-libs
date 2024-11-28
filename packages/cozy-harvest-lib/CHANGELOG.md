@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [31.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@30.8.3...cozy-harvest-lib@31.0.0) (2024-11-28)
+
+
+### Code Refactoring
+
+* Rename Routes to HarvestRoutes ([760608a](https://github.com/cozy/cozy-libs/commit/760608a4d8c4f42d5a5a1150d8bbbc89e08c3cd1))
+
+
+### Features
+
+* **AccountModalHeader:** Add a story to test the component ([dbe8d8a](https://github.com/cozy/cozy-libs/commit/dbe8d8a90649636572e8edf4f49519c98cf30b01))
+* Add react-router to work with storybook ([549ceab](https://github.com/cozy/cozy-libs/commit/549ceab2113faf041d110b953d255c49fd087192))
+* Remove adaptive router ([9db7559](https://github.com/cozy/cozy-libs/commit/9db755987117b455c6c2bb0cde9046c51ad7c2fa))
+* Remove react-router v3 package ([392c5c2](https://github.com/cozy/cozy-libs/commit/392c5c25affc2e78872ceb4d6f65831f8c3c816a))
+* Remove RoutesV4 to only use RouteV6 ([6205897](https://github.com/cozy/cozy-libs/commit/620589750d2afc1716aae2ac1ef38a4a16cfcbf1))
+
+
+### BREAKING CHANGES
+
+* You must have `react-router-dom >= 6.14.2` 
+* `Routes` has been renamed `HarvestRoutes`. You should changed the import `import { Routes } from 'cozy-harvest-lib'` to `import { HarvestRoutes } from 'cozy-harvest-lib'`
+
+
+
+
+
 ## [30.8.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@30.8.2...cozy-harvest-lib@30.8.3) (2024-11-28)
 
 **Note:** Version bump only for package cozy-harvest-lib
