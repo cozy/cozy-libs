@@ -1,5 +1,62 @@
 <h1 align="center">Rsbuild Config Cozy App</h1>
 
+## What's rsbuild-config-cozy-app?
+
+An opinionated configurations for [Rsbuild](https://rsbuild.dev/) to build Cozy Applications.
+
+The project should follow the structure of Cozy Applications. You can get an example inside [cozy-app-template](https://github.com/cozy/cozy-app-template)
+
+To complete the build, you can add :
+
+- eslint with eslint-cozy-app configuration to lint your application
+- jest for your unit test
+
+## Quick Start
+
+To install:
+
+```bash
+yarn add @rsbuild/core rsbuild-config-cozy-app -D
+```
+
+Create a config file named `rsbuild.config.mjs` with the following content:
+
+```javascript
+import { defineConfig } from '@rsbuild/core'
+import { getRsbuildConfig } from 'rsbuild-config-cozy-app'
+
+const config = getRsbuildConfig({
+  title: 'Your application name',
+  hasServices: true
+})
+
+export default defineConfig(config)
+```
+
+Add `scripts` inside your `package.json` file as follows:
+
+```json
+"scripts": {
+  "build": "rsbuild build",
+  "watch": "rsbuild build --watch",
+  "analyze": "RSDOCTOR=true yarn build"
+}
+```
+
+You can now access your application using the [cozy-stack](https://github.com/cozy/cozy-stack)
+
+## Best Practices
+
+- Keep extensions into import for all the file that's are not `.js` or `.ts`, especially for `.styl` files.
+- Place any files that need to be included in the build package but are not used in the React build inside the root `public` folder. This ensures that these files are copied into a assets folder. If it needs to be used inside a public context you just need to add
+  ```
+    "/assets": {
+      "folder": "/assets",
+      "public": true
+    }
+  ```
+- Use a common alias like `@/` for `./src`. You can put it into your `tsconfig.json`
+
 ## Migrating from cozy-scripts
 
 ### Install dependencies
@@ -7,7 +64,7 @@
 Run the following command to install the necessary dependencies:
 
 ```bash
-yarn add @rsbuild/core rsbuild-config-cozy-app --dev
+yarn add @rsbuild/core rsbuild-config-cozy-app -D
 ```
 
 ### Create a configuration file
@@ -100,9 +157,3 @@ The package `identity-obj-proxy` is used inside jest config to mock css module f
 ```bash
 yarn add identity-obj-proxy --dev
 ```
-
-## Best Practices
-
-- Keep file extensions, especially for `.styl` files.
-- Place any files that need to be included in the build package but are not used in React inside the root `public` folder. These files will be copied to the public folder, avoiding duplicated assets for public builds.
-- Use a general alias like `@/`.
