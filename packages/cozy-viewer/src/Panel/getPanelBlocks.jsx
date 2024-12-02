@@ -6,6 +6,7 @@ import KonnectorBlock from 'cozy-harvest-lib/dist/components/KonnectorBlock'
 
 import Informations from './Informations'
 import Qualification from './Qualification'
+import Sharing from './Sharing'
 import Summary from './Summary'
 
 /**
@@ -39,6 +40,10 @@ export const getPanelBlocksSpecs = (isPublic = false) => ({
   informations: {
     condition: () => true,
     component: Informations
+  },
+  sharing: {
+    condition: () => true,
+    component: Sharing
   }
 })
 
