@@ -10,7 +10,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import styles from '../../styles/recipient.styl'
 
-const MemberRecipientStatus = ({ status, isMe, instance }) => {
+const MemberRecipientStatus = ({ status, isMe, instance, typographyProps }) => {
   const { t } = useI18n()
 
   const isSendingEmail = !isMe && status === 'mail-not-sent'
@@ -37,7 +37,11 @@ const MemberRecipientStatus = ({ status, isMe, instance }) => {
         <Icon icon={icon} size={10} />
       </Img>
       <Bd>
-        <Typography variant="caption" color="textSecondary">
+        <Typography
+          variant="caption"
+          color="textSecondary"
+          {...typographyProps}
+        >
           {text}
         </Typography>
       </Bd>
