@@ -27,7 +27,7 @@ const LinkRecipient = props => {
     <RecipientConfirm
       recipientConfirmationData={recipientConfirmationData}
       verifyRecipient={verifyRecipient}
-    ></RecipientConfirm>
+    />
   ) : (
     <LinkRecipientPermissions {...props} className="u-flex-shrink-0" />
   )
