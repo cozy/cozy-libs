@@ -11417,15 +11417,15 @@ cozy-pouch-link@^50.0.0, cozy-pouch-link@^50.3.1:
     pouchdb-browser "^7.2.2"
     pouchdb-find "^7.2.2"
 
-cozy-sharing@14.1.0:
-  version "14.1.0"
-  resolved "https://registry.yarnpkg.com/cozy-sharing/-/cozy-sharing-14.1.0.tgz#60aa6751a15afba846130d9668de2fb550091b59"
-  integrity sha512-jOcSkKup5yHRx5jZAnj1fw/CXc0Px7mlIvt4ShDnU2xs7BmAlRHRTbUQVlmiDZ+qcMN4lfBsg/eE1NKWiPzo3g==
+cozy-sharing@^16.8.0:
+  version "16.8.0"
+  resolved "https://registry.yarnpkg.com/cozy-sharing/-/cozy-sharing-16.8.0.tgz#a0b68f073801ccdd2f04dff58313e8e9539a99f6"
+  integrity sha512-NL9n9+hfpMKsV20A7MhT9QOFJ73OPlNHVuVVx4jIsfk90Hu2M7b6dqlskU9FITd+vaoas+ccq5M6SaNkl6HMKw==
   dependencies:
     "@cozy/minilog" "^1.0.0"
     classnames "^2.2.6"
-    cozy-device-helper "^3.0.0"
-    cozy-doctypes "^1.90.0"
+    cozy-device-helper "^3.7.1"
+    cozy-doctypes "^1.97.1"
     lodash "^4.17.19"
     react-autosuggest "^10.1.0"
     react-tooltip "^3.11.1"
