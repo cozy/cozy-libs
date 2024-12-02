@@ -1,4 +1,8 @@
+import React from 'react'
+
 import getPanelBlocks, { getPanelBlocksSpecs } from './getPanelBlocks'
+
+jest.mock('./Sharing', () => () => <div data-testid="SharingBlock" />)
 
 jest.mock('cozy-harvest-lib/dist/components/KonnectorBlock', () => jest.fn())
 const block1Component = jest.fn()
@@ -75,6 +79,10 @@ describe('getPanelBlocksSpecs', () => {
         component: expect.anything()
       },
       informations: {
+        condition: expect.any(Function),
+        component: expect.anything()
+      },
+      sharing: {
         condition: expect.any(Function),
         component: expect.anything()
       }

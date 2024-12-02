@@ -27,6 +27,7 @@
     "openInOnlyOffice": "Ouvrir avec Only Office",
     "panel": {
       "summary": "Résumé",
+      "sharing": "Qui a accès ?",
       "informations": {
         "format": {
           "title": "Document %{format}",
