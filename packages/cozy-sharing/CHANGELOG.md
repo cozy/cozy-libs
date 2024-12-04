@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.9.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.8.0...cozy-sharing@16.9.0) (2024-12-04)
+
+
+### Features
+
+* **Sharing:** Change style of PublicBanner wording ([ddc8ce3](https://github.com/cozy/cozy-libs/commit/ddc8ce3cfcb1e3cfbdf17f5a7b8d9c8da997b5b0))
+
+
+
+
+
 # [16.8.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.7.0...cozy-sharing@16.8.0) (2024-12-02)
 
 
