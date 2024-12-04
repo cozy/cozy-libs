@@ -97,7 +97,7 @@ ActionMenuWrapper.propTypes = {
   file: PropTypes.object,
   optionFile: PropTypes.shape({
     name: PropTypes.string,
-    value: PropTypes.string
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   })
 }
 
