@@ -1,5 +1,12 @@
 import PropTypes from 'prop-types'
-import React, { useRef, useState, createRef, useMemo, useEffect } from 'react'
+import React, {
+  Fragment,
+  useRef,
+  useState,
+  createRef,
+  useMemo,
+  useEffect
+} from 'react'
 
 import {
   isExpiringSoon,
@@ -7,6 +14,7 @@ import {
   KNOWN_BILLS_ATTRIBUTES_NAMES,
   getMetadataQualificationType
 } from 'cozy-client/dist/models/paper'
+import Divider from 'cozy-ui/transpiled/react/Divider'
 import List from 'cozy-ui/transpiled/react/List'
 
 import ActionMenuWrapper from './ActionMenuWrapper'
@@ -14,6 +22,7 @@ import QualificationListItemContact from './QualificationListItemContact'
 import QualificationListItemDate from './QualificationListItemDate'
 import QualificationListItemInformation from './QualificationListItemInformation'
 import QualificationListItemOther from './QualificationListItemOther'
+import QualificationListItemQualification from './QualificationListItemQualification'
 import ExpirationAlert from '../components/ExpirationAlert'
 import { withViewerLocales } from '../hoc/withViewerLocales'
 
@@ -51,18 +60,21 @@ const Qualification = ({ file }) => {
 
   const formattedMetadataQualification = useMemo(() => {
     const relatedBills = file.bills?.data?.[0]
+    const formattedMetadataQualification = formatMetadataQualification(
+      metadata
+    ).sort((a, b) =>
+      a.name === 'qualification' ? -1 : b.name === 'qualification' ? 1 : 0
+    ) // move "qualification" metadata in first position
 
     if (relatedBills) {
       const formattedBillsMetadata = KNOWN_BILLS_ATTRIBUTES_NAMES.map(
         attrName => ({ name: attrName, value: relatedBills[attrName] })
       )
 
-      return formatMetadataQualification(metadata).concat(
-        formattedBillsMetadata
-      )
+      return formattedMetadataQualification.concat(formattedBillsMetadata)
     }
 
-    return formatMetadataQualification(metadata)
+    return formattedMetadataQualification
   }, [metadata, file.bills?.data])
 
   useEffect(() => {
@@ -76,24 +88,37 @@ const Qualification = ({ file }) => {
       {isExpiringSoon(file) && !isExpirationAlertHidden(file) && (
         <ExpirationAlert file={file} />
       )}
-      <List className="u-pv-1">
+      <QualificationListItemQualification
+        file={file}
+        ref={actionBtnRef.current[0]}
+        formattedMetadataQualification={formattedMetadataQualification[0]}
+        toggleActionsMenu={val =>
+          toggleActionsMenu(0, formattedMetadataQualification[0].name, val)
+        }
+      />
+      <List>
         {formattedMetadataQualification.map((meta, idx) => {
           const { name } = meta
+          if (name === 'qualification') return null
+
           const metadataQualificationType = getMetadataQualificationType(name)
           const QualificationListItemComp =
             ComponentFromMetadataQualificationType[metadataQualificationType]
 
+          const isLastItem = idx === formattedMetadataQualification.length - 1
+
           return (
-            <QualificationListItemComp
-              key={idx}
-              file={file}
-              ref={actionBtnRef.current[idx]}
-              formattedMetadataQualification={meta}
-              toggleActionsMenu={val => toggleActionsMenu(idx, name, val)}
-            />
+            <Fragment key={idx}>
+              <QualificationListItemComp
+                file={file}
+                ref={actionBtnRef.current[idx]}
+                formattedMetadataQualification={meta}
+                toggleActionsMenu={val => toggleActionsMenu(idx, name, val)}
+              />
+              {!isLastItem && <Divider variant="inset" />}
+            </Fragment>
           )
         })}
-
         {optionFile.name && (
           <ActionMenuWrapper
             onClose={hideActionsMenu}
