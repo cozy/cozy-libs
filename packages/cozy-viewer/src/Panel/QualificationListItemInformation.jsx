@@ -3,17 +3,42 @@ import React, { forwardRef } from 'react'
 
 import {
   getTranslatedNameForInformationMetadata,
-  formatInformationMetadataValue
+  formatInformationMetadataValue,
+  KNOWN_INFORMATION_METADATA_NAMES
 } from 'cozy-client/dist/models/paper'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
+import BellIcon from 'cozy-ui/transpiled/react/Icons/Bell'
+import ContractIcon from 'cozy-ui/transpiled/react/Icons/Contract'
 import Dots from 'cozy-ui/transpiled/react/Icons/Dots'
+import EuroIcon from 'cozy-ui/transpiled/react/Icons/Euro'
+import GlobeIcon from 'cozy-ui/transpiled/react/Icons/Globe'
+import NumberIcon from 'cozy-ui/transpiled/react/Icons/Number'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
+import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
 import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import QualificationListItemText from './QualificationListItemText'
+
+const KNOWN_INFORMATION_METADATA_ICONS = [
+  NumberIcon,
+  NumberIcon,
+  GlobeIcon,
+  EuroIcon,
+  ContractIcon,
+  EuroIcon,
+  EuroIcon,
+  NumberIcon,
+  NumberIcon,
+  BellIcon
+]
+
+const makeInformationMetadataIcon = name =>
+  KNOWN_INFORMATION_METADATA_ICONS[
+    KNOWN_INFORMATION_METADATA_NAMES.findIndex(el => el === name)
+  ]
 
 const QualificationListItemInformation = forwardRef(
   ({ formattedMetadataQualification, file, toggleActionsMenu }, ref) => {
@@ -30,12 +55,16 @@ const QualificationListItemInformation = forwardRef(
       name,
       qualificationLabel
     })
+    const InformationIcon = makeInformationMetadataIcon(name)
 
     const titleComponent =
       formattedTitle === name ? <MidEllipsis text={name} /> : formattedTitle
 
     return (
-      <ListItem className="u-pl-2 u-pr-3">
+      <ListItem>
+        <ListItemIcon>
+          <Icon icon={InformationIcon} />
+        </ListItemIcon>
         <QualificationListItemText
           primary={titleComponent}
           secondary={formattedValue}

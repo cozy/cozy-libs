@@ -8,7 +8,9 @@ import {
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Dots from 'cozy-ui/transpiled/react/Icons/Dots'
+import FileIcon from 'cozy-ui/transpiled/react/Icons/File'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
+import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
 import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
@@ -31,7 +33,10 @@ const QualificationListItemOther = forwardRef(
     })
 
     return (
-      <ListItem className="u-pl-2 u-pr-3">
+      <ListItem>
+        <ListItemIcon>
+          <Icon icon={FileIcon} />
+        </ListItemIcon>
         <QualificationListItemText
           primary={formattedTitle}
           secondary={<MidEllipsis text={formattedValue} />}

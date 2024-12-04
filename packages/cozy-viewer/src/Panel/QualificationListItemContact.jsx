@@ -8,7 +8,9 @@ import {
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Dots from 'cozy-ui/transpiled/react/Icons/Dots'
+import PeopleIcon from 'cozy-ui/transpiled/react/Icons/People'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
+import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
@@ -36,7 +38,7 @@ const QualificationListItemContact = ({ file }) => {
 
   if (isLoadingContacts) {
     return (
-      <ListItem className="u-pl-2 u-pr-3">
+      <ListItem>
         <Spinner color="var(--secondaryTextColor)" />
       </ListItem>
     )
@@ -51,7 +53,10 @@ const QualificationListItemContact = ({ file }) => {
 
   return (
     <>
-      <ListItem className="u-ph-2">
+      <ListItem>
+        <ListItemIcon>
+          <Icon icon={PeopleIcon} />
+        </ListItemIcon>
         <QualificationListItemText
           primary={formattedTitle}
           secondary={formattedValue}
