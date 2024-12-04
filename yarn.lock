@@ -11417,20 +11417,6 @@ cozy-pouch-link@^50.0.0, cozy-pouch-link@^50.3.1:
     pouchdb-browser "^7.2.2"
     pouchdb-find "^7.2.2"
 
-cozy-sharing@^16.8.0:
-  version "16.8.0"
-  resolved "https://registry.yarnpkg.com/cozy-sharing/-/cozy-sharing-16.8.0.tgz#a0b68f073801ccdd2f04dff58313e8e9539a99f6"
-  integrity sha512-NL9n9+hfpMKsV20A7MhT9QOFJ73OPlNHVuVVx4jIsfk90Hu2M7b6dqlskU9FITd+vaoas+ccq5M6SaNkl6HMKw==
-  dependencies:
-    "@cozy/minilog" "^1.0.0"
-    classnames "^2.2.6"
-    cozy-device-helper "^3.7.1"
-    cozy-doctypes "^1.97.1"
-    lodash "^4.17.19"
-    react-autosuggest "^10.1.0"
-    react-tooltip "^3.11.1"
-    snarkdown "^2.0.0"
-
 cozy-stack-client@13.20.2, cozy-stack-client@^13.20.2:
   version "13.20.2"
   resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-13.20.2.tgz#2ff55f93dca809b7ec82ec0afc88a3bc041383c1"
@@ -11722,10 +11708,10 @@ cozy-ui@^113.1.0:
     react-swipeable-views "^0.13.3"
     rooks "^5.11.2"
 
-cozy-ui@^113.7.0:
-  version "113.7.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-113.7.0.tgz#11b897adc8158bc0c1ab36409312b0b817c88869"
-  integrity sha512-7TTBVWOh2km8s/Q7suJl9WGbU7Ebx0fQdwzPjfYod8PkBXHn1G02ndJCkqcNSfA0VE4oD4JS+BGfbK9ZVck/dA==
+cozy-ui@^113.8.0:
+  version "113.8.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-113.8.0.tgz#bb5fa11b86e2b51b92973a517554c048edbcfa77"
+  integrity sha512-VNfLwjxZ9SRRzg0FvJ80AkduTx+5wZkCKu4OheWLrtaX0VB9BVm4EB89jYplL7orO/fEEPvDdOjhZk1zUlHTBw==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@material-ui/core" "4.12.3"

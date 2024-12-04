@@ -31,7 +31,7 @@
     "cozy-intent": "^2.29.1",
     "cozy-logger": "^1.16.1",
     "cozy-sharing": "^16.9.0",
-    "cozy-ui": "^113.7.0",
+    "cozy-ui": "^113.8.0",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.6",
     "enzyme-to-json": "3.6.2",
@@ -56,7 +56,7 @@
     "cozy-intent": ">=2.26.0",
     "cozy-logger": ">=1.9.0",
     "cozy-sharing": ">=16.8.0",
-    "cozy-ui": ">=113.7.0",
+    "cozy-ui": ">=113.8.0",
     "react": ">=16.12.0",
     "react-dom": ">=16.12.0"
   }
