@@ -21,7 +21,7 @@ describe('PublicBanner', () => {
     useI18n.mockReturnValue({
       t: (localeToTranslate, options) => {
         if (localeToTranslate === 'Share.banner.shared_from') {
-          return `Shared from ![avatar](${options.image}) ${options.name}'s cozy.`
+          return `Shared from ![avatar](${options.image}) <strong>${options.name}</strong>'s cozy.`
         }
         return localeToTranslate
       }
@@ -41,7 +41,7 @@ describe('PublicBanner', () => {
 
     // Then
     expect(container.querySelector('.bannermarkdown').innerHTML).toEqual(
-      `Shared from <img src="http://cozy.localhost:8080/public/avatar?fallback=initials" alt="avatar"> &lt;a href="https://evil.com"&gt;Click me!&lt;/a&gt;'s cozy.`
+      `Shared from <img src="http://cozy.localhost:8080/public/avatar?fallback=initials" alt="avatar"> <strong>&lt;a href="https://evil.com"&gt;Click me!&lt;/a&gt;</strong>'s cozy.`
     )
   })
 })

@@ -28,13 +28,15 @@ const PublicBannerCozyToCozyContent = ({ sharing }) => {
     })
   )
   const beginning = withAvatar.split('<img src')
-  const translated = beginning[1].split('alt="avatar">')
+  const [userBoldName, ending] = beginning[1]
+    .split('<strong>')[1]
+    .split('</strong>')
 
   return (
     <span className={styles['bannermarkdown']}>
       {beginning[0]}
-      <img src={avatarURL} alt="avatar" />
-      {translated[1]}
+      <img src={avatarURL} alt="avatar" /> <strong>{userBoldName}</strong>
+      {ending}
     </span>
   )
 }
