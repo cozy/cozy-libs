@@ -50,14 +50,13 @@
     width 100%
     height 100%
 
-.viewer-controls.--expanded .viewer-nav
-    margin-top 0
-    width 40%
-
-.viewer-controls--display-content-top
     +medium-screen()
         justify-content flex-start
         padding-top $toolbarHeightMedium - $viewerMarginTopMedium + 1rem
+
+.viewer-controls.--expanded .viewer-nav
+    margin-top 0
+    width 40%
 
 .viewer-toolbar
     position absolute

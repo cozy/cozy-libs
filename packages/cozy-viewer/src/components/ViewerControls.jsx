@@ -11,7 +11,6 @@ import { infoWidth } from './InformationPanel'
 import Navigation from './Navigation'
 import Toolbar from './Toolbar'
 import styles from './styles.styl'
-import { isValidForPanel } from '../helpers'
 import { toolbarPropsPropType } from '../proptypes'
 
 const ACTIONS_HIDE_DELAY = 3000
@@ -125,14 +124,10 @@ class ViewerControls extends Component {
     const { showToolbar, showClose, toolbarRef, showFilePath } = toolbarProps
     const { hidden } = this.state
 
-    const shouldDisplayContentTop = isValidForPanel({ file })
-
     return (
       <div
         className={cx(styles['viewer-controls'], {
           [styles['viewer-controls--expanded']]: expanded,
-          [styles['viewer-controls--display-content-top']]:
-            shouldDisplayContentTop,
           [classes.viewerControlsWithInfo]: showInfoPanel
         })}
         ref={wrapped => {

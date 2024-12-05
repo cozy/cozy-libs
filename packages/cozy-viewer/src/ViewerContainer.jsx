@@ -12,7 +12,6 @@ import { useExtendI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import Viewer from './Viewer'
 import ViewerInformationsWrapper from './ViewerInformationsWrapper'
-import { isValidForPanel } from './helpers'
 import { locales } from './locales'
 import { toolbarPropsPropType } from './proptypes'
 import { ActionMenuProvider } from './providers/ActionMenuProvider'
@@ -37,8 +36,7 @@ const ViewerContainer = props => {
   const fileCount = files.length
   const hasPrevious = currentIndex > 0
   const hasNext = currentIndex < fileCount - 1
-  const validForPanel =
-    isValidForPanel({ file: currentFile }) && isDesktop && !disablePanel
+  const validForPanel = isDesktop && !disablePanel
 
   const componentsPropsWithDefault = {
     ...componentsProps,
