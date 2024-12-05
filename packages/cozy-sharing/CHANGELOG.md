@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.11.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.10.0...cozy-sharing@16.11.0) (2024-12-05)
+
+
+### Features
+
+* **Sharing:** Expose new component to show owner recipient ([bcc6302](https://github.com/cozy/cozy-libs/commit/bcc6302abf0190259e86a9d327aa0d46e39b693b))
+
+
+
+
+
 # [16.10.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.9.0...cozy-sharing@16.10.0) (2024-12-05)
 
 
