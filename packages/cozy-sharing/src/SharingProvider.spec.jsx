@@ -9,10 +9,12 @@ import SharingContext from './context'
 import { receiveSharings } from './state'
 import AppLike from '../test/AppLike'
 
-const AppWrapper = ({ children, client }) => {
+const AppWrapper = ({ children, client, isPublic }) => {
   return (
     <AppLike client={client}>
-      <SharingProvider client={client}>{children}</SharingProvider>
+      <SharingProvider client={client} isPublic={isPublic}>
+        {children}
+      </SharingProvider>
     </AppLike>
   )
 }
@@ -62,7 +64,11 @@ describe('SharingProvider', () => {
   client.isLogged = true
 
   beforeEach(() => {
-    jest.spyOn(client, 'collection')
+    jest.spyOn(client, 'collection').mockReturnValue({
+      findByDoctype: jest.fn().mockResolvedValue({ data: [] }),
+      findLinksByDoctype: jest.fn().mockResolvedValue({ data: [] }),
+      findApps: jest.fn().mockResolvedValue({ data: [] })
+    })
     jest
       .spyOn(SharingProvider.prototype, 'fetchAllSharings')
       .mockReturnValue(Promise.resolve())
@@ -86,6 +92,17 @@ describe('SharingProvider', () => {
     client.emit('plugin:realtime:login')
     expect(client.plugins.realtime.subscribe).toHaveBeenCalled()
     expect(SharingProvider.prototype.fetchAllSharings).toHaveBeenCalled()
+  })
+
+  it("should not call collection's methods but always subscribe to the realtime when isPublic is true", () => {
+    client.isLogged = true
+    render(<AppWrapper client={client} isPublic={true} />)
+
+    expect(SharingProvider.prototype.fetchAllSharings).toHaveBeenCalled()
+    expect(client.plugins.realtime.subscribe).toHaveBeenCalled()
+    expect(client.collection().findByDoctype).not.toHaveBeenCalled()
+    expect(client.collection().findLinksByDoctype).not.toHaveBeenCalled()
+    expect(client.collection().findApps).not.toHaveBeenCalled()
   })
 })
 
