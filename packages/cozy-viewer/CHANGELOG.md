@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@6.0.1...cozy-viewer@7.0.0) (2024-12-05)
+
+
+### Features
+
+* **Viewer:** Add icons on qualification items ([b723037](https://github.com/cozy/cozy-libs/commit/b7230373edb395d06640992591fbd0f4320f1555))
+* **Viewer:** Add new qualification item ([4f76701](https://github.com/cozy/cozy-libs/commit/4f767014ad3faf2023fbbcb52915357efee0c41b))
+* **Viewer:** Upgrade cozy-ui ([806f310](https://github.com/cozy/cozy-libs/commit/806f3100af004654e0246d38d9937c4a015f0428))
+
+
+### BREAKING CHANGES
+
+* **Viewer:** You must have `cozy-ui >= 113.8.0`
+
+
+
+
+
 ## [6.0.1](https://github.com/cozy/cozy-libs/compare/cozy-viewer@6.0.0...cozy-viewer@6.0.1) (2024-12-04)
 
 **Note:** Version bump only for package cozy-viewer
