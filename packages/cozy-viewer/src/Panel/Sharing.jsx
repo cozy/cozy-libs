@@ -7,7 +7,6 @@ import {
   MemberRecipientLite,
   LinkRecipientLite
 } from 'cozy-sharing'
-import Divider from 'cozy-ui/transpiled/react/Divider'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import List from 'cozy-ui/transpiled/react/List'
@@ -34,23 +33,20 @@ const Sharing = ({ file, t }) => {
 
   return (
     <>
-      <List>
-        <ListItem button onClick={() => setShowModal(true)}>
-          <ListItemText
-            primary={
-              <>
-                {t('Viewer.panel.sharing')}
-                {!allLoaded && <Spinner className="u-ml-half" noMargin />}
-              </>
-            }
-            primaryTypographyProps={{ variant: 'h6' }}
-          />
-          <ListItemIcon>
-            <Icon icon={RightIcon} />
-          </ListItemIcon>
-        </ListItem>
-      </List>
-      <Divider />
+      <ListItem size="large" divider button onClick={() => setShowModal(true)}>
+        <ListItemText
+          primary={
+            <>
+              {t('Viewer.panel.sharing')}
+              {!allLoaded && <Spinner className="u-ml-half" noMargin />}
+            </>
+          }
+          primaryTypographyProps={{ variant: 'h6' }}
+        />
+        <ListItemIcon>
+          <Icon icon={RightIcon} />
+        </ListItemIcon>
+      </ListItem>
       <List>
         <LinkRecipientLite permissions={permissions} link={link} />
         {recipients.map(recipient => (
