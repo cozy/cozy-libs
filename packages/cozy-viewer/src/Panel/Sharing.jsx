@@ -5,6 +5,7 @@ import {
   ShareModal,
   useSharingContext,
   MemberRecipientLite,
+  OwnerRecipientDefaultLite,
   LinkRecipientLite
 } from 'cozy-sharing'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -49,18 +50,23 @@ const Sharing = ({ file, t }) => {
       </ListItem>
       <List>
         <LinkRecipientLite permissions={permissions} link={link} />
-        {recipients.map(recipient => (
-          <MemberRecipientLite
-            key={recipient.index}
-            recipient={recipient}
-            isOwner={isOwner(file._id)}
-          />
-        ))}
+        {recipients.length > 0 ? (
+          recipients.map(recipient => (
+            <MemberRecipientLite
+              key={recipient.index}
+              recipient={recipient}
+              isOwner={isOwner(file._id)}
+            />
+          ))
+        ) : (
+          <OwnerRecipientDefaultLite />
+        )}
       </List>
       {showModal && (
         <ShareModal
           document={file}
           documentType="Files"
+          sharingDesc=""
           onClose={() => setShowModal(false)}
         />
       )}
