@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@7.0.2...cozy-viewer@8.0.0) (2024-12-05)
+
+
+### Bug Fixes
+
+* **Viewer:** It crashed for file without metadata ([85a25dd](https://github.com/cozy/cozy-libs/commit/85a25dd14d929f5326ba8d963e5929a2a3126771))
+* **Viewer:** Last qualification divider wasn't displayed correctly ([2c24870](https://github.com/cozy/cozy-libs/commit/2c2487066866510f2352cb3a8aac32a0a730beb1))
+* **Viewer:** Now hide qualification list if not relevant ([8deaa4a](https://github.com/cozy/cozy-libs/commit/8deaa4a4dd64c0cddeabde9218c2f8e356dbc52e))
+* **Viewer:** Now qualification divider use correct tag ([09f29d1](https://github.com/cozy/cozy-libs/commit/09f29d1e6d35fc759e3b45ebc2c25f2e7e4f7c9a))
+* **Viewer:** Now show correctly the owner in sharing block ([b88e24a](https://github.com/cozy/cozy-libs/commit/b88e24a707f619e24c6bb174107ffdb6d6f28668))
+* **Viewer:** Sharing item style in panel wasn't correct ([7f76212](https://github.com/cozy/cozy-libs/commit/7f76212bfaf7a2f4b51c4001597367592c141456))
+
+
+### Features
+
+* **Viewer:** Show always panel, not just for certified/connected files ([9bc42e7](https://github.com/cozy/cozy-libs/commit/9bc42e76735ff4da9e10c3a71c5c0e4443f2bfe5))
+* **Viewer:** Upgrade peerDep ([1e199ec](https://github.com/cozy/cozy-libs/commit/1e199ecbfd9dacc59224b70106963a212ef8b2b1))
+
+
+### BREAKING CHANGES
+
+* **Viewer:** You must have `cozy-sharing >= 16.11.0` and `cozy-harvest-lib >= 31.0.5`
+
+
+
+
+
 ## [7.0.2](https://github.com/cozy/cozy-libs/compare/cozy-viewer@7.0.1...cozy-viewer@7.0.2) (2024-12-05)
 
 **Note:** Version bump only for package cozy-viewer
