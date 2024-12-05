@@ -9,7 +9,7 @@ import TextField from 'cozy-ui/transpiled/react/TextField'
 import { withViewerLocales } from '../hoc/withViewerLocales'
 
 const SummaryDialog = ({ file, t, onClose }) => {
-  const [value, setValue] = useState(file.metadata.description)
+  const [value, setValue] = useState(file.metadata?.description)
   const [busy, setBusy] = useState(false)
   const client = useClient()
 

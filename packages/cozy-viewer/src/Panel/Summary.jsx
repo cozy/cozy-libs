@@ -31,7 +31,7 @@ const Summary = ({ file, t }) => {
   const { showAlert } = useAlert()
 
   const label = t('Viewer.panel.summary')
-  const value = file.metadata.description
+  const value = file.metadata?.description
   const actions = makeActions([copyToClipboard, editAttribute])
 
   const handleClick = async () => {
