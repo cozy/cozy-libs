@@ -26,14 +26,6 @@ const QualificationListItemContact = ({ file }) => {
     name: '',
     value: ''
   })
-
-  const hideActionsMenu = () => setOptionFile({ name: '', value: '' })
-  const toggleActionsMenu = (name, value) =>
-    setOptionFile(prev => {
-      if (prev.value) return { name: '', value: '' }
-      return { name, value }
-    })
-
   const { contacts, isLoadingContacts } = useReferencedContactName(file)
 
   if (isLoadingContacts) {
@@ -44,12 +36,20 @@ const QualificationListItemContact = ({ file }) => {
     )
   }
 
-  const formattedTitle = getTranslatedNameForContact({ lang })
   const formattedValue = formatContactValue(contacts)
 
-  if (!isLoadingContacts && !formattedValue) {
+  if (!formattedValue) {
     return null
   }
+
+  const formattedTitle = getTranslatedNameForContact({ lang })
+
+  const hideActionsMenu = () => setOptionFile({ name: '', value: '' })
+  const toggleActionsMenu = (name, value) =>
+    setOptionFile(prev => {
+      if (prev.value) return { name: '', value: '' }
+      return { name, value }
+    })
 
   return (
     <>
