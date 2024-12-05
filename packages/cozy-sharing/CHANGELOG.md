@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.10.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.9.0...cozy-sharing@16.10.0) (2024-12-05)
+
+
+### Features
+
+* **Sharing:** Add isPublic prop to SharingProvider ([d08862d](https://github.com/cozy/cozy-libs/commit/d08862d65fd4caaabfd29f116ade0607528345a9))
+
+
+
+
+
 # [16.9.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.8.0...cozy-sharing@16.9.0) (2024-12-04)
 
 
