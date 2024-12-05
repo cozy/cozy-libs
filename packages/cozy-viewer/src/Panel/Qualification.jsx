@@ -12,6 +12,7 @@ import {
   isExpiringSoon,
   formatMetadataQualification,
   KNOWN_BILLS_ATTRIBUTES_NAMES,
+  formatContactValue,
   getMetadataQualificationType
 } from 'cozy-client/dist/models/paper'
 import Divider from 'cozy-ui/transpiled/react/Divider'
@@ -26,6 +27,7 @@ import QualificationListItemQualification from './QualificationListItemQualifica
 import { makeHideDivider } from './helpers'
 import ExpirationAlert from '../components/ExpirationAlert'
 import { withViewerLocales } from '../hoc/withViewerLocales'
+import useReferencedContactName from '../hooks/useReferencedContactName'
 
 const ComponentFromMetadataQualificationType = {
   contact: QualificationListItemContact,
@@ -47,6 +49,8 @@ const Qualification = ({ file }) => {
     name: '',
     value: ''
   })
+  const { contacts } = useReferencedContactName(file)
+  const formattedContactValue = formatContactValue(contacts)
 
   const hideActionsMenu = () => {
     setOptionFile({ id: '', name: '', value: '' })
@@ -84,6 +88,9 @@ const Qualification = ({ file }) => {
     )
   }, [formattedMetadataQualification])
 
+  const showMetadataList =
+    formattedMetadataQualification.length !== 2 || formattedContactValue // we have at minimum "qualification" and "contact" item
+
   return (
     <>
       {isExpiringSoon(file) && !isExpirationAlertHidden(file) && (
@@ -97,41 +104,43 @@ const Qualification = ({ file }) => {
           toggleActionsMenu(0, formattedMetadataQualification[0].name, val)
         }
       />
-      <List>
-        {formattedMetadataQualification.map((meta, idx) => {
-          const { name } = meta
-          if (name === 'qualification') return null
+      {showMetadataList && (
+        <List>
+          {formattedMetadataQualification.map((meta, idx) => {
+            const { name } = meta
+            if (name === 'qualification') return null
 
-          const metadataQualificationType = getMetadataQualificationType(name)
-          const QualificationListItemComp =
-            ComponentFromMetadataQualificationType[metadataQualificationType]
+            const metadataQualificationType = getMetadataQualificationType(name)
+            const QualificationListItemComp =
+              ComponentFromMetadataQualificationType[metadataQualificationType]
 
-          const hideDivider = makeHideDivider(
-            formattedMetadataQualification,
-            idx
-          )
+            const hideDivider = makeHideDivider(
+              formattedMetadataQualification,
+              idx
+            )
 
-          return (
-            <Fragment key={idx}>
-              <QualificationListItemComp
-                file={file}
-                ref={actionBtnRef.current[idx]}
-                formattedMetadataQualification={meta}
-                toggleActionsMenu={val => toggleActionsMenu(idx, name, val)}
-              />
-              {!hideDivider && <Divider variant="inset" />}
-            </Fragment>
-          )
-        })}
-        {optionFile.name && (
-          <ActionMenuWrapper
-            onClose={hideActionsMenu}
-            file={file}
-            optionFile={optionFile}
-            ref={actionBtnRef.current[optionFile.id]}
-          />
-        )}
-      </List>
+            return (
+              <Fragment key={idx}>
+                <QualificationListItemComp
+                  file={file}
+                  ref={actionBtnRef.current[idx]}
+                  formattedMetadataQualification={meta}
+                  toggleActionsMenu={val => toggleActionsMenu(idx, name, val)}
+                />
+                {!hideDivider && <Divider variant="inset" />}
+              </Fragment>
+            )
+          })}
+          {optionFile.name && (
+            <ActionMenuWrapper
+              onClose={hideActionsMenu}
+              file={file}
+              optionFile={optionFile}
+              ref={actionBtnRef.current[optionFile.id]}
+            />
+          )}
+        </List>
+      )}
     </>
   )
 }
