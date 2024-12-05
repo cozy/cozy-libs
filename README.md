@@ -26,3 +26,7 @@
 ## Note
 
 - To run unit tests of a package, as some packages may be required for testing, you must first build the cozy-libs packages by running `yarn build`.
+
+## Deleted packages
+
+- cozy-mespapiers-lib : lib has been merged again in [mespapiers](https://github.com/cozy/mespapiers) in 2024. Last commit where it exists in this repo: `b49bd1f6b71446235b2c5a702a13584765787ce8`. [Removal PR](https://github.com/cozy/cozy-libs/pull/2641).
