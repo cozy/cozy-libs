@@ -127,7 +127,7 @@ const Qualification = ({ file }) => {
                   formattedMetadataQualification={meta}
                   toggleActionsMenu={val => toggleActionsMenu(idx, name, val)}
                 />
-                {!hideDivider && <Divider variant="inset" />}
+                {!hideDivider && <Divider component="li" variant="inset" />}
               </Fragment>
             )
           })}
