@@ -89,8 +89,15 @@ const KonnectorBlock = ({ file }) => {
   })
 
   return (
-    <List>
-      <ListItem button component="a" href={link} target="_blank">
+    <>
+      <ListItem
+        size="large"
+        button
+        divider
+        component="a"
+        href={link}
+        target="_blank"
+      >
         <ListItemIcon>
           <AppIcon
             app={slug}
@@ -113,31 +120,30 @@ const KonnectorBlock = ({ file }) => {
           <Icon icon={RightIcon} />
         </ListItemIcon>
       </ListItem>
+      <List>
+        <ListItem button component="a" href={storeLink} target="_blank">
+          <ListItemIcon>
+            <AppIcon app="store" className="u-w-1 u-h-1" />
+          </ListItemIcon>
+          <ListItemText
+            primary={t('konnectorBlock.store.primary')}
+            secondary={t('konnectorBlock.store.secondary')}
+          />
+        </ListItem>
 
-      <Divider component="li" />
+        <Divider component="li" variant="inset" />
 
-      <ListItem button component="a" href={storeLink} target="_blank">
-        <ListItemIcon>
-          <AppIcon app="store" className="u-w-1 u-h-1" />
-        </ListItemIcon>
-        <ListItemText
-          primary={t('konnectorBlock.store.primary')}
-          secondary={t('konnectorBlock.store.secondary')}
-        />
-      </ListItem>
-
-      <Divider component="li" variant="inset" />
-
-      <ListItem button {...vendorLink}>
-        <ListItemIcon>
-          <Icon icon={GlobeIcon} />
-        </ListItemIcon>
-        <ListItemText
-          primary={t('konnectorBlock.open')}
-          secondary={get(vendorLink, 'href')}
-        />
-      </ListItem>
-    </List>
+        <ListItem button {...vendorLink}>
+          <ListItemIcon>
+            <Icon icon={GlobeIcon} />
+          </ListItemIcon>
+          <ListItemText
+            primary={t('konnectorBlock.open')}
+            secondary={get(vendorLink, 'href')}
+          />
+        </ListItem>
+      </List>
+    </>
   )
 }
 
