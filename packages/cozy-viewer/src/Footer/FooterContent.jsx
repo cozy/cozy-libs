@@ -10,7 +10,6 @@ import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 import BottomSheetContent from './BottomSheetContent'
 import { extractChildrenCompByName } from './helpers'
 import PrintButton from '../components/PrintButton'
-import { isValidForPanel } from '../helpers'
 
 const FooterButtons = ({
   file,
@@ -56,36 +55,22 @@ const FooterContent = ({ file, toolbarRef, children, isPublic }) => {
     mediumHeightRatio: isPublic ? undefined : 0.5
   }
 
-  if (isValidForPanel({ file })) {
-    return (
-      <BottomSheet
-        toolbarProps={toolbarProps}
-        portalProps={{ disablePortal: true }}
-        settings={bottomSheetSettings}
-      >
-        <BottomSheetHeader
-          className={cx('u-ph-1 u-pb-1', styles.bottomSheetHeader)}
-        >
-          <FooterButtons
-            file={file}
-            FooterActionButtonsWithFile={FooterActionButtonsWithFile}
-          />
-        </BottomSheetHeader>
-        <BottomSheetContent file={file} isPublic={isPublic} />
-      </BottomSheet>
-    )
-  }
-
-  // If `FooterActionButtons` hasn't children
-  if (!FooterActionButtonsWithFile) return null
-
   return (
-    <div className={styles.footer}>
-      <FooterButtons
-        file={file}
-        FooterActionButtonsWithFile={FooterActionButtonsWithFile}
-      />
-    </div>
+    <BottomSheet
+      toolbarProps={toolbarProps}
+      portalProps={{ disablePortal: true }}
+      settings={bottomSheetSettings}
+    >
+      <BottomSheetHeader
+        className={cx('u-ph-1 u-pb-1', styles.bottomSheetHeader)}
+      >
+        <FooterButtons
+          file={file}
+          FooterActionButtonsWithFile={FooterActionButtonsWithFile}
+        />
+      </BottomSheetHeader>
+      <BottomSheetContent file={file} isPublic={isPublic} />
+    </BottomSheet>
   )
 }
 

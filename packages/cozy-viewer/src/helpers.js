@@ -2,8 +2,6 @@ import { generateWebLink } from 'cozy-client'
 import {
   isEncrypted,
   isFromKonnector,
-  hasQualifications,
-  hasCertifications,
   normalize
 } from 'cozy-client/dist/models/file'
 import {
@@ -29,22 +27,6 @@ export const getCurrentModel = metadataName => {
  * @property {string} id - id of the document
  * @property {string} type - doctype of the document
  */
-
-/**
- * Checks if the file matches one of the following conditions:
- * - Is certified
- * - Is Qualified
- * - From a Connector
- *
- * @param {object} param
- * @param {IOCozyFile} param.file
- * @returns {boolean}
- */
-export const isValidForPanel = ({ file }) => {
-  return (
-    hasCertifications(file) || hasQualifications(file) || isFromKonnector(file)
-  )
-}
 
 export const isFileEncrypted = file => isEncrypted(file)
 
