@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { withClient } from 'cozy-client'
+import minilog from 'cozy-minilog'
 
 import SharingContext from './context'
 import { fetchNextPermissions } from './fetchNextPermissions'
@@ -40,6 +41,7 @@ import reducer, {
   getSharedParentPath
 } from './state'
 
+const log = minilog('SharingProvider')
 const SHARING_DOCTYPE = 'io.cozy.sharings'
 const PERMISSION_DOCTYPE = 'io.cozy.permissions'
 
@@ -83,6 +85,7 @@ export class SharingProvider extends Component {
       refresh: this.fetchAllSharings,
       hasWriteAccess: this.hasWriteAccess
     }
+    this.isPublic = props.isPublic ?? false
     this.realtime = null
     this.isInitialized = false
 
@@ -175,6 +178,11 @@ export class SharingProvider extends Component {
   }
 
   async fetchAllSharings() {
+    if (this.isPublic) {
+      // In public mode, the promise below fails because the methods do not have the required permissions.
+      log.warn('fetchAllSharings is not allowed in public context.')
+      return
+    }
     const { doctype, client } = this.props
     const [sharings, permissions, apps] = await Promise.all([
       this.sharingCol.findByDoctype(doctype),
