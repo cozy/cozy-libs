@@ -41,3 +41,19 @@ export const makeSize = bytes => {
  * @returns {string}
  */
 export const makePath = file => file.path?.replace(`/${file.name}`, '')
+
+/**
+ *
+ * @param {array} formattedMetadataQualification
+ * @param {number} idx
+ * @returns {boolean}
+ */
+export const makeHideDivider = (formattedMetadataQualification, idx) => {
+  const lastItem = formattedMetadataQualification.at(-1)
+  const isLastItem = idx === formattedMetadataQualification.length - 1
+  const isSecondLastItem = idx === formattedMetadataQualification.length - 2
+  const hideDivider =
+    isLastItem || (isSecondLastItem && lastItem.name === 'contact')
+
+  return hideDivider
+}

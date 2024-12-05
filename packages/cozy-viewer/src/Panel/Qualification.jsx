@@ -23,6 +23,7 @@ import QualificationListItemDate from './QualificationListItemDate'
 import QualificationListItemInformation from './QualificationListItemInformation'
 import QualificationListItemOther from './QualificationListItemOther'
 import QualificationListItemQualification from './QualificationListItemQualification'
+import { makeHideDivider } from './helpers'
 import ExpirationAlert from '../components/ExpirationAlert'
 import { withViewerLocales } from '../hoc/withViewerLocales'
 
@@ -105,7 +106,10 @@ const Qualification = ({ file }) => {
           const QualificationListItemComp =
             ComponentFromMetadataQualificationType[metadataQualificationType]
 
-          const isLastItem = idx === formattedMetadataQualification.length - 1
+          const hideDivider = makeHideDivider(
+            formattedMetadataQualification,
+            idx
+          )
 
           return (
             <Fragment key={idx}>
@@ -115,7 +119,7 @@ const Qualification = ({ file }) => {
                 formattedMetadataQualification={meta}
                 toggleActionsMenu={val => toggleActionsMenu(idx, name, val)}
               />
-              {!isLastItem && <Divider variant="inset" />}
+              {!hideDivider && <Divider variant="inset" />}
             </Fragment>
           )
         })}
