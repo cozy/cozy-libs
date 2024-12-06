@@ -6,6 +6,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { getIconWithlabel, openExternalLink } from './helpers/sharings'
+import withLocales from './hoc/withLocales'
 
 /**
  * OpenSharingLinkButton component renders a Button
@@ -16,7 +17,7 @@ import { getIconWithlabel, openExternalLink } from './helpers/sharings'
  * @param {boolean} [props.isSharingShortcutCreated=false] - Indicates if a sharing shortcut has been created. (default false)
  * @param {Object} [props] - Additional props to be passed to the Button component.
  */
-export const OpenSharingLinkButton = ({
+const OpenSharingLinkButton = ({
   link,
   isSharingShortcutCreated = false,
   ...props
@@ -47,3 +48,5 @@ OpenSharingLinkButton.propTypes = {
   link: PropTypes.string,
   isSharingShortcutCreated: PropTypes.bool
 }
+
+export default withLocales(OpenSharingLinkButton)

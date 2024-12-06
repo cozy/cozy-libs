@@ -1,11 +1,14 @@
 import React from 'react'
 
 import { I18n, translate } from 'cozy-ui/transpiled/react/providers/I18n'
+import { getI18n } from 'cozy-ui/transpiled/react/providers/I18n/helpers'
 
 const locales = {
   en: require(`../../locales/en.json`),
   fr: require(`../../locales/fr.json`)
 }
+
+export const getActionsI18n = () => getI18n(undefined, lang => locales[lang])
 
 /**
  * Adds cozy-sharing translations in the React context
