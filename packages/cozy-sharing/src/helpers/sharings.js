@@ -75,7 +75,7 @@ export const getIconWithlabel = ({ link, isSharingShortcutCreated, t }) => {
     return { icon: ToTheCloudIcon, label: t('Share.create-cozy') }
   }
   if (!isSharingShortcutCreated) {
-    return { icon: CloudPlusOutlinedIcon, label: t('toolbar.add_to_mine') }
+    return { icon: CloudPlusOutlinedIcon, label: t('Share.banner.add_to_mine') }
   }
-  return { icon: SyncIcon, label: t('toolbar.menu_sync_cozy') }
+  return { icon: SyncIcon, label: t('Share.banner.sync_to_mine') }
 }

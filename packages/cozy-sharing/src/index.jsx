@@ -27,6 +27,6 @@ export { useSharingInfos } from './components/SharingBanner/hooks/useSharingInfo
 export { ConfirmTrustedRecipientsDialog } from './ConfirmTrustedRecipientsDialog'
 export { ShareButtonWithRecipients } from './ShareButtonWithRecipients'
 export { DOCUMENT_TYPE } from './helpers/documentType'
-export { OpenSharingLinkButton } from './OpenSharingLinkButton'
-export { OpenSharingLinkFabButton } from './OpenSharingLinkFabButton'
+export { default as OpenSharingLinkButton } from './OpenSharingLinkButton'
+export { default as OpenSharingLinkFabButton } from './OpenSharingLinkFabButton'
 export { openSharingLink } from './actions/openSharingLink'

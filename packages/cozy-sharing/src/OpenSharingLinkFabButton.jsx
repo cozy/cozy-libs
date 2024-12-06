@@ -5,6 +5,7 @@ import { ExtendableFab } from 'cozy-ui/transpiled/react/Fab'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { getIconWithlabel, openExternalLink } from './helpers/sharings'
+import withLocales from './hoc/withLocales'
 
 const makeStyles = customStyle => {
   const { position, right, bottom, ...rest } = customStyle
@@ -25,7 +26,7 @@ const makeStyles = customStyle => {
  * @param {boolean} [props.isSharingShortcutCreated=false] - Indicates if a sharing shortcut has been created. (default false)
  * @param {Object} [props] - Additional props to be passed to the ExtendableFab component.
  */
-export const OpenSharingLinkFabButton = ({
+const OpenSharingLinkFabButton = ({
   link,
   isSharingShortcutCreated = false,
   ...props
@@ -61,3 +62,5 @@ OpenSharingLinkFabButton.propTypes = {
   link: PropTypes.string.isRequired,
   isSharingShortcutCreated: PropTypes.bool
 }
+
+export default withLocales(OpenSharingLinkFabButton)
