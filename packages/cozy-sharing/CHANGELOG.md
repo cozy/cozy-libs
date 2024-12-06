@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.13.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.12.0...cozy-sharing@16.13.0) (2024-12-06)
+
+
+### Features
+
+* Use Sharing locales instead apps ([55265c9](https://github.com/cozy/cozy-libs/commit/55265c9366e8ee98664503a6a62500e4ec986606))
+
+
+
+
+
 # [16.12.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.11.0...cozy-sharing@16.12.0) (2024-12-06)
 
 
