@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.12.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.11.0...cozy-sharing@16.12.0) (2024-12-06)
+
+
+### Features
+
+* Add openSharingLink action ([de97967](https://github.com/cozy/cozy-libs/commit/de979676b43ab73e412683895437f108740ab5e2))
+* Add OpenSharingLinkButton & OpenSharingLinkFabButton components ([ffc603c](https://github.com/cozy/cozy-libs/commit/ffc603c798954b5ebffb4a860c82f231765bda8d))
+* Upgrade cozy-ui to 113.5.0 ([9bbd797](https://github.com/cozy/cozy-libs/commit/9bbd797056e085f00d1d867641abb12695fbf52b))
+
+
+
+
+
 # [16.11.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.10.0...cozy-sharing@16.11.0) (2024-12-05)
 
 
