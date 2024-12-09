@@ -1,7 +1,4 @@
-import {
-  isFromKonnector,
-  hasQualifications
-} from 'cozy-client/dist/models/file'
+import { isFromKonnector } from 'cozy-client/dist/models/file'
 import KonnectorBlock from 'cozy-harvest-lib/dist/components/KonnectorBlock'
 
 import Informations from './Informations'
@@ -30,7 +27,7 @@ export const getPanelBlocksSpecs = (isPublic = false) => ({
     component: Summary
   },
   qualifications: {
-    condition: hasQualifications,
+    condition: () => true,
     component: Qualification
   },
   konnector: {

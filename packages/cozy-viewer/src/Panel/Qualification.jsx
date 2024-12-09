@@ -8,6 +8,7 @@ import React, {
   useEffect
 } from 'react'
 
+import { hasQualifications } from 'cozy-client/dist/models/file'
 import {
   isExpiringSoon,
   formatMetadataQualification,
@@ -24,6 +25,7 @@ import QualificationListItemDate from './QualificationListItemDate'
 import QualificationListItemInformation from './QualificationListItemInformation'
 import QualificationListItemOther from './QualificationListItemOther'
 import QualificationListItemQualification from './QualificationListItemQualification'
+import QualificationListItemQualificationEmpty from './QualificationListItemQualificationEmpty'
 import { makeHideDivider } from './helpers'
 import ExpirationAlert from '../components/ExpirationAlert'
 import { withViewerLocales } from '../hoc/withViewerLocales'
@@ -89,21 +91,22 @@ const Qualification = ({ file }) => {
   }, [formattedMetadataQualification])
 
   const showMetadataList =
-    formattedMetadataQualification.length !== 2 || formattedContactValue // we have at minimum "qualification" and "contact" item
+    hasQualifications(file) &&
+    (formattedMetadataQualification.length !== 2 || formattedContactValue) // we have at minimum "qualification" and "contact" item
 
   return (
     <>
       {isExpiringSoon(file) && !isExpirationAlertHidden(file) && (
         <ExpirationAlert file={file} />
       )}
-      <QualificationListItemQualification
-        file={file}
-        ref={actionBtnRef.current[0]}
-        formattedMetadataQualification={formattedMetadataQualification[0]}
-        toggleActionsMenu={val =>
-          toggleActionsMenu(0, formattedMetadataQualification[0].name, val)
-        }
-      />
+      {hasQualifications(file) ? (
+        <QualificationListItemQualification
+          file={file}
+          formattedMetadataQualification={formattedMetadataQualification[0]}
+        />
+      ) : (
+        <QualificationListItemQualificationEmpty file={file} />
+      )}
       {showMetadataList && (
         <List>
           {formattedMetadataQualification.map((meta, idx) => {
