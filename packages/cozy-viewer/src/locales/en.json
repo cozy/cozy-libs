@@ -49,6 +49,10 @@
         }
       },
       "qualification": {
+        "empty": {
+          "primary": "Document type",
+          "secondary": "Bills, contract, identity card..."
+        },
         "actions": {
           "copy": "Copy",
           "copyClipboard": "Copy to clipboard",

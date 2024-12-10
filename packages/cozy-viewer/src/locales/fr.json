@@ -49,6 +49,10 @@
         }
       },
       "qualification": {
+        "empty": {
+          "primary": "Type de document",
+          "secondary": "Facture, contrat, carte d'identité..."
+        },
         "actions": {
           "copy": "Copier",
           "copyClipboard": "Copier dans le presse-papier",
