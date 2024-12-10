@@ -45,7 +45,7 @@ const Sharing = ({ file, t }) => {
           primaryTypographyProps={{ variant: 'h6' }}
         />
         <ListItemIcon>
-          <Icon icon={RightIcon} />
+          <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
         </ListItemIcon>
       </ListItem>
       <List>
