@@ -30,3 +30,4 @@
 ## Deleted packages
 
 - cozy-mespapiers-lib : lib has been merged again in [mespapiers](https://github.com/cozy/mespapiers) in 2024. Last commit where it exists in this repo: `b49bd1f6b71446235b2c5a702a13584765787ce8`. [Removal PR](https://github.com/cozy/cozy-libs/pull/2641).
+- cozy-scanner : lib was used for qualifications that are now in [cozy-client](https://github.com/cozy/cozy-client). Last commit where it exists in this repo: `cd79f20a4c2e807ec57893548594e2a5f430eba7`. [Removal PR](https://github.com/cozy/cozy-libs/pull/2649).
