@@ -10965,17 +10965,6 @@ cosmiconfig@^8.2.0:
     parse-json "^5.2.0"
     path-type "^4.0.0"
 
-cozy-authentication@^3.6.1:
-  version "3.6.1"
-  resolved "https://registry.yarnpkg.com/cozy-authentication/-/cozy-authentication-3.6.1.tgz#316c5ab3de8a527878f3e10f7dde3a9d05d4fa09"
-  integrity sha512-NwU4nGEoOtBYIGeVpGHZs0SnwvZ94OBbrmK8ILCc7d0CcEmY3JfEKZ+AsjvWKmXlD71YoOFpFnhbtbTSkaeuAw==
-  dependencies:
-    cozy-device-helper "^3.7.1"
-    localforage "1.7.3"
-    prop-types "15.7.2"
-    snarkdown "1.2.2"
-    url-polyfill "1.1.7"
-
 cozy-bi-auth@0.0.25:
   version "0.0.25"
   resolved "https://registry.yarnpkg.com/cozy-bi-auth/-/cozy-bi-auth-0.0.25.tgz#00947925dc3cbb664f4fa54cedde80e47d55fdd0"
@@ -18748,12 +18737,6 @@ loader-utils@^2.0.0, loader-utils@^2.0.4:
     emojis-list "^3.0.0"
     json5 "^2.1.2"
 
-localforage@1.7.3:
-  version "1.7.3"
-  resolved "https://registry.yarnpkg.com/localforage/-/localforage-1.7.3.tgz#0082b3ca9734679e1bd534995bdd3b24cf10f204"
-  dependencies:
-    lie "3.1.1"
-
 localforage@^1.8.1:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/localforage/-/localforage-1.10.0.tgz#5c465dc5f62b2807c3a84c0c6a1b1b3212781dd4"
@@ -25381,7 +25364,7 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-snarkdown@1.2.2, snarkdown@^1.2.2:
+snarkdown@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/snarkdown/-/snarkdown-1.2.2.tgz#0cfe2f3012b804de120fc0c9f7791e869c59cc74"
 
@@ -27478,10 +27461,6 @@ url-parse@^1.4.3, url-parse@^1.4.4, url-parse@^1.5.3:
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
-
-url-polyfill@1.1.7:
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/url-polyfill/-/url-polyfill-1.1.7.tgz#402ee84360eb549bbeb585f4c7971e79a31de9e3"
 
 url-search-params-polyfill@^7.0.0:
   version "7.0.0"
