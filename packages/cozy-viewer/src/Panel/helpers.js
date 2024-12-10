@@ -1,4 +1,8 @@
 import { splitFilename } from 'cozy-client/dist/models/file'
+import {
+  formatMetadataQualification,
+  KNOWN_BILLS_ATTRIBUTES_NAMES
+} from 'cozy-client/dist/models/paper'
 
 /**
  * Returns file extension or class
@@ -56,4 +60,29 @@ export const makeHideDivider = (formattedMetadataQualification, idx) => {
     isLastItem || (isSecondLastItem && lastItem.name === 'contact')
 
   return hideDivider
+}
+
+/**
+ *
+ * @param {import("cozy-client/types").IOCozyFile} file - io.cozy.file
+ * @param {Object} metadata - An io.cozy.files metadata object
+ * @returns {array}
+ */
+export const makeFormattedMetadataQualification = (file, metadata) => {
+  const relatedBills = file.bills?.data?.[0]
+  const formattedMetadataQualification = formatMetadataQualification(
+    metadata
+  ).sort((a, b) =>
+    a.name === 'qualification' ? -1 : b.name === 'qualification' ? 1 : 0
+  ) // move "qualification" metadata in first position
+
+  if (relatedBills) {
+    const formattedBillsMetadata = KNOWN_BILLS_ATTRIBUTES_NAMES.map(
+      attrName => ({ name: attrName, value: relatedBills[attrName] })
+    )
+
+    return formattedMetadataQualification.concat(formattedBillsMetadata)
+  }
+
+  return formattedMetadataQualification
 }

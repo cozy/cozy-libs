@@ -1,18 +1,9 @@
 import PropTypes from 'prop-types'
-import React, {
-  Fragment,
-  useRef,
-  useState,
-  createRef,
-  useMemo,
-  useEffect
-} from 'react'
+import React, { Fragment, useRef, useState, createRef, useEffect } from 'react'
 
 import { hasQualifications } from 'cozy-client/dist/models/file'
 import {
   isExpiringSoon,
-  formatMetadataQualification,
-  KNOWN_BILLS_ATTRIBUTES_NAMES,
   formatContactValue,
   getMetadataQualificationType
 } from 'cozy-client/dist/models/paper'
@@ -27,7 +18,7 @@ import QualificationListItemInformation from './QualificationListItemInformation
 import QualificationListItemOther from './QualificationListItemOther'
 import QualificationListItemQualification from './QualificationListItemQualification'
 import QualificationListItemQualificationEmpty from './QualificationListItemQualificationEmpty'
-import { makeHideDivider } from './helpers'
+import { makeHideDivider, makeFormattedMetadataQualification } from './helpers'
 import ExpirationAlert from '../components/ExpirationAlert'
 import { withViewerLocales } from '../hoc/withViewerLocales'
 import useReferencedContactName from '../hooks/useReferencedContactName'
@@ -55,6 +46,13 @@ const Qualification = ({ file }) => {
   })
   const { contacts } = useReferencedContactName(file)
   const formattedContactValue = formatContactValue(contacts)
+  const formattedMetadataQualification = makeFormattedMetadataQualification(
+    file,
+    metadata
+  )
+  const showMetadataList =
+    hasQualifications(file) &&
+    (formattedMetadataQualification.length !== 2 || formattedContactValue) // we have at minimum "qualification" and "contact" item
 
   const hideActionsMenu = () => {
     setOptionFile({ id: '', name: '', value: '' })
@@ -67,34 +65,11 @@ const Qualification = ({ file }) => {
     })
   }
 
-  const formattedMetadataQualification = useMemo(() => {
-    const relatedBills = file.bills?.data?.[0]
-    const formattedMetadataQualification = formatMetadataQualification(
-      metadata
-    ).sort((a, b) =>
-      a.name === 'qualification' ? -1 : b.name === 'qualification' ? 1 : 0
-    ) // move "qualification" metadata in first position
-
-    if (relatedBills) {
-      const formattedBillsMetadata = KNOWN_BILLS_ATTRIBUTES_NAMES.map(
-        attrName => ({ name: attrName, value: relatedBills[attrName] })
-      )
-
-      return formattedMetadataQualification.concat(formattedBillsMetadata)
-    }
-
-    return formattedMetadataQualification
-  }, [metadata, file.bills?.data])
-
   useEffect(() => {
     actionBtnRef.current = formattedMetadataQualification.map(
       (_, idx) => actionBtnRef.current[idx] ?? createRef()
     )
   }, [formattedMetadataQualification])
-
-  const showMetadataList =
-    hasQualifications(file) &&
-    (formattedMetadataQualification.length !== 2 || formattedContactValue) // we have at minimum "qualification" and "contact" item
 
   return (
     <>
