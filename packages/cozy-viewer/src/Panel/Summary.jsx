@@ -61,7 +61,7 @@ const Summary = ({ file, t }) => {
           </ListItemSecondaryAction>
         ) : (
           <ListItemIcon>
-            <Icon icon={RightIcon} />
+            <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
           </ListItemIcon>
         )}
       </ListItem>
