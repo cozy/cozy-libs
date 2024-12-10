@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.8.9...cozy-playgrounds@2.9.0) (2024-12-10)
+
+
+### Features
+
+* Remove cozy-authentication from playgrounds ([d4db7d3](https://github.com/cozy/cozy-libs/commit/d4db7d3044f7303526cc059bb3ccbb87bdfb7958))
+
+
+
+
+
 ## [2.8.9](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.8.8...cozy-playgrounds@2.8.9) (2024-12-10)
 
 **Note:** Version bump only for package cozy-playgrounds

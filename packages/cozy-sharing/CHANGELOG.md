@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.15.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.14.0...cozy-sharing@16.15.0) (2024-12-10)
+
+
+### Features
+
+* **cozy-sharing:** Upgrade cozy-ui to 113.9.0 ([a6943b0](https://github.com/cozy/cozy-libs/commit/a6943b096173cad242f16d10e95236ec81ea14b3))
+
+
+
+
+
 # [16.14.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.13.0...cozy-sharing@16.14.0) (2024-12-10)
 
 
