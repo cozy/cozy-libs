@@ -8,6 +8,7 @@ import React, {
   useEffect
 } from 'react'
 
+import { hasQualifications } from 'cozy-client/dist/models/file'
 import {
   isExpiringSoon,
   formatMetadataQualification,
@@ -17,6 +18,7 @@ import {
 } from 'cozy-client/dist/models/paper'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import List from 'cozy-ui/transpiled/react/List'
+import QualificationModal from 'cozy-ui/transpiled/react/QualificationModal'
 
 import ActionMenuWrapper from './ActionMenuWrapper'
 import QualificationListItemContact from './QualificationListItemContact'
@@ -24,6 +26,7 @@ import QualificationListItemDate from './QualificationListItemDate'
 import QualificationListItemInformation from './QualificationListItemInformation'
 import QualificationListItemOther from './QualificationListItemOther'
 import QualificationListItemQualification from './QualificationListItemQualification'
+import QualificationListItemQualificationEmpty from './QualificationListItemQualificationEmpty'
 import { makeHideDivider } from './helpers'
 import ExpirationAlert from '../components/ExpirationAlert'
 import { withViewerLocales } from '../hoc/withViewerLocales'
@@ -44,6 +47,7 @@ const isExpirationAlertHidden = file => {
 const Qualification = ({ file }) => {
   const { metadata = {} } = file
   const actionBtnRef = useRef([])
+  const [showQualifModal, setShowQualifModal] = useState(false)
   const [optionFile, setOptionFile] = useState({
     id: '',
     name: '',
@@ -89,21 +93,30 @@ const Qualification = ({ file }) => {
   }, [formattedMetadataQualification])
 
   const showMetadataList =
-    formattedMetadataQualification.length !== 2 || formattedContactValue // we have at minimum "qualification" and "contact" item
+    hasQualifications(file) &&
+    (formattedMetadataQualification.length !== 2 || formattedContactValue) // we have at minimum "qualification" and "contact" item
 
   return (
     <>
       {isExpiringSoon(file) && !isExpirationAlertHidden(file) && (
         <ExpirationAlert file={file} />
       )}
-      <QualificationListItemQualification
-        file={file}
-        ref={actionBtnRef.current[0]}
-        formattedMetadataQualification={formattedMetadataQualification[0]}
-        toggleActionsMenu={val =>
-          toggleActionsMenu(0, formattedMetadataQualification[0].name, val)
-        }
-      />
+      {hasQualifications(file) ? (
+        <QualificationListItemQualification
+          formattedMetadataQualification={formattedMetadataQualification[0]}
+          onClick={() => setShowQualifModal(true)}
+        />
+      ) : (
+        <QualificationListItemQualificationEmpty
+          onClick={() => setShowQualifModal(true)}
+        />
+      )}
+      {showQualifModal && (
+        <QualificationModal
+          file={file}
+          onClose={() => setShowQualifModal(false)}
+        />
+      )}
       {showMetadataList && (
         <List>
           {formattedMetadataQualification.map((meta, idx) => {
