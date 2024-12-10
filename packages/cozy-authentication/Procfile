@@ -1,2 +1,0 @@
-example-server: yarn example-server
-transpilation: yarn build --watch
