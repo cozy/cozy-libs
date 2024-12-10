@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.14.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.13.0...cozy-sharing@16.14.0) (2024-12-10)
+
+
+### Features
+
+* Remove notes.sharing-cozy-to-cozy flag ([f6fa190](https://github.com/cozy/cozy-libs/commit/f6fa1907ea97c0214c2f0cd3e196e7a1177a03ca))
+
+
+
+
+
 # [16.13.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.12.0...cozy-sharing@16.13.0) (2024-12-06)
 
 
