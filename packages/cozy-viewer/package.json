@@ -4,7 +4,7 @@
   "description": "Cozy-Viewer provides a component to show files in a viewer.",
   "main": "dist/index.js",
   "license": "MIT",
-  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-scanner/README.md",
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-viewer/Readme.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cozy/cozy-libs.git"
