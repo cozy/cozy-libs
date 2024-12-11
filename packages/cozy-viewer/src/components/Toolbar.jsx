@@ -5,6 +5,12 @@ import React from 'react'
 import { useClient } from 'cozy-client'
 import { downloadFile } from 'cozy-client/dist/models/file'
 import { useWebviewIntent } from 'cozy-intent'
+import {
+  openSharingLink,
+  OpenSharingLinkButton,
+  useSharingInfos
+} from 'cozy-sharing'
+import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import DownloadIcon from 'cozy-ui/transpiled/react/Icons/Download'
@@ -17,6 +23,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import PrintButton from './PrintButton'
+import PublicToolbarMoreMenu from './PublicToolbarMoreMenu'
 import { ToolbarFilePath } from './ToolbarFilePath'
 import styles from './styles.styl'
 import { extractChildrenCompByName } from '../Footer/helpers'
@@ -44,6 +51,9 @@ const Toolbar = ({
   const classes = useClasses()
   const { t } = useI18n()
   const webviewIntent = useWebviewIntent()
+  const { isSharingShortcutCreated, discoveryLink, loading } = useSharingInfos()
+  const isCozySharing = window.location.pathname === '/preview'
+  const isShareNotAdded = !loading && !isSharingShortcutCreated
 
   const { url } = useEncrypted()
 
@@ -51,6 +61,12 @@ const Toolbar = ({
     children,
     file,
     name: 'ToolbarButtons'
+  })
+
+  const actions = makeActions([openSharingLink], {
+    isSharingShortcutCreated,
+    link: discoveryLink,
+    openSharingLinkDisplayed: isCozySharing
   })
 
   return (
@@ -82,21 +98,31 @@ const Toolbar = ({
         {showFilePath ? <ToolbarFilePath file={file} /> : null}
       </div>
 
-      <div className="u-flex">
-        {isDesktop && (
-          <>
-            {ToolbarButtons}
-            <PrintButton file={file} />
-            <IconButton
-              className="u-white"
-              aria-label={t('Viewer.download')}
-              onClick={() => downloadFile({ client, file, url, webviewIntent })}
-            >
-              <Icon icon={DownloadIcon} />
-            </IconButton>
-          </>
-        )}
-      </div>
+      {isDesktop && (
+        <div className="u-flex u-flex-items-center">
+          {ToolbarButtons}
+          {isCozySharing && isShareNotAdded && (
+            <OpenSharingLinkButton
+              link={discoveryLink}
+              isSharingShortcutCreated={isSharingShortcutCreated}
+              variant="text"
+              color="default"
+              isShortLabel
+            />
+          )}
+          <PrintButton file={file} />
+          <IconButton
+            className="u-white"
+            aria-label={t('Viewer.download')}
+            onClick={() => downloadFile({ client, file, url, webviewIntent })}
+          >
+            <Icon icon={DownloadIcon} />
+          </IconButton>
+          {isCozySharing && (
+            <PublicToolbarMoreMenu files={[file]} actions={actions} />
+          )}
+        </div>
+      )}
     </div>
   )
 }
