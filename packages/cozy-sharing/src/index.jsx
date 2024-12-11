@@ -29,4 +29,9 @@ export { ShareButtonWithRecipients } from './ShareButtonWithRecipients'
 export { DOCUMENT_TYPE } from './helpers/documentType'
 export { default as OpenSharingLinkButton } from './OpenSharingLinkButton'
 export { default as OpenSharingLinkFabButton } from './OpenSharingLinkFabButton'
+export {
+  NativeFileSharingProvider,
+  useNativeFileSharing
+} from './providers/NativeFileSharingProvider'
 export { openSharingLink } from './actions/openSharingLink'
+export { shareNative } from './actions/shareNative'

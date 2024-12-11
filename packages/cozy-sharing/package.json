@@ -67,6 +67,8 @@
     "cozy-client": ">=51.4.0",
     "cozy-realtime": "^3.11.0",
     "cozy-ui": ">=113.5.0",
+    "cozy-intent": ">=2.29.1",
+    "cozy-device-helper": ">=3.7.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-router": "^5.0.1"
