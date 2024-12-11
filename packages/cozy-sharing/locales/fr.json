@@ -82,7 +82,8 @@
         "readOnly": "lecture",
         "readWrite": "modification"
       }
-    }
+    },
+    "send": "Envoyer..."
   },
   "Sharings": {
     "unavailable": {

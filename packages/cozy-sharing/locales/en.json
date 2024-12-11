@@ -84,7 +84,8 @@
           "readWrite": "write"
         }
       }
-    }
+    },
+    "send": "Send..."
   },
   "Sharings": {
     "unavailable": {
