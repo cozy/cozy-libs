@@ -11,18 +11,13 @@ import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
 import QualificationIconStack from 'cozy-ui/transpiled/react/QualificationIconStack'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-const QualificationListItemQualification = ({
-  formattedMetadataQualification,
-  onClick
-}) => {
+const QualificationListItemQualification = ({ file, onClick }) => {
   const { lang } = useI18n()
-  const { name, value } = formattedMetadataQualification
-
-  if (!value) return null
+  const value = file.metadata.qualification.label
 
   const formattedValue = formatOtherMetadataValue(value, {
     lang,
-    name
+    name: 'qualification'
   })
 
   return (
@@ -45,10 +40,7 @@ QualificationListItemQualification.displayName =
   'QualificationListItemQualification'
 
 QualificationListItemQualification.propTypes = {
-  formattedMetadataQualification: PropTypes.shape({
-    name: PropTypes.string,
-    value: PropTypes.string
-  }),
+  file: PropTypes.object,
   onClick: PropTypes.func
 }
 
