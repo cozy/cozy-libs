@@ -57,12 +57,12 @@ const SharingBannerCozyToCozy = ({
   const action = () => openExternalLink(discoveryLink)
   const buttonOne = isSharingShortcutCreated
     ? {
-        label: t('Share.banner.sync_to_mine'),
+        label: t('Share.banner.sync_to_mine', { smart_count: 2 }),
         icon: 'sync-cozy',
         action
       }
     : {
-        label: t('Share.banner.add_to_mine'),
+        label: t('Share.banner.add_to_mine', { smart_count: 2 }),
         icon: 'to-the-cloud',
         action
       }
@@ -120,7 +120,7 @@ const SharingBannerByLink = ({ onClose }) => {
         <Button
           component="a"
           variant="text"
-          label={t('Share.create-cozy')}
+          label={t('Share.create-cozy', { smart_count: 2 })}
           icon={CozyHomeLinkIcon}
           href={HOME_LINK_HREF}
         />

@@ -24,11 +24,13 @@ const makeStyles = customStyle => {
  * @param {Object} props - The props for the component.
  * @param {string} props.link - The URL to be opened when the button is clicked.
  * @param {boolean} [props.isSharingShortcutCreated=false] - Indicates if a sharing shortcut has been created. (default false)
+ * @param {boolean} [props.isShortLabel] - Display a short label for the button.
  * @param {Object} [props] - Additional props to be passed to the ExtendableFab component.
  */
 const OpenSharingLinkFabButton = ({
   link,
   isSharingShortcutCreated = false,
+  isShortLabel,
   ...props
 }) => {
   const { style = {}, ...rest } = props
@@ -42,6 +44,7 @@ const OpenSharingLinkFabButton = ({
   const { icon, label } = getIconWithlabel({
     link,
     isSharingShortcutCreated,
+    isShortLabel,
     t
   })
 
@@ -60,7 +63,8 @@ const OpenSharingLinkFabButton = ({
 
 OpenSharingLinkFabButton.propTypes = {
   link: PropTypes.string.isRequired,
-  isSharingShortcutCreated: PropTypes.bool
+  isSharingShortcutCreated: PropTypes.bool,
+  isShortLabel: PropTypes.bool
 }
 
 export default withLocales(OpenSharingLinkFabButton)

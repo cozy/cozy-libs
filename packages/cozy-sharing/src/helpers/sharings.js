@@ -70,12 +70,28 @@ export const openExternalLink = url => {
  * @param {object} params.t
  * @returns {{ icon: React.Component, label: string }}
  */
-export const getIconWithlabel = ({ link, isSharingShortcutCreated, t }) => {
+export const getIconWithlabel = ({
+  link,
+  isSharingShortcutCreated,
+  isShortLabel,
+  t
+}) => {
   if (link === CREATE_COZY_HREF) {
-    return { icon: ToTheCloudIcon, label: t('Share.create-cozy') }
+    return {
+      icon: ToTheCloudIcon,
+      label: t('Share.create-cozy', { smart_count: isShortLabel ? 1 : 2 })
+    }
   }
   if (!isSharingShortcutCreated) {
-    return { icon: CloudPlusOutlinedIcon, label: t('Share.banner.add_to_mine') }
+    return {
+      icon: CloudPlusOutlinedIcon,
+      label: t('Share.banner.add_to_mine', {
+        smart_count: isShortLabel ? 1 : 2
+      })
+    }
   }
-  return { icon: SyncIcon, label: t('Share.banner.sync_to_mine') }
+  return {
+    icon: SyncIcon,
+    label: t('Share.banner.sync_to_mine', { smart_count: isShortLabel ? 1 : 2 })
+  }
 }
