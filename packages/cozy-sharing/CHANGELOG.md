@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [16.15.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.15.0...cozy-sharing@16.15.1) (2024-12-11)
+
+
+### Bug Fixes
+
+* **cozy-sharing:** Do not display loader in public context ([71ff258](https://github.com/cozy/cozy-libs/commit/71ff25879d4d98dbde49035a6f1be5eb687b1500))
+
+
+
+
+
 # [16.15.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.14.0...cozy-sharing@16.15.0) (2024-12-10)
 
 
