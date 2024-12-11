@@ -28,7 +28,7 @@
       "anyoneWithTheLink": "N'importe qui avec le lien",
       "accessCount": "%{count} personnes y ont accès"
     },
-    "create-cozy": "Créer mon Cozy",
+    "create-cozy": "Créer |||| Créer mon Cozy",
     "members": {
       "count": "%{smart_count} membre |||| %{smart_count} membres",
       "others": "et 1 autre… |||| et %{smart_count} autres…",
@@ -59,8 +59,8 @@
       "shared_from": "Les éléments ci-dessous sont affichés depuis le Cozy de ![avatar](%{image}) **%{name}**. Vous pouvez ajouter un lien vers ce partage dans votre Cozy.",
       "whats_cozy": "Cozy est un domicile numérique sécurisé pour toutes vos données, hébergé en France - ",
       "know_more": "En savoir plus",
-      "sync_to_mine": "Synchroniser dans mon Cozy",
-      "add_to_mine": "Ajouter à mon Cozy",
+      "sync_to_mine": "Synchroniser |||| Synchroniser dans mon Cozy",
+      "add_to_mine": "Ajouter |||| Ajouter à mon Cozy",
       "close": "Fermer"
     },
     "permissionLink": {
