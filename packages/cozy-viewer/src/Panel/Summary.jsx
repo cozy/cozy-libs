@@ -49,7 +49,7 @@ const Summary = ({ file, t }) => {
           <Icon icon={TextIcon} />
         </ListItemIcon>
         <QualificationListItemText
-          primary={value && label}
+          primary={value ? label : undefined}
           secondary={value || label}
           disabled={!value}
         />
