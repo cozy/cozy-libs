@@ -24,7 +24,11 @@ const makeComponent = (label, icon) => {
   return Component
 }
 
-export const openSharingLink = ({ isSharingShortcutCreated, link }) => {
+export const openSharingLink = ({
+  isSharingShortcutCreated,
+  openSharingLinkDisplayed = true,
+  link
+}) => {
   const { t } = getActionsI18n()
   const { icon, label } = getIconWithlabel({
     link,
@@ -36,6 +40,7 @@ export const openSharingLink = ({ isSharingShortcutCreated, link }) => {
     name: 'openSharingLink',
     label,
     icon,
+    displayCondition: () => openSharingLinkDisplayed,
     action: () => {
       openExternalLink(link)
     },
