@@ -181,6 +181,7 @@ export class SharingProvider extends Component {
     if (this.isPublic) {
       // In public mode, the promise below fails because the methods do not have the required permissions.
       log.warn('fetchAllSharings is not allowed in public context.')
+      this.setState({ allLoaded: true })
       return
     }
     const { doctype, client } = this.props
