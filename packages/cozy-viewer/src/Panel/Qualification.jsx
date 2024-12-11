@@ -4,7 +4,6 @@ import React, { Fragment, useRef, useState, createRef, useEffect } from 'react'
 import { hasQualifications } from 'cozy-client/dist/models/file'
 import {
   isExpiringSoon,
-  formatContactValue,
   getMetadataQualificationType
 } from 'cozy-client/dist/models/paper'
 import Divider from 'cozy-ui/transpiled/react/Divider'
@@ -21,7 +20,6 @@ import QualificationListItemQualificationEmpty from './QualificationListItemQual
 import { makeHideDivider, makeFormattedMetadataQualification } from './helpers'
 import ExpirationAlert from '../components/ExpirationAlert'
 import { withViewerLocales } from '../hoc/withViewerLocales'
-import useReferencedContactName from '../hooks/useReferencedContactName'
 
 const ComponentFromMetadataQualificationType = {
   contact: QualificationListItemContact,
@@ -44,15 +42,12 @@ const Qualification = ({ file }) => {
     name: '',
     value: ''
   })
-  const { contacts } = useReferencedContactName(file)
-  const formattedContactValue = formatContactValue(contacts)
   const formattedMetadataQualification = makeFormattedMetadataQualification(
     file,
     metadata
   )
   const showMetadataList =
-    hasQualifications(file) &&
-    (formattedMetadataQualification.length !== 2 || formattedContactValue) // we have at minimum "qualification" and "contact" item
+    hasQualifications(file) && formattedMetadataQualification.length > 1 // we have at minimum "contact" item
 
   const hideActionsMenu = () => {
     setOptionFile({ id: '', name: '', value: '' })
@@ -78,7 +73,7 @@ const Qualification = ({ file }) => {
       )}
       {hasQualifications(file) ? (
         <QualificationListItemQualification
-          formattedMetadataQualification={formattedMetadataQualification[0]}
+          file={file}
           onClick={() => setShowQualifModal(true)}
         />
       ) : (
@@ -96,7 +91,6 @@ const Qualification = ({ file }) => {
         <List>
           {formattedMetadataQualification.map((meta, idx) => {
             const { name } = meta
-            if (name === 'qualification') return null
 
             const metadataQualificationType = getMetadataQualificationType(name)
             const QualificationListItemComp =
