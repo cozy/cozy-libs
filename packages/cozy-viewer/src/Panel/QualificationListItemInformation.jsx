@@ -14,6 +14,7 @@ import Dots from 'cozy-ui/transpiled/react/Icons/Dots'
 import EuroIcon from 'cozy-ui/transpiled/react/Icons/Euro'
 import GlobeIcon from 'cozy-ui/transpiled/react/Icons/Globe'
 import NumberIcon from 'cozy-ui/transpiled/react/Icons/Number'
+import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
@@ -66,19 +67,25 @@ const QualificationListItemInformation = forwardRef(
           <Icon icon={InformationIcon} />
         </ListItemIcon>
         <QualificationListItemText
-          primary={titleComponent}
-          secondary={formattedValue}
+          primary={value ? titleComponent : undefined}
+          secondary={value ? formattedValue : titleComponent}
           disabled={!value}
         />
-        <ListItemSecondaryAction>
-          <IconButton
-            ref={ref}
-            onClick={() => toggleActionsMenu(value)}
-            data-testid="toggleActionsMenuBtn"
-          >
-            <Icon icon={Dots} />
-          </IconButton>
-        </ListItemSecondaryAction>
+        {value ? (
+          <ListItemSecondaryAction>
+            <IconButton
+              ref={ref}
+              onClick={() => toggleActionsMenu(value)}
+              data-testid="toggleActionsMenuBtn"
+            >
+              <Icon icon={Dots} />
+            </IconButton>
+          </ListItemSecondaryAction>
+        ) : (
+          <ListItemIcon>
+            <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
+          </ListItemIcon>
+        )}
       </ListItem>
     )
   }
