@@ -9,6 +9,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Dots from 'cozy-ui/transpiled/react/Icons/Dots'
 import FileIcon from 'cozy-ui/transpiled/react/Icons/File'
+import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
@@ -38,17 +39,25 @@ const QualificationListItemOther = forwardRef(
           <Icon icon={FileIcon} />
         </ListItemIcon>
         <QualificationListItemText
-          primary={formattedTitle}
-          secondary={<MidEllipsis text={formattedValue} />}
+          primary={value ? formattedTitle : undefined}
+          secondary={
+            value ? <MidEllipsis text={formattedValue} /> : formattedTitle
+          }
         />
-        <ListItemSecondaryAction>
-          <IconButton
-            ref={ref}
-            onClick={() => toggleActionsMenu(formattedValue)}
-          >
-            <Icon icon={Dots} />
-          </IconButton>
-        </ListItemSecondaryAction>
+        {value ? (
+          <ListItemSecondaryAction>
+            <IconButton
+              ref={ref}
+              onClick={() => toggleActionsMenu(formattedValue)}
+            >
+              <Icon icon={Dots} />
+            </IconButton>
+          </ListItemSecondaryAction>
+        ) : (
+          <ListItemIcon>
+            <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
+          </ListItemIcon>
+        )}
       </ListItem>
     )
   }

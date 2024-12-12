@@ -11,6 +11,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import CalendarIcon from 'cozy-ui/transpiled/react/Icons/Calendar'
 import Dots from 'cozy-ui/transpiled/react/Icons/Dots'
+import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
@@ -37,33 +38,43 @@ const QualificationListItemDate = forwardRef(
           <Icon icon={CalendarIcon} />
         </ListItemIcon>
         <QualificationListItemText
-          primary={formattedTitle}
+          primary={value ? formattedTitle : undefined}
           secondary={
-            <>
-              <Typography component="span" variant="inherit">
-                {formattedDate}
-              </Typography>
-              {isExpirationDate &&
-                (isExpired(file) || isExpiringSoon(file)) && (
-                  <>
-                    <Typography component="span" variant="inherit">
-                      {' · '}
-                    </Typography>
-                    <ExpirationAnnotation file={file} />
-                  </>
-                )}
-            </>
+            value ? (
+              <>
+                <Typography component="span" variant="inherit">
+                  {formattedDate}
+                </Typography>
+                {isExpirationDate &&
+                  (isExpired(file) || isExpiringSoon(file)) && (
+                    <>
+                      <Typography component="span" variant="inherit">
+                        {' · '}
+                      </Typography>
+                      <ExpirationAnnotation file={file} />
+                    </>
+                  )}
+              </>
+            ) : (
+              formattedTitle
+            )
           }
           disabled={!value}
         />
-        <ListItemSecondaryAction>
-          <IconButton
-            ref={ref}
-            onClick={() => toggleActionsMenu(formattedDate)}
-          >
-            <Icon icon={Dots} />
-          </IconButton>
-        </ListItemSecondaryAction>
+        {value ? (
+          <ListItemSecondaryAction>
+            <IconButton
+              ref={ref}
+              onClick={() => toggleActionsMenu(formattedDate)}
+            >
+              <Icon icon={Dots} />
+            </IconButton>
+          </ListItemSecondaryAction>
+        ) : (
+          <ListItemIcon>
+            <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
+          </ListItemIcon>
+        )}
       </ListItem>
     )
   }
