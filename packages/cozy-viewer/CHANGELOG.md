@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.1.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@8.0.9...cozy-viewer@8.1.0) (2024-12-12)
+
+
+### Features
+
+* **cozy-viewer:** Add Sharing buttons in the public viewer ([5988072](https://github.com/cozy/cozy-libs/commit/59880724d4e2729fd4f6653c83b4b4380b321326))
+
+
+
+
+
 ## [8.0.9](https://github.com/cozy/cozy-libs/compare/cozy-viewer@8.0.8...cozy-viewer@8.0.9) (2024-12-12)
 
 **Note:** Version bump only for package cozy-viewer
