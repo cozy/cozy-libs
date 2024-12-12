@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.16.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.15.1...cozy-sharing@16.16.0) (2024-12-12)
+
+
+### Features
+
+* **cozy-sharing:** Add conditionnal prop to openSharingLink action ([ec2a8be](https://github.com/cozy/cozy-libs/commit/ec2a8be595215745e85ae0cc1e9b7493e2c5b8a4))
+
+
+
+
+
 ## [16.15.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.15.0...cozy-sharing@16.15.1) (2024-12-11)
 
 
