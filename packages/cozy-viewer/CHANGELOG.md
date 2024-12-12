@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@8.1.0...cozy-viewer@9.0.0) (2024-12-12)
+
+
+### Bug Fixes
+
+* **Viewer:** Sharing and Summary panel item right icon color ([d026cb5](https://github.com/cozy/cozy-libs/commit/d026cb5422afe4e3e332808f3302ba47b64dbfc3))
+
+
+### Features
+
+* **Viewer:** Add possibility to set/modify file qualification ([747eab8](https://github.com/cozy/cozy-libs/commit/747eab8acce3a12925475a4fc854749b428519b4))
+* **Viewer:** Adjust right icon on qualification items ([a1d71d5](https://github.com/cozy/cozy-libs/commit/a1d71d5d55e30792ac15a4749a97958f3e8e6b8c))
+* **Viewer:** Showing metadata is now based on a list ([217ccfa](https://github.com/cozy/cozy-libs/commit/217ccfa31a1ed83ef13d8759cd70443e72868d2c))
+* **Viewer:** Upgrade packages ([8da361f](https://github.com/cozy/cozy-libs/commit/8da361f7b46cbbe96414581897ec987d4af4d86a))
+
+
+### BREAKING CHANGES
+
+* **Viewer:** You must have `cozy-client >= 51.6.0`, `cozy-ui >= 114.0.0` and `cozy-intent >= 2.29.1`
+
+
+
+
+
 # [8.1.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@8.0.9...cozy-viewer@8.1.0) (2024-12-12)
 
 
