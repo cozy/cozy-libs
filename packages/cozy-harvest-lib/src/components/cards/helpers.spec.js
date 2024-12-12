@@ -38,6 +38,7 @@ describe('makeLabel', () => {
     it('should return "Sync. ago..." if lastSuccessDate is defined and > 5 minutes', () => {
       const res = makeLabel({
         t,
+        lang: 'fr',
         trigger: {
           current_state: { last_success: '2020-12-25T11:55:00.000Z' }
         },
