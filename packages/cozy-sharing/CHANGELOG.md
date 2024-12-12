@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.17.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.16.0...cozy-sharing@16.17.0) (2024-12-12)
+
+
+### Features
+
+* **cozy-sharing:** Add isShortLabel prop to OpenSharing's buttons ([1085567](https://github.com/cozy/cozy-libs/commit/108556765800f6972a6b4c801fa09fd7c5d08c65))
+
+
+
+
+
 # [16.16.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.15.1...cozy-sharing@16.16.0) (2024-12-12)
 
 
