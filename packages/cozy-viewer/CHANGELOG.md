@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.0.1](https://github.com/cozy/cozy-libs/compare/cozy-viewer@9.0.0...cozy-viewer@9.0.1) (2024-12-13)
+
+
+### Bug Fixes
+
+* **cozy-viewer:** Add SharingProvider in the Sharing Panel ([b9e630f](https://github.com/cozy/cozy-libs/commit/b9e630f6c432812a3482b883baa1da9a36de7769))
+* **cozy-viewer:** Force white color for iconButtons in the Viewer ([e631229](https://github.com/cozy/cozy-libs/commit/e6312292999dd5ebdaa6a845e1103cc9fe33b16b))
+
+
+
+
+
 # [9.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@8.1.0...cozy-viewer@9.0.0) (2024-12-12)
 
 
