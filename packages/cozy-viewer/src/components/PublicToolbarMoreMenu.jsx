@@ -17,7 +17,12 @@ const PublicToolbarMoreMenu = ({ files, actions }) => {
 
   return (
     <>
-      <IconButton ref={moreButtonRef} variant="secondary" onClick={toggleMenu}>
+      <IconButton
+        ref={moreButtonRef}
+        variant="secondary"
+        className="u-white"
+        onClick={toggleMenu}
+      >
         <Icon icon={DotsIcon} />
       </IconButton>
 

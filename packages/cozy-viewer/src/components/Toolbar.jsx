@@ -106,6 +106,7 @@ const Toolbar = ({
               link={discoveryLink}
               isSharingShortcutCreated={isSharingShortcutCreated}
               variant="text"
+              className="u-white"
               color="default"
               isShortLabel
             />
