@@ -145,7 +145,7 @@ export class SearchEngine {
       return
     }
     log.debug('[REALTIME] Update doc from index after update : ', doc)
-    void this.addDocToIndex(searchIndex.index, doc)
+    void this.indexDoc(searchIndex.index, doc)
 
     if (this.isLocalSearch) {
       this.debouncedReplication()
@@ -193,7 +193,7 @@ export class SearchEngine {
     // There is no persisted path for files: we must add it
     const completedDocs = this.isLocalSearch ? addFilePaths(docs) : docs
     for (const doc of completedDocs) {
-      void this.addDocToIndex(flexsearchIndex, doc)
+      void this.indexDoc(flexsearchIndex, doc)
     }
 
     const endTimeIndex = performance.now()
@@ -205,7 +205,7 @@ export class SearchEngine {
     return flexsearchIndex
   }
 
-  async addDocToIndex(
+  async indexDoc(
     flexsearchIndex: FlexSearch.Document<CozyDoc, true>,
     doc: CozyDoc
   ): Promise<void> {
@@ -216,6 +216,9 @@ export class SearchEngine {
         docToIndex = await computeFileFullpath(this.client, doc)
       }
       flexsearchIndex.add(docToIndex)
+    } else {
+      // Should not index doc: remove it from index if it exists
+      flexsearchIndex.remove(doc._id!)
     }
   }
 
@@ -291,7 +294,7 @@ export class SearchEngine {
         searchIndex.index.remove(change.id)
       } else {
         const normalizedDoc = { ...change.doc, _type: doctype } as CozyDoc
-        void this.addDocToIndex(searchIndex.index, normalizedDoc)
+        void this.indexDoc(searchIndex.index, normalizedDoc)
       }
     }
 
