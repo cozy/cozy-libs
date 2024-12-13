@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.3](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.8.2...cozy-dataproxy-lib@1.8.3) (2024-12-13)
+
+
+### Bug Fixes
+
+* Remove file from search after realtime event ([9bf28dc](https://github.com/cozy/cozy-libs/commit/9bf28dc94bda3ec82c8127f041fb44b7be96d355))
+
+
+
+
+
 ## [1.8.2](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.8.1...cozy-dataproxy-lib@1.8.2) (2024-12-12)
 
 **Note:** Version bump only for package cozy-dataproxy-lib
