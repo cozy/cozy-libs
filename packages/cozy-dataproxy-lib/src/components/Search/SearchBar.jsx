@@ -6,7 +6,7 @@ import SearchBarDesktop from './SearchBarDesktop'
 import SearchBarMobile from './SearchBarMobile'
 import { useSearch } from './SearchProvider'
 
-const SearchBar = () => {
+const SearchBar = ({ componentsProps }) => {
   const { isMobile } = useBreakpoints()
   const [inputValue, setInputValue] = useState('')
   const { clearSearch, setSelectedIndex, delayedSetSearchValue } = useSearch()
@@ -34,6 +34,7 @@ const SearchBar = () => {
 
   return (
     <SearchBarDesktop
+      {...componentsProps?.SearchBarDesktop}
       value={inputValue}
       onClear={handleClear}
       onChange={handleChange}

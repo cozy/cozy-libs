@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
@@ -9,21 +10,29 @@ import SearchProvider from './Search/SearchProvider'
 import localesEn from '../locales/en.json'
 import localesFr from '../locales/fr.json'
 
-const AssistantWrapperDesktop = () => {
-  const locales = { fr: localesFr, en: localesEn }
+const locales = { fr: localesFr, en: localesEn }
+
+const AssistantWrapperDesktop = ({ componentsProps }) => {
   useExtendI18n(locales)
 
   return (
-    <CozyTheme variant="normal">
-      <div className="app-list-wrapper u-mb-3 u-mh-auto u-w-100">
-        <AssistantProvider>
-          <SearchProvider>
-            <SearchBar />
-          </SearchProvider>
-        </AssistantProvider>
-      </div>
-    </CozyTheme>
+    <div className="u-mh-auto u-w-100" style={{ maxWidth: '100%' }}>
+      <AssistantProvider>
+        <SearchProvider>
+          <SearchBar componentsProps={componentsProps} />
+        </SearchProvider>
+      </AssistantProvider>
+    </div>
   )
+}
+AssistantWrapperDesktop.propTypes = {
+  componentsProps: PropTypes.shape({
+    SearchBarDesktop: PropTypes.shape({
+      elevation: PropTypes.boolean,
+      size: PropTypes.string,
+      hasHalfBorderRadius: PropTypes.bool
+    })
+  })
 }
 
 export default AssistantWrapperDesktop
