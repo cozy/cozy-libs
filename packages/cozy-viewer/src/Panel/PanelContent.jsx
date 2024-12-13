@@ -33,7 +33,7 @@ const PanelContent = ({ file, isPublic, t }) => {
           elevation={2}
           square
         >
-          <PanelBlock file={file} />
+          <PanelBlock file={file} isPublic={isPublic} />
         </Paper>
       ))}
     </Stack>

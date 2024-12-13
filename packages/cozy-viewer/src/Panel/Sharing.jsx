@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
-import {
+import { useClient } from 'cozy-client'
+import SharingProvider, {
   ShareModal,
   useSharingContext,
   MemberRecipientLite,
@@ -79,4 +80,19 @@ Sharing.propTypes = {
   t: PropTypes.func
 }
 
-export default withViewerLocales(Sharing)
+const DumbSharing = ({ file, t, isPublic }) => {
+  const client = useClient()
+
+  return (
+    <SharingProvider
+      client={client}
+      doctype="io.cozy.files"
+      documentType="Files"
+      isPublic={isPublic}
+    >
+      <Sharing file={file} t={t} />
+    </SharingProvider>
+  )
+}
+
+export default withViewerLocales(DumbSharing)

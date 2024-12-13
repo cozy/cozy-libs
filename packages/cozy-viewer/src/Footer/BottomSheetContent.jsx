@@ -17,7 +17,7 @@ const BottomSheetContent = ({ file, isPublic }) => {
       disableGutters
       disableElevation={index === panelBlocks.length - 1}
     >
-      <PanelBlock file={file} />
+      <PanelBlock file={file} isPublic={isPublic} />
     </BottomSheetItem>
   ))
 }
