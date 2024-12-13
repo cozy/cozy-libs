@@ -12,7 +12,7 @@ import localesFr from '../locales/fr.json'
 
 const locales = { fr: localesFr, en: localesEn }
 
-export const AssistantWrapperMobile = () => {
+export const AssistantMobile = () => {
   const { t } = useI18n()
   const navigate = useNavigate()
 
@@ -31,4 +31,4 @@ export const AssistantWrapperMobile = () => {
   )
 }
 
-export default AssistantWrapperMobile
+export default AssistantMobile
