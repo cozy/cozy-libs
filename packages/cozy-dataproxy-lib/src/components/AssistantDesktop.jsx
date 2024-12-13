@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import useExtendI18n from 'cozy-ui/transpiled/react/providers/I18n/useExtendI18n'
 
 import AssistantProvider from './AssistantProvider'
@@ -12,7 +11,7 @@ import localesFr from '../locales/fr.json'
 
 const locales = { fr: localesFr, en: localesEn }
 
-const AssistantWrapperDesktop = ({ componentsProps }) => {
+const AssistantDesktop = ({ componentsProps }) => {
   useExtendI18n(locales)
 
   return (
@@ -25,7 +24,7 @@ const AssistantWrapperDesktop = ({ componentsProps }) => {
     </div>
   )
 }
-AssistantWrapperDesktop.propTypes = {
+AssistantDesktop.propTypes = {
   componentsProps: PropTypes.shape({
     SearchBarDesktop: PropTypes.shape({
       elevation: PropTypes.boolean,
@@ -35,4 +34,4 @@ AssistantWrapperDesktop.propTypes = {
   })
 }
 
-export default AssistantWrapperDesktop
+export default AssistantDesktop
