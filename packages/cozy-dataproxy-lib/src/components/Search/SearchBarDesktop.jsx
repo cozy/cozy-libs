@@ -14,7 +14,14 @@ import { useAssistant } from '../AssistantProvider'
 import ResultMenu from '../ResultMenu/ResultMenu'
 import { makeConversationId } from '../helpers'
 
-const SearchBarDesktop = ({ value, onClear, onChange }) => {
+const SearchBarDesktop = ({
+  value,
+  onClear,
+  onChange,
+  elevation,
+  size,
+  hasHalfBorderRadius
+}) => {
   const { t } = useI18n()
   const { searchValue, results, selectedIndex, setSelectedIndex } = useSearch()
   const { onAssistantExecute } = useAssistant()
@@ -78,10 +85,25 @@ const SearchBarDesktop = ({ value, onClear, onChange }) => {
     <ClickAwayListener onClickAway={onClear}>
       <span>
         <SearchBar
-          className={searchValue ? styles['searchBarDesktop--result'] : ''}
+          elevation={elevation}
+          className={
+            searchValue && hasHalfBorderRadius
+              ? styles['searchBarDesktop--result']
+              : ''
+          }
           ref={searchRef}
-          size="large"
-          icon={<Icon className="u-mh-1" icon={AssistantIcon} size={32} />}
+          size={size}
+          icon={
+            size === 'large' ? (
+              <Icon className="u-mh-1" icon={AssistantIcon} size={32} />
+            ) : (
+              <Icon
+                className="u-ml-1 u-mr-half"
+                icon={AssistantIcon}
+                size={24}
+              />
+            )
+          }
           placeholder={t('assistant.search.placeholder')}
           value={value}
           componentsProps={{
@@ -101,6 +123,11 @@ const SearchBarDesktop = ({ value, onClear, onChange }) => {
       </span>
     </ClickAwayListener>
   )
+}
+
+SearchBarDesktop.defaultProps = {
+  size: 'large',
+  elevation: false
 }
 
 export default SearchBarDesktop
