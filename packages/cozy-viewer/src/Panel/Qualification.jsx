@@ -17,7 +17,11 @@ import QualificationListItemInformation from './QualificationListItemInformation
 import QualificationListItemOther from './QualificationListItemOther'
 import QualificationListItemQualification from './QualificationListItemQualification'
 import QualificationListItemQualificationEmpty from './QualificationListItemQualificationEmpty'
-import { makeHideDivider, makeFormattedMetadataQualification } from './helpers'
+import {
+  makeHideDivider,
+  makeFormattedMetadataQualification,
+  isExpirationAlertHidden
+} from './helpers'
 import ExpirationAlert from '../components/ExpirationAlert'
 import { withViewerLocales } from '../hoc/withViewerLocales'
 
@@ -27,10 +31,6 @@ const ComponentFromMetadataQualificationType = {
   information: QualificationListItemInformation,
   other: QualificationListItemOther,
   bills: QualificationListItemInformation
-}
-
-const isExpirationAlertHidden = file => {
-  return file?.metadata?.hideExpirationAlert ?? false
 }
 
 const Qualification = ({ file }) => {

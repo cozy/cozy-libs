@@ -184,3 +184,12 @@ export const makeFormattedMetadataQualification = file => {
     .concat(billsMetadataArray)
     .concat([{ name: 'contact', value: null }])
 }
+
+/**
+ *
+ * @param {import("cozy-client/types").IOCozyFile} file - io.cozy.file
+ * @returns {boolean}
+ */
+export const isExpirationAlertHidden = file => {
+  return file?.metadata?.hideExpirationAlert ?? false
+}
