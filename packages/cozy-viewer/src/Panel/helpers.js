@@ -1,6 +1,6 @@
 import get from 'lodash/get'
 
-import { splitFilename } from 'cozy-client/dist/models/file'
+import { splitFilename, isFromKonnector } from 'cozy-client/dist/models/file'
 import { KNOWN_BILLS_ATTRIBUTES_NAMES } from 'cozy-client/dist/models/paper'
 
 /**
@@ -193,3 +193,10 @@ export const makeFormattedMetadataQualification = file => {
 export const isExpirationAlertHidden = file => {
   return file?.metadata?.hideExpirationAlert ?? false
 }
+
+/**
+ *
+ * @param {import("cozy-client/types").IOCozyFile} file - io.cozy.file
+ * @returns {boolean}
+ */
+export const canEditQualification = file => !isFromKonnector(file)
