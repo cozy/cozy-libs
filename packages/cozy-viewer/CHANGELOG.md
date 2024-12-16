@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.0.2](https://github.com/cozy/cozy-libs/compare/cozy-viewer@9.0.1...cozy-viewer@9.0.2) (2024-12-16)
+
+
+### Bug Fixes
+
+* **Viewer:** Qualification was editable for file fetched by konnectors ([2ae0af3](https://github.com/cozy/cozy-libs/commit/2ae0af3ae4a20946cd84755135aef50df5945782))
+* **Viewer:** Remove referencedDate metadata for invoices ([8d3b206](https://github.com/cozy/cozy-libs/commit/8d3b2069ab3f08639e2deb61375baf9478ff4020))
+* **Viewer:** Summary now show multiline text correctly ([628bee2](https://github.com/cozy/cozy-libs/commit/628bee2d1a0c30fbb5a7d283a5cb67da5386e1e5))
+
+
+
+
+
 ## [9.0.1](https://github.com/cozy/cozy-libs/compare/cozy-viewer@9.0.0...cozy-viewer@9.0.1) (2024-12-13)
 
 
