@@ -11,6 +11,8 @@ import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
 import QualificationIconStack from 'cozy-ui/transpiled/react/QualificationIconStack'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
+import { canEditQualification } from './helpers'
+
 const QualificationListItemQualification = ({ file, onClick }) => {
   const { lang } = useI18n()
   const value = file.metadata.qualification.label
@@ -21,7 +23,12 @@ const QualificationListItemQualification = ({ file, onClick }) => {
   })
 
   return (
-    <ListItem size="large" divider button onClick={onClick}>
+    <ListItem
+      size="large"
+      divider
+      button={canEditQualification(file)}
+      onClick={canEditQualification(file) ? onClick : undefined}
+    >
       <ListItemIcon>
         <QualificationIconStack qualification={value} />
       </ListItemIcon>
@@ -29,9 +36,11 @@ const QualificationListItemQualification = ({ file, onClick }) => {
         primary={<MidEllipsis text={formattedValue} />}
         primaryTypographyProps={{ variant: 'h6' }}
       />
-      <ListItemIcon>
-        <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
-      </ListItemIcon>
+      {canEditQualification(file) && (
+        <ListItemIcon>
+          <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
+        </ListItemIcon>
+      )}
     </ListItem>
   )
 }
