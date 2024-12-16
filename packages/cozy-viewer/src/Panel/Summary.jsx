@@ -49,6 +49,7 @@ const Summary = ({ file, t }) => {
           <Icon icon={TextIcon} />
         </ListItemIcon>
         <QualificationListItemText
+          style={{ wordBreak: 'break-word' }}
           primary={value ? label : undefined}
           secondary={value || label}
           disabled={!value}
