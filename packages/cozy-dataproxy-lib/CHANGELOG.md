@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.8.4...cozy-dataproxy-lib@1.9.0) (2024-12-17)
+
+
+### Features
+
+* Adapt search placeholder if assistant is disabled ([9488f39](https://github.com/cozy/cozy-libs/commit/9488f390a3c6c833105996abc7c7190edf5878ec))
+* Add locales for assistant SearchDialog ([86fd569](https://github.com/cozy/cozy-libs/commit/86fd56977a0327e5c6da0030a2b6ff7e0167fc40))
+* Copy search and assistant UI from cozy-home to cozy-dataproxy-lib ([554e681](https://github.com/cozy/cozy-libs/commit/554e6819238fcde96cf7bd554e6d8d673558e4b4))
+* Make AssistantWrapperDesktop generic ([c84845c](https://github.com/cozy/cozy-libs/commit/c84845cbbe53f33d3deb3fea834a9afcd80d36fc))
+* Make AssistantWrapperMobile more generic ([2167e2a](https://github.com/cozy/cozy-libs/commit/2167e2a4aa163930a72fbd0b380ddbb78ce82d5c))
+* Rename exposed assistant component ([f316ab3](https://github.com/cozy/cozy-libs/commit/f316ab381dd9a6bb36310675f334c86b21b01e47))
+
+
+
+
+
 ## [1.8.4](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.8.3...cozy-dataproxy-lib@1.8.4) (2024-12-13)
 
 
