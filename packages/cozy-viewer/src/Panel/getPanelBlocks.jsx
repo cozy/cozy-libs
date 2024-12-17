@@ -22,13 +22,13 @@ import Summary from './Summary'
  * @returns {PanelBlocksSpecs}
  */
 export const getPanelBlocksSpecs = (isPublic = false) => ({
-  summary: {
-    condition: () => true,
-    component: Summary
-  },
   qualifications: {
     condition: () => true,
     component: Qualification
+  },
+  summary: {
+    condition: () => true,
+    component: Summary
   },
   konnector: {
     condition: file => isFromKonnector(file) && !isPublic,
