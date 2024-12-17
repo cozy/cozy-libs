@@ -26,7 +26,7 @@ export const AssistantMobile = () => {
       }
       type="button"
       label={t('assistant.search.placeholder')}
-      onClick={() => navigate('connected/search')} // FIXME
+      onClick={() => navigate('connected/search')} // FIXME this route is related to home app
     />
   )
 }
