@@ -66,11 +66,11 @@ describe('getPanelBlocks', () => {
 describe('getPanelBlocksSpecs', () => {
   it('should return the specs of the blocks to display in the panel', () => {
     expect(getPanelBlocksSpecs()).toEqual({
-      summary: {
+      qualifications: {
         condition: expect.any(Function),
         component: expect.anything()
       },
-      qualifications: {
+      summary: {
         condition: expect.any(Function),
         component: expect.anything()
       },
