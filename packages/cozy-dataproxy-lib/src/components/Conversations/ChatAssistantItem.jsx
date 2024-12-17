@@ -7,20 +7,14 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import ChatItem from './ChatItem'
 import Sources from './Sources/Sources'
 
-const ChatAssistantItem = ({ className, id, label, sources, ...props }) => {
+const ChatAssistantItem = ({ id, sources, ...props }) => {
   const { t } = useI18n()
   // need memo to avoid rendering it everytime
   const icon = useMemo(() => <Icon icon={AssistantIcon} size={32} />, [])
 
   return (
     <>
-      <ChatItem
-        {...props}
-        className={className}
-        icon={icon}
-        name={t('assistant.name')}
-        label={label}
-      />
+      <ChatItem {...props} icon={icon} name={t('assistant.name')} />
       {sources?.length > 0 && <Sources messageId={id} sources={sources} />}
     </>
   )

@@ -16,7 +16,7 @@ import { useSearch } from '../Search/SearchProvider'
 const SearchResult = () => {
   const { isLoading, results, selectedIndex, searchValue } = useSearch()
 
-  if (isLoading && !results?.length)
+  if (isLoading && !results?.length) {
     return (
       <>
         <ListItemSkeleton hasSecondary />
@@ -24,6 +24,7 @@ const SearchResult = () => {
         <ListItemSkeleton hasSecondary />
       </>
     )
+  }
 
   return results.map((result, idx) => (
     <ResultMenuItem

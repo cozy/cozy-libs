@@ -31,7 +31,7 @@ const ChatConversation = ({ conversation, myself }) => {
 
   return (
     <div ref={listRef}>
-      {conversation?.messages.map((message, idx) => {
+      {conversation?.messages?.map((message, idx) => {
         if (message.role === 'user') {
           return (
             <ChatUserItem
