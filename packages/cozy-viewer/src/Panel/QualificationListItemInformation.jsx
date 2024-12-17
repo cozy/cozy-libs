@@ -22,6 +22,7 @@ import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import QualificationListItemText from './QualificationListItemText'
+import IntentOpener from '../components/IntentOpener'
 
 const KNOWN_INFORMATION_METADATA_ICONS = [
   NumberIcon,
@@ -62,31 +63,40 @@ const QualificationListItemInformation = forwardRef(
       formattedTitle === name ? <MidEllipsis text={name} /> : formattedTitle
 
     return (
-      <ListItem>
-        <ListItemIcon>
-          <Icon icon={InformationIcon} />
-        </ListItemIcon>
-        <QualificationListItemText
-          primary={value ? titleComponent : undefined}
-          secondary={value ? formattedValue : titleComponent}
-          disabled={!value}
-        />
-        {value ? (
-          <ListItemSecondaryAction>
-            <IconButton
-              ref={ref}
-              onClick={() => toggleActionsMenu(value)}
-              data-testid="toggleActionsMenuBtn"
-            >
-              <Icon icon={Dots} />
-            </IconButton>
-          </ListItemSecondaryAction>
-        ) : (
+      <IntentOpener
+        action="OPEN"
+        doctype="io.cozy.files.paper"
+        options={{
+          path: `${qualificationLabel}/${file._id}/edit/information?metadata=${name}`
+        }}
+        disabled={!!value}
+      >
+        <ListItem button={!value}>
           <ListItemIcon>
-            <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
+            <Icon icon={InformationIcon} />
           </ListItemIcon>
-        )}
-      </ListItem>
+          <QualificationListItemText
+            primary={value ? titleComponent : undefined}
+            secondary={value ? formattedValue : titleComponent}
+            disabled={!value}
+          />
+          {value ? (
+            <ListItemSecondaryAction>
+              <IconButton
+                ref={ref}
+                onClick={() => toggleActionsMenu(value)}
+                data-testid="toggleActionsMenuBtn"
+              >
+                <Icon icon={Dots} />
+              </IconButton>
+            </ListItemSecondaryAction>
+          ) : (
+            <ListItemIcon>
+              <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
+            </ListItemIcon>
+          )}
+        </ListItem>
+      </IntentOpener>
     )
   }
 )

@@ -20,11 +20,13 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import QualificationListItemText from './QualificationListItemText'
 import ExpirationAnnotation from '../components/ExpirationAnnotation'
+import IntentOpener from '../components/IntentOpener'
 
 const QualificationListItemDate = forwardRef(
   ({ file, formattedMetadataQualification, toggleActionsMenu }, ref) => {
     const { f, lang } = useI18n()
     const { name, value } = formattedMetadataQualification
+    const qualificationLabel = file.metadata.qualification.label
     const formattedTitle = getTranslatedNameForDateMetadata(name, { lang })
     const formattedDate = formatDateMetadataValue(value, {
       f,
@@ -33,49 +35,58 @@ const QualificationListItemDate = forwardRef(
     const isExpirationDate = name === 'expirationDate'
 
     return (
-      <ListItem>
-        <ListItemIcon>
-          <Icon icon={CalendarIcon} />
-        </ListItemIcon>
-        <QualificationListItemText
-          primary={value ? formattedTitle : undefined}
-          secondary={
-            value ? (
-              <>
-                <Typography component="span" variant="inherit">
-                  {formattedDate}
-                </Typography>
-                {isExpirationDate &&
-                  (isExpired(file) || isExpiringSoon(file)) && (
-                    <>
-                      <Typography component="span" variant="inherit">
-                        {' · '}
-                      </Typography>
-                      <ExpirationAnnotation file={file} />
-                    </>
-                  )}
-              </>
-            ) : (
-              formattedTitle
-            )
-          }
-          disabled={!value}
-        />
-        {value ? (
-          <ListItemSecondaryAction>
-            <IconButton
-              ref={ref}
-              onClick={() => toggleActionsMenu(formattedDate)}
-            >
-              <Icon icon={Dots} />
-            </IconButton>
-          </ListItemSecondaryAction>
-        ) : (
+      <IntentOpener
+        action="OPEN"
+        doctype="io.cozy.files.paper"
+        options={{
+          path: `${qualificationLabel}/${file._id}/edit/information?metadata=${name}`
+        }}
+        disabled={!!value}
+      >
+        <ListItem>
           <ListItemIcon>
-            <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
+            <Icon icon={CalendarIcon} />
           </ListItemIcon>
-        )}
-      </ListItem>
+          <QualificationListItemText
+            primary={value ? formattedTitle : undefined}
+            secondary={
+              value ? (
+                <>
+                  <Typography component="span" variant="inherit">
+                    {formattedDate}
+                  </Typography>
+                  {isExpirationDate &&
+                    (isExpired(file) || isExpiringSoon(file)) && (
+                      <>
+                        <Typography component="span" variant="inherit">
+                          {' · '}
+                        </Typography>
+                        <ExpirationAnnotation file={file} />
+                      </>
+                    )}
+                </>
+              ) : (
+                formattedTitle
+              )
+            }
+            disabled={!value}
+          />
+          {value ? (
+            <ListItemSecondaryAction>
+              <IconButton
+                ref={ref}
+                onClick={() => toggleActionsMenu(formattedDate)}
+              >
+                <Icon icon={Dots} />
+              </IconButton>
+            </ListItemSecondaryAction>
+          ) : (
+            <ListItemIcon>
+              <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
+            </ListItemIcon>
+          )}
+        </ListItem>
+      </IntentOpener>
     )
   }
 )
