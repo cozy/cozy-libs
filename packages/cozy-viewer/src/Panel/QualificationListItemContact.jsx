@@ -17,6 +17,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import ActionMenuWrapper from './ActionMenuWrapper'
 import QualificationListItemText from './QualificationListItemText'
+import IntentOpener from '../components/IntentOpener'
 import useReferencedContactName from '../hooks/useReferencedContactName'
 
 const QualificationListItemContact = ({ file }) => {
@@ -43,6 +44,7 @@ const QualificationListItemContact = ({ file }) => {
   }
 
   const formattedTitle = getTranslatedNameForContact({ lang })
+  const qualificationLabel = file.metadata.qualification.label
 
   const hideActionsMenu = () => setOptionFile({ name: '', value: '' })
   const toggleActionsMenu = (name, value) =>
@@ -53,23 +55,32 @@ const QualificationListItemContact = ({ file }) => {
 
   return (
     <>
-      <ListItem>
-        <ListItemIcon>
-          <Icon icon={PeopleIcon} />
-        </ListItemIcon>
-        <QualificationListItemText
-          primary={formattedTitle}
-          secondary={formattedValue}
-        />
-        <ListItemSecondaryAction>
-          <IconButton
-            ref={actionBtnRef}
-            onClick={() => toggleActionsMenu('contact', formattedValue)}
-          >
-            <Icon icon={Dots} />
-          </IconButton>
-        </ListItemSecondaryAction>
-      </ListItem>
+      <IntentOpener
+        action="OPEN"
+        doctype="io.cozy.files.paper"
+        options={{
+          path: `${qualificationLabel}/${file._id}/edit/contact`
+        }}
+        disabled={!!formattedValue}
+      >
+        <ListItem>
+          <ListItemIcon>
+            <Icon icon={PeopleIcon} />
+          </ListItemIcon>
+          <QualificationListItemText
+            primary={formattedTitle}
+            secondary={formattedValue}
+          />
+          <ListItemSecondaryAction>
+            <IconButton
+              ref={actionBtnRef}
+              onClick={() => toggleActionsMenu('contact', formattedValue)}
+            >
+              <Icon icon={Dots} />
+            </IconButton>
+          </ListItemSecondaryAction>
+        </ListItem>
+      </IntentOpener>
 
       {optionFile.value && (
         <ActionMenuWrapper
