@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.1.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@9.0.2...cozy-viewer@9.1.0) (2024-12-18)
+
+
+### Features
+
+* **Viewer:** Add isReadOnly props on ViewerContainer ([01fefc2](https://github.com/cozy/cozy-libs/commit/01fefc25bf87a29a9d5ac1872b1cd104f599166c))
+* **Viewer:** Create IntentOpener to share props ([03923ad](https://github.com/cozy/cozy-libs/commit/03923adf41b49b8b3b67300ff0901f0a741089b6))
+* **Viewer:** Move Summary block below Qualification block ([b3d9b26](https://github.com/cozy/cozy-libs/commit/b3d9b262eabace3642446d3c483c5f4081fbf8b7))
+* **Viewer:** Remove click/edit action if isReadOnly ([4b9f832](https://github.com/cozy/cozy-libs/commit/4b9f832e337bf7e41cd0a80938b178b2f390de21))
+* **Viewer:** Use intent to edit metadata qualification ([ec65534](https://github.com/cozy/cozy-libs/commit/ec65534c47e15c7aff350fc9e473567b5d9cfca7))
+
+
+
+
+
 ## [9.0.2](https://github.com/cozy/cozy-libs/compare/cozy-viewer@9.0.1...cozy-viewer@9.0.2) (2024-12-16)
 
 
