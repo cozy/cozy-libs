@@ -197,6 +197,8 @@ export const isExpirationAlertHidden = file => {
 /**
  *
  * @param {import("cozy-client/types").IOCozyFile} file - io.cozy.file
+ * @param {boolean} isReadOnly - Is sharing read-only
  * @returns {boolean}
  */
-export const canEditQualification = file => !isFromKonnector(file)
+export const canEditQualification = (file, isReadOnly) =>
+  !isFromKonnector(file) && !isReadOnly

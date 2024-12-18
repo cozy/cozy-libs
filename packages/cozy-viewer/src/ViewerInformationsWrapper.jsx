@@ -17,6 +17,7 @@ const ViewerInformationsWrapper = ({
   validForPanel,
   toolbarRef,
   isPublic,
+  isReadOnly,
   children
 }) => {
   const theme = useTheme()
@@ -48,7 +49,11 @@ const ViewerInformationsWrapper = ({
       )}
       {validForPanel && (
         <InformationPanel>
-          <PanelContent file={currentFile} isPublic={isPublic} />
+          <PanelContent
+            file={currentFile}
+            isPublic={isPublic}
+            isReadOnly={isReadOnly}
+          />
         </InformationPanel>
       )}
     </>
@@ -61,6 +66,7 @@ ViewerInformationsWrapper.propTypes = {
   validForPanel: PropTypes.bool,
   toolbarRef: PropTypes.object,
   isPublic: PropTypes.bool,
+  isReadOnly: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node)

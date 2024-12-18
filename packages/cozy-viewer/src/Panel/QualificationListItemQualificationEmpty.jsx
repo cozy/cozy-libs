@@ -9,12 +9,21 @@ import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
+import { canEditQualification } from './helpers'
 import { withViewerLocales } from '../hoc/withViewerLocales'
 
-const QualificationListItemQualificationEmpty = ({ t, onClick }) => {
+const QualificationListItemQualificationEmpty = ({
+  file,
+  isReadOnly,
+  t,
+  onClick
+}) => {
   return (
     <List>
-      <ListItem button onClick={onClick}>
+      <ListItem
+        button={canEditQualification(file, isReadOnly)}
+        onClick={canEditQualification(file, isReadOnly) ? onClick : undefined}
+      >
         <ListItemIcon>
           <Icon icon={LabelOutlinedIcon} />
         </ListItemIcon>
@@ -25,9 +34,11 @@ const QualificationListItemQualificationEmpty = ({ t, onClick }) => {
           primary={t('Viewer.panel.qualification.empty.primary')}
           secondary={t('Viewer.panel.qualification.empty.secondary')}
         />
-        <ListItemIcon>
-          <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
-        </ListItemIcon>
+        {canEditQualification(file, isReadOnly) && (
+          <ListItemIcon>
+            <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
+          </ListItemIcon>
+        )}
       </ListItem>
     </List>
   )

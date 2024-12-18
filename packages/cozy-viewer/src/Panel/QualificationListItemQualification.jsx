@@ -13,7 +13,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { canEditQualification } from './helpers'
 
-const QualificationListItemQualification = ({ file, onClick }) => {
+const QualificationListItemQualification = ({ file, isReadOnly, onClick }) => {
   const { lang } = useI18n()
   const value = file.metadata.qualification.label
 
@@ -26,8 +26,8 @@ const QualificationListItemQualification = ({ file, onClick }) => {
     <ListItem
       size="large"
       divider
-      button={canEditQualification(file)}
-      onClick={canEditQualification(file) ? onClick : undefined}
+      button={canEditQualification(file, isReadOnly)}
+      onClick={canEditQualification(file, isReadOnly) ? onClick : undefined}
     >
       <ListItemIcon>
         <QualificationIconStack qualification={value} />
@@ -36,7 +36,7 @@ const QualificationListItemQualification = ({ file, onClick }) => {
         primary={<MidEllipsis text={formattedValue} />}
         primaryTypographyProps={{ variant: 'h6' }}
       />
-      {canEditQualification(file) && (
+      {canEditQualification(file, isReadOnly) && (
         <ListItemIcon>
           <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
         </ListItemIcon>

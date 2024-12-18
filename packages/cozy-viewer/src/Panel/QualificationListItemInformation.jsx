@@ -43,7 +43,10 @@ const makeInformationMetadataIcon = name =>
   ]
 
 const QualificationListItemInformation = forwardRef(
-  ({ formattedMetadataQualification, file, toggleActionsMenu }, ref) => {
+  (
+    { formattedMetadataQualification, file, isReadOnly, toggleActionsMenu },
+    ref
+  ) => {
     const { lang } = useI18n()
     const { name, value } = formattedMetadataQualification
     const qualificationLabel = file.metadata.qualification.label
@@ -69,9 +72,9 @@ const QualificationListItemInformation = forwardRef(
         options={{
           path: `${qualificationLabel}/${file._id}/edit/information?metadata=${name}`
         }}
-        disabled={!!value}
+        disabled={!!value || isReadOnly}
       >
-        <ListItem button={!value}>
+        <ListItem button={!value && !isReadOnly}>
           <ListItemIcon>
             <Icon icon={InformationIcon} />
           </ListItemIcon>
@@ -91,9 +94,11 @@ const QualificationListItemInformation = forwardRef(
               </IconButton>
             </ListItemSecondaryAction>
           ) : (
-            <ListItemIcon>
-              <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
-            </ListItemIcon>
+            !isReadOnly && (
+              <ListItemIcon>
+                <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
+              </ListItemIcon>
+            )
           )}
         </ListItem>
       </IntentOpener>
@@ -104,6 +109,8 @@ const QualificationListItemInformation = forwardRef(
 QualificationListItemInformation.displayName = 'QualificationListItemNumber'
 
 QualificationListItemInformation.propTypes = {
+  file: PropTypes.object.isRequired,
+  isReadOnly: PropTypes.bool,
   formattedMetadataQualification: PropTypes.shape({
     name: PropTypes.string,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
