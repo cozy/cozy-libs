@@ -20,7 +20,7 @@ import QualificationListItemText from './QualificationListItemText'
 import IntentOpener from '../components/IntentOpener'
 import useReferencedContactName from '../hooks/useReferencedContactName'
 
-const QualificationListItemContact = ({ file }) => {
+const QualificationListItemContact = ({ file, isReadOnly }) => {
   const { lang } = useI18n()
   const actionBtnRef = useRef()
   const [optionFile, setOptionFile] = useState({
@@ -61,9 +61,9 @@ const QualificationListItemContact = ({ file }) => {
         options={{
           path: `${qualificationLabel}/${file._id}/edit/contact`
         }}
-        disabled={!!formattedValue}
+        disabled={!!formattedValue || isReadOnly}
       >
-        <ListItem>
+        <ListItem button={!formattedValue && !isReadOnly}>
           <ListItemIcon>
             <Icon icon={PeopleIcon} />
           </ListItemIcon>
@@ -95,7 +95,8 @@ const QualificationListItemContact = ({ file }) => {
 }
 
 QualificationListItemContact.propTypes = {
-  file: PropTypes.object.isRequired
+  file: PropTypes.object.isRequired,
+  isReadOnly: PropTypes.bool
 }
 
 export default QualificationListItemContact

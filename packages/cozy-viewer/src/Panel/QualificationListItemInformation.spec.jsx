@@ -2,23 +2,22 @@ import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 
 import QualificationListItemInformation from './QualificationListItemInformation'
-
-jest.mock('cozy-ui/transpiled/react/providers/I18n', () => ({
-  useI18n: jest.fn(() => ({ t: x => x }))
-}))
+import DemoProvider from '../providers/DemoProvider'
 
 const setup = ({
   formattedMetadataQualification = {},
   toggleActionsMenu = jest.fn()
 } = {}) => {
   return render(
-    <QualificationListItemInformation
-      formattedMetadataQualification={formattedMetadataQualification}
-      toggleActionsMenu={toggleActionsMenu}
-      file={{
-        metadata: { qualification: { label: 'label_of_qualification' } }
-      }}
-    />
+    <DemoProvider>
+      <QualificationListItemInformation
+        formattedMetadataQualification={formattedMetadataQualification}
+        toggleActionsMenu={toggleActionsMenu}
+        file={{
+          metadata: { qualification: { label: 'label_of_qualification' } }
+        }}
+      />
+    </DemoProvider>
   )
 }
 
@@ -43,6 +42,7 @@ describe('QualificationListItemInformation', () => {
       expect(queryByText('No information')).toBeNull()
       expect(queryByText('Italie')).toBeInTheDocument()
     })
+
     it('should display current value if it number type', () => {
       const formattedMetadataQualification = { name: 'country', value: 0 }
       const { queryByText } = setup({
@@ -53,6 +53,7 @@ describe('QualificationListItemInformation', () => {
       expect(queryByText('0')).toBeInTheDocument()
     })
   })
+
   describe('toggleActionsMenu', () => {
     it('should call toggleActionsMenu with current value on click it', () => {
       const formattedMetadataQualification = {

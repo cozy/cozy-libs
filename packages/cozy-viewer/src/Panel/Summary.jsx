@@ -24,7 +24,7 @@ import QualificationListItemText from './QualificationListItemText'
 import SummaryDialog from './SummaryDialog'
 import { withViewerLocales } from '../hoc/withViewerLocales'
 
-const Summary = ({ file, t }) => {
+const Summary = ({ file, isReadOnly, t }) => {
   const [showModal, setShowModal] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
   const anchorRef = useRef()
@@ -32,9 +32,11 @@ const Summary = ({ file, t }) => {
 
   const label = t('Viewer.panel.summary')
   const value = file.metadata?.description
-  const actions = makeActions([copyToClipboard, editAttribute])
+  const actions = makeActions([copyToClipboard, !isReadOnly && editAttribute])
 
   const handleClick = async () => {
+    if (isReadOnly) return
+
     if (value) {
       await copyToClipboard().action(undefined, { showAlert, copyValue: value })
     } else {
@@ -44,7 +46,7 @@ const Summary = ({ file, t }) => {
 
   return (
     <List>
-      <ListItem button onClick={handleClick}>
+      <ListItem button={!isReadOnly} onClick={handleClick}>
         <ListItemIcon>
           <Icon icon={TextIcon} />
         </ListItemIcon>
@@ -61,9 +63,11 @@ const Summary = ({ file, t }) => {
             </IconButton>
           </ListItemSecondaryAction>
         ) : (
-          <ListItemIcon>
-            <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
-          </ListItemIcon>
+          !isReadOnly && (
+            <ListItemIcon>
+              <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
+            </ListItemIcon>
+          )
         )}
       </ListItem>
       {showModal && (

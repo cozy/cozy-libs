@@ -9,7 +9,7 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import getPanelBlocks, { getPanelBlocksSpecs } from './getPanelBlocks'
 import { withViewerLocales } from '../hoc/withViewerLocales'
 
-const PanelContent = ({ file, isPublic, t }) => {
+const PanelContent = ({ file, isPublic, isReadOnly, t }) => {
   const panelBlocks = getPanelBlocks({
     panelBlocksSpecs: getPanelBlocksSpecs(isPublic),
     file
@@ -33,7 +33,7 @@ const PanelContent = ({ file, isPublic, t }) => {
           elevation={2}
           square
         >
-          <PanelBlock file={file} isPublic={isPublic} />
+          <PanelBlock file={file} isPublic={isPublic} isReadOnly={isReadOnly} />
         </Paper>
       ))}
     </Stack>
@@ -42,7 +42,8 @@ const PanelContent = ({ file, isPublic, t }) => {
 
 PanelContent.propTypes = {
   file: PropTypes.object.isRequired,
-  isPublic: PropTypes.bool
+  isPublic: PropTypes.bool,
+  isReadOnly: PropTypes.bool
 }
 
 export default withViewerLocales(PanelContent)
