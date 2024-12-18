@@ -1,7 +1,9 @@
 import cx from 'classnames'
 import PropTypes from 'prop-types'
-import React, { createRef } from 'react'
+import React, { createRef, useState, useEffect } from 'react'
 
+import { useClient } from 'cozy-client'
+import { isDocumentReadOnly } from 'cozy-client/dist/models/permission'
 import Modal from 'cozy-ui/transpiled/react/Modal'
 import { FileDoctype } from 'cozy-ui/transpiled/react/proptypes'
 import AlertProvider from 'cozy-ui/transpiled/react/providers/Alert'
@@ -31,6 +33,8 @@ const ViewerContainer = props => {
   const { currentIndex, files, currentURL } = props
   const toolbarRef = createRef()
   const { isDesktop } = useBreakpoints()
+  const [isReadOnly, setIsReadOnly] = useState(true)
+  const client = useClient()
   useExtendI18n(locales)
   const currentFile = files[currentIndex]
   const fileCount = files.length
@@ -46,6 +50,19 @@ const ViewerContainer = props => {
       ...componentsProps?.toolbarProps
     }
   }
+
+  useEffect(() => {
+    const getIsReadOnly = async () => {
+      const res = await isDocumentReadOnly({
+        document: currentFile,
+        client
+      })
+
+      setIsReadOnly(res)
+    }
+
+    getIsReadOnly()
+  }, [client, currentFile])
 
   return (
     <AlertProvider>
@@ -69,6 +86,7 @@ const ViewerContainer = props => {
           </EncryptedProvider>
           <ViewerInformationsWrapper
             isPublic={isPublic}
+            isReadOnly={isReadOnly}
             disableFooter={disableFooter}
             validForPanel={validForPanel}
             currentFile={currentFile}
