@@ -8,27 +8,35 @@ const KONNECTORS_DOCTYPE = 'io.cozy.konnectors'
 
 export const useKonnectorWithTriggers = (slug, injectedKonnector) => {
   const client = useClient()
-  const [isFetching, setIsFetching] = useState(true)
+  const [isFetchingKonnector, setIsFetchingKonnector] = useState(true)
+  const [isFetchingTriggers, setIsFetchingTriggers] = useState(true)
   const [triggers, setTriggers] = useState({ data: [] })
   const [konnector, setKonnector] = useState({})
 
   useEffect(() => {
-    async function load() {
-      if (injectedKonnector) {
-        setKonnector(injectedKonnector)
-        setTriggers(injectedKonnector.triggers)
-      } else {
-        const [konnector, triggers] = await Promise.all([
-          getKonnector(client, slug),
-          getTriggers(client, slug)
-        ])
-        setKonnector(konnector)
-        setTriggers({ data: triggers })
-      }
-      setIsFetching(false)
+    async function _getKonnector() {
+      // need to do getKonnector anyway to force the update of the konnector to be
+      // sure to have updated konnector fields
+      const konnector = await getKonnector(client, slug)
+      setKonnector(konnector)
+      setIsFetchingKonnector(false)
     }
 
-    load()
+    _getKonnector()
+  }, [client, slug])
+
+  useEffect(() => {
+    async function _getTriggers() {
+      if (injectedKonnector) {
+        setTriggers(injectedKonnector.triggers)
+      } else {
+        const triggers = await getTriggers(client, slug)
+        setTriggers({ data: triggers })
+      }
+      setIsFetchingTriggers(false)
+    }
+
+    _getTriggers()
   }, [client, injectedKonnector, slug])
 
   useEffect(() => {
@@ -52,8 +60,8 @@ export const useKonnectorWithTriggers = (slug, injectedKonnector) => {
   }
   return {
     konnectorWithTriggers,
-    fetching: isFetching,
-    notFoundError: !isFetching && !konnector
+    fetching: isFetchingKonnector || isFetchingTriggers,
+    notFoundError: !(isFetchingKonnector || isFetchingTriggers) && !konnector
   }
 }
 
