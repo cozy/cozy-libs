@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.17.0...cozy-sharing@17.0.0) (2024-12-18)
+
+
+### Features
+
+* Add NativeFileSharingProvider and shareNative action ([71ba4e1](https://github.com/cozy/cozy-libs/commit/71ba4e120a5518534867cd1f1541502652f9b979))
+
+
+### BREAKING CHANGES
+
+* you now need cozy-intent >=2.29.1
+and cozy-device-helper >= 3.7.1 with cozy-sharing
+
+
+
+
+
 # [16.17.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.16.0...cozy-sharing@16.17.0) (2024-12-12)
 
 
