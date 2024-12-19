@@ -3,8 +3,24 @@ import React, { useState } from 'react'
 
 import Backdrop from 'cozy-ui/transpiled/react/Backdrop'
 import IntentDialogOpener from 'cozy-ui/transpiled/react/IntentDialogOpener'
+import Portal from 'cozy-ui/transpiled/react/Portal'
 
-const IntentOpener = ({ action, doctype, options, disabled, children }) => {
+const PortalBackdrop = ({ children, ...props }) => {
+  return (
+    <Portal into="body">
+      <Backdrop {...props}>{children}</Backdrop>
+    </Portal>
+  )
+}
+
+const IntentOpener = ({
+  action,
+  doctype,
+  options,
+  disabled,
+  children,
+  ...props
+}) => {
   const [isLoading, setIsLoading] = useState(true)
 
   if (disabled) {
@@ -13,10 +29,11 @@ const IntentOpener = ({ action, doctype, options, disabled, children }) => {
 
   return (
     <IntentDialogOpener
+      {...props}
       action={action}
       doctype={doctype}
       options={options}
-      Component={Backdrop}
+      Component={PortalBackdrop}
       invisible={!isLoading}
       isOver
       showCloseButton={false}
