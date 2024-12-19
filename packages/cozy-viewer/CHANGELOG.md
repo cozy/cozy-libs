@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@9.1.1...cozy-viewer@10.0.0) (2024-12-19)
+
+
+### Bug Fixes
+
+* **Viewer:** Now use portal to open intents ([4e57015](https://github.com/cozy/cozy-libs/commit/4e570151b22b2ede47fc9872c16131fd8eb7ffe7))
+
+
+### Features
+
+* **Viewer:** Remove editPathByModelProps ([5273c4b](https://github.com/cozy/cozy-libs/commit/5273c4ba31c2a7500ace0ac0f766507b0aa2b593))
+
+
+### BREAKING CHANGES
+
+* **Viewer:** You no longer need to set props
+`editPathByModelProps`. Used to set a path to edit qualification
+metadata. Now we use intents to do that.
+
+
+
+
+
 ## [9.1.1](https://github.com/cozy/cozy-libs/compare/cozy-viewer@9.1.0...cozy-viewer@9.1.1) (2024-12-18)
 
 **Note:** Version bump only for package cozy-viewer
