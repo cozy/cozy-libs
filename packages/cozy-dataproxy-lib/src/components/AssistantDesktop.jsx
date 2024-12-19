@@ -15,7 +15,7 @@ const AssistantDesktop = ({ componentsProps }) => {
   useExtendI18n(locales)
 
   return (
-    <div className="u-mh-auto u-w-100" style={{ maxWidth: '100%' }}>
+    <div className="u-mh-auto u-w-100 u-maw-100">
       <AssistantProvider>
         <SearchProvider>
           <SearchBar componentsProps={componentsProps} />
