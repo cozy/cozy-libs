@@ -9,6 +9,7 @@ import ListItemSkeleton from 'cozy-ui/transpiled/react/Skeletons/ListItemSkeleto
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
+import NoResultItem from './NoResultItem'
 import ResultMenuItem from './ResultMenuItem'
 import { useSearch } from '../Search/SearchProvider'
 import { isAssistantEnabled } from '../helpers'
@@ -24,6 +25,10 @@ const SearchResult = () => {
         <ListItemSkeleton hasSecondary />
       </>
     )
+  }
+
+  if (!isLoading && !results?.length && !isAssistantEnabled()) {
+    return <NoResultItem />
   }
 
   return results.map((result, idx) => (

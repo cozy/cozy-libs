@@ -3,7 +3,8 @@
     "search": {
       "placeholder": "Any question?",
       "send": "Send",
-      "result": "Ask the assistant"
+      "result": "Ask the assistant",
+      "noItem": "No results"
     },
     "dialog": {
       "close": "Close"

@@ -3,7 +3,8 @@
     "search": {
       "placeholder": "Une question ?",
       "send": "Envoyer",
-      "result": "Demander à l'assistant"
+      "result": "Demander à l'assistant",
+      "noItem": "Aucun résultat"
     },
     "dialog": {
       "close": "Fermer"
