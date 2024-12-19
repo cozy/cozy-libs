@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@2.0.0...cozy-dataproxy-lib@2.1.0) (2024-12-19)
+
+
+### Bug Fixes
+
+* Deal with malformed docs ([c758aed](https://github.com/cozy/cozy-libs/commit/c758aed7bf7f2f3796f824ddd20e1de7e4ee97b6))
+* Force iframe style dimension to 0 ([909dc07](https://github.com/cozy/cozy-libs/commit/909dc07f7cdfa41f5d6842564231f04adf77d9af))
+
+
+### Features
+
+* Display message if no results and no assistant ([9d1c3b0](https://github.com/cozy/cozy-libs/commit/9d1c3b0227edfc7f29360dc4f220824a97878efc))
+
+
+
+
+
 # [2.0.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.9.0...cozy-dataproxy-lib@2.0.0) (2024-12-19)
 
 
