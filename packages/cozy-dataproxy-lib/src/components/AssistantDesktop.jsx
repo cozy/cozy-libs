@@ -24,7 +24,7 @@ const AssistantDesktop = ({ componentsProps }) => {
 AssistantDesktop.propTypes = {
   componentsProps: PropTypes.shape({
     SearchBarDesktop: PropTypes.shape({
-      elevation: PropTypes.boolean,
+      elevation: PropTypes.bool,
       size: PropTypes.string,
       hasHalfBorderRadius: PropTypes.bool
     })
