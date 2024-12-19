@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.9.0...cozy-dataproxy-lib@2.0.0) (2024-12-19)
+
+
+### Bug Fixes
+
+* Invalid proptypes for AssistantDesktop ([be7fec2](https://github.com/cozy/cozy-libs/commit/be7fec28ab1500a30befe0ccc257d37e2684f3e3))
+
+
+### Features
+
+* Add subpath exports ([512e816](https://github.com/cozy/cozy-libs/commit/512e816cfe71a5087060d6cb001dc4f235b744f4))
+* Move cozy-device-helper to peerDeps ([90dd54e](https://github.com/cozy/cozy-libs/commit/90dd54e57f86eb1d3f35a7d0da1df2929d58adfb))
+
+
+### BREAKING CHANGES
+
+* you now need cozy-device-helper >= 3.7.1
+
+
+
+
+
 # [1.9.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@1.8.4...cozy-dataproxy-lib@1.9.0) (2024-12-17)
 
 
