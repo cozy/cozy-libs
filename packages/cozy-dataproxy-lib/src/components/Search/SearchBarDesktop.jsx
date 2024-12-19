@@ -2,7 +2,6 @@ import AssistantIcon from 'assets/icons/icon-assistant.png'
 import React, { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import flag from 'cozy-flags'
 import ClickAwayListener from 'cozy-ui/transpiled/react/ClickAwayListener'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
@@ -12,7 +11,7 @@ import { useSearch } from './SearchProvider'
 import styles from './styles.styl'
 import { useAssistant } from '../AssistantProvider'
 import ResultMenu from '../ResultMenu/ResultMenu'
-import { makeConversationId } from '../helpers'
+import { isAssistantEnabled, makeConversationId } from '../helpers'
 
 const SearchBarDesktop = ({
   value,
@@ -29,10 +28,8 @@ const SearchBarDesktop = ({
   const searchRef = useRef()
   const listRef = useRef()
 
-  const isAssistantEnabled = flag('cozy.assistant.enabled')
-
   const handleClick = () => {
-    if (!isAssistantEnabled) return
+    if (!isAssistantEnabled()) return
 
     const conversationId = makeConversationId()
     onAssistantExecute({ value, conversationId })
@@ -107,7 +104,7 @@ const SearchBarDesktop = ({
             )
           }
           placeholder={
-            isAssistantEnabled ? t('assistant.search.placeholder') : undefined // fallback on SearchBar default
+            isAssistantEnabled() ? t('assistant.search.placeholder') : undefined // fallback on SearchBar default
           }
           value={value}
           componentsProps={{
