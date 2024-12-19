@@ -399,6 +399,13 @@ export class SearchEngine {
   }
 
   compareStrings(str1: string, str2: string): number {
+    if (!str1 && !str2) {
+      return 0
+    } else if (!str1) {
+      return 1
+    } else if (!str2) {
+      return -1
+    }
     return str1.localeCompare(str2, undefined, { numeric: true })
   }
 
@@ -412,13 +419,13 @@ export class SearchEngine {
         isIOCozyApp(a.doc) &&
         isIOCozyApp(b.doc)
       ) {
-        return this.compareStrings(a.doc.slug, b.doc.slug)
+        return this.compareStrings(a.doc?.slug, b.doc?.slug)
       } else if (
         a.doctype === CONTACTS_DOCTYPE &&
         isIOCozyContact(a.doc) &&
         isIOCozyContact(b.doc)
       ) {
-        return this.compareStrings(a.doc.displayName, b.doc.displayName)
+        return this.compareStrings(a.doc?.displayName, b.doc?.displayName)
       } else if (
         a.doctype === FILES_DOCTYPE &&
         isIOCozyFile(a.doc) &&
@@ -444,7 +451,7 @@ export class SearchEngine {
       return aRes.doc.type === 'directory' ? -1 : 1
     }
     // Then name
-    return this.compareStrings(aRes.doc.name, bRes.doc.name)
+    return this.compareStrings(aRes.doc?.name, bRes.doc?.name)
   }
 
   limitSearchResults(searchResults: RawSearchResult[]): RawSearchResult[] {
