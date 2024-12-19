@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { forwardRef } from 'react'
 
-import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Copy from 'cozy-ui/transpiled/react/Icons/Copy'
 import Edit from 'cozy-ui/transpiled/react/Icons/Rename'
@@ -12,10 +11,10 @@ import ActionMenu, {
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import styles from './styles.styl'
+import IntentOpener from '../components/IntentOpener'
 
 const ActionMenuDesktop = forwardRef(
-  ({ onClose, isEditable, actions, appLink, appSlug }, ref) => {
-    const { handleCopy, handleEdit } = actions
+  ({ actions, isEditable, onClose }, ref) => {
     const { t } = useI18n()
 
     return (
@@ -25,24 +24,24 @@ const ActionMenuDesktop = forwardRef(
         anchorElRef={ref}
       >
         {isEditable && (
-          <AppLinker app={{ slug: appSlug }} href={appLink}>
-            {({ onClick, href }) => {
-              return (
-                <a href={href} onClick={() => handleEdit(onClick)}>
-                  <ActionMenuItem
-                    left={<Icon icon={Edit} color="var(--iconTextColor)" />}
-                  >
-                    <Typography>
-                      {t(`Viewer.panel.qualification.actions.edit`)}
-                    </Typography>
-                  </ActionMenuItem>
-                </a>
-              )
-            }}
-          </AppLinker>
+          <IntentOpener
+            action="OPEN"
+            doctype="io.cozy.files.paper"
+            options={{ path: actions.edit.path }}
+            onComplete={onClose}
+            onDismiss={onClose}
+          >
+            <ActionMenuItem
+              left={<Icon icon={Edit} color="var(--iconTextColor)" />}
+            >
+              <Typography>
+                {t(`Viewer.panel.qualification.actions.edit`)}
+              </Typography>
+            </ActionMenuItem>
+          </IntentOpener>
         )}
         <ActionMenuItem
-          onClick={handleCopy}
+          onClick={actions.copy.onClick}
           left={<Icon icon={Copy} color="var(--iconTextColor)" />}
         >
           <Typography>
@@ -53,17 +52,16 @@ const ActionMenuDesktop = forwardRef(
     )
   }
 )
+
 ActionMenuDesktop.displayName = 'ActionMenuDesktop'
 
 ActionMenuDesktop.propTypes = {
-  onClose: PropTypes.func,
-  isEditable: PropTypes.bool,
   actions: PropTypes.shape({
-    handleCopy: PropTypes.func,
-    handleEdit: PropTypes.func
+    copy: PropTypes.object,
+    edit: PropTypes.object
   }),
-  appLink: PropTypes.string,
-  appSlug: PropTypes.string
+  isEditable: PropTypes.bool,
+  onClose: PropTypes.func
 }
 
 export default ActionMenuDesktop

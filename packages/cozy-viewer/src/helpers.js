@@ -4,23 +4,6 @@ import {
   isFromKonnector,
   normalize
 } from 'cozy-client/dist/models/file'
-import {
-  KNOWN_DATE_METADATA_NAMES,
-  KNOWN_INFORMATION_METADATA_NAMES,
-  KNOWN_BILLS_ATTRIBUTES_NAMES
-} from 'cozy-client/dist/models/paper'
-
-export const getCurrentModel = metadataName => {
-  if (
-    KNOWN_DATE_METADATA_NAMES.includes(metadataName) ||
-    KNOWN_INFORMATION_METADATA_NAMES.includes(metadataName) ||
-    KNOWN_BILLS_ATTRIBUTES_NAMES.includes(metadataName)
-  ) {
-    return 'information'
-  }
-  if (metadataName === 'contact') return 'contact'
-  if (metadataName === 'page') return 'page'
-}
 
 /**
  * @typedef {object} Reference
@@ -35,21 +18,6 @@ export const formatDate = ({ f, lang, date }) => {
     return f(date, 'MM/DD/YYYY')
   }
   return f(date, 'DD/MM/YYYY')
-}
-
-/**
- * @param {{ information: string, page: string }} editPathByModelProps
- * @param {string} currentModel
- * @param {string} name
- * @returns {string}
- */
-export const buildEditAttributePath = (
-  editPathByModelProps,
-  currentModel,
-  name
-) => {
-  const currentPath = editPathByModelProps[currentModel]
-  return currentPath?.replace(/__NAME__/, name) ?? ''
 }
 
 export const isEditableAttribute = (name, file) => {

@@ -16,7 +16,6 @@ import Viewer from './Viewer'
 import ViewerInformationsWrapper from './ViewerInformationsWrapper'
 import { locales } from './locales'
 import { toolbarPropsPropType } from './proptypes'
-import { ActionMenuProvider } from './providers/ActionMenuProvider'
 import styles from './styles.styl'
 
 const ViewerContainer = props => {
@@ -24,7 +23,6 @@ const ViewerContainer = props => {
     className,
     disableFooter,
     disablePanel,
-    editPathByModelProps,
     children,
     componentsProps,
     isPublic,
@@ -66,36 +64,34 @@ const ViewerContainer = props => {
 
   return (
     <AlertProvider>
-      <ActionMenuProvider editPathByModelProps={editPathByModelProps}>
-        <div
-          id="viewer-wrapper"
-          className={cx(styles['viewer-wrapper'], className)}
-        >
-          <EncryptedProvider url={currentURL}>
-            <Viewer
-              {...rest}
-              componentsProps={componentsPropsWithDefault}
-              currentFile={currentFile}
-              hasPrevious={hasPrevious}
-              hasNext={hasNext}
-              validForPanel={validForPanel}
-              toolbarRef={toolbarRef}
-            >
-              {children}
-            </Viewer>
-          </EncryptedProvider>
-          <ViewerInformationsWrapper
-            isPublic={isPublic}
-            isReadOnly={isReadOnly}
-            disableFooter={disableFooter}
-            validForPanel={validForPanel}
+      <div
+        id="viewer-wrapper"
+        className={cx(styles['viewer-wrapper'], className)}
+      >
+        <EncryptedProvider url={currentURL}>
+          <Viewer
+            {...rest}
+            componentsProps={componentsPropsWithDefault}
             currentFile={currentFile}
+            hasPrevious={hasPrevious}
+            hasNext={hasNext}
+            validForPanel={validForPanel}
             toolbarRef={toolbarRef}
           >
             {children}
-          </ViewerInformationsWrapper>
-        </div>
-      </ActionMenuProvider>
+          </Viewer>
+        </EncryptedProvider>
+        <ViewerInformationsWrapper
+          isPublic={isPublic}
+          isReadOnly={isReadOnly}
+          disableFooter={disableFooter}
+          validForPanel={validForPanel}
+          currentFile={currentFile}
+          toolbarRef={toolbarRef}
+        >
+          {children}
+        </ViewerInformationsWrapper>
+      </div>
     </AlertProvider>
   )
 }
@@ -116,13 +112,6 @@ ViewerContainer.propTypes = {
   showNavigation: PropTypes.bool,
   /** A render prop that is called when a file can't be displayed */
   renderFallbackExtraContent: PropTypes.func,
-  /** Edit path by model properties */
-  editPathByModelProps: PropTypes.shape({
-    /** URL used to edit the file when editing a `information` type metadata (text, date) */
-    information: PropTypes.string,
-    /** URL used to edit the file when editing a `page` type metadata (side of the document) */
-    page: PropTypes.string
-  }),
   /** Show/Hide the panel containing more information about the file only on Desktop */
   disablePanel: PropTypes.bool,
   /** Show/Hide the panel containing more information about the file only on Phone & Tablet devices */
