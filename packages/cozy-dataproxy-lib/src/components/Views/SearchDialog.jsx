@@ -6,8 +6,7 @@ import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import useExtendI18n from 'cozy-ui/transpiled/react/providers/I18n/useExtendI18n'
 
-import localesEn from '../../locales/en.json'
-import localesFr from '../../locales/fr.json'
+import { locales } from '../../locales'
 import AssistantProvider, { useAssistant } from '../AssistantProvider'
 import ResultMenuContent from '../ResultMenu/ResultMenuContent'
 import SearchBar from '../Search/SearchBar'
@@ -15,8 +14,6 @@ import { useSearch } from '../Search/SearchProvider'
 import SearchProvider from '../Search/SearchProvider'
 import SearchSubmitFab from '../Search/SearchSubmitFab'
 import { makeConversationId } from '../helpers'
-
-const locales = { fr: localesFr, en: localesEn }
 
 const SearchDialog = () => {
   useExtendI18n(locales)

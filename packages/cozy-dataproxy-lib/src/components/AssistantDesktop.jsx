@@ -6,10 +6,7 @@ import useExtendI18n from 'cozy-ui/transpiled/react/providers/I18n/useExtendI18n
 import AssistantProvider from './AssistantProvider'
 import SearchBar from './Search/SearchBar'
 import SearchProvider from './Search/SearchProvider'
-import localesEn from '../locales/en.json'
-import localesFr from '../locales/fr.json'
-
-const locales = { fr: localesFr, en: localesEn }
+import { locales } from '../locales'
 
 const AssistantDesktop = ({ componentsProps }) => {
   useExtendI18n(locales)

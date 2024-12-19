@@ -7,10 +7,7 @@ import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import useExtendI18n from 'cozy-ui/transpiled/react/providers/I18n/useExtendI18n'
 
-import localesEn from '../locales/en.json'
-import localesFr from '../locales/fr.json'
-
-const locales = { fr: localesFr, en: localesEn }
+import { locales } from '../locales'
 
 export const AssistantMobile = () => {
   const { t } = useI18n()
