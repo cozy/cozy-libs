@@ -97,6 +97,10 @@ export const DataProxyProvider = React.memo(({ children }) => {
           src={iframeUrl}
           width={0}
           height={0}
+          style={{
+            width: 0,
+            height: 0
+          }}
           sandbox="allow-same-origin allow-scripts"
           onLoad={onIframeLoaded}
         ></iframe>
