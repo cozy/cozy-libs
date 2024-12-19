@@ -6,9 +6,6 @@
   "bugs": {
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
-  "dependencies": {
-    "lodash": "^4.17.19"
-  },
   "devDependencies": {
     "@babel/cli": "7.16.8",
     "@babel/core": "7.16.12",
