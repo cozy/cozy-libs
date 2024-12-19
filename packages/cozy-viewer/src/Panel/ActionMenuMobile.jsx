@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
 import BottomSheet, {
   BottomSheetItem
 } from 'cozy-ui/transpiled/react/BottomSheet'
@@ -14,42 +13,34 @@ import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-const ActionMenuMobile = ({
-  onClose,
-  isEditable,
-  actions,
-  appLink,
-  appSlug
-}) => {
+import IntentOpener from '../components/IntentOpener'
+
+const ActionMenuMobile = ({ actions, isEditable, onClose }) => {
   const { t } = useI18n()
-  const { handleCopy, handleEdit } = actions
 
   return (
     <BottomSheet backdrop onClose={onClose}>
       <BottomSheetItem disableGutters>
         <List>
           {isEditable && (
-            <AppLinker app={{ slug: appSlug }} href={appLink}>
-              {({ onClick, href }) => {
-                return (
-                  <ListItem
-                    button
-                    component="a"
-                    href={href}
-                    onClick={() => handleEdit(onClick)}
-                  >
-                    <ListItemIcon>
-                      <Icon icon={Edit} />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={t(`Viewer.panel.qualification.actions.edit`)}
-                    />
-                  </ListItem>
-                )
-              }}
-            </AppLinker>
+            <IntentOpener
+              action="OPEN"
+              doctype="io.cozy.files.paper"
+              options={{ path: actions.edit.path }}
+              onComplete={onClose}
+              onDismiss={onClose}
+            >
+              <ListItem button>
+                <ListItemIcon>
+                  <Icon icon={Edit} />
+                </ListItemIcon>
+                <ListItemText
+                  primary={t(`Viewer.panel.qualification.actions.edit`)}
+                />
+              </ListItem>
+            </IntentOpener>
           )}
-          <ListItem button onClick={handleCopy}>
+          <ListItem button onClick={actions.copy.onClick}>
             <ListItemIcon>
               <Icon icon={Copy} />
             </ListItemIcon>
@@ -64,13 +55,12 @@ const ActionMenuMobile = ({
 }
 
 ActionMenuMobile.propTypes = {
-  onClose: PropTypes.func,
-  isEditable: PropTypes.bool,
   actions: PropTypes.shape({
-    handleCopy: PropTypes.func,
-    handleEdit: PropTypes.func
+    copy: PropTypes.object,
+    edit: PropTypes.object
   }),
-  appLink: PropTypes.string
+  isEditable: PropTypes.bool,
+  onClose: PropTypes.func
 }
 
 export default ActionMenuMobile

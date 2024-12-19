@@ -21,9 +21,6 @@ The `Viewer` can display an **information panel** to show additional information
 - **disablePanel** : `<boolean>` – Show/Hide the panel containing more information about the file only on Desktop
 - **disableFooter** : `<boolean>` – Show/Hide the panel containing more information about the file only on Phone & Tablet devices
 - **disableModal** : `<boolean>` – To avoid wrapping the Viewer with a Modal component (wrapper of Viewer)
-- **editPathByModelProps** : `<object>` – Edit path by model properties
-  - **information** : `<string>` – URL used to edit the file when editing a `information` type metadata (text, date)
-  - **page** : `<string>` – URL used to edit the file when editing a `page` type metadata (side of the document)
 - **onChangeRequest** : `<function>` - Called with (nextFile, nextIndex) when the user requests to navigate to another file
 - **onCloseRequest** : `<function>` - Called when the user wants to leave the Viewer
 - **isPublic**: `<boolean>` - Whether the viewer is used in a public page or not
@@ -222,10 +219,8 @@ const toggleViewer = () => setState({ viewerOpened: !state.viewerOpened })
 const handleToggleToolbarClose = () => setState({ showToolbarCloseButton: !state.showToolbarCloseButton })
 const handleToggleToolbarWithPath = () => setState({ showToolbarWithPath: !state.showToolbarWithPath })
 const onFileChange = (file, nextIndex) => setState({ currentIndex: nextIndex, currentURL: getURL(file) })
-const editPathByModelProps = {
-  information: `#!/Viewer?metadata=__NAME__`,
-  page: `#!/Viewer`
-};
+
+;
 
 <DemoProvider>
   <Variants initialVariants={initialVariants}>{
@@ -257,7 +252,6 @@ const editPathByModelProps = {
               currentURL={state.currentURL}
               disableModal={variant.disableModal}
               showNavigation={variant.navigation}
-              editPathByModelProps={editPathByModelProps}
               onCloseRequest={toggleViewer}
               onChangeRequest={onFileChange}
               componentsProps={{
