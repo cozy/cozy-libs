@@ -55,6 +55,11 @@
   ],
   "license": "MIT",
   "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./api": "./dist/api.js",
+    "./ui": "./dist/ui.js"
+  },
   "peerDependencies": {
     "cozy-client": ">=51.0.1",
     "cozy-flags": ">=4.6.1",
