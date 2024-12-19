@@ -1,7 +1,6 @@
 import { useDataProxy } from 'dataproxy/DataProxyProvider'
 import React, { forwardRef } from 'react'
 
-import flag from 'cozy-flags'
 import Circle from 'cozy-ui/transpiled/react/Circle'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import PaperplaneIcon from 'cozy-ui/transpiled/react/Icons/Paperplane'
@@ -12,6 +11,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import ResultMenuItem from './ResultMenuItem'
 import { useSearch } from '../Search/SearchProvider'
+import { isAssistantEnabled } from '../helpers'
 
 const SearchResult = () => {
   const { isLoading, results, selectedIndex, searchValue } = useSearch()
@@ -37,9 +37,7 @@ const SearchResult = () => {
       query={searchValue}
       highlightQuery="true"
       selected={
-        flag('cozy.assistant.enabled')
-          ? selectedIndex === idx + 1
-          : selectedIndex === idx
+        isAssistantEnabled() ? selectedIndex === idx + 1 : selectedIndex === idx
       }
       onClick={result.onClick}
     />
@@ -54,7 +52,7 @@ const ResultMenuContent = forwardRef(({ onClick }, ref) => {
 
   return (
     <List ref={ref}>
-      {flag('cozy.assistant.enabled') && (
+      {isAssistantEnabled() && (
         <ResultMenuItem
           icon={
             <Circle size="small">

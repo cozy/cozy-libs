@@ -1,3 +1,5 @@
+import flag from 'cozy-flags'
+
 export const getInstantMessage = assistantState =>
   Object.keys(assistantState.message)
     .sort((a, b) => a - b)
@@ -19,3 +21,5 @@ export const pushMessagesIdInState = (id, res, setState) => {
 
 export const isMessageForThisConversation = (res, messagesId) =>
   messagesId.includes(res._id)
+
+export const isAssistantEnabled = () => flag('cozy.assistant.enabled')

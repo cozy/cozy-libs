@@ -1,7 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import flag from 'cozy-flags'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import useExtendI18n from 'cozy-ui/transpiled/react/providers/I18n/useExtendI18n'
@@ -13,7 +12,7 @@ import SearchBar from '../Search/SearchBar'
 import { useSearch } from '../Search/SearchProvider'
 import SearchProvider from '../Search/SearchProvider'
 import SearchSubmitFab from '../Search/SearchSubmitFab'
-import { makeConversationId } from '../helpers'
+import { isAssistantEnabled, makeConversationId } from '../helpers'
 
 const SearchDialog = () => {
   useExtendI18n(locales)
@@ -46,7 +45,7 @@ const SearchDialog = () => {
       content={
         <>
           {searchValue && <ResultMenuContent onClick={handleClick} />}
-          {flag('cozy.assistant.enabled') && (
+          {isAssistantEnabled() && (
             <SearchSubmitFab searchValue={searchValue} onClick={handleClick} />
           )}
         </>
