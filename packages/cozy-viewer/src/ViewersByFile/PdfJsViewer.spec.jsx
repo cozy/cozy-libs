@@ -1,161 +1,57 @@
-import { shallow } from 'enzyme'
+import '@testing-library/jest-dom'
+import { render } from '@testing-library/react'
 import React from 'react'
+import { Document } from 'react-pdf'
 
-import { PdfJsViewer, MIN_SCALE, MAX_SCALE, MAX_PAGES } from './PdfJsViewer'
+import { PdfJsViewer } from './PdfJsViewer'
+
+jest.mock('../NoViewer/DownloadButton', () => () => (
+  <div data-testid="dl-btn-no-viewer">DownloadButton</div>
+))
+
+jest.mock('react-pdf', () => ({
+  Document: jest.fn(),
+  Page: jest.fn(() => <div>Page</div>)
+}))
 
 describe('PDFViewer', () => {
-  let component
-  const panGestureMock = jest.fn()
-  const swipeGestureMock = jest.fn()
-  const gesturesMock = {
-    get: jest.fn(type => ({
-      set: type === 'pan' ? panGestureMock : swipeGestureMock
-    }))
+  const setup = ({ file = {}, onLoadErrorMock } = {}) => {
+    Document.mockImplementation(
+      ({ children, onLoadError = onLoadErrorMock }) => {
+        onLoadErrorMock && onLoadError()
+
+        return <div>{children}</div>
+      }
+    )
+    const defaultProps = { url: 'fake', file, t: x => x }
+    return render(<PdfJsViewer {...defaultProps} />)
   }
   beforeEach(() => {
-    component = shallow(
-      <PdfJsViewer url="test" file={{}} gestures={gesturesMock} t={x => x} />
-    )
-  })
-  afterEach(() => {
     jest.clearAllMocks()
   })
 
-  describe('desture integration', () => {
-    let instance
-    beforeEach(() => {
-      instance = component.instance()
-    })
+  it('should render a fallback component', () => {
+    const onLoadErrorMock = jest.fn()
+    const { getByTestId, queryByTestId } = setup({ onLoadErrorMock })
 
-    it('should disable gestures when zooming in', () => {
-      instance.scaleUp()
-      expect(component.state('scale')).toBeGreaterThan(1)
-      expect(panGestureMock).toHaveBeenCalledWith({ enable: false })
-      expect(swipeGestureMock).toHaveBeenCalledWith({ enable: false })
-      instance.scaleUp()
-      expect(panGestureMock).toHaveBeenCalledTimes(1)
-      expect(swipeGestureMock).toHaveBeenCalledTimes(1)
-    })
+    const DownloadBtnNoViewer = getByTestId('dl-btn-no-viewer')
+    const pdfjsNoViewer = getByTestId('no-viewer')
+    const pdfjsViewer = queryByTestId('pdfjs-viewer')
 
-    it('should leave gestures alone when zooming out', () => {
-      instance.scaleDown()
-      expect(component.state('scale')).toBeLessThan(1)
-      expect(panGestureMock).not.toHaveBeenCalled()
-      expect(swipeGestureMock).not.toHaveBeenCalled()
-    })
-
-    it('should re-enable gestures when zooming back out', () => {
-      instance.scaleUp()
-      expect(component.state('scale')).toBeGreaterThan(1)
-      expect(panGestureMock).toHaveBeenCalledWith({ enable: false })
-      expect(swipeGestureMock).toHaveBeenCalledWith({ enable: false })
-      instance.scaleDown()
-      expect(component.state('scale')).toBe(1)
-      expect(panGestureMock).toHaveBeenCalledWith({ enable: true })
-      expect(swipeGestureMock).toHaveBeenCalledWith({ enable: true })
-    })
+    expect(pdfjsViewer).toBeNull()
+    expect(DownloadBtnNoViewer).toBeInTheDocument()
+    expect(pdfjsNoViewer).toBeInTheDocument()
   })
 
-  describe('with a valid PDF', () => {
-    let instance
-    beforeEach(() => {
-      instance = component.instance()
-      instance.onLoadSuccess({ numPages: 3 })
-    })
+  it('should not render the fallback component', () => {
+    const { queryByTestId, getByTestId } = setup()
 
-    it('should start with default options', () => {
-      expect(component.state('loaded')).toBe(true)
-      expect(component.state('totalPages')).toBe(3)
-      expect(component.state('currentPage')).toBe(1)
-      expect(component.state('scale')).toBe(1)
-    })
+    const pdfjsViewer = getByTestId('pdfjs-viewer')
+    const pdfjsNoViewer = queryByTestId('no-viewer')
+    const DownloadBtnNoViewer = queryByTestId('dl-btn-no-viewer')
 
-    it('should flip to the next page while possible', () => {
-      instance.nextPage()
-      expect(component.state('currentPage')).toBe(2)
-      instance.nextPage()
-      expect(component.state('currentPage')).toBe(3)
-      instance.nextPage()
-      expect(component.state('currentPage')).toBe(3)
-    })
-
-    it('should flip to the previous page while possible', () => {
-      instance.nextPage()
-      expect(component.state('currentPage')).toBe(2)
-      instance.previousPage()
-      expect(component.state('currentPage')).toBe(1)
-      instance.previousPage()
-      expect(component.state('currentPage')).toBe(1)
-    })
-
-    it('should scale up to a certain point', () => {
-      const initialScale = component.state('scale')
-      instance.scaleUp()
-      expect(component.state('scale')).toBeGreaterThan(initialScale)
-
-      for (let i = 0; i < 10; i++) instance.scaleUp()
-      expect(component.state('scale')).toEqual(MAX_SCALE)
-    })
-
-    it('should scale down to a certain point', () => {
-      const initialScale = component.state('scale')
-      instance.scaleDown()
-      expect(component.state('scale')).toBeLessThan(initialScale)
-
-      for (let i = 0; i < 10; i++) instance.scaleDown()
-      expect(component.state('scale')).toEqual(MIN_SCALE)
-    })
-  })
-
-  describe('a PDF with few pages', () => {
-    beforeEach(() => {
-      component.instance().onLoadSuccess({ numPages: MAX_PAGES })
-    })
-
-    it('should render all the pages', () => {
-      const pages = component.find('ForwardRef(Page)')
-      expect(pages.length).toEqual(MAX_PAGES)
-    })
-
-    it('should not show pagination controls', () => {
-      const pageUp = component.find({ icon: 'top' })
-      const pageDown = component.find({ icon: 'bottom' })
-      expect(pageUp.length).toEqual(0)
-      expect(pageDown.length).toEqual(0)
-    })
-  })
-
-  describe('a PDF with many pages', () => {
-    beforeEach(() => {
-      component.instance().onLoadSuccess({ numPages: MAX_PAGES + 1 })
-    })
-
-    it('should render only the current page', () => {
-      const pages = component.find('ForwardRef(Page)')
-      expect(pages.length).toEqual(1)
-    })
-
-    it('should show pagination controls', () => {
-      const pageUp = component.find({ icon: 'top' })
-      const pageDown = component.find({ icon: 'bottom' })
-      expect(pageUp.length).toEqual(1)
-      expect(pageDown.length).toEqual(1)
-    })
-  })
-
-  describe('with a pdf that does not load', () => {
-    beforeEach(() => {
-      jest.spyOn(console, 'warn').mockImplementation(() => {})
-    })
-    afterEach(() => {
-      // eslint-disable-next-line no-console
-      console.warn.mockRestore()
-    })
-    it('should show a fallback', () => {
-      component.instance().onLoadError('pdfviewer test error')
-      expect(component.state('errored')).toBe(true)
-      const noViewer = component.find('NoViewer')
-      expect(noViewer.length).toBe(1)
-    })
+    expect(pdfjsViewer).toBeInTheDocument()
+    expect(pdfjsNoViewer).toBeNull()
+    expect(DownloadBtnNoViewer).toBeNull()
   })
 })

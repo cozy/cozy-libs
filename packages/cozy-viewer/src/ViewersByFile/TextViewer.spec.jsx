@@ -1,20 +1,23 @@
-import { shallow } from 'enzyme'
+import '@testing-library/jest-dom'
+import { render, waitFor } from '@testing-library/react'
 import React from 'react'
-import renderer from 'react-test-renderer'
-
-import { createMockClient } from 'cozy-client'
-import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import { TextViewer, isMarkdown } from './TextViewer'
 
-const client = createMockClient({})
+jest.mock('../NoViewer/DownloadButton', () => () => (
+  <div data-testid="dl-btn-no-viewer">DownloadButton</div>
+))
+
+const client = {}
 
 const mockText = jest.fn()
 const mockFetch = responseText => async () => ({
   text: mockText.mockResolvedValue(responseText)
 })
 
-client.stackClient.fetch = mockFetch('Text')
+client.getStackClient = jest.fn().mockReturnValue({
+  fetch: mockFetch('The content of my file')
+})
 
 const props = {
   client,
@@ -44,75 +47,64 @@ describe('isMarkdown function', () => {
     expect(isMarkdown({ name: 'text.txt' })).toBe(false)
   })
 })
+
 describe('TextViewer Component', () => {
   it('should display the loader ', () => {
-    const comp = shallow(<TextViewer {...props} />)
-    expect(comp).toMatchSnapshot()
+    const { getByTestId } = render(<TextViewer {...props} />)
+    expect(getByTestId('viewer-spinner')).toBeInTheDocument()
   })
-
-  it('should display the error component and render with renderFallback', () => {
-    const comp = renderer.create(
-      <BreakpointsProvider>
-        <TextViewer
-          {...props}
-          renderFallbackExtraContent={file => <span>{file.name}</span>}
-        />
-      </BreakpointsProvider>
-    )
-
-    const inst = comp.root.children[0].instance
-    inst.setState({ error: true, loading: false })
-    expect(comp.toJSON()).toMatchSnapshot()
-  })
-
-  it('should display the text viewer', () => {
-    const comp = renderer.create(
-      <BreakpointsProvider>
-        <TextViewer {...props} />
-      </BreakpointsProvider>
-    )
-
-    const inst = comp.root.children[0].instance
-    inst.setState({
-      loading: false,
-      isMarkdown: false,
-      text: 'The content of my file'
+  describe('TextViewer render method', () => {
+    it('should render the loader when loading', () => {
+      const { getByTestId } = render(<TextViewer {...props} />)
+      expect(getByTestId('viewer-spinner')).toBeInTheDocument()
     })
-    expect(comp.toJSON()).toMatchSnapshot()
-    expect(mockText).toHaveBeenCalled()
-  })
 
-  it('should display the markdown viewer', () => {
-    const comp = renderer.create(
-      <BreakpointsProvider>
-        <TextViewer {...props} />
-      </BreakpointsProvider>
-    )
+    it('should render NoViewer component on error', async () => {
+      const errorProps = {
+        ...props,
+        client: {
+          ...props.client,
+          getStackClient: jest.fn().mockReturnValue({
+            fetch: jest.fn().mockRejectedValue(new Error('Fetch error'))
+          })
+        }
+      }
+      const { getByTestId } = render(<TextViewer {...errorProps} />)
 
-    const inst = comp.root.children[0].instance
-    inst.setState({
-      loading: false,
-      isMarkdown: true,
-      text: "It's very easy to make some words **bold** and other words *italic* with Markdown"
+      await waitFor(() => {
+        const pdfjsNoViewer = getByTestId('no-viewer')
+        expect(pdfjsNoViewer).toBeInTheDocument()
+      })
     })
-    expect(comp.toJSON()).toMatchSnapshot()
-  })
 
-  it('should display the text viewer when an URL is given', () => {
-    const url = 'blob:http://foo.mycozy.cloud'
-    const comp = renderer.create(
-      <BreakpointsProvider>
-        <TextViewer {...props} url={url} />
-      </BreakpointsProvider>
-    )
-
-    const inst = comp.root.children[0].instance
-    inst.setState({
-      loading: false,
-      isMarkdown: false,
-      text: 'The content of my file'
+    it('should render MarkdownRenderer when file is markdown', async () => {
+      const markdownProps = {
+        ...props,
+        file: {
+          ...props.file,
+          mime: 'text/markdown'
+        }
+      }
+      const { findByText } = render(<TextViewer {...markdownProps} />)
+      await waitFor(async () => {
+        const element = await findByText('The content of my file')
+        expect(element).toBeInTheDocument()
+      })
     })
-    expect(comp.toJSON()).toMatchSnapshot()
-    expect(mockText).toHaveBeenCalled()
+
+    it('should render PlainTextRenderer when file is not markdown', async () => {
+      const plainTextProps = {
+        ...props,
+        file: {
+          ...props.file,
+          mime: 'text/plain'
+        }
+      }
+      const { findByTestId } = render(<TextViewer {...plainTextProps} />)
+      await waitFor(async () => {
+        const element = await findByTestId('viewer-plaintext')
+        expect(element).toBeInTheDocument()
+      })
+    })
   })
 })

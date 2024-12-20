@@ -22,6 +22,7 @@ const MarkdownRenderer = ({ text }) => (
 const PlainTextRenderer = ({ text }) => (
   <pre
     className={cx(styles['viewer-textviewer-content'], 'u-mh-auto', 'u-mv-2')}
+    data-testid="viewer-plaintext"
   >
     {text}
   </pre>
@@ -29,7 +30,7 @@ const PlainTextRenderer = ({ text }) => (
 
 const Loader = () => {
   return (
-    <div className={styles['viewer-textviewer']}>
+    <div className={styles['viewer-textviewer']} data-testid="viewer-spinner">
       <ViewerSpinner />
     </div>
   )

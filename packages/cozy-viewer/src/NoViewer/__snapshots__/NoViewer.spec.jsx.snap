@@ -4,6 +4,7 @@ exports[`NoViewer should render the viewer 1`] = `
 <div>
   <div
     class="viewer-noviewer"
+    data-testid="no-viewer"
   >
     <svg
       class="styles__icon___23x3R"
@@ -48,6 +49,7 @@ exports[`NoViewer should render the viewer with specific extra content 1`] = `
 <div>
   <div
     class="viewer-noviewer"
+    data-testid="no-viewer"
   >
     <svg
       class="styles__icon___23x3R"

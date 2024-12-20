@@ -133,6 +133,7 @@ export class PdfJsViewer extends Component {
       <div
         className={styles['viewer-pdfviewer']}
         ref={ref => (this.wrapper = ref)}
+        data-testid="pdfjs-viewer"
       >
         <Document
           file={url}
