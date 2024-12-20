@@ -44,7 +44,7 @@
     "handle-synchronization": "Gérer mes synchronisations",
     "desynchronized": {
       "message": "vous avez désynchronisé ce compte le %{date}",
-      "dateFormat": "DD/MM/YY"
+      "dateFormat": "dd/LL/yy"
     }
   },
   "contractForm": {
@@ -100,7 +100,7 @@
         "syncing": "Récupération des données…",
         "unknown": "Dernière sync. inconnue",
         "afterSomeTimes": "Sync. il y a %{times}",
-        "format": "DD/MM/YYYY",
+        "format": "dd/LL/yyyy",
         "disconnected": "Déconnecté",
         "justNow": "Sync. à l'instant"
       },
@@ -144,7 +144,7 @@
     }
   },
   "default": {
-    "dateFormat": "DD/MM/YYYY",
+    "dateFormat": "dd/LL/yyyy",
     "baseDir": "/Administratif"
   },
   "error": {
