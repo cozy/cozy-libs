@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@2.1.1...cozy-dataproxy-lib@2.2.0) (2024-12-20)
+
+
+### Features
+
+* Display message if no enough char in query and no assistant ([b78963f](https://github.com/cozy/cozy-libs/commit/b78963f906dc02c409c6885fc73a5f559a8a9b89))
+
+
+
+
+
 ## [2.1.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@2.1.0...cozy-dataproxy-lib@2.1.1) (2024-12-20)
 
 
