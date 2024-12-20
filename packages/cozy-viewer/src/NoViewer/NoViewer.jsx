@@ -8,7 +8,7 @@ import FileIcon from './FileIcon'
 import styles from '../ViewersByFile/styles.styl'
 
 const NoViewer = ({ file, url, renderFallbackExtraContent }) => (
-  <div className={styles['viewer-noviewer']}>
+  <div className={styles['viewer-noviewer']} data-testid="no-viewer">
     <FileIcon type={file.class} />
     <p className={styles['viewer-filename']}>{file.name}</p>
     {renderFallbackExtraContent(file, url)}
