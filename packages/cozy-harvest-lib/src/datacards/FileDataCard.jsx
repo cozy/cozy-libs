@@ -56,7 +56,7 @@ const FileListItem = ({ divider, file, onClick, style }) => {
         secondary={
           <Typography variant="caption">
             {t('datacards.files.imported', {
-              date: f(get(file, 'cozyMetadata.createdAt'), 'DD/MM/YYYY')
+              date: f(get(file, 'cozyMetadata.createdAt'), 'dd/LL/yyyy')
             })}
           </Typography>
         }
