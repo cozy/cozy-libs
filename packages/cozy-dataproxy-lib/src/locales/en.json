@@ -4,7 +4,8 @@
       "placeholder": "Any question?",
       "send": "Send",
       "result": "Ask the assistant",
-      "noItem": "No results"
+      "noItem": "No results",
+      "notEnough": "Your query must contain at least 3 characters"
     },
     "dialog": {
       "close": "Close"
