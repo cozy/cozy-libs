@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@2.1.0...cozy-dataproxy-lib@2.1.1) (2024-12-20)
+
+
+### Bug Fixes
+
+* Do not instanciate iframe for RN env ([15327ad](https://github.com/cozy/cozy-libs/commit/15327ad77e637007b1f8e3ef81287b200a213ebe))
+
+
+
+
+
 # [2.1.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@2.0.0...cozy-dataproxy-lib@2.1.0) (2024-12-19)
 
 
