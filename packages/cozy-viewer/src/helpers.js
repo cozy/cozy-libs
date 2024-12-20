@@ -15,9 +15,9 @@ export const isFileEncrypted = file => isEncrypted(file)
 
 export const formatDate = ({ f, lang, date }) => {
   if (lang === 'en') {
-    return f(date, 'MM/DD/YYYY')
+    return f(date, 'LL/dd/yyyy')
   }
-  return f(date, 'DD/MM/YYYY')
+  return f(date, 'dd/LL/yyyy')
 }
 
 export const isEditableAttribute = (name, file) => {
