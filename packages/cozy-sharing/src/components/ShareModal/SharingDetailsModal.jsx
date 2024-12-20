@@ -48,7 +48,7 @@ export const SharingDetailsModal = ({
             />
             <div className={styles['share-details-created']}>
               {t(`${documentType}.share.details.createdAt`, {
-                date: f(document.created_at || null, 'Do MMMM YYYY')
+                date: f(document.created_at || null, 'do LLLL yyyy')
               })}
             </div>
             <div className={styles['share-details-perm']}>
