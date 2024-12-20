@@ -4,7 +4,8 @@
       "placeholder": "Une question ?",
       "send": "Envoyer",
       "result": "Demander à l'assistant",
-      "noItem": "Aucun résultat"
+      "noItem": "Aucun résultat",
+      "notEnough": "Votre recherche doit contenir au moins 3 caractères"
     },
     "dialog": {
       "close": "Fermer"

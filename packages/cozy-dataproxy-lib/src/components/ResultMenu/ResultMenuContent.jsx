@@ -10,6 +10,7 @@ import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import NoResultItem from './NoResultItem'
+import NotEnoughItem from './NotEnoughItem'
 import ResultMenuItem from './ResultMenuItem'
 import { useSearch } from '../Search/SearchProvider'
 import { isAssistantEnabled } from '../helpers'
@@ -28,7 +29,11 @@ const SearchResult = () => {
   }
 
   if (!isLoading && !results?.length && !isAssistantEnabled()) {
-    return <NoResultItem />
+    if (searchValue.length >= 3) {
+      return <NoResultItem />
+    } else {
+      return <NotEnoughItem />
+    }
   }
 
   return results.map((result, idx) => (
