@@ -13,11 +13,5 @@ module.exports = {
   transformIgnorePatterns: ['node_modules/(?!(cozy-ui|cozy-harvest-lib))'],
   transform: {
     '^.+\\.(ts|tsx|js|jsx)?$': 'babel-jest'
-  },
-  globals: {
-    __ALLOW_HTTP__: false,
-    cozy: {}
-  },
-  setupFilesAfterEnv: ['<rootDir>/test/jestLib/setup.js', 'jest-canvas-mock'],
-  snapshotSerializers: ['enzyme-to-json/serializer']
+  }
 }

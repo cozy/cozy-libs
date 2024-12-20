@@ -4,6 +4,7 @@ exports[`Shortcutviewer renders the component 1`] = `
 <div>
   <div
     class="viewer-noviewer"
+    data-testid="no-viewer"
   >
     <svg
       class="styles__icon___23x3R"
