@@ -11163,6 +11163,31 @@ cozy-client@^51.6.1:
     sift "^6.0.0"
     url-search-params-polyfill "^8.0.0"
 
+cozy-client@^51.6.1:
+  version "51.6.1"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-51.6.1.tgz#55ba89c3ddedf47444ef2aa2799b5e6d12e04f76"
+  integrity sha512-++MbwaarzQWEpZIfbovWRNWcGWpWwhTC40S5CHjIDIZzSWKLe7mq2nhPw/cgeorj+JWSR7t6CoekJp9E2aOInQ==
+  dependencies:
+    "@cozy/minilog" "1.0.0"
+    "@types/jest" "^26.0.20"
+    "@types/lodash" "^4.14.170"
+    btoa "^1.2.1"
+    cozy-stack-client "^51.6.0"
+    date-fns "2.29.3"
+    json-stable-stringify "^1.0.1"
+    lodash "^4.17.13"
+    microee "^0.0.6"
+    node-fetch "^2.6.1"
+    node-polyglot "2.4.2"
+    open "7.4.2"
+    prop-types "^15.6.2"
+    react-redux "^7.2.0"
+    redux "3 || 4"
+    redux-thunk "^2.3.0"
+    server-destroy "^1.0.1"
+    sift "^6.0.0"
+    url-search-params-polyfill "^8.0.0"
+
 cozy-device-helper@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/cozy-device-helper/-/cozy-device-helper-2.0.0.tgz#1d08b6cb74709ef941b4d8214f13a6dc7e3910ec"
@@ -11379,10 +11404,10 @@ cozy-ui@^111.19.0:
     react-swipeable-views "^0.13.3"
     rooks "^5.11.2"
 
-cozy-ui@^113.1.0:
-  version "113.1.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-113.1.0.tgz#0623a55f92069a0959f0a72953d6b2d2c5ef3370"
-  integrity sha512-Wtq1Tw1D2qIcqPV1FhMFcW0P7DuJa9kgRu7WnxUwf6epYbhGceR0uRn9v1+UV3X4O09LNcjePeTD8exHAuLH9w==
+cozy-ui@^113.9.0:
+  version "113.9.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-113.9.0.tgz#d41b80558c752ced8cc6c2421e2609fcc17254a2"
+  integrity sha512-ntENcdeTDy0Lkc2kW2FLCQHT4vE7/cxLzZ6H2oxce8kMWUQgZ3DnSswv6MYVXHLz7RfuGLO0f+3LLqxBjZZPXw==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@material-ui/core" "4.12.3"

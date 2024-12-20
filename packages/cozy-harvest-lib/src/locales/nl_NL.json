@@ -44,7 +44,7 @@
     "handle-synchronization": "Synchronisaties beheren",
     "desynchronized": {
       "message": "je hebt de synchroniastie met dit account stopgezet op %{date}",
-      "dateFormat": "DD-MM-YYYY"
+      "dateFormat": "dd-LL-yyyy"
     }
   },
   "contractForm": {
@@ -100,7 +100,7 @@
         "syncing": "Gegevensherstel…",
         "unknown": "Onbekend",
         "afterSomeTimes": "%{times} geleden gesynchroniseerd",
-        "format": "DD-MM-YYYY",
+        "format": "dd-LL-yyyy",
         "disconnected": "Losgekoppeld",
         "justNow": "Zojuist gesynchroniseerd"
       },
@@ -144,7 +144,7 @@
     }
   },
   "default": {
-    "dateFormat": "DD-MM-YYYY",
+    "dateFormat": "dd-LL-yyyy",
     "baseDir": "/Administratief"
   },
   "error": {
