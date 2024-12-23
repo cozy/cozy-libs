@@ -1,4 +1,4 @@
-import distanceInWords from 'date-fns/distance_in_words'
+import formatDistance from 'date-fns/formatDistance'
 import flatten from 'lodash/flatten'
 import get from 'lodash/get'
 import keyBy from 'lodash/keyBy'
@@ -50,7 +50,7 @@ export const getEndPlaceDisplayName = trip => {
 export const getFormattedDuration = trip => {
   const startDate = new Date(trip.properties.start_fmt_time)
   const endDate = new Date(trip.properties.end_fmt_time)
-  return distanceInWords(endDate, startDate)
+  return formatDistance(endDate, startDate)
 }
 
 export const getModes = trip => {

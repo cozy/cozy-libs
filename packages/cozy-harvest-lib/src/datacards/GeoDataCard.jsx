@@ -1,5 +1,5 @@
-import isSameDay from 'date-fns/is_same_day'
-import isSameYear from 'date-fns/is_same_year'
+import isSameDay from 'date-fns/isSameDay'
+import isSameYear from 'date-fns/isSameYear'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import sortBy from 'lodash/sortBy'
