@@ -1,5 +1,5 @@
-import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
-import dateFnsLocaleEn from 'date-fns/locale/en'
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import dateFnsLocaleEn from 'date-fns/locale/en-US'
 import dateFnsLocaleEs from 'date-fns/locale/es'
 import dateFnsLocalefr from 'date-fns/locale/fr'
 import PropTypes from 'prop-types'
@@ -27,7 +27,7 @@ const ContractItemSecondaryText = ({ contract }) => {
       <>
         <Icon icon={SyncIcon} size={8} color="#FE952A" />{' '}
         <span style={{ color: '#EFA82D' }}>
-          {distanceInWordsToNow(contract.metadata.updatedAt, {
+          {formatDistanceToNow(new Date(contract.metadata.updatedAt), {
             addSuffix: true,
             locale: dateFnsLocales[lang]
           })}
@@ -52,7 +52,7 @@ const ContractItemSecondaryText = ({ contract }) => {
     return (
       <>
         <Icon icon={SyncIcon} size={8} />{' '}
-        {distanceInWordsToNow(contract.metadata.updatedAt, {
+        {formatDistanceToNow(new Date(contract.metadata.updatedAt), {
           addSuffix: true,
           locale: dateFnsLocales[lang]
         })}

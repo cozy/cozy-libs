@@ -1,4 +1,3 @@
-import DateFns from 'date-fns'
 import get from 'lodash/get'
 
 import { toFrequency } from './cron'
@@ -26,7 +25,7 @@ export const getLastSuccessDate = trigger => {
   const lastSuccessDate =
     !!trigger && !!trigger.current_state && trigger.current_state.last_success
   if (!lastSuccessDate) return null
-  return DateFns.parse(lastSuccessDate)
+  return new Date(lastSuccessDate)
 }
 
 export const getKonnectorSlug = trigger => get(trigger, 'message.konnector')
