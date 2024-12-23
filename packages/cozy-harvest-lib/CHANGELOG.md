@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [32.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.0.0...cozy-harvest-lib@32.1.0) (2024-12-23)
+
+
+### Features
+
+* Upgrade date-fns to 2.30.0 ([aaf21c9](https://github.com/cozy/cozy-libs/commit/aaf21c98c239ca661d29b5f8a98a4014dc140ded))
+
+
+
+
+
 # [32.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.27...cozy-harvest-lib@32.0.0) (2024-12-23)
 
 
