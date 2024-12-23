@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.4.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@11.3.4...cozy-viewer@11.4.0) (2024-12-23)
+
+
+### Features
+
+* **cozy-viewer:** Update jest config ([6040193](https://github.com/cozy/cozy-libs/commit/6040193844b36f5b6658329327c3bbacc9c37251))
+
+
+
+
+
 ## [11.3.4](https://github.com/cozy/cozy-libs/compare/cozy-viewer@11.3.3...cozy-viewer@11.3.4) (2024-12-23)
 
 **Note:** Version bump only for package cozy-viewer
