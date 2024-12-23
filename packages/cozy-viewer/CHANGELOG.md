@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.3.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@11.2.0...cozy-viewer@11.3.0) (2024-12-23)
+
+
+### Features
+
+* **cozy-viewer:** Replace jsdom-sixteen package ([4e70b47](https://github.com/cozy/cozy-libs/commit/4e70b47361af4977b54fd6d09cd95b0a1a946317))
+
+
+
+
+
 # [11.2.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@11.1.0...cozy-viewer@11.2.0) (2024-12-23)
 
 
