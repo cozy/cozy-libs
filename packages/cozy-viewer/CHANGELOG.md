@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.1.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@11.0.0...cozy-viewer@11.1.0) (2024-12-23)
+
+
+### Features
+
+* **cozy-viewer:** Remove Enzyme ([faea78f](https://github.com/cozy/cozy-libs/commit/faea78fa6fcf439659d9efd290384628981b3bc2))
+
+
+
+
+
 # [11.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@10.0.0...cozy-viewer@11.0.0) (2024-12-20)
 
 
