@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.2.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@11.1.0...cozy-viewer@11.2.0) (2024-12-23)
+
+
+### Features
+
+* **cozy-viewer:** Add missing package ([51cbe60](https://github.com/cozy/cozy-libs/commit/51cbe609cf27910e1ad05dcc8a4f6997f3ffd01f))
+
+
+
+
+
 # [11.1.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@11.0.0...cozy-viewer@11.1.0) (2024-12-23)
 
 
