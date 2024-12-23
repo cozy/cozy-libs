@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [32.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.27...cozy-harvest-lib@32.0.0) (2024-12-23)
+
+
+### Features
+
+* **cozy-harvest:** Replace jsdom-sixteen package ([2f455ba](https://github.com/cozy/cozy-libs/commit/2f455ba87718b0633f71035c489f1db6cbbd22f1))
+* **cozy-harvest:** Upgrade cozy-ui to 115.0.2 ([8933c1f](https://github.com/cozy/cozy-libs/commit/8933c1fbd3332ae9e6f2e92642a9a456988e7562))
+
+
+### BREAKING CHANGES
+
+* **cozy-harvest:** You must have `cozy-ui >= 115.0.2`, `cozy-client >= 51.6.1`, `cozy-intent >= 2.29.1` & `cozy-viewer >= 11.3.1`
+
+
+
+
+
 ## [31.0.27](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.26...cozy-harvest-lib@31.0.27) (2024-12-23)
 
 **Note:** Version bump only for package cozy-harvest-lib
