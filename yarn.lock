@@ -17167,6 +17167,16 @@ jest-environment-jsdom-sixteen@1.0.3, jest-environment-jsdom-sixteen@^1.0.3:
     jest-util "^25.1.0"
     jsdom "^16.2.1"
 
+jest-environment-jsdom-sixteen@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/jest-environment-jsdom-sixteen/-/jest-environment-jsdom-sixteen-2.0.0.tgz#0f8c12663ccd9836d248574decffc575bfb091e1"
+  integrity sha512-BF+8P67aEJcd78TQzwSb9P4a73cArOWb5KgqI8eU6cHRWDIJdDRE8XTeZAmOuDSDhKpuEXjKkXwWB3GOJvqHJQ==
+  dependencies:
+    "@jest/fake-timers" "^25.1.0"
+    jest-mock "^25.1.0"
+    jest-util "^25.1.0"
+    jsdom "^16.2.1"
+
 jest-environment-jsdom@^24.9.0:
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/jest-environment-jsdom/-/jest-environment-jsdom-24.9.0.tgz#4b0806c7fc94f95edb369a69cc2778eec2b7375b"
