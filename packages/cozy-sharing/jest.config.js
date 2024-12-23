@@ -5,7 +5,11 @@ module.exports = {
     '!**/vendor/**',
     '!**/*.stories.{js,jsx,ts,tsx}'
   ],
-  testPathIgnorePatterns: ['node_modules', 'dist', '__tests__'],
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/dist/',
+    '<rootDir>/__tests__/'
+  ],
   roots: ['<rootDir>/src'],
   testURL: 'http://localhost/',
   moduleFileExtensions: ['js', 'jsx', 'json', 'styl'],
@@ -18,6 +22,8 @@ module.exports = {
     '^cozy-logger$': 'cozy-logger/dist/index.js',
     '^cozy-client$': 'cozy-client/dist/index.js'
   },
-  transformIgnorePatterns: ['node_modules/(?!cozy-ui)'],
+  transformIgnorePatterns: [
+    '<rootDir>/node_modules/(?!(cozy-ui|cozy-harvest-lib))'
+  ],
   setupFilesAfterEnv: ['<rootDir>/jestHelpers/setup.js']
 }
