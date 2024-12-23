@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [32.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.1.0...cozy-harvest-lib@32.2.0) (2024-12-23)
+
+
+### Features
+
+* **cozy-harvest:** Add missing react-redux dep ([27ee882](https://github.com/cozy/cozy-libs/commit/27ee8822365d51031a8b61ee4816005c2ea5dc33))
+* **cozy-harvest:** Prefer use createMockClient for tests ([26a5e30](https://github.com/cozy/cozy-libs/commit/26a5e3076cb8a0928ca95bec1a9a75440ec7e7cb))
+
+
+
+
+
 # [32.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.0.0...cozy-harvest-lib@32.1.0) (2024-12-23)
 
 
