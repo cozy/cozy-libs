@@ -8,7 +8,7 @@ module.exports = {
   roots: ['src'],
   resolver: 'jest-resolve-cached',
   testPathIgnorePatterns: ['node_modules', 'dist'],
-  testEnvironment: 'jest-environment-jsdom-sixteen',
+  testEnvironment: 'jest-environment-jsdom',
   testURL: 'http://localhost/',
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json', 'styl'],
   moduleDirectories: ['src', 'node_modules'],
