@@ -8,7 +8,8 @@ module.exports = {
     '\\.(png|gif|jpe?g|svg)$': '<rootDir>/test/__mocks__/fileMock.js',
     '\\.styl$': 'identity-obj-proxy',
     'react-pdf/dist/esm/entry.webpack': 'react-pdf',
-    '^cozy-client$': 'cozy-client/dist/index'
+    '^cozy-client$': '<rootDir>/node_modules/cozy-client/dist/index',
+    '^cozy-ui(.*)': '<rootDir>/node_modules/cozy-ui/$1'
   },
   transformIgnorePatterns: ['node_modules/(?!(cozy-ui|cozy-harvest-lib))'],
   transform: {
