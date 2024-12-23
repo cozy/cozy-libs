@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@17.0.0...cozy-sharing@18.0.0) (2024-12-23)
+
+
+### Features
+
+* **cozy-sharing:** Remove Enzyme tests ([0c678a1](https://github.com/cozy/cozy-libs/commit/0c678a1a096966db9baf5311b99964fc458ce8dc))
+* **cozy-sharing:** Replace jsdom-sixteen package ([b75bc51](https://github.com/cozy/cozy-libs/commit/b75bc51a8d2cbfa0300e5c9fc5f0d839dea24ef2))
+* **cozy-sharing:** Upgrade cozy-ui to 115.0.2 ([f25a351](https://github.com/cozy/cozy-libs/commit/f25a351df58ed0517f35ec4fef7c9044ceac6d56))
+
+
+### BREAKING CHANGES
+
+* **cozy-sharing:** You must have `cozy-ui >= 115.0.2` & `cozy-client >= 51.6.1`
+
+
+
+
+
 # [17.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.17.0...cozy-sharing@17.0.0) (2024-12-18)
 
 
