@@ -1,7 +1,10 @@
 import React from 'react'
 import { Provider as ReduxProvider } from 'react-redux'
 
-import CozyClient, { CozyProvider as CozyClientProvider } from 'cozy-client'
+import {
+  CozyProvider as CozyClientProvider,
+  createMockClient
+} from 'cozy-client'
 import { useCozyDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import AlertProvider from 'cozy-ui/transpiled/react/providers/Alert'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
@@ -11,8 +14,7 @@ import I18n from 'cozy-ui/transpiled/react/providers/I18n'
 import DialogContext from '../src/components/DialogContext'
 import enLocale from '../src/locales/en.json'
 
-const defaultClient = new CozyClient()
-defaultClient.ensureStore()
+const defaultClient = createMockClient({})
 
 const AppLike = ({
   client: clientOption,
