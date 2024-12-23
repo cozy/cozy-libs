@@ -5,7 +5,6 @@ module.exports = {
     '!**/vendor/**',
     '!**/*.stories.{js,jsx,ts,tsx}'
   ],
-  snapshotSerializers: ['enzyme-to-json/serializer'],
   testPathIgnorePatterns: ['node_modules', 'dist', '__tests__'],
   roots: ['<rootDir>/src'],
   testURL: 'http://localhost/',

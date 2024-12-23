@@ -1,41 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SharedStatus component should display the link if there is a link 1`] = `
-<SharedStatus
-  docId="1"
-  link={true}
-  recipients={Array []}
->
-  <span
-    className="shared-status"
+<div>
+  <div
+    class="CozyTheme--light-normal u-dc"
   >
-    <LinkIcon
-      data-for="linkfor1"
-      data-tip={true}
-      height="16"
-      style={
-        Object {
-          "fill": "var(--iconTextColor)",
-        }
-      }
-      viewBox="0 0 16 16"
-      width="16"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
+    <span
+      class="shared-status"
     >
       <svg
+        currentItem="false"
         data-for="linkfor1"
-        data-tip={true}
+        data-tip="true"
         height="16"
-        style={
-          Object {
-            "fill": "var(--iconTextColor)",
-          }
-        }
+        style="fill: var(--iconTextColor);"
         viewBox="0 0 16 16"
         width="16"
         xmlns="http://www.w3.org/2000/svg"
-        xmlnsXlink="http://www.w3.org/1999/xlink"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
       >
         <defs>
           <path
@@ -44,121 +26,69 @@ exports[`SharedStatus component should display the link if there is a link 1`] =
           />
         </defs>
         <use
-          fillRule="nonzero"
-          xlinkHref="#link-1-path-1"
+          fill-rule="nonzero"
+          xlink:href="#link-1-path-1"
         />
       </svg>
-    </LinkIcon>
-    <SharingTooltip
-      id="linkfor1"
-    >
-      <ReactTooltip
-        className="shared-tooltip"
-        clickable={false}
-        effect="solid"
+      <div
+        class="__react_component_tooltip place-bottom type-dark "
+        data-id="tooltip"
         id="linkfor1"
-        insecure={true}
-        place="bottom"
-        resizeHide={true}
-        wrapper="div"
       >
-        <div
-          className="__react_component_tooltip place-bottom type-dark "
-          data-id="tooltip"
-          id="linkfor1"
-        >
-          <span>
-            Shared by link
-          </span>
-        </div>
-      </ReactTooltip>
-    </SharingTooltip>
-  </span>
-</SharedStatus>
+        <span>
+          Shared by link
+        </span>
+      </div>
+    </span>
+  </div>
+</div>
 `;
 
 exports[`SharedStatus component should have the right display if there is several recipients 1`] = `
-<SharedStatus
-  docId="1"
-  recipients={
-    Array [
-      Object {
-        "_id": 1,
-        "name": "1",
-      },
-      Object {
-        "_id": 2,
-        "name": "2",
-      },
-    ]
-  }
->
-  <span
-    className="shared-status"
+<div>
+  <div
+    class="CozyTheme--light-normal u-dc"
   >
-    <a
-      className="shared-status-label"
-      data-for="members1"
-      data-tip={true}
+    <span
+      class="shared-status"
     >
-      2 members
-    </a>
-    <SharingTooltip
-      id="members1"
-    >
-      <ReactTooltip
-        className="shared-tooltip"
-        clickable={false}
-        effect="solid"
-        id="members1"
-        insecure={true}
-        place="bottom"
-        resizeHide={true}
-        wrapper="div"
+      <a
+        class="shared-status-label"
+        currentitem="false"
+        data-for="members1"
+        data-tip="true"
       >
-        <div
-          className="__react_component_tooltip place-bottom type-dark "
-          data-id="tooltip"
-          id="members1"
+        2 members
+      </a>
+      <div
+        class="__react_component_tooltip place-bottom type-dark "
+        data-id="tooltip"
+        id="members1"
+      >
+        <ul
+          class="shared-tooltip-list"
         >
-          <TooltipRecipientList
-            cutoff={4}
-            recipientNames={
-              Array [
-                "1",
-                "2",
-              ]
-            }
-          >
-            <ul
-              className="shared-tooltip-list"
-            >
-              <li
-                key="key_name_1_0"
-              >
-                1
-              </li>
-              <li
-                key="key_name_2_1"
-              >
-                2
-              </li>
-            </ul>
-          </TooltipRecipientList>
-        </div>
-      </ReactTooltip>
-    </SharingTooltip>
-  </span>
-</SharedStatus>
+          <li>
+            1
+          </li>
+          <li>
+            2
+          </li>
+        </ul>
+      </div>
+    </span>
+  </div>
+</div>
 `;
 
 exports[`SharedStatus component should just render a span if no sharing 1`] = `
-<SharedStatus
-  docId="1"
-  recipients={Array []}
->
-  <span
-    className="shared-status"
-  />
-</SharedStatus>
+<div>
+  <div
+    class="CozyTheme--light-normal u-dc"
+  >
+    <span
+      class="shared-status"
+    />
+  </div>
+</div>
 `;

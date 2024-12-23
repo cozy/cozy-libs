@@ -1,47 +1,48 @@
-import { mount } from 'enzyme'
+import { render } from '@testing-library/react'
 import React from 'react'
 
 import { SharedStatus } from './SharedStatus'
 import AppLike from '../../test/AppLike'
-describe('SharedStatus component', () => {
-  const WrappingComponent = ({ children }) => <AppLike>{children}</AppLike>
 
+describe('SharedStatus component', () => {
   it('should just render a span if no sharing', () => {
-    const component = mount(<SharedStatus docId="1" recipients={[]} />, {
-      wrappingComponent: WrappingComponent
-    })
-    expect(component).toMatchSnapshot()
+    const { container } = render(
+      <AppLike>
+        <SharedStatus docId="1" recipients={[]} />
+      </AppLike>
+    )
+    expect(container).toMatchSnapshot()
   })
 
   it('should have the right display if there is several recipients', () => {
-    const component = mount(
-      <SharedStatus
-        docId="1"
-        recipients={[
-          {
-            _id: 1,
-            name: '1'
-          },
-          {
-            _id: 2,
-            name: '2'
-          }
-        ]}
-      />,
-      {
-        wrappingComponent: WrappingComponent
-      }
+    const { container, getByText } = render(
+      <AppLike>
+        <SharedStatus
+          docId="1"
+          recipients={[
+            {
+              _id: 1,
+              name: '1'
+            },
+            {
+              _id: 2,
+              name: '2'
+            }
+          ]}
+        />
+      </AppLike>
     )
-    expect(component).toMatchSnapshot()
+    expect(container).toMatchSnapshot()
+    expect(getByText('2 members')).toBeTruthy()
   })
 
   it('should display the link if there is a link', () => {
-    const component = mount(
-      <SharedStatus docId="1" recipients={[]} link={true} />,
-      {
-        wrappingComponent: WrappingComponent
-      }
+    const { container, getByText } = render(
+      <AppLike>
+        <SharedStatus docId="1" recipients={[]} link={true} />
+      </AppLike>
     )
-    expect(component).toMatchSnapshot()
+    expect(container).toMatchSnapshot()
+    expect(getByText('Shared by link')).toBeTruthy()
   })
 })
