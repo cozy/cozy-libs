@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@2.2.0...cozy-dataproxy-lib@2.3.0) (2024-12-24)
+
+
+### Features
+
+* Enable search options ([4f07fec](https://github.com/cozy/cozy-libs/commit/4f07fec7aaa0d00c3d3083e5972de5e5823f36d0))
+
+
+
+
+
 # [2.2.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@2.1.1...cozy-dataproxy-lib@2.2.0) (2024-12-20)
 
 
