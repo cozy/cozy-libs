@@ -9,7 +9,7 @@ import {
   APPS_DOCTYPE,
   FILES_DOCTYPE,
   CONTACTS_DOCTYPE,
-  DOCTYPE_ORDER,
+  DOCTYPE_DEFAULT_ORDER,
   LIMIT_DOCTYPE_SEARCH,
   SearchedDoctype,
   SEARCHABLE_DOCTYPES
@@ -32,7 +32,8 @@ import {
   SearchIndex,
   SearchIndexes,
   SearchResult,
-  isSearchedDoctype
+  isSearchedDoctype,
+  SearchOptions
 } from './types'
 
 const log = Minilog('🗂️ [Indexing]')
@@ -319,16 +320,19 @@ export class SearchEngine {
     return this.incrementalIndexation(doctype, searchIndex)
   }
 
-  search(query: string): SearchResult[] {
+  search(query: string, options: SearchOptions | undefined): SearchResult[] {
     if (!this.searchIndexes) {
       // TODO: What if the indexing is running but not finished yet?
       log.warn('[SEARCH] No search index available')
       return []
     }
 
-    const allResults = this.searchOnIndexes(query)
+    const allResults = this.searchOnIndexes(query, options?.doctypes)
     const dedupResults = this.deduplicateAndFlatten(allResults)
-    const sortedResults = this.sortSearchResults(dedupResults)
+    const sortedResults = this.sortSearchResults(
+      dedupResults,
+      options?.doctypes
+    )
     const results = this.limitSearchResults(sortedResults)
 
     const normResults: SearchResult[] = []
@@ -339,10 +343,19 @@ export class SearchEngine {
     return normResults.filter(res => res.title)
   }
 
-  searchOnIndexes(query: string): FlexSearchResultWithDoctype[] {
+  searchOnIndexes(
+    query: string,
+    searchOnDoctypes: string[] | undefined
+  ): FlexSearchResultWithDoctype[] {
     let searchResults: FlexSearchResultWithDoctype[] = []
     for (const key in this.searchIndexes) {
       const doctype = key as SearchedDoctype // XXX - Should not be necessary
+
+      if (searchOnDoctypes && !searchOnDoctypes.includes(doctype)) {
+        // Search only on specified doctypes
+        continue
+      }
+
       const index = this.searchIndexes[doctype]
       if (!index) {
         log.warn('[SEARCH] No search index available for ', doctype)
@@ -409,10 +422,21 @@ export class SearchEngine {
     return str1.localeCompare(str2, undefined, { numeric: true })
   }
 
-  sortSearchResults(searchResults: RawSearchResult[]): RawSearchResult[] {
+  sortSearchResults(
+    searchResults: RawSearchResult[],
+    doctypesOrder: string[] | undefined
+  ): RawSearchResult[] {
     return searchResults.sort((a, b) => {
-      const doctypeComparison =
-        DOCTYPE_ORDER[a.doctype] - DOCTYPE_ORDER[b.doctype]
+      let doctypeComparison
+      if (doctypesOrder) {
+        doctypeComparison =
+          doctypesOrder.findIndex(dt => dt === a.doctype) -
+          doctypesOrder.findIndex(dt => dt === b.doctype)
+      } else {
+        doctypeComparison =
+          DOCTYPE_DEFAULT_ORDER[a.doctype] - DOCTYPE_DEFAULT_ORDER[b.doctype]
+      }
+
       if (doctypeComparison !== 0) return doctypeComparison
       if (
         a.doctype === APPS_DOCTYPE &&
@@ -455,6 +479,15 @@ export class SearchEngine {
   }
 
   limitSearchResults(searchResults: RawSearchResult[]): RawSearchResult[] {
-    return searchResults.slice(0, LIMIT_DOCTYPE_SEARCH)
+    const doctypesCount: Record<string, number> = {}
+    return searchResults.filter(result => {
+      const doctype = result.doctype
+      if (doctypesCount[doctype]) {
+        doctypesCount[doctype] += 1
+      } else {
+        doctypesCount[doctype] = 1
+      }
+      return doctypesCount[doctype] <= LIMIT_DOCTYPE_SEARCH
+    })
   }
 }

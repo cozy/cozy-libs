@@ -33,7 +33,7 @@ export const TRASH_DIR_ID = 'io.cozy.files.trash-dir'
 export const SHARED_DRIVES_DIR_ID = 'io.cozy.files.shared-drives-dir'
 
 export const LIMIT_DOCTYPE_SEARCH = 100
-export const DOCTYPE_ORDER = {
+export const DOCTYPE_DEFAULT_ORDER = {
   [APPS_DOCTYPE]: 0,
   [CONTACTS_DOCTYPE]: 1,
   [FILES_DOCTYPE]: 2

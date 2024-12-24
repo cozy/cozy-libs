@@ -12,7 +12,7 @@ const config = {
     './src/search/helpers/getSearchEncoder.ts'
   ],
   rootDir: '../',
-  testMatch: ['./**/*.spec.{ts,tsx}'],
+  testMatch: ['./**/*.spec.{ts,tsx,js}'],
   coverageThreshold: {
     global: {
       branches: 80,
