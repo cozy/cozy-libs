@@ -35,6 +35,10 @@ export const isSearchedDoctype = (
   return searchedDoctypes.includes(doctype)
 }
 
+export interface SearchOptions {
+  doctypes: string[] // Specify which doctypes should be searched, and their order
+}
+
 export interface RawSearchResult
   extends FlexSearch.EnrichedDocumentSearchResultSetUnitResultUnit<CozyDoc> {
   fields: string[]

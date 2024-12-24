@@ -16,7 +16,7 @@ export const useDataProxy = () => {
   return context
 }
 
-export const DataProxyProvider = React.memo(({ children }) => {
+export const DataProxyProvider = React.memo(({ children, options = {} }) => {
   const client = useClient()
   const [iframeUrl, setIframeUrl] = useState()
   const [dataProxy, setDataProxy] = useState()
@@ -82,8 +82,7 @@ export const DataProxyProvider = React.memo(({ children }) => {
 
   const search = async search => {
     log.log('Send search query to DataProxy iframe')
-
-    const result = await dataProxy.search(search)
+    const result = await dataProxy.search(search, options)
 
     return result
   }
