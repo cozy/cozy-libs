@@ -14,15 +14,14 @@ export const useKonnectorWithTriggers = (slug, injectedKonnector) => {
 
   useEffect(() => {
     async function load() {
+      // need to do getKonnector anyway to force the update of the konnector to be
+      // sur to have updated konnector fields
+      const konnector = await getKonnector(client, slug)
+      setKonnector(konnector)
       if (injectedKonnector) {
-        setKonnector(injectedKonnector)
         setTriggers(injectedKonnector.triggers)
       } else {
-        const [konnector, triggers] = await Promise.all([
-          getKonnector(client, slug),
-          getTriggers(client, slug)
-        ])
-        setKonnector(konnector)
+        const triggers = await getTriggers(client, slug)
         setTriggers({ data: triggers })
       }
       setIsFetching(false)
