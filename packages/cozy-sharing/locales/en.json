@@ -71,6 +71,7 @@
       "modifyFolder": "Modify folder",
       "readDescription": "Link holders can only read or download content.",
       "writeDescription": "Link holders can alter and delete content.",
+      "deactivateDescription": "The link is deactivated. Holders of the link no longer have access to it.",
       "deactivate": "Deactivate link",
       "cancel": "Cancel",
       "confirm": "OK"
@@ -416,5 +417,34 @@
       },
       "addEmail": "Enter an email address to invite the contact"
     }
+  },
+  "ShareRestrictionModal": {
+    "action": {
+      "desktop": "Confirm",
+      "mobile": "Confirm"
+    },
+    "invalidPasswordMessage": "%{smart_count} character is missing |||| %{smart_count} characters are missings"
+  },
+  "BoxDate": {
+    "label": "Deadline",
+    "text": "Remove access after a deadline"
+  },
+  "BoxPassword": {
+    "label": "Password",
+    "text": "Limit access with a password"
+  },
+  "BoxEditingRights": {
+    "editSubText": "People with access to the link can modify the content",
+    "readOnlySubText": "People who have access to the link can only view the content",
+    "text": "Editing rights"
+  },
+  "copyReminderContent": {
+    "success": "Copied to clipboard",
+    "error": "Cannot copy to clipboard"
+  },
+  "shareFile": {
+    "error": "Problem with link recovery: %{error}",
+    "text": "Link to my document %{name}: |||| Link to my documents %{name}: ",
+    "title": "Link to my document %{name} |||| Link to my documents %{name}"
   }
 }
