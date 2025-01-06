@@ -71,6 +71,7 @@
       "modifyFolder": "Modifier le dossier",
       "readDescription": "Les détenteurs du lien peuvent uniquement consulter ou télécharger le contenu.",
       "writeDescription": "Les détenteurs du lien peuvent modifier et supprimer le contenu.",
+      "deactivateDescription": "Le lien est déactivé. Les détenteurs du lien n'y ont plus accès",
       "deactivate": "Désactiver le lien",
       "cancel": "Annuler",
       "confirm": "OK"
@@ -414,5 +415,35 @@
       },
       "addEmail": "Renseigner un email pour pouvoir inviter le contact"
     }
+  },
+  "ShareRestrictionModal": {
+    "title": "Lien de partage",
+    "action": {
+      "desktop": "Valider",
+      "mobile": "Valider"
+    },
+    "invalidPasswordMessage": "Il manque %{smart_count} caractère |||| Il manque %{smart_count} caractères"
+  },
+  "BoxDate": {
+    "label": "Date limite",
+    "text": "Restreindre l'accès après une date limite"
+  },
+  "BoxPassword": {
+    "label": "Mot de passe",
+    "text": "Limiter l'accès par un mot de passe"
+  },
+  "BoxEditingRights": {
+    "editSubText": "Les personnes ayant accès au lien peuvent modifier le contenu",
+    "readOnlySubText": "Les personnes ayant accès au lien peuvent uniquement consulter le contenu",
+    "text": "Droit d’édition"
+  },
+  "copyReminderContent": {
+    "success": "Copié dans le presse-papier",
+    "error": "Impossible de copier dans le presse-papier"
+  },
+  "shareFile": {
+    "error": "Problème avec la récupération du lien : %{error}",
+    "text": "Voici un lien vers mon document %{name} : |||| Voici un lien contenant mes documents %{name} : ",
+    "title": "Lien vers mon document %{name} |||| Lien vers mes documents %{name}"
   }
 }
