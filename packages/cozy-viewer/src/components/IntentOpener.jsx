@@ -1,17 +1,7 @@
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React from 'react'
 
-import Backdrop from 'cozy-ui/transpiled/react/Backdrop'
 import IntentDialogOpener from 'cozy-ui/transpiled/react/IntentDialogOpener'
-import Portal from 'cozy-ui/transpiled/react/Portal'
-
-const PortalBackdrop = ({ children, ...props }) => {
-  return (
-    <Portal into="body">
-      <Backdrop {...props}>{children}</Backdrop>
-    </Portal>
-  )
-}
 
 const IntentOpener = ({
   action,
@@ -21,8 +11,6 @@ const IntentOpener = ({
   children,
   ...props
 }) => {
-  const [isLoading, setIsLoading] = useState(true)
-
   if (disabled) {
     return children
   }
@@ -33,14 +21,13 @@ const IntentOpener = ({
       action={action}
       doctype={doctype}
       options={options}
-      Component={PortalBackdrop}
-      invisible={!isLoading}
-      isOver
       showCloseButton={false}
       iframeProps={{
-        spinnerProps: { className: 'u-m-0', middle: true, color: 'white' },
-        setIsLoading
+        spinnerProps: { className: 'u-m-0', middle: true, color: 'white' }
       }}
+      fullScreen
+      fullWidth
+      PaperComponent="div"
     >
       {children}
     </IntentDialogOpener>
