@@ -25,7 +25,6 @@ export const EditableSharingModal = ({ document, ...rest }) => {
     revokeSelf,
     revokeSharingLink,
     share,
-    shareByLink,
     updateDocumentPermissions
   } = useSharingContext()
 
@@ -42,7 +41,6 @@ export const EditableSharingModal = ({ document, ...rest }) => {
       onRevokeLink={revokeSharingLink}
       onRevokeSelf={revokeSelf}
       onShare={share}
-      onShareByLink={shareByLink}
       onUpdateShareLinkPermissions={updateDocumentPermissions}
       permissions={getDocumentPermissions(document.id)}
       recipients={getRecipients(document.id)}

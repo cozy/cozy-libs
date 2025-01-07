@@ -16,7 +16,9 @@ import {
   forwardFile,
   updatePermissions,
   makeTTL,
-  revokePermissions
+  revokePermissions,
+  READ_ONLY_PERMS,
+  WRITE_PERMS
 } from './helpers'
 import { checkIsReadOnlyPermissions } from '../../helpers/permissions'
 import { useSharingContext } from '../../hooks/useSharingContext'
@@ -39,14 +41,16 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
     documentType,
     getDocumentPermissions,
     updateDocumentPermissions,
-    revokeSharingLink
+    revokeSharingLink,
+    shareByLink,
+    getSharingLink
   } = useSharingContext()
 
   const permissions = getDocumentPermissions(file._id)
   const isReadOnlyPermissions = checkIsReadOnlyPermissions(permissions)
   // 'readOnly', 'write' or 'revoke'
   const [editingRights, setEditingRights] = useState(
-    isReadOnlyPermissions ? 'readOnly' : 'write'
+    isReadOnlyPermissions || permissions.length === 0 ? 'readOnly' : 'write'
   )
 
   const isDesktopOrMobileWithoutShareAPI =
@@ -73,6 +77,16 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
         revokeSharingLink,
         showAlert
       })
+      onClose()
+      return
+    }
+
+    // If the file is not shared, we create a new sharing link
+    if (getSharingLink(file._id) === null) {
+      const verbs = editingRights === 'readOnly' ? READ_ONLY_PERMS : WRITE_PERMS
+      await shareByLink(file, { verbs })
+      const url = getSharingLink(file._id)
+      await copyToClipboard(url, { t, showAlert })
       onClose()
       return
     }
