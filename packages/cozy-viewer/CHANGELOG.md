@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@11.4.0...cozy-viewer@12.0.0) (2025-01-07)
+
+
+### Features
+
+* **Viewer:** Hide the qualification in the panel if not supported ([e0c7c5a](https://github.com/cozy/cozy-libs/commit/e0c7c5a7dca4ee1781c677fe9f44d6c3bad8418c))
+* **Viewer:** Upgrade packages ([31fa49a](https://github.com/cozy/cozy-libs/commit/31fa49ac01455b62ff39e4e8739de4cfabb5b21b))
+
+
+### BREAKING CHANGES
+
+* **Viewer:** You muse have `cozy-client >= 52.1.0` and `cozy-ui >= 116.0.0`
+
+
+
+
+
 # [11.4.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@11.3.4...cozy-viewer@11.4.0) (2024-12-23)
 
 
