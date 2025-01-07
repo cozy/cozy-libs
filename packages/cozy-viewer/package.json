@@ -25,13 +25,13 @@
     "@testing-library/react-hooks": "^3.2.1",
     "babel-plugin-inline-json-import": "0.3.2",
     "babel-preset-cozy-app": "^2.8.1",
-    "cozy-client": "^51.6.0",
+    "cozy-client": "^52.1.0",
     "cozy-device-helper": "2.0.0",
     "cozy-harvest-lib": "^32.2.1",
     "cozy-intent": "^2.29.1",
     "cozy-logger": "^1.16.1",
     "cozy-sharing": "^18.0.0",
-    "cozy-ui": "^115.0.2",
+    "cozy-ui": "^116.0.0",
     "identity-obj-proxy": "3.0.0",
     "jest": "26.6.3",
     "jest-canvas-mock": "2.3.1",
@@ -49,13 +49,13 @@
     "react-pdf": "^5.7.2"
   },
   "peerDependencies": {
-    "cozy-client": ">=51.6.0",
+    "cozy-client": ">=52.1.0",
     "cozy-device-helper": ">=2.0.0",
     "cozy-harvest-lib": ">=31.0.5",
     "cozy-intent": ">=2.29.1",
     "cozy-logger": ">=1.9.0",
     "cozy-sharing": ">=16.11.0",
-    "cozy-ui": ">=115.0.2",
+    "cozy-ui": ">=116.0.0",
     "react": ">=16.12.0",
     "react-dom": ">=16.12.0"
   }
