@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [12.0.1](https://github.com/cozy/cozy-libs/compare/cozy-viewer@12.0.0...cozy-viewer@12.0.1) (2025-01-07)
+
+
+### Bug Fixes
+
+* **Viewer:** Now use intent inner dialog backdrop instead of custom one ([e0c8882](https://github.com/cozy/cozy-libs/commit/e0c8882ba7f80cde51dd7398216f9c137a99479f))
+
+
+
+
+
 # [12.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@11.4.0...cozy-viewer@12.0.0) (2025-01-07)
 
 
