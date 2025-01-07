@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { Fragment, useRef, useState, createRef, useEffect } from 'react'
 
+import { hasSupportedQualification } from 'cozy-client/dist/models/document/qualification'
 import { hasQualifications } from 'cozy-client/dist/models/file'
 import {
   isExpiringSoon,
@@ -71,7 +72,7 @@ const Qualification = ({ file, isReadOnly }) => {
       {isExpiringSoon(file) && !isExpirationAlertHidden(file) && (
         <ExpirationAlert file={file} />
       )}
-      {hasQualifications(file) ? (
+      {hasSupportedQualification(file) ? (
         <QualificationListItemQualification
           file={file}
           isReadOnly={isReadOnly}
