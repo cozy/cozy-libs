@@ -18,8 +18,6 @@ const ShareDialogOnlyByLink = ({
   documentType,
   link,
   onClose,
-  onRevokeLink,
-  onUpdateShareLinkPermissions,
   permissions
 }) => {
   const { t } = useI18n()
@@ -51,8 +49,6 @@ const ShareDialogOnlyByLink = ({
             recipients={recipients}
             link={link}
             permissions={permissions}
-            onUpdateShareLinkPermissions={onUpdateShareLinkPermissions}
-            onRevokeLink={onRevokeLink}
           />
           <div
             className={cx(

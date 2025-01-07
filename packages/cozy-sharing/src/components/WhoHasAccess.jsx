@@ -37,9 +37,7 @@ const WhoHasAccess = ({
   onRevokeSelf,
   verifyRecipient,
   link,
-  permissions,
-  onUpdateShareLinkPermissions,
-  onRevokeLink
+  permissions
 }) => {
   const previousLink = usePrevious(link)
   const linkHasBeenJustCreated = link && previousLink === null
@@ -58,8 +56,6 @@ const WhoHasAccess = ({
             onRevokeSelf={onRevokeSelf}
             link={link}
             permissions={permissions}
-            onChangePermissions={onUpdateShareLinkPermissions}
-            onDisable={onRevokeLink}
             fadeIn={linkHasBeenJustCreated}
           />
         )}

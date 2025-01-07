@@ -33,9 +33,7 @@ const SharingContent = ({
   recipientsToBeConfirmed,
   verifyRecipient,
   link,
-  permissions,
-  onUpdateShareLinkPermissions,
-  onRevokeLink
+  permissions
 }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
@@ -89,8 +87,6 @@ const SharingContent = ({
           verifyRecipient={verifyRecipient}
           link={link}
           permissions={permissions}
-          onUpdateShareLinkPermissions={onUpdateShareLinkPermissions}
-          onRevokeLink={onRevokeLink}
         />
       )}
     </div>
