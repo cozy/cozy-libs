@@ -3,6 +3,9 @@ import minilog from 'cozy-minilog'
 
 const log = minilog('ShareRestrictionModal/helpers')
 
+export const WRITE_PERMS = ['GET', 'POST', 'PUT', 'PATCH']
+export const READ_ONLY_PERMS = ['GET']
+
 /**
  * Copy a string to the clipboard
  *
@@ -127,7 +130,7 @@ export const updatePermissions = async ({
   switch (editingRights) {
     case 'readOnly':
       try {
-        return updateDocumentPermissions(file, ['GET'])
+        return updateDocumentPermissions(file, READ_ONLY_PERMS)
       } catch (err) {
         showAlert({
           message: t(`${documentType}.share.shareByLink.permserror`),
@@ -142,7 +145,7 @@ export const updatePermissions = async ({
       break
     case 'write':
       try {
-        return updateDocumentPermissions(file, ['GET', 'POST', 'PUT', 'PATCH'])
+        return updateDocumentPermissions(file, WRITE_PERMS)
       } catch (err) {
         showAlert({
           message: t(`${documentType}.share.shareByLink.permserror`),

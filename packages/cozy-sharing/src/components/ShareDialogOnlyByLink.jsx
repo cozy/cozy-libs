@@ -19,7 +19,6 @@ const ShareDialogOnlyByLink = ({
   link,
   onClose,
   onRevokeLink,
-  onShareByLink,
   onUpdateShareLinkPermissions,
   permissions
 }) => {
@@ -65,7 +64,6 @@ const ShareDialogOnlyByLink = ({
               link={link}
               document={document}
               documentType={documentType}
-              onEnable={onShareByLink}
             />
           </div>
         </>

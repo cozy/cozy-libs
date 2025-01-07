@@ -18,7 +18,6 @@ export const ShareModal = ({
   onRevokeLink,
   onRevokeSelf,
   onShare,
-  onShareByLink,
   onUpdateShareLinkPermissions,
   permissions,
   recipients,
@@ -44,7 +43,6 @@ export const ShareModal = ({
       link={link}
       onClose={onClose}
       onRevokeLink={onRevokeLink}
-      onShareByLink={onShareByLink}
       onUpdateShareLinkPermissions={onUpdateShareLinkPermissions}
       permissions={permissions}
     />
@@ -62,7 +60,6 @@ export const ShareModal = ({
       onRevokeLink={onRevokeLink}
       onRevokeSelf={onRevokeSelf}
       onShare={onShare}
-      onShareByLink={onShareByLink}
       onUpdateShareLinkPermissions={onUpdateShareLinkPermissions}
       permissions={permissions}
       recipients={recipients}
@@ -92,7 +89,6 @@ ShareModal.propTypes = {
   onRevoke: PropTypes.func.isRequired,
   onRevokeLink: PropTypes.func.isRequired,
   onShare: PropTypes.func.isRequired,
-  onShareByLink: PropTypes.func.isRequired,
   onUpdateShareLinkPermissions: PropTypes.func.isRequired,
   permissions: PropTypes.array.isRequired,
   recipients: PropTypes.array.isRequired,

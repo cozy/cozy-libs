@@ -1,94 +1,34 @@
 import PropTypes from 'prop-types'
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useReducer } from 'react'
 
-import Alert from 'cozy-ui/transpiled/react/Alert'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import CopyIcon from 'cozy-ui/transpiled/react/Icons/Copy'
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
-import Snackbar from 'cozy-ui/transpiled/react/Snackbar'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-import EditLinkPermissionDialog from './EditLinkPermissionDialog'
-import { isOnlyReadOnlyLinkAllowed } from '../helpers/link'
-import logger from '../logger'
+import { ShareRestrictionModal } from './ShareRestrictionModal/ShareRestrictionModal'
+import { copyToClipboard } from './ShareRestrictionModal/helpers'
 
-const ShareByLink = ({ link, document, documentType, onEnable }) => {
+const ShareByLink = ({ link, document, documentType }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
-  const [loading, setLoading] = useState(false)
-  const [shouldCopyToClipboard, setShouldCopyToClipboard] = useState(false)
-  const [alert, setAlert] = useState(false)
-
-  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
-
-  const copyLinkToClipboard = useCallback(
-    async ({ isAutomaticCopy }) => {
-      try {
-        await navigator.clipboard.writeText(link)
-        setAlert({
-          open: true,
-          severity: 'success',
-          message: t(`${documentType}.share.shareByLink.copied`)
-        })
-      } catch {
-        if (!isAutomaticCopy) {
-          // In case of automatic copy, the browser can block the copy request. This is not shown to the user since it is expected and can be circumvented by clicking directly on the copy link
-          setAlert({
-            open: true,
-            severity: 'error',
-            message: t(`${documentType}.share.shareByLink.failed`)
-          })
-        }
-      }
-    },
-    [documentType, link, t]
-  )
-
-  const onPermissionsSelected = async options => {
-    try {
-      setLoading(true)
-      await onEnable(document, options)
-    } catch (e) {
-      setAlert({
-        open: true,
-        severity: 'error',
-        message: t(`${documentType}.share.error.generic`)
-      })
-      logger.log(e)
-    } finally {
-      setLoading(false)
-      setShouldCopyToClipboard(true)
-    }
-  }
-
-  const onCreate = async () => {
-    if (isOnlyReadOnlyLinkAllowed({ documentType })) {
-      onPermissionsSelected({ verbs: ['GET'] })
-    } else {
-      setIsEditDialogOpen(true)
-    }
-  }
-
-  useEffect(() => {
-    if (link && shouldCopyToClipboard) {
-      copyLinkToClipboard({ isAutomaticCopy: true })
-      setShouldCopyToClipboard(false)
-    }
-  }, [link, shouldCopyToClipboard, copyLinkToClipboard])
-
-  const onClose = () => {
-    setIsEditDialogOpen(false)
-  }
-
-  const onCloseAlert = () => {
-    setAlert({ ...alert, open: false })
-  }
+  const { showAlert } = useAlert()
 
   const showCopyAndSendButtons = link && isMobile && navigator.share
   const showOnlyCopyButton =
     (link && !isMobile) || (link && isMobile && !navigator.share)
+
+  const [isEditDialogOpen, toggleEditDialogOpen] = useReducer(
+    state => !state,
+    false
+  )
+
+  const copyLinkToClipboard = async () => {
+    await copyToClipboard(link, { t, showAlert })
+  }
 
   const shareLink = async () => {
     try {
@@ -100,10 +40,10 @@ const ShareByLink = ({ link, document, documentType, onEnable }) => {
       }
       await navigator.share(shareData)
     } catch (error) {
-      setAlert({
-        open: true,
+      showAlert({
+        message: t(`${documentType}.share.error.generic`),
         severity: 'error',
-        message: t(`${documentType}.share.error.generic`)
+        variant: 'filled'
       })
     }
   }
@@ -117,9 +57,8 @@ const ShareByLink = ({ link, document, documentType, onEnable }) => {
           size="medium"
           startIcon={<Icon icon={LinkIcon} />}
           className="u-flex-auto"
-          busy={loading}
           style={{ position: 'initial' }} // fix z-index bug on iOS when under a BottomDrawer due to relative position
-          onClick={onCreate}
+          onClick={toggleEditDialogOpen}
         />
       )}
       {showCopyAndSendButtons && (
@@ -151,22 +90,8 @@ const ShareByLink = ({ link, document, documentType, onEnable }) => {
         />
       )}
       {isEditDialogOpen && (
-        <EditLinkPermissionDialog
-          open
-          onClose={onClose}
-          document={document}
-          onPermissionsSelected={onPermissionsSelected}
-        />
+        <ShareRestrictionModal file={document} onClose={toggleEditDialogOpen} />
       )}
-      <Snackbar open={alert.open} onClose={onCloseAlert}>
-        <Alert
-          variant="filled"
-          severity={alert.severity}
-          onClose={onCloseAlert}
-        >
-          {alert.message}
-        </Alert>
-      </Snackbar>
     </div>
   )
 }
@@ -174,8 +99,7 @@ const ShareByLink = ({ link, document, documentType, onEnable }) => {
 ShareByLink.propTypes = {
   link: PropTypes.string,
   document: PropTypes.object.isRequired,
-  documentType: PropTypes.string.isRequired,
-  onEnable: PropTypes.func.isRequired
+  documentType: PropTypes.string.isRequired
 }
 
 export default ShareByLink
