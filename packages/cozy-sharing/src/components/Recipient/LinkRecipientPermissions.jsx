@@ -41,7 +41,7 @@ const LinkRecipientPermissions = ({ className, document, permissions }) => {
 LinkRecipientPermissions.propTypes = {
   className: PropTypes.string,
   document: PropTypes.object.isRequired,
-  permissions: PropTypes.object.isRequired
+  permissions: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 export default LinkRecipientPermissions

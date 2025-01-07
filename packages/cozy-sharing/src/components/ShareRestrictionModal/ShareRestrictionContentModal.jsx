@@ -93,7 +93,7 @@ ShareRestrictionContentModal.propTypes = {
   helperTextPassword: PropTypes.string,
   password: PropTypes.string,
   setPassword: PropTypes.func.isRequired,
-  passwordToggle: PropTypes.func.isRequired,
+  passwordToggle: PropTypes.bool.isRequired,
   setPasswordToggle: PropTypes.func.isRequired,
   setIsValidPassword: PropTypes.func.isRequired,
   // Editing rights
