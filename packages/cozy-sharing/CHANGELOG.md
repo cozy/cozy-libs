@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@18.0.0...cozy-sharing@19.0.0) (2025-01-08)
+
+
+### Bug Fixes
+
+* **sharing:** Update propTypes ([0474d9c](https://github.com/cozy/cozy-libs/commit/0474d9c46344b1f7abf65fc6e419a25aef33d2ed))
+
+
+### Features
+
+* **sharing:** Add 3 actions to use the new action menu ([1af8fa7](https://github.com/cozy/cozy-libs/commit/1af8fa7dbffad63d117149d14e09399e9d71a8a6))
+* **sharing:** Add missing devDeps ([5221b40](https://github.com/cozy/cozy-libs/commit/5221b40397935538e95dcec82c939fb22196c991))
+* **sharing:** Add needed packages ([36a2b67](https://github.com/cozy/cozy-libs/commit/36a2b6771275a35b3ab484b22a18b6d9c7b61496))
+* **sharing:** Add ShareRestrictionModal component ([df5ed28](https://github.com/cozy/cozy-libs/commit/df5ed28c7c7f5dbb339bf26d563e8ffd825a686f))
+* **sharing:** Add the 3 boxes of the new link-sharing modal ([a297d20](https://github.com/cozy/cozy-libs/commit/a297d20c46966c82447491a6fefe2d96509c45a9))
+* **sharing:** Move revoke action to a secondary button ([83d3738](https://github.com/cozy/cozy-libs/commit/83d3738220e2c02ed749a08a47f92ca08ce9feb7))
+* **sharing:** Remove EditLinkPermissionDialog ([1b8bd56](https://github.com/cozy/cozy-libs/commit/1b8bd560f4e72b885817f1f17a83156b6c1a7d58))
+* **sharing:** Remove useless props ([cc3f816](https://github.com/cozy/cozy-libs/commit/cc3f816b6d35deb619488495bb767e1d76b557de))
+* **sharing:** Replace old sharing link menu with the new modal ([de1a1c2](https://github.com/cozy/cozy-libs/commit/de1a1c27a5747c0b8bf091ed1856994f65cdcdb2))
+* **sharing:** Upgrade packages ([9a1312d](https://github.com/cozy/cozy-libs/commit/9a1312d43cba1dcd521e8d6502865ac2071535cf))
+* **sharing:** Use ShareRestrictionModal when creating share link ([248c3b4](https://github.com/cozy/cozy-libs/commit/248c3b4904649e17e935afdef1bd2a0b87082dc7))
+
+
+### BREAKING CHANGES
+
+* **sharing:** You muse have `cozy-client >= 52.1.0` and `cozy-ui >= 116.0.0`
+
+
+
+
+
 # [18.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@17.0.0...cozy-sharing@18.0.0) (2024-12-23)
 
 
