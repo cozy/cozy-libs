@@ -31,7 +31,7 @@ const KonnectorBlock = ({ file }) => {
   const [konnector, setKonnector] = useState()
   const client = useClient()
   const { t } = useI18n()
-  const slug = get(file, 'cozyMetadata.uploadedBy.slug')
+  const slug = get(file, 'cozyMetadata.createdByApp')
   const sourceAccountIdentifier = get(
     file,
     'cozyMetadata.sourceAccountIdentifier'
