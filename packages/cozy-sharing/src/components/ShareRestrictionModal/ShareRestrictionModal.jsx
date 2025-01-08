@@ -7,6 +7,7 @@ import { getSharingLink as makeSharingLink } from 'cozy-client/dist/models/shari
 import { isMobile } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import Icon from 'cozy-ui/transpiled/react/Icon'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
@@ -16,9 +17,9 @@ import {
   forwardFile,
   updatePermissions,
   makeTTL,
-  revokePermissions,
   READ_ONLY_PERMS,
-  WRITE_PERMS
+  WRITE_PERMS,
+  revokePermissions
 } from './helpers'
 import { checkIsReadOnlyPermissions } from '../../helpers/permissions'
 import { useSharingContext } from '../../hooks/useSharingContext'
@@ -41,14 +42,15 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
     documentType,
     getDocumentPermissions,
     updateDocumentPermissions,
-    revokeSharingLink,
     shareByLink,
-    getSharingLink
+    getSharingLink,
+    revokeSharingLink
   } = useSharingContext()
 
+  const hasSharingLink = getSharingLink(file._id) !== null
   const permissions = getDocumentPermissions(file._id)
   const isReadOnlyPermissions = checkIsReadOnlyPermissions(permissions)
-  // 'readOnly', 'write' or 'revoke'
+
   const [editingRights, setEditingRights] = useState(
     isReadOnlyPermissions || permissions.length === 0 ? 'readOnly' : 'write'
   )
@@ -69,20 +71,8 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
 
   const handleClick = async () => {
     setLoading(true)
-    if (editingRights === 'revoke') {
-      await revokePermissions({
-        file,
-        t,
-        documentType,
-        revokeSharingLink,
-        showAlert
-      })
-      onClose()
-      return
-    }
-
     // If the file is not shared, we create a new sharing link
-    if (getSharingLink(file._id) === null) {
+    if (!hasSharingLink) {
       const verbs = editingRights === 'readOnly' ? READ_ONLY_PERMS : WRITE_PERMS
       await shareByLink(file, { verbs })
       const url = getSharingLink(file._id)
@@ -120,9 +110,17 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
     onClose()
   }
 
-  const textAction = isDesktopOrMobileWithoutShareAPI
-    ? t('ShareRestrictionModal.action.desktop')
-    : t('ShareRestrictionModal.action.mobile')
+  const handleRevokeLink = async () => {
+    setLoading(true)
+    await revokePermissions({
+      file,
+      t,
+      documentType,
+      revokeSharingLink,
+      showAlert
+    })
+    onClose()
+  }
 
   return (
     <ConfirmDialog
@@ -131,7 +129,6 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
       content={
         <ShareRestrictionContentModal
           file={file}
-          onShareRestrictionModalClose={onClose}
           // Date
           dateToggle={dateToggle}
           setDateToggle={setDateToggle}
@@ -151,12 +148,24 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
         />
       }
       actions={
-        <Button
-          label={textAction}
-          onClick={handleClick}
-          disabled={!isValidDate || !isValidPassword}
-          busy={loading}
-        />
+        <>
+          {hasSharingLink && (
+            <Button
+              label={t('Share.permissionLink.deactivate')}
+              variant="secondary"
+              color="error"
+              startIcon={<Icon icon="trash" />}
+              onClick={handleRevokeLink}
+              busy={loading}
+            />
+          )}
+          <Button
+            label={t('ShareRestrictionModal.action.confirm')}
+            onClick={handleClick}
+            disabled={!isValidDate || !isValidPassword}
+            busy={loading}
+          />
+        </>
       }
     />
   )

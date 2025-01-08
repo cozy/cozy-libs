@@ -71,7 +71,6 @@
       "modifyFolder": "Modify folder",
       "readDescription": "Link holders can only read or download content.",
       "writeDescription": "Link holders can alter and delete content.",
-      "deactivateDescription": "The link is deactivated. Holders of the link no longer have access to it.",
       "deactivate": "Deactivate link",
       "cancel": "Cancel",
       "confirm": "OK"
@@ -420,8 +419,7 @@
   },
   "ShareRestrictionModal": {
     "action": {
-      "desktop": "Confirm",
-      "mobile": "Confirm"
+      "confirm": "Confirm"
     },
     "invalidPasswordMessage": "%{smart_count} character is missing |||| %{smart_count} characters are missings"
   },
