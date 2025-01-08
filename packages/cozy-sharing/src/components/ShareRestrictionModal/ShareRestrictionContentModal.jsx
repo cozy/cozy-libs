@@ -97,6 +97,6 @@ ShareRestrictionContentModal.propTypes = {
   setPasswordToggle: PropTypes.func.isRequired,
   setIsValidPassword: PropTypes.func.isRequired,
   // Editing rights
-  editingRights: PropTypes.oneOf(['readOnly', 'write', 'revoke']),
+  editingRights: PropTypes.oneOf(['readOnly', 'write']),
   setEditingRights: PropTypes.func.isRequired
 }

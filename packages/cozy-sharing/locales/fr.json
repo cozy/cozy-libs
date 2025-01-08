@@ -71,7 +71,6 @@
       "modifyFolder": "Modifier le dossier",
       "readDescription": "Les détenteurs du lien peuvent uniquement consulter ou télécharger le contenu.",
       "writeDescription": "Les détenteurs du lien peuvent modifier et supprimer le contenu.",
-      "deactivateDescription": "Le lien est déactivé. Les détenteurs du lien n'y ont plus accès",
       "deactivate": "Désactiver le lien",
       "cancel": "Annuler",
       "confirm": "OK"
@@ -419,8 +418,7 @@
   "ShareRestrictionModal": {
     "title": "Lien de partage",
     "action": {
-      "desktop": "Valider",
-      "mobile": "Valider"
+      "confirm": "Valider"
     },
     "invalidPasswordMessage": "Il manque %{smart_count} caractère |||| Il manque %{smart_count} caractères"
   },

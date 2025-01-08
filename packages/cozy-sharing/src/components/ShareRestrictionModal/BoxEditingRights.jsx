@@ -3,10 +3,7 @@ import React, { useReducer, useRef } from 'react'
 
 import { isDirectory as isDir } from 'cozy-client/dist/models/file'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
-import {
-  divider,
-  makeActions
-} from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
+import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import Box from 'cozy-ui/transpiled/react/Box'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import List from 'cozy-ui/transpiled/react/List'
@@ -18,7 +15,6 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import { editPermissionLink } from '../Recipient/actions/editPermissionLink'
 import { readOnlyPermissionLink } from '../Recipient/actions/readOnlyPermissionLink'
-import { revokeLink } from '../Recipient/actions/revokeLink'
 
 export const BoxEditingRights = ({ file, editingRights, setEditingRights }) => {
   const [isMenuDisplayed, toggleMenuDisplayed] = useReducer(
@@ -31,21 +27,16 @@ export const BoxEditingRights = ({ file, editingRights, setEditingRights }) => {
 
   const isDirectory = isDir(file)
 
-  const actions = makeActions(
-    [readOnlyPermissionLink, editPermissionLink, divider, revokeLink],
-    {
-      t,
-      editingRights,
-      setEditingRights,
-      documentType,
-      isDirectory
-    }
-  )
+  const actions = makeActions([readOnlyPermissionLink, editPermissionLink], {
+    t,
+    editingRights,
+    setEditingRights,
+    documentType,
+    isDirectory
+  })
 
   const textSecondary =
-    editingRights === 'revoke'
-      ? t('Share.permissionLink.deactivateDescription')
-      : editingRights === 'readOnly'
+    editingRights === 'readOnly'
       ? t('Share.permissionLink.readDescription')
       : t('Share.permissionLink.writeDescription')
 
@@ -95,6 +86,6 @@ export const BoxEditingRights = ({ file, editingRights, setEditingRights }) => {
 
 BoxEditingRights.propTypes = {
   file: PropTypes.object.isRequired,
-  editingRights: PropTypes.oneOf(['readOnly', 'write', 'revoke']).isRequired,
+  editingRights: PropTypes.oneOf(['readOnly', 'write']).isRequired,
   setEditingRights: PropTypes.func.isRequired
 }

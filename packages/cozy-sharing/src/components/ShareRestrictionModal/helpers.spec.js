@@ -28,7 +28,8 @@ describe('ShareRestrictionModal/helpers', () => {
         t: jest.fn(),
         editingRights,
         documentType,
-        updateDocumentPermissions
+        updateDocumentPermissions,
+        showAlert: jest.fn()
       })
 
       expect(updateDocumentPermissions).toHaveBeenCalledWith(file, ['GET'])
@@ -44,7 +45,8 @@ describe('ShareRestrictionModal/helpers', () => {
         t: jest.fn(),
         editingRights,
         documentType,
-        updateDocumentPermissions
+        updateDocumentPermissions,
+        showAlert: jest.fn()
       })
 
       expect(updateDocumentPermissions).toHaveBeenCalledWith(file, [
@@ -61,14 +63,13 @@ describe('ShareRestrictionModal/helpers', () => {
     it('should call revokeSharingLink', async () => {
       const revokeSharingLink = jest.fn()
       const file = { _id: '123' }
-      const editingRights = 'revoke'
 
       await revokePermissions({
         file,
         t: jest.fn(),
-        editingRights,
         documentType,
-        revokeSharingLink
+        revokeSharingLink,
+        showAlert: jest.fn()
       })
 
       expect(revokeSharingLink).toHaveBeenCalledWith(file)

@@ -186,7 +186,7 @@ export const revokePermissions = async ({
       variant: 'filled'
     })
     log.error(
-      "Error in 'revokeLink' function when trying to revoke sharing link",
+      "Error in 'revokePermissions' function when trying to revoke sharing link",
       err
     )
   }
