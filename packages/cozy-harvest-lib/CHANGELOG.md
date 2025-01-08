@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [32.2.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.4...cozy-harvest-lib@32.2.5) (2025-01-08)
+
+
+### Bug Fixes
+
+* **harvest:** Konnector slug now relies on createdByApp in KonnectrBlock ([9a18110](https://github.com/cozy/cozy-libs/commit/9a18110633f208bf51251fd192f8efb647526d40))
+
+
+
+
+
 ## [32.2.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.3...cozy-harvest-lib@32.2.4) (2025-01-08)
 
 **Note:** Version bump only for package cozy-harvest-lib
