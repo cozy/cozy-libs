@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@12.0.3...cozy-viewer@13.0.0) (2025-01-08)
+
+
+### Features
+
+* **Viewer:** Upgrade packages ([3a49402](https://github.com/cozy/cozy-libs/commit/3a494027fef759dd871126b4dfa3e34b7b6d00e8))
+
+
+### BREAKING CHANGES
+
+* **Viewer:** You must have `cozy-harvest-lib >= 32.2.5`
+
+
+
+
+
 ## [12.0.3](https://github.com/cozy/cozy-libs/compare/cozy-viewer@12.0.2...cozy-viewer@12.0.3) (2025-01-08)
 
 **Note:** Version bump only for package cozy-viewer
