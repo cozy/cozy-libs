@@ -4,6 +4,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { useClient } from 'cozy-client'
 import { isFlagshipApp } from 'cozy-device-helper'
 import flag from 'cozy-flags'
+import { useWebviewIntent } from 'cozy-intent'
 import Minilog from 'cozy-minilog'
 
 const log = Minilog('👷‍♂️ [DataProxyProvider]')
@@ -18,6 +19,7 @@ export const useDataProxy = () => {
 
 export const DataProxyProvider = React.memo(({ children, options = {} }) => {
   const client = useClient()
+  const webviewIntent = useWebviewIntent()
   const [iframeUrl, setIframeUrl] = useState()
   const [dataProxy, setDataProxy] = useState()
   const [dataProxyServicesAvailable, setDataProxyServicesAvailable] =
@@ -28,14 +30,6 @@ export const DataProxyProvider = React.memo(({ children, options = {} }) => {
 
     const initIframe = async () => {
       try {
-        if (!flag('cozy.search.enabled')) {
-          log.log(
-            'Dataproxy features will be disabled due to missing feature flags'
-          )
-          setDataProxyServicesAvailable(false)
-          return
-        }
-
         log.log('Initializing DataProxy intent')
         const result = await client.stackClient.fetchJSON('POST', '/intents', {
           data: {
@@ -61,18 +55,59 @@ export const DataProxyProvider = React.memo(({ children, options = {} }) => {
       } catch (error) {
         setDataProxyServicesAvailable(false)
         log.error(
-          'Error whild initializing Search intent, dataproxy features will be disabled',
+          'Error while initializing Search intent, dataproxy features will be disabled',
           error
         )
       }
     }
 
-    if (isFlagshipApp()) {
+    const initFlagship = async () => {
+      try {
+        if (!webviewIntent) {
+          return
+        }
+
+        log.log('Initializing DataProxy intent in Flagship app')
+        const isSearchAvailable =
+          (await webviewIntent.call('isAvailable', 'search')) ?? false
+
+        if (!isSearchAvailable) {
+          log.log(
+            'Dataproxy features will be disabled due to feature not supported by Flagship app'
+          )
+          setDataProxyServicesAvailable(false)
+          return
+        }
+
+        setDataProxy(() => ({
+          search: (search, options) =>
+            webviewIntent?.call('search', search, options)
+        }))
+
+        setDataProxyServicesAvailable(isSearchAvailable)
+      } catch (error) {
+        setDataProxyServicesAvailable(false)
+        log.error(
+          `Error while initializing Flagship's Search, dataproxy features will be disabled`,
+          error
+        )
+      }
+    }
+
+    if (!flag('cozy.search.enabled')) {
+      log.log(
+        'Dataproxy features will be disabled due to missing feature flags'
+      )
       setDataProxyServicesAvailable(false)
+      return
+    }
+
+    if (isFlagshipApp()) {
+      initFlagship()
     } else {
       initIframe()
     }
-  }, [client])
+  }, [client, webviewIntent])
 
   const onIframeLoaded = () => {
     const ifr = document.getElementById('DataProxy')
