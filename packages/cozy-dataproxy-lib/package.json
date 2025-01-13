@@ -58,7 +58,8 @@
   "exports": {
     ".": "./dist/index.js",
     "./api": "./dist/api.js",
-    "./ui": "./dist/ui.js"
+    "./ui": "./dist/ui.js",
+    "./dist/stylesheet.css": "./dist/stylesheet.css"
   },
   "peerDependencies": {
     "cozy-client": ">=51.0.1",
