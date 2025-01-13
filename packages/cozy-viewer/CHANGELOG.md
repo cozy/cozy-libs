@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.0.2](https://github.com/cozy/cozy-libs/compare/cozy-viewer@13.0.1...cozy-viewer@13.0.2) (2025-01-13)
+
+
+### Bug Fixes
+
+* **Viewer:** Now hide option to see file folder on public pages ([3eda54a](https://github.com/cozy/cozy-libs/commit/3eda54a32ada848b192eb18fbd0e4596b03ef565))
+
+
+
+
+
 ## [13.0.1](https://github.com/cozy/cozy-libs/compare/cozy-viewer@13.0.0...cozy-viewer@13.0.1) (2025-01-09)
 
 
