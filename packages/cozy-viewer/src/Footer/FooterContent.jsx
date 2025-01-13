@@ -39,7 +39,13 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const FooterContent = ({ file, toolbarRef, children, isPublic }) => {
+const FooterContent = ({
+  file,
+  toolbarRef,
+  children,
+  isPublic,
+  isReadOnly
+}) => {
   const styles = useStyles()
 
   const toolbarProps = useMemo(() => ({ ref: toolbarRef }), [toolbarRef])
@@ -69,7 +75,11 @@ const FooterContent = ({ file, toolbarRef, children, isPublic }) => {
           FooterActionButtonsWithFile={FooterActionButtonsWithFile}
         />
       </BottomSheetHeader>
-      <BottomSheetContent file={file} isPublic={isPublic} />
+      <BottomSheetContent
+        file={file}
+        isPublic={isPublic}
+        isReadOnly={isReadOnly}
+      />
     </BottomSheet>
   )
 }
@@ -78,6 +88,7 @@ FooterContent.propTypes = {
   file: PropTypes.object.isRequired,
   toolbarRef: PropTypes.object,
   isPublic: PropTypes.bool,
+  isReadOnly: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node)
