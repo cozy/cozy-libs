@@ -20,6 +20,7 @@ import { getServicesEntries } from './helpers'
  * @returns {Object} The configuration object for Rsbuild.
  */
 function getRsbuildConfig({
+  enableFastRefresh = false,
   hasServices = false,
   hasPublic = false,
   hasIntents = false,
@@ -31,7 +32,9 @@ function getRsbuildConfig({
     plugins: [
       pluginEjs(),
       pluginNodePolyfill(),
-      pluginReact(),
+      pluginReact({
+        fastRefresh: enableFastRefresh
+      }),
       pluginStylus({
         stylusOptions: {
           // To resolve import from cozy-ui inside stylus files
