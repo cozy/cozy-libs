@@ -27,7 +27,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { makeFormat, makeSize, makeDate, makePath } from './helpers'
 import { withViewerLocales } from '../hoc/withViewerLocales'
 
-const Informations = ({ file, t }) => {
+const Informations = ({ file, isPublic, t }) => {
   const [showMenu, setShowMenu] = useState(false)
   const { f, lang } = useI18n()
   const format = makeFormat(file)
@@ -69,11 +69,13 @@ const Informations = ({ file, t }) => {
           primary={path}
           secondary={t('Viewer.panel.informations.location')}
         />
-        <ListItemSecondaryAction>
-          <IconButton ref={anchorRef} onClick={() => setShowMenu(v => !v)}>
-            <Icon icon={DotsIcon} />
-          </IconButton>
-        </ListItemSecondaryAction>
+        {!isPublic && (
+          <ListItemSecondaryAction>
+            <IconButton ref={anchorRef} onClick={() => setShowMenu(v => !v)}>
+              <Icon icon={DotsIcon} />
+            </IconButton>
+          </ListItemSecondaryAction>
+        )}
       </ListItem>
       {showMenu && (
         <ActionsMenu
@@ -142,6 +144,7 @@ const Informations = ({ file, t }) => {
 
 Informations.propTypes = {
   file: PropTypes.object.isRequired,
+  isPublic: PropTypes.bool,
   t: PropTypes.func
 }
 
