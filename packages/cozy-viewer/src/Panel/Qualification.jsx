@@ -124,6 +124,7 @@ const Qualification = ({ file, isReadOnly }) => {
               file={file}
               optionFile={optionFile}
               ref={actionBtnRef.current[optionFile.id]}
+              isReadOnly={isReadOnly}
             />
           )}
         </List>

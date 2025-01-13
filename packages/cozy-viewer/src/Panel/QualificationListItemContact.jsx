@@ -88,6 +88,7 @@ const QualificationListItemContact = ({ file, isReadOnly }) => {
           file={file}
           optionFile={optionFile}
           ref={actionBtnRef}
+          isReadOnly={isReadOnly}
         />
       )}
     </>

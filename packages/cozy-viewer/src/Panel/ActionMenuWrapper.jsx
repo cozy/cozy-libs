@@ -9,38 +9,54 @@ import ActionMenuDesktop from './ActionMenuDesktop'
 import ActionMenuMobile from './ActionMenuMobile'
 import { isEditableAttribute } from '../helpers'
 
-const ActionMenuWrapper = forwardRef(({ file, optionFile, onClose }, ref) => {
-  const { name, value } = optionFile
-  const { isMobile } = useBreakpoints()
-  const { t } = useI18n()
-  const { showAlert } = useAlert()
+const ActionMenuWrapper = forwardRef(
+  ({ file, optionFile, isReadOnly, onClose }, ref) => {
+    const { name, value } = optionFile
+    const { isMobile } = useBreakpoints()
+    const { t } = useI18n()
+    const { showAlert } = useAlert()
 
-  const isEditable = isEditableAttribute(name, file)
-  const editPath = `${file.metadata.qualification.label}/${file._id}/edit/information?metadata=${optionFile.name}`
+    const isEditable = isEditableAttribute(name, file) && !isReadOnly
+    const editPath = `${file.metadata.qualification.label}/${file._id}/edit/information?metadata=${optionFile.name}`
 
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(value)
-      showAlert({
-        message: t(`Viewer.snackbar.copiedToClipboard.success`),
-        severity: 'success',
-        variant: 'filled',
-        icon: false
-      })
-    } catch (error) {
-      showAlert({
-        message: t(`Viewer.snackbar.copiedToClipboard.error`),
-        severity: 'error',
-        variant: 'filled',
-        icon: false
-      })
+    const handleCopy = async () => {
+      try {
+        await navigator.clipboard.writeText(value)
+        showAlert({
+          message: t(`Viewer.snackbar.copiedToClipboard.success`),
+          severity: 'success',
+          variant: 'filled',
+          icon: false
+        })
+      } catch (error) {
+        showAlert({
+          message: t(`Viewer.snackbar.copiedToClipboard.error`),
+          severity: 'error',
+          variant: 'filled',
+          icon: false
+        })
+      }
+      onClose()
     }
-    onClose()
-  }
 
-  if (isMobile) {
+    if (isMobile) {
+      return (
+        <ActionMenuMobile
+          file={file}
+          optionFile={optionFile}
+          actions={{
+            copy: { onClick: handleCopy },
+            edit: { path: editPath }
+          }}
+          isEditable={isEditable}
+          onClose={onClose}
+        />
+      )
+    }
+
     return (
-      <ActionMenuMobile
+      <ActionMenuDesktop
+        ref={ref}
         file={file}
         optionFile={optionFile}
         actions={{
@@ -52,21 +68,7 @@ const ActionMenuWrapper = forwardRef(({ file, optionFile, onClose }, ref) => {
       />
     )
   }
-
-  return (
-    <ActionMenuDesktop
-      ref={ref}
-      file={file}
-      optionFile={optionFile}
-      actions={{
-        copy: { onClick: handleCopy },
-        edit: { path: editPath }
-      }}
-      isEditable={isEditable}
-      onClose={onClose}
-    />
-  )
-})
+)
 
 ActionMenuWrapper.displayName = 'ActionMenuWrapper'
 
@@ -76,6 +78,7 @@ ActionMenuWrapper.propTypes = {
     name: PropTypes.string,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   }),
+  isReadOnly: PropTypes.bool,
   onClose: PropTypes.func
 }
 
