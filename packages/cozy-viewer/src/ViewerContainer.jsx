@@ -4,6 +4,7 @@ import React, { createRef, useState, useEffect } from 'react'
 
 import { useClient } from 'cozy-client'
 import { isDocumentReadOnly } from 'cozy-client/dist/models/permission'
+import { useSharingContext } from 'cozy-sharing'
 import Modal from 'cozy-ui/transpiled/react/Modal'
 import { FileDoctype } from 'cozy-ui/transpiled/react/proptypes'
 import AlertProvider from 'cozy-ui/transpiled/react/providers/Alert'
@@ -34,6 +35,8 @@ const ViewerContainer = props => {
   const [isReadOnly, setIsReadOnly] = useState(true)
   const client = useClient()
   useExtendI18n(locales)
+  const { hasWriteAccess } = useSharingContext()
+
   const currentFile = files[currentIndex]
   const fileCount = files.length
   const hasPrevious = currentIndex > 0
@@ -51,16 +54,18 @@ const ViewerContainer = props => {
 
   useEffect(() => {
     const getIsReadOnly = async () => {
-      const res = await isDocumentReadOnly({
-        document: currentFile,
-        client
-      })
+      const res = isPublic
+        ? await isDocumentReadOnly({
+            document: currentFile,
+            client
+          })
+        : !hasWriteAccess(currentFile._id)
 
       setIsReadOnly(res)
     }
 
     getIsReadOnly()
-  }, [client, currentFile])
+  }, [client, currentFile, hasWriteAccess, isPublic])
 
   return (
     <AlertProvider>
