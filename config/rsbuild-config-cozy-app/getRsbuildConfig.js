@@ -31,7 +31,9 @@ function getRsbuildConfig({
     plugins: [
       pluginEjs(),
       pluginNodePolyfill(),
-      pluginReact(),
+      pluginReact({
+        fastRefresh: import.meta.env.NODE_ENV === 'development'
+      }),
       pluginStylus({
         stylusOptions: {
           // To resolve import from cozy-ui inside stylus files
