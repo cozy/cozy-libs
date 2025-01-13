@@ -42,6 +42,7 @@ const ViewerInformationsWrapper = ({
             file={currentFile}
             toolbarRef={toolbarRef}
             isPublic={isPublic}
+            isReadOnly={isReadOnly}
           >
             {children}
           </FooterContent>

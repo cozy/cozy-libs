@@ -5,7 +5,7 @@ import { BottomSheetItem } from 'cozy-ui/transpiled/react/BottomSheet'
 
 import getPanelBlocks, { getPanelBlocksSpecs } from '../Panel/getPanelBlocks'
 
-const BottomSheetContent = ({ file, isPublic }) => {
+const BottomSheetContent = ({ file, isPublic, isReadOnly }) => {
   const panelBlocks = getPanelBlocks({
     panelBlocksSpecs: getPanelBlocksSpecs(isPublic),
     file
@@ -17,14 +17,15 @@ const BottomSheetContent = ({ file, isPublic }) => {
       disableGutters
       disableElevation={index === panelBlocks.length - 1}
     >
-      <PanelBlock file={file} isPublic={isPublic} />
+      <PanelBlock file={file} isPublic={isPublic} isReadOnly={isReadOnly} />
     </BottomSheetItem>
   ))
 }
 
 BottomSheetContent.propTypes = {
   file: PropTypes.object.isRequired,
-  isPublic: PropTypes.bool
+  isPublic: PropTypes.bool,
+  isReadOnly: PropTypes.bool
 }
 
 export default BottomSheetContent
