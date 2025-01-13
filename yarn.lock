@@ -10993,15 +10993,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-native@npm:0.67.7":
-  version: 0.67.7
-  resolution: "@types/react-native@npm:0.67.7"
-  dependencies:
-    "@types/react": "npm:*"
-  checksum: 10c0/72843a6051972626f5bb3df05e9e37ab773664be281ce3c5791e368b892e7e245e113260f83dd65d42697550dcda96792ca7205fa28b03843feb26c855c74f32
-  languageName: node
-  linkType: hard
-
 "@types/react-redux@npm:7.1.25":
   version: 7.1.25
   resolution: "@types/react-redux@npm:7.1.25"
@@ -16688,11 +16679,7 @@ __metadata:
   dependencies:
     "@babel/cli": "npm:7.16.8"
     "@babel/core": "npm:7.16.12"
-    "@types/react-native": "npm:0.67.7"
-    babel-jest: "npm:26.6.3"
     babel-preset-cozy-app: "npm:^2.8.1"
-    jest: "npm:26.6.3"
-    lodash: "npm:^4.17.19"
     typescript: "npm:5.5.2"
   languageName: unknown
   linkType: soft
