@@ -141,7 +141,7 @@ class ViewerControls extends Component {
             showFilePath={showFilePath}
             onMouseEnter={this.showControls}
             onMouseLeave={this.hideControls}
-            onClose={showClose && onClose}
+            onClose={showClose ? onClose : undefined}
           >
             {children}
           </Toolbar>
