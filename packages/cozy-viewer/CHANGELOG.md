@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.1.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@13.0.2...cozy-viewer@13.1.0) (2025-01-13)
+
+
+### Bug Fixes
+
+* **Viewer:** Now hide edit option on mobile if read only ([ce2f287](https://github.com/cozy/cozy-libs/commit/ce2f287494a943547762d5f189a74d38554d9f05))
+* **Viewer:** Now isReadOnly manage public and private share ([6e0aba3](https://github.com/cozy/cozy-libs/commit/6e0aba3abd9dee753656e9aef82ecb53931e14aa))
+* **Viewer:** Now show edit option on qualification according to share ([73034bf](https://github.com/cozy/cozy-libs/commit/73034bf13bb18ba269aa70902902f214b31d87fb))
+
+
+### Features
+
+* **Viewer:** Disable qualification modification on public ([f41540e](https://github.com/cozy/cozy-libs/commit/f41540ea791d31878dfa2325bca4cc7f867c010a))
+
+
+
+
+
 ## [13.0.2](https://github.com/cozy/cozy-libs/compare/cozy-viewer@13.0.1...cozy-viewer@13.0.2) (2025-01-13)
 
 
