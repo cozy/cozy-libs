@@ -14,7 +14,8 @@ import { withViewerLocales } from '../hoc/withViewerLocales'
 
 export const MIN_SCALE = 0.25
 export const MAX_SCALE = 3
-export const MAX_PAGES = 3
+export const MAX_PAGES = 40
+export const MAX_SIZE_FILE = 10_485_760 // 10MB
 const KEY_CODE_UP = 38
 const KEY_CODE_DOWN = 40
 const OPACITY_DELAY = 1_000
@@ -85,7 +86,9 @@ export class PdfJsViewer extends Component {
   onLoadSuccess = ({ numPages }) => {
     this.setState({
       totalPages: numPages,
-      renderAllPages: numPages <= MAX_PAGES,
+      renderAllPages:
+        numPages <= MAX_PAGES &&
+        parseInt(this.props.file.size, 10) <= MAX_SIZE_FILE,
       loaded: true
     })
   }
