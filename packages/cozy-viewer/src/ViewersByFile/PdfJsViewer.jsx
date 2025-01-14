@@ -17,6 +17,8 @@ export const MAX_SCALE = 3
 export const MAX_PAGES = 3
 const KEY_CODE_UP = 38
 const KEY_CODE_DOWN = 40
+const OPACITY_DELAY = 1_000
+let timeoutOpacity
 
 export class PdfJsViewer extends Component {
   state = {
@@ -26,24 +28,45 @@ export class PdfJsViewer extends Component {
     loaded: false,
     errored: false,
     width: null,
-    renderAllPages: false
+    renderAllPages: false,
+    toolbarDisplayed: true,
+    keepToolbarDisplayed: false
   }
 
   componentDidMount() {
     this.setWrapperSize()
     this.resizeListener = throttle(this.setWrapperSize, 500)
+    this.mouseMoveListener = throttle(this.onMouseMove, OPACITY_DELAY / 2)
     window.addEventListener('resize', this.resizeListener)
+    document.addEventListener('mousemove', this.mouseMoveListener)
     document.addEventListener('keyup', this.onKeyUp, false)
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.resizeListener)
+    document.removeEventListener('mousemove', this.mouseMoveListener)
     document.removeEventListener('keyup', this.onKeyUp, false)
+    if (timeoutOpacity) {
+      clearTimeout(timeoutOpacity)
+    }
+  }
+
+  onMouseMove = () => {
+    if (!this.state.toolbarDisplayed) {
+      this.setState({ toolbarDisplayed: true })
+    }
+    if (timeoutOpacity) {
+      clearTimeout(timeoutOpacity)
+    }
+    timeoutOpacity = setTimeout(() => {
+      this.setState({ toolbarDisplayed: false })
+    }, OPACITY_DELAY)
   }
 
   onKeyUp = e => {
     if (e.keyCode === KEY_CODE_UP) this.previousPage()
     else if (e.keyCode === KEY_CODE_DOWN) this.nextPage()
+    this.onMouseMove()
   }
 
   toggleGestures(enable) {
@@ -118,8 +141,11 @@ export class PdfJsViewer extends Component {
       currentPage,
       scale,
       width,
-      renderAllPages
+      renderAllPages,
+      toolbarDisplayed,
+      keepToolbarDisplayed
     } = this.state
+
     if (errored)
       return (
         <NoViewer
@@ -165,7 +191,14 @@ export class PdfJsViewer extends Component {
           )}
         </Document>
         {loaded && (
-          <div className={cx(styles['viewer-pdfviewer-toolbar'], 'u-p-half')}>
+          <div
+            className={cx(styles['viewer-pdfviewer-toolbar'], 'u-p-half', {
+              [styles['viewer-pdfviewer-toolbar--hidden']]:
+                !toolbarDisplayed && !keepToolbarDisplayed
+            })}
+            onMouseEnter={() => this.setState({ keepToolbarDisplayed: true })}
+            onMouseLeave={() => this.setState({ keepToolbarDisplayed: false })}
+          >
             {!renderAllPages && (
               <span className="u-mh-half">
                 <ToolbarButton
