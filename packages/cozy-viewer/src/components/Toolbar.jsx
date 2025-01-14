@@ -89,7 +89,7 @@ const Toolbar = ({
       )}
       <div className="u-pl-half u-ov-auto u-w-100">
         <Typography
-          variant="h3"
+          variant={isDesktop ? 'h3' : 'h4'}
           color={isDesktop ? 'inherit' : 'textPrimary'}
           noWrap
         >
