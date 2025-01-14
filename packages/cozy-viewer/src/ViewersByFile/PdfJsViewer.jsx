@@ -127,7 +127,8 @@ export class PdfJsViewer extends Component {
           renderFallbackExtraContent={renderFallbackExtraContent}
         />
       )
-    const pageWidth = width ? width * scale : null // newer versions of react-pdf do that automatically
+
+    const pageWidth = width && totalPages > 1 ? width - 15 : width // Remove the scrollbar width to avoid a horizontal scrollbar
 
     return (
       <div
@@ -148,6 +149,7 @@ export class PdfJsViewer extends Component {
                 key={page}
                 pageNumber={page + 1}
                 width={pageWidth}
+                scale={scale}
                 renderAnnotations={false}
                 className={cx('u-mv-1', styles['viewer-pdfviewer-page'])}
               />
@@ -156,6 +158,7 @@ export class PdfJsViewer extends Component {
             <Page
               pageNumber={currentPage}
               width={pageWidth}
+              scale={scale}
               renderAnnotations={false}
               className={styles['viewer-pdfviewer-page']}
             />
