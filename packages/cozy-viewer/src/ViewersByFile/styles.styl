@@ -66,6 +66,13 @@
     background var(--charcoalGrey)
     color var(--white)
     border-radius .5rem
+    opacity 1
+    transition opacity 0.5s ease-in-out
+
+    &--hidden
+      opacity 0
+      transition opacity 0.5s ease-in-out
+
 
 .viewer-imageviewer
     flex             1 1 100%
