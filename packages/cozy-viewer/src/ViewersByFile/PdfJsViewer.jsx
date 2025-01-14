@@ -21,17 +21,36 @@ const KEY_CODE_DOWN = 40
 const OPACITY_DELAY = 1_000
 let timeoutOpacity
 
+const makeInputPageStyle = nbPages => {
+  const maxWidth = Math.max(1, String(Math.abs(nbPages)).length - 1)
+  return {
+    maxWidth: `${maxWidth}rem`,
+    marginRight: '0.25rem',
+    textAlign: 'center',
+    backgroundColor: 'var(--charcoalGrey)',
+    border: '2px solid var(--borderMainColor)',
+    borderRadius: '5px'
+  }
+}
+
 export class PdfJsViewer extends Component {
   state = {
     totalPages: 1,
     scale: 1,
     currentPage: 1,
+    inputPageValue: 1,
     loaded: false,
     errored: false,
     width: null,
     renderAllPages: false,
     toolbarDisplayed: true,
-    keepToolbarDisplayed: false
+    keepToolbarDisplayed: false,
+    isInputPageFocused: false
+  }
+
+  constructor() {
+    super()
+    this.inputRef = React.createRef()
   }
 
   componentDidMount() {
@@ -102,15 +121,23 @@ export class PdfJsViewer extends Component {
   }
 
   nextPage = () => {
-    this.setState(state => ({
-      currentPage: Math.min(state.currentPage + 1, state.totalPages)
-    }))
+    this.setState(state => {
+      const value = Math.min(state.currentPage + 1, state.totalPages)
+      return {
+        currentPage: value,
+        inputPageValue: value
+      }
+    })
   }
 
   previousPage = () => {
-    this.setState(state => ({
-      currentPage: Math.max(state.currentPage - 1, 1)
-    }))
+    this.setState(state => {
+      const value = Math.max(state.currentPage - 1, 1)
+      return {
+        currentPage: value,
+        inputPageValue: value
+      }
+    })
   }
 
   scaleUp = () => {
@@ -118,9 +145,7 @@ export class PdfJsViewer extends Component {
       const previousScale = state.scale
       const scale = Math.min(previousScale + 0.25, MAX_SCALE)
       if (scale > 1 && previousScale <= 1) this.toggleGestures(false)
-      return {
-        scale
-      }
+      return { scale }
     })
   }
 
@@ -129,10 +154,41 @@ export class PdfJsViewer extends Component {
       const previousScale = state.scale
       const scale = Math.max(previousScale - 0.25, MIN_SCALE)
       if (scale <= 1 && previousScale > 1) this.toggleGestures(true)
-      return {
-        scale
-      }
+      return { scale }
     })
+  }
+
+  handleInputPageChange = evt => {
+    const value = evt.target.value
+    if (value === '' || (value <= this.state.totalPages && value > 0)) {
+      this.setState({ inputPageValue: value })
+    }
+  }
+
+  handleInputPageKeyDown = evt => {
+    if (evt.keyCode === 13) {
+      this.inputRef.current.blur()
+    }
+  }
+
+  handleInputPageFocus = () => {
+    this.setState({
+      isInputPageFocused: true,
+      keepToolbarDisplayed: true
+    })
+  }
+
+  handleInputPageBlur = () => {
+    this.setState(state => ({
+      keepToolbarDisplayed: false,
+      isInputPageFocused: false,
+      inputPageValue: state.inputPageValue
+        ? state.inputPageValue
+        : state.currentPage,
+      currentPage: state.inputPageValue
+        ? parseInt(state.inputPageValue, 10)
+        : state.currentPage
+    }))
   }
 
   render() {
@@ -142,11 +198,13 @@ export class PdfJsViewer extends Component {
       errored,
       totalPages,
       currentPage,
+      inputPageValue,
       scale,
       width,
       renderAllPages,
       toolbarDisplayed,
-      keepToolbarDisplayed
+      keepToolbarDisplayed,
+      isInputPageFocused
     } = this.state
 
     if (errored)
@@ -158,6 +216,10 @@ export class PdfJsViewer extends Component {
       )
 
     const pageWidth = width && totalPages > 1 ? width - 15 : width // Remove the scrollbar width to avoid a horizontal scrollbar
+    const pageInputValue =
+      inputPageValue || inputPageValue === ''
+        ? inputPageValue
+        : currentPage.toString()
 
     return (
       <div
@@ -199,8 +261,14 @@ export class PdfJsViewer extends Component {
               [styles['viewer-pdfviewer-toolbar--hidden']]:
                 !toolbarDisplayed && !keepToolbarDisplayed
             })}
-            onMouseEnter={() => this.setState({ keepToolbarDisplayed: true })}
-            onMouseLeave={() => this.setState({ keepToolbarDisplayed: false })}
+            onMouseEnter={() =>
+              !isInputPageFocused &&
+              this.setState({ keepToolbarDisplayed: true })
+            }
+            onMouseLeave={() =>
+              !isInputPageFocused &&
+              this.setState({ keepToolbarDisplayed: false })
+            }
           >
             {!renderAllPages && (
               <span className="u-mh-half">
@@ -210,7 +278,18 @@ export class PdfJsViewer extends Component {
                   disabled={currentPage === 1}
                   label={t('Viewer.previous')}
                 />
-                {currentPage}/{totalPages}
+                <input
+                  ref={this.inputRef}
+                  type="text"
+                  inputMode="numeric"
+                  style={makeInputPageStyle(totalPages)}
+                  value={pageInputValue}
+                  onChange={this.handleInputPageChange}
+                  onKeyDown={this.handleInputPageKeyDown}
+                  onFocus={this.handleInputPageFocus}
+                  onBlur={this.handleInputPageBlur}
+                />
+                /{totalPages}
                 <ToolbarButton
                   icon="bottom"
                   onClick={this.nextPage}
