@@ -41,6 +41,19 @@ function getRsbuildConfig({
         }
       })
     ],
+    // Used when running `rsbuild dev`
+    // By default the dev configuration would serve app's files from localhost:300
+    // which is not what we want as we expect to serve apps from a local cozy-stack
+    dev: {
+      // this param tells to put files in the output folder so we can access them from cozy-stack
+      writeToDisk: true,
+      // this param tells the cozy-app which URL to use for the HMR websocket, otherwise it would use the cozy-stack URL by default
+      client: {
+        host: 'rsbuild.cozy.tools', // we cannot use localhost because chromium browsers prevent unsecure websockets to localhost
+        protocol: 'ws',
+        port: '<port>'
+      }
+    },
     output: {
       cleanDistPath: true,
       filename: {
