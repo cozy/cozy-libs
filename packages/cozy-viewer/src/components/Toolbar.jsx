@@ -20,21 +20,12 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import { useEncrypted } from 'cozy-ui/transpiled/react/providers/Encrypted'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
-import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import PrintButton from './PrintButton'
 import PublicToolbarMoreMenu from './PublicToolbarMoreMenu'
 import { ToolbarFilePath } from './ToolbarFilePath'
 import styles from './styles.styl'
 import { extractChildrenCompByName } from '../Footer/helpers'
-
-const useClasses = makeStyles(theme => ({
-  iconButton: {
-    [theme.breakpoints.down('md')]: {
-      marginLeft: '0.25rem'
-    }
-  }
-}))
 
 const Toolbar = ({
   hidden,
@@ -48,7 +39,6 @@ const Toolbar = ({
   showFilePath
 }) => {
   const client = useClient()
-  const classes = useClasses()
   const { t } = useI18n()
   const webviewIntent = useWebviewIntent()
   const { isSharingShortcutCreated, discoveryLink, loading } = useSharingInfos()
@@ -80,10 +70,7 @@ const Toolbar = ({
       onMouseLeave={onMouseLeave}
     >
       {onClose && (
-        <IconButton
-          className={cx(classes.iconButton, { 'u-white': isDesktop })}
-          onClick={onClose}
-        >
+        <IconButton className={cx({ 'u-white': isDesktop })} onClick={onClose}>
           <Icon icon={PreviousIcon} />
         </IconButton>
       )}
