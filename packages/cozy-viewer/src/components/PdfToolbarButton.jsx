@@ -1,18 +1,20 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Button from 'cozy-ui/transpiled/react/deprecated/Button'
+import Button from 'cozy-ui/transpiled/react/Buttons'
+import Icon from 'cozy-ui/transpiled/react/Icon'
 
 const PdfToolbarButton = ({ icon, onClick, disabled, label }) => (
   <Button
-    iconOnly
-    subtle
-    theme="secondary"
-    className="u-p-half u-m-half"
+    variant="text"
+    color="secondary"
+    className="u-p-half u-m-half u-mah-2"
     icon={icon}
     onClick={onClick}
     disabled={disabled}
-    label={label}
+    label={<Icon icon={icon} size={16} />}
+    aria-label={label}
+    disableRipple
   />
 )
 
