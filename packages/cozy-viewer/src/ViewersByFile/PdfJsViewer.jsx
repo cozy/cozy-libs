@@ -24,12 +24,7 @@ let timeoutOpacity
 const makeInputPageStyle = nbPages => {
   const maxWidth = Math.max(1, String(Math.abs(nbPages)).length - 1)
   return {
-    maxWidth: `${maxWidth}rem`,
-    marginRight: '0.25rem',
-    textAlign: 'center',
-    backgroundColor: 'var(--charcoalGrey)',
-    border: '2px solid var(--borderMainColor)',
-    borderRadius: '5px'
+    maxWidth: `${maxWidth}.5rem`
   }
 }
 
@@ -278,18 +273,22 @@ export class PdfJsViewer extends Component {
                   disabled={currentPage === 1}
                   label={t('Viewer.previous')}
                 />
-                <input
-                  ref={this.inputRef}
-                  type="text"
-                  inputMode="numeric"
-                  style={makeInputPageStyle(totalPages)}
-                  value={pageInputValue}
-                  onChange={this.handleInputPageChange}
-                  onKeyDown={this.handleInputPageKeyDown}
-                  onFocus={this.handleInputPageFocus}
-                  onBlur={this.handleInputPageBlur}
-                />
-                /{totalPages}
+                <label htmlFor="input-page">
+                  <input
+                    ref={this.inputRef}
+                    id="input-page"
+                    className={styles['viewer-pdfviewer-input-page']}
+                    type="text"
+                    inputMode="numeric"
+                    style={makeInputPageStyle(totalPages)}
+                    value={pageInputValue}
+                    onChange={this.handleInputPageChange}
+                    onKeyDown={this.handleInputPageKeyDown}
+                    onFocus={this.handleInputPageFocus}
+                    onBlur={this.handleInputPageBlur}
+                  />
+                  /{totalPages}
+                </label>
                 <ToolbarButton
                   icon="bottom"
                   onClick={this.nextPage}
