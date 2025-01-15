@@ -7,7 +7,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import ShareIcon from 'cozy-ui/transpiled/react/Icons/Share'
 
-const Sharing = ({ file, variant }) => {
+const Sharing = ({ className, file, variant }) => {
   const client = useClient()
   const [showShareModal, setShowShareModal] = useState(false)
 
@@ -18,6 +18,7 @@ const Sharing = ({ file, variant }) => {
       </IconButton>
     ) : (
       <ShareButton
+        className={className}
         fullWidth
         useShortLabel
         docId={file.id}
