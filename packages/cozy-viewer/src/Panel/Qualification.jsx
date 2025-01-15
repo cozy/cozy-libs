@@ -120,11 +120,11 @@ const Qualification = ({ file, isPublic, isReadOnly }) => {
           })}
           {optionFile.name && (
             <ActionMenuWrapper
-              onClose={hideActionsMenu}
+              ref={actionBtnRef.current[optionFile.id]}
               file={file}
               optionFile={optionFile}
-              ref={actionBtnRef.current[optionFile.id]}
               isReadOnly={isPublic ? true : isReadOnly}
+              onClose={hideActionsMenu}
             />
           )}
         </List>

@@ -17,7 +17,10 @@ const ActionMenuWrapper = forwardRef(
     const { showAlert } = useAlert()
 
     const isEditable = isEditableAttribute(name, file) && !isReadOnly
-    const editPath = `${file.metadata.qualification.label}/${file._id}/edit/information?metadata=${optionFile.name}`
+    const editPath =
+      name === 'contact'
+        ? `${file.metadata.qualification.label}/${file._id}/edit/contact`
+        : `${file.metadata.qualification.label}/${file._id}/edit/information?metadata=${optionFile.name}`
 
     const handleCopy = async () => {
       try {
