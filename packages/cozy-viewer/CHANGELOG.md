@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.2.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@13.1.0...cozy-viewer@13.2.0) (2025-01-15)
+
+
+### Bug Fixes
+
+* **viewer:** Remove horizontal scroolbar ([9b0c2c3](https://github.com/cozy/cozy-libs/commit/9b0c2c33c5d0f60a195342cf84b36ca6a2398085))
+
+
+### Features
+
+* **viewer:** Add input for select current page ([7aa912e](https://github.com/cozy/cozy-libs/commit/7aa912e63df7b53341b11157ac2d9c7fe383f2fc))
+* **viewer:** Auto hide toolbar buttons ([90e656a](https://github.com/cozy/cozy-libs/commit/90e656af5627ab627d2cad2d19a14b56b99a4e76))
+* **viewer:** Increase display limit for all pages ([b4a1b4a](https://github.com/cozy/cozy-libs/commit/b4a1b4a62839a89666db3c81df7b98eec5f30afa))
+* **viewer:** Replace old Viewer buttons ([ef2fbee](https://github.com/cozy/cozy-libs/commit/ef2fbee8a49bc6bbef7f7d7ded266beaf7c2470a))
+* **viewer:** Update style of toolbar ([5f6008d](https://github.com/cozy/cozy-libs/commit/5f6008dba900fea754b45b403d39ab758553fa56))
+
+
+
+
+
 # [13.1.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@13.0.2...cozy-viewer@13.1.0) (2025-01-13)
 
 
