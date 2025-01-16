@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@2.3.1...cozy-dataproxy-lib@2.4.0) (2025-01-16)
+
+
+### Features
+
+* Make the DataProxyProvider work in Flagship app ([9d770b9](https://github.com/cozy/cozy-libs/commit/9d770b9508d75cb5dbf1c3d0a7266271499b6ff1))
+
+
+
+
+
 ## [2.3.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@2.3.0...cozy-dataproxy-lib@2.3.1) (2025-01-15)
 
 
