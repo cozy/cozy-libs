@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [32.2.11](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.10...cozy-harvest-lib@32.2.11) (2025-01-16)
+
+
+### Bug Fixes
+
+* Force the update of the current konnector data ([23370de](https://github.com/cozy/cozy-libs/commit/23370ded95bfd42c6c482dd0cdd9015057d8502e))
+
+
+
+
+
 ## [32.2.10](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.9...cozy-harvest-lib@32.2.10) (2025-01-15)
 
 **Note:** Version bump only for package cozy-harvest-lib
