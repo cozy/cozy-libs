@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.2.2](https://github.com/cozy/cozy-libs/compare/cozy-viewer@13.2.1...cozy-viewer@13.2.2) (2025-01-16)
+
+
+### Bug Fixes
+
+* **Viewer:** Editing a contact use now the correct intent path ([44881c3](https://github.com/cozy/cozy-libs/commit/44881c3cefcc2bae3d331e789424cecf8a3ee126))
+
+
+
+
+
 ## [13.2.1](https://github.com/cozy/cozy-libs/compare/cozy-viewer@13.2.0...cozy-viewer@13.2.1) (2025-01-16)
 
 **Note:** Version bump only for package cozy-viewer
