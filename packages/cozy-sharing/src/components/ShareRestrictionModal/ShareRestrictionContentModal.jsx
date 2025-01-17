@@ -33,14 +33,16 @@ export const ShareRestrictionContentModal = ({
 }) => {
   const { t } = useI18n()
 
-  const handlePasswordToggle = val => {
-    setPasswordToggle(val)
-  }
   const handlePassword = value => {
     setPassword(value)
     setIsValidPassword(
       value.trim().length === 0 || value.trim().length >= PASSWORD_MIN_LENGTH
     )
+  }
+
+  const handlePasswordToggle = val => {
+    setPasswordToggle(val)
+    handlePassword('')
   }
 
   const handleDateToggle = val => {
@@ -70,6 +72,7 @@ export const ShareRestrictionContentModal = ({
         toggle={dateToggle}
       />
       <BoxPassword
+        file={file}
         onChange={handlePassword}
         password={password}
         onToggle={handlePasswordToggle}
