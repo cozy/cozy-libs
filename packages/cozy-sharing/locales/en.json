@@ -26,6 +26,8 @@
     "recipients": {
       "you": "You",
       "anyoneWithTheLink": "Anyone with the link",
+      "linkWithPassword": "Anyone with a password",
+      "expires": "Until %{date}",
       "accessCount": "%{count} people have access"
     },
     "create-cozy": "Create |||| Create my cozy",
