@@ -14,14 +14,38 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import LinkRecipientPermissions from './LinkRecipientPermissions'
 import RecipientConfirm from './RecipientConfirm'
+import {
+  checkIsPermissionHasPassword,
+  getPermissionExpiresDate
+} from '../../helpers/permissions'
 import { FADE_IN_DURATION } from '../../helpers/recipients'
+import { useSharingContext } from '../../hooks/useSharingContext'
 import styles from '../../styles/recipient.styl'
 
 const LinkRecipient = props => {
-  const { t } = useI18n()
+  const { t, f, lang } = useI18n()
   const { isMobile } = useBreakpoints()
+  const { getDocumentPermissions } = useSharingContext()
 
-  const { recipientConfirmationData, verifyRecipient, link, fadeIn } = props
+  const { recipientConfirmationData, verifyRecipient, link, fadeIn, document } =
+    props
+
+  const permissions = getDocumentPermissions(document._id)
+  const hasPassword = checkIsPermissionHasPassword(permissions)
+  const expiresDate = getPermissionExpiresDate(permissions)
+  const dateFormatted = expiresDate
+    ? f(expiresDate, lang === 'fr' ? 'dd/LL/yyyy' : 'LL/dd/yyyy')
+    : null
+
+  const textPrimary = hasPassword
+    ? t('Share.recipients.linkWithPassword')
+    : t('Share.recipients.anyoneWithTheLink')
+
+  const textSecondary = expiresDate
+    ? t('Share.recipients.expires', {
+        date: dateFormatted
+      })
+    : link
 
   const RightPart = recipientConfirmationData ? (
     <RecipientConfirm
@@ -43,10 +67,10 @@ const LinkRecipient = props => {
         <ListItemText
           primary={
             <Typography className="u-ellipsis" variant="body1">
-              {t('Share.recipients.anyoneWithTheLink')}
+              {textPrimary}
             </Typography>
           }
-          secondary={link}
+          secondary={textSecondary}
         />
         {RightPart}
       </ListItem>

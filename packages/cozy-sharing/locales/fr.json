@@ -26,6 +26,8 @@
     "recipients": {
       "you": "Vous",
       "anyoneWithTheLink": "N'importe qui avec le lien",
+      "linkWithPassword": "N'importe qui avec un mot de passe",
+      "expires": "Jusqu'au %{date}",
       "accessCount": "%{count} personnes y ont accès"
     },
     "create-cozy": "Créer |||| Créer mon Cozy",
