@@ -331,23 +331,28 @@ export class SharingProvider extends Component {
    * updateDocumentPermissions - Description
    *
    * @param {Object} document A shared document
-   * @param {Array} newVerbs The new verbs to use for the permission, eg. ['GET']
+   * @param {object} options The new verbs to use for the permission, eg. ['GET']
+   * @param {string[]} options.verbs The new verbs to use for the permission, eg. ['GET']
+   * @param {string} [options.expiresAt] The new expiration date for the permission
+   * @param {string} [options.password] The new password for the permission
    *
    * @return {Array}
    */
-  updateDocumentPermissions = async (document, newVerbs) => {
+  updateDocumentPermissions = async (document, options) => {
+    const { verbs, expiresAt, password } = options
     const permissions = getDocumentPermissions(this.state, document.id)
 
     const responses = await Promise.all(
       permissions.map(async permissionDocument => {
         const updatedPermissions = permissionDocument.attributes.permissions
         Object.keys(updatedPermissions).map(permType => {
-          updatedPermissions[permType].verbs = newVerbs
+          updatedPermissions[permType].verbs = verbs
         })
 
         const resp = await this.permissionCol.add(
           permissionDocument,
-          updatedPermissions
+          updatedPermissions,
+          { expiresAt, password }
         )
         this.dispatch(updateSharingLink(resp))
         return resp
