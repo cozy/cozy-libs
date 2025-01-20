@@ -110,10 +110,52 @@ export const forwardFile = async ({
 }
 
 /**
+ * createPermissions - Create the permissions of a file
+ * @param {object} options
+ * @param {import('cozy-client/types/types').IOCozyFile} options.file File to update permissions
+ * @param {Function} options.t i18n function
+ * @param {Date|string} options.ttl - Time to live of the sharing link
+ * @param {string} options.password - Password
+ * @param {'readOnly'|'write'} options.editingRights - Editing rights
+ * @param {string} options.documentType - Type of the document
+ * @param {Function} options.shareByLink - Function to create permissions
+ * @param {Function} options.showAlert - Function to display an alert
+ */
+export const createPermissions = async ({
+  file,
+  t,
+  ttl,
+  password,
+  editingRights,
+  documentType,
+  shareByLink,
+  showAlert
+}) => {
+  try {
+    const verbs = editingRights === 'readOnly' ? READ_ONLY_PERMS : WRITE_PERMS
+    return shareByLink(file, { verbs, ttl, password })
+  } catch (err) {
+    showAlert({
+      message: t(`${documentType}.share.shareByLink.permserror`),
+      severity: 'error',
+      variant: 'filled'
+    })
+    log.error(
+      "Error in 'readOnlyPermissionLink' function when trying to change permission",
+      err
+    )
+  }
+}
+
+/**
  * updatePermissions - Updates the permissions of a file
  * @param {object} options
  * @param {import('cozy-client/types/types').IOCozyFile} options.file File to update permissions
  * @param {Function} options.t i18n function
+ * @param {boolean} options.dateToggle - Expiration date toggle
+ * @param {Date|null} options.selectedDate - Expiration date
+ * @param {boolean} options.passwordToggle - Password toggle
+ * @param {string} options.password - Password
  * @param {string} options.documentType - Type of the document
  * @param {'readOnly'|'write'} options.editingRights - Editing rights
  * @param {Function} options.updateDocumentPermissions - Function to update permissions
@@ -122,42 +164,34 @@ export const forwardFile = async ({
 export const updatePermissions = async ({
   file,
   t,
+  dateToggle,
+  selectedDate,
+  passwordToggle,
+  password,
   editingRights,
   documentType,
   updateDocumentPermissions,
   showAlert
 }) => {
-  switch (editingRights) {
-    case 'readOnly':
-      try {
-        return updateDocumentPermissions(file, READ_ONLY_PERMS)
-      } catch (err) {
-        showAlert({
-          message: t(`${documentType}.share.shareByLink.permserror`),
-          severity: 'error',
-          variant: 'filled'
-        })
-        log.error(
-          "Error in 'readOnlyPermissionLink' function when trying to change permission",
-          err
-        )
-      }
-      break
-    case 'write':
-      try {
-        return updateDocumentPermissions(file, WRITE_PERMS)
-      } catch (err) {
-        showAlert({
-          message: t(`${documentType}.share.shareByLink.permserror`),
-          severity: 'error',
-          variant: 'filled'
-        })
-        log.error(
-          "Error in 'editPermissionLink' function when trying to change permission",
-          err
-        )
-      }
-      break
+  try {
+    const expiresAt = dateToggle ? selectedDate?.toISOString() || undefined : ''
+    const ensurePassword = passwordToggle ? password || undefined : ''
+    const verbs = editingRights === 'readOnly' ? READ_ONLY_PERMS : WRITE_PERMS
+    return updateDocumentPermissions(file, {
+      verbs,
+      expiresAt,
+      password: ensurePassword
+    })
+  } catch (err) {
+    showAlert({
+      message: t(`${documentType}.share.shareByLink.permserror`),
+      severity: 'error',
+      variant: 'filled'
+    })
+    log.error(
+      "Error in 'updateDocumentPermissions' function when trying to change permission",
+      err
+    )
   }
 }
 

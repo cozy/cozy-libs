@@ -15,8 +15,11 @@ import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { copyToClipboard } from './helpers'
+import { checkIsPermissionHasPassword } from '../../helpers/permissions'
+import { useSharingContext } from '../../hooks/useSharingContext'
 
 export const BoxPassword = ({
+  file,
   onChange,
   password,
   onToggle,
@@ -28,6 +31,10 @@ export const BoxPassword = ({
   const { showAlert } = useAlert()
   const [displayHelper, setDisplayHelper] = useState(false)
   const inputRef = React.useRef()
+  const { getDocumentPermissions } = useSharingContext()
+
+  const permissions = getDocumentPermissions(file._id)
+  const hasPassword = checkIsPermissionHasPassword(permissions)
 
   const handlePasswordToggle = val => {
     const value = val?.target?.checked ?? val
@@ -78,6 +85,12 @@ export const BoxPassword = ({
           <TextField
             inputRef={inputRef}
             label={t('BoxPassword.label')}
+            {...(hasPassword && {
+              placeholder: '****',
+              InputLabelProps: {
+                shrink: true
+              }
+            })}
             value={password}
             error={displayHelper && !!helperText}
             helperText={displayHelper && helperText}

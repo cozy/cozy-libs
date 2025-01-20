@@ -2,9 +2,7 @@ import { addDays } from 'date-fns'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
-import { useClient } from 'cozy-client'
-import { getSharingLink as makeSharingLink } from 'cozy-client/dist/models/sharing'
-import { isMobile } from 'cozy-device-helper'
+import { generateWebLink, useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -14,14 +12,17 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { ShareRestrictionContentModal } from './ShareRestrictionContentModal'
 import {
   copyToClipboard,
-  forwardFile,
   updatePermissions,
   makeTTL,
-  READ_ONLY_PERMS,
-  WRITE_PERMS,
-  revokePermissions
+  revokePermissions,
+  createPermissions
 } from './helpers'
-import { checkIsReadOnlyPermissions } from '../../helpers/permissions'
+import {
+  checkIsPermissionHasExpiresDate,
+  checkIsPermissionHasPassword,
+  checkIsReadOnlyPermissions,
+  getPermissionExpiresDate
+} from '../../helpers/permissions'
 import { useSharingContext } from '../../hooks/useSharingContext'
 
 const PASSWORD_MIN_LENGTH = 4
@@ -31,11 +32,8 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
   const { t } = useI18n()
   const { showAlert } = useAlert()
   const [password, setPassword] = useState('')
-  const [selectedDate, setSelectedDate] = useState(addDays(new Date(), 30))
   const [isValidDate, setIsValidDate] = useState(true)
   const [isValidPassword, setIsValidPassword] = useState(true)
-  const [dateToggle, setDateToggle] = useState(true)
-  const [passwordToggle, setPasswordToggle] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const {
@@ -50,13 +48,21 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
   const hasSharingLink = getSharingLink(file._id) !== null
   const permissions = getDocumentPermissions(file._id)
   const isReadOnlyPermissions = checkIsReadOnlyPermissions(permissions)
+  const hasPassword = checkIsPermissionHasPassword(permissions)
+  const hasExpiresDate = checkIsPermissionHasExpiresDate(permissions)
+  const expiresDate = getPermissionExpiresDate(permissions)
+  const defaultDate = expiresDate
+    ? new Date(expiresDate)
+    : addDays(new Date(), 30)
 
+  const [selectedDate, setSelectedDate] = useState(defaultDate)
+  const [dateToggle, setDateToggle] = useState(
+    permissions.length > 0 ? hasExpiresDate : true
+  )
+  const [passwordToggle, setPasswordToggle] = useState(hasPassword)
   const [editingRights, setEditingRights] = useState(
     isReadOnlyPermissions || permissions.length === 0 ? 'readOnly' : 'write'
   )
-
-  const isDesktopOrMobileWithoutShareAPI =
-    (isMobile() && !navigator.share) || !isMobile()
 
   const helperTextPassword = !isValidPassword
     ? t('ShareRestrictionModal.invalidPasswordMessage', {
@@ -73,41 +79,49 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
     setLoading(true)
     // If the file is not shared, we create a new sharing link
     if (!hasSharingLink) {
-      const verbs = editingRights === 'readOnly' ? READ_ONLY_PERMS : WRITE_PERMS
-      await shareByLink(file, { verbs })
-      const url = getSharingLink(file._id)
-      await copyToClipboard(url, { t, showAlert })
-      onClose()
-      return
-    }
-
-    await updatePermissions({
-      file,
-      t,
-      editingRights,
-      documentType,
-      updateDocumentPermissions,
-      showAlert
-    })
-
-    const ttl = makeTTL(dateToggle && selectedDate)
-    if (isDesktopOrMobileWithoutShareAPI) {
-      const url = await makeSharingLink(client, [file._id], {
-        ttl,
-        password
-      })
-      await copyToClipboard(url, { t, showAlert })
-    } else {
-      await forwardFile({
-        client,
+      const ttl = makeTTL(dateToggle && selectedDate)
+      const { data: perms } = await createPermissions({
         file,
         t,
         ttl,
         password,
+        editingRights,
+        documentType,
+        shareByLink,
         showAlert
       })
+      const url = generateWebLink({
+        cozyUrl: client.getStackClient().uri,
+        searchParams: [['sharecode', perms.attributes.shortcodes.code]],
+        pathname: '/public',
+        slug: 'drive',
+        subDomainType: client.capabilities.flat_subdomains ? 'flat' : 'nested'
+      })
+      await copyToClipboard(url, { t, showAlert })
+      onClose()
+    } else {
+      const [{ data: perms }] = await updatePermissions({
+        file,
+        t,
+        dateToggle,
+        selectedDate,
+        passwordToggle,
+        password,
+        editingRights,
+        documentType,
+        updateDocumentPermissions,
+        showAlert
+      })
+      const url = generateWebLink({
+        cozyUrl: client.getStackClient().uri,
+        searchParams: [['sharecode', perms.attributes.shortcodes.code]],
+        pathname: '/public',
+        slug: 'drive',
+        subDomainType: client.capabilities.flat_subdomains ? 'flat' : 'nested'
+      })
+      await copyToClipboard(url, { t, showAlert })
+      onClose()
     }
-    onClose()
   }
 
   const handleRevokeLink = async () => {
