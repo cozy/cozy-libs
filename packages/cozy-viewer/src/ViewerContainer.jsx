@@ -35,7 +35,7 @@ const ViewerContainer = props => {
   const [isReadOnly, setIsReadOnly] = useState(true)
   const client = useClient()
   useExtendI18n(locales)
-  const { hasWriteAccess } = useSharingContext()
+  const { hasWriteAccess, hasSharedParent } = useSharingContext()
 
   const currentFile = files[currentIndex]
   const fileCount = files.length
@@ -59,13 +59,17 @@ const ViewerContainer = props => {
             document: currentFile,
             client
           })
-        : !hasWriteAccess(currentFile._id)
+        : !hasWriteAccess(
+            hasSharedParent(currentFile.path)
+              ? currentFile.dir_id
+              : currentFile._id
+          )
 
       setIsReadOnly(res)
     }
 
     getIsReadOnly()
-  }, [client, currentFile, hasWriteAccess, isPublic])
+  }, [client, currentFile, hasWriteAccess, hasSharedParent, isPublic])
 
   return (
     <AlertProvider>
