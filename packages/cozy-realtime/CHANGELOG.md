@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.6.3](https://github.com/cozy/cozy-libs/compare/cozy-realtime@5.6.2...cozy-realtime@5.6.3) (2025-01-20)
+
+
+### Bug Fixes
+
+* Correctly declare RealtimePlugin's `option` parameter as optional ([ffd47d1](https://github.com/cozy/cozy-libs/commit/ffd47d1bbef0808ac32f758302b524bedf0bf7ca))
+
+
+
+
+
 ## [5.6.2](https://github.com/cozy/cozy-libs/compare/cozy-realtime@5.6.1...cozy-realtime@5.6.2) (2024-12-12)
 
 **Note:** Version bump only for package cozy-realtime
