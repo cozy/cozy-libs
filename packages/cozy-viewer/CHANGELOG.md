@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.2.6](https://github.com/cozy/cozy-libs/compare/cozy-viewer@13.2.5...cozy-viewer@13.2.6) (2025-01-21)
+
+
+### Bug Fixes
+
+* **Viewer:** Now wait all sharing fetch before checking write access ([3657ac3](https://github.com/cozy/cozy-libs/commit/3657ac3b3243abef7b70ebd5fe16d183646ec085))
+
+
+
+
+
 ## [13.2.5](https://github.com/cozy/cozy-libs/compare/cozy-viewer@13.2.4...cozy-viewer@13.2.5) (2025-01-21)
 
 
