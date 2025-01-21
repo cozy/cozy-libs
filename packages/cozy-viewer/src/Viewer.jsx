@@ -70,6 +70,7 @@ class Viewer extends Component {
       showNavigation,
       renderFallbackExtraContent,
       validForPanel,
+      isPublic,
       children,
       componentsProps
     } = this.props
@@ -82,6 +83,7 @@ class Viewer extends Component {
         <ViewerControls
           file={currentFile}
           onClose={this.onClose}
+          isPublic={isPublic}
           hasPrevious={hasPrevious}
           hasNext={hasNext}
           onPrevious={this.onPrevious}
@@ -107,6 +109,7 @@ class Viewer extends Component {
 Viewer.propTypes = {
   /** One `io.cozy.files` to display */
   currentFile: FileDoctype.isRequired,
+  isPublic: PropTypes.bool,
   hasNext: PropTypes.bool,
   hasPrevious: PropTypes.bool,
   /** Called when the user wants to leave the Viewer */

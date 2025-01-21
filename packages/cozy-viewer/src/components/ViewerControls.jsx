@@ -118,6 +118,7 @@ class ViewerControls extends Component {
       showNavigation,
       showInfoPanel,
       children,
+      isPublic,
       classes,
       breakpoints: { isDesktop }
     } = this.props
@@ -138,6 +139,7 @@ class ViewerControls extends Component {
           <Toolbar
             toolbarRef={toolbarRef}
             file={file}
+            isPublic={isPublic}
             showFilePath={showFilePath}
             onMouseEnter={this.showControls}
             onMouseLeave={this.hideControls}
@@ -172,6 +174,7 @@ class ViewerControls extends Component {
 
 ViewerControls.propTypes = {
   file: PropTypes.object.isRequired,
+  isPublic: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   hasPrevious: PropTypes.bool.isRequired,
   hasNext: PropTypes.bool.isRequired,

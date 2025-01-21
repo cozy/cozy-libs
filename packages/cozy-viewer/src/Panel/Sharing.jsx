@@ -1,9 +1,7 @@
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React from 'react'
 
-import { useClient } from 'cozy-client'
-import SharingProvider, {
-  ShareModal,
+import {
   useSharingContext,
   MemberRecipientLite,
   OwnerRecipientDefaultLite,
@@ -18,9 +16,10 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import { withViewerLocales } from '../hoc/withViewerLocales'
+import { useShareModal } from '../providers/ShareModalProvider'
 
 const Sharing = ({ file, t }) => {
-  const [showModal, setShowModal] = useState(false)
+  const { setShowShareModal } = useShareModal()
   const {
     isOwner,
     getDocumentPermissions,
@@ -38,7 +37,12 @@ const Sharing = ({ file, t }) => {
 
   return (
     <>
-      <ListItem size="large" divider button onClick={() => setShowModal(true)}>
+      <ListItem
+        size="large"
+        divider
+        button
+        onClick={() => setShowShareModal(true)}
+      >
         <ListItemText
           primary={
             <>
@@ -66,14 +70,6 @@ const Sharing = ({ file, t }) => {
           <OwnerRecipientDefaultLite />
         )}
       </List>
-      {showModal && (
-        <ShareModal
-          document={file}
-          documentType="Files"
-          sharingDesc=""
-          onClose={() => setShowModal(false)}
-        />
-      )}
     </>
   )
 }
@@ -83,19 +79,4 @@ Sharing.propTypes = {
   t: PropTypes.func
 }
 
-const DumbSharing = ({ file, t, isPublic }) => {
-  const client = useClient()
-
-  return (
-    <SharingProvider
-      client={client}
-      doctype="io.cozy.files"
-      documentType="Files"
-      isPublic={isPublic}
-    >
-      <Sharing file={file} t={t} />
-    </SharingProvider>
-  )
-}
-
-export default withViewerLocales(DumbSharing)
+export default withViewerLocales(Sharing)

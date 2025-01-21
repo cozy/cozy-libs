@@ -3,14 +3,14 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { useClient } from 'cozy-client'
-import { downloadFile } from 'cozy-client/dist/models/file'
 import { useWebviewIntent } from 'cozy-intent'
 import {
-  openSharingLink,
   OpenSharingLinkButton,
-  useSharingInfos
+  useSharingInfos,
+  useSharingContext
 } from 'cozy-sharing'
-import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
+import { download } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import DownloadIcon from 'cozy-ui/transpiled/react/Icons/Download'
@@ -18,13 +18,12 @@ import PreviousIcon from 'cozy-ui/transpiled/react/Icons/Previous'
 import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
-import { useEncrypted } from 'cozy-ui/transpiled/react/providers/Encrypted'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-import PrintButton from './PrintButton'
-import PublicToolbarMoreMenu from './PublicToolbarMoreMenu'
 import { ToolbarFilePath } from './ToolbarFilePath'
+import ToolbarMoreMenu from './ToolbarMoreMenu'
 import styles from './styles.styl'
+import SharingButton from '../Footer/Sharing'
 import { extractChildrenCompByName } from '../Footer/helpers'
 
 const Toolbar = ({
@@ -32,6 +31,7 @@ const Toolbar = ({
   onMouseEnter,
   onMouseLeave,
   file,
+  isPublic,
   onClose,
   toolbarRef,
   breakpoints: { isDesktop },
@@ -42,21 +42,14 @@ const Toolbar = ({
   const { t } = useI18n()
   const webviewIntent = useWebviewIntent()
   const { isSharingShortcutCreated, discoveryLink, loading } = useSharingInfos()
+  const { isOwner } = useSharingContext()
+
   const isCozySharing = window.location.pathname === '/preview'
   const isShareNotAdded = !loading && !isSharingShortcutCreated
-
-  const { url } = useEncrypted()
-
   const ToolbarButtons = extractChildrenCompByName({
     children,
     file,
     name: 'ToolbarButtons'
-  })
-
-  const actions = makeActions([openSharingLink], {
-    isSharingShortcutCreated,
-    link: discoveryLink,
-    openSharingLinkDisplayed: isCozySharing
   })
 
   return (
@@ -88,6 +81,9 @@ const Toolbar = ({
       {isDesktop && (
         <div className="u-flex u-flex-items-center">
           {ToolbarButtons}
+          {!isCozySharing && !isOwner(file._id) && (
+            <SharingButton className="u-white" file={file} />
+          )}
           {isCozySharing && isShareNotAdded && (
             <OpenSharingLinkButton
               link={discoveryLink}
@@ -98,19 +94,17 @@ const Toolbar = ({
               isShortLabel
             />
           )}
-          <PrintButton file={file} />
-          <IconButton
+          <Button
             className="u-white"
+            variant="text"
             aria-label={t('Viewer.download')}
-            onClick={() => downloadFile({ client, file, url, webviewIntent })}
-          >
-            <Icon icon={DownloadIcon} />
-          </IconButton>
-          {isCozySharing && (
-            <PublicToolbarMoreMenu files={[file]} actions={actions} />
-          )}
+            label={t('Viewer.download')}
+            startIcon={<Icon icon={DownloadIcon} />}
+            onClick={() => download.action([file], { client, webviewIntent })}
+          />
         </div>
       )}
+      <ToolbarMoreMenu file={file} isPublic={isPublic} />
     </div>
   )
 }

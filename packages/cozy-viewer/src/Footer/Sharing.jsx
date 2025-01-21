@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React from 'react'
 
-import { useClient } from 'cozy-client'
-import SharingProvider, { ShareModal, ShareButton } from 'cozy-sharing'
+import { ShareButton } from 'cozy-sharing'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import ShareIcon from 'cozy-ui/transpiled/react/Icons/Share'
 
-const Sharing = ({ file, variant }) => {
-  const client = useClient()
-  const [showShareModal, setShowShareModal] = useState(false)
+import { useShareModal } from '../providers/ShareModalProvider'
+
+const Sharing = ({ className, file, variant }) => {
+  const { setShowShareModal } = useShareModal()
 
   const SharingButton =
     variant === 'iconButton' ? (
@@ -18,6 +18,7 @@ const Sharing = ({ file, variant }) => {
       </IconButton>
     ) : (
       <ShareButton
+        className={className}
         fullWidth
         useShortLabel
         docId={file.id}
@@ -25,25 +26,7 @@ const Sharing = ({ file, variant }) => {
       />
     )
 
-  return (
-    <>
-      <SharingProvider
-        client={client}
-        doctype="io.cozy.files"
-        documentType="Files"
-      >
-        {showShareModal && (
-          <ShareModal
-            document={file}
-            documentType="Files"
-            sharingDesc={file.name}
-            onClose={() => setShowShareModal(false)}
-          />
-        )}
-        {SharingButton}
-      </SharingProvider>
-    </>
-  )
+  return <>{SharingButton}</>
 }
 
 Sharing.propTypes = {

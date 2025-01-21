@@ -9,18 +9,11 @@ import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import BottomSheetContent from './BottomSheetContent'
 import { extractChildrenCompByName } from './helpers'
-import PrintButton from '../components/PrintButton'
 
 const FooterButtons = ({
-  file,
   FooterActionButtonsWithFile = { FooterActionButtonsWithFile }
 }) => {
-  return (
-    <>
-      {FooterActionButtonsWithFile}
-      <PrintButton file={file} variant="button" />
-    </>
-  )
+  return <>{FooterActionButtonsWithFile}</>
 }
 
 const useStyles = makeStyles(theme => ({
@@ -71,7 +64,6 @@ const FooterContent = ({
         className={cx('u-ph-1 u-pb-1', styles.bottomSheetHeader)}
       >
         <FooterButtons
-          file={file}
           FooterActionButtonsWithFile={FooterActionButtonsWithFile}
         />
       </BottomSheetHeader>
