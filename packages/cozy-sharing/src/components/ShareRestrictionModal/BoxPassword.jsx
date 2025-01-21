@@ -84,6 +84,7 @@ export const BoxPassword = ({
         <div className="u-pt-half u-ph-1 u-pb-1">
           <TextField
             inputRef={inputRef}
+            autoFocus
             label={t('BoxPassword.label')}
             {...(hasPassword && {
               placeholder: '****',
