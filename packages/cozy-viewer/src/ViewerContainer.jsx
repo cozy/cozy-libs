@@ -4,6 +4,7 @@ import React, { createRef, useState, useEffect } from 'react'
 
 import { useClient } from 'cozy-client'
 import { isDocumentReadOnly } from 'cozy-client/dist/models/permission'
+import SharingProvider from 'cozy-sharing'
 import { useSharingContext } from 'cozy-sharing'
 import Modal from 'cozy-ui/transpiled/react/Modal'
 import { FileDoctype } from 'cozy-ui/transpiled/react/proptypes'
@@ -17,6 +18,7 @@ import Viewer from './Viewer'
 import ViewerInformationsWrapper from './ViewerInformationsWrapper'
 import { locales } from './locales'
 import { toolbarPropsPropType } from './proptypes'
+import ShareModalProvider from './providers/ShareModalProvider'
 import styles from './styles.styl'
 
 const ViewerContainer = props => {
@@ -82,34 +84,43 @@ const ViewerContainer = props => {
 
   return (
     <AlertProvider>
-      <div
-        id="viewer-wrapper"
-        className={cx(styles['viewer-wrapper'], className)}
+      <SharingProvider
+        client={client}
+        doctype="io.cozy.files"
+        documentType="Files"
+        isPublic={isPublic}
       >
-        <EncryptedProvider url={currentURL}>
-          <Viewer
-            {...rest}
-            componentsProps={componentsPropsWithDefault}
-            currentFile={currentFile}
-            hasPrevious={hasPrevious}
-            hasNext={hasNext}
-            validForPanel={validForPanel}
-            toolbarRef={toolbarRef}
+        <ShareModalProvider file={currentFile}>
+          <div
+            id="viewer-wrapper"
+            className={cx(styles['viewer-wrapper'], className)}
           >
-            {children}
-          </Viewer>
-        </EncryptedProvider>
-        <ViewerInformationsWrapper
-          isPublic={isPublic}
-          isReadOnly={isReadOnly}
-          disableFooter={disableFooter}
-          validForPanel={validForPanel}
-          currentFile={currentFile}
-          toolbarRef={toolbarRef}
-        >
-          {children}
-        </ViewerInformationsWrapper>
-      </div>
+            <EncryptedProvider url={currentURL}>
+              <Viewer
+                {...rest}
+                componentsProps={componentsPropsWithDefault}
+                currentFile={currentFile}
+                hasPrevious={hasPrevious}
+                hasNext={hasNext}
+                validForPanel={validForPanel}
+                toolbarRef={toolbarRef}
+              >
+                {children}
+              </Viewer>
+            </EncryptedProvider>
+            <ViewerInformationsWrapper
+              isPublic={isPublic}
+              isReadOnly={isReadOnly}
+              disableFooter={disableFooter}
+              validForPanel={validForPanel}
+              currentFile={currentFile}
+              toolbarRef={toolbarRef}
+            >
+              {children}
+            </ViewerInformationsWrapper>
+          </div>
+        </ShareModalProvider>
+      </SharingProvider>
     </AlertProvider>
   )
 }
