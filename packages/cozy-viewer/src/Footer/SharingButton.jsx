@@ -8,34 +8,34 @@ import ShareIcon from 'cozy-ui/transpiled/react/Icons/Share'
 
 import { useShareModal } from '../providers/ShareModalProvider'
 
-const Sharing = ({ className, file, variant }) => {
+const SharingButton = ({ className, file, variant }) => {
   const { setShowShareModal } = useShareModal()
 
-  const SharingButton =
-    variant === 'iconButton' ? (
+  if (variant === 'iconButton')
+    return (
       <IconButton className="u-white" onClick={() => setShowShareModal(true)}>
         <Icon icon={ShareIcon} />
       </IconButton>
-    ) : (
-      <ShareButton
-        className={className}
-        fullWidth
-        useShortLabel
-        docId={file.id}
-        onClick={() => setShowShareModal(true)}
-      />
     )
 
-  return <>{SharingButton}</>
+  return (
+    <ShareButton
+      className={className}
+      fullWidth
+      useShortLabel
+      docId={file.id}
+      onClick={() => setShowShareModal(true)}
+    />
+  )
 }
 
-Sharing.propTypes = {
+SharingButton.propTypes = {
   file: PropTypes.object,
   variant: PropTypes.oneOf(['default', 'iconButton'])
 }
 
-Sharing.defaultProptypes = {
+SharingButton.defaultProptypes = {
   variant: 'default'
 }
 
-export default Sharing
+export default SharingButton
