@@ -8,11 +8,13 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import ActionMenuDesktop from './ActionMenuDesktop'
 import ActionMenuMobile from './ActionMenuMobile'
 import { isEditableAttribute } from '../helpers'
+import { useViewer } from '../providers/ViewerProvider'
 
 const ActionMenuWrapper = forwardRef(
-  ({ file, optionFile, isReadOnly, onClose }, ref) => {
+  ({ optionFile, isReadOnly, onClose }, ref) => {
     const { name, value } = optionFile
     const { isMobile } = useBreakpoints()
+    const { file } = useViewer()
     const { t } = useI18n()
     const { showAlert } = useAlert()
 
@@ -45,8 +47,6 @@ const ActionMenuWrapper = forwardRef(
     if (isMobile) {
       return (
         <ActionMenuMobile
-          file={file}
-          optionFile={optionFile}
           actions={{
             copy: { onClick: handleCopy },
             edit: { path: editPath }
@@ -60,8 +60,6 @@ const ActionMenuWrapper = forwardRef(
     return (
       <ActionMenuDesktop
         ref={ref}
-        file={file}
-        optionFile={optionFile}
         actions={{
           copy: { onClick: handleCopy },
           edit: { path: editPath }

@@ -19,6 +19,7 @@ import ViewerInformationsWrapper from './ViewerInformationsWrapper'
 import { locales } from './locales'
 import { toolbarPropsPropType } from './proptypes'
 import ShareModalProvider from './providers/ShareModalProvider'
+import ViewerProvider from './providers/ViewerProvider'
 import styles from './styles.styl'
 
 const ViewerContainer = props => {
@@ -83,46 +84,47 @@ const ViewerContainer = props => {
   ])
 
   return (
-    <AlertProvider>
-      <SharingProvider
-        client={client}
-        doctype="io.cozy.files"
-        documentType="Files"
-        isPublic={isPublic}
-      >
-        <ShareModalProvider file={currentFile}>
-          <div
-            id="viewer-wrapper"
-            className={cx(styles['viewer-wrapper'], className)}
-          >
-            <EncryptedProvider url={currentURL}>
-              <Viewer
-                {...rest}
-                isPublic={isPublic}
-                componentsProps={componentsPropsWithDefault}
-                currentFile={currentFile}
-                hasPrevious={hasPrevious}
-                hasNext={hasNext}
+    <ViewerProvider
+      file={currentFile}
+      isPublic={isPublic}
+      isReadOnly={isReadOnly}
+    >
+      <AlertProvider>
+        <SharingProvider
+          client={client}
+          doctype="io.cozy.files"
+          documentType="Files"
+          isPublic={isPublic}
+        >
+          <ShareModalProvider>
+            <div
+              id="viewer-wrapper"
+              className={cx(styles['viewer-wrapper'], className)}
+            >
+              <EncryptedProvider url={currentURL}>
+                <Viewer
+                  {...rest}
+                  componentsProps={componentsPropsWithDefault}
+                  hasPrevious={hasPrevious}
+                  hasNext={hasNext}
+                  validForPanel={validForPanel}
+                  toolbarRef={toolbarRef}
+                >
+                  {children}
+                </Viewer>
+              </EncryptedProvider>
+              <ViewerInformationsWrapper
+                disableFooter={disableFooter}
                 validForPanel={validForPanel}
                 toolbarRef={toolbarRef}
               >
                 {children}
-              </Viewer>
-            </EncryptedProvider>
-            <ViewerInformationsWrapper
-              isPublic={isPublic}
-              isReadOnly={isReadOnly}
-              disableFooter={disableFooter}
-              validForPanel={validForPanel}
-              currentFile={currentFile}
-              toolbarRef={toolbarRef}
-            >
-              {children}
-            </ViewerInformationsWrapper>
-          </div>
-        </ShareModalProvider>
-      </SharingProvider>
-    </AlertProvider>
+              </ViewerInformationsWrapper>
+            </div>
+          </ShareModalProvider>
+        </SharingProvider>
+      </AlertProvider>
+    </ViewerProvider>
   )
 }
 

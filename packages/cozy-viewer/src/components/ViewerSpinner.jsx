@@ -1,9 +1,11 @@
 import React from 'react'
 
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
+import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
-const ViewerSpinner = ({ breakpoints: { isDesktop } }) => {
+const ViewerSpinner = () => {
+  const { isDesktop } = useBreakpoints()
+
   return (
     <Spinner
       size="xxlarge"
@@ -14,4 +16,4 @@ const ViewerSpinner = ({ breakpoints: { isDesktop } }) => {
   )
 }
 
-export default withBreakpoints()(ViewerSpinner)
+export default ViewerSpinner

@@ -64,7 +64,7 @@ const QualificationListItemDate = forwardRef(
                         <Typography component="span" variant="inherit">
                           {' · '}
                         </Typography>
-                        <ExpirationAnnotation file={file} />
+                        <ExpirationAnnotation />
                       </>
                     )}
                 </>

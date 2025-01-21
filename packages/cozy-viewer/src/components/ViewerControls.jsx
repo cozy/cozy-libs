@@ -1,10 +1,9 @@
 import cx from 'classnames'
 import Hammer from 'hammerjs'
-import flow from 'lodash/flow'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
-import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
+import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { withStyles } from 'cozy-ui/transpiled/react/styles'
 
 import { infoWidth } from './InformationPanel'
@@ -12,6 +11,7 @@ import Navigation from './Navigation'
 import Toolbar from './Toolbar'
 import styles from './styles.styl'
 import { toolbarPropsPropType } from '../proptypes'
+import { useViewer } from '../providers/ViewerProvider'
 
 const ACTIONS_HIDE_DELAY = 3000
 
@@ -61,7 +61,7 @@ class ViewerControls extends Component {
   initGestures = () => {
     const gestures = new Hammer(
       this.wrapped,
-      this.props.breakpoints.isDesktop
+      this.props.isDesktop
         ? {
             cssProps: {
               userSelect: 'auto'
@@ -69,7 +69,7 @@ class ViewerControls extends Component {
           }
         : {}
     )
-    if (!this.props.breakpoints.isDesktop) gestures.on('swipe', this.onSwipe)
+    if (!this.props.isDesktop) gestures.on('swipe', this.onSwipe)
 
     return gestures
   }
@@ -107,7 +107,6 @@ class ViewerControls extends Component {
 
   render() {
     const {
-      file,
       onClose,
       hasPrevious,
       hasNext,
@@ -118,9 +117,8 @@ class ViewerControls extends Component {
       showNavigation,
       showInfoPanel,
       children,
-      isPublic,
       classes,
-      breakpoints: { isDesktop }
+      isDesktop
     } = this.props
     const { showToolbar, showClose, toolbarRef, showFilePath } = toolbarProps
     const { hidden } = this.state
@@ -138,8 +136,6 @@ class ViewerControls extends Component {
         {showToolbar && (
           <Toolbar
             toolbarRef={toolbarRef}
-            file={file}
-            isPublic={isPublic}
             showFilePath={showFilePath}
             onMouseEnter={this.showControls}
             onMouseLeave={this.hideControls}
@@ -173,8 +169,7 @@ class ViewerControls extends Component {
 }
 
 ViewerControls.propTypes = {
-  file: PropTypes.object.isRequired,
-  isPublic: PropTypes.bool,
+  isDesktop: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   hasPrevious: PropTypes.bool.isRequired,
   hasNext: PropTypes.bool.isRequired,
@@ -186,4 +181,14 @@ ViewerControls.propTypes = {
   showInfoPanel: PropTypes.bool
 }
 
-export default flow(withBreakpoints(), withStyles(customStyles))(ViewerControls)
+const ViewerControlsWrapper = props => {
+  const { file } = useViewer()
+  const { isDesktop } = useBreakpoints()
+
+  // this `expanded` property makes the next/previous controls cover the displayed image
+  const expanded = file && file.class === 'image'
+
+  return <ViewerControls expanded={expanded} isDesktop={isDesktop} {...props} />
+}
+
+export default withStyles(customStyles)(ViewerControlsWrapper)

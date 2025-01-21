@@ -1,11 +1,13 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 
 import { BottomSheetItem } from 'cozy-ui/transpiled/react/BottomSheet'
 
 import getPanelBlocks, { getPanelBlocksSpecs } from '../Panel/getPanelBlocks'
+import { useViewer } from '../providers/ViewerProvider'
 
-const BottomSheetContent = ({ file, isPublic, isReadOnly }) => {
+const BottomSheetContent = () => {
+  const { file, isPublic, isReadOnly } = useViewer()
+
   const panelBlocks = getPanelBlocks({
     panelBlocksSpecs: getPanelBlocksSpecs(isPublic),
     file
@@ -20,12 +22,6 @@ const BottomSheetContent = ({ file, isPublic, isReadOnly }) => {
       <PanelBlock file={file} isPublic={isPublic} isReadOnly={isReadOnly} />
     </BottomSheetItem>
   ))
-}
-
-BottomSheetContent.propTypes = {
-  file: PropTypes.object.isRequired,
-  isPublic: PropTypes.bool,
-  isReadOnly: PropTypes.bool
 }
 
 export default BottomSheetContent

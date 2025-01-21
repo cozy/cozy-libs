@@ -26,13 +26,12 @@ import ToolbarMoreMenu from './ToolbarMoreMenu'
 import styles from './styles.styl'
 import { extractChildrenCompByName } from '../Footer/helpers'
 import { useShareModal } from '../providers/ShareModalProvider'
+import { useViewer } from '../providers/ViewerProvider'
 
 const Toolbar = ({
   hidden,
   onMouseEnter,
   onMouseLeave,
-  file,
-  isPublic,
   onClose,
   toolbarRef,
   breakpoints: { isDesktop },
@@ -42,6 +41,7 @@ const Toolbar = ({
   const client = useClient()
   const { t } = useI18n()
   const webviewIntent = useWebviewIntent()
+  const { file } = useViewer()
   const { isSharingShortcutCreated, discoveryLink, loading } = useSharingInfos()
   const { isOwner } = useSharingContext()
   const { setShowShareModal } = useShareModal()
@@ -77,7 +77,7 @@ const Toolbar = ({
         >
           <MidEllipsis text={file.name} />
         </Typography>
-        {showFilePath ? <ToolbarFilePath file={file} /> : null}
+        {showFilePath ? <ToolbarFilePath /> : null}
       </div>
 
       {isDesktop && (
@@ -112,7 +112,7 @@ const Toolbar = ({
           />
         </div>
       )}
-      <ToolbarMoreMenu file={file} isPublic={isPublic} />
+      <ToolbarMoreMenu />
     </div>
   )
 }
@@ -121,7 +121,6 @@ Toolbar.propTypes = {
   hidden: PropTypes.bool,
   onMouseEnter: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
-  file: PropTypes.object.isRequired,
   onClose: PropTypes.func,
   showFilePath: PropTypes.bool
 }

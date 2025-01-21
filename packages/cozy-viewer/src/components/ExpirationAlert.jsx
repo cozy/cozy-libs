@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
 import { useClient } from 'cozy-client'
@@ -15,12 +14,14 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { withViewerLocales } from '../hoc/withViewerLocales'
+import { useViewer } from '../providers/ViewerProvider'
 
 const FILES_DOCTYPE = 'io.cozy.files'
 
-const ExpirationAlert = ({ file }) => {
+const ExpirationAlert = () => {
   const { t, lang } = useI18n()
   const client = useClient()
+  const { file } = useViewer()
   const [isBusy, setIsBusy] = useState(false)
 
   const handleClose = async () => {
@@ -77,10 +78,6 @@ const ExpirationAlert = ({ file }) => {
       </Typography>
     </Alert>
   )
-}
-
-ExpirationAlert.propTypes = {
-  file: PropTypes.object.isRequired
 }
 
 export default withViewerLocales(ExpirationAlert)

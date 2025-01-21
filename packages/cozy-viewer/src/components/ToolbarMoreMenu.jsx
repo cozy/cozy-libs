@@ -21,10 +21,12 @@ import { useEncrypted } from 'cozy-ui/transpiled/react/providers/Encrypted'
 
 import { share } from './actions/share'
 import { useShareModal } from '../providers/ShareModalProvider'
+import { useViewer } from '../providers/ViewerProvider'
 
-const ToolbarMoreMenu = ({ file, isPublic }) => {
+const ToolbarMoreMenu = () => {
   const [isPrintAvailable, setIsPrintAvailable] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
+  const { file, isPublic } = useViewer()
   const { isDesktop } = useBreakpoints()
   const { url } = useEncrypted()
   const anchorRef = useRef()

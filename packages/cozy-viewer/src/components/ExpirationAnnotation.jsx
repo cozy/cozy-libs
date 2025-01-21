@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 
 import { models } from 'cozy-client'
@@ -12,8 +11,11 @@ const {
   makeExpiresInMessage
 } = models.paper
 
-const ExpirationAnnotation = ({ file }) => {
+import { useViewer } from '../providers/ViewerProvider'
+
+const ExpirationAnnotation = () => {
   const { lang } = useI18n()
+  const { file } = useViewer()
 
   if (isExpired(file)) {
     return (
@@ -30,10 +32,6 @@ const ExpirationAnnotation = ({ file }) => {
       {makeExpiresInMessage(expirationDate, { lang })}
     </Typography>
   )
-}
-
-ExpirationAnnotation.propTypes = {
-  file: PropTypes.object.isRequired
 }
 
 export default ExpirationAnnotation
