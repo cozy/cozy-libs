@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { useSetFlagshipUI } from 'cozy-ui/transpiled/react/hooks/useSetFlagshipUi/useSetFlagshipUI'
-import { FileDoctype } from 'cozy-ui/transpiled/react/proptypes'
 import { useCozyTheme } from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import { useTheme } from 'cozy-ui/transpiled/react/styles'
 
@@ -12,12 +11,9 @@ import Footer from './components/Footer'
 import InformationPanel from './components/InformationPanel'
 
 const ViewerInformationsWrapper = ({
-  currentFile,
   disableFooter,
   validForPanel,
   toolbarRef,
-  isPublic,
-  isReadOnly,
   children
 }) => {
   const theme = useTheme()
@@ -38,23 +34,12 @@ const ViewerInformationsWrapper = ({
     <>
       {!disableFooter && (
         <Footer>
-          <FooterContent
-            file={currentFile}
-            toolbarRef={toolbarRef}
-            isPublic={isPublic}
-            isReadOnly={isReadOnly}
-          >
-            {children}
-          </FooterContent>
+          <FooterContent toolbarRef={toolbarRef}>{children}</FooterContent>
         </Footer>
       )}
       {validForPanel && (
         <InformationPanel>
-          <PanelContent
-            file={currentFile}
-            isPublic={isPublic}
-            isReadOnly={isReadOnly}
-          />
+          <PanelContent />
         </InformationPanel>
       )}
     </>
@@ -62,12 +47,9 @@ const ViewerInformationsWrapper = ({
 }
 
 ViewerInformationsWrapper.propTypes = {
-  currentFile: FileDoctype.isRequired,
   disableFooter: PropTypes.bool,
   validForPanel: PropTypes.bool,
   toolbarRef: PropTypes.object,
-  isPublic: PropTypes.bool,
-  isReadOnly: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node)

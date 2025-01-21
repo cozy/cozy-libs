@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
-import { FileDoctype } from 'cozy-ui/transpiled/react/proptypes'
-
 import ViewerByFile from './components/ViewerByFile'
 import ViewerControls from './components/ViewerControls'
 import { toolbarPropsPropType } from './proptypes'
@@ -63,42 +61,33 @@ class Viewer extends Component {
 
   render() {
     const {
-      currentFile,
       hasPrevious,
       hasNext,
       toolbarRef,
       showNavigation,
       renderFallbackExtraContent,
       validForPanel,
-      isPublic,
       children,
       componentsProps
     } = this.props
 
-    // this `expanded` property makes the next/previous controls cover the displayed image
-    const expanded = currentFile && currentFile.class === 'image'
-
     return (
       <>
         <ViewerControls
-          file={currentFile}
-          onClose={this.onClose}
-          isPublic={isPublic}
           hasPrevious={hasPrevious}
           hasNext={hasNext}
-          onPrevious={this.onPrevious}
-          onNext={this.onNext}
-          expanded={expanded}
           toolbarProps={{ ...componentsProps.toolbarProps, toolbarRef }}
           showNavigation={showNavigation}
           showInfoPanel={validForPanel}
+          onPrevious={this.onPrevious}
+          onNext={this.onNext}
+          onClose={this.onClose}
         >
           {children}
           <ViewerByFile
-            file={currentFile}
-            onClose={this.onClose}
             renderFallbackExtraContent={renderFallbackExtraContent}
             componentsProps={componentsProps}
+            onClose={this.onClose}
           />
         </ViewerControls>
       </>
@@ -107,9 +96,6 @@ class Viewer extends Component {
 }
 
 Viewer.propTypes = {
-  /** One `io.cozy.files` to display */
-  currentFile: FileDoctype.isRequired,
-  isPublic: PropTypes.bool,
   hasNext: PropTypes.bool,
   hasPrevious: PropTypes.bool,
   /** Called when the user wants to leave the Viewer */

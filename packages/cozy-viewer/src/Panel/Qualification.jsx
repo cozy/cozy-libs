@@ -70,7 +70,7 @@ const Qualification = ({ file, isReadOnly }) => {
   return (
     <>
       {isExpiringSoon(file) && !isExpirationAlertHidden(file) && (
-        <ExpirationAlert file={file} />
+        <ExpirationAlert />
       )}
       {hasSupportedQualification(file) ? (
         <QualificationListItemQualification
@@ -121,7 +121,6 @@ const Qualification = ({ file, isReadOnly }) => {
           {optionFile.name && (
             <ActionMenuWrapper
               ref={actionBtnRef.current[optionFile.id]}
-              file={file}
               optionFile={optionFile}
               isReadOnly={isReadOnly}
               onClose={hideActionsMenu}

@@ -4,7 +4,6 @@ import React, { useMemo } from 'react'
 import { isPlainText } from 'cozy-client/dist/models/file'
 import { isMobile as isMobileDevice } from 'cozy-device-helper'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
-import { FileDoctype } from 'cozy-ui/transpiled/react/proptypes'
 import { useEncrypted } from 'cozy-ui/transpiled/react/providers/Encrypted'
 
 import NoViewer from '../NoViewer'
@@ -17,6 +16,7 @@ import PdfMobileViewer from '../ViewersByFile/PdfMobileViewer'
 import ShortcutViewer from '../ViewersByFile/ShortcutViewer'
 import TextViewer from '../ViewersByFile/TextViewer'
 import VideoViewer from '../ViewersByFile/VideoViewer'
+import { useViewer } from '../providers/ViewerProvider'
 
 const isBlankPaper = doc => doc.metadata?.paperProps?.isBlank
 
@@ -57,7 +57,6 @@ export const getViewerComponentName = ({
 
 const ViewerByFile = withBreakpoints()(
   ({
-    file,
     onClose,
     renderFallbackExtraContent,
     gestures,
@@ -66,6 +65,7 @@ const ViewerByFile = withBreakpoints()(
     breakpoints: { isDesktop },
     componentsProps
   }) => {
+    const { file } = useViewer()
     const isOnlyOfficeEnabled = componentsProps?.OnlyOfficeViewer?.isEnabled
     const onlyOfficeOpener = componentsProps?.OnlyOfficeViewer?.opener
 
@@ -85,19 +85,18 @@ const ViewerByFile = withBreakpoints()(
       <ComponentName
         file={file}
         url={url}
-        onClose={onClose}
         renderFallbackExtraContent={renderFallbackExtraContent}
         gestures={gestures}
         gesturesRef={gesturesRef}
-        onSwipe={onSwipe}
         onlyOfficeOpener={onlyOfficeOpener}
+        onSwipe={onSwipe}
+        onClose={onClose}
       />
     )
   }
 )
 
 ViewerByFile.propTypes = {
-  file: FileDoctype.isRequired,
   onClose: PropTypes.func.isRequired,
   renderFallbackExtraContent: PropTypes.func,
   // gestures, gesturesRef and onSwipe are got from ViewerControls

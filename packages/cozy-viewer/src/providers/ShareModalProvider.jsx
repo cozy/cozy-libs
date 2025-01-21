@@ -2,6 +2,8 @@ import React, { useMemo, useContext, useState } from 'react'
 
 import { ShareModal } from 'cozy-sharing'
 
+import { useViewer } from './ViewerProvider'
+
 export const ShareModalContext = React.createContext()
 
 export const useShareModal = () => {
@@ -13,7 +15,8 @@ export const useShareModal = () => {
   return context
 }
 
-const ShareModalProvider = ({ file, children }) => {
+const ShareModalProvider = ({ children }) => {
+  const { file } = useViewer()
   const [showShareModal, setShowShareModal] = useState(false)
 
   const value = useMemo(

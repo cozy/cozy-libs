@@ -1,5 +1,4 @@
 import cx from 'classnames'
-import PropTypes from 'prop-types'
 import React from 'react'
 
 import Paper from 'cozy-ui/transpiled/react/Paper'
@@ -8,8 +7,11 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import getPanelBlocks, { getPanelBlocksSpecs } from './getPanelBlocks'
 import { withViewerLocales } from '../hoc/withViewerLocales'
+import { useViewer } from '../providers/ViewerProvider'
 
-const PanelContent = ({ file, isPublic, isReadOnly, t }) => {
+const PanelContent = ({ t }) => {
+  const { file, isPublic, isReadOnly } = useViewer()
+
   const panelBlocks = getPanelBlocks({
     panelBlocksSpecs: getPanelBlocksSpecs(isPublic),
     file
@@ -38,12 +40,6 @@ const PanelContent = ({ file, isPublic, isReadOnly, t }) => {
       ))}
     </Stack>
   )
-}
-
-PanelContent.propTypes = {
-  file: PropTypes.object.isRequired,
-  isPublic: PropTypes.bool,
-  isReadOnly: PropTypes.bool
 }
 
 export default withViewerLocales(PanelContent)

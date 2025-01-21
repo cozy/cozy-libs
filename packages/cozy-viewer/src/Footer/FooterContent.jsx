@@ -9,6 +9,7 @@ import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import BottomSheetContent from './BottomSheetContent'
 import { extractChildrenCompByName } from './helpers'
+import { useViewer } from '../providers/ViewerProvider'
 
 const FooterButtons = ({
   FooterActionButtonsWithFile = { FooterActionButtonsWithFile }
@@ -32,14 +33,9 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const FooterContent = ({
-  file,
-  toolbarRef,
-  children,
-  isPublic,
-  isReadOnly
-}) => {
+const FooterContent = ({ toolbarRef, children }) => {
   const styles = useStyles()
+  const { file, isPublic } = useViewer()
 
   const toolbarProps = useMemo(() => ({ ref: toolbarRef }), [toolbarRef])
 
@@ -67,20 +63,13 @@ const FooterContent = ({
           FooterActionButtonsWithFile={FooterActionButtonsWithFile}
         />
       </BottomSheetHeader>
-      <BottomSheetContent
-        file={file}
-        isPublic={isPublic}
-        isReadOnly={isReadOnly}
-      />
+      <BottomSheetContent />
     </BottomSheet>
   )
 }
 
 FooterContent.propTypes = {
-  file: PropTypes.object.isRequired,
   toolbarRef: PropTypes.object,
-  isPublic: PropTypes.bool,
-  isReadOnly: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node)

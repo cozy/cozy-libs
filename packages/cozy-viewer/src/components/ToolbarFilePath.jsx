@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 
-import { useClient, useQuery, models } from 'cozy-client'
+import { useClient, useQuery } from 'cozy-client'
+import { ensureFilePath } from 'cozy-client/dist/models/file'
 import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
 import FilePath from 'cozy-ui/transpiled/react/FilePath'
 import Link from 'cozy-ui/transpiled/react/Link'
@@ -11,13 +12,13 @@ import {
   normalizeAndSpreadAttributes,
   removeFilenameFromPath
 } from '../helpers'
+import { useViewer } from '../providers/ViewerProvider'
 import { buildFileByIdQuery } from '../queries'
 
-const { ensureFilePath } = models.file
-
-const ToolbarFilePath = ({ file }) => {
+const ToolbarFilePath = () => {
   const client = useClient()
   const { isDesktop } = useBreakpoints()
+  const { file } = useViewer()
 
   const normalizeFile = normalizeAndSpreadAttributes(file)
 
