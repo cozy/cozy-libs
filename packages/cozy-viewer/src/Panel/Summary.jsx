@@ -20,7 +20,7 @@ import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryA
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 
-import QualificationListItemText from './QualificationListItemText'
+import QualificationListItemText from './Qualifications/QualificationListItemText'
 import SummaryDialog from './SummaryDialog'
 import { withViewerLocales } from '../hoc/withViewerLocales'
 

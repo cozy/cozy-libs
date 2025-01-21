@@ -3,7 +3,7 @@ import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 
 import QualificationListItemInformation from './QualificationListItemInformation'
-import DemoProvider from '../providers/DemoProvider'
+import DemoProvider from '../../providers/DemoProvider'
 
 const setup = ({
   formattedMetadataQualification = {},

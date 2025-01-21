@@ -16,8 +16,8 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import QualificationListItemText from './QualificationListItemText'
-import IntentOpener from '../components/IntentOpener'
-import useReferencedContactName from '../hooks/useReferencedContactName'
+import IntentOpener from '../../components/IntentOpener'
+import useReferencedContactName from '../../hooks/useReferencedContactName'
 
 const QualificationListItemContact = forwardRef(
   ({ file, isReadOnly, toggleActionsMenu }, ref) => {
