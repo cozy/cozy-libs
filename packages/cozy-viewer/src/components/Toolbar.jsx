@@ -7,7 +7,8 @@ import { useWebviewIntent } from 'cozy-intent'
 import {
   OpenSharingLinkButton,
   useSharingInfos,
-  useSharingContext
+  useSharingContext,
+  ShareButton
 } from 'cozy-sharing'
 import { download } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import Button from 'cozy-ui/transpiled/react/Buttons'
@@ -23,8 +24,8 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { ToolbarFilePath } from './ToolbarFilePath'
 import ToolbarMoreMenu from './ToolbarMoreMenu'
 import styles from './styles.styl'
-import SharingButton from '../Footer/Sharing'
 import { extractChildrenCompByName } from '../Footer/helpers'
+import { useShareModal } from '../providers/ShareModalProvider'
 
 const Toolbar = ({
   hidden,
@@ -43,6 +44,7 @@ const Toolbar = ({
   const webviewIntent = useWebviewIntent()
   const { isSharingShortcutCreated, discoveryLink, loading } = useSharingInfos()
   const { isOwner } = useSharingContext()
+  const { setShowShareModal } = useShareModal()
 
   const isCozySharing = window.location.pathname === '/preview'
   const isShareNotAdded = !loading && !isSharingShortcutCreated
@@ -82,7 +84,13 @@ const Toolbar = ({
         <div className="u-flex u-flex-items-center">
           {ToolbarButtons}
           {!isCozySharing && !isOwner(file._id) && (
-            <SharingButton className="u-white" file={file} />
+            <ShareButton
+              className="u-white"
+              fullWidth
+              useShortLabel
+              docId={file._id}
+              onClick={() => setShowShareModal(true)}
+            />
           )}
           {isCozySharing && isShareNotAdded && (
             <OpenSharingLinkButton
