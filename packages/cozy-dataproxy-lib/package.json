@@ -12,7 +12,6 @@
   "dependencies": {
     "classnames": "2.5.1",
     "comlink": "4.4.1",
-    "cozy-pouch-link": "^50.3.1",
     "flexsearch": "0.7.43",
     "lodash": "4.17.21",
     "mime-types": "2.1.35",
@@ -68,6 +67,7 @@
     "cozy-intent": ">=2.26.0",
     "cozy-logger": ">=1.10.4",
     "cozy-minilog": ">=3.3.1",
+    "cozy-pouch-link": "50.3.1",
     "cozy-realtime": ">=5.0.2",
     "cozy-ui": ">=111.19.0",
     "react": ">=16.12.0",
