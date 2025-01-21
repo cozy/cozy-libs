@@ -69,39 +69,24 @@ export class SearchEngine {
     if (!this.client) {
       return
     }
-    let startReplicationTime = 0,
-      endReplicationTime = 0
-    if (!this.isLocalSearch) {
-      // In case of non-local search, force the indexing for all doctypes
-      // For local search, this will be done automatically after initial replication
-      for (const doctype of SEARCHABLE_DOCTYPES) {
-        this.searchIndexes[doctype] = await this.indexDocsForSearch(
-          doctype as keyof typeof SEARCH_SCHEMA
-        )
-      }
+
+    // Create search indexes by querying docs, either locally or remotely
+    for (const doctype of SEARCHABLE_DOCTYPES) {
+      const startIndexingTime = performance.now()
+      this.searchIndexes[doctype] = await this.indexDocsForSearch(
+        doctype as keyof typeof SEARCH_SCHEMA
+      )
+      const endIndexingTime = performance.now()
+      log.debug(
+        `Indexing ${doctype} took ${(
+          endIndexingTime - startIndexingTime
+        ).toFixed(2)}`
+      )
     }
+
     if (this.isLocalSearch) {
-      this.client.on('pouchlink:doctypesync:end', async (doctype: string) => {
-        if (isSearchedDoctype(doctype)) {
-          // Index doctype after initial replication
-          this.searchIndexes[doctype] = await this.indexDocsForSearch(
-            doctype as keyof typeof SEARCH_SCHEMA
-          )
-        }
-      })
-      this.client.on('pouchlink:sync:start', () => {
-        log.debug('Started pouch replication')
-        startReplicationTime = performance.now()
-      })
-      this.client.on('pouchlink:sync:end', () => {
-        log.debug('Ended pouch replication')
-        endReplicationTime = performance.now()
-        log.debug(
-          `Replication took ${(
-            endReplicationTime - startReplicationTime
-          ).toFixed(2)}`
-        )
-      })
+      // Use replication events to have up-to-date search indexes, based on local data
+      this.indexOnReplicationEvents()
     }
 
     if (this.client.isLogged) {
@@ -111,6 +96,33 @@ export class SearchEngine {
         this.afterLogin()
       })
     }
+  }
+
+  indexOnReplicationEvents(): void {
+    let startReplicationTime = 0,
+      endReplicationTime = 0
+
+    this.client.on('pouchlink:doctypesync:end', async (doctype: string) => {
+      if (isSearchedDoctype(doctype)) {
+        // Index doctype after initial replication
+        this.searchIndexes[doctype] = await this.indexDocsForSearch(
+          doctype as keyof typeof SEARCH_SCHEMA
+        )
+      }
+    })
+    this.client.on('pouchlink:sync:start', () => {
+      log.debug('Started pouch replication')
+      startReplicationTime = performance.now()
+    })
+    this.client.on('pouchlink:sync:end', () => {
+      log.debug('Ended pouch replication')
+      endReplicationTime = performance.now()
+      log.debug(
+        `Replication took ${(endReplicationTime - startReplicationTime).toFixed(
+          2
+        )}`
+      )
+    })
   }
 
   afterLogin(): void {
