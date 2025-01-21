@@ -1,4 +1,4 @@
-import { addDays } from 'date-fns'
+import { addDays, isValid } from 'date-fns'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -9,6 +9,8 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { BoxDate } from './BoxDate'
 import { BoxEditingRights } from './BoxEditingRights'
 import { BoxPassword } from './BoxPassword'
+import { checkIsPermissionHasPassword } from '../../helpers/permissions'
+import { useSharingContext } from '../../hooks/useSharingContext'
 
 const PASSWORD_MIN_LENGTH = 4
 
@@ -32,26 +34,43 @@ export const ShareRestrictionContentModal = ({
   setEditingRights
 }) => {
   const { t } = useI18n()
+  const { getDocumentPermissions } = useSharingContext()
+  const permissions = getDocumentPermissions(file._id)
+  const hasPassword = checkIsPermissionHasPassword(permissions)
 
   const handlePassword = value => {
     setPassword(value)
     setIsValidPassword(
-      value.trim().length === 0 || value.trim().length >= PASSWORD_MIN_LENGTH
+      (hasPassword && value.trim().length === 0) ||
+        value.trim().length >= PASSWORD_MIN_LENGTH
     )
   }
 
   const handlePasswordToggle = val => {
     setPasswordToggle(val)
-    handlePassword('')
+    setPassword('')
+    if (val && !password) {
+      setIsValidPassword(hasPassword)
+    } else {
+      setIsValidPassword(true)
+    }
+  }
+
+  const handleDate = date => {
+    setSelectedDate(date)
+    setIsValidDate(isValid(date))
   }
 
   const handleDateToggle = val => {
+    setDateToggle(val)
     if (!val) {
+      setSelectedDate(null)
+      setIsValidDate(true)
+    } else {
+      const defaultValue = val ? addDays(new Date(), 30) : null
+      setSelectedDate(defaultValue)
       setIsValidDate(true)
     }
-    const defaultValue = val ? addDays(new Date(), 30) : null
-    setSelectedDate(defaultValue, true)
-    setDateToggle(val)
   }
 
   return (
@@ -66,7 +85,7 @@ export const ShareRestrictionContentModal = ({
         setEditingRights={setEditingRights}
       />
       <BoxDate
-        onChange={setSelectedDate}
+        onChange={handleDate}
         date={selectedDate}
         onToggle={handleDateToggle}
         toggle={dateToggle}

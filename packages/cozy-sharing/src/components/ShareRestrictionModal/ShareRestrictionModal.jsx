@@ -70,11 +70,6 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
       })
     : null
 
-  const handleDateChange = (date, isValid) => {
-    setSelectedDate(date)
-    setIsValidDate(isValid)
-  }
-
   const handleClick = async () => {
     setLoading(true)
     // If the file is not shared, we create a new sharing link
@@ -146,7 +141,7 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
           // Date
           dateToggle={dateToggle}
           setDateToggle={setDateToggle}
-          setSelectedDate={handleDateChange}
+          setSelectedDate={setSelectedDate}
           selectedDate={selectedDate}
           setIsValidDate={setIsValidDate}
           // Password
