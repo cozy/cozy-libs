@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.2.5](https://github.com/cozy/cozy-libs/compare/cozy-viewer@13.2.4...cozy-viewer@13.2.5) (2025-01-21)
+
+
+### Bug Fixes
+
+* **Viewer:** Now Qualification panel is editable on write share ([ce63d47](https://github.com/cozy/cozy-libs/commit/ce63d47a3cc11c55cb1d3790188ce4a88f91f09a))
+
+
+
+
+
 ## [13.2.4](https://github.com/cozy/cozy-libs/compare/cozy-viewer@13.2.3...cozy-viewer@13.2.4) (2025-01-20)
 
 **Note:** Version bump only for package cozy-viewer
