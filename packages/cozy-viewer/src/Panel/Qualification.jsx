@@ -34,7 +34,7 @@ const ComponentFromMetadataQualificationType = {
   bills: QualificationListItemInformation
 }
 
-const Qualification = ({ file, isPublic, isReadOnly }) => {
+const Qualification = ({ file, isReadOnly }) => {
   const { metadata = {} } = file
   const actionBtnRef = useRef([])
   const [showQualifModal, setShowQualifModal] = useState(false)
@@ -75,13 +75,13 @@ const Qualification = ({ file, isPublic, isReadOnly }) => {
       {hasSupportedQualification(file) ? (
         <QualificationListItemQualification
           file={file}
-          isReadOnly={isPublic ? true : isReadOnly}
+          isReadOnly={isReadOnly}
           onClick={() => setShowQualifModal(true)}
         />
       ) : (
         <QualificationListItemQualificationEmpty
           file={file}
-          isReadOnly={isPublic ? true : isReadOnly}
+          isReadOnly={isReadOnly}
           onClick={() => setShowQualifModal(true)}
         />
       )}
@@ -109,7 +109,7 @@ const Qualification = ({ file, isPublic, isReadOnly }) => {
               <Fragment key={idx}>
                 <QualificationListItemComp
                   file={file}
-                  isReadOnly={isPublic ? true : isReadOnly}
+                  isReadOnly={isReadOnly}
                   ref={actionBtnRef.current[idx]}
                   formattedMetadataQualification={meta}
                   toggleActionsMenu={val => toggleActionsMenu(idx, name, val)}
@@ -123,7 +123,7 @@ const Qualification = ({ file, isPublic, isReadOnly }) => {
               ref={actionBtnRef.current[optionFile.id]}
               file={file}
               optionFile={optionFile}
-              isReadOnly={isPublic ? true : isReadOnly}
+              isReadOnly={isReadOnly}
               onClose={hideActionsMenu}
             />
           )}
