@@ -2,40 +2,68 @@ import PropTypes from 'prop-types'
 import React, { forwardRef } from 'react'
 
 import {
-  isExpired,
-  isExpiringSoon,
-  getTranslatedNameForDateMetadata,
-  formatDateMetadataValue
+  getTranslatedNameForInformationMetadata,
+  formatInformationMetadataValue,
+  KNOWN_INFORMATION_METADATA_NAMES
 } from 'cozy-client/dist/models/paper'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import CalendarIcon from 'cozy-ui/transpiled/react/Icons/Calendar'
+import BellIcon from 'cozy-ui/transpiled/react/Icons/Bell'
+import ContractIcon from 'cozy-ui/transpiled/react/Icons/Contract'
 import Dots from 'cozy-ui/transpiled/react/Icons/Dots'
+import EuroIcon from 'cozy-ui/transpiled/react/Icons/Euro'
+import GlobeIcon from 'cozy-ui/transpiled/react/Icons/Globe'
+import NumberIcon from 'cozy-ui/transpiled/react/Icons/Number'
 import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
-import Typography from 'cozy-ui/transpiled/react/Typography'
+import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import QualificationListItemText from './QualificationListItemText'
-import ExpirationAnnotation from '../components/ExpirationAnnotation'
-import IntentOpener from '../components/IntentOpener'
+import IntentOpener from '../../components/IntentOpener'
 
-const QualificationListItemDate = forwardRef(
+const KNOWN_INFORMATION_METADATA_ICONS = [
+  NumberIcon,
+  NumberIcon,
+  GlobeIcon,
+  EuroIcon,
+  ContractIcon,
+  EuroIcon,
+  EuroIcon,
+  NumberIcon,
+  NumberIcon,
+  BellIcon
+]
+
+const makeInformationMetadataIcon = name =>
+  KNOWN_INFORMATION_METADATA_ICONS[
+    KNOWN_INFORMATION_METADATA_NAMES.findIndex(el => el === name)
+  ]
+
+const QualificationListItemInformation = forwardRef(
   (
-    { file, isReadOnly, formattedMetadataQualification, toggleActionsMenu },
+    { formattedMetadataQualification, file, isReadOnly, toggleActionsMenu },
     ref
   ) => {
-    const { f, lang } = useI18n()
+    const { lang } = useI18n()
     const { name, value } = formattedMetadataQualification
     const qualificationLabel = file.metadata.qualification.label
-    const formattedTitle = getTranslatedNameForDateMetadata(name, { lang })
-    const formattedDate = formatDateMetadataValue(value, {
-      f,
-      lang
+
+    const formattedTitle = getTranslatedNameForInformationMetadata(name, {
+      lang,
+      qualificationLabel
     })
-    const isExpirationDate = name === 'expirationDate'
+    const formattedValue = formatInformationMetadataValue(value, {
+      lang,
+      name,
+      qualificationLabel
+    })
+    const InformationIcon = makeInformationMetadataIcon(name)
+
+    const titleComponent =
+      formattedTitle === name ? <MidEllipsis text={name} /> : formattedTitle
 
     return (
       <IntentOpener
@@ -48,37 +76,19 @@ const QualificationListItemDate = forwardRef(
       >
         <ListItem button={!value && !isReadOnly}>
           <ListItemIcon>
-            <Icon icon={CalendarIcon} />
+            <Icon icon={InformationIcon} />
           </ListItemIcon>
           <QualificationListItemText
-            primary={value ? formattedTitle : undefined}
-            secondary={
-              value ? (
-                <>
-                  <Typography component="span" variant="inherit">
-                    {formattedDate}
-                  </Typography>
-                  {isExpirationDate &&
-                    (isExpired(file) || isExpiringSoon(file)) && (
-                      <>
-                        <Typography component="span" variant="inherit">
-                          {' · '}
-                        </Typography>
-                        <ExpirationAnnotation />
-                      </>
-                    )}
-                </>
-              ) : (
-                formattedTitle
-              )
-            }
+            primary={value ? titleComponent : undefined}
+            secondary={value ? formattedValue : titleComponent}
             disabled={!value}
           />
           {value ? (
             <ListItemSecondaryAction>
               <IconButton
                 ref={ref}
-                onClick={() => toggleActionsMenu(formattedDate)}
+                onClick={() => toggleActionsMenu(value)}
+                data-testid="toggleActionsMenuBtn"
               >
                 <Icon icon={Dots} />
               </IconButton>
@@ -96,16 +106,16 @@ const QualificationListItemDate = forwardRef(
   }
 )
 
-QualificationListItemDate.displayName = 'QualificationListItemDate'
+QualificationListItemInformation.displayName = 'QualificationListItemNumber'
 
-QualificationListItemDate.propTypes = {
+QualificationListItemInformation.propTypes = {
   file: PropTypes.object.isRequired,
   isReadOnly: PropTypes.bool,
   formattedMetadataQualification: PropTypes.shape({
     name: PropTypes.string,
-    value: PropTypes.string
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   }).isRequired,
   toggleActionsMenu: PropTypes.func.isRequired
 }
 
-export default QualificationListItemDate
+export default QualificationListItemInformation

@@ -12,12 +12,12 @@ import List from 'cozy-ui/transpiled/react/List'
 import QualificationModal from 'cozy-ui/transpiled/react/QualificationModal'
 
 import ActionMenuWrapper from './ActionMenuWrapper'
-import QualificationListItemContact from './QualificationListItemContact'
-import QualificationListItemDate from './QualificationListItemDate'
-import QualificationListItemInformation from './QualificationListItemInformation'
-import QualificationListItemOther from './QualificationListItemOther'
-import QualificationListItemQualification from './QualificationListItemQualification'
-import QualificationListItemQualificationEmpty from './QualificationListItemQualificationEmpty'
+import QualificationListItemContact from './Qualifications/QualificationListItemContact'
+import QualificationListItemDate from './Qualifications/QualificationListItemDate'
+import QualificationListItemInformation from './Qualifications/QualificationListItemInformation'
+import QualificationListItemOther from './Qualifications/QualificationListItemOther'
+import QualificationListItemQualification from './Qualifications/QualificationListItemQualification'
+import QualificationListItemQualificationEmpty from './Qualifications/QualificationListItemQualificationEmpty'
 import {
   makeHideDivider,
   makeFormattedMetadataQualification,

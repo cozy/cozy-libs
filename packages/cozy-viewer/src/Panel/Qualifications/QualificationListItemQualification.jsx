@@ -11,7 +11,7 @@ import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
 import QualificationIconStack from 'cozy-ui/transpiled/react/QualificationIconStack'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-import { canEditQualification } from './helpers'
+import { canEditQualification } from '../helpers'
 
 const QualificationListItemQualification = ({ file, isReadOnly, onClick }) => {
   const { lang } = useI18n()
