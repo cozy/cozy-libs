@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { useClient } from 'cozy-client'
-import { getSharingLink } from 'cozy-client/dist/models/sharing'
+import { makeSharingLink } from 'cozy-client/dist/models/sharing'
 import { isIOS, isMobileApp } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -32,7 +32,7 @@ const ForwardButton = ({ file, variant, onClick }) => {
       }
     } else {
       try {
-        const url = await getSharingLink(client, [file.id])
+        const url = await makeSharingLink(client, [file.id])
         const shareData = {
           title: t('Viewer.share.title', { name: file.name }),
           text: t('Viewer.share.text', { name: file.name }),

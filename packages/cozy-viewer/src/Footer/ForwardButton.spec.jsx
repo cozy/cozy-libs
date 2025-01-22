@@ -1,7 +1,7 @@
 import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
 
-import { getSharingLink } from 'cozy-client/dist/models/sharing'
+import { makeSharingLink } from 'cozy-client/dist/models/sharing'
 import { isMobileApp } from 'cozy-device-helper'
 
 import ForwardButton from './ForwardButton'
@@ -11,7 +11,7 @@ import DemoProvider from '../providers/DemoProvider'
 jest.mock('cozy-device-helper')
 jest.mock('cozy-client/dist/models/sharing', () => ({
   ...jest.requireActual('cozy-client/dist/models/sharing'),
-  getSharingLink: jest.fn()
+  makeSharingLink: jest.fn()
 }))
 jest.mock('./helpers')
 
@@ -54,14 +54,14 @@ describe('ForwardButton', () => {
     })
   })
 
-  describe('getSharingLink', () => {
+  describe('makeSharingLink', () => {
     it('should not call it if is on native app', async () => {
       const { findByTestId } = setup({ isMobileApplication: true })
 
       const btn = await findByTestId('openFileButton')
       fireEvent.click(btn)
 
-      expect(getSharingLink).toHaveBeenCalledTimes(0)
+      expect(makeSharingLink).toHaveBeenCalledTimes(0)
     })
 
     it('should not call it if the "onClick" prop is passed', async () => {
@@ -71,7 +71,7 @@ describe('ForwardButton', () => {
       const btn = await findByTestId('openFileButton')
       fireEvent.click(btn)
 
-      expect(getSharingLink).toHaveBeenCalledTimes(0)
+      expect(makeSharingLink).toHaveBeenCalledTimes(0)
       expect(onClick).toHaveBeenCalledTimes(1)
     })
 
@@ -81,7 +81,7 @@ describe('ForwardButton', () => {
       const btn = await findByTestId('openFileButton')
       fireEvent.click(btn)
 
-      expect(getSharingLink).toHaveBeenCalledTimes(1)
+      expect(makeSharingLink).toHaveBeenCalledTimes(1)
     })
   })
 })
