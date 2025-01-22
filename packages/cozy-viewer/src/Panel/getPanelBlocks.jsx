@@ -21,25 +21,26 @@ import Summary from './Summary'
  * @param {boolean} isPublic - Whether the panel is displayed in public view
  * @returns {PanelBlocksSpecs}
  */
-export const getPanelBlocksSpecs = (isPublic = false) => ({
+export const getPanelBlocksSpecs = (isPublic = false, panelProps) => ({
   qualifications: {
-    condition: () => true,
+    condition: () => !panelProps?.qualifications?.disabled,
     component: Qualification
   },
   summary: {
-    condition: () => true,
+    condition: () => !panelProps?.summary?.disabled,
     component: Summary
   },
   konnector: {
-    condition: file => isFromKonnector(file) && !isPublic,
+    condition: file =>
+      !panelProps?.konnector?.disabled && isFromKonnector(file) && !isPublic,
     component: KonnectorBlock
   },
   informations: {
-    condition: () => true,
+    condition: () => !panelProps?.informations?.disabled,
     component: Informations
   },
   sharing: {
-    condition: () => !isPublic,
+    condition: () => !panelProps?.sharing?.disabled && !isPublic,
     component: Sharing
   }
 })

@@ -11,12 +11,19 @@ export const useViewer = () => {
   return context
 }
 
-const ViewerProvider = ({ file, isPublic, isReadOnly, children }) => {
+const ViewerProvider = ({
+  file,
+  isPublic,
+  isReadOnly,
+  componentsProps,
+  children
+}) => {
   return (
     <ViewerContext.Provider
       value={{
         file,
         isPublic,
+        componentsProps,
         isReadOnly
       }}
     >
