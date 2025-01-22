@@ -3,6 +3,7 @@ import { render, waitFor } from '@testing-library/react'
 import React from 'react'
 
 import { TextViewer, isMarkdown } from './TextViewer'
+import DemoProvider from '../providers/DemoProvider'
 
 jest.mock('../NoViewer/DownloadButton', () => () => (
   <div data-testid="dl-btn-no-viewer">DownloadButton</div>
@@ -50,12 +51,21 @@ describe('isMarkdown function', () => {
 
 describe('TextViewer Component', () => {
   it('should display the loader ', () => {
-    const { getByTestId } = render(<TextViewer {...props} />)
+    const { getByTestId } = render(
+      <DemoProvider>
+        <TextViewer {...props} />
+      </DemoProvider>
+    )
     expect(getByTestId('viewer-spinner')).toBeInTheDocument()
   })
+
   describe('TextViewer render method', () => {
     it('should render the loader when loading', () => {
-      const { getByTestId } = render(<TextViewer {...props} />)
+      const { getByTestId } = render(
+        <DemoProvider>
+          <TextViewer {...props} />
+        </DemoProvider>
+      )
       expect(getByTestId('viewer-spinner')).toBeInTheDocument()
     })
 
@@ -69,7 +79,11 @@ describe('TextViewer Component', () => {
           })
         }
       }
-      const { getByTestId } = render(<TextViewer {...errorProps} />)
+      const { getByTestId } = render(
+        <DemoProvider>
+          <TextViewer {...errorProps} />
+        </DemoProvider>
+      )
 
       await waitFor(() => {
         const pdfjsNoViewer = getByTestId('no-viewer')
@@ -85,7 +99,11 @@ describe('TextViewer Component', () => {
           mime: 'text/markdown'
         }
       }
-      const { findByText } = render(<TextViewer {...markdownProps} />)
+      const { findByText } = render(
+        <DemoProvider>
+          <TextViewer {...markdownProps} />
+        </DemoProvider>
+      )
       await waitFor(async () => {
         const element = await findByText('The content of my file')
         expect(element).toBeInTheDocument()
@@ -100,7 +118,11 @@ describe('TextViewer Component', () => {
           mime: 'text/plain'
         }
       }
-      const { findByTestId } = render(<TextViewer {...plainTextProps} />)
+      const { findByTestId } = render(
+        <DemoProvider>
+          <TextViewer {...plainTextProps} />
+        </DemoProvider>
+      )
       await waitFor(async () => {
         const element = await findByTestId('viewer-plaintext')
         expect(element).toBeInTheDocument()

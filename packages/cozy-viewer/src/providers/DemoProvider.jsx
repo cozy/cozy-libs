@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
 import { CozyProvider } from 'cozy-client'
 import CloudWallpaper from 'cozy-ui/docs/cloud-wallpaper.jpg'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import I18n from 'cozy-ui/transpiled/react/providers/I18n'
 
+import ViewerProvider from './ViewerProvider'
 import { locales } from '../locales/index'
 
 const demoTextFileResponse = {
@@ -71,20 +72,41 @@ const mockClient = {
   getInstanceOptions: () => ({ app: { slug: 'mespapiers' }, subdomain: 'flat' })
 }
 
-class Wrapper extends React.Component {
-  render() {
-    const lang = localStorage.getItem('lang') || 'en'
-
-    return (
-      <CozyProvider client={mockClient}>
-        <BreakpointsProvider>
-          <I18n dictRequire={lang => locales[lang]} lang={lang}>
-            {this.props.children}
-          </I18n>
-        </BreakpointsProvider>
-      </CozyProvider>
-    )
-  }
+const ViewerContainer = ({ file, isPublic, isReadOnly, children }) => {
+  return (
+    <ViewerProvider file={file} isPublic={isPublic} isReadOnly={isReadOnly}>
+      {children}
+    </ViewerProvider>
+  )
 }
 
-export default Wrapper
+ViewerContainer.defaultProps = {
+  file: {},
+  isPublic: false,
+  isReadOnly: false
+}
+
+const DemoProvider = ({
+  file,
+  isPublic,
+  isReadOnly,
+  withContainer,
+  children
+}) => {
+  const lang = localStorage.getItem('lang') || 'en'
+
+  const Wrapper = withContainer ? ViewerContainer : Fragment
+  const wrapperProps = withContainer ? { file, isPublic, isReadOnly } : {}
+
+  return (
+    <CozyProvider client={mockClient}>
+      <BreakpointsProvider>
+        <I18n dictRequire={lang => locales[lang]} lang={lang}>
+          <Wrapper {...wrapperProps}>{children}</Wrapper>
+        </I18n>
+      </BreakpointsProvider>
+    </CozyProvider>
+  )
+}
+
+export default DemoProvider

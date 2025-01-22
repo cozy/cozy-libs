@@ -4,6 +4,7 @@ import React from 'react'
 
 import ViewerByFile from './ViewerByFile'
 import ViewerControls from './ViewerControls'
+import DemoProvider from '../providers/DemoProvider'
 
 jest.mock('../ViewersByFile/AudioViewer', () => () => <div>AudioViewer</div>)
 jest.mock('cozy-ui/transpiled/react/providers/Encrypted', () => ({
@@ -20,24 +21,24 @@ describe('ViewerControls', () => {
 
   const setup = ({ children } = {}) => {
     render(
-      <ViewerControls
-        file={file}
-        onClose={() => {}}
-        hasPrevious={false}
-        hasNext={false}
-        onPrevious={() => {}}
-        onNext={() => {}}
-        expanded={false}
-        toolbarProps={{
-          showToolbar: false,
-          showClose: false,
-          showFilePath: false,
-          toolbarRef: undefined
-        }}
-        showNavigation={false}
-      >
-        {children}
-      </ViewerControls>
+      <DemoProvider withContainer file={file}>
+        <ViewerControls
+          onClose={() => {}}
+          hasPrevious={false}
+          hasNext={false}
+          onPrevious={() => {}}
+          onNext={() => {}}
+          toolbarProps={{
+            showToolbar: false,
+            showClose: false,
+            showFilePath: false,
+            toolbarRef: undefined
+          }}
+          showNavigation={false}
+        >
+          {children}
+        </ViewerControls>
+      </DemoProvider>
     )
   }
 
@@ -49,6 +50,7 @@ describe('ViewerControls', () => {
         <ViewerByFile key="viewer" file={file} onClose={() => {}} />
       ]
     })
+
     expect(screen.queryByText('not ViewerByFile')).not.toBeInTheDocument()
     expect(screen.getByText('AudioViewer')).toBeInTheDocument()
   })
