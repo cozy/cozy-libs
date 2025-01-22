@@ -39,7 +39,7 @@ export const getPanelBlocksSpecs = (isPublic = false) => ({
     component: Informations
   },
   sharing: {
-    condition: () => false,
+    condition: () => !isPublic,
     component: Sharing
   }
 })
