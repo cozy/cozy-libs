@@ -169,7 +169,7 @@ export class AccountModal extends Component {
               account={account}
               onAccountDeleted={onDismiss}
               addAccount={() => {
-                navigate('new', { replace: true })
+                navigate('../new', { replace: true })
               }}
               showNewAccountButton={showNewAccountButton}
               intentsApi={intentsApi}
