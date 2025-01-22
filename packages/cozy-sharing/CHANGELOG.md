@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [20.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@19.0.0...cozy-sharing@20.0.0) (2025-01-22)
+
+
+### Bug Fixes
+
+* **sharing:** Dispatch correct value ([4f2d17c](https://github.com/cozy/cozy-libs/commit/4f2d17cec7ce51fae97c825e3bb605c204dff330))
+
+
+### Features
+
+* **sharing:** Auto focus password input ([614da3c](https://github.com/cozy/cozy-libs/commit/614da3cceae6f207ced87ae0bc81886224c83a24))
+* **sharing:** Change ShareRestrictionModal validity ([00fb730](https://github.com/cozy/cozy-libs/commit/00fb730160e7f80ea57f6ebf7f47afadff9c0945))
+* **sharing:** Improve BoxPassword ([7e39d7f](https://github.com/cozy/cozy-libs/commit/7e39d7fe16c021c9902a905f7dbdba92b2787eaf))
+* **sharing:** Improve ShareDialogOnlyByLink UX ([4287e74](https://github.com/cozy/cozy-libs/commit/4287e74dc32aa7541e861939c4405a20426640e6))
+* **sharing:** Rework logic of ShareRestrictionModal ([e33df9f](https://github.com/cozy/cozy-libs/commit/e33df9f5bb737dab6db738b435d2d0492698c8e9))
+* **sharing:** Upgrade cozy-client to 53.0.0 ([fd6294f](https://github.com/cozy/cozy-libs/commit/fd6294f0870499a928795a73f099f3885e090a0a))
+
+
+### BREAKING CHANGES
+
+* **sharing:** You must have `cozy-client >= 53.0.0`
+
+
+
+
+
 # [19.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@18.0.0...cozy-sharing@19.0.0) (2025-01-08)
 
 
