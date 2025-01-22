@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [32.2.19](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.18...cozy-harvest-lib@32.2.19) (2025-01-22)
+
+
+### Bug Fixes
+
+* Allow multiple accounts to server konnectors ([0c3b2bf](https://github.com/cozy/cozy-libs/commit/0c3b2bffb5d61b59f411021b99bbbc68c36fc4c9))
+* Correct path associated to the Add Account button ([d8c53fe](https://github.com/cozy/cozy-libs/commit/d8c53fe1d10bf4c22c2bb7b716709b2a9466da9f))
+
+
+
+
+
 ## [32.2.18](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.17...cozy-harvest-lib@32.2.18) (2025-01-22)
 
 **Note:** Version bump only for package cozy-harvest-lib
