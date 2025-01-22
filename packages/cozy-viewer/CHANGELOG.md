@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.3.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@13.2.6...cozy-viewer@13.3.0) (2025-01-22)
+
+
+### Features
+
+* **Viewer:** Hides sharing panel until sharing is fully functional ([3560368](https://github.com/cozy/cozy-libs/commit/3560368ea916937c75ed2062ae54a017a9daf6cc))
+
+
+
+
+
 ## [13.2.6](https://github.com/cozy/cozy-libs/compare/cozy-viewer@13.2.5...cozy-viewer@13.2.6) (2025-01-21)
 
 
