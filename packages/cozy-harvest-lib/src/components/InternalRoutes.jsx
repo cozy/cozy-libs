@@ -56,8 +56,14 @@ const InternalRoutes = ({
                 accountId={params.accountId}
                 accountsAndTriggers={accountsAndTriggers}
                 onDismiss={onDismiss}
-                showNewAccountButton={flag('clisk.multi-accounts')}
-                showAccountSelection={flag('clisk.multi-accounts')}
+                showNewAccountButton={
+                  !konnectorWithTriggers.clientSide ||
+                  flag('clisk.multi-accounts')
+                }
+                showAccountSelection={
+                  !konnectorWithTriggers.clientSide ||
+                  flag('clisk.multi-accounts')
+                }
                 Component={DataTab}
               />
             )}
@@ -75,8 +81,14 @@ const InternalRoutes = ({
                 accountId={params.accountId}
                 accountsAndTriggers={accountsAndTriggers}
                 onDismiss={onDismiss}
-                showNewAccountButton={flag('clisk.multi-accounts')}
-                showAccountSelection={flag('clisk.multi-accounts')}
+                showNewAccountButton={
+                  !konnectorWithTriggers.clientSide ||
+                  flag('clisk.multi-accounts')
+                }
+                showAccountSelection={
+                  !konnectorWithTriggers.clientSide ||
+                  flag('clisk.multi-accounts')
+                }
                 Component={ConfigurationTab}
               />
             )}
