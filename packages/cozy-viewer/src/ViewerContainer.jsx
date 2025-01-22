@@ -88,6 +88,7 @@ const ViewerContainer = props => {
       file={currentFile}
       isPublic={isPublic}
       isReadOnly={isReadOnly}
+      componentsProps={componentsPropsWithDefault}
     >
       <AlertProvider>
         <SharingProvider
@@ -158,6 +159,29 @@ ViewerContainer.propTypes = {
       isEnabled: PropTypes.bool,
       /** To open the Only Office file */
       opener: PropTypes.func
+    }),
+    /** Used to spread props to Panel components */
+    panel: PropTypes.shape({
+      qualifications: PropTypes.PropTypes.shape({
+        /** Whether the qualifications panel is disabled */
+        disabled: PropTypes.bool
+      }),
+      summary: PropTypes.PropTypes.shape({
+        /** Whether the summary panel is disabled */
+        disabled: PropTypes.bool
+      }),
+      konnector: PropTypes.PropTypes.shape({
+        /** Whether the konnector panel is disabled */
+        disabled: PropTypes.bool
+      }),
+      informations: PropTypes.PropTypes.shape({
+        /** Whether the informations panel is disabled */
+        disabled: PropTypes.bool
+      }),
+      sharing: PropTypes.PropTypes.shape({
+        /** Whether the sharing panel is disabled */
+        disabled: PropTypes.bool
+      })
     }),
     /** Toolbar properties */
     toolbarProps: PropTypes.shape(toolbarPropsPropType)

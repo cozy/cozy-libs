@@ -10,10 +10,10 @@ import { withViewerLocales } from '../hoc/withViewerLocales'
 import { useViewer } from '../providers/ViewerProvider'
 
 const PanelContent = ({ t }) => {
-  const { file, isPublic, isReadOnly } = useViewer()
+  const { file, isPublic, componentsProps, isReadOnly } = useViewer()
 
   const panelBlocks = getPanelBlocks({
-    panelBlocksSpecs: getPanelBlocksSpecs(isPublic),
+    panelBlocksSpecs: getPanelBlocksSpecs(isPublic, componentsProps?.panel),
     file
   })
 
