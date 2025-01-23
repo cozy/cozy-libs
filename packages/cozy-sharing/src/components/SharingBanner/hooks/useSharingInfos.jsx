@@ -12,10 +12,13 @@ const getSharingId = permission => {
   return sharingId
 }
 
+const CREATE_COZY_LINK = 'https://manager.cozycloud.cc/cozy/create'
+
 export const useSharingInfos = (previewPath = '/preview') => {
   const client = useClient()
 
-  const [discoveryLink, setDiscoveryLink] = useState()
+  const [addSharingLink, setAddSharingLink] = useState()
+  const [syncSharingLink, setSyncSharingLink] = useState()
   const [isSharingShortcutCreated, setIsSharingSharingcutCreated] =
     useState(false)
   const [sharing, setSharing] = useState()
@@ -36,13 +39,17 @@ export const useSharingInfos = (previewPath = '/preview') => {
 
         const link = client
           .collection('io.cozy.sharings')
+          .getDiscoveryLink(sharingId, sharecode, { shortcut: true })
+        const linkSync = client
+          .collection('io.cozy.sharings')
           .getDiscoveryLink(sharingId, sharecode)
         const sharingsByIdQuery = buildSharingsByIdQuery(sharingId)
         const { data: sharing } = await client.query(
           sharingsByIdQuery.definition
         )
 
-        setDiscoveryLink(link)
+        setAddSharingLink(link)
+        setSyncSharingLink(linkSync)
         setIsSharingSharingcutCreated(isSharingShortcutCreated)
         setSharing(sharing)
       } catch (e) {
@@ -62,7 +69,9 @@ export const useSharingInfos = (previewPath = '/preview') => {
   return {
     sharing,
     loading,
-    discoveryLink,
+    addSharingLink,
+    syncSharingLink,
+    createCozyLink: CREATE_COZY_LINK,
     isSharingShortcutCreated
   }
 }
