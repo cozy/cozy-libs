@@ -33,5 +33,7 @@ export {
   NativeFileSharingProvider,
   useNativeFileSharing
 } from './providers/NativeFileSharingProvider'
-export { openSharingLink } from './actions/openSharingLink'
+export { createCozySharingLink } from './actions/createCozySharingLink'
+export { addToCozySharingLink } from './actions/addToCozySharingLink'
+export { syncToCozySharingLink } from './actions/syncToCozySharingLink'
 export { shareNative } from './actions/shareNative'
