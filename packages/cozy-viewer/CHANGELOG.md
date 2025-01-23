@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@13.3.2...cozy-viewer@14.0.0) (2025-01-23)
+
+
+### Bug Fixes
+
+* **Viewer:** Adjust back button position in toolbar ([0cd2ecf](https://github.com/cozy/cozy-libs/commit/0cd2ecf3705b8d45f7ee0a9ddccf34b38339864e))
+* **Viewer:** Adjust title size for mobile ([68654e0](https://github.com/cozy/cozy-libs/commit/68654e0e0084c03024a3c840e5928f31a87d25e4))
+
+
+### Features
+
+* Upgrade packages ([3e8ad4d](https://github.com/cozy/cozy-libs/commit/3e8ad4d07ce0312fa3c2df567f952480dbd5cc7d))
+* **Viewer:** Add MoreMenu and move elements inside ([42e369a](https://github.com/cozy/cozy-libs/commit/42e369adbc3d0c1672eed77c26d041b47c390420))
+* **Viewer:** Add props to hide panel blocks ([a64460b](https://github.com/cozy/cozy-libs/commit/a64460b607e5433bf14321d106f3572227d9b3c9))
+* **Viewer:** Add sharingProvider and ShareModalProvider ([002ac22](https://github.com/cozy/cozy-libs/commit/002ac2243fab24043b7e0807ffafc825d86e0991))
+* **Viewer:** Remove ViewerWithCustomPanelAndFooter ([d93ff49](https://github.com/cozy/cozy-libs/commit/d93ff490a61ad54171696ed0f121f70c19eba1d6))
+* **Viewer:** Show Sharing panel again ([7cefd15](https://github.com/cozy/cozy-libs/commit/7cefd15beedc1b840bf1ec525532d4fadcf679f3))
+
+
+### BREAKING CHANGES
+
+* You must have `cozy-client >= 53.1.0`, `cozy-sharing >= 20.0.0` and `cozy-ui >= 117.1.0`
+* **Viewer:** You must replace `ViewerWithCustomPanelAndFooter` by default import.
+
+
+
+
+
 ## [13.3.2](https://github.com/cozy/cozy-libs/compare/cozy-viewer@13.3.1...cozy-viewer@13.3.2) (2025-01-22)
 
 **Note:** Version bump only for package cozy-viewer
