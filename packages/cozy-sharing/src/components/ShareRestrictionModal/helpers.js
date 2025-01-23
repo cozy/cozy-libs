@@ -1,4 +1,3 @@
-import { getSharingLink } from 'cozy-client/dist/models/sharing'
 import minilog from 'cozy-minilog'
 
 const log = minilog('ShareRestrictionModal/helpers')
@@ -63,49 +62,6 @@ export const makeTTL = selectedDate => {
   } catch (error) {
     log.error(error)
     return
-  }
-}
-
-/**
- * forwardFile - Triggers the download of one or multiple files by the browser
- * @param {object} options
- * @param {import('cozy-client/types/CozyClient').default} options.client
- * @param {import('cozy-client/types/types').IOCozyFile} options.file File to download
- * @param {Function} options.t i18n function
- * @param {string} options.ttl Time to live of the sharing link
- * @param {string} options.password Password of the sharing link
- * @param {Function} options.showAlert - Function to display an alert
- */
-export const forwardFile = async ({
-  client,
-  file,
-  t,
-  ttl,
-  password,
-  showAlert
-}) => {
-  try {
-    // We currently support only one file at a time
-    const url = await getSharingLink(client, [file._id], { ttl, password })
-    const isZipFile = file.class === 'zip'
-    const shareData = {
-      title: t('shareFile.title', {
-        name: file.name,
-        smart_count: isZipFile ? 2 : 1
-      }),
-      text: t('shareFile.text', {
-        name: file.name,
-        smart_count: isZipFile ? 2 : 1
-      }),
-      url
-    }
-    navigator.share(shareData)
-  } catch (error) {
-    showAlert({
-      message: t('shareFile.error'),
-      severity: 'error',
-      variant: 'filled'
-    })
   }
 }
 
