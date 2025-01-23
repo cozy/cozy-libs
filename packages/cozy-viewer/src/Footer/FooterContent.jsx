@@ -11,12 +11,6 @@ import BottomSheetContent from './BottomSheetContent'
 import { extractChildrenCompByName } from './helpers'
 import { useViewer } from '../providers/ViewerProvider'
 
-const FooterButtons = ({
-  FooterActionButtonsWithFile = { FooterActionButtonsWithFile }
-}) => {
-  return <>{FooterActionButtonsWithFile}</>
-}
-
 const useStyles = makeStyles(theme => ({
   footer: {
     display: 'flex',
@@ -59,9 +53,7 @@ const FooterContent = ({ toolbarRef, children }) => {
       <BottomSheetHeader
         className={cx('u-ph-1 u-pb-1', styles.bottomSheetHeader)}
       >
-        <FooterButtons
-          FooterActionButtonsWithFile={FooterActionButtonsWithFile}
-        />
+        <FooterActionButtonsWithFile />
       </BottomSheetHeader>
       <BottomSheetContent />
     </BottomSheet>
