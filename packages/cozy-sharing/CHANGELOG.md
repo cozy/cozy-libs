@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@21.1.0...cozy-sharing@21.2.0) (2025-01-23)
+
+
+### Features
+
+* Remove unused forwardFile ([dbc6aa8](https://github.com/cozy/cozy-libs/commit/dbc6aa8b5e642cdc0b7b626ff9ec91713ffdc7c1))
+
+
+
+
+
 # [21.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@21.0.0...cozy-sharing@21.1.0) (2025-01-23)
 
 
