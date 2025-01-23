@@ -139,7 +139,7 @@ const SharingBannerByLink = ({ onClose }) => {
 SharingBannerCozyToCozy.propTypes = {
   sharing: PropTypes.object.isRequired,
   isSharingShortcutCreated: PropTypes.bool.isRequired,
-  addToCozySharingLink: PropTypes.string.isRequired,
+  addSharingLink: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired
 }
 export { SharingBannerCozyToCozy, SharingBannerByLink }
