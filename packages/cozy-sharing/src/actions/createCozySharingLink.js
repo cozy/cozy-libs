@@ -28,7 +28,7 @@ const makeComponent = (label, icon) => {
 export const createCozySharingLink = ({
   openSharingLinkDisplayed = true,
   isShortLabel = false,
-  createSharingLink
+  createCozyLink
 }) => {
   const { t } = getActionsI18n()
   const label = t('Share.create-cozy', { smart_count: isShortLabel ? 1 : 2 })
@@ -40,7 +40,7 @@ export const createCozySharingLink = ({
     icon,
     displayCondition: () => openSharingLinkDisplayed,
     action: () => {
-      openExternalLink(createSharingLink)
+      openExternalLink(createCozyLink)
     },
     Component: makeComponent(label, icon)
   }
