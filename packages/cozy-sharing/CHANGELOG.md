@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@21.0.0...cozy-sharing@21.1.0) (2025-01-23)
+
+
+### Bug Fixes
+
+* **sharing:** Fix SharingBannerCozyToCozy propTypes ([1c28e60](https://github.com/cozy/cozy-libs/commit/1c28e60acc2352f75433b67d23ddb2d25b276183))
+
+
+### Features
+
+* **sharing:** Rename prop of createCozySharingLink action ([cbfb7c9](https://github.com/cozy/cozy-libs/commit/cbfb7c9f179f7396841257f5ad09be7f61ad725d))
+
+
+
+
+
 # [21.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@20.0.0...cozy-sharing@21.0.0) (2025-01-23)
 
 
