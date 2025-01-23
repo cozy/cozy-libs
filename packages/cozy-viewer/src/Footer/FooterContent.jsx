@@ -53,7 +53,7 @@ const FooterContent = ({ toolbarRef, children }) => {
       <BottomSheetHeader
         className={cx('u-ph-1 u-pb-1', styles.bottomSheetHeader)}
       >
-        <FooterActionButtonsWithFile />
+        {FooterActionButtonsWithFile}
       </BottomSheetHeader>
       <BottomSheetContent />
     </BottomSheet>
