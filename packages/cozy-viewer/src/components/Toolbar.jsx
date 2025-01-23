@@ -42,7 +42,8 @@ const Toolbar = ({
   const { t } = useI18n()
   const webviewIntent = useWebviewIntent()
   const { file } = useViewer()
-  const { isSharingShortcutCreated, discoveryLink, loading } = useSharingInfos()
+  const { isSharingShortcutCreated, addSharingLink, loading } =
+    useSharingInfos()
   const { isOwner } = useSharingContext()
   const { setShowShareModal } = useShareModal()
 
@@ -94,7 +95,7 @@ const Toolbar = ({
           )}
           {isCozySharing && isShareNotAdded && (
             <OpenSharingLinkButton
-              link={discoveryLink}
+              link={addSharingLink}
               isSharingShortcutCreated={isSharingShortcutCreated}
               variant="text"
               className="u-white"
