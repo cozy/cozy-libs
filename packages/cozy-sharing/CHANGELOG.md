@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@20.0.0...cozy-sharing@21.0.0) (2025-01-23)
+
+
+### Features
+
+* **sharing:** Add new links to `useSharingInfos` ([e9e51f7](https://github.com/cozy/cozy-libs/commit/e9e51f773698ea72af5aca218c65b597c4f918c7))
+* **sharing:** Replace `openSharingLink` with 3 new actions ([9150b33](https://github.com/cozy/cozy-libs/commit/9150b33f7ef3cd55b986dffedd768f00408674dd))
+* **sharing:** Update PublicBanner with new addSharingLink ([3be70fe](https://github.com/cozy/cozy-libs/commit/3be70fef1780806584cba1f07daaf0ebcd9596c7))
+
+
+### BREAKING CHANGES
+
+* **sharing:** We now need 3 separate actions to Cozy to Cozy sharing.
+Replace the `openSharingLink` action with the desired
+action with its link option
+
+Example:
+```
+import {
+  addToCozySharingLink,
+  syncToCozySharingLink,
+  useSharingInfos
+} from 'cozy-sharing'
+
+const { addSharingLink, syncSharingLink } = useSharingInfos()
+
+const actions = makeActions(
+  [
+    addToCozySharingLink,
+    syncToCozySharingLink
+  ],
+  {
+    addSharingLink,
+    syncSharingLink
+  }
+)
+```
+
+
+
+
+
 # [20.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@19.0.0...cozy-sharing@20.0.0) (2025-01-22)
 
 
