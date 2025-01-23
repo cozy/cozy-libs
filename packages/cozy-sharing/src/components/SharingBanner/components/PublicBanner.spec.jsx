@@ -34,7 +34,7 @@ describe('PublicBanner', () => {
       <SharingBannerCozyToCozy
         sharing={sharing}
         isSharingShortcutCreated={true}
-        discoveryLink="discoveryLink"
+        addSharingLink="discoveryLink"
         onClose={() => {}}
       />
     )

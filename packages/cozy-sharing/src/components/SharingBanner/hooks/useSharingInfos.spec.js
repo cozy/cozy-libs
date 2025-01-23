@@ -81,8 +81,8 @@ describe('useSharingInfos', () => {
   })
 
   it('returns the right infos when using useSharingInfo', async () => {
-    const discoveryLink = '/link'
-    getDiscoveryLinkMock.mockReturnValue(discoveryLink)
+    const addSharingLink = '/addSharingLink'
+    getDiscoveryLinkMock.mockReturnValue(addSharingLink)
     fetchOwnPermissionsMock.mockResolvedValue(mockedPermissionsWithInstance)
     queryMock.mockResolvedValue(mockSharing)
     const { result, waitForNextUpdate } = setup()
@@ -93,12 +93,12 @@ describe('useSharingInfos', () => {
     expect(result.current.loading).toEqual(false)
     expect(result.current.isSharingShortcutCreated).toEqual(true)
     expect(result.current.sharing).toEqual(mockSharing.data)
-    expect(result.current.discoveryLink).toEqual(discoveryLink)
+    expect(result.current.addSharingLink).toEqual(addSharingLink)
   })
 
-  it('returns the right infos when using useSharingInfo without discoveryLink', async () => {
-    const discoveryLink = false
-    getDiscoveryLinkMock.mockReturnValue(discoveryLink)
+  it('returns the right infos when using useSharingInfo without addSharingLink', async () => {
+    const addSharingLink = undefined
+    getDiscoveryLinkMock.mockReturnValue(addSharingLink)
     fetchOwnPermissionsMock.mockResolvedValue(mockedPermissionsWithoutInstance)
     queryMock.mockResolvedValue(mockSharing)
     const { result, waitForNextUpdate } = setup()
@@ -109,7 +109,7 @@ describe('useSharingInfos', () => {
     expect(result.current.loading).toEqual(false)
     expect(result.current.isSharingShortcutCreated).toEqual(false)
     expect(result.current.sharing).toEqual(mockSharing.data)
-    expect(result.current.discoveryLink).toEqual(discoveryLink)
+    expect(result.current.addSharingLink).toEqual(addSharingLink)
   })
 
   it('returns loading false if there is nothing to do aka sharing by link', () => {
