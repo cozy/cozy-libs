@@ -49,12 +49,12 @@ const openExternalLink = url => (window.location = url)
 const SharingBannerCozyToCozy = ({
   sharing,
   isSharingShortcutCreated,
-  discoveryLink,
+  addSharingLink,
   onClose
 }) => {
   const { t } = useI18n()
 
-  const action = () => openExternalLink(discoveryLink)
+  const action = () => openExternalLink(addSharingLink)
   const buttonOne = isSharingShortcutCreated
     ? {
         label: t('Share.banner.sync_to_mine', { smart_count: 2 }),
@@ -139,7 +139,7 @@ const SharingBannerByLink = ({ onClose }) => {
 SharingBannerCozyToCozy.propTypes = {
   sharing: PropTypes.object.isRequired,
   isSharingShortcutCreated: PropTypes.bool.isRequired,
-  discoveryLink: PropTypes.string.isRequired,
+  addToCozySharingLink: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired
 }
 export { SharingBannerCozyToCozy, SharingBannerByLink }
