@@ -3,7 +3,8 @@ import React, { useState, useRef, useEffect } from 'react'
 
 import { useWebviewIntent } from 'cozy-intent'
 import {
-  openSharingLink,
+  addToCozySharingLink,
+  syncToCozySharingLink,
   useSharingInfos,
   useSharingContext
 } from 'cozy-sharing'
@@ -11,6 +12,7 @@ import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import {
   makeActions,
   download,
+  divider,
   print
 } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -30,7 +32,8 @@ const ToolbarMoreMenu = () => {
   const { isDesktop } = useBreakpoints()
   const { url } = useEncrypted()
   const anchorRef = useRef()
-  const { isSharingShortcutCreated, discoveryLink } = useSharingInfos()
+  const { isSharingShortcutCreated, addSharingLink, syncSharingLink } =
+    useSharingInfos()
   const { hasWriteAccess, allLoaded } = useSharingContext()
   const webviewIntent = useWebviewIntent()
   const { setShowShareModal } = useShareModal()
@@ -41,13 +44,21 @@ const ToolbarMoreMenu = () => {
   const isCozySharing = window.location.pathname === '/preview'
 
   const actions = makeActions(
-    [share, openSharingLink, download, showPrintAction && print],
+    [
+      share,
+      isCozySharing && addToCozySharingLink,
+      isCozySharing && syncToCozySharingLink,
+      isCozySharing && divider,
+      download,
+      showPrintAction && print
+    ],
     {
       isSharingShortcutCreated,
       allLoaded,
       isPublic,
       hasWriteAccess,
-      link: discoveryLink,
+      addSharingLink,
+      syncSharingLink,
       openSharingLinkDisplayed: isCozySharing,
       setShowShareModal: setShowShareModal,
       encryptedUrl: url
