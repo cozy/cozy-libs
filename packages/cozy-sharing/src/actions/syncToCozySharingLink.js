@@ -2,10 +2,11 @@ import React, { forwardRef } from 'react'
 
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
-import { getIconWithlabel, openExternalLink } from '../helpers/sharings'
+import { openExternalLink } from '../helpers/sharings'
 import { getActionsI18n } from '../hoc/withLocales'
 
 const makeComponent = (label, icon) => {
@@ -19,32 +20,29 @@ const makeComponent = (label, icon) => {
       </ActionsMenuItem>
     )
   })
-  Component.displayName = 'OpenSharingLink'
+  Component.displayName = 'SyncToCozySharingLink'
 
   return Component
 }
 
-export const openSharingLink = ({
-  isSharingShortcutCreated,
+export const syncToCozySharingLink = ({
   openSharingLinkDisplayed = true,
   isShortLabel = false,
-  link
+  syncSharingLink
 }) => {
   const { t } = getActionsI18n()
-  const { icon, label } = getIconWithlabel({
-    link,
-    isSharingShortcutCreated,
-    isShortLabel,
-    t
+  const label = t('Share.banner.sync_to_mine', {
+    smart_count: isShortLabel ? 1 : 2
   })
+  const icon = SyncIcon
 
   return {
-    name: 'openSharingLink',
+    name: 'syncToCozySharingLink',
     label,
     icon,
     displayCondition: () => openSharingLinkDisplayed,
     action: () => {
-      openExternalLink(link)
+      openExternalLink(syncSharingLink)
     },
     Component: makeComponent(label, icon)
   }
