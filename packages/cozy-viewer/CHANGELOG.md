@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [14.0.2](https://github.com/cozy/cozy-libs/compare/cozy-viewer@14.0.1...cozy-viewer@14.0.2) (2025-01-23)
+
+
+### Bug Fixes
+
+* **Viewer:** FooterContent wasn't using component correctly ([ab878f5](https://github.com/cozy/cozy-libs/commit/ab878f56c5b71d8bb12116adb062c47edd9ce056))
+
+
+
+
+
 ## [14.0.1](https://github.com/cozy/cozy-libs/compare/cozy-viewer@14.0.0...cozy-viewer@14.0.1) (2025-01-23)
 
 **Note:** Version bump only for package cozy-viewer
