@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@2.4.1...cozy-dataproxy-lib@3.0.0) (2025-01-27)
+
+
+### Bug Fixes
+
+* Cozy-pouch-link as peerDep to avoid version conflict ([5a93d82](https://github.com/cozy/cozy-libs/commit/5a93d8203491e7e1eb5d4e16162320da45fb5989)), closes [/github.com/cozy/cozy-libs/blob/master/packages/cozy-dataproxy-lib/src/search/SearchEngine.ts#L56](https://github.com//github.com/cozy/cozy-libs/blob/master/packages/cozy-dataproxy-lib/src/search/SearchEngine.ts/issues/L56)
+
+
+### Features
+
+* Handle offline queries ([706ce6e](https://github.com/cozy/cozy-libs/commit/706ce6ec6fa8389e95d01a129bbc32bb2bd00251))
+
+
+### BREAKING CHANGES
+
+* it is now required to have cozy-pouch-link as
+a dependency for a client to benefit from the local search
+functionalities.
+
+
+
+
+
 ## [2.4.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@2.4.0...cozy-dataproxy-lib@2.4.1) (2025-01-20)
 
 **Note:** Version bump only for package cozy-dataproxy-lib
