@@ -2,7 +2,6 @@
   "Viewer": {
     "actions": {
       "download": "Télécharger",
-      "share": "Partager",
       "forward": "Envoyer"
     },
     "alert": {
