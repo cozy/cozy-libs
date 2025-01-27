@@ -22,7 +22,6 @@ import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { ToolbarFilePath } from './ToolbarFilePath'
-import ToolbarMoreMenu from './ToolbarMoreMenu'
 import styles from './styles.styl'
 import { extractChildrenCompByName } from '../Footer/helpers'
 import { useShareModal } from '../providers/ShareModalProvider'
@@ -83,7 +82,6 @@ const Toolbar = ({
 
       {isDesktop && (
         <div className="u-flex u-flex-items-center">
-          {ToolbarButtons}
           {!isCozySharing && !isOwner(file._id) && (
             <ShareButton
               className="u-white"
@@ -113,7 +111,7 @@ const Toolbar = ({
           />
         </div>
       )}
-      <ToolbarMoreMenu />
+      {ToolbarButtons}
     </div>
   )
 }
