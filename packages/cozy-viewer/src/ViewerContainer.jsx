@@ -162,23 +162,23 @@ ViewerContainer.propTypes = {
     }),
     /** Used to spread props to Panel components */
     panel: PropTypes.shape({
-      qualifications: PropTypes.PropTypes.shape({
+      qualifications: PropTypes.shape({
         /** Whether the qualifications panel is disabled */
         disabled: PropTypes.bool
       }),
-      summary: PropTypes.PropTypes.shape({
+      summary: PropTypes.shape({
         /** Whether the summary panel is disabled */
         disabled: PropTypes.bool
       }),
-      konnector: PropTypes.PropTypes.shape({
+      konnector: PropTypes.shape({
         /** Whether the konnector panel is disabled */
         disabled: PropTypes.bool
       }),
-      informations: PropTypes.PropTypes.shape({
+      informations: PropTypes.shape({
         /** Whether the informations panel is disabled */
         disabled: PropTypes.bool
       }),
-      sharing: PropTypes.PropTypes.shape({
+      sharing: PropTypes.shape({
         /** Whether the sharing panel is disabled */
         disabled: PropTypes.bool
       })
