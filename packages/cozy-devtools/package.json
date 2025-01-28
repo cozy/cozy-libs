@@ -1,6 +1,6 @@
 {
   "name": "cozy-devtools",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Cozy-Devtools exposes a devtool that can be injected in an app for debug and better developer experience.",
   "main": "dist/index.js",
   "license": "MIT",
@@ -23,7 +23,7 @@
     "babel-preset-cozy-app": "^2.8.1",
     "cozy-client": "^50.0.0",
     "cozy-flags": "^4.6.1",
-    "cozy-intent": "^2.29.1",
+    "cozy-intent": "^2.29.2",
     "cozy-pouch-link": "^50.0.0",
     "cozy-ui": "^111.19.0",
     "react": "^16.12.0",

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.29.2](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.29.1...cozy-intent@2.29.2) (2025-01-28)
+
+
+### Bug Fixes
+
+* Crash on envs without window object ([8bf136b](https://github.com/cozy/cozy-libs/commit/8bf136b5fc49a50341c7c37eb5d222a3e85662e3))
+
+
+
+
+
 ## 2.29.1 (2024-11-06)
 
 
