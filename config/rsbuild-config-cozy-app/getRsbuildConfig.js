@@ -130,6 +130,9 @@ function getRsbuildConfig({
       },
       ...(hasPublic && {
         public: {
+          dev: {
+            assetPrefix: '/public'
+          },
           html: {
             template: './src/targets/public/index.ejs'
           },
@@ -149,6 +152,9 @@ function getRsbuildConfig({
       }),
       ...(hasIntents && {
         intents: {
+          dev: {
+            assetPrefix: '/intents'
+          },
           html: {
             template: './src/targets/intents/index.ejs'
           },
