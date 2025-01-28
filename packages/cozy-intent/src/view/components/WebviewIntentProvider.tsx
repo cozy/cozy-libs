@@ -25,8 +25,6 @@ interface Props {
   webviewService?: WebviewService
 }
 
-const assumeWebviewWindow = window as unknown as WebviewWindow
-
 function isWebviewWindow(window: Window): window is WebviewWindow {
   return (window as WebviewWindow).ReactNativeWebView !== undefined
 }
@@ -48,7 +46,7 @@ const getBarInitAPI = (): ((webviewContext: WebviewService) => void) | void => {
 /* eslint-enable no-console */
 
 const sendSyncMessage = (message: string): void => {
-  return assumeWebviewWindow.ReactNativeWebView.postMessage(
+  return (window as unknown as WebviewWindow).ReactNativeWebView.postMessage(
     JSON.stringify({
       type: strings.postMeSignature,
       message
@@ -62,7 +60,7 @@ const getConnection = async (
 ): Promise<void> => {
   sendSyncMessage(strings.webviewIsRendered)
 
-  const messenger = new WebviewMessenger(assumeWebviewWindow)
+  const messenger = new WebviewMessenger(window as unknown as WebviewWindow)
 
   const result = await ChildHandshake(
     isWebDevMode() ? DebugWebviewMessenger(messenger) : messenger,
@@ -73,7 +71,7 @@ const getConnection = async (
 }
 
 const isValidEnv = (): boolean => {
-  const flagshipApp = assumeWebviewWindow.cozy?.flagship
+  const flagshipApp = (window as unknown as WebviewWindow).cozy?.flagship
 
   if (!flagshipApp) return false
 
