@@ -116,7 +116,7 @@ export const DataProxyProvider = React.memo(({ children, options = {} }) => {
   }
 
   const search = async search => {
-    log.log('Send search query to DataProxy iframe')
+    log.log('Send search query to DataProxy')
     const result = await dataProxy.search(search, options)
 
     return result
