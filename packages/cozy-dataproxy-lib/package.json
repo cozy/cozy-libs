@@ -26,7 +26,7 @@
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-tsconfig-paths": "^1.0.3",
     "babel-preset-cozy-app": "^2.8.1",
-    "cozy-client": "^51.0.1",
+    "cozy-client": "^53.1.0",
     "cozy-device-helper": "^3.7.1",
     "cozy-flags": "^4.6.1",
     "cozy-intent": "^2.29.2",
