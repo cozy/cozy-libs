@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/cozy/cozy-libs/compare/rsbuild-config-cozy-app@0.2.0...rsbuild-config-cozy-app@0.2.1) (2025-01-29)
+
+
+### Bug Fixes
+
+* Declare assetPrefixes for dev mode in shared Rsbuild configuration ([ed8a3e5](https://github.com/cozy/cozy-libs/commit/ed8a3e50dfa8b26d6af6cb8b7d09ef0944b15888))
+
+
+
+
+
 # [0.2.0](https://github.com/cozy/cozy-libs/compare/rsbuild-config-cozy-app@0.1.2...rsbuild-config-cozy-app@0.2.0) (2025-01-15)
 
 
