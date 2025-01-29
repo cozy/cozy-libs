@@ -1,7 +1,7 @@
 {
   "name": "cozy-dataproxy-lib",
   "description": "Library meant to be by Cozy Cloud's DataProxy apps for data manipulation",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "author": {
     "name": "Cozy Cloud",
     "url": "https://github.com/cozy"

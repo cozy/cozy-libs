@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.2](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.0.1...cozy-dataproxy-lib@3.0.2) (2025-01-29)
+
+
+### Bug Fixes
+
+* Improve indexing time ([4291f76](https://github.com/cozy/cozy-libs/commit/4291f7673a543c67633eed7b8414579d5b4167f0))
+* Index documents only after login ([f57e756](https://github.com/cozy/cozy-libs/commit/f57e75699a477cdc53073d20c71f92fc2adea6cb))
+
+
+
+
+
 ## [3.0.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.0.0...cozy-dataproxy-lib@3.0.1) (2025-01-28)
 
 **Note:** Version bump only for package cozy-dataproxy-lib
