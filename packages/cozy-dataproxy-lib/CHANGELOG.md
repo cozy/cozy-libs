@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.3](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.0.2...cozy-dataproxy-lib@3.0.3) (2025-01-29)
+
+
+### Bug Fixes
+
+* Prevent registering RealtimePlugin if it is already registered ([24165f3](https://github.com/cozy/cozy-libs/commit/24165f30e817ccfd7daa8ba588a03a03e994cf81))
+
+
+
+
+
 ## [3.0.2](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.0.1...cozy-dataproxy-lib@3.0.2) (2025-01-29)
 
 
