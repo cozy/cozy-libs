@@ -54,7 +54,7 @@ export class SearchEngine {
     this.searchIndexes = {} as SearchIndexes
 
     this.isLocalSearch = !!getPouchLink(this.client)
-    log.info('Use local data on trusted device : ', this.isLocalSearch)
+    log.info('Use local data on trusted device: ', this.isLocalSearch)
 
     this.debouncedReplication = (): void => {
       const pouchLink = getPouchLink(client)
@@ -76,26 +76,20 @@ export class SearchEngine {
     if (!this.client) {
       return
     }
-
     // Create search indexes by querying docs, either locally or remotely
     for (const doctype of SEARCHABLE_DOCTYPES) {
-      const startIndexingTime = performance.now()
-      this.searchIndexes[doctype] = await this.indexDocsForSearch(
+      const searchIndex = await this.indexDocsForSearch(
         doctype as keyof typeof SEARCH_SCHEMA
       )
-      const endIndexingTime = performance.now()
-      log.debug(
-        `Indexing ${doctype} took ${(
-          endIndexingTime - startIndexingTime
-        ).toFixed(2)}`
-      )
+      if (searchIndex) {
+        this.searchIndexes[doctype] = searchIndex
+      }
     }
 
     if (this.isLocalSearch) {
       // Use replication events to have up-to-date search indexes, based on local data
       this.indexOnReplicationEvents()
     }
-
   }
 
   indexOnReplicationEvents(): void {
@@ -105,9 +99,12 @@ export class SearchEngine {
     this.client.on('pouchlink:doctypesync:end', async (doctype: string) => {
       if (isSearchedDoctype(doctype)) {
         // Index doctype after initial replication
-        this.searchIndexes[doctype] = await this.indexDocsForSearch(
+        const searchIndex = await this.indexDocsForSearch(
           doctype as keyof typeof SEARCH_SCHEMA
         )
+        if (searchIndex) {
+          this.searchIndexes[doctype] = searchIndex
+        }
       }
     })
     this.client.on('pouchlink:sync:start', () => {
@@ -161,7 +158,7 @@ export class SearchEngine {
       return
     }
     log.debug('[REALTIME] Update doc from index after update : ', doc)
-    void this.indexDoc(searchIndex.index, doc)
+    void this.indexSingleDoc(searchIndex.index, doc)
 
     if (this.isLocalSearch) {
       this.debouncedReplication()
@@ -206,11 +203,7 @@ export class SearchEngine {
       }
     })
 
-    // There is no persisted path for files: we must add it
-    const completedDocs = this.isLocalSearch ? addFilePaths(docs) : docs
-    for (const doc of completedDocs) {
-      void this.indexDoc(flexsearchIndex, doc)
-    }
+    this.indexAllDocs(flexsearchIndex, docs)
 
     const endTimeIndex = performance.now()
     log.debug(
@@ -221,7 +214,24 @@ export class SearchEngine {
     return flexsearchIndex
   }
 
-  async indexDoc(
+  indexAllDocs(
+    flexsearchIndex: FlexSearch.Document<CozyDoc, true>,
+    docs: CozyDoc[]
+  ): FlexSearch.Document<CozyDoc, true> {
+    // There is no persisted path for files: we must add it
+    const completedDocs = this.isLocalSearch ? addFilePaths(docs) : docs
+    for (const doc of completedDocs) {
+      if (this.shouldIndexDoc(doc)) {
+        flexsearchIndex.add(doc)
+      } else {
+        // Should not index doc: remove it from index if it exists
+        flexsearchIndex.remove(doc._id!)
+      }
+    }
+    return flexsearchIndex
+  }
+
+  async indexSingleDoc(
     flexsearchIndex: FlexSearch.Document<CozyDoc, true>,
     doc: CozyDoc
   ): Promise<void> {
@@ -277,8 +287,12 @@ export class SearchEngine {
 
   async initialIndexation(
     doctype: keyof typeof SEARCH_SCHEMA
-  ): Promise<SearchIndex> {
+  ): Promise<SearchIndex | null> {
     const docs = await this.queryLocalOrRemoteDocs(doctype)
+    if (docs.length < 1) {
+      // No docs available yet
+      return null
+    }
     const index = this.buildSearchIndex(doctype, docs)
     const lastSeq = await this.getLocalLastSeq(doctype)
 
@@ -310,7 +324,7 @@ export class SearchEngine {
         searchIndex.index.remove(change.id)
       } else {
         const normalizedDoc = { ...change.doc, _type: doctype } as CozyDoc
-        void this.indexDoc(searchIndex.index, normalizedDoc)
+        void this.indexSingleDoc(searchIndex.index, normalizedDoc)
       }
     }
 
@@ -321,18 +335,29 @@ export class SearchEngine {
 
   async indexDocsForSearch(
     doctype: keyof typeof SEARCH_SCHEMA
-  ): Promise<SearchIndex> {
+  ): Promise<SearchIndex | null> {
     const searchIndex = this.searchIndexes[doctype]
+    const startIndexing = performance.now()
 
+    let index
     if (!searchIndex) {
       // First creation of search index
-      return this.initialIndexation(doctype)
+      index = await this.initialIndexation(doctype)
+      if (!index) {
+        return null
+      }
+    } else {
+      // At this point, the search index is supposed to be already up-to-date,
+      // thanks to the realtime.
+      // However, we check if it is actually the case for safety, and update the lastSeq
+      index = await this.incrementalIndexation(doctype, searchIndex)
     }
 
-    // At this point, the search index is supposed to be already up-to-date,
-    // thanks to the realtime.
-    // However, we check if it is actually the case for safety, and update the lastSeq
-    return this.incrementalIndexation(doctype, searchIndex)
+    const endIndexing = performance.now()
+    log.debug(
+      `Indexing ${doctype} took ${(endIndexing - startIndexing).toFixed(2)} ms`
+    )
+    return index
   }
 
   search(query: string, options: SearchOptions | undefined): SearchResult[] {
