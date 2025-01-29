@@ -2,7 +2,6 @@ import { createMockClient } from 'cozy-client'
 
 import { SearchEngine } from './SearchEngine'
 import * as consts from './consts'
-jest.mock('cozy-client')
 jest.mock('flexsearch')
 jest.mock('flexsearch/dist/module/lang/latin/simple')
 
