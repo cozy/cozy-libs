@@ -1,6 +1,7 @@
 import FlexSearch from 'flexsearch'
 
-import CozyClient from 'cozy-client'
+import CozyClient, { defaultPerformanceApi } from 'cozy-client'
+import type { PerformanceAPI } from 'cozy-client/types/performances/types'
 import Minilog from 'cozy-minilog'
 import { RealtimePlugin } from 'cozy-realtime'
 
@@ -55,11 +56,17 @@ export class SearchEngine {
   debouncedReplication: () => void
   isLocalSearch: boolean
   storage: StorageInterface
+  performanceApi: PerformanceAPI
 
-  constructor(client: CozyClient, storage: StorageInterface) {
+  constructor(
+    client: CozyClient,
+    storage: StorageInterface,
+    performanceApi?: PerformanceAPI
+  ) {
     this.client = client
     this.searchIndexes = {} as SearchIndexes
     this.storage = storage
+    this.performanceApi = performanceApi ?? defaultPerformanceApi
 
     this.isLocalSearch = !!getPouchLink(this.client)
     log.info('Use local data on trusted device: ', this.isLocalSearch)
@@ -84,6 +91,8 @@ export class SearchEngine {
     if (!this.client) {
       return
     }
+
+    const markName = this.performanceApi.mark('indexDocuments')
 
     const lastExportDate = await getExportDate(this.storage)
     if (!lastExportDate || !this.isLocalSearch) {
@@ -113,6 +122,11 @@ export class SearchEngine {
       // Use replication events to have up-to-date search indexes, based on local data
       this.indexOnReplicationEvents()
     }
+
+    this.performanceApi.measure({
+      markName: markName,
+      category: 'Search'
+    })
   }
 
   indexOnReplicationEvents(): void {
@@ -286,6 +300,9 @@ export class SearchEngine {
   async indexDocsForSearch(
     doctype: keyof typeof SEARCH_SCHEMA
   ): Promise<SearchIndex | null> {
+    const markeNameIndex = this.performanceApi.mark(
+      `indexDocsForSearch ${doctype}`
+    )
     const searchIndex = this.searchIndexes[doctype]
     const startIndexing = performance.now()
 
@@ -294,6 +311,11 @@ export class SearchEngine {
       // First creation of search index
       index = await this.initialIndexation(doctype)
       if (!index) {
+        this.performanceApi.measure({
+          markName: markeNameIndex,
+          measureName: `${markeNameIndex} initial indexation`,
+          category: 'Search'
+        })
         return null
       }
     } else {
@@ -307,6 +329,13 @@ export class SearchEngine {
     log.debug(
       `Indexing ${doctype} took ${(endIndexing - startIndexing).toFixed(2)} ms`
     )
+
+    this.performanceApi.measure({
+      markName: markeNameIndex,
+      measureName: `${markeNameIndex} incremental indexation`,
+      category: 'Search'
+    })
+
     return index
   }
 
@@ -319,6 +348,8 @@ export class SearchEngine {
       log.warn('[SEARCH] No search index available')
       return null
     }
+
+    const markeNameIndex = this.performanceApi.mark('search')
 
     const allResults = this.searchOnIndexes(query, options?.doctypes)
     const dedupResults = this.deduplicateAndFlatten(allResults)
@@ -333,7 +364,14 @@ export class SearchEngine {
       const normalizedRes = normalizeSearchResult(this.client, res, query)
       normResults.push(normalizedRes)
     }
-    return normResults.filter(res => res.title)
+    const output = normResults.filter(res => res.title)
+
+    this.performanceApi.measure({
+      markName: markeNameIndex,
+      category: 'Search'
+    })
+
+    return output
   }
 
   searchOnIndexes(
