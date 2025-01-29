@@ -159,7 +159,8 @@ declare module 'cozy-client' {
   }
 
   export default class CozyClient {
-    plugins: unknown
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    plugins: Record<string, any>
     constructor(rawOptions?: ClientOptions)
     getStackClient(): StackClient
     getInstanceOptions(): InstanceOptions

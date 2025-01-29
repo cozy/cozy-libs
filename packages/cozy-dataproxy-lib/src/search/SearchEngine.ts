@@ -127,7 +127,9 @@ export class SearchEngine {
     void this.indexDocuments()
 
     // Ensure login is done before plugin register
-    this.client.registerPlugin(RealtimePlugin, {})
+    if (!this.client.plugins[RealtimePlugin.pluginName]) {
+      this.client.registerPlugin(RealtimePlugin, {})
+    }
 
     // Realtime subscription
     this.handleUpdatedOrCreatedDoc = this.handleUpdatedOrCreatedDoc.bind(this)
@@ -139,7 +141,6 @@ export class SearchEngine {
 
   subscribeDoctype(client: CozyClient, doctype: string): void {
     /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method */
-    // @ts-expect-error Client's plugins are not typed
     const realtime = client.plugins.realtime
     realtime.subscribe('created', doctype, this.handleUpdatedOrCreatedDoc)
     realtime.subscribe('updated', doctype, this.handleUpdatedOrCreatedDoc)
