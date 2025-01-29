@@ -62,7 +62,14 @@ export class SearchEngine {
         pouchLink.startReplicationWithDebounce()
       }
     }
-    void this.indexDocuments()
+
+    if (this.client.isLogged) {
+      this.afterLogin()
+    } else {
+      this.client.on('login', () => {
+        this.afterLogin()
+      })
+    }
   }
 
   async indexDocuments(): Promise<void> {
@@ -89,13 +96,6 @@ export class SearchEngine {
       this.indexOnReplicationEvents()
     }
 
-    if (this.client.isLogged) {
-      this.afterLogin()
-    } else {
-      this.client.on('login', () => {
-        this.afterLogin()
-      })
-    }
   }
 
   indexOnReplicationEvents(): void {
@@ -126,6 +126,9 @@ export class SearchEngine {
   }
 
   afterLogin(): void {
+    // The document indexing should be performed once everything is setup
+    void this.indexDocuments()
+
     // Ensure login is done before plugin register
     this.client.registerPlugin(RealtimePlugin, {})
 
