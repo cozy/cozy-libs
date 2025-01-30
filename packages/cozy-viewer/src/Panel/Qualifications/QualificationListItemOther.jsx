@@ -5,6 +5,7 @@ import {
   getTranslatedNameForOtherMetadata,
   formatOtherMetadataValue
 } from 'cozy-client/dist/models/paper'
+import { copyToClipboard } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Dots from 'cozy-ui/transpiled/react/Icons/Dots'
@@ -14,6 +15,7 @@ import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
 import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import QualificationListItemText from './QualificationListItemText'
@@ -25,6 +27,8 @@ const QualificationListItemOther = forwardRef(
     ref
   ) => {
     const { lang } = useI18n()
+    const { showAlert } = useAlert()
+
     const { name, value } = formattedMetadataQualification
     const qualificationLabel = file.metadata.qualification.label
 
@@ -38,6 +42,11 @@ const QualificationListItemOther = forwardRef(
       name
     })
 
+    const handleClick = async () => {
+      if (!value) return
+      await copyToClipboard().action(undefined, { showAlert, copyValue: value })
+    }
+
     return (
       <IntentOpener
         action="OPEN"
@@ -47,7 +56,7 @@ const QualificationListItemOther = forwardRef(
         }}
         disabled={!!value || isReadOnly}
       >
-        <ListItem button={!value && !isReadOnly}>
+        <ListItem button={!!value || !isReadOnly} onClick={handleClick}>
           <ListItemIcon>
             <Icon icon={FileIcon} />
           </ListItemIcon>

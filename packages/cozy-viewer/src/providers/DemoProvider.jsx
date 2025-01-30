@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 
 import { CozyProvider } from 'cozy-client'
 import CloudWallpaper from 'cozy-ui/docs/cloud-wallpaper.jpg'
+import AlertProvider from 'cozy-ui/transpiled/react/providers/Alert'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import I18n from 'cozy-ui/transpiled/react/providers/I18n'
 
@@ -102,7 +103,9 @@ const DemoProvider = ({
     <CozyProvider client={mockClient}>
       <BreakpointsProvider>
         <I18n dictRequire={lang => locales[lang]} lang={lang}>
-          <Wrapper {...wrapperProps}>{children}</Wrapper>
+          <AlertProvider>
+            <Wrapper {...wrapperProps}>{children}</Wrapper>
+          </AlertProvider>
         </I18n>
       </BreakpointsProvider>
     </CozyProvider>

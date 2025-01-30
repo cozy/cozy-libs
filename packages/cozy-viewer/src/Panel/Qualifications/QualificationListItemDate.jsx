@@ -7,6 +7,7 @@ import {
   getTranslatedNameForDateMetadata,
   formatDateMetadataValue
 } from 'cozy-client/dist/models/paper'
+import { copyToClipboard } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import CalendarIcon from 'cozy-ui/transpiled/react/Icons/Calendar'
@@ -16,6 +17,7 @@ import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import QualificationListItemText from './QualificationListItemText'
@@ -28,6 +30,8 @@ const QualificationListItemDate = forwardRef(
     ref
   ) => {
     const { f, lang } = useI18n()
+    const { showAlert } = useAlert()
+
     const { name, value } = formattedMetadataQualification
     const qualificationLabel = file.metadata.qualification.label
     const formattedTitle = getTranslatedNameForDateMetadata(name, { lang })
@@ -36,6 +40,11 @@ const QualificationListItemDate = forwardRef(
       lang
     })
     const isExpirationDate = name === 'expirationDate'
+
+    const handleClick = async () => {
+      if (!value) return
+      await copyToClipboard().action(undefined, { showAlert, copyValue: value })
+    }
 
     return (
       <IntentOpener
@@ -46,7 +55,7 @@ const QualificationListItemDate = forwardRef(
         }}
         disabled={!!value || isReadOnly}
       >
-        <ListItem button={!value && !isReadOnly}>
+        <ListItem button={!!value || !isReadOnly} onClick={handleClick}>
           <ListItemIcon>
             <Icon icon={CalendarIcon} />
           </ListItemIcon>
