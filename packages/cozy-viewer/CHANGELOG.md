@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@15.1.1...cozy-viewer@16.0.0) (2025-01-30)
+
+
+### Features
+
+* **Viewer:** Upgrade packages ([a7d9999](https://github.com/cozy/cozy-libs/commit/a7d9999cad050d07dce2044dac0a76798aef7eab))
+
+
+### BREAKING CHANGES
+
+* **Viewer:** You muste have `cozy-client >= 53.1.1` and `cozy-ui>=117.2.0`
+
+
+
+
+
 ## [15.1.1](https://github.com/cozy/cozy-libs/compare/cozy-viewer@15.1.0...cozy-viewer@15.1.1) (2025-01-28)
 
 **Note:** Version bump only for package cozy-viewer
