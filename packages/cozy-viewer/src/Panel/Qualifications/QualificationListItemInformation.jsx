@@ -9,6 +9,7 @@ import {
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import BellIcon from 'cozy-ui/transpiled/react/Icons/Bell'
+import CompanyIcon from 'cozy-ui/transpiled/react/Icons/Company'
 import ContractIcon from 'cozy-ui/transpiled/react/Icons/Contract'
 import Dots from 'cozy-ui/transpiled/react/Icons/Dots'
 import EuroIcon from 'cozy-ui/transpiled/react/Icons/Euro'
@@ -31,7 +32,7 @@ const KNOWN_INFORMATION_METADATA_ICONS = [
   EuroIcon,
   ContractIcon,
   EuroIcon,
-  EuroIcon,
+  CompanyIcon,
   NumberIcon,
   NumberIcon,
   BellIcon
