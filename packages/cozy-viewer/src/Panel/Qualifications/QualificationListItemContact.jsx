@@ -5,6 +5,7 @@ import {
   getTranslatedNameForContact,
   formatContactValue
 } from 'cozy-client/dist/models/paper'
+import { copyToClipboard } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Dots from 'cozy-ui/transpiled/react/Icons/Dots'
@@ -13,6 +14,7 @@ import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import QualificationListItemText from './QualificationListItemText'
@@ -23,6 +25,7 @@ const QualificationListItemContact = forwardRef(
   ({ file, isReadOnly, toggleActionsMenu }, ref) => {
     const { lang } = useI18n()
     const { contacts, isLoadingContacts } = useReferencedContactName(file)
+    const { showAlert } = useAlert()
 
     if (isLoadingContacts) {
       return (
@@ -41,6 +44,14 @@ const QualificationListItemContact = forwardRef(
     const formattedTitle = getTranslatedNameForContact({ lang })
     const qualificationLabel = file.metadata.qualification.label
 
+    const handleClick = async () => {
+      if (!formattedValue) return
+      await copyToClipboard().action(undefined, {
+        showAlert,
+        copyValue: formattedValue
+      })
+    }
+
     return (
       <>
         <IntentOpener
@@ -51,7 +62,10 @@ const QualificationListItemContact = forwardRef(
           }}
           disabled={!!formattedValue || isReadOnly}
         >
-          <ListItem button={!formattedValue && !isReadOnly}>
+          <ListItem
+            button={!!formattedValue || !isReadOnly}
+            onClick={handleClick}
+          >
             <ListItemIcon>
               <Icon icon={PeopleIcon} />
             </ListItemIcon>

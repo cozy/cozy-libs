@@ -6,6 +6,7 @@ import {
   formatInformationMetadataValue,
   KNOWN_INFORMATION_METADATA_NAMES
 } from 'cozy-client/dist/models/paper'
+import { copyToClipboard } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import BellIcon from 'cozy-ui/transpiled/react/Icons/Bell'
@@ -20,11 +21,11 @@ import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
 import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import QualificationListItemText from './QualificationListItemText'
 import IntentOpener from '../../components/IntentOpener'
-
 const KNOWN_INFORMATION_METADATA_ICONS = [
   NumberIcon,
   NumberIcon,
@@ -49,6 +50,8 @@ const QualificationListItemInformation = forwardRef(
     ref
   ) => {
     const { lang } = useI18n()
+    const { showAlert } = useAlert()
+
     const { name, value } = formattedMetadataQualification
     const qualificationLabel = file.metadata.qualification.label
 
@@ -66,6 +69,11 @@ const QualificationListItemInformation = forwardRef(
     const titleComponent =
       formattedTitle === name ? <MidEllipsis text={name} /> : formattedTitle
 
+    const handleClick = async () => {
+      if (!value) return
+      await copyToClipboard().action(undefined, { showAlert, copyValue: value })
+    }
+
     return (
       <IntentOpener
         action="OPEN"
@@ -75,7 +83,7 @@ const QualificationListItemInformation = forwardRef(
         }}
         disabled={!!value || isReadOnly}
       >
-        <ListItem button={!value && !isReadOnly}>
+        <ListItem button={!!value || !isReadOnly} onClick={handleClick}>
           <ListItemIcon>
             <Icon icon={InformationIcon} />
           </ListItemIcon>
