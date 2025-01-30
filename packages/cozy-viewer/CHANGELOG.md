@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.1.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@16.0.0...cozy-viewer@16.1.0) (2025-01-30)
+
+
+### Features
+
+* **Viewer:** Change employer name qualification icon ([c97da4d](https://github.com/cozy/cozy-libs/commit/c97da4d5425e215d9f4bd558eeca6e7745ac8368))
+
+
+
+
+
 # [16.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@15.1.1...cozy-viewer@16.0.0) (2025-01-30)
 
 
