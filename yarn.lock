@@ -11207,10 +11207,10 @@ cozy-client@^53.0.0:
     sift "^6.0.0"
     url-search-params-polyfill "^8.0.0"
 
-cozy-client@^53.1.0:
-  version "53.1.0"
-  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-53.1.0.tgz#c25750ec9a559a7e82f58e81dfe08b99a66bd8ea"
-  integrity sha512-Y8GfWcIfIK7LavpXLq3nU0ufGoqp5WE4l4s7biuk6s9ifLI1nptBODDzLVR6noLcytxiOX+/ti5nOo/fmQCoKg==
+cozy-client@^53.1.1:
+  version "53.1.1"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-53.1.1.tgz#d8cca5d3c5ea67be074a96d66339c81212d75bc7"
+  integrity sha512-Or/rzIy6quaSIwPfkbLDPkF++x1vjEYRXRJNBsWNl81eP9kSg4vCMWk1hG9dGVbBvFRmgdzn3EggtWS28TIkTQ==
   dependencies:
     "@cozy/minilog" "1.0.0"
     "@types/jest" "^26.0.20"
@@ -11519,10 +11519,10 @@ cozy-ui@^116.0.0:
     react-swipeable-views "^0.13.3"
     rooks "^5.11.2"
 
-cozy-ui@^117.1.0:
-  version "117.1.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-117.1.0.tgz#9fd8941902164a22b6a3bf3837d5495f2ea538f5"
-  integrity sha512-BypU8IPv457Uvb+XcAPUqs3goiGslXIZ4GJZxNFlHbIPJHo2GcwPaT3xfBgWDy7BndlF8gJk9eLreEM+ZZDgFA==
+cozy-ui@^117.2.0:
+  version "117.2.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-117.2.0.tgz#642427d7d9d95a69d8927ab27504782e1bddaa36"
+  integrity sha512-9v8ggKK0rqdVGgp6LBBbISHH8GUKLtbJMaicJ0vdwcOR+JpYmTZeBM2jVIjyTMiyK/220nDbK3kusGxERnLLJg==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@date-io/date-fns" "1"
@@ -20280,6 +20280,17 @@ msgpack5@^4.0.2:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
     safe-buffer "^5.1.2"
+
+"mui-bottom-sheet@git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9":
+  version "1.0.8"
+  uid "3dc4c2a245ab39079bc2f73546bccf80847be14c"
+  resolved "git+https://github.com/cozy/mui-bottom-sheet.git#3dc4c2a245ab39079bc2f73546bccf80847be14c"
+  dependencies:
+    "@juggle/resize-observer" "^3.1.3"
+    jest-environment-jsdom-sixteen "^1.0.3"
+    react-spring "9.0.0-rc.3"
+    react-use-gesture "^7.0.8"
+    react-use-measure "^2.0.0"
 
 "mui-bottom-sheet@https://github.com/cozy/mui-bottom-sheet.git#v1.0.9":
   version "1.0.8"
