@@ -18,9 +18,9 @@ const MemberRecipientLite = ({ recipient, isOwner, ...props }) => {
   const { t } = useI18n()
   const client = useClient()
 
-  const recipientOwner = recipient.status === 'owner'
   const isMe =
-    (isOwner && recipientOwner) || recipient.instance === client.options.uri
+    (isOwner && recipient.status === 'owner') ||
+    recipient.instance === client.options.uri
 
   return (
     <ListItem size="small" ellipsis>
@@ -43,7 +43,7 @@ const MemberRecipientLite = ({ recipient, isOwner, ...props }) => {
         }
       />
       <Typography className="u-flex-shrink-0" variant="body2">
-        {recipientOwner
+        {isMe
           ? t(`Share.status.${recipient.status}`).toLowerCase()
           : t(`Share.type.${recipient.type ?? 'one-way'}`).toLowerCase()}
       </Typography>
