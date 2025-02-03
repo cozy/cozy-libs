@@ -26,15 +26,6 @@ export const EditableSharingModal = ({ document, ...rest }) => {
     share
   } = useSharingContext()
 
-  const shareFileRefId = hasSharedParent(document.path)
-    ? document.dir_id
-    : document._id
-  const recipients = getRecipients(shareFileRefId)
-  const permissions = getDocumentPermissions(shareFileRefId)
-  const link = getSharingLink(shareFileRefId)
-  const sharing = getSharingForSelf(shareFileRefId)
-  const _isOwner = isOwner(shareFileRefId)
-
   return (
     <ShareModal
       createContact={contact => client.create(Contact.doctype, contact)}
@@ -42,14 +33,14 @@ export const EditableSharingModal = ({ document, ...rest }) => {
       documentType={documentType}
       hasSharedChild={documentPath && hasSharedChild(documentPath)}
       hasSharedParent={documentPath && hasSharedParent(documentPath)}
-      isOwner={_isOwner}
-      link={link}
+      isOwner={isOwner(document.id)}
+      link={getSharingLink(document.id)}
       onRevoke={revoke}
       onRevokeSelf={revokeSelf}
       onShare={share}
-      permissions={permissions}
-      recipients={recipients}
-      sharing={sharing}
+      permissions={getDocumentPermissions(document.id)}
+      recipients={getRecipients(document.id)}
+      sharing={getSharingForSelf(document.id)}
       {...rest}
     />
   )

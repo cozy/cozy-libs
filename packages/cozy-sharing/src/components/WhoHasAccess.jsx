@@ -60,7 +60,7 @@ const WhoHasAccess = ({
           />
         )}
 
-        {isOwner && <OwnerRecipient recipients={recipients} />}
+        <OwnerRecipient recipients={recipients} />
 
         <RecipientList
           recipients={recipients}
