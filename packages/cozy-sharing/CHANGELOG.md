@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [21.2.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@21.2.1...cozy-sharing@21.2.2) (2025-02-04)
+
+
+### Bug Fixes
+
+* **Sharing:** Show all share recipients in the “who has access” modal ([8669e6b](https://github.com/cozy/cozy-libs/commit/8669e6b8d8650bbd6645a9be94db403121059e70))
+* **Sharing:** Show correct sharing status by user ([55f5a43](https://github.com/cozy/cozy-libs/commit/55f5a43ca5426da991ab76c7f96faa6ccae00a11))
+
+
+### Reverts
+
+* Revert "fix(Sharing): Show correct sharing status by user" ([547a458](https://github.com/cozy/cozy-libs/commit/547a458b1dc4cb64724345c753eff153f7830a8a))
+
+
+
+
+
 ## [21.2.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@21.2.0...cozy-sharing@21.2.1) (2025-01-28)
 
 **Note:** Version bump only for package cozy-sharing
