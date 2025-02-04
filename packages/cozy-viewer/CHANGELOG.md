@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@16.2.1...cozy-viewer@17.0.0) (2025-02-04)
+
+
+### Features
+
+* **Viewer:** Upgrade cozy-sharing ([1adc139](https://github.com/cozy/cozy-libs/commit/1adc139e08723a22f87e9e23038268fa3016350e))
+
+
+### BREAKING CHANGES
+
+* **Viewer:** You must have `cozy-sharing >= 21.2.2`
+
+
+
+
+
 ## [16.2.1](https://github.com/cozy/cozy-libs/compare/cozy-viewer@16.2.0...cozy-viewer@16.2.1) (2025-02-04)
 
 **Note:** Version bump only for package cozy-viewer
