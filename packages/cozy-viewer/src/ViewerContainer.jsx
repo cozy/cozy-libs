@@ -6,11 +6,10 @@ import { useClient } from 'cozy-client'
 import { isDocumentReadOnly } from 'cozy-client/dist/models/permission'
 import SharingProvider from 'cozy-sharing'
 import { useSharingContext } from 'cozy-sharing'
-import Modal from 'cozy-ui/transpiled/react/Modal'
+import Dialog from 'cozy-ui/transpiled/react/Dialog'
 import { FileDoctype } from 'cozy-ui/transpiled/react/proptypes'
 import AlertProvider from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import { useCozyTheme } from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import EncryptedProvider from 'cozy-ui/transpiled/react/providers/Encrypted'
 import { useExtendI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
@@ -194,27 +193,26 @@ ViewerContainer.defaultProps = {
 }
 
 const ViewerContainerWrapper = ({ disableModal, ...props }) => {
-  const { type, variant } = useCozyTheme()
-  const { modalProps = { open: true } } = props.componentsProps || {}
+  const { modalProps = { open: true, fullScreen: true, fullWidth: true } } =
+    props.componentsProps || {}
 
   if (disableModal) {
     return <ViewerContainer {...props} />
   }
 
   return (
-    <Modal {...modalProps} className={`CozyTheme--${type}-${variant}`}>
-      {/* This div is needed for the Modal ref */}
-      <div>
-        <ViewerContainer {...props} />
-      </div>
-    </Modal>
+    <Dialog {...modalProps}>
+      <ViewerContainer {...props} />
+    </Dialog>
   )
 }
 
 ViewerContainerWrapper.defaultProps = {
   componentsProps: {
     modalProps: {
-      open: true
+      open: true,
+      fullScreen: true,
+      fullWidth: true
     }
   }
 }
