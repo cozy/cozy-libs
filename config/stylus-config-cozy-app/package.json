@@ -1,0 +1,26 @@
+{
+  "name": "stylus-config-cozy-app",
+  "version": "0.0.0",
+  "description": "Stylus config for Cozy Application (Cozy Cloud)",
+  "author": "Cozy Cloud",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cozy/cozy-libs.git"
+  },
+  "homepage": "https://github.com/cozy/cozy-libs/tree/master/config/stylus-config-cozy-app",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cozy/cozy-libs/issues"
+  },
+  "files": [
+    ".stylintrc"
+  ],
+  "devDependencies": {
+    "stylint": "1.5.9"
+  },
+  "dependencies": {
+  },
+  "peerDependencies": {
+    "stylint": ">=1.5.9"
+  }
+}
