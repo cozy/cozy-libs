@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@17.0.0...cozy-viewer@18.0.0) (2025-02-05)
+
+
+### Bug Fixes
+
+* **Viewer:** Replace Modal by Dialog and add better click propagation ([26a49e0](https://github.com/cozy/cozy-libs/commit/26a49e0868f017634367e0a82d24d8fb4e4e6782))
+
+
+### Features
+
+* Upgrade cozy-ui ([15e3419](https://github.com/cozy/cozy-libs/commit/15e3419eea04917239adfadedb78feed667f4a9f))
+
+
+### BREAKING CHANGES
+
+* You must have `cozy-ui >=117.2.2`
+
+
+
+
+
 # [17.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@16.2.1...cozy-viewer@17.0.0) (2025-02-04)
 
 

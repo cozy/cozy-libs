@@ -1,6 +1,6 @@
 {
   "name": "cozy-viewer",
-  "version": "17.0.0",
+  "version": "18.0.0",
   "description": "Cozy-Viewer provides a component to show files in a viewer.",
   "main": "dist/index.js",
   "license": "MIT",
@@ -27,7 +27,7 @@
     "babel-preset-cozy-app": "^2.8.1",
     "cozy-client": "^53.1.1",
     "cozy-device-helper": "2.0.0",
-    "cozy-harvest-lib": "^32.2.31",
+    "cozy-harvest-lib": "^32.2.32",
     "cozy-intent": "^2.29.2",
     "cozy-logger": "^1.16.1",
     "cozy-sharing": "^21.2.2",
