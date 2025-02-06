@@ -7,6 +7,31 @@ import { getIconForSearchResult } from './getIconForSearchResult'
 
 const log = Minilog('🔍 [useFetchResult]')
 
+const searchWithRetry = async (
+  dataProxy,
+  searchValue,
+  { maxRetries = 5, delay = 500 } = {}
+) => {
+  let currentDelay = delay
+  // Make several search attemps in case it is not ready yet
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    const searchResults = await dataProxy.search(searchValue)
+
+    if (searchResults) {
+      // A successful search will return an array, and null otherwise
+      return searchResults
+    }
+    log.info(
+      `Search attempt ${attempt + 1} failed, retrying in ${currentDelay} ms...`
+    )
+    await new Promise(resolve => setTimeout(resolve, currentDelay))
+    currentDelay *= 2 // Exponential backoff
+  }
+
+  log.error(`Search failed after ${maxRetries} attempts`)
+  return []
+}
+
 export const useFetchResult = searchValue => {
   const [state, setState] = useState({
     isLoading: true,
@@ -24,7 +49,7 @@ export const useFetchResult = searchValue => {
 
       setState({ isLoading: true, results: null, searchValue })
 
-      const searchResults = await dataProxy.search(searchValue)
+      const searchResults = await searchWithRetry(dataProxy, searchValue)
 
       const results = searchResults.map(r => {
         // Begin Retrocompatibility code, to be removed when following PR is merged: https://github.com/cozy/cozy-web-data-proxy/pull/10
