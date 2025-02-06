@@ -89,6 +89,18 @@ function getRsbuildConfig({
             {
               test: /\.webapp$/i,
               type: 'json'
+            },
+            // We want to keep static images used by cozy-ui inside components
+            {
+              test: /\.(png|jpe?g|gif)$/i,
+              include: /cozy-ui\/transpiled\/react(\/|\\)/,
+              type: 'asset/resource'
+            },
+            // We want to keep static images used by cozy-dataproxy-lib inside components
+            {
+              test: /\.(png|jpe?g|gif)$/i,
+              include: /cozy-dataproxy-lib\/dist\/assets(\/|\\)/,
+              type: 'asset/resource'
             }
           ]
         },
