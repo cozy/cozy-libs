@@ -38,3 +38,5 @@ export const DOCTYPE_DEFAULT_ORDER = {
   [CONTACTS_DOCTYPE]: 1,
   [FILES_DOCTYPE]: 2
 }
+
+export const DATAPROXY_STORAGE_PREFIX = '@dataproxy'
