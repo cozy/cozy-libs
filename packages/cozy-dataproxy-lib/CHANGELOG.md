@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.0.3...cozy-dataproxy-lib@3.1.0) (2025-02-06)
+
+
+### Features
+
+* Do not rebuild search index from scratch ([008e18d](https://github.com/cozy/cozy-libs/commit/008e18de784db1d31268af6e5871fa2986f02b3c))
+* Retry search with exponential backoff ([5b00b12](https://github.com/cozy/cozy-libs/commit/5b00b12c9321935648670f8bc0b8e00296ca0344))
+
+
+
+
+
 ## [3.0.3](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.0.2...cozy-dataproxy-lib@3.0.3) (2025-01-29)
 
 
