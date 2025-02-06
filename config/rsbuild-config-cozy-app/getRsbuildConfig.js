@@ -4,6 +4,7 @@ import path from 'path'
 import { pluginNodePolyfill } from '@rsbuild/plugin-node-polyfill'
 import { pluginReact } from '@rsbuild/plugin-react'
 import { pluginStylus } from '@rsbuild/plugin-stylus'
+import { pluginSvgr } from '@rsbuild/plugin-svgr'
 import { RsdoctorRspackPlugin } from '@rsdoctor/rspack-plugin'
 import { pluginEjs } from 'rsbuild-plugin-ejs'
 
@@ -38,6 +39,12 @@ function getRsbuildConfig({
         stylusOptions: {
           // To resolve import from cozy-ui inside stylus files
           paths: [path.resolve(appPath, 'node_modules', 'cozy-ui', 'stylus')]
+        }
+      }),
+      pluginSvgr({
+        svgrOptions: {
+          // To import every SVG imported in Cozy apps as React components understandable by cozy-ui Icon component
+          exportType: 'default'
         }
       })
     ],
