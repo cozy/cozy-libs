@@ -57,9 +57,14 @@ export interface SearchResult {
 export interface SearchIndex {
   index: FlexSearch.Document<CozyDoc, true>
   lastSeq: number | null
-  lastUpdated: string
+  lastUpdated: string | null
 }
 
 export type SearchIndexes = {
   [key in SearchedDoctype]: SearchIndex
+}
+
+export interface StorageInterface {
+  storeData(key: string, value: unknown): Promise<void>
+  getData<T>(key: string): Promise<T | null>
 }

@@ -24,6 +24,11 @@ import {
 } from './indexDocs'
 import { queryAllDocs, queryFilesForSearch } from './queries'
 import {
+  importSearchIndexes,
+  exportSearchIndexes,
+  getExportDate
+} from './storage'
+import {
   CozyDoc,
   RawSearchResult,
   isIOCozyApp,
@@ -33,7 +38,8 @@ import {
   SearchIndexes,
   SearchResult,
   isSearchedDoctype,
-  SearchOptions
+  SearchOptions,
+  StorageInterface
 } from './types'
 
 const log = Minilog('🗂️ [Indexing]')
@@ -48,10 +54,12 @@ export class SearchEngine {
   searchIndexes: SearchIndexes
   debouncedReplication: () => void
   isLocalSearch: boolean
+  storage: StorageInterface
 
-  constructor(client: CozyClient) {
+  constructor(client: CozyClient, storage: StorageInterface) {
     this.client = client
     this.searchIndexes = {} as SearchIndexes
+    this.storage = storage
 
     this.isLocalSearch = !!getPouchLink(this.client)
     log.info('Use local data on trusted device: ', this.isLocalSearch)
@@ -76,13 +84,28 @@ export class SearchEngine {
     if (!this.client) {
       return
     }
-    // Create search indexes by querying docs, either locally or remotely
-    for (const doctype of SEARCHABLE_DOCTYPES) {
-      const searchIndex = await this.indexDocsForSearch(
-        doctype as keyof typeof SEARCH_SCHEMA
-      )
-      if (searchIndex) {
-        this.searchIndexes[doctype] = searchIndex
+
+    const lastExportDate = await getExportDate(this.storage)
+    if (!lastExportDate || !this.isLocalSearch) {
+      // No persisted index found: let's create them
+      for (const doctype of SEARCHABLE_DOCTYPES) {
+        const searchIndex = await this.indexDocsForSearch(
+          doctype as keyof typeof SEARCH_SCHEMA
+        )
+        if (searchIndex) {
+          this.searchIndexes[doctype] = searchIndex
+        }
+      }
+    } else {
+      // Import local indexes
+      const startImport = performance.now()
+      this.searchIndexes = await importSearchIndexes(this.storage)
+      const endImport = performance.now()
+      log.debug(`Index import took ${(endImport - startImport).toFixed(2)} ms`)
+      // The indexes might be stale: update them
+      for (const doctype of SEARCHABLE_DOCTYPES) {
+        const searchIndex = this.searchIndexes[doctype]
+        void indexOnChanges(this, searchIndex, doctype)
       }
     }
 
@@ -119,6 +142,8 @@ export class SearchEngine {
           2
         )}`
       )
+      // Save up-to-date index on storage to be later imported
+      void exportSearchIndexes(this.storage, this.searchIndexes)
     })
   }
 
