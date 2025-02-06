@@ -50,6 +50,10 @@ interface FlexSearchResultWithDoctype
   doctype: SearchedDoctype
 }
 
+interface EngineOptions {
+  shouldInit?: boolean
+}
+
 export class SearchEngine {
   client: CozyClient
   searchIndexes: SearchIndexes
@@ -57,16 +61,19 @@ export class SearchEngine {
   isLocalSearch: boolean
   storage: StorageInterface
   performanceApi: PerformanceAPI
+  engineOptions: EngineOptions
 
   constructor(
     client: CozyClient,
     storage: StorageInterface,
-    performanceApi?: PerformanceAPI
+    performanceApi?: PerformanceAPI,
+    engineOptions: EngineOptions = {}
   ) {
     this.client = client
     this.searchIndexes = {} as SearchIndexes
     this.storage = storage
     this.performanceApi = performanceApi ?? defaultPerformanceApi
+    this.engineOptions = { shouldInit: true, ...engineOptions }
 
     this.isLocalSearch = !!getPouchLink(this.client)
     log.info('Use local data on trusted device: ', this.isLocalSearch)
@@ -78,12 +85,14 @@ export class SearchEngine {
       }
     }
 
-    if (this.client.isLogged) {
-      this.afterLogin()
-    } else {
-      this.client.on('login', () => {
-        this.afterLogin()
-      })
+    if (this.engineOptions.shouldInit) {
+      if (this.client.isLogged) {
+        void this.init()
+      } else {
+        this.client.on('login', () => {
+          void this.init()
+        })
+      }
     }
   }
 
@@ -161,10 +170,7 @@ export class SearchEngine {
     })
   }
 
-  afterLogin(): void {
-    // The document indexing should be performed once everything is setup
-    void this.indexDocuments()
-
+  async init(): Promise<void> {
     // Ensure login is done before plugin register
     if (!this.client.plugins[RealtimePlugin.pluginName]) {
       this.client.registerPlugin(RealtimePlugin, {})
@@ -176,6 +182,9 @@ export class SearchEngine {
     this.subscribeDoctype(this.client, FILES_DOCTYPE)
     this.subscribeDoctype(this.client, CONTACTS_DOCTYPE)
     this.subscribeDoctype(this.client, APPS_DOCTYPE)
+
+    // The document indexing should be performed once everything is setup
+    await this.indexDocuments()
   }
 
   subscribeDoctype(client: CozyClient, doctype: string): void {
@@ -370,7 +379,6 @@ export class SearchEngine {
       markName: markeNameIndex,
       category: 'Search'
     })
-
     return output
   }
 
