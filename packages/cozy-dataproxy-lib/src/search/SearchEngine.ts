@@ -15,13 +15,13 @@ import {
   SEARCHABLE_DOCTYPES
 } from './consts'
 import { getPouchLink } from './helpers/client'
-import { getSearchEncoder } from './helpers/getSearchEncoder'
-import {
-  addFilePaths,
-  computeFileFullpath,
-  shouldKeepFile
-} from './helpers/normalizeFile'
 import { normalizeSearchResult } from './helpers/normalizeSearchResult'
+import {
+  indexAllDocs,
+  indexOnChanges,
+  indexSingleDoc,
+  initSearchIndex
+} from './indexDocs'
 import { queryAllDocs, queryFilesForSearch } from './queries'
 import {
   CozyDoc,
@@ -158,8 +158,8 @@ export class SearchEngine {
       // No index yet: it will be done by querying the local db after first replication
       return
     }
-    log.debug('[REALTIME] Update doc from index after update : ', doc)
-    void this.indexSingleDoc(searchIndex.index, doc)
+    log.debug('[REALTIME] Update doc from index after update : ', doc._id)
+    void indexSingleDoc(this.client, searchIndex.index, doc)
 
     if (this.isLocalSearch) {
       this.debouncedReplication()
@@ -176,7 +176,7 @@ export class SearchEngine {
       // No index yet: it will be done by querying the local db after first replication
       return
     }
-    log.debug('[REALTIME] Remove doc from index after update : ', doc)
+    log.debug('[REALTIME] Remove doc from index after update : ', doc._id)
     this.searchIndexes[doctype].index.remove(doc._id!)
 
     if (this.isLocalSearch) {
@@ -190,21 +190,8 @@ export class SearchEngine {
   ): FlexSearch.Document<CozyDoc, true> {
     const startTimeIndex = performance.now()
 
-    const fieldsToIndex = SEARCH_SCHEMA[doctype]
-
-    const flexsearchIndex = new FlexSearch.Document<CozyDoc, true>({
-      tokenize: 'reverse', // See https://github.com/nextapps-de/flexsearch?tab=readme-ov-file#tokenizer
-      encode: getSearchEncoder(),
-      // @ts-expect-error minlength is not described by Flexsearch types but exists
-      minlength: 3,
-      document: {
-        id: '_id',
-        index: fieldsToIndex,
-        store: true
-      }
-    })
-
-    this.indexAllDocs(flexsearchIndex, docs)
+    const flexsearchIndex = initSearchIndex(doctype)
+    indexAllDocs(flexsearchIndex, docs, this.isLocalSearch)
 
     const endTimeIndex = performance.now()
     log.debug(
@@ -213,47 +200,6 @@ export class SearchEngine {
       )} ms`
     )
     return flexsearchIndex
-  }
-
-  indexAllDocs(
-    flexsearchIndex: FlexSearch.Document<CozyDoc, true>,
-    docs: CozyDoc[]
-  ): FlexSearch.Document<CozyDoc, true> {
-    // There is no persisted path for files: we must add it
-    const completedDocs = this.isLocalSearch ? addFilePaths(docs) : docs
-    for (const doc of completedDocs) {
-      if (this.shouldIndexDoc(doc)) {
-        flexsearchIndex.add(doc)
-      } else {
-        // Should not index doc: remove it from index if it exists
-        flexsearchIndex.remove(doc._id!)
-      }
-    }
-    return flexsearchIndex
-  }
-
-  async indexSingleDoc(
-    flexsearchIndex: FlexSearch.Document<CozyDoc, true>,
-    doc: CozyDoc
-  ): Promise<void> {
-    if (this.shouldIndexDoc(doc)) {
-      let docToIndex = doc
-      if (isIOCozyFile(doc)) {
-        // Add path for files
-        docToIndex = await computeFileFullpath(this.client, doc)
-      }
-      flexsearchIndex.add(docToIndex)
-    } else {
-      // Should not index doc: remove it from index if it exists
-      flexsearchIndex.remove(doc._id!)
-    }
-  }
-
-  shouldIndexDoc(doc: CozyDoc): boolean {
-    if (isIOCozyFile(doc)) {
-      return shouldKeepFile(doc)
-    }
-    return true
   }
 
   async getLocalLastSeq(doctype: keyof typeof SEARCH_SCHEMA): Promise<number> {
@@ -309,29 +255,7 @@ export class SearchEngine {
     doctype: keyof typeof SEARCH_SCHEMA,
     searchIndex: SearchIndex
   ): Promise<SearchIndex> {
-    const pouchLink = getPouchLink(this.client)
-    if (!this.isLocalSearch || !pouchLink) {
-      // No need to handle incremental indexation for non-local search: it is already done through realtime
-      return searchIndex
-    }
-    const lastSeq = searchIndex.lastSeq || 0
-    const changes = await pouchLink.getChanges(doctype, {
-      include_docs: true,
-      since: lastSeq
-    })
-
-    for (const change of changes.results) {
-      if (change.deleted) {
-        searchIndex.index.remove(change.id)
-      } else {
-        const normalizedDoc = { ...change.doc, _type: doctype } as CozyDoc
-        void this.indexSingleDoc(searchIndex.index, normalizedDoc)
-      }
-    }
-
-    searchIndex.lastSeq = changes.last_seq
-    searchIndex.lastUpdated = new Date().toISOString()
-    return searchIndex
+    return indexOnChanges(this, searchIndex, doctype)
   }
 
   async indexDocsForSearch(
