@@ -32,7 +32,7 @@
     "cozy-intent": "^2.29.2",
     "cozy-logger": "^1.16.1",
     "cozy-minilog": "^3.9.1",
-    "cozy-pouch-link": "^50.3.1",
+    "cozy-pouch-link": "^53.2.1",
     "cozy-realtime": "^5.6.3",
     "cozy-ui": "^111.19.0",
     "cross-fetch": "^4.0.0",
