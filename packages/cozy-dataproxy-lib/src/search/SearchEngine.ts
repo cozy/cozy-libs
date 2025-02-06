@@ -310,11 +310,14 @@ export class SearchEngine {
     return index
   }
 
-  search(query: string, options: SearchOptions | undefined): SearchResult[] {
-    if (!this.searchIndexes) {
-      // TODO: What if the indexing is running but not finished yet?
+  search(
+    query: string,
+    options: SearchOptions | undefined
+  ): SearchResult[] | null {
+    if (!this.searchIndexes || Object.keys(this.searchIndexes).length < 1) {
+      // The indexing might be running but not finished yet
       log.warn('[SEARCH] No search index available')
-      return []
+      return null
     }
 
     const allResults = this.searchOnIndexes(query, options?.doctypes)
