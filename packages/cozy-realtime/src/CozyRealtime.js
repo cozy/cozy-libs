@@ -551,9 +551,10 @@ class CozyRealtime {
     // We however can't assert that the token sent was not expired.
     // If this happenned, we should throw the socket and reconnect.
     //  Let's do that in all cases, as it won't be frequent anyways.
-    if (this.hasWebSocket()) {
-      this.revokeWebSocket()
-    }
+    // We can also have lost the WS connexion because of a sleep or
+    // else. Like that, if the client is refreshed, we try reconnect
+    // the WS in order to be sure to be connected.
+    this.reconnect({ immediate: true })
   }
 
   /**
@@ -618,7 +619,15 @@ class CozyRealtime {
   onVisibilityChange() {
     if (document.visibilityState && document.visibilityState === 'visible') {
       // if we have a reconnect waiting, do it immediatly
-      this.retryManager.stopCurrentAttemptWaitingTime()
+      if (this.retryManager.waiting) {
+        this.retryManager.stopCurrentAttemptWaitingTime()
+      } else {
+        // If the current websocket is closed but we missed the closing state
+        // because of a sleep or something else, let's try to reconnect
+        if (this.websocket.readyState === WebSocket.CLOSED) {
+          this.reconnect({ immediate: true })
+        }
+      }
     }
   }
 }
