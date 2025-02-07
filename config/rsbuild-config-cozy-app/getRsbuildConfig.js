@@ -108,6 +108,10 @@ function getRsbuildConfig({
           // Only register the plugin when RSDOCTOR is true, as the plugin will increase the build time.
           process.env.RSDOCTOR && new RsdoctorRspackPlugin()
         ].filter(Boolean)
+      },
+      htmlPlugin: {
+        inject: false,
+        hash: true
       }
     },
     server: {
