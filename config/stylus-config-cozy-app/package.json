@@ -1,6 +1,6 @@
 {
   "name": "stylus-config-cozy-app",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Stylus config for Cozy Application (Cozy Cloud)",
   "author": "Cozy Cloud",
   "repository": {
@@ -17,8 +17,6 @@
   ],
   "devDependencies": {
     "stylint": "1.5.9"
-  },
-  "dependencies": {
   },
   "peerDependencies": {
     "stylint": ">=1.5.9"
