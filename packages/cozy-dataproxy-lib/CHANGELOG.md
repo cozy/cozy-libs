@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.2.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.1.0...cozy-dataproxy-lib@3.2.0) (2025-02-07)
+
+
+### Features
+
+* Add PerformanceApi to SearchEngine ([4de7f27](https://github.com/cozy/cozy-libs/commit/4de7f27685961ba2ede539b5a0d821ff28cd3a42)), closes [cozy/cozy-client#1574](https://github.com/cozy/cozy-client/issues/1574)
+* Upgrade cozy-client to `53.1.0` ([70a5170](https://github.com/cozy/cozy-libs/commit/70a5170fad152f28d70b6fb20ed5fc3b85539683)), closes [cozy/cozy-client#1574](https://github.com/cozy/cozy-client/issues/1574)
+
+
+
+
+
 # [3.1.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.0.3...cozy-dataproxy-lib@3.1.0) (2025-02-06)
 
 
