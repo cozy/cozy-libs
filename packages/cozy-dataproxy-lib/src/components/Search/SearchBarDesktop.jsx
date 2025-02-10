@@ -1,4 +1,3 @@
-import AssistantIcon from 'assets/icons/icon-assistant.png'
 import React, { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -9,6 +8,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { useSearch } from './SearchProvider'
 import styles from './styles.styl'
+import { AssistantIcon } from '../AssistantIcon/AssistantIcon'
 import { useAssistant } from '../AssistantProvider'
 import ResultMenu from '../ResultMenu/ResultMenu'
 import { isAssistantEnabled, makeConversationId } from '../helpers'
