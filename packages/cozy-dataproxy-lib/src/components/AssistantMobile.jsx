@@ -1,4 +1,3 @@
-import AssistantIcon from 'assets/icons/icon-assistant.png'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -7,6 +6,7 @@ import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import useExtendI18n from 'cozy-ui/transpiled/react/providers/I18n/useExtendI18n'
 
+import { AssistantIcon } from './AssistantIcon/AssistantIcon'
 import { locales } from '../locales'
 
 export const AssistantMobile = () => {
