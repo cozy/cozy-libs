@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.2.0...cozy-dataproxy-lib@3.2.1) (2025-02-10)
+
+**Note:** Version bump only for package cozy-dataproxy-lib
+
+
+
+
+
 # [3.2.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.1.0...cozy-dataproxy-lib@3.2.0) (2025-02-07)
 
 

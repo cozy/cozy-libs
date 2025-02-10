@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.6.4](https://github.com/cozy/cozy-libs/compare/cozy-realtime@5.6.3...cozy-realtime@5.6.4) (2025-02-10)
+
+
+### Bug Fixes
+
+* Reconnect realtime after refreshed token ([7d7e331](https://github.com/cozy/cozy-libs/commit/7d7e3316095e5d636b8c238b16c131554361000a))
+
+
+
+
+
 ## [5.6.3](https://github.com/cozy/cozy-libs/compare/cozy-realtime@5.6.2...cozy-realtime@5.6.3) (2025-01-20)
 
 
