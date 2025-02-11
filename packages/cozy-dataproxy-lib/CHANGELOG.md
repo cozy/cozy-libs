@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.4.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.4.0...cozy-dataproxy-lib@3.4.1) (2025-02-11)
+
+
+### Bug Fixes
+
+* **cozy-dataproxy-lib:** Embed assistant's icon as base64 instead of PNG ([c455dc5](https://github.com/cozy/cozy-libs/commit/c455dc5aee6ec763e334664f1dfa99f5f3cc602c))
+
+
+
+
+
 # [3.4.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.3.0...cozy-dataproxy-lib@3.4.0) (2025-02-11)
 
 
