@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.3.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.2.1...cozy-dataproxy-lib@3.3.0) (2025-02-11)
+
+
+### Features
+
+* Allow init to be called independently ([22b0d73](https://github.com/cozy/cozy-libs/commit/22b0d7362b9d2bb3bdaa6bfcba67679c2b3b9518))
+
+
+
+
+
 ## [3.2.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.2.0...cozy-dataproxy-lib@3.2.1) (2025-02-10)
 
 **Note:** Version bump only for package cozy-dataproxy-lib
