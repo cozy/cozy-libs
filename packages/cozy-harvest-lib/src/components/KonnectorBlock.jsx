@@ -30,7 +30,7 @@ import { fetchKonnectorData } from '../helpers/konnectorBlock'
 const KonnectorBlock = ({ file }) => {
   const [konnector, setKonnector] = useState()
   const client = useClient()
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const slug = get(file, 'cozyMetadata.createdByApp')
   const sourceAccountIdentifier = get(
     file,
@@ -84,6 +84,7 @@ const KonnectorBlock = ({ file }) => {
   const label = makeLabel({
     t,
     konnector,
+    lang,
     trigger,
     isRunning: trigger.current_state.status === 'running'
   })
