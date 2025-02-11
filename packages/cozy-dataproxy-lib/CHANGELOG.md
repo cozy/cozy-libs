@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.4.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.3.0...cozy-dataproxy-lib@3.4.0) (2025-02-11)
+
+
+### Features
+
+* Upgrade peer deps ([bc988ab](https://github.com/cozy/cozy-libs/commit/bc988abf6e417e23a46f93229b2f3ac9bd8b1c2d))
+
+
+
+
+
 # [3.3.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.2.1...cozy-dataproxy-lib@3.3.0) (2025-02-11)
 
 
