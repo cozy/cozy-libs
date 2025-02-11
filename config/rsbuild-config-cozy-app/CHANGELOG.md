@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/cozy/cozy-libs/compare/rsbuild-config-cozy-app@0.2.1...rsbuild-config-cozy-app@0.3.0) (2025-02-11)
+
+
+### Features
+
+* Do not inject automatically static assets ([970ab0b](https://github.com/cozy/cozy-libs/commit/970ab0b0db465ef02b076d7bb83f4d33a7fefbc4))
+* Import static images from cozy-ui and cozy-dataproxy-lib ([74da70a](https://github.com/cozy/cozy-libs/commit/74da70acda608c537f0970e70c80c86839dc438d))
+* Import svg as React components with rsbuild ([aee3496](https://github.com/cozy/cozy-libs/commit/aee3496e75ae606daa7f0ddd6b93d2ffe9de4aea))
+
+
+
+
+
 ## [0.2.1](https://github.com/cozy/cozy-libs/compare/rsbuild-config-cozy-app@0.2.0...rsbuild-config-cozy-app@0.2.1) (2025-01-29)
 
 
