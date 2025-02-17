@@ -20,7 +20,6 @@ const SharingContent = ({
   documentType,
   hasSharedParent,
   isOwner,
-  needsContactsPermission,
   onRevoke,
   onRevokeSelf,
   onShare,
@@ -68,7 +67,6 @@ const SharingContent = ({
             currentRecipients={recipients}
             document={document}
             documentType={documentType}
-            needsContactsPermission={needsContactsPermission}
             onShare={onShare}
             sharing={sharing}
             sharingDesc={sharingDesc}
