@@ -92,7 +92,6 @@ const ShareDialogTwoStepsConfirmationContainer = ({
   hasSharedParent,
   isOwner,
   link,
-  needsContactsPermission,
   onClose,
   onRevoke,
   onRevokeLink,
@@ -208,7 +207,6 @@ const ShareDialogTwoStepsConfirmationContainer = ({
         documentType={documentType}
         hasSharedParent={hasSharedParent}
         isOwner={isOwner}
-        needsContactsPermission={needsContactsPermission}
         onRevoke={onRevoke}
         onRevokeSelf={onRevokeSelf}
         onShare={onShare}

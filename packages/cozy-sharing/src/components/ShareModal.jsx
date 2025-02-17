@@ -12,7 +12,6 @@ export const ShareModal = ({
   hasSharedParent,
   isOwner,
   link,
-  needsContactsPermission,
   onClose,
   onRevoke,
   onRevokeSelf,
@@ -50,7 +49,6 @@ export const ShareModal = ({
       hasSharedParent={hasSharedParent}
       isOwner={isOwner}
       link={link}
-      needsContactsPermission={needsContactsPermission}
       onClose={onClose}
       onRevoke={onRevoke}
       onRevokeSelf={onRevokeSelf}
@@ -78,7 +76,6 @@ ShareModal.propTypes = {
   hasSharedParent: PropTypes.bool,
   isOwner: PropTypes.bool,
   link: PropTypes.string,
-  needsContactsPermission: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   onRevoke: PropTypes.func.isRequired,
   onShare: PropTypes.func.isRequired,
