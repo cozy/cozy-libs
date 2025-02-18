@@ -27,7 +27,8 @@ export const ShareByEmail = ({
   createContact,
   documentType,
   currentRecipients,
-  sharing
+  sharing,
+  submitLabel
 }) => {
   const client = useClient()
   const { t } = useI18n()
@@ -166,7 +167,7 @@ export const ShareByEmail = ({
             onChange={onChange}
           />
           <ShareSubmit
-            label={t(`${documentType}.share.shareByEmail.send`)}
+            label={submitLabel || t(`${documentType}.share.shareByEmail.send`)}
             onSubmit={share}
             loading={loading}
             disabled={recipients.length === 0}
@@ -191,7 +192,9 @@ ShareByEmail.propTypes = {
   onShare: PropTypes.func.isRequired,
   createContact: PropTypes.func.isRequired,
   // We can display this component without having created the sharing yet
-  sharing: PropTypes.object
+  sharing: PropTypes.object,
+  // Customize the label of the button that submit contacts
+  submitLabel: PropTypes.string
 }
 
 export default ShareByEmail
