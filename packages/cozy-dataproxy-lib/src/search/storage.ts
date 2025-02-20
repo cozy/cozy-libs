@@ -2,6 +2,7 @@ import Minilog from 'cozy-minilog'
 
 import {
   DATAPROXY_STORAGE_PREFIX,
+  MIN_DELAY_BEFORE_EXPORT,
   SEARCH_SCHEMA,
   SEARCHABLE_DOCTYPES,
   SearchedDoctype
@@ -45,6 +46,19 @@ export const exportSearchIndexes = async (
   if (!storage) {
     return
   }
+
+  const lastExportDate = await getExportDate(storage)
+  if (lastExportDate) {
+    // Prevent too frequent exports
+    if (
+      new Date(lastExportDate).getTime() + MIN_DELAY_BEFORE_EXPORT >
+      new Date().getTime()
+    ) {
+      log.info('Export already happened earlier, skip it.')
+      return
+    }
+  }
+
   log.info('Start indexes export')
 
   for (const key of Object.keys(searchIndexes)) {
@@ -73,6 +87,7 @@ export const exportSearchIndexes = async (
     )
   }
   await persistExportDate(storage)
+  log.info('Indexes export done')
 }
 
 export const importSearchIndexes = async (
