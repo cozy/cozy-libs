@@ -127,10 +127,20 @@ export class SearchEngine {
       this.searchIndexes = await importSearchIndexes(this.storage)
       const endImport = performance.now()
       log.debug(`Index import took ${(endImport - startImport).toFixed(2)} ms`)
-      // The indexes might be stale: update them
+
       for (const doctype of SEARCHABLE_DOCTYPES) {
         const searchIndex = this.searchIndexes[doctype]
-        void indexOnChanges(this, searchIndex, doctype)
+        if (!searchIndex) {
+          // The index import probably have failed: let's rebuild it
+          const newSearchIndex = await this.indexDocsForSearch(
+            doctype as keyof typeof SEARCH_SCHEMA
+          )
+          if (newSearchIndex) {
+            this.searchIndexes[doctype] = newSearchIndex
+          }
+        }
+        // The indexes might be stale: update them
+        await indexOnChanges(this, this.searchIndexes[doctype], doctype)
       }
     }
 
@@ -150,8 +160,8 @@ export class SearchEngine {
       endReplicationTime = 0
 
     this.client.on('pouchlink:doctypesync:end', async (doctype: string) => {
-      if (isSearchedDoctype(doctype)) {
-        // Index doctype after initial replication
+      if (isSearchedDoctype(doctype) && this.searchIndexes[doctype]) {
+        // Here, the index already exist, so let's have an incremental update
         const searchIndex = await this.indexDocsForSearch(
           doctype as keyof typeof SEARCH_SCHEMA
         )
