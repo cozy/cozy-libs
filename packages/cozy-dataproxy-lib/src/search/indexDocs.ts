@@ -79,7 +79,7 @@ export const indexOnChanges = async (
     // it is already done through realtime
     return searchIndex
   }
-  const lastSeq = searchIndex.lastSeq || 0
+  const lastSeq = searchIndex?.lastSeq || 0
   const changes = await pouchLink.getChanges(doctype, {
     include_docs: true,
     since: lastSeq
@@ -90,7 +90,11 @@ export const indexOnChanges = async (
       searchIndex.index.remove(change.id)
     } else {
       const normalizedDoc = { ...change.doc, _type: doctype } as CozyDoc
-      void indexSingleDoc(searchEngine.client, searchIndex.index, normalizedDoc)
+      await indexSingleDoc(
+        searchEngine.client,
+        searchIndex.index,
+        normalizedDoc
+      )
     }
   }
 
