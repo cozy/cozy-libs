@@ -225,7 +225,8 @@ export class SharingProvider extends Component {
     recipients,
     readOnlyRecipients,
     description,
-    openSharing
+    openSharing,
+    sharedDrive
   }) => {
     const { client, doctype } = this.props
     const sharing = getDocumentSharing(this.state, document.id)
@@ -249,7 +250,8 @@ export class SharingProvider extends Component {
       readOnlyRecipients,
       description,
       previewPath,
-      openSharing
+      openSharing,
+      sharedDrive
     })
 
     this.dispatch(
