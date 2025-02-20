@@ -164,14 +164,23 @@ export class SearchEngine {
       log.debug('Started pouch replication')
       startReplicationTime = performance.now()
     })
-    this.client.on('pouchlink:sync:end', () => {
+    this.client.on('pouchlink:sync:end', async () => {
       log.debug('Ended pouch replication')
+
       endReplicationTime = performance.now()
-      log.debug(
-        `Replication took ${(endReplicationTime - startReplicationTime).toFixed(
-          2
-        )}`
-      )
+      if (startReplicationTime > 0) {
+        // Log only if the start replication event was correctly get
+        log.debug(
+          `Replication took ${(
+            endReplicationTime - startReplicationTime
+          ).toFixed(2)} ms`
+        )
+      }
+      if (Object.keys(this.searchIndexes).length < 1) {
+        log.info('No search index found: start indexing')
+        // This happens at first replication, so init the indexes
+        await this.indexDocumentsAtInit()
+      }
       // Save up-to-date index on storage to be later imported
       void exportSearchIndexes(this.storage, this.searchIndexes)
     })
