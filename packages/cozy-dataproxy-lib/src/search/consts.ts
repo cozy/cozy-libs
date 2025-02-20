@@ -40,3 +40,4 @@ export const DOCTYPE_DEFAULT_ORDER = {
 }
 
 export const DATAPROXY_STORAGE_PREFIX = '@dataproxy'
+export const MIN_DELAY_BEFORE_EXPORT = 5 * 60 * 1000 // 5min
