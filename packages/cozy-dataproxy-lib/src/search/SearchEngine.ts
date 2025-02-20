@@ -85,22 +85,29 @@ export class SearchEngine {
       }
     }
 
-    if (this.engineOptions.shouldInit) {
-      if (this.client.isLogged) {
-        void this.init()
-      } else {
-        this.client.on('login', () => {
-          void this.init()
-        })
-      }
+    if (this.client.isLogged) {
+      this.afterLogin()
+    } else {
+      this.client.on('login', () => {
+        this.afterLogin()
+      })
     }
   }
 
-  async indexDocuments(): Promise<void> {
+  afterLogin(): void {
+    if (this.engineOptions.shouldInit) {
+      void this.init()
+    }
+    // Use replication events to have up-to-date search indexes, based on local data
+    this.handleReplicationEvents()
+  }
+
+  async indexDocumentsAtInit(): Promise<void> {
     if (!this.client) {
       return
     }
 
+    log.info('Initialize indexes...')
     const markName = this.performanceApi.mark('indexDocuments')
 
     const lastExportDate = await getExportDate(this.storage)
@@ -127,18 +134,18 @@ export class SearchEngine {
       }
     }
 
-    if (this.isLocalSearch) {
-      // Use replication events to have up-to-date search indexes, based on local data
-      this.indexOnReplicationEvents()
-    }
-
     this.performanceApi.measure({
       markName: markName,
       category: 'Search'
     })
   }
 
-  indexOnReplicationEvents(): void {
+  handleReplicationEvents(): void {
+    if (!this.isLocalSearch) {
+      // Nothing to do here, we do not want to replicate for non-local search
+      return
+    }
+
     let startReplicationTime = 0,
       endReplicationTime = 0
 
@@ -184,7 +191,7 @@ export class SearchEngine {
     this.subscribeDoctype(this.client, APPS_DOCTYPE)
 
     // The document indexing should be performed once everything is setup
-    await this.indexDocuments()
+    await this.indexDocumentsAtInit()
   }
 
   subscribeDoctype(client: CozyClient, doctype: string): void {
