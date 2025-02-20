@@ -445,5 +445,14 @@
     "error": "Problème avec la récupération du lien : %{error}",
     "text": "Voici un lien vers mon document %{name} : |||| Voici un lien contenant mes documents %{name} : ",
     "title": "Lien vers mon document %{name} |||| Lien vers mes documents %{name}"
+  },
+  "SharedDrive": {
+    "newSharedDriveModal": {
+      "title": "Nouveau drive partagé",
+      "nameLabel": "Nom du drive partagé",
+      "descriptionLabel": "Description",
+      "add": "Ajouter",
+      "create": "Créer"
+    }
   }
 }

@@ -19,6 +19,7 @@ export { default as LinkRecipientLite } from './components/Recipient/LinkRecipie
 export { default as OwnerRecipientDefaultLite } from './components/Recipient/OwnerRecipientDefaultLite'
 export { SharedRecipientsList } from './SharedRecipientsList'
 export { ShareButton } from './ShareButton'
+export { NewSharedDriveModal } from './components/SharedDrive/NewSharedDriveModal'
 export { ShareModal } from './components/ShareModal/ShareModal'
 export { RefreshableSharings } from './RefreshableSharings'
 export { CozyPassFingerprintDialogContent } from './components/CozyPassFingerprintDialogContent'
