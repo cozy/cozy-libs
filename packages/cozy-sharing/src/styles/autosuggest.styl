@@ -55,9 +55,13 @@
         border  none
         &:hover
         &:focus
+        &:focus-visible
             border none
+            outline none
         &:first-child
-          padding .25rem .5rem
-
+            padding .25rem .5rem
+        &::placeholder
+            color var(--secondaryTextColor)
+            font-size 1rem
 .recipientChip
   margin .25rem .5rem .25rem 0
