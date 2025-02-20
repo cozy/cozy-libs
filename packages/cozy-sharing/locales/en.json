@@ -446,5 +446,14 @@
     "error": "Problem with link recovery: %{error}",
     "text": "Link to my document %{name}: |||| Link to my documents %{name}: ",
     "title": "Link to my document %{name} |||| Link to my documents %{name}"
+  },
+  "SharedDrive": {
+    "newSharedDriveModal": {
+      "title": "New shared drive",
+      "nameLabel": "Drive name",
+      "descriptionLabel": "Description",
+      "add": "Add",
+      "create": "Create"
+    }
   }
 }
