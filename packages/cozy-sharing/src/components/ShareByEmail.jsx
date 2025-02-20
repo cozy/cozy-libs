@@ -28,7 +28,8 @@ export const ShareByEmail = ({
   documentType,
   currentRecipients,
   sharing,
-  submitLabel
+  submitLabel,
+  showNotifications = true
 }) => {
   const client = useClient()
   const { t } = useI18n()
@@ -97,27 +98,31 @@ export const ShareByEmail = ({
         openSharing: readWriteRecipients.length > 0
       })
 
-      showAlert({
-        message: t(
-          ...getSuccessMessage(recipientsBefore, contacts, documentType)
-        ),
-        severity: 'success',
-        variant: 'filled'
-      })
+      if (showNotifications) {
+        showAlert({
+          message: t(
+            ...getSuccessMessage(recipientsBefore, contacts, documentType)
+          ),
+          severity: 'success',
+          variant: 'filled'
+        })
+      }
     } catch (err) {
-      showAlert({
-        message: t(
-          ...getErrorMessage({
-            t,
-            err,
-            documentType,
-            recipients,
-            selectedOption
-          })
-        ),
-        severity: 'error',
-        variant: 'filled'
-      })
+      if (showNotifications) {
+        showAlert({
+          message: t(
+            ...getErrorMessage({
+              t,
+              err,
+              documentType,
+              recipients,
+              selectedOption
+            })
+          ),
+          severity: 'error',
+          variant: 'filled'
+        })
+      }
     } finally {
       reset()
     }
@@ -194,7 +199,9 @@ ShareByEmail.propTypes = {
   // We can display this component without having created the sharing yet
   sharing: PropTypes.object,
   // Customize the label of the button that submit contacts
-  submitLabel: PropTypes.string
+  submitLabel: PropTypes.string,
+  // Display success or error notifications
+  showNotifications: PropTypes.bool
 }
 
 export default ShareByEmail
