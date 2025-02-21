@@ -387,6 +387,11 @@
       "desc": "You keep the content but it won't be updated between your Cozy anymore."
     }
   },
+  "RevokeSharedDriveMemberItem": {
+    "revoke": {
+      "title": "Remove"
+    }
+  },
   "GroupRecipient": {
     "secondary": "%{memberCount} member |||| %{memberCount} members",
     "secondary_you": "including you"

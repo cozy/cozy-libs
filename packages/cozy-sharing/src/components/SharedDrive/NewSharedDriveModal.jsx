@@ -26,7 +26,7 @@ export const NewSharedDriveModal = withLocales(props => {
   const [sharedDriveRecipients, setSharedDriveRecipients] = useState({
     recipients: [],
     readOnlyRecipients: []
-  }) // manque un index
+  })
   const [sharedDriveName, setSharedDriveName] = useState('')
   const [sharedDriveDescription, setSharedDriveDescription] = useState('')
 
@@ -64,6 +64,41 @@ export const NewSharedDriveModal = withLocales(props => {
       readOnlyRecipients: sharedDriveRecipients.readOnlyRecipients,
       description: sharedDriveDescription,
       sharedDrive: true
+    })
+  }
+
+  const onSetType = (index, newType) => {
+    const _id = index.split('virtual-shared-drive-sharing-')[1]
+
+    if (newType === 'two-way') {
+      setSharedDriveRecipients(prev => {
+        const recipientToMove = prev.readOnlyRecipients.find(r => r._id === _id)
+
+        return {
+          recipients: [...prev.recipients, recipientToMove],
+          readOnlyRecipients: prev.readOnlyRecipients.filter(r => r._id !== _id)
+        }
+      })
+    } else {
+      setSharedDriveRecipients(prev => {
+        const recipientToMove = prev.recipients.find(r => r._id === _id)
+
+        return {
+          recipients: prev.recipients.filter(r => r._id !== _id),
+          readOnlyRecipients: [...prev.readOnlyRecipients, recipientToMove]
+        }
+      })
+    }
+  }
+
+  const onRevoke = index => {
+    const _id = index.split('virtual-shared-drive-sharing-')[1]
+
+    setSharedDriveRecipients(prev => {
+      return {
+        recipients: prev.recipients.filter(r => r._id !== _id),
+        readOnlyRecipients: prev.readOnlyRecipients.filter(r => r._id !== _id)
+      }
     })
   }
 
@@ -114,6 +149,8 @@ export const NewSharedDriveModal = withLocales(props => {
               document={document}
               documentType="Files"
               className="u-w-100"
+              onRevoke={onRevoke}
+              onSetType={onSetType}
             />
           </Box>
         </div>

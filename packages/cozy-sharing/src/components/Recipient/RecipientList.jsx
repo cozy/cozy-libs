@@ -4,6 +4,7 @@ import { GroupRecipient } from './GroupRecipient'
 import MemberRecipient from './MemberRecipient'
 import { usePrevious } from '../../helpers/hooks'
 import { filterAndReworkRecipients } from '../../helpers/recipients'
+import SharedDriveRecipient from '../SharedDrive/SharedDriveRecipient'
 
 const RecipientList = ({
   recipients,
@@ -13,6 +14,7 @@ const RecipientList = ({
   documentType,
   onRevoke,
   onRevokeSelf,
+  onSetType,
   verifyRecipient
 }) => {
   const previousRecipients = usePrevious(recipients)
@@ -25,6 +27,22 @@ const RecipientList = ({
     const recipientConfirmationData = recipientsToBeConfirmed.find(
       user => user.email === recipient.email
     )
+
+    const isSharedDriveRecipient = recipient?.index
+      ?.toString()
+      .startsWith('virtual-shared-drive')
+
+    if (isSharedDriveRecipient) {
+      return (
+        <SharedDriveRecipient
+          {...recipient}
+          key={recipient.index}
+          onRevoke={onRevoke}
+          onSetType={onSetType}
+          fadeIn={recipient.hasBeenJustAdded}
+        />
+      )
+    }
 
     const isGroupRecipient = recipient.members
     if (isGroupRecipient) {
