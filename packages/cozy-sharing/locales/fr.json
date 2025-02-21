@@ -385,6 +385,11 @@
       "desc": "Vous conservez le contenu mais il ne sera plus mis à jour entre vos Cozy."
     }
   },
+  "RevokeSharedDriveMemberItem": {
+    "revoke": {
+      "title": "Supprimer"
+    }
+  },
   "GroupRecipient": {
     "secondary": "%{memberCount} membre |||| %{memberCount} membres",
     "secondary_you": "dont vous"

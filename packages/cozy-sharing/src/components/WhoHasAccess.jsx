@@ -32,9 +32,10 @@ const WhoHasAccess = ({
   recipientsToBeConfirmed = [],
   document,
   documentType,
-  onRevoke,
   className,
+  onRevoke,
   onRevokeSelf,
+  onSetType,
   verifyRecipient,
   link,
   permissions
@@ -70,6 +71,7 @@ const WhoHasAccess = ({
           documentType={documentType}
           onRevoke={onRevoke}
           onRevokeSelf={onRevokeSelf}
+          onSetType={onSetType}
           verifyRecipient={verifyRecipient}
         />
       </List>
