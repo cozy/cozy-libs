@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.5.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.4.1...cozy-dataproxy-lib@3.5.0) (2025-02-21)
+
+
+### Bug Fixes
+
+* Handle missing search index for a single doctype ([895f1dc](https://github.com/cozy/cozy-libs/commit/895f1dc5c71bfb1307337b4355ef3ed593054c5e))
+
+
+### Features
+
+* Add some minimal delay between exports ([cef11e4](https://github.com/cozy/cozy-libs/commit/cef11e413d4a932a3a8125f5bfc2f446253d7d71))
+* Index documents after replication ([4d3d91f](https://github.com/cozy/cozy-libs/commit/4d3d91f9f643b1bc295eebcf9c92bc775f69fd40))
+
+
+
+
+
 ## [3.4.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.4.0...cozy-dataproxy-lib@3.4.1) (2025-02-11)
 
 
