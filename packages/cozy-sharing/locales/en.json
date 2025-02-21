@@ -458,7 +458,9 @@
       "nameLabel": "Drive name",
       "descriptionLabel": "Description",
       "add": "Add",
-      "create": "Create"
+      "create": "Create",
+      "successNotification": "Shared drive has been added",
+      "errorNotification": "Error during shared drive creation"
     }
   }
 }

@@ -7,6 +7,7 @@ import Button from 'cozy-ui/transpiled/react/Buttons'
 import { FixedActionsDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import TextField from 'cozy-ui/transpiled/react/TextField'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { mergeAndDeduplicateRecipients, formatRecipients } from './helpers'
@@ -18,10 +19,11 @@ import styles from '../../styles/shareddrive.styl'
 import { default as DumbShareByEmail } from '../ShareByEmail'
 import WhoHasAccess from '../WhoHasAccess'
 
-export const NewSharedDriveModal = withLocales(props => {
+export const NewSharedDriveModal = withLocales(({ onClose }) => {
   const client = useClient()
   const { t } = useI18n()
   const { share } = useSharingContext()
+  const { showAlert } = useAlert()
 
   const [sharedDriveRecipients, setSharedDriveRecipients] = useState({
     recipients: [],
@@ -52,19 +54,35 @@ export const NewSharedDriveModal = withLocales(props => {
   }
 
   const onCreate = async () => {
-    const { data: sharedDriveFolder } = await client.create('io.cozy.files', {
-      name: sharedDriveName,
-      dirId: 'io.cozy.files.shared-drives-dir',
-      type: 'directory'
-    })
+    try {
+      const { data: sharedDriveFolder } = await client.create('io.cozy.files', {
+        name: sharedDriveName,
+        dirId: 'io.cozy.files.shared-drives-dir',
+        type: 'directory'
+      })
 
-    await share({
-      document: sharedDriveFolder,
-      recipients: sharedDriveRecipients.recipients,
-      readOnlyRecipients: sharedDriveRecipients.readOnlyRecipients,
-      description: sharedDriveDescription,
-      sharedDrive: true
-    })
+      await share({
+        document: sharedDriveFolder,
+        recipients: sharedDriveRecipients.recipients,
+        readOnlyRecipients: sharedDriveRecipients.readOnlyRecipients,
+        description: sharedDriveDescription,
+        sharedDrive: true
+      })
+
+      showAlert({
+        message: t('SharedDrive.newSharedDriveModal.successNotification'),
+        severity: 'success',
+        variant: 'filled'
+      })
+
+      onClose()
+    } catch (err) {
+      showAlert({
+        message: t('SharedDrive.newSharedDriveModal.errorNotification'),
+        severity: 'error',
+        variant: 'filled'
+      })
+    }
   }
 
   const onSetType = (index, newType) => {
@@ -107,7 +125,7 @@ export const NewSharedDriveModal = withLocales(props => {
   return (
     <FixedActionsDialog
       open
-      onClose={props.onClose}
+      onClose={onClose}
       title={t('SharedDrive.newSharedDriveModal.title')}
       content={
         <div className={styles['shared-drive-content-wrapper']}>
