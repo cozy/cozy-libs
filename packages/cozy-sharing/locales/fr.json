@@ -457,7 +457,9 @@
       "nameLabel": "Nom du drive partagé",
       "descriptionLabel": "Description",
       "add": "Ajouter",
-      "create": "Créer"
+      "create": "Créer",
+      "successNotification": "Le drive partagé a été ajouté",
+      "errorNotification": "Erreur lors de la création du drive partagé"
     }
   }
 }
