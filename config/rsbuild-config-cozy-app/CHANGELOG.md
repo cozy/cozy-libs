@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/cozy/cozy-libs/compare/rsbuild-config-cozy-app@0.3.0...rsbuild-config-cozy-app@0.4.0) (2025-02-25)
+
+
+### Features
+
+* Display progressbar in dev mode ([490ed8e](https://github.com/cozy/cozy-libs/commit/490ed8e8de0a2197dedcf810e1606874ba1c8a0f))
+
+
+
+
+
 # [0.3.0](https://github.com/cozy/cozy-libs/compare/rsbuild-config-cozy-app@0.2.1...rsbuild-config-cozy-app@0.3.0) (2025-02-11)
 
 
