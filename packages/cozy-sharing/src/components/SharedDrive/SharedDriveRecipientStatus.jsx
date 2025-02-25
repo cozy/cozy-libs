@@ -1,7 +1,6 @@
 import React from 'react'
 
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { Media, Bd } from 'cozy-ui/transpiled/react/deprecated/Media'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 const SharedDriveRecipientStatus = ({ members, email }) => {
@@ -15,13 +14,9 @@ const SharedDriveRecipientStatus = ({ members, email }) => {
     : email
 
   return (
-    <Media>
-      <Bd>
-        <Typography variant="caption" color="textSecondary">
-          {text}
-        </Typography>
-      </Bd>
-    </Media>
+    <Typography variant="caption" color="textSecondary">
+      {text}
+    </Typography>
   )
 }
 
