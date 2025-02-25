@@ -5,10 +5,7 @@ import EyeIcon from 'cozy-ui/transpiled/react/Icons/Eye'
 import PaperplaneIcon from 'cozy-ui/transpiled/react/Icons/Paperplane'
 import ToTheCloudIcon from 'cozy-ui/transpiled/react/Icons/ToTheCloud'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { Media, Img, Bd } from 'cozy-ui/transpiled/react/deprecated/Media'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
-
-import styles from '../../styles/recipient.styl'
 
 const MemberRecipientStatus = ({ status, isMe, instance, typographyProps }) => {
   const { t } = useI18n()
@@ -32,20 +29,13 @@ const MemberRecipientStatus = ({ status, isMe, instance, typographyProps }) => {
   }
 
   return (
-    <Media>
-      <Img className={styles['recipient-status-icon']}>
-        <Icon icon={icon} size={10} />
-      </Img>
-      <Bd>
-        <Typography
-          variant="caption"
-          color="textSecondary"
-          {...typographyProps}
-        >
-          {text}
-        </Typography>
-      </Bd>
-    </Media>
+    <div className="u-flex u-flex-items-center">
+      <Icon icon={icon} size={10} />
+      &nbsp;
+      <Typography variant="caption" color="textSecondary" {...typographyProps}>
+        {text}
+      </Typography>
+    </div>
   )
 }
 
