@@ -73,10 +73,6 @@ export const BoxEditingRights = ({ file, editingRights, setEditingRights }) => {
         open={isMenuDisplayed}
         docs={[file]}
         actions={actions}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right'
-        }}
         autoClose
         onClose={toggleMenuDisplayed}
       />
