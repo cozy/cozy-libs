@@ -76,10 +76,6 @@ const GroupRecipientPermissions = ({
             ref={buttonRef}
             open={isMenuDisplayed}
             actions={actions}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right'
-            }}
             autoClose
             onClose={hideMenu}
           >
