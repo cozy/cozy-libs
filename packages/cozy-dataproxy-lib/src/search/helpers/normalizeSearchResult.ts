@@ -1,6 +1,8 @@
 import CozyClient, { generateWebLink, models } from 'cozy-client'
 import { IOCozyContact } from 'cozy-client/types/types'
+import Minilog from 'cozy-minilog'
 
+import { getFilePath } from './filePaths'
 import { APPS_DOCTYPE, TYPE_DIRECTORY } from '../consts'
 import { queryDocsByIds } from '../queries'
 import {
@@ -13,12 +15,14 @@ import {
   EnrichedSearchResult
 } from '../types'
 
+const log = Minilog('🗂️ [Indexing]')
+
 export const normalizeSearchResult = (
   client: CozyClient,
   searchResults: EnrichedSearchResult,
   query: string
 ): SearchResult => {
-  const doc = cleanFilePath(searchResults.doc)
+  const doc = getCleanedFilePath(searchResults.doc)
   const slug = getSearchResultSlug(client, doc)
   const url = buildOpenURL(client, doc, slug)
   const secondaryUrl = buildSecondaryURL(client, doc, url)
@@ -33,19 +37,20 @@ export const normalizeSearchResult = (
   return normalizedRes
 }
 
-export const cleanFilePath = (doc: CozyDoc): CozyDoc => {
+export const getCleanedFilePath = (doc: CozyDoc): CozyDoc => {
   if (!isIOCozyFile(doc)) {
     return doc
   }
-  const { path, name } = doc
+  const path = doc.path ? doc.path : getFilePath(doc._id)
   if (!path) {
     // Paths should be completed for both files and directories, at indexing time
+    log.warn(`No path found for ${doc._id}}`)
     return doc
   }
   let newPath = path
-  if (path.endsWith(`/${name}`)) {
+  if (path.endsWith(`/${doc.name}`)) {
     // Remove the name from the path, which is added at indexing time to search on it
-    newPath = path.slice(0, -name.length - 1)
+    newPath = path.slice(0, -doc.name.length - 1)
   }
 
   return { ...doc, path: newPath }

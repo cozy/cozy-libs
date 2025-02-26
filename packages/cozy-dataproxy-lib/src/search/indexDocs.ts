@@ -5,12 +5,10 @@ import CozyClient from 'cozy-client'
 import { SearchEngine } from './SearchEngine'
 import { SEARCH_SCHEMA } from './consts'
 import { getPouchLink } from './helpers/client'
+import { setFilePaths, computeFileFullpath } from './helpers/filePaths'
 import { getSearchEncoder } from './helpers/getSearchEncoder'
-import {
+import { shouldKeepFile } from './helpers/normalizeFile'
   addFilePaths,
-  computeFileFullpath,
-  shouldKeepFile
-} from './helpers/normalizeFile'
 import { CozyDoc, isIOCozyFile, SearchIndex } from './types'
 
 export const initSearchIndex = (
@@ -37,15 +35,16 @@ export const indexAllDocs = (
   docs: CozyDoc[],
   isLocalSearch: boolean
 ): FlexSearch.Document<CozyDoc, false> => {
-  // There is no persisted path for files: we must add it
-  const completedDocs = isLocalSearch ? addFilePaths(docs) : docs
-  for (const doc of completedDocs) {
+  for (const doc of docs) {
     if (shouldIndexDoc(doc)) {
       flexsearchIndex.add(doc)
     } else {
       // Should not index doc: remove it from index if it exists
       flexsearchIndex.remove(doc._id!)
     }
+  }
+  if (isLocalSearch) {
+    setFilePaths(docs) // Necessary to keep track of local file paths
   }
   return flexsearchIndex
 }
