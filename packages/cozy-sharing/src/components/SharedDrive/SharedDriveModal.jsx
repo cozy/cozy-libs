@@ -1,8 +1,8 @@
+import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
 import { useClient } from 'cozy-client'
-import Box from 'cozy-ui/transpiled/react/Box'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { FixedActionsDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import TextField from 'cozy-ui/transpiled/react/TextField'
@@ -128,14 +128,14 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
       onClose={onClose}
       title={t('SharedDrive.sharedDriveModal.title')}
       content={
-        <div className={styles['shared-drive-content-wrapper']}>
+        <div className="u-flex u-flex-column u-flex-items-center">
           <IllustrationSharedDrives></IllustrationSharedDrives>
           <TextField
             required
             label={t('SharedDrive.sharedDriveModal.nameLabel')}
             variant="outlined"
             size="small"
-            className="u-w-100"
+            className="u-w-100 u-mt-1"
             value={sharedDriveName}
             onChange={handleSharedDriveNameChange}
           />
@@ -144,11 +144,16 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
             label={t('SharedDrive.sharedDriveModal.descriptionLabel')}
             variant="outlined"
             size="large"
-            className="u-w-100"
+            className="u-w-100 u-mt-1"
             value={sharedDriveDescription}
             onChange={handleSharedDriveDescriptionChange}
           />
-          <Box className={styles['shared-drive-who-has-access-wrapper']}>
+          <div
+            className={cx(
+              'u-mt-1',
+              styles['shared-drive-who-has-access-wrapper']
+            )}
+          >
             <Typography variant="h6" className="u-mb-1-half">
               {t('Share.contacts.whoHasAccess')}
             </Typography>
@@ -170,7 +175,7 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
               onRevoke={onRevoke}
               onSetType={onSetType}
             />
-          </Box>
+          </div>
         </div>
       }
       actions={
