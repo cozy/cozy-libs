@@ -16,7 +16,10 @@ import {
   SEARCHABLE_DOCTYPES
 } from './consts'
 import { getPouchLink } from './helpers/client'
-import { normalizeSearchResult } from './helpers/normalizeSearchResult'
+import {
+  enrichResultsWithDocs,
+  normalizeSearchResult
+} from './helpers/normalizeSearchResult'
 import {
   indexAllDocs,
   indexOnChanges,
@@ -41,13 +44,14 @@ import {
   SearchResult,
   isSearchedDoctype,
   SearchOptions,
-  StorageInterface
+  StorageInterface,
+  EnrichedSearchResult
 } from './types'
 
 const log = Minilog('🗂️ [Indexing]')
 
 interface FlexSearchResultWithDoctype
-  extends FlexSearch.EnrichedDocumentSearchResultSetUnit<CozyDoc> {
+  extends FlexSearch.SimpleDocumentSearchResultSetUnit {
   doctype: SearchedDoctype
 }
 
@@ -262,7 +266,7 @@ export class SearchEngine {
   buildSearchIndex(
     doctype: keyof typeof SEARCH_SCHEMA,
     docs: CozyDoc[]
-  ): FlexSearch.Document<CozyDoc, true> {
+  ): FlexSearch.Document<CozyDoc, false> {
     const startTimeIndex = performance.now()
 
     const flexsearchIndex = initSearchIndex(doctype)
@@ -356,10 +360,10 @@ export class SearchEngine {
     return index
   }
 
-  search(
+  async search(
     query: string,
     options: SearchOptions | undefined
-  ): SearchResult[] | null {
+  ): Promise<SearchResult[] | null> {
     if (!this.searchIndexes || Object.keys(this.searchIndexes).length < 1) {
       // The indexing might be running but not finished yet
       log.warn('[SEARCH] No search index available')
@@ -370,8 +374,12 @@ export class SearchEngine {
 
     const allResults = this.searchOnIndexes(query, options?.doctypes)
     const dedupResults = this.deduplicateAndFlatten(allResults)
+    const enrichedResults = await enrichResultsWithDocs(
+      this.client,
+      dedupResults
+    )
     const sortedResults = this.sortSearchResults(
-      dedupResults,
+      enrichedResults,
       options?.doctypes
     )
     const results = this.limitSearchResults(sortedResults)
@@ -408,9 +416,6 @@ export class SearchEngine {
         log.warn('[SEARCH] No search index available for ', doctype)
         continue
       }
-      // TODO: do not use flexsearch store and rely on pouch storage?
-      // It's better for memory, but might slow down search queries
-      //
       // XXX - The limit is specified twice because of a flexsearch inconstency
       // that does not enforce the limit if only given in second argument, and
       // does not return the correct type is only given in third options
@@ -419,10 +424,26 @@ export class SearchEngine {
       // field, which can cause issue related to the sort: if we search on name+path for files,
       // and limit on 100, the 101th result on name will be skipped, but might appear on path,
       // which will make it appear in the search results, but in incorrect order.
+      //
+      // Search result example:
+      // [
+      //   {
+      //       "field": "displayName",
+      //       "result": [
+      //           "604627c6bafee013ec5f27f7f72029f6"
+      //       ]
+      //   },
+      //   {
+      //       "field": "fullname",
+      //       "result": [
+      //           "604627c6bafee013ec5f27f7f72029f6", "604627c6bafee013ec5f27f3f714568"
+      //       ]
+      //   }
+      // ]
       const FLEXSEARCH_LIMIT = 10000
       const indexResults = index.index.search(query, FLEXSEARCH_LIMIT, {
         limit: FLEXSEARCH_LIMIT,
-        enrich: true
+        enrich: false
       })
 
       const newResults = indexResults.map(res => ({
@@ -439,19 +460,20 @@ export class SearchEngine {
     searchResults: FlexSearchResultWithDoctype[]
   ): RawSearchResult[] {
     const combinedResults = searchResults.flatMap(item =>
-      item.result.map(r => ({ ...r, field: item.field, doctype: item.doctype }))
+      item.result.map(id => ({
+        id: id.toString(), // Because of flexsearch Id typing
+        doctype: item.doctype,
+        field: item.field
+      }))
     )
 
-    type MapItem = Omit<(typeof combinedResults)[number], 'field'> & {
-      fields: string[]
-    }
-    const resultMap = new Map<FlexSearch.Id[], MapItem>()
+    const resultMap = new Map<string, RawSearchResult>()
 
-    combinedResults.forEach(({ id, field, ...rest }) => {
+    combinedResults.forEach(({ id, field, doctype }) => {
       if (resultMap.has(id)) {
         resultMap.get(id)?.fields.push(field)
       } else {
-        resultMap.set(id, { id, fields: [field], ...rest })
+        resultMap.set(id, { id, fields: [field], doctype })
       }
     })
 
@@ -470,9 +492,9 @@ export class SearchEngine {
   }
 
   sortSearchResults(
-    searchResults: RawSearchResult[],
+    searchResults: EnrichedSearchResult[],
     doctypesOrder: string[] | undefined
-  ): RawSearchResult[] {
+  ): EnrichedSearchResult[] {
     return searchResults.sort((a, b) => {
       let doctypeComparison
       if (doctypesOrder) {
@@ -509,7 +531,7 @@ export class SearchEngine {
     })
   }
 
-  sortFiles(aRes: RawSearchResult, bRes: RawSearchResult): number {
+  sortFiles(aRes: EnrichedSearchResult, bRes: EnrichedSearchResult): number {
     if (!isIOCozyFile(aRes.doc) || !isIOCozyFile(bRes.doc)) {
       return 0
     }
@@ -525,7 +547,9 @@ export class SearchEngine {
     return this.compareStrings(aRes.doc?.name, bRes.doc?.name)
   }
 
-  limitSearchResults(searchResults: RawSearchResult[]): RawSearchResult[] {
+  limitSearchResults(
+    searchResults: EnrichedSearchResult[]
+  ): EnrichedSearchResult[] {
     const doctypesCount: Record<string, number> = {}
     return searchResults.filter(result => {
       const doctype = result.doctype

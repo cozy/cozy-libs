@@ -23,6 +23,11 @@ interface AllDocsResponse {
 interface QueryResponseSingleDoc {
   data: CozyDoc
 }
+
+interface QueryResponseMultipleDoc {
+  data: CozyDoc[]
+}
+
 const defaultFetchPolicy = fetchPolicies.olderThan(5 * 60 * 1000) // 5 min
 
 export const queryFilesForSearch = async (
@@ -64,6 +69,26 @@ export const queryDocById = async (
   const resp = (await client.query(Q(doctype).getById(id), {
     singleDocData: true
   })) as QueryResponseSingleDoc
+
+export const queryDocsByIds = async (
+  client: CozyClient,
+  doctype: string,
+  ids: string[],
+  { fromStore = true } = {}
+): Promise<CozyDoc[]> => {
+  if (fromStore) {
+    // This is much more efficient to query from store than PouchDB
+    // FIXME: it is also more efficient to query the whole doctype than by ids,
+    // because of how it is implemented in cozy-client
+    // See https://github.com/cozy/cozy-client/issues/1591
+    const allDocs = client.getCollectionFromState(doctype)
+    const docs = allDocs.filter(doc => doc._id && ids.includes(doc._id))
+    return docs as CozyDoc[]
+  }
+
+  const resp = (await client.query(
+    Q(doctype).getByIds(ids)
+  )) as QueryResponseMultipleDoc
   return resp.data
 }
 

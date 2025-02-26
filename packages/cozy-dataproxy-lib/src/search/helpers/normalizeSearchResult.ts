@@ -2,18 +2,20 @@ import CozyClient, { generateWebLink, models } from 'cozy-client'
 import { IOCozyContact } from 'cozy-client/types/types'
 
 import { APPS_DOCTYPE, TYPE_DIRECTORY } from '../consts'
+import { queryDocsByIds } from '../queries'
 import {
   CozyDoc,
   RawSearchResult,
   isIOCozyApp,
   isIOCozyContact,
   isIOCozyFile,
-  SearchResult
+  SearchResult,
+  EnrichedSearchResult
 } from '../types'
 
 export const normalizeSearchResult = (
   client: CozyClient,
-  searchResults: RawSearchResult,
+  searchResults: EnrichedSearchResult,
   query: string
 ): SearchResult => {
   const doc = cleanFilePath(searchResults.doc)
@@ -223,4 +225,63 @@ const buildSecondaryURL = (
     pathname: '',
     searchParams: []
   })
+}
+
+export const enrichResultsWithDocs = async (
+  client: CozyClient,
+  results: RawSearchResult[]
+): Promise<EnrichedSearchResult[]> => {
+  const enrichedResults = [...results] as EnrichedSearchResult[]
+
+  // Group by doctype
+  const resultsByDoctype = results.reduce<Record<string, string[]>>(
+    (acc, { id, doctype }) => {
+      if (!acc[doctype]) {
+        acc[doctype] = []
+      }
+      acc[doctype].push(id)
+      return acc
+    },
+    {}
+  )
+  let docs = [] as CozyDoc[]
+  for (const doctype of Object.keys(resultsByDoctype)) {
+    const ids = resultsByDoctype[doctype]
+
+    const startQuery = performance.now()
+    let queryDocs
+    let fromStore = true
+    // Query docs directly from store, for better performances
+    queryDocs = await queryDocsByIds(client, doctype, ids, {
+      fromStore
+    })
+    if (queryDocs.length < 1) {
+      log.warn('Ids not found on store: query PouchDB')
+      // This should not happen, but let's add a fallback to query Pouch in case the store
+      // returned nothing. This is not done by default, as querying PouchDB is much slower.
+      fromStore = false
+      queryDocs = await queryDocsByIds(client, doctype, ids, {
+        fromStore
+      })
+    }
+    const endQuery = performance.now()
+    docs = docs.concat(queryDocs)
+    log.debug(
+      `Query took ${(endQuery - startQuery).toFixed(2)} ms to retrieve ${
+        ids.length
+      } ${doctype} from store: ${fromStore}`
+    )
+  }
+  const docsMap = new Map(docs?.map(doc => [doc._id, doc]))
+
+  for (const res of enrichedResults) {
+    const id = res.id?.toString() // Because of flexsearch Id typing
+    const doc = docsMap.get(id)
+    if (!doc) {
+      log.error(`${id} is found in search but not in local data`)
+    } else {
+      res.doc = doc
+    }
+  }
+  return enrichedResults
 }
