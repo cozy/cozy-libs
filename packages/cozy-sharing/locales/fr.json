@@ -452,7 +452,7 @@
     "title": "Lien vers mon document %{name} |||| Lien vers mes documents %{name}"
   },
   "SharedDrive": {
-    "newSharedDriveModal": {
+    "sharedDriveModal": {
       "title": "Nouveau drive partagé",
       "nameLabel": "Nom du drive partagé",
       "descriptionLabel": "Description",
