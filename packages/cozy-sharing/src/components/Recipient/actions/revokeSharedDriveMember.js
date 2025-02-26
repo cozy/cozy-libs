@@ -7,6 +7,25 @@ import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
+const makeComponent = title => {
+  const Component = forwardRef((props, ref) => {
+    return (
+      <ActionsMenuItem {...props} ref={ref}>
+        <ListItemIcon>
+          <Icon icon={TrashIcon} color="var(--errorColor)" />
+        </ListItemIcon>
+        <ListItemText
+          primary={<Typography color="error">{title}</Typography>}
+        />
+      </ActionsMenuItem>
+    )
+  })
+
+  Component.displayName = 'RevokeSharedDriveMember'
+
+  return Component
+}
+
 const revokeSharedDriveMember = ({ t, handleRevocation }) => {
   const title = t(`RevokeSharedDriveMemberItem.revoke.title`)
 
@@ -16,18 +35,7 @@ const revokeSharedDriveMember = ({ t, handleRevocation }) => {
     action: () => {
       handleRevocation()
     },
-    Component: forwardRef(function RevokeMemberItem(props, ref) {
-      return (
-        <ActionsMenuItem {...props} ref={ref}>
-          <ListItemIcon>
-            <Icon icon={TrashIcon} color="var(--errorColor)" />
-          </ListItemIcon>
-          <ListItemText
-            primary={<Typography color="error">{title}</Typography>}
-          />
-        </ActionsMenuItem>
-      )
-    })
+    Component: makeComponent(title)
   }
 }
 export { revokeSharedDriveMember }
