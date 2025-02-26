@@ -1,4 +1,4 @@
-import CozyClient, { Q } from 'cozy-client'
+import CozyClient, { Q, fetchPolicies } from 'cozy-client'
 import { IOCozyFile } from 'cozy-client/types/types'
 import Minilog from 'cozy-minilog'
 
@@ -23,6 +23,7 @@ interface AllDocsResponse {
 interface QueryResponseSingleDoc {
   data: CozyDoc
 }
+const defaultFetchPolicy = fetchPolicies.olderThan(5 * 60 * 1000) // 5 min
 
 export const queryFilesForSearch = async (
   client: CozyClient
@@ -48,7 +49,11 @@ export const queryAllDocs = async (
   client: CozyClient,
   doctype: string
 ): Promise<CozyDoc[]> => {
-  return client.queryAll<CozyDoc[]>(Q(doctype).limitBy(null))
+  const queryOpts = {
+    as: `${doctype}/all`,
+    fetchPolicies: defaultFetchPolicy
+  }
+  return client.queryAll<CozyDoc[]>(Q(doctype).limitBy(null), queryOpts)
 }
 
 export const queryDocById = async (

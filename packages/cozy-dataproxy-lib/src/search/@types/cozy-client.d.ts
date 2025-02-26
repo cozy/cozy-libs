@@ -177,7 +177,10 @@ declare module 'cozy-client' {
       queryDefinition: QueryDefinition,
       options?: QueryOptions
     ) => Promise<QueryResult>
-    queryAll: <T>(queryDefinition: QueryDefinition) => Promise<T>
+    queryAll: <T>(
+      queryDefinition: QueryDefinition,
+      options?: QueryOptions
+    ) => Promise<T>
     links: CozyLink[]
     capabilities: ClientCapabilities
     registerPlugin: (Plugin: () => void, options: unknown) => void
