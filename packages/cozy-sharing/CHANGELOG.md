@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@21.2.2...cozy-sharing@21.3.0) (2025-02-26)
+
+
+### Features
+
+* Add a basic new shared drive modal ([a554807](https://github.com/cozy/cozy-libs/commit/a55480749600410871b74e3284f23f5d57d71605))
+* Allow to create a shared drive in the share method ([c5efffe](https://github.com/cozy/cozy-libs/commit/c5efffee257519a4e83d74a4c263395239d5fd02))
+* Allow to customize autosuggest submit label ([6b619df](https://github.com/cozy/cozy-libs/commit/6b619dffc96d020e3bc031a73f3c622afdd77343))
+* Allow to disable notifications on contact selection ([a62e48d](https://github.com/cozy/cozy-libs/commit/a62e48db450620bb42e9d5e568fdc861ee6a0650))
+* Display notification and close modal on shared drive creation ([10bff21](https://github.com/cozy/cozy-libs/commit/10bff21516fa3159ce04e15c332044fe462636cc))
+* Manage changing permissions in NewSharedDriveModal ([9aba037](https://github.com/cozy/cozy-libs/commit/9aba0371d9d3a993523a5d6968eac7c4d9d1ec3f))
+
+
+
+
+
 ## [21.2.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@21.2.1...cozy-sharing@21.2.2) (2025-02-04)
 
 
