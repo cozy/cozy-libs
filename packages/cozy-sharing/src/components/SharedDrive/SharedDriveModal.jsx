@@ -19,7 +19,7 @@ import styles from '../../styles/shareddrive.styl'
 import { default as DumbShareByEmail } from '../ShareByEmail'
 import WhoHasAccess from '../WhoHasAccess'
 
-export const NewSharedDriveModal = withLocales(({ onClose }) => {
+export const SharedDriveModal = withLocales(({ onClose }) => {
   const client = useClient()
   const { t } = useI18n()
   const { share } = useSharingContext()
@@ -70,7 +70,7 @@ export const NewSharedDriveModal = withLocales(({ onClose }) => {
       })
 
       showAlert({
-        message: t('SharedDrive.newSharedDriveModal.successNotification'),
+        message: t('SharedDrive.sharedDriveModal.successNotification'),
         severity: 'success',
         variant: 'filled'
       })
@@ -78,7 +78,7 @@ export const NewSharedDriveModal = withLocales(({ onClose }) => {
       onClose()
     } catch (err) {
       showAlert({
-        message: t('SharedDrive.newSharedDriveModal.errorNotification'),
+        message: t('SharedDrive.sharedDriveModal.errorNotification'),
         severity: 'error',
         variant: 'filled'
       })
@@ -126,13 +126,13 @@ export const NewSharedDriveModal = withLocales(({ onClose }) => {
     <FixedActionsDialog
       open
       onClose={onClose}
-      title={t('SharedDrive.newSharedDriveModal.title')}
+      title={t('SharedDrive.sharedDriveModal.title')}
       content={
         <div className={styles['shared-drive-content-wrapper']}>
           <IllustrationSharedDrives></IllustrationSharedDrives>
           <TextField
             required
-            label={t('SharedDrive.newSharedDriveModal.nameLabel')}
+            label={t('SharedDrive.sharedDriveModal.nameLabel')}
             variant="outlined"
             size="small"
             className="u-w-100"
@@ -141,7 +141,7 @@ export const NewSharedDriveModal = withLocales(({ onClose }) => {
           />
           <TextField
             required
-            label={t('SharedDrive.newSharedDriveModal.descriptionLabel')}
+            label={t('SharedDrive.sharedDriveModal.descriptionLabel')}
             variant="outlined"
             size="large"
             className="u-w-100"
@@ -158,7 +158,7 @@ export const NewSharedDriveModal = withLocales(({ onClose }) => {
               document={document}
               documentType="Files"
               onShare={onShare}
-              submitLabel={t('SharedDrive.newSharedDriveModal.add')}
+              submitLabel={t('SharedDrive.sharedDriveModal.add')}
               showNotifications={false}
             />
             <WhoHasAccess
@@ -177,7 +177,7 @@ export const NewSharedDriveModal = withLocales(({ onClose }) => {
         <>
           <Button
             variant="primary"
-            label={t('SharedDrive.newSharedDriveModal.create')}
+            label={t('SharedDrive.sharedDriveModal.create')}
             onClick={onCreate}
           />
         </>
@@ -186,6 +186,6 @@ export const NewSharedDriveModal = withLocales(({ onClose }) => {
   )
 })
 
-NewSharedDriveModal.propTypes = {
+SharedDriveModal.propTypes = {
   onClose: PropTypes.func.isRequired
 }
