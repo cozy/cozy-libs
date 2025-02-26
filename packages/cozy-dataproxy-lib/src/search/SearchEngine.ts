@@ -21,9 +21,10 @@ import {
   indexAllDocs,
   indexOnChanges,
   indexSingleDoc,
+  initDoctypeAfterIndexImport,
   initSearchIndex
 } from './indexDocs'
-import { queryAllDocs, queryFilesForSearch } from './queries'
+import { queryLocalOrRemoteDocs } from './queries'
 import {
   importSearchIndexes,
   exportSearchIndexes,
@@ -285,31 +286,12 @@ export class SearchEngine {
     return -1
   }
 
-  async queryLocalOrRemoteDocs(
-    doctype: keyof typeof SEARCH_SCHEMA
-  ): Promise<CozyDoc[]> {
-    let docs = []
-    const startTimeQ = performance.now()
-
-    if (!this.isLocalSearch && doctype === FILES_DOCTYPE) {
-      // Special case for stack's files
-      docs = await queryFilesForSearch(this.client)
-    } else {
-      docs = await queryAllDocs(this.client, doctype)
-    }
-    const endTimeQ = performance.now()
-    log.debug(
-      `Query ${docs.length} ${doctype} took ${(endTimeQ - startTimeQ).toFixed(
-        2
-      )} ms`
-    )
-    return docs
-  }
-
   async initialIndexation(
     doctype: keyof typeof SEARCH_SCHEMA
   ): Promise<SearchIndex | null> {
-    const docs = await this.queryLocalOrRemoteDocs(doctype)
+    const docs = await queryLocalOrRemoteDocs(this.client, doctype, {
+      isLocalSearch: this.isLocalSearch
+    })
     if (docs.length < 1) {
       // No docs available yet
       return null

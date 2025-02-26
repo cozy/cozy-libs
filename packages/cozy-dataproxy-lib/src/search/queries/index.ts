@@ -1,12 +1,15 @@
 import CozyClient, { Q } from 'cozy-client'
 import { IOCozyFile } from 'cozy-client/types/types'
+import Minilog from 'cozy-minilog'
 
-import { TYPE_DIRECTORY } from '../consts'
+import { FILES_DOCTYPE, TYPE_DIRECTORY } from '../consts'
 import {
   normalizeFileWithFolders,
   shouldKeepFile
 } from '../helpers/normalizeFile'
 import { CozyDoc } from '../types'
+
+const log = Minilog('🗂️ [Indexing]')
 
 interface DBRow {
   id: string
@@ -57,4 +60,27 @@ export const queryDocById = async (
     singleDocData: true
   })) as QueryResponseSingleDoc
   return resp.data
+}
+
+export const queryLocalOrRemoteDocs = async (
+  client: CozyClient,
+  doctype: string,
+  { isLocalSearch }: { isLocalSearch: boolean }
+): Promise<CozyDoc[]> => {
+  let docs = []
+  const startTimeQ = performance.now()
+
+  if (!isLocalSearch && doctype === FILES_DOCTYPE) {
+    // Special case for stack's files
+    docs = await queryFilesForSearch(client)
+  } else {
+    docs = await queryAllDocs(client, doctype)
+  }
+  const endTimeQ = performance.now()
+  log.debug(
+    `Query ${docs.length} ${doctype} took ${(endTimeQ - startTimeQ).toFixed(
+      2
+    )} ms`
+  )
+  return docs
 }
