@@ -8,7 +8,7 @@ import { getPouchLink } from './helpers/client'
 import { setFilePaths, computeFileFullpath } from './helpers/filePaths'
 import { getSearchEncoder } from './helpers/getSearchEncoder'
 import { shouldKeepFile } from './helpers/normalizeFile'
-  addFilePaths,
+import { queryLocalOrRemoteDocs } from './queries'
 import { CozyDoc, isIOCozyFile, SearchIndex } from './types'
 
 export const initSearchIndex = (
@@ -100,6 +100,19 @@ export const indexOnChanges = async (
   searchIndex.lastSeq = changes.last_seq
   searchIndex.lastUpdated = new Date().toISOString()
   return searchIndex
+}
+
+export const initDoctypeAfterIndexImport = async (
+  client: CozyClient,
+  doctype: string
+): Promise<void> => {
+  // Query the local database to load documents in store
+  const docs = await queryLocalOrRemoteDocs(client, doctype, {
+    isLocalSearch: true
+  })
+  // If we are here, the data is locally queried. And paths are not stored in db, so
+  // we need to compute file paths from files docs
+  setFilePaths(docs)
 }
 
 const shouldIndexDoc = (doc: CozyDoc): boolean => {

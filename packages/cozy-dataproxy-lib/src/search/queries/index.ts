@@ -66,9 +66,17 @@ export const queryDocById = async (
   doctype: string,
   id: string
 ): Promise<CozyDoc> => {
-  const resp = (await client.query(Q(doctype).getById(id), {
+  const queryOpts = {
+    as: `${doctype}/${id}`,
+    fetchPolicy: defaultFetchPolicy,
     singleDocData: true
-  })) as QueryResponseSingleDoc
+  }
+  const resp = (await client.query(
+    Q(doctype).getById(id),
+    queryOpts
+  )) as QueryResponseSingleDoc
+  return resp.data
+}
 
 export const queryDocsByIds = async (
   client: CozyClient,
