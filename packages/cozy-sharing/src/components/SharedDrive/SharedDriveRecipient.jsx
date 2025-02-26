@@ -39,11 +39,7 @@ const SharedDriveRecipient = props => {
           )}
         </ListItemIcon>
         <ListItemText
-          primary={
-            <Typography className="u-ellipsis" variant="body1">
-              {name}
-            </Typography>
-          }
+          primary={<Typography variant="body1">{name}</Typography>}
           secondary={<SharedDriveRecipientStatus {...props} />}
         />
         <SharedDriveRecipientPermissions
