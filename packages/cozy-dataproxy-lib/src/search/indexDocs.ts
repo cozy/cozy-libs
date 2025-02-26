@@ -15,10 +15,10 @@ import { CozyDoc, isIOCozyFile, SearchIndex } from './types'
 
 export const initSearchIndex = (
   doctype: keyof typeof SEARCH_SCHEMA
-): FlexSearch.Document<CozyDoc, true> => {
+): FlexSearch.Document<CozyDoc, false> => {
   const fieldsToIndex = SEARCH_SCHEMA[doctype]
 
-  const flexsearchIndex = new FlexSearch.Document<CozyDoc, true>({
+  const flexsearchIndex = new FlexSearch.Document<CozyDoc, false>({
     tokenize: 'reverse', // See https://github.com/nextapps-de/flexsearch?tab=readme-ov-file#tokenizer
     encode: getSearchEncoder(),
     // @ts-expect-error minlength is not described by Flexsearch types but exists
@@ -26,17 +26,17 @@ export const initSearchIndex = (
     document: {
       id: '_id',
       index: fieldsToIndex,
-      store: true
+      store: false // Use redux store to get docs
     }
   })
   return flexsearchIndex
 }
 
 export const indexAllDocs = (
-  flexsearchIndex: FlexSearch.Document<CozyDoc, true>,
+  flexsearchIndex: FlexSearch.Document<CozyDoc, false>,
   docs: CozyDoc[],
   isLocalSearch: boolean
-): FlexSearch.Document<CozyDoc, true> => {
+): FlexSearch.Document<CozyDoc, false> => {
   // There is no persisted path for files: we must add it
   const completedDocs = isLocalSearch ? addFilePaths(docs) : docs
   for (const doc of completedDocs) {
@@ -52,7 +52,7 @@ export const indexAllDocs = (
 
 export const indexSingleDoc = async (
   client: CozyClient,
-  flexsearchIndex: FlexSearch.Document<CozyDoc, true>,
+  flexsearchIndex: FlexSearch.Document<CozyDoc, false>,
   doc: CozyDoc
 ): Promise<void> => {
   if (shouldIndexDoc(doc)) {
