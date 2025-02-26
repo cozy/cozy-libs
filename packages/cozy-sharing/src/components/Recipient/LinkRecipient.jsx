@@ -65,11 +65,7 @@ const LinkRecipient = props => {
           </Circle>
         </ListItemIcon>
         <ListItemText
-          primary={
-            <Typography className="u-ellipsis" variant="body1">
-              {textPrimary}
-            </Typography>
-          }
+          primary={<Typography variant="body1">{textPrimary}</Typography>}
           secondary={textSecondary}
         />
         {RightPart}

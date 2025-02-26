@@ -57,7 +57,7 @@ const MemberRecipient = props => {
         </ListItemIcon>
         <ListItemText
           primary={
-            <Typography className="u-ellipsis" variant="body1">
+            <Typography variant="body1">
               {isMe ? t('Share.recipients.you') : name}
             </Typography>
           }
