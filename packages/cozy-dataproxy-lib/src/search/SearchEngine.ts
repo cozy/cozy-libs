@@ -117,7 +117,7 @@ export class SearchEngine {
 
     const lastExportDate = await getExportDate(this.storage)
     if (!lastExportDate || !this.isLocalSearch) {
-      // No persisted index found: let's create them
+      // No persisted index: let's create them
       for (const doctype of SEARCHABLE_DOCTYPES) {
         const searchIndex = await this.indexDocsForSearch(
           doctype as keyof typeof SEARCH_SCHEMA
@@ -128,25 +128,7 @@ export class SearchEngine {
       }
     } else {
       // Import local indexes
-      const startImport = performance.now()
-      this.searchIndexes = await importSearchIndexes(this.storage)
-      const endImport = performance.now()
-      log.debug(`Index import took ${(endImport - startImport).toFixed(2)} ms`)
-
-      for (const doctype of SEARCHABLE_DOCTYPES) {
-        const searchIndex = this.searchIndexes[doctype]
-        if (!searchIndex) {
-          // The index import probably have failed: let's rebuild it
-          const newSearchIndex = await this.indexDocsForSearch(
-            doctype as keyof typeof SEARCH_SCHEMA
-          )
-          if (newSearchIndex) {
-            this.searchIndexes[doctype] = newSearchIndex
-          }
-        }
-        // The indexes might be stale: update them
-        await indexOnChanges(this, this.searchIndexes[doctype], doctype)
-      }
+      await this.initSearchWithIndexImport()
     }
 
     this.performanceApi.measure({
@@ -260,6 +242,37 @@ export class SearchEngine {
 
     if (this.isLocalSearch) {
       this.debouncedReplication()
+    }
+  }
+
+  /**
+   * Initialize indexes by:
+   *  - importing persisted indexes
+   *  - Requesting remote changes if the indexes are stale
+   *  - Query the local database to load the redux store
+   */
+  async initSearchWithIndexImport(): Promise<void> {
+    const startImport = performance.now()
+    this.searchIndexes = await importSearchIndexes(this.storage)
+    const endImport = performance.now()
+    log.debug(`Index import took ${(endImport - startImport).toFixed(2)} ms`)
+
+    for (const doctype of SEARCHABLE_DOCTYPES) {
+      const searchIndex = this.searchIndexes[doctype]
+      if (!searchIndex) {
+        // The index import probably have failed: let's rebuild it
+        const newSearchIndex = await this.indexDocsForSearch(
+          doctype as keyof typeof SEARCH_SCHEMA
+        )
+        if (newSearchIndex) {
+          this.searchIndexes[doctype] = newSearchIndex
+        }
+      }
+      // The indexes might be stale: update them
+      await indexOnChanges(this, this.searchIndexes[doctype], doctype)
+
+      // The doctype needs some extra treatment to initialize everything correctly
+      void initDoctypeAfterIndexImport(this.client, doctype)
     }
   }
 
