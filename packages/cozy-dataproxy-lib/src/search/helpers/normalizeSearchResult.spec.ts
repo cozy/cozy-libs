@@ -1,9 +1,12 @@
 import CozyClient from 'cozy-client'
 import { IOCozyContact, IOCozyFile } from 'cozy-client/types/types'
 
-import { cleanFilePath, normalizeSearchResult } from './normalizeSearchResult'
+import {
+  getCleanedFilePath,
+  normalizeSearchResult
+} from './normalizeSearchResult'
 import { FILES_DOCTYPE } from '../consts'
-import { RawSearchResult } from '../types'
+import { EnrichedSearchResult } from '../types'
 
 const fakeFlatDomainClient = {
   getStackClient: () => ({
@@ -27,7 +30,7 @@ describe('Should normalize files results', () => {
     const searchResult = {
       doctype: 'io.cozy.files',
       doc: doc
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -61,7 +64,7 @@ describe('Should normalize files results', () => {
     const searchResult = {
       doctype: 'io.cozy.files',
       doc: doc
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -91,7 +94,7 @@ describe('Should normalize files results', () => {
     const searchResult = {
       doctype: 'io.cozy.files',
       doc: doc
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -122,7 +125,7 @@ describe('Should normalize contacts results', () => {
       doctype: 'io.cozy.files',
       doc: doc,
       fields: ['displayName', 'jobTitle']
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -151,7 +154,7 @@ describe('Should normalize contacts results', () => {
       doctype: 'io.cozy.files',
       doc: doc,
       fields: ['displayName', 'jobTitle']
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -179,7 +182,7 @@ describe('Should normalize contacts results', () => {
       doctype: 'io.cozy.files',
       doc: doc,
       fields: ['displayName', 'jobTitle']
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -208,7 +211,7 @@ describe('Should normalize contacts results', () => {
       doctype: 'io.cozy.files',
       doc: doc,
       fields: []
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -241,7 +244,7 @@ describe('Should normalize contacts results', () => {
       doctype: 'io.cozy.files',
       doc: doc,
       fields: ['displayName', 'email[]:address']
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -277,7 +280,7 @@ describe('Should normalize apps results', () => {
       doctype: 'io.cozy.files',
       doc: doc,
       fields: ['displayName', 'email[]:address']
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -306,7 +309,7 @@ describe('Should normalize apps results', () => {
       doctype: 'io.cozy.files',
       doc: doc,
       fields: ['displayName', 'email[]:address']
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -337,7 +340,7 @@ describe('Should normalize unknown doctypes', () => {
       doctype: 'io.cozy.files',
       doc: doc,
       fields: ['displayName', 'email[]:address']
-    } as unknown as RawSearchResult
+    } as unknown as EnrichedSearchResult
 
     const result = normalizeSearchResult(
       fakeFlatDomainClient,
@@ -356,15 +359,15 @@ describe('Should normalize unknown doctypes', () => {
   })
 })
 
-describe('cleanFilePath', () => {
+describe('getCleanedFilePath', () => {
   it('should return the document unchanged if it is not an IOCozyFile', () => {
     const doc = { fullname: 'name' } as IOCozyContact
-    expect(cleanFilePath(doc)).toEqual(doc)
+    expect(getCleanedFilePath(doc)).toEqual(doc)
   })
 
   it('should return the document unchanged if path is undefined', () => {
     const doc = { _type: FILES_DOCTYPE, name: 'name' } as IOCozyFile
-    expect(cleanFilePath(doc)).toEqual(doc)
+    expect(getCleanedFilePath(doc)).toEqual(doc)
   })
 
   it('should remove name from path if path ends with name', () => {
@@ -374,7 +377,7 @@ describe('cleanFilePath', () => {
       name: 'myname'
     } as IOCozyFile
     const expected = { ...doc, path: '/the/path' }
-    expect(cleanFilePath(doc)).toEqual(expected)
+    expect(getCleanedFilePath(doc)).toEqual(expected)
   })
 
   it('should return the document unchanged if path does not end with name', () => {
@@ -383,6 +386,6 @@ describe('cleanFilePath', () => {
       path: '/the/path/othername',
       name: 'name'
     } as IOCozyFile
-    expect(cleanFilePath(doc)).toEqual(doc)
+    expect(getCleanedFilePath(doc)).toEqual(doc)
   })
 })
