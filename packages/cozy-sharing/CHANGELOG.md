@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [22.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@21.3.0...cozy-sharing@22.0.0) (2025-02-26)
+
+
+### Features
+
+* Upgrade cozy-client ([ccc4ece](https://github.com/cozy/cozy-libs/commit/ccc4ece2ae51fc6d0f4d207dc7023db0cf4942c1))
+
+
+### BREAKING CHANGES
+
+* You must have `cozy-client >=57.0.0`
+
+
+
+
+
 # [21.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@21.2.2...cozy-sharing@21.3.0) (2025-02-26)
 
 
