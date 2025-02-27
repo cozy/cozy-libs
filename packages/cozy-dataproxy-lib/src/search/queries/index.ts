@@ -1,12 +1,15 @@
-import CozyClient, { Q } from 'cozy-client'
+import CozyClient, { Q, fetchPolicies } from 'cozy-client'
 import { IOCozyFile } from 'cozy-client/types/types'
+import Minilog from 'cozy-minilog'
 
-import { TYPE_DIRECTORY } from '../consts'
+import { FILES_DOCTYPE, TYPE_DIRECTORY } from '../consts'
 import {
   normalizeFileWithFolders,
   shouldKeepFile
 } from '../helpers/normalizeFile'
 import { CozyDoc } from '../types'
+
+const log = Minilog('🗂️ [Indexing]')
 
 interface DBRow {
   id: string
@@ -20,6 +23,12 @@ interface AllDocsResponse {
 interface QueryResponseSingleDoc {
   data: CozyDoc
 }
+
+interface QueryResponseMultipleDoc {
+  data: CozyDoc[]
+}
+
+const defaultFetchPolicy = fetchPolicies.olderThan(5 * 60 * 1000) // 5 min
 
 export const queryFilesForSearch = async (
   client: CozyClient
@@ -45,7 +54,11 @@ export const queryAllDocs = async (
   client: CozyClient,
   doctype: string
 ): Promise<CozyDoc[]> => {
-  return client.queryAll<CozyDoc[]>(Q(doctype).limitBy(null))
+  const queryOpts = {
+    as: `${doctype}/all`,
+    fetchPolicies: defaultFetchPolicy
+  }
+  return client.queryAll<CozyDoc[]>(Q(doctype).limitBy(null), queryOpts)
 }
 
 export const queryDocById = async (
@@ -53,8 +66,59 @@ export const queryDocById = async (
   doctype: string,
   id: string
 ): Promise<CozyDoc> => {
-  const resp = (await client.query(Q(doctype).getById(id), {
+  const queryOpts = {
+    as: `${doctype}/${id}`,
+    fetchPolicy: defaultFetchPolicy,
     singleDocData: true
-  })) as QueryResponseSingleDoc
+  }
+  const resp = (await client.query(
+    Q(doctype).getById(id),
+    queryOpts
+  )) as QueryResponseSingleDoc
   return resp.data
+}
+
+export const queryDocsByIds = async (
+  client: CozyClient,
+  doctype: string,
+  ids: string[],
+  { fromStore = true } = {}
+): Promise<CozyDoc[]> => {
+  if (fromStore) {
+    // This is much more efficient to query from store than PouchDB
+    // FIXME: it is also more efficient to query the whole doctype than by ids,
+    // because of how it is implemented in cozy-client
+    // See https://github.com/cozy/cozy-client/issues/1591
+    const allDocs = client.getCollectionFromState(doctype)
+    const docs = allDocs.filter(doc => doc._id && ids.includes(doc._id))
+    return docs as CozyDoc[]
+  }
+
+  const resp = (await client.query(
+    Q(doctype).getByIds(ids)
+  )) as QueryResponseMultipleDoc
+  return resp.data
+}
+
+export const queryLocalOrRemoteDocs = async (
+  client: CozyClient,
+  doctype: string,
+  { isLocalSearch }: { isLocalSearch: boolean }
+): Promise<CozyDoc[]> => {
+  let docs = []
+  const startTimeQ = performance.now()
+
+  if (!isLocalSearch && doctype === FILES_DOCTYPE) {
+    // Special case for stack's files
+    docs = await queryFilesForSearch(client)
+  } else {
+    docs = await queryAllDocs(client, doctype)
+  }
+  const endTimeQ = performance.now()
+  log.debug(
+    `Query ${docs.length} ${doctype} took ${(endTimeQ - startTimeQ).toFixed(
+      2
+    )} ms`
+  )
+  return docs
 }

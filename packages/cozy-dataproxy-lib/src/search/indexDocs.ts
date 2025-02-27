@@ -5,20 +5,18 @@ import CozyClient from 'cozy-client'
 import { SearchEngine } from './SearchEngine'
 import { SEARCH_SCHEMA } from './consts'
 import { getPouchLink } from './helpers/client'
+import { setFilePaths, computeFileFullpath } from './helpers/filePaths'
 import { getSearchEncoder } from './helpers/getSearchEncoder'
-import {
-  addFilePaths,
-  computeFileFullpath,
-  shouldKeepFile
-} from './helpers/normalizeFile'
+import { shouldKeepFile } from './helpers/normalizeFile'
+import { queryLocalOrRemoteDocs } from './queries'
 import { CozyDoc, isIOCozyFile, SearchIndex } from './types'
 
 export const initSearchIndex = (
   doctype: keyof typeof SEARCH_SCHEMA
-): FlexSearch.Document<CozyDoc, true> => {
+): FlexSearch.Document<CozyDoc, false> => {
   const fieldsToIndex = SEARCH_SCHEMA[doctype]
 
-  const flexsearchIndex = new FlexSearch.Document<CozyDoc, true>({
+  const flexsearchIndex = new FlexSearch.Document<CozyDoc, false>({
     tokenize: 'reverse', // See https://github.com/nextapps-de/flexsearch?tab=readme-ov-file#tokenizer
     encode: getSearchEncoder(),
     // @ts-expect-error minlength is not described by Flexsearch types but exists
@@ -26,20 +24,18 @@ export const initSearchIndex = (
     document: {
       id: '_id',
       index: fieldsToIndex,
-      store: true
+      store: false // Use redux store to get docs
     }
   })
   return flexsearchIndex
 }
 
 export const indexAllDocs = (
-  flexsearchIndex: FlexSearch.Document<CozyDoc, true>,
+  flexsearchIndex: FlexSearch.Document<CozyDoc, false>,
   docs: CozyDoc[],
   isLocalSearch: boolean
-): FlexSearch.Document<CozyDoc, true> => {
-  // There is no persisted path for files: we must add it
-  const completedDocs = isLocalSearch ? addFilePaths(docs) : docs
-  for (const doc of completedDocs) {
+): FlexSearch.Document<CozyDoc, false> => {
+  for (const doc of docs) {
     if (shouldIndexDoc(doc)) {
       flexsearchIndex.add(doc)
     } else {
@@ -47,12 +43,15 @@ export const indexAllDocs = (
       flexsearchIndex.remove(doc._id!)
     }
   }
+  if (isLocalSearch) {
+    setFilePaths(docs) // Necessary to keep track of local file paths
+  }
   return flexsearchIndex
 }
 
 export const indexSingleDoc = async (
   client: CozyClient,
-  flexsearchIndex: FlexSearch.Document<CozyDoc, true>,
+  flexsearchIndex: FlexSearch.Document<CozyDoc, false>,
   doc: CozyDoc
 ): Promise<void> => {
   if (shouldIndexDoc(doc)) {
@@ -101,6 +100,19 @@ export const indexOnChanges = async (
   searchIndex.lastSeq = changes.last_seq
   searchIndex.lastUpdated = new Date().toISOString()
   return searchIndex
+}
+
+export const initDoctypeAfterIndexImport = async (
+  client: CozyClient,
+  doctype: string
+): Promise<void> => {
+  // Query the local database to load documents in store
+  const docs = await queryLocalOrRemoteDocs(client, doctype, {
+    isLocalSearch: true
+  })
+  // If we are here, the data is locally queried. And paths are not stored in db, so
+  // we need to compute file paths from files docs
+  setFilePaths(docs)
 }
 
 const shouldIndexDoc = (doc: CozyDoc): boolean => {
