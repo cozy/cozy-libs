@@ -10,19 +10,18 @@ import { CozyDoc, isIOCozyFile } from '../types'
  * Thus, we keep all the file paths in memory to be able to quickly retrieve them
  * at search time.
  */
-const allPaths: Record<string, string> = {}
+const allPaths = new Map<string, string>()
 
-export const getFilePath = (id: string): string => {
-  return allPaths[id]
+export const getFilePath = (id: string): string | undefined => {
+  return id ? allPaths.get(id) : undefined
 }
 
 const setFilePath = (id: string, path: string): void => {
-  allPaths[id] = path
+  allPaths.set(id, path)
 }
 
 export const resetAllPaths = (): void => {
-  // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-  Object.keys(allPaths).forEach(key => delete allPaths[key])
+  allPaths.clear()
 }
 
 /**
@@ -95,14 +94,15 @@ export const computeFileFullpath = async (
     return { ...file, path: newPath }
   }
 
-  if (getFilePath(file._id)) {
+  const filePath = getFilePath(file._id)
+  if (filePath) {
     // File path exists in memory
-    return { ...file, path: getFilePath(file._id) }
+    return { ...file, path: filePath }
   }
 
-  if (getFilePath(file.dir_id)) {
+  const parentPath = getFilePath(file.dir_id)
+  if (parentPath) {
     // Parent path exists in memory
-    const parentPath = getFilePath(file.dir_id)
     const path = `${parentPath}/${file.name}`
     setFilePath(file._id, path) // Add the path in memory
     return { ...file, path }
