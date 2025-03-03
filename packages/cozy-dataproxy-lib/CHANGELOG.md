@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.6.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.5.0...cozy-dataproxy-lib@3.6.0) (2025-03-03)
+
+
+### Features
+
+* Correctly deal with paths ([8766aaf](https://github.com/cozy/cozy-libs/commit/8766aaf8d14ca94e6043e9413211cc73f2be4c0f))
+* Do no store documents in search index ([7786ffe](https://github.com/cozy/cozy-libs/commit/7786ffe8c243227416183dc53f14fb3fcefbb06c))
+* File paths optimizations ([6d5278a](https://github.com/cozy/cozy-libs/commit/6d5278a3280edab00ff2a5f326db4eb602ecfdba))
+* Init store and paths after import ([57fce3e](https://github.com/cozy/cozy-libs/commit/57fce3e950a43c6f3ecc4ae851493f6dae31ea70))
+* Use fetchPolicy for all query ([384eb86](https://github.com/cozy/cozy-libs/commit/384eb8601134f64570a97c2aebdf7aa53dee2087))
+
+
+
+
+
 # [3.5.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.4.1...cozy-dataproxy-lib@3.5.0) (2025-02-21)
 
 
