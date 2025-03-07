@@ -13,7 +13,8 @@
   },
   "devDependencies": {
     "gluejs": "2.x",
-    "mocha": "*"
+    "mocha": "*",
+    "typescript": "5.5.2"
   },
   "repository": {
     "type": "git",
