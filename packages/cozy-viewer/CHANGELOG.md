@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.1.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@18.0.3...cozy-viewer@18.1.0) (2025-03-07)
+
+
+### Features
+
+* Remove cordova code ([55b97c5](https://github.com/cozy/cozy-libs/commit/55b97c5623a59a383227f4c30c32e0735a5480ca))
+
+
+
+
+
 ## [18.0.3](https://github.com/cozy/cozy-libs/compare/cozy-viewer@18.0.2...cozy-viewer@18.0.3) (2025-02-26)
 
 **Note:** Version bump only for package cozy-viewer
