@@ -4,7 +4,6 @@
   "author": "Cozy",
   "license": "MIT",
   "homepage": "https://github.com/cozy/cozy-libs#readme",
-  "private": "true",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cozy/cozy-libs.git"
@@ -16,7 +15,7 @@
     "lint": "eslint --ext js,jsx,ts,tsx .",
     "lint:md": "remark . -o",
     "test": "lerna run --concurrency 1 --ignore cozy-procedures test",
-    "build": "DISABLE_V8_COMPILE_CACHE=1 lerna run --scope cozy-device-helper build && lerna run --scope cozy-minilog build && lerna run --ignore cozy-device-helper --ignore cozy-minilog build",
+    "build": "DISABLE_V8_COMPILE_CACHE=1 lerna run --scope cozy-device-helper build && lerna run --scope cozy-minilog build && lerna run --scope cozy-harvest-lib build && lerna run --ignore cozy-device-helper --ignore cozy-minilog build --ignore cozy-harvest-lib",
     "check-constraints": "node scripts/check-packages-constraints.js"
   },
   "devDependencies": {
@@ -27,6 +26,7 @@
     "babel-preset-cozy-app": "^1.5.0",
     "husky": "1.3.1",
     "lerna": "8.1.8",
+    "node-gyp": "^11.1.0",
     "remark-cli": "9.0.0"
   },
   "husky": {
@@ -44,6 +44,9 @@
       "packages/*",
       "config/*"
     ],
-    "nohoist": ["**/cozy-ui"]
-  }
+    "nohoist": [
+      "**/cozy-ui"
+    ]
+  },
+  "packageManager": "yarn@4.7.0"
 }

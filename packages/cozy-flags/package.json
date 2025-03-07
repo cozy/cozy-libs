@@ -14,9 +14,7 @@
   "bugs": {
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
-  "bin": {
-    "cozy-flags": "./bin/cozy-flags"
-  },
+  "bin": "./bin/cozy-flags",
   "scripts": {
     "build": "yarn build:types && yarn build:js",
     "build:js": "babel --extensions .js,.jsx,.ts,.tsx ./src -d ./dist --verbose",
@@ -30,7 +28,8 @@
     "babel-preset-cozy-app": "^2.8.1",
     "cozy-client": "^37.2.0",
     "jest-localstorage-mock": "2.4.21",
-    "react": "16.12.0"
+    "react": "16.12.0",
+    "typescript": "5.5.2"
   },
   "jest": {
     "testPathIgnorePatterns": [
