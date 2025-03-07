@@ -1,0 +1,65 @@
+{
+  "name": "cozy-external-bridge",
+  "description": "Library allows communication between a container app and an app embedded in an iframe",
+  "version": "0.0.0",
+  "author": {
+    "name": "Cozy Cloud",
+    "url": "https://github.com/cozy"
+  },
+  "bugs": {
+    "url": "https://github.com/cozy/cozy-libs/issues"
+  },
+  "dependencies": {
+    "comlink": "4.4.1"
+  },
+  "peerDependencies": {
+    "cozy-client": ">=54.0.0",
+    "react": ">=16.12.0",
+    "react-dom": ">=16.12.0",
+    "react-router-dom": ">=6.14.2"
+  },
+  "devDependencies": {
+    "@babel/core": "7.16.12",
+    "@rspack/cli": "^1.2.7",
+    "@rspack/core": "^1.2.7",
+    "@testing-library/react": "10.4.9",
+    "@testing-library/react-hooks": "7.0.2",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "babel-plugin-tsconfig-paths": "^1.0.3",
+    "babel-preset-cozy-app": "^2.8.1",
+    "cozy-client": "^54.0.0",
+    "jest": "26.6.3",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+    "react-router-dom": "6.14.2",
+    "typescript": "5.5.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/cozy/cozy-libs/packages/cozy-external-bridge",
+  "keywords": [
+    "cozy"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./container": "./dist/container/index.js",
+    "./embedded": "./dist/embedded/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cozy/cozy-libs.git",
+    "directory": "packages/cozy-external-bridge"
+  },
+  "scripts": {
+    "build": "yarn build:clean && yarn build:types && babel --extensions .ts,.tsx,.js,.jsx --ignore '**/*.spec.tsx','**/*.spec.ts','**/*.d.ts' ./src -d ./dist --copy-files && yarn build:lib",
+    "build:clean": "rm -rf ./dist",
+    "build:types": "tsc -p tsconfig-build.json",
+    "build:lib": "rspack build",
+    "prepublishOnly": "yarn build",
+    "test": "jest --config=./tests/jest.config.js"
+  },
+  "types": "dist/index.d.ts"
+}
