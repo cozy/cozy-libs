@@ -2,9 +2,7 @@
   "name": "@cozy/repo-doctor",
   "version": "0.16.1",
   "license": "MIT",
-  "bin": {
-    "repo-doctor": "src/index.js"
-  },
+  "bin": "src/index.js",
   "scripts": {
     "start": "src/index.js",
     "start:mattermost": "src/index.js --reporter mattermost --configFile examples/repo-doctor.json",
