@@ -14,7 +14,7 @@ const AccountSelectControlBig = ({ name }) => {
         icon={BottomIcon}
         size="15"
         className="u-ml-half"
-        color={"var('--primaryTextColor')"}
+        color="var('--primaryTextColor')"
       />
     </div>
   )
