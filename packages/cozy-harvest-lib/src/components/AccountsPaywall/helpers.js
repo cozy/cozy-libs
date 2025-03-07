@@ -109,7 +109,8 @@ export const computeRemainingOfferCreditsByKonnector = (
 
   let listOfAccounts = accounts.sort(
     (a, b) =>
-      new Date(a.cozyMetadata.createdAt) - new Date(b.cozyMetadata.createdAt)
+      new Date(a.cozyMetadata.createdAt).getTime() -
+      new Date(b.cozyMetadata.createdAt).getTime()
   )
 
   return offersForKonnector.reduce((acc, offer) => {
