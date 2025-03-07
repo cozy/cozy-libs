@@ -3,7 +3,7 @@ import React from 'react'
 
 import { useClient } from 'cozy-client'
 import { makeSharingLink } from 'cozy-client/dist/models/sharing'
-import { isIOS, isMobileApp } from 'cozy-device-helper'
+import { isIOS } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
@@ -11,8 +11,6 @@ import ReplyIcon from 'cozy-ui/transpiled/react/Icons/Reply'
 import ShareIosIcon from 'cozy-ui/transpiled/react/Icons/ShareIos'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
-
-import { exportFilesNative } from './helpers'
 
 const ForwardIcon = isIOS() ? ShareIosIcon : ReplyIcon
 
@@ -24,24 +22,16 @@ const ForwardButton = ({ file, variant, onClick }) => {
   const label = t('Viewer.actions.forward')
 
   const onFileOpen = async file => {
-    if (isMobileApp()) {
-      try {
-        await exportFilesNative(client, [file])
-      } catch (error) {
-        Alerter.info(`Viewer.error.${error}`, { fileMime: file.mime })
+    try {
+      const url = await makeSharingLink(client, [file.id])
+      const shareData = {
+        title: t('Viewer.share.title', { name: file.name }),
+        text: t('Viewer.share.text', { name: file.name }),
+        url
       }
-    } else {
-      try {
-        const url = await makeSharingLink(client, [file.id])
-        const shareData = {
-          title: t('Viewer.share.title', { name: file.name }),
-          text: t('Viewer.share.text', { name: file.name }),
-          url
-        }
-        navigator.share(shareData)
-      } catch (error) {
-        Alerter.error('Viewer.share.error', { error: error })
-      }
+      navigator.share(shareData)
+    } catch (error) {
+      Alerter.error('Viewer.share.error', { error: error })
     }
   }
 
@@ -91,5 +81,4 @@ ForwardButton.defaultProptypes = {
   variant: 'default'
 }
 
-export { exportFilesNative }
 export default ForwardButton
