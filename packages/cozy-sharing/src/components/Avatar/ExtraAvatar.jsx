@@ -2,7 +2,7 @@ import uniqueId from 'lodash/uniqueId'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Avatar from 'cozy-ui/transpiled/react/Avatar'
+import Avatar from 'cozy-ui/transpiled/react/legacy/Avatar'
 
 import { SharingTooltip, TooltipRecipientList } from '../Tooltip'
 
