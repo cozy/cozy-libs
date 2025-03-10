@@ -2,9 +2,9 @@ import PropTypes from 'prop-types'
 import React, { useState, useRef } from 'react'
 import Autosuggest from 'react-autosuggest'
 
-import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import Chip from 'cozy-ui/transpiled/react/Chips'
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
+import Avatar from 'cozy-ui/transpiled/react/legacy/Avatar'
 
 import { GroupAvatar } from './Avatar/GroupAvatar'
 import ContactSuggestion from './ContactSuggestion'
