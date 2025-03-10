@@ -39,6 +39,7 @@
     "snarkdown": "^2.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "7.16.8",
     "@babel/core": "7.16.12",
     "@storybook/addon-essentials": "7.6.0",
     "@storybook/addon-interactions": "7.6.0",
