@@ -19,6 +19,7 @@
     "rooks": "7.14.1"
   },
   "devDependencies": {
+    "@babel/cli": "7.16.8",
     "@babel/core": "7.16.12",
     "@testing-library/react": "10.4.9",
     "@testing-library/react-hooks": "7.0.2",
