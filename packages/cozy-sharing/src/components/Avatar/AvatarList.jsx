@@ -2,8 +2,8 @@ import cx from 'classnames'
 import React from 'react'
 
 import { useClient } from 'cozy-client'
-import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
+import Avatar from 'cozy-ui/transpiled/react/legacy/Avatar'
 
 import { ExtraAvatar } from './ExtraAvatar'
 import { GroupAvatar } from './GroupAvatar'
