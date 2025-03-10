@@ -16136,6 +16136,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "cozy-dataproxy-lib@workspace:packages/cozy-dataproxy-lib"
   dependencies:
+    "@babel/cli": "npm:7.16.8"
     "@babel/core": "npm:7.16.12"
     "@testing-library/react": "npm:10.4.9"
     "@testing-library/react-hooks": "npm:7.0.2"
@@ -16404,6 +16405,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "cozy-intent@workspace:packages/cozy-intent"
   dependencies:
+    "@babel/cli": "npm:7.16.8"
     "@babel/core": "npm:7.16.12"
     "@testing-library/react": "npm:10.4.9"
     "@testing-library/react-hooks": "npm:7.0.2"
@@ -16684,6 +16686,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "cozy-sharing@workspace:packages/cozy-sharing"
   dependencies:
+    "@babel/cli": "npm:7.16.8"
     "@babel/core": "npm:7.16.12"
     "@cozy/minilog": "npm:^1.0.0"
     "@storybook/addon-essentials": "npm:7.6.0"
