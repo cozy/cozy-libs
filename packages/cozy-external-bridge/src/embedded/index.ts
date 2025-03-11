@@ -33,6 +33,7 @@ const onPopstate = (): void => {
 }
 
 const startHistorySyncing = (): void => {
+  console.log('🟣 Starting history syncing')
   history.pushState = (state, title, url): void => {
     originalPushState.call(history, state, title, url)
     if (url) {
@@ -51,6 +52,7 @@ const startHistorySyncing = (): void => {
 }
 
 const stopHistorySyncing = (): void => {
+  console.log('🟣 Stopping history syncing')
   history.pushState = originalPushState
   history.replaceState = originalReplaceState
   window.removeEventListener('popstate', onPopstate)
@@ -70,6 +72,9 @@ if (isInsideCozy()) {
   availableMethods = Comlink.wrap(
     Comlink.windowEndpoint(self.parent, self, documentReferrer)
   )
+
+  // We start automatically the history syncing for testing purpose
+  startHistorySyncing()
 
   // @ts-expect-error No type
   window._isInsideCozy = isInsideCozy

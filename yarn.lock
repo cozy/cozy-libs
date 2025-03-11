@@ -16737,6 +16737,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "cozy-external-bridge@workspace:packages/cozy-external-bridge"
   dependencies:
+    "@babel/cli": "npm:7.16.8"
     "@babel/core": "npm:7.16.12"
     "@rspack/cli": "npm:^1.2.7"
     "@rspack/core": "npm:^1.2.7"

@@ -19,6 +19,7 @@
     "react-router-dom": ">=6.14.2"
   },
   "devDependencies": {
+    "@babel/cli": "7.16.8",
     "@babel/core": "7.16.12",
     "@rspack/cli": "^1.2.7",
     "@rspack/core": "^1.2.7",
