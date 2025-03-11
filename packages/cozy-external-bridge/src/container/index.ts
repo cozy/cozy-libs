@@ -27,6 +27,15 @@ const useInitialRedirection = (): void => {
   const location = useLocation()
 
   useEffect(() => {
+    // If current url is root url, do nothing
+    if (
+      location.pathname === '/' &&
+      location.hash === '' &&
+      location.search === ''
+    ) {
+      return
+    }
+
     const iframe = getIframe()
 
     const destUrl = new URL(iframe.src)
