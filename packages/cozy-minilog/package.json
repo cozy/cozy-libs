@@ -2,7 +2,7 @@
   "name": "cozy-minilog",
   "description": "Lightweight client & server-side logging with Stream-API backends and counting, timing support",
   "license": "MIT",
-  "version": "3.9.1",
+  "version": "3.10.0",
   "main": "dist/index.js",
   "files": [
     "dist"

@@ -3,333 +3,177 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [2.9.18](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.17...cozy-playgrounds@2.9.18) (2025-03-11)
+## [2.9.19](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.18...cozy-playgrounds@2.9.19) (2025-03-11)
 
 **Note:** Version bump only for package cozy-playgrounds
 
+## [2.9.18](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.17...cozy-playgrounds@2.9.18) (2025-03-11)
 
-
-
+**Note:** Version bump only for package cozy-playgrounds
 
 ## [2.9.17](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.16...cozy-playgrounds@2.9.17) (2025-02-26)
 
 **Note:** Version bump only for package cozy-playgrounds
 
-
-
-
-
 ## [2.9.16](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.15...cozy-playgrounds@2.9.16) (2025-02-26)
 
 **Note:** Version bump only for package cozy-playgrounds
-
-
-
-
 
 ## [2.9.15](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.14...cozy-playgrounds@2.9.15) (2025-02-10)
 
 **Note:** Version bump only for package cozy-playgrounds
 
-
-
-
-
 ## [2.9.14](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.13...cozy-playgrounds@2.9.14) (2025-02-04)
 
 **Note:** Version bump only for package cozy-playgrounds
-
-
-
-
 
 ## [2.9.13](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.12...cozy-playgrounds@2.9.13) (2025-01-28)
 
 **Note:** Version bump only for package cozy-playgrounds
 
-
-
-
-
 ## [2.9.12](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.11...cozy-playgrounds@2.9.12) (2025-01-23)
 
 **Note:** Version bump only for package cozy-playgrounds
-
-
-
-
 
 ## [2.9.11](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.10...cozy-playgrounds@2.9.11) (2025-01-23)
 
 **Note:** Version bump only for package cozy-playgrounds
 
-
-
-
-
 ## [2.9.10](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.9...cozy-playgrounds@2.9.10) (2025-01-23)
 
 **Note:** Version bump only for package cozy-playgrounds
-
-
-
-
 
 ## [2.9.9](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.8...cozy-playgrounds@2.9.9) (2025-01-22)
 
 **Note:** Version bump only for package cozy-playgrounds
 
-
-
-
-
 ## [2.9.8](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.7...cozy-playgrounds@2.9.8) (2025-01-20)
 
 **Note:** Version bump only for package cozy-playgrounds
-
-
-
-
 
 ## [2.9.7](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.6...cozy-playgrounds@2.9.7) (2025-01-08)
 
 **Note:** Version bump only for package cozy-playgrounds
 
-
-
-
-
 ## [2.9.6](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.5...cozy-playgrounds@2.9.6) (2024-12-23)
 
 **Note:** Version bump only for package cozy-playgrounds
-
-
-
-
 
 ## [2.9.5](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.4...cozy-playgrounds@2.9.5) (2024-12-18)
 
 **Note:** Version bump only for package cozy-playgrounds
 
-
-
-
-
 ## [2.9.4](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.3...cozy-playgrounds@2.9.4) (2024-12-12)
 
 **Note:** Version bump only for package cozy-playgrounds
-
-
-
-
 
 ## [2.9.3](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.2...cozy-playgrounds@2.9.3) (2024-12-12)
 
 **Note:** Version bump only for package cozy-playgrounds
 
-
-
-
-
 ## [2.9.2](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.1...cozy-playgrounds@2.9.2) (2024-12-12)
 
 **Note:** Version bump only for package cozy-playgrounds
-
-
-
-
 
 ## [2.9.1](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.0...cozy-playgrounds@2.9.1) (2024-12-11)
 
 **Note:** Version bump only for package cozy-playgrounds
 
-
-
-
-
 # [2.9.0](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.8.9...cozy-playgrounds@2.9.0) (2024-12-10)
-
 
 ### Features
 
-* Remove cozy-authentication from playgrounds ([d4db7d3](https://github.com/cozy/cozy-libs/commit/d4db7d3044f7303526cc059bb3ccbb87bdfb7958))
-
-
-
-
+- Remove cozy-authentication from playgrounds ([d4db7d3](https://github.com/cozy/cozy-libs/commit/d4db7d3044f7303526cc059bb3ccbb87bdfb7958))
 
 ## [2.8.9](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.8.8...cozy-playgrounds@2.8.9) (2024-12-10)
 
 **Note:** Version bump only for package cozy-playgrounds
 
-
-
-
-
 ## [2.8.8](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.8.7...cozy-playgrounds@2.8.8) (2024-12-06)
 
 **Note:** Version bump only for package cozy-playgrounds
-
-
-
-
 
 ## [2.8.7](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.8.6...cozy-playgrounds@2.8.7) (2024-12-06)
 
 **Note:** Version bump only for package cozy-playgrounds
 
-
-
-
-
 ## [2.8.6](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.8.5...cozy-playgrounds@2.8.6) (2024-12-05)
 
 **Note:** Version bump only for package cozy-playgrounds
-
-
-
-
 
 ## [2.8.5](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.8.4...cozy-playgrounds@2.8.5) (2024-12-05)
 
 **Note:** Version bump only for package cozy-playgrounds
 
-
-
-
-
 ## [2.8.4](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.8.3...cozy-playgrounds@2.8.4) (2024-12-04)
 
 **Note:** Version bump only for package cozy-playgrounds
-
-
-
-
 
 ## [2.8.3](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.8.2...cozy-playgrounds@2.8.3) (2024-12-02)
 
 **Note:** Version bump only for package cozy-playgrounds
 
-
-
-
-
 ## [2.8.2](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.8.1...cozy-playgrounds@2.8.2) (2024-11-26)
 
 **Note:** Version bump only for package cozy-playgrounds
 
-
-
-
-
 ## 2.8.1 (2024-11-06)
-
 
 ### Bug Fixes
 
-* Rename cozy-dataproxy to cozy-dataproxy-lib ([635d421](https://github.com/cozy/cozy-libs/commit/635d421045fc0374ca88cd68ec4941c95c40a0dd))
-
-
-
-
+- Rename cozy-dataproxy to cozy-dataproxy-lib ([635d421](https://github.com/cozy/cozy-libs/commit/635d421045fc0374ca88cd68ec4941c95c40a0dd))
 
 # 2.8.0 (2024-11-06)
 
-
 ### Features
 
-* Upgrade cozy-client and cozy-pouch-link ([67f5241](https://github.com/cozy/cozy-libs/commit/67f5241754e0472a991dad3e5fafd0b1c5edb9c6)), closes [cozy/cozy-client#1553](https://github.com/cozy/cozy-client/issues/1553) [cozy/cozy-client#1556](https://github.com/cozy/cozy-client/issues/1556)
-
-
-
-
+- Upgrade cozy-client and cozy-pouch-link ([67f5241](https://github.com/cozy/cozy-libs/commit/67f5241754e0472a991dad3e5fafd0b1c5edb9c6)), closes [cozy/cozy-client#1553](https://github.com/cozy/cozy-client/issues/1553) [cozy/cozy-client#1556](https://github.com/cozy/cozy-client/issues/1556)
 
 # 2.7.0 (2024-11-06)
 
-
 ### Features
 
-* **cozy-devtools:** Remove logs and use hook to get `client` ([df87cf5](https://github.com/cozy/cozy-libs/commit/df87cf500edacae42c55c4bbf710fa2e55ea8ba3))
-
-
-
-
+- **cozy-devtools:** Remove logs and use hook to get `client` ([df87cf5](https://github.com/cozy/cozy-libs/commit/df87cf500edacae42c55c4bbf710fa2e55ea8ba3))
 
 # 2.6.0 (2024-11-06)
 
-
 ### Features
 
-* **cozy-devtools:** Add first version to test providers ([5689640](https://github.com/cozy/cozy-libs/commit/568964008bb657dfaf8038ac2d9fa3dca8d3eb1c))
-
-
-
-
+- **cozy-devtools:** Add first version to test providers ([5689640](https://github.com/cozy/cozy-libs/commit/568964008bb657dfaf8038ac2d9fa3dca8d3eb1c))
 
 ## 2.5.1 (2024-11-05)
 
 **Note:** Version bump only for package cozy-playgrounds
 
-
-
-
-
 # 2.5.0 (2024-10-30)
-
 
 ### Features
 
-* Update deps for cozy-viewer ([b2e103a](https://github.com/cozy/cozy-libs/commit/b2e103a1280182881ae1133860c0a09650271920))
-
-
-
-
+- Update deps for cozy-viewer ([b2e103a](https://github.com/cozy/cozy-libs/commit/b2e103a1280182881ae1133860c0a09650271920))
 
 # 2.4.0 (2024-10-30)
 
-
 ### Features
 
-* Download file on mobile viewer on press ([3c38062](https://github.com/cozy/cozy-libs/commit/3c38062e2c83d5b8f7d0065323c18d45b5ce9564))
-
-
-
-
+- Download file on mobile viewer on press ([3c38062](https://github.com/cozy/cozy-libs/commit/3c38062e2c83d5b8f7d0065323c18d45b5ce9564))
 
 # 2.3.0 (2024-10-25)
 
-
 ### Features
 
-* **Viewer:** Replace Encrypted provider by cozy-ui one ([aa81d02](https://github.com/cozy/cozy-libs/commit/aa81d02f0a70de8044f704cbd895b1d54c9f38b8))
-
-
-
-
+- **Viewer:** Replace Encrypted provider by cozy-ui one ([aa81d02](https://github.com/cozy/cozy-libs/commit/aa81d02f0a70de8044f704cbd895b1d54c9f38b8))
 
 ## 2.2.28 (2024-10-23)
 
 **Note:** Version bump only for package cozy-playgrounds
 
-
-
-
-
 ## 2.2.27 (2024-10-16)
 
 **Note:** Version bump only for package cozy-playgrounds
 
-
-
-
-
 ## [2.2.26](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.2.25...cozy-playgrounds@2.2.26) (2024-10-15)
 
 **Note:** Version bump only for package cozy-playgrounds
-
-
-
-
 
 ## [2.2.25](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.2.24...cozy-playgrounds@2.2.25) (2024-09-23)
 

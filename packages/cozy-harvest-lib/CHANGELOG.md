@@ -3,801 +3,431 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [32.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.37...cozy-harvest-lib@32.3.0) (2025-03-11)
+
+### Features
+
+- Install eslint at monorepo root ([7fb0667](https://github.com/cozy/cozy-libs/commit/7fb066743320f437b8bde80a4ddbed63297e52c8))
+- Update to Yarn 4 ([35ebc77](https://github.com/cozy/cozy-libs/commit/35ebc776f815a76f5a8937e81198e43679702e03))
+
 ## [32.2.37](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.36...cozy-harvest-lib@32.2.37) (2025-03-11)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [32.2.36](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.35...cozy-harvest-lib@32.2.36) (2025-03-07)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [32.2.35](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.34...cozy-harvest-lib@32.2.35) (2025-02-26)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [32.2.34](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.33...cozy-harvest-lib@32.2.34) (2025-02-26)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [32.2.33](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.32...cozy-harvest-lib@32.2.33) (2025-02-10)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [32.2.32](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.31...cozy-harvest-lib@32.2.32) (2025-02-05)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [32.2.31](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.30...cozy-harvest-lib@32.2.31) (2025-02-04)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [32.2.30](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.29...cozy-harvest-lib@32.2.30) (2025-02-04)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [32.2.29](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.28...cozy-harvest-lib@32.2.29) (2025-01-30)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [32.2.28](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.27...cozy-harvest-lib@32.2.28) (2025-01-30)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [32.2.27](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.26...cozy-harvest-lib@32.2.27) (2025-01-30)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [32.2.26](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.25...cozy-harvest-lib@32.2.26) (2025-01-28)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [32.2.25](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.24...cozy-harvest-lib@32.2.25) (2025-01-28)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [32.2.24](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.23...cozy-harvest-lib@32.2.24) (2025-01-23)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [32.2.23](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.22...cozy-harvest-lib@32.2.23) (2025-01-23)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [32.2.22](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.21...cozy-harvest-lib@32.2.22) (2025-01-23)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [32.2.21](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.20...cozy-harvest-lib@32.2.21) (2025-01-23)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [32.2.20](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.19...cozy-harvest-lib@32.2.20) (2025-01-23)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [32.2.19](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.18...cozy-harvest-lib@32.2.19) (2025-01-22)
-
 
 ### Bug Fixes
 
-* Allow multiple accounts to server konnectors ([0c3b2bf](https://github.com/cozy/cozy-libs/commit/0c3b2bffb5d61b59f411021b99bbbc68c36fc4c9))
-* Correct path associated to the Add Account button ([d8c53fe](https://github.com/cozy/cozy-libs/commit/d8c53fe1d10bf4c22c2bb7b716709b2a9466da9f))
-
-
-
-
+- Allow multiple accounts to server konnectors ([0c3b2bf](https://github.com/cozy/cozy-libs/commit/0c3b2bffb5d61b59f411021b99bbbc68c36fc4c9))
+- Correct path associated to the Add Account button ([d8c53fe](https://github.com/cozy/cozy-libs/commit/d8c53fe1d10bf4c22c2bb7b716709b2a9466da9f))
 
 ## [32.2.18](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.17...cozy-harvest-lib@32.2.18) (2025-01-22)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [32.2.17](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.16...cozy-harvest-lib@32.2.17) (2025-01-22)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [32.2.16](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.15...cozy-harvest-lib@32.2.16) (2025-01-21)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [32.2.15](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.14...cozy-harvest-lib@32.2.15) (2025-01-21)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [32.2.14](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.13...cozy-harvest-lib@32.2.14) (2025-01-20)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [32.2.13](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.12...cozy-harvest-lib@32.2.13) (2025-01-20)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [32.2.12](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.11...cozy-harvest-lib@32.2.12) (2025-01-16)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [32.2.11](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.10...cozy-harvest-lib@32.2.11) (2025-01-16)
-
 
 ### Bug Fixes
 
-* Force the update of the current konnector data ([23370de](https://github.com/cozy/cozy-libs/commit/23370ded95bfd42c6c482dd0cdd9015057d8502e))
-
-
-
-
+- Force the update of the current konnector data ([23370de](https://github.com/cozy/cozy-libs/commit/23370ded95bfd42c6c482dd0cdd9015057d8502e))
 
 ## [32.2.10](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.9...cozy-harvest-lib@32.2.10) (2025-01-15)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [32.2.9](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.8...cozy-harvest-lib@32.2.9) (2025-01-13)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [32.2.8](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.7...cozy-harvest-lib@32.2.8) (2025-01-13)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [32.2.7](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.6...cozy-harvest-lib@32.2.7) (2025-01-09)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [32.2.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.5...cozy-harvest-lib@32.2.6) (2025-01-08)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [32.2.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.4...cozy-harvest-lib@32.2.5) (2025-01-08)
-
 
 ### Bug Fixes
 
-* **harvest:** Konnector slug now relies on createdByApp in KonnectrBlock ([9a18110](https://github.com/cozy/cozy-libs/commit/9a18110633f208bf51251fd192f8efb647526d40))
-
-
-
-
+- **harvest:** Konnector slug now relies on createdByApp in KonnectrBlock ([9a18110](https://github.com/cozy/cozy-libs/commit/9a18110633f208bf51251fd192f8efb647526d40))
 
 ## [32.2.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.3...cozy-harvest-lib@32.2.4) (2025-01-08)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [32.2.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.2...cozy-harvest-lib@32.2.3) (2025-01-07)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [32.2.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.1...cozy-harvest-lib@32.2.2) (2025-01-07)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [32.2.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.2.0...cozy-harvest-lib@32.2.1) (2024-12-23)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 # [32.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.1.0...cozy-harvest-lib@32.2.0) (2024-12-23)
-
 
 ### Features
 
-* **cozy-harvest:** Add missing react-redux dep ([27ee882](https://github.com/cozy/cozy-libs/commit/27ee8822365d51031a8b61ee4816005c2ea5dc33))
-* **cozy-harvest:** Prefer use createMockClient for tests ([26a5e30](https://github.com/cozy/cozy-libs/commit/26a5e3076cb8a0928ca95bec1a9a75440ec7e7cb))
-
-
-
-
+- **cozy-harvest:** Add missing react-redux dep ([27ee882](https://github.com/cozy/cozy-libs/commit/27ee8822365d51031a8b61ee4816005c2ea5dc33))
+- **cozy-harvest:** Prefer use createMockClient for tests ([26a5e30](https://github.com/cozy/cozy-libs/commit/26a5e3076cb8a0928ca95bec1a9a75440ec7e7cb))
 
 # [32.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.0.0...cozy-harvest-lib@32.1.0) (2024-12-23)
 
-
 ### Features
 
-* Upgrade date-fns to 2.30.0 ([aaf21c9](https://github.com/cozy/cozy-libs/commit/aaf21c98c239ca661d29b5f8a98a4014dc140ded))
-
-
-
-
+- Upgrade date-fns to 2.30.0 ([aaf21c9](https://github.com/cozy/cozy-libs/commit/aaf21c98c239ca661d29b5f8a98a4014dc140ded))
 
 # [32.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.27...cozy-harvest-lib@32.0.0) (2024-12-23)
 
-
 ### Features
 
-* **cozy-harvest:** Replace jsdom-sixteen package ([2f455ba](https://github.com/cozy/cozy-libs/commit/2f455ba87718b0633f71035c489f1db6cbbd22f1))
-* **cozy-harvest:** Upgrade cozy-ui to 115.0.2 ([8933c1f](https://github.com/cozy/cozy-libs/commit/8933c1fbd3332ae9e6f2e92642a9a456988e7562))
-
+- **cozy-harvest:** Replace jsdom-sixteen package ([2f455ba](https://github.com/cozy/cozy-libs/commit/2f455ba87718b0633f71035c489f1db6cbbd22f1))
+- **cozy-harvest:** Upgrade cozy-ui to 115.0.2 ([8933c1f](https://github.com/cozy/cozy-libs/commit/8933c1fbd3332ae9e6f2e92642a9a456988e7562))
 
 ### BREAKING CHANGES
 
-* **cozy-harvest:** You must have `cozy-ui >= 115.0.2`, `cozy-client >= 51.6.1`, `cozy-intent >= 2.29.1` & `cozy-viewer >= 11.3.1`
-
-
-
-
+- **cozy-harvest:** You must have `cozy-ui >= 115.0.2`, `cozy-client >= 51.6.1`, `cozy-intent >= 2.29.1` & `cozy-viewer >= 11.3.1`
 
 ## [31.0.27](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.26...cozy-harvest-lib@31.0.27) (2024-12-23)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [31.0.26](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.25...cozy-harvest-lib@31.0.26) (2024-12-23)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [31.0.25](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.24...cozy-harvest-lib@31.0.25) (2024-12-23)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [31.0.24](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.23...cozy-harvest-lib@31.0.24) (2024-12-23)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [31.0.23](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.22...cozy-harvest-lib@31.0.23) (2024-12-20)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [31.0.22](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.21...cozy-harvest-lib@31.0.22) (2024-12-19)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [31.0.21](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.20...cozy-harvest-lib@31.0.21) (2024-12-18)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [31.0.20](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.19...cozy-harvest-lib@31.0.20) (2024-12-18)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [31.0.19](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.18...cozy-harvest-lib@31.0.19) (2024-12-16)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [31.0.18](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.17...cozy-harvest-lib@31.0.18) (2024-12-13)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [31.0.17](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.16...cozy-harvest-lib@31.0.17) (2024-12-12)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [31.0.16](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.15...cozy-harvest-lib@31.0.16) (2024-12-12)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [31.0.15](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.14...cozy-harvest-lib@31.0.15) (2024-12-12)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [31.0.14](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.13...cozy-harvest-lib@31.0.14) (2024-12-12)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [31.0.13](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.12...cozy-harvest-lib@31.0.13) (2024-12-12)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [31.0.12](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.11...cozy-harvest-lib@31.0.12) (2024-12-11)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [31.0.11](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.10...cozy-harvest-lib@31.0.11) (2024-12-10)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [31.0.10](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.9...cozy-harvest-lib@31.0.10) (2024-12-10)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [31.0.9](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.8...cozy-harvest-lib@31.0.9) (2024-12-10)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [31.0.8](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.7...cozy-harvest-lib@31.0.8) (2024-12-06)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [31.0.7](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.6...cozy-harvest-lib@31.0.7) (2024-12-06)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [31.0.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.5...cozy-harvest-lib@31.0.6) (2024-12-05)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [31.0.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.4...cozy-harvest-lib@31.0.5) (2024-12-05)
-
 
 ### Bug Fixes
 
-* **Harvest:** Konnector block style wasn't correct ([336cd7f](https://github.com/cozy/cozy-libs/commit/336cd7f0af23aa65b8040d3c999e4b2912b266ae))
-
-
-
-
+- **Harvest:** Konnector block style wasn't correct ([336cd7f](https://github.com/cozy/cozy-libs/commit/336cd7f0af23aa65b8040d3c999e4b2912b266ae))
 
 ## [31.0.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.3...cozy-harvest-lib@31.0.4) (2024-12-05)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [31.0.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.2...cozy-harvest-lib@31.0.3) (2024-12-05)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [31.0.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.1...cozy-harvest-lib@31.0.2) (2024-12-04)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [31.0.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@31.0.0...cozy-harvest-lib@31.0.1) (2024-12-03)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 # [31.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@30.8.3...cozy-harvest-lib@31.0.0) (2024-11-28)
-
 
 ### Code Refactoring
 
-* Rename Routes to HarvestRoutes ([760608a](https://github.com/cozy/cozy-libs/commit/760608a4d8c4f42d5a5a1150d8bbbc89e08c3cd1))
-
+- Rename Routes to HarvestRoutes ([760608a](https://github.com/cozy/cozy-libs/commit/760608a4d8c4f42d5a5a1150d8bbbc89e08c3cd1))
 
 ### Features
 
-* **AccountModalHeader:** Add a story to test the component ([dbe8d8a](https://github.com/cozy/cozy-libs/commit/dbe8d8a90649636572e8edf4f49519c98cf30b01))
-* Add react-router to work with storybook ([549ceab](https://github.com/cozy/cozy-libs/commit/549ceab2113faf041d110b953d255c49fd087192))
-* Remove adaptive router ([9db7559](https://github.com/cozy/cozy-libs/commit/9db755987117b455c6c2bb0cde9046c51ad7c2fa))
-* Remove react-router v3 package ([392c5c2](https://github.com/cozy/cozy-libs/commit/392c5c25affc2e78872ceb4d6f65831f8c3c816a))
-* Remove RoutesV4 to only use RouteV6 ([6205897](https://github.com/cozy/cozy-libs/commit/620589750d2afc1716aae2ac1ef38a4a16cfcbf1))
-
+- **AccountModalHeader:** Add a story to test the component ([dbe8d8a](https://github.com/cozy/cozy-libs/commit/dbe8d8a90649636572e8edf4f49519c98cf30b01))
+- Add react-router to work with storybook ([549ceab](https://github.com/cozy/cozy-libs/commit/549ceab2113faf041d110b953d255c49fd087192))
+- Remove adaptive router ([9db7559](https://github.com/cozy/cozy-libs/commit/9db755987117b455c6c2bb0cde9046c51ad7c2fa))
+- Remove react-router v3 package ([392c5c2](https://github.com/cozy/cozy-libs/commit/392c5c25affc2e78872ceb4d6f65831f8c3c816a))
+- Remove RoutesV4 to only use RouteV6 ([6205897](https://github.com/cozy/cozy-libs/commit/620589750d2afc1716aae2ac1ef38a4a16cfcbf1))
 
 ### BREAKING CHANGES
 
-* You must have `react-router-dom >= 6.14.2` 
-* `Routes` has been renamed `HarvestRoutes`. You should changed the import `import { Routes } from 'cozy-harvest-lib'` to `import { HarvestRoutes } from 'cozy-harvest-lib'`
-
-
-
-
+- You must have `react-router-dom >= 6.14.2`
+- `Routes` has been renamed `HarvestRoutes`. You should changed the import `import { Routes } from 'cozy-harvest-lib'` to `import { HarvestRoutes } from 'cozy-harvest-lib'`
 
 ## [30.8.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@30.8.2...cozy-harvest-lib@30.8.3) (2024-11-28)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [30.8.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@30.8.1...cozy-harvest-lib@30.8.2) (2024-11-27)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [30.8.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@30.8.0...cozy-harvest-lib@30.8.1) (2024-11-27)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 # [30.8.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@30.7.1...cozy-harvest-lib@30.8.0) (2024-11-27)
-
 
 ### Features
 
-* **Harvest:** Add last sync time in KonnectorBlock ([2642af1](https://github.com/cozy/cozy-libs/commit/2642af127192d187b40c0c7b2c424a6abf8fc0fa))
-* **Harvest:** Add link to store in KonnectorBlock ([ceb4608](https://github.com/cozy/cozy-libs/commit/ceb4608bd2c9a7aa2c34c41e58993ea799dc9a60))
-* **Harvest:** Adjust KonnectorBlock style ([94e413b](https://github.com/cozy/cozy-libs/commit/94e413bae050d4ebad71de4fd1728fe9f12e2112))
-* **Harvest:** Change wording in KonnectorBlock ([3b9cdfb](https://github.com/cozy/cozy-libs/commit/3b9cdfbba91ebe0c89071f75c12992ccd7c44ab8))
-
-
-
-
+- **Harvest:** Add last sync time in KonnectorBlock ([2642af1](https://github.com/cozy/cozy-libs/commit/2642af127192d187b40c0c7b2c424a6abf8fc0fa))
+- **Harvest:** Add link to store in KonnectorBlock ([ceb4608](https://github.com/cozy/cozy-libs/commit/ceb4608bd2c9a7aa2c34c41e58993ea799dc9a60))
+- **Harvest:** Adjust KonnectorBlock style ([94e413b](https://github.com/cozy/cozy-libs/commit/94e413bae050d4ebad71de4fd1728fe9f12e2112))
+- **Harvest:** Change wording in KonnectorBlock ([3b9cdfb](https://github.com/cozy/cozy-libs/commit/3b9cdfbba91ebe0c89071f75c12992ccd7c44ab8))
 
 ## [30.7.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@30.7.0...cozy-harvest-lib@30.7.1) (2024-11-26)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 # [30.7.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@30.6.5...cozy-harvest-lib@30.7.0) (2024-11-22)
-
 
 ### Bug Fixes
 
-* **cozy-harvest-lib:** Make test working after no-hosting cozy-ui ([ead9c6f](https://github.com/cozy/cozy-libs/commit/ead9c6f34f50708f72eb6e0d2f7ced4f354e1d12))
-* **cozy-harvest-lib:** Make test works with cozy-client ([bce0da5](https://github.com/cozy/cozy-libs/commit/bce0da5531afea157da2c2fd72ed3645a831e853))
-
+- **cozy-harvest-lib:** Make test working after no-hosting cozy-ui ([ead9c6f](https://github.com/cozy/cozy-libs/commit/ead9c6f34f50708f72eb6e0d2f7ced4f354e1d12))
+- **cozy-harvest-lib:** Make test works with cozy-client ([bce0da5](https://github.com/cozy/cozy-libs/commit/bce0da5531afea157da2c2fd72ed3645a831e853))
 
 ### Features
 
-* **cozy-harvest-lib:** Force light theme inside Storybook ([ec78500](https://github.com/cozy/cozy-libs/commit/ec78500ff71551a27e6036d861a19071d119b4ef))
-* **cozy-harvest-lib:** Update cozy-ui from 112.2.0 to 113.1.0 ([92c0722](https://github.com/cozy/cozy-libs/commit/92c072200b3d223466d55bacd794bdcff1b18359))
-
-
-
-
+- **cozy-harvest-lib:** Force light theme inside Storybook ([ec78500](https://github.com/cozy/cozy-libs/commit/ec78500ff71551a27e6036d861a19071d119b4ef))
+- **cozy-harvest-lib:** Update cozy-ui from 112.2.0 to 113.1.0 ([92c0722](https://github.com/cozy/cozy-libs/commit/92c072200b3d223466d55bacd794bdcff1b18359))
 
 ## [30.6.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@30.6.4...cozy-harvest-lib@30.6.5) (2024-11-22)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [30.6.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@30.6.3...cozy-harvest-lib@30.6.4) (2024-11-18)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [30.6.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@30.6.2...cozy-harvest-lib@30.6.3) (2024-11-18)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [30.6.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@30.6.1...cozy-harvest-lib@30.6.2) (2024-11-07)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## 30.6.1 (2024-11-06)
-
 
 ### Bug Fixes
 
-* Rename cozy-dataproxy to cozy-dataproxy-lib ([635d421](https://github.com/cozy/cozy-libs/commit/635d421045fc0374ca88cd68ec4941c95c40a0dd))
-
-
-
-
+- Rename cozy-dataproxy to cozy-dataproxy-lib ([635d421](https://github.com/cozy/cozy-libs/commit/635d421045fc0374ca88cd68ec4941c95c40a0dd))
 
 # 30.6.0 (2024-11-06)
 
-
 ### Features
 
-* Upgrade cozy-client and cozy-pouch-link ([67f5241](https://github.com/cozy/cozy-libs/commit/67f5241754e0472a991dad3e5fafd0b1c5edb9c6)), closes [cozy/cozy-client#1553](https://github.com/cozy/cozy-client/issues/1553) [cozy/cozy-client#1556](https://github.com/cozy/cozy-client/issues/1556)
-
-
-
-
+- Upgrade cozy-client and cozy-pouch-link ([67f5241](https://github.com/cozy/cozy-libs/commit/67f5241754e0472a991dad3e5fafd0b1c5edb9c6)), closes [cozy/cozy-client#1553](https://github.com/cozy/cozy-client/issues/1553) [cozy/cozy-client#1556](https://github.com/cozy/cozy-client/issues/1556)
 
 # 30.5.0 (2024-11-06)
 
-
 ### Features
 
-* **cozy-devtools:** Remove logs and use hook to get `client` ([df87cf5](https://github.com/cozy/cozy-libs/commit/df87cf500edacae42c55c4bbf710fa2e55ea8ba3))
-
-
-
-
+- **cozy-devtools:** Remove logs and use hook to get `client` ([df87cf5](https://github.com/cozy/cozy-libs/commit/df87cf500edacae42c55c4bbf710fa2e55ea8ba3))
 
 # 30.4.0 (2024-11-06)
 
-
 ### Features
 
-* **cozy-devtools:** Add first version to test providers ([5689640](https://github.com/cozy/cozy-libs/commit/568964008bb657dfaf8038ac2d9fa3dca8d3eb1c))
-
-
-
-
+- **cozy-devtools:** Add first version to test providers ([5689640](https://github.com/cozy/cozy-libs/commit/568964008bb657dfaf8038ac2d9fa3dca8d3eb1c))
 
 ## 30.3.1 (2024-11-05)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 # 30.3.0 (2024-10-30)
-
 
 ### Features
 
-* Update deps for cozy-viewer ([b2e103a](https://github.com/cozy/cozy-libs/commit/b2e103a1280182881ae1133860c0a09650271920))
-
-
-
-
+- Update deps for cozy-viewer ([b2e103a](https://github.com/cozy/cozy-libs/commit/b2e103a1280182881ae1133860c0a09650271920))
 
 # 30.2.0 (2024-10-30)
 
-
 ### Features
 
-* Download file on mobile viewer on press ([3c38062](https://github.com/cozy/cozy-libs/commit/3c38062e2c83d5b8f7d0065323c18d45b5ce9564))
-
-
-
-
+- Download file on mobile viewer on press ([3c38062](https://github.com/cozy/cozy-libs/commit/3c38062e2c83d5b8f7d0065323c18d45b5ce9564))
 
 # 30.1.0 (2024-10-25)
 
-
 ### Features
 
-* **Viewer:** Replace Encrypted provider by cozy-ui one ([aa81d02](https://github.com/cozy/cozy-libs/commit/aa81d02f0a70de8044f704cbd895b1d54c9f38b8))
-
-
-
-
+- **Viewer:** Replace Encrypted provider by cozy-ui one ([aa81d02](https://github.com/cozy/cozy-libs/commit/aa81d02f0a70de8044f704cbd895b1d54c9f38b8))
 
 ## 30.0.4 (2024-10-23)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## 30.0.3 (2024-10-16)
 
 **Note:** Version bump only for package cozy-harvest-lib
 
-
-
-
-
 ## [30.0.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@30.0.1...cozy-harvest-lib@30.0.2) (2024-10-15)
 
 **Note:** Version bump only for package cozy-harvest-lib
-
-
-
-
 
 ## [30.0.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@30.0.0...cozy-harvest-lib@30.0.1) (2024-09-24)
 

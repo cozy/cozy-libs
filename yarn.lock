@@ -16147,11 +16147,11 @@ __metadata:
     classnames: "npm:2.5.1"
     comlink: "npm:4.4.1"
     cozy-client: "npm:^54.0.0"
-    cozy-device-helper: "npm:^3.7.1"
-    cozy-flags: "npm:^4.6.1"
-    cozy-intent: "npm:^2.29.2"
-    cozy-logger: "npm:^1.16.1"
-    cozy-minilog: "npm:^3.9.1"
+    cozy-device-helper: "npm:^3.8.0"
+    cozy-flags: "npm:^4.7.0"
+    cozy-intent: "npm:^2.30.0"
+    cozy-logger: "npm:^1.17.0"
+    cozy-minilog: "npm:^3.10.0"
     cozy-pouch-link: "npm:^54.0.0"
     cozy-realtime: "npm:^5.6.4"
     cozy-ui: "npm:^111.19.0"
@@ -16210,7 +16210,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-device-helper@npm:^3.7.1, cozy-device-helper@workspace:packages/cozy-device-helper":
+"cozy-device-helper@npm:^3.7.1, cozy-device-helper@npm:^3.8.0, cozy-device-helper@workspace:packages/cozy-device-helper":
   version: 0.0.0-use.local
   resolution: "cozy-device-helper@workspace:packages/cozy-device-helper"
   dependencies:
@@ -16231,8 +16231,8 @@ __metadata:
   dependencies:
     babel-preset-cozy-app: "npm:^2.8.1"
     cozy-client: "npm:^50.0.0"
-    cozy-flags: "npm:^4.6.1"
-    cozy-intent: "npm:^2.29.2"
+    cozy-flags: "npm:^4.7.0"
+    cozy-intent: "npm:^2.30.0"
     cozy-pouch-link: "npm:^50.0.0"
     cozy-ui: "npm:^111.19.0"
     date-fns: "npm:2.29.3"
@@ -16253,7 +16253,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"cozy-doctypes@npm:^1.97.1, cozy-doctypes@workspace:packages/cozy-doctypes":
+"cozy-doctypes@npm:^1.97.2, cozy-doctypes@workspace:packages/cozy-doctypes":
   version: 0.0.0-use.local
   resolution: "cozy-doctypes@workspace:packages/cozy-doctypes"
   dependencies:
@@ -16263,8 +16263,8 @@ __metadata:
     btoa: "npm:1.2.1"
     cozy-client: "npm:13.21.0"
     cozy-client-js: "npm:0.19.0"
-    cozy-flags: "npm:^4.6.1"
-    cozy-logger: "npm:^1.16.1"
+    cozy-flags: "npm:^4.7.0"
+    cozy-logger: "npm:^1.17.0"
     cozy-stack-client: "npm:13.20.2"
     date-fns: "npm:^1.30.1"
     es6-promise-pool: "npm:^2.5.0"
@@ -16297,7 +16297,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-flags@npm:^4.6.1, cozy-flags@workspace:packages/cozy-flags":
+"cozy-flags@npm:^4.7.0, cozy-flags@workspace:packages/cozy-flags":
   version: 0.0.0-use.local
   resolution: "cozy-flags@workspace:packages/cozy-flags"
   dependencies:
@@ -16318,7 +16318,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"cozy-harvest-lib@npm:^32.2.37, cozy-harvest-lib@workspace:packages/cozy-harvest-lib":
+"cozy-harvest-lib@npm:^32.3.0, cozy-harvest-lib@workspace:packages/cozy-harvest-lib":
   version: 0.0.0-use.local
   resolution: "cozy-harvest-lib@workspace:packages/cozy-harvest-lib"
   dependencies:
@@ -16344,17 +16344,17 @@ __metadata:
     babel-preset-cozy-app: "npm:^2.8.1"
     classnames: "npm:^2.3.1"
     cozy-client: "npm:^51.6.1"
-    cozy-device-helper: "npm:^3.7.1"
-    cozy-doctypes: "npm:^1.97.1"
-    cozy-flags: "npm:^4.6.1"
-    cozy-intent: "npm:^2.29.2"
-    cozy-interapp: "npm:^0.15.1"
+    cozy-device-helper: "npm:^3.8.0"
+    cozy-doctypes: "npm:^1.97.2"
+    cozy-flags: "npm:^4.7.0"
+    cozy-intent: "npm:^2.30.0"
+    cozy-interapp: "npm:^0.16.0"
     cozy-keys-lib: "npm:^6.1.1"
-    cozy-logger: "npm:^1.16.1"
+    cozy-logger: "npm:^1.17.0"
     cozy-realtime: "npm:^5.6.4"
     cozy-tsconfig: "npm:^1.8.1"
     cozy-ui: "npm:^115.0.2"
-    cozy-viewer: "npm:^19.0.0"
+    cozy-viewer: "npm:^19.1.0"
     date-fns: "npm:2.30.0"
     enzyme: "npm:3.11.0"
     enzyme-adapter-react-16: "npm:1.15.6"
@@ -16401,7 +16401,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"cozy-intent@npm:^2.29.2, cozy-intent@workspace:packages/cozy-intent":
+"cozy-intent@npm:^2.30.0, cozy-intent@workspace:packages/cozy-intent":
   version: 0.0.0-use.local
   resolution: "cozy-intent@workspace:packages/cozy-intent"
   dependencies:
@@ -16428,7 +16428,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-interapp@npm:^0.15.1, cozy-interapp@workspace:packages/cozy-interapp":
+"cozy-interapp@npm:^0.16.0, cozy-interapp@workspace:packages/cozy-interapp":
   version: 0.0.0-use.local
   resolution: "cozy-interapp@workspace:packages/cozy-interapp"
   dependencies:
@@ -16509,7 +16509,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"cozy-logger@npm:^1.10.1, cozy-logger@npm:^1.16.1, cozy-logger@npm:^1.6.0, cozy-logger@workspace:packages/cozy-logger":
+"cozy-logger@npm:^1.10.1, cozy-logger@npm:^1.17.0, cozy-logger@npm:^1.6.0, cozy-logger@workspace:packages/cozy-logger":
   version: 0.0.0-use.local
   resolution: "cozy-logger@workspace:packages/cozy-logger"
   dependencies:
@@ -16520,7 +16520,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"cozy-minilog@npm:^3.3.1, cozy-minilog@npm:^3.9.1, cozy-minilog@workspace:packages/cozy-minilog":
+"cozy-minilog@npm:^3.10.0, cozy-minilog@npm:^3.3.1, cozy-minilog@workspace:packages/cozy-minilog":
   version: 0.0.0-use.local
   resolution: "cozy-minilog@workspace:packages/cozy-minilog"
   dependencies:
@@ -16575,10 +16575,10 @@ __metadata:
     "@material-ui/core": "npm:3.9.4"
     "@material-ui/lab": "npm:^4.0.0-alpha.60"
     cozy-client: "npm:13.21.0"
-    cozy-device-helper: "npm:^3.7.1"
-    cozy-doctypes: "npm:^1.97.1"
+    cozy-device-helper: "npm:^3.8.0"
+    cozy-doctypes: "npm:^1.97.2"
     cozy-realtime: "npm:^5.6.4"
-    cozy-sharing: "npm:^23.0.0"
+    cozy-sharing: "npm:^23.1.0"
     cozy-ui: "npm:40.9.1"
     date-fns: "npm:1.30.1"
     lodash: "npm:4.17.21"
@@ -16682,7 +16682,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"cozy-sharing@npm:^23.0.0, cozy-sharing@workspace:packages/cozy-sharing":
+"cozy-sharing@npm:^23.1.0, cozy-sharing@workspace:packages/cozy-sharing":
   version: 0.0.0-use.local
   resolution: "cozy-sharing@workspace:packages/cozy-sharing"
   dependencies:
@@ -16705,9 +16705,9 @@ __metadata:
     classnames: "npm:^2.2.6"
     cozy-client: "npm:^57.0.0"
     cozy-device-helper: "npm:^3.7.1"
-    cozy-doctypes: "npm:^1.97.1"
-    cozy-intent: "npm:^2.29.2"
-    cozy-minilog: "npm:^3.9.1"
+    cozy-doctypes: "npm:^1.97.2"
+    cozy-intent: "npm:^2.30.0"
+    cozy-minilog: "npm:^3.10.0"
     cozy-ui: "npm:^119.0.1"
     date-fns: "npm:2.30.0"
     jest: "npm:26.6.3"
@@ -17091,7 +17091,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-viewer@npm:^19.0.0, cozy-viewer@workspace:packages/cozy-viewer":
+"cozy-viewer@npm:^19.1.0, cozy-viewer@workspace:packages/cozy-viewer":
   version: 0.0.0-use.local
   resolution: "cozy-viewer@workspace:packages/cozy-viewer"
   dependencies:
@@ -17103,10 +17103,10 @@ __metadata:
     classnames: "npm:^2.2.5"
     cozy-client: "npm:^53.1.1"
     cozy-device-helper: "npm:2.0.0"
-    cozy-harvest-lib: "npm:^32.2.37"
-    cozy-intent: "npm:^2.29.2"
-    cozy-logger: "npm:^1.16.1"
-    cozy-sharing: "npm:^23.0.0"
+    cozy-harvest-lib: "npm:^32.3.0"
+    cozy-intent: "npm:^2.30.0"
+    cozy-logger: "npm:^1.17.0"
+    cozy-sharing: "npm:^23.1.0"
     cozy-ui: "npm:^119.0.1"
     hammerjs: "npm:^2.0.8"
     identity-obj-proxy: "npm:3.0.0"

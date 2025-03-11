@@ -3,124 +3,91 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [23.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@22.0.0...cozy-sharing@23.0.0) (2025-03-11)
-
+# [23.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@23.0.0...cozy-sharing@23.1.0) (2025-03-11)
 
 ### Features
 
-* **Sharing:** Remove image avatar from stack ([904efbc](https://github.com/cozy/cozy-libs/commit/904efbca5855fef7d3cd23ffcbefd64810cdec26))
-* **Sharing:** Upgrade cozy-ui 116.0.0 to 119.0.1 ([393ce80](https://github.com/cozy/cozy-libs/commit/393ce806fe726355b165c7130653bb33b2c371cc))
+- Add @babel/cli in devDep for some packages ([89e3a41](https://github.com/cozy/cozy-libs/commit/89e3a4156ba5867c9c20642d14e63b14bf992217))
 
+# [23.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@22.0.0...cozy-sharing@23.0.0) (2025-03-11)
+
+### Features
+
+- **Sharing:** Remove image avatar from stack ([904efbc](https://github.com/cozy/cozy-libs/commit/904efbca5855fef7d3cd23ffcbefd64810cdec26))
+- **Sharing:** Upgrade cozy-ui 116.0.0 to 119.0.1 ([393ce80](https://github.com/cozy/cozy-libs/commit/393ce806fe726355b165c7130653bb33b2c371cc))
 
 ### BREAKING CHANGES
 
-* **Sharing:** You must have `cozy-ui >= 119.0.1`
-
-
-
-
+- **Sharing:** You must have `cozy-ui >= 119.0.1`
 
 # [22.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@21.3.0...cozy-sharing@22.0.0) (2025-02-26)
 
-
 ### Features
 
-* Upgrade cozy-client ([ccc4ece](https://github.com/cozy/cozy-libs/commit/ccc4ece2ae51fc6d0f4d207dc7023db0cf4942c1))
-
+- Upgrade cozy-client ([ccc4ece](https://github.com/cozy/cozy-libs/commit/ccc4ece2ae51fc6d0f4d207dc7023db0cf4942c1))
 
 ### BREAKING CHANGES
 
-* You must have `cozy-client >=57.0.0`
-
-
-
-
+- You must have `cozy-client >=57.0.0`
 
 # [21.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@21.2.2...cozy-sharing@21.3.0) (2025-02-26)
 
-
 ### Features
 
-* Add a basic new shared drive modal ([a554807](https://github.com/cozy/cozy-libs/commit/a55480749600410871b74e3284f23f5d57d71605))
-* Allow to create a shared drive in the share method ([c5efffe](https://github.com/cozy/cozy-libs/commit/c5efffee257519a4e83d74a4c263395239d5fd02))
-* Allow to customize autosuggest submit label ([6b619df](https://github.com/cozy/cozy-libs/commit/6b619dffc96d020e3bc031a73f3c622afdd77343))
-* Allow to disable notifications on contact selection ([a62e48d](https://github.com/cozy/cozy-libs/commit/a62e48db450620bb42e9d5e568fdc861ee6a0650))
-* Display notification and close modal on shared drive creation ([10bff21](https://github.com/cozy/cozy-libs/commit/10bff21516fa3159ce04e15c332044fe462636cc))
-* Manage changing permissions in NewSharedDriveModal ([9aba037](https://github.com/cozy/cozy-libs/commit/9aba0371d9d3a993523a5d6968eac7c4d9d1ec3f))
-
-
-
-
+- Add a basic new shared drive modal ([a554807](https://github.com/cozy/cozy-libs/commit/a55480749600410871b74e3284f23f5d57d71605))
+- Allow to create a shared drive in the share method ([c5efffe](https://github.com/cozy/cozy-libs/commit/c5efffee257519a4e83d74a4c263395239d5fd02))
+- Allow to customize autosuggest submit label ([6b619df](https://github.com/cozy/cozy-libs/commit/6b619dffc96d020e3bc031a73f3c622afdd77343))
+- Allow to disable notifications on contact selection ([a62e48d](https://github.com/cozy/cozy-libs/commit/a62e48db450620bb42e9d5e568fdc861ee6a0650))
+- Display notification and close modal on shared drive creation ([10bff21](https://github.com/cozy/cozy-libs/commit/10bff21516fa3159ce04e15c332044fe462636cc))
+- Manage changing permissions in NewSharedDriveModal ([9aba037](https://github.com/cozy/cozy-libs/commit/9aba0371d9d3a993523a5d6968eac7c4d9d1ec3f))
 
 ## [21.2.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@21.2.1...cozy-sharing@21.2.2) (2025-02-04)
 
-
 ### Bug Fixes
 
-* **Sharing:** Show all share recipients in the “who has access” modal ([8669e6b](https://github.com/cozy/cozy-libs/commit/8669e6b8d8650bbd6645a9be94db403121059e70))
-* **Sharing:** Show correct sharing status by user ([55f5a43](https://github.com/cozy/cozy-libs/commit/55f5a43ca5426da991ab76c7f96faa6ccae00a11))
-
+- **Sharing:** Show all share recipients in the “who has access” modal ([8669e6b](https://github.com/cozy/cozy-libs/commit/8669e6b8d8650bbd6645a9be94db403121059e70))
+- **Sharing:** Show correct sharing status by user ([55f5a43](https://github.com/cozy/cozy-libs/commit/55f5a43ca5426da991ab76c7f96faa6ccae00a11))
 
 ### Reverts
 
-* Revert "fix(Sharing): Show correct sharing status by user" ([547a458](https://github.com/cozy/cozy-libs/commit/547a458b1dc4cb64724345c753eff153f7830a8a))
-
-
-
-
+- Revert "fix(Sharing): Show correct sharing status by user" ([547a458](https://github.com/cozy/cozy-libs/commit/547a458b1dc4cb64724345c753eff153f7830a8a))
 
 ## [21.2.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@21.2.0...cozy-sharing@21.2.1) (2025-01-28)
 
 **Note:** Version bump only for package cozy-sharing
 
-
-
-
-
 # [21.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@21.1.0...cozy-sharing@21.2.0) (2025-01-23)
-
 
 ### Features
 
-* Remove unused forwardFile ([dbc6aa8](https://github.com/cozy/cozy-libs/commit/dbc6aa8b5e642cdc0b7b626ff9ec91713ffdc7c1))
-
-
-
-
+- Remove unused forwardFile ([dbc6aa8](https://github.com/cozy/cozy-libs/commit/dbc6aa8b5e642cdc0b7b626ff9ec91713ffdc7c1))
 
 # [21.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@21.0.0...cozy-sharing@21.1.0) (2025-01-23)
 
-
 ### Bug Fixes
 
-* **sharing:** Fix SharingBannerCozyToCozy propTypes ([1c28e60](https://github.com/cozy/cozy-libs/commit/1c28e60acc2352f75433b67d23ddb2d25b276183))
-
+- **sharing:** Fix SharingBannerCozyToCozy propTypes ([1c28e60](https://github.com/cozy/cozy-libs/commit/1c28e60acc2352f75433b67d23ddb2d25b276183))
 
 ### Features
 
-* **sharing:** Rename prop of createCozySharingLink action ([cbfb7c9](https://github.com/cozy/cozy-libs/commit/cbfb7c9f179f7396841257f5ad09be7f61ad725d))
-
-
-
-
+- **sharing:** Rename prop of createCozySharingLink action ([cbfb7c9](https://github.com/cozy/cozy-libs/commit/cbfb7c9f179f7396841257f5ad09be7f61ad725d))
 
 # [21.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@20.0.0...cozy-sharing@21.0.0) (2025-01-23)
 
-
 ### Features
 
-* **sharing:** Add new links to `useSharingInfos` ([e9e51f7](https://github.com/cozy/cozy-libs/commit/e9e51f773698ea72af5aca218c65b597c4f918c7))
-* **sharing:** Replace `openSharingLink` with 3 new actions ([9150b33](https://github.com/cozy/cozy-libs/commit/9150b33f7ef3cd55b986dffedd768f00408674dd))
-* **sharing:** Update PublicBanner with new addSharingLink ([3be70fe](https://github.com/cozy/cozy-libs/commit/3be70fef1780806584cba1f07daaf0ebcd9596c7))
-
+- **sharing:** Add new links to `useSharingInfos` ([e9e51f7](https://github.com/cozy/cozy-libs/commit/e9e51f773698ea72af5aca218c65b597c4f918c7))
+- **sharing:** Replace `openSharingLink` with 3 new actions ([9150b33](https://github.com/cozy/cozy-libs/commit/9150b33f7ef3cd55b986dffedd768f00408674dd))
+- **sharing:** Update PublicBanner with new addSharingLink ([3be70fe](https://github.com/cozy/cozy-libs/commit/3be70fef1780806584cba1f07daaf0ebcd9596c7))
 
 ### BREAKING CHANGES
 
-* **sharing:** We now need 3 separate actions to Cozy to Cozy sharing.
-Replace the `openSharingLink` action with the desired
-action with its link option
+- **sharing:** We now need 3 separate actions to Cozy to Cozy sharing.
+  Replace the `openSharingLink` action with the desired
+  action with its link option
 
 Example:
+
 ```
 import {
   addToCozySharingLink,
@@ -142,344 +109,203 @@ const actions = makeActions(
 )
 ```
 
-
-
-
-
 # [20.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@19.0.0...cozy-sharing@20.0.0) (2025-01-22)
-
 
 ### Bug Fixes
 
-* **sharing:** Dispatch correct value ([4f2d17c](https://github.com/cozy/cozy-libs/commit/4f2d17cec7ce51fae97c825e3bb605c204dff330))
-
+- **sharing:** Dispatch correct value ([4f2d17c](https://github.com/cozy/cozy-libs/commit/4f2d17cec7ce51fae97c825e3bb605c204dff330))
 
 ### Features
 
-* **sharing:** Auto focus password input ([614da3c](https://github.com/cozy/cozy-libs/commit/614da3cceae6f207ced87ae0bc81886224c83a24))
-* **sharing:** Change ShareRestrictionModal validity ([00fb730](https://github.com/cozy/cozy-libs/commit/00fb730160e7f80ea57f6ebf7f47afadff9c0945))
-* **sharing:** Improve BoxPassword ([7e39d7f](https://github.com/cozy/cozy-libs/commit/7e39d7fe16c021c9902a905f7dbdba92b2787eaf))
-* **sharing:** Improve ShareDialogOnlyByLink UX ([4287e74](https://github.com/cozy/cozy-libs/commit/4287e74dc32aa7541e861939c4405a20426640e6))
-* **sharing:** Rework logic of ShareRestrictionModal ([e33df9f](https://github.com/cozy/cozy-libs/commit/e33df9f5bb737dab6db738b435d2d0492698c8e9))
-* **sharing:** Upgrade cozy-client to 53.0.0 ([fd6294f](https://github.com/cozy/cozy-libs/commit/fd6294f0870499a928795a73f099f3885e090a0a))
-
+- **sharing:** Auto focus password input ([614da3c](https://github.com/cozy/cozy-libs/commit/614da3cceae6f207ced87ae0bc81886224c83a24))
+- **sharing:** Change ShareRestrictionModal validity ([00fb730](https://github.com/cozy/cozy-libs/commit/00fb730160e7f80ea57f6ebf7f47afadff9c0945))
+- **sharing:** Improve BoxPassword ([7e39d7f](https://github.com/cozy/cozy-libs/commit/7e39d7fe16c021c9902a905f7dbdba92b2787eaf))
+- **sharing:** Improve ShareDialogOnlyByLink UX ([4287e74](https://github.com/cozy/cozy-libs/commit/4287e74dc32aa7541e861939c4405a20426640e6))
+- **sharing:** Rework logic of ShareRestrictionModal ([e33df9f](https://github.com/cozy/cozy-libs/commit/e33df9f5bb737dab6db738b435d2d0492698c8e9))
+- **sharing:** Upgrade cozy-client to 53.0.0 ([fd6294f](https://github.com/cozy/cozy-libs/commit/fd6294f0870499a928795a73f099f3885e090a0a))
 
 ### BREAKING CHANGES
 
-* **sharing:** You must have `cozy-client >= 53.0.0`
-
-
-
-
+- **sharing:** You must have `cozy-client >= 53.0.0`
 
 # [19.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@18.0.0...cozy-sharing@19.0.0) (2025-01-08)
 
-
 ### Bug Fixes
 
-* **sharing:** Update propTypes ([0474d9c](https://github.com/cozy/cozy-libs/commit/0474d9c46344b1f7abf65fc6e419a25aef33d2ed))
-
+- **sharing:** Update propTypes ([0474d9c](https://github.com/cozy/cozy-libs/commit/0474d9c46344b1f7abf65fc6e419a25aef33d2ed))
 
 ### Features
 
-* **sharing:** Add 3 actions to use the new action menu ([1af8fa7](https://github.com/cozy/cozy-libs/commit/1af8fa7dbffad63d117149d14e09399e9d71a8a6))
-* **sharing:** Add missing devDeps ([5221b40](https://github.com/cozy/cozy-libs/commit/5221b40397935538e95dcec82c939fb22196c991))
-* **sharing:** Add needed packages ([36a2b67](https://github.com/cozy/cozy-libs/commit/36a2b6771275a35b3ab484b22a18b6d9c7b61496))
-* **sharing:** Add ShareRestrictionModal component ([df5ed28](https://github.com/cozy/cozy-libs/commit/df5ed28c7c7f5dbb339bf26d563e8ffd825a686f))
-* **sharing:** Add the 3 boxes of the new link-sharing modal ([a297d20](https://github.com/cozy/cozy-libs/commit/a297d20c46966c82447491a6fefe2d96509c45a9))
-* **sharing:** Move revoke action to a secondary button ([83d3738](https://github.com/cozy/cozy-libs/commit/83d3738220e2c02ed749a08a47f92ca08ce9feb7))
-* **sharing:** Remove EditLinkPermissionDialog ([1b8bd56](https://github.com/cozy/cozy-libs/commit/1b8bd560f4e72b885817f1f17a83156b6c1a7d58))
-* **sharing:** Remove useless props ([cc3f816](https://github.com/cozy/cozy-libs/commit/cc3f816b6d35deb619488495bb767e1d76b557de))
-* **sharing:** Replace old sharing link menu with the new modal ([de1a1c2](https://github.com/cozy/cozy-libs/commit/de1a1c27a5747c0b8bf091ed1856994f65cdcdb2))
-* **sharing:** Upgrade packages ([9a1312d](https://github.com/cozy/cozy-libs/commit/9a1312d43cba1dcd521e8d6502865ac2071535cf))
-* **sharing:** Use ShareRestrictionModal when creating share link ([248c3b4](https://github.com/cozy/cozy-libs/commit/248c3b4904649e17e935afdef1bd2a0b87082dc7))
-
+- **sharing:** Add 3 actions to use the new action menu ([1af8fa7](https://github.com/cozy/cozy-libs/commit/1af8fa7dbffad63d117149d14e09399e9d71a8a6))
+- **sharing:** Add missing devDeps ([5221b40](https://github.com/cozy/cozy-libs/commit/5221b40397935538e95dcec82c939fb22196c991))
+- **sharing:** Add needed packages ([36a2b67](https://github.com/cozy/cozy-libs/commit/36a2b6771275a35b3ab484b22a18b6d9c7b61496))
+- **sharing:** Add ShareRestrictionModal component ([df5ed28](https://github.com/cozy/cozy-libs/commit/df5ed28c7c7f5dbb339bf26d563e8ffd825a686f))
+- **sharing:** Add the 3 boxes of the new link-sharing modal ([a297d20](https://github.com/cozy/cozy-libs/commit/a297d20c46966c82447491a6fefe2d96509c45a9))
+- **sharing:** Move revoke action to a secondary button ([83d3738](https://github.com/cozy/cozy-libs/commit/83d3738220e2c02ed749a08a47f92ca08ce9feb7))
+- **sharing:** Remove EditLinkPermissionDialog ([1b8bd56](https://github.com/cozy/cozy-libs/commit/1b8bd560f4e72b885817f1f17a83156b6c1a7d58))
+- **sharing:** Remove useless props ([cc3f816](https://github.com/cozy/cozy-libs/commit/cc3f816b6d35deb619488495bb767e1d76b557de))
+- **sharing:** Replace old sharing link menu with the new modal ([de1a1c2](https://github.com/cozy/cozy-libs/commit/de1a1c27a5747c0b8bf091ed1856994f65cdcdb2))
+- **sharing:** Upgrade packages ([9a1312d](https://github.com/cozy/cozy-libs/commit/9a1312d43cba1dcd521e8d6502865ac2071535cf))
+- **sharing:** Use ShareRestrictionModal when creating share link ([248c3b4](https://github.com/cozy/cozy-libs/commit/248c3b4904649e17e935afdef1bd2a0b87082dc7))
 
 ### BREAKING CHANGES
 
-* **sharing:** You muse have `cozy-client >= 52.1.0` and `cozy-ui >= 116.0.0`
-
-
-
-
+- **sharing:** You muse have `cozy-client >= 52.1.0` and `cozy-ui >= 116.0.0`
 
 # [18.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@17.0.0...cozy-sharing@18.0.0) (2024-12-23)
 
-
 ### Features
 
-* **cozy-sharing:** Remove Enzyme tests ([0c678a1](https://github.com/cozy/cozy-libs/commit/0c678a1a096966db9baf5311b99964fc458ce8dc))
-* **cozy-sharing:** Replace jsdom-sixteen package ([b75bc51](https://github.com/cozy/cozy-libs/commit/b75bc51a8d2cbfa0300e5c9fc5f0d839dea24ef2))
-* **cozy-sharing:** Upgrade cozy-ui to 115.0.2 ([f25a351](https://github.com/cozy/cozy-libs/commit/f25a351df58ed0517f35ec4fef7c9044ceac6d56))
-
+- **cozy-sharing:** Remove Enzyme tests ([0c678a1](https://github.com/cozy/cozy-libs/commit/0c678a1a096966db9baf5311b99964fc458ce8dc))
+- **cozy-sharing:** Replace jsdom-sixteen package ([b75bc51](https://github.com/cozy/cozy-libs/commit/b75bc51a8d2cbfa0300e5c9fc5f0d839dea24ef2))
+- **cozy-sharing:** Upgrade cozy-ui to 115.0.2 ([f25a351](https://github.com/cozy/cozy-libs/commit/f25a351df58ed0517f35ec4fef7c9044ceac6d56))
 
 ### BREAKING CHANGES
 
-* **cozy-sharing:** You must have `cozy-ui >= 115.0.2` & `cozy-client >= 51.6.1`
-
-
-
-
+- **cozy-sharing:** You must have `cozy-ui >= 115.0.2` & `cozy-client >= 51.6.1`
 
 # [17.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.17.0...cozy-sharing@17.0.0) (2024-12-18)
 
-
 ### Features
 
-* Add NativeFileSharingProvider and shareNative action ([71ba4e1](https://github.com/cozy/cozy-libs/commit/71ba4e120a5518534867cd1f1541502652f9b979))
-
+- Add NativeFileSharingProvider and shareNative action ([71ba4e1](https://github.com/cozy/cozy-libs/commit/71ba4e120a5518534867cd1f1541502652f9b979))
 
 ### BREAKING CHANGES
 
-* you now need cozy-intent >=2.29.1
-and cozy-device-helper >= 3.7.1 with cozy-sharing
-
-
-
-
+- you now need cozy-intent >=2.29.1
+  and cozy-device-helper >= 3.7.1 with cozy-sharing
 
 # [16.17.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.16.0...cozy-sharing@16.17.0) (2024-12-12)
 
-
 ### Features
 
-* **cozy-sharing:** Add isShortLabel prop to OpenSharing's buttons ([1085567](https://github.com/cozy/cozy-libs/commit/108556765800f6972a6b4c801fa09fd7c5d08c65))
-
-
-
-
+- **cozy-sharing:** Add isShortLabel prop to OpenSharing's buttons ([1085567](https://github.com/cozy/cozy-libs/commit/108556765800f6972a6b4c801fa09fd7c5d08c65))
 
 # [16.16.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.15.1...cozy-sharing@16.16.0) (2024-12-12)
 
-
 ### Features
 
-* **cozy-sharing:** Add conditionnal prop to openSharingLink action ([ec2a8be](https://github.com/cozy/cozy-libs/commit/ec2a8be595215745e85ae0cc1e9b7493e2c5b8a4))
-
-
-
-
+- **cozy-sharing:** Add conditionnal prop to openSharingLink action ([ec2a8be](https://github.com/cozy/cozy-libs/commit/ec2a8be595215745e85ae0cc1e9b7493e2c5b8a4))
 
 ## [16.15.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.15.0...cozy-sharing@16.15.1) (2024-12-11)
 
-
 ### Bug Fixes
 
-* **cozy-sharing:** Do not display loader in public context ([71ff258](https://github.com/cozy/cozy-libs/commit/71ff25879d4d98dbde49035a6f1be5eb687b1500))
-
-
-
-
+- **cozy-sharing:** Do not display loader in public context ([71ff258](https://github.com/cozy/cozy-libs/commit/71ff25879d4d98dbde49035a6f1be5eb687b1500))
 
 # [16.15.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.14.0...cozy-sharing@16.15.0) (2024-12-10)
 
-
 ### Features
 
-* **cozy-sharing:** Upgrade cozy-ui to 113.9.0 ([a6943b0](https://github.com/cozy/cozy-libs/commit/a6943b096173cad242f16d10e95236ec81ea14b3))
-
-
-
-
+- **cozy-sharing:** Upgrade cozy-ui to 113.9.0 ([a6943b0](https://github.com/cozy/cozy-libs/commit/a6943b096173cad242f16d10e95236ec81ea14b3))
 
 # [16.14.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.13.0...cozy-sharing@16.14.0) (2024-12-10)
 
-
 ### Features
 
-* Remove notes.sharing-cozy-to-cozy flag ([f6fa190](https://github.com/cozy/cozy-libs/commit/f6fa1907ea97c0214c2f0cd3e196e7a1177a03ca))
-
-
-
-
+- Remove notes.sharing-cozy-to-cozy flag ([f6fa190](https://github.com/cozy/cozy-libs/commit/f6fa1907ea97c0214c2f0cd3e196e7a1177a03ca))
 
 # [16.13.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.12.0...cozy-sharing@16.13.0) (2024-12-06)
 
-
 ### Features
 
-* Use Sharing locales instead apps ([55265c9](https://github.com/cozy/cozy-libs/commit/55265c9366e8ee98664503a6a62500e4ec986606))
-
-
-
-
+- Use Sharing locales instead apps ([55265c9](https://github.com/cozy/cozy-libs/commit/55265c9366e8ee98664503a6a62500e4ec986606))
 
 # [16.12.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.11.0...cozy-sharing@16.12.0) (2024-12-06)
 
-
 ### Features
 
-* Add openSharingLink action ([de97967](https://github.com/cozy/cozy-libs/commit/de979676b43ab73e412683895437f108740ab5e2))
-* Add OpenSharingLinkButton & OpenSharingLinkFabButton components ([ffc603c](https://github.com/cozy/cozy-libs/commit/ffc603c798954b5ebffb4a860c82f231765bda8d))
-* Upgrade cozy-ui to 113.5.0 ([9bbd797](https://github.com/cozy/cozy-libs/commit/9bbd797056e085f00d1d867641abb12695fbf52b))
-
-
-
-
+- Add openSharingLink action ([de97967](https://github.com/cozy/cozy-libs/commit/de979676b43ab73e412683895437f108740ab5e2))
+- Add OpenSharingLinkButton & OpenSharingLinkFabButton components ([ffc603c](https://github.com/cozy/cozy-libs/commit/ffc603c798954b5ebffb4a860c82f231765bda8d))
+- Upgrade cozy-ui to 113.5.0 ([9bbd797](https://github.com/cozy/cozy-libs/commit/9bbd797056e085f00d1d867641abb12695fbf52b))
 
 # [16.11.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.10.0...cozy-sharing@16.11.0) (2024-12-05)
 
-
 ### Features
 
-* **Sharing:** Expose new component to show owner recipient ([bcc6302](https://github.com/cozy/cozy-libs/commit/bcc6302abf0190259e86a9d327aa0d46e39b693b))
-
-
-
-
+- **Sharing:** Expose new component to show owner recipient ([bcc6302](https://github.com/cozy/cozy-libs/commit/bcc6302abf0190259e86a9d327aa0d46e39b693b))
 
 # [16.10.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.9.0...cozy-sharing@16.10.0) (2024-12-05)
 
-
 ### Features
 
-* **Sharing:** Add isPublic prop to SharingProvider ([d08862d](https://github.com/cozy/cozy-libs/commit/d08862d65fd4caaabfd29f116ade0607528345a9))
-
-
-
-
+- **Sharing:** Add isPublic prop to SharingProvider ([d08862d](https://github.com/cozy/cozy-libs/commit/d08862d65fd4caaabfd29f116ade0607528345a9))
 
 # [16.9.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.8.0...cozy-sharing@16.9.0) (2024-12-04)
 
-
 ### Features
 
-* **Sharing:** Change style of PublicBanner wording ([ddc8ce3](https://github.com/cozy/cozy-libs/commit/ddc8ce3cfcb1e3cfbdf17f5a7b8d9c8da997b5b0))
-
-
-
-
+- **Sharing:** Change style of PublicBanner wording ([ddc8ce3](https://github.com/cozy/cozy-libs/commit/ddc8ce3cfcb1e3cfbdf17f5a7b8d9c8da997b5b0))
 
 # [16.8.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.7.0...cozy-sharing@16.8.0) (2024-12-02)
 
-
 ### Features
 
-* **Sharing:** Expose too new component to get recipients ([a5836f7](https://github.com/cozy/cozy-libs/commit/a5836f7ea3634de44689b4e6c34eeac9b5fcb731))
-
-
-
-
+- **Sharing:** Expose too new component to get recipients ([a5836f7](https://github.com/cozy/cozy-libs/commit/a5836f7ea3634de44689b4e6c34eeac9b5fcb731))
 
 # [16.7.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.6.1...cozy-sharing@16.7.0) (2024-11-26)
 
-
 ### Features
 
-* Update text to CozyToCozy public banner ([3bd6ea6](https://github.com/cozy/cozy-libs/commit/3bd6ea61e712a763726c5c379e79bba549012a9c))
-
-
-
-
+- Update text to CozyToCozy public banner ([3bd6ea6](https://github.com/cozy/cozy-libs/commit/3bd6ea61e712a763726c5c379e79bba549012a9c))
 
 ## 16.6.1 (2024-11-06)
 
-
 ### Bug Fixes
 
-* Rename cozy-dataproxy to cozy-dataproxy-lib ([635d421](https://github.com/cozy/cozy-libs/commit/635d421045fc0374ca88cd68ec4941c95c40a0dd))
-
-
-
-
+- Rename cozy-dataproxy to cozy-dataproxy-lib ([635d421](https://github.com/cozy/cozy-libs/commit/635d421045fc0374ca88cd68ec4941c95c40a0dd))
 
 # 16.6.0 (2024-11-06)
 
-
 ### Features
 
-* Upgrade cozy-client and cozy-pouch-link ([67f5241](https://github.com/cozy/cozy-libs/commit/67f5241754e0472a991dad3e5fafd0b1c5edb9c6)), closes [cozy/cozy-client#1553](https://github.com/cozy/cozy-client/issues/1553) [cozy/cozy-client#1556](https://github.com/cozy/cozy-client/issues/1556)
-
-
-
-
+- Upgrade cozy-client and cozy-pouch-link ([67f5241](https://github.com/cozy/cozy-libs/commit/67f5241754e0472a991dad3e5fafd0b1c5edb9c6)), closes [cozy/cozy-client#1553](https://github.com/cozy/cozy-client/issues/1553) [cozy/cozy-client#1556](https://github.com/cozy/cozy-client/issues/1556)
 
 # 16.5.0 (2024-11-06)
 
-
 ### Features
 
-* **cozy-devtools:** Remove logs and use hook to get `client` ([df87cf5](https://github.com/cozy/cozy-libs/commit/df87cf500edacae42c55c4bbf710fa2e55ea8ba3))
-
-
-
-
+- **cozy-devtools:** Remove logs and use hook to get `client` ([df87cf5](https://github.com/cozy/cozy-libs/commit/df87cf500edacae42c55c4bbf710fa2e55ea8ba3))
 
 # 16.4.0 (2024-11-06)
 
-
 ### Features
 
-* **cozy-devtools:** Add first version to test providers ([5689640](https://github.com/cozy/cozy-libs/commit/568964008bb657dfaf8038ac2d9fa3dca8d3eb1c))
-
-
-
-
+- **cozy-devtools:** Add first version to test providers ([5689640](https://github.com/cozy/cozy-libs/commit/568964008bb657dfaf8038ac2d9fa3dca8d3eb1c))
 
 ## 16.3.1 (2024-11-05)
 
 **Note:** Version bump only for package cozy-sharing
 
-
-
-
-
 # 16.3.0 (2024-10-30)
-
 
 ### Features
 
-* Update deps for cozy-viewer ([b2e103a](https://github.com/cozy/cozy-libs/commit/b2e103a1280182881ae1133860c0a09650271920))
-
-
-
-
+- Update deps for cozy-viewer ([b2e103a](https://github.com/cozy/cozy-libs/commit/b2e103a1280182881ae1133860c0a09650271920))
 
 # 16.2.0 (2024-10-30)
 
-
 ### Features
 
-* Download file on mobile viewer on press ([3c38062](https://github.com/cozy/cozy-libs/commit/3c38062e2c83d5b8f7d0065323c18d45b5ce9564))
-
-
-
-
+- Download file on mobile viewer on press ([3c38062](https://github.com/cozy/cozy-libs/commit/3c38062e2c83d5b8f7d0065323c18d45b5ce9564))
 
 # 16.1.0 (2024-10-25)
 
-
 ### Features
 
-* **Viewer:** Replace Encrypted provider by cozy-ui one ([aa81d02](https://github.com/cozy/cozy-libs/commit/aa81d02f0a70de8044f704cbd895b1d54c9f38b8))
-
-
-
-
+- **Viewer:** Replace Encrypted provider by cozy-ui one ([aa81d02](https://github.com/cozy/cozy-libs/commit/aa81d02f0a70de8044f704cbd895b1d54c9f38b8))
 
 ## 16.0.3 (2024-10-23)
 
 **Note:** Version bump only for package cozy-sharing
 
-
-
-
-
 ## 16.0.2 (2024-10-16)
 
 **Note:** Version bump only for package cozy-sharing
 
-
-
-
-
 ## [16.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@16.0.0...cozy-sharing@16.0.1) (2024-10-15)
 
 **Note:** Version bump only for package cozy-sharing
-
-
-
-
 
 # [16.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@15.0.4...cozy-sharing@16.0.0) (2024-09-23)
 

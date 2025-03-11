@@ -3,125 +3,75 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [2.29.2](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.29.1...cozy-intent@2.29.2) (2025-01-28)
+# [2.30.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.29.2...cozy-intent@2.30.0) (2025-03-11)
 
+### Features
+
+- Add @babel/cli in devDep for some packages ([89e3a41](https://github.com/cozy/cozy-libs/commit/89e3a4156ba5867c9c20642d14e63b14bf992217))
+
+## [2.29.2](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.29.1...cozy-intent@2.29.2) (2025-01-28)
 
 ### Bug Fixes
 
-* Crash on envs without window object ([8bf136b](https://github.com/cozy/cozy-libs/commit/8bf136b5fc49a50341c7c37eb5d222a3e85662e3))
-
-
-
-
+- Crash on envs without window object ([8bf136b](https://github.com/cozy/cozy-libs/commit/8bf136b5fc49a50341c7c37eb5d222a3e85662e3))
 
 ## 2.29.1 (2024-11-06)
 
-
 ### Bug Fixes
 
-* Rename cozy-dataproxy to cozy-dataproxy-lib ([635d421](https://github.com/cozy/cozy-libs/commit/635d421045fc0374ca88cd68ec4941c95c40a0dd))
-
-
-
-
+- Rename cozy-dataproxy to cozy-dataproxy-lib ([635d421](https://github.com/cozy/cozy-libs/commit/635d421045fc0374ca88cd68ec4941c95c40a0dd))
 
 # 2.29.0 (2024-11-06)
 
-
 ### Features
 
-* Upgrade cozy-client and cozy-pouch-link ([67f5241](https://github.com/cozy/cozy-libs/commit/67f5241754e0472a991dad3e5fafd0b1c5edb9c6)), closes [cozy/cozy-client#1553](https://github.com/cozy/cozy-client/issues/1553) [cozy/cozy-client#1556](https://github.com/cozy/cozy-client/issues/1556)
-
-
-
-
+- Upgrade cozy-client and cozy-pouch-link ([67f5241](https://github.com/cozy/cozy-libs/commit/67f5241754e0472a991dad3e5fafd0b1c5edb9c6)), closes [cozy/cozy-client#1553](https://github.com/cozy/cozy-client/issues/1553) [cozy/cozy-client#1556](https://github.com/cozy/cozy-client/issues/1556)
 
 # 2.28.0 (2024-11-06)
 
-
 ### Features
 
-* **cozy-devtools:** Remove logs and use hook to get `client` ([df87cf5](https://github.com/cozy/cozy-libs/commit/df87cf500edacae42c55c4bbf710fa2e55ea8ba3))
-
-
-
-
+- **cozy-devtools:** Remove logs and use hook to get `client` ([df87cf5](https://github.com/cozy/cozy-libs/commit/df87cf500edacae42c55c4bbf710fa2e55ea8ba3))
 
 # 2.27.0 (2024-11-06)
 
-
 ### Features
 
-* **cozy-devtools:** Add first version to test providers ([5689640](https://github.com/cozy/cozy-libs/commit/568964008bb657dfaf8038ac2d9fa3dca8d3eb1c))
-
-
-
-
+- **cozy-devtools:** Add first version to test providers ([5689640](https://github.com/cozy/cozy-libs/commit/568964008bb657dfaf8038ac2d9fa3dca8d3eb1c))
 
 ## 2.26.1 (2024-11-05)
 
 **Note:** Version bump only for package cozy-intent
 
-
-
-
-
 # 2.26.0 (2024-10-30)
-
 
 ### Features
 
-* Update deps for cozy-viewer ([b2e103a](https://github.com/cozy/cozy-libs/commit/b2e103a1280182881ae1133860c0a09650271920))
-
-
-
-
+- Update deps for cozy-viewer ([b2e103a](https://github.com/cozy/cozy-libs/commit/b2e103a1280182881ae1133860c0a09650271920))
 
 # 2.25.0 (2024-10-30)
 
-
 ### Features
 
-* Download file on mobile viewer on press ([3c38062](https://github.com/cozy/cozy-libs/commit/3c38062e2c83d5b8f7d0065323c18d45b5ce9564))
-
-
-
-
+- Download file on mobile viewer on press ([3c38062](https://github.com/cozy/cozy-libs/commit/3c38062e2c83d5b8f7d0065323c18d45b5ce9564))
 
 # 2.24.0 (2024-10-25)
 
-
 ### Features
 
-* **Viewer:** Replace Encrypted provider by cozy-ui one ([aa81d02](https://github.com/cozy/cozy-libs/commit/aa81d02f0a70de8044f704cbd895b1d54c9f38b8))
-
-
-
-
+- **Viewer:** Replace Encrypted provider by cozy-ui one ([aa81d02](https://github.com/cozy/cozy-libs/commit/aa81d02f0a70de8044f704cbd895b1d54c9f38b8))
 
 ## 2.23.3 (2024-10-23)
 
 **Note:** Version bump only for package cozy-intent
 
-
-
-
-
 ## 2.23.2 (2024-10-16)
 
 **Note:** Version bump only for package cozy-intent
 
-
-
-
-
 ## [2.23.1](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.23.0...cozy-intent@2.23.1) (2024-10-15)
 
 **Note:** Version bump only for package cozy-intent
-
-
-
-
 
 # [2.23.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.22.0...cozy-intent@2.23.0) (2024-09-09)
 
