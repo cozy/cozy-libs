@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@18.1.0...cozy-viewer@19.0.0) (2025-03-11)
+
+
+### Features
+
+* **Viewer:** Upgrade cozy-ui ([8680dd7](https://github.com/cozy/cozy-libs/commit/8680dd7fda548711286a764a5fa1a9e6cb9f0379))
+
+
+### BREAKING CHANGES
+
+* **Viewer:** You must have `cozy-ui >= 119.0.1`
+
+
+
+
+
 # [18.1.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@18.0.3...cozy-viewer@18.1.0) (2025-03-07)
 
 

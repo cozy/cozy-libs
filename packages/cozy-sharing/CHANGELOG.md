@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [23.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@22.0.0...cozy-sharing@23.0.0) (2025-03-11)
+
+
+### Features
+
+* **Sharing:** Remove image avatar from stack ([904efbc](https://github.com/cozy/cozy-libs/commit/904efbca5855fef7d3cd23ffcbefd64810cdec26))
+* **Sharing:** Upgrade cozy-ui 116.0.0 to 119.0.1 ([393ce80](https://github.com/cozy/cozy-libs/commit/393ce806fe726355b165c7130653bb33b2c371cc))
+
+
+### BREAKING CHANGES
+
+* **Sharing:** You must have `cozy-ui >= 119.0.1`
+
+
+
+
+
 # [22.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@21.3.0...cozy-sharing@22.0.0) (2025-02-26)
 
 
