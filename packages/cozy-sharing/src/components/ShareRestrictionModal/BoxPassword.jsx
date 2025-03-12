@@ -4,6 +4,8 @@ import React, { useState } from 'react'
 import Box from 'cozy-ui/transpiled/react/Box'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
+import CopyIcon from 'cozy-ui/transpiled/react/Icons/Copy'
+import PasswordIcon from 'cozy-ui/transpiled/react/Icons/Password'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -67,7 +69,7 @@ export const BoxPassword = ({
           onClick={() => handlePasswordToggle(!toggle)}
         >
           <ListItemIcon>
-            <Icon icon="password" />
+            <Icon icon={PasswordIcon} />
           </ListItemIcon>
           <ListItemText primary={t('BoxPassword.text')} />
           <ListItemSecondaryAction>
@@ -104,7 +106,7 @@ export const BoxPassword = ({
             InputProps={{
               endAdornment: (
                 <IconButton onClick={handleCopy}>
-                  <Icon icon="copy" />
+                  <Icon icon={CopyIcon} />
                 </IconButton>
               )
             }}
