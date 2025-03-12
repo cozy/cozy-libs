@@ -5,6 +5,7 @@ import React from 'react'
 import Box from 'cozy-ui/transpiled/react/Box'
 import DatePicker from 'cozy-ui/transpiled/react/DatePicker'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import CalendarIcon from 'cozy-ui/transpiled/react/Icons/Calendar'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -32,7 +33,7 @@ export const BoxDate = ({ onChange, date, toggle, onToggle }) => {
           onClick={() => handleDateToggle(!toggle)}
         >
           <ListItemIcon>
-            <Icon icon="calendar" />
+            <Icon icon={CalendarIcon} />
           </ListItemIcon>
           <ListItemText primary={t('BoxDate.text')} />
           <ListItemSecondaryAction>

@@ -6,6 +6,7 @@ import { generateWebLink, useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
@@ -163,7 +164,7 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
               label={t('Share.permissionLink.deactivate')}
               variant="secondary"
               color="error"
-              startIcon={<Icon icon="trash" />}
+              startIcon={<Icon icon={TrashIcon} />}
               onClick={handleRevokeLink}
               busy={loading}
             />

@@ -6,6 +6,8 @@ import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import Box from 'cozy-ui/transpiled/react/Box'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import BottomIcon from 'cozy-ui/transpiled/react/Icons/Bottom'
+import PeopleIcon from 'cozy-ui/transpiled/react/Icons/People'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -55,14 +57,14 @@ export const BoxEditingRights = ({ file, editingRights, setEditingRights }) => {
             onClick={toggleMenuDisplayed}
           >
             <ListItemIcon>
-              <Icon icon="people" />
+              <Icon icon={PeopleIcon} />
             </ListItemIcon>
             <ListItemText
               primary={t('BoxEditingRights.text')}
               secondary={textSecondary}
             />
             <ListItemIcon className="u-mr-half">
-              <Icon icon="bottom" />
+              <Icon icon={BottomIcon} />
             </ListItemIcon>
           </ListItem>
         </List>
