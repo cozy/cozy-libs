@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [24.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@23.2.0...cozy-sharing@24.0.0) (2025-03-12)
+
+### Features
+
+- **Sharing:** Adjust switch position ([4c72e95](https://github.com/cozy/cozy-libs/commit/4c72e95916a5dc3f3ce24e71196ac50d4c232610))
+- **Sharing:** Upgrade cozy-ui ([9bf395a](https://github.com/cozy/cozy-libs/commit/9bf395a1db38f213a30dc9346578f592a33f7228))
+
+### BREAKING CHANGES
+
+- **Sharing:** You must have `cozy-ui >= 119.2.0`
+
 # [23.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@23.1.0...cozy-sharing@23.2.0) (2025-03-12)
 
 ### Features
