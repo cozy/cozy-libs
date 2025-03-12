@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [23.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@23.1.0...cozy-sharing@23.2.0) (2025-03-12)
+
+### Features
+
+- Replace sprite icons by svgr ([a7f2d16](https://github.com/cozy/cozy-libs/commit/a7f2d16cd1f3471c9aefe18b0403483f74fc26a5))
+
 # [23.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@23.0.0...cozy-sharing@23.1.0) (2025-03-11)
 
 ### Features
