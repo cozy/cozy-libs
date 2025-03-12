@@ -12,6 +12,7 @@ import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Switch from 'cozy-ui/transpiled/react/Switch'
+import { isTwakeTheme } from 'cozy-ui/transpiled/react/helpers/isTwakeTheme'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 export const BoxDate = ({ onChange, date, toggle, onToggle }) => {
@@ -38,7 +39,7 @@ export const BoxDate = ({ onChange, date, toggle, onToggle }) => {
           <ListItemText primary={t('BoxDate.text')} />
           <ListItemSecondaryAction>
             <Switch
-              edge="end"
+              edge={isTwakeTheme() ? 'start' : 'end'}
               color="primary"
               checked={toggle}
               onChange={handleDateToggle}
