@@ -77,13 +77,12 @@ if (isInsideCozy()) {
   startHistorySyncing()
 
   // @ts-expect-error No type
-  window._isInsideCozy = isInsideCozy
-  // @ts-expect-error No type
-  window._startHistorySyncing = startHistorySyncing
-  // @ts-expect-error No type
-  window._stopHistorySyncing = stopHistorySyncing
-  // @ts-expect-error No type
-  window._getContacts = getContacts
+  window._cozyBridge = {
+    isInsideCozy,
+    startHistorySyncing,
+    stopHistorySyncing,
+    getContacts
+  }
 } else {
   console.log('🟣 Not inside Cozy...')
 }
