@@ -10,8 +10,11 @@ const isInsideCozy = (): boolean => {
     const documentReferrerUrl = new URL(documentReferrer)
 
     return (
+      documentReferrerUrl.hostname.endsWith('.twake.app') ||
+      documentReferrerUrl.hostname.endsWith('.lin-saas.com') ||
       documentReferrerUrl.hostname.endsWith('.mycozy.cloud') ||
-      documentReferrerUrl.hostname.endsWith('.localhost')
+      documentReferrerUrl.hostname.endsWith('.localhost') ||
+      documentReferrerUrl.hostname.endsWith('.tools')
     )
   } catch {
     return false
