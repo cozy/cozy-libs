@@ -65,12 +65,14 @@ const stopHistorySyncing = (): void => {
 const getContacts = async (): Promise<IOCozyContact> => {
   console.log('🟣 Fetching contacts...')
   const contacts = await availableMethods.getContacts()
+  console.log('🟣 Twake received contacts...', contacts)
   return contacts
 }
 
 const getFlag = async (key: string): Promise<string | boolean> => {
   console.log('🟣 Getting flag...')
   const flag = await availableMethods.getFlag(key)
+  console.log('🟣 Twake received flag...', flag)
   return flag
 }
 
