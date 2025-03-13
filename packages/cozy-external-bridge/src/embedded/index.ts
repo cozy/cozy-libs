@@ -21,6 +21,7 @@ const isInsideCozy = (): boolean => {
 let availableMethods: {
   updateHistory: (url: string) => void
   getContacts: () => Promise<IOCozyContact>
+  getFlag: (key: string) => Promise<string | boolean>
 }
 
 // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -64,6 +65,12 @@ const getContacts = async (): Promise<IOCozyContact> => {
   return contacts
 }
 
+const getFlag = async (key: string): Promise<string | boolean> => {
+  console.log('🟣 Getting flag...')
+  const flag = await availableMethods.getFlag(key)
+  return flag
+}
+
 console.log('🟣 Trying to connect to', documentReferrer)
 
 if (isInsideCozy()) {
@@ -81,7 +88,8 @@ if (isInsideCozy()) {
     isInsideCozy,
     startHistorySyncing,
     stopHistorySyncing,
-    getContacts
+    getContacts,
+    getFlag
   }
 } else {
   console.log('🟣 Not inside Cozy...')

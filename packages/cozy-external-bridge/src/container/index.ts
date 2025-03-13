@@ -6,6 +6,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 
 import { Q, useClient } from 'cozy-client'
 import { IOCozyContact } from 'cozy-client/types/types'
+import flag from 'cozy-flags'
 
 import { extractUrl } from './helpers'
 
@@ -68,6 +69,9 @@ export const useExternalBridge = (origin: string): void => {
         }
 
         return data
+      },
+      getFlag: (key: string): string | boolean => {
+        return flag(key)
       },
       // Proof of concepts of Twake <-> Cozy URL synchronization
       updateHistory: (newUrl: string): void => {
