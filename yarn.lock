@@ -16748,6 +16748,7 @@ __metadata:
     babel-preset-cozy-app: "npm:^2.8.1"
     comlink: "npm:4.4.1"
     cozy-client: "npm:^54.0.0"
+    cozy-flags: "npm:^4.7.0"
     jest: "npm:26.6.3"
     react: "npm:16.12.0"
     react-dom: "npm:16.12.0"
@@ -16755,6 +16756,7 @@ __metadata:
     typescript: "npm:5.5.2"
   peerDependencies:
     cozy-client: ">=54.0.0"
+    cozy-flags: ">=4.7.0"
     react: ">=16.12.0"
     react-dom: ">=16.12.0"
     react-router-dom: ">=6.14.2"
