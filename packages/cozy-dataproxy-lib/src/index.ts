@@ -1,2 +1,2 @@
-export * from './ui'
-export * from './api'
+export { SearchEngine } from './search/SearchEngine'
+export { DataProxyProvider, useDataProxy } from './dataproxy/DataProxyProvider'
