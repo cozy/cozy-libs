@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "date-fns": "2.29.3",
-    "lodash": "4.17.13",
+    "lodash": "4.17.21",
     "react-inspector": "5.1.1"
   },
   "peerDependencies": {
