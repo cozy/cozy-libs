@@ -2,11 +2,13 @@
 
 ### Prerequisite for both components
 
-1. Update `cozy-scripts` version of your app to 8.4.0.
+1. Install `cozy-dataproxy-lib` and update `cozy-scripts` version of your app to 8.4.0.
 
-2. Add the provider in your tree :
+2. Add the provider in your tree because the SearchEngine is provided by the DataProxyProvider :
 
 ```jsx
+import { DataProxyProvider } from 'cozy-dataproxy-lib'
+
 <DataProxyProvider>
   { children }
 </DataProxyProvider>
