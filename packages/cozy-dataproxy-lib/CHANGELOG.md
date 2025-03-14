@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.7.0...cozy-dataproxy-lib@4.0.0) (2025-03-14)
+
+### Features
+
+- Remove UI components from cozy-dataproxy-lib ([afcfc3d](https://github.com/cozy/cozy-libs/commit/afcfc3da5788797a9b8b042ffaf95103395fe7bd))
+
+### BREAKING CHANGES
+
+- UI components from cozy-dataproxy-lib have been
+  migrated to cozy-search. Simply replace `import { AssistantDialog,
+AssistantDesktop } from 'cozy-dataproxy-lib'` and
+  `import { AssistantDialog,
+AssistantDesktop } from 'cozy-dataproxy-lib/ui'` by `import {
+AssistantDialog, AssistantDesktop } from 'cozy-search'`
+
 # [3.7.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.6.0...cozy-dataproxy-lib@3.7.0) (2025-03-11)
 
 ### Features
