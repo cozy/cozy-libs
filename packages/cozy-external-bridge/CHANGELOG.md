@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.3.0...cozy-external-bridge@0.4.0) (2025-03-17)
+
+### Features
+
+- Add temporary dev exception ([1083a44](https://github.com/cozy/cozy-libs/commit/1083a4499ec87dbb6ace83202fe347d977d648d7))
+
 # [0.3.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.2.1...cozy-external-bridge@0.3.0) (2025-03-13)
 
 ### Features
