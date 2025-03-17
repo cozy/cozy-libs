@@ -2,14 +2,14 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { models } from 'cozy-client'
+import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import Avatar from 'cozy-ui/transpiled/react/legacy/Avatar'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-import { GroupAvatar } from './Avatar/GroupAvatar'
 import { Contact, Group, getDisplayName, getInitials } from '../models'
+import { GroupAvatar } from './Avatar/GroupAvatar'
 
 const ContactModel = models.contact
 
@@ -33,9 +33,9 @@ export const ContactSuggestion = ({ contactOrGroup }) => {
     <ListItem button>
       <ListItemIcon>
         {isContactGroup ? (
-          <GroupAvatar size="small" />
+          <GroupAvatar size="m" />
         ) : (
-          <Avatar text={avatarText} size="small" />
+          <Avatar size="m">{avatarText}</Avatar>
         )}
       </ListItemIcon>
       <ListItemText

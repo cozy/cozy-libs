@@ -2,8 +2,10 @@ import cx from 'classnames'
 import React from 'react'
 
 import { useClient } from 'cozy-client'
+import Avatar from 'cozy-ui/transpiled/react/Avatar'
+import Icon from 'cozy-ui/transpiled/react/Icon'
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
-import Avatar from 'cozy-ui/transpiled/react/legacy/Avatar'
+import { isTwakeTheme } from 'cozy-ui/transpiled/react/helpers/isTwakeTheme'
 
 import { ExtraAvatar } from './ExtraAvatar'
 import { GroupAvatar } from './GroupAvatar'
@@ -73,20 +75,14 @@ const AvatarList = ({
     >
       {link && (
         <span data-testid="AvatarList-link">
-          <Avatar
-            className={styles['recipients-avatars--link']}
-            icon={LinkIcon}
-            size={size}
-          />
+          <Avatar color="none" border innerBorder={isTwakeTheme()} size={size}>
+            <Icon icon={LinkIcon} />
+          </Avatar>
         </span>
       )}
       {hasExtraRecipients && (
         <span data-testid="AvatarList-plusX">
-          <ExtraAvatar
-            className={styles['recipients-avatars--plusX']}
-            extraRecipients={extraRecipients}
-            size={size}
-          />
+          <ExtraAvatar extraRecipients={extraRecipients} size={size} />
         </span>
       )}
       {shownRecipients.map(recipient => {
@@ -98,10 +94,7 @@ const AvatarList = ({
               }`}
               key={recipient.index}
             >
-              <GroupAvatar
-                size={size}
-                className={cx(styles['recipients-avatars--avatar'])}
-              />
+              <GroupAvatar size={size} />
             </span>
           )
         }
@@ -113,11 +106,7 @@ const AvatarList = ({
             }`}
             key={recipient.index}
           >
-            <MemberAvatar
-              recipient={recipient}
-              size={size}
-              className={cx(styles['recipients-avatars--avatar'])}
-            />
+            <MemberAvatar recipient={recipient} size={size} />
           </span>
         )
       })}

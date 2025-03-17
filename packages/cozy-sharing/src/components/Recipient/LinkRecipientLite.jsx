@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Circle from 'cozy-ui/transpiled/react/Circle'
+import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { isTwakeTheme } from 'cozy-ui/transpiled/react/helpers/isTwakeTheme'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { checkIsReadOnlyPermissions } from '../../helpers/permissions'
 import withLocales from '../../hoc/withLocales'
-import styles from '../../styles/recipient.styl'
 
 const LinkRecipientLite = ({ permissions, link }) => {
   const { t } = useI18n()
@@ -24,9 +24,9 @@ const LinkRecipientLite = ({ permissions, link }) => {
   return (
     <ListItem size="small" ellipsis>
       <ListItemIcon>
-        <Circle size="small" className={styles['link-recipient-icon-circle']}>
+        <Avatar size="m" color="none" border innerBorder={isTwakeTheme()}>
           <Icon icon={LinkIcon} />
-        </Circle>
+        </Avatar>
       </ListItemIcon>
       <ListItemText
         primary={t('Share.recipients.anyoneWithTheLink')}

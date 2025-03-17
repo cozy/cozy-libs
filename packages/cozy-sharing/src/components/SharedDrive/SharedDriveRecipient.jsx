@@ -33,9 +33,9 @@ const SharedDriveRecipient = props => {
       <ListItem gutters={isMobile ? 'default' : 'double'} size="small">
         <ListItemIcon>
           {members ? (
-            <GroupAvatar size="small" />
+            <GroupAvatar size="m" />
           ) : (
-            <MemberAvatar size="small" recipient={props} />
+            <MemberAvatar size="m" recipient={props} />
           )}
         </ListItemIcon>
         <ListItemText

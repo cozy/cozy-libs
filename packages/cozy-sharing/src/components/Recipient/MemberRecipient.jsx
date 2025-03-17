@@ -53,7 +53,7 @@ const MemberRecipient = props => {
     <Fade in timeout={fadeIn ? FADE_IN_DURATION : 0}>
       <ListItem gutters={isMobile ? 'default' : 'double'} size="small">
         <ListItemIcon>
-          <MemberAvatar size="small" recipient={props} />
+          <MemberAvatar size="m" recipient={props} />
         </ListItemIcon>
         <ListItemText
           primary={
