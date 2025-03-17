@@ -17229,7 +17229,7 @@ __metadata:
     cozy-doctypes: "npm:^1.97.2"
     cozy-intent: "npm:^2.30.0"
     cozy-minilog: "npm:^3.10.0"
-    cozy-ui: "npm:^119.2.0"
+    cozy-ui: "npm:^121.1.1"
     date-fns: "npm:2.30.0"
     jest: "npm:26.6.3"
     jest-environment-jsdom: "npm:26.6.2"
@@ -17246,7 +17246,7 @@ __metadata:
     cozy-device-helper: ">=3.7.1"
     cozy-intent: ">=2.29.1"
     cozy-minilog: ">=3.9.1"
-    cozy-ui: ">=119.2.0"
+    cozy-ui: ">=121.1.1"
     prop-types: ^15.7.2
     react: ^16.12.0
     react-router: ^5.0.1
@@ -17575,6 +17575,48 @@ __metadata:
   bin:
     rsg-screenshots: scripts/screenshots.js
   checksum: 10c0/e8d574b1ef11e6616afd25944a2a22e04da68cc84f7b91ae53b57c50b1465fac0fde55553d049657721219bf7ec8bc2661629430f6e4319e77ca5d59a554de80
+  languageName: node
+  linkType: hard
+
+"cozy-ui@npm:^121.1.1":
+  version: 121.1.1
+  resolution: "cozy-ui@npm:121.1.1"
+  dependencies:
+    "@babel/runtime": "npm:^7.3.4"
+    "@date-io/date-fns": "npm:1"
+    "@material-ui/core": "npm:4.12.3"
+    "@material-ui/lab": "npm:^4.0.0-alpha.61"
+    "@material-ui/pickers": "npm:3.3.11"
+    "@popperjs/core": "npm:^2.4.4"
+    chart.js: "npm:3.7.1"
+    classnames: "npm:^2.2.5"
+    cozy-interapp: "npm:^0.5.4"
+    date-fns: "npm:2.30.0"
+    filesize: "npm:8.0.7"
+    hammerjs: "npm:^2.0.8"
+    intersection-observer: "npm:0.11.0"
+    mime-types: "npm:2.1.35"
+    mui-bottom-sheet: "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9"
+    node-polyglot: "npm:^2.5.0"
+    normalize.css: "npm:^8.0.0"
+    pdf-lib: "npm:1.17.1"
+    react-chartjs-2: "npm:4.1.0"
+    react-markdown: "npm:^4.0.8"
+    react-popper: "npm:^2.2.3"
+    react-remove-scroll: "npm:^2.4.0"
+    react-select: "npm:^4.3.0"
+    react-swipeable-views: "npm:^0.13.3"
+    rooks: "npm:^5.11.2"
+  peerDependencies:
+    cozy-client: ">=52.1.0"
+    cozy-device-helper: ^2.0.0
+    cozy-flags: ">=2.10.1"
+    cozy-intent: ">=2.29.1"
+    react: ^16.8.6
+    react-dom: ^16.8.6
+  bin:
+    rsg-screenshots: scripts/screenshots.js
+  checksum: 10c0/3e7d453e5ab10a9ce48e57086031be4df1641bbf1b9f5837f5e7d58410c887d129d3d7d86fdd62298cb12c3f1cd8f201ed6952c141dff9ccbe811edd4ecc0ab6
   languageName: node
   linkType: hard
 
