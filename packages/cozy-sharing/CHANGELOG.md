@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@24.0.0...cozy-sharing@25.0.0) (2025-03-17)
+
+### Features
+
+- **Sharing:** Replace legacy Avatars by modern Avatars ([480a092](https://github.com/cozy/cozy-libs/commit/480a0927521f818635022a74edf8a0b199b896a9))
+- **Sharing:** Upgrade cozy-ui ([732cde5](https://github.com/cozy/cozy-libs/commit/732cde5537c3c1142352c806c3af9b6e7b5d9031))
+
+### BREAKING CHANGES
+
+- **Sharing:** You must have `cozy-ui >= 121.1.1`
+
 # [24.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@23.2.0...cozy-sharing@24.0.0) (2025-03-12)
 
 ### Features
