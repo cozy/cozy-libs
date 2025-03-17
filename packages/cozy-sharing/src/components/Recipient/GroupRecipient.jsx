@@ -52,7 +52,7 @@ const GroupRecipient = props => {
           size="small"
         >
           <ListItemIcon>
-            <GroupAvatar size="small" />
+            <GroupAvatar size="m" />
           </ListItemIcon>
           <ListItemText
             primary={<Typography variant="body1">{name}</Typography>}

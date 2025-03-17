@@ -1,9 +1,9 @@
 import React from 'react'
 
-import Avatar from 'cozy-ui/transpiled/react/legacy/Avatar'
+import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
 import logger from '../../logger'
-import { getDisplayName, getInitials } from '../../models'
+import { getInitials } from '../../models'
 
 const MemberAvatar = ({ recipient, ...rest }) => {
   // There are cases when due to apparent memory leaks, the recipient does not exist
@@ -35,13 +35,14 @@ const MemberAvatar = ({ recipient, ...rest }) => {
   return (
     <Avatar
       // image={image}
-      text={getInitials(recipient)}
-      textId={getDisplayName(recipient)}
+      border
       disabled={
         recipient.status === 'pending' || recipient.status === 'mail-not-send'
       }
       {...rest}
-    />
+    >
+      {getInitials(recipient)}
+    </Avatar>
   )
 }
 

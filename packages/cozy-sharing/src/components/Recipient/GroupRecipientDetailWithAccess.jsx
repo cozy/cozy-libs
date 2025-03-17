@@ -1,12 +1,12 @@
 import React from 'react'
 
 import { useClient } from 'cozy-client'
+import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import Avatar from 'cozy-ui/transpiled/react/legacy/Avatar'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import MemberRecipientStatus from './MemberRecipientStatus'
@@ -29,11 +29,7 @@ const GroupRecipientDetailWithAccess = ({ withAccess }) => {
           return (
             <ListItem disableGutters key={recipient.index} size="small">
               <ListItemIcon>
-                <Avatar
-                  size="small"
-                  text={getInitials(recipient)}
-                  textId={name}
-                />
+                <Avatar size="m">{getInitials(recipient)}</Avatar>
               </ListItemIcon>
               <ListItemText
                 primary={name}

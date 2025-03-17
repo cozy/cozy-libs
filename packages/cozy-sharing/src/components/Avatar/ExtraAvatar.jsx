@@ -2,7 +2,8 @@ import uniqueId from 'lodash/uniqueId'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Avatar from 'cozy-ui/transpiled/react/legacy/Avatar'
+import Avatar from 'cozy-ui/transpiled/react/Avatar'
+import { isTwakeTheme } from 'cozy-ui/transpiled/react/helpers/isTwakeTheme'
 
 import { SharingTooltip, TooltipRecipientList } from '../Tooltip'
 
@@ -14,12 +15,12 @@ const ExtraAvatar = ({ className, size, extraRecipients = [] }) => {
       <Avatar
         className={className}
         size={size}
-        text={`+${Math.min(extraRecipients.length, 99)}`}
-        style={{
-          backgroundColor: 'var(--genericRecipientBackground)',
-          color: 'var(--genericRecipientColor)'
-        }}
-      />
+        color="none"
+        border
+        innerBorder={isTwakeTheme()}
+      >
+        {`+${Math.min(extraRecipients.length, 99)}`}
+      </Avatar>
       <SharingTooltip id={sharingTooltipId}>
         <TooltipRecipientList recipientNames={extraRecipients} />
       </SharingTooltip>
@@ -35,7 +36,7 @@ ExtraAvatar.propTypes = {
 
 ExtraAvatar.defaultProps = {
   extraRecipients: [],
-  size: 'medium'
+  size: 'm'
 }
 
 export { ExtraAvatar }

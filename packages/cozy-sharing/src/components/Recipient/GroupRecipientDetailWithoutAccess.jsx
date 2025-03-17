@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import ForbiddenIcon from 'cozy-ui/transpiled/react/Icons/Forbidden'
 import List from 'cozy-ui/transpiled/react/List'
@@ -7,7 +8,6 @@ import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import Avatar from 'cozy-ui/transpiled/react/legacy/Avatar'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { DEFAULT_DISPLAY_NAME } from '../../helpers/recipients'
@@ -35,11 +35,7 @@ const GroupRecipientDetailWithoutAccess = ({ withoutAccess, isOwner }) => {
               size="small"
             >
               <ListItemIcon>
-                <Avatar
-                  size="small"
-                  text={getInitials(recipient)}
-                  textId={name}
-                />
+                <Avatar size="m">{getInitials(recipient)}</Avatar>
               </ListItemIcon>
               <ListItemText
                 primary={name}

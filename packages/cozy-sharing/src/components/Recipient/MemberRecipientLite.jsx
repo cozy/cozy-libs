@@ -25,7 +25,7 @@ const MemberRecipientLite = ({ recipient, isOwner, ...props }) => {
   return (
     <ListItem size="small" ellipsis>
       <ListItemIcon>
-        <MemberAvatar size="small" recipient={recipient} {...props} />
+        <MemberAvatar size="m" recipient={recipient} {...props} />
       </ListItemIcon>
       <ListItemText
         primary={

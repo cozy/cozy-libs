@@ -17,7 +17,7 @@ export const SharedStatus = withLocales(
             link={getSharingLink(docId) !== null}
             onClick={onClick}
             isOwner={isOwner(docId)}
-            size={24}
+            size="s"
             showMeAsOwner={showMeAsOwner}
           />
         )

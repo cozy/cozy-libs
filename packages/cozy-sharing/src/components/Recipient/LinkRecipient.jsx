@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Circle from 'cozy-ui/transpiled/react/Circle'
+import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import Fade from 'cozy-ui/transpiled/react/Fade'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
@@ -9,6 +9,7 @@ import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { isTwakeTheme } from 'cozy-ui/transpiled/react/helpers/isTwakeTheme'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
@@ -20,7 +21,6 @@ import {
 } from '../../helpers/permissions'
 import { FADE_IN_DURATION } from '../../helpers/recipients'
 import { useSharingContext } from '../../hooks/useSharingContext'
-import styles from '../../styles/recipient.styl'
 
 const LinkRecipient = props => {
   const { t, f, lang } = useI18n()
@@ -60,9 +60,9 @@ const LinkRecipient = props => {
     <Fade in timeout={fadeIn ? FADE_IN_DURATION : 0}>
       <ListItem gutters={isMobile ? 'default' : 'double'} size="small">
         <ListItemIcon>
-          <Circle size="small" className={styles['link-recipient-icon-circle']}>
+          <Avatar size="m" color="none" border innerBorder={isTwakeTheme()}>
             <Icon icon={LinkIcon} />
-          </Circle>
+          </Avatar>
         </ListItemIcon>
         <ListItemText
           primary={<Typography variant="body1">{textPrimary}</Typography>}

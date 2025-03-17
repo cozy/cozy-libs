@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Avatar from 'cozy-ui/transpiled/react/legacy/Avatar'
+import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
 import Identity from './Identity'
 import { getDisplayName, getInitials } from '../../models'
@@ -10,7 +10,7 @@ const MemberIdentity = ({ instance, ...rest }) => {
   const name = getDisplayName(rest)
   return (
     <div className={styles['recipient']}>
-      <Avatar text={getInitials(rest)} textId={name} />
+      <Avatar>{getInitials(rest)}</Avatar>
       <div className={styles['recipient-ident-status']}>
         <Identity name={name} details={instance} />
       </div>

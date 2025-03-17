@@ -81,7 +81,7 @@ const GroupRecipientPermissions = ({
           >
             <ActionsMenuMobileHeader>
               <ListItemIcon>
-                <GroupAvatar size="small" />
+                <GroupAvatar size="m" />
               </ListItemIcon>
               <ListItemText
                 primary={name}
