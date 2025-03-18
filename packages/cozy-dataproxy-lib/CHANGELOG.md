@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.0.0...cozy-dataproxy-lib@4.1.0) (2025-03-18)
+
+### Features
+
+- Improve error message when useDataProxy used without provider ([dbedc66](https://github.com/cozy/cozy-libs/commit/dbedc660617f751e1a4963ae28eafffe2df62eb9))
+
 # [4.0.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@3.7.0...cozy-dataproxy-lib@4.0.0) (2025-03-14)
 
 ### Features
