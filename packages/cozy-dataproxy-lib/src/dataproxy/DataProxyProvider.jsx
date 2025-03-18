@@ -13,7 +13,9 @@ export const DataProxyContext = React.createContext()
 
 export const useDataProxy = () => {
   const context = useContext(DataProxyContext)
-
+  if (!context) {
+    throw new Error('useDataProxy must be used within a DataProxyProvider')
+  }
   return context
 }
 
