@@ -425,6 +425,7 @@
     }
   },
   "ShareRestrictionModal": {
+    "title": "Sharing link",
     "action": {
       "confirm": "Confirm"
     },
