@@ -37,6 +37,11 @@ export const BoxEditingRights = ({ file, editingRights, setEditingRights }) => {
     isDirectory
   })
 
+  const textPrimary =
+    editingRights === 'readOnly'
+      ? t('BoxEditingRights.readOnlyTitle')
+      : t('BoxEditingRights.editTitle')
+
   const textSecondary =
     editingRights === 'readOnly'
       ? t('Share.permissionLink.readDescription')
@@ -59,10 +64,7 @@ export const BoxEditingRights = ({ file, editingRights, setEditingRights }) => {
             <ListItemIcon>
               <Icon icon={PeopleIcon} />
             </ListItemIcon>
-            <ListItemText
-              primary={t('BoxEditingRights.text')}
-              secondary={textSecondary}
-            />
+            <ListItemText primary={textPrimary} secondary={textSecondary} />
             <ListItemIcon className="u-mr-half">
               <Icon icon={BottomIcon} />
             </ListItemIcon>
