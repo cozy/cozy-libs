@@ -438,9 +438,10 @@
     "text": "Limiter l'accès par un mot de passe"
   },
   "BoxEditingRights": {
+    "editTitle": "Droit d'édition",
+    "readOnlyTitle": "Droit de lecture",
     "editSubText": "Les personnes ayant accès au lien peuvent modifier le contenu",
-    "readOnlySubText": "Les personnes ayant accès au lien peuvent uniquement consulter le contenu",
-    "text": "Droit d’édition"
+    "readOnlySubText": "Les personnes ayant accès au lien peuvent uniquement consulter le contenu"
   },
   "copyReminderContent": {
     "success": "Copié dans le presse-papier",

@@ -440,9 +440,10 @@
     "text": "Limit access with a password"
   },
   "BoxEditingRights": {
+    "editTitle": "Editing rights",
+    "readOnlyTitle": "Reading rights",
     "editSubText": "People with access to the link can modify the content",
-    "readOnlySubText": "People who have access to the link can only view the content",
-    "text": "Editing rights"
+    "readOnlySubText": "People who have access to the link can only view the content"
   },
   "copyReminderContent": {
     "success": "Copied to clipboard",
