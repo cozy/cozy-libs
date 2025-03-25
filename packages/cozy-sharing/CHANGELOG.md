@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.0.0...cozy-sharing@25.1.0) (2025-03-25)
+
+### Bug Fixes
+
+- Missing translation ([a5d0464](https://github.com/cozy/cozy-libs/commit/a5d0464e09a1be6027b94d1d2ab9a965422f236d))
+
+### Features
+
+- Dynamic title in BoxEditingRights ([909cdc4](https://github.com/cozy/cozy-libs/commit/909cdc417015c66e2e2d52ee5fb665f739b74dbf))
+
 # [25.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@24.0.0...cozy-sharing@25.0.0) (2025-03-17)
 
 ### Features
