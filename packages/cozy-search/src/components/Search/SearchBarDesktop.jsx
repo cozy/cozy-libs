@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom'
 
 import ClickAwayListener from 'cozy-ui/transpiled/react/ClickAwayListener'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import MagnifierIcon from 'cozy-ui/transpiled/react/Icons/Magnifier'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
+import { isTwakeTheme } from 'cozy-ui/transpiled/react/helpers/isTwakeTheme'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { useSearch } from './SearchProvider'
@@ -94,12 +96,16 @@ const SearchBarDesktop = ({
           size={size}
           icon={
             size === 'large' ? (
-              <Icon className="u-mh-1" icon={AssistantIcon} size={32} />
+              <Icon
+                className="u-mh-1"
+                icon={isTwakeTheme() ? MagnifierIcon : AssistantIcon}
+                size={isTwakeTheme() ? 24 : 32}
+              />
             ) : (
               <Icon
                 className="u-ml-1 u-mr-half"
-                icon={AssistantIcon}
-                size={24}
+                icon={isTwakeTheme() ? MagnifierIcon : AssistantIcon}
+                size={isTwakeTheme() ? 16 : 24}
               />
             )
           }
