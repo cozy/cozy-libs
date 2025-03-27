@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.5.0...cozy-external-bridge@0.6.0) (2025-03-27)
+
+### Features
+
+- Add a setupBridge method ([5bb0b88](https://github.com/cozy/cozy-libs/commit/5bb0b88b1b16e3a6f8f6952b0acef32c02d85264))
+
 # [0.5.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.4.0...cozy-external-bridge@0.5.0) (2025-03-21)
 
 ### Features
