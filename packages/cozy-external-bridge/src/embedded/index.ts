@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable no-console */
 import * as Comlink from 'comlink'
 
@@ -5,24 +6,7 @@ import { IOCozyContact } from 'cozy-client/types/types'
 
 const documentReferrer = document.referrer
 
-const isInsideCozy = (): boolean => {
-  try {
-    const documentReferrerUrl = new URL(documentReferrer)
-
-    return (
-      documentReferrerUrl.hostname.endsWith('.twake.app') ||
-      documentReferrerUrl.hostname.endsWith('.lin-saas.dev') ||
-      documentReferrerUrl.hostname.endsWith('.lin-saas.com') ||
-      documentReferrerUrl.hostname.endsWith('.mycozy.cloud') ||
-      documentReferrerUrl.hostname.endsWith('.cozy.works') ||
-      documentReferrerUrl.hostname.endsWith('.cozy.company') ||
-      documentReferrerUrl.hostname.endsWith('.localhost') ||
-      documentReferrerUrl.hostname.endsWith('.tools')
-    )
-  } catch {
-    return false
-  }
-}
+console.log('🟣 Document referrer ', documentReferrer)
 
 let availableMethods: {
   updateHistory: (url: string) => void
@@ -79,26 +63,45 @@ const getFlag = async (key: string): Promise<string | boolean> => {
   return flag
 }
 
-console.log('🟣 Trying to connect to', documentReferrer)
+const isInsideCozy = (): boolean => {
+  try {
+    const documentReferrerUrl = new URL(documentReferrer)
 
-if (isInsideCozy()) {
-  console.log('🟣 Inside Cozy!')
+    return (
+      documentReferrerUrl.hostname.endsWith('.twake.app') ||
+      documentReferrerUrl.hostname.endsWith('.lin-saas.com') ||
+      documentReferrerUrl.hostname.endsWith('.lin-saas.dev') ||
+      documentReferrerUrl.hostname.endsWith('.mycozy.cloud') ||
+      documentReferrerUrl.hostname.endsWith('.cozy.works') ||
+      documentReferrerUrl.hostname.endsWith('.cozy.company')
+    )
+  } catch {
+    return false
+  }
+}
+
+const setupBridge = (): void => {
+  console.log('🟣 Setup bridge')
 
   availableMethods = Comlink.wrap(
     Comlink.windowEndpoint(self.parent, self, documentReferrer)
   )
 
-  // We start automatically the history syncing for testing purpose
-  startHistorySyncing()
-
+  // Full bridge
   // @ts-expect-error No type
   window._cozyBridge = {
-    isInsideCozy,
+    // @ts-expect-error No type
+    ...window._cozyBridge,
     startHistorySyncing,
     stopHistorySyncing,
     getContacts,
     getFlag
   }
-} else {
-  console.log('🟣 Not inside Cozy...')
+}
+
+// Default bridge
+// @ts-expect-error No type
+window._cozyBridge = {
+  isInsideCozy,
+  setupBridge
 }
