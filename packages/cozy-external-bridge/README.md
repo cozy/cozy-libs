@@ -6,8 +6,9 @@ This library allows communication between a container app and an app embedded in
 
 Just add the `useExternalBridge` hook and it will :
 
-- expose a `getContacts` method
 - allow history syncing
+- expose a `getContacts` method
+- expose a `getFlag` method
 
 ```
 import { useExternalBridge } from 'cozy-external-bridge/container'
@@ -19,9 +20,16 @@ const App = () => {
 
 ## For embedded app
 
-Import `dist/embedded/bundle.js` script. If you are in the appropriate environment, it should add methods to the `window` object :
+Import `dist/embedded/bundle.js` script. It exposes method in `window._cozyBridge`.
 
-- window.\_isInsideCozy: () => boolean
-- window.\_startHistorySyncing: () => void
-- window.\_stopHistorySyncing: () => void
-- window.\_getContacts: () => Promise<IoCozyContact>
+At first, you have the following methods in `window._cozyBridge` :
+
+- `isInsideCozy: () => boolean` : check if you are inside a Cozy iframe
+- `setupBridge: () => boolean` : setup bridge
+
+After setupping bridge, you have the following methods in `window._cozyBridge` :
+
+- `startHistorySyncing: () => void` : start sending history updates to parent window
+- `stopHistorySyncing: () => void` : stop sending history updates to parent window
+- `getContacts: () => Promise<IOCozyContact>` : get contacts from parent window
+- `getFlag: (key: string) => Promise<string | boolean>` : get flags from parent window
