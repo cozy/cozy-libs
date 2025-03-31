@@ -13,13 +13,17 @@
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
   "scripts": {
-    "build": "rm -rf ./dist && tsc -p tsconfig-build.json && env BABEL_ENV=transpilation babel --extensions .ts,.tsx,.js,.jsx,.md,.styl,.json,.snap ./src -d ./dist --copy-files --no-copy-ignored --verbose",
+    "build": "yarn build:clean && yarn build:types && env BABEL_ENV=transpilation babel --extensions .ts,.tsx,.js,.jsx,.md,.styl,.json,.snap ./src -d ./dist --copy-files --no-copy-ignored --verbose",
+    "build:clean": "rm -rf ./dist",
+    "build:types": "tsc -p tsconfig-build.json",
     "start": "yarn build --watch",
     "prepublishOnly": "yarn build",
     "test": "env NODE_ENV=test jest",
     "lint": "cd .. && yarn eslint --ext js,jsx packages/cozy-viewer"
   },
   "devDependencies": {
+    "@babel/cli": "7.16.8",
+    "@babel/core": "7.16.12",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "11.2.7",
     "@testing-library/react-hooks": "^3.2.1",
