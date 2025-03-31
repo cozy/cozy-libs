@@ -29,9 +29,11 @@ const ViewerContainer = props => {
     children,
     componentsProps,
     isPublic,
+    currentIndex,
+    files,
+    currentURL,
     ...rest
   } = props
-  const { currentIndex, files, currentURL } = props
   const toolbarRef = createRef()
   const { isDesktop } = useBreakpoints()
   const [isReadOnly, setIsReadOnly] = useState(true)
