@@ -25,15 +25,13 @@ const Sharing = ({ file, t }) => {
     getDocumentPermissions,
     getSharingLink,
     allLoaded,
-    hasSharedParent,
     getRecipients
   } = useSharingContext()
 
-  const shareFileRefId = hasSharedParent(file.path) ? file.dir_id : file._id
-  const recipients = getRecipients(shareFileRefId)
-  const permissions = getDocumentPermissions(shareFileRefId)
-  const link = getSharingLink(shareFileRefId)
-  const _isOwner = isOwner(shareFileRefId)
+  const recipients = getRecipients(file._id)
+  const permissions = getDocumentPermissions(file._id)
+  const link = getSharingLink(file._id)
+  const _isOwner = isOwner(file._id)
 
   return (
     <>
