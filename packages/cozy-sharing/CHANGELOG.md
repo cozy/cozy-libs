@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.1.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.1.0...cozy-sharing@25.1.1) (2025-04-02)
+
+### Bug Fixes
+
+- **Sharing:** Don't rely anymore on parent to show file recipients ([2e9702e](https://github.com/cozy/cozy-libs/commit/2e9702e3cd2e3863b06cef8e1c497882ba34eff3))
+
 # [25.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.0.0...cozy-sharing@25.1.0) (2025-03-25)
 
 ### Bug Fixes
