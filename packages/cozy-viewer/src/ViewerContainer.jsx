@@ -106,6 +106,9 @@ const ViewerContainer = props => {
               <EncryptedProvider url={currentURL}>
                 <Viewer
                   {...rest}
+                  currentIndex={currentIndex}
+                  files={files}
+                  currentURL={currentURL}
                   componentsProps={componentsPropsWithDefault}
                   hasPrevious={hasPrevious}
                   hasNext={hasNext}
