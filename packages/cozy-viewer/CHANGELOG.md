@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [21.0.3](https://github.com/cozy/cozy-libs/compare/cozy-viewer@21.0.2...cozy-viewer@21.0.3) (2025-04-02)
+
+### Bug Fixes
+
+- **Viewer:** Props have been omitted on Viewer component ([59b4d81](https://github.com/cozy/cozy-libs/commit/59b4d810c320c9ac7a76564044240e2d26e01d64))
+
 ## [21.0.2](https://github.com/cozy/cozy-libs/compare/cozy-viewer@21.0.1...cozy-viewer@21.0.2) (2025-03-31)
 
 ### Bug Fixes
