@@ -64,7 +64,6 @@
     "prepublishOnly": "yarn build",
     "test": "jest --config=./tests/jest.config.js",
     "lint": "cd ../.. && yarn eslint --ext js,jsx,ts packages/cozy-external-bridge"
-
   },
   "types": "dist/index.d.ts"
 }
