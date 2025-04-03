@@ -134,7 +134,7 @@ const SearchBarDesktop = ({
 
 SearchBarDesktop.defaultProps = {
   size: 'large',
-  elevation: false
+  elevation: 0
 }
 
 export default SearchBarDesktop
