@@ -17138,7 +17138,7 @@ __metadata:
     cozy-minilog: "npm:^3.10.0"
     cozy-pouch-link: "npm:^54.0.0"
     cozy-realtime: "npm:^5.6.4"
-    cozy-ui: "npm:^121.5.0"
+    cozy-ui: "npm:^122.0.0"
     cross-fetch: "npm:^4.0.0"
     jest: "npm:26.6.3"
     lodash: "npm:4.17.21"
@@ -17159,7 +17159,7 @@ __metadata:
     cozy-minilog: ">=3.3.1"
     cozy-pouch-link: 54.0.0
     cozy-realtime: ">=5.6.4"
-    cozy-ui: ">=121.5.0"
+    cozy-ui: ">=122.0.0"
     react: ">=16.12.0"
     react-dom: ">=16.12.0"
     react-router-dom: ^6.28.0
@@ -17528,9 +17528,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-ui@npm:^121.5.0":
-  version: 121.5.0
-  resolution: "cozy-ui@npm:121.5.0"
+"cozy-ui@npm:^122.0.0":
+  version: 122.0.0
+  resolution: "cozy-ui@npm:122.0.0"
   dependencies:
     "@babel/runtime": "npm:^7.3.4"
     "@date-io/date-fns": "npm:1"
@@ -17566,7 +17566,7 @@ __metadata:
     react-dom: ^16.8.6
   bin:
     rsg-screenshots: scripts/screenshots.js
-  checksum: 10c0/8c067f7da8eb740e2c0560afd7b3ee10302f280498aaba83e214913c79a205b5db632f636c238c6b2e41c494fb8fa028aabf214ecf9c25fccfe5710377f520a4
+  checksum: 10c0/575cb9a46baab03c6c9175ed6fd7630dfa363f30e925a639e6153440784059eda60aaafd9b4c2e9f9718d7f829f5300544de15d07ed13e373786f63efe262474
   languageName: node
   linkType: hard
 
