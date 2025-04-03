@@ -1,3 +1,4 @@
+import cx from 'classnames'
 import React, { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -21,7 +22,8 @@ const SearchBarDesktop = ({
   onChange,
   elevation,
   size,
-  hasHalfBorderRadius
+  hasHalfBorderRadius,
+  className
 }) => {
   const { t } = useI18n()
   const { searchValue, results, selectedIndex, setSelectedIndex } = useSearch()
@@ -87,11 +89,12 @@ const SearchBarDesktop = ({
       <span>
         <SearchBar
           elevation={elevation}
-          className={
+          className={cx(
+            className,
             searchValue && hasHalfBorderRadius
               ? styles['searchBarDesktop--result']
               : ''
-          }
+          )}
           ref={searchRef}
           size={size}
           icon={

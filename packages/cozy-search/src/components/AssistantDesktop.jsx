@@ -26,7 +26,8 @@ AssistantDesktop.propTypes = {
     SearchBarDesktop: PropTypes.shape({
       elevation: PropTypes.number,
       size: PropTypes.string,
-      hasHalfBorderRadius: PropTypes.bool
+      hasHalfBorderRadius: PropTypes.bool,
+      className: PropTypes.string
     })
   })
 }
