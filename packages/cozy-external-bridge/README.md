@@ -24,8 +24,9 @@ Import `dist/embedded/bundle.js` script. It exposes method in `window._cozyBridg
 
 At first, you have the following methods in `window._cozyBridge` :
 
-- `isInsideCozy: () => boolean` : check if you are inside a Cozy iframe
-- `setupBridge: () => boolean` : setup bridge
+- `requestParentOrigin: () => Promise<string | undefined>` : request origin from parent iframe; returns undefined if not in an iframe or no answer from iframe
+- `isInsideCozy: (targetOrigin: string) => boolean` : check if target origin is a Cozy origin
+- `setupBridge: (targetOrigin: string) => boolean` : setup bridge to communicate with target origin
 
 After setupping bridge, you have the following methods in `window._cozyBridge` :
 

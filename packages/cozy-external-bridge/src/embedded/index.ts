@@ -4,10 +4,6 @@ import * as Comlink from 'comlink'
 
 import { IOCozyContact } from 'cozy-client/types/types'
 
-const documentReferrer = document.referrer
-
-console.log('🟣 Document referrer ', documentReferrer)
-
 let availableMethods: {
   updateHistory: (url: string) => void
   getContacts: () => Promise<IOCozyContact>
@@ -63,28 +59,62 @@ const getFlag = async (key: string): Promise<string | boolean> => {
   return flag
 }
 
-const isInsideCozy = (): boolean => {
+const requestParentOrigin = (): Promise<string | undefined> => {
+  return new Promise((resolve) => {
+    // If we are not in an iframe, we return undefined directly
+    if (window.self === window.parent) {
+      return resolve(undefined)
+    }
+
+    const handleMessage = (event: any) => {
+      if (event.data === "answerParentOrigin") {
+        clearTimeout(timeout)
+        window.removeEventListener('message', handleMessage)
+        return resolve(event.origin)
+      }
+    };
+
+    window.addEventListener('message', handleMessage)
+
+    window.parent.postMessage('requestParentOrigin', '*')
+
+    // If no answer from parent window, we return undefined after 1s
+    const timeout = setTimeout(() => {
+      window.removeEventListener('message', handleMessage)
+      return resolve(undefined)
+    }, 1000)
+  });
+};
+
+const isInsideCozy = (targetOrigin: string): boolean => {
   try {
-    const documentReferrerUrl = new URL(documentReferrer)
+    if (!targetOrigin) return false
+
+    const targetUrl = new URL(targetOrigin)
 
     return (
-      documentReferrerUrl.hostname.endsWith('.twake.app') ||
-      documentReferrerUrl.hostname.endsWith('.lin-saas.com') ||
-      documentReferrerUrl.hostname.endsWith('.lin-saas.dev') ||
-      documentReferrerUrl.hostname.endsWith('.mycozy.cloud') ||
-      documentReferrerUrl.hostname.endsWith('.cozy.works') ||
-      documentReferrerUrl.hostname.endsWith('.cozy.company')
+      targetUrl.hostname.endsWith('.twake.app') ||
+      targetUrl.hostname.endsWith('.lin-saas.com') ||
+      targetUrl.hostname.endsWith('.lin-saas.dev') ||
+      targetUrl.hostname.endsWith('.mycozy.cloud') ||
+      targetUrl.hostname.endsWith('.cozy.works') ||
+      targetUrl.hostname.endsWith('.cozy.company')
     )
   } catch {
     return false
   }
 }
 
-const setupBridge = (): void => {
-  console.log('🟣 Setup bridge')
+const setupBridge = (targetOrigin: string): void => {
+  if(!targetOrigin) {
+    console.log('🟣 No target origin, doing nothing')
+    return
+  }
+
+  console.log('🟣 Setup bridge to', targetOrigin)
 
   availableMethods = Comlink.wrap(
-    Comlink.windowEndpoint(self.parent, self, documentReferrer)
+    Comlink.windowEndpoint(self.parent, self, targetOrigin)
   )
 
   // Full bridge
@@ -97,11 +127,14 @@ const setupBridge = (): void => {
     getContacts,
     getFlag
   }
+
+  console.log('🟣 Bridge ready')
 }
 
 // Default bridge
 // @ts-expect-error No type
 window._cozyBridge = {
+  requestParentOrigin,
   isInsideCozy,
   setupBridge
 }
