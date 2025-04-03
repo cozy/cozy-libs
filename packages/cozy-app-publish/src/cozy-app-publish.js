@@ -13,6 +13,7 @@ const scripts = require('./index')
 const pkg = require('../package.json')
 
 const MODES = {
+  GITHUB_ACTION: 'githubAction',
   TRAVIS: 'travis',
   MANUAL: 'manual'
 }
@@ -100,6 +101,8 @@ function _getPublishMode(mode) {
     return mode
   } else if (process.env.TRAVIS === 'true') {
     return MODES.TRAVIS
+  } else if (process.env.GITHUB_ACTIONS === 'true') {
+    return MODES.GITHUB_ACTION
   } else {
     // default mode
     return MODES.MANUAL
