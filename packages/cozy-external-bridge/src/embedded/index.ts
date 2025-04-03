@@ -60,19 +60,19 @@ const getFlag = async (key: string): Promise<string | boolean> => {
 }
 
 const requestParentOrigin = (): Promise<string | undefined> => {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     // If we are not in an iframe, we return undefined directly
     if (window.self === window.parent) {
       return resolve(undefined)
     }
 
     const handleMessage = (event: any) => {
-      if (event.data === "answerParentOrigin") {
+      if (event.data === 'answerParentOrigin') {
         clearTimeout(timeout)
         window.removeEventListener('message', handleMessage)
         return resolve(event.origin)
       }
-    };
+    }
 
     window.addEventListener('message', handleMessage)
 
@@ -83,8 +83,8 @@ const requestParentOrigin = (): Promise<string | undefined> => {
       window.removeEventListener('message', handleMessage)
       return resolve(undefined)
     }, 1000)
-  });
-};
+  })
+}
 
 const isInsideCozy = (targetOrigin: string): boolean => {
   try {
@@ -106,7 +106,7 @@ const isInsideCozy = (targetOrigin: string): boolean => {
 }
 
 const setupBridge = (targetOrigin: string): void => {
-  if(!targetOrigin) {
+  if (!targetOrigin) {
     console.log('🟣 No target origin, doing nothing')
     return
   }

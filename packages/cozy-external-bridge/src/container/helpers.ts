@@ -7,14 +7,17 @@ export const extractUrl = (url: string): string => {
   }
 }
 
-export const handleRequestParentOrigin = (event: MessageEvent, origin: string) => {
+export const handleRequestParentOrigin = (
+  event: MessageEvent,
+  origin: string
+) => {
   // We do not care about message from other origin that our iframe
   if (event.origin !== origin) {
     return
   }
 
   if (event.source && event.data === 'requestParentOrigin') {
-      // @ts-expect-error TS typing is incorrect
-      event.source.postMessage('answerParentOrigin', event.origin);
+    // @ts-expect-error TS typing is incorrect
+    event.source.postMessage('answerParentOrigin', event.origin)
   }
 }

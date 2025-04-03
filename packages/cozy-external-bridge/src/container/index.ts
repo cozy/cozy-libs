@@ -59,13 +59,14 @@ const useParentOrigin = (origin: string) => {
   useEffect(() => {
     if (!client) return
 
-    const requestParentOriginHandler = (event: MessageEvent) => handleRequestParentOrigin(event, origin)
+    const requestParentOriginHandler = (event: MessageEvent) =>
+      handleRequestParentOrigin(event, origin)
 
-    window.addEventListener('message', requestParentOriginHandler);
+    window.addEventListener('message', requestParentOriginHandler)
 
     return () => {
-      window.removeEventListener('message', requestParentOriginHandler);
-    };
+      window.removeEventListener('message', requestParentOriginHandler)
+    }
   }, [client, origin])
 }
 
