@@ -53,13 +53,13 @@ const useInitialRedirection = (): void => {
 }
 
 // Allow the iframe to request the origin of the parent window
-const useParentOrigin = (origin: string) => {
+const useParentOrigin = (origin: string): void => {
   const client = useClient()
 
   useEffect(() => {
     if (!client) return
 
-    const requestParentOriginHandler = (event: MessageEvent) =>
+    const requestParentOriginHandler = (event: MessageEvent): void =>
       handleRequestParentOrigin(event, origin)
 
     window.addEventListener('message', requestParentOriginHandler)

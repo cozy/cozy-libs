@@ -66,7 +66,7 @@ const requestParentOrigin = (): Promise<string | undefined> => {
       return resolve(undefined)
     }
 
-    const handleMessage = (event: any) => {
+    const handleMessage = (event: MessageEvent): void => {
       if (event.data === 'answerParentOrigin') {
         clearTimeout(timeout)
         window.removeEventListener('message', handleMessage)
