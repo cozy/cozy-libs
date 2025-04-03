@@ -8,7 +8,7 @@ import { Q, useClient } from 'cozy-client'
 import { IOCozyContact } from 'cozy-client/types/types'
 import flag from 'cozy-flags'
 
-import { extractUrl } from './helpers'
+import { extractUrl, handleRequestParentOrigin } from './helpers'
 
 const getIframe = (): HTMLIFrameElement => {
   const iframe = document.getElementById(
@@ -52,11 +52,29 @@ const useInitialRedirection = (): void => {
   }, [])
 }
 
+// Allow the iframe to request the origin of the parent window
+const useParentOrigin = (origin: string) => {
+  const client = useClient()
+
+  useEffect(() => {
+    if (!client) return
+
+    const requestParentOriginHandler = (event: MessageEvent) => handleRequestParentOrigin(event, origin)
+
+    window.addEventListener('message', requestParentOriginHandler);
+
+    return () => {
+      window.removeEventListener('message', requestParentOriginHandler);
+    };
+  }, [client, origin])
+}
+
 export const useExternalBridge = (origin: string): void => {
   const client = useClient()
   const navigate = useNavigate()
 
   useInitialRedirection()
+  useParentOrigin(origin)
 
   useEffect(() => {
     if (!client) return
