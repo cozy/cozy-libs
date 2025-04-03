@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [22.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@21.0.4...cozy-viewer@22.0.0) (2025-04-03)
+
+### Bug Fixes
+
+- **Viewer:** Don't rely anymore on parent to show file recipients ([6ec0c3f](https://github.com/cozy/cozy-libs/commit/6ec0c3f3b5c7e306f7081314226e1e5a8ea294a3))
+
+### Features
+
+- **Viewer:** Upgrade packages ([2b6b726](https://github.com/cozy/cozy-libs/commit/2b6b72620b0ba4141237fa692523b31bac32321f))
+
+### BREAKING CHANGES
+
+- **Viewer:** You must have `cozy-sharing >= 25.1.1` and `cozy-client >= 57.0.0`
+
 ## [21.0.4](https://github.com/cozy/cozy-libs/compare/cozy-viewer@21.0.3...cozy-viewer@21.0.4) (2025-04-02)
 
 **Note:** Version bump only for package cozy-viewer
