@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.6.0...cozy-external-bridge@0.7.0) (2025-04-03)
+
+### Bug Fixes
+
+- Extra space in package.json blocks CI ([a26658a](https://github.com/cozy/cozy-libs/commit/a26658aba3d6dc063bd80360f3dbdd926bc33a3c))
+
+### Features
+
+- Use parent origin instead of document.referrer ([ed218c3](https://github.com/cozy/cozy-libs/commit/ed218c393921d4528af8371899bc4ba71fa4b594))
+
 # [0.6.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.5.0...cozy-external-bridge@0.6.0) (2025-03-27)
 
 ### Features

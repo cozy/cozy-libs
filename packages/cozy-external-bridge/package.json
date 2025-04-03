@@ -1,7 +1,7 @@
 {
   "name": "cozy-external-bridge",
   "description": "Library allows communication between a container app and an app embedded in an iframe",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "author": {
     "name": "Cozy Cloud",
     "url": "https://github.com/cozy"
