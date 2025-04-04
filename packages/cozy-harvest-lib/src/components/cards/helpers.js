@@ -1,5 +1,8 @@
 // @ts-check
-import { formatLocallyDistanceToNow } from 'cozy-ui/transpiled/react/providers/I18n/format'
+import {
+  formatLocallyDistanceToNow,
+  initFormat
+} from 'cozy-ui/transpiled/react/providers/I18n/format'
 
 import { isDisconnected } from '../../helpers/konnectors'
 import { getLastSuccessDate } from '../../helpers/triggers'
@@ -20,9 +23,14 @@ const getDifferenceInMillisecondes = date => {
  * @param {import('cozy-client/types/types').IOCozyKonnector} options.konnector - Associated Connector
  * @param {object} options.trigger - Associated trigger
  * @param {object} options.isRunning - If the connector is running
+ * @param {string} options.lang - lang identifier ('fr', 'en')
  * @returns {string}
  */
-export const makeLabel = ({ t, konnector, trigger, isRunning }) => {
+export const makeLabel = ({ t, konnector, trigger, isRunning, lang }) => {
+  if (lang) {
+    // force current language for cozy-ui formatLocallyDistanceToNow
+    initFormat(lang)(new Date(), 'yyyy-MM-dd HH:mm:ss')
+  }
   const lastSuccessDate = getLastSuccessDate(trigger)
   if (isRunning) {
     return t('card.launchTrigger.lastSync.syncing')
