@@ -101,13 +101,19 @@ const SearchBarDesktop = ({
           icon={
             size === 'large' ? (
               <Icon
-                className="u-mh-1"
+                className={cx(
+                  'u-mh-1',
+                  isTwakeTheme() ? styles['search-bar-icon'] : undefined
+                )}
                 icon={isTwakeTheme() ? MagnifierIcon : AssistantIcon}
                 size={isTwakeTheme() ? 24 : 32}
               />
             ) : (
               <Icon
-                className="u-ml-1 u-mr-half"
+                className={cx(
+                  'u-ml-1 u-mr-half',
+                  isTwakeTheme() ? styles['search-bar-icon'] : undefined
+                )}
                 icon={isTwakeTheme() ? MagnifierIcon : AssistantIcon}
                 size={isTwakeTheme() ? 16 : 24}
               />
