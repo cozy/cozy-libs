@@ -24,7 +24,8 @@ const SearchBarDesktop = ({
   elevation,
   size,
   hasHalfBorderRadius,
-  className
+  className,
+  disabledHover
 }) => {
   const { t } = useI18n()
   const { searchValue, results, selectedIndex, setSelectedIndex } = useSearch()
@@ -136,6 +137,7 @@ const SearchBarDesktop = ({
           }}
           disabledClear
           disabledFocus={value !== ''}
+          disabledHover={disabledHover}
           onChange={onChange}
         />
         {searchValue && (

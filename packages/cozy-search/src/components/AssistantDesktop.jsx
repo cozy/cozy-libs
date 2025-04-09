@@ -27,7 +27,8 @@ AssistantDesktop.propTypes = {
       elevation: PropTypes.number,
       size: PropTypes.string,
       hasHalfBorderRadius: PropTypes.bool,
-      className: PropTypes.string
+      className: PropTypes.string,
+      disabledHover: PropTypes.bool
     })
   })
 }
