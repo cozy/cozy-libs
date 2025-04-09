@@ -6,6 +6,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import PaperplaneIcon from 'cozy-ui/transpiled/react/Icons/Paperplane'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItemSkeleton from 'cozy-ui/transpiled/react/Skeletons/ListItemSkeleton'
+import { isTwakeTheme } from 'cozy-ui/transpiled/react/helpers/isTwakeTheme'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
@@ -62,7 +63,7 @@ const ResultMenuContent = forwardRef(({ onClick }, ref) => {
 
   return (
     <List ref={ref}>
-      {isAssistantEnabled() && (
+      {isAssistantEnabled() && !isTwakeTheme() && (
         <ResultMenuItem
           icon={
             <Circle size="small">

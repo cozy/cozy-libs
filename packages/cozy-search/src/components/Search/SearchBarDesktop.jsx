@@ -9,6 +9,7 @@ import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
 import { isTwakeTheme } from 'cozy-ui/transpiled/react/helpers/isTwakeTheme'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
+import { AssistantButton } from './AssistantButton'
 import { useSearch } from './SearchProvider'
 import styles from './styles.styl'
 import { AssistantIcon } from '../AssistantIcon/AssistantIcon'
@@ -113,11 +114,19 @@ const SearchBarDesktop = ({
             )
           }
           placeholder={
-            isAssistantEnabled() ? t('assistant.search.placeholder') : undefined // fallback on SearchBar default
+            isAssistantEnabled() && !isTwakeTheme()
+              ? t('assistant.search.placeholder')
+              : undefined // fallback on SearchBar default
           }
           value={value}
           componentsProps={{
-            inputBase: { onKeyDown: handleKeyDown }
+            inputBase: {
+              onKeyDown: handleKeyDown,
+              endAdornment:
+                isAssistantEnabled() && isTwakeTheme() ? (
+                  <AssistantButton onClick={handleClick} size={size} />
+                ) : undefined
+            }
           }}
           disabledClear
           disabledFocus={value !== ''}
