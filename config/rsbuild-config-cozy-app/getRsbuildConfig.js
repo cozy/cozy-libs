@@ -102,6 +102,11 @@ function getRsbuildConfig({
               test: /\.(png|jpe?g|gif)$/i,
               include: /cozy-dataproxy-lib\/dist\/assets(\/|\\)/,
               type: 'asset/resource'
+            },
+            // To avoid errors with react-spring used in BottomSheet component
+            {
+              test: /react-spring/,
+              sideEffects: true
             }
           ]
         },
