@@ -10,7 +10,7 @@
     "dialog": {
       "close": "Fermer"
     },
-    "name": "Assistant Cozy",
+    "name": "Assistant %{name}",
     "sources": "%{smart_count} source |||| %{smart_count} sources",
     "suggestions": {
       "find_file": "Rechercher un fichier",
