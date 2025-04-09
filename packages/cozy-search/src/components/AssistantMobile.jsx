@@ -1,3 +1,4 @@
+import cx from 'classnames'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -10,6 +11,7 @@ import useExtendI18n from 'cozy-ui/transpiled/react/providers/I18n/useExtendI18n
 
 import { locales } from '../locales'
 import { AssistantIcon } from './AssistantIcon/AssistantIcon'
+import styles from './Search/styles.styl'
 import { isAssistantEnabled } from './helpers'
 
 export const AssistantMobile = () => {
@@ -23,7 +25,10 @@ export const AssistantMobile = () => {
       size="medium"
       icon={
         <Icon
-          className="u-ml-1 u-mr-half"
+          className={cx(
+            'u-ml-1 u-mr-half',
+            isTwakeTheme() ? styles['search-bar-icon'] : undefined
+          )}
           icon={isTwakeTheme() ? MagnifierIcon : AssistantIcon}
           size={isTwakeTheme() ? 16 : 24}
         />
