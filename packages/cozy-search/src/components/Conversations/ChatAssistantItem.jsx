@@ -2,7 +2,6 @@ import React from 'react'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import { isTwakeTheme } from 'cozy-ui/transpiled/react/helpers/isTwakeTheme'
-import { useCozyTheme } from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import ChatItem from './ChatItem'
@@ -12,7 +11,6 @@ import { TwakeAssistantIcon } from '../AssistantIcon/TwakeAssistantIcon'
 
 const ChatAssistantItem = ({ label, className, id, sources, ...props }) => {
   const { t } = useI18n()
-  const { type } = useCozyTheme()
 
   return (
     <>
@@ -25,13 +23,7 @@ const ChatAssistantItem = ({ label, className, id, sources, ...props }) => {
             icon={isTwakeTheme() ? TwakeAssistantIcon : AssistantIcon}
             size={isTwakeTheme() ? 24 : 32}
             className={isTwakeTheme() ? 'u-mh-half' : undefined}
-            color={
-              isTwakeTheme()
-                ? type === 'light'
-                  ? 'var(--primaryColor)'
-                  : 'var(--white)'
-                : undefined
-            }
+            color="var(--primaryColor)"
           />
         }
         name={t('assistant.name', { name: isTwakeTheme() ? 'Twake' : 'Cozy' })}
