@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.3.0...cozy-search@0.4.0) (2025-04-10)
+
+### Features
+
+- **Search:** Add AI assistant in Twake theme ([ba8d70d](https://github.com/cozy/cozy-libs/commit/ba8d70d0e56c502d7e1cba9546094aeecc02d54d))
+- **Search:** Allow to disable hover in SearchBarDesktop ([3396e17](https://github.com/cozy/cozy-libs/commit/3396e1787de2b4d2ff37dce5f3f84713c8687247))
+- **Search:** Set same color for icon as placeholder in Twake theme ([3c9e9c4](https://github.com/cozy/cozy-libs/commit/3c9e9c4068d3c53651a19e16c83362fe261a3781))
+- **Search:** Update mobile search bar in Twake theme ([aee189b](https://github.com/cozy/cozy-libs/commit/aee189bf4e6eb0ce6c9e63585b55c04991438e8a))
+- Use primary color for assistant icon ([0514a2f](https://github.com/cozy/cozy-libs/commit/0514a2f757b8f111b65223df6c554a5183ea0e0d))
+
 # [0.3.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.2.0...cozy-search@0.3.0) (2025-04-04)
 
 ### Features
