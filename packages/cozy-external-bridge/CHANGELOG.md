@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.7.0...cozy-external-bridge@0.8.0) (2025-04-10)
+
+### Features
+
+- **ExternalBridge:** Add new accepted domain ([e77f6c3](https://github.com/cozy/cozy-libs/commit/e77f6c3b56154ccd18956f27a6d41ccec18fa410))
+
 # [0.7.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.6.0...cozy-external-bridge@0.7.0) (2025-04-03)
 
 ### Bug Fixes
