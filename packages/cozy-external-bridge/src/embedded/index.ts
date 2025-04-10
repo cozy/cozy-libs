@@ -93,6 +93,7 @@ const isInsideCozy = (targetOrigin: string): boolean => {
     const targetUrl = new URL(targetOrigin)
 
     return (
+      targetUrl.hostname.endsWith('.linagora.com') ||
       targetUrl.hostname.endsWith('.twake.app') ||
       targetUrl.hostname.endsWith('.lin-saas.com') ||
       targetUrl.hostname.endsWith('.lin-saas.dev') ||
