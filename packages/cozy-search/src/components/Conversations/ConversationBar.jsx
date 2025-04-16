@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import PaperplaneIcon from 'cozy-ui/transpiled/react/Icons/Paperplane'
 import StopIcon from 'cozy-ui/transpiled/react/Icons/Stop'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
@@ -68,28 +67,22 @@ const ConversationBar = ({ assistantStatus }) => {
             autoFocus: !isMobile,
             endAdornment:
               assistantStatus !== 'idle' ? (
-                <IconButton className="u-p-half" onClick={handleStop}>
-                  <Button
-                    component="div"
-                    className="u-miw-auto u-w-2 u-h-2 u-bdrs-circle"
-                    classes={{ label: 'u-flex u-w-auto' }}
-                    label={<Icon icon={StopIcon} size={12} />}
-                  />
-                </IconButton>
+                <Button
+                  component="div"
+                  className="u-miw-auto u-mih-auto u-w-2 u-h-2 u-bdrs-circle u-p-1 u-mr-1"
+                  classes={{ label: 'u-flex u-w-auto' }}
+                  label={<Icon icon={StopIcon} size={12} />}
+                  onClick={handleStop}
+                />
               ) : (
-                <IconButton
-                  className="u-p-half"
+                <Button
+                  component="div"
+                  className="u-miw-auto u-mih-auto u-w-2 u-h-2 u-bdrs-circle u-p-1 u-mr-1"
+                  classes={{ label: 'u-flex u-w-auto' }}
+                  label={<Icon icon={PaperplaneIcon} size={12} />}
                   disabled={!inputValue}
                   onClick={handleClick}
-                >
-                  <Button
-                    component="div"
-                    className="u-miw-auto u-w-2 u-h-2 u-bdrs-circle"
-                    classes={{ label: 'u-flex u-w-auto' }}
-                    label={<Icon icon={PaperplaneIcon} />}
-                    disabled={!inputValue}
-                  />
-                </IconButton>
+                />
               ),
             onKeyDown: ev => {
               if (!isMobile) {
