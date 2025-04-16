@@ -87,3 +87,17 @@ The search and assistant are dialogs. So you just need to create a route for eac
   }
 />
 ```
+
+### Opening AI conversation from a button
+
+You can also use the `AssistantLink` component to get an onClick method that opens the AI conversation from a button.
+
+```jsx
+import { AssistantLink } from 'cozy-search'
+
+<AssistantLink>
+  {({ openAssistant }) => (
+    <a onClick={openAssistant}>Open assistant</a>
+  )}
+</AssistantLink>
+```

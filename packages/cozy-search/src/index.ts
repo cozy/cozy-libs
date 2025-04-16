@@ -1,3 +1,4 @@
+export { default as AssistantLink } from './components/Search/AssistantLink'
 export { default as AssistantDesktop } from './components/AssistantDesktop'
 export { default as AssistantMobile } from './components/AssistantMobile'
 export { default as AssistantDialog } from './components/Views/AssistantDialog'
