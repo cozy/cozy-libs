@@ -10,7 +10,7 @@ const ChatUserItem = ({ className, label, myself, ...props }) => {
     <ChatItem
       {...props}
       className={className}
-      icon={<Avatar text={getInitials(myself)} size="small" />}
+      icon={<Avatar text={getInitials(myself)} size="s" />}
       name={getDisplayName(myself)}
       label={label}
     />
