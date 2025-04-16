@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.1](https://github.com/cozy/cozy-libs/compare/cozy-search@0.5.0...cozy-search@0.5.1) (2025-04-16)
+
+### Bug Fixes
+
+- Set correct avatar size ([8ec8788](https://github.com/cozy/cozy-libs/commit/8ec87883250eeadf72b4468b72d7e93354117aa6))
+
 # [0.5.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.4.0...cozy-search@0.5.0) (2025-04-16)
 
 ### Bug Fixes
