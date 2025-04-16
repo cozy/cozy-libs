@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.4.0...cozy-search@0.5.0) (2025-04-16)
+
+### Bug Fixes
+
+- ConversationBar end icons were not round ([2a0d33a](https://github.com/cozy/cozy-libs/commit/2a0d33a8c61ac2146cf4dd0268b3bca89b522c4b))
+- Use correct size for Avatar ([8745f51](https://github.com/cozy/cozy-libs/commit/8745f5118d0e6a7583bc02658160744984be93c7))
+
+### Features
+
+- Add an AssistantLink ([cf3e0ae](https://github.com/cozy/cozy-libs/commit/cf3e0ae3e1483fba93683f797187af1aca75528e))
+
 # [0.4.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.3.0...cozy-search@0.4.0) (2025-04-10)
 
 ### Features
