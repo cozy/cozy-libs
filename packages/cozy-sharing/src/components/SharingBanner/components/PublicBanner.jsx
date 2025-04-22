@@ -95,7 +95,7 @@ const SharingBannerByLinkText = () => {
   const text = t('Share.banner.whats_cozy')
   const knowMore = (
     <a
-      href="https://cozy.io"
+      href="https://twake.app"
       target="_blank"
       className="u-link"
       rel="noopener noreferrer"
