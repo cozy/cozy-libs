@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.1.1...cozy-sharing@25.2.0) (2025-04-22)
+
+### Features
+
+- Update help link ([6302ed2](https://github.com/cozy/cozy-libs/commit/6302ed27ef865ed8a6e3c8854931285764abcbc1))
+- Update Twake wording in sharing banner ([ff4cb07](https://github.com/cozy/cozy-libs/commit/ff4cb07ddb52893c65af46d3d18c9b73b4de4ec7))
+
 ## [25.1.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.1.0...cozy-sharing@25.1.1) (2025-04-02)
 
 ### Bug Fixes
