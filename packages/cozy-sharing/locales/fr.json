@@ -59,7 +59,7 @@
     "loadingError": "Erreur de chargement",
     "banner": {
       "shared_from": "Les éléments ci-dessous sont affichés depuis le Cozy de ![avatar](%{image}) **%{name}**. Vous pouvez ajouter un lien vers ce partage dans votre Cozy.",
-      "whats_cozy": "Cozy est un domicile numérique sécurisé pour toutes vos données, hébergé en France - ",
+      "whats_cozy": "Twake est un domicile numérique sécurisé pour toutes vos données, hébergé en France - ",
       "know_more": "En savoir plus",
       "sync_to_mine": "Synchroniser |||| Synchroniser dans mon Cozy",
       "add_to_mine": "Ajouter |||| Ajouter à mon Cozy",
