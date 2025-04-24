@@ -30,7 +30,7 @@ class MJDefaults extends core.HeadComponent {
     }
 
     // Load the Lato font from Google APIs
-    add('fonts', 'inter', 'https://fonts.googleapis.com/css?family=inter')
+    add('fonts', 'Inter', 'https://fonts.googleapis.com/css?family=Inter')
 
     // Set some default attributes
     add('defaultAttributes', 'mj-all', {
