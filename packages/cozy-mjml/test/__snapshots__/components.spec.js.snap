@@ -48,9 +48,9 @@ Object {
         <![endif]-->
         
       <!--[if !mso]><!-->
-        <link href=\\"https://fonts.googleapis.com/css?family=inter\\" rel=\\"stylesheet\\" type=\\"text/css\\">
+        <link href=\\"https://fonts.googleapis.com/css?family=Inter\\" rel=\\"stylesheet\\" type=\\"text/css\\">
         <style type=\\"text/css\\">
-          @import url(https://fonts.googleapis.com/css?family=inter);
+          @import url(https://fonts.googleapis.com/css?family=Inter);
         </style>
       <!--<![endif]-->
 
