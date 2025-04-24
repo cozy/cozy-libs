@@ -48,9 +48,9 @@ Object {
         <![endif]-->
         
       <!--[if !mso]><!-->
-        <link href=\\"https://fonts.googleapis.com/css?family=Lato\\" rel=\\"stylesheet\\" type=\\"text/css\\">
+        <link href=\\"https://fonts.googleapis.com/css?family=inter\\" rel=\\"stylesheet\\" type=\\"text/css\\">
         <style type=\\"text/css\\">
-          @import url(https://fonts.googleapis.com/css?family=Lato);
+          @import url(https://fonts.googleapis.com/css?family=inter);
         </style>
       <!--<![endif]-->
 
@@ -76,8 +76,8 @@ Object {
     }
   
         </style>
-        <style type=\\"text/css\\">.primary-link{color:#297ef2;text-decoration:none;font-weight:bold;}
-.highlight{color:#297ef2;font-weight:bold;}
+        <style type=\\"text/css\\">.primary-link{color:#0a84ff;text-decoration:none;font-weight:bold;}
+.highlight{color:#0a84ff;font-weight:bold;}
 </style>
         
       </head>
@@ -136,94 +136,10 @@ Object {
       >
         <tbody>
           <tr>
-            <td  style=\\"width:122px;\\">
+            <td  style=\\"width:370px;\\">
               
       <img
-         alt=\\"Cozy Cloud\\" height=\\"24\\" src=\\"https://files.cozycloud.cc/cozy-mjml/cozycloud.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:24px;width:100%;\\" width=\\"122\\"
-      />
-    
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    
-              </td>
-            </tr>
-          
-      </table>
-    
-      </div>
-    
-          <!--[if mso | IE]>
-            </td>
-          
-        </tr>
-      
-                  </table>
-                <![endif]-->
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        
-      </div>
-    
-      
-      <!--[if mso | IE]>
-          </td>
-        </tr>
-      </table>
-      
-      <table
-         align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"\\" style=\\"width:600px;\\" width=\\"600\\"
-      >
-        <tr>
-          <td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\">
-      <![endif]-->
-    
-      
-      <div  style=\\"Margin:0px auto;max-width:600px;\\">
-        
-        <table
-           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
-        >
-          <tbody>
-            <tr>
-              <td
-                 style=\\"direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;\\"
-              >
-                <!--[if mso | IE]>
-                  <table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
-                
-        <tr>
-      
-            <td
-               class=\\"\\" style=\\"vertical-align:top;width:600px;\\"
-            >
-          <![endif]-->
-            
-      <div
-         class=\\"mj-column-per-100 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
-      >
-        
-      <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"vertical-align:top;\\" width=\\"100%\\"
-      >
-        
-            <tr>
-              <td
-                 align=\\"left\\" style=\\"font-size:0px;padding:16px 0;word-break:break-word;\\"
-              >
-                
-      <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-collapse:collapse;border-spacing:0px;\\"
-      >
-        <tbody>
-          <tr>
-            <td  style=\\"width:142px;\\">
-              
-      <img
-         alt=\\"Mon Cozy\\" height=\\"32\\" src=\\"https://files.cozycloud.cc/cozy-mjml/cozy-logo-monCozy.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:32px;width:100%;\\" width=\\"142\\"
+         alt=\\"Twake Workplace\\" height=\\"48\\" src=\\"https://files.cozycloud.cc/cozy-mjml/twakeworkplacelogo.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:48px;width:100%;\\" width=\\"370\\"
       />
     
             </td>
@@ -326,7 +242,7 @@ Object {
               >
                 
       <div
-         style=\\"font-family:Lato,Arial;font-size:12px;font-weight:bold;line-height:1.5;text-align:left;text-transform:uppercase;color:#95999d;\\"
+         style=\\"font-family:inter,Arial;font-size:14px;font-weight:bold;line-height:1.5;text-align:left;color:#95999d;\\"
       >
         ✉️ Main title
       </div>
@@ -340,7 +256,7 @@ Object {
               >
                 
       <div
-         style=\\"font-family:Lato,Arial;font-size:18px;font-weight:bold;line-height:1.5;text-align:left;color:#32363f;\\"
+         style=\\"font-family:inter,Arial;font-size:18px;font-weight:bold;line-height:1.5;text-align:left;color:#32363f;\\"
       >
         Level 2 title
       </div>
@@ -354,7 +270,7 @@ Object {
               >
                 
       <div
-         style=\\"font-family:Lato,Arial;font-size:16px;line-height:1.5;text-align:left;color:#32363f;\\"
+         style=\\"font-family:inter,Arial;font-size:16px;line-height:1.5;text-align:left;color:#32363f;\\"
       >
         Content with a small bottom space (8px)
       </div>
@@ -368,7 +284,7 @@ Object {
               >
                 
       <div
-         style=\\"font-family:Lato,Arial;font-size:16px;line-height:1.5;text-align:left;color:#32363f;\\"
+         style=\\"font-family:inter,Arial;font-size:16px;line-height:1.5;text-align:left;color:#32363f;\\"
       >
         Content with a medium bottom space (16px)
       </div>
@@ -382,7 +298,7 @@ Object {
               >
                 
       <div
-         style=\\"font-family:Lato,Arial;font-size:16px;line-height:1.5;text-align:left;color:#32363f;\\"
+         style=\\"font-family:inter,Arial;font-size:16px;line-height:1.5;text-align:left;color:#32363f;\\"
       >
         Content with a large bottom space (24px)
       </div>
@@ -396,7 +312,7 @@ Object {
               >
                 
       <div
-         style=\\"font-family:Lato,Arial;font-size:16px;line-height:1.5;text-align:left;color:#32363f;\\"
+         style=\\"font-family:inter,Arial;font-size:16px;line-height:1.5;text-align:left;color:#32363f;\\"
       >
         Content with a extra large bottom space (32px)
       </div>
@@ -410,7 +326,7 @@ Object {
               >
                 
       <div
-         style=\\"font-family:Lato,Arial;font-size:16px;font-weight:bold;line-height:1.5;text-align:left;color:#297ef2;\\"
+         style=\\"font-family:inter,Arial;font-size:16px;font-weight:bold;line-height:1.5;text-align:left;color:#0a84ff;\\"
       >
         Highlighted text
       </div>
@@ -428,10 +344,10 @@ Object {
       >
         <tr>
           <td
-             align=\\"center\\" bgcolor=\\"#297ef2\\" role=\\"presentation\\" style=\\"border:none;border-radius:2px;cursor:auto;padding:10px 16px;background:#297ef2;\\" valign=\\"middle\\"
+             align=\\"center\\" bgcolor=\\"#297ef2\\" role=\\"presentation\\" style=\\"border:none;border-radius:32px;cursor:auto;padding:10px 16px;background:#297ef2;\\" valign=\\"middle\\"
           >
             <a
-               href=\\"https://cozy.io\\" style=\\"background:#297ef2;color:#ffffff;font-family:Lato,Arial;font-size:14px;font-weight:bold;line-height:1.43;Margin:0;text-decoration:none;text-transform:uppercase;\\" target=\\"_blank\\"
+               href=\\"https://cozy.io\\" style=\\"background:#297ef2;color:#ffffff;font-family:inter,Arial;font-size:14px;font-weight:bold;line-height:1.43;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
             >
               Primary button
             </a>
@@ -455,7 +371,7 @@ Object {
              align=\\"center\\" bgcolor=\\"transparent\\" role=\\"presentation\\" style=\\"border:none;border-radius:3px;cursor:auto;padding:10px 8px;background:transparent;\\" valign=\\"middle\\"
           >
             <a
-               href=\\"https://cozy.io\\" style=\\"background:transparent;color:#297ef2;font-family:Lato,Arial;font-size:16px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
+               href=\\"https://cozy.io\\" style=\\"background:transparent;color:#0a84ff;font-family:inter,Arial;font-size:16px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
             >
               Primary link
             </a>
@@ -479,7 +395,7 @@ Object {
              align=\\"center\\" bgcolor=\\"transparent\\" role=\\"presentation\\" style=\\"border:none;border-radius:3px;cursor:auto;padding:10px 8px;background:transparent;\\" valign=\\"middle\\"
           >
             <a
-               href=\\"https://cozy.io\\" style=\\"background:transparent;color:#297ef2;font-family:Lato,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
+               href=\\"https://cozy.io\\" style=\\"background:transparent;color:#0a84ff;font-family:inter,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
             >
               Smaller primary link for long links for example
             </a>
@@ -574,98 +490,6 @@ Object {
           <tbody>
             <tr>
               <td
-                 style=\\"direction:ltr;font-size:0px;padding:16px 0 8px;text-align:center;vertical-align:top;\\"
-              >
-                <!--[if mso | IE]>
-                  <table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
-                
-        <tr>
-      
-            <td
-               align=\\"center\\" class=\\"\\" style=\\"vertical-align:top;width:600px;\\"
-            >
-          <![endif]-->
-            
-      <div
-         class=\\"mj-column-per-100 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
-      >
-        
-      <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"vertical-align:top;\\" width=\\"100%\\"
-      >
-        
-            <tr>
-              <td
-                 align=\\"center\\" style=\\"font-size:0px;padding:0;word-break:break-word;\\"
-              >
-                
-      <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-collapse:collapse;border-spacing:0px;\\"
-      >
-        <tbody>
-          <tr>
-            <td  style=\\"width:32px;\\">
-              
-      <img
-         height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/cozy-logo-round.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"32\\"
-      />
-    
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    
-              </td>
-            </tr>
-          
-      </table>
-    
-      </div>
-    
-          <!--[if mso | IE]>
-            </td>
-          
-        </tr>
-      
-                  </table>
-                <![endif]-->
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        
-      </div>
-    
-      
-      <!--[if mso | IE]>
-          </td>
-        </tr>
-      </table>
-      
-              </td>
-            </tr>
-          
-            <tr>
-              <td
-                 class=\\"\\" width=\\"600px\\"
-              >
-          
-      <table
-         align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"\\" style=\\"width:600px;\\" width=\\"600\\"
-      >
-        <tr>
-          <td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\">
-      <![endif]-->
-    
-      
-      <div  style=\\"Margin:0px auto;max-width:600px;\\">
-        
-        <table
-           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
-        >
-          <tbody>
-            <tr>
-              <td
                  style=\\"direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;\\"
               >
                 <!--[if mso | IE]>
@@ -692,9 +516,9 @@ Object {
               >
                 
       <div
-         style=\\"font-family:Lato,Arial;font-size:16px;font-weight:bold;line-height:1.5;text-align:center;color:#297ef2;\\"
+         style=\\"font-family:inter,Arial;font-size:16px;font-weight:bold;line-height:1.5;text-align:center;color:#0a84ff;\\"
       >
-        Cozy Cloud hosts your personal cloud, Cozy
+        Twake Workplace hosts your personal cloud
       </div>
     
               </td>
@@ -706,7 +530,7 @@ Object {
               >
                 
       <div
-         style=\\"font-family:Lato,Arial;font-size:14px;line-height:1.5;text-align:center;color:#95999d;\\"
+         style=\\"font-family:inter,Arial;font-size:14px;line-height:1.5;text-align:center;color:#95999d;\\"
       >
         Hosted in France • Respectful of your privacy • Secure
       </div>
@@ -814,9 +638,9 @@ Object {
              align=\\"center\\" bgcolor=\\"transparent\\" role=\\"presentation\\" style=\\"border:none;border-radius:3px;cursor:auto;padding:10px 8px;background:transparent;\\" valign=\\"middle\\"
           >
             <a
-               href=\\"https://blog.cozy.io\\" style=\\"background:transparent;color:#297ef2;font-family:Lato,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
+               href=\\"https://blog.cozy.io/en/\\" style=\\"background:transparent;color:#0a84ff;font-family:inter,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
             >
-              Cozy Cloud's blog
+              Twake Workplace's blog
             </a>
           </td>
         </tr>
@@ -863,7 +687,7 @@ Object {
               >
                 
       <div
-         style=\\"font-family:Lato,Arial;font-size:16px;line-height:1.5;text-align:center;color:#95999d;\\"
+         style=\\"font-family:inter,Arial;font-size:16px;line-height:1.5;text-align:center;color:#95999d;\\"
       >
         |
       </div>
@@ -916,7 +740,7 @@ Object {
              align=\\"center\\" bgcolor=\\"transparent\\" role=\\"presentation\\" style=\\"border:none;border-radius:3px;cursor:auto;padding:10px 8px;background:transparent;\\" valign=\\"middle\\"
           >
             <a
-               href=\\"https://support.cozy.io\\" style=\\"background:transparent;color:#297ef2;font-family:Lato,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
+               href=\\"https://help.cozy.io/\\" style=\\"background:transparent;color:#0a84ff;font-family:inter,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
             >
               Help &amp; support
             </a>
@@ -1037,7 +861,7 @@ Object {
         >
           
       <img
-         alt=\\"Appstore\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/appstore-en.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
+         alt=\\"Appstore\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/twake-appstore-en.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
       />
     
         </a>
@@ -1087,7 +911,7 @@ Object {
         >
           
       <img
-         alt=\\"Play Store\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/playstore-en.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
+         alt=\\"Play Store\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/twake-playstore-en.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
       />
     
         </a>
@@ -1137,7 +961,7 @@ Object {
         >
           
       <img
-         alt=\\"Cozy Desktop\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/desktop-en.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
+         alt=\\"Cozy Desktop\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/twake-desktop-en.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
       />
     
         </a>
@@ -1232,7 +1056,7 @@ Object {
               >
                 
       <div
-         style=\\"font-family:Lato,Arial;font-size:12px;line-height:1.5;text-align:center;color:#32363f;\\"
+         style=\\"font-family:inter,Arial;font-size:12px;line-height:1.5;text-align:center;color:#32363f;\\"
       >
         <a href=\\"https://cozy.io/en/legal/\\" style=\\"color:#5d6165;\\">Legal</a>
       </div>
@@ -1357,9 +1181,9 @@ Object {
              align=\\"center\\" bgcolor=\\"#ffffff\\" role=\\"presentation\\" style=\\"border:none;border-radius:16px;cursor:auto;padding:4px 16px;background:#ffffff;\\" valign=\\"middle\\"
           >
             <a
-               href=\\"https://isabelledurand.mycozy.cloud\\" style=\\"background:#ffffff;color:#297ef2;font-family:Lato,Arial;font-size:14px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
+               href=\\"https://isabelledurand.mycozy.cloud\\" style=\\"background:#ffffff;color:#0a84ff;font-family:inter,Arial;font-size:14px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
             >
-              <img width=\\"24\\" height=\\"24\\" src=\\"https://files.cozycloud.cc/cozy-mjml/cozy-logo-round.png\\" style=\\"vertical-align:middle;\\" />&nbsp;
+              <img width=\\"24\\" height=\\"24\\" src=\\"https://files.cozycloud.cc/cozy-mjml/twakelogo.png\\" style=\\"vertical-align:middle;\\" />&nbsp;
               isabelledurand.mycozy.cloud
             </a>
           </td>
@@ -1443,9 +1267,9 @@ Object {
               >
                 
       <div
-         style=\\"font-family:Lato,Arial;font-size:16px;font-weight:bold;line-height:1.5;text-align:center;color:#297ef2;\\"
+         style=\\"font-family:inter,Arial;font-size:16px;font-weight:bold;line-height:1.5;text-align:center;color:#0a84ff;\\"
       >
-        Cozy Cloud héberge votre domicile numérique, Cozy
+        Twake Workplace héberge votre domicile numérique
       </div>
     
               </td>
@@ -1457,7 +1281,7 @@ Object {
               >
                 
       <div
-         style=\\"font-family:Lato,Arial;font-size:14px;line-height:1.5;text-align:center;color:#95999d;\\"
+         style=\\"font-family:inter,Arial;font-size:14px;line-height:1.5;text-align:center;color:#95999d;\\"
       >
         Hébergé en France • Respectueux de votre vie privée • Sécurisé
       </div>
@@ -1565,9 +1389,9 @@ Object {
              align=\\"center\\" bgcolor=\\"transparent\\" role=\\"presentation\\" style=\\"border:none;border-radius:3px;cursor:auto;padding:10px 8px;background:transparent;\\" valign=\\"middle\\"
           >
             <a
-               href=\\"https://blog.cozy.io\\" style=\\"background:transparent;color:#297ef2;font-family:Lato,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
+               href=\\"https://blog.cozy.io/fr/\\" style=\\"background:transparent;color:#0a84ff;font-family:inter,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
             >
-              Blog de Cozy Cloud
+              Blog de Twake Workplace
             </a>
           </td>
         </tr>
@@ -1614,7 +1438,7 @@ Object {
               >
                 
       <div
-         style=\\"font-family:Lato,Arial;font-size:16px;line-height:1.5;text-align:center;color:#95999d;\\"
+         style=\\"font-family:inter,Arial;font-size:16px;line-height:1.5;text-align:center;color:#95999d;\\"
       >
         |
       </div>
@@ -1667,7 +1491,7 @@ Object {
              align=\\"center\\" bgcolor=\\"transparent\\" role=\\"presentation\\" style=\\"border:none;border-radius:3px;cursor:auto;padding:10px 8px;background:transparent;\\" valign=\\"middle\\"
           >
             <a
-               href=\\"https://support.cozy.io\\" style=\\"background:transparent;color:#297ef2;font-family:Lato,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
+               href=\\"https://support.cozy.io/\\" style=\\"background:transparent;color:#0a84ff;font-family:inter,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
             >
               Aide et support
             </a>
@@ -1788,7 +1612,7 @@ Object {
         >
           
       <img
-         alt=\\"Appstore\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/appstore-fr.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
+         alt=\\"Appstore\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/twake-appstore-fr.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
       />
     
         </a>
@@ -1838,7 +1662,7 @@ Object {
         >
           
       <img
-         alt=\\"Play Store\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/playstore-fr.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
+         alt=\\"Play Store\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/twake-playstore-fr.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
       />
     
         </a>
@@ -1888,7 +1712,7 @@ Object {
         >
           
       <img
-         alt=\\"Cozy Desktop\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/desktop-fr.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
+         alt=\\"Cozy Desktop\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/twake-desktop-fr.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
       />
     
         </a>
@@ -1983,7 +1807,7 @@ Object {
               >
                 
       <div
-         style=\\"font-family:Lato,Arial;font-size:12px;line-height:1.5;text-align:center;color:#32363f;\\"
+         style=\\"font-family:inter,Arial;font-size:12px;line-height:1.5;text-align:center;color:#32363f;\\"
       >
         <a href=\\"https://cozy.io/fr/legal/\\" style=\\"color:#5d6165;\\">Mentions légales</a>
       </div>
