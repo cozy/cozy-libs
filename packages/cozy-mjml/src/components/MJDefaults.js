@@ -22,19 +22,19 @@ class MJDefaults extends core.HeadComponent {
   handler() {
     const { add } = this.context
 
-    const highlight = { color: '#297ef2', 'font-weight': 'bold' }
+    const highlight = { color: '#0a84ff', 'font-weight': 'bold' }
     const primaryLink = {
-      color: '#297ef2',
+      color: '#0a84ff',
       'text-decoration': 'none',
       'font-weight': 'bold'
     }
 
     // Load the Lato font from Google APIs
-    add('fonts', 'Lato', 'https://fonts.googleapis.com/css?family=Lato')
+    add('fonts', 'inter', 'https://fonts.googleapis.com/css?family=inter')
 
     // Set some default attributes
     add('defaultAttributes', 'mj-all', {
-      'font-family': 'Lato,Arial',
+      'font-family': 'inter,Arial',
       color: '#32363f',
       'font-size': '16px',
       'line-height': '1.5'
@@ -48,8 +48,7 @@ class MJDefaults extends core.HeadComponent {
     add('classes', 'highlight', highlight)
     add('classes', 'title', {
       color: '#95999d',
-      'text-transform': 'uppercase',
-      'font-size': '12px',
+      'font-size': '14px',
       'font-weight': 'bold'
     })
     add('classes', 'title-h2', {
@@ -59,9 +58,8 @@ class MJDefaults extends core.HeadComponent {
     add('classes', 'primary-button', {
       'inner-padding': '10px 16px',
       'background-color': '#297ef2',
-      'border-radius': '2px',
+      'border-radius': '32px',
       color: '#fff',
-      'text-transform': 'uppercase',
       'font-size': '14px',
       'font-weight': 'bold',
       'line-height': '1.43'

@@ -8,24 +8,10 @@ validator.registerDependencies({
 
 class MJHeader extends core.BodyComponent {
   render() {
-    let img = 'cozycloud.png'
-    let alt = 'Cozy Cloud'
-    let width = 122
-    let height = 24
-    if (this.getAttribute('mycozy')) {
-      // The default locale is 'en'
-      img = 'cozy-logo-myCozy.png'
-      alt = 'My Cozy'
-      width = 129
-      height = 32
-      if (this.getAttribute('locale') == 'fr') {
-        img = 'cozy-logo-monCozy.png'
-        alt = 'Mon Cozy'
-        width = 142
-        height = 32
-      }
-    }
-
+    let img = 'twakeworkplacelogo.png'
+    let alt = 'Twake Workplace'
+    let width = 370
+    let height = 48
     return this.renderMJML(
       `<mj-section padding="0">
          <mj-column>
@@ -37,14 +23,5 @@ class MJHeader extends core.BodyComponent {
 }
 
 MJHeader.endingTag = true
-
-MJHeader.allowedAttributes = {
-  locale: 'string',
-  mycozy: 'boolean'
-}
-
-MJHeader.defaultAttributes = {
-  locale: 'en'
-}
 
 module.exports = MJHeader

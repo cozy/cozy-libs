@@ -76,12 +76,10 @@ There are no props for this component.
 
 #### Available props
 
-- `mycozy`: bool, default `false` - Displays a header with *MyCozy* logo instead of *CozyCloud* logo
-- `locale`: `en`|`fr`, default `en` - Displays the *MyCozy* logo in english or french
+There are no props for this component.
 
 ```xml
 <mj-header></mj-header>
-<mj-header mycozy="true" locale="fr"></mj-header>
 ```
 
 ### `<mj-footer>`

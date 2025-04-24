@@ -4,7 +4,6 @@
   </mj-head>
   <mj-body background-color="#f5f6f7">
     <mj-header></mj-header>
-    <mj-header locale="fr" mycozy="true"></mj-header>
     <mj-wrapper background-color="#fff" border-radius="8px" padding="0">
       <mj-section>
         <mj-column>
