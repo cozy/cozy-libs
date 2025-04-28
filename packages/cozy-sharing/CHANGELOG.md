@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.2.0...cozy-sharing@25.3.0) (2025-04-28)
+
+### Features
+
+- Allow to hide cozy to cozy sharing with a flag ([3836c83](https://github.com/cozy/cozy-libs/commit/3836c837713f3122b8657b4cff8a9274c7d949ed))
+- Enable again avatar display from cozy-stack ([9d716ab](https://github.com/cozy/cozy-libs/commit/9d716ab8eb64e0254386e1c572317a9f49fe21db))
+
 # [25.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.1.1...cozy-sharing@25.2.0) (2025-04-22)
 
 ### Features
