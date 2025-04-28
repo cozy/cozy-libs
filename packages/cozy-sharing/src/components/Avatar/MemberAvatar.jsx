@@ -1,11 +1,14 @@
 import React from 'react'
 
+import { useClient } from 'cozy-client'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
 import logger from '../../logger'
 import { getInitials } from '../../models'
 
 const MemberAvatar = ({ recipient, ...rest }) => {
+  const client = useClient()
+
   // There are cases when due to apparent memory leaks, the recipient does not exist
   // This will trigger an unhanded error in the Avatar component and crash the app
   // At the moment, we are not sure where is the root cause of this cascading undefined props
@@ -26,22 +29,18 @@ const MemberAvatar = ({ recipient, ...rest }) => {
    * status in the url force the refresh of the image when the
    * status changes
    */
-  // we comment this part for now because it's not compliant with Twake theme
-  // const image =
-  //   recipient.avatarPath && recipient.status
-  //     ? `${client.options.uri}${recipient.avatarPath}?v=${recipient.status}`
-  //     : null
+  const image =
+    recipient.avatarPath && recipient.status
+      ? `${client.options.uri}${recipient.avatarPath}?v=${recipient.status}`
+      : null
 
   return (
-    <Avatar
-      // image={image}
-      border
-      disabled={
-        recipient.status === 'pending' || recipient.status === 'mail-not-send'
-      }
-      {...rest}
-    >
-      {getInitials(recipient)}
+    <Avatar {...rest}>
+      {image ? (
+        <img width="100%" height="100%" src={image} />
+      ) : (
+        getInitials(recipient)
+      )}
     </Avatar>
   )
 }
