@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import flag from 'cozy-flags'
+
 import ShareDialogCozyToCozy from './ShareDialogCozyToCozy'
 import ShareDialogOnlyByLink from './ShareDialogOnlyByLink'
 
@@ -22,7 +24,8 @@ export const ShareModal = ({
   sharingDesc,
   twoStepsConfirmationMethods
 }) => {
-  const shareDialogOnlyByLink = documentType === 'Albums'
+  const shareDialogOnlyByLink =
+    flag('cozy.hide-sharing-cozy-to-cozy') || documentType === 'Albums'
 
   const showShareByEmail = !hasSharedParent && !hasSharedChild
   const showShareByLink = documentType !== 'Organizations'

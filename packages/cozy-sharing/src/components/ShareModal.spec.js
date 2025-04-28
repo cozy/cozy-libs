@@ -37,9 +37,16 @@ describe('ShareModal component', () => {
   })
 
   it('should render ShareDialogCozyToCozy if type is Notes', () => {
-    flag.mockImplementation(() => true)
     const root = setup({ documentType: 'Notes' })
 
     expect(root.getByText('ShareDialogCozyToCozy'))
+  })
+
+  it('should render ShareDialogOnlyByLink if flag cozy.hide-sharing-cozy-to-cozy is true', () => {
+    flag.mockImplementation(() => true)
+
+    const root = setup({ documentType: 'Document' })
+
+    expect(root.getByText('ShareDialogOnlyByLink'))
   })
 })
