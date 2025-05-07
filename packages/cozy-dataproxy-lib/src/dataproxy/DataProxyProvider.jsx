@@ -152,9 +152,19 @@ export const DataProxyProvider = React.memo(({ children }) => {
         return result
       }
 
+      // Request through cozy-client
+      const requestLink = async (operation, options) => {
+        log.log('Send request to DataProxy : ', operation)
+        if (options.fetchPolicy) {
+          // Functions cannot be serialized and thus passed to the iframe
+          delete options.fetchPolicy
+        }
+        return dataProxy.requestLink(operation, options)
+      }
       const newValue = {
         dataProxyServicesAvailable,
-        search
+        search,
+        requestLink
       }
 
       client.links.forEach(link => {
