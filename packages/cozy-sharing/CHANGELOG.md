@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.3.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.3.0...cozy-sharing@25.3.1) (2025-05-07)
+
+### Bug Fixes
+
+- Do not rely on attributes ([a77602c](https://github.com/cozy/cozy-libs/commit/a77602cfbbce6b08296578b12863c631251f99a4))
+
 # [25.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.2.0...cozy-sharing@25.3.0) (2025-04-28)
 
 ### Features
