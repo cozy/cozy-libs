@@ -88,9 +88,11 @@ export const computeFileFullpath = async (
     // If a file path exists, check it is complete, i.e. it includes the name.
     // The stack typically does not include the name in the path, which is useful to search on it
     if (file.path?.includes(file.name)) {
+      setFilePath(file._id, file.path)
       return file
     }
     const newPath = `${file.path}/${file.name}`
+    setFilePath(file._id, newPath)
     return { ...file, path: newPath }
   }
 
