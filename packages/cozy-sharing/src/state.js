@@ -621,9 +621,7 @@ const getAppUrlForDoctype = (state, documentType) => {
 }
 
 const getAppUrl = (apps, appName) => {
-  const app = apps.find(
-    a => a.attributes.slug === appName && a.attributes.state === 'ready'
-  )
+  const app = apps.find(a => a?.slug === appName && a?.state === 'ready')
   if (!app) {
     throw new Error(`Sharing link: app ${appName} not installed`)
   }

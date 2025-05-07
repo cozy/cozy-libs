@@ -326,8 +326,15 @@ export const PERM_WITHOUT_DOC = {
 
 export const APPS = [
   {
-    type: 'io.cozy.apps',
+    _type: 'io.cozy.apps',
     id: 'io.cozy.apps/drive',
+    _id: 'io.cozy.apps/drive',
+    name: 'Drive',
+    name_prefix: 'Cozy',
+    editor: 'Cozy',
+    type: 'webapp',
+    slug: 'drive',
+    state: 'ready',
     attributes: {
       name: 'Drive',
       name_prefix: 'Cozy',
@@ -343,8 +350,15 @@ export const APPS = [
     }
   },
   {
-    type: 'io.cozy.apps',
+    _type: 'io.cozy.apps',
     id: 'io.cozy.apps/photos',
+    _id: 'io.cozy.apps/photos',
+    name: 'Photos',
+    name_prefix: 'Cozy',
+    editor: 'Cozy',
+    type: 'webapp',
+    slug: 'photos',
+    state: 'ready',
     attributes: {
       name: 'Photos',
       name_prefix: 'Cozy',
