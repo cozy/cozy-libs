@@ -1,5 +1,5 @@
 import * as Comlink from 'comlink'
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, useCallback } from 'react'
 
 import { useClient } from 'cozy-client'
 import { isFlagshipApp } from 'cozy-device-helper'
@@ -19,11 +19,12 @@ export const useDataProxy = () => {
   return context
 }
 
-export const DataProxyProvider = React.memo(({ children, options = {} }) => {
+export const DataProxyProvider = React.memo(({ children }) => {
   const client = useClient()
   const webviewIntent = useWebviewIntent()
   const [iframeUrl, setIframeUrl] = useState()
   const [dataProxy, setDataProxy] = useState()
+  const [value, setValue] = useState()
   const [dataProxyServicesAvailable, setDataProxyServicesAvailable] =
     useState(undefined)
 
@@ -111,27 +112,68 @@ export const DataProxyProvider = React.memo(({ children, options = {} }) => {
     }
   }, [client, webviewIntent])
 
-  const onIframeLoaded = () => {
+  const onIframeLoaded = useCallback(() => {
     const ifr = document.getElementById('DataProxy')
     const remote = Comlink.wrap(Comlink.windowEndpoint(ifr.contentWindow))
     setDataProxy(() => remote)
-  }
+  }, [setDataProxy])
 
-  const search = async search => {
-    log.log('Send search query to DataProxy')
-    const result = await dataProxy.search(search, options)
+  const onReceiveMessage = useCallback(
+    event => {
+      if (!event.origin.includes('dataproxy')) {
+        return
+      }
+      const eventData = event?.data
+      if (eventData && typeof eventData === 'object') {
+        if (
+          eventData.type === 'DATAPROXYMESSAGE' &&
+          eventData.payload === 'READY'
+        ) {
+          onIframeLoaded()
+        }
+      }
+    },
+    [onIframeLoaded]
+  )
 
-    return result
-  }
+  useEffect(function () {
+    window.addEventListener('message', onReceiveMessage)
+    return function () {
+      window.removeEventListener('message', onReceiveMessage)
+    }
+  })
 
-  const value = {
-    dataProxyServicesAvailable,
-    search
-  }
+  useEffect(() => {
+    const doAsync = async () => {
+      // Make a global search
+      const search = async (search, options) => {
+        log.log('Send search query to DataProxy')
+        const result = await dataProxy.search(search, options)
+        return result
+      }
+
+      const newValue = {
+        dataProxyServicesAvailable,
+        search
+      }
+
+      client.links.forEach(link => {
+        if (link.registerDataProxy) {
+          // This is required as the DataProxy is not ready when the DataProxyLink is created
+          link.registerDataProxy(newValue)
+        }
+      })
+
+      setValue(newValue)
+    }
+    if (dataProxy && client?.links) {
+      doAsync()
+    }
+  }, [dataProxy, client, dataProxyServicesAvailable])
 
   return (
     <DataProxyContext.Provider value={value}>
-      {children}
+      {value && children}
       {iframeUrl ? (
         <iframe
           id="DataProxy"
@@ -143,7 +185,6 @@ export const DataProxyProvider = React.memo(({ children, options = {} }) => {
             height: 0
           }}
           sandbox="allow-same-origin allow-scripts"
-          onLoad={onIframeLoaded}
         ></iframe>
       ) : undefined}
     </DataProxyContext.Provider>
