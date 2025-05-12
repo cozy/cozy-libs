@@ -1,14 +1,8 @@
 import React, { forwardRef } from 'react'
 
 import { useDataProxy } from 'cozy-dataproxy-lib'
-import Circle from 'cozy-ui/transpiled/react/Circle'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import PaperplaneIcon from 'cozy-ui/transpiled/react/Icons/Paperplane'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItemSkeleton from 'cozy-ui/transpiled/react/Skeletons/ListItemSkeleton'
-import { isTwakeTheme } from 'cozy-ui/transpiled/react/helpers/isTwakeTheme'
-import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import NoResultItem from './NoResultItem'
 import NotEnoughItem from './NotEnoughItem'
@@ -55,31 +49,10 @@ const SearchResult = () => {
   ))
 }
 
-const ResultMenuContent = forwardRef(({ onClick }, ref) => {
-  const { t } = useI18n()
-  const { isMobile } = useBreakpoints()
-  const { searchValue, selectedIndex } = useSearch()
+const ResultMenuContent = forwardRef((props, ref) => {
   const { dataProxyServicesAvailable } = useDataProxy()
 
-  return (
-    <List ref={ref}>
-      {isAssistantEnabled() && !isTwakeTheme() && (
-        <ResultMenuItem
-          icon={
-            <Circle size="small">
-              <Icon icon={PaperplaneIcon} size={isMobile ? 12 : undefined} />
-            </Circle>
-          }
-          primaryText={searchValue}
-          query={searchValue}
-          secondaryText={t('assistant.search.result')}
-          selected={selectedIndex === 0}
-          onClick={onClick}
-        />
-      )}
-      {dataProxyServicesAvailable && <SearchResult />}
-    </List>
-  )
+  return <List ref={ref}>{dataProxyServicesAvailable && <SearchResult />}</List>
 })
 
 ResultMenuContent.displayName = 'ResultMenuContent'

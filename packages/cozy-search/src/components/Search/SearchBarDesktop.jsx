@@ -6,13 +6,10 @@ import ClickAwayListener from 'cozy-ui/transpiled/react/ClickAwayListener'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import MagnifierIcon from 'cozy-ui/transpiled/react/Icons/Magnifier'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
-import { isTwakeTheme } from 'cozy-ui/transpiled/react/helpers/isTwakeTheme'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { AssistantButton } from './AssistantButton'
 import { useSearch } from './SearchProvider'
 import styles from './styles.styl'
-import { AssistantIcon } from '../AssistantIcon/AssistantIcon'
 import { useAssistant } from '../AssistantProvider'
 import ResultMenu from '../ResultMenu/ResultMenu'
 import { isAssistantEnabled, makeConversationId } from '../helpers'
@@ -27,7 +24,6 @@ const SearchBarDesktop = ({
   className,
   disabledHover
 }) => {
-  const { t } = useI18n()
   const { searchValue, results, selectedIndex, setSelectedIndex } = useSearch()
   const { onAssistantExecute } = useAssistant()
   const navigate = useNavigate()
@@ -102,37 +98,25 @@ const SearchBarDesktop = ({
           icon={
             size === 'large' ? (
               <Icon
-                className={cx(
-                  'u-mh-1',
-                  isTwakeTheme() ? styles['search-bar-icon'] : undefined
-                )}
-                icon={isTwakeTheme() ? MagnifierIcon : AssistantIcon}
-                size={isTwakeTheme() ? 24 : 32}
+                className={cx('u-mh-1', styles['search-bar-icon'])}
+                icon={MagnifierIcon}
+                size={24}
               />
             ) : (
               <Icon
-                className={cx(
-                  'u-ml-1 u-mr-half',
-                  isTwakeTheme() ? styles['search-bar-icon'] : undefined
-                )}
-                icon={isTwakeTheme() ? MagnifierIcon : AssistantIcon}
-                size={isTwakeTheme() ? 16 : 24}
+                className={cx('u-ml-1 u-mr-half', styles['search-bar-icon'])}
+                icon={MagnifierIcon}
+                size={16}
               />
             )
-          }
-          placeholder={
-            isAssistantEnabled() && !isTwakeTheme()
-              ? t('assistant.search.placeholder')
-              : undefined // fallback on SearchBar default
           }
           value={value}
           componentsProps={{
             inputBase: {
               onKeyDown: handleKeyDown,
-              endAdornment:
-                isAssistantEnabled() && isTwakeTheme() ? (
-                  <AssistantButton onClick={handleClick} size={size} />
-                ) : undefined
+              endAdornment: isAssistantEnabled() ? (
+                <AssistantButton onClick={handleClick} size={size} />
+              ) : undefined
             }
           }}
           disabledClear
