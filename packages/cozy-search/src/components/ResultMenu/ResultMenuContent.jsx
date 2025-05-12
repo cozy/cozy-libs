@@ -23,7 +23,7 @@ const SearchResult = () => {
     )
   }
 
-  if (!isLoading && !results?.length && !isAssistantEnabled()) {
+  if (!isLoading && !results?.length) {
     if (searchValue.length >= 3) {
       return <NoResultItem />
     } else {
