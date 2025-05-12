@@ -7,9 +7,10 @@ import { SEARCH_SCHEMA } from './consts'
 import { getPouchLink } from './helpers/client'
 import { setFilePaths, computeFileFullpath } from './helpers/filePaths'
 import { getSearchEncoder } from './helpers/getSearchEncoder'
+import { shouldKeepApp } from './helpers/normalizeApp'
 import { shouldKeepFile } from './helpers/normalizeFile'
 import { queryLocalOrRemoteDocs } from './queries'
-import { CozyDoc, isIOCozyFile, SearchIndex } from './types'
+import { CozyDoc, isIOCozyFile, isIOCozyApp, SearchIndex } from './types'
 
 export const initSearchIndex = (
   doctype: keyof typeof SEARCH_SCHEMA
@@ -118,6 +119,9 @@ export const initDoctypeAfterIndexImport = async (
 const shouldIndexDoc = (doc: CozyDoc): boolean => {
   if (isIOCozyFile(doc)) {
     return shouldKeepFile(doc)
+  }
+  if (isIOCozyApp(doc)) {
+    return shouldKeepApp(doc)
   }
   return true
 }
