@@ -5,12 +5,10 @@ import { useNavigate } from 'react-router-dom'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import MagnifierIcon from 'cozy-ui/transpiled/react/Icons/Magnifier'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
-import { isTwakeTheme } from 'cozy-ui/transpiled/react/helpers/isTwakeTheme'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import useExtendI18n from 'cozy-ui/transpiled/react/providers/I18n/useExtendI18n'
 
 import { locales } from '../locales'
-import { AssistantIcon } from './AssistantIcon/AssistantIcon'
 import styles from './Search/styles.styl'
 import { isAssistantEnabled } from './helpers'
 
@@ -25,12 +23,9 @@ export const AssistantMobile = () => {
       size="medium"
       icon={
         <Icon
-          className={cx(
-            'u-ml-1 u-mr-half',
-            isTwakeTheme() ? styles['search-bar-icon'] : undefined
-          )}
-          icon={isTwakeTheme() ? MagnifierIcon : AssistantIcon}
-          size={isTwakeTheme() ? 16 : 24}
+          className={cx('u-ml-1 u-mr-half', styles['search-bar-icon'])}
+          icon={MagnifierIcon}
+          size={16}
         />
       }
       type="button"

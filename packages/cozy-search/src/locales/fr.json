@@ -3,14 +3,13 @@
     "search": {
       "placeholder": "Une question ?",
       "send": "Envoyer",
-      "result": "Demander à l'assistant",
       "noItem": "Aucun résultat",
       "notEnough": "Votre recherche doit contenir au moins 3 caractères"
     },
     "dialog": {
       "close": "Fermer"
     },
-    "name": "Assistant %{name}",
+    "name": "Assistant Twake",
     "sources": "%{smart_count} source |||| %{smart_count} sources",
     "suggestions": {
       "find_file": "Rechercher un fichier",

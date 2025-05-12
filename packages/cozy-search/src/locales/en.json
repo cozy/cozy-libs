@@ -3,14 +3,13 @@
     "search": {
       "placeholder": "Any question?",
       "send": "Send",
-      "result": "Ask the assistant",
       "noItem": "No results",
       "notEnough": "Your query must contain at least 3 characters"
     },
     "dialog": {
       "close": "Close"
     },
-    "name": "%{name} Assistant",
+    "name": "Twake Assistant",
     "sources": "%{smart_count} source |||| %{smart_count} sources",
     "suggestions": {
       "find_file": "Search a file",
