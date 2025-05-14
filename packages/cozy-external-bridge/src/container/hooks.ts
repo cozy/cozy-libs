@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 
 import { useClient } from 'cozy-client'
 
+import { BRIDGE_ROUTE_PREFIX } from './constants'
 import { getIframe, handleRequestParentOrigin } from './helpers'
 
 // Initial redirection is necessary when we load a page from a direct link
@@ -11,25 +12,13 @@ export const useInitialRedirection = (): void => {
   const location = useLocation()
 
   useEffect(() => {
-    // If current url is root url, do nothing
-    if (
-      location.pathname === '/' &&
-      location.hash === '' &&
-      location.search === ''
-    ) {
-      return
-    }
+    if (location.pathname.startsWith(BRIDGE_ROUTE_PREFIX)) {
+      const iframe = getIframe()
 
-    const iframe = getIframe()
-
-    const destUrl = new URL(iframe.src)
-    destUrl.pathname = location.pathname
-    destUrl.hash = location.hash
-    destUrl.search = location.search
-
-    const currentIframeUrl = new URL(iframe.src)
-
-    if (destUrl.toString() !== currentIframeUrl.toString()) {
+      const destUrl = new URL(iframe.src)
+      destUrl.pathname = location.pathname.replace(BRIDGE_ROUTE_PREFIX, '')
+      destUrl.hash = location.hash
+      destUrl.search = location.search
       iframe.src = destUrl.toString()
     }
   }, [])

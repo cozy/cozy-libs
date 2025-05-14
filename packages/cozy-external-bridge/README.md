@@ -4,7 +4,7 @@ This library allows communication between a container app and an app embedded in
 
 ## For container app
 
-Just add the `useExternalBridge` hook and it will :
+Add the `useExternalBridge` hook and it will :
 
 - allow history syncing
 - expose a `getContacts` method
@@ -16,6 +16,20 @@ import { useExternalBridge } from 'cozy-external-bridge/container'
 const App = () => {
   useExternalBridge('https://chat.twake.app')
 }
+```
+
+You also need to manage routing if embedded app use history syncing :
+
+```
+<HashRouter>
+  <Routes>
+    <Route element={<AppLayout />}>
+      <Route path="/" element={<OutletWrapper Component={App} />}>
+        <Route path="bridge/*" />
+      </Route>
+    </Route>
+  </Routes>
+</HashRouter>
 ```
 
 ## For embedded app

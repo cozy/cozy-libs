@@ -8,6 +8,7 @@ import { IOCozyContact } from 'cozy-client/types/types'
 import flag from 'cozy-flags'
 import Minilog from 'cozy-minilog'
 
+import { BRIDGE_ROUTE_PREFIX } from './constants'
 import { getIframe, extractUrl } from './helpers'
 import { useInitialRedirection, useParentOrigin } from './hooks'
 
@@ -41,7 +42,7 @@ export const useExternalBridge = (origin: string): void => {
         log.debug(
           `Navigating to ${url} because received ${newUrl} from embedded app`
         )
-        navigate(url, { replace: true })
+        navigate(BRIDGE_ROUTE_PREFIX + url, { replace: true })
       }
     }
 
