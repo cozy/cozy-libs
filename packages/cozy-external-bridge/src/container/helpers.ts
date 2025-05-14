@@ -1,3 +1,15 @@
+export const getIframe = (): HTMLIFrameElement => {
+  const iframe = document.getElementById(
+    'embeddedApp'
+  ) as HTMLIFrameElement | null
+
+  if (iframe === null) {
+    throw new Error('No iframe found')
+  }
+
+  return iframe
+}
+
 export const extractUrl = (url: string): string => {
   if (url.startsWith('http')) {
     const objectUrl = new URL(url)
