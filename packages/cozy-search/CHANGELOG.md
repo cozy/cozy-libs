@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.5.1...cozy-search@0.6.0) (2025-05-14)
+
+### Bug Fixes
+
+- Display no result even if assistant disabled ([59e8a55](https://github.com/cozy/cozy-libs/commit/59e8a55503ab74fbc448f231ec45eac008eff941))
+
+### Features
+
+- Remove isTwakeTheme from cozy-search ([be40991](https://github.com/cozy/cozy-libs/commit/be409919551c3e78b15bfbc50c4994fa56d2922c))
+
 ## [0.5.1](https://github.com/cozy/cozy-libs/compare/cozy-search@0.5.0...cozy-search@0.5.1) (2025-04-16)
 
 ### Bug Fixes
