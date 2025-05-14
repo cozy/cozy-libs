@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.4.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.3.1...cozy-sharing@25.4.0) (2025-05-14)
+
+### Features
+
+- Replace `isTwakeTheme` by truthy condition ([3a54804](https://github.com/cozy/cozy-libs/commit/3a54804decee80ed2a39b8d9910bd879df1e9473))
+
 ## [25.3.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.3.0...cozy-sharing@25.3.1) (2025-05-07)
 
 ### Bug Fixes
