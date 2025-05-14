@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import * as Comlink from 'comlink'
 import { PostMessageWithOrigin } from 'comlink/dist/umd/protocol'
 import { useEffect } from 'react'
@@ -7,9 +6,12 @@ import { useNavigate } from 'react-router-dom'
 import { Q, useClient } from 'cozy-client'
 import { IOCozyContact } from 'cozy-client/types/types'
 import flag from 'cozy-flags'
+import Minilog from 'cozy-minilog'
 
 import { getIframe, extractUrl } from './helpers'
 import { useInitialRedirection, useParentOrigin } from './hooks'
+
+const log = Minilog('🌉 [Container bridge]')
 
 export const useExternalBridge = (origin: string): void => {
   const client = useClient()
@@ -36,7 +38,9 @@ export const useExternalBridge = (origin: string): void => {
       // Proof of concepts of Twake <-> Cozy URL synchronization
       updateHistory: (newUrl: string): void => {
         const url = extractUrl(newUrl)
-        console.log('🟢 Replacing route:', url)
+        log.debug(
+          `Navigating to ${url} because received ${newUrl} from embedded app`
+        )
         navigate(url, { replace: true })
       }
     }
@@ -49,5 +53,7 @@ export const useExternalBridge = (origin: string): void => {
         origin
       )
     )
+
+    log.debug('Bridge initialized')
   }, [navigate, client, origin])
 }
