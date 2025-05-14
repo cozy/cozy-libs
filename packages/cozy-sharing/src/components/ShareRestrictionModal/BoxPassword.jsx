@@ -13,7 +13,6 @@ import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryA
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Switch from 'cozy-ui/transpiled/react/Switch'
 import TextField from 'cozy-ui/transpiled/react/TextField'
-import { isTwakeTheme } from 'cozy-ui/transpiled/react/helpers/isTwakeTheme'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
@@ -75,7 +74,7 @@ export const BoxPassword = ({
           <ListItemText primary={t('BoxPassword.text')} />
           <ListItemSecondaryAction>
             <Switch
-              edge={isTwakeTheme() ? 'start' : 'end'}
+              edge="start"
               color="primary"
               checked={toggle}
               onChange={handlePasswordToggle}

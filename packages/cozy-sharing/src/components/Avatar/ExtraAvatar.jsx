@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
-import { isTwakeTheme } from 'cozy-ui/transpiled/react/helpers/isTwakeTheme'
 
 import { SharingTooltip, TooltipRecipientList } from '../Tooltip'
 
@@ -12,13 +11,7 @@ const ExtraAvatar = ({ className, size, extraRecipients = [] }) => {
 
   return (
     <span data-tip data-for={sharingTooltipId} className="u-db">
-      <Avatar
-        className={className}
-        size={size}
-        color="none"
-        border
-        innerBorder={isTwakeTheme()}
-      >
+      <Avatar className={className} size={size} color="none" border innerBorder>
         {`+${Math.min(extraRecipients.length, 99)}`}
       </Avatar>
       <SharingTooltip id={sharingTooltipId}>
