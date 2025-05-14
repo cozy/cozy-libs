@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.8.0...cozy-external-bridge@0.9.0) (2025-05-14)
+
+### Features
+
+- **cozy-external-bridge:** Add a bridge route prefix ([ac9d66d](https://github.com/cozy/cozy-libs/commit/ac9d66d0f788d96b61afdbfa2532835d3c7a924f))
+- **cozy-external-bridge:** Use Minilog for container app logs ([88302a6](https://github.com/cozy/cozy-libs/commit/88302a6b97ed31220e6e80f70e6c8cbc8308623b))
+
+### BREAKING CHANGES
+
+- **cozy-external-bridge:** You now need to install cozy-minilog >=3.10.0
+  to use cozy-external-bridge
+
 # [0.8.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.7.0...cozy-external-bridge@0.8.0) (2025-04-10)
 
 ### Features
