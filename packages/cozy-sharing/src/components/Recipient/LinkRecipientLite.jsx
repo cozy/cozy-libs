@@ -8,7 +8,6 @@ import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { isTwakeTheme } from 'cozy-ui/transpiled/react/helpers/isTwakeTheme'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { checkIsReadOnlyPermissions } from '../../helpers/permissions'
@@ -24,7 +23,7 @@ const LinkRecipientLite = ({ permissions, link }) => {
   return (
     <ListItem size="small" ellipsis>
       <ListItemIcon>
-        <Avatar size="m" color="none" border innerBorder={isTwakeTheme()}>
+        <Avatar size="m" color="none" border innerBorder>
           <Icon icon={LinkIcon} />
         </Avatar>
       </ListItemIcon>

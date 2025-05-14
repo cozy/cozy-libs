@@ -5,7 +5,6 @@ import { useClient } from 'cozy-client'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
-import { isTwakeTheme } from 'cozy-ui/transpiled/react/helpers/isTwakeTheme'
 
 import { ExtraAvatar } from './ExtraAvatar'
 import { GroupAvatar } from './GroupAvatar'
@@ -75,7 +74,7 @@ const AvatarList = ({
     >
       {link && (
         <span data-testid="AvatarList-link">
-          <Avatar color="none" border innerBorder={isTwakeTheme()} size={size}>
+          <Avatar color="none" border innerBorder size={size}>
             <Icon icon={LinkIcon} />
           </Avatar>
         </span>
