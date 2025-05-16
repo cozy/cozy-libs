@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.1](https://github.com/cozy/cozy-libs/compare/cozy-search@0.6.0...cozy-search@0.6.1) (2025-05-16)
+
+### Bug Fixes
+
+- Do not crash on missing myself contact ([c9acd32](https://github.com/cozy/cozy-libs/commit/c9acd325d871e6c3df9d2bf82209d09bc059551b))
+
 # [0.6.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.5.1...cozy-search@0.6.0) (2025-05-14)
 
 ### Bug Fixes
