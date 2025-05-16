@@ -10,6 +10,7 @@
       "close": "Fermer"
     },
     "name": "Assistant Twake",
+    "default_username": "Anonyme",
     "sources": "%{smart_count} source |||| %{smart_count} sources",
     "suggestions": {
       "find_file": "Rechercher un fichier",
