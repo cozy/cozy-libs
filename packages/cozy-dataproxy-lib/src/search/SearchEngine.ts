@@ -2,6 +2,7 @@ import FlexSearch from 'flexsearch'
 
 import CozyClient, { defaultPerformanceApi } from 'cozy-client'
 import type { PerformanceAPI } from 'cozy-client/types/performances/types'
+import flag from 'cozy-flags'
 import Minilog from 'cozy-minilog'
 import { RealtimePlugin } from 'cozy-realtime'
 
@@ -187,6 +188,17 @@ export class SearchEngine {
     // Ensure login is done before plugin register
     if (!this.client.plugins[RealtimePlugin.pluginName]) {
       this.client.registerPlugin(RealtimePlugin, {})
+    }
+    if (!this.client.plugins[flag.plugin.pluginName]) {
+      this.client.registerPlugin(flag.plugin as unknown as () => void, {})
+      // If we agree this is a good solution, we should maybe add a flag.store.setAll(object)
+      for (const [key, value] of Object.entries(
+        // @ts-expect-error instanceOptions not correctly typed
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        this.client.instanceOptions.flags
+      )) {
+        flag.store.set(key, value)
+      }
     }
 
     // Realtime subscription
