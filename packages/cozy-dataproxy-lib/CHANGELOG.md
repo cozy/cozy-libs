@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.2.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.1.1...cozy-dataproxy-lib@4.2.0) (2025-05-19)
+
+### Features
+
+- Correctly init DataProxy ([bdb1670](https://github.com/cozy/cozy-libs/commit/bdb16705103fa222d631750403d951eee61f4868))
+
 ## [4.1.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.1.0...cozy-dataproxy-lib@4.1.1) (2025-05-07)
 
 ### Bug Fixes
