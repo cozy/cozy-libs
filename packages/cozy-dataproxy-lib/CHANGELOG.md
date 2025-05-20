@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.3.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.2.0...cozy-dataproxy-lib@4.3.0) (2025-05-20)
+
+### Features
+
+- Add support for requestLink ([eeef504](https://github.com/cozy/cozy-libs/commit/eeef5049a69f6e7fd6acb5e5231e3dc3a74323fe))
+
 # [4.2.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.1.1...cozy-dataproxy-lib@4.2.0) (2025-05-19)
 
 ### Features
