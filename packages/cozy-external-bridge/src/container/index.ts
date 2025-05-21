@@ -1,5 +1,5 @@
-
-import { useRedirectOnLoad, useListenParentOriginRequest } from './hooks'
+import { useRedirectOnLoad } from './useRedirectOnLoad'
+import { useListenParentOriginRequest } from './useListenParentOriginRequest'
 import { useListenBridgeRequests } from './useListenBridgeRequests'
 
 export const useExternalBridge = (origin: string): void => {
