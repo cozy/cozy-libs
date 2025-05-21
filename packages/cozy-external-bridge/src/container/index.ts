@@ -10,7 +10,7 @@ import Minilog from 'cozy-minilog'
 
 import { BRIDGE_ROUTE_PREFIX } from './constants'
 import { getIframe, extractUrl } from './helpers'
-import { useInitialRedirection, useParentOrigin } from './hooks'
+import { useRedirectOnLoad, useParentOrigin } from './hooks'
 
 const log = Minilog('🌉 [Container bridge]')
 
@@ -18,7 +18,7 @@ export const useExternalBridge = (origin: string): void => {
   const client = useClient()
   const navigate = useNavigate()
 
-  useInitialRedirection()
+  useRedirectOnLoad()
   useParentOrigin(origin)
 
   useEffect(() => {

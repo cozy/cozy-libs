@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react-hooks'
 import { useLocation } from 'react-router-dom'
 
 import { getIframe } from './helpers'
-import { useInitialRedirection } from './hooks'
+import { useRedirectOnLoad } from './useRedirectOnLoad'
 
 jest.mock('react-router-dom', () => ({
   useLocation: jest.fn()
@@ -27,7 +27,7 @@ describe('useInitialRedirection', () => {
     const mockIframe = { src: 'https://alice-chat.mycozy.cloud' }
     mockedGetIframe.mockReturnValue(mockIframe)
 
-    renderHook(() => useInitialRedirection())
+    renderHook(() => useRedirectOnLoad())
 
     expect(mockIframe.src).toBe('https://alice-chat.mycozy.cloud')
   })
@@ -39,7 +39,7 @@ describe('useInitialRedirection', () => {
     const mockIframe = { src: 'https://alice-chat.mycozy.cloud' }
     mockedGetIframe.mockReturnValue(mockIframe)
 
-    renderHook(() => useInitialRedirection())
+    renderHook(() => useRedirectOnLoad())
 
     expect(mockIframe.src).toBe('https://alice-chat.mycozy.cloud/welcome')
   })
@@ -55,7 +55,7 @@ describe('useInitialRedirection', () => {
     const mockIframe = { src: 'https://alice-chat.mycozy.cloud' }
     mockedGetIframe.mockReturnValue(mockIframe)
 
-    renderHook(() => useInitialRedirection())
+    renderHook(() => useRedirectOnLoad())
 
     expect(mockIframe.src).toBe(
       'https://alice-chat.mycozy.cloud/welcome/bridge'

@@ -6,9 +6,9 @@ import { useClient } from 'cozy-client'
 import { BRIDGE_ROUTE_PREFIX } from './constants'
 import { getIframe, handleRequestParentOrigin } from './helpers'
 
-// Initial redirection is necessary when we load a page from a direct link
-// to load the iframe to the direct link
-export const useInitialRedirection = (): void => {
+// When we load the container app, we want to forward
+// the relevant part of the URL to the iframe
+export const useRedirectOnLoad = (): void => {
   const location = useLocation()
 
   useEffect(() => {
