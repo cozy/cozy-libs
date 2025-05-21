@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 import { useClient } from 'cozy-client'
 
 import { BRIDGE_ROUTE_PREFIX } from './constants'
-import { getIframe, handleRequestParentOrigin } from './helpers'
+import { getIframe, handleParentOriginRequest } from './helpers'
 
 // When we load the container app, we want to forward
 // the relevant part of the URL to the iframe
@@ -25,19 +25,19 @@ export const useRedirectOnLoad = (): void => {
 }
 
 // Allow the iframe to request the origin of the parent window
-export const useParentOrigin = (origin: string): void => {
+export const useListenParentOriginRequest = (origin: string): void => {
   const client = useClient()
 
   useEffect(() => {
     if (!client) return
 
-    const requestParentOriginHandler = (event: MessageEvent): void =>
-      handleRequestParentOrigin(event, origin)
+    const parentOriginRequestHandler = (event: MessageEvent): void =>
+      handleParentOriginRequest(event, origin)
 
-    window.addEventListener('message', requestParentOriginHandler)
+    window.addEventListener('message', parentOriginRequestHandler)
 
     return () => {
-      window.removeEventListener('message', requestParentOriginHandler)
+      window.removeEventListener('message', parentOriginRequestHandler)
     }
   }, [client, origin])
 }

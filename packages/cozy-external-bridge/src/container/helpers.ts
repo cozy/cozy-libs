@@ -19,7 +19,7 @@ export const extractUrl = (url: string): string => {
   }
 }
 
-export const handleRequestParentOrigin = (
+export const handleParentOriginRequest = (
   event: MessageEvent,
   origin: string
 ): void => {
