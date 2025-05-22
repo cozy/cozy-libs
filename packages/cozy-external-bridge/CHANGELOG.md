@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.10.0...cozy-external-bridge@0.11.0) (2025-05-22)
+
+### Bug Fixes
+
+- Redirect on load display blank page ([13684ea](https://github.com/cozy/cozy-libs/commit/13684ea6627586b987f9172cb77f087591f8498d))
+
+### BREAKING CHANGES
+
+- useExternalBridge hook does not redirect
+  the iframe automatically if necessaru and returns instead an
+  `urlToLoad` url in its return value
+
 # [0.10.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.9.0...cozy-external-bridge@0.10.0) (2025-05-22)
 
 ### Features
