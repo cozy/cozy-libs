@@ -1,6 +1,6 @@
 import * as Comlink from 'comlink'
 import { PostMessageWithOrigin } from 'comlink/dist/umd/protocol'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Q, useClient } from 'cozy-client'
@@ -13,9 +13,16 @@ import { getIframe, extractUrl } from './helpers'
 
 const log = Minilog('🌉 [Container bridge]')
 
-export const useListenBridgeRequests = (origin: string): void => {
+interface UseListenBridgeRequestsReturnType {
+  isReady: boolean
+}
+
+export const useListenBridgeRequests = (
+  origin: string
+): UseListenBridgeRequestsReturnType => {
   const client = useClient()
   const navigate = useNavigate()
+  const [isReady, setIsReady] = useState<boolean>(false)
 
   useEffect(() => {
     if (!client) return
@@ -51,6 +58,10 @@ export const useListenBridgeRequests = (origin: string): void => {
       )
     )
 
-    log.debug('Bridge initialized')
+    log.debug('Listening to bridge requests')
+
+    setIsReady(true)
   }, [navigate, client, origin])
+
+  return { isReady }
 }
