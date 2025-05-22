@@ -1,15 +1,16 @@
+import { useBuildUrlToLoad } from './useBuildUrlToLoad'
 import { useListenBridgeRequests } from './useListenBridgeRequests'
 import { useListenParentOriginRequest } from './useListenParentOriginRequest'
-import { useRedirectOnLoad } from './useRedirectOnLoad'
 
 interface UseExternalBridgeReturnType {
   isReady: boolean
+  urlToLoad: string | undefined
 }
 
 export const useExternalBridge = (
   origin: string
 ): UseExternalBridgeReturnType => {
-  useRedirectOnLoad()
+  const { urlToLoad } = useBuildUrlToLoad(origin)
 
   const { isReady: isParentOriginRequestListenerReady } =
     useListenParentOriginRequest(origin)
@@ -17,5 +18,5 @@ export const useExternalBridge = (
 
   const isReady = isParentOriginRequestListenerReady && isBridgeListenerReady
 
-  return { isReady }
+  return { isReady, urlToLoad }
 }
