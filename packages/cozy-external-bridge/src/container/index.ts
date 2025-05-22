@@ -1,9 +1,21 @@
-import { useRedirectOnLoad } from './useRedirectOnLoad'
-import { useListenParentOriginRequest } from './useListenParentOriginRequest'
 import { useListenBridgeRequests } from './useListenBridgeRequests'
+import { useListenParentOriginRequest } from './useListenParentOriginRequest'
+import { useRedirectOnLoad } from './useRedirectOnLoad'
 
-export const useExternalBridge = (origin: string): void => {
+interface UseExternalBridgeReturnType {
+  isReady: boolean
+}
+
+export const useExternalBridge = (
+  origin: string
+): UseExternalBridgeReturnType => {
   useRedirectOnLoad()
-  useListenParentOriginRequest(origin)
-  useListenBridgeRequests(origin)
+
+  const { isReady: isParentOriginRequestListenerReady } =
+    useListenParentOriginRequest(origin)
+  const { isReady: isBridgeListenerReady } = useListenBridgeRequests(origin)
+
+  const isReady = isParentOriginRequestListenerReady && isBridgeListenerReady
+
+  return { isReady }
 }
