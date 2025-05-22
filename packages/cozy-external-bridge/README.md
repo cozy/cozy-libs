@@ -14,7 +14,7 @@ Add the `useExternalBridge` hook and it will :
 import { useExternalBridge } from 'cozy-external-bridge/container'
 
 const App = () => {
-  useExternalBridge('https://chat.twake.app')
+  const { isReady, urlToLoad } = useExternalBridge('https://chat.twake.app')
 }
 ```
 
