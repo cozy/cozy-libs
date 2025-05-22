@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.9.0...cozy-external-bridge@0.10.0) (2025-05-22)
+
+### Features
+
+- Add log for useRedirectOnLoad ([9b03927](https://github.com/cozy/cozy-libs/commit/9b03927605fba958078e1dfa8a1b9193223acb4b))
+- Return boolean if bridge is ready ([7e1bf42](https://github.com/cozy/cozy-libs/commit/7e1bf42f9a12b0ec0519ce31817e5515d2e031cb))
+
 # [0.9.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.8.0...cozy-external-bridge@0.9.0) (2025-05-14)
 
 ### Features
