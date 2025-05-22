@@ -1,29 +1,38 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import Minilog from 'cozy-minilog'
 
 import { BRIDGE_ROUTE_PREFIX } from './constants'
-import { getIframe } from './helpers'
 
 const log = Minilog('🌉 [Container bridge]')
 
+interface UseBuildUrlToLoadReturnType {
+  urlToLoad: string | undefined
+}
+
 // When we load the container app, we want to forward
 // the relevant part of the URL to the iframe
-export const useRedirectOnLoad = (): void => {
+export const useBuildUrlToLoad = (
+  origin: string
+): UseBuildUrlToLoadReturnType => {
   const location = useLocation()
+  const [urlToLoad, setUrlToLoad] = useState<string | undefined>(undefined)
 
   useEffect(() => {
     if (location.pathname.startsWith(BRIDGE_ROUTE_PREFIX)) {
-      const iframe = getIframe()
-
-      const destUrl = new URL(iframe.src)
+      const destUrl = new URL(origin)
       destUrl.pathname = location.pathname.replace(BRIDGE_ROUTE_PREFIX, '')
       destUrl.hash = location.hash
       destUrl.search = location.search
-      iframe.src = destUrl.toString()
 
-      log.debug('Redirecting iframe to', destUrl.toString())
+      log.debug('Setting iframe to', destUrl.toString(), 'after modification')
+      setUrlToLoad(destUrl.toString())
+    } else {
+      log.debug('Setting iframe to', origin)
+      setUrlToLoad(origin)
     }
   }, [])
+
+  return { urlToLoad }
 }
