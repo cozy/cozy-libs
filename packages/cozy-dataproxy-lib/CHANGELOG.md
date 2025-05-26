@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.5.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.4.0...cozy-dataproxy-lib@4.5.0) (2025-05-26)
+
+### Bug Fixes
+
+- Query local PouchDB queries rather than store ([4945d29](https://github.com/cozy/cozy-libs/commit/4945d2958b9b6e7b34fb5b1a14c99549bdb87f6f))
+
+### Features
+
+- Do debug logs only when debug flag is enabled ([b0e4c0c](https://github.com/cozy/cozy-libs/commit/b0e4c0cab253b710ad30491852b9b3cfa1f70546))
+
 # [4.4.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.3.0...cozy-dataproxy-lib@4.4.0) (2025-05-26)
 
 ### Features
