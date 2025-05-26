@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.4.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.3.0...cozy-dataproxy-lib@4.4.0) (2025-05-26)
+
+### Features
+
+- Hide hidden apps from dataproxy search ([0b7b759](https://github.com/cozy/cozy-libs/commit/0b7b75946fc27c65dff40d869b979f5f76a62b8c))
+
 # [4.3.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.2.0...cozy-dataproxy-lib@4.3.0) (2025-05-20)
 
 ### Features
