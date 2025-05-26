@@ -255,21 +255,13 @@ export const enrichResultsWithDocs = async (
     const ids = resultsByDoctype[doctype]
 
     const startQuery = performance.now()
-    let queryDocs
-    let fromStore = true
-    // Query docs directly from store, for better performances
-    queryDocs = await queryDocsByIds(client, doctype, ids, {
-      fromStore
+    const fromStore = false
+    // We used to query from store as it was much more efficient, but now we query directly from PouchDB
+    // which should be fast enough after performances improvements in cozy-pouch-link
+    const queryDocs = await queryDocsByIds(client, doctype, ids, {
+      fromStore: false
     })
-    if (queryDocs.length < 1) {
-      log.warn('Ids not found on store: query PouchDB')
-      // This should not happen, but let's add a fallback to query Pouch in case the store
-      // returned nothing. This is not done by default, as querying PouchDB is much slower.
-      fromStore = false
-      queryDocs = await queryDocsByIds(client, doctype, ids, {
-        fromStore
-      })
-    }
+
     const endQuery = performance.now()
     docs = docs.concat(queryDocs)
     if (isDebug()) {
@@ -279,7 +271,6 @@ export const enrichResultsWithDocs = async (
         } ${doctype} from store: ${fromStore}`
       )
     }
-
   }
   const docsMap = new Map(docs?.map(doc => [doc._id, doc]))
 
