@@ -8,6 +8,7 @@ import {
   shouldKeepFile
 } from '../helpers/normalizeFile'
 import { CozyDoc } from '../types'
+import { isDebug } from '../helpers/utils'
 
 const log = Minilog('🗂️ [Indexing]')
 
@@ -115,10 +116,12 @@ export const queryLocalOrRemoteDocs = async (
     docs = await queryAllDocs(client, doctype)
   }
   const endTimeQ = performance.now()
-  log.debug(
-    `Query ${docs.length} ${doctype} took ${(endTimeQ - startTimeQ).toFixed(
-      2
-    )} ms`
-  )
+  if (isDebug()) {
+    log.debug(
+      `Query ${docs.length} ${doctype} took ${(endTimeQ - startTimeQ).toFixed(
+        2
+      )} ms`
+    )
+  }
   return docs
 }
