@@ -83,12 +83,10 @@ export const queryDocsByIds = async (
   client: CozyClient,
   doctype: string,
   ids: string[],
-  { fromStore = true } = {}
+  { fromStore = false } = {}
 ): Promise<CozyDoc[]> => {
   if (fromStore) {
-    // This is much more efficient to query from store than PouchDB
-    // FIXME: it is also more efficient to query the whole doctype than by ids,
-    // because of how it is implemented in cozy-client
+    // This used to be more efficient than querying by id, but should be fixed now
     // See https://github.com/cozy/cozy-client/issues/1591
     const allDocs = client.getCollectionFromState(doctype)
     const docs = allDocs.filter(doc => doc._id && ids.includes(doc._id))
