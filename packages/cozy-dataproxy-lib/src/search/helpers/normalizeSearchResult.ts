@@ -14,6 +14,7 @@ import {
   SearchResult,
   EnrichedSearchResult
 } from '../types'
+import { isDebug } from './utils'
 
 const log = Minilog('🗂️ [Indexing]')
 
@@ -271,11 +272,14 @@ export const enrichResultsWithDocs = async (
     }
     const endQuery = performance.now()
     docs = docs.concat(queryDocs)
-    log.debug(
-      `Query took ${(endQuery - startQuery).toFixed(2)} ms to retrieve ${
-        ids.length
-      } ${doctype} from store: ${fromStore}`
-    )
+    if (isDebug()) {
+      log.debug(
+        `Query took ${(endQuery - startQuery).toFixed(2)} ms to retrieve ${
+          ids.length
+        } ${doctype} from store: ${fromStore}`
+      )
+    }
+
   }
   const docsMap = new Map(docs?.map(doc => [doc._id, doc]))
 

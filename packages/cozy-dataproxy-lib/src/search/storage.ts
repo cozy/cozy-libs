@@ -7,6 +7,7 @@ import {
   SEARCHABLE_DOCTYPES,
   SearchedDoctype
 } from './consts'
+import { isDebug } from './helpers/utils'
 import { initSearchIndex } from './indexDocs'
 import { CozyDoc, SearchIndex, SearchIndexes, StorageInterface } from './types'
 
@@ -133,11 +134,13 @@ export const importSearchIndexes = async (
 
     const endImportDoctype = performance.now()
 
-    log.debug(
-      `${doctype} import took ${(endImportDoctype - startImportDoctype).toFixed(
-        2
-      )} ms`
-    )
+    if (isDebug()) {
+      log.debug(
+        `${doctype} import took ${(
+          endImportDoctype - startImportDoctype
+        ).toFixed(2)} ms`
+      )
+    }
   }
   return searchIndexes
 }

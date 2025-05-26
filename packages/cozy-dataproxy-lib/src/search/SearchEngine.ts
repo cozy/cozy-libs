@@ -20,6 +20,7 @@ import {
   enrichResultsWithDocs,
   normalizeSearchResult
 } from './helpers/normalizeSearchResult'
+import { isDebug } from './helpers/utils'
 import {
   indexAllDocs,
   indexOnChanges,
@@ -255,7 +256,10 @@ export class SearchEngine {
     const startImport = performance.now()
     this.searchIndexes = await importSearchIndexes(this.storage)
     const endImport = performance.now()
-    log.debug(`Index import took ${(endImport - startImport).toFixed(2)} ms`)
+
+    if (isDebug()) {
+      log.debug(`Index import took ${(endImport - startImport).toFixed(2)} ms`)
+    }
 
     for (const doctype of SEARCHABLE_DOCTYPES) {
       const searchIndex = this.searchIndexes[doctype]
@@ -360,9 +364,13 @@ export class SearchEngine {
     }
 
     const endIndexing = performance.now()
-    log.debug(
-      `Indexing ${doctype} took ${(endIndexing - startIndexing).toFixed(2)} ms`
-    )
+    if (isDebug()) {
+      log.debug(
+        `Indexing ${doctype} took ${(endIndexing - startIndexing).toFixed(
+          2
+        )} ms`
+      )
+    }
 
     this.performanceApi.measure({
       markName: markeNameIndex,
