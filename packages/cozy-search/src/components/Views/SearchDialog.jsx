@@ -6,25 +6,16 @@ import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import useExtendI18n from 'cozy-ui/transpiled/react/providers/I18n/useExtendI18n'
 
 import { locales } from '../../locales'
-import AssistantProvider, { useAssistant } from '../AssistantProvider'
+import AssistantProvider from '../AssistantProvider'
 import ResultMenuContent from '../ResultMenu/ResultMenuContent'
 import SearchBar from '../Search/SearchBar'
 import { useSearch } from '../Search/SearchProvider'
 import SearchProvider from '../Search/SearchProvider'
-import SearchSubmitFab from '../Search/SearchSubmitFab'
-import { isAssistantEnabled, makeConversationId } from '../helpers'
 
 const SearchDialog = () => {
   useExtendI18n(locales)
-  const { onAssistantExecute } = useAssistant()
   const navigate = useNavigate()
   const { searchValue } = useSearch()
-
-  const handleClick = () => {
-    const conversationId = makeConversationId()
-    onAssistantExecute({ value: searchValue, conversationId })
-    navigate(`../assistant/${conversationId}`, { replace: true })
-  }
 
   const handleClose = () => {
     navigate('..')
@@ -42,14 +33,7 @@ const SearchDialog = () => {
         divider: { className: 'u-dn' }
       }}
       title={<SearchBar />}
-      content={
-        <>
-          {searchValue && <ResultMenuContent onClick={handleClick} />}
-          {isAssistantEnabled() && (
-            <SearchSubmitFab searchValue={searchValue} onClick={handleClick} />
-          )}
-        </>
-      }
+      content={searchValue && <ResultMenuContent />}
       onClose={handleClose}
     />
   )

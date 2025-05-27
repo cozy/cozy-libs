@@ -6,7 +6,7 @@ import Popper from 'cozy-ui/transpiled/react/Popper'
 import ResultMenuContent from './ResultMenuContent'
 import styles from './styles.styl'
 
-const ResultMenu = ({ anchorRef, listRef, onClick }) => {
+const ResultMenu = ({ anchorRef, listRef }) => {
   return (
     <Popper
       style={{
@@ -19,7 +19,7 @@ const ResultMenu = ({ anchorRef, listRef, onClick }) => {
     >
       <Paper className={styles['resultMenu']} square>
         <div className={styles['resultMenu-inner']}>
-          <ResultMenuContent ref={listRef} onClick={onClick} />
+          <ResultMenuContent ref={listRef} />
         </div>
       </Paper>
     </Popper>
