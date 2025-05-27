@@ -29,9 +29,6 @@ export const AssistantMobile = () => {
         />
       }
       type="button"
-      label={
-        isAssistantEnabled() ? t('assistant.search.placeholder') : undefined // fallback on SearchBar default
-      }
       onClick={() => navigate('connected/search')} // FIXME this route is related to home app
     />
   )

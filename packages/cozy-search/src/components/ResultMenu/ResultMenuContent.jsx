@@ -8,7 +8,6 @@ import NoResultItem from './NoResultItem'
 import NotEnoughItem from './NotEnoughItem'
 import ResultMenuItem from './ResultMenuItem'
 import { useSearch } from '../Search/SearchProvider'
-import { isAssistantEnabled } from '../helpers'
 
 const SearchResult = () => {
   const { isLoading, results, selectedIndex, searchValue } = useSearch()
@@ -41,9 +40,7 @@ const SearchResult = () => {
       secondaryUrl={result.secondaryUrl}
       query={searchValue}
       highlightQuery="true"
-      selected={
-        isAssistantEnabled() ? selectedIndex === idx + 1 : selectedIndex === idx
-      }
+      selected={selectedIndex === idx}
       onClick={result.onClick}
     />
   ))
