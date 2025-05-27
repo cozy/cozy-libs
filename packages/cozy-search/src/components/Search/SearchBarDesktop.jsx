@@ -56,8 +56,8 @@ const SearchBarDesktop = ({
 
     if (ev.key === 'Enter') {
       ev.preventDefault()
-      if (selectedIndex) {
-        const onClickFn = results?.[selectedIndex - 1]?.onClick
+      if (selectedIndex !== undefined) {
+        const onClickFn = results?.[selectedIndex]?.onClick
         onClickFn()
       }
     }
