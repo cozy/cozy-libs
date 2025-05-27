@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -20,6 +20,8 @@ const ResultMenuItem = ({
   query,
   highlightQuery = false
 }) => {
+  const itemRef = useRef()
+
   const iconComponent =
     icon.type === 'component' ? (
       <Icon icon={icon.component} size={32} />
@@ -46,8 +48,24 @@ const ResultMenuItem = ({
     secondaryText
   )
 
+  useEffect(() => {
+    if (selected) {
+      itemRef?.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'nearest'
+      })
+    }
+  }, [selected])
+
   return (
-    <ListItem button size="small" selected={selected} onClick={onClick}>
+    <ListItem
+      ref={itemRef}
+      button
+      size="small"
+      selected={selected}
+      onClick={onClick}
+    >
       <ListItemIcon>{iconComponent}</ListItemIcon>
       <ListItemText primary={primary} secondary={secondary} />
     </ListItem>
