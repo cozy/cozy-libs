@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.6.1...cozy-search@0.7.0) (2025-05-28)
+
+### Bug Fixes
+
+- Close search results when navigating in same tab ([e03804f](https://github.com/cozy/cozy-libs/commit/e03804fcbd4c80c1a52be511ad2723b4a2a6eac2))
+- Do not show loader at AI chat open ([8a73606](https://github.com/cozy/cozy-libs/commit/8a736065a4200e5a4831a01998529fb76b8c6107))
+- Press Enter when element is first in result do nothing ([12f3891](https://github.com/cozy/cozy-libs/commit/12f3891971a85e827dca7437ba9a3d39444c2c61))
+- SearchDialog and AssistantDialog goes to previous page when ([5545b1e](https://github.com/cozy/cozy-libs/commit/5545b1e4210db7878532a28ee7c0fe3c59659315))
+
+### Features
+
+- Expose componentsProps.SearchBar in mobile search ([d4e4cb3](https://github.com/cozy/cozy-libs/commit/d4e4cb317e3535df6fc00d5b5f816c7e8e0a68c5))
+- Navigate in same tab if search result is from same app ([fa28af1](https://github.com/cozy/cozy-libs/commit/fa28af13cee580874a1a4dd9011615128e602c0a))
+- Remove last assistant code in search ([a7f21ab](https://github.com/cozy/cozy-libs/commit/a7f21abe0e91dddb205d05a86a0bebc8d8c6619f))
+- Scroll to element when navigating with keyboard ([68e15a3](https://github.com/cozy/cozy-libs/commit/68e15a3ac45d8e0af5c8f4238cea4b017921ea58))
+- Use a tag instead of onClick in search result ([6160583](https://github.com/cozy/cozy-libs/commit/6160583e1303b64cbc89cf0c42cd545a651c21c6))
+
 ## [0.6.1](https://github.com/cozy/cozy-libs/compare/cozy-search@0.6.0...cozy-search@0.6.1) (2025-05-16)
 
 ### Bug Fixes
