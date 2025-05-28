@@ -35,13 +35,13 @@ const SearchResult = () => {
       key={result.id || idx}
       icon={result.icon}
       slug={result.slug}
+      url={result.url}
       primaryText={result.primary}
       secondaryText={result.secondary}
       secondaryUrl={result.secondaryUrl}
       query={searchValue}
       highlightQuery="true"
       selected={selectedIndex === idx}
-      onClick={result.onClick}
     />
   ))
 }
