@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
+import { useClient } from 'cozy-client'
 import { useDataProxy } from 'cozy-dataproxy-lib'
 import Minilog from 'cozy-minilog'
 
@@ -33,6 +35,8 @@ const searchWithRetry = async (
 }
 
 export const useFetchResult = searchValue => {
+  const client = useClient()
+  const navigate = useNavigate()
   const [state, setState] = useState({
     isLoading: true,
     results: null,
@@ -65,7 +69,17 @@ export const useFetchResult = searchValue => {
           primary: r.title,
           secondary: r.subTitle,
           onClick: () => {
-            window.open(r.url)
+            if (r.slug === client.appMetadata.slug) {
+              try {
+                const url = new URL(r.url)
+                const hash = url.hash.replace('#', '')
+                navigate(hash)
+              } catch {
+                window.open(r.url)
+              }
+            } else {
+              window.open(r.url)
+            }
           }
         }
       })
