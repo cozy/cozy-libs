@@ -58,6 +58,7 @@ const SearchBarDesktop = ({
       ev.preventDefault()
       if (selectedIndex !== undefined) {
         const onClickFn = results?.[selectedIndex]?.onClick
+        onClear()
         onClickFn()
       }
     }
@@ -105,7 +106,13 @@ const SearchBarDesktop = ({
           disabledHover={disabledHover}
           onChange={onChange}
         />
-        {searchValue && <ResultMenu listRef={listRef} anchorRef={searchRef} />}
+        {searchValue && (
+          <ResultMenu
+            listRef={listRef}
+            anchorRef={searchRef}
+            onClear={onClear}
+          />
+        )}
       </span>
     </ClickAwayListener>
   )

@@ -9,7 +9,7 @@ import NotEnoughItem from './NotEnoughItem'
 import ResultMenuItem from './ResultMenuItem'
 import { useSearch } from '../Search/SearchProvider'
 
-const SearchResult = () => {
+const SearchResult = ({ onClear }) => {
   const { isLoading, results, selectedIndex, searchValue } = useSearch()
 
   if (isLoading && !results?.length) {
@@ -42,14 +42,19 @@ const SearchResult = () => {
       query={searchValue}
       highlightQuery="true"
       selected={selectedIndex === idx}
+      onClear={onClear}
     />
   ))
 }
 
-const ResultMenuContent = forwardRef((props, ref) => {
+const ResultMenuContent = forwardRef(({ onClear }, ref) => {
   const { dataProxyServicesAvailable } = useDataProxy()
 
-  return <List ref={ref}>{dataProxyServicesAvailable && <SearchResult />}</List>
+  return (
+    <List ref={ref}>
+      {dataProxyServicesAvailable && <SearchResult onClear={onClear} />}
+    </List>
+  )
 })
 
 ResultMenuContent.displayName = 'ResultMenuContent'
