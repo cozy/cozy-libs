@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
@@ -12,11 +12,12 @@ import { makeConversationId } from '../helpers'
 export const AssistantButton = ({ size }) => {
   const { onAssistantExecute } = useAssistant()
   const navigate = useNavigate()
+  const { pathname } = useLocation()
 
   const onClick = () => {
     const conversationId = makeConversationId()
     onAssistantExecute({ value: '', conversationId })
-    navigate(`assistant/${conversationId}`)
+    navigate(`assistant/${conversationId}?returnPath=${pathname}`)
   }
 
   return (
