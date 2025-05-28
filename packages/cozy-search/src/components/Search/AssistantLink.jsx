@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import AssistantProvider, { useAssistant } from '../AssistantProvider'
 import { isAssistantEnabled, makeConversationId } from '../helpers'
@@ -7,13 +7,14 @@ import { isAssistantEnabled, makeConversationId } from '../helpers'
 const AssistantLink = ({ children }) => {
   const { onAssistantExecute } = useAssistant()
   const navigate = useNavigate()
+  const { pathname } = useLocation()
 
   const openAssistant = () => {
     if (!isAssistantEnabled()) return
 
     const conversationId = makeConversationId()
     onAssistantExecute({ value: '', conversationId })
-    navigate(`assistant/${conversationId}`)
+    navigate(`assistant/${conversationId}?returnPath=${pathname}`)
   }
 
   return (

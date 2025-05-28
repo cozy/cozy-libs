@@ -1,7 +1,7 @@
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import MagnifierIcon from 'cozy-ui/transpiled/react/Icons/Magnifier'
@@ -13,6 +13,7 @@ import styles from './Search/styles.styl'
 
 export const AssistantMobile = ({ componentsProps }) => {
   const navigate = useNavigate()
+  const { pathname } = useLocation()
 
   useExtendI18n(locales)
 
@@ -28,7 +29,7 @@ export const AssistantMobile = ({ componentsProps }) => {
         />
       }
       type="button"
-      onClick={() => navigate('connected/search')} // FIXME this route is related to home app
+      onClick={() => navigate(`connected/search?returnPath=${pathname}`)} // FIXME this route is related to home app
     />
   )
 }

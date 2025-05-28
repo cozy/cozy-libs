@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
@@ -15,12 +15,21 @@ import SearchProvider from '../Search/SearchProvider'
 const SearchDialog = () => {
   useExtendI18n(locales)
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
   const { searchValue } = useSearch()
 
-  const handleClose = () => {
-    navigate('..')
+  const onClose = () => {
+    try {
+      const returnPath = searchParams.get('returnPath')
+      if (returnPath) {
+        navigate(returnPath)
+      } else {
+        navigate('..')
+      }
+    } catch {
+      navigate('..')
+    }
   }
-
   return (
     <FixedDialog
       open
@@ -34,7 +43,7 @@ const SearchDialog = () => {
       }}
       title={<SearchBar />}
       content={searchValue && <ResultMenuContent />}
-      onClose={handleClose}
+      onClose={onClose}
     />
   )
 }
