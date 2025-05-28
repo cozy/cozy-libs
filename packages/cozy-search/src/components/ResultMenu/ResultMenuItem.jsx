@@ -19,7 +19,8 @@ const ResultMenuItem = ({
   slug,
   selected,
   query,
-  highlightQuery = false
+  highlightQuery = false,
+  onClear
 }) => {
   const itemRef = useRef()
 
@@ -67,6 +68,7 @@ const ResultMenuItem = ({
       size="small"
       selected={selected}
       className={styles.resultMenuItem}
+      onClick={onClear}
     >
       <ListItemIcon>{iconComponent}</ListItemIcon>
       <ListItemText primary={primary} secondary={secondary} />
