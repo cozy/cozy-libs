@@ -24,7 +24,7 @@ const AssistantProvider = ({ children }) => {
   const client = useClient()
   const [assistantState, setAssistantState] = useState({
     message: {},
-    status: 'pending',
+    status: 'idle',
     messagesId: []
   })
 
