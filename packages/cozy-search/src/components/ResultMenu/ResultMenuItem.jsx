@@ -8,15 +8,16 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
 import SuggestionItemTextHighlighted from './SuggestionItemTextHighlighted'
 import SuggestionItemTextSecondary from './SuggestionItemTextSecondary'
+import styles from './styles.styl'
 
 const ResultMenuItem = ({
   icon,
+  url,
   primaryText,
   secondaryText,
   secondaryUrl,
   slug,
   selected,
-  onClick,
   query,
   highlightQuery = false
 }) => {
@@ -60,11 +61,12 @@ const ResultMenuItem = ({
 
   return (
     <ListItem
+      component="a"
+      href={url}
       ref={itemRef}
-      button
       size="small"
       selected={selected}
-      onClick={onClick}
+      className={styles.resultMenuItem}
     >
       <ListItemIcon>{iconComponent}</ListItemIcon>
       <ListItemText primary={primary} secondary={secondary} />
