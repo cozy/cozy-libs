@@ -8,6 +8,8 @@ let availableMethods: {
   updateHistory: (url: string) => void
   getContacts: () => Promise<IOCozyContact>
   getFlag: (key: string) => Promise<string | boolean>
+  createDocs: (data: object) => Promise<object>
+  updateDocs: (data: object) => Promise<object>
 }
 
 // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -57,6 +59,20 @@ const getFlag = async (key: string): Promise<string | boolean> => {
   const flag = await availableMethods.getFlag(key)
   console.log('🟣 Twake received flag...', flag)
   return flag
+}
+
+const createDocs = async (data: object): Promise<object> => {
+  console.log('🟣 Creating file...')
+  const createdDocs = await availableMethods.createDocs(data)
+  console.log('🟣 Twake received created file...', createdDocs)
+  return createdDocs
+}
+
+const updateDocs = async (data: object): Promise<object> => {
+  console.log('🟣 Updating data...')
+  const updatedDocs = await availableMethods.updateDocs(data)
+  console.log('🟣 Twake received updated file...', updatedDocs)
+  return updatedDocs
 }
 
 const requestParentOrigin = (): Promise<string | undefined> => {
@@ -126,7 +142,9 @@ const setupBridge = (targetOrigin: string): void => {
     startHistorySyncing,
     stopHistorySyncing,
     getContacts,
-    getFlag
+    getFlag,
+    createDocs,
+    updateDocs
   }
 
   console.log('🟣 Bridge ready')

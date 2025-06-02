@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Q, useClient } from 'cozy-client'
-import { IOCozyContact } from 'cozy-client/types/types'
+import { IOCozyContact, IOCozyFile } from 'cozy-client/types/types'
 import flag from 'cozy-flags'
 import Minilog from 'cozy-minilog'
 
@@ -35,6 +35,53 @@ export const useListenBridgeRequests = (
         }
 
         return data
+      },
+      createDocs: async ({
+        dirId,
+        externalId
+      }: {
+        dirId: string
+        externalId: string
+      }): Promise<object> => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+        const { data: createdFile } = (await client
+          .collection('io.cozy.files')
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+          .createFile('Empty content', {
+            name: `New Docs ${new Date().toISOString()}.md`,
+            dirId,
+            metadata: { externalId }
+          })) as {
+          data: Promise<object>
+        }
+
+        return createdFile
+      },
+      updateDocs: async ({
+        docsId,
+        content
+      }: {
+        docsId: string
+        content: string
+      }): Promise<object | undefined> => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        const { data: file } = (await client.query(
+          Q('io.cozy.files').where({ 'metadata.externalId': docsId })
+        )) as {
+          data: IOCozyFile | undefined
+        }
+
+        if (!file) return
+
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+        const { data: uploadedFile } = (await client
+          .collection('io.cozy.files')
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+          .updateFile(content, { fileId: file._id })) as {
+          data: Promise<object>
+        }
+
+        return uploadedFile
       },
       getFlag: (key: string): string | boolean => {
         return flag(key)
