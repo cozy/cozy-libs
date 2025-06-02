@@ -65,19 +65,29 @@ export const useListenBridgeRequests = (
         content: string
       }): Promise<object | undefined> => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const { data: file } = (await client.query(
-          Q('io.cozy.files').where({ 'metadata.externalId': docsId })
+        const { data: files } = (await client.query(
+          Q('io.cozy.files')
+            .where({ 'metadata.externalId': docsId })
+            .indexFields(['metadata.externalId'])
+            .limitBy(1),
+          { as: `io.cozy.files/${docsId}` }
         )) as {
-          data: IOCozyFile | undefined
+          data: IOCozyFile[] | undefined
         }
 
-        if (!file) return
+        if (!files || files.length < 1) return
+
+        const file = files[0]
 
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         const { data: uploadedFile } = (await client
           .collection('io.cozy.files')
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          .updateFile(content, { fileId: file._id })) as {
+          .updateFile(content, {
+            fileId: file._id,
+            name: file.name,
+            metadata: file.metadata
+          })) as {
           data: Promise<object>
         }
 
