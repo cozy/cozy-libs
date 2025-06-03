@@ -65,10 +65,12 @@ export const useListenBridgeRequests = (
       },
       updateDocs: async ({
         docsId,
-        content
+        content,
+        name
       }: {
         docsId: string
-        content: string
+        content: string | undefined
+        name: string | undefined
       }): Promise<object | undefined> => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const { data: files } = (await client.query(
@@ -85,19 +87,35 @@ export const useListenBridgeRequests = (
 
         const file = files[0]
 
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-        const { data: uploadedFile } = (await client
-          .collection('io.cozy.files')
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          .updateFile(content, {
-            fileId: file._id,
-            name: file.name,
-            metadata: file.metadata
-          })) as {
-          data: Promise<object>
-        }
+        if (content) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+          const { data: uploadedFile } = (await client
+            .collection('io.cozy.files')
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+            .updateFile(content, {
+              fileId: file._id,
+              name: file.name,
+              metadata: file.metadata
+            })) as {
+            data: Promise<object>
+          }
 
-        return uploadedFile
+          return uploadedFile
+        } else if (name) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+          const { data: updatedFile } = (await client
+            .collection('io.cozy.files')
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+            .update({
+              id: file._id,
+              metadata: file.metadata,
+              name: `${name}.md`
+            })) as {
+            data: Promise<object>
+          }
+
+          return updatedFile
+        }
       },
       search: async (searchQuery: string): Promise<object[]> => {
         return await dataProxy.search(searchQuery)
