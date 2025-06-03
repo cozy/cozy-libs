@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { Q, useClient } from 'cozy-client'
 import { IOCozyContact, IOCozyFile } from 'cozy-client/types/types'
+import { useDataProxy } from 'cozy-dataproxy-lib'
 import flag from 'cozy-flags'
 import Minilog from 'cozy-minilog'
 
@@ -21,6 +22,9 @@ export const useListenBridgeRequests = (
   origin: string
 ): UseListenBridgeRequestsReturnType => {
   const client = useClient()
+  const dataProxy = useDataProxy() as {
+    search: (searchQuery: string) => Promise<object[]>
+  }
   const navigate = useNavigate()
   const [isReady, setIsReady] = useState<boolean>(false)
 
@@ -94,6 +98,9 @@ export const useListenBridgeRequests = (
         }
 
         return uploadedFile
+      },
+      search: async (searchQuery: string): Promise<object[]> => {
+        return await dataProxy.search(searchQuery)
       },
       getFlag: (key: string): string | boolean => {
         return flag(key)
