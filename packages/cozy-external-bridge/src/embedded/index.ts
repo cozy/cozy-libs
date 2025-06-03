@@ -10,6 +10,7 @@ let availableMethods: {
   getFlag: (key: string) => Promise<string | boolean>
   createDocs: (data: object) => Promise<object>
   updateDocs: (data: object) => Promise<object>
+  search: (searchQuery: string) => Promise<object[]>
 }
 
 // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -73,6 +74,13 @@ const updateDocs = async (data: object): Promise<object> => {
   const updatedDocs = await availableMethods.updateDocs(data)
   console.log('🟣 Twake received updated file...', updatedDocs)
   return updatedDocs
+}
+
+const search = async (searchQuery: string): Promise<object[]> => {
+  console.log('🟣 Search...')
+  const results = await availableMethods.search(searchQuery)
+  console.log('🟣 Search results: ', results)
+  return results
 }
 
 const requestParentOrigin = (): Promise<string | undefined> => {
@@ -144,7 +152,8 @@ const setupBridge = (targetOrigin: string): void => {
     getContacts,
     getFlag,
     createDocs,
-    updateDocs
+    updateDocs,
+    search
   }
 
   console.log('🟣 Bridge ready')
