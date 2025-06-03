@@ -25,6 +25,8 @@ export const useListenBridgeRequests = (
   const [isReady, setIsReady] = useState<boolean>(false)
 
   useEffect(() => {
+    if (isReady) return
+
     if (!client) return
 
     const exposedMethods = {
