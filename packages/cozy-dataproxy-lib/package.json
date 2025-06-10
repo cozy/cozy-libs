@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "comlink": "4.4.1",
-    "flexsearch": "0.7.43"
+    "flexsearch": "^0.8.205"
   },
   "devDependencies": {
     "@babel/cli": "7.16.8",
