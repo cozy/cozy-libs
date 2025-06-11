@@ -54,9 +54,10 @@ export const useListenBridgeRequests = (
           .collection('io.cozy.files')
           // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           .createFile('Empty content', {
-            name: `New Docs ${new Date().toISOString()}.md`,
+            name: `New Docs ${new Date().toISOString()}.docs-note`,
             dirId,
-            metadata: { externalId }
+            metadata: { externalId },
+            contentType: 'text/markdown'
           })) as {
           data: Promise<object>
         }
