@@ -16711,7 +16711,7 @@ __metadata:
     react-router-dom: "npm:6.14.2"
     typescript: "npm:5.5.2"
   peerDependencies:
-    cozy-client: ">=54.0.0"
+    cozy-client: ">=58.4.0"
     cozy-flags: ">=4.7.0"
     cozy-minilog: ">=3.10.0"
     react: ">=16.12.0"

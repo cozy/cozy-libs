@@ -53,7 +53,7 @@ export const useListenBridgeRequests = (
         const { data: createdFile } = (await client
           .collection('io.cozy.files')
           // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-          .createFile('Empty content', {
+          .createFile('', {
             name: `New Docs ${new Date().toISOString()}.docs-note`,
             dirId,
             metadata: { externalId },
@@ -87,22 +87,7 @@ export const useListenBridgeRequests = (
         if (!files || files.length < 1) return
 
         const file = files[0]
-
-        if (content) {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-          const { data: uploadedFile } = (await client
-            .collection('io.cozy.files')
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-            .updateFile(content, {
-              fileId: file._id,
-              name: file.name,
-              metadata: file.metadata
-            })) as {
-            data: Promise<object>
-          }
-
-          return uploadedFile
-        } else if (name) {
+        if (name) {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-call
           const { data: updatedFile } = (await client
             .collection('io.cozy.files')
@@ -110,13 +95,29 @@ export const useListenBridgeRequests = (
             .update({
               id: file._id,
               metadata: file.metadata,
-              name: `${name}.md`
+              name: `${name}.docs-note`,
+              contentType: 'text/markdown'
             })) as {
             data: Promise<object>
           }
 
           return updatedFile
         }
+
+        // An undefined file content will throw on cozy-client side
+        const dataContent = content === undefined ? '' : content
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+        const { data: uploadedFile } = (await client
+          .collection('io.cozy.files')
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+          .updateFile(dataContent, {
+            fileId: file._id,
+            name: file.name,
+            metadata: file.metadata
+          })) as {
+          data: Promise<object>
+        }
+        return uploadedFile
       },
       search: async (searchQuery: string): Promise<object[]> => {
         return await dataProxy.search(searchQuery)
