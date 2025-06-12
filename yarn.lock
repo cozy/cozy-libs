@@ -17572,6 +17572,51 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cozy-ui@npm:^126.0.0":
+  version: 126.0.0
+  resolution: "cozy-ui@npm:126.0.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.3.4"
+    "@date-io/date-fns": "npm:1"
+    "@material-ui/core": "npm:4.12.3"
+    "@material-ui/lab": "npm:^4.0.0-alpha.61"
+    "@material-ui/pickers": "npm:3.3.11"
+    "@popperjs/core": "npm:^2.4.4"
+    chart.js: "npm:3.7.1"
+    classnames: "npm:^2.2.5"
+    cozy-interapp: "npm:^0.5.4"
+    date-fns: "npm:2.30.0"
+    filesize: "npm:8.0.7"
+    hammerjs: "npm:^2.0.8"
+    intersection-observer: "npm:0.11.0"
+    mime-types: "npm:2.1.35"
+    mui-bottom-sheet: "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9"
+    node-polyglot: "npm:^2.5.0"
+    normalize.css: "npm:^8.0.0"
+    pdf-lib: "npm:1.17.1"
+    react-chartjs-2: "npm:4.1.0"
+    react-markdown: "npm:^4.0.8"
+    react-popper: "npm:^2.2.3"
+    react-remove-scroll: "npm:^2.4.0"
+    react-select: "npm:^4.3.0"
+    react-swipeable-views: "npm:^0.13.3"
+    react-virtuoso: "npm:4.12.7"
+    rooks: "npm:^5.11.2"
+  peerDependencies:
+    cozy-client: ">=52.1.0"
+    cozy-device-helper: ">=2.0.0"
+    cozy-flags: ">=2.10.1"
+    cozy-intent: ">=2.29.1"
+    react: ^16.14.0
+    react-dnd: ^16.0.1
+    react-dnd-html5-backend: ^16.0.1
+    react-dom: ^16.14.0
+  bin:
+    rsg-screenshots: scripts/screenshots.js
+  checksum: 10c0/2bee52d6fb5b6b8d547301771f1a955b3cd62fabecb87d653d7ef18fca2a10676f3fb5a28f5cf2858862c0128b12743234c8fde364d82ee32c14d9ea393214b7
+  languageName: node
+  linkType: hard
+
 "cozy-ui@npm:^40.9.1":
   version: 40.10.0
   resolution: "cozy-ui@npm:40.10.0"
@@ -17624,7 +17669,7 @@ __metadata:
     cozy-intent: "npm:^2.30.0"
     cozy-logger: "npm:^1.17.0"
     cozy-sharing: "npm:^25.4.0"
-    cozy-ui: "npm:^121.1.1"
+    cozy-ui: "npm:^126.0.0"
     hammerjs: "npm:^2.0.8"
     identity-obj-proxy: "npm:3.0.0"
     jest: "npm:26.6.3"
@@ -17641,11 +17686,11 @@ __metadata:
   peerDependencies:
     cozy-client: ">=57.0.0"
     cozy-device-helper: ">=2.0.0"
-    cozy-harvest-lib: ">=32.2.5"
-    cozy-intent: ">=2.29.1"
-    cozy-logger: ">=1.9.0"
-    cozy-sharing: ">=25.1.1"
-    cozy-ui: ">=121.1.1"
+    cozy-harvest-lib: ">=32.2.12"
+    cozy-intent: ">=2.30.0"
+    cozy-logger: ">=1.17.0"
+    cozy-sharing: ">=25.4.0"
+    cozy-ui: ">=126.0.0"
     react: ">=16.12.0"
     react-dom: ">=16.12.0"
   languageName: unknown
@@ -35863,6 +35908,16 @@ __metadata:
     react: ">=16.13"
     react-dom: ">=16.13"
   checksum: 10c0/ac5f4ad042631ca7d55a9af46501fc8187be5166e52a30f0f631634981e6a581935f953edef56a813bb037c465418a2f88d49a796714d187dd64c2389b35dcfc
+  languageName: node
+  linkType: hard
+
+"react-virtuoso@npm:4.12.7":
+  version: 4.12.7
+  resolution: "react-virtuoso@npm:4.12.7"
+  peerDependencies:
+    react: ">=16 || >=17 || >= 18 || >= 19"
+    react-dom: ">=16 || >=17 || >= 18 || >=19"
+  checksum: 10c0/56f4ea49668ad1004be42ff75dc0eade581754dd37a0aa04a3b7470cb132b324de2e7af5d8e29c420bf9726fd4a016104e2a14347ed9cc23235ce7a658a0591e
   languageName: node
   linkType: hard
 

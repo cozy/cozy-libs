@@ -8,7 +8,7 @@ import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
-import QualificationIconStack from 'cozy-ui/transpiled/react/QualificationIconStack'
+import QualificationIcon from 'cozy-ui/transpiled/react/QualificationIcon'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { canEditQualification } from '../helpers'
@@ -30,7 +30,7 @@ const QualificationListItemQualification = ({ file, isReadOnly, onClick }) => {
       onClick={canEditQualification(file, isReadOnly) ? onClick : undefined}
     >
       <ListItemIcon>
-        <QualificationIconStack qualification={value} />
+        <QualificationIcon qualification={value} />
       </ListItemIcon>
       <ListItemText
         primary={<MidEllipsis text={formattedValue} />}
