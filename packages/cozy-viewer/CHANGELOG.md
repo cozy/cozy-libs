@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [23.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@22.0.4...cozy-viewer@23.0.0) (2025-06-12)
+
+### Features
+
+- Upgrade cozy-ui ([4884fc2](https://github.com/cozy/cozy-libs/commit/4884fc28f8339b6e2b283585e6d0d5b3aaf2beb1))
+
+### BREAKING CHANGES
+
+- You must have `cozy-ui >= 126.0.0`, `cozy-harvest-lib >=32.2.12`, `cozy-intent >= 2.30.0`, `cozy-logger >= 1.17.0`, `cozy-sharing >= 25.4.0`
+
 ## [22.0.4](https://github.com/cozy/cozy-libs/compare/cozy-viewer@22.0.3...cozy-viewer@22.0.4) (2025-05-14)
 
 **Note:** Version bump only for package cozy-viewer
