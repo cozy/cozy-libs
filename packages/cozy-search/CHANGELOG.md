@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.1](https://github.com/cozy/cozy-libs/compare/cozy-search@0.8.0...cozy-search@0.8.1) (2025-06-13)
+
+### Bug Fixes
+
+- Upgrade cozy-client peerDep to use search ([19521e8](https://github.com/cozy/cozy-libs/commit/19521e88f31c37f7776c0d3279d227c2d99a3271))
+
 # [0.8.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.7.0...cozy-search@0.8.0) (2025-06-13)
 
 ### Features
