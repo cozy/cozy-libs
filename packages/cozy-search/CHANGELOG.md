@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.7.0...cozy-search@0.8.0) (2025-06-13)
+
+### Features
+
+- Correctly handle icon ([eadde85](https://github.com/cozy/cozy-libs/commit/eadde85752c6ede6217bc4fa435cdcee736cccfd))
+- Redirect Docs sources to correct app ([be65ef6](https://github.com/cozy/cozy-libs/commit/be65ef68525381577d278343fd216da0f6f6416c))
+
 # [0.7.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.6.1...cozy-search@0.7.0) (2025-05-28)
 
 ### Bug Fixes
