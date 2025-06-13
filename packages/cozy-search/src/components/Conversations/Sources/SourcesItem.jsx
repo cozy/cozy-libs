@@ -52,10 +52,7 @@ const SourcesItem = ({ file }) => {
       button
     >
       <ListItemIcon>
-        <Icon
-          icon={getDriveMimeTypeIcon(false, file.name, file.mime)}
-          size={32}
-        />
+        <Icon icon={getDriveMimeTypeIcon(file)} size={32} />
       </ListItemIcon>
       <ListItemText
         primary={file.name}
