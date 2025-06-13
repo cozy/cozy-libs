@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useClient, generateWebLink } from 'cozy-client'
-import { isNote } from 'cozy-client/dist/models/file'
+import { isNote, isDocs } from 'cozy-client/dist/models/file'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -10,16 +10,37 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import styles from './styles.styl'
 import { getDriveMimeTypeIcon } from '../../Search/getIconForSearchResult'
 
+const getSlug = file => {
+  if (isNote(file)) {
+    return 'notes'
+  }
+  if (isDocs(file)) {
+    return 'docs'
+  }
+  return 'drive'
+}
+
+const getHash = (file, slug) => {
+  if (slug === 'notes') {
+    return `/n/${file._id}`
+  }
+  if (slug === 'docs') {
+    return `/bridge/docs/${file.metadata.externalId}`
+  }
+  return `/folder/${file.dir_id}/file/${file._id}`
+}
+
 const SourcesItem = ({ file }) => {
   const client = useClient()
 
+  const slug = getSlug(file)
+  const hash = getHash(file, slug)
+
   const docUrl = generateWebLink({
-    slug: isNote(file) ? 'notes' : 'drive',
+    slug: slug,
     cozyUrl: client?.getStackClient().uri,
     subDomainType: client?.getInstanceOptions().subdomain,
-    hash: isNote(file)
-      ? `/n/${file._id}`
-      : `/folder/${file.dir_id}/file/${file._id}`
+    hash: hash
   })
 
   return (
