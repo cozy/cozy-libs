@@ -17153,7 +17153,7 @@ __metadata:
     stylus: "npm:^0.64.0"
     typescript: "npm:5.5.2"
   peerDependencies:
-    cozy-client: ">=54.0.0"
+    cozy-client: ">=54.8.0"
     cozy-device-helper: ">=3.7.1"
     cozy-flags: ">=4.6.1"
     cozy-intent: ">=2.26.0"
