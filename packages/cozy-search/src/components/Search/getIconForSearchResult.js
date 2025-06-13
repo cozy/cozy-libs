@@ -1,5 +1,6 @@
 import get from 'lodash/get'
 
+import { isNote, isDocs } from 'cozy-client/dist/models/file'
 import ContactsIcon from 'cozy-ui/transpiled/react/Icons/Contacts'
 import IconAudio from 'cozy-ui/transpiled/react/Icons/FileTypeAudio'
 import IconBin from 'cozy-ui/transpiled/react/Icons/FileTypeBin'
@@ -15,7 +16,8 @@ import IconText from 'cozy-ui/transpiled/react/Icons/FileTypeText'
 import IconVideo from 'cozy-ui/transpiled/react/Icons/FileTypeVideo'
 import IconZip from 'cozy-ui/transpiled/react/Icons/FileTypeZip'
 
-import EncryptedFolderIcon from './EncryptedFolderIcon'
+import IconDocs from './Icons/DocsIcon'
+import EncryptedFolderIcon from './Icons/EncryptedFolderIcon'
 import { getFileMimetype } from './getFileMimetype'
 
 export const getIconForSearchResult = searchResult => {
@@ -36,11 +38,7 @@ export const getIconForSearchResult = searchResult => {
   if (searchResult.slug === 'drive') {
     return {
       type: 'component',
-      component: getDriveMimeTypeIcon(
-        searchResult.doc.type === 'directory',
-        searchResult.doc.name,
-        searchResult.doc.mime
-      )
+      component: getDriveMimeTypeIcon(searchResult.doc)
     }
   }
 
@@ -64,26 +62,23 @@ export const getIconForSearchResult = searchResult => {
  *
  * See source: https://github.com/cozy/cozy-drive/blob/fbe2df67199683b23a40f476ccdacb00ee027459/src/lib/getMimeTypeIcon.js
  *
- * @param {boolean} isDirectory - Indicates whether the file is a directory.
- * @param {string} name - The name of the file.
- * @param {string} mime - The mime type of the file.
+ * @param {import('cozy-client/types/types').IOCozyFile} file - The io.cozy.files .
  * @param {Object} [options] - Additional options.
  * @param {boolean} [options.isEncrypted] - Indicates whether the file is encrypted. Default is false.
  * @returns {import('react').ReactNode} - The icon corresponding to the file's mime type.
  */
-export const getDriveMimeTypeIcon = (
-  isDirectory,
-  name,
-  mime,
-  { isEncrypted = false } = {}
-) => {
+export const getDriveMimeTypeIcon = (file, { isEncrypted = false } = {}) => {
+  const isDirectory = file.type === 'directory'
+  const { name, mime } = file
   if (isEncrypted) {
     return EncryptedFolderIcon
   }
   if (isDirectory) {
     return IconFolder
-  } else if (/\.cozy-note$/.test(name)) {
+  } else if (isNote(file)) {
     return IconNote
+  } else if (isDocs(file)) {
+    return IconDocs
   } else {
     const iconsByMimeType = {
       audio: IconAudio,
