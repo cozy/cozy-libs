@@ -10,6 +10,8 @@ let availableMethods: {
   getFlag: (key: string) => Promise<string | boolean>
   createDocs: (data: object) => Promise<object>
   updateDocs: (data: object) => Promise<object>
+  requestNotificationPermission: () => Promise<NotificationPermission>
+  sendNotification: (data: { title: string; body: string }) => Promise<void>
   search: (searchQuery: string) => Promise<object[]>
 }
 
@@ -83,6 +85,27 @@ const search = async (searchQuery: string): Promise<object[]> => {
   return results
 }
 
+const requestNotificationPermission =
+  async (): Promise<NotificationPermission> => {
+    console.log('🟣 Requesting notification permission...')
+    const notificationPermission =
+      await availableMethods.requestNotificationPermission()
+    console.log(
+      '🟣 Notification permission request result: ',
+      notificationPermission
+    )
+    return notificationPermission
+  }
+
+const sendNotification = async (data: {
+  title: string
+  body: string
+}): Promise<void> => {
+  console.log('🟣 Sending notification...')
+  await availableMethods.sendNotification(data)
+  console.log('🟣 Notification sent')
+}
+
 const requestParentOrigin = (): Promise<string | undefined> => {
   return new Promise(resolve => {
     // If we are not in an iframe, we return undefined directly
@@ -153,6 +176,8 @@ const setupBridge = (targetOrigin: string): void => {
     getFlag,
     createDocs,
     updateDocs,
+    requestNotificationPermission,
+    sendNotification,
     search
   }
 
