@@ -11,6 +11,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import SourcesItem from './SourcesItem'
 import { buildFilesByIds } from '../../queries'
+import { filter } from 'lodash'
 
 const Sources = ({ messageId, files }) => {
   const [showSources, setShowSources] = useState(false)
@@ -38,12 +39,13 @@ const Sources = ({ messageId, files }) => {
     }
   }, [showSources])
 
+  const filterSources = files.filter(file => !file.name.includes('.pptx'))
   return (
     <Box ref={ref} className="u-mt-1-half" pl="44px">
       <Chip
         className="u-mb-1"
         icon={<Icon icon={MultiFilesIcon} className="u-ml-half" />}
-        label={t('assistant.sources', files.length)}
+        label={t('assistant.sources', filterSources.length)}
         deleteIcon={
           <Icon
             className="u-h-1"
@@ -62,7 +64,7 @@ const Sources = ({ messageId, files }) => {
         unmountOnExit={true}
       >
         <div>
-          {files.map(file => (
+          {filterSources.map(file => (
             <SourcesItem key={`${messageId}-${file._id}`} file={file} />
           ))}
         </div>
