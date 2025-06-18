@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.6.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.5.0...cozy-sharing@25.6.0) (2025-06-18)
+
+### Features
+
+- Remove shared drive description in modal ([c5d430d](https://github.com/cozy/cozy-libs/commit/c5d430dbf2c9ce777dfba2e9afa8d88d3540347b))
+- Remove shared drive illustration in modal ([e7bd6cd](https://github.com/cozy/cozy-libs/commit/e7bd6cdf48b70dd40d12995f36f0b68d21bc04e7))
+- Update shared drive modal style and wording ([75231f0](https://github.com/cozy/cozy-libs/commit/75231f0689053cc6653082f534148f01ae147567))
+
 # [25.5.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.4.0...cozy-sharing@25.5.0) (2025-06-18)
 
 ### Features
