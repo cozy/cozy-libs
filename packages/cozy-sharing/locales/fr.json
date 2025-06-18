@@ -17,8 +17,8 @@
       "one-way": "Peut consulter",
       "two-way": "Peut modifier",
       "desc": {
-        "one-way": "Les contacts peuvent consulter, télécharger, et ajouter le contenu à leur Cozy. En cas d’ajout à leur Cozy, ils recevront vos modifications sur le contenu mais ils ne pourront pas le modifier.",
-        "two-way": "Les contacts peuvent modifier, supprimer et ajouter le contenu à leur Cozy. Les modifications sur le contenu seront répercutées automatiquement entre vos Cozy."
+        "one-way": "Les contacts peuvent consulter, télécharger, et ajouter le contenu à leur Twake. En cas d’ajout à leur Twake, ils recevront vos modifications sur le contenu mais ils ne pourront pas le modifier.",
+        "two-way": "Les contacts peuvent modifier, supprimer et ajouter le contenu à leur Twake. Les modifications sur le contenu seront répercutées automatiquement entre vos Twake."
       }
     },
     "locked-type-file": "Bientôt : vous pourrez changer la permission donnée sur le fichier.",
@@ -30,7 +30,7 @@
       "expires": "Jusqu'au %{date}",
       "accessCount": "%{count} personnes y ont accès"
     },
-    "create-cozy": "Créer |||| Créer mon Cozy",
+    "create-cozy": "Créer |||| Créer mon Twake",
     "members": {
       "count": "%{smart_count} membre |||| %{smart_count} membres",
       "others": "et 1 autre… |||| et %{smart_count} autres…",
@@ -39,8 +39,8 @@
     "contacts": {
       "whoHasAccess": "Qui a accès ?",
       "permissionRequired": {
-        "title": "Enregistrer vos contacts dans votre Cozy ?",
-        "desc": "Autorisez l'application à accéder aux contacts de votre Cozy : vous pourrez les sélectionner la prochaine fois.",
+        "title": "Enregistrer vos contacts dans votre Twake ?",
+        "desc": "Autorisez l'application à accéder aux contacts de votre Twake : vous pourrez les sélectionner la prochaine fois.",
         "action": "Autoriser l'accès",
         "success": "L'application a accès à vos contacts"
       },
@@ -58,11 +58,11 @@
     },
     "loadingError": "Erreur de chargement",
     "banner": {
-      "shared_from": "Les éléments ci-dessous sont affichés depuis le Cozy de ![avatar](%{image}) **%{name}**. Vous pouvez ajouter un lien vers ce partage dans votre Cozy.",
+      "shared_from": "Les éléments ci-dessous sont affichés depuis le Twake de ![avatar](%{image}) **%{name}**. Vous pouvez ajouter un lien vers ce partage dans votre Twake.",
       "whats_cozy": "Twake est un domicile numérique sécurisé pour toutes vos données, hébergé en France - ",
       "know_more": "En savoir plus",
-      "sync_to_mine": "Synchroniser |||| Synchroniser dans mon Cozy",
-      "add_to_mine": "Ajouter |||| Ajouter à mon Cozy",
+      "sync_to_mine": "Synchroniser |||| Synchroniser dans mon Twake",
+      "add_to_mine": "Ajouter |||| Ajouter à mon Twake",
       "close": "Fermer"
     },
     "permissionLink": {
@@ -103,8 +103,8 @@
         "ro": "Peut consulter",
         "rw": "Peut modifier",
         "desc": {
-          "ro": "Vous pouvez consulter, télécharger, et ajouter ce contenu à votre Cozy. Vous recevrez les modifications faites par le propriétaire, mais vous ne pourrez pas le modifier.",
-          "rw": "Vous pouvez consulter, modifier et supprimer du contenu. Les modifications sur le contenu seront répercutées automatiquement entre vos Cozy."
+          "ro": "Vous pouvez consulter, télécharger, et ajouter ce contenu à votre Twake. Vous recevrez les modifications faites par le propriétaire, mais vous ne pourrez pas le modifier.",
+          "rw": "Vous pouvez consulter, modifier et supprimer du contenu. Les modifications sur le contenu seront répercutées automatiquement entre vos Twake."
         }
       },
       "sharedByMe": "Partagé",
@@ -170,8 +170,8 @@
         "ro": "Peut consulter",
         "rw": "Peut modifier",
         "desc": {
-          "ro": "Vous pouvez consulter, télécharger, et ajouter ce contenu à votre Cozy. Vous recevrez les modifications faites par le propriétaire, mais vous ne pourrez pas le modifier.",
-          "rw": "Vous pouvez consulter, modifier et supprimer du contenu. Les modifications sur le contenu seront répercutées automatiquement entre vos Cozy."
+          "ro": "Vous pouvez consulter, télécharger, et ajouter ce contenu à votre Twake. Vous recevrez les modifications faites par le propriétaire, mais vous ne pourrez pas le modifier.",
+          "rw": "Vous pouvez consulter, modifier et supprimer du contenu. Les modifications sur le contenu seront répercutées automatiquement entre vos Twake."
         }
       },
       "sharedByMe": "Partagé",
@@ -304,8 +304,8 @@
         "ro": "Peut consulter",
         "rw": "Peut modifier",
         "desc": {
-          "ro": "Vous pouvez consulter, télécharger, et ajouter ce contenu à votre Cozy. Vous recevrez les modifications faites par le propriétaire, mais vous ne pourrez pas le modifier.",
-          "rw": "Vous pouvez consulter, modifier et supprimer du contenu. Les modifications sur le contenu seront répercutées automatiquement entre vos Cozy."
+          "ro": "Vous pouvez consulter, télécharger, et ajouter ce contenu à votre Twake. Vous recevrez les modifications faites par le propriétaire, mais vous ne pourrez pas le modifier.",
+          "rw": "Vous pouvez consulter, modifier et supprimer du contenu. Les modifications sur le contenu seront répercutées automatiquement entre vos Twake."
         }
       },
       "sharedByMe": "Partagé",
@@ -362,13 +362,13 @@
       }
     },
     "fingerprint": {
-      "instruction": "Par sécurité, nous vous proposons de vérifier l'identité de **%{userName} (%{userEmail})**. Pour cela, contactez **%{userName}** par le moyen de votre choix (Appel, SMS, messagerie instantanée, ...) afin de vérifier son code de sécurité.<br><br>Chaque Cozy a une phrase de sécurité qu'il peut retrouver dans son interface web. Sa phrase de sécurité doit correspondre à :",
+      "instruction": "Par sécurité, nous vous proposons de vérifier l'identité de **%{userName} (%{userEmail})**. Pour cela, contactez **%{userName}** par le moyen de votre choix (Appel, SMS, messagerie instantanée, ...) afin de vérifier son code de sécurité.<br><br>Chaque Twake a une phrase de sécurité qu'il peut retrouver dans son interface web. Sa phrase de sécurité doit correspondre à :",
       "instruction2": "Si c'est bien le cas, vous pouvez confirmer ce contact qui sera alors vu comme sécurisé pour vos prochains partages."
     }
   },
   "ConfirmRecipientModal": {
     "title": "%{smart_count} contact en attente de vérification |||| %{smart_count} contacts en attente de vérification",
-    "intruction": "Vérifier l'identité de leur Cozy pour leur permettre d'accéder aux éléments que vous avez partagés avec eux."
+    "intruction": "Vérifier l'identité de leur Twake pour leur permettre d'accéder aux éléments que vous avez partagés avec eux."
   },
   "ShareRecipientsLimitModal": {
     "title": "Problème au niveau de votre partage",
@@ -382,7 +382,7 @@
     },
     "revokeSelf": {
       "title": "Arrêter le partage",
-      "desc": "Vous conservez le contenu mais il ne sera plus mis à jour entre vos Cozy."
+      "desc": "Vous conservez le contenu mais il ne sera plus mis à jour entre vos Twake."
     }
   },
   "RevokeSharedDriveMemberItem": {
