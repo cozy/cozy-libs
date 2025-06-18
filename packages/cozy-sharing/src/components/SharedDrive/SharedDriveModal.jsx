@@ -29,7 +29,6 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
     readOnlyRecipients: []
   })
   const [sharedDriveName, setSharedDriveName] = useState('')
-  const [sharedDriveDescription, setSharedDriveDescription] = useState('')
 
   const onShare = params => {
     setSharedDriveRecipients({
@@ -48,10 +47,6 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
     setSharedDriveName(event.target.value)
   }
 
-  const handleSharedDriveDescriptionChange = event => {
-    setSharedDriveDescription(event.target.value)
-  }
-
   const onCreate = async () => {
     try {
       const { data: sharedDriveFolder } = await client.create('io.cozy.files', {
@@ -64,7 +59,6 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
         document: sharedDriveFolder,
         recipients: sharedDriveRecipients.recipients,
         readOnlyRecipients: sharedDriveRecipients.readOnlyRecipients,
-        description: sharedDriveDescription,
         sharedDrive: true
       })
 
@@ -136,15 +130,6 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
             className="u-w-100 u-mt-1"
             value={sharedDriveName}
             onChange={handleSharedDriveNameChange}
-          />
-          <TextField
-            required
-            label={t('SharedDrive.sharedDriveModal.descriptionLabel')}
-            variant="outlined"
-            size="large"
-            className="u-w-100 u-mt-1"
-            value={sharedDriveDescription}
-            onChange={handleSharedDriveDescriptionChange}
           />
           <div
             className={cx(

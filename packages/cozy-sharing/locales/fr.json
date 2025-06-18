@@ -456,7 +456,6 @@
     "sharedDriveModal": {
       "title": "Nouveau drive partagé",
       "nameLabel": "Nom du drive partagé",
-      "descriptionLabel": "Description",
       "add": "Ajouter",
       "create": "Créer",
       "successNotification": "Le drive partagé a été ajouté",
