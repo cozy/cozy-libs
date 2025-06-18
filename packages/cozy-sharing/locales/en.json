@@ -458,7 +458,6 @@
     "sharedDriveModal": {
       "title": "New shared drive",
       "nameLabel": "Drive name",
-      "descriptionLabel": "Description",
       "add": "Add",
       "create": "Create",
       "successNotification": "Shared drive has been added",
