@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [32.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.3.13...cozy-harvest-lib@32.4.0) (2025-06-18)
+
+### Features
+
+- Replace Cozy by Twake in locales ([5633122](https://github.com/cozy/cozy-libs/commit/5633122f343e9d14f1120c039cea6a16e7d020ef))
+
 ## [32.3.13](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.3.12...cozy-harvest-lib@32.3.13) (2025-06-12)
 
 **Note:** Version bump only for package cozy-harvest-lib

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [23.1.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@23.0.0...cozy-viewer@23.1.0) (2025-06-18)
+
+### Bug Fixes
+
+- **Viewer:** Controls arrows was pointing wrong direction ([a8b2c62](https://github.com/cozy/cozy-libs/commit/a8b2c629d4a53e18862d788819e846dcb75f355d))
+
+### Features
+
+- Replace Cozy by Twake in locales ([5633122](https://github.com/cozy/cozy-libs/commit/5633122f343e9d14f1120c039cea6a16e7d020ef))
+
 # [23.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@22.0.4...cozy-viewer@23.0.0) (2025-06-12)
 
 ### Features
