@@ -132,6 +132,19 @@ export const useListenBridgeRequests = (
           `Navigating to ${url} because received ${newUrl} from embedded app`
         )
         navigate(BRIDGE_ROUTE_PREFIX + url, { replace: true })
+      },
+      requestNotificationPermission:
+        async (): Promise<NotificationPermission> => {
+          return await Notification.requestPermission()
+        },
+      sendNotification: ({
+        title,
+        body
+      }: {
+        title: string
+        body: string
+      }): void => {
+        new Notification(title, { body })
       }
     }
 
