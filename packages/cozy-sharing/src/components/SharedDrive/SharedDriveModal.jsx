@@ -11,7 +11,6 @@ import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { mergeAndDeduplicateRecipients, formatRecipients } from './helpers'
-import IllustrationSharedDrives from '../../assets/illustrations/illustration-shared-drives.svg'
 import withLocales from '../../hoc/withLocales'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import { Contact } from '../../models'
@@ -129,7 +128,6 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
       title={t('SharedDrive.sharedDriveModal.title')}
       content={
         <div className="u-flex u-flex-column u-flex-items-center">
-          <IllustrationSharedDrives></IllustrationSharedDrives>
           <TextField
             required
             label={t('SharedDrive.sharedDriveModal.nameLabel')}
