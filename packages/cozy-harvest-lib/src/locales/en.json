@@ -19,7 +19,7 @@
       "button": "Disconnect this account"
     },
     "installFlagship": {
-      "label": "Install Cozy on mobile"
+      "label": "Install Twake on mobile"
     },
     "cannotConnectModal": {
       "title": "You can't connect?",
@@ -27,11 +27,11 @@
       "noAccount": "If you do not have an account you will need to create one on the [%{vendorName}](%{vendorLink})'s website."
     },
     "cannotConnectLink": "I can't connect",
-    "notClientSide": "To synchronize your %{name} data in your Cozy you must use the Cozy app on your phone or tablet.",
+    "notClientSide": "To synchronize your %{name} data in your Twake you must use the Twake app on your phone or tablet.",
     "clientSide": {
-      "title": "Connect to your Cozy",
+      "title": "Connect to your Twake",
       "submit": "Connect",
-      "description": "Connect %{name} to your Cozy to synchronize your account and retrieve all your data. "
+      "description": "Connect %{name} to your Twake to synchronize your account and retrieve all your data. "
     }
   },
   "contracts": {
@@ -115,23 +115,23 @@
         "title": "Your documents",
         "description": "This service retrieves your latest documents and keeps a complete back-up for you.",
         "button": "Open the documents",
-        "install": "Discover Cozy Drive"
+        "install": "Discover Twake Drive"
       },
       "contacts": {
         "title": "Your contacts",
         "description": "This service synchronizes all your contacts for you.",
         "button": "Open contacts",
-        "install": "Discover Cozy Contacts"
+        "install": "Discover Twake Contacts"
       },
       "banks": {
         "title": "Your banking data",
         "description": "This service retrieves and keeps a complete record of your latest banking operations for you.",
         "button": "Access bank accounts",
-        "install": "Discover Cozy Banks"
+        "install": "Discover Twake Banks"
       },
       "coachco2": {
         "title": "Apps to go further",
-        "description": "The following apps are able to use privately this kind of data inside your Cozy.",
+        "description": "The following apps are able to use privately this kind of data inside your Twake.",
         "button": "Coach CO2",
         "install": "Discover CoachCO2"
       }
@@ -139,7 +139,7 @@
     "information": {
       "title": "Useful information",
       "websiteLink": "Open the website",
-      "store": "See in Cozy Cloud Store",
+      "store": "See in Twake Workplace Store",
       "storeDescription": "Access the description of this app"
     }
   },
@@ -448,10 +448,10 @@
       "label": "Reconnect"
     },
     "connect": {
-      "description": "Connect %{name} to your Cozy to synchronize your account and automatically retrieve all your data.",
+      "description": "Connect %{name} to your Twake to synchronize your account and automatically retrieve all your data.",
       "label": "Connect",
       "submit": "Connect",
-      "title": "Connect to your Cozy"
+      "title": "Connect to your Twake"
     },
     "window": {
       "title": "OAuth"
@@ -491,7 +491,7 @@
       "title": "Successful configuration!",
       "connect": "Your data will be available in a few minutes and the next ones will follow automatically.",
       "banksLinkText": "See my accounts in %{appName}",
-      "driveLinkText": "Open the folder in Cozy Drive",
+      "driveLinkText": "Open the folder in Twake Drive",
       "button": "Close"
     }
   },
@@ -564,7 +564,7 @@
   "konnectorBlock": {
     "open": "Open the website",
     "store": {
-      "primary": "See in Cozy Cloud store",
+      "primary": "See in Twake Workplace store",
       "secondary": "Access the description of this app"
     },
     "disconnected": "Disconnected",

@@ -17,8 +17,8 @@
       "one-way": "Can view",
       "two-way": "Can change",
       "desc": {
-        "one-way": "Contacts can view, download, and add the content to their Cozy. If they add the content to their Cozy, they will get updates you make to the content, but they won't be able to update it.",
-        "two-way": "Contacts can update, delete and add the content to their Cozy. Updates on the content will be seen on other Cozies."
+        "one-way": "Contacts can view, download, and add the content to their Twake. If they add the content to their Twake, they will get updates you make to the content, but they won't be able to update it.",
+        "two-way": "Contacts can update, delete and add the content to their Twake. Updates on the content will be seen on other Cozies."
       }
     },
     "locked-type-file": "Coming soon: you will be able to change permissions you grant on the file.",
@@ -30,7 +30,7 @@
       "expires": "Until %{date}",
       "accessCount": "%{count} people have access"
     },
-    "create-cozy": "Create |||| Create my cozy",
+    "create-cozy": "Create |||| Create my Twake",
     "members": {
       "count": "%{smart_count} member |||| %{smart_count} members",
       "others": "and 1 other… |||| and %{smart_count} others…",
@@ -39,8 +39,8 @@
     "contacts": {
       "whoHasAccess": "Who has access?",
       "permissionRequired": {
-        "title": "Save your contacts in your Cozy?",
-        "desc": "Authorize the application to access to your Cozy's contacts: you'll be able to select them next time.",
+        "title": "Save your contacts in your Twake?",
+        "desc": "Authorize the application to access to your Twake's contacts: you'll be able to select them next time.",
         "action": "Authorize access",
         "success": "The application has access to your contacts"
       },
@@ -58,11 +58,11 @@
     },
     "loadingError": "Loading error",
     "banner": {
-      "shared_from": "The items below are displayed from ![avatar](%{image}) **%{name}**'s Cozy. You can add a link to this share in your Cozy",
+      "shared_from": "The items below are displayed from ![avatar](%{image}) **%{name}**'s Twake. You can add a link to this share in your Twake",
       "whats_cozy": "Twake is a secure digital home for all your data, hosted in France - ",
       "know_more": "More information",
-      "sync_to_mine": "Synchronise |||| Synchronise in my Cozy",
-      "add_to_mine": "Add |||| Add to my Cozy",
+      "sync_to_mine": "Synchronise |||| Synchronise in my Twake",
+      "add_to_mine": "Add |||| Add to my Twake",
       "close": "Close"
     },
     "permissionLink": {
@@ -105,8 +105,8 @@
         "ro": "Can read",
         "rw": "Can change",
         "desc": {
-          "ro": "You can view, download, and add this content to your Cozy. You will get updates by the owner, but you won't be able to update this content yourself.",
-          "rw": "You can view, update, delete and add this content to your Cozy. Updates you make will be seen on other Cozies."
+          "ro": "You can view, download, and add this content to your Twake. You will get updates by the owner, but you won't be able to update this content yourself.",
+          "rw": "You can view, update, delete and add this content to your Twake. Updates you make will be seen on other Cozies."
         }
       },
       "sharedByMe": "Shared by me",
@@ -173,8 +173,8 @@
         "ro": "Can read",
         "rw": "Can change",
         "desc": {
-          "ro": "You can view, download, and add this content to your Cozy. You will get updates by the owner, but you won't be able to update this content yourself.",
-          "rw": "You can view, update, delete and add this content to your Cozy. Updates you make will be seen on other Cozies."
+          "ro": "You can view, download, and add this content to your Twake. You will get updates by the owner, but you won't be able to update this content yourself.",
+          "rw": "You can view, update, delete and add this content to your Twake. Updates you make will be seen on other Cozies."
         }
       },
       "sharedByMe": "Shared by me",
@@ -305,8 +305,8 @@
         "ro": "Can read",
         "rw": "Can change",
         "desc": {
-          "ro": "You can view, download, and add this content to your Cozy. You will get updates by the owner, but you won't be able to update this content yourself.",
-          "rw": "You can view, update, delete and add this content to your Cozy. Updates you make will be seen on other Cozies."
+          "ro": "You can view, download, and add this content to your Twake. You will get updates by the owner, but you won't be able to update this content yourself.",
+          "rw": "You can view, update, delete and add this content to your Twake. Updates you make will be seen on other Cozies."
         }
       },
       "sharedByMe": "Shared by me",
@@ -364,13 +364,13 @@
       }
     },
     "fingerprint": {
-      "instruction": "For security reasons, please verify **%{userName} (%{userEmail})**'s identity. To do this, contact **%{userName}** via the means of communication of your choice (call, text message, instant messaging app...) and verify their security code.<br><br>Every Cozy user has a security code that they can find using their web application. Their security code must correspond to:",
+      "instruction": "For security reasons, please verify **%{userName} (%{userEmail})**'s identity. To do this, contact **%{userName}** via the means of communication of your choice (call, text message, instant messaging app...) and verify their security code.<br><br>Every Twake user has a security code that they can find using their web application. Their security code must correspond to:",
       "instruction2": "If it is the case, then you can confirm this contact who will be considered as secure for your next sharings."
     }
   },
   "ConfirmRecipientModal": {
     "title": "%{smart_count} contact waiting for confirmation |||| %{smart_count} contacts waiting for confirmation",
-    "intruction": "Verify identity of their Cozy in order to give them access content you shared with them."
+    "intruction": "Verify identity of their Twake in order to give them access content you shared with them."
   },
   "ShareRecipientsLimitModal": {
     "title": "Problem with your sharing",
@@ -384,7 +384,7 @@
     },
     "revokeSelf": {
       "title": "Remove me from sharing",
-      "desc": "You keep the content but it won't be updated between your Cozy anymore."
+      "desc": "You keep the content but it won't be updated between your Twake anymore."
     }
   },
   "RevokeSharedDriveMemberItem": {
@@ -403,7 +403,7 @@
     },
     "revokeSelf": {
       "title": "Remove me from sharing",
-      "desc": "You keep the content but it won't be updated between your Cozy anymore."
+      "desc": "You keep the content but it won't be updated between your Twake anymore."
     }
   },
   "GroupRecipientDetail": {
