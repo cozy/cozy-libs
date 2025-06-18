@@ -457,7 +457,9 @@
       "title": "Nouveau drive partagé",
       "nameLabel": "Nom du drive partagé",
       "add": "Ajouter",
+      "cancel": "Annuler",
       "create": "Créer",
+      "addPeople": "Ajouter des utilisateurs au drive partagé :",
       "successNotification": "Le drive partagé a été ajouté",
       "errorNotification": "Erreur lors de la création du drive partagé"
     }

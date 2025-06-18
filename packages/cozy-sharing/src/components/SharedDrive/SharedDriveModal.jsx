@@ -1,10 +1,9 @@
-import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
 import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import { FixedActionsDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import TextField from 'cozy-ui/transpiled/react/TextField'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
@@ -14,7 +13,6 @@ import { mergeAndDeduplicateRecipients, formatRecipients } from './helpers'
 import withLocales from '../../hoc/withLocales'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import { Contact } from '../../models'
-import styles from '../../styles/shareddrive.styl'
 import { default as DumbShareByEmail } from '../ShareByEmail'
 import WhoHasAccess from '../WhoHasAccess'
 
@@ -116,29 +114,25 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
   const recipients = formatRecipients(sharedDriveRecipients)
 
   return (
-    <FixedActionsDialog
+    <FixedDialog
       open
+      disableGutters
       onClose={onClose}
       title={t('SharedDrive.sharedDriveModal.title')}
       content={
-        <div className="u-flex u-flex-column u-flex-items-center">
-          <TextField
-            required
-            label={t('SharedDrive.sharedDriveModal.nameLabel')}
-            variant="outlined"
-            size="small"
-            className="u-w-100 u-mt-1"
-            value={sharedDriveName}
-            onChange={handleSharedDriveNameChange}
-          />
-          <div
-            className={cx(
-              'u-mt-1',
-              styles['shared-drive-who-has-access-wrapper']
-            )}
-          >
-            <Typography variant="h6" className="u-mb-1-half">
-              {t('Share.contacts.whoHasAccess')}
+        <div>
+          <div className="u-ph-2">
+            <TextField
+              required
+              label={t('SharedDrive.sharedDriveModal.nameLabel')}
+              variant="outlined"
+              size="small"
+              className="u-w-100 u-mt-1-half"
+              value={sharedDriveName}
+              onChange={handleSharedDriveNameChange}
+            />
+            <Typography variant="h6" className="u-mt-1-half u-mb-half">
+              {t('SharedDrive.sharedDriveModal.addPeople')}
             </Typography>
             <DumbShareByEmail
               createContact={contact => client.create(Contact.doctype, contact)}
@@ -149,20 +143,25 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
               submitLabel={t('SharedDrive.sharedDriveModal.add')}
               showNotifications={false}
             />
-            <WhoHasAccess
-              isOwner
-              recipients={recipients}
-              document={document}
-              documentType="Files"
-              className="u-w-100"
-              onRevoke={onRevoke}
-              onSetType={onSetType}
-            />
           </div>
+          <WhoHasAccess
+            isOwner
+            recipients={recipients}
+            document={document}
+            documentType="Files"
+            className="u-w-100"
+            onRevoke={onRevoke}
+            onSetType={onSetType}
+          />
         </div>
       }
       actions={
         <>
+          <Button
+            variant="secondary"
+            label={t('SharedDrive.sharedDriveModal.cancel')}
+            onClick={onClose}
+          />
           <Button
             variant="primary"
             label={t('SharedDrive.sharedDriveModal.create')}

@@ -459,7 +459,9 @@
       "title": "New shared drive",
       "nameLabel": "Drive name",
       "add": "Add",
+      "cancel": "Cancel",
       "create": "Create",
+      "addPeople": "Add people to the shared drive :",
       "successNotification": "Shared drive has been added",
       "errorNotification": "Error during shared drive creation"
     }
