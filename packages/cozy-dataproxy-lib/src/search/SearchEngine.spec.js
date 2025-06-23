@@ -2,15 +2,16 @@ import { createMockClient } from 'cozy-client'
 
 import { SearchEngine } from './SearchEngine'
 import * as consts from './consts'
-jest.mock('flexsearch')
-jest.mock('flexsearch/dist/module/lang/latin/simple')
+import { initSearchIndex } from './indexDocs'
+// jest.mock('flexsearch')
+// jest.mock('flexsearch/dist/module/lang/latin/simple')
 
-jest.mock('./helpers/client', () => ({
-  getPouchLink: jest.fn()
-}))
-jest.mock('./helpers/getSearchEncoder', () => ({
-  getSearchEncoder: jest.fn()
-}))
+// jest.mock('./helpers/client', () => ({
+//   getPouchLink: jest.fn()
+// }))
+// jest.mock('./helpers/getSearchEncoder', () => ({
+//   getSearchEncoder: jest.fn()
+// }))
 jest.mock('./consts', () => ({
   LIMIT_DOCTYPE_SEARCH: 3,
   SEARCH_SCHEMA: {
@@ -27,6 +28,53 @@ jest.mock('./consts', () => ({
   CONTACTS_DOCTYPE: 'io.cozy.contacts',
   APPS_DOCTYPE: 'io.cozy.apps'
 }))
+
+describe('searchOnIndexes', () => {
+  let searchEngine
+  beforeEach(async () => {
+    const client = createMockClient()
+    searchEngine = new SearchEngine(client)
+    const searchIndex = initSearchIndex('io.cozy.files')
+    searchEngine.searchIndexes['io.cozy.files'] = {
+      index: searchIndex
+    }
+    const docs = [
+      { _id: '1', _type: 'io.cozy.files', name: 'test1' },
+      { _id: '2', _type: 'io.cozy.files', name: 'test2' },
+      { _id: '3', _type: 'io.cozy.files', name: 'aaaa' }
+    ]
+
+    for (const doc of docs) {
+      searchEngine.searchIndexes['io.cozy.files'].index.add(doc)
+    }
+    console.log('index : ', searchEngine.searchIndexes['io.cozy.files'].index)
+  })
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
+  it('should return search results', async () => {
+    const searchResults = await searchEngine.searchOnIndexes('test')
+    expect(searchResults.length).toEqual(2)
+  })
+})
+
+// describe('search test', () => {
+//   it('should index', () => {
+//     const fieldsToIndex = ['name']
+//     const flexsearchIndex = new FlexSearch.Document({
+//       tokenize: 'reverse', // See https://github.com/nextapps-de/flexsearch?tab=readme-ov-file#tokenizer
+//       encode: getSearchEncoder(),
+//       // @ts-expect-error minlength is not described by Flexsearch types but exists
+//       minlength: 3,
+//       document: {
+//         id: '_id',
+//         index: fieldsToIndex,
+//         store: true // Use redux store to get docs
+//       }
+//     })
+//   })
+// })
 
 describe('sortSearchResults', () => {
   let searchEngine

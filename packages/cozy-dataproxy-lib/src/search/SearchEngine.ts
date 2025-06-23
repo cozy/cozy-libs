@@ -1,4 +1,7 @@
-import FlexSearch from 'flexsearch'
+import FlexSearch, {
+  DocumentSearchResults,
+  Document as FlexSearchDocument
+} from 'flexsearch'
 
 import CozyClient, { defaultPerformanceApi } from 'cozy-client'
 import type { PerformanceAPI } from 'cozy-client/types/performances/types'
@@ -51,9 +54,14 @@ import {
 
 const log = Minilog('🗂️ [Indexing]')
 
-interface FlexSearchResultWithDoctype
-  extends FlexSearch.SimpleDocumentSearchResultSetUnit {
+// interface FlexSearchResultWithDoctype extends DocumentSearchResults {
+//   doctype: SearchedDoctype
+// }
+
+interface FlexSearchResultWithDoctype {
   doctype: SearchedDoctype
+  field: string
+  result: DocumentSearchResults
 }
 
 interface EngineOptions {
@@ -283,7 +291,7 @@ export class SearchEngine {
   buildSearchIndex(
     doctype: keyof typeof SEARCH_SCHEMA,
     docs: CozyDoc[]
-  ): FlexSearch.Document<CozyDoc, false> {
+  ): FlexSearchDocument {
     const startTimeIndex = performance.now()
 
     const flexsearchIndex = initSearchIndex(doctype)
@@ -466,6 +474,7 @@ export class SearchEngine {
         limit: FLEXSEARCH_LIMIT,
         enrich: false
       })
+      console.log('index results : ', indexResults)
 
       const newResults = indexResults.map(res => ({
         ...res,

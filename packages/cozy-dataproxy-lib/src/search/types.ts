@@ -1,6 +1,15 @@
-import FlexSearch from 'flexsearch'
+import FlexSearch, {
+  Document as FlexSearchDocument,
+  DocumentData
+} from 'flexsearch'
 
-import { IOCozyFile, IOCozyContact, IOCozyApp } from 'cozy-client/types/types'
+// import { IOCozyFile, IOCozyContact, IOCozyApp } from 'cozy-client/types/types'
+
+import {
+  IOCozyFile as ClientIOCozyFile,
+  IOCozyContact as ClientIOCozyContact,
+  IOCozyApp as ClientIOCozyApp
+} from 'cozy-client/types/types'
 
 import {
   APPS_DOCTYPE,
@@ -9,6 +18,16 @@ import {
   SEARCH_SCHEMA,
   SearchedDoctype
 } from './consts'
+
+export type IOCozyFile = ClientIOCozyFile & {
+  [key: string]: string
+}
+export type IOCozyContact = ClientIOCozyContact & {
+  [key: string]: string
+}
+export type IOCozyApp = ClientIOCozyApp & {
+  [key: string]: string
+}
 
 export type CozyDoc = IOCozyFile | IOCozyContact | IOCozyApp
 
@@ -59,7 +78,7 @@ export interface SearchResult {
 }
 
 export interface SearchIndex {
-  index: FlexSearch.Document<CozyDoc, false>
+  index: FlexSearchDocument<CozyDoc>
   lastSeq: number | null
   lastUpdated: string | null
 }

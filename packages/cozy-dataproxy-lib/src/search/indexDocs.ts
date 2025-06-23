@@ -1,4 +1,4 @@
-import FlexSearch from 'flexsearch'
+import FlexSearch, { Document as FlexSearchDocument } from 'flexsearch'
 
 import CozyClient from 'cozy-client'
 
@@ -14,12 +14,13 @@ import { CozyDoc, isIOCozyFile, isIOCozyApp, SearchIndex } from './types'
 
 export const initSearchIndex = (
   doctype: keyof typeof SEARCH_SCHEMA
-): FlexSearch.Document<CozyDoc, false> => {
+): FlexSearchDocument => {
   const fieldsToIndex = SEARCH_SCHEMA[doctype]
 
-  const flexsearchIndex = new FlexSearch.Document<CozyDoc, false>({
+  const flexsearchIndex = new FlexSearchDocument({
     tokenize: 'reverse', // See https://github.com/nextapps-de/flexsearch?tab=readme-ov-file#tokenizer
-    encode: getSearchEncoder(),
+    encoder: 'Exact',
+    // encode: getSearchEncoder(),
     // @ts-expect-error minlength is not described by Flexsearch types but exists
     minlength: 3,
     document: {
@@ -32,10 +33,10 @@ export const initSearchIndex = (
 }
 
 export const indexAllDocs = (
-  flexsearchIndex: FlexSearch.Document<CozyDoc, false>,
+  flexsearchIndex: FlexSearchDocument,
   docs: CozyDoc[],
   isLocalSearch: boolean
-): FlexSearch.Document<CozyDoc, false> => {
+): FlexSearchDocument => {
   for (const doc of docs) {
     if (shouldIndexDoc(doc)) {
       flexsearchIndex.add(doc)
@@ -52,7 +53,7 @@ export const indexAllDocs = (
 
 export const indexSingleDoc = async (
   client: CozyClient,
-  flexsearchIndex: FlexSearch.Document<CozyDoc, false>,
+  flexsearchIndex: FlexSearchDocument,
   doc: CozyDoc
 ): Promise<void> => {
   if (shouldIndexDoc(doc)) {

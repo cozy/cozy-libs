@@ -1,8 +1,8 @@
 import CozyClient from 'cozy-client'
-import { IOCozyFile } from 'cozy-client/types/types'
 
 import { FILES_DOCTYPE, TYPE_DIRECTORY, TYPE_FILE } from '../consts'
 import { queryDocById } from '../queries'
+import { IOCozyFile } from '../types'
 import { CozyDoc, isIOCozyFile } from '../types'
 
 /**
