@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.2](https://github.com/cozy/cozy-libs/compare/cozy-search@0.8.1...cozy-search@0.8.2) (2025-06-24)
+
+### Bug Fixes
+
+- Remove LLM sources tags ([95b9e49](https://github.com/cozy/cozy-libs/commit/95b9e497c47d951be686ff7e2895533d474861e3))
+
 ## [0.8.1](https://github.com/cozy/cozy-libs/compare/cozy-search@0.8.0...cozy-search@0.8.1) (2025-06-13)
 
 ### Bug Fixes
