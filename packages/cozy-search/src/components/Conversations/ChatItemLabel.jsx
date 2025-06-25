@@ -10,14 +10,17 @@ import Markdown from 'cozy-ui/transpiled/react/Markdown'
  * @returns {string} sanitized content
  */
 const sanitizeContent = content => {
+  if (!content) {
+    return ''
+  }
   return content
     .replace(/\s?\[REF\][\s\S]*?\[\/REF\]/g, '')
     .replace(/\s?\[doc_\d+\]/g, '')
 }
 
 const ChatItemLabel = ({ label }) => {
-  const content = sanitizeContent(label)
   if (typeof label === 'string') {
+    const content = sanitizeContent(label)
     return <Markdown content={content} />
   }
 
