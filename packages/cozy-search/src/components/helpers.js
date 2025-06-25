@@ -23,3 +23,25 @@ export const isMessageForThisConversation = (res, messagesId) =>
   messagesId.includes(res._id)
 
 export const isAssistantEnabled = () => flag('cozy.assistant.enabled')
+
+/**
+ * Sanitize chat content by removing special sources tags like
+ * [REF]...[/REF] or [doc_X] that are not currently handled.
+ *
+ * @param {string} content - content to sanitize
+ * @returns {string} sanitized content
+ */
+export const sanitizeChatContent = content => {
+  if (!content) {
+    return ''
+  }
+  return (
+    content
+      // Remove REFdoc_1/REF
+      .replace(/\s?\[REF\][\s\S]*?\[\/REF\]/g, '')
+      // Remove [REF]doc_1[/REF]
+      .replace(/\s?REF[\s\S]*?\/REF/g, '')
+      // remove « [doc_1] »
+      .replace(/\s?\[doc_\d+\]/g, '')
+  )
+}
