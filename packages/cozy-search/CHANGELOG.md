@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.3](https://github.com/cozy/cozy-libs/compare/cozy-search@0.8.2...cozy-search@0.8.3) (2025-06-26)
+
+### Bug Fixes
+
+- Avoid crashing on non-string element ([33a7bbf](https://github.com/cozy/cozy-libs/commit/33a7bbff87cb5fafd57e69339aa484f4ddb990f3))
+- Properly handle LLM Ref ([3e156a0](https://github.com/cozy/cozy-libs/commit/3e156a0b5aee0c1910ae4366684334ed056d0d5e))
+
 ## [0.8.2](https://github.com/cozy/cozy-libs/compare/cozy-search@0.8.1...cozy-search@0.8.2) (2025-06-24)
 
 ### Bug Fixes
