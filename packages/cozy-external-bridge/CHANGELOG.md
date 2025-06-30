@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.15.1...cozy-external-bridge@0.16.0) (2025-06-30)
+
+### Features
+
+- Expose notification API ([f19578c](https://github.com/cozy/cozy-libs/commit/f19578caccc443eb87a7c397d8f5fa8c701adff2))
+
 ## [0.15.1](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.15.0...cozy-external-bridge@0.15.1) (2025-06-13)
 
 ### Bug Fixes
