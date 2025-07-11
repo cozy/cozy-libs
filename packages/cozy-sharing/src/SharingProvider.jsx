@@ -186,7 +186,7 @@ export class SharingProvider extends Component {
     }
     const { doctype, client } = this.props
     const [sharings, permissions, apps] = await Promise.all([
-      this.sharingCol.findByDoctype(doctype),
+      this.sharingCol.findByDoctype(doctype, { withSharedDocs: false }),
       this.permissionCol.findLinksByDoctype(doctype),
       client.fetchQueryAndGetFromState(fetchApps())
     ])
