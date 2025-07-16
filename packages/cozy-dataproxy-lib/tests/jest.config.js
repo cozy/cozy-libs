@@ -11,6 +11,7 @@ const config = {
     './src/search/types.ts',
     './src/search/helpers/getSearchEncoder.ts'
   ],
+  transformIgnorePatterns: ['node_modules/(?!(flexsearch)/)'],
   rootDir: '../',
   testMatch: ['./**/*.spec.{ts,tsx,js}'],
   coverageThreshold: {
