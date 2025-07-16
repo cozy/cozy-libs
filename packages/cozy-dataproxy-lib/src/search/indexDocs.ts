@@ -21,7 +21,7 @@ export const initSearchIndex = (
     tokenize: 'reverse', // See https://github.com/nextapps-de/flexsearch?tab=readme-ov-file#tokenizer
     encode: getSearchEncoder(),
     // @ts-expect-error minlength is not described by Flexsearch types but exists
-    minlength: 3,
+    minlength: 2,
     document: {
       id: '_id',
       index: fieldsToIndex,
