@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.7.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.6.0...cozy-sharing@25.7.0) (2025-07-16)
+
+### Features
+
+- Improve sharings retrieval performances ([87c99e0](https://github.com/cozy/cozy-libs/commit/87c99e07a427de1557120a8c3d03de573487a92d))
+- Upgrade cozy-client for param ([b612543](https://github.com/cozy/cozy-libs/commit/b6125435b03f56d27090b8c32274bf0da560d8d4))
+
 # [25.6.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.5.0...cozy-sharing@25.6.0) (2025-06-18)
 
 ### Features
