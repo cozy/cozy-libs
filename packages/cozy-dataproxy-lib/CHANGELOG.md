@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.6.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.5.1...cozy-dataproxy-lib@4.6.0) (2025-07-17)
+
+### Features
+
+- Handle 2 characters edge cases ([6ec319d](https://github.com/cozy/cozy-libs/commit/6ec319d333249585ea6e9caeb675a468445c164d))
+
 ## [4.5.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.5.0...cozy-dataproxy-lib@4.5.1) (2025-07-17)
 
 ### Bug Fixes
