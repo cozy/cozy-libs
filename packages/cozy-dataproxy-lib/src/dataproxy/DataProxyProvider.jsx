@@ -184,8 +184,8 @@ export const DataProxyProvider = React.memo(({ children }) => {
   }, [dataProxyCom, client, dataProxyServicesAvailable])
 
   return (
-    <DataProxyContext.Provider value={dataProxyFn}>
-      {dataProxyFn && children}
+    <DataProxyContext.Provider value={dataProxyFn || {}}>
+      {(dataProxyServicesAvailable === false || dataProxyFn) && children}
       {iframeUrl ? (
         <iframe
           id="DataProxy"
