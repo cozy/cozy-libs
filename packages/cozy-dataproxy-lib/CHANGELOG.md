@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.5.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.5.0...cozy-dataproxy-lib@4.5.1) (2025-07-17)
+
+### Bug Fixes
+
+- **cozy-dataproxy-lib:** Avoid blank screen when dataproxy not ([4dd3220](https://github.com/cozy/cozy-libs/commit/4dd322083f615b7983c8c373550bc6338033d7a9))
+
 # [4.5.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.4.0...cozy-dataproxy-lib@4.5.0) (2025-05-26)
 
 ### Bug Fixes
