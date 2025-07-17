@@ -67,6 +67,8 @@ export const DataProxyProvider = React.memo(({ children }) => {
     const initFlagship = async () => {
       try {
         if (!webviewIntent) {
+          // We do not set dataProxyServicesAvailable to false here
+          // because we are waiting webviewIntent to be initialized
           return
         }
 
