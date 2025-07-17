@@ -24,7 +24,7 @@ export const DataProxyProvider = React.memo(({ children }) => {
   const webviewIntent = useWebviewIntent()
   const [iframeUrl, setIframeUrl] = useState()
   const [dataProxyCom, setDataProxyCom] = useState()
-  const [dataProxyFn, setDataProxyFn] = useState()
+  const [dataProxy, setDataProxy] = useState()
   const [dataProxyServicesAvailable, setDataProxyServicesAvailable] =
     useState(undefined)
 
@@ -163,7 +163,7 @@ export const DataProxyProvider = React.memo(({ children }) => {
         }
         return dataProxyCom.requestLink(operation, options)
       }
-      const newDataProxyFn = {
+      const newDataProxy = {
         dataProxyServicesAvailable,
         search,
         requestLink
@@ -172,11 +172,11 @@ export const DataProxyProvider = React.memo(({ children }) => {
       client.links.forEach(link => {
         if (link.registerDataProxy) {
           // This is required as the DataProxy is not ready when the DataProxyLink is created
-          link.registerDataProxy(newDataProxyFn)
+          link.registerDataProxy(newDataProxy)
         }
       })
 
-      setDataProxyFn(newDataProxyFn)
+      setDataProxy(newDataProxy)
     }
     if (dataProxyCom && client?.links) {
       doAsync()
@@ -184,8 +184,8 @@ export const DataProxyProvider = React.memo(({ children }) => {
   }, [dataProxyCom, client, dataProxyServicesAvailable])
 
   return (
-    <DataProxyContext.Provider value={dataProxyFn || {}}>
-      {(dataProxyServicesAvailable === false || dataProxyFn) && children}
+    <DataProxyContext.Provider value={dataProxy || {}}>
+      {(dataProxyServicesAvailable === false || dataProxy) && children}
       {iframeUrl ? (
         <iframe
           id="DataProxy"
