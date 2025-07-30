@@ -18,6 +18,7 @@ import {
   revokePermissions,
   createPermissions
 } from './helpers'
+import { getAppSlugFromDocumentType } from '../../helpers/link'
 import {
   checkIsPermissionHasExpiresDate,
   checkIsPermissionHasPassword,
@@ -90,7 +91,7 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
         cozyUrl: client.getStackClient().uri,
         searchParams: [['sharecode', perms.attributes.shortcodes.code]],
         pathname: '/public',
-        slug: 'drive',
+        slug: getAppSlugFromDocumentType({ documentType }),
         subDomainType: client.capabilities.flat_subdomains ? 'flat' : 'nested'
       })
       await copyToClipboard(url, { t, showAlert })
@@ -112,7 +113,7 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
         cozyUrl: client.getStackClient().uri,
         searchParams: [['sharecode', perms.attributes.shortcodes.code]],
         pathname: '/public',
-        slug: 'drive',
+        slug: getAppSlugFromDocumentType({ documentType }),
         subDomainType: client.capabilities.flat_subdomains ? 'flat' : 'nested'
       })
       await copyToClipboard(url, { t, showAlert })
