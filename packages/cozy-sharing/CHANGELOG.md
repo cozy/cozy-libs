@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.7.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.7.0...cozy-sharing@25.7.1) (2025-07-30)
+
+### Bug Fixes
+
+- Correct link in clipboard when sharing an album ([b56a93c](https://github.com/cozy/cozy-libs/commit/b56a93c43d15a186aa1c26e382d30491b148f255))
+
 # [25.7.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.6.0...cozy-sharing@25.7.0) (2025-07-16)
 
 ### Features
