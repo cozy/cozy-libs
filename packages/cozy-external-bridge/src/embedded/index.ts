@@ -18,7 +18,7 @@ let availableMethods: {
 // eslint-disable-next-line @typescript-eslint/unbound-method
 const originalPushState = history.pushState
 // eslint-disable-next-line @typescript-eslint/unbound-method
-const originalReplaceState = history.pushState
+const originalReplaceState = history.replaceState
 
 const onPopstate = (): void => {
   availableMethods.updateHistory(document.location.href)
