@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.1](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.16.0...cozy-external-bridge@0.16.1) (2025-07-31)
+
+### Bug Fixes
+
+- Do not replace replaceState by pushState to avoid strange ([0fc1496](https://github.com/cozy/cozy-libs/commit/0fc1496e94a2be64c0679788312d858f1ec77cc1))
+
 # [0.16.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.15.1...cozy-external-bridge@0.16.0) (2025-06-30)
 
 ### Features
