@@ -47,6 +47,9 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
 
   const onCreate = async () => {
     try {
+      await client
+        .collection('io.cozy.files')
+        .getOrCreateSharedDrivesDirectory()
       const { data: sharedDriveFolder } = await client.create('io.cozy.files', {
         name: sharedDriveName,
         dirId: 'io.cozy.files.shared-drives-dir',
