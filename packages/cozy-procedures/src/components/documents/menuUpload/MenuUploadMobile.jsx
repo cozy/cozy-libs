@@ -13,7 +13,6 @@ import {
 } from 'cozy-ui/transpiled/react/'
 
 import { ActionMenuHeader } from 'cozy-ui/transpiled/react/ActionMenu'
-import { isAndroidApp } from 'cozy-device-helper'
 import UploadInputLabel from '../UploadInputLabel'
 
 import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
@@ -83,17 +82,6 @@ class MenuUploadMobile extends Component {
                 <UploadInputLabel />
               </FileInput>
             </MenuItem>
-
-            {isAndroidApp() && (
-              <MenuItem
-                icon={<Icon icon={FileIcon} />}
-                onClick={e => e.stopPropagation()}
-                disabled
-              >
-                <span> {t('documents.upload.scan_a_doc')}</span>
-                <Caption>{t('documents.upload.soon_available')}</Caption>
-              </MenuItem>
-            )}
           </ActionMenu>
         )}
       </>
