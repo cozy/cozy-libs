@@ -128,11 +128,8 @@
     "upload": {
       "from_other_service": "Depuis un autre service",
       "from_drive": "Depuis mon drive",
-      "from_my_mobile": "Depuis mon telephone",
-      "from_my_device_scan": "Scan / Import depuis mon téléphone",
       "from_my_computer": "Depuis mon ordinateur",
       "soon_available": "(bientôt disponible)",
-      "scan_a_doc": "Scanner un document",
       "conflict_error": "Un fichier avec le même nom est déjà présent. Veuillez renommer votre fichier avant de recommencer.",
       "error": "Une erreur est survenue durant l'upload du fichier."
     },
