@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.7.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.7.1...cozy-sharing@25.7.2) (2025-08-19)
+
+### Bug Fixes
+
+- Resolve creating shared drive issue :bug: ([d6574ac](https://github.com/cozy/cozy-libs/commit/d6574ac7c75b4da8da1e67554df175d7031eb5b2))
+
 ## [25.7.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.7.0...cozy-sharing@25.7.1) (2025-07-30)
 
 ### Bug Fixes
