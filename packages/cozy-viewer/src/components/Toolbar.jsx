@@ -112,7 +112,8 @@ const Toolbar = ({
             onClick={() =>
               download({ encryptedUrl: url }).action([file], {
                 client,
-                webviewIntent
+                webviewIntent,
+                driveId: file.driveId
               })
             }
           />
