@@ -65,7 +65,7 @@ const withFileUrl = BaseComponent =>
 
     getDownloadLink(file) {
       return this.context.client
-        .collection('io.cozy.files')
+        .collection('io.cozy.files', { driveId: file.driveId })
         .getDownloadLinkById(file._id, file.name)
     }
 
