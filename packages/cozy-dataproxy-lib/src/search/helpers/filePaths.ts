@@ -24,6 +24,17 @@ export const resetAllPaths = (): void => {
   allPaths.clear()
 }
 
+const buildPath = (parentPath: string | undefined, name: string): string => {
+  if (!parentPath) {
+    return name || ''
+  }
+  const sanitizedParentPath = parentPath.endsWith('/')
+    ? parentPath.slice(0, -1)
+    : parentPath
+  const path = `${sanitizedParentPath}/${name}`
+  return path
+}
+
 /**
  * Compute and set paths for given files.
  *
@@ -50,7 +61,7 @@ export const setFilePaths = (docs: CozyDoc[]): CozyDoc[] => {
       if (file.type === TYPE_FILE) {
         const parentPath = getFilePath(file.dir_id)
         // Add path to all files based on their parent path
-        const path = parentPath ? `${parentPath}/${file.name}` : ''
+        const path = buildPath(parentPath, file.name)
         setFilePath(file._id, path)
         return {
           ...file,
@@ -96,16 +107,20 @@ export const computeFileFullpath = async (
     return { ...file, path: newPath }
   }
 
+  const parentPath = getFilePath(file.dir_id)
   const filePath = getFilePath(file._id)
-  if (filePath) {
-    // File path exists in memory
-    return { ...file, path: filePath }
+  if (parentPath && filePath) {
+    const builtPath = buildPath(parentPath, file.name)
+    if (filePath !== builtPath) {
+      // File path needs to be updated in memory
+      setFilePath(file._id, builtPath)
+    }
+    return { ...file, path: builtPath }
   }
 
-  const parentPath = getFilePath(file.dir_id)
   if (parentPath) {
     // Parent path exists in memory
-    const path = `${parentPath}/${file.name}`
+    const path = buildPath(parentPath, file.name)
     setFilePath(file._id, path) // Add the path in memory
     return { ...file, path }
   }
@@ -119,7 +134,7 @@ export const computeFileFullpath = async (
   )) as IOCozyFile
 
   if (parentDir?.path) {
-    const path = `${parentDir.path}/${file.name}`
+    const path = buildPath(parentDir.path, file.name)
     fileWithPath.path = path
     // Add the paths in memory
     setFilePath(file.dir_id, parentDir.path)
