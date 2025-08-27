@@ -131,3 +131,38 @@ describe('computeFileFullpath', () => {
     expect(res.path).toEqual('ROOT/MYDIR/file3')
   })
 })
+
+describe('it should correctly handle in-memory paths', () => {
+  beforeEach(() => {
+    resetAllPaths()
+  })
+
+  const dir = {
+    _id: '123',
+    _type: 'io.cozy.files',
+    type: 'directory',
+    dir_id: 'ROOT',
+    name: 'MYDIR',
+    path: 'ROOT/MYDIR'
+  } as IOCozyFile
+  const filewithNoPath = {
+    _id: '000',
+    _type: 'io.cozy.files',
+    type: 'file',
+    dir_id: '123',
+    name: 'file3'
+  } as IOCozyFile
+
+  it('should compute correct path on file', async () => {
+    setFilePaths([dir, filewithNoPath])
+    const res = await computeFileFullpath(client, filewithNoPath)
+    expect(res.path).toEqual('ROOT/MYDIR/file3')
+  })
+
+  it('should compute correct path on file after rename', async () => {
+    setFilePaths([dir, filewithNoPath])
+    const newFileWithFullPath = { ...filewithNoPath, name: 'file4' }
+    const res = await computeFileFullpath(client, newFileWithFullPath)
+    expect(res.path).toEqual('ROOT/MYDIR/file4')
+  })
+})
