@@ -53,6 +53,10 @@ export const getCleanedFilePath = (doc: CozyDoc): CozyDoc => {
     // Remove the name from the path, which is added at indexing time to search on it
     newPath = path.slice(0, -doc.name.length - 1)
   }
+  if (!newPath) {
+    // Special case for root path
+    newPath = '/'
+  }
 
   return { ...doc, path: newPath }
 }
