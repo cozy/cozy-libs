@@ -278,14 +278,17 @@ export const enrichResultsWithDocs = async (
   }
   const docsMap = new Map(docs?.map(doc => [doc._id, doc]))
 
+  const filteredResults = []
   for (const res of enrichedResults) {
     const id = res.id?.toString() // Because of flexsearch Id typing
     const doc = docsMap.get(id)
     if (!doc) {
+      // TODO: remove missing docs from search index
       log.error(`${id} is found in search but not in local data`)
     } else {
       res.doc = doc
+      filteredResults.push(res)
     }
   }
-  return enrichedResults
+  return filteredResults
 }
