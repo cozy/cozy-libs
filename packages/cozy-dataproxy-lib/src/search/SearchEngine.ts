@@ -197,6 +197,9 @@ export class SearchEngine {
     this.subscribeDoctype(this.client, CONTACTS_DOCTYPE)
     this.subscribeDoctype(this.client, APPS_DOCTYPE)
 
+    if (this.isLocalSearch) {
+      this.debouncedReplication()
+    }
     // The document indexing should be performed once everything is setup
     await this.indexDocumentsAtInit()
   }
@@ -221,11 +224,10 @@ export class SearchEngine {
       return
     }
     log.debug('[REALTIME] Update doc from index after update : ', doc._id)
-    void indexSingleDoc(this.client, searchIndex.index, doc)
-
     if (this.isLocalSearch) {
       this.debouncedReplication()
     }
+    void indexSingleDoc(this.client, searchIndex.index, doc)
   }
 
   handleDeletedDoc(doc: CozyDoc): void {
