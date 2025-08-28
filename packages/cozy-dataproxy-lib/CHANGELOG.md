@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.7.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.6.1...cozy-dataproxy-lib@4.7.0) (2025-08-28)
+
+### Bug Fixes
+
+- Filter out missing docs from search ([d443efd](https://github.com/cozy/cozy-libs/commit/d443efd1fc2a346f89730217cd1038201e5c7f55))
+- Handle path for files at root ([4d22b15](https://github.com/cozy/cozy-libs/commit/4d22b1557de31f3fdaffad6b376bd1afd8377acf))
+- Update file paths after move or rename ([26f4dd7](https://github.com/cozy/cozy-libs/commit/26f4dd7b724834cf840e8613321c15d1ee737795))
+
+### Features
+
+- Replicate data at init ([404adfc](https://github.com/cozy/cozy-libs/commit/404adfcfce626dfa5cdd5585f0a4113cdb1fb6a4))
+
 ## [4.6.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.6.0...cozy-dataproxy-lib@4.6.1) (2025-08-21)
 
 **Note:** Version bump only for package cozy-dataproxy-lib
