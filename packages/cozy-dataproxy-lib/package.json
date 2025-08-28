@@ -21,7 +21,7 @@
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-tsconfig-paths": "^1.0.3",
     "babel-preset-cozy-app": "^2.8.1",
-    "cozy-client": "^54.0.0",
+    "cozy-client": "^60.2.0",
     "cozy-device-helper": "^4.0.0",
     "cozy-flags": "^4.7.0",
     "cozy-intent": "^2.30.0",
@@ -51,7 +51,7 @@
     ".": "./dist/index.js"
   },
   "peerDependencies": {
-    "cozy-client": ">=54.0.0",
+    "cozy-client": ">=60.2.0",
     "cozy-device-helper": ">=3.7.1",
     "cozy-flags": ">=4.6.1",
     "cozy-intent": ">=2.26.0",
