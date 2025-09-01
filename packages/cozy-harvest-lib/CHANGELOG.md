@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [32.5.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.4.5...cozy-harvest-lib@32.5.0) (2025-09-01)
+
+### Features
+
+- Remove usage of useless isMobileApp method ([e26ce64](https://github.com/cozy/cozy-libs/commit/e26ce64c2a6231aaab09ba04e28e31a1262bd0fd))
+
 ## [32.4.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@32.4.4...cozy-harvest-lib@32.4.5) (2025-08-21)
 
 **Note:** Version bump only for package cozy-harvest-lib

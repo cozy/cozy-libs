@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [23.2.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@23.1.5...cozy-viewer@23.2.0) (2025-09-01)
+
+### Features
+
+- Remove usage of useless isMobileApp method ([e26ce64](https://github.com/cozy/cozy-libs/commit/e26ce64c2a6231aaab09ba04e28e31a1262bd0fd))
+
 ## [23.1.5](https://github.com/cozy/cozy-libs/compare/cozy-viewer@23.1.4...cozy-viewer@23.1.5) (2025-08-21)
 
 **Note:** Version bump only for package cozy-viewer
