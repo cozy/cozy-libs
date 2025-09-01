@@ -1,6 +1,4 @@
 // @ts-check
-import { isMobileApp } from 'cozy-device-helper'
-
 import { popupCenter } from './Popup'
 import { windowOpen } from '../helpers/windowWrapper'
 
@@ -17,18 +15,10 @@ import { windowOpen } from '../helpers/windowWrapper'
  * @param {String} options.title - Title of the popup
  * @param {Number} options.width - Width of the popup
  * @param {Number} options.height - Height of the popup
- * @param {Function} options.handleUrlChange - Function to call when popup url changes
  * @param {Function} options.registerRealtime - Function to call to register realtime events
  * @returns {Promise<OpenWindowResult>}
  */
-export function openWindow({
-  url,
-  title,
-  width,
-  height,
-  handleUrlChange,
-  registerRealtime
-}) {
+export function openWindow({ url, title, width, height, registerRealtime }) {
   const { w, h, top, left } = popupCenter(width, height)
   const popup = windowOpen(
     url,
@@ -51,18 +41,12 @@ export function openWindow({
     let checkClosedInterval
     let unregisterRealtime
     const cleanAndResolve = data => {
-      if (handleUrlChange) {
-        removeListeners(popup, handleUrlChange)
-      }
       stopMonitoringClosing(checkClosedInterval)
       if (registerRealtime) {
         unregisterRealtime()
       }
       if (!popup.closed) popup.close()
       resolve(data)
-    }
-    if (handleUrlChange) {
-      addListeners(popup, cleanAndResolve, handleUrlChange)
     }
     if (registerRealtime) {
       unregisterRealtime = registerRealtime(cleanAndResolve)
@@ -106,48 +90,4 @@ function startMonitoringClosing(popup, resolve) {
  */
 function stopMonitoringClosing(checkClosedInterval) {
   clearInterval(checkClosedInterval)
-}
-
-/**
- * Removes all listeners
- *
- * @param {Object} popup - Current popup
- * @param {Function} handleUrlChange - handleUrlChange function not to listen anymore
- * @returns <void>
- */
-function removeListeners(popup, handleUrlChange) {
-  // rest of instructions only if popup is still opened
-  if (popup.closed) return
-
-  // rest of instructions only on mobile app
-  if (!isMobileApp()) return
-  popup.removeEventListener('loadstart', handleUrlChange)
-  popup.removeEventListener('exit', handleClose)
-}
-
-/**
- * Add listeners
- *
- * @param {Object} popup
- * @param {Function} resolve
- * @param {Function} handleUrlChange
- * @returns <void>
- */
-function addListeners(popup, resolve, handleUrlChange) {
-  // rest of instructions only on mobile app
-  if (!isMobileApp()) return
-  popup.addEventListener('loadstart', handleUrlChange(resolve))
-  popup.addEventListener('exit', handleClose(resolve))
-}
-
-/**
- * Function called when the popup is closed
- *
- * @param {Function} resolve
- * @returns {Function}
- */
-function handleClose(resolve) {
-  return popup => {
-    resolve(popup)
-  }
 }
