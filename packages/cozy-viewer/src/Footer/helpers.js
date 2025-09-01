@@ -1,10 +1,8 @@
 import { isValidElement, Children, cloneElement } from 'react'
 
-import { isMobileApp } from 'cozy-device-helper'
-
 export const shouldBeForwardButton = client => {
   const isDrive = client?.appMetadata?.slug === 'drive'
-  if (isMobileApp() || (navigator.share && !isDrive)) return true
+  if (navigator.share && !isDrive) return true
   return false
 }
 

@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types'
 import { PureComponent } from 'react'
 
-import { isMobileApp } from 'cozy-device-helper'
-
 /**
  * Customized function to get dimensions and position for a centered
  * popup window
@@ -61,23 +59,6 @@ export class Popup extends PureComponent {
     this.killPopup()
   }
 
-  addListeners(popup) {
-    // rest of instructions only on mobile app
-    if (!isMobileApp()) return
-    popup.addEventListener('loadstart', this.handleUrlChange)
-    popup.addEventListener('exit', this.handleClose)
-  }
-
-  removeListeners(popup) {
-    // rest of instructions only if popup is still opened
-    if (popup.closed) return
-
-    // rest of instructions only on mobile app
-    if (!isMobileApp()) return
-    popup.removeEventListener('loadstart', this.handleUrlChange)
-    popup.removeEventListener('exit', this.handleClose)
-  }
-
   handleClose(popup) {
     this.killPopup()
 
@@ -111,14 +92,12 @@ export class Popup extends PureComponent {
       popup.focus()
     }
 
-    this.addListeners(popup)
     this.startMonitoringClosing(popup)
     this.setState({ popup })
   }
 
   killPopup() {
     const { popup } = this.state
-    this.removeListeners(popup)
     this.stopMonitoringClosing()
     if (!popup.closed) popup.close()
   }

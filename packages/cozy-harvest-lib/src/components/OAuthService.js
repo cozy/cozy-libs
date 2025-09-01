@@ -18,41 +18,6 @@ export const OAUTH_SERVICE_ERROR = 'ERROR'
 export const OAUTH_SERVICE_OK = 'OK'
 
 /**
- * Monitor URL changes for mobile apps and in app browsers
- * @param  {import('cozy-client/types/types').KonnectorsDoctype} konnector
- *
- * The provider redirect us to something like : oauthcallback.mycozy.cloud/?account=A&state=b
- * So we listen to the URL change with these informations, and we try to handle it.
- * It works well on iOS or when we are logged on the same device on the web, but it will
- * fail on Android if we're ne logged in the browser. Why ?
- * Our oauthcallback.mycozy.cloud/?account=A&state=b checks if we're logged, if not the server
- * sends an http redirect.
- * On Android, the 'loadstart' event is not dispatched by the browser when it get a redirect.
- * The inAppBrowser follows the URL and arrive on :
- * https://my.mycozy.cloud/auth?redirect=https://home.cozy.cloud/?account=a&state=b
- * So if we don't have account & state searchParams we have to check if we've a redirect searchParams
- * init it and search if we have inside this url an account and state params
- */
-function handleUrlChange(konnector) {
-  return resolve => {
-    return event => {
-      const { url } = event
-      const oAuthData = extractOAuthDataFromUrl(url)
-      if (oAuthData) {
-        return handleOAuthData(oAuthData, konnector, resolve)
-      }
-      const redirect = url.searchParams.get('redirect')
-      if (redirect) {
-        const redirectOAuthData = extractOAuthDataFromUrl(new URL(redirect))
-        if (redirectOAuthData) {
-          return handleOAuthData(redirectOAuthData, konnector, resolve)
-        }
-      }
-    }
-  }
-}
-
-/**
  * Handles OAuth data. OAuth data may be provided by different way:
  * * realtime message from web apps (see handleMessage)
  * * url changes from mobile apps
@@ -88,26 +53,6 @@ function handleOAuthData(data, konnector, resolve) {
  * @property  {String} oAuthStateKey - key for localStorage
  * @property  {String} [finalLocation] - final query string added to the redirected url
  */
-
-/**
- * Extract OAuthData from url search params if any
- *
- * @param {URL} url
- * @returns {OAuthData|null} OAuthData
- */
-function extractOAuthDataFromUrl(url) {
-  const account = url.searchParams.get('account')
-  const state = url.searchParams.get('state')
-  const error = url.searchParams.get('error')
-  if (account && state) {
-    const oAuthData = { key: account, oAuthStateKey: state }
-    if (error) {
-      oAuthData.error = error
-    }
-    return oAuthData
-  }
-  return null
-}
 
 /**
  * @typedef OAuthServiceResult
@@ -331,7 +276,6 @@ export function openOAuthWindow({
       title: title || '',
       width: OAUTH_POPUP_WIDTH,
       height: OAUTH_POPUP_HEIGHT,
-      handleUrlChange: handleUrlChange(konnector),
       registerRealtime: registerRealtime({ konnector, client })
     })
   }

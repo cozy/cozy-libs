@@ -3,7 +3,7 @@ import util from 'util'
 import { openOAuthWindow, OAUTH_SERVICE_OK } from 'components/OAuthService'
 import MicroEE from 'microee'
 
-import { isMobileApp, isFlagshipApp } from 'cozy-device-helper'
+import { isFlagshipApp } from 'cozy-device-helper'
 
 import { OAUTH_REALTIME_CHANNEL, terminateOAuth } from '../helpers/oauth'
 import PopupMock from '../helpers/windowWrapperMocks'
@@ -60,7 +60,6 @@ const client = {
 }
 
 jest.mock('cozy-device-helper', () => ({
-  isMobileApp: jest.fn(),
   isFlagshipApp: jest.fn()
 }))
 
@@ -135,71 +134,8 @@ describe('OAuthService', () => {
       })
     })
 
-    describe('with intentsApi', () => {
-      beforeEach(() => {
-        isMobileApp.mockReturnValue(true)
-      })
-
-      it('should render', async () => {
-        let closePromise = new Promise(() => {})
-        const intentsApi = {
-          fetchSessionCode: jest.fn().mockResolvedValue('somesessioncode'),
-          showInAppBrowser: jest.fn().mockImplementation(() => {
-            return closePromise
-          }),
-          closeInAppBrowser: jest.fn().mockResolvedValue()
-        }
-        const promise = openOAuthWindow({
-          client,
-          konnector: { slug: 'ameli' },
-          redirectSlug: 'home',
-          extraParams: { extraParam1: 'extraParamValue' },
-          title: 'popup title',
-          account: { _id: 'someaccountid' },
-          intentsApi
-        })
-
-        expect(isPending(promise)).toBe(true)
-        expect(terminateOAuth).not.toHaveBeenCalled()
-
-        await sleep(100) // lets time to show inAppBrowser before realtime event occurs
-
-        mockCozyRealtime.emitRealtimeEvent(
-          'notified',
-          'io.cozy.accounts',
-          OAUTH_REALTIME_CHANNEL,
-          {
-            _id: 'oauth-popup',
-            data: {
-              error: null,
-              finalLocation: 'connection_id=194&state=someuuid',
-              key: null,
-              oAuthStateKey: 'someuuid'
-            }
-          }
-        )
-        const result = await promise
-        expect(result).toStrictEqual({
-          result: OAUTH_SERVICE_OK,
-          key: null,
-          data: {
-            error: null,
-            finalLocation: 'connection_id=194&state=someuuid',
-            key: null,
-            oAuthStateKey: 'someuuid'
-          }
-        })
-
-        expect(terminateOAuth).toHaveBeenCalled()
-        expect(intentsApi.fetchSessionCode).toHaveBeenCalledTimes(1)
-        expect(intentsApi.showInAppBrowser).toHaveBeenCalled() // TODO test url mock nonce
-        expect(intentsApi.closeInAppBrowser).toHaveBeenCalled()
-      })
-    })
-
     describe('on web', () => {
       beforeEach(() => {
-        isMobileApp.mockReturnValue(false)
         isFlagshipApp.mockReturnValue(false)
       })
 
@@ -250,8 +186,4 @@ describe('OAuthService', () => {
 
 const isPending = promise => {
   return util.inspect(promise).includes('pending')
-}
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms))
 }
