@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [23.3.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@23.2.0...cozy-viewer@23.3.0) (2025-09-03)
+
+### Features
+
+- Update withFileUrl to be used in shared drive :sparkles: ([d6e86ee](https://github.com/cozy/cozy-libs/commit/d6e86ee5881fe733a2b7b5ddfe1408df0a39b260))
+
 # [23.2.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@23.1.5...cozy-viewer@23.2.0) (2025-09-01)
 
 ### Features
