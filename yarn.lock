@@ -4447,6 +4447,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.19.4":
+  version: 7.28.3
+  resolution: "@babel/runtime@npm:7.28.3"
+  checksum: 10c0/b360f82c2c5114f2a062d4d143d7b4ec690094764853937110585a9497977aed66c102166d0e404766c274e02a50ffb8f6d77fef7251ecf3f607f0e03e6397bc
+  languageName: node
+  linkType: hard
+
 "@babel/runtime@npm:^7.21.0, @babel/runtime@npm:^7.6.0":
   version: 7.26.0
   resolution: "@babel/runtime@npm:7.26.0"
@@ -13126,6 +13133,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"at-least-node@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "at-least-node@npm:1.0.0"
+  checksum: 10c0/4c058baf6df1bc5a1697cf182e2029c58cd99975288a13f9e70068ef5d6f4e1f1fd7c4d2c3c4912eae44797d1725be9700995736deca441b39f3e66d8dee97ef
+  languageName: node
+  linkType: hard
+
 "atob@npm:^2.1.1, atob@npm:^2.1.2":
   version: 2.1.2
   resolution: "atob@npm:2.1.2"
@@ -14566,7 +14580,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"call-bound@npm:^1.0.2, call-bound@npm:^1.0.3":
+"call-bound@npm:^1.0.2, call-bound@npm:^1.0.3, call-bound@npm:^1.0.4":
   version: 1.0.4
   resolution: "call-bound@npm:1.0.4"
   dependencies:
@@ -15102,6 +15116,13 @@ __metadata:
   version: 3.8.0
   resolution: "ci-info@npm:3.8.0"
   checksum: 10c0/0d3052193b58356372b34ab40d2668c3e62f1006d5ca33726d1d3c423853b19a85508eadde7f5908496fb41448f465263bf61c1ee58b7832cb6a924537e3863a
+  languageName: node
+  linkType: hard
+
+"ci-info@npm:^3.7.0":
+  version: 3.9.0
+  resolution: "ci-info@npm:3.9.0"
+  checksum: 10c0/6f0109e36e111684291d46123d491bc4e7b7a1934c3a20dea28cba89f1d4a03acd892f5f6a81ed3855c38647e285a150e3c9ba062e38943bef57fee6c1554c3a
   languageName: node
   linkType: hard
 
@@ -16552,16 +16573,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-client@npm:^59.4.0":
-  version: 59.4.0
-  resolution: "cozy-client@npm:59.4.0"
+"cozy-client@npm:^60.5.0":
+  version: 60.5.0
+  resolution: "cozy-client@npm:60.5.0"
   dependencies:
     "@cozy/minilog": "npm:1.0.0"
     "@fastify/deepmerge": "npm:^2.0.2"
     "@types/jest": "npm:^26.0.20"
     "@types/lodash": "npm:^4.14.170"
     btoa: "npm:^1.2.1"
-    cozy-stack-client: "npm:^59.4.0"
+    cozy-stack-client: "npm:^60.1.0"
     date-fns: "npm:2.29.3"
     fast-deep-equal: "npm:^3.1.3"
     json-stable-stringify: "npm:^1.0.1"
@@ -16587,7 +16608,7 @@ __metadata:
     react-native-google-play-integrity: ^1.1.0
     react-native-inappbrowser-reborn: ^3.5.1
     react-native-ios11-devicecheck: ^0.0.3
-  checksum: 10c0/2c462c78dd124c591c3fd2422dd4adc14b61c61afdb868e96298834f1d9464dfcb29af00ed3a207cd0ddf3ee211a3a4badfb3610bce6f23ea9678c6e472c2edc
+  checksum: 10c0/7d42926d74ac0a53679c9af955357acd3585a97e96f822a716a3de9677252da4c9215c3efd855e563e55757fefff83b157c6308fa5181e5027886acd3da52b36
   languageName: node
   linkType: hard
 
@@ -17235,12 +17256,12 @@ __metadata:
     babel-plugin-css-modules-transform: "npm:1.6.2"
     babel-plugin-inline-react-svg: "npm:1.1.2"
     classnames: "npm:^2.2.6"
-    cozy-client: "npm:^59.4.0"
+    cozy-client: "npm:^60.5.0"
     cozy-device-helper: "npm:^3.7.1"
     cozy-doctypes: "npm:^1.97.2"
     cozy-intent: "npm:^2.30.0"
     cozy-minilog: "npm:^3.10.0"
-    cozy-ui: "npm:^121.1.1"
+    cozy-ui: "npm:^128.3.5"
     date-fns: "npm:2.30.0"
     jest: "npm:26.6.3"
     jest-environment-jsdom: "npm:26.6.2"
@@ -17253,11 +17274,11 @@ __metadata:
     snarkdown: "npm:^2.0.0"
     storybook: "npm:7.6.0"
   peerDependencies:
-    cozy-client: ">=59.4.0"
+    cozy-client: ">=60.5.0"
     cozy-device-helper: ">=3.7.1"
     cozy-intent: ">=2.29.1"
     cozy-minilog: ">=3.9.1"
-    cozy-ui: ">=121.1.1"
+    cozy-ui: ">=128.3.5"
     prop-types: ^15.7.2
     react: ^16.12.0
     react-router: ^5.0.1
@@ -17365,16 +17386,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-stack-client@npm:^59.4.0":
-  version: 59.4.0
-  resolution: "cozy-stack-client@npm:59.4.0"
+"cozy-stack-client@npm:^60.1.0":
+  version: 60.1.0
+  resolution: "cozy-stack-client@npm:60.1.0"
   dependencies:
     detect-node: "npm:^2.0.4"
     mime: "npm:^2.4.0"
     qs: "npm:^6.7.0"
   peerDependencies:
     cozy-flags: ">2.8.6"
-  checksum: 10c0/e91ca5073c24a4accbc9a34da193d7d8b3f93e665442eca72eed34d79f7cd38d708812b185fcbc120f125c200edc398e2d0fc497d323b273063a6c6a994625e3
+  checksum: 10c0/b5d80d3c892c6a41d0b0a53c72b2ac2886a299f8ba155fb315d558224ee1142eb8a5cd42fb7bd173bbb62cb1eef99cddc7618b8c02931f14ec5d5769faf009b5
   languageName: node
   linkType: hard
 
@@ -17547,48 +17568,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-ui@npm:^121.1.1":
-  version: 121.1.1
-  resolution: "cozy-ui@npm:121.1.1"
-  dependencies:
-    "@babel/runtime": "npm:^7.3.4"
-    "@date-io/date-fns": "npm:1"
-    "@material-ui/core": "npm:4.12.3"
-    "@material-ui/lab": "npm:^4.0.0-alpha.61"
-    "@material-ui/pickers": "npm:3.3.11"
-    "@popperjs/core": "npm:^2.4.4"
-    chart.js: "npm:3.7.1"
-    classnames: "npm:^2.2.5"
-    cozy-interapp: "npm:^0.5.4"
-    date-fns: "npm:2.30.0"
-    filesize: "npm:8.0.7"
-    hammerjs: "npm:^2.0.8"
-    intersection-observer: "npm:0.11.0"
-    mime-types: "npm:2.1.35"
-    mui-bottom-sheet: "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9"
-    node-polyglot: "npm:^2.5.0"
-    normalize.css: "npm:^8.0.0"
-    pdf-lib: "npm:1.17.1"
-    react-chartjs-2: "npm:4.1.0"
-    react-markdown: "npm:^4.0.8"
-    react-popper: "npm:^2.2.3"
-    react-remove-scroll: "npm:^2.4.0"
-    react-select: "npm:^4.3.0"
-    react-swipeable-views: "npm:^0.13.3"
-    rooks: "npm:^5.11.2"
-  peerDependencies:
-    cozy-client: ">=52.1.0"
-    cozy-device-helper: ^2.0.0
-    cozy-flags: ">=2.10.1"
-    cozy-intent: ">=2.29.1"
-    react: ^16.8.6
-    react-dom: ^16.8.6
-  bin:
-    rsg-screenshots: scripts/screenshots.js
-  checksum: 10c0/3e7d453e5ab10a9ce48e57086031be4df1641bbf1b9f5837f5e7d58410c887d129d3d7d86fdd62298cb12c3f1cd8f201ed6952c141dff9ccbe811edd4ecc0ab6
-  languageName: node
-  linkType: hard
-
 "cozy-ui@npm:^122.0.0":
   version: 122.0.0
   resolution: "cozy-ui@npm:122.0.0"
@@ -17673,6 +17652,56 @@ __metadata:
   bin:
     rsg-screenshots: scripts/screenshots.js
   checksum: 10c0/2bee52d6fb5b6b8d547301771f1a955b3cd62fabecb87d653d7ef18fca2a10676f3fb5a28f5cf2858862c0128b12743234c8fde364d82ee32c14d9ea393214b7
+  languageName: node
+  linkType: hard
+
+"cozy-ui@npm:^128.3.5":
+  version: 128.3.5
+  resolution: "cozy-ui@npm:128.3.5"
+  dependencies:
+    "@babel/runtime": "npm:^7.3.4"
+    "@date-io/date-fns": "npm:1"
+    "@material-ui/core": "npm:4.12.3"
+    "@material-ui/lab": "npm:^4.0.0-alpha.61"
+    "@material-ui/pickers": "npm:3.3.11"
+    "@popperjs/core": "npm:^2.4.4"
+    chart.js: "npm:3.7.1"
+    classnames: "npm:^2.2.5"
+    cozy-interapp: "npm:^0.5.4"
+    date-fns: "npm:2.30.0"
+    filesize: "npm:8.0.7"
+    final-form: "npm:4.20.9"
+    final-form-arrays: "npm:3.1.0"
+    hammerjs: "npm:^2.0.8"
+    intersection-observer: "npm:0.11.0"
+    mime-types: "npm:2.1.35"
+    mui-bottom-sheet: "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9"
+    node-polyglot: "npm:^2.5.0"
+    normalize.css: "npm:^8.0.0"
+    patch-package: "npm:^8.0.0"
+    pdf-lib: "npm:1.17.1"
+    react-chartjs-2: "npm:4.1.0"
+    react-final-form: "npm:6.5.9"
+    react-final-form-arrays: "npm:3.1.4"
+    react-markdown: "npm:^4.0.8"
+    react-popper: "npm:^2.2.3"
+    react-remove-scroll: "npm:^2.4.0"
+    react-select: "npm:^4.3.0"
+    react-swipeable-views: "npm:^0.13.3"
+    react-virtuoso: "npm:^4.13.0"
+    rooks: "npm:7.14.1"
+  peerDependencies:
+    cozy-client: ">=60.5.0"
+    cozy-device-helper: ">=2.0.0"
+    cozy-flags: ">=2.10.1"
+    cozy-intent: ">=2.29.1"
+    react: ^16.14.0
+    react-dnd: ^16.0.1
+    react-dnd-html5-backend: ^16.0.1
+    react-dom: ^16.14.0
+  bin:
+    rsg-screenshots: scripts/screenshots.js
+  checksum: 10c0/dec43d5fa68364a26c89add43fd5717b53ff1801af3d0fed8cce2fa8e4029745e16e832cfdba431221acf5654ea2ab4a0effa1dbe7fdf6d3c0282c1eb02fc9d9
   languageName: node
   linkType: hard
 
@@ -22218,6 +22247,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"final-form-arrays@npm:3.1.0":
+  version: 3.1.0
+  resolution: "final-form-arrays@npm:3.1.0"
+  peerDependencies:
+    final-form: ^4.20.8
+  checksum: 10c0/449bbe824e16502c62e721c7579f50a43ae2d4e7aae4421e77c027420d86e5e1644fad3e1de8bef1ac9a43527fe5d3d0ebbb1a79f49d73680b843d1626ee67f1
+  languageName: node
+  linkType: hard
+
+"final-form@npm:4.20.9":
+  version: 4.20.9
+  resolution: "final-form@npm:4.20.9"
+  dependencies:
+    "@babel/runtime": "npm:^7.10.0"
+  checksum: 10c0/da8818644d5006367ab594e341559fc6cc5a11249c5ce537d096b8f2a1c4b36a4321626e469108e2dae32d65e1b6352efc973f503e24ca02fad92292df123953
+  languageName: node
+  linkType: hard
+
 "final-form@npm:^4.18.5":
   version: 4.20.6
   resolution: "final-form@npm:4.20.6"
@@ -22358,6 +22405,15 @@ __metadata:
     locate-path: "npm:^5.0.0"
     path-exists: "npm:^4.0.0"
   checksum: 10c0/0406ee89ebeefa2d507feb07ec366bebd8a6167ae74aa4e34fb4c4abd06cf782a3ce26ae4194d70706f72182841733f00551c209fe575cb00bd92104056e78c1
+  languageName: node
+  linkType: hard
+
+"find-yarn-workspace-root@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "find-yarn-workspace-root@npm:2.0.0"
+  dependencies:
+    micromatch: "npm:^4.0.2"
+  checksum: 10c0/b0d3843013fbdaf4e57140e0165889d09fa61745c9e85da2af86e54974f4cc9f1967e40f0d8fc36a79d53091f0829c651d06607d552582e53976f3cd8f4e5689
   languageName: node
   linkType: hard
 
@@ -22673,6 +22729,18 @@ __metadata:
     jsonfile: "npm:^4.0.0"
     universalify: "npm:^0.1.0"
   checksum: 10c0/1943bb2150007e3739921b8d13d4109abdc3cc481e53b97b7ea7f77eda1c3c642e27ae49eac3af074e3496ea02fde30f411ef410c760c70a38b92e656e5da784
+  languageName: node
+  linkType: hard
+
+"fs-extra@npm:^9.0.0":
+  version: 9.1.0
+  resolution: "fs-extra@npm:9.1.0"
+  dependencies:
+    at-least-node: "npm:^1.0.0"
+    graceful-fs: "npm:^4.2.0"
+    jsonfile: "npm:^6.0.1"
+    universalify: "npm:^2.0.0"
+  checksum: 10c0/9b808bd884beff5cb940773018179a6b94a966381d005479f00adda6b44e5e3d4abf765135773d849cc27efe68c349e4a7b86acd7d3306d5932c14f3a4b17a92
   languageName: node
   linkType: hard
 
@@ -28061,6 +28129,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"json-stable-stringify@npm:^1.0.2":
+  version: 1.3.0
+  resolution: "json-stable-stringify@npm:1.3.0"
+  dependencies:
+    call-bind: "npm:^1.0.8"
+    call-bound: "npm:^1.0.4"
+    isarray: "npm:^2.0.5"
+    jsonify: "npm:^0.0.1"
+    object-keys: "npm:^1.1.1"
+  checksum: 10c0/8b3ff19e4c23c0ad591a49bc3a015d89a538db787d12fe9c4072e1d64d8cfa481f8c37719c629c3d84e848847617bf49f5fee894cf1d25959ab5b67e1c517f31
+  languageName: node
+  linkType: hard
+
 "json-stream-stringify@npm:3.0.1":
   version: 3.0.1
   resolution: "json-stream-stringify@npm:3.0.1"
@@ -28182,6 +28263,13 @@ __metadata:
     graceful-fs:
       optional: true
   checksum: 10c0/4f95b5e8a5622b1e9e8f33c96b7ef3158122f595998114d1e7f03985649ea99cb3cd99ce1ed1831ae94c8c8543ab45ebd044207612f31a56fd08462140e46865
+  languageName: node
+  linkType: hard
+
+"jsonify@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "jsonify@npm:0.0.1"
+  checksum: 10c0/7f5499cdd59a0967ed35bda48b7cec43d850bbc8fb955cdd3a1717bb0efadbe300724d5646de765bb7a99fc1c3ab06eb80d93503c6faaf99b4ff50a3326692f6
   languageName: node
   linkType: hard
 
@@ -28453,6 +28541,15 @@ __metadata:
   version: 6.0.3
   resolution: "kind-of@npm:6.0.3"
   checksum: 10c0/61cdff9623dabf3568b6445e93e31376bee1cdb93f8ba7033d86022c2a9b1791a1d9510e026e6465ebd701a6dd2f7b0808483ad8838341ac52f003f512e0b4c4
+  languageName: node
+  linkType: hard
+
+"klaw-sync@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "klaw-sync@npm:6.0.0"
+  dependencies:
+    graceful-fs: "npm:^4.1.11"
+  checksum: 10c0/00d8e4c48d0d699b743b3b028e807295ea0b225caf6179f51029e19783a93ad8bb9bccde617d169659fbe99559d73fb35f796214de031d0023c26b906cecd70a
   languageName: node
   linkType: hard
 
@@ -32343,7 +32440,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"open@npm:7.4.2":
+"open@npm:7.4.2, open@npm:^7.4.2":
   version: 7.4.2
   resolution: "open@npm:7.4.2"
   dependencies:
@@ -33160,6 +33257,31 @@ __metadata:
   version: 0.1.1
   resolution: "pascalcase@npm:0.1.1"
   checksum: 10c0/48dfe90618e33810bf58211d8f39ad2c0262f19ad6354da1ba563935b5f429f36409a1fb9187c220328f7a4dc5969917f8e3e01ee089b5f1627b02aefe39567b
+  languageName: node
+  linkType: hard
+
+"patch-package@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "patch-package@npm:8.0.0"
+  dependencies:
+    "@yarnpkg/lockfile": "npm:^1.1.0"
+    chalk: "npm:^4.1.2"
+    ci-info: "npm:^3.7.0"
+    cross-spawn: "npm:^7.0.3"
+    find-yarn-workspace-root: "npm:^2.0.0"
+    fs-extra: "npm:^9.0.0"
+    json-stable-stringify: "npm:^1.0.2"
+    klaw-sync: "npm:^6.0.0"
+    minimist: "npm:^1.2.6"
+    open: "npm:^7.4.2"
+    rimraf: "npm:^2.6.3"
+    semver: "npm:^7.5.3"
+    slash: "npm:^2.0.0"
+    tmp: "npm:^0.0.33"
+    yaml: "npm:^2.2.2"
+  bin:
+    patch-package: index.js
+  checksum: 10c0/690eab0537e953a3fd7d32bb23f0e82f97cd448f8244c3227ed55933611a126f9476397325c06ad2c11d881a19b427a02bd1881bee78d89f1731373fc4fe0fee
   languageName: node
   linkType: hard
 
@@ -35299,6 +35421,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-final-form-arrays@npm:3.1.4":
+  version: 3.1.4
+  resolution: "react-final-form-arrays@npm:3.1.4"
+  dependencies:
+    "@babel/runtime": "npm:^7.19.4"
+  peerDependencies:
+    final-form: ^4.15.0
+    final-form-arrays: ">=1.0.4"
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-final-form: ^6.2.1
+  checksum: 10c0/cae3bd51f6b843bf92d551eabcf4c827cae6b899effbcaff8eae025dc5f63678ef995a3f157a555ab42883fd109dfb95ab3c8fa7733ca7b94578b74399ca117c
+  languageName: node
+  linkType: hard
+
+"react-final-form@npm:6.5.9":
+  version: 6.5.9
+  resolution: "react-final-form@npm:6.5.9"
+  dependencies:
+    "@babel/runtime": "npm:^7.15.4"
+  peerDependencies:
+    final-form: ^4.20.4
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 10c0/b572645d88cb4fee95e9201ce00b623d6e3d8b19484dd844ddc63fb494d43d2e6fcd0c59b1cbad72c2c9ae5d39066bd450debc9cacfbd9a46e2c8195a09fa4eb
+  languageName: node
+  linkType: hard
+
 "react-final-form@npm:^3.7.0":
   version: 3.7.0
   resolution: "react-final-form@npm:3.7.0"
@@ -35977,6 +36125,16 @@ __metadata:
     react: ">=16 || >=17 || >= 18 || >= 19"
     react-dom: ">=16 || >=17 || >= 18 || >=19"
   checksum: 10c0/56f4ea49668ad1004be42ff75dc0eade581754dd37a0aa04a3b7470cb132b324de2e7af5d8e29c420bf9726fd4a016104e2a14347ed9cc23235ce7a658a0591e
+  languageName: node
+  linkType: hard
+
+"react-virtuoso@npm:^4.13.0":
+  version: 4.14.0
+  resolution: "react-virtuoso@npm:4.14.0"
+  peerDependencies:
+    react: ">=16 || >=17 || >= 18 || >= 19"
+    react-dom: ">=16 || >=17 || >= 18 || >=19"
+  checksum: 10c0/5d34a1c6eb1de84618d51f73e5ec7f21f4979263809a0ce2fbb0554100bdc46ea1d07eeb78d407515735918b3df398ac1207ddb9f77905c6e3789dc51ca384db
   languageName: node
   linkType: hard
 
@@ -43865,6 +44023,15 @@ __metadata:
   version: 1.10.2
   resolution: "yaml@npm:1.10.2"
   checksum: 10c0/5c28b9eb7adc46544f28d9a8d20c5b3cb1215a886609a2fd41f51628d8aaa5878ccd628b755dbcd29f6bb4921bd04ffbc6dcc370689bb96e594e2f9813d2605f
+  languageName: node
+  linkType: hard
+
+"yaml@npm:^2.2.2":
+  version: 2.8.1
+  resolution: "yaml@npm:2.8.1"
+  bin:
+    yaml: bin.mjs
+  checksum: 10c0/7c587be00d9303d2ae1566e03bc5bc7fe978ba0d9bf39cc418c3139d37929dfcb93a230d9749f2cb578b6aa5d9ebebc322415e4b653cb83acd8bc0bc321707f3
   languageName: node
   linkType: hard
 
