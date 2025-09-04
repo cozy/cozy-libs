@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [26.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.7.2...cozy-sharing@26.0.0) (2025-09-04)
+
+### Features
+
+- **cozy-sharing:** Update packages ([41c4a07](https://github.com/cozy/cozy-libs/commit/41c4a073a5fc6f9aefe3078ac21a62ff2d2a1f0d))
+
+### BREAKING CHANGES
+
+- **cozy-sharing:** cozy-sharing requires `cozy-client` >= 60.5.0,
+  `cozy-ui` >= 128.3.5
+
 ## [25.7.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@25.7.1...cozy-sharing@25.7.2) (2025-08-19)
 
 ### Bug Fixes
