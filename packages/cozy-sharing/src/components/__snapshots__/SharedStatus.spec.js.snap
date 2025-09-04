@@ -3,7 +3,7 @@
 exports[`SharedStatus component should display the link if there is a link 1`] = `
 <div>
   <div
-    class="CozyTheme--light-normal u-dc"
+    class="TwakeTheme--light-normal u-dc"
   >
     <span
       class="shared-status"
@@ -47,7 +47,7 @@ exports[`SharedStatus component should display the link if there is a link 1`] =
 exports[`SharedStatus component should have the right display if there is several recipients 1`] = `
 <div>
   <div
-    class="CozyTheme--light-normal u-dc"
+    class="TwakeTheme--light-normal u-dc"
   >
     <span
       class="shared-status"
@@ -84,7 +84,7 @@ exports[`SharedStatus component should have the right display if there is severa
 exports[`SharedStatus component should just render a span if no sharing 1`] = `
 <div>
   <div
-    class="CozyTheme--light-normal u-dc"
+    class="TwakeTheme--light-normal u-dc"
   >
     <span
       class="shared-status"
