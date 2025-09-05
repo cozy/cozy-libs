@@ -14,7 +14,9 @@ const store = flag.store as unknown as IMicroEE
  * Connects a component to the flags. The wrapped component
  * will be refreshed when a flag changes.
  */
-const connect = <P extends object>(Component: ComponentType<P>): ReactNode => {
+const connect = <P extends object>(
+  Component: ComponentType<P>
+): ComponentType<P> => {
   class Wrapped extends React.Component<P> {
     static displayName: string
 
