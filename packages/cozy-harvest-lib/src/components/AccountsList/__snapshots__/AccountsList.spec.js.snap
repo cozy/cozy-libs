@@ -69,6 +69,7 @@ exports[`AccountsList should render 1`] = `
         <ForwardRef
           className="u-bdrs-4"
           fullWidth={true}
+          height="default"
           icon={
             <Icon
               icon={[Function]}

@@ -65,7 +65,7 @@ exports[`OAuthForm should handle oauth cancelation 1`] = `
         />
       </div>
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained customColor-primary u-mh-auto MuiButton-containedPrimary MuiButton-disableElevation Mui-disabled Mui-disabled"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained customColor-primary customSize-default u-mh-auto MuiButton-containedPrimary MuiButton-disableElevation Mui-disabled Mui-disabled"
         disabled=""
         tabindex="-1"
         type="button"
@@ -160,7 +160,7 @@ exports[`OAuthForm should handle oauth cancelation 2`] = `
         />
       </div>
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained customColor-primary u-mh-auto MuiButton-containedPrimary MuiButton-disableElevation"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained customColor-primary customSize-default u-mh-auto MuiButton-containedPrimary MuiButton-disableElevation"
         tabindex="0"
         type="button"
       >
@@ -205,7 +205,7 @@ exports[`OAuthForm should render 1`] = `
         />
       </div>
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained customColor-primary u-mh-auto MuiButton-containedPrimary MuiButton-disableElevation"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained customColor-primary customSize-default u-mh-auto MuiButton-containedPrimary MuiButton-disableElevation"
         tabindex="0"
         type="button"
       >
