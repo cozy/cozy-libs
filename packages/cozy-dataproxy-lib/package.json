@@ -1,7 +1,7 @@
 {
   "name": "cozy-dataproxy-lib",
   "description": "Library meant to be by Cozy Cloud's DataProxy apps for data manipulation",
-  "version": "4.7.0",
+  "version": "4.7.1",
   "author": {
     "name": "Cozy Cloud",
     "url": "https://github.com/cozy"
@@ -22,7 +22,7 @@
     "babel-plugin-tsconfig-paths": "^1.0.3",
     "babel-preset-cozy-app": "^2.8.1",
     "cozy-client": "^54.0.0",
-    "cozy-device-helper": "^3.8.0",
+    "cozy-device-helper": "^4.0.0",
     "cozy-flags": "^4.7.0",
     "cozy-intent": "^2.30.0",
     "cozy-logger": "^1.17.0",

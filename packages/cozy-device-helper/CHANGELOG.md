@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@3.8.0...cozy-device-helper@4.0.0) (2025-09-05)
+
+### Features
+
+- **cozy-device-helper:** Remove cordova related methods ([1b963c4](https://github.com/cozy/cozy-libs/commit/1b963c415f104fdae464de1635236c93ae98eb5b))
+
+### BREAKING CHANGES
+
+- **cozy-device-helper:** Every cordova related methods
+  have been removed.
+
+When updating, if you find a method below, it is probably dead code
+that you can remove. :
+
+- hasDevicePlugin,
+- hasInAppBrowserPlugin,
+- hasSafariPlugin,
+- hasNetworkInformationPlugin
+- checkApp
+- startApp
+- nativeLinkOpen
+- openDeeplinkOrRedirect
+- getDeviceName
+
+When updating, if you find a method below, keep what is relevant,
+i.e. what is related to `isWebApp()` or `!isMobileApp()` or
+`!isCordova()` :
+
+- isCordova
+- getPlatform
+- isIOSApp
+- isAndroidApp
+- isMobileApp
+- isWebApp
+
 # [3.8.0](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@3.7.1...cozy-device-helper@3.8.0) (2025-03-11)
 
 ### Features
