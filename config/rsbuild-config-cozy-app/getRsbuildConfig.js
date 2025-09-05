@@ -85,6 +85,10 @@ function getRsbuildConfig({
     },
     tools: {
       rspack: {
+        // We want to watch cozy-* packages when using rlink
+        watchOptions: {
+          ignored: /\.git|node_modules\/(?!cozy-)/
+        },
         module: {
           rules: [
             {
