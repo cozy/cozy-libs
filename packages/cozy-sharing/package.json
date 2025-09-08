@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@cozy/minilog": "^1.0.0",
-    "classnames": "^2.2.6",
+    "classnames": "^2.5.1",
     "cozy-device-helper": "^4.0.0",
     "cozy-doctypes": "^1.97.2",
     "date-fns": "2.30.0",

@@ -15268,17 +15268,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:2.5.1, classnames@npm:^2.3.1":
+"classnames@npm:^2.2.5, classnames@npm:^2.2.6, classnames@npm:^2.5.1":
   version: 2.5.1
   resolution: "classnames@npm:2.5.1"
   checksum: 10c0/afff4f77e62cea2d79c39962980bf316bacb0d7c49e13a21adaadb9221e1c6b9d3cdb829d8bb1b23c406f4e740507f37e1dcf506f7e3b7113d17c5bab787aa69
-  languageName: node
-  linkType: hard
-
-"classnames@npm:^2.2.5, classnames@npm:^2.2.6":
-  version: 2.3.1
-  resolution: "classnames@npm:2.3.1"
-  checksum: 10c0/e3b832219042802464e648c41c2e8be96c2c64d2522cfa22fbb5ec088418406c61ab351a682c077c07f691c8b00c9f0ee7939b20fabc6c23da69063252a4ab89
   languageName: node
   linkType: hard
 
@@ -16948,7 +16941,7 @@ __metadata:
     babel-jest: "npm:26.6.3"
     babel-plugin-inline-react-svg: "npm:1.1.2"
     babel-preset-cozy-app: "npm:^2.8.1"
-    classnames: "npm:^2.3.1"
+    classnames: "npm:^2.5.1"
     cozy-client: "npm:^52.1.0"
     cozy-device-helper: "npm:^4.0.0"
     cozy-doctypes: "npm:^1.97.2"
@@ -17300,7 +17293,7 @@ __metadata:
     babel-plugin-module-resolver: "npm:^4.0.0"
     babel-plugin-tsconfig-paths: "npm:^1.0.3"
     babel-preset-cozy-app: "npm:^2.8.1"
-    classnames: "npm:2.5.1"
+    classnames: "npm:^2.5.1"
     cozy-client: "npm:^54.0.0"
     cozy-device-helper: "npm:^4.0.0"
     cozy-flags: "npm:^4.7.0"
@@ -17357,7 +17350,7 @@ __metadata:
     babel-jest: "npm:26.6.3"
     babel-plugin-css-modules-transform: "npm:1.6.2"
     babel-plugin-inline-react-svg: "npm:1.1.2"
-    classnames: "npm:^2.2.6"
+    classnames: "npm:^2.5.1"
     cozy-client: "npm:^60.5.0"
     cozy-device-helper: "npm:^3.7.1"
     cozy-doctypes: "npm:^1.97.2"
@@ -17854,7 +17847,7 @@ __metadata:
     "@testing-library/react-hooks": "npm:^3.2.1"
     babel-plugin-inline-json-import: "npm:0.3.2"
     babel-preset-cozy-app: "npm:^2.8.1"
-    classnames: "npm:^2.2.5"
+    classnames: "npm:^2.5.1"
     cozy-client: "npm:^57.0.0"
     cozy-device-helper: "npm:2.0.0"
     cozy-harvest-lib: "npm:^33.0.0"
