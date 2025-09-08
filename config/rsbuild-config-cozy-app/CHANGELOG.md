@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/cozy/cozy-libs/compare/rsbuild-config-cozy-app@0.5.0...rsbuild-config-cozy-app@0.6.0) (2025-09-08)
+
+### Bug Fixes
+
+- **rsbuild-config-cozy-app:** Watch cozy-\* packages when using rlink ([18f1f77](https://github.com/cozy/cozy-libs/commit/18f1f777103d6e8fe8e34db69ec9c0d9c3c4c94c))
+
+### Features
+
+- **rsbuild-config-cozy-app:** Update rsbuild dependencies ([dc053ad](https://github.com/cozy/cozy-libs/commit/dc053ad0b8f6f55fbb1d3f38af76fcb4b9b65001))
+
+### BREAKING CHANGES
+
+- **rsbuild-config-cozy-app:** You need to update `@rsbuild/core` >= 1.5.4
+
 # [0.5.0](https://github.com/cozy/cozy-libs/compare/rsbuild-config-cozy-app@0.4.0...rsbuild-config-cozy-app@0.5.0) (2025-04-09)
 
 ### Features
