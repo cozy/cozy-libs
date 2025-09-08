@@ -38,7 +38,8 @@ Add `scripts` inside your `package.json` file as follows:
 ```json
 "scripts": {
   "build": "rsbuild build",
-  "watch": "rsbuild build --watch",
+  "watch": "rsbuild build --watch --mode development",
+  "start": "rsbuild dev",
   "analyze": "RSDOCTOR=true yarn build"
 }
 ```
@@ -56,6 +57,10 @@ You can now access your application using the [cozy-stack](https://github.com/co
     }
   ```
 - Use a common alias like `@/` for `./src`. You can put it into your `tsconfig.json`
+
+## Development Advices
+
+- By default, it watches packages inside node_modules only if they are named `cozy-*`.
 
 ## Migrating from cozy-scripts
 
