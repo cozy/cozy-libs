@@ -10,7 +10,7 @@
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
   "dependencies": {
-    "classnames": "2.5.1",
+    "classnames": "^2.5.1",
     "lodash": "4.17.21",
     "mime-types": "2.1.35",
     "react-type-animation": "3.2.0",
