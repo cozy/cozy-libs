@@ -33,7 +33,7 @@
     "cozy-device-helper": "^4.0.0",
     "cozy-doctypes": "^1.97.2",
     "date-fns": "2.30.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "react-autosuggest": "^10.1.0",
     "react-tooltip": "^3.11.1",
     "snarkdown": "^2.0.0"

@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "classnames": "^2.5.1",
-    "lodash": "4.17.21",
+    "lodash": "^4.17.21",
     "mime-types": "2.1.35",
     "react-type-animation": "3.2.0",
     "rooks": "7.14.1"

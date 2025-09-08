@@ -4889,7 +4889,7 @@ __metadata:
   dependencies:
     argparse: "npm:^2.0.1"
     jest: "npm:26.6.3"
-    lodash: "npm:^4.17.19"
+    lodash: "npm:^4.17.21"
     tabtab: "npm:^3.0.2"
   languageName: unknown
   linkType: soft
@@ -16349,7 +16349,7 @@ __metadata:
     fs-extra: "npm:^7.0.1"
     jest: "npm:26.6.3"
     jest-fetch-mock: "npm:2.1.2"
-    lodash: "npm:^4.17.19"
+    lodash: "npm:^4.17.21"
     node-fetch: "npm:^2.6.1"
     prompt: "npm:^1.0.0"
     request: "npm:^2.88.0"
@@ -16804,7 +16804,7 @@ __metadata:
     cozy-ui: "npm:^111.19.0"
     date-fns: "npm:2.29.3"
     jest: "npm:26.6.3"
-    lodash: "npm:4.17.13"
+    lodash: "npm:^4.17.21"
     react: "npm:^16.12.0"
     react-dom: "npm:^16.12.0"
     react-inspector: "npm:5.1.1"
@@ -16839,7 +16839,7 @@ __metadata:
     fs-extra: "npm:8.1.0"
     jest: "npm:26.6.3"
     jest-environment-jsdom-sixteen: "npm:1.0.3"
-    lodash: "npm:^4.17.19"
+    lodash: "npm:^4.17.21"
     mockdate: "npm:2.0.5"
     prop-types: "npm:^15.7.2"
   peerDependencies:
@@ -16966,7 +16966,7 @@ __metadata:
     jest-resolve-cached: "npm:1.0.0"
     jsdom: "npm:16.5.0"
     leaflet: "npm:1.8.0"
-    lodash: "npm:^4.17.19"
+    lodash: "npm:^4.17.21"
     microee: "npm:^0.0.6"
     mockdate: "npm:^3.0.5"
     node-polyglot: "npm:^2.4.0"
@@ -17180,7 +17180,7 @@ __metadata:
     cozy-sharing: "npm:^26.0.1"
     cozy-ui: "npm:40.9.1"
     date-fns: "npm:1.30.1"
-    lodash: "npm:4.17.21"
+    lodash: "npm:^4.17.21"
     parcel: "npm:1.12.4"
     react: "npm:^16.12.0"
     react-dom: "npm:^16.12.0"
@@ -17234,7 +17234,7 @@ __metadata:
     cozy-ui: "npm:40.9.1"
     date-fns: "npm:^1.30.1"
     jest: "npm:26.6.3"
-    lodash: "npm:^4.17.19"
+    lodash: "npm:^4.17.21"
     prop-types: "npm:^15.7.2"
     react: "npm:16.12.0"
     react-jsonschema-form: "npm:^1.8.0"
@@ -17305,7 +17305,7 @@ __metadata:
     cozy-ui: "npm:^122.0.0"
     cross-fetch: "npm:^4.0.0"
     jest: "npm:26.6.3"
-    lodash: "npm:4.17.21"
+    lodash: "npm:^4.17.21"
     mime-types: "npm:2.1.35"
     react: "npm:16.12.0"
     react-dom: "npm:16.13.0"
@@ -17360,7 +17360,7 @@ __metadata:
     date-fns: "npm:2.30.0"
     jest: "npm:26.6.3"
     jest-environment-jsdom: "npm:26.6.2"
-    lodash: "npm:^4.17.19"
+    lodash: "npm:^4.17.21"
     react: "npm:16.12.0"
     react-autosuggest: "npm:^10.1.0"
     react-dom: "npm:16.13.0"
@@ -17860,7 +17860,7 @@ __metadata:
     jest: "npm:26.6.3"
     jest-canvas-mock: "npm:2.3.1"
     jest-environment-jsdom: "npm:26.6.2"
-    lodash: "npm:4.17.21"
+    lodash: "npm:^4.17.21"
     prop-types: "npm:15.8.1"
     react-dom: "npm:16.12.0"
     react-markdown: "npm:^4.0.8"
@@ -29380,14 +29380,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:4.17.13":
-  version: 4.17.13
-  resolution: "lodash@npm:4.17.13"
-  checksum: 10c0/35b0b728de4cf4fe07efd342d867550e613cacf1342639d13660b2c1f1f4a738c454c8d9359a0fbff3f0c6a9330f01801aa0a109b09e0b633014e9e5d953b70c
-  languageName: node
-  linkType: hard
-
-"lodash@npm:4.17.21, lodash@npm:^4.15.0, lodash@npm:^4.17.12, lodash@npm:^4.17.13, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.2, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4, lodash@npm:^4.2.1, lodash@npm:^4.3.0, lodash@npm:^4.7.0":
+"lodash@npm:^4.15.0, lodash@npm:^4.17.12, lodash@npm:^4.17.13, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.2, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4, lodash@npm:^4.2.1, lodash@npm:^4.3.0, lodash@npm:^4.7.0":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: 10c0/d8cbea072bb08655bb4c989da418994b073a608dffa608b09ac04b43a791b12aeae7cd7ad919aa4c925f33b48490b5cfe6c1f71d827956071dae2e7bb3a6b74c
