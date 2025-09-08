@@ -49,7 +49,7 @@
   "dependencies": {
     "classnames": "^2.5.1",
     "hammerjs": "^2.0.8",
-    "lodash": "4.17.21",
+    "lodash": "^4.17.21",
     "react-markdown": "^4.0.8",
     "react-pdf": "^5.7.2"
   },
