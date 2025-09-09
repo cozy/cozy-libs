@@ -13635,9 +13635,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-preset-cozy-app@npm:^2.8.1, babel-preset-cozy-app@workspace:packages/babel-preset-cozy-app":
+"babel-preset-cozy-app@npm:^2.8.1, babel-preset-cozy-app@workspace:config/babel-preset-cozy-app":
   version: 0.0.0-use.local
-  resolution: "babel-preset-cozy-app@workspace:packages/babel-preset-cozy-app"
+  resolution: "babel-preset-cozy-app@workspace:config/babel-preset-cozy-app"
   dependencies:
     "@babel/core": "npm:7.16.12"
     "@babel/eslint-parser": "npm:^7.16.3"
@@ -14236,9 +14236,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist-config-cozy@npm:^0.11.1, browserslist-config-cozy@workspace:packages/browserslist-config-cozy":
+"browserslist-config-cozy@npm:^0.11.1, browserslist-config-cozy@workspace:config/browserslist-config-cozy":
   version: 0.0.0-use.local
-  resolution: "browserslist-config-cozy@workspace:packages/browserslist-config-cozy"
+  resolution: "browserslist-config-cozy@workspace:config/browserslist-config-cozy"
   dependencies:
     jest-cli: "npm:24.9.0"
   languageName: unknown
@@ -15774,9 +15774,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commitlint-config-cozy@workspace:packages/commitlint-config-cozy":
+"commitlint-config-cozy@workspace:config/commitlint-config-cozy":
   version: 0.0.0-use.local
-  resolution: "commitlint-config-cozy@workspace:packages/commitlint-config-cozy"
+  resolution: "commitlint-config-cozy@workspace:config/commitlint-config-cozy"
   dependencies:
     "@babel/core": "npm:7.16.12"
     "@commitlint/cli": "npm:16.2.4"
@@ -20874,9 +20874,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-cozy-app@npm:^6.7.1, eslint-config-cozy-app@workspace:packages/eslint-config-cozy-app":
+"eslint-config-cozy-app@npm:^6.7.1, eslint-config-cozy-app@workspace:config/eslint-config-cozy-app":
   version: 0.0.0-use.local
-  resolution: "eslint-config-cozy-app@workspace:packages/eslint-config-cozy-app"
+  resolution: "eslint-config-cozy-app@workspace:config/eslint-config-cozy-app"
   dependencies:
     "@babel/eslint-parser": "npm:7.19.1"
     "@typescript-eslint/eslint-plugin": "npm:6.21.0"
@@ -37341,9 +37341,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"remark-preset-cozy@workspace:packages/remark-preset-cozy":
+"remark-preset-cozy@workspace:config/remark-preset-cozy":
   version: 0.0.0-use.local
-  resolution: "remark-preset-cozy@workspace:packages/remark-preset-cozy"
+  resolution: "remark-preset-cozy@workspace:config/remark-preset-cozy"
   dependencies:
     remark-preset-lint-recommended: "npm:^4.0.1"
   languageName: unknown
@@ -37424,15 +37424,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"renovate-config-cozy-libs@workspace:packages/renovate-config-cozy-libs":
+"renovate-config-cozy-libs@workspace:config/renovate-config-cozy-libs":
   version: 0.0.0-use.local
-  resolution: "renovate-config-cozy-libs@workspace:packages/renovate-config-cozy-libs"
+  resolution: "renovate-config-cozy-libs@workspace:config/renovate-config-cozy-libs"
   languageName: unknown
   linkType: soft
 
-"renovate-config-cozy@workspace:packages/renovate-config-cozy":
+"renovate-config-cozy@workspace:config/renovate-config-cozy":
   version: 0.0.0-use.local
-  resolution: "renovate-config-cozy@workspace:packages/renovate-config-cozy"
+  resolution: "renovate-config-cozy@workspace:config/renovate-config-cozy"
   languageName: unknown
   linkType: soft
 
