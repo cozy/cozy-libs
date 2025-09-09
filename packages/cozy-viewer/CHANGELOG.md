@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [23.4.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@23.3.2...cozy-viewer@23.4.0) (2025-09-09)
+
+### Features
+
+- Dedup classnames package ([6ac12d3](https://github.com/cozy/cozy-libs/commit/6ac12d3be9ec9ec1b8ceb90b2b6826ef650d48f9))
+- Dedup lodash package ([93ebfd0](https://github.com/cozy/cozy-libs/commit/93ebfd010456639ec94552fc5bb7e6790811cf56))
+
 ## [23.3.2](https://github.com/cozy/cozy-libs/compare/cozy-viewer@23.3.1...cozy-viewer@23.3.2) (2025-09-05)
 
 **Note:** Version bump only for package cozy-viewer

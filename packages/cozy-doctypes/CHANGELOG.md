@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.98.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.97.2...cozy-doctypes@1.98.0) (2025-09-09)
+
+### Features
+
+- Dedup lodash package ([93ebfd0](https://github.com/cozy/cozy-libs/commit/93ebfd010456639ec94552fc5bb7e6790811cf56))
+
 ## [1.97.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.97.1...cozy-doctypes@1.97.2) (2025-03-11)
 
 **Note:** Version bump only for package cozy-doctypes

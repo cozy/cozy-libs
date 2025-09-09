@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.36...cozy-playgrounds@2.10.0) (2025-09-09)
+
+### Features
+
+- Dedup lodash package ([93ebfd0](https://github.com/cozy/cozy-libs/commit/93ebfd010456639ec94552fc5bb7e6790811cf56))
+
 ## [2.9.36](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.9.35...cozy-playgrounds@2.9.36) (2025-09-05)
 
 **Note:** Version bump only for package cozy-playgrounds

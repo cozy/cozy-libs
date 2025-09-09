@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.59.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.58.0...cozy-procedures@0.59.0) (2025-09-09)
+
+### Features
+
+- Dedup lodash package ([93ebfd0](https://github.com/cozy/cozy-libs/commit/93ebfd010456639ec94552fc5bb7e6790811cf56))
+
 # [0.58.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.57.2...cozy-procedures@0.58.0) (2025-09-01)
 
 ### Features
