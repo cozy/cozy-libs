@@ -1,3 +1,3 @@
 {
-  "extends": ["./packages/eslint-config-cozy-app/react.js"]
+  "extends": ["./config/eslint-config-cozy-app/react.js"]
 }
