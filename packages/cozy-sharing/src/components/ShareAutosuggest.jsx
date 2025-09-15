@@ -191,7 +191,8 @@ const ShareAutocomplete = ({
         onBlur: onAutosuggestBlur,
         value: inputValue,
         type: 'email',
-        placeholder
+        placeholder,
+        className: styles['suggestionInput']
       }}
     />
   )
