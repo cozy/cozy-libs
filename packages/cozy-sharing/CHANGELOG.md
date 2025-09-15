@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [26.1.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.1.0...cozy-sharing@26.1.1) (2025-09-15)
+
+### Bug Fixes
+
+- Remove black background in add recipient input :bug: ([07643c2](https://github.com/cozy/cozy-libs/commit/07643c27d4dcf8828c8dc4b2c4a75c8fcc431032))
+
 # [26.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.0.1...cozy-sharing@26.1.0) (2025-09-09)
 
 ### Features
