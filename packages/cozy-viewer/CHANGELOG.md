@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [23.4.2](https://github.com/cozy/cozy-libs/compare/cozy-viewer@23.4.1...cozy-viewer@23.4.2) (2025-09-15)
+
+### Bug Fixes
+
+- Set correct link to open shared drive from toolbar :bug: ([e188e26](https://github.com/cozy/cozy-libs/commit/e188e26d04808c573da2f199d85c93b80c445da2))
+
 ## [23.4.1](https://github.com/cozy/cozy-libs/compare/cozy-viewer@23.4.0...cozy-viewer@23.4.1) (2025-09-15)
 
 **Note:** Version bump only for package cozy-viewer
