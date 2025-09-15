@@ -38,7 +38,9 @@ const ToolbarFilePath = () => {
 
   if (fileWithPath) {
     const appSlug = 'drive'
-    const nativePath = `/folder/${fileWithPath.dir_id}`
+    const nativePath = fileWithPath.driveId
+      ? `/shareddrive/${fileWithPath.driveId}/${fileWithPath.dir_id}`
+      : `/folder/${fileWithPath.dir_id}`
     const path = removeFilenameFromPath(fileWithPath.path)
     const link = makeWebLink({ client, path: nativePath, slug: appSlug })
 
