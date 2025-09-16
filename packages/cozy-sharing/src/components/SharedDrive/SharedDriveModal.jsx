@@ -57,6 +57,7 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
       })
 
       await share({
+        description: sharedDriveName,
         document: sharedDriveFolder,
         recipients: sharedDriveRecipients.recipients,
         readOnlyRecipients: sharedDriveRecipients.readOnlyRecipients,
