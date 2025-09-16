@@ -2,19 +2,14 @@ import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
 import { useClient } from 'cozy-client'
-import Button from 'cozy-ui/transpiled/react/Buttons'
-import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import TextField from 'cozy-ui/transpiled/react/TextField'
-import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
+import { DumbSharedDriveModal } from './DumbSharedDriveModal'
 import { mergeAndDeduplicateRecipients, formatRecipients } from './helpers'
 import withLocales from '../../hoc/withLocales'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import { Contact } from '../../models'
-import { default as DumbShareByEmail } from '../ShareByEmail'
-import WhoHasAccess from '../WhoHasAccess'
 
 export const SharedDriveModal = withLocales(({ onClose }) => {
   const client = useClient()
@@ -115,64 +110,21 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
     })
   }
 
+  const createContact = contact => client.create(Contact.doctype, contact)
+
   const recipients = formatRecipients(sharedDriveRecipients)
 
   return (
-    <FixedDialog
-      open
-      disableGutters
+    <DumbSharedDriveModal
+      sharedDriveName={sharedDriveName}
+      handleSharedDriveNameChange={handleSharedDriveNameChange}
+      createContact={createContact}
+      recipients={recipients}
+      onRevoke={onRevoke}
+      onSetType={onSetType}
+      onCreate={onCreate}
       onClose={onClose}
-      title={t('SharedDrive.sharedDriveModal.title')}
-      content={
-        <div>
-          <div className="u-ph-2">
-            <TextField
-              required
-              label={t('SharedDrive.sharedDriveModal.nameLabel')}
-              variant="outlined"
-              size="small"
-              className="u-w-100 u-mt-1-half"
-              value={sharedDriveName}
-              onChange={handleSharedDriveNameChange}
-            />
-            <Typography variant="h6" className="u-mt-1-half u-mb-half">
-              {t('SharedDrive.sharedDriveModal.addPeople')}
-            </Typography>
-            <DumbShareByEmail
-              createContact={contact => client.create(Contact.doctype, contact)}
-              currentRecipients={[]}
-              document={document}
-              documentType="Files"
-              onShare={onShare}
-              submitLabel={t('SharedDrive.sharedDriveModal.add')}
-              showNotifications={false}
-            />
-          </div>
-          <WhoHasAccess
-            isOwner
-            recipients={recipients}
-            document={document}
-            documentType="Files"
-            className="u-w-100"
-            onRevoke={onRevoke}
-            onSetType={onSetType}
-          />
-        </div>
-      }
-      actions={
-        <>
-          <Button
-            variant="secondary"
-            label={t('SharedDrive.sharedDriveModal.cancel')}
-            onClick={onClose}
-          />
-          <Button
-            variant="primary"
-            label={t('SharedDrive.sharedDriveModal.create')}
-            onClick={onCreate}
-          />
-        </>
-      }
+      onShare={onShare}
     />
   )
 })
