@@ -32,7 +32,7 @@ export const DumbSharedDriveModal = withLocales(
         open
         disableGutters
         onClose={onClose}
-        title={t('SharedDrive.sharedDriveModal.title')}
+        title={title}
         content={
           <div>
             <div className="u-ph-2">

@@ -300,6 +300,16 @@ export const isOwner = (state, docId) => {
   return true
 }
 
+export const isSharedDrive = (state, docId) => {
+  if (state.byDocId[docId] && state.byDocId[docId].sharings.length !== 0) {
+    return (
+      getSharingById(state, state.byDocId[docId].sharings[0]).attributes
+        .drive === true
+    )
+  }
+  return false
+}
+
 export const canReshare = (state, docId, instanceUri) => {
   const sharing = getDocumentSharing(state, docId)
   const me = sharing.attributes.members.find(matchingInstanceName(instanceUri))
