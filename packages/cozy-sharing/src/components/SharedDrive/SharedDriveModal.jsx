@@ -116,6 +116,7 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
 
   return (
     <DumbSharedDriveModal
+      title={t('SharedDrive.sharedDriveModal.title')}
       sharedDriveName={sharedDriveName}
       handleSharedDriveNameChange={handleSharedDriveNameChange}
       createContact={createContact}
