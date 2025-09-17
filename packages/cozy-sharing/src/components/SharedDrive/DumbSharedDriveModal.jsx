@@ -36,15 +36,17 @@ export const DumbSharedDriveModal = withLocales(
         content={
           <div>
             <div className="u-ph-2">
-              <TextField
-                required
-                label={t('SharedDrive.sharedDriveModal.nameLabel')}
-                variant="outlined"
-                size="small"
-                className="u-w-100 u-mt-1-half"
-                value={sharedDriveName}
-                onChange={handleSharedDriveNameChange}
-              />
+              {handleSharedDriveNameChange && (
+                <TextField
+                  required
+                  label={t('SharedDrive.sharedDriveModal.nameLabel')}
+                  variant="outlined"
+                  size="small"
+                  className="u-w-100 u-mt-1-half"
+                  value={sharedDriveName}
+                  onChange={handleSharedDriveNameChange}
+                />
+              )}
               <Typography variant="h6" className="u-mt-1-half u-mb-half">
                 {t('SharedDrive.sharedDriveModal.addPeople')}
               </Typography>
@@ -71,16 +73,20 @@ export const DumbSharedDriveModal = withLocales(
         }
         actions={
           <>
-            <Button
-              variant="secondary"
-              label={t('SharedDrive.sharedDriveModal.cancel')}
-              onClick={onClose}
-            />
-            <Button
-              variant="primary"
-              label={t('SharedDrive.sharedDriveModal.create')}
-              onClick={onCreate}
-            />
+            {onCreate && (
+              <>
+                <Button
+                  variant="secondary"
+                  label={t('SharedDrive.sharedDriveModal.cancel')}
+                  onClick={onClose}
+                />
+                <Button
+                  variant="primary"
+                  label={t('SharedDrive.sharedDriveModal.create')}
+                  onClick={onCreate}
+                />
+              </>
+            )}
           </>
         }
       />
