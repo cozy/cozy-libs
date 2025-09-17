@@ -328,6 +328,23 @@ export const getRecipients = (state, docId) => {
   return getRecipientsWithoutGroups(sharings, docId)
 }
 
+const getRecipientType = (sharing, member, documentType) => {
+  // If member is read_only, for sure it's one-way
+  if (member.read_only) {
+    return 'one-way'
+  }
+
+  // Else if it is a shared drive, for sure it's two-way
+  if (sharing.drive) {
+    return 'two-way'
+  }
+
+  // Else, we keep the legacy way of determining the type
+  // because we need to take some time to understand if we can
+  // just return 'two-way' or not
+  return documentType
+}
+
 const getRecipientsWithoutGroups = (sharings, docId) => {
   const recipients = sharings
     .map(sharing => {
@@ -335,7 +352,7 @@ const getRecipientsWithoutGroups = (sharings, docId) => {
       return sharing.attributes.members.map((m, idx) => ({
         ...m,
         index: `sharing-${sharing.id}-member-${idx}`,
-        type: m.read_only ? 'one-way' : type,
+        type: getRecipientType(sharing, m, type),
         sharingId: sharing.id,
         memberIndex: idx,
         avatarPath: `/sharings/${sharing.id}/recipients/${idx}/avatar`
@@ -356,7 +373,7 @@ export const getRecipientsWithGroups = (sharings, docId) => {
 
     const members = sharing.attributes.members.map((m, idx) => ({
       ...m,
-      type: m.read_only ? 'one-way' : type,
+      type: getRecipientType(sharing, m, type),
       sharingId,
       index: `sharing-${sharing.id}-member-${idx}`,
       memberIndex: idx,
