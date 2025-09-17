@@ -28,6 +28,7 @@ const RecipientWaitingForConfirmationAlert = ({ recipientsToBeConfirmed }) => {
 
 const WhoHasAccess = ({
   isOwner = false,
+  isSharedDrive = false,
   recipients,
   recipientsToBeConfirmed = [],
   document,
@@ -67,6 +68,7 @@ const WhoHasAccess = ({
           recipients={recipients}
           recipientsToBeConfirmed={recipientsToBeConfirmed}
           isOwner={isOwner}
+          isSharedDrive={isSharedDrive}
           document={document}
           documentType={documentType}
           onRevoke={onRevoke}

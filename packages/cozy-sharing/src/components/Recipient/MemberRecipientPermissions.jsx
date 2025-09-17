@@ -16,6 +16,7 @@ import { revokeMember } from './actions/revokeMember'
 
 const MemberRecipientPermissions = ({
   isOwner,
+  isSharedDrive,
   status,
   instance,
   type,
@@ -58,6 +59,7 @@ const MemberRecipientPermissions = ({
     t,
     type: type ?? 'one-way',
     isOwner,
+    isSharedDrive,
     handleRevocation
   })
 

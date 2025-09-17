@@ -7,10 +7,13 @@ import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
-const revokeMember = ({ t, isOwner, handleRevocation }) => {
+const revokeMember = ({ t, isOwner, isSharedDrive, handleRevocation }) => {
   const revokeType = isOwner ? 'revoke' : 'revokeSelf'
   const title = t(`RevokeMemberItem.${revokeType}.title`)
-  const desc = t(`RevokeMemberItem.${revokeType}.desc`)
+  const desc =
+    isOwner && isSharedDrive
+      ? t(`RevokeMemberItem.revoke.sharedDriveDesc`)
+      : t(`RevokeMemberItem.${revokeType}.desc`)
 
   const icon = TrashIcon
 

@@ -380,7 +380,8 @@
   "RevokeMemberItem": {
     "revoke": {
       "title": "Remove from sharing",
-      "desc": "This contact will keep a copy but the changes won't be synchrnoized anymore."
+      "desc": "This contact will keep a copy but the changes won't be synchrnoized anymore.",
+      "sharedDriveDesc": "Your contact will no longer be able to access the data."
     },
     "revokeSelf": {
       "title": "Remove me from sharing",
@@ -399,7 +400,8 @@
   "RevokeGroupItem": {
     "revoke": {
       "title": "Remove group from sharing",
-      "desc": "Group members will keep a copy but the changes won't be synchrnoized anymore."
+      "desc": "Group members will keep a copy but the changes won't be synchrnoized anymore.",
+      "sharedDriveDesc": "Group members will no longer be able to access the data."
     },
     "revokeSelf": {
       "title": "Remove me from sharing",

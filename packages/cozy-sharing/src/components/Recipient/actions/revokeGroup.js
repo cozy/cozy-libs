@@ -7,10 +7,13 @@ import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
-const revokeGroup = ({ t, isOwner, handleRevocation }) => {
+const revokeGroup = ({ t, isOwner, isSharedDrive, handleRevocation }) => {
   const revokeType = isOwner ? 'revoke' : 'revokeSelf'
   const title = t(`RevokeGroupItem.${revokeType}.title`)
-  const desc = t(`RevokeGroupItem.${revokeType}.desc`)
+  const desc =
+    isOwner && isSharedDrive
+      ? t(`RevokeGroupItem.revoke.sharedDriveDesc`)
+      : t(`RevokeGroupItem.${revokeType}.desc`)
 
   const icon = ForbiddenIcon
 
