@@ -10,6 +10,7 @@ const RecipientList = ({
   recipients,
   recipientsToBeConfirmed,
   isOwner,
+  isSharedDrive,
   document,
   documentType,
   onRevoke,
@@ -65,6 +66,7 @@ const RecipientList = ({
         {...recipient}
         key={recipient.index}
         isOwner={isOwner}
+        isSharedDrive={isSharedDrive}
         document={document}
         documentType={documentType}
         onRevoke={onRevoke}

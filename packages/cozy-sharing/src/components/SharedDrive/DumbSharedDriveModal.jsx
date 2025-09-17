@@ -62,6 +62,7 @@ export const DumbSharedDriveModal = withLocales(
             </div>
             <WhoHasAccess
               isOwner
+              isSharedDrive
               recipients={recipients}
               document={document}
               documentType="Files"

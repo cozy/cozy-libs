@@ -378,7 +378,8 @@
   "RevokeMemberItem": {
     "revoke": {
       "title": "Arrêter le partage",
-      "desc": "Votre contact conservera une copie mais vos changements ne seront plus synchronisés."
+      "desc": "Votre contact conservera une copie mais vos changements ne seront plus synchronisés.",
+      "sharedDriveDesc": "Votre contact ne pourra plus accéder aux données."
     },
     "revokeSelf": {
       "title": "Arrêter le partage",
@@ -397,7 +398,8 @@
   "RevokeGroupItem": {
     "revoke": {
       "title": "Arrêter le partage pour le groupe",
-      "desc": "Les membres du groupe conserveront une copie mais vos changements ne seront plus synchronisés"
+      "desc": "Les membres du groupe conserveront une copie mais vos changements ne seront plus synchronisés",
+      "sharedDriveDesc": "Les membres du groupe ne pourront plus accéder aux données."
     },
     "revokeSelf": {
       "title": "Quitter le partage",
