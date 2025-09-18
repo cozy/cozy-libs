@@ -5,6 +5,7 @@ import flag from 'cozy-flags'
 
 import ShareDialogCozyToCozy from './ShareDialogCozyToCozy'
 import ShareDialogOnlyByLink from './ShareDialogOnlyByLink'
+import { SharedDriveEditModal } from './SharedDrive/SharedDriveEditModal'
 
 export const ShareModal = ({
   createContact,
@@ -13,6 +14,7 @@ export const ShareModal = ({
   hasSharedChild,
   hasSharedParent,
   isOwner,
+  isSharedDrive,
   link,
   onClose,
   onRevoke,
@@ -24,6 +26,19 @@ export const ShareModal = ({
   sharingDesc,
   twoStepsConfirmationMethods
 }) => {
+  if (isSharedDrive) {
+    return (
+      <SharedDriveEditModal
+        document={document}
+        sharing={sharing}
+        recipients={recipients}
+        onShare={onShare}
+        onRevoke={onRevoke}
+        onClose={onClose}
+      />
+    )
+  }
+
   const shareDialogOnlyByLink =
     flag('cozy.hide-sharing-cozy-to-cozy') || documentType === 'Albums'
 
