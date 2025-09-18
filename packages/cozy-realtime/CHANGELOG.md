@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.8.0](https://github.com/cozy/cozy-libs/compare/cozy-realtime@5.7.0...cozy-realtime@5.8.0) (2025-09-18)
+
+### Features
+
+- **cozy-realtime:** Add support for shared drives files ([c8a18ae](https://github.com/cozy/cozy-libs/commit/c8a18ae8900c9901cf69da4913f06a4b574626e6))
+
 # [5.7.0](https://github.com/cozy/cozy-libs/compare/cozy-realtime@5.6.4...cozy-realtime@5.7.0) (2025-08-21)
 
 ### Features
