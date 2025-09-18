@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [26.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.1.1...cozy-sharing@26.2.0) (2025-09-18)
+
+### Features
+
+- **sharing:** Add isSharedDrive selector ([50212d4](https://github.com/cozy/cozy-libs/commit/50212d4f88976633bb6d26830e759887ed593cc1))
+- **sharing:** Add shared drive edit modal ([112ba42](https://github.com/cozy/cozy-libs/commit/112ba429876edc9a57884b55352126a6e29786e4))
+- **sharing:** Allow shared drive modal to hide some inputs ([7a312d1](https://github.com/cozy/cozy-libs/commit/7a312d14743d1c1bfd70d15618615e75ce875274))
+- **sharing:** Display good wording when removing access in a ([d78eb48](https://github.com/cozy/cozy-libs/commit/d78eb481918bb97ee771b7e65b130854994317c4))
+- **sharing:** Properly display readonly for shared drives recipients ([cb18bd5](https://github.com/cozy/cozy-libs/commit/cb18bd506e1352875781f2585ca3d33a6aaae098))
+- **sharing:** Save shared drive title in description during creation ([52a82ad](https://github.com/cozy/cozy-libs/commit/52a82ad7e7eadfa4306fc5836f497a5ec91074f5))
+
 ## [26.1.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.1.0...cozy-sharing@26.1.1) (2025-09-15)
 
 ### Bug Fixes

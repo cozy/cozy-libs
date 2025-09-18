@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [23.4.4](https://github.com/cozy/cozy-libs/compare/cozy-viewer@23.4.3...cozy-viewer@23.4.4) (2025-09-18)
+
+**Note:** Version bump only for package cozy-viewer
+
 ## [23.4.3](https://github.com/cozy/cozy-libs/compare/cozy-viewer@23.4.2...cozy-viewer@23.4.3) (2025-09-18)
 
 **Note:** Version bump only for package cozy-viewer
