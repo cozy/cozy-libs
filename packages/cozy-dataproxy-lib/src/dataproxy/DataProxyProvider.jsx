@@ -19,7 +19,7 @@ export const useDataProxy = () => {
   return context
 }
 
-export const DataProxyProvider = React.memo(({ children }) => {
+export const DataProxyProvider = React.memo(({ children, options = {} }) => {
   const client = useClient()
   const webviewIntent = useWebviewIntent()
   const [iframeUrl, setIframeUrl] = useState()
@@ -85,8 +85,11 @@ export const DataProxyProvider = React.memo(({ children }) => {
         }
 
         setDataProxyCom(() => ({
-          search: (search, options) =>
-            webviewIntent?.call('search', search, options)
+          search: (search, searchOptions) =>
+            webviewIntent?.call('search', search, {
+              ...options,
+              ...searchOptions
+            })
         }))
 
         setDataProxyServicesAvailable(isSearchAvailable)
@@ -148,9 +151,12 @@ export const DataProxyProvider = React.memo(({ children }) => {
   useEffect(() => {
     const doAsync = async () => {
       // Make a global search
-      const search = async (search, options) => {
-        log.log('Send search query to DataProxy')
-        const result = await dataProxyCom.search(search, options)
+      const search = async (search, searchOptions) => {
+        log.log('Send search query to DataProxy: ', search)
+        const result = await dataProxyCom.search(search, {
+          ...options,
+          ...searchOptions
+        })
         return result
       }
 
