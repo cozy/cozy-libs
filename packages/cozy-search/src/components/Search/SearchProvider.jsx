@@ -14,10 +14,10 @@ export const useSearch = () => {
   return context
 }
 
-const SearchProvider = ({ children }) => {
+const SearchProvider = ({ children, searchOptions = {} }) => {
   const [searchValue, setSearchValue] = useState('')
   const [selectedIndex, setSelectedIndex] = useState()
-  const { isLoading, results } = useFetchResult(searchValue)
+  const { isLoading, results } = useFetchResult(searchValue, searchOptions)
 
   const delayedSetSearchValue = useMemo(
     () => debounce(setSearchValue, 250),

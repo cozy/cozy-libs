@@ -9,15 +9,12 @@ import { getIconForSearchResult } from './getIconForSearchResult'
 
 const log = Minilog('🔍 [useFetchResult]')
 
-const searchWithRetry = async (
-  dataProxy,
-  searchValue,
-  { maxRetries = 5, delay = 500 } = {}
-) => {
+const searchWithRetry = async (dataProxy, searchValue, options = {}) => {
+  const { maxRetries = 5, delay = 500, ...searchOptions } = options
   let currentDelay = delay
   // Make several search attemps in case it is not ready yet
   for (let attempt = 0; attempt < maxRetries; attempt++) {
-    const searchResults = await dataProxy.search(searchValue)
+    const searchResults = await dataProxy.search(searchValue, searchOptions)
 
     if (searchResults) {
       // A successful search will return an array, and null otherwise
@@ -34,7 +31,7 @@ const searchWithRetry = async (
   return []
 }
 
-export const useFetchResult = searchValue => {
+export const useFetchResult = (searchValue, searchOptions = {}) => {
   const client = useClient()
   const navigate = useNavigate()
   const [state, setState] = useState({
@@ -45,7 +42,7 @@ export const useFetchResult = searchValue => {
   const dataProxy = useDataProxy()
 
   useEffect(() => {
-    const fetch = async searchValue => {
+    const fetch = async (searchValue, searchOptions) => {
       if (!dataProxy.dataProxyServicesAvailable) {
         log.log('DataProxy services are not available. Skipping search...')
         return
@@ -53,7 +50,11 @@ export const useFetchResult = searchValue => {
 
       setState({ isLoading: true, results: null, searchValue })
 
-      const searchResults = await searchWithRetry(dataProxy, searchValue)
+      const searchResults = await searchWithRetry(
+        dataProxy,
+        searchValue,
+        searchOptions
+      )
 
       const results = searchResults.map(r => {
         // Begin Retrocompatibility code, to be removed when following PR is merged: https://github.com/cozy/cozy-web-data-proxy/pull/10
@@ -90,7 +91,7 @@ export const useFetchResult = searchValue => {
 
     if (searchValue) {
       if (searchValue !== state.searchValue) {
-        fetch(searchValue)
+        fetch(searchValue, searchOptions)
       }
     } else {
       setState({ isLoading: true, results: null, searchValue: null })
