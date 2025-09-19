@@ -8,13 +8,13 @@ import SearchBar from './Search/SearchBar'
 import SearchProvider from './Search/SearchProvider'
 import { locales } from '../locales'
 
-const AssistantDesktop = ({ componentsProps }) => {
+const AssistantDesktop = ({ componentsProps, searchOptions = {} }) => {
   useExtendI18n(locales)
 
   return (
     <div className="u-mh-auto u-w-100 u-maw-100">
       <AssistantProvider>
-        <SearchProvider>
+        <SearchProvider searchOptions={searchOptions}>
           <SearchBar componentsProps={componentsProps} />
         </SearchProvider>
       </AssistantProvider>
