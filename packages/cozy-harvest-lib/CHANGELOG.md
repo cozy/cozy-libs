@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [34.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@33.1.5...cozy-harvest-lib@34.0.0) (2025-09-23)
+
+### Features
+
+- **harvest:** Upgrade cozy-ui to get auth modal new illustration ([197b84b](https://github.com/cozy/cozy-libs/commit/197b84b2858e9c2a2b17c040f98477212d75472e))
+
+### BREAKING CHANGES
+
+- **harvest:** You must have `cozy-ui >= 123.2.1`
+
 ## [33.1.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@33.1.4...cozy-harvest-lib@33.1.5) (2025-09-23)
 
 **Note:** Version bump only for package cozy-harvest-lib
