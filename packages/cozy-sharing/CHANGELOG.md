@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [26.2.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.2.0...cozy-sharing@26.2.1) (2025-09-23)
+
+### Bug Fixes
+
+- **sharing:** Sharing suggestions now pops over the dialog container ([c7338a7](https://github.com/cozy/cozy-libs/commit/c7338a7cab5bd7c32a6c74801be9a4664b0ee465))
+
 # [26.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.1.1...cozy-sharing@26.2.0) (2025-09-18)
 
 ### Features
