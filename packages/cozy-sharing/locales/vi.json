@@ -1,0 +1,469 @@
+{
+  "loading": {
+    "sharing": "Đang tải"
+  },
+  "Share": {
+    "status": {
+      "owner": "Chủ sở hữu",
+      "pending": "Đã gửi lời mời",
+      "seen": "Đã xem lời mời",
+      "ready": "Đã chấp nhận",
+      "refused": "Đã từ chối",
+      "mail-not-sent": "Đang gửi thư mời...",
+      "revoked": "Lỗi",
+      "unregistered": "Lỗi"
+    },
+    "type": {
+      "one-way": "Có thể xem",
+      "two-way": "Có thể thay đổi",
+      "desc": {
+        "one-way": "Người liên hệ có thể xem, tải xuống và thêm nội dung vào Twake của họ. Nếu họ thêm nội dung vào Twake, họ sẽ nhận được các bản cập nhật mà bạn thực hiện đối với nội dung, nhưng họ sẽ không thể cập nhật nó.",
+        "two-way": "Người liên hệ có thể cập nhật, xóa và thêm nội dung vào Twake của họ. Các bản cập nhật trên nội dung sẽ được thấy trên các Cozy khác."
+      }
+    },
+    "locked-type-file": "Sắp ra mắt: bạn sẽ có thể thay đổi quyền mà bạn cấp trên tệp.",
+    "locked-type-folder": "Sắp ra mắt: bạn sẽ có thể thay đổi quyền mà bạn cấp trên thư mục.",
+    "recipients": {
+      "you": "Bạn",
+      "anyoneWithTheLink": "Bất kỳ ai có liên kết",
+      "linkWithPassword": "Bất kỳ ai có mật khẩu",
+      "expires": "Cho đến %{date}",
+      "accessCount": "%{count} người có quyền truy cập"
+    },
+    "create-cozy": "Tạo |||| Tạo Twake của tôi",
+    "members": {
+      "count": "%{smart_count} thành viên |||| %{smart_count} thành viên",
+      "others": "và 1 người khác… |||| và %{smart_count} người khác…",
+      "otherContacts": "người liên hệ khác |||| người liên hệ khác"
+    },
+    "contacts": {
+      "whoHasAccess": "Ai có quyền truy cập?",
+      "permissionRequired": {
+        "title": "Lưu danh bạ của bạn vào Twake của bạn?",
+        "desc": "Cho phép ứng dụng truy cập vào danh bạ Twake của bạn: bạn sẽ có thể chọn họ vào lần sau.",
+        "action": "Cho phép truy cập",
+        "success": "Ứng dụng có quyền truy cập vào danh bạ của bạn"
+      },
+      "defaultDisplayName": "Ẩn danh"
+    },
+    "twoStepsConfirmation": {
+      "title": "Xác nhận danh tính người liên hệ",
+      "titleReject": "Từ chối người liên hệ",
+      "confirm": "Xác nhận",
+      "reject": "Từ chối",
+      "cancel": "Hủy",
+      "verify": "Xác minh",
+      "contactAreWaitingForConfirmation": "Một số liên hệ đang chờ xác nhận của bạn. Hãy xác nhận danh tính của họ để cho phép họ truy cập các mục bạn đã chia sẻ với họ.||||%{smart_count} liên hệ đang chờ xác nhận của bạn. Hãy xác nhận danh tính của họ để cho phép họ truy cập các mục bạn đã chia sẻ với họ.",
+      "confirmRejection": "Bạn có thực sự muốn từ chối người liên hệ %{userName} (%{userEmail}) không?"
+    },
+    "loadingError": "Lỗi tải",
+    "banner": {
+      "shared_from": "Các mục dưới đây được hiển thị từ Twake của ![avatar](%{image}) **%{name}**. Bạn có thể thêm liên kết đến chia sẻ này vào Twake của mình",
+      "whats_cozy": "Twake là một ngôi nhà kỹ thuật số an toàn cho tất cả dữ liệu của bạn, được lưu trữ tại Pháp - ",
+      "know_more": "Thông tin thêm",
+      "sync_to_mine": "Đồng bộ hóa |||| Đồng bộ hóa vào Twake của tôi",
+      "add_to_mine": "Thêm |||| Thêm vào Twake của tôi",
+      "close": "Đóng"
+    },
+    "permissionLink": {
+      "title": "Cho phép bất kỳ ai có liên kết để:",
+      "seeFile": "Xem tệp",
+      "modifyFile": "Sửa đổi tệp",
+      "seeFolder": "Xem thư mục",
+      "modifyFolder": "Sửa đổi thư mục",
+      "readDescription": "Người giữ liên kết chỉ có thể đọc hoặc tải xuống nội dung.",
+      "writeDescription": "Người giữ liên kết có thể thay đổi và xóa nội dung.",
+      "deactivate": "Hủy kích hoạt liên kết",
+      "cancel": "Hủy",
+      "confirm": "OK"
+    },
+    "errors": {
+      "errors": {
+        "groupMemberAlreadyInSharing": "Các thành viên của %{groupName} đã được mời với quyền %{sharingRights}. Không thể mời cùng một người liên hệ hai lần với các quyền khác nhau. |||| Các liên hệ đã được mời với quyền %{sharingRights}. Không thể mời cùng một người liên hệ hai lần với các quyền khác nhau.",
+        "contactAlreadyInSharing": "%{contactName} đã được mời vào một nhóm với quyền %{sharingRights}. Không thể mời cùng một người liên hệ hai lần với các quyền khác nhau. |||| Các liên hệ đã được mời với quyền %{sharingRights}. Không thể mời cùng một người liên hệ hai lần với các quyền khác nhau.",
+        "sharingRights": {
+          "readOnly": "đọc",
+          "readWrite": "viết"
+        }
+      }
+    },
+    "send": "Gửi..."
+  },
+  "Sharings": {
+    "unavailable": {
+      "title": "Bật trực tuyến!",
+      "message": "Cần có kết nối internet để hiển thị danh sách các chia sẻ gần đây của bạn."
+    }
+  },
+  "Files": {
+    "share": {
+      "cta": "Chia sẻ",
+      "title": "Chia sẻ \"%{name}\"",
+      "details": {
+        "title": "Chi tiết chia sẻ",
+        "createdAt": "Vào %{date}",
+        "ro": "Có thể đọc",
+        "rw": "Có thể thay đổi",
+        "desc": {
+          "ro": "Bạn có thể xem, tải xuống và thêm nội dung này vào Twake của mình. Bạn sẽ nhận được các bản cập nhật từ chủ sở hữu, nhưng bạn sẽ không thể tự cập nhật nội dung này.",
+          "rw": "Bạn có thể xem, cập nhật, xóa và thêm nội dung này vào Twake của mình. Các bản cập nhật bạn thực hiện sẽ được thấy trên các Cozies khác."
+        }
+      },
+      "sharedByMe": "Được chia sẻ bởi tôi",
+      "shared": "Đã chia sẻ",
+      "sharedWithMe": "Được chia sẻ với tôi",
+      "sharedBy": "Được chia sẻ bởi %{name}",
+      "sharedByLink": "Được chia sẻ qua liên kết",
+      "shareByLink": {
+        "create": "Tạo một liên kết",
+        "send": "Gửi liên kết",
+        "copy": "Sao chép liên kết",
+        "copied": "Liên kết đã được sao chép vào khay nhớ tạm",
+        "failed": "Không thể sao chép vào khay nhớ tạm",
+        "permserror": "Đã xảy ra lỗi khi thay đổi quyền của liên kết, vui lòng thử lại.",
+        "shareDescription": "Đây là liên kết đến tài liệu %{name}:"
+      },
+      "shareByEmail": {
+        "subtitle": "Bằng email",
+        "emailPlaceholder": "Thêm liên hệ hoặc nhóm",
+        "send": "Gửi",
+        "singleContactSuccess": "Bạn đã gửi lời mời đến %{email}.",
+        "contactSuccess": "Bạn đã gửi lời mời đến %{smart_count} liên hệ. |||| Bạn đã gửi lời mời đến %{smart_count} liên hệ.",
+        "singleGroupSuccess": "Bạn đã gửi lời mời đến các thành viên của nhóm %{groupName}.",
+        "groupSuccess": "Bạn đã gửi lời mời đến các thành viên của %{smart_count} nhóm. |||| Bạn đã gửi lời mời đến các thành viên của %{smart_count} nhóm.",
+        "contactAndGroupSuccess": "Bạn đã gửi lời mời đến %{nbContact} liên hệ và các thành viên của %{nbGroup} nhóm.",
+        "comingsoon": "Sắp ra mắt! Bạn sẽ có thể chia sẻ tài liệu và ảnh chỉ trong một cú nhấp chuột với gia đình, bạn bè và cả đồng nghiệp của mình. Đừng lo, chúng tôi sẽ cho bạn biết khi nào nó sẵn sàng!",
+        "onlyByLink": "%{type} này chỉ có thể được chia sẻ bằng liên kết, vì",
+        "type": {
+          "file": "tệp",
+          "folder": "thư mục"
+        },
+        "hasSharedParent": "nó nằm trong một thư mục đã chia sẻ",
+        "hasSharedChild": "nó chứa một phần tử đã chia sẻ"
+      },
+      "sharingLink": {
+        "title": "Liên kết để chia sẻ",
+        "copy": "Sao chép",
+        "copied": "Đã sao chép"
+      },
+      "protectedShare": {
+        "title": "Sắp ra mắt!",
+        "desc": "Chia sẻ bất cứ thứ gì qua email với gia đình và bạn bè của bạn!"
+      },
+      "close": "Đóng",
+      "gettingLink": "Đang lấy liên kết của bạn...",
+      "error": {
+        "generic": "Đã xảy ra lỗi khi tạo liên kết chia sẻ tệp, vui lòng thử lại.",
+        "revoke": "Ối, đã xảy ra lỗi. Vui lòng liên hệ với chúng tôi để chúng tôi có thể khắc phục sự cố này sớm nhất có thể."
+      },
+      "specialCase": {
+        "base": "%{type} này không thể được chia sẻ ngoại trừ bằng liên kết vì nó",
+        "isInSharedFolder": "nằm trong một thư mục đã chia sẻ",
+        "hasSharedFolder": "chứa một thư mục đã chia sẻ"
+      }
+    }
+  },
+"Notes": {
+    "share": {
+      "cta": "Chia sẻ",
+      "title": "Chia sẻ \"%{name}\"",
+      "details": {
+        "title": "Chi tiết chia sẻ",
+        "createdAt": "Vào %{date}",
+        "ro": "Có thể đọc",
+        "rw": "Có thể thay đổi",
+        "desc": {
+          "ro": "Bạn có thể xem, tải xuống và thêm nội dung này vào Twake của mình. Bạn sẽ nhận được các bản cập nhật từ chủ sở hữu, nhưng bạn sẽ không thể tự cập nhật nội dung này.",
+          "rw": "Bạn có thể xem, cập nhật, xóa và thêm nội dung này vào Twake của mình. Các bản cập nhật bạn thực hiện sẽ được thấy trên các Cozies khác."
+        }
+      },
+      "sharedByMe": "Được chia sẻ bởi tôi",
+      "shared": "Đã chia sẻ",
+      "sharedWithMe": "Được chia sẻ với tôi",
+      "sharedBy": "Được chia sẻ bởi %{name}",
+      "shareByLink": {
+        "create": "Tạo một liên kết",
+        "send": "Gửi liên kết",
+        "copy": "Sao chép liên kết",
+        "copied": "Liên kết đã được sao chép vào khay nhớ tạm",
+        "failed": "Không thể sao chép vào khay nhớ tạm",
+        "permserror": "Đã xảy ra lỗi khi thay đổi quyền của liên kết, vui lòng thử lại.",
+        "shareDescription": "Đây là liên kết đến tài liệu %{name}:"
+      },
+      "shareByEmail": {
+        "subtitle": "Bằng email",
+        "email": "Đến:",
+        "emailPlaceholder": "Nhập địa chỉ email hoặc tên người nhận",
+        "send": "Gửi",
+        "singleContactSuccess": "Bạn đã gửi lời mời đến %{email}.",
+        "contactSuccess": "Bạn đã gửi lời mời đến %{smart_count} liên hệ. |||| Bạn đã gửi lời mời đến %{smart_count} liên hệ.",
+        "singleGroupSuccess": "Bạn đã gửi lời mời đến các thành viên của nhóm %{groupName}.",
+        "groupSuccess": "Bạn đã gửi lời mời đến các thành viên của %{smart_count} nhóm. |||| Bạn đã gửi lời mời đến các thành viên của %{smart_count} nhóm.",
+        "contactAndGroupSuccess": "Bạn đã gửi lời mời đến %{nbContact} liên hệ và các thành viên của %{nbGroup} nhóm.",
+        "comingsoon": "Sắp ra mắt! Bạn sẽ có thể chia sẻ tài liệu và ảnh chỉ trong một cú nhấp chuột với gia đình, bạn bè và cả đồng nghiệp của mình. Đừng lo, chúng tôi sẽ cho bạn biết khi nào nó sẵn sàng!",
+        "onlyByLink": "%{type} này chỉ có thể được chia sẻ bằng liên kết, vì",
+        "type": {
+          "file": "tệp",
+          "folder": "thư mục",
+          "note": "ghi chú"
+        },
+        "hasSharedParent": "nó nằm trong một thư mục đã chia sẻ",
+        "hasSharedChild": "nó chứa một phần tử đã chia sẻ"
+      },
+      "sharingLink": {
+        "title": "Liên kết để chia sẻ",
+        "copy": "Sao chép",
+        "copied": "Đã sao chép"
+      },
+      "whoHasAccess": {
+        "title": "1 người có quyền truy cập |||| %{smart_count} người có quyền truy cập"
+      },
+      "protectedShare": {
+        "title": "Sắp ra mắt!",
+        "desc": "Chia sẻ bất cứ thứ gì qua email với gia đình và bạn bè của bạn!"
+      },
+      "close": "Đóng",
+      "gettingLink": "Đang lấy liên kết của bạn...",
+      "error": {
+        "generic": "Đã xảy ra lỗi khi tạo liên kết chia sẻ ghi chú, vui lòng thử lại.",
+        "revoke": "Ối, đã xảy ra lỗi. Vui lòng liên hệ với chúng tôi để chúng tôi có thể khắc phục sự cố này sớm nhất có thể."
+      },
+      "specialCase": {
+        "base": "%{type} này không thể được chia sẻ ngoại trừ bằng liên kết vì nó",
+        "isInSharedFolder": "nằm trong một thư mục đã chia sẻ",
+        "hasSharedFolder": "chứa một thư mục đã chia sẻ"
+      }
+    }
+  },
+  "Albums": {
+    "share": {
+      "cta": "Chia sẻ",
+      "title": "Chia sẻ \"%{name}\" với những người khác",
+      "details": {
+        "title": "Chi tiết chia sẻ",
+        "createdAt": "Vào %{date}",
+        "ro": "Chỉ đọc",
+        "rw": "Đọc/ghi"
+      },
+      "sharedByMe": "Đã chia sẻ",
+      "shared": "Đã chia sẻ",
+      "sharedWithMe": "Được chia sẻ với tôi",
+      "shareByLink": {
+        "create": "Tạo một liên kết",
+        "send": "Gửi liên kết",
+        "copy": "Sao chép liên kết",
+        "copied": "Liên kết đã được sao chép vào khay nhớ tạm",
+        "failed": "Không thể sao chép vào khay nhớ tạm",
+        "permserror": "Đã xảy ra lỗi khi thay đổi quyền của liên kết, vui lòng thử lại.",
+        "fetchFailed": "Ối! Dường như kết nối của bạn bị giới hạn, hãy thử lại sau khi kết nối tốt hơn.",
+        "shareDescription": "Đây là liên kết đến album %{name}:"
+      },
+      "shareByEmail": {
+        "title": "Bằng email",
+        "subtitle": "Bằng email",
+        "email": "email",
+        "emailPlaceholder": "Nhập địa chỉ email hoặc tên người nhận",
+        "send": "Gửi",
+        "singleContactSuccess": "Bạn đã gửi lời mời đến %{email}.",
+        "contactSuccess": "Bạn đã gửi lời mời đến %{smart_count} liên hệ. |||| Bạn đã gửi lời mời đến %{smart_count} liên hệ.",
+        "singleGroupSuccess": "Bạn đã gửi lời mời đến các thành viên của nhóm %{groupName}.",
+        "groupSuccess": "Bạn đã gửi lời mời đến các thành viên của %{smart_count} nhóm. |||| Bạn đã gửi lời mời đến các thành viên của %{smart_count} nhóm.",
+        "contactAndGroupSuccess": "Bạn đã gửi lời mời đến %{nbContact} liên hệ và các thành viên của %{nbGroup} nhóm.",
+        "comingsoon": "Sắp ra mắt! Bạn sẽ có thể chia sẻ tài liệu và ảnh chỉ trong một cú nhấp chuột với gia đình, bạn bè và cả đồng nghiệp của mình. Đừng lo, chúng tôi sẽ cho bạn biết khi nào nó sẵn sàng!"
+      },
+      "unshare": {
+        "title": "Xóa khỏi album",
+        "success": "Bạn đã xóa album được chia sẻ này khỏi %{email}."
+      },
+      "sharingLink": {
+        "title": "Liên kết để chia sẻ",
+        "copy": "Sao chép",
+        "copied": "Đã sao chép"
+      },
+      "whoHasAccess": {
+        "title": "Ai có quyền truy cập"
+      },
+      "protectedShare": {
+        "title": "Sắp ra mắt!",
+        "desc": "Chia sẻ bất cứ thứ gì qua email với gia đình và bạn bè của bạn!"
+      },
+      "close": "Đóng",
+      "gettingLink": "Đang lấy liên kết của bạn...",
+      "error": {
+        "generic": "Đã xảy ra lỗi khi tạo liên kết chia sẻ album, vui lòng thử lại.",
+        "revoke": "Đã xảy ra lỗi khi thu hồi liên kết chia sẻ album, vui lòng thử lại."
+      }
+    }
+  },
+  "Organizations": {
+    "share": {
+      "cta": "Chia sẻ",
+      "title": "Chia sẻ \"%{name}\"",
+      "details": {
+        "title": "Chi tiết chia sẻ",
+        "createdAt": "Vào %{date}",
+        "ro": "Có thể đọc",
+        "rw": "Có thể thay đổi",
+        "desc": {
+          "ro": "Bạn có thể xem, tải xuống và thêm nội dung này vào Twake của mình. Bạn sẽ nhận được các bản cập nhật từ chủ sở hữu, nhưng bạn sẽ không thể tự cập nhật nội dung này.",
+          "rw": "Bạn có thể xem, cập nhật, xóa và thêm nội dung này vào Twake của mình. Các bản cập nhật bạn thực hiện sẽ được thấy trên các Cozies khác."
+        }
+      },
+      "sharedByMe": "Được chia sẻ bởi tôi",
+      "shared": "Đã chia sẻ",
+      "sharedWithMe": "Được chia sẻ với tôi",
+      "sharedBy": "Được chia sẻ bởi %{name}",
+      "sharedByLink": "Được chia sẻ qua liên kết",
+      "shareByLink": {
+        "create": "Tạo một liên kết",
+        "send": "Gửi liên kết",
+        "copy": "Sao chép liên kết",
+        "copied": "Liên kết đã được sao chép vào khay nhớ tạm",
+        "failed": "Không thể sao chép vào khay nhớ tạm",
+        "permserror": "Đã xảy ra lỗi khi thay đổi quyền của liên kết, vui lòng thử lại.",
+        "shareDescription": "Đây là liên kết đến tài liệu %{name}:"
+      },
+      "shareByEmail": {
+        "subtitle": "Bằng email",
+        "email": "Gửi đến:",
+        "emailPlaceholder": "Nhập địa chỉ email hoặc tên người nhận",
+        "send": "Gửi",
+        "singleContactSuccess": "Bạn đã gửi lời mời đến %{email}.",
+        "contactSuccess": "Bạn đã gửi lời mời đến %{smart_count} liên hệ. |||| Bạn đã gửi lời mời đến %{smart_count} liên hệ.",
+        "singleGroupSuccess": "Bạn đã gửi lời mời đến các thành viên của nhóm %{groupName}.",
+        "groupSuccess": "Bạn đã gửi lời mời đến các thành viên của %{smart_count} nhóm. |||| Bạn đã gửi lời mời đến các thành viên của %{smart_count} nhóm.",
+        "contactAndGroupSuccess": "Bạn đã gửi lời mời đến %{nbContact} liên hệ và các thành viên của %{nbGroup} nhóm.",
+        "comingsoon": "Sắp ra mắt! Bạn sẽ có thể chia sẻ tài liệu và ảnh chỉ trong một cú nhấp chuột với gia đình, bạn bè và cả đồng nghiệp của mình. Đừng lo, chúng tôi sẽ cho bạn biết khi nào nó sẵn sàng!",
+        "onlyByLink": "%{type} này chỉ có thể được chia sẻ bằng liên kết, vì",
+        "type": {
+          "file": "tệp",
+          "folder": "thư mục"
+        },
+        "hasSharedParent": "nó nằm trong một thư mục đã chia sẻ",
+        "hasSharedChild": "nó chứa một phần tử đã chia sẻ"
+      },
+      "sharingLink": {
+        "title": "Liên kết để chia sẻ",
+        "copy": "Sao chép",
+        "copied": "Đã sao chép"
+      },
+      "protectedShare": {
+        "title": "Sắp ra mắt!",
+        "desc": "Chia sẻ bất cứ thứ gì qua email với gia đình và bạn bè của bạn!"
+      },
+      "close": "Đóng",
+      "gettingLink": "Đang lấy liên kết của bạn...",
+      "error": {
+        "generic": "Đã xảy ra lỗi khi tạo liên kết chia sẻ tệp, vui lòng thử lại.",
+        "revoke": "Ối, đã xảy ra lỗi. Vui lòng liên hệ với chúng tôi để chúng tôi có thể khắc phục sự cố này sớm nhất có thể."
+      },
+      "specialCase": {
+        "base": "%{type} này không thể được chia sẻ ngoại trừ bằng liên kết vì nó",
+        "isInSharedFolder": "nằm trong một thư mục đã chia sẻ",
+        "hasSharedFolder": "chứa một thư mục đã chia sẻ"
+      }
+    },
+    "fingerprint": {
+      "instruction": "Vì lý do bảo mật, vui lòng xác minh danh tính của **%{userName} (%{userEmail})**. Để làm điều này, hãy liên hệ với **%{userName}** thông qua phương tiện liên lạc mà bạn chọn (cuộc gọi, tin nhắn văn bản, ứng dụng nhắn tin tức thì...) và xác minh mã bảo mật của họ.<br><br>Mỗi người dùng Twake đều có một mã bảo mật mà họ có thể tìm thấy bằng ứng dụng web của mình. Mã bảo mật của họ phải tương ứng với:",
+      "instruction2": "Nếu đúng như vậy, thì bạn có thể xác nhận liên hệ này, người sẽ được coi là an toàn cho các lần chia sẻ tiếp theo của bạn."
+    }
+  },
+  "ConfirmRecipientModal": {
+    "title": "%{smart_count} liên hệ đang chờ xác nhận |||| %{smart_count} liên hệ đang chờ xác nhận",
+    "intruction": "Xác minh danh tính Twake của họ để cấp cho họ quyền truy cập vào nội dung bạn đã chia sẻ với họ."
+  },
+  "ShareRecipientsLimitModal": {
+    "title": "Sự cố với chia sẻ của bạn",
+    "content": "Bạn không thể chia sẻ %{documentName} với nhiều hơn %{limit} thành viên.",
+    "confirm": "Tôi hiểu rồi"
+  },
+  "RevokeMemberItem": {
+    "revoke": {
+      "title": "Xóa khỏi chia sẻ",
+      "desc": "Liên hệ này sẽ giữ lại một bản sao nhưng các thay đổi sẽ không còn được đồng bộ hóa nữa."
+    },
+    "revokeSelf": {
+      "title": "Xóa tôi khỏi chia sẻ",
+      "desc": "Bạn giữ lại nội dung nhưng nó sẽ không được cập nhật giữa các Twake của bạn nữa."
+    }
+  },
+  "RevokeSharedDriveMemberItem": {
+    "revoke": {
+      "title": "Xóa"
+    }
+  },
+  "GroupRecipient": {
+    "secondary": "%{memberCount} thành viên |||| %{memberCount} thành viên",
+    "secondary_you": "bao gồm cả bạn"
+  },
+  "RevokeGroupItem": {
+    "revoke": {
+      "title": "Xóa nhóm khỏi chia sẻ",
+      "desc": "Các thành viên trong nhóm sẽ giữ lại một bản sao nhưng các thay đổi sẽ không còn được đồng bộ hóa nữa."
+    },
+    "revokeSelf": {
+      "title": "Xóa tôi khỏi chia sẻ",
+      "desc": "Bạn giữ lại nội dung nhưng nó sẽ không được cập nhật giữa các Twake của bạn nữa."
+    }
+  },
+  "GroupRecipientDetail": {
+    "subtitle": "Được quản lý bởi %{ownerName}",
+    "empty": {
+      "content": "Nhóm liên hệ của bạn trống! Nhanh chóng thêm thành viên để bắt đầu chia sẻ các tài liệu quý giá của bạn với họ!",
+      "action": "Mở Danh bạ"
+    },
+    "withAccess": {
+      "title": "Quyền truy cập vào mục"
+    },
+    "withoutAccess": {
+      "title": "Không có quyền truy cập",
+      "status": {
+        "mail-not-sent": "Gửi lời mời không thành công",
+        "revoked": "Đã thu hồi chia sẻ"
+      },
+      "addEmail": "Nhập địa chỉ email để mời liên hệ"
+    }
+  },
+  "ShareRestrictionModal": {
+    "title": "Liên kết chia sẻ",
+    "action": {
+      "confirm": "Xác nhận"
+    },
+    "invalidPasswordMessage": "Thiếu %{smart_count} ký tự |||| Thiếu %{smart_count} ký tự"
+  },
+  "BoxDate": {
+    "label": "Thời hạn",
+    "text": "Xóa quyền truy cập sau một thời hạn"
+  },
+  "BoxPassword": {
+    "label": "Mật khẩu",
+    "text": "Giới hạn quyền truy cập bằng mật khẩu"
+  },
+  "BoxEditingRights": {
+    "editTitle": "Quyền chỉnh sửa",
+    "readOnlyTitle": "Quyền đọc",
+    "editSubText": "Những người có quyền truy cập vào liên kết có thể sửa đổi nội dung",
+    "readOnlySubText": "Những người có quyền truy cập vào liên kết chỉ có thể xem nội dung"
+  },
+  "copyReminderContent": {
+    "success": "Đã sao chép vào khay nhớ tạm",
+    "error": "Không thể sao chép vào khay nhớ tạm"
+  },
+  "shareFile": {
+    "error": "Sự cố với việc khôi phục liên kết: %{error}",
+    "text": "Liên kết đến tài liệu của tôi %{name}: |||| Liên kết đến các tài liệu của tôi %{name}: ",
+    "title": "Liên kết đến tài liệu của tôi %{name} |||| Liên kết đến các tài liệu của tôi %{name}"
+  },
+  "SharedDrive": {
+    "sharedDriveModal": {
+      "title": "Ổ đĩa được chia sẻ mới",
+      "nameLabel": "Tên ổ đĩa",
+      "add": "Thêm",
+      "cancel": "Hủy",
+      "create": "Tạo",
+      "addPeople": "Thêm người vào ổ đĩa được chia sẻ:",
+      "successNotification": "Ổ đĩa được chia sẻ đã được thêm",
+      "errorNotification": "Lỗi trong quá trình tạo ổ đĩa được chia sẻ"
+    }
+  }
+}
