@@ -1,0 +1,84 @@
+{
+  "Viewer": {
+    "actions": {
+      "download": "Tải xuống",
+      "forward": "Gửi"
+    },
+    "alert": {
+      "preparing": "Đang chuẩn bị tệp của bạn…"
+    },
+    "close": "đóng",
+    "cancel": "Hủy",
+    "ok": "Ok",
+    "download": "Tải xuống",
+    "complete": "Hoàn thành tài liệu",
+    "noImage": "Không có hình ảnh",
+    "error": {
+      "downloadFile": {
+        "offline": "Bạn cần phải kết nối để tải tệp này"
+      },
+      "generic": "Đã xảy ra lỗi khi mở tệp này, vui lòng thử lại.",
+      "missing": "Tệp này bị thiếu",
+      "network": "Không thể tải tệp này. Bạn có kết nối internet hoạt động không?"
+    },
+    "goto": "Truy cập %{url}",
+    "next": "Tiếp theo",
+    "openWith": "Mở bằng...",
+    "openInOnlyOffice": "Mở bằng Only Office",
+    "panel": {
+      "summary": "Tóm tắt",
+      "sharing": "Ai có quyền truy cập?",
+      "informations": {
+        "format": {
+          "title": "Tài liệu %{format}",
+          "subtitle": "Định dạng"
+        },
+        "size": "Kích thước",
+        "location": "Vị trí",
+        "creation": "Ngày tạo",
+        "modification": "Lần sửa đổi cuối cùng"
+      },
+      "certifications": {
+        "carbonCopy": {
+          "title": "Bản sao",
+          "caption": "Cho biết liệu tài liệu có được Twake Workplace, máy chủ của Twake, định nghĩa là \"chính xác và nguyên bản\" hay không, vì nó có thể khẳng định rằng nó đến trực tiếp từ dịch vụ của bên thứ ba, mà không trải qua bất kỳ sửa đổi nào."
+        },
+        "electronicSafe": {
+          "title": "Kho điện tử an toàn",
+          "caption": "Cho biết liệu tài liệu gốc có được bảo mật bởi kho kỹ thuật số cá nhân của bạn với các chứng nhận mang lại giá trị chứng cứ và đảm bảo lưu giữ 50 năm sau khi gửi hay không."
+        }
+      },
+      "qualification": {
+        "empty": {
+          "primary": "Loại tài liệu",
+          "secondary": "Hóa đơn, hợp đồng, thẻ căn cước..."
+        },
+        "actions": {
+          "copy": "Sao chép",
+          "copyClipboard": "Sao chép vào khay nhớ tạm",
+          "edit": "Chỉnh sửa"
+        }
+      },
+      "expiration": {
+        "dismiss": "Tôi đã hiểu"
+      },
+      "title": "Thông tin hữu ích"
+    },
+    "previous": "Trước đó",
+    "retry": "Thử lại",
+    "scaledown": "Thu nhỏ",
+    "scaleup": "Phóng to",
+    "share": {
+      "title": "Liên kết đến tài liệu của tôi %{name}",
+      "text": "Đây là liên kết đến tài liệu của tôi %{name}: ",
+      "error": "Sự cố với khôi phục liên kết: %{error}",
+      "success": "Tệp của bạn đã được chia sẻ thành công"
+    },
+    "snackbar": {
+      "copiedToClipboard": {
+        "success": "Đã sao chép vào khay nhớ tạm",
+        "error": "Không thể sao chép vào khay nhớ tạm"
+      }
+    }
+  }
+}
