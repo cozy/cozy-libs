@@ -16991,7 +16991,7 @@ __metadata:
     cozy-logger: "npm:^1.17.0"
     cozy-realtime: "npm:^5.8.0"
     cozy-tsconfig: "npm:^1.8.1"
-    cozy-ui: "npm:^122.14.1"
+    cozy-ui: "npm:^123.2.1"
     cozy-viewer: "npm:^23.4.5"
     date-fns: "npm:2.30.0"
     enzyme: "npm:3.11.0"
@@ -17032,7 +17032,7 @@ __metadata:
     cozy-interapp: ">=0.9.0"
     cozy-keys-lib: ">=6.1.1"
     cozy-realtime: ">=4.2.8"
-    cozy-ui: ">=122.14.1"
+    cozy-ui: ">=123.2.1"
     cozy-viewer: ">=11.3.1"
     leaflet: ^1.7.1
     react-router-dom: ">=6.14.2"
@@ -17704,9 +17704,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-ui@npm:^122.14.1":
-  version: 122.14.1
-  resolution: "cozy-ui@npm:122.14.1"
+"cozy-ui@npm:^123.2.1":
+  version: 123.2.1
+  resolution: "cozy-ui@npm:123.2.1"
   dependencies:
     "@babel/runtime": "npm:^7.3.4"
     "@date-io/date-fns": "npm:1"
@@ -17742,7 +17742,7 @@ __metadata:
     react-dom: ^16.8.6
   bin:
     rsg-screenshots: scripts/screenshots.js
-  checksum: 10c0/fc2e557853dc28704dc24548c5d1b88135cf2f76c1c292946fff739a147622738f74021218a5835d07cfc0f9d2a42c192c257ff3d67170b015d3b37036a4b3d5
+  checksum: 10c0/8c56c0b63b9f6f57761cb9825f4e59ac6e3268bc992ed3289a7f6deb0322ab8a03b45fbc59820b970804d07d68d4ad7e40aabf20629647115e08fd7aed2cd298
   languageName: node
   linkType: hard
 
