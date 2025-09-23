@@ -1,0 +1,21 @@
+{
+  "assistant": {
+    "search": {
+      "placeholder": "Есть вопрос?",
+      "send": "Отправить",
+      "noItem": "Нет результатов",
+      "notEnough": "Ваш запрос должен содержать не менее 3 символов"
+    },
+    "dialog": {
+      "close": "Закрыть"
+    },
+    "name": "Ассистент Twake",
+    "default_username": "Анонимно",
+    "sources": "%{smart_count} источник |||| %{smart_count} источника |||| %{smart_count} источников",
+    "suggestions": {
+      "find_file": "Найти файл",
+      "reimbursements": "Проверить возмещения расходов",
+      "reorganise_files": "Реорганизовать мои файлы"
+    }
+  }
+}

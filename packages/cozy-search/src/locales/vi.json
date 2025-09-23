@@ -1,0 +1,21 @@
+{
+  "assistant": {
+    "search": {
+      "placeholder": "Có câu hỏi nào không?",
+      "send": "Gửi",
+      "noItem": "Không có kết quả",
+      "notEnough": "Truy vấn của bạn phải chứa ít nhất 3 ký tự"
+    },
+    "dialog": {
+      "close": "Đóng"
+    },
+    "name": "Trợ lý Twake",
+    "default_username": "Ẩn danh",
+    "sources": "%{smart_count} nguồn |||| %{smart_count} nguồn",
+    "suggestions": {
+      "find_file": "Tìm một tệp",
+      "reimbursements": "Kiểm tra các khoản hoàn trả của tôi",
+      "reorganise_files": "Sắp xếp lại các tệp của tôi"
+    }
+  }
+}
