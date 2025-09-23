@@ -33,6 +33,10 @@ export const DumbSharedDriveModal = withLocales(
         disableGutters
         onClose={onClose}
         title={title}
+        classes={{ paper: 'u-ov-visible' }}
+        componentsProps={{
+          dialogContent: { className: 'u-ov-visible' }
+        }}
         content={
           <div>
             <div className="u-ph-2">
