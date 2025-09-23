@@ -1,7 +1,7 @@
 import Polyglot from 'node-polyglot'
 
 const polyglots = {}
-const langs = ['fr', 'en']
+const langs = ['fr', 'en', 'ru', 'vi']
 for (const lang of langs) {
   let locales = {}
   try {
