@@ -5,7 +5,9 @@ import { getI18n } from 'cozy-ui/transpiled/react/providers/I18n/helpers'
 
 const locales = {
   en: require(`../../locales/en.json`),
-  fr: require(`../../locales/fr.json`)
+  fr: require(`../../locales/fr.json`),
+  ru: require(`../../locales/ru.json`),
+  vi: require(`../../locales/vi.json`)
 }
 
 export const getActionsI18n = () => getI18n(undefined, lang => locales[lang])
