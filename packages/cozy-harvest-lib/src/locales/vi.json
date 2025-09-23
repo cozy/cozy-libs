@@ -1,0 +1,598 @@
+{
+  "close": "Đóng",
+  "back": "Quay lại",
+  "badges": {
+    "warning": "Cảnh báo"
+  },
+  "accountForm": {
+    "submit": {
+      "label": "Kết nối"
+    },
+    "fields": {
+      "optional": "(tùy chọn)"
+    },
+    "password": {
+      "show": "Hiện",
+      "hide": "Ẩn"
+    },
+    "disconnect": {
+      "button": "Ngắt kết nối tài khoản này"
+    },
+    "installFlagship": {
+      "label": "Cài đặt Twake trên di động"
+    },
+    "cannotConnectModal": {
+      "title": "Bạn không thể kết nối?",
+      "content": "Bạn có thể kiểm tra thông tin đăng nhập hoặc đặt lại mật khẩu của mình trên trang web của [%{vendorName}](%{vendorLink}).",
+      "noAccount": "Nếu bạn không có tài khoản, bạn sẽ cần tạo một tài khoản trên trang web của [%{vendorName}](%{vendorLink})."
+    },
+    "cannotConnectLink": "Tôi không thể kết nối",
+    "notClientSide": "Để đồng bộ hóa dữ liệu %{name} của bạn trong Twake, bạn phải sử dụng ứng dụng Twake trên điện thoại hoặc máy tính bảng của mình.",
+    "clientSide": {
+      "title": "Kết nối với Twake của bạn",
+      "submit": "Kết nối",
+      "description": "Kết nối %{name} với Twake của bạn để đồng bộ hóa tài khoản và truy xuất tất cả dữ liệu của bạn. "
+    }
+  },
+  "contracts": {
+    "headers": {
+      "bankAccounts": "Tài khoản ngân hàng",
+      "default": "Hợp đồng"
+    },
+    "deleted": "Đã xóa",
+    "no-contracts": "Không còn hợp đồng nào",
+    "handle-synchronization": "Xử lý các đồng bộ hóa của tôi",
+    "desynchronized": {
+      "message": "bạn đã ngắt đồng bộ tài khoản này vào %{date}",
+      "dateFormat": "LL/dd/yy"
+    }
+  },
+  "contractForm": {
+    "details": "Chi tiết",
+    "sharing": "Chia sẻ",
+    "back-to-accounts": "Quay lại tài khoản",
+    "update": "Cập nhật",
+    "delete": "Đặt lại",
+    "deleting": "Đang đặt lại...",
+    "confirm-deletion": {
+      "description": "Điều này cũng sẽ xóa các giao dịch của bạn cùng với các liên kết hóa đơn. Nếu bạn không muốn nhập lại dữ liệu ngân hàng của mình trong lần đồng bộ hóa theo lịch trình tiếp theo, bạn sẽ phải xóa kết nối.",
+      "confirm": "Xác nhận xóa tài khoản",
+      "title": "Bạn có chắc chắn không?"
+    },
+    "deletion_error": "Đã xảy ra lỗi khi xóa nhóm.",
+    "label": "Nhãn",
+    "owner": "Chủ sở hữu",
+    "addOwnerBtn": "Thêm chủ sở hữu",
+    "removeOwnerBtn": "Xóa chủ sở hữu này",
+    "ownerPlaceholder": "Chọn chủ sở hữu",
+    "bank": "Ngân hàng",
+    "number": "Số",
+    "type": "Loại",
+    "apply": "Áp dụng",
+    "success": "Tài khoản đã được cập nhật thành công",
+    "failure": "Lỗi khi cập nhật tài khoản",
+    "removeAccountBtn": "Xóa tài khoản",
+    "listPlaceholder": "Tìm kiếm một liên hệ",
+    "listEmptyMessage": "Không tìm thấy liên hệ nào",
+    "addContactLabel": "Thêm một liên hệ",
+    "cancel": "Hủy",
+    "imported": "Tài khoản đã được đồng bộ hóa"
+  },
+  "card": {
+    "launchTrigger": {
+      "button": {
+        "label": "Đồng bộ hóa"
+      },
+      "configure": "Cấu hình",
+      "connect": "Kết nối",
+      "success": "Đồng bộ hóa thành công",
+      "error": "Đã xảy ra lỗi.",
+      "frequency": {
+        "label": "Tần suất:",
+        "hourly": "Mỗi giờ",
+        "daily": "Mỗi ngày một lần",
+        "weekly": "Mỗi tuần một lần",
+        "monthly": "Mỗi tháng một lần",
+        "undefined": "Thủ công"
+      },
+      "lastSync": {
+        "label": "Cập nhật:",
+        "syncing": "Đang khôi phục dữ liệu…",
+        "unknown": "Đồng bộ lần cuối không xác định",
+        "afterSomeTimes": "Đồng bộ cách đây %{times}",
+        "format": "LL/dd/yyyy",
+        "disconnected": "Đã ngắt kết nối",
+        "justNow": "Đã đồng bộ ngay bây giờ"
+      },
+      "runningAlert": {
+        "title": "Đừng đóng ứng dụng của bạn!",
+        "body": "Để việc khôi phục dữ liệu hoàn tất, điện thoại phải được bật. Tuy nhiên, bạn có thể tiếp tục duyệt trong ứng dụng di động miễn là nó vẫn hoạt động ở chế độ nền trước.",
+        "button": "Tôi hiểu rồi"
+      }
+    },
+    "appLink": {
+      "drive": {
+        "title": "Tài liệu của bạn",
+        "description": "Dịch vụ này truy xuất các tài liệu mới nhất của bạn và giữ một bản sao lưu đầy đủ cho bạn.",
+        "button": "Mở tài liệu",
+        "install": "Khám phá Twake Drive"
+      },
+      "contacts": {
+        "title": "Danh bạ của bạn",
+        "description": "Dịch vụ này đồng bộ hóa tất cả danh bạ của bạn.",
+        "button": "Mở danh bạ",
+        "install": "Khám phá Twake Contacts"
+      },
+      "banks": {
+        "title": "Dữ liệu ngân hàng của bạn",
+        "description": "Dịch vụ này truy xuất và lưu giữ một bản ghi đầy đủ về các hoạt động ngân hàng mới nhất của bạn.",
+        "button": "Truy cập tài khoản ngân hàng",
+        "install": "Khám phá Twake Banks"
+      },
+      "coachco2": {
+        "title": "Ứng dụng để tiến xa hơn",
+        "description": "Các ứng dụng sau đây có thể sử dụng dữ liệu này một cách riêng tư trong Twake của bạn.",
+        "button": "Coach CO2",
+        "install": "Khám phá CoachCO2"
+      }
+    },
+    "information": {
+      "title": "Thông tin hữu ích",
+      "websiteLink": "Mở trang web",
+      "store": "Xem trong Twake Workplace Store",
+      "storeDescription": "Truy cập mô tả của ứng dụng này"
+    }
+  },
+  "default": {
+    "dateFormat": "LL/dd/yyyy",
+    "baseDir": "/Administrative"
+  },
+  "error": {
+    "application-not-found": "Ứng dụng này không tồn tại",
+    "reconnect-via-form": "Kết nối lại",
+    "job": {
+      "DISK_QUOTA_EXCEEDED": {
+        "title": "Bộ nhớ đầy",
+        "description": "Dịch vụ này không thể tìm nạp tài liệu của bạn ngay bây giờ. Vui lòng xóa một số tệp hoặc vào **Cài đặt > Lưu trữ** để có thêm dung lượng trống."
+      },
+      "CHALLENGE_ASKED": {
+        "title": "Yêu cầu xác thực",
+        "description": "Trang web yêu cầu một yếu tố xác thực thứ hai. Bạn có thể chạy lại trình kết nối thủ công để cung cấp mã và tiếp tục truy xuất dữ liệu của mình."
+      },
+      "OAUTH_CANCELED": {
+        "title": "Đã hủy",
+        "description": "Chúng tôi không thể thêm ngân hàng của bạn vì bạn đã hủy kết nối. Nhấp vào \"Thêm ngân hàng của bạn\" một lần nữa để thử lại."
+      },
+      "LOGIN_FAILED": {
+        "title": "Thông tin đăng nhập không chính xác hoặc đã hết hạn",
+        "description": "Xin lỗi, thông tin đăng nhập hoặc mật khẩu của bạn không hợp lệ hoặc đã hết hạn. Bạn có thể kiểm tra thông tin đăng nhập của mình trên trang web [%{name}](%{link}) trước khi cập nhật."
+      },
+      "LOGIN_FAILED.NEEDS_SECRET": {
+        "title": "Cần thêm thông tin bổ sung",
+        "description": "Một trường bổ sung phải được điền vào để kết nối dịch vụ của bạn. Bạn có thể chạy lại trình kết nối thủ công để cung cấp thông tin."
+      },
+      "LOGIN_FAILED.TOO_MANY_ATTEMPTS": {
+        "title": "Tạm thời bị chặn",
+        "description": "Đã có quá nhiều lần thử. Vui lòng cập nhật thông tin đăng nhập của bạn trên trang web [%{name}](%{link}) và cập nhật trình kết nối sau."
+      },
+      "MAINTENANCE": {
+        "title": "Trang web không khả dụng",
+        "description": "Dường như trang web [%{name}](%{link}) không khả dụng hoặc trình kết nối phải được cập nhật. Vui lòng chạy lại trình kết nối sau hoặc truy cập trợ giúp trực tuyến của chúng tôi."
+      },
+      "NOT_EXISTING_DIRECTORY": {
+        "title": "Thư mục đích bị thiếu",
+        "description": "Dường như thư mục đích của tài khoản này đã bị xóa. Vui lòng khôi phục nó bằng cách ngắt kết nối tài khoản này và sau đó kết nối lại."
+      },
+      "TERMS_VERSION_MISMATCH": {
+        "title": "Điều khoản dịch vụ mới nhất không được chấp nhận",
+        "description": "%{name} dường như đã cập nhật Điều khoản dịch vụ của mình. Vui lòng kiểm tra xem dịch vụ đã được cập nhật chưa. Nếu lỗi này vẫn xảy ra, vui lòng liên hệ với chúng tôi tại [%{supportMail}](mailto:%{supportMail})."
+      },
+      "UNKNOWN_ERROR": {
+        "title": "Lỗi kết nối",
+        "description": "Đã xảy ra lỗi không xác định. Bạn có thể thử cập nhật dữ liệu của mình. Nếu sự cố vẫn tiếp diễn, vui lòng liên hệ với chúng tôi tại [%{supportMail}](mailto:%{supportMail})."
+      },
+      "UNKNOWN_ERROR.PARTIAL_SYNC": {
+        "title": "Lỗi kết nối",
+        "description": "Việc đồng bộ hóa đã hoàn tất nhưng một số phần tử có thể bị thiếu"
+      },
+      "USER_ACTION_NEEDED": {
+        "title": "Cần hành động trên trang web của nhà cung cấp",
+        "description": "Dường như trang web [%{name}](%{link}) yêu cầu bạn đăng nhập và hoàn thành một hành động cụ thể. Vui lòng chạy lại trình kết nối sau khi bạn đã giải quyết vấn đề trên trang web."
+      },
+      "USER_ACTION_NEEDED.OAUTH_OUTDATED": {
+        "title": "Yêu cầu gia hạn quyền truy cập",
+        "description": "Dịch vụ [%{name}](%{link}) yêu cầu bạn gia hạn xác thực của mình. Vui lòng ngắt kết nối và kết nối lại tài khoản %{name} với ứng dụng này. Không có dữ liệu nào sẽ bị mất."
+      },
+      "USER_ACTION_NEEDED.ACCOUNT_REMOVED": {
+        "title": "Tài khoản không khả dụng",
+        "description": "Dường như tài khoản của bạn không còn hoạt động. Vui lòng kiểm tra tài khoản của bạn trên [%{name}](%{link}) trước khi thử lại."
+      },
+      "USER_ACTION_NEEDED.CHANGE_PASSWORD": {
+        "title": "Yêu cầu cập nhật mật khẩu",
+        "description": "Dường như trang web [%{name}](%{link}) yêu cầu bạn đăng nhập và cập nhật mật khẩu. Vui lòng chạy lại trình kết nối sau khi bạn đã giải quyết vấn đề trên trang web."
+      },
+      "USER_ACTION_NEEDED.PERMISSIONS_CHANGED": {
+        "title": "New permissions needed",
+        "description": "You connector was updated and the permissions changed. Please validate them before launching the connector again."
+      },
+      "USER_ACTION_NEEDED.SCA_REQUIRED": {
+        "title": "Yêu cầu gia hạn xác thực",
+        "description": "Dường như %{name} yêu cầu kiểm tra lại thông tin đăng nhập để đồng bộ hóa hoạt động. Vui lòng chạy lại trình kết nối để bắt đầu quá trình xác minh. Bạn sẽ nhận được mật khẩu dùng một lần hoặc một quy trình xác thực trên ứng dụng hoặc trang web ngân hàng của bạn."
+      }
+    }
+  },
+  "USER_ACTION_NEEDED.TWOFA_EXPIRED": {
+    "title": "Yêu cầu gia hạn xác thực",
+    "description": "Kết nối cuối cùng với dịch vụ đã thất bại; vui lòng khởi chạy lại. Bạn có thể phải cung cấp mã xác thực."
+  },
+  "USER_ACTION_NEEDED.WEBAUTH_REQUIRED": {
+    "title": "Yêu cầu xác thực trên trang web của nhà cung cấp",
+    "description": "Dường như [%{name}](%{link}) yêu cầu bạn đăng nhập trên trang web của họ để đồng bộ hóa hoạt động. Vui lòng chạy lại trình kết nối sau khi bạn đã giải quyết vấn đề trên trang web."
+  },
+  "USER_ACTION_NEEDED.WRONG_TWOFA_CODE": {
+    "title": "Mã xác thực mạnh không chính xác",
+    "description": "Mã xác thực hai yếu tố được cung cấp không chính xác, vui lòng bắt đầu lại."
+  },
+  "USER_ACTION_NEEDED.CGU_FORM": {
+    "title": "Cần xác thực các điều khoản dịch vụ mới",
+    "description": "Dường như cần xác thực các điều khoản dịch vụ mới. Vui lòng xác thực chúng trên trang web [%{name}](%{link}) và đồng bộ hóa lại."
+  },
+  "VENDOR_DOWN": {
+    "title": "Dịch vụ không khả dụng",
+    "description": "Dường như dịch vụ [%{name}](%{link}) hiện không khả dụng. Vui lòng chạy lại trình kết nối sau."
+  },
+  "VENDOR_DOWN.BANK_DOWN": {
+    "title": "Trang web ngân hàng không khả dụng",
+    "description": "Truy cập vào khu vực khách hàng của [%{name}](%{link}) hiện không khả dụng. Vui lòng chạy lại trình kết nối sau."
+  },
+  "VENDOR_DOWN.LINXO_DOWN": {
+    "title": "Dịch vụ không khả dụng",
+    "description": "Dường như chúng tôi đang gặp tình trạng quá tải với các trình kết nối ngân hàng của mình. Vui lòng chạy lại trình kết nối sau."
+  },
+  "ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED": {
+    "title": "Tài khoản này đã tồn tại",
+    "description": "Việc sửa đổi danh sách các tài khoản đã đồng bộ hóa của bạn sẽ được thực hiện trong vòng vài phút."
+  },
+  "WRONG_ACCOUNT_IDENTIFIER": {
+    "title": "Đây là các mã định danh sai",
+    "description": "Bạn đã gửi mã định danh sai không liên kết với tài khoản này."
+  },
+  "fields": {
+    "answer": {
+      "label": "Câu trả lời bí mật"
+    },
+    "birthdate": {
+      "label": "Ngày sinh",
+      "placeholder": "mm/dd/yyyy"
+    },
+    "code": {
+      "label": "Mã bảo mật"
+    },
+    "date": {
+      "label": "Ngày",
+      "placeholder": "mm/dd/yyyy"
+    },
+    "email": {
+      "label": "Địa chỉ email"
+    },
+    "firstname": {
+      "label": "Tên"
+    },
+    "lastname": {
+      "label": "Họ"
+    },
+    "login": {
+      "label": "Đăng nhập"
+    },
+    "password": {
+      "label": "Mật khẩu"
+    },
+    "phone": {
+      "label": "Số điện thoại"
+    },
+    "two_fa_code": {
+      "label": "Mã xác thực mạnh"
+    }
+  },
+  "folder": {
+    "administrative": "Hành chính",
+    "photos": "Ảnh"
+  },
+  "infos": {
+    "konnectorUpdate": {
+      "title": "Có bản cập nhật cho dịch vụ này.",
+      "body": {
+        "regular": "Thực hiện bản cập nhật này để tiếp tục tìm nạp dữ liệu của bạn và có các tính năng mới nhất:",
+        "blocking": "Cập nhật nó để tiếp tục tìm nạp dữ liệu của bạn:"
+      },
+      "button": {
+        "label": "Xem bản cập nhật"
+      }
+    }
+  },
+  "legacy": {
+    "fields": {
+      "access_token": {
+        "label": "Mã thông báo truy cập"
+      },
+      "accessTokenSecret": {
+        "label": "Mã bí mật mã thông báo truy cập"
+      },
+      "accountName": {
+        "label": "Tên tài khoản"
+      },
+      "agreement": {
+        "label": "Tôi đồng ý"
+      },
+      "apikey": {
+        "label": "Khóa API"
+      },
+      "appKey": {
+        "label": "Khóa ứng dụng"
+      },
+      "appSecret": {
+        "label": "Mã bí mật ứng dụng"
+      },
+      "authCode": {
+        "label": "Mã xác thực"
+      },
+      "bank_identifier": {
+        "label": "Mã định danh ngân hàng (tùy chọn)"
+      },
+      "branchName": {
+        "label": "Chi nhánh"
+      },
+      "cardNumber": {
+        "label": "Số thẻ"
+      },
+      "consumerKey": {
+        "label": "Khóa người tiêu dùng"
+      },
+      "consumerSecret": {
+        "label": "Mã bí mật người tiêu dùng"
+      },
+      "dob": {
+        "label": "Ngày sinh"
+      },
+      "folderPath": {
+        "label": "Đường dẫn thư mục"
+      },
+      "identifier": {
+        "label": "Mã định danh"
+      },
+      "loginUrl": {
+        "label": "URL đăng nhập"
+      },
+      "namePath": {
+        "label": "Tên thư mục"
+      },
+      "new_identifier": {
+        "label": "Mã định danh"
+      },
+      "phoneNumber": {
+        "label": "Số điện thoại"
+      },
+      "profileName": {
+        "label": "Tên hồ sơ"
+      },
+      "refreshToken": {
+        "label": "Mã thông báo làm mới"
+      },
+      "secret": {
+        "label": "Mật khẩu"
+      },
+      "timeout": {
+        "label": "Độ trễ (ms)"
+      },
+      "token": {
+        "label": "Mã thông báo"
+      },
+      "tricountUrl": {
+        "label": "URL Tricount"
+      }
+    }
+  },
+  "modal": {
+    "aria-label": "Cấu hình trình kết nối",
+    "konnector": {
+      "error": {
+        "title": "Không thể truy xuất tài khoản của bạn",
+        "description": "Không thể truy xuất tài khoản (%{message}).",
+        "button": "Đóng"
+      }
+    },
+    "accounts": {
+      "title": "Chọn một tài khoản %{name}",
+      "error": {
+        "title": "Lỗi",
+        "description": "Không thể truy xuất (các) tài khoản của bạn",
+        "retry": "Thử lại"
+      }
+    },
+    "tabs": {
+      "data": "Dữ liệu",
+      "configuration": "Cấu hình"
+    },
+    "addAccount": {
+      "title": "Kết nối với %{name}",
+      "button": "Thêm một tài khoản"
+    },
+    "deleteBIConnection": {
+      "title": "Ngắt kết nối ngân hàng",
+      "description": "Yêu cầu của bạn đã được ghi lại. Nó sẽ có hiệu lực trong giây lát. Dữ liệu đã nhập trước đó sẽ không bị xóa.",
+      "confirm-deletion": "Đóng"
+    },
+    "deleteAccount": {
+      "title": "Ngắt kết nối",
+      "description": "Tài khoản của bạn sẽ bị ngắt kết nối, nhưng dữ liệu đã được nhập sẽ được giữ lại.",
+      "confirm": "Ngắt kết nối",
+      "cancel": "Hủy"
+    },
+    "updateAccount": {
+      "general-subheader": "Chung",
+      "identifiers": "Mã định danh",
+      "delete-account-success": "Tài khoản đã bị ngắt kết nối",
+      "delete-account-error": "Không thể ngắt kết nối tài khoản, vui lòng thử lại sau hoặc liên hệ với bộ phận hỗ trợ của chúng tôi."
+    }
+  },
+  "oauth": {
+    "banking": {
+      "connect": {
+        "label": "Thêm ngân hàng của bạn"
+      },
+      "reconnect": {
+        "label": "Kết nối lại"
+      }
+    },
+    "reconnect": {
+      "label": "Kết nối lại"
+    },
+    "connect": {
+      "description": "Kết nối %{name} với Twake của bạn để đồng bộ hóa tài khoản và tự động truy xuất tất cả dữ liệu của bạn.",
+      "label": "Kết nối",
+      "submit": "Kết nối",
+      "title": "Kết nối với Twake của bạn"
+    },
+    "window": {
+      "title": "OAuth"
+    }
+  },
+  "triggerSuccessMessage": {
+    "button": {
+      "label": "Đóng"
+    },
+    "description": "Dữ liệu của bạn sẽ có sẵn trong vài phút và những dữ liệu tiếp theo sẽ tự động theo sau.",
+    "figure": {
+      "alt": "đã kết nối"
+    },
+    "title": "Cấu hình thành công!"
+  },
+  "twoFAForm": {
+    "modal-label": "Biểu mẫu xác thực hai yếu tố",
+    "providers": {
+      "default": "Nhập mã được gửi cho bạn qua e-mail hoặc SMS",
+      "email": "Nhập mã được gửi cho bạn qua e-mail",
+      "sms": "Nhập mã được gửi cho bạn qua SMS",
+      "app_code": "Nhập mã dùng một lần để tạo trong ứng dụng di động ${name}",
+      "app": "Sử dụng ứng dụng của nhà cung cấp để tiếp tục xác thực"
+    },
+    "desc-2fa": "Bạn cần mở ứng dụng của nhà cung cấp để xác nhận xác thực của mình. Trong một số trường hợp, bạn sẽ phải xác thực hai lần.",
+    "desc_1": "Mã này cho phép bạn hoàn thành kết nối của mình.",
+    "desc_2": "Mã thứ hai nhận được trên điện thoại di động hoặc qua email của bạn cho phép bạn hoàn tất kết nối của mình.",
+    "code": {
+      "label_1": "mã",
+      "label_2": "Mã thứ hai"
+    },
+    "retry": "Mã không hợp lệ, vui lòng nhập lại.",
+    "CTA": "Xác thực"
+  },
+  "account": {
+    "success": {
+      "title": "Cấu hình thành công!",
+      "connect": "Dữ liệu của bạn sẽ có sẵn trong vài phút và những dữ liệu tiếp theo sẽ tự động theo sau.",
+      "banksLinkText": "Xem tài khoản của tôi trong %{appName}",
+      "driveLinkText": "Mở thư mục trong Twake Drive",
+      "button": "Đóng"
+    }
+  },
+  "maintenance": {
+    "noService": "Dịch vụ bị gián đoạn",
+    "explanationTitle": "Có chuyện gì đang xảy ra vậy?"
+  },
+  "suggestions": {
+    "title": "Nhập dữ liệu của bạn từ %{name}",
+    "data": "Cài đặt %{name} sẽ tự động nhập các dữ liệu sau:",
+    "why": "Tại sao %{name} được đề xuất cho tôi?",
+    "reason_bank": "%{name} đã được phát hiện trong một trong các giao dịch ngân hàng của bạn. Đừng lo, không ai khác có thể truy cập thông tin này",
+    "install": "Cài đặt",
+    "silence": "Không đề xuất lại"
+  },
+  "dataType": {
+    "none": "%{name} sẽ không truy cập bất kỳ dữ liệu cá nhân nào của bạn",
+    "activity": "Các hoạt động của bạn",
+    "appointment": "Các cuộc hẹn của bạn",
+    "bankTransactions": "Các giao dịch ngân hàng của bạn",
+    "bankAccounts": "Các tài khoản ngân hàng của bạn",
+    "bill": "Các hóa đơn của bạn",
+    "bloodPressure": "Huyết áp của bạn",
+    "calendar": "Các lịch của bạn",
+    "certificate": "Các chứng chỉ của bạn",
+    "commit": "Các cam kết của bạn",
+    "consumption": "Lượng tiêu thụ của bạn",
+    "contact": "Danh bạ của bạn",
+    "contract": "Các hợp đồng của bạn",
+    "courseMaterial": "Tài liệu khóa học của bạn",
+    "document": "Tài liệu của bạn",
+    "event": "Các sự kiện của bạn",
+    "family": "Thông tin gia đình của bạn",
+    "geopoint": "Vị trí địa lý của bạn",
+    "heartbeat": "Nhịp tim của bạn",
+    "home": "Thông tin nhà của bạn",
+    "phonecommunicationlog": "Nhật ký liên lạc điện thoại của bạn",
+    "picture": "Ảnh của bạn",
+    "podcast": "Podcast của bạn",
+    "profile": "Hồ sơ khách hàng của bạn",
+    "refund": "Các khoản hoàn tiền của bạn",
+    "sinister": "Các vụ việc của bạn",
+    "sleepTime": "Thời gian ngủ của bạn",
+    "stepsNumber": "Số bước của bạn",
+    "temperature": "Dữ liệu nhiệt độ của bạn",
+    "travelDate": "Ngày đi lại của bạn",
+    "tweet": "Các tweet của bạn",
+    "videostream": "Các video của bạn",
+    "weight": "Cân nặng của bạn"
+  },
+  "vaultCiphersList": {
+    "title": "Bạn muốn nhập dữ liệu của mình từ tài khoản nào?",
+    "otherAccount": "Từ một tài khoản khác…"
+  },
+  "triggerManager": {
+    "confirmationModal": {
+      "title": "Cập nhật thông tin đăng nhập?",
+      "description": "Thông tin đăng nhập trước đó của bạn sẽ bị mất vĩnh viễn. Thêm một tài khoản mới để giữ chúng.",
+      "primaryText": "Cập nhật",
+      "secondaryText": "Hủy"
+    }
+  },
+  "connectionBackdrop": {
+    "connecting": "Đang kết nối",
+    "progress": "Thiết lập kết nối với %{name} có thể mất đến 30 giây..."
+  },
+  "disconnectedAccountModal": {
+    "disconnected-help": "Tài khoản này đã bị ngắt kết nối. Dữ liệu của bạn đã được giữ lại. Nếu bạn muốn khởi động lại quá trình đồng bộ hóa, vui lòng cấu hình lại tài khoản của bạn bằng nút \"Thêm ngân hàng\"."
+  },
+  "konnectorBlock": {
+    "open": "Mở trang web",
+    "store": {
+      "primary": "Xem trong cửa hàng Twake Workplace",
+      "secondary": "Truy cập mô tả của ứng dụng này"
+    },
+    "disconnected": "Đã ngắt kết nối",
+    "inMaintenance": "Đang bảo trì",
+    "hasNewVersionAvailable": "Có phiên bản mới",
+    "fatalError": "Đã xảy ra lỗi khi khôi phục dịch vụ. Nếu vấn đề này vẫn tiếp diễn, đừng ngần ngại liên hệ với chúng tôi tại [%{name}](%{link})"
+  },
+  "datacards": {
+    "trips": {
+      "title": "Các chuyến đi gần đây",
+      "caption": "Xem 5 chuyến đi gần đây nhất của bạn được truy xuất trên %{konnectorName}",
+      "modes": {
+        "AIR_OR_HSR": "Máy bay",
+        "BICYCLING": "Xe đạp",
+        "BUS": "Xe buýt",
+        "CAR": "Xe hơi",
+        "IN_VEHICLE": "Phương tiện",
+        "TRAIN": "Tàu hỏa",
+        "UNKNOWN": "Không xác định",
+        "WALKING": "Đi bộ",
+        "ON_FOOT": "Đi bộ",
+        "RUNNING": "Chạy"
+      }
+    },
+    "files": {
+      "title": "Tài liệu của bạn",
+      "imported": "Đã nhập vào %{date}",
+      "caption": "Dịch vụ này truy xuất các tài liệu mới nhất của bạn và giữ một bản sao lưu đầy đủ cho bạn."
+    }
+  }
+}
