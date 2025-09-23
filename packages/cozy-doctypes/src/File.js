@@ -14,14 +14,15 @@ class CozyFile extends Document {
    *
    * @param  {string} dirID  The id of the parent directory
    * @param  {string} name   The file's name
+   * @param  {string} driveId The id of shared drive
    * @return {string}        The full path of the file in the cozy
    **/
-  static async getFullpath(dirId, name) {
+  static async getFullpath(dirId, name, driveId) {
     if (!dirId) {
       throw new Error('You must provide a dirId')
     }
 
-    const parentDir = await this.get(dirId)
+    const parentDir = await this.get(dirId, driveId)
     const parentDirectoryPath = trimEnd(parentDir.path, '/')
     return `${parentDirectoryPath}/${name}`
   }
@@ -174,6 +175,7 @@ class CozyFile extends Document {
    * @param {String} conflictStrategy Actually only 2 hardcoded strategies 'erase' or 'rename'
    * @param {Object} metadata An object containing the metadata to attach
    * @param {String} contentType content type of the file
+   * @param {String} driveId id of shared drive
    */
   static async uploadFileWithConflictStrategy(
     name,
@@ -181,12 +183,15 @@ class CozyFile extends Document {
     dirId,
     conflictStrategy,
     metadata,
-    contentType
+    contentType,
+    driveId
   ) {
-    const filesCollection = this.cozyClient.collection('io.cozy.files')
+    const filesCollection = this.cozyClient.collection('io.cozy.files', {
+      driveId
+    })
 
     try {
-      const path = await CozyFile.getFullpath(dirId, name)
+      const path = await CozyFile.getFullpath(dirId, name, driveId)
 
       const existingFile = await filesCollection.statByPath(path)
       const { id: fileId } = existingFile.data
@@ -214,12 +219,20 @@ class CozyFile extends Document {
           dirId,
           conflictStrategy,
           metadata,
-          contentType
+          contentType,
+          driveId
         )
       }
     } catch (error) {
       if (/Not Found/.test(error.message)) {
-        return await CozyFile.upload(name, file, dirId, metadata, contentType)
+        return await CozyFile.upload(
+          name,
+          file,
+          dirId,
+          metadata,
+          contentType,
+          driveId
+        )
       }
       throw error
     }
@@ -231,15 +244,25 @@ class CozyFile extends Document {
    * @param {String} dirId
    * @param {Object} metadata
    * @param {String} contentType
+   * @param {String} driveId
    */
-  static async upload(name, file, dirId, metadata, contentType = 'image/jpeg') {
-    return this.cozyClient.collection('io.cozy.files').createFile(file, {
-      name,
-      dirId,
-      contentType,
-      lastModifiedDate: new Date(),
-      metadata
-    })
+  static async upload(
+    name,
+    file,
+    dirId,
+    metadata,
+    contentType = 'image/jpeg',
+    driveId
+  ) {
+    return this.cozyClient
+      .collection('io.cozy.files', { driveId })
+      .createFile(file, {
+        name,
+        dirId,
+        contentType,
+        lastModifiedDate: new Date(),
+        metadata
+      })
   }
 }
 

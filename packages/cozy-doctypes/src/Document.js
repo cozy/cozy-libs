@@ -163,10 +163,11 @@ class Document {
    * Returns the item that has this id
    *
    * @param {string} id - The id of an item in the collection
+   * @param {string} driveId - The id of shared drive
    * @returns {object}  - The collection's item that has this id
    *
    */
-  static async get(id) {
+  static async get(id, driveId) {
     if (!this.usesCozyClient()) {
       throw new Error('This method is not implemented with cozy-client-js')
     }
@@ -175,7 +176,9 @@ class Document {
       throw new Error('doctype is not defined')
     }
 
-    const resp = await this.cozyClient.query(Q(this.doctype).getById(id))
+    const resp = await this.cozyClient.query(
+      Q(this.doctype).getById(id).sharingById(driveId)
+    )
     return resp.data
   }
 

@@ -54,9 +54,10 @@ describe('File model', () => {
       parentDirPath = '/GrandParent/Parent'
       const result = await CozyFile.getFullpath('parent', 'mydoc.odt')
       expect(cozyClient.stackClient.collection).toHaveBeenCalledWith(
-        'io.cozy.files'
+        'io.cozy.files',
+        expect.any(Object)
       )
-      expect(getSpy).toHaveBeenCalledWith('parent')
+      expect(getSpy).toHaveBeenCalledWith('parent', expect.any(Object))
       expect(result).toEqual('/GrandParent/Parent/mydoc.odt')
     })
 
@@ -64,9 +65,10 @@ describe('File model', () => {
       parentDirPath = '/'
       const result = await CozyFile.getFullpath('parent', 'mydoc.odt')
       expect(cozyClient.stackClient.collection).toHaveBeenCalledWith(
-        'io.cozy.files'
+        'io.cozy.files',
+        expect.any(Object)
       )
-      expect(getSpy).toHaveBeenCalledWith('parent')
+      expect(getSpy).toHaveBeenCalledWith('parent', expect.any(Object))
       expect(result).toEqual('/mydoc.odt')
     })
   })
