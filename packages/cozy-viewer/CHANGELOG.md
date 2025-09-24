@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [23.5.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@23.4.6...cozy-viewer@23.5.0) (2025-09-24)
+
+### Features
+
+- **cozy-viewer:** Add ru and vi locales ([ef1dfa8](https://github.com/cozy/cozy-libs/commit/ef1dfa8243f561f1ab0c31807af2438c31f42a52))
+
 ## [23.4.6](https://github.com/cozy/cozy-libs/compare/cozy-viewer@23.4.5...cozy-viewer@23.4.6) (2025-09-23)
 
 **Note:** Version bump only for package cozy-viewer

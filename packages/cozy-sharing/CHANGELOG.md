@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [26.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.2.1...cozy-sharing@26.3.0) (2025-09-24)
+
+### Features
+
+- **cozy-sharing:** Add ru and vi locales ([01e74e3](https://github.com/cozy/cozy-libs/commit/01e74e376ccb2156e5f565ad6e41156e6ef079f4))
+
 ## [26.2.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.2.0...cozy-sharing@26.2.1) (2025-09-23)
 
 ### Bug Fixes

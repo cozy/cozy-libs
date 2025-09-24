@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.10.0...cozy-search@0.11.0) (2025-09-24)
+
+### Features
+
+- **cozy-search:** Add ru and vi locales ([aa77667](https://github.com/cozy/cozy-libs/commit/aa7766717698176b7fbb16802230d02fe084edc3))
+
 # [0.10.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.9.1...cozy-search@0.10.0) (2025-09-19)
 
 ### Features
