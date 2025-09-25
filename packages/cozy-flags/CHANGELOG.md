@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.8.0](https://github.com/cozy/cozy-libs/compare/cozy-flags@4.7.0...cozy-flags@4.8.0) (2025-09-25)
+
+### Features
+
+- Upgrade peerDep for flags and sharing ([4bb85b9](https://github.com/cozy/cozy-libs/commit/4bb85b94fafb5937beb9e1515a71f60fe7cbca2f))
+
 # [4.7.0](https://github.com/cozy/cozy-libs/compare/cozy-flags@4.6.1...cozy-flags@4.7.0) (2025-03-11)
 
 ### Features

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [26.4.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.3.0...cozy-sharing@26.4.0) (2025-09-25)
+
+### Features
+
+- Upgrade peerDep for flags and sharing ([4bb85b9](https://github.com/cozy/cozy-libs/commit/4bb85b94fafb5937beb9e1515a71f60fe7cbca2f))
+
 # [26.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.2.1...cozy-sharing@26.3.0) (2025-09-24)
 
 ### Features
