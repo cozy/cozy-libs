@@ -70,6 +70,15 @@ export const allowDoubleSubscriptions = true
 export const requireDoubleUnsubscriptions = true
 
 /**
+ * Close the socket after this period of time if the page becomes hidden
+ * (ie: in a background tab or a minimized window)
+ *
+ * @type {numeric}
+ * @private
+ */
+export const closeIfHiddenFor = 30 * min
+
+/**
  * If one subscribe multiple times to the exact same event with the exact
  * same handler, this function is called. You are welcome to add any
  * log or warning you wish, or even to throw an exception.
