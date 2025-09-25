@@ -42,7 +42,7 @@
   },
   "peerDependencies": {
     "cozy-client": ">=20.0.0",
-    "react": "^16.12.0"
+    "react": ">=16.12.0"
   },
   "dependencies": {
     "microee": "^0.0.6"

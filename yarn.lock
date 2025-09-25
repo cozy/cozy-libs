@@ -16950,7 +16950,7 @@ __metadata:
     typescript: "npm:5.5.2"
   peerDependencies:
     cozy-client: ">=20.0.0"
-    react: ^16.12.0
+    react: ">=16.12.0"
   bin:
     cozy-flags: ./bin/cozy-flags
   languageName: unknown
@@ -17413,9 +17413,9 @@ __metadata:
     cozy-intent: ">=2.29.1"
     cozy-minilog: ">=3.9.1"
     cozy-ui: ">=128.3.5"
-    prop-types: ^15.7.2
-    react: ^16.12.0
-    react-router: ^5.0.1
+    prop-types: ">=15.7.2"
+    react: ">=16.12.0"
+    react-router: ">=5.0.1"
   languageName: unknown
   linkType: soft
 
