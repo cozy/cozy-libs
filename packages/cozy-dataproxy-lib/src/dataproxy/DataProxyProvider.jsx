@@ -148,7 +148,7 @@ export const DataProxyProvider = React.memo(({ children, options = {} }) => {
     } else {
       initIframe()
     }
-  }, [client, webviewIntent])
+  }, [client, webviewIntent, options])
 
   const onIframeLoaded = useCallback(() => {
     const ifr = document.getElementById('DataProxy')
@@ -177,12 +177,12 @@ export const DataProxyProvider = React.memo(({ children, options = {} }) => {
     [onIframeLoaded]
   )
 
-  useEffect(function () {
+  useEffect(() => {
     window.addEventListener('message', onReceiveMessage)
-    return function () {
+    return () => {
       window.removeEventListener('message', onReceiveMessage)
     }
-  })
+  }, [onReceiveMessage])
 
   useEffect(() => {
     const doAsync = async () => {
@@ -199,11 +199,11 @@ export const DataProxyProvider = React.memo(({ children, options = {} }) => {
       // Request through cozy-client
       const requestLink = async (operation, options) => {
         log.log('Send request to DataProxy : ', operation)
-        if (options.fetchPolicy) {
+        if (options?.fetchPolicy) {
           // Functions cannot be serialized and thus passed to the iframe
           delete options.fetchPolicy
         }
-        return dataProxyCom.requestLink(operation, options)
+        return dataProxyCom.requestLink?.(operation, options)
       }
       const newDataProxy = {
         dataProxyServicesAvailable,
@@ -211,7 +211,6 @@ export const DataProxyProvider = React.memo(({ children, options = {} }) => {
         search,
         requestLink
       }
-
       client.links.forEach(link => {
         if (link.registerDataProxy) {
           // This is required as the DataProxy is not ready when the DataProxyLink is created
@@ -224,7 +223,8 @@ export const DataProxyProvider = React.memo(({ children, options = {} }) => {
     if (dataProxyCom && client?.links) {
       doAsync()
     }
-  }, [dataProxyCom, client, dataProxyServicesAvailable])
+  }, [dataProxyCom, client, dataProxyServicesAvailable, options])
+
   const reloadIframe = useCallback(() => {
     setIframeVersion(v => v + 1)
   }, [])
