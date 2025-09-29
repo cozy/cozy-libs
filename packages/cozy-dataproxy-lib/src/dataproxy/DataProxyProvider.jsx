@@ -158,17 +158,20 @@ export const DataProxyProvider = React.memo(({ children, options = {} }) => {
 
   const onReceiveMessage = useCallback(
     event => {
-      if (!event.origin.includes('dataproxy')) {
-        return
-      }
-      const eventData = event?.data
-      if (eventData && typeof eventData === 'object') {
+      try {
+        if (typeof event.origin !== 'string') return
+        if (!event.origin.includes('dataproxy')) return
+        const d = event?.data
         if (
-          eventData.type === 'DATAPROXYMESSAGE' &&
-          eventData.payload === 'READY'
+          d &&
+          typeof d === 'object' &&
+          d.type === 'DATAPROXYMESSAGE' &&
+          d.payload === 'READY'
         ) {
           onIframeLoaded()
         }
+      } catch (e) {
+        log.error('[DataProxy] onReceiveMessage error', e)
       }
     },
     [onIframeLoaded]
