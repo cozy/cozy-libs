@@ -29,6 +29,26 @@ export const useDataProxy = () => {
   return context
 }
 
+// See https://legacy.reactjs.org/docs/error-boundaries.html
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { hasError: false }
+  }
+  static getDerivedStateFromError() {
+    return { hasError: true }
+  }
+  componentDidCatch(e) {
+    log.error('[DataProxy iframe errors]', e)
+  }
+  render() {
+    if (this.state.hasError) {
+      return null
+    }
+    return this.props.children ?? null
+  }
+}
+
 export const DataProxyProvider = React.memo(({ children, options = {} }) => {
   const client = useClient()
   const webviewIntent = useWebviewIntent()
@@ -37,9 +57,12 @@ export const DataProxyProvider = React.memo(({ children, options = {} }) => {
   const [dataProxy, setDataProxy] = useState()
   const [dataProxyServicesAvailable, setDataProxyServicesAvailable] =
     useState(undefined)
+  const [iframeVersion, setIframeVersion] = useState(0)
 
   useEffect(() => {
-    if (!client) return
+    if (!client) {
+      return
+    }
 
     const initIframe = async () => {
       try {
@@ -199,23 +222,35 @@ export const DataProxyProvider = React.memo(({ children, options = {} }) => {
       doAsync()
     }
   }, [dataProxyCom, client, dataProxyServicesAvailable])
+  const reloadIframe = useCallback(() => {
+    setIframeVersion(v => v + 1)
+  }, [])
+
+  const iframeKey = `${iframeUrl}::${iframeVersion}` // Useful to force iframe reload when key change
 
   return (
     <DataProxyContext.Provider value={dataProxy || defaultValue}>
-      {children}
-      {iframeUrl ? (
-        <iframe
-          id="DataProxy"
-          src={iframeUrl}
-          width={0}
-          height={0}
-          style={{
-            width: 0,
-            height: 0
-          }}
-          sandbox="allow-same-origin allow-scripts"
-        ></iframe>
-      ) : undefined}
+      {children ?? null}
+      <ErrorBoundary>
+        {iframeUrl ? (
+          <iframe
+            key={iframeKey}
+            id="DataProxy"
+            src={iframeUrl}
+            width={0}
+            height={0}
+            style={{
+              width: 0,
+              height: 0
+            }}
+            sandbox="allow-same-origin allow-scripts"
+            onError={() => {
+              log.error('[DataProxy] iframe load error')
+              reloadIframe()
+            }}
+          ></iframe>
+        ) : null}
+      </ErrorBoundary>
     </DataProxyContext.Provider>
   )
 })
