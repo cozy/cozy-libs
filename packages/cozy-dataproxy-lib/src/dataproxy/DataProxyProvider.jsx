@@ -9,7 +9,17 @@ import Minilog from 'cozy-minilog'
 
 const log = Minilog('👷‍♂️ [DataProxyProvider]')
 
-export const DataProxyContext = React.createContext()
+const noop = async () => {
+  throw new Error('[DataProxy] not ready')
+}
+const defaultValue = Object.freeze({
+  dataProxyServicesAvailable: false,
+  ready: false,
+  search: noop,
+  requestLink: noop
+})
+
+export const DataProxyContext = React.createContext(defaultValue)
 
 export const useDataProxy = () => {
   const context = useContext(DataProxyContext)
@@ -171,6 +181,7 @@ export const DataProxyProvider = React.memo(({ children, options = {} }) => {
       }
       const newDataProxy = {
         dataProxyServicesAvailable,
+        ready: Boolean(dataProxyCom),
         search,
         requestLink
       }
@@ -190,7 +201,7 @@ export const DataProxyProvider = React.memo(({ children, options = {} }) => {
   }, [dataProxyCom, client, dataProxyServicesAvailable])
 
   return (
-    <DataProxyContext.Provider value={dataProxy || {}}>
+    <DataProxyContext.Provider value={dataProxy || defaultValue}>
       {children}
       {iframeUrl ? (
         <iframe
