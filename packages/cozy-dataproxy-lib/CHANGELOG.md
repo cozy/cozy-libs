@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.9.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.8.2...cozy-dataproxy-lib@4.9.0) (2025-09-30)
+
+### Bug Fixes
+
+- Dependencies array ([22db81d](https://github.com/cozy/cozy-libs/commit/22db81d7cd5fad9e7f7743f891d6d1e1e8be7fba))
+- Do not crash on onReceiveMessage ([604585b](https://github.com/cozy/cozy-libs/commit/604585b5c7a029037c87638288fa79ec03253080))
+
+### Features
+
+- Use default value for provider ([9691571](https://github.com/cozy/cozy-libs/commit/9691571c694bb3f8fa596c10855d4eeca616f92f))
+- Use error boundary component ([639e61d](https://github.com/cozy/cozy-libs/commit/639e61dc38b6471e8d80d621f3b30033713c8e2a))
+
 ## [4.8.2](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.8.1...cozy-dataproxy-lib@4.8.2) (2025-09-25)
 
 **Note:** Version bump only for package cozy-dataproxy-lib
