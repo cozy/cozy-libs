@@ -5,7 +5,6 @@ import CozyClient from 'cozy-client'
 import { SearchEngine } from './SearchEngine'
 import { SEARCH_SCHEMA } from './consts'
 import { getPouchLink } from './helpers/client'
-import { setFilePaths, computeFileFullpath } from './helpers/filePaths'
 import { getSearchEncoder } from './helpers/getSearchEncoder'
 import { shouldKeepApp } from './helpers/normalizeApp'
 import { shouldKeepFile } from './helpers/normalizeFile'
@@ -33,8 +32,7 @@ export const initSearchIndex = (
 
 export const indexAllDocs = (
   flexsearchIndex: FlexSearch.Document<CozyDoc, false>,
-  docs: CozyDoc[],
-  isLocalSearch: boolean
+  docs: CozyDoc[]
 ): FlexSearch.Document<CozyDoc, false> => {
   for (const doc of docs) {
     if (shouldIndexDoc(doc)) {
@@ -44,24 +42,16 @@ export const indexAllDocs = (
       flexsearchIndex.remove(doc._id!)
     }
   }
-  if (isLocalSearch) {
-    setFilePaths(docs) // Necessary to keep track of local file paths
-  }
+
   return flexsearchIndex
 }
 
-export const indexSingleDoc = async (
-  client: CozyClient,
+export const indexSingleDoc = (
   flexsearchIndex: FlexSearch.Document<CozyDoc, false>,
   doc: CozyDoc
-): Promise<void> => {
+): void => {
   if (shouldIndexDoc(doc)) {
-    let docToIndex = doc
-    if (isIOCozyFile(doc)) {
-      // Add path for files
-      docToIndex = await computeFileFullpath(client, doc)
-    }
-    flexsearchIndex.add(docToIndex)
+    flexsearchIndex.add(doc)
   } else {
     // Should not index doc: remove it from index if it exists
     flexsearchIndex.remove(doc._id!)
@@ -90,11 +80,7 @@ export const indexOnChanges = async (
       searchIndex.index.remove(change.id)
     } else {
       const normalizedDoc = { ...change.doc, _type: doctype } as CozyDoc
-      await indexSingleDoc(
-        searchEngine.client,
-        searchIndex.index,
-        normalizedDoc
-      )
+      indexSingleDoc(searchIndex.index, normalizedDoc)
     }
   }
 
@@ -107,13 +93,10 @@ export const initDoctypeAfterIndexImport = async (
   client: CozyClient,
   doctype: string
 ): Promise<void> => {
-  // Query the local database to load documents in store
-  const docs = await queryLocalOrRemoteDocs(client, doctype, {
+  // Query all files to load documents and compute paths
+  await queryLocalOrRemoteDocs(client, doctype, {
     isLocalSearch: true
   })
-  // If we are here, the data is locally queried. And paths are not stored in db, so
-  // we need to compute file paths from files docs
-  setFilePaths(docs)
 }
 
 const shouldIndexDoc = (doc: CozyDoc): boolean => {

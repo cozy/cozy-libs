@@ -2,7 +2,6 @@ import CozyClient, { generateWebLink, models } from 'cozy-client'
 import { IOCozyContact } from 'cozy-client/types/types'
 import Minilog from 'cozy-minilog'
 
-import { getFilePath } from './filePaths'
 import { APPS_DOCTYPE, TYPE_DIRECTORY } from '../consts'
 import { queryDocsByIds } from '../queries'
 import {
@@ -42,7 +41,7 @@ export const getCleanedFilePath = (doc: CozyDoc): CozyDoc => {
   if (!isIOCozyFile(doc)) {
     return doc
   }
-  const path = doc.path ? doc.path : getFilePath(doc._id)
+  const path = doc.path
   if (!path) {
     // Paths should be completed for both files and directories, at indexing time
     log.warn(`No path found for ${doc._id}}`)
