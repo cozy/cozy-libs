@@ -227,7 +227,7 @@ export class SearchEngine {
     if (this.isLocalSearch) {
       this.debouncedReplication()
     }
-    void indexSingleDoc(this.client, searchIndex.index, doc)
+    indexSingleDoc(searchIndex.index, doc)
   }
 
   handleDeletedDoc(doc: CozyDoc): void {
@@ -289,7 +289,7 @@ export class SearchEngine {
     const startTimeIndex = performance.now()
 
     const flexsearchIndex = initSearchIndex(doctype)
-    indexAllDocs(flexsearchIndex, docs, this.isLocalSearch)
+    indexAllDocs(flexsearchIndex, docs)
 
     const endTimeIndex = performance.now()
     log.debug(
