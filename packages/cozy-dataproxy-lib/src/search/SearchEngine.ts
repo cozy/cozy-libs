@@ -428,8 +428,11 @@ export class SearchEngine {
     let searchResults: FlexSearchResultWithDoctype[] = []
     for (const key in this.searchIndexes) {
       const doctype = key as SearchedDoctype // XXX - Should not be necessary
-
-      if (searchOnDoctypes && !searchOnDoctypes.includes(doctype)) {
+      if (
+        searchOnDoctypes &&
+        searchOnDoctypes?.length > 0 &&
+        !searchOnDoctypes.includes(doctype)
+      ) {
         // Search only on specified doctypes
         continue
       }
@@ -520,7 +523,7 @@ export class SearchEngine {
   ): EnrichedSearchResult[] {
     return searchResults.sort((a, b) => {
       let doctypeComparison
-      if (doctypesOrder) {
+      if (doctypesOrder && doctypesOrder.length > 0) {
         doctypeComparison =
           doctypesOrder.findIndex(dt => dt === a.doctype) -
           doctypesOrder.findIndex(dt => dt === b.doctype)
