@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.9.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.9.0...cozy-dataproxy-lib@4.9.1) (2025-10-03)
+
+### Bug Fixes
+
+- Infinite render when default option ([15ee45d](https://github.com/cozy/cozy-libs/commit/15ee45d972a7a66f91bb290d48efd5f3dda513c0))
+
 # [4.9.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.8.2...cozy-dataproxy-lib@4.9.0) (2025-09-30)
 
 ### Bug Fixes
