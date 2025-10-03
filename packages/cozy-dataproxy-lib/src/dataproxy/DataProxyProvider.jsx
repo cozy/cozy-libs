@@ -195,8 +195,7 @@ export const DataProxyProvider = React.memo(
       const doAsync = async () => {
         // Make a global search
         const search = async (search, searchOptions) => {
-          log.log('Send search query to DataProxy: ', search)
-          log.log('optins: ', searchOptions)
+          log.log('Send search query to DataProxy: ', search, searchOptions)
           const result = await dataProxyCom.search(search, {
             ...options,
             ...searchOptions
@@ -235,6 +234,7 @@ export const DataProxyProvider = React.memo(
 
     const reloadIframe = useCallback(() => {
       setIframeVersion(v => v + 1)
+      log.log('Reload iframe with new version ', iframeVersion)
     }, [])
 
     const iframeKey = `${iframeUrl}::${iframeVersion}` // Useful to force iframe reload when key change
