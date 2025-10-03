@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.9.2](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.9.1...cozy-dataproxy-lib@4.9.2) (2025-10-03)
+
+### Bug Fixes
+
+- Empty doctype array ([92175f6](https://github.com/cozy/cozy-libs/commit/92175f602dd859ff8f0b6963f24cdaa680643b75))
+
 ## [4.9.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.9.0...cozy-dataproxy-lib@4.9.1) (2025-10-03)
 
 ### Bug Fixes
