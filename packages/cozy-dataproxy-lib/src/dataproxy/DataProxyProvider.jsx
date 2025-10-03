@@ -49,213 +49,221 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-export const DataProxyProvider = React.memo(({ children, options = {} }) => {
-  const client = useClient()
-  const webviewIntent = useWebviewIntent()
-  const [iframeUrl, setIframeUrl] = useState()
-  const [dataProxyCom, setDataProxyCom] = useState()
-  const [dataProxy, setDataProxy] = useState()
-  const [dataProxyServicesAvailable, setDataProxyServicesAvailable] =
-    useState(undefined)
-  const [iframeVersion, setIframeVersion] = useState(0)
+const DEFAULT_OPTS = { doctypes: [] }
 
-  useEffect(() => {
-    if (!client) {
-      return
-    }
+export const DataProxyProvider = React.memo(
+  ({ children, options = DEFAULT_OPTS }) => {
+    const client = useClient()
+    const webviewIntent = useWebviewIntent()
+    const [iframeUrl, setIframeUrl] = useState()
+    const [dataProxyCom, setDataProxyCom] = useState()
+    const [dataProxy, setDataProxy] = useState()
+    const [dataProxyServicesAvailable, setDataProxyServicesAvailable] =
+      useState(undefined)
+    const [iframeVersion, setIframeVersion] = useState(0)
 
-    const initIframe = async () => {
-      try {
-        log.log('Initializing DataProxy intent')
-        const result = await client.stackClient.fetchJSON('POST', '/intents', {
-          data: {
-            type: 'io.cozy.intents',
-            attributes: {
-              action: 'OPEN',
-              type: 'io.cozy.dataproxy',
-              permissions: ['GET']
+    useEffect(() => {
+      if (!client) {
+        return
+      }
+
+      const initIframe = async () => {
+        try {
+          log.log('Initializing DataProxy intent')
+          const result = await client.stackClient.fetchJSON(
+            'POST',
+            '/intents',
+            {
+              data: {
+                type: 'io.cozy.intents',
+                attributes: {
+                  action: 'OPEN',
+                  type: 'io.cozy.dataproxy',
+                  permissions: ['GET']
+                }
+              }
             }
+          )
+
+          if (!result.data?.attributes?.services?.[0]?.href) {
+            log.log(
+              'No dataproxy intent available, dataproxy features will be disabled'
+            )
+            setDataProxyServicesAvailable(false)
+            return
+          }
+
+          setIframeUrl(result.data.attributes.services[0]?.href)
+          setDataProxyServicesAvailable(true)
+        } catch (error) {
+          setDataProxyServicesAvailable(false)
+          log.error(
+            'Error while initializing Search intent, dataproxy features will be disabled',
+            error
+          )
+        }
+      }
+
+      const initFlagship = async () => {
+        try {
+          if (!webviewIntent) {
+            // We do not set dataProxyServicesAvailable to false here
+            // because we are waiting webviewIntent to be initialized
+            return
+          }
+
+          log.log('Initializing DataProxy intent in Flagship app')
+          const isSearchAvailable =
+            (await webviewIntent.call('isAvailable', 'search')) ?? false
+
+          if (!isSearchAvailable) {
+            log.log(
+              'Dataproxy features will be disabled due to feature not supported by Flagship app'
+            )
+            setDataProxyServicesAvailable(false)
+            return
+          }
+
+          setDataProxyCom(() => ({
+            search: (search, searchOptions) =>
+              webviewIntent?.call('search', search, {
+                ...options,
+                ...searchOptions
+              })
+          }))
+
+          setDataProxyServicesAvailable(isSearchAvailable)
+        } catch (error) {
+          setDataProxyServicesAvailable(false)
+          log.error(
+            `Error while initializing Flagship's Search, dataproxy features will be disabled`,
+            error
+          )
+        }
+      }
+
+      if (!flag('cozy.search.enabled')) {
+        log.log(
+          'Dataproxy features will be disabled due to missing feature flags'
+        )
+        setDataProxyServicesAvailable(false)
+        return
+      }
+
+      if (isFlagshipApp()) {
+        initFlagship()
+      } else {
+        initIframe()
+      }
+    }, [client, webviewIntent, options])
+
+    const onIframeLoaded = useCallback(() => {
+      const ifr = document.getElementById('DataProxy')
+      const remote = Comlink.wrap(Comlink.windowEndpoint(ifr.contentWindow))
+      setDataProxyCom(() => remote)
+    }, [setDataProxyCom])
+
+    const onReceiveMessage = useCallback(
+      event => {
+        try {
+          if (typeof event.origin !== 'string') return
+          if (!event.origin.includes('dataproxy')) return
+          const d = event?.data
+          if (
+            d &&
+            typeof d === 'object' &&
+            d.type === 'DATAPROXYMESSAGE' &&
+            d.payload === 'READY'
+          ) {
+            onIframeLoaded()
+          }
+        } catch (e) {
+          log.error('[DataProxy] onReceiveMessage error', e)
+        }
+      },
+      [onIframeLoaded]
+    )
+
+    useEffect(() => {
+      window.addEventListener('message', onReceiveMessage)
+      return () => {
+        window.removeEventListener('message', onReceiveMessage)
+      }
+    }, [onReceiveMessage])
+
+    useEffect(() => {
+      const doAsync = async () => {
+        // Make a global search
+        const search = async (search, searchOptions) => {
+          log.log('Send search query to DataProxy: ', search)
+          const result = await dataProxyCom.search(search, {
+            ...options,
+            ...searchOptions
+          })
+          return result
+        }
+
+        // Request through cozy-client
+        const requestLink = async (operation, options) => {
+          log.log('Send request to DataProxy : ', operation)
+          if (options?.fetchPolicy) {
+            // Functions cannot be serialized and thus passed to the iframe
+            delete options.fetchPolicy
+          }
+          return dataProxyCom.requestLink?.(operation, options)
+        }
+        const newDataProxy = {
+          dataProxyServicesAvailable,
+          ready: Boolean(dataProxyCom),
+          search,
+          requestLink
+        }
+        client.links.forEach(link => {
+          if (link.registerDataProxy) {
+            // This is required as the DataProxy is not ready when the DataProxyLink is created
+            link.registerDataProxy(newDataProxy)
           }
         })
 
-        if (!result.data?.attributes?.services?.[0]?.href) {
-          log.log(
-            'No dataproxy intent available, dataproxy features will be disabled'
-          )
-          setDataProxyServicesAvailable(false)
-          return
-        }
-
-        setIframeUrl(result.data.attributes.services[0]?.href)
-        setDataProxyServicesAvailable(true)
-      } catch (error) {
-        setDataProxyServicesAvailable(false)
-        log.error(
-          'Error while initializing Search intent, dataproxy features will be disabled',
-          error
-        )
+        setDataProxy(newDataProxy)
       }
-    }
-
-    const initFlagship = async () => {
-      try {
-        if (!webviewIntent) {
-          // We do not set dataProxyServicesAvailable to false here
-          // because we are waiting webviewIntent to be initialized
-          return
-        }
-
-        log.log('Initializing DataProxy intent in Flagship app')
-        const isSearchAvailable =
-          (await webviewIntent.call('isAvailable', 'search')) ?? false
-
-        if (!isSearchAvailable) {
-          log.log(
-            'Dataproxy features will be disabled due to feature not supported by Flagship app'
-          )
-          setDataProxyServicesAvailable(false)
-          return
-        }
-
-        setDataProxyCom(() => ({
-          search: (search, searchOptions) =>
-            webviewIntent?.call('search', search, {
-              ...options,
-              ...searchOptions
-            })
-        }))
-
-        setDataProxyServicesAvailable(isSearchAvailable)
-      } catch (error) {
-        setDataProxyServicesAvailable(false)
-        log.error(
-          `Error while initializing Flagship's Search, dataproxy features will be disabled`,
-          error
-        )
+      if (dataProxyCom && client?.links) {
+        doAsync()
       }
-    }
+    }, [dataProxyCom, client, dataProxyServicesAvailable, options])
 
-    if (!flag('cozy.search.enabled')) {
-      log.log(
-        'Dataproxy features will be disabled due to missing feature flags'
-      )
-      setDataProxyServicesAvailable(false)
-      return
-    }
+    const reloadIframe = useCallback(() => {
+      setIframeVersion(v => v + 1)
+    }, [])
 
-    if (isFlagshipApp()) {
-      initFlagship()
-    } else {
-      initIframe()
-    }
-  }, [client, webviewIntent, options])
+    const iframeKey = `${iframeUrl}::${iframeVersion}` // Useful to force iframe reload when key change
 
-  const onIframeLoaded = useCallback(() => {
-    const ifr = document.getElementById('DataProxy')
-    const remote = Comlink.wrap(Comlink.windowEndpoint(ifr.contentWindow))
-    setDataProxyCom(() => remote)
-  }, [setDataProxyCom])
-
-  const onReceiveMessage = useCallback(
-    event => {
-      try {
-        if (typeof event.origin !== 'string') return
-        if (!event.origin.includes('dataproxy')) return
-        const d = event?.data
-        if (
-          d &&
-          typeof d === 'object' &&
-          d.type === 'DATAPROXYMESSAGE' &&
-          d.payload === 'READY'
-        ) {
-          onIframeLoaded()
-        }
-      } catch (e) {
-        log.error('[DataProxy] onReceiveMessage error', e)
-      }
-    },
-    [onIframeLoaded]
-  )
-
-  useEffect(() => {
-    window.addEventListener('message', onReceiveMessage)
-    return () => {
-      window.removeEventListener('message', onReceiveMessage)
-    }
-  }, [onReceiveMessage])
-
-  useEffect(() => {
-    const doAsync = async () => {
-      // Make a global search
-      const search = async (search, searchOptions) => {
-        log.log('Send search query to DataProxy: ', search)
-        const result = await dataProxyCom.search(search, {
-          ...options,
-          ...searchOptions
-        })
-        return result
-      }
-
-      // Request through cozy-client
-      const requestLink = async (operation, options) => {
-        log.log('Send request to DataProxy : ', operation)
-        if (options?.fetchPolicy) {
-          // Functions cannot be serialized and thus passed to the iframe
-          delete options.fetchPolicy
-        }
-        return dataProxyCom.requestLink?.(operation, options)
-      }
-      const newDataProxy = {
-        dataProxyServicesAvailable,
-        ready: Boolean(dataProxyCom),
-        search,
-        requestLink
-      }
-      client.links.forEach(link => {
-        if (link.registerDataProxy) {
-          // This is required as the DataProxy is not ready when the DataProxyLink is created
-          link.registerDataProxy(newDataProxy)
-        }
-      })
-
-      setDataProxy(newDataProxy)
-    }
-    if (dataProxyCom && client?.links) {
-      doAsync()
-    }
-  }, [dataProxyCom, client, dataProxyServicesAvailable, options])
-
-  const reloadIframe = useCallback(() => {
-    setIframeVersion(v => v + 1)
-  }, [])
-
-  const iframeKey = `${iframeUrl}::${iframeVersion}` // Useful to force iframe reload when key change
-
-  return (
-    <DataProxyContext.Provider value={dataProxy || defaultValue}>
-      {children ?? null}
-      <ErrorBoundary>
-        {iframeUrl ? (
-          <iframe
-            key={iframeKey}
-            id="DataProxy"
-            src={iframeUrl}
-            width={0}
-            height={0}
-            style={{
-              width: 0,
-              height: 0
-            }}
-            sandbox="allow-same-origin allow-scripts"
-            onError={() => {
-              log.error('[DataProxy] iframe load error')
-              reloadIframe()
-            }}
-          ></iframe>
-        ) : null}
-      </ErrorBoundary>
-    </DataProxyContext.Provider>
-  )
-})
+    return (
+      <DataProxyContext.Provider value={dataProxy || defaultValue}>
+        {children ?? null}
+        <ErrorBoundary>
+          {iframeUrl ? (
+            <iframe
+              key={iframeKey}
+              id="DataProxy"
+              src={iframeUrl}
+              width={0}
+              height={0}
+              style={{
+                width: 0,
+                height: 0
+              }}
+              sandbox="allow-same-origin allow-scripts"
+              onError={() => {
+                log.error('[DataProxy] iframe load error')
+                reloadIframe()
+              }}
+            ></iframe>
+          ) : null}
+        </ErrorBoundary>
+      </DataProxyContext.Provider>
+    )
+  }
+)
 
 DataProxyProvider.displayName = 'DataProxyProvider'
