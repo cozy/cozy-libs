@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.10.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.9.3...cozy-dataproxy-lib@4.10.0) (2025-10-03)
+
+### Features
+
+- Move paths handling to cozy-pouch-link ([5c82d2f](https://github.com/cozy/cozy-libs/commit/5c82d2fc0143508f24be5cefd405e8e0e79ce637))
+- Upgade cozy-pouch-link peerDep for paths handling ([524b3d2](https://github.com/cozy/cozy-libs/commit/524b3d2c8406aee8391277d51966e9a2226b0a51))
+
 ## [4.9.3](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.9.2...cozy-dataproxy-lib@4.9.3) (2025-10-03)
 
 ### Bug Fixes
