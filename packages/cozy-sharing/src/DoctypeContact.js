@@ -19,6 +19,9 @@ export const getInitials = (contactOrRecipient, defaultValue = '') => {
 }
 
 export const getDisplayName = (contact, defaultValue = '') => {
+  if (!contact) {
+    return defaultValue
+  }
   if (isContact(contact)) {
     return ContactModel.getDisplayName(contact)
   } else {

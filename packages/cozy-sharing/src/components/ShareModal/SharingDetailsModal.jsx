@@ -44,7 +44,7 @@ export const SharingDetailsModal = ({
               name={t(`${documentType}.share.sharedBy`, {
                 name: getDisplayName(owner)
               })}
-              url={owner.instance}
+              url={owner?.instance}
             />
             <div className={styles['share-details-created']}>
               {t(`${documentType}.share.details.createdAt`, {
