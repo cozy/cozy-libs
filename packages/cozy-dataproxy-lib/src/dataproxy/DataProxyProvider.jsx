@@ -49,7 +49,7 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-const DEFAULT_OPTS = { doctypes: [] }
+const DEFAULT_OPTS = {}
 
 export const DataProxyProvider = React.memo(
   ({ children, options = DEFAULT_OPTS }) => {
@@ -196,6 +196,7 @@ export const DataProxyProvider = React.memo(
         // Make a global search
         const search = async (search, searchOptions) => {
           log.log('Send search query to DataProxy: ', search)
+          log.log('optins: ', searchOptions)
           const result = await dataProxyCom.search(search, {
             ...options,
             ...searchOptions
