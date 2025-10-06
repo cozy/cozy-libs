@@ -2,7 +2,6 @@ import CozyClient, { generateWebLink, models } from 'cozy-client'
 import { IOCozyContact } from 'cozy-client/types/types'
 import Minilog from 'cozy-minilog'
 
-import { getFilePath } from './filePaths'
 import { APPS_DOCTYPE, TYPE_DIRECTORY, TYPE_FILE } from '../consts'
 import { queryDocsByIds } from '../queries'
 import {
