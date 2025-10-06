@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [26.5.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.4.0...cozy-sharing@26.5.0) (2025-10-06)
+
+### Features
+
+- Add onRevokeSuccess callback :sparkles: ([3845ace](https://github.com/cozy/cozy-libs/commit/3845aced0e3cf365ffbc183bb5c5cf894b04e667))
+
 # [26.4.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.3.0...cozy-sharing@26.4.0) (2025-09-25)
 
 ### Features
