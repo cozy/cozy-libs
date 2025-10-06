@@ -39,6 +39,7 @@ export const ShareModal = withLocales(props => {
       sharingType={getSharingType(document.id)}
       recipients={getRecipients(document.id)}
       onRevoke={revokeSelf}
+      onRevokeSelf={revokeSelf}
       {...rest}
     />
   )
