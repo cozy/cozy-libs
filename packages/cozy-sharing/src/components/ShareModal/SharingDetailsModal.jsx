@@ -40,12 +40,14 @@ export const SharingDetailsModal = ({
               isMobile ? 'u-ph-1 u-pt-1-half' : 'u-ph-2 u-pt-1'
             )}
           >
-            <OwnerIdentity
-              name={t(`${documentType}.share.sharedBy`, {
-                name: getDisplayName(owner)
-              })}
-              url={owner.instance}
-            />
+            {owner ? (
+              <OwnerIdentity
+                name={t(`${documentType}.share.sharedBy`, {
+                  name: getDisplayName(owner)
+                })}
+                url={owner.instance}
+              />
+            ) : null}
             <div className={styles['share-details-created']}>
               {t(`${documentType}.share.details.createdAt`, {
                 date: f(document.created_at || null, 'do LLLL yyyy')
