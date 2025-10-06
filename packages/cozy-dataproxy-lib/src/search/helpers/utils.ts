@@ -11,8 +11,10 @@ export const isDebug = (): boolean => {
   return Boolean(flag('debug'))
 }
 
-export const normalizeDoctype = (doctype: string): SearchedDoctype => {
-  if (doctype.includes(SHARED_DRIVE_FILES_DOCTYPE)) {
+export const normalizeDoctype = (
+  doctype: string | undefined
+): SearchedDoctype => {
+  if (doctype && doctype.includes(SHARED_DRIVE_FILES_DOCTYPE)) {
     return FILES_DOCTYPE as SearchedDoctype
   }
   // Only return the doctype if it's a valid SearchedDoctype
