@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [26.5.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.5.0...cozy-sharing@26.5.1) (2025-10-06)
+
+### Bug Fixes
+
+- Handle missing owner in SharingDetailsModal :bug: ([6ce20bf](https://github.com/cozy/cozy-libs/commit/6ce20bf77390f0773ffaf831b060fd89fcf8bd9b))
+
 # [26.5.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.4.0...cozy-sharing@26.5.0) (2025-10-06)
 
 ### Features
