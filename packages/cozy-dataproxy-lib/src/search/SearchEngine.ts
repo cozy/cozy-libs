@@ -2,8 +2,10 @@ import FlexSearch from 'flexsearch'
 
 import CozyClient, { defaultPerformanceApi } from 'cozy-client'
 import type { PerformanceAPI } from 'cozy-client/types/performances/types'
+import { IOCozyFile } from 'cozy-client/types/types'
 import Minilog from 'cozy-minilog'
 import { RealtimePlugin } from 'cozy-realtime'
+import CozyRealtime from 'cozy-realtime'
 
 import { SHARED_DRIVE_FILES_DOCTYPE } from './consts'
 import {
@@ -47,7 +49,9 @@ import {
   isSearchedDoctype,
   SearchOptions,
   StorageInterface,
-  EnrichedSearchResult
+  EnrichedSearchResult,
+  isTrashedDrive,
+  isInSharedDrivesDir
 } from './types'
 
 const log = Minilog('🗂️ [Indexing]')
@@ -69,6 +73,7 @@ export class SearchEngine {
   storage: StorageInterface
   performanceApi: PerformanceAPI
   engineOptions: EngineOptions
+  sharedDrivesRealtimes: Record<string, CozyRealtime>
 
   constructor(
     client: CozyClient,
@@ -81,6 +86,7 @@ export class SearchEngine {
     this.storage = storage
     this.performanceApi = performanceApi ?? defaultPerformanceApi
     this.engineOptions = { shouldInit: true, ...engineOptions }
+    this.sharedDrivesRealtimes = {}
 
     this.isLocalSearch = !!getPouchLink(this.client)
     log.info('Use local data on trusted device: ', this.isLocalSearch)
@@ -187,8 +193,12 @@ export class SearchEngine {
 
   async init(): Promise<void> {
     // Ensure login is done before plugin register
-    if (!this.client.plugins[RealtimePlugin.pluginName]) {
-      this.client.registerPlugin(RealtimePlugin, {})
+    const realtimePlugin = RealtimePlugin as unknown as {
+      (): void
+      pluginName: 'realtime'
+    }
+    if (!this.client.plugins[realtimePlugin.pluginName]) {
+      this.client.registerPlugin(realtimePlugin, {})
     }
 
     // Realtime subscription
@@ -198,6 +208,16 @@ export class SearchEngine {
     this.subscribeDoctype(this.client, CONTACTS_DOCTYPE)
     this.subscribeDoctype(this.client, APPS_DOCTYPE)
 
+    const pouchLink = getPouchLink(this.client)
+    if (pouchLink) {
+      const sharedDrivesDoctypes = pouchLink.doctypes.filter(dtype =>
+        dtype.includes(SHARED_DRIVE_FILES_DOCTYPE)
+      )
+      for (const sharedDrivesDoctype of sharedDrivesDoctypes) {
+        this.addSharedDriveRealtime(sharedDrivesDoctype)
+      }
+    }
+
     if (this.isLocalSearch) {
       this.debouncedReplication()
     }
@@ -205,18 +225,66 @@ export class SearchEngine {
     await this.indexDocumentsAtInit()
   }
 
-  subscribeDoctype(client: CozyClient, doctype: string): void {
+  addSharedDrive(driveId: string): void {
+    this.addSharedDriveRealtime(`${SHARED_DRIVE_FILES_DOCTYPE}-${driveId}`)
+    if (this.isLocalSearch) {
+      this.debouncedReplication()
+    }
+  }
+
+  removeSharedDrive(driveId: string): void {
+    this.sharedDrivesRealtimes[driveId]?.stop()
+    delete this.sharedDrivesRealtimes[driveId]
+    if (
+      this.searchIndexes &&
+      this.searchIndexes[`${SHARED_DRIVE_FILES_DOCTYPE}-${driveId}`]
+    ) {
+      delete this.searchIndexes[`${SHARED_DRIVE_FILES_DOCTYPE}-${driveId}`]
+    }
+    if (this.isLocalSearch) {
+      this.debouncedReplication()
+    }
+  }
+
+  private addSharedDriveRealtime(sharedDrivesDoctype: string): void {
+    const sharedDriveId = sharedDrivesDoctype.split('-')[1]
+    const realtime = new CozyRealtime({
+      client: this.client,
+      sharedDriveId
+    })
+    this.subscribeDoctype(this.client, FILES_DOCTYPE, realtime, sharedDriveId)
+    this.sharedDrivesRealtimes[sharedDriveId] = realtime
+  }
+
+  subscribeDoctype(
+    client: CozyClient,
+    doctype: string,
+    realtime?: CozyRealtime,
+    sharedDriveId?: string
+  ): void {
     /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method */
-    const realtime = client.plugins.realtime
-    realtime.subscribe('created', doctype, this.handleUpdatedOrCreatedDoc)
-    realtime.subscribe('updated', doctype, this.handleUpdatedOrCreatedDoc)
-    realtime.subscribe('deleted', doctype, this.handleDeletedDoc)
+    const realtimeInstance = realtime ? realtime : client.plugins.realtime
+    realtimeInstance.subscribe('created', doctype, (doc: CozyDoc) =>
+      this.handleUpdatedOrCreatedDoc(doc, sharedDriveId)
+    )
+    realtimeInstance.subscribe('updated', doctype, (doc: CozyDoc) =>
+      this.handleUpdatedOrCreatedDoc(doc, sharedDriveId)
+    )
+    realtimeInstance.subscribe('deleted', doctype, (doc: CozyDoc) =>
+      this.handleDeletedDoc(doc, sharedDriveId)
+    )
     /* eslint-enable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method */
   }
 
-  handleUpdatedOrCreatedDoc(doc: CozyDoc): void {
-    const doctype = doc._type
-    if (!isSearchedDoctype(doctype)) {
+  handleUpdatedOrCreatedDoc(doc: CozyDoc, sharedDriveId?: string): void {
+    const doctype = sharedDriveId
+      ? `${SHARED_DRIVE_FILES_DOCTYPE}-${sharedDriveId}`
+      : doc._type
+    if (
+      !doctype ||
+      !isSearchedDoctype(normalizeDoctype(doctype)) ||
+      isTrashedDrive(doc as IOCozyFile, sharedDriveId)
+    ) {
       return
     }
     const searchIndex = this.searchIndexes?.[doctype]
@@ -231,9 +299,15 @@ export class SearchEngine {
     indexSingleDoc(searchIndex.index, doc)
   }
 
-  handleDeletedDoc(doc: CozyDoc): void {
-    const doctype = doc._type
-    if (!isSearchedDoctype(doctype)) {
+  handleDeletedDoc(doc: CozyDoc, sharedDriveId?: string): void {
+    const doctype = sharedDriveId
+      ? `${SHARED_DRIVE_FILES_DOCTYPE}-${sharedDriveId}`
+      : doc._type
+    if (
+      !doctype ||
+      !isSearchedDoctype(normalizeDoctype(doctype)) ||
+      isInSharedDrivesDir(doc as IOCozyFile)
+    ) {
       return
     }
     const searchIndex = this.searchIndexes?.[doctype]
