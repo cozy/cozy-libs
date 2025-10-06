@@ -2,7 +2,8 @@ import CozyClient, { generateWebLink, models } from 'cozy-client'
 import { IOCozyContact } from 'cozy-client/types/types'
 import Minilog from 'cozy-minilog'
 
-import { APPS_DOCTYPE, TYPE_DIRECTORY } from '../consts'
+import { getFilePath } from './filePaths'
+import { APPS_DOCTYPE, TYPE_DIRECTORY, TYPE_FILE } from '../consts'
 import { queryDocsByIds } from '../queries'
 import {
   CozyDoc,
@@ -10,6 +11,7 @@ import {
   isIOCozyApp,
   isIOCozyContact,
   isIOCozyFile,
+  isIOCozySharedDriveFile,
   SearchResult,
   EnrichedSearchResult
 } from '../types'
@@ -195,6 +197,12 @@ const buildOpenURL = (
     } else {
       urlHash = `${folderURLHash}/file/${doc._id}`
     }
+    if (isIOCozySharedDriveFile(doc)) {
+      urlHash = `/shareddrive/${doc.driveId}/${dirId}`
+      if (doc.type === TYPE_FILE) {
+        urlHash += `/file/${doc._id}`
+      }
+    }
   }
 
   if (isIOCozyContact(doc)) {
@@ -224,7 +232,11 @@ const buildSecondaryURL = (
     return null
   }
 
-  const folderURLHash = `/folder/${doc.dir_id}`
+  let folderURLHash = `/folder/${doc.dir_id}`
+
+  if (isIOCozySharedDriveFile(doc)) {
+    folderURLHash = `/shareddrive/${doc.driveId}/${doc.dir_id}` // FIXME this url hash for shared drives should be in cozy-client
+  }
 
   return generateWebLink({
     cozyUrl: client.getStackClient().uri,

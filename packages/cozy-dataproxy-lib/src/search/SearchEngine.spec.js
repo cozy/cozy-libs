@@ -11,6 +11,25 @@ jest.mock('./helpers/client', () => ({
 jest.mock('./helpers/getSearchEncoder', () => ({
   getSearchEncoder: jest.fn()
 }))
+jest.mock('./helpers/normalizeSearchResult', () => ({
+  enrichResultsWithDocs: jest.fn(),
+  normalizeSearchResult: jest.fn()
+}))
+jest.mock('./storage', () => ({
+  getExportDate: jest.fn(),
+  importSearchIndexes: jest.fn(),
+  exportSearchIndexes: jest.fn()
+}))
+jest.mock('./indexDocs', () => ({
+  indexAllDocs: jest.fn(),
+  indexOnChanges: jest.fn(),
+  indexSingleDoc: jest.fn(),
+  initDoctypeAfterIndexImport: jest.fn(),
+  initSearchIndex: jest.fn()
+}))
+jest.mock('./queries', () => ({
+  queryLocalOrRemoteDocs: jest.fn()
+}))
 jest.mock('./consts', () => ({
   LIMIT_DOCTYPE_SEARCH: 3,
   SEARCH_SCHEMA: {
@@ -25,7 +44,9 @@ jest.mock('./consts', () => ({
   },
   FILES_DOCTYPE: 'io.cozy.files',
   CONTACTS_DOCTYPE: 'io.cozy.contacts',
-  APPS_DOCTYPE: 'io.cozy.apps'
+  APPS_DOCTYPE: 'io.cozy.apps',
+  SHARED_DRIVE_FILES_DOCTYPE: 'io.cozy.files.shareddrives',
+  SEARCHABLE_DOCTYPES: ['io.cozy.files', 'io.cozy.contacts', 'io.cozy.apps']
 }))
 
 describe('sortSearchResults', () => {
@@ -216,5 +237,271 @@ describe('limitSearchResults', () => {
     const searchResults = []
     const filteredResults = searchEngine.limitSearchResults(searchResults)
     expect(filteredResults).toEqual([])
+  })
+})
+
+describe('getSharedDrivesDoctypes', () => {
+  let searchEngine
+  let mockClient
+  let mockPouchLink
+
+  beforeEach(() => {
+    mockClient = createMockClient()
+    mockPouchLink = {
+      doctypes: [
+        'io.cozy.files',
+        'io.cozy.contacts',
+        'io.cozy.apps',
+        'io.cozy.files.shareddrives.drive1',
+        'io.cozy.files.shareddrives.drive2'
+      ]
+    }
+
+    const { getPouchLink } = require('./helpers/client')
+    getPouchLink.mockReturnValue(mockPouchLink)
+
+    searchEngine = new SearchEngine(mockClient, {}, undefined, {
+      shouldInit: false
+    })
+  })
+
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
+  it('should return shared drives doctypes when pouch link exists', () => {
+    const sharedDrivesDoctypes = searchEngine.getSharedDrivesDoctypes()
+
+    expect(sharedDrivesDoctypes).toEqual([
+      'io.cozy.files.shareddrives.drive1',
+      'io.cozy.files.shareddrives.drive2'
+    ])
+  })
+
+  it('should return empty array when pouch link does not exist', () => {
+    const { getPouchLink } = require('./helpers/client')
+    getPouchLink.mockReturnValue(null)
+
+    const sharedDrivesDoctypes = searchEngine.getSharedDrivesDoctypes()
+
+    expect(sharedDrivesDoctypes).toEqual([])
+  })
+
+  it('should return empty array when no shared drives doctypes exist', () => {
+    mockPouchLink.doctypes = [
+      'io.cozy.files',
+      'io.cozy.contacts',
+      'io.cozy.apps'
+    ]
+
+    const sharedDrivesDoctypes = searchEngine.getSharedDrivesDoctypes()
+
+    expect(sharedDrivesDoctypes).toEqual([])
+  })
+})
+
+describe('search method with shared drives integration', () => {
+  let searchEngine
+  let mockClient
+  let mockPouchLink
+  let mockStorage
+
+  beforeEach(() => {
+    mockClient = createMockClient()
+    mockStorage = {
+      storeData: jest.fn(),
+      getData: jest.fn()
+    }
+    mockPouchLink = {
+      doctypes: [
+        'io.cozy.files',
+        'io.cozy.contacts',
+        'io.cozy.apps',
+        'io.cozy.files.shareddrives.drive1',
+        'io.cozy.files.shareddrives.drive2'
+      ]
+    }
+
+    const { getPouchLink } = require('./helpers/client')
+    getPouchLink.mockReturnValue(mockPouchLink)
+
+    searchEngine = new SearchEngine(mockClient, mockStorage, undefined, {
+      shouldInit: false
+    })
+
+    // Mock search indexes with shared drives
+    searchEngine.searchIndexes = {
+      'io.cozy.files': { index: { search: jest.fn().mockReturnValue([]) } },
+      'io.cozy.files.shareddrives.drive1': {
+        index: { search: jest.fn().mockReturnValue([]) }
+      },
+      'io.cozy.files.shareddrives.drive2': {
+        index: { search: jest.fn().mockReturnValue([]) }
+      }
+    }
+  })
+
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
+  it('should include shared drives doctypes when searching files without specific doctypes', async () => {
+    const {
+      enrichResultsWithDocs,
+      normalizeSearchResult
+    } = require('./helpers/normalizeSearchResult')
+    enrichResultsWithDocs.mockResolvedValue([])
+    normalizeSearchResult.mockReturnValue({ title: 'test', doc: {} })
+
+    const searchOnIndexesSpy = jest.spyOn(searchEngine, 'searchOnIndexes')
+    searchOnIndexesSpy.mockReturnValue([])
+
+    await searchEngine.search('test query', {
+      doctypes: [consts.FILES_DOCTYPE]
+    })
+
+    expect(searchOnIndexesSpy).toHaveBeenCalledWith('test query', [
+      consts.FILES_DOCTYPE,
+      'io.cozy.files.shareddrives.drive1',
+      'io.cozy.files.shareddrives.drive2'
+    ])
+  })
+
+  it('should include shared drives doctypes when searching without specific doctypes', async () => {
+    const {
+      enrichResultsWithDocs,
+      normalizeSearchResult
+    } = require('./helpers/normalizeSearchResult')
+    enrichResultsWithDocs.mockResolvedValue([])
+    normalizeSearchResult.mockReturnValue({ title: 'test', doc: {} })
+
+    const searchOnIndexesSpy = jest.spyOn(searchEngine, 'searchOnIndexes')
+    searchOnIndexesSpy.mockReturnValue([])
+
+    await searchEngine.search('test query', {})
+
+    expect(searchOnIndexesSpy).toHaveBeenCalledWith('test query', [
+      'io.cozy.files.shareddrives.drive1',
+      'io.cozy.files.shareddrives.drive2'
+    ])
+  })
+
+  it('should not include shared drives doctypes when searching specific non-files doctypes', async () => {
+    const {
+      enrichResultsWithDocs,
+      normalizeSearchResult
+    } = require('./helpers/normalizeSearchResult')
+    enrichResultsWithDocs.mockResolvedValue([])
+    normalizeSearchResult.mockReturnValue({ title: 'test', doc: {} })
+
+    const searchOnIndexesSpy = jest.spyOn(searchEngine, 'searchOnIndexes')
+    searchOnIndexesSpy.mockReturnValue([])
+
+    await searchEngine.search('test query', {
+      doctypes: [consts.CONTACTS_DOCTYPE]
+    })
+
+    expect(searchOnIndexesSpy).toHaveBeenCalledWith('test query', [
+      consts.CONTACTS_DOCTYPE
+    ])
+  })
+
+  it('should clean up non-existing doctypes from search indexes', async () => {
+    // Set up search indexes with doctypes that don't exist in pouch link
+    searchEngine.searchIndexes = {
+      'io.cozy.files': { index: { search: jest.fn().mockReturnValue([]) } },
+      'io.cozy.files.shareddrives.drive1': {
+        index: { search: jest.fn().mockReturnValue([]) }
+      },
+      'non.existing.doctype': {
+        index: { search: jest.fn().mockReturnValue([]) }
+      }
+    }
+
+    const {
+      enrichResultsWithDocs,
+      normalizeSearchResult
+    } = require('./helpers/normalizeSearchResult')
+    enrichResultsWithDocs.mockResolvedValue([])
+    normalizeSearchResult.mockReturnValue({ title: 'test', doc: {} })
+
+    const searchOnIndexesSpy = jest.spyOn(searchEngine, 'searchOnIndexes')
+    searchOnIndexesSpy.mockReturnValue([])
+
+    await searchEngine.search('test query', {})
+
+    // Check that non-existing doctype was removed
+    expect(searchEngine.searchIndexes['non.existing.doctype']).toBeUndefined()
+    expect(searchEngine.searchIndexes['io.cozy.files']).toBeDefined()
+    expect(
+      searchEngine.searchIndexes['io.cozy.files.shareddrives.drive1']
+    ).toBeDefined()
+  })
+})
+
+describe('indexDocumentsAtInit with shared drives', () => {
+  let searchEngine
+  let mockClient
+  let mockStorage
+  let mockPouchLink
+
+  beforeEach(() => {
+    mockClient = createMockClient()
+    mockStorage = {
+      storeData: jest.fn(),
+      getData: jest.fn().mockResolvedValue(null) // No persisted index
+    }
+    mockPouchLink = {
+      doctypes: [
+        'io.cozy.files',
+        'io.cozy.contacts',
+        'io.cozy.apps',
+        'io.cozy.files.shareddrives.drive1',
+        'io.cozy.files.shareddrives.drive2'
+      ]
+    }
+
+    const { getPouchLink } = require('./helpers/client')
+    getPouchLink.mockReturnValue(mockPouchLink)
+
+    searchEngine = new SearchEngine(mockClient, mockStorage, undefined, {
+      shouldInit: false
+    })
+    searchEngine.isLocalSearch = true
+  })
+
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
+  it('should index shared drives doctypes during initialization', async () => {
+    const { getExportDate } = require('./storage')
+    const { queryLocalOrRemoteDocs } = require('./queries')
+    const { initSearchIndex, indexAllDocs } = require('./indexDocs')
+
+    getExportDate.mockResolvedValue(null) // No persisted index
+    queryLocalOrRemoteDocs.mockResolvedValue([])
+    initSearchIndex.mockReturnValue({ search: jest.fn() })
+    indexAllDocs.mockImplementation(() => {})
+
+    const indexDocsForSearchSpy = jest.spyOn(searchEngine, 'indexDocsForSearch')
+    indexDocsForSearchSpy.mockResolvedValue({
+      index: { search: jest.fn() },
+      lastSeq: 1,
+      lastUpdated: new Date().toISOString()
+    })
+
+    await searchEngine.indexDocumentsAtInit()
+
+    // Should be called for standard doctypes + shared drives doctypes
+    expect(indexDocsForSearchSpy).toHaveBeenCalledWith('io.cozy.files')
+    expect(indexDocsForSearchSpy).toHaveBeenCalledWith('io.cozy.contacts')
+    expect(indexDocsForSearchSpy).toHaveBeenCalledWith('io.cozy.apps')
+    expect(indexDocsForSearchSpy).toHaveBeenCalledWith(
+      'io.cozy.files.shareddrives.drive1'
+    )
+    expect(indexDocsForSearchSpy).toHaveBeenCalledWith(
+      'io.cozy.files.shareddrives.drive2'
+    )
   })
 })
