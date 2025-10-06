@@ -5,6 +5,7 @@ import type { PerformanceAPI } from 'cozy-client/types/performances/types'
 import Minilog from 'cozy-minilog'
 import { RealtimePlugin } from 'cozy-realtime'
 
+import { SHARED_DRIVE_FILES_DOCTYPE } from './consts'
 import {
   SEARCH_SCHEMA,
   APPS_DOCTYPE,
@@ -20,7 +21,7 @@ import {
   enrichResultsWithDocs,
   normalizeSearchResult
 } from './helpers/normalizeSearchResult'
-import { isDebug } from './helpers/utils'
+import { isDebug, normalizeDoctype } from './helpers/utils'
 import {
   indexAllDocs,
   indexOnChanges,
@@ -119,10 +120,11 @@ export class SearchEngine {
     const lastExportDate = await getExportDate(this.storage)
     if (!lastExportDate || !this.isLocalSearch) {
       // No persisted index: let's create them
-      for (const doctype of SEARCHABLE_DOCTYPES) {
-        const searchIndex = await this.indexDocsForSearch(
-          doctype as keyof typeof SEARCH_SCHEMA
-        )
+      const doctypes = (SEARCHABLE_DOCTYPES as unknown as string[]).concat(
+        this.getSharedDrivesDoctypes()
+      )
+      for (const doctype of doctypes) {
+        const searchIndex = await this.indexDocsForSearch(doctype)
         if (searchIndex) {
           this.searchIndexes[doctype] = searchIndex
         }
@@ -148,11 +150,10 @@ export class SearchEngine {
       endReplicationTime = 0
 
     this.client.on('pouchlink:doctypesync:end', async (doctype: string) => {
-      if (isSearchedDoctype(doctype) && this.searchIndexes[doctype]) {
+      const normalizedDoctype = normalizeDoctype(doctype)
+      if (isSearchedDoctype(normalizedDoctype)) {
         // Here, the index already exist, so let's have an incremental update
-        const searchIndex = await this.indexDocsForSearch(
-          doctype as keyof typeof SEARCH_SCHEMA
-        )
+        const searchIndex = await this.indexDocsForSearch(doctype)
         if (searchIndex) {
           this.searchIndexes[doctype] = searchIndex
         }
@@ -283,7 +284,7 @@ export class SearchEngine {
   }
 
   buildSearchIndex(
-    doctype: keyof typeof SEARCH_SCHEMA,
+    doctype: string,
     docs: CozyDoc[]
   ): FlexSearch.Document<CozyDoc, false> {
     const startTimeIndex = performance.now()
@@ -300,7 +301,7 @@ export class SearchEngine {
     return flexsearchIndex
   }
 
-  async getLocalLastSeq(doctype: keyof typeof SEARCH_SCHEMA): Promise<number> {
+  async getLocalLastSeq(doctype: string): Promise<number> {
     if (this.isLocalSearch) {
       const pouchLink = getPouchLink(this.client)
       const info = pouchLink ? await pouchLink.getDbInfo(doctype) : null
@@ -309,16 +310,10 @@ export class SearchEngine {
     return -1
   }
 
-  async initialIndexation(
-    doctype: keyof typeof SEARCH_SCHEMA
-  ): Promise<SearchIndex | null> {
+  async initialIndexation(doctype: string): Promise<SearchIndex | null> {
     const docs = await queryLocalOrRemoteDocs(this.client, doctype, {
       isLocalSearch: this.isLocalSearch
     })
-    if (docs.length < 1) {
-      // No docs available yet
-      return null
-    }
     const index = this.buildSearchIndex(doctype, docs)
     const lastSeq = await this.getLocalLastSeq(doctype)
 
@@ -331,15 +326,15 @@ export class SearchEngine {
   }
 
   async incrementalIndexation(
-    doctype: keyof typeof SEARCH_SCHEMA,
+    doctype: string,
     searchIndex: SearchIndex
   ): Promise<SearchIndex> {
-    return indexOnChanges(this, searchIndex, doctype)
+    const updatedSearchIndex = await indexOnChanges(this, searchIndex, doctype)
+
+    return updatedSearchIndex
   }
 
-  async indexDocsForSearch(
-    doctype: keyof typeof SEARCH_SCHEMA
-  ): Promise<SearchIndex | null> {
+  async indexDocsForSearch(doctype: string): Promise<SearchIndex | null> {
     const markeNameIndex = this.performanceApi.mark(
       `indexDocsForSearch ${doctype}`
     )
@@ -393,9 +388,31 @@ export class SearchEngine {
       return null
     }
 
+    const pouchLink = getPouchLink(this.client)
+    const currentDoctypes = pouchLink?.doctypes || []
+    const existingDoctypes = Object.keys(this.searchIndexes)
+    const nonExistingDoctypes = existingDoctypes.filter(
+      doctype => !currentDoctypes.includes(doctype)
+    )
+    for (const doctype of nonExistingDoctypes) {
+      delete this.searchIndexes[doctype]
+      log.debug('[SEARCH] Delete index for non-existing doctype', doctype)
+    }
+
+    const optionsDoctypes = options?.doctypes || []
+    if (
+      optionsDoctypes.includes(FILES_DOCTYPE) ||
+      optionsDoctypes.length === 0
+    ) {
+      const sharedDrivesDoctypes = Object.keys(this.searchIndexes).filter(
+        doctype => doctype.includes(SHARED_DRIVE_FILES_DOCTYPE)
+      )
+      optionsDoctypes.push(...sharedDrivesDoctypes)
+    }
+
     const markeNameIndex = this.performanceApi.mark('search')
 
-    const allResults = this.searchOnIndexes(query, options?.doctypes)
+    const allResults = this.searchOnIndexes(query, optionsDoctypes)
     const dedupResults = this.deduplicateAndFlatten(allResults)
     const enrichedResults = await enrichResultsWithDocs(
       this.client,
@@ -403,7 +420,7 @@ export class SearchEngine {
     )
     const sortedResults = this.sortSearchResults(
       enrichedResults,
-      options?.doctypes
+      optionsDoctypes
     )
     const results = this.limitSearchResults(sortedResults)
 
@@ -423,14 +440,16 @@ export class SearchEngine {
 
   searchOnIndexes(
     query: string,
-    searchOnDoctypes: string[] | undefined
+    searchOnDoctypes: string[]
   ): FlexSearchResultWithDoctype[] {
     let searchResults: FlexSearchResultWithDoctype[] = []
     for (const key in this.searchIndexes) {
       const doctype = key as SearchedDoctype // XXX - Should not be necessary
+      const isSearchOnDoctypesDefined = searchOnDoctypes.length > 0
+
       if (
         searchOnDoctypes &&
-        searchOnDoctypes?.length > 0 &&
+        isSearchOnDoctypesDefined &&
         !searchOnDoctypes.includes(doctype)
       ) {
         // Search only on specified doctypes
@@ -586,5 +605,15 @@ export class SearchEngine {
       }
       return doctypesCount[doctype] <= LIMIT_DOCTYPE_SEARCH
     })
+  }
+
+  getSharedDrivesDoctypes(): string[] {
+    const pouchLink = getPouchLink(this.client)
+    if (!pouchLink) {
+      return []
+    }
+    return pouchLink.doctypes.filter(dtype =>
+      dtype.includes(SHARED_DRIVE_FILES_DOCTYPE)
+    )
   }
 }
