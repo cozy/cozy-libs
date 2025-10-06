@@ -13,7 +13,11 @@ import {
 export type CozyDoc = IOCozyFile | IOCozyContact | IOCozyApp
 
 export const isIOCozyFile = (doc: CozyDoc): doc is IOCozyFile => {
-  return doc._type === FILES_DOCTYPE
+  return doc._type === FILES_DOCTYPE || doc.driveId !== undefined // FIXME find a way to add the right doctype in the result
+}
+
+export const isIOCozySharedDriveFile = (doc: CozyDoc): doc is IOCozyFile => {
+  return doc.driveId !== undefined
 }
 
 export const isIOCozyContact = (doc: CozyDoc): doc is IOCozyContact => {
@@ -65,7 +69,7 @@ export interface SearchIndex {
 }
 
 export type SearchIndexes = {
-  [key in SearchedDoctype]: SearchIndex
+  [key: string]: SearchIndex
 }
 
 export interface StorageInterface {

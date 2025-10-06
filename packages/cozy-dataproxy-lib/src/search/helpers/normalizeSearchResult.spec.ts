@@ -48,6 +48,38 @@ describe('Should normalize files results', () => {
     })
   })
 
+  test('Should handle shared drive files', () => {
+    const doc = {
+      _id: 'SHARED_FILE_ID',
+      // No _type on purpose, shared-drive files might not have FILES_DOCTYPE
+      type: 'file',
+      dir_id: 'PARENT_ID',
+      name: 'SHARED_FILE_NAME',
+      path: 'SHARED/FILE/PATH',
+      driveId: 'DRIVE_ID'
+    }
+    const searchResult = {
+      doctype: 'io.cozy.files',
+      doc: doc
+    } as unknown as EnrichedSearchResult
+
+    const result = normalizeSearchResult(
+      fakeFlatDomainClient,
+      searchResult,
+      'someQuery'
+    )
+
+    expect(result).toStrictEqual({
+      doc: doc,
+      slug: 'drive',
+      title: 'SHARED_FILE_NAME',
+      subTitle: 'SHARED/FILE/PATH',
+      url: 'https://claude-drive.mycozy.cloud/#/shareddrive/DRIVE_ID/PARENT_ID/file/SHARED_FILE_ID',
+      secondaryUrl:
+        'https://claude-drive.mycozy.cloud/#/shareddrive/DRIVE_ID/PARENT_ID'
+    })
+  })
+
   test('Should handle notes', () => {
     const doc = {
       _id: 'SOME_NOTE_ID',

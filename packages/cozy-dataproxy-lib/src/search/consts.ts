@@ -25,6 +25,7 @@ export const SEARCH_SCHEMA: Record<SearchedDoctype, string[]> = {
 export const FILES_DOCTYPE = 'io.cozy.files'
 export const CONTACTS_DOCTYPE = 'io.cozy.contacts'
 export const APPS_DOCTYPE = 'io.cozy.apps'
+export const SHARED_DRIVE_FILES_DOCTYPE = 'io.cozy.files.shareddrives'
 
 export const TYPE_DIRECTORY = 'directory'
 export const TYPE_FILE = 'file'
