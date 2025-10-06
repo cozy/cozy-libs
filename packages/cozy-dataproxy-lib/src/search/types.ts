@@ -7,7 +7,8 @@ import {
   CONTACTS_DOCTYPE,
   FILES_DOCTYPE,
   SEARCH_SCHEMA,
-  SearchedDoctype
+  SearchedDoctype,
+  SHARED_DRIVES_DIR_ID
 } from './consts'
 
 export type CozyDoc = IOCozyFile | IOCozyContact | IOCozyApp
@@ -37,6 +38,20 @@ export const isSearchedDoctype = (
     return false
   }
   return searchedDoctypes.includes(doctype)
+}
+
+export const isTrashedDrive = (
+  doc: IOCozyFile,
+  sharedDriveId: string | undefined
+): boolean => {
+  return (
+    !!sharedDriveId &&
+    (doc as IOCozyFile & { restore_path?: string }).restore_path === '/Drives'
+  )
+}
+
+export const isInSharedDrivesDir = (doc: IOCozyFile): boolean => {
+  return doc.dir_id === SHARED_DRIVES_DIR_ID
 }
 
 export interface SearchOptions {

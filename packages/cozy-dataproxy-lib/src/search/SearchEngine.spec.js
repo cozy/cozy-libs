@@ -46,7 +46,17 @@ jest.mock('./consts', () => ({
   CONTACTS_DOCTYPE: 'io.cozy.contacts',
   APPS_DOCTYPE: 'io.cozy.apps',
   SHARED_DRIVE_FILES_DOCTYPE: 'io.cozy.files.shareddrives',
+  SHARED_DRIVES_DIR_ID: 'io.cozy.files.shared-drives-dir',
   SEARCHABLE_DOCTYPES: ['io.cozy.files', 'io.cozy.contacts', 'io.cozy.apps']
+}))
+
+// Mock realtime dependencies
+jest.mock('cozy-realtime', () => ({
+  RealtimePlugin: {
+    pluginName: 'realtime'
+  },
+  __esModule: true,
+  default: jest.fn()
 }))
 
 describe('sortSearchResults', () => {
@@ -503,5 +513,348 @@ describe('indexDocumentsAtInit with shared drives', () => {
     expect(indexDocsForSearchSpy).toHaveBeenCalledWith(
       'io.cozy.files.shareddrives.drive2'
     )
+  })
+})
+
+// Realtime features tests
+describe('Realtime features', () => {
+  let searchEngine
+  let mockClient
+  let mockStorage
+  let mockPouchLink
+  let mockRealtimePlugin
+  let mockCozyRealtime
+
+  beforeEach(() => {
+    mockClient = createMockClient()
+    mockStorage = {
+      storeData: jest.fn(),
+      getData: jest.fn()
+    }
+    mockPouchLink = {
+      doctypes: ['io.cozy.files', 'io.cozy.contacts', 'io.cozy.apps'],
+      startReplicationWithDebounce: jest.fn(),
+      getDbInfo: jest.fn().mockResolvedValue({ update_seq: 1 })
+    }
+
+    mockRealtimePlugin = {
+      subscribe: jest.fn()
+    }
+
+    mockCozyRealtime = jest.fn().mockImplementation(() => ({
+      subscribe: jest.fn(),
+      stop: jest.fn()
+    }))
+
+    const { getPouchLink } = require('./helpers/client')
+    getPouchLink.mockReturnValue(mockPouchLink)
+
+    const CozyRealtime = require('cozy-realtime').default
+    CozyRealtime.mockImplementation(mockCozyRealtime)
+
+    // Mock client plugins
+    mockClient.plugins = {
+      realtime: mockRealtimePlugin
+    }
+    mockClient.registerPlugin = jest.fn()
+    mockClient.on = jest.fn()
+    mockClient.isLogged = true
+
+    searchEngine = new SearchEngine(mockClient, mockStorage, undefined, {
+      shouldInit: false
+    })
+    searchEngine.isLocalSearch = true
+  })
+
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
+  describe('init method - realtime setup', () => {
+    it('should setup shared drives realtime if pouch link has shared drives doctypes', async () => {
+      mockPouchLink.doctypes = [
+        'io.cozy.files',
+        'io.cozy.contacts',
+        'io.cozy.apps',
+        'io.cozy.files.shareddrives-drive1',
+        'io.cozy.files.shareddrives-drive2'
+      ]
+
+      await searchEngine.init()
+
+      expect(mockCozyRealtime).toHaveBeenCalledWith({
+        client: mockClient,
+        sharedDriveId: 'drive1'
+      })
+      expect(mockCozyRealtime).toHaveBeenCalledWith({
+        client: mockClient,
+        sharedDriveId: 'drive2'
+      })
+    })
+  })
+
+  describe('handleUpdatedOrCreatedDoc method', () => {
+    beforeEach(() => {
+      searchEngine.searchIndexes = {
+        'io.cozy.files': {
+          index: { search: jest.fn() }
+        }
+      }
+    })
+
+    it('should return early if doctype is not a searched doctype', () => {
+      const { indexSingleDoc } = require('./indexDocs')
+      const doc = { _type: 'io.cozy.notsearched', _id: 'test-id' }
+
+      searchEngine.handleUpdatedOrCreatedDoc(doc)
+
+      expect(indexSingleDoc).not.toHaveBeenCalled()
+    })
+
+    it('should return early if no search index exists for doctype', () => {
+      const { indexSingleDoc } = require('./indexDocs')
+      const doc = { _type: 'io.cozy.contacts', _id: 'test-id' }
+
+      searchEngine.handleUpdatedOrCreatedDoc(doc)
+
+      expect(indexSingleDoc).not.toHaveBeenCalled()
+    })
+
+    it('should call indexSingleDoc for valid doctype with existing index', () => {
+      const { indexSingleDoc } = require('./indexDocs')
+      const doc = { _type: 'io.cozy.files', _id: 'test-id' }
+
+      searchEngine.handleUpdatedOrCreatedDoc(doc)
+
+      expect(indexSingleDoc).toHaveBeenCalledWith(
+        searchEngine.searchIndexes['io.cozy.files'].index,
+        doc
+      )
+    })
+
+    it('should trigger debounced replication for local search', () => {
+      const doc = { _type: 'io.cozy.files', _id: 'test-id' }
+      const debouncedReplicationSpy = jest.spyOn(
+        searchEngine,
+        'debouncedReplication'
+      )
+
+      searchEngine.handleUpdatedOrCreatedDoc(doc)
+
+      expect(debouncedReplicationSpy).toHaveBeenCalled()
+    })
+
+    it('should not trigger debounced replication for non-local search', () => {
+      searchEngine.isLocalSearch = false
+      const doc = { _type: 'io.cozy.files', _id: 'test-id' }
+      const debouncedReplicationSpy = jest.spyOn(
+        searchEngine,
+        'debouncedReplication'
+      )
+
+      searchEngine.handleUpdatedOrCreatedDoc(doc)
+
+      expect(debouncedReplicationSpy).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('handleDeletedDoc method', () => {
+    beforeEach(() => {
+      const mockIndex = {
+        remove: jest.fn()
+      }
+      searchEngine.searchIndexes = {
+        'io.cozy.files': {
+          index: mockIndex
+        }
+      }
+    })
+
+    it('should return early if doctype is not a searched doctype', () => {
+      const doc = { _type: 'io.cozy.notsearched', _id: 'test-id' }
+
+      searchEngine.handleDeletedDoc(doc)
+
+      expect(
+        searchEngine.searchIndexes['io.cozy.files'].index.remove
+      ).not.toHaveBeenCalled()
+    })
+
+    it('should return early if no search index exists for doctype', () => {
+      const doc = { _type: 'io.cozy.contacts', _id: 'test-id' }
+
+      searchEngine.handleDeletedDoc(doc)
+
+      expect(
+        searchEngine.searchIndexes['io.cozy.files'].index.remove
+      ).not.toHaveBeenCalled()
+    })
+
+    it('should remove document from search index for valid doctype', () => {
+      const doc = { _type: 'io.cozy.files', _id: 'test-id' }
+
+      searchEngine.handleDeletedDoc(doc)
+
+      expect(
+        searchEngine.searchIndexes['io.cozy.files'].index.remove
+      ).toHaveBeenCalledWith('test-id')
+    })
+
+    it('should trigger debounced replication for local search', () => {
+      const doc = { _type: 'io.cozy.files', _id: 'test-id' }
+      const debouncedReplicationSpy = jest.spyOn(
+        searchEngine,
+        'debouncedReplication'
+      )
+
+      searchEngine.handleDeletedDoc(doc)
+
+      expect(debouncedReplicationSpy).toHaveBeenCalled()
+    })
+
+    it('should not trigger debounced replication for non-local search', () => {
+      searchEngine.isLocalSearch = false
+      const doc = { _type: 'io.cozy.files', _id: 'test-id' }
+      const debouncedReplicationSpy = jest.spyOn(
+        searchEngine,
+        'debouncedReplication'
+      )
+
+      searchEngine.handleDeletedDoc(doc)
+
+      expect(debouncedReplicationSpy).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('Shared drives realtime functionality', () => {
+    beforeEach(() => {
+      const mockRealtimeInstance = {
+        subscribe: jest.fn(),
+        stop: jest.fn()
+      }
+      mockCozyRealtime.mockReturnValue(mockRealtimeInstance)
+    })
+
+    describe('addSharedDrive method', () => {
+      it('should add shared drive realtime and trigger replication', () => {
+        const addSharedDriveRealtimeSpy = jest.spyOn(
+          searchEngine,
+          'addSharedDriveRealtime'
+        )
+        const debouncedReplicationSpy = jest.spyOn(
+          searchEngine,
+          'debouncedReplication'
+        )
+
+        searchEngine.addSharedDrive('drive1')
+
+        expect(addSharedDriveRealtimeSpy).toHaveBeenCalledWith(
+          'io.cozy.files.shareddrives-drive1'
+        )
+        expect(debouncedReplicationSpy).toHaveBeenCalled()
+      })
+
+      it('should not trigger replication for non-local search', () => {
+        searchEngine.isLocalSearch = false
+        const debouncedReplicationSpy = jest.spyOn(
+          searchEngine,
+          'debouncedReplication'
+        )
+
+        searchEngine.addSharedDrive('drive1')
+
+        expect(debouncedReplicationSpy).not.toHaveBeenCalled()
+      })
+    })
+
+    describe('removeSharedDrive method', () => {
+      beforeEach(() => {
+        const mockRealtimeInstance = {
+          subscribe: jest.fn(),
+          stop: jest.fn()
+        }
+        searchEngine.sharedDrivesRealtimes = {
+          drive1: mockRealtimeInstance
+        }
+        searchEngine.searchIndexes = {
+          'io.cozy.files.shareddrives-drive1': { index: { search: jest.fn() } }
+        }
+      })
+
+      it('should stop realtime, remove from indexes and trigger replication', () => {
+        const mockRealtimeInstance = searchEngine.sharedDrivesRealtimes.drive1
+        const debouncedReplicationSpy = jest.spyOn(
+          searchEngine,
+          'debouncedReplication'
+        )
+
+        searchEngine.removeSharedDrive('drive1')
+
+        expect(mockRealtimeInstance.stop).toHaveBeenCalled()
+        expect(searchEngine.sharedDrivesRealtimes.drive1).toBeUndefined()
+        expect(
+          searchEngine.searchIndexes['io.cozy.files.shareddrives-drive1']
+        ).toBeUndefined()
+        expect(debouncedReplicationSpy).toHaveBeenCalled()
+      })
+
+      it('should handle removal of non-existent drive gracefully', () => {
+        const debouncedReplicationSpy = jest.spyOn(
+          searchEngine,
+          'debouncedReplication'
+        )
+
+        searchEngine.removeSharedDrive('nonexistent')
+
+        expect(debouncedReplicationSpy).toHaveBeenCalled()
+      })
+
+      it('should not trigger replication for non-local search', () => {
+        searchEngine.isLocalSearch = false
+        const debouncedReplicationSpy = jest.spyOn(
+          searchEngine,
+          'debouncedReplication'
+        )
+
+        searchEngine.removeSharedDrive('drive1')
+
+        expect(debouncedReplicationSpy).not.toHaveBeenCalled()
+      })
+    })
+
+    describe('addSharedDriveRealtime private method', () => {
+      it('should create CozyRealtime instance and subscribe to files doctype', () => {
+        const mockRealtimeInstance = {
+          subscribe: jest.fn(),
+          stop: jest.fn()
+        }
+        mockCozyRealtime.mockReturnValue(mockRealtimeInstance)
+
+        searchEngine.addSharedDriveRealtime('io.cozy.files.shareddrives-drive1')
+
+        expect(mockCozyRealtime).toHaveBeenCalledWith({
+          client: mockClient,
+          sharedDriveId: 'drive1'
+        })
+        expect(mockRealtimeInstance.subscribe).toHaveBeenCalledWith(
+          'created',
+          consts.FILES_DOCTYPE,
+          expect.any(Function)
+        )
+        expect(mockRealtimeInstance.subscribe).toHaveBeenCalledWith(
+          'updated',
+          consts.FILES_DOCTYPE,
+          expect.any(Function)
+        )
+        expect(mockRealtimeInstance.subscribe).toHaveBeenCalledWith(
+          'deleted',
+          consts.FILES_DOCTYPE,
+          expect.any(Function)
+        )
+        expect(searchEngine.sharedDrivesRealtimes.drive1).toBe(
+          mockRealtimeInstance
+        )
+      })
+    })
   })
 })
