@@ -2,7 +2,12 @@ import CozyClient, { Q, fetchPolicies } from 'cozy-client'
 import { IOCozyFile } from 'cozy-client/types/types'
 import Minilog from 'cozy-minilog'
 
-import { FILES_DOCTYPE, TYPE_DIRECTORY } from '../consts'
+import {
+  FILES_DOCTYPE,
+  SHARED_DRIVE_FILES_DOCTYPE,
+  TYPE_DIRECTORY
+} from '../consts'
+import { getPouchLink } from '../helpers/client'
 import {
   normalizeFileWithFolders,
   shouldKeepFile
@@ -51,7 +56,7 @@ export const queryFilesForSearch = async (
   return normalizedFiles
 }
 
-export const queryAllDocs = async (
+export const queryAllDocs = (
   client: CozyClient,
   doctype: string
 ): Promise<CozyDoc[]> => {
@@ -59,7 +64,11 @@ export const queryAllDocs = async (
     as: `${doctype}/all`,
     fetchPolicies: defaultFetchPolicy
   }
-  return client.queryAll<CozyDoc[]>(Q(doctype).limitBy(null), queryOpts)
+  if (doctype.includes(SHARED_DRIVE_FILES_DOCTYPE)) {
+    return querySharedDriveFiles(client, doctype)
+  } else {
+    return client.queryAll<CozyDoc[]>(Q(doctype).limitBy(null), queryOpts)
+  }
 }
 
 export const queryDocById = async (
@@ -97,6 +106,33 @@ export const queryDocsByIds = async (
     Q(doctype).getByIds(ids)
   )) as QueryResponseMultipleDoc
   return resp.data
+}
+
+export const querySharedDriveFiles = async (
+  client: CozyClient,
+  doctype: string
+): Promise<CozyDoc[]> => {
+  const pouchLink = getPouchLink(client)
+
+  if (!pouchLink) {
+    return []
+  }
+
+  const pouch = pouchLink.getPouch(doctype) as unknown as {
+    allDocs: (opts: {
+      include_docs: boolean
+    }) => Promise<PouchAllDocsResponse<CozyDoc>>
+  }
+  interface PouchAllDocsDocRow<T> {
+    doc: T
+  }
+  interface PouchAllDocsResponse<T> {
+    rows: Array<PouchAllDocsDocRow<T>>
+  }
+  const resp: PouchAllDocsResponse<CozyDoc> = await pouch.allDocs({
+    include_docs: true
+  })
+  return resp.rows.map(row => ({ ...row.doc, _type: doctype } as CozyDoc))
 }
 
 export const queryLocalOrRemoteDocs = async (
