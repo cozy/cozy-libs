@@ -464,14 +464,7 @@ export class SearchEngine {
 
     const pouchLink = getPouchLink(this.client)
     const currentDoctypes = pouchLink?.doctypes || []
-    const existingDoctypes = Object.keys(this.searchIndexes)
-    const nonExistingDoctypes = existingDoctypes.filter(
-      doctype => !currentDoctypes.includes(doctype)
-    )
-    for (const doctype of nonExistingDoctypes) {
-      delete this.searchIndexes[doctype]
-      log.debug('[SEARCH] Delete index for non-existing doctype', doctype)
-    }
+    this.cleanIndexes(currentDoctypes)
 
     const optionsDoctypes = options?.doctypes || []
     if (
@@ -689,5 +682,20 @@ export class SearchEngine {
     return pouchLink.doctypes.filter(dtype =>
       dtype.includes(SHARED_DRIVE_FILES_DOCTYPE)
     )
+  }
+
+  /**
+   * Clean up search indexes for doctypes that no longer exist
+   * @param currentDoctypes - List of currently valid doctypes
+   */
+  private cleanIndexes(currentDoctypes: string[]): void {
+    const existingDoctypes = Object.keys(this.searchIndexes)
+    const nonExistingDoctypes = existingDoctypes.filter(
+      doctype => !currentDoctypes.includes(doctype)
+    )
+    for (const doctype of nonExistingDoctypes) {
+      delete this.searchIndexes[doctype]
+      log.debug('[SEARCH] Delete index for non-existing doctype', doctype)
+    }
   }
 }
