@@ -2,7 +2,7 @@ import React from 'react'
 
 import SharingContext from './context'
 
-export const SharedDocument = ({ docId, children }) => (
+export const SharedDocument = ({ docId, children, driveId }) => (
   <SharingContext.Consumer>
     {({
       hasWriteAccess,
@@ -14,7 +14,7 @@ export const SharedDocument = ({ docId, children }) => (
       revokeSelf
     } = {}) =>
       children({
-        hasWriteAccess: hasWriteAccess(docId),
+        hasWriteAccess: hasWriteAccess(docId, driveId),
         isShared: byDocId !== undefined && byDocId[docId],
         isSharedByMe: byDocId !== undefined && byDocId[docId] && isOwner(docId),
         isSharedWithMe:
