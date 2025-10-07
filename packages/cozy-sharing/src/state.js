@@ -12,6 +12,10 @@ const ADD_SHARING_LINK = 'ADD_SHARING_LINK'
 const UPDATE_SHARING_LINK = 'UPDATE_SHARING_LINK'
 const REVOKE_SHARING_LINK = 'REVOKE_SHARING_LINK'
 const RECEIVE_PATHS = 'RECEIVE_PATHS'
+export const SHARING_TYPE = {
+  TWO_WAY: 'two-way',
+  ONE_WAY: 'one-way'
+}
 
 // actions
 export const receiveSharings = ({
@@ -575,8 +579,8 @@ const getDirectorySharingType = rule => {
   // Since the sharing hasn't been accepted, it can't be synced so we return the "one-way" type.
   // TODO : the sharing type shouldn't be based on rule but on ready_only prop of the member
   return rule && rule.update === 'sync' && rule.remove === 'sync'
-    ? 'two-way'
-    : 'one-way'
+    ? SHARING_TYPE.TWO_WAY
+    : SHARING_TYPE.ONE_WAY
 }
 
 /**
@@ -589,8 +593,8 @@ const getFileSharingType = rule => {
   // Since the sharing hasn't been accepted, it can't be synced so we return the "one-way" type.
   // TODO : the sharing type shouldn't be based on rule but on ready_only prop of the member
   return rule && rule.update === 'sync' && rule.remove === 'revoke'
-    ? 'two-way'
-    : 'one-way'
+    ? SHARING_TYPE.TWO_WAY
+    : SHARING_TYPE.ONE_WAY
 }
 
 /**
@@ -605,9 +609,10 @@ export const getDocumentSharingType = (sharing, docId) => {
   const directorySharingType = getDirectorySharingType(rule)
   const fileSharingType = getFileSharingType(rule)
 
-  return directorySharingType === 'two-way' || fileSharingType === 'two-way'
-    ? 'two-way'
-    : 'one-way'
+  return directorySharingType === SHARING_TYPE.TWO_WAY ||
+    fileSharingType === SHARING_TYPE.TWO_WAY
+    ? SHARING_TYPE.TWO_WAY
+    : SHARING_TYPE.ONE_WAY
 }
 
 export const isReadOnlySharing = (sharing, docId) => {
@@ -615,7 +620,8 @@ export const isReadOnlySharing = (sharing, docId) => {
   const directorySharingType = getDirectorySharingType(rule)
   const fileSharingType = getFileSharingType(rule)
 
-  return directorySharingType === 'two-way' || fileSharingType === 'two-way'
+  return directorySharingType === SHARING_TYPE.TWO_WAY ||
+    fileSharingType === SHARING_TYPE.TWO_WAY
     ? false
     : true
 }
@@ -669,4 +675,43 @@ export const getSharedDocIdsBySharings = sharings => {
     }
   })
   return docs
+}
+
+/**
+ * Resolves shared drive sharing type.
+ *
+ * @param {object} sharing
+ * @returns {'two-way'|'one-way'|null}
+ */
+const resolveDriveSharingTypeFromRule = sharing => {
+  if (!sharing?.attributes?.rules?.length) return null
+
+  const rule = sharing.attributes.rules[0]
+  const dirType = getDirectorySharingType(rule)
+  const fileType = getFileSharingType(rule)
+
+  return dirType === SHARING_TYPE.TWO_WAY || fileType === SHARING_TYPE.TWO_WAY
+    ? SHARING_TYPE.TWO_WAY
+    : SHARING_TYPE.ONE_WAY
+}
+
+/**
+ * Computes the effective sharing type for a drive.
+ *
+ * @param {string} state - the state
+ * @param {string} driveId - the shared drive ID
+ * @param {string} instanceUri - the URI of the instance
+ * @returns {string|null} - the sharing type
+ */
+export const getSharedDriveSharingType = (state, driveId, instanceUri) => {
+  const sharing = getSharingById(state, driveId)
+  if (!sharing) return null
+
+  const baseType = resolveDriveSharingTypeFromRule(sharing)
+  if (sharing.attributes.owner) return baseType
+
+  const me = sharing.attributes.members?.find(matchingInstanceName(instanceUri))
+  if (!me) return baseType
+
+  return me.read_only ? SHARING_TYPE.ONE_WAY : baseType
 }
