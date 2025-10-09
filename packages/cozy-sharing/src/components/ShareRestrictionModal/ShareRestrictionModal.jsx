@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
 import { generateWebLink, useClient } from 'cozy-client'
+import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -59,7 +60,9 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
 
   const [selectedDate, setSelectedDate] = useState(defaultDate)
   const [dateToggle, setDateToggle] = useState(
-    permissions.length > 0 ? hasExpiresDate : true
+    permissions.length > 0
+      ? hasExpiresDate
+      : flag('sharing.date-toggle.enabled')
   )
   const [passwordToggle, setPasswordToggle] = useState(hasPassword)
   const [editingRights, setEditingRights] = useState(
