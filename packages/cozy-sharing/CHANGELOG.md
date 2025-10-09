@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [26.6.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.5.2...cozy-sharing@26.6.0) (2025-10-09)
+
+### Features
+
+- Toggle sharing deadline by flag :sparkles: ([69436d1](https://github.com/cozy/cozy-libs/commit/69436d1eab1f76c22c5bb5e2fed56eac31ba558e))
+
 ## [26.5.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.5.1...cozy-sharing@26.5.2) (2025-10-07)
 
 ### Bug Fixes
