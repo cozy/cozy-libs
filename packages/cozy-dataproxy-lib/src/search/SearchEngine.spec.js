@@ -534,7 +534,8 @@ describe('Realtime features', () => {
     mockPouchLink = {
       doctypes: ['io.cozy.files', 'io.cozy.contacts', 'io.cozy.apps'],
       startReplicationWithDebounce: jest.fn(),
-      getDbInfo: jest.fn().mockResolvedValue({ update_seq: 1 })
+      getDbInfo: jest.fn().mockResolvedValue({ update_seq: 1 }),
+      getSharedDriveDoctypes: jest.fn().mockReturnValue([])
     }
 
     mockRealtimePlugin = {
@@ -572,13 +573,10 @@ describe('Realtime features', () => {
 
   describe('init method - realtime setup', () => {
     it('should setup shared drives realtime if pouch link has shared drives doctypes', async () => {
-      mockPouchLink.doctypes = [
-        'io.cozy.files',
-        'io.cozy.contacts',
-        'io.cozy.apps',
+      mockPouchLink.getSharedDriveDoctypes.mockReturnValue([
         'io.cozy.files.shareddrives-drive1',
         'io.cozy.files.shareddrives-drive2'
-      ]
+      ])
 
       await searchEngine.init()
 
@@ -748,9 +746,7 @@ describe('Realtime features', () => {
 
         searchEngine.addSharedDrive('drive1')
 
-        expect(addSharedDriveRealtimeSpy).toHaveBeenCalledWith(
-          'io.cozy.files.shareddrives-drive1'
-        )
+        expect(addSharedDriveRealtimeSpy).toHaveBeenCalledWith('drive1')
         expect(debouncedReplicationSpy).toHaveBeenCalled()
       })
 
@@ -830,7 +826,7 @@ describe('Realtime features', () => {
         }
         mockCozyRealtime.mockReturnValue(mockRealtimeInstance)
 
-        searchEngine.addSharedDriveRealtime('io.cozy.files.shareddrives-drive1')
+        searchEngine.addSharedDriveRealtime('drive1')
 
         expect(mockCozyRealtime).toHaveBeenCalledWith({
           client: mockClient,
