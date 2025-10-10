@@ -210,11 +210,12 @@ export class SearchEngine {
 
     const pouchLink = getPouchLink(this.client)
     if (pouchLink) {
-      const sharedDrivesDoctypes = pouchLink.doctypes.filter(dtype =>
-        dtype.includes(SHARED_DRIVE_FILES_DOCTYPE)
-      )
+      const sharedDrivesDoctypes = pouchLink.getSharedDriveDoctypes()
       for (const sharedDrivesDoctype of sharedDrivesDoctypes) {
-        this.addSharedDriveRealtime(sharedDrivesDoctype)
+        const driveId = sharedDrivesDoctype.split('-').pop()
+        if (driveId) {
+          this.addSharedDriveRealtime(driveId)
+        }
       }
     }
 
@@ -226,7 +227,7 @@ export class SearchEngine {
   }
 
   addSharedDrive(driveId: string): void {
-    this.addSharedDriveRealtime(`${SHARED_DRIVE_FILES_DOCTYPE}-${driveId}`)
+    this.addSharedDriveRealtime(driveId)
     if (this.isLocalSearch) {
       this.debouncedReplication()
     }
@@ -246,8 +247,7 @@ export class SearchEngine {
     }
   }
 
-  private addSharedDriveRealtime(sharedDrivesDoctype: string): void {
-    const sharedDriveId = sharedDrivesDoctype.split('-')[1]
+  private addSharedDriveRealtime(sharedDriveId: string): void {
     const realtime = new CozyRealtime({
       client: this.client,
       sharedDriveId
