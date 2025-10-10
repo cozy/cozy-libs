@@ -2,11 +2,7 @@ import CozyClient, { Q, fetchPolicies } from 'cozy-client'
 import { IOCozyFile } from 'cozy-client/types/types'
 import Minilog from 'cozy-minilog'
 
-import {
-  FILES_DOCTYPE,
-  SHARED_DRIVE_FILES_DOCTYPE,
-  TYPE_DIRECTORY
-} from '../consts'
+import { FILES_DOCTYPE, TYPE_DIRECTORY } from '../consts'
 import { getPouchLink } from '../helpers/client'
 import {
   normalizeFileWithFolders,
@@ -64,7 +60,14 @@ export const queryAllDocs = (
     as: `${doctype}/all`,
     fetchPolicies: defaultFetchPolicy
   }
-  if (doctype.includes(SHARED_DRIVE_FILES_DOCTYPE)) {
+  const pouchLink = getPouchLink(client)
+  let isSharedDriveDoctype = false
+  if (pouchLink) {
+    isSharedDriveDoctype = pouchLink
+      .getSharedDriveDoctypes()
+      .includes(doctype) as boolean
+  }
+  if (isSharedDriveDoctype) {
     return querySharedDriveFiles(client, doctype)
   } else {
     return client.queryAll<CozyDoc[]>(Q(doctype).limitBy(null), queryOpts)
