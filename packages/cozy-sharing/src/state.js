@@ -678,24 +678,6 @@ export const getSharedDocIdsBySharings = sharings => {
 }
 
 /**
- * Resolves shared drive sharing type.
- *
- * @param {object} sharing
- * @returns {'two-way'|'one-way'|null}
- */
-const resolveDriveSharingTypeFromRule = sharing => {
-  if (!sharing?.attributes?.rules?.length) return null
-
-  const rule = sharing.attributes.rules[0]
-  const dirType = getDirectorySharingType(rule)
-  const fileType = getFileSharingType(rule)
-
-  return dirType === SHARING_TYPE.TWO_WAY || fileType === SHARING_TYPE.TWO_WAY
-    ? SHARING_TYPE.TWO_WAY
-    : SHARING_TYPE.ONE_WAY
-}
-
-/**
  * Computes the effective sharing type for a drive.
  *
  * @param {string} state - the state
@@ -707,11 +689,8 @@ export const getSharedDriveSharingType = (state, driveId, instanceUri) => {
   const sharing = getSharingById(state, driveId)
   if (!sharing) return null
 
-  const baseType = resolveDriveSharingTypeFromRule(sharing)
-  if (sharing.attributes.owner) return baseType
-
   const me = sharing.attributes.members?.find(matchingInstanceName(instanceUri))
-  if (!me) return baseType
+  if (!me) return null
 
-  return me.read_only ? SHARING_TYPE.ONE_WAY : baseType
+  return me.read_only ? SHARING_TYPE.ONE_WAY : SHARING_TYPE.TWO_WAY
 }
