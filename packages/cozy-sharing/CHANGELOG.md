@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [26.6.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.6.0...cozy-sharing@26.6.1) (2025-10-15)
+
+### Bug Fixes
+
+- Change the way to check write access of shared drive :bug: ([e75c3ba](https://github.com/cozy/cozy-libs/commit/e75c3ba6ba044639b4ab13021067e15649ecc864))
+
 # [26.6.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.5.2...cozy-sharing@26.6.0) (2025-10-09)
 
 ### Features
