@@ -71,9 +71,44 @@ const Sources = ({ messageId, files }) => {
   )
 }
 
-const SourcesWithFilesQuery = ({ messageId, sources }) => {
-  const fileIds = sources.map(source => source.id)
+// const SourcesWithFilesQuery = ({ messageId, sources }) => {
+//   console.log({ sources })
+  
+//   const fileIds = sources.filter(source => source.docType === 'io.cozy.files').map(source => source.id)
+//   //const emailIds = sources.filter(source => source.docType === 'com.linagora.email').map(source => source.id)
 
+//   const filesByIds = buildFilesByIds(fileIds)
+
+//   console.log({ filesByIds })
+//   // const emailsByIds = buildEmailsByIds(emailIds)
+  
+//   const { data: files, ...queryResult } = useQuery(
+//     filesByIds.definition,
+//     filesByIds.options
+//   )
+
+//   const isLoading = isQueryLoading(queryResult)
+
+//   if (isLoading || files.length === 0) return null
+
+//   return <Sources messageId={messageId} files={files} />
+// }
+
+
+const SourcesWithFilesQuery = ({ messageId, sources }) => {
+  console.log({ sources })
+  const fileIds = []
+  sources.map(source => {
+    if (source.doctype === 'io.cozy.files') {
+      fileIds.push(source.id)
+    }
+    else if (source.doctype === 'com.linagora.email') {
+      console.log("email source detected", source)
+      console.log("email source handling not yet implemented")
+      // handle email case
+      // still implementing ---
+    }
+  })
   const filesByIds = buildFilesByIds(fileIds)
   const { data: files, ...queryResult } = useQuery(
     filesByIds.definition,
