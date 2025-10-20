@@ -54,6 +54,8 @@ export class SharingProvider extends Component {
     const instanceUri = props.client.getStackClient().uri
     const documentType = props.documentType || 'Document'
     const onShared = props.onShared || (() => {})
+
+    this.fetchAllSharings = this.fetchAllSharings.bind(this)
     this.state = {
       byDocId: {},
       sharings: [],
@@ -98,8 +100,6 @@ export class SharingProvider extends Component {
     const { client } = props
     this.sharingCol = client.collection(SHARING_DOCTYPE)
     this.permissionCol = client.collection(PERMISSION_DOCTYPE)
-
-    this.fetchAllSharings = this.fetchAllSharings.bind(this)
   }
 
   dispatch = action =>
