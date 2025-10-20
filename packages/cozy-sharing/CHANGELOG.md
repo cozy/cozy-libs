@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [26.6.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.6.1...cozy-sharing@26.6.2) (2025-10-20)
+
+### Bug Fixes
+
+- Bind fetchAllSharings before state init in SharingProvider 🐛 ([df12219](https://github.com/cozy/cozy-libs/commit/df12219852b473867e37788e74b442c792060cc8))
+
 ## [26.6.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.6.0...cozy-sharing@26.6.1) (2025-10-15)
 
 ### Bug Fixes
