@@ -13,3 +13,17 @@
 
   +gt-mobile()
     max-height 155px
+
+.conversationBarSibling
+  height 100px
+  width 100%
+  margin 16px 0px
+  opacity 1
+
+  transition: height 0.4s 0.15s, opacity 0.4s, margin 0.4s 0.15s
+  transition-timing-function: cubic-bezier(0.31, 0.1, 0, 1.06)
+
+.conversationBarSibling--started
+  height 0px
+  opacity 0
+  margin 0px
