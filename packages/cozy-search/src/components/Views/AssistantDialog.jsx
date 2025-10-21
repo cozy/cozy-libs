@@ -8,6 +8,7 @@ import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import AssistantProvider, { useAssistant } from '../AssistantProvider'
 import Conversation from '../Conversations/Conversation'
 import ConversationBar from '../Conversations/ConversationBar'
+import ConversationLayout from '../Conversations/ConversationLayout'
 
 const AssistantDialog = () => {
   const { assistantState } = useAssistant()
@@ -36,13 +37,14 @@ const AssistantDialog = () => {
       fullScreen
       size="full"
       componentsProps={{
-        dialogTitle: { className: isMobile ? 'u-ph-0' : '' },
-        dialogActions: { className: isMobile ? 'u-mh-half' : 'u-mb-2' },
+        dialogTitle: { className: 'u-dn' },
+        dialogActions: { className: 'u-dn' },
+        dialogContent: { className: 'u-p-0' },
         divider: { className: 'u-dn' }
       }}
+      disableGutters
       title={isMobile ? ' ' : ' '}
-      content={<Conversation id={conversationId} />}
-      actions={<ConversationBar assistantStatus={assistantState.status} />}
+      content={<ConversationLayout conversationId={conversationId} assistantState={assistantState} />}
       onClose={onClose}
     />
   )

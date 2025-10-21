@@ -1,10 +1,26 @@
 {
   "assistant": {
     "search": {
-      "placeholder": "Une question ?",
+      "placeholder": "Une question ?",
       "send": "Envoyer",
       "noItem": "Aucun résultat",
       "notEnough": "Votre recherche doit contenir au moins 3 caractères"
+    },
+    "conversationBar": {
+      "startMessage": "Comment puis-je vous aider ?",
+      "newChat": "Nouveau"
+    },
+    "modes": {
+      "twake_knowledge": "Connaissances Twake",
+      "legal": "Juridique",
+      "financial": "Financier",
+      "image_creation": "Création d'images",
+      "code_assistant": "Assistant de code",
+      "brainstorming": "Brainstorming",
+      "travel_planner": "Planificateur de voyage",
+      "fitness_coach": "Coach sportif",
+      "recipe_suggester": "Suggestions de recettes",
+      "web_search": "Recherche web"
     },
     "dialog": {
       "close": "Fermer"

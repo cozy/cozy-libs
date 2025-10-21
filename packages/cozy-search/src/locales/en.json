@@ -6,6 +6,22 @@
       "noItem": "No results",
       "notEnough": "Your query must contain at least 3 characters"
     },
+    "conversationBar": {
+      "startMessage": "What can I do for you?",
+      "newChat": "New chat"
+    },
+    "modes": {
+      "twake_knowledge": "My Twake Knowledge",
+      "legal": "Legal",
+      "financial": "Financial",
+      "image_creation": "Image creation",
+      "code_assistant": "Code assistant",
+      "brainstorming": "Brainstorming",
+      "travel_planner": "Travel planner",
+      "fitness_coach": "Fitness coach",
+      "recipe_suggester": "Recipe suggester",
+      "web_search": "Web search"
+    },
     "dialog": {
       "close": "Close"
     },
