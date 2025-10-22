@@ -7,44 +7,35 @@ import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
+import { useClient, useQuery, Q } from "cozy-client";
+import { buildRecentConversationsQuery } from "../queries";
+
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { makeConversationId } from "../helpers";
 
 const ConversationList = ({ onNewConversation }) => {
   const { t } = useI18n();
+  const client = useClient();
+  const navigate = useNavigate();
+  
+  const { conversationId } = useParams()
+  const [searchParams] = useSearchParams()
 
-  const [selectedConversation, setSelectedConversation] = useState(0);
+  const recentConvsQuery = buildRecentConversationsQuery()
 
-  const conversations = [
-    {
-      title: "Project Update",
-      lastMessage: "Reviewed Q3 roadmap",
-      date: "2025-10-21"
-    },
-    {
-      title: "Team Alignment",
-      lastMessage: "Discussed project timeline",
-      date: "2025-10-21"
-    },
-    {
-      title: "Client Feedback",
-      lastMessage: "Client suggested revisions",
-      date: "2025-10-20"
-    },
-    {
-      title: "Budget Review",
-      lastMessage: "Confirmed allocation for design",
-      date: "2025-02-15"
-    },
-    {
-      title: "Hiring Discussion",
-      lastMessage: "Shortlisted candidates",
-      date: "2025-02-14"
-    },
-    {
-      title: "Partnership Proposal",
-      lastMessage: "Drafted outline for potential collaboration",
-      date: "2025-02-14"
-    }
-  ]
+  const goToConversation = (conversationId) => {
+    navigate(`/assistant/${conversationId}${searchParams.toString() ? `?${searchParams.toString()}` : ''}`);
+  };
+
+  const createNewConversation = () => {
+    const newConversationId = makeConversationId();
+    goToConversation(newConversationId);
+  };
+
+  const { data: conversations, historyFetchStatus } = useQuery(
+    recentConvsQuery.definition,
+    recentConvsQuery.options
+  );
 
   return (
     <div className="u-flex u-flex-column u-w-100 u-h-100 u-flex-align-center u-flex-justify-start">
@@ -57,7 +48,7 @@ const ConversationList = ({ onNewConversation }) => {
         <Button
           startIcon={<Icon icon={"plus"} size={14} />}
           label={t('assistant.conversationBar.newChat')}
-          onClick={onNewConversation}
+          onClick={createNewConversation}
           variant="primary"
           className="u-w-100 u-bdrs-6"
         />
@@ -65,28 +56,36 @@ const ConversationList = ({ onNewConversation }) => {
       <Typography className="u-ph-half u-mh-1 u-mb-half" variant="subtitle1" color="textSecondary">
         {t('assistant.conversationList.recentConversations')}
       </Typography>
-      <List className="u-ph-half" disabledGutters>
-        {conversations.map((conv, index) => (
-          <ListItem dense button className="u-bdrs-4 u-mb-half" key={index}
-            style={{
-              backgroundColor: selectedConversation === index ? 'var(--defaultBackgroundColor)' : undefined,
-            }}
-            onClick={() => setSelectedConversation(index)}
-          >
-            <ListItemText>
-              <Typography variant="body2">
-                {conv.title}
-              </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
-                {conv.lastMessage}
-              </Typography>
-              <Typography variant="caption" color="textSecondary">
-                {new Date(conv.date).toLocaleDateString()}
-              </Typography>
-            </ListItemText>
-          </ListItem>
-        ))}
-      </List>
+      <div
+        style={{
+          height: '100%',
+          width: '100%',
+          overflow: 'scroll'
+        }}
+      >
+        <List className="u-ph-half" disabledGutters>
+          {conversations && conversations.map((conv, index) => (
+            <ListItem dense button className="u-bdrs-4 u-mb-half" key={index}
+              style={{
+                backgroundColor: conversationId === conv.id ? 'var(--defaultBackgroundColor)' : undefined,
+              }}
+              onClick={() => goToConversation(conv.id)}
+            >
+              <ListItemText>
+                <Typography variant="body2">
+                  {conv.messages[conv.messages.length - 1]?.content}
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                  {conv.messages[conv.messages.length - 1]?.content}
+                </Typography>
+                <Typography variant="caption" color="textSecondary">
+                  {new Date(conv.cozyMetadata?.updatedAt).toLocaleString()}
+                </Typography>
+              </ListItemText>
+            </ListItem>
+          ))}
+        </List>
+      </div>
     </div>
   );
 };

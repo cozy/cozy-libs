@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useMemo, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
@@ -16,6 +16,9 @@ import { useAssistant } from '../AssistantProvider'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { TwakeAssistantIcon } from '../AssistantIcon/TwakeAssistantIcon'
 import { TwakeAssistantIconColor } from '../AssistantIcon/TwakeAssistantIconColor'
+import { ExpertIcon } from '../AssistantIcon/ExpertIcon'
+import { KnowledgeBaseIcon } from '../AssistantIcon/KnowledgeBaseIcon'
+import ChatModes from './ConversationChips'
 
 const ConversationBar = ({ assistantStatus, hasConversationStarted }) => {
   const { t } = useI18n()
@@ -49,8 +52,6 @@ const ConversationBar = ({ assistantStatus, hasConversationStarted }) => {
       handleClear()
       inputRef.current.style.height = 'auto'
     })
-
-  const [webSearchEnabled, setWebSearchEnabled] = useState(false)
 
   return (
     <div className="u-w-100 u-maw-7 u-mh-auto">
@@ -97,17 +98,6 @@ const ConversationBar = ({ assistantStatus, hasConversationStarted }) => {
                   flex: "none"
                 }}
               >
-                {!hasConversationStarted && (
-                  <Button
-                    startIcon={<Icon icon={"globe"} size={14} />}
-                    label={t('assistant.modes.web_search')}
-                    onClick={() => { setWebSearchEnabled(!webSearchEnabled) }}
-                    variant="text"
-                    color={webSearchEnabled ? "primary" : "inherit"}
-                    size="small"
-                  />
-                )}
-
                 {assistantStatus !== 'idle' ? (
                   <Button
                     component="div"
@@ -148,61 +138,6 @@ const ConversationBar = ({ assistantStatus, hasConversationStarted }) => {
       <div className={`${styles['conversationBarSibling']} ${hasConversationStarted ? styles['conversationBarSibling--started'] : ''} u-flex u-flex-column u-flex-items-center u-flex-justify-start`}>
         <ChatModes />
       </div>
-    </div>
-  )
-}
-
-const ChatModes = () => {
-  const { t } = useI18n()
-
-  const modes = [
-    { key: "twake_knowledge", label: t("assistant.modes.twake_knowledge"), icon: TwakeAssistantIconColor },
-    { key: "legal", label: t("assistant.modes.legal"), icon: 'justice' },
-    { key: 'financial', label: t("assistant.modes.financial"), icon: 'benefit' },
-    { key: 'image_creation', label: t("assistant.modes.image_creation"), icon: 'image' },
-    { key: 'code_assistant', label: t("assistant.modes.code_assistant"), icon: 'lightning' },
-    { key: 'brainstorming', label: t("assistant.modes.brainstorming"), icon: 'lightbulb' },
-    { key: 'travel_planner', label: t("assistant.modes.travel_planner"), icon: 'plane' },
-    { key: 'fitness_coach', label: t("assistant.modes.fitness_coach"), icon: 'fitness' },
-    { key: 'recipe_suggester', label: t("assistant.modes.recipe_suggester"), icon: 'restaurant' }
-  ]
-
-  const [enabledModes, setEnabledModes] = useState(["twake_knowledge"])
-
-  return (
-    <div
-      className="u-flex u-flex-row u-flex-wrap u-w-100 u-flex-justify-start"
-      style={{ gap: 8 }}
-    >
-      {modes.splice(0,4).map(mode => (
-        <Chip
-          icon={<Icon icon={mode.icon} style={{ marginLeft: 12 }} />}
-          label={mode.label}
-          clickable
-          key={mode.label}
-          variant={enabledModes.includes(mode.key) ? 'ghost' : 'default'}
-          className="u-mr-0"
-          onClick={() => {
-            if (enabledModes.includes(mode.key)) {
-              setEnabledModes(enabledModes.filter(m => m !== mode.key))
-            } else {
-              setEnabledModes([...enabledModes, mode.key])
-            }
-          }}
-        />
-      ))}
-
-      {modes.length > 0 && (
-        <Chip
-          label={`+${modes.length} more`}
-          clickable
-          variant="default"
-          className="u-mr-0"
-          onClick={() => {
-            // Handle click for additional modes
-          }}
-        />
-      )}
     </div>
   )
 }

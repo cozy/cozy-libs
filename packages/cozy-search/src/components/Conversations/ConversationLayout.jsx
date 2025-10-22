@@ -18,9 +18,19 @@ import ConversationList from './ConversationList'
 import AppTitle from 'cozy-ui/transpiled/react/AppTitle';
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
+import { buildChatConversationQueryById } from '../queries'
+import { useQuery } from 'cozy-client'
+
 const ConversationLayout = ({ conversationId, assistantState }) => {
   const { isMobile } = useBreakpoints()
-  const hasConversationStarted = assistantState && assistantState.messagesId.length > 0
+
+  const chatConversationQuery = buildChatConversationQueryById(conversationId ?? "")
+  const { data: chatConversation, ...queryResult } = useQuery(
+    chatConversationQuery.definition,
+    chatConversationQuery.options
+  )
+
+  const hasConversationStarted = chatConversation && chatConversation.messages.length > 0
   const [historyOpen, setHistoryOpen] = useState(!isMobile)
 
   return (

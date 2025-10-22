@@ -8,13 +8,16 @@
     },
     "conversationBar": {
       "startMessage": "Comment puis-je vous aider ?",
-      "newChat": "Nouveau"
+      "newChat": "Nouveau",
+      "more": {
+        "experts": "autres expertises",
+        "knowledge_bases": "autres bases de connaissances"
+      }
     },
     "conversationList": {
       "recentConversations": "Conversations récentes"
     },
-    "modes": {
-      "twake_knowledge": "Connaissances Twake",
+    "experts": {
       "legal": "Juridique",
       "financial": "Financier",
       "image_creation": "Création d'images",
@@ -24,6 +27,13 @@
       "fitness_coach": "Coach sportif",
       "recipe_suggester": "Suggestions de recettes",
       "web_search": "Recherche web"
+    },
+    "knowledge_bases": {
+      "twake_knowledge": "Connaissances Twake",
+      "web": "Web",
+      "linagora_client": "Base clients Linagora",
+      "security_procedures": "Procédures sécurité",
+      "other": "Autre base de connaissances"
     },
     "dialog": {
       "close": "Fermer"

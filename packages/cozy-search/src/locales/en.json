@@ -8,13 +8,16 @@
     },
     "conversationBar": {
       "startMessage": "What can I do for you?",
-      "newChat": "New chat"
+      "newChat": "New chat",
+      "more": {
+        "experts": "more experts",
+        "knowledge_bases": "more knowledge bases"
+      }
     },
     "conversationList": {
       "recentConversations": "Recent conversations"
     },
-    "modes": {
-      "twake_knowledge": "My Twake Knowledge",
+    "experts": {
       "legal": "Legal",
       "financial": "Financial",
       "image_creation": "Image creation",
@@ -24,6 +27,13 @@
       "fitness_coach": "Fitness coach",
       "recipe_suggester": "Recipe suggester",
       "web_search": "Web search"
+    },
+    "knowledge_bases": {
+      "twake_knowledge": "Twake Knowledge",
+      "web": "Web",
+      "linagora_client": "Linagora Client Base",
+      "security_procedures": "Security Procedures",
+      "other": "Other knowledge base"
     },
     "dialog": {
       "close": "Close"
