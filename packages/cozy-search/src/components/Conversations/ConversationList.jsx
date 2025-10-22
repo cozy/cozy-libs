@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -10,6 +10,8 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 const ConversationList = ({ onNewConversation }) => {
   const { t } = useI18n();
+
+  const [selectedConversation, setSelectedConversation] = useState(0);
 
   const conversations = [
     {
@@ -46,6 +48,11 @@ const ConversationList = ({ onNewConversation }) => {
 
   return (
     <div className="u-flex u-flex-column u-w-100 u-h-100 u-flex-align-center u-flex-justify-start">
+      <div
+        style={{
+          height: 44
+        }}
+      />
       <div className="u-m-1-half u-mb-0">
         <Button
           startIcon={<Icon icon={"plus"} size={14} />}
@@ -55,9 +62,17 @@ const ConversationList = ({ onNewConversation }) => {
           className="u-w-100 u-bdrs-6"
         />
       </div>
-      <List className="u-ph-1" disabledGutters>
+      <Typography className="u-ph-half u-mh-1 u-mb-half" variant="subtitle1" color="textSecondary">
+        {t('assistant.conversationList.recentConversations')}
+      </Typography>
+      <List className="u-ph-half" disabledGutters>
         {conversations.map((conv, index) => (
-          <ListItem dense button className="u-bdrs-4 u-mb-half" key={index}>
+          <ListItem dense button className="u-bdrs-4 u-mb-half" key={index}
+            style={{
+              backgroundColor: selectedConversation === index ? 'var(--defaultBackgroundColor)' : undefined,
+            }}
+            onClick={() => setSelectedConversation(index)}
+          >
             <ListItemText>
               <Typography variant="body2">
                 {conv.title}

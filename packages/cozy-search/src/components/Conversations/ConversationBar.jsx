@@ -172,6 +172,7 @@ const ChatModes = () => {
   return (
     <div
       className="u-flex u-flex-row u-flex-wrap u-w-100 u-flex-justify-start"
+      style={{ gap: 8 }}
     >
       {modes.splice(0,4).map(mode => (
         <Chip
@@ -180,7 +181,7 @@ const ChatModes = () => {
           clickable
           key={mode.label}
           variant={enabledModes.includes(mode.key) ? 'ghost' : 'default'}
-          className="u-mr-half"
+          className="u-mr-0"
           onClick={() => {
             if (enabledModes.includes(mode.key)) {
               setEnabledModes(enabledModes.filter(m => m !== mode.key))
@@ -196,7 +197,7 @@ const ChatModes = () => {
           label={`+${modes.length} more`}
           clickable
           variant="default"
-          className="u-mr-half"
+          className="u-mr-0"
           onClick={() => {
             // Handle click for additional modes
           }}

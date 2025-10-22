@@ -10,6 +10,9 @@
       "startMessage": "Comment puis-je vous aider ?",
       "newChat": "Nouveau"
     },
+    "conversationList": {
+      "recentConversations": "Conversations récentes"
+    },
     "modes": {
       "twake_knowledge": "Connaissances Twake",
       "legal": "Juridique",
