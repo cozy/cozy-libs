@@ -19,8 +19,9 @@ import AppTitle from 'cozy-ui/transpiled/react/AppTitle';
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 const ConversationLayout = ({ conversationId, assistantState }) => {
+  const { isMobile } = useBreakpoints()
   const hasConversationStarted = assistantState && assistantState.messagesId.length > 0
-  const [historyOpen, setHistoryOpen] = useState(true)
+  const [historyOpen, setHistoryOpen] = useState(!isMobile)
 
   return (
     <div className={`${styles['conversationApp']}`}>
@@ -47,7 +48,7 @@ const ConversationLayout = ({ conversationId, assistantState }) => {
           />
         </div>
 
-        <div className={`u-flex u-flex-column u-flex-items-center u-flex-justify-center ${styles['conversationHistory']} ${historyOpen ? styles['conversationHistory--open'] : ''}`}>
+        <div className={`u-flex u-flex-column u-flex-items-center u-flex-justify-center ${styles['conversationHistory']} ${historyOpen ? styles['conversationHistory--open'] : ''} ${isMobile ? styles['conversationHistory--mobile'] : ''}`}>
           <ConversationList
             onNewConversation={() => { }}
           />
