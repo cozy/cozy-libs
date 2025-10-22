@@ -76,7 +76,7 @@
     "directory": "packages/cozy-search"
   },
   "scripts": {
-    "build": "yarn build:clean && yarn build:types && babel --extensions .ts,.tsx,.js,.jsx,.styl --ignore '**/*.spec.tsx','**/*.spec.ts','**/*.d.ts' ./src -d ./dist --copy-files",
+    "build": "yarn build:clean && yarn build:types && babel --extensions .ts,.tsx,.js,.jsx --ignore '**/*.spec.tsx','**/*.spec.ts','**/*.d.ts' ./src -d ./dist --copy-files",
     "build:clean": "rm -rf ./dist",
     "build:types": "tsc -p tsconfig-build.json",
     "build:watch": "yarn build --watch",
