@@ -10,6 +10,9 @@
       "startMessage": "What can I do for you?",
       "newChat": "New chat"
     },
+    "conversationList": {
+      "recentConversations": "Recent conversations"
+    },
     "modes": {
       "twake_knowledge": "My Twake Knowledge",
       "legal": "Legal",
