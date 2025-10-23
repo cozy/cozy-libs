@@ -21,18 +21,24 @@
       "legal": "Legal",
       "financial": "Financial",
       "image_creation": "Image creation",
+      "marketing": "Marketing",
       "code_assistant": "Code assistant",
       "brainstorming": "Brainstorming",
       "travel_planner": "Travel planner",
       "fitness_coach": "Fitness coach",
       "recipe_suggester": "Recipe suggester",
-      "web_search": "Web search"
+      "web_search": "Web search",
+      "external_warning": {
+        "title": "External expert selected",
+        "description": "Be careful with the selected knowledge bases",
+        "know_more": "Know more"
+      }
     },
     "knowledge_bases": {
-      "twake_knowledge": "Twake Knowledge",
+      "twake_knowledge": "My Twake",
       "web": "Web",
       "linagora_client": "Linagora Client Base",
-      "security_procedures": "Security Procedures",
+      "security_procedures": "Security",
       "other": "Other knowledge base"
     },
     "dialog": {
