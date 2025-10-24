@@ -135,7 +135,7 @@ const ConversationBar = ({ assistantStatus, hasConversationStarted }) => {
         onChange={handleChange}
       />
 
-      <div className={`${styles['conversationBarSibling']} ${hasConversationStarted ? styles['conversationBarSibling--started'] : ''} u-flex u-flex-column u-flex-items-center u-flex-justify-start`}>
+      <div className={`${styles['conversationBarSibling']} u-flex u-flex-column u-flex-items-center u-flex-justify-start`}>
         <ChatModes />
       </div>
     </div>

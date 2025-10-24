@@ -35,9 +35,9 @@
       }
     },
     "knowledge_bases": {
-      "twake_knowledge": "My Twake",
+      "twake_knowledge": "Connaîssances Twake",
       "web": "Web",
-      "linagora_client": "Base clients Linagora",
+      "linagora_client": "CRM",
       "security_procedures": "Sécurité",
       "other": "Autre base de connaissances"
     },
