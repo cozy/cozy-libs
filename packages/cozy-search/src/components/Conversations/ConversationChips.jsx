@@ -141,7 +141,7 @@ const ChatChips = ({ modes, onModeSelect, splice = 3, startIcon = ExpertIcon, mo
 
   return (
     <div
-      className="u-flex u-flex-row u-flex-wrap u-w-100 u-flex-justify-start u-flex-items-center u-mb-1"
+      className="u-flex u-flex-row u-flex-wrap u-w-100 u-flex-justify-between u-flex-items-center u-mb-1"
       style={{ gap: 8 }}
     >
       <Icon icon={startIcon} size={24} style={{ opacity: 0.6 }} />
