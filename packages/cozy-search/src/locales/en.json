@@ -37,7 +37,7 @@
     "knowledge_bases": {
       "twake_knowledge": "My Twake",
       "web": "Web",
-      "linagora_client": "Linagora Client Base",
+      "linagora_client": "CRM",
       "security_procedures": "Security",
       "other": "Other knowledge base"
     },
