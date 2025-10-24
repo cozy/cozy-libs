@@ -10,13 +10,14 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { useClient, useQuery, Q } from "cozy-client";
 import { buildRecentConversationsQuery } from "../queries";
 
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { makeConversationId } from "../helpers";
 
 const ConversationList = ({ onNewConversation }) => {
   const { t } = useI18n();
   const client = useClient();
   const navigate = useNavigate();
+  const location = useLocation();
   
   const { conversationId } = useParams()
   const [searchParams] = useSearchParams()
@@ -24,7 +25,21 @@ const ConversationList = ({ onNewConversation }) => {
   const recentConvsQuery = buildRecentConversationsQuery()
 
   const goToConversation = (conversationId) => {
-    navigate(`/assistant/${conversationId}${searchParams.toString() ? `?${searchParams.toString()}` : ''}`);
+    const parts = location.pathname.split("/");
+    const assistantIndex = parts.findIndex((part) => part === "assistant");
+
+    if (assistantIndex !== -1 && parts.length > assistantIndex + 1) {
+      parts[assistantIndex + 1] = conversationId;
+    } else {
+      parts.push("assistant", conversationId);
+    }
+    const newPathname = parts.join("/");
+    
+    navigate({
+      pathname: newPathname,
+      search: location.search,
+      hash: location.hash,
+    });
   };
 
   const createNewConversation = () => {
