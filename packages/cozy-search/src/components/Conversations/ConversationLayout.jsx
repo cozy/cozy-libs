@@ -61,6 +61,7 @@ const ConversationLayout = ({ conversationId, assistantState }) => {
         <div className={`u-flex u-flex-column u-flex-items-center u-flex-justify-center ${styles['conversationHistory']} ${historyOpen ? styles['conversationHistory--open'] : ''} ${isMobile ? styles['conversationHistory--mobile'] : ''}`}>
           <ConversationList
             onNewConversation={() => { }}
+            id={conversationId}
           />
         </div>
         <div className={`${styles['conversationWindowContainer']}`}>
