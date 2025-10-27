@@ -41,13 +41,7 @@ export const buildMyselfQuery = () => {
 export const buildRecentConversationsQuery = () => ({
   definition: () =>
     Q(CHAT_CONVERSATIONS_DOCTYPE)
-      .where({
-        // TODO : fix
-        'cozyMetadata.updatedAt': { $gt: new Date("1999-01-01T00:00:00Z") },
-      })
-      .indexFields([
-        'cozyMetadata.updatedAt'
-      ])
+      .where({ 'cozyMetadata.doctypeVersion': "1" })
       .sortBy([{ 'cozyMetadata.updatedAt': 'desc' }])
       .limitBy(50),
   options: {

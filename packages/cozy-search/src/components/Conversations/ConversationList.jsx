@@ -7,13 +7,13 @@ import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
-import { useClient, useQuery, Q } from "cozy-client";
-import { buildRecentConversationsQuery } from "../queries";
+import { useClient, useQuery, Q, RealTimeQueries } from "cozy-client";
+import { buildRecentConversationsQuery, CHAT_CONVERSATIONS_DOCTYPE } from "../queries";
 
 import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { makeConversationId } from "../helpers";
 
-const ConversationList = ({ onNewConversation }) => {
+const ConversationList = ({ onNewConversation, id }) => {
   const { t } = useI18n();
   const client = useClient();
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const ConversationList = ({ onNewConversation }) => {
   const { conversationId } = useParams()
   const [searchParams] = useSearchParams()
 
-  const recentConvsQuery = buildRecentConversationsQuery()
+  const recentConvsQuery = buildRecentConversationsQuery(id)
 
   const goToConversation = (conversationId) => {
     const parts = location.pathname.split("/");
@@ -54,6 +54,7 @@ const ConversationList = ({ onNewConversation }) => {
 
   return (
     <div className="u-flex u-flex-column u-w-100 u-h-100 u-flex-align-center u-flex-justify-start">
+      <RealTimeQueries doctype={CHAT_CONVERSATIONS_DOCTYPE} client={client} />
       <div
         style={{
           height: 44
