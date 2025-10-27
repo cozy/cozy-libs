@@ -3,14 +3,13 @@ import React from 'react'
 import snarkdown from 'snarkdown'
 
 import { useClient } from 'cozy-client'
+import flag from 'cozy-flags'
 import Banner from 'cozy-ui/transpiled/react/Banner'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import CozyHomeLinkIcon from './CozyHomeLinkIcon'
 import styles from '../../../styles/publicBanner.styl'
-
-const HOME_LINK_HREF = 'https://manager.cozycloud.cc/cozy/create'
 
 const getPublicNameFromSharing = sharing =>
   sharing.attributes.members[0].public_name
@@ -112,6 +111,9 @@ const SharingBannerByLinkText = () => {
 
 const SharingBannerByLink = ({ onClose }) => {
   const { t } = useI18n()
+
+  const HOME_LINK_HREF = flag('signup.url')
+
   return (
     <Banner
       bgcolor="var(--defaultBackgroundColor)"
