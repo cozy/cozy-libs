@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [26.7.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.6.2...cozy-sharing@26.7.0) (2025-10-28)
+
+### Features
+
+- Change signup link in public banner :sparkles: ([52c7dc0](https://github.com/cozy/cozy-libs/commit/52c7dc000b9455164a2d977de8aa64c6dd7cc41c))
+
 ## [26.6.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@26.6.1...cozy-sharing@26.6.2) (2025-10-20)
 
 ### Bug Fixes
