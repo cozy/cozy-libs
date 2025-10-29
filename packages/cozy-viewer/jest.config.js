@@ -9,6 +9,8 @@ module.exports = {
     '\\.styl$': 'identity-obj-proxy',
     'react-pdf/dist/esm/entry.webpack': 'react-pdf',
     '^cozy-client$': '<rootDir>/node_modules/cozy-client/dist/index',
+    '^cozy-client/dist/types$':
+      '<rootDir>/node_modules/cozy-client/dist/types.js',
     '^cozy-ui(.*)': '<rootDir>/node_modules/cozy-ui/$1'
   },
   transformIgnorePatterns: ['node_modules/(?!(cozy-ui|cozy-harvest-lib))'],
