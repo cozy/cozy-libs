@@ -1,0 +1,130 @@
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
+
+import { useInstanceInfo } from 'cozy-client'
+import { buildPremiumLink } from 'cozy-client/dist/models/instance'
+import { isFlagshipApp } from 'cozy-device-helper'
+import { useWebviewIntent } from 'cozy-intent'
+import Button from 'cozy-ui/transpiled/react/Buttons'
+import { IllustrationDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import CozyUpgradeIcon from 'cozy-ui/transpiled/react/Icons/CozyUpgrade'
+import Markdown from 'cozy-ui/transpiled/react/Markdown'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
+
+import { makeType } from './helpers'
+import withPaywallLocales from './locales/withPaywallLocales'
+
+/**
+ * Component with the core logic of the paywall, which is then declined in several variants to adapt to the user case
+ */
+const Paywall = ({
+  variant,
+  onClose,
+  isPublic,
+  isIapEnabled,
+  contentInterpolation
+}) => {
+  const instanceInfo = useInstanceInfo()
+  const { t } = useI18n()
+
+  const webviewIntent = useWebviewIntent()
+  const [isFlagshipAppIapAvailable, setFlagshipAppIapAvailable] = useState(null)
+
+  useEffect(() => {
+    const fetchIapAvailability = async () => {
+      const isAvailable =
+        (await webviewIntent?.call('isAvailable', 'iap')) ?? false
+      setFlagshipAppIapAvailable(isAvailable)
+    }
+
+    fetchIapAvailability()
+  }, [webviewIntent])
+
+  if (!instanceInfo.isLoaded)
+    return (
+      <IllustrationDialog
+        open
+        size="small"
+        content={
+          <div className="u-h-5">
+            <Spinner size="xxlarge" noMargin middle />
+          </div>
+        }
+        onClose={onClose}
+      />
+    )
+
+  const canOpenPremiumLink =
+    !isFlagshipApp() ||
+    (isFlagshipApp() && isIapEnabled && isFlagshipAppIapAvailable)
+
+  const link = buildPremiumLink(instanceInfo)
+  const type = makeType(instanceInfo, isPublic, link)
+
+  const onAction = () => {
+    return type === 'premium' && canOpenPremiumLink
+      ? window.open(link, '_self')
+      : onClose()
+  }
+
+  return (
+    <IllustrationDialog
+      open
+      size="small"
+      actionsLayout="column"
+      title={
+        <div className="u-flex u-flex-column u-flex-items-center">
+          <Icon icon={CozyUpgradeIcon} width={128} height={128} />
+          <Typography variant="h3" className="u-mt-1">
+            {t(`${variant}Paywall.${type}.title`)}
+          </Typography>
+        </div>
+      }
+      actions={
+        <Button
+          onClick={onAction}
+          label={
+            isFlagshipAppIapAvailable === null
+              ? t(`action.loading`)
+              : canOpenPremiumLink
+              ? t(`${variant}Paywall.${type}.action`)
+              : t(`action.withoutIAP`)
+          }
+          busy={isFlagshipAppIapAvailable === null}
+        />
+      }
+      content={
+        <Markdown
+          content={t(`${variant}Paywall.${type}.content`, {
+            ...contentInterpolation
+          })}
+        />
+      }
+      onClose={onClose}
+    />
+  )
+}
+
+Paywall.propTypes = {
+  /** Type of paywall */
+  variant: PropTypes.string.isRequired,
+  /** Callback used when the user close the paywall */
+  onClose: PropTypes.func.isRequired,
+  /** Whether paywall is display in a public context */
+  isPublic: PropTypes.bool,
+  /** Whether the IAP is enabled */
+  isIapEnabled: PropTypes.bool,
+  /** Translation interpolation for the content of the paywall */
+  contentInterpolation: PropTypes.object
+}
+
+Paywall.defaultProps = {
+  isPublic: false,
+  isIapEnabled: false,
+  contentInterpolation: {}
+}
+
+export default withPaywallLocales(Paywall)
