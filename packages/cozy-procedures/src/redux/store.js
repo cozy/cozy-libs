@@ -1,5 +1,6 @@
-import { configureStore, getDefaultMiddleware } from 'redux-starter-kit'
 import logger from 'redux-logger'
+import { configureStore, getDefaultMiddleware } from 'redux-starter-kit'
+
 import rootReducer from './rootReducer'
 
 const store = configureStore({

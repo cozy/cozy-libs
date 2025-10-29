@@ -1,10 +1,10 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { withRouter } from 'react-router'
 
-import { creditApplicationTemplate } from 'cozy-procedures'
 import { withClient } from 'cozy-client'
 import { AdministrativeProcedure } from 'cozy-doctypes'
+import { creditApplicationTemplate } from 'cozy-procedures'
 import CozyRealtime from 'cozy-realtime'
 import {
   Title,
@@ -16,9 +16,9 @@ import {
 import InlineCard from 'cozy-ui/transpiled/react/InlineCard'
 
 import Topbar from '../Topbar'
-import EndModal from './EndModal'
-import DocumentsNotFullyCompleted from './DocumentsNotFullyCompleted'
 import DocumentsFullyCompleted from './DocumentsFullyCompleted'
+import DocumentsNotFullyCompleted from './DocumentsNotFullyCompleted'
+import EndModal from './EndModal'
 import PersonalDataFullyCompleted from './PersonalDataFullyCompleted'
 import PersonalDataNotFullyCompleted from './PersonalDataNotFullyCompleted'
 import ProcedureComponentsPropType from '../ProcedureComponentsPropType'

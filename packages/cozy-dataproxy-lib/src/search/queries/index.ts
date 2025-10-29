@@ -7,8 +7,8 @@ import {
   normalizeFileWithFolders,
   shouldKeepFile
 } from '../helpers/normalizeFile'
-import { CozyDoc } from '../types'
 import { isDebug } from '../helpers/utils'
+import { CozyDoc } from '../types'
 
 const log = Minilog('🗂️ [Indexing]')
 

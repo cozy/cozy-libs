@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import flow from 'lodash/flow'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 import { translate, withBreakpoints } from 'cozy-ui/transpiled/react'
 

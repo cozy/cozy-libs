@@ -1,7 +1,8 @@
-import { createSlice } from 'redux-starter-kit'
 import get from 'lodash/get'
-import { creditApplicationTemplate } from 'cozy-procedures'
+import { createSlice } from 'redux-starter-kit'
+
 import { models } from 'cozy-client'
+import { creditApplicationTemplate } from 'cozy-procedures'
 const { fetchFilesByQualificationRules } = models.file
 
 const documentsSlice = createSlice({

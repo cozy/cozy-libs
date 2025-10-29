@@ -9,8 +9,8 @@ import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
-import { canEditQualification } from '../helpers'
 import { withViewerLocales } from '../../hoc/withViewerLocales'
+import { canEditQualification } from '../helpers'
 
 const QualificationListItemQualificationEmpty = ({
   file,

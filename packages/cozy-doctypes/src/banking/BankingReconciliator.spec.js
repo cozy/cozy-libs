@@ -1,5 +1,5 @@
-const BankingReconciliator = require('./BankingReconciliator')
 const { Document, BankAccount, BankTransaction } = require('..')
+const BankingReconciliator = require('./BankingReconciliator')
 
 describe('banking reconciliator', () => {
   let reconciliator

@@ -1,5 +1,6 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
+
 import { translate, Spinner } from 'cozy-ui/transpiled/react/'
 import Card from 'cozy-ui/transpiled/react/Card'
 

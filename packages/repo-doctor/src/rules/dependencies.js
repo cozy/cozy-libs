@@ -1,6 +1,6 @@
-const semverDiff = require('semver-diff')
 const bluebird = require('bluebird')
 const keyBy = require('lodash/keyBy')
+const semverDiff = require('semver-diff')
 
 const { fetchDependencyInfo } = require('../fetch')
 

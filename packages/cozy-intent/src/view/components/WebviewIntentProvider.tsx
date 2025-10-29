@@ -1,5 +1,5 @@
-import React, { ReactElement, useEffect, useState } from 'react'
 import { Connection, ChildHandshake, debug } from 'post-me'
+import React, { ReactElement, useEffect, useState } from 'react'
 
 import {
   CozyBar,
@@ -11,8 +11,8 @@ import {
   DebugWebviewMessenger,
   WebviewMethods
 } from '../../api'
-import { WebviewContext } from '../../view'
 import { isWebDevMode } from '../../utils'
+import { WebviewContext } from '../../view'
 
 declare const cozy: CozyBar | undefined
 

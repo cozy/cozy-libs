@@ -1,9 +1,10 @@
 import formatDate from 'date-fns/format'
-import subMonths from 'date-fns/sub_months'
 import startOfMonth from 'date-fns/start_of_month'
-import pick from 'lodash/pick'
-import groupBy from 'lodash/groupBy'
+import subMonths from 'date-fns/sub_months'
 import get from 'lodash/get'
+import groupBy from 'lodash/groupBy'
+import pick from 'lodash/pick'
+
 import { BankTransaction } from 'cozy-doctypes'
 
 /**
