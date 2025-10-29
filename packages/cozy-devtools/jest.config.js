@@ -5,7 +5,7 @@ module.exports = {
   moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],
   moduleDirectories: ['src', 'node_modules'],
   moduleNameMapper: {
-    '^cozy-client$': 'cozy-client/dist/index'
+    '^cozy-client$': '<rootDir>/node_modules/cozy-client/dist/index.js'
   },
   transformIgnorePatterns: ['node_modules/(?!(cozy-ui)'],
   transform: {
