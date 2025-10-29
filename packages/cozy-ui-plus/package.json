@@ -1,0 +1,75 @@
+{
+  "name": "cozy-ui-plus",
+  "version": "1.0.0",
+  "description": "Cozy-ui-plus is an extension of cozy-ui and provides components based on cozy-client",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-ui-plus/Readme.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cozy/cozy-libs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cozy/cozy-libs/issues"
+  },
+  "scripts": {
+    "build": "yarn build:clean && yarn build:types && env BABEL_ENV=transpilation babel --extensions .ts,.tsx,.js,.jsx,.md,.styl,.json,.snap ./src -d ./dist --copy-files --no-copy-ignored --verbose",
+    "build:clean": "rm -rf ./dist",
+    "build:types": "tsc -p tsconfig-build.json",
+    "start": "yarn build --watch",
+    "prepublishOnly": "yarn build",
+    "test": "env NODE_ENV=test jest",
+    "lint": "cd .. && yarn eslint --ext js,jsx packages/cozy-ui-plus"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.16.8",
+    "@babel/core": "7.16.12",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "11.2.7",
+    "@testing-library/react-hooks": "^3.2.1",
+    "@testing-library/user-event": "^14.4.0",
+    "@typescript-eslint/eslint-plugin": "5.54.0",
+    "@typescript-eslint/parser": "5.54.0",
+    "babel-plugin-inline-json-import": "0.3.2",
+    "babel-preset-cozy-app": "^2.8.1",
+    "cozy-client": "^60.5.0",
+    "cozy-device-helper": "2.0.0",
+    "cozy-intent": "^2.30.0",
+    "cozy-logger": "^1.17.0",
+    "cozy-stack-client": "^60.1.0",
+    "cozy-ui": "^132.0.0",
+    "jest": "26.6.3",
+    "jest-canvas-mock": "2.3.1",
+    "jest-environment-jsdom": "26.6.2",
+    "node-polyglot": "^2.4.0",
+    "prop-types": "15.8.1",
+    "react": "16.12.0",
+    "react-dnd": "16.0.1",
+    "react-dnd-html5-backend": "16.0.1",
+    "react-dom": "16.12.0",
+    "react-test-renderer": "16.12.0",
+    "stylus": "0.64.0",
+    "typescript": "5.5.2"
+  },
+  "dependencies": {
+    "classnames": "^2.5.1",
+    "cozy-interapp": "^0.5.4",
+    "filesize": "8.0.7",
+    "final-form": "4.20.9",
+    "final-form-arrays": "3.1.0",
+    "lodash": "^4.17.21",
+    "mime-types": "2.1.35",
+    "react-final-form": "6.5.9",
+    "react-final-form-arrays": "3.1.4",
+    "rooks": "7.14.1"
+  },
+  "peerDependencies": {
+    "cozy-client": ">=60.5.0",
+    "cozy-device-helper": ">=2.0.0",
+    "cozy-intent": ">=2.30.0",
+    "cozy-logger": ">=1.17.0",
+    "cozy-ui": ">=132.0.0",
+    "react": "^16 || ^17 || ^18",
+    "react-dom": "^16 || ^17 || ^18"
+  }
+}
