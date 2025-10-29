@@ -1,5 +1,5 @@
 const j = require('jscodeshift')
-const { simplify, makeJSXElement, makeAttribute } = require('./imports')
+
 const {
   before,
   after,
@@ -8,6 +8,7 @@ const {
   JSXElementWithChildren,
   JSXElementWithAttribute
 } = require('./__mocks__/imports')
+const { simplify, makeJSXElement, makeAttribute } = require('./imports')
 require('@testing-library/jest-dom')
 
 describe('transform imports', () => {

@@ -1,14 +1,15 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { withRouter } from 'react-router'
+
+import { creditApplicationTemplate } from 'cozy-procedures'
 import { Title, translate, Label, Button } from 'cozy-ui/transpiled/react/'
 
+import ProcedureComponentsPropType from './ProcedureComponentsPropType'
 import Topbar from './Topbar'
 import DocumentsGroup from '../components/documents/DocumentsGroup'
-import { creditApplicationTemplate } from 'cozy-procedures'
-import DocumentsContainer from '../containers/DocumentsDataForm'
 import CompletedFromDriveStatus from '../containers/CompletedFromDriveStatus'
-import ProcedureComponentsPropType from './ProcedureComponentsPropType'
+import DocumentsContainer from '../containers/DocumentsDataForm'
 
 /**
  * This function is used to populate an array based on the order

@@ -1,7 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import Slider from '@material-ui/lab/Slider'
 import get from 'lodash/get'
-import Topbar from './Topbar'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { withRouter } from 'react-router'
+
+import { creditApplicationTemplate } from 'cozy-procedures'
 import {
   translate,
   Title,
@@ -10,10 +13,9 @@ import {
   Button,
   Card
 } from 'cozy-ui/transpiled/react'
-import Slider from '@material-ui/lab/Slider'
-import { withRouter } from 'react-router'
-import { creditApplicationTemplate } from 'cozy-procedures'
+
 import ProcedureComponentsPropType from './ProcedureComponentsPropType'
+import Topbar from './Topbar'
 
 class Duration extends React.PureComponent {
   constructor(props) {

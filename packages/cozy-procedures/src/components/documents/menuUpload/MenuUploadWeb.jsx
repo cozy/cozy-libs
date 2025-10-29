@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
 import {
   translate,
@@ -10,11 +10,10 @@ import {
   Caption,
   FileInput
 } from 'cozy-ui/transpiled/react'
+import FileIcon from 'cozy-ui/transpiled/react/Icons/File'
+import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 
 import UploadInputLabel from '../UploadInputLabel'
-
-import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
-import FileIcon from 'cozy-ui/transpiled/react/Icons/File'
 
 class MenuUploadWeb extends Component {
   render() {

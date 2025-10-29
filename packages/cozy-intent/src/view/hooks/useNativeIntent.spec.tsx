@@ -1,9 +1,9 @@
-import React from 'react'
 import { renderHook } from '@testing-library/react-hooks'
+import React from 'react'
 
-import { NativeContext, useNativeIntent } from '../../view'
-import { NativeService } from '../../api'
 import { mockNativeMethods } from '../../../tests'
+import { NativeService } from '../../api'
+import { NativeContext, useNativeIntent } from '../../view'
 
 describe('useNativeIntent', () => {
   it('Should return the context if it exists', () => {

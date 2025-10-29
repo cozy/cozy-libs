@@ -1,9 +1,9 @@
-import React from 'react'
 import { renderHook } from '@testing-library/react-hooks'
+import React from 'react'
 
-import { WebviewContext, useWebviewIntent } from '../../view'
-import { WebviewService } from '../../api'
 import { mockConnection } from '../../../tests'
+import { WebviewService } from '../../api'
+import { WebviewContext, useWebviewIntent } from '../../view'
 
 describe('useNativeIntent', () => {
   it('Should not throw if the context does not exist in a Flagship app', () => {
