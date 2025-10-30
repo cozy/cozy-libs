@@ -78,20 +78,27 @@ const Sources = ({ messageId, files, emailSources }) => {
 const SourcesWithFilesQuery = ({ messageId, sources }) => {
   const fileIds = []
   const emailSources = []
+  let files = []
   sources.map(source => {
     source.doctype === 'com.linagora.email'
       ? emailSources.push(source)
       : fileIds.push(source.id)
   })
-  const filesByIds = buildFilesByIds(fileIds)
-  const { data: files, ...queryResult } = useQuery(
+  const enabled = fileIds && fileIds.length > 0
+  const filesByIds = buildFilesByIds(fileIds, enabled)
+  const { data: fetchedFiles, ...queryResult } = useQuery(
     filesByIds.definition,
     filesByIds.options
   )
 
   const isLoading = isQueryLoading(queryResult)
+  files = fetchedFiles || []
 
-  if (isLoading || files.length === 0) return null
+  if (
+    (isLoading && enabled) ||
+    (files.length === 0 && emailSources.length === 0)
+  )
+    return null
 
   return (
     <Sources messageId={messageId} files={files} emailSources={emailSources} />
