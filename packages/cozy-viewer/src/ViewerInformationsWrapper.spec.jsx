@@ -1,6 +1,8 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 
+import DemoProvider from 'cozy-ui/transpiled/react/providers/DemoProvider'
+
 import ViewerInformationsWrapper from './ViewerInformationsWrapper'
 
 /* eslint-disable react/display-name */
@@ -20,11 +22,13 @@ jest.mock('./Footer/FooterContent', () => () => (
 
 const setup = ({ validForPanel, disableFooter } = {}) => {
   return render(
-    <ViewerInformationsWrapper
-      currentFile={{}}
-      disableFooter={disableFooter}
-      validForPanel={validForPanel}
-    />
+    <DemoProvider>
+      <ViewerInformationsWrapper
+        currentFile={{}}
+        disableFooter={disableFooter}
+        validForPanel={validForPanel}
+      />
+    </DemoProvider>
   )
 }
 
