@@ -4,7 +4,7 @@
   "description": "Cozy-ui-plus is an extension of cozy-ui and provides components based on cozy-client",
   "main": "dist/index.js",
   "license": "MIT",
-  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-ui-plus/Readme.md",
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-ui-plus/README.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cozy/cozy-libs.git"
