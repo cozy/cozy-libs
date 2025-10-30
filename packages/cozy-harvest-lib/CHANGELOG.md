@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [35.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@34.2.1...cozy-harvest-lib@35.0.0) (2025-10-30)
+
+### Features
+
+- Forgot to create BC when adding `cozy-ui-plus` in some packages ([3a14a14](https://github.com/cozy/cozy-libs/commit/3a14a14122618ad1ec3a1ba5d6b217a9c827c925))
+
+### BREAKING CHANGES
+
+- You must have `cozy-ui-plus >= 1.2.0`
+
 ## [34.2.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@34.2.0...cozy-harvest-lib@34.2.1) (2025-10-30)
 
 **Note:** Version bump only for package cozy-harvest-lib
