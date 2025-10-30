@@ -4,7 +4,7 @@ Extension of cozy-ui to provide components with cozy-client dependencies
 
 ## Installation
 
-Import CSS:
+Import CSS (strictly required only for components with style):
 
 ```jsx
 import 'cozy-ui-plus/dist/stylesheet.css'
