@@ -71,7 +71,9 @@ function getRsbuildConfig({
         // By default, only .module.styl files are considered as CSS modules by Rsbuild.
         // This option forces all .styl files to be resolved as CSS modules.
         auto: resource => resource.endsWith('.styl')
-      }
+      },
+      // We enable old API polyfill to keep compatibility with old browsers
+      polyfill: 'usage'
     },
     performance: {
       chunkSplit: {
