@@ -16,11 +16,10 @@ const EmailSourceItem = ({ email }) => {
     slug: 'mail',
     cozyUrl: client?.getStackClient().uri,
     subDomainType: client?.getInstanceOptions().subdomain,
-    hash: `/bridge/dashboard/${email.emailID}`
+    hash: `/bridge/dashboard/${email.id}`
   })
 
-  const dateSplit = email.date.split('T')
-  const emailDate = dateSplit && dateSplit.length > 0 ? dateSplit[0] : ''
+  const emailDate = email['datetime'] ? email['datetime'].split('T')[0] : ''
 
   return (
     <ListItem
@@ -34,8 +33,8 @@ const EmailSourceItem = ({ email }) => {
         <Icon icon={EmailIcon} size={32} />
       </ListItemIcon>
       <ListItemText
-        primary={`${emailDate} - ${email.subject}`}
-        secondary={`${email.emailPreview}`}
+        primary={`${emailDate} - ${email['email.subject']}`}
+        secondary={`${email['email.preview']}`}
       />
     </ListItem>
   )
