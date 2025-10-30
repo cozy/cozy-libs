@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.8.1](https://github.com/cozy/cozy-libs/compare/cozy-realtime@5.8.0...cozy-realtime@5.8.1) (2025-10-30)
+
+**Note:** Version bump only for package cozy-realtime
+
 # [5.8.0](https://github.com/cozy/cozy-libs/compare/cozy-realtime@5.7.0...cozy-realtime@5.8.0) (2025-09-18)
 
 ### Features
