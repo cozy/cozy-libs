@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react'
 
-import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import AppIcon from 'cozy-ui-plus/dist/AppIcon'
 
 import SuggestionItemTextHighlighted from './SuggestionItemTextHighlighted'
 import SuggestionItemTextSecondary from './SuggestionItemTextSecondary'

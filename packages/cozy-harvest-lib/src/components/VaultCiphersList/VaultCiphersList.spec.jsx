@@ -4,7 +4,7 @@ import React from 'react'
 import VaultCiphersList from './VaultCiphersList'
 import AppLike from '../../../test/AppLike'
 
-jest.mock('cozy-ui/transpiled/react/AppIcon', () => () => null)
+jest.mock('cozy-ui-plus/dist/AppIcon', () => () => null)
 
 describe('when there is some ciphers', () => {
   it('should handle cipher select', async () => {

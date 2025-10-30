@@ -7,7 +7,7 @@ import '../dist/stylesheet.css'
 
 import I18n from 'cozy-ui/transpiled/react/providers/I18n'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
+import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
 import { CozyProvider, createFakeClient } from 'cozy-client'
 
 import enLocale from '../locales/en.json'

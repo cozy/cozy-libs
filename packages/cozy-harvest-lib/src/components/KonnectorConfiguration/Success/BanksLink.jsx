@@ -2,9 +2,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { withClient } from 'cozy-client'
-import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import OpenwithIcon from 'cozy-ui/transpiled/react/Icons/Openwith'
+import AppLinker from 'cozy-ui-plus/dist/AppLinker'
 
 import withLocales from '../../hoc/withLocales'
 import useAppLinkWithStoreFallback from '../../hooks/useAppLinkWithStoreFallback'

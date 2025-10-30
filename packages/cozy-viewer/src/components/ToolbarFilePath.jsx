@@ -2,10 +2,10 @@ import React, { useMemo } from 'react'
 
 import { useClient, useQuery } from 'cozy-client'
 import { ensureFilePath } from 'cozy-client/dist/models/file'
-import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
 import FilePath from 'cozy-ui/transpiled/react/FilePath'
 import Link from 'cozy-ui/transpiled/react/Link'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import AppLinker from 'cozy-ui-plus/dist/AppLinker'
 
 import {
   makeWebLink,

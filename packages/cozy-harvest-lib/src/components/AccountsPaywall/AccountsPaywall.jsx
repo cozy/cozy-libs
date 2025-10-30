@@ -4,7 +4,7 @@ import React from 'react'
 import {
   MaxAccountsByKonnectorPaywall,
   MaxAccountsPaywall
-} from 'cozy-ui/transpiled/react/Paywall'
+} from 'cozy-ui-plus/dist/Paywall'
 
 import { computeMaxAccountsByKonnector, computeMaxAccounts } from './helpers'
 

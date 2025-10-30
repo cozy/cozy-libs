@@ -35,7 +35,7 @@ jest.mock('cozy-keys-lib', () => {
   }
 })
 jest.mock('cozy-ui/transpiled/react/utils/color')
-jest.mock('cozy-ui/transpiled/react/AppIcon', () => () => null)
+jest.mock('cozy-ui-plus/dist/AppIcon', () => () => null)
 jest.mock('../../src/components/KonnectorIcon', () => () => null)
 jest.mock('cozy-doctypes', () => {
   const doctypes = jest.requireActual('cozy-doctypes')

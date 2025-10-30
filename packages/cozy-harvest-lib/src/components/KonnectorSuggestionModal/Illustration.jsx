@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
+import AppIcon from 'cozy-ui-plus/dist/AppIcon'
 
 import PreinstallIllustration from '../../assets/preinstall.svg'
 

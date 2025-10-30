@@ -1,17 +1,15 @@
 import { render, waitFor } from '@testing-library/react'
 import React from 'react'
 
-import { checkImageSource } from 'cozy-ui/transpiled/react/FileImageLoader/checkImageSource'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import EncryptedProvider from 'cozy-ui/transpiled/react/providers/Encrypted'
+import { checkImageSource } from 'cozy-ui-plus/dist/FileImageLoader/checkImageSource'
 
 import ImageViewer from './ImageViewer'
 import DemoProvider from '../providers/DemoProvider'
 
-jest.mock('cozy-ui/transpiled/react/FileImageLoader/checkImageSource', () => ({
-  ...jest.requireActual(
-    'cozy-ui/transpiled/react/FileImageLoader/checkImageSource'
-  ),
+jest.mock('cozy-ui-plus/dist/FileImageLoader/checkImageSource', () => ({
+  ...jest.requireActual('cozy-ui-plus/dist/FileImageLoader/checkImageSource'),
   checkImageSource: jest.fn()
 }))
 

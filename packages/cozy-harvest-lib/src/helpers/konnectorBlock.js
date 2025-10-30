@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/react'
 import get from 'lodash/get'
 
 import { triggers } from 'cozy-client/dist/models/trigger'
-import { generateUniversalLink } from 'cozy-ui/transpiled/react/AppLinker'
+import { generateUniversalLink } from 'cozy-ui-plus/dist/AppLinker'
 
 import { getErrorLocale } from './konnectors'
 import { hasNewVersionAvailable } from './konnectors'
