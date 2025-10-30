@@ -49,7 +49,7 @@
   },
   "commitlint": {
     "extends": [
-      "./packages/commitlint-config-cozy"
+      "./config/commitlint-config-cozy"
     ]
   },
   "workspaces": {
