@@ -12,9 +12,7 @@ import {
   Button,
   ButtonLink
 } from 'cozy-ui/transpiled/react/'
-import AppLinker, {
-  generateUniversalLink
-} from 'cozy-ui/transpiled/react/AppLinker'
+import AppLinker, { generateUniversalLink } from 'cozy-ui-plus/dist/AppLinker'
 
 import IllustrationError from '../../assets/error.svg'
 import IllustrationOK from '../../assets/ok.svg'

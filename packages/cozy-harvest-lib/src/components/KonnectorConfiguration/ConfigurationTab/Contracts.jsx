@@ -8,8 +8,8 @@ import NavigationList, {
   NavigationListSection,
   NavigationListHeader
 } from 'cozy-ui/transpiled/react/NavigationList'
-import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
+import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
 
 import BIContractActivationWindow from './BiContractActivationWindow'
 import ContractItem from './ContractItem'

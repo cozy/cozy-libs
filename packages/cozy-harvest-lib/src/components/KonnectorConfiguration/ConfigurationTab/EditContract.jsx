@@ -8,7 +8,6 @@ import {
   useQuery
 } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import BaseContactPicker from 'cozy-ui/transpiled/react/ContactPicker'
 import {
   DialogCloseButton,
   DialogBackButton,
@@ -30,6 +29,7 @@ import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { withStyles } from 'cozy-ui/transpiled/react/styles'
+import BaseContactPicker from 'cozy-ui-plus/dist/ContactPicker'
 
 import {
   getAccountLabel,

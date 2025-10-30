@@ -8,8 +8,8 @@ import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
-import QualificationIcon from 'cozy-ui/transpiled/react/QualificationIcon'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
+import QualificationIcon from 'cozy-ui-plus/dist/Qualification/QualificationIcon'
 
 import { canEditQualification } from '../helpers'
 

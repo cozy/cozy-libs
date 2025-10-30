@@ -2,10 +2,10 @@ import PropTypes from 'prop-types'
 import React, { memo } from 'react'
 
 import { withClient } from 'cozy-client'
-import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import OpenwithIcon from 'cozy-ui/transpiled/react/Icons/Openwith'
 import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
+import AppLinker from 'cozy-ui-plus/dist/AppLinker'
 
 import useAppLinkWithStoreFallback from '../../hooks/useAppLinkWithStoreFallback'
 

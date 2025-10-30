@@ -1,7 +1,7 @@
 import Hammer from 'hammerjs'
 import React, { Component } from 'react'
 
-import FileImageLoader from 'cozy-ui/transpiled/react/FileImageLoader'
+import FileImageLoader from 'cozy-ui-plus/dist/FileImageLoader'
 
 import NoNetworkViewer from './NoNetworkViewer'
 import styles from './styles.styl'

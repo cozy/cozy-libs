@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 
 import { withClient } from 'cozy-client'
-import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
+import AppIcon from 'cozy-ui-plus/dist/AppIcon'
 
 // TODO move this to cozy-ui
 class KonnectorIcon extends PureComponent {

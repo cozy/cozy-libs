@@ -5,9 +5,9 @@
  */
 import React from 'react'
 
-import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
 import Link from 'cozy-ui/transpiled/react/Link'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import AppLinker from 'cozy-ui-plus/dist/AppLinker'
 
 import SuggestionItemTextHighlighted from './SuggestionItemTextHighlighted'
 

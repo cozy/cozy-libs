@@ -3,9 +3,9 @@ import React, { memo } from 'react'
 
 import { useQuery } from 'cozy-client'
 import { Application } from 'cozy-doctypes'
-import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import EyeIcon from 'cozy-ui/transpiled/react/Icons/Eye'
+import AppLinker from 'cozy-ui-plus/dist/AppLinker'
 
 import { appsConn } from '../connections/apps'
 
