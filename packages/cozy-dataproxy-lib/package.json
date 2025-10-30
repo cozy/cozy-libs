@@ -21,13 +21,13 @@
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-tsconfig-paths": "^1.0.3",
     "babel-preset-cozy-app": "^2.8.1",
-    "cozy-client": "^60.2.0",
+    "cozy-client": "^60.15.2",
     "cozy-device-helper": "^4.0.0",
     "cozy-flags": "^4.8.0",
     "cozy-intent": "^2.30.0",
     "cozy-logger": "^1.17.0",
     "cozy-minilog": "^3.10.0",
-    "cozy-pouch-link": "^60.10.1",
+    "cozy-pouch-link": "^60.16.0",
     "cozy-realtime": "^5.8.0",
     "cross-fetch": "^4.0.0",
     "jest": "26.6.3",
@@ -78,7 +78,7 @@
     "test": "jest --config=./tests/jest.config.js",
     "test:watch": "yarn test --watchAll",
     "start": "yarn build:watch",
-    "lint": "cd .. && yarn eslint --ext js,jsx,ts packages/cozy-dataproxy-lib"
+    "lint": "cd ../.. && yarn eslint --ext js,jsx,ts packages/cozy-dataproxy-lib"
   },
   "types": "dist/index.d.ts"
 }

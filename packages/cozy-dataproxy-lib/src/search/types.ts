@@ -7,13 +7,18 @@ import {
   CONTACTS_DOCTYPE,
   FILES_DOCTYPE,
   SEARCH_SCHEMA,
-  SearchedDoctype
+  SearchedDoctype,
+  SHARED_DRIVES_DIR_ID
 } from './consts'
 
 export type CozyDoc = IOCozyFile | IOCozyContact | IOCozyApp
 
 export const isIOCozyFile = (doc: CozyDoc): doc is IOCozyFile => {
-  return doc._type === FILES_DOCTYPE
+  return doc._type === FILES_DOCTYPE || doc.driveId !== undefined // FIXME find a way to add the right doctype in the result
+}
+
+export const isIOCozySharedDriveFile = (doc: CozyDoc): doc is IOCozyFile => {
+  return doc.driveId !== undefined
 }
 
 export const isIOCozyContact = (doc: CozyDoc): doc is IOCozyContact => {
@@ -33,6 +38,20 @@ export const isSearchedDoctype = (
     return false
   }
   return searchedDoctypes.includes(doctype)
+}
+
+export const isTrashedDrive = (
+  doc: IOCozyFile,
+  sharedDriveId: string | undefined
+): boolean => {
+  return (
+    !!sharedDriveId &&
+    (doc as IOCozyFile & { restore_path?: string }).restore_path === '/Drives'
+  )
+}
+
+export const isInSharedDrivesDir = (doc: IOCozyFile): boolean => {
+  return doc.dir_id === SHARED_DRIVES_DIR_ID
 }
 
 export interface SearchOptions {
@@ -65,7 +84,7 @@ export interface SearchIndex {
 }
 
 export type SearchIndexes = {
-  [key in SearchedDoctype]: SearchIndex
+  [key: string]: SearchIndex
 }
 
 export interface StorageInterface {
