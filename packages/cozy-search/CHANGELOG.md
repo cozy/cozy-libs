@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.11.2...cozy-search@0.12.0) (2025-10-30)
+
+### Features
+
+- Add `cozy-ui-plus` to replace `cozy-ui` components c90db9 ([789c60f](https://github.com/cozy/cozy-libs/commit/789c60f260cc090b31aa0bf13770d18f0813f670))
+
 ## [0.11.2](https://github.com/cozy/cozy-libs/compare/cozy-search@0.11.1...cozy-search@0.11.2) (2025-10-30)
 
 **Note:** Version bump only for package cozy-search
