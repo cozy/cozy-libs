@@ -62,7 +62,7 @@
     "cozy-logger": ">=1.17.0",
     "cozy-sharing": ">=25.4.0",
     "cozy-ui": ">=126.0.0",
-    "cozy-ui-plus": ">=1.1.3",
+    "cozy-ui-plus": ">=1.2.0",
     "react": ">=16.12.0",
     "react-dom": ">=16.12.0"
   }
