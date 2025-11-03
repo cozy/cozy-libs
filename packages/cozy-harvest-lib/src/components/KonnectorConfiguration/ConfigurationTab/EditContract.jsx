@@ -19,17 +19,17 @@ import Dialog, {
   DialogTitle
 } from 'cozy-ui/transpiled/react/Dialog'
 import Divider from 'cozy-ui/transpiled/react/Divider'
-import Field from 'cozy-ui/transpiled/react/Field'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
-import CollectionField from 'cozy-ui/transpiled/react/Labs/CollectionField'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { withStyles } from 'cozy-ui/transpiled/react/styles'
+import CollectionField from 'cozy-ui-plus/dist/CollectionField'
 import BaseContactPicker from 'cozy-ui-plus/dist/ContactPicker'
+import Field from 'cozy-ui-plus/dist/Field'
 
 import {
   getAccountLabel,
