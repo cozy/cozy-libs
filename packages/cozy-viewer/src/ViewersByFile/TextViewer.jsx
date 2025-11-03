@@ -4,7 +4,7 @@ import React from 'react'
 import ReactMarkdown from 'react-markdown'
 
 import { withClient, models } from 'cozy-client'
-import { FileDoctype } from 'cozy-ui/transpiled/react/proptypes'
+import { FileDoctype } from 'cozy-ui-plus/dist/proptypes'
 
 import styles from './styles.styl'
 import NoViewer from '../NoViewer'
