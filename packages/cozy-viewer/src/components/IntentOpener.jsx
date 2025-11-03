@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import IntentDialogOpener from 'cozy-ui/transpiled/react/IntentDialogOpener'
+import IntentDialogOpener from 'cozy-ui-plus/dist/Intent/IntentDialogOpener'
 
 const IntentOpener = ({
   action,

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { FileDoctype } from 'cozy-ui/transpiled/react/proptypes'
+import { FileDoctype } from 'cozy-ui-plus/dist/proptypes'
 
 import DownloadButton from './DownloadButton'
 import FileIcon from './FileIcon'

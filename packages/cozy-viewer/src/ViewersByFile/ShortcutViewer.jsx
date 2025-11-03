@@ -4,7 +4,7 @@ import React from 'react'
 import { useClient, useFetchShortcut } from 'cozy-client'
 import OpenwithIcon from 'cozy-ui/transpiled/react/Icons/Openwith'
 import { ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
-import { FileDoctype } from 'cozy-ui/transpiled/react/proptypes'
+import { FileDoctype } from 'cozy-ui-plus/dist/proptypes'
 
 import NoViewer from '../NoViewer'
 import { withViewerLocales } from '../hoc/withViewerLocales'

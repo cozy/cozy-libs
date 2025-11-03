@@ -5,8 +5,8 @@ import { withClient } from 'cozy-client'
 import { downloadFile } from 'cozy-client/dist/models/file'
 import { useWebviewIntent } from 'cozy-intent'
 import Button from 'cozy-ui/transpiled/react/deprecated/Button'
-import { FileDoctype } from 'cozy-ui/transpiled/react/proptypes'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
+import { FileDoctype } from 'cozy-ui-plus/dist/proptypes'
 
 const DownloadButton = ({ client, file, url }) => {
   const { t } = useI18n()
