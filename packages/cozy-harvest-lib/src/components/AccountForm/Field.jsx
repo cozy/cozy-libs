@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import UIField from 'cozy-ui/transpiled/react/Field'
+import UIField from 'cozy-ui-plus/dist/Field'
 
 const ObfuscateChar = () => {
   return (
