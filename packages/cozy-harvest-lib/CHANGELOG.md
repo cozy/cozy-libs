@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [35.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@35.0.0...cozy-harvest-lib@35.1.0) (2025-11-03)
+
+### Features
+
+- **Harvest:** Replace some components by cozy-ui-plus ([3a4def6](https://github.com/cozy/cozy-libs/commit/3a4def64cb60599c71a028503b9a798027410056))
+
 # [35.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@34.2.1...cozy-harvest-lib@35.0.0) (2025-10-30)
 
 ### Features
