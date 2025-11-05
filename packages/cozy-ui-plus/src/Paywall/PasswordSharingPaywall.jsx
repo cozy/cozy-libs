@@ -3,9 +3,14 @@ import React from 'react'
 
 import Paywall from './Paywall'
 
-const PasswordSharingPaywall = ({ onClose }) => {
+const PasswordSharingPaywall = ({ onClose, ...props }) => {
   return (
-    <Paywall variant="passwordSharing" onClose={onClose} isPublic={false} />
+    <Paywall
+      variant="passwordSharing"
+      onClose={onClose}
+      isPublic={false}
+      {...props}
+    />
   )
 }
 

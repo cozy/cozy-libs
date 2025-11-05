@@ -11,12 +11,13 @@ import withPaywallLocales from './locales/withPaywallLocales'
  * @param {function} onClose - Callback used when the user close the paywall
  * @returns {React.Component} - React component
  */
-const MaxPapersPaywall = ({ max, onClose }) => {
+const MaxPapersPaywall = ({ max, onClose, ...props }) => {
   return (
     <Paywall
       variant="maxPapers"
       contentInterpolation={{ smart_count: max }}
       onClose={onClose}
+      {...props}
     />
   )
 }

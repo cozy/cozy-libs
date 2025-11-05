@@ -6,8 +6,8 @@ import Paywall from './Paywall'
 /**
  * Paywall displayed when user disk space is full
  */
-const QuotaPaywall = ({ onClose }) => {
-  return <Paywall variant="quota" onClose={onClose} />
+const QuotaPaywall = ({ onClose, ...props }) => {
+  return <Paywall variant="quota" onClose={onClose} {...props} />
 }
 
 QuotaPaywall.propTypes = {

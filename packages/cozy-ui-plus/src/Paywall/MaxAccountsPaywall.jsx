@@ -7,12 +7,13 @@ import withPaywallLocales from './locales/withPaywallLocales'
 /**
  * Paywall displayed when the user reach the maximum accounts allowed for all konnectors
  */
-const MaxAccountsPaywall = ({ max, onClose }) => {
+const MaxAccountsPaywall = ({ max, onClose, ...props }) => {
   return (
     <Paywall
       variant="maxAccounts"
       contentInterpolation={{ smart_count: max }}
       onClose={onClose}
+      {...props}
     />
   )
 }

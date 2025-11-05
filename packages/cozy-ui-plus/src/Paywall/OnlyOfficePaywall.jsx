@@ -3,8 +3,15 @@ import React from 'react'
 
 import Paywall from './Paywall'
 
-const OnlyOfficePaywall = ({ onClose, isPublic }) => {
-  return <Paywall variant="onlyOffice" onClose={onClose} isPublic={isPublic} />
+const OnlyOfficePaywall = ({ onClose, isPublic, ...props }) => {
+  return (
+    <Paywall
+      variant="onlyOffice"
+      onClose={onClose}
+      isPublic={isPublic}
+      {...props}
+    />
+  )
 }
 
 /**

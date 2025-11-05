@@ -7,12 +7,13 @@ import withPaywallLocales from './locales/withPaywallLocales'
 /**
  * Paywall displayed when the user reach the maximum days allowed of capture geolocated data
  */
-const MaxDaysToCapturePaywall = ({ days, onClose }) => {
+const MaxDaysToCapturePaywall = ({ days, onClose, ...props }) => {
   return (
     <Paywall
       variant="maxDaysToCapture"
       contentInterpolation={{ smart_count: days }}
       onClose={onClose}
+      {...props}
     />
   )
 }
