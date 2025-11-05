@@ -1,0 +1,18 @@
+{
+  "cancel": "Hủy",
+  "allow": "Cho phép",
+  "authentification-dialog": {
+    "title": "Đăng nhập",
+    "title-oidc": "Twake Pass",
+    "subtitle": "Để bảo mật, vui lòng xác nhận danh tính của bạn",
+    "label": "Mật khẩu Twake",
+    "label-oidc": "Mật khẩu Twake Pass",
+    "abort": "Rời khỏi",
+    "unlock": "Mở khóa",
+    "forgotten-password": "Tôi quên mật khẩu",
+    "errors": {
+      "invalid_password": "Mật khẩu không chính xác, hãy thử lại.",
+      "server_error": "Có lỗi xảy ra với máy chủ. Vui lòng tải lại trang."
+    }
+  }
+}

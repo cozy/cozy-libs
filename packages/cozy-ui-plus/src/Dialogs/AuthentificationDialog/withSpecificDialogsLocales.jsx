@@ -1,0 +1,15 @@
+import withOnlyLocales from 'cozy-ui/transpiled/react/providers/I18n/withOnlyLocales'
+
+import en from './locales/en.json'
+import fr from './locales/fr.json'
+import ru from './locales/ru.json'
+import vi from './locales/vi.json'
+
+export const locales = {
+  en,
+  fr,
+  ru,
+  vi
+}
+
+export default withOnlyLocales(locales)

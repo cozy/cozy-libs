@@ -1,0 +1,18 @@
+{
+  "cancel": "Cancel",
+  "allow": "Allow",
+  "authentification-dialog": {
+    "title": "Login",
+    "title-oidc": "Twake Pass",
+    "subtitle": "For security, please confirm your identity",
+    "label": "Twake password",
+    "label-oidc": "Twake Pass password",
+    "abort": "Leave",
+    "unlock": "Unlock",
+    "forgotten-password": "I forgot my password",
+    "errors": {
+      "invalid_password": "Incorrect password, try again.",
+      "server_error": "Something went wrong with the server. Please, reload the page."
+    }
+  }
+}
