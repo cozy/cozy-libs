@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@2.1.0...cozy-ui-plus@2.1.1) (2025-11-05)
+
+### Bug Fixes
+
+- **ui-plus:** Now spread props between Paywall and its subcomponents ([a86cf6a](https://github.com/cozy/cozy-libs/commit/a86cf6a353c1d64173226756147a3060f0a41ecc))
+
 # [2.1.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@2.0.0...cozy-ui-plus@2.1.0) (2025-11-05)
 
 ### Features
