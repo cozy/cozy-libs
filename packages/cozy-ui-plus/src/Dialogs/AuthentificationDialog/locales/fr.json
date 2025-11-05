@@ -1,0 +1,18 @@
+{
+  "cancel": "Annuler",
+  "allow": "Autoriser",
+  "authentification-dialog": {
+    "title": "Authentification",
+    "title-oidc": "Twake Pass",
+    "subtitle": "Par sécurité, merci de confirmer votre identité",
+    "label": "Mot de passe Twake",
+    "label-oidc": "Mot de passe Twake Pass",
+    "abort": "Quitter",
+    "unlock": "Déverrouiller",
+    "forgotten-password": "J'ai oublié mon mot de passe",
+    "errors": {
+      "invalid_password": "Mot de passe incorrect, essayer à nouveau.",
+      "server_error": "Une erreur s'est produite. Merci de recharger la page."
+    }
+  }
+}

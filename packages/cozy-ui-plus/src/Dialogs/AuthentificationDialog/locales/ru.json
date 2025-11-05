@@ -1,0 +1,18 @@
+{
+  "cancel": "Отменить",
+  "allow": "Разрешить",
+  "authentification-dialog": {
+    "title": "Вход",
+    "title-oidc": "Twake Pass",
+    "subtitle": "Для безопасности подтвердите вашу личность",
+    "label": "Пароль Twake",
+    "label-oidc": "Пароль Twake Pass",
+    "abort": "Выйти",
+    "unlock": "Разблокировать",
+    "forgotten-password": "Я забыл пароль",
+    "errors": {
+      "invalid_password": "Неверный пароль, попробуйте еще раз.",
+      "server_error": "Что-то пошло не так с сервером. Пожалуйста, перезагрузите страницу."
+    }
+  }
+}
