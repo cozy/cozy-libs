@@ -7,7 +7,12 @@ import withPaywallLocales from './locales/withPaywallLocales'
 /**
  * Paywall displayed when the user reach the maximum accounts allowed for a konnector
  */
-const MaxAccountsByKonnectorPaywall = ({ max, konnectorName, onClose }) => {
+const MaxAccountsByKonnectorPaywall = ({
+  max,
+  konnectorName,
+  onClose,
+  ...props
+}) => {
   return (
     <Paywall
       variant="maxAccountsByKonnector"
@@ -16,6 +21,7 @@ const MaxAccountsByKonnectorPaywall = ({ max, konnectorName, onClose }) => {
         konnectorName
       }}
       onClose={onClose}
+      {...props}
     />
   )
 }
