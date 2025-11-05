@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@1.2.0...cozy-ui-plus@2.0.0) (2025-11-05)
+
+### Features
+
+- Rename `AuthentificationDialog` folder ([346e115](https://github.com/cozy/cozy-libs/commit/346e1152d2cc32705137a74041c08fc4a61f491f))
+
+### BREAKING CHANGES
+
+- You must replace `import AuthentificationDialog from 'cozy-ui-plus/dist/Dialogs/AuthenticationDialogs'` by `import AuthentificationDialog from 'cozy-ui-plus/dist/Dialogs/AuthentificationDialog'`
+
 # [1.2.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@1.1.3...cozy-ui-plus@1.2.0) (2025-10-30)
 
 ### Features
