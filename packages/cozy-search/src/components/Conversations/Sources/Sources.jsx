@@ -13,7 +13,7 @@ import EmailSourceItem from './EmailSourceItem'
 import FileSourcesItem from './FileSourcesItem'
 import { buildFilesByIds } from '../../queries'
 
-const Sources = ({ messageId, files, emailSources }) => {
+const Sources = ({ messageId, files, emails }) => {
   const [showSources, setShowSources] = useState(false)
   const { t } = useI18n()
   const ref = useRef()
@@ -44,7 +44,7 @@ const Sources = ({ messageId, files, emailSources }) => {
       <Chip
         className="u-mb-1"
         icon={<Icon icon={MultiFilesIcon} className="u-ml-half" />}
-        label={t('assistant.sources', files.length + emailSources.length)}
+        label={t('assistant.sources', files.length + emails.length)}
         deleteIcon={
           <Icon
             className="u-h-1"
@@ -66,7 +66,7 @@ const Sources = ({ messageId, files, emailSources }) => {
           {files.map(file => (
             <FileSourcesItem key={`${messageId}-${file._id}`} file={file} />
           ))}
-          {emailSources.map(email => (
+          {emails.map(email => (
             <EmailSourceItem key={`${messageId}-${email.id}`} email={email} />
           ))}
         </div>
@@ -77,11 +77,11 @@ const Sources = ({ messageId, files, emailSources }) => {
 
 const SourcesWithFilesQuery = ({ messageId, sources }) => {
   const fileIds = []
-  const emailSources = []
+  const emails = []
   let files = []
   sources.map(source => {
     source.doctype === 'com.linagora.email'
-      ? emailSources.push(source)
+      ? emails.push(source)
       : fileIds.push(source.id)
   })
   const enabled = fileIds && fileIds.length > 0
@@ -94,15 +94,10 @@ const SourcesWithFilesQuery = ({ messageId, sources }) => {
   const isLoading = isQueryLoading(queryResult)
   files = fetchedFiles || []
 
-  if (
-    (isLoading && enabled) ||
-    (files.length === 0 && emailSources.length === 0)
-  )
+  if ((isLoading && enabled) || (files.length === 0 && emails.length === 0))
     return null
 
-  return (
-    <Sources messageId={messageId} files={files} emailSources={emailSources} />
-  )
+  return <Sources messageId={messageId} files={files} emails={emails} />
 }
 
 export default SourcesWithFilesQuery
