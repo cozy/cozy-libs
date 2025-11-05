@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@2.0.0...cozy-ui-plus@2.1.0) (2025-11-05)
+
+### Features
+
+- **ui-plus:** Add AuthentificationDialog locales ([66ad8a3](https://github.com/cozy/cozy-libs/commit/66ad8a3a1f2e234d341a0bde6044ca22434e2824))
+
 # [2.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@1.2.0...cozy-ui-plus@2.0.0) (2025-11-05)
 
 ### Features
