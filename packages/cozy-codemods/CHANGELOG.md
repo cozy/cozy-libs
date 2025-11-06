@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.32.0](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.31.3...@cozy/codemods@1.32.0) (2025-11-06)
+
+### Features
+
+- **codemods:** Add script to deal with cozy-ui v133.0.0 BCs ([11b9840](https://github.com/cozy/cozy-libs/commit/11b9840db9beae46d615ab8d4d028f395683d1ed))
+
 ## [1.31.3](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.31.2...@cozy/codemods@1.31.3) (2025-10-30)
 
 **Note:** Version bump only for package @cozy/codemods
