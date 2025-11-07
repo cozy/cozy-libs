@@ -13,7 +13,7 @@ interface UseListenParentOriginRequestReturnType {
 
 // Allow the iframe to request the origin of the parent window
 export const useListenParentOriginRequest = (
-  origin: string
+  url: string
 ): UseListenParentOriginRequestReturnType => {
   const client = useClient()
   const [isReady, setIsReady] = useState<boolean>(false)
@@ -22,7 +22,7 @@ export const useListenParentOriginRequest = (
     if (!client) return
 
     const parentOriginRequestHandler = (event: MessageEvent): void =>
-      handleParentOriginRequest(event, origin)
+      handleParentOriginRequest(event, url)
 
     window.addEventListener('message', parentOriginRequestHandler)
 
@@ -33,7 +33,7 @@ export const useListenParentOriginRequest = (
     return () => {
       window.removeEventListener('message', parentOriginRequestHandler)
     }
-  }, [client, origin])
+  }, [client, url])
 
   return { isReady }
 }

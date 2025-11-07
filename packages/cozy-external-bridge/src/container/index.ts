@@ -7,14 +7,12 @@ interface UseExternalBridgeReturnType {
   urlToLoad: string | undefined
 }
 
-export const useExternalBridge = (
-  origin: string
-): UseExternalBridgeReturnType => {
-  const { urlToLoad } = useBuildUrlToLoad(origin)
+export const useExternalBridge = (url: string): UseExternalBridgeReturnType => {
+  const { urlToLoad } = useBuildUrlToLoad(url)
 
   const { isReady: isParentOriginRequestListenerReady } =
-    useListenParentOriginRequest(origin)
-  const { isReady: isBridgeListenerReady } = useListenBridgeRequests(origin)
+    useListenParentOriginRequest(url)
+  const { isReady: isBridgeListenerReady } = useListenBridgeRequests(url)
 
   const isReady = isParentOriginRequestListenerReady && isBridgeListenerReady
 

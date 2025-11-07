@@ -21,10 +21,10 @@ export const extractUrl = (url: string): string => {
 
 export const handleParentOriginRequest = (
   event: MessageEvent,
-  origin: string
+  url: string
 ): void => {
   // We do not care about message from other origin that our iframe
-  if (event.origin !== origin) {
+  if (event.origin !== url) {
     return
   }
 
