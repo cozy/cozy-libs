@@ -153,10 +153,10 @@ const isInsideCozy = (targetOrigin: string): boolean => {
   }
 }
 
-const setupBridge = (targetOrigin: string): void => {
+const setupBridge = (targetOrigin: string): boolean => {
   if (!targetOrigin) {
     console.log('🟣 No target origin, doing nothing')
-    return
+    return false
   }
 
   console.log('🟣 Setup bridge to', targetOrigin)
@@ -182,6 +182,7 @@ const setupBridge = (targetOrigin: string): void => {
   }
 
   console.log('🟣 Bridge ready')
+  return true
 }
 
 // Default bridge
