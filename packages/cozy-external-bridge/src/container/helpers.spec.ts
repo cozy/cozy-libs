@@ -54,4 +54,26 @@ describe('handleParentOriginRequest', () => {
     )
     expect(mockPostMessage).toHaveBeenCalledTimes(1)
   })
+
+  it('should successfully execute postMessage when origins match even if path is different', () => {
+    const mockPostMessage = jest.fn()
+    const url = 'http://expected-origin.com/new'
+    const eventOrigin = 'http://expected-origin.com'
+    const mockEvent = {
+      origin: eventOrigin,
+      data: 'requestParentOrigin',
+      source: {
+        postMessage: mockPostMessage
+      }
+    } as unknown as MessageEvent
+
+    const result = handleParentOriginRequest(mockEvent, url)
+
+    expect(result).toBeUndefined()
+    expect(mockPostMessage).toHaveBeenCalledWith(
+      'answerParentOrigin',
+      eventOrigin
+    )
+    expect(mockPostMessage).toHaveBeenCalledTimes(1)
+  })
 })
