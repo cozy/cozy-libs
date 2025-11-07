@@ -24,7 +24,9 @@ export const handleParentOriginRequest = (
   url: string
 ): void => {
   // We do not care about message from other origin that our iframe
-  if (event.origin !== url) {
+  const urlOrigin = new URL(url).origin
+
+  if (event.origin !== urlOrigin) {
     return
   }
 
