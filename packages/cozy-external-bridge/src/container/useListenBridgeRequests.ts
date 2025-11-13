@@ -42,6 +42,11 @@ export const useListenBridgeRequests = (
 
         return data
       },
+      getLang: (): string => {
+        const lang = document.documentElement.getAttribute('lang') || 'en'
+
+        return lang
+      },
       createDocs: async ({
         dirId,
         externalId
