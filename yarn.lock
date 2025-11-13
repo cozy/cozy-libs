@@ -17719,7 +17719,7 @@ __metadata:
     cozy-interapp: "npm:^0.5.4"
     cozy-logger: "npm:^1.17.0"
     cozy-stack-client: "npm:^60.1.0"
-    cozy-ui: "npm:^132.0.0"
+    cozy-ui: "npm:^134.0.0"
     filesize: "npm:8.0.7"
     final-form: "npm:4.20.9"
     final-form-arrays: "npm:3.1.0"
@@ -17745,7 +17745,7 @@ __metadata:
     cozy-device-helper: ">=2.0.0"
     cozy-intent: ">=2.30.0"
     cozy-logger: ">=1.17.0"
-    cozy-ui: ">=132.0.0"
+    cozy-ui: ">=134.0.0"
     react: ^16 || ^17 || ^18
     react-dom: ^16 || ^17 || ^18
   languageName: unknown
@@ -18048,9 +18048,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-ui@npm:^132.0.0":
-  version: 132.0.0
-  resolution: "cozy-ui@npm:132.0.0"
+"cozy-ui@npm:^134.0.0":
+  version: 134.0.0
+  resolution: "cozy-ui@npm:134.0.0"
   dependencies:
     "@babel/runtime": "npm:^7.3.4"
     "@date-io/date-fns": "npm:1"
@@ -18060,22 +18060,15 @@ __metadata:
     "@popperjs/core": "npm:^2.4.4"
     chart.js: "npm:3.7.1"
     classnames: "npm:^2.2.5"
-    cozy-interapp: "npm:^0.5.4"
     date-fns: "npm:2.30.0"
-    filesize: "npm:8.0.7"
-    final-form: "npm:4.20.9"
-    final-form-arrays: "npm:3.1.0"
     hammerjs: "npm:^2.0.8"
     intersection-observer: "npm:0.11.0"
-    mime-types: "npm:2.1.35"
     mui-bottom-sheet: "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9"
     node-polyglot: "npm:^2.5.0"
     normalize.css: "npm:^8.0.0"
     patch-package: "npm:^8.0.0"
     pdf-lib: "npm:1.17.1"
     react-chartjs-2: "npm:4.1.0"
-    react-final-form: "npm:6.5.9"
-    react-final-form-arrays: "npm:3.1.4"
     react-markdown: "npm:^4.0.8"
     react-popper: "npm:^2.2.3"
     react-remove-scroll: "npm:^2.4.0"
@@ -18084,7 +18077,6 @@ __metadata:
     react-virtuoso: "npm:^4.13.0"
     rooks: "npm:7.14.1"
   peerDependencies:
-    cozy-client: ">=60.5.0"
     cozy-device-helper: ">=2.0.0"
     cozy-intent: ">=2.29.1"
     react: ^16 || ^17 || ^18
@@ -18093,7 +18085,7 @@ __metadata:
     react-dom: ^16 || ^17 || ^18
   bin:
     rsg-screenshots: scripts/screenshots.js
-  checksum: 10c0/a4c9df3ee6ac0d01f69b5b0372fb06ecff5366f4866ffcbfe1abd5f4941167b2d7508bd2f6b2b1c91503ed9f923d029babcd6afb8839f7965d66faca62270bd5
+  checksum: 10c0/881e95012d1f22e1ea11aaf34cec010600f23f72f1e5eb0606cbfeb22607738b704a3451558675b50a862f474ddd57e31512308ef8df202c0a76f4dca0f19fbe
   languageName: node
   linkType: hard
 
