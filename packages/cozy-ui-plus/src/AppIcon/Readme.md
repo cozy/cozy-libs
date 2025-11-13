@@ -27,6 +27,7 @@ if no application was found, we fallback on a default `CubeIcon`
 import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
 
 ;
+
 <div>
   <div style={{ width: '100px' }}>
     <AppIcon app="test" />
