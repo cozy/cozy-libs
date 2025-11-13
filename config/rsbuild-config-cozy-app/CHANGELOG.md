@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/cozy/cozy-libs/compare/rsbuild-config-cozy-app@0.6.0...rsbuild-config-cozy-app@0.7.0) (2025-11-13)
+
+### Features
+
+- **rsbuild-config-cozy-app:** Enable polyfill of old API ([309f4ef](https://github.com/cozy/cozy-libs/commit/309f4efa7b5a5fdebdbe08b91028a6d7edf5c925))
+
 # [0.6.0](https://github.com/cozy/cozy-libs/compare/rsbuild-config-cozy-app@0.5.0...rsbuild-config-cozy-app@0.6.0) (2025-09-08)
 
 ### Bug Fixes
