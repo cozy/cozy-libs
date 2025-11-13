@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@2.2.0...cozy-ui-plus@3.0.0) (2025-11-13)
+
+### Features
+
+- Fake commit to create BC ([64dd66a](https://github.com/cozy/cozy-libs/commit/64dd66a098ca3ba61322f712fd6f14d5d772fcc1))
+
+### BREAKING CHANGES
+
+- You must have `cozy-ui >= 134.0.0`
+
 # [2.2.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@2.1.1...cozy-ui-plus@2.2.0) (2025-11-13)
 
 ### Features
