@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@2.1.1...cozy-ui-plus@2.2.0) (2025-11-13)
+
+### Features
+
+- **cozy-ui-plus:** Upgrade cozy-ui ([1bd1e3b](https://github.com/cozy/cozy-libs/commit/1bd1e3b431f33a974fef4c5242dfc3cbb317dce7))
+
 ## [2.1.1](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@2.1.0...cozy-ui-plus@2.1.1) (2025-11-05)
 
 ### Bug Fixes
