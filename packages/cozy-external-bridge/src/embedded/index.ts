@@ -7,6 +7,7 @@ import { IOCozyContact } from 'cozy-client/types/types'
 let availableMethods: {
   updateHistory: (url: string) => void
   getContacts: () => Promise<IOCozyContact>
+  getLang: () => Promise<string>
   getFlag: (key: string) => Promise<string | boolean>
   createDocs: (data: object) => Promise<object>
   updateDocs: (data: object) => Promise<object>
@@ -55,6 +56,13 @@ const getContacts = async (): Promise<IOCozyContact> => {
   const contacts = await availableMethods.getContacts()
   console.log('🟣 Twake received contacts...', contacts)
   return contacts
+}
+
+const getLang = async (): Promise<string> => {
+  console.log('🟣 Fetching lang...')
+  const lang = await availableMethods.getLang()
+  console.log('🟣 Twake received lang...', lang)
+  return lang
 }
 
 const getFlag = async (key: string): Promise<string | boolean> => {
@@ -173,6 +181,7 @@ const setupBridge = (targetOrigin: string): boolean => {
     startHistorySyncing,
     stopHistorySyncing,
     getContacts,
+    getLang,
     getFlag,
     createDocs,
     updateDocs,
