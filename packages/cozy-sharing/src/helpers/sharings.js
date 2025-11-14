@@ -11,7 +11,7 @@ import {
 import logger from '../logger'
 import { addSharing, updateSharing } from '../state'
 
-const CREATE_COZY_HREF = 'https://manager.cozycloud.cc/cozy/create'
+const CREATE_COZY_HREF = 'https://sign-up.twake.app'
 
 export const getSharingObject = (internalSharing, sharing) => {
   if (internalSharing) {
