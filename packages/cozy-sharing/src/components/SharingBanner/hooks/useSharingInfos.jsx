@@ -5,14 +5,13 @@ import { useClient, models } from 'cozy-client'
 import logger from '../../../logger'
 import { buildSharingsByIdQuery } from '../../../queries/queries'
 import getQueryParameter from '../helpers/QueryParameter'
+import flag from 'cozy-flags'
 
 const getSharingId = permission => {
   const sourceId = permission.data.attributes.source_id
   const sharingId = sourceId.split('/')[1]
   return sharingId
 }
-
-const CREATE_COZY_LINK = 'https://manager.cozycloud.cc/cozy/create'
 
 export const useSharingInfos = (previewPath = '/preview') => {
   const client = useClient()
@@ -23,6 +22,7 @@ export const useSharingInfos = (previewPath = '/preview') => {
     useState(false)
   const [sharing, setSharing] = useState()
   const [loading, setLoading] = useState(true)
+  const createCozyLink = flag('signup-url') || 'https://sign-up.twake.app'
 
   useEffect(() => {
     const loadSharingDiscoveryLink = async () => {
@@ -71,7 +71,7 @@ export const useSharingInfos = (previewPath = '/preview') => {
     loading,
     addSharingLink,
     syncSharingLink,
-    createCozyLink: CREATE_COZY_LINK,
+    createCozyLink,
     isSharingShortcutCreated
   }
 }
