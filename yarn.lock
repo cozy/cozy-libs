@@ -17036,6 +17036,19 @@ __metadata:
     react: ">=16.12.0"
     react-dom: ">=16.12.0"
     react-router-dom: ">=6.14.2"
+  peerDependenciesMeta:
+    cozy-client:
+      optional: true
+    cozy-flags:
+      optional: true
+    cozy-minilog:
+      optional: true
+    react:
+      optional: true
+    react-dom:
+      optional: true
+    react-router-dom:
+      optional: true
   languageName: unknown
   linkType: soft
 
