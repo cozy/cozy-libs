@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.18.0...cozy-external-bridge@0.19.0) (2025-11-19)
+
+### Features
+
+- Set cozy and react peer deps as optional ([e717fca](https://github.com/cozy/cozy-libs/commit/e717fca7c38737b0d05c11123407a43f3267bb63))
+
 # [0.18.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.17.0...cozy-external-bridge@0.18.0) (2025-11-19)
 
 ### Features
