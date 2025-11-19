@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.17.0...cozy-external-bridge@0.18.0) (2025-11-19)
+
+### Features
+
+- Add getLang to bridge ([3f79cfd](https://github.com/cozy/cozy-libs/commit/3f79cfd3ea2fb6c88f4a2988e4e8c32e45497470))
+
 # [0.17.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.16.4...cozy-external-bridge@0.17.0) (2025-11-07)
 
 ### Features
