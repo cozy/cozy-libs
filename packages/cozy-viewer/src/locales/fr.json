@@ -79,6 +79,13 @@
         "success": "Copié dans le presse-papier",
         "error": "Impossible de copier dans le presse-papier"
       }
+    },
+    "summriseWithAi": "Résumer",
+    "ai": {
+      "error": {
+        "summary": "Échec de la génération du résumé. Veuillez réessayer."
+      },
+      "copied": "Résumé copié dans le presse-papier"
     }
   }
 }

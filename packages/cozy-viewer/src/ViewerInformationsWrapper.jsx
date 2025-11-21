@@ -6,9 +6,11 @@ import { useCozyTheme } from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import { useTheme } from 'cozy-ui/transpiled/react/styles'
 
 import FooterContent from './Footer/FooterContent'
+import AIAssistantPanel from './Panel/AI/AIAssistantPanel'
 import PanelContent from './Panel/PanelContent'
 import Footer from './components/Footer'
 import InformationPanel from './components/InformationPanel'
+import { useViewer } from './providers/ViewerProvider'
 
 const ViewerInformationsWrapper = ({
   disableFooter,
@@ -18,6 +20,7 @@ const ViewerInformationsWrapper = ({
 }) => {
   const theme = useTheme()
   const { isLight } = useCozyTheme()
+  const { isOpenAiAssistant } = useViewer()
   const sidebar = document.querySelector('[class*="sidebar"]')
 
   useSetFlagshipUI(
@@ -32,15 +35,23 @@ const ViewerInformationsWrapper = ({
 
   return (
     <>
-      {!disableFooter && (
-        <Footer>
-          <FooterContent toolbarRef={toolbarRef}>{children}</FooterContent>
-        </Footer>
-      )}
-      {validForPanel && (
+      {isOpenAiAssistant ? (
         <InformationPanel>
-          <PanelContent />
+          <AIAssistantPanel />
         </InformationPanel>
+      ) : (
+        <>
+          {!disableFooter && (
+            <Footer>
+              <FooterContent toolbarRef={toolbarRef}>{children}</FooterContent>
+            </Footer>
+          )}
+          {validForPanel && (
+            <InformationPanel>
+              <PanelContent />
+            </InformationPanel>
+          )}
+        </>
       )}
     </>
   )
