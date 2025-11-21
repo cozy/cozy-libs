@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [24.1.7](https://github.com/cozy/cozy-libs/compare/cozy-viewer@24.1.6...cozy-viewer@24.1.7) (2025-11-21)
+
+### Bug Fixes
+
+- Viewer toolbar download button missing required params ([5695650](https://github.com/cozy/cozy-libs/commit/5695650eb76929259ff4874f503d710f360a7c4d))
+
 ## [24.1.6](https://github.com/cozy/cozy-libs/compare/cozy-viewer@24.1.5...cozy-viewer@24.1.6) (2025-11-14)
 
 **Note:** Version bump only for package cozy-viewer
