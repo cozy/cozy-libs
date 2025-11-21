@@ -91,5 +91,17 @@
       "content": "Gói hiện tại của bạn không cho phép bạn tận dụng tính năng này.",
       "action": "Tôi hiểu"
     }
+  },
+  "AIAssistantPaywall": {
+    "premium": {
+      "title": "Tính năng này không khả dụng cho bạn",
+      "content": "Các tính năng AI chỉ khả dụng trên gói premium, bạn cần nâng cấp gói của mình để truy cập tính năng này.",
+      "action": "Nâng cấp gói"
+    },
+    "default": {
+      "title": "Thông báo",
+      "content": "Gói hiện tại của bạn không cho phép sử dụng tính năng này.",
+      "action": "Tôi hiểu"
+    }
   }
 }
