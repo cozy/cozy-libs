@@ -4,6 +4,7 @@ import {
   isFromKonnector,
   normalize
 } from 'cozy-client/dist/models/file'
+import flag from 'cozy-flags'
 
 /**
  * @typedef {object} Reference
@@ -71,4 +72,57 @@ export const makeWebLink = ({ client, slug, path }) => {
 export const removeFilenameFromPath = path => {
   const newPath = path.substring(0, path.lastIndexOf('/'))
   return newPath === '' ? '/' : newPath
+}
+
+/**
+ * Check if a file is compatible with AI summary feature
+ * Compatible file types are defined in the drive.summary flag
+ * Flag structure: [{ type: "mime/type", options: { ... } }, ...]
+ * @param {object} file - File document with mime and metadata properties
+ * @param {object} options - Optional parameters
+ * @param {number} options.pdfPageCount - Number of pages if the file is a PDF
+ * @returns {boolean} Whether the file is compatible with summary
+ */
+export const isFileSummaryCompatible = (
+  file,
+  options = { pdfPageCount: null }
+) => {
+  if (!file || !file.mime) {
+    return false
+  }
+
+  const compatibleTypesRawValue = flag('drive.summary')
+  const compatibleTypes = JSON.parse(compatibleTypesRawValue)
+  if (!Array.isArray(compatibleTypes) || compatibleTypes.length === 0) {
+    return false
+  }
+
+  const mime = file.mime.toLowerCase()
+
+  for (const config of compatibleTypes) {
+    if (!config || !config.type) {
+      continue
+    }
+
+    const configType = config.type.toLowerCase()
+
+    if (configType.endsWith('/*')) {
+      const prefix = configType.slice(0, -2)
+      if (!mime.startsWith(prefix + '/')) {
+        continue
+      }
+    } else if (mime !== configType) {
+      continue
+    }
+
+    if (config.options) {
+      const { pageLimit } = config.options
+      const { pdfPageCount } = options
+      return pdfPageCount > 0 && pdfPageCount <= pageLimit
+    }
+
+    return true
+  }
+
+  return false
 }

@@ -4,6 +4,7 @@ import React from 'react'
 
 import { useClient } from 'cozy-client'
 import { downloadFile } from 'cozy-client/dist/models/file'
+import flag from 'cozy-flags'
 import { useWebviewIntent } from 'cozy-intent'
 import {
   OpenSharingLinkButton,
@@ -17,6 +18,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import DownloadIcon from 'cozy-ui/transpiled/react/Icons/Download'
 import PreviousIcon from 'cozy-ui/transpiled/react/Icons/Previous'
+import TextIcon from 'cozy-ui/transpiled/react/Icons/Text'
 import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
@@ -26,6 +28,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { ToolbarFilePath } from './ToolbarFilePath'
 import styles from './styles.styl'
 import { extractChildrenCompByName } from '../Footer/helpers'
+import { isFileSummaryCompatible } from '../helpers'
 import { useShareModal } from '../providers/ShareModalProvider'
 import { useViewer } from '../providers/ViewerProvider'
 
@@ -37,12 +40,13 @@ const Toolbar = ({
   toolbarRef,
   breakpoints: { isDesktop },
   children,
-  showFilePath
+  showFilePath,
+  onPaywallRedirect
 }) => {
   const client = useClient()
   const { t } = useI18n()
   const webviewIntent = useWebviewIntent()
-  const { file } = useViewer()
+  const { file, setIsOpenAiAssistant, pdfPageCount } = useViewer()
   const { isSharingShortcutCreated, addSharingLink, loading } =
     useSharingInfos()
   const { isOwner } = useSharingContext()
@@ -56,6 +60,19 @@ const Toolbar = ({
     file,
     name: 'ToolbarButtons'
   })
+
+  const isAiAvailable = flag('ai.available')
+  const isAiEnabled = flag('ai.enabled')
+  const isSummaryCompatible = isFileSummaryCompatible(file, { pdfPageCount })
+  const showSummariseButton = isAiAvailable && isSummaryCompatible
+
+  const handleSummariseClick = () => {
+    if (!isAiEnabled && onPaywallRedirect) {
+      onPaywallRedirect()
+    } else {
+      setIsOpenAiAssistant(true)
+    }
+  }
 
   return (
     <div
@@ -104,6 +121,21 @@ const Toolbar = ({
               isShortLabel
             />
           )}
+          {showSummariseButton && (
+            <Button
+              variant="text"
+              startIcon={
+                <Icon
+                  icon={TextIcon}
+                  className={cx(styles['viewer-ai-summarise-btn'])}
+                />
+              }
+              aria-label={t('Viewer.summriseWithAi')}
+              label={t('Viewer.summriseWithAi')}
+              onClick={handleSummariseClick}
+              className={cx(styles['viewer-ai-summarise-btn'])}
+            />
+          )}
           <Button
             className="u-white"
             variant="text"
@@ -132,7 +164,8 @@ Toolbar.propTypes = {
   onMouseEnter: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
   onClose: PropTypes.func,
-  showFilePath: PropTypes.bool
+  showFilePath: PropTypes.bool,
+  onPaywallRedirect: PropTypes.func
 }
 
 export default withBreakpoints()(Toolbar)
