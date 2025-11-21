@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { useClient } from 'cozy-client'
+import { downloadFile } from 'cozy-client/dist/models/file'
 import { useWebviewIntent } from 'cozy-intent'
 import {
   OpenSharingLinkButton,
@@ -110,11 +111,13 @@ const Toolbar = ({
             label={t('Viewer.download')}
             startIcon={<Icon icon={DownloadIcon} />}
             onClick={() =>
-              download({ encryptedUrl: url }).action([file], {
-                client,
-                webviewIntent,
-                driveId: file.driveId
-              })
+              download({ client, encryptedUrl: url, downloadFile }).action(
+                [file],
+                {
+                  webviewIntent,
+                  driveId: file.driveId
+                }
+              )
             }
           />
         </div>
