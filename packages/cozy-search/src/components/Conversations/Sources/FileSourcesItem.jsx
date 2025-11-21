@@ -30,7 +30,7 @@ const getHash = (file, slug) => {
   return `/folder/${file.dir_id}/file/${file._id}`
 }
 
-const SourcesItem = ({ file }) => {
+const FileSourcesItem = ({ file }) => {
   const client = useClient()
 
   const slug = getSlug(file)
@@ -62,4 +62,4 @@ const SourcesItem = ({ file }) => {
   )
 }
 
-export default SourcesItem
+export default FileSourcesItem
