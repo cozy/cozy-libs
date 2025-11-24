@@ -1,7 +1,8 @@
 import cx from 'classnames'
 import PropTypes from 'prop-types'
-import React, { useCallback, useState, useEffect } from 'react'
+import React, { useCallback, useState, useEffect, useRef } from 'react'
 
+import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
@@ -42,35 +43,60 @@ const loaderStyles = {
 const AIAssistantPanel = () => {
   const { t } = useI18n()
   const { file, setIsOpenAiAssistant } = useViewer()
+  const client = useClient()
 
   const [isLoading, setIsLoading] = useState(true)
   const [summary, setSummary] = useState('')
   const [error, setError] = useState(null)
 
+  const fetchedFileIdRef = useRef(null)
+  const isFetchingRef = useRef(false)
+
   const handleClose = () => {
     setIsOpenAiAssistant(false)
   }
 
-  const fetchSummary = useCallback(async () => {
-    setIsLoading(true)
-    setError(null)
-    try {
-      const response = await summarizeFile({ file, stream: false })
-      if (response && response.content) {
-        setSummary(response.content)
-      } else if (response && response.choices && response.choices[0]) {
-        setSummary(response.choices[0].message.content)
+  const fetchSummary = useCallback(
+    async (force = false) => {
+      // Prevent duplicate fetches for the same file
+      if (
+        !force &&
+        (fetchedFileIdRef.current === file._id || isFetchingRef.current)
+      ) {
+        return
       }
-    } catch (err) {
-      setError(err.message || 'Failed to generate summary')
-      Alerter.error(t('Viewer.ai.error.summary'))
-    } finally {
-      setIsLoading(false)
-    }
-  }, [file, t])
+
+      isFetchingRef.current = true
+      setIsLoading(true)
+      setError(null)
+
+      try {
+        const response = await summarizeFile({ file, stream: false })
+        const summaryContent =
+          response?.content || response?.choices?.[0]?.message?.content
+        setSummary(summaryContent)
+        const fileMetadata = file.metadata || {}
+        await client
+          .collection('io.cozy.files')
+          .updateMetadataAttribute(file._id, {
+            ...fileMetadata,
+            description: summaryContent
+          })
+        fetchedFileIdRef.current = file._id
+      } catch (err) {
+        setError(err.message || 'Failed to generate summary')
+        Alerter.error(t('Viewer.ai.error.summary'))
+      } finally {
+        setIsLoading(false)
+        isFetchingRef.current = false
+      }
+    },
+    [client, file, t]
+  )
 
   const handleRefresh = () => {
-    fetchSummary()
+    fetchedFileIdRef.current = null
+    fetchSummary(true)
   }
 
   const handleCopy = () => {
