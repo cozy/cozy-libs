@@ -27,7 +27,10 @@ export const receiveSharings = ({
   type: RECEIVE_SHARINGS,
   data: {
     sharings: sharings.filter(
-      s => !areAllRecipientsRevoked(s) && !hasBeenSelfRevoked(s, instanceUri)
+      s =>
+        // Shared drives without recipients are valid and should be kept
+        (isSharingADrive(s) || !areAllRecipientsRevoked(s)) &&
+        !hasBeenSelfRevoked(s, instanceUri)
     ),
     permissions,
     apps
@@ -181,7 +184,10 @@ const byDocId = (state = {}, action) => {
     case REVOKE_GROUP:
     case REVOKE_RECIPIENT:
     case UPDATE_SHARING:
-      if (areAllRecipientsRevoked(action.sharing)) {
+      if (
+        !isSharingADrive(action.sharing) &&
+        areAllRecipientsRevoked(action.sharing)
+      ) {
         return forgetSharing(state, action.sharing)
       }
       return state
@@ -275,7 +281,10 @@ const sharedPaths = (state = [], action) => {
       return newState
     case REVOKE_GROUP:
     case REVOKE_RECIPIENT:
-      if (areAllRecipientsRevoked(action.sharing)) {
+      if (
+        !isSharingADrive(action.sharing) &&
+        areAllRecipientsRevoked(action.sharing)
+      ) {
         return state.filter(p => p !== action.path)
       }
       return state
@@ -550,6 +559,8 @@ export const getPermissionDocIds = perm =>
         : []
     )
     .reduce((acc, val) => [...acc, ...val], [])
+
+const isSharingADrive = sharing => sharing.attributes.drive === true
 
 const areAllRecipientsRevoked = sharing =>
   sharing.attributes.owner &&
