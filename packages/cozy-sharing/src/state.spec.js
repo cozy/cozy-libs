@@ -7,6 +7,7 @@ import reducer, {
   getRecipients,
   revokeRecipient,
   revokeSelf,
+  updateSharing,
   matchingInstanceName,
   getSharingLink,
   hasSharedParent,
@@ -96,6 +97,168 @@ describe('Sharing state', () => {
       folder_1: { sharings: [SHARING_1.id], permissions: [] }
     })
     expect(state.sharings).toEqual([SHARING_1])
+  })
+
+  it('should not filter out shared drives without recipients', () => {
+    const SHARED_DRIVE_WITHOUT_RECIPIENTS = {
+      ...SHARING_1,
+      id: 'shared_drive_no_recipients',
+      attributes: {
+        ...SHARING_1.attributes,
+        drive: true,
+        members: [
+          {
+            status: 'owner',
+            name: 'Jane Doe',
+            email: 'jane@doe.com',
+            instance: 'http://cozy.tools:8080'
+          }
+        ],
+        rules: [
+          {
+            title: 'My Shared Drive',
+            doctype: 'io.cozy.files',
+            values: ['shared_drive_folder'],
+            add: 'sync',
+            update: 'sync',
+            remove: 'sync'
+          }
+        ]
+      }
+    }
+    const state = reducer(
+      undefined,
+      receiveSharings({
+        sharings: [SHARING_1, SHARED_DRIVE_WITHOUT_RECIPIENTS]
+      })
+    )
+    expect(state.byDocId).toEqual({
+      folder_1: { sharings: [SHARING_1.id], permissions: [] },
+      shared_drive_folder: {
+        sharings: [SHARED_DRIVE_WITHOUT_RECIPIENTS.id],
+        permissions: []
+      }
+    })
+    expect(state.sharings).toEqual([SHARING_1, SHARED_DRIVE_WITHOUT_RECIPIENTS])
+  })
+
+  it('should not forget shared drives without recipients when updating', () => {
+    const SHARED_DRIVE_WITHOUT_RECIPIENTS = {
+      ...SHARING_1,
+      id: 'shared_drive_no_recipients',
+      attributes: {
+        ...SHARING_1.attributes,
+        drive: true,
+        members: [
+          {
+            status: 'owner',
+            name: 'Jane Doe',
+            email: 'jane@doe.com',
+            instance: 'http://cozy.tools:8080'
+          }
+        ],
+        rules: [
+          {
+            title: 'My Shared Drive',
+            doctype: 'io.cozy.files',
+            values: ['shared_drive_folder'],
+            add: 'sync',
+            update: 'sync',
+            remove: 'sync'
+          }
+        ]
+      }
+    }
+    const initialState = reducer(
+      undefined,
+      receiveSharings({
+        sharings: [SHARED_DRIVE_WITHOUT_RECIPIENTS]
+      })
+    )
+    const updatedSharing = {
+      ...SHARED_DRIVE_WITHOUT_RECIPIENTS,
+      attributes: {
+        ...SHARED_DRIVE_WITHOUT_RECIPIENTS.attributes,
+        description: 'Updated description'
+      }
+    }
+    const state = reducer(initialState, updateSharing(updatedSharing))
+    expect(state.byDocId).toEqual({
+      shared_drive_folder: {
+        sharings: [SHARED_DRIVE_WITHOUT_RECIPIENTS.id],
+        permissions: []
+      }
+    })
+    expect(state.sharings).toEqual([updatedSharing])
+  })
+
+  it('should not remove shared drive path when revoking last recipient', () => {
+    const SHARED_DRIVE_WITH_ONE_RECIPIENT = {
+      ...SHARING_1,
+      id: 'shared_drive_one_recipient',
+      attributes: {
+        ...SHARING_1.attributes,
+        drive: true,
+        members: [
+          {
+            status: 'owner',
+            name: 'Jane Doe',
+            email: 'jane@doe.com',
+            instance: 'http://cozy.tools:8080'
+          },
+          {
+            status: 'ready',
+            name: 'John Doe',
+            email: 'john@doe.com',
+            instance: 'http://cozy.local:8080'
+          }
+        ],
+        rules: [
+          {
+            title: 'My Shared Drive',
+            doctype: 'io.cozy.files',
+            values: ['shared_drive_folder'],
+            add: 'sync',
+            update: 'sync',
+            remove: 'sync'
+          }
+        ]
+      }
+    }
+    const sharedDrivePath = '/shared_drive_folder'
+    const initialState = reducer(
+      reducer(
+        undefined,
+        receiveSharings({
+          sharings: [SHARED_DRIVE_WITH_ONE_RECIPIENT]
+        })
+      ),
+      addSharing(SHARED_DRIVE_WITH_ONE_RECIPIENT, sharedDrivePath)
+    )
+    const sharingAfterRevoke = {
+      ...SHARED_DRIVE_WITH_ONE_RECIPIENT,
+      attributes: {
+        ...SHARED_DRIVE_WITH_ONE_RECIPIENT.attributes,
+        members: [
+          SHARED_DRIVE_WITH_ONE_RECIPIENT.attributes.members[0],
+          {
+            ...SHARED_DRIVE_WITH_ONE_RECIPIENT.attributes.members[1],
+            status: 'revoked'
+          }
+        ]
+      }
+    }
+    const state = reducer(
+      initialState,
+      revokeRecipient(sharingAfterRevoke, 1, sharedDrivePath)
+    )
+    expect(state.sharedPaths).toContain(sharedDrivePath)
+    expect(state.byDocId).toEqual({
+      shared_drive_folder: {
+        sharings: [SHARED_DRIVE_WITH_ONE_RECIPIENT.id],
+        permissions: []
+      }
+    })
   })
 
   it('should index received permissions', () => {
