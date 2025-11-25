@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [27.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@27.0.6...cozy-sharing@27.1.0) (2025-11-25)
+
+### Features
+
+- Enhance sharing logic to retain shared drives without recipients ([ab91186](https://github.com/cozy/cozy-libs/commit/ab911869e5f49aafaf5ca16b3323bd9826072b35))
+
 ## [27.0.6](https://github.com/cozy/cozy-libs/compare/cozy-sharing@27.0.5...cozy-sharing@27.0.6) (2025-11-14)
 
 ### Bug Fixes
