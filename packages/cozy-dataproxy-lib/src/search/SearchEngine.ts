@@ -50,7 +50,7 @@ import {
   SearchOptions,
   StorageInterface,
   EnrichedSearchResult,
-  isTrashedDrive,
+  isTrashedSharedDrive,
   isInSharedDrivesDir
 } from './types'
 
@@ -283,7 +283,7 @@ export class SearchEngine {
     if (
       !doctype ||
       !isSearchedDoctype(normalizeDoctype(doctype)) ||
-      isTrashedDrive(doc as IOCozyFile, sharedDriveId)
+      isTrashedSharedDrive(doc as IOCozyFile, sharedDriveId)
     ) {
       return
     }
