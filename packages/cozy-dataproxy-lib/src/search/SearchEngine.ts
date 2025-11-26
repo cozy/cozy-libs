@@ -242,9 +242,7 @@ export class SearchEngine {
     ) {
       delete this.searchIndexes[`${SHARED_DRIVE_FILES_DOCTYPE}-${driveId}`]
     }
-    if (this.isLocalSearch) {
-      this.debouncedReplication()
-    }
+    void exportSearchIndexes(this.storage, this.searchIndexes)
   }
 
   private addSharedDriveRealtime(sharedDriveId: string): void {
@@ -388,6 +386,10 @@ export class SearchEngine {
     const docs = await queryLocalOrRemoteDocs(this.client, doctype, {
       isLocalSearch: this.isLocalSearch
     })
+    if (docs.length < 1) {
+      // No docs available yet
+      return null
+    }
     const index = this.buildSearchIndex(doctype, docs)
     const lastSeq = await this.getLocalLastSeq(doctype)
 
