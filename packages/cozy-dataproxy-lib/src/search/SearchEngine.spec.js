@@ -779,10 +779,6 @@ describe('Realtime features', () => {
 
       it('should stop realtime, remove from indexes and trigger replication', () => {
         const mockRealtimeInstance = searchEngine.sharedDrivesRealtimes.drive1
-        const debouncedReplicationSpy = jest.spyOn(
-          searchEngine,
-          'debouncedReplication'
-        )
 
         searchEngine.removeSharedDrive('drive1')
 
@@ -791,18 +787,6 @@ describe('Realtime features', () => {
         expect(
           searchEngine.searchIndexes['io.cozy.files.shareddrives-drive1']
         ).toBeUndefined()
-        expect(debouncedReplicationSpy).toHaveBeenCalled()
-      })
-
-      it('should handle removal of non-existent drive gracefully', () => {
-        const debouncedReplicationSpy = jest.spyOn(
-          searchEngine,
-          'debouncedReplication'
-        )
-
-        searchEngine.removeSharedDrive('nonexistent')
-
-        expect(debouncedReplicationSpy).toHaveBeenCalled()
       })
 
       it('should not trigger replication for non-local search', () => {

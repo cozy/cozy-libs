@@ -3,7 +3,7 @@ import FlexSearch from 'flexsearch'
 import CozyClient from 'cozy-client'
 
 import { SearchEngine } from './SearchEngine'
-import { SEARCH_SCHEMA } from './consts'
+import { SEARCH_SCHEMA, SearchedDoctype } from './consts'
 import { getPouchLink } from './helpers/client'
 import { getSearchEncoder } from './helpers/getSearchEncoder'
 import { shouldKeepApp } from './helpers/normalizeApp'
@@ -15,7 +15,8 @@ import { CozyDoc, isIOCozyFile, isIOCozyApp, SearchIndex } from './types'
 export const initSearchIndex = (
   doctype: string
 ): FlexSearch.Document<CozyDoc, false> => {
-  const fieldsToIndex = SEARCH_SCHEMA[normalizeDoctype(doctype)]
+  const fieldsToIndex =
+    SEARCH_SCHEMA[normalizeDoctype(doctype) as SearchedDoctype]
 
   const flexsearchIndex = new FlexSearch.Document<CozyDoc, false>({
     tokenize: 'reverse', // See https://github.com/nextapps-de/flexsearch?tab=readme-ov-file#tokenizer
