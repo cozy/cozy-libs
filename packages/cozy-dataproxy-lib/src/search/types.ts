@@ -40,7 +40,7 @@ export const isSearchedDoctype = (
   return searchedDoctypes.includes(doctype)
 }
 
-export const isTrashedDrive = (
+export const isTrashedSharedDrive = (
   doc: IOCozyFile,
   sharedDriveId: string | undefined
 ): boolean => {
