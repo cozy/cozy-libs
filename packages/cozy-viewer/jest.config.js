@@ -11,7 +11,8 @@ module.exports = {
     '^cozy-client$': '<rootDir>/node_modules/cozy-client/dist/index',
     '^cozy-client/dist/types$':
       '<rootDir>/node_modules/cozy-client/dist/types.js',
-    '^cozy-ui$': '<rootDir>/node_modules/cozy-ui/$1'
+    '^cozy-ui$': '<rootDir>/node_modules/cozy-ui/$1',
+    '^cozy-flags$': '<rootDir>/test/__mocks__/cozyFlagsMock.js'
   },
   transformIgnorePatterns: ['node_modules/(?!(cozy-ui|cozy-harvest-lib))'],
   transform: {

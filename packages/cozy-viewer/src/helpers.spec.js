@@ -1,4 +1,12 @@
-import { isEditableAttribute, removeFilenameFromPath } from './helpers'
+import flag from 'cozy-flags'
+
+import {
+  isEditableAttribute,
+  removeFilenameFromPath,
+  isFileSummaryCompatible
+} from './helpers'
+
+jest.mock('cozy-flags')
 
 describe('helpers', () => {
   describe('isEditableAttribute', () => {
@@ -72,6 +80,77 @@ describe('helpers', () => {
       expect(removeFilenameFromPath('/7IsD.gif/7IsD.gif', '7IsD.gif')).toBe(
         '/7IsD.gif'
       )
+    })
+  })
+
+  describe('isFileSummaryCompatible', () => {
+    beforeEach(() => {
+      jest.resetAllMocks()
+    })
+
+    it('should return false if file is not defined or has no mime', () => {
+      expect(isFileSummaryCompatible(null)).toBe(false)
+      expect(isFileSummaryCompatible({})).toBe(false)
+    })
+
+    it('should return false if no compatible types are defined', () => {
+      flag.mockReturnValue(JSON.stringify([]))
+      expect(isFileSummaryCompatible({ mime: 'application/pdf' })).toBe(false)
+    })
+
+    it('should return true if mime matches exactly', () => {
+      flag.mockReturnValue(
+        JSON.stringify([{ type: 'application/pdf' }, { type: 'text/plain' }])
+      )
+      expect(isFileSummaryCompatible({ mime: 'application/pdf' })).toBe(true)
+      expect(isFileSummaryCompatible({ mime: 'text/plain' })).toBe(true)
+    })
+
+    it('should return false if mime does not match', () => {
+      flag.mockReturnValue(JSON.stringify([{ type: 'application/pdf' }]))
+      expect(isFileSummaryCompatible({ mime: 'text/plain' })).toBe(false)
+    })
+
+    it('should handle wildcard types', () => {
+      flag.mockReturnValue(JSON.stringify([{ type: 'text/*' }]))
+      expect(isFileSummaryCompatible({ mime: 'text/plain' })).toBe(true)
+      expect(isFileSummaryCompatible({ mime: 'text/markdown' })).toBe(true)
+      expect(isFileSummaryCompatible({ mime: 'application/pdf' })).toBe(false)
+    })
+
+    it('should respect page limit options for PDFs', () => {
+      flag.mockReturnValue(
+        JSON.stringify([
+          { type: 'application/pdf', options: { pageLimit: 50 } }
+        ])
+      )
+      expect(
+        isFileSummaryCompatible(
+          { mime: 'application/pdf' },
+          { pdfPageCount: 10 }
+        )
+      ).toBe(true)
+      expect(
+        isFileSummaryCompatible(
+          { mime: 'application/pdf' },
+          { pdfPageCount: 50 }
+        )
+      ).toBe(true)
+      expect(
+        isFileSummaryCompatible(
+          { mime: 'application/pdf' },
+          { pdfPageCount: 51 }
+        )
+      ).toBe(false)
+    })
+
+    it('should return false if pdfPageCount is missing when required', () => {
+      flag.mockReturnValue(
+        JSON.stringify([
+          { type: 'application/pdf', options: { pageLimit: 50 } }
+        ])
+      )
+      expect(isFileSummaryCompatible({ mime: 'application/pdf' })).toBe(false)
     })
   })
 })

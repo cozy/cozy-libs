@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 
 export const ViewerContext = React.createContext()
 
@@ -18,13 +18,20 @@ const ViewerProvider = ({
   componentsProps,
   children
 }) => {
+  const [isOpenAiAssistant, setIsOpenAiAssistant] = useState(false)
+  const [pdfPageCount, setPdfPageCount] = useState(null)
+
   return (
     <ViewerContext.Provider
       value={{
         file,
         isPublic,
         componentsProps,
-        isReadOnly
+        isReadOnly,
+        isOpenAiAssistant,
+        setIsOpenAiAssistant,
+        pdfPageCount,
+        setPdfPageCount
       }}
     >
       {children}

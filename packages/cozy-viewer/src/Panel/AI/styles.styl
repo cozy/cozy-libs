@@ -1,0 +1,22 @@
+@keyframes aiLoaderSlide
+  0%
+    transform translateX(-100%)
+  100%
+    transform translateX(100%)
+
+.loaderContainer
+  position relative
+  overflow hidden
+  height 3px
+  width 100%
+  background-color var(--dividerColor)
+  margin-top 0px
+
+.loaderBar
+  position absolute
+  top 0
+  left 0
+  height 100%
+  width 100%
+  background linear-gradient(90deg, #00B8D4 0%, #667EEA 25%, #F093FB 50%, #F5576C 75%, #FDB813 100%)
+  animation aiLoaderSlide 2s linear infinite
