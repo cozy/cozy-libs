@@ -16,6 +16,7 @@ const defaultValue = Object.freeze({
   dataProxyServicesAvailable: false,
   ready: false,
   search: noop,
+  recents: noop,
   requestLink: noop
 })
 
@@ -203,6 +204,11 @@ export const DataProxyProvider = React.memo(
           return result
         }
 
+        const recents = () => {
+          log.log('Send recents query to DataProxy: ')
+          return dataProxyCom.recents()
+        }
+
         // Request through cozy-client
         const requestLink = async (operation, options) => {
           log.log('Send request to DataProxy : ', operation)
@@ -216,6 +222,7 @@ export const DataProxyProvider = React.memo(
           dataProxyServicesAvailable,
           ready: Boolean(dataProxyCom),
           search,
+          recents,
           requestLink
         }
         client.links.forEach(link => {
