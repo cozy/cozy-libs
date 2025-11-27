@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [27.1.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@27.1.0...cozy-sharing@27.1.1) (2025-11-27)
+
+### Bug Fixes
+
+- **cozy-sharing:** Fix shared drive write access display for recipients ([3f2eaa2](https://github.com/cozy/cozy-libs/commit/3f2eaa25c3a2023f92040c98e972cdfa6e277133))
+
 # [27.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@27.0.6...cozy-sharing@27.1.0) (2025-11-25)
 
 ### Features
