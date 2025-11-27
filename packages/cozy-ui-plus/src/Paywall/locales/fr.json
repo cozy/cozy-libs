@@ -91,5 +91,17 @@
       "content": "Votre offre actuelle ne vous permet pas de profiter de cette fonctionnalité.",
       "action": "J'ai compris"
     }
+  },
+  "AIAssistantPaywall": {
+    "premium": {
+      "title": "Cette fonctionnalité n'est pas disponible pour vous",
+      "content": "Les fonctionnalités d'IA sont uniquement disponibles avec l'abonnement premium. Vous devez mettre à niveau votre offre pour accéder à cette fonctionnalité.",
+      "action": "Mettre à niveau mon forfait"
+    },
+    "default": {
+      "title": "Information",
+      "content": "Votre offre actuelle ne vous permet pas d'utiliser cette fonctionnalité.",
+      "action": "Je comprends"
+    }
   }
 }
