@@ -708,6 +708,85 @@ describe('getSharingType selector', () => {
       )
     ).toBe('one-way')
   })
+
+  it('should return two-way for a shared drive member with write access', () => {
+    const SHARED_DRIVE = {
+      ...SHARING_3,
+      id: 'shared_drive',
+      attributes: {
+        ...SHARING_3.attributes,
+        drive: true,
+        owner: false,
+        members: [
+          {
+            status: 'owner',
+            name: 'Jane Doe',
+            email: 'jane@doe.com',
+            instance: 'http://cozy.tools:8080'
+          },
+          {
+            status: 'ready',
+            name: 'John Doe',
+            email: 'john@doe.com',
+            instance: 'http://cozy.local:8080'
+          }
+        ]
+      }
+    }
+    const newState = reducer(
+      {},
+      receiveSharings({
+        sharings: [SHARED_DRIVE]
+      })
+    )
+    expect(
+      getSharingType(
+        newState,
+        SHARED_DRIVE.attributes.rules[0].values[0],
+        'http://cozy.local:8080'
+      )
+    ).toBe('two-way')
+  })
+
+  it('should return one-way for a shared drive member with read-only access', () => {
+    const SHARED_DRIVE_READ_ONLY = {
+      ...SHARING_3,
+      id: 'shared_drive_read_only',
+      attributes: {
+        ...SHARING_3.attributes,
+        drive: true,
+        owner: false,
+        members: [
+          {
+            status: 'owner',
+            name: 'Jane Doe',
+            email: 'jane@doe.com',
+            instance: 'http://cozy.tools:8080'
+          },
+          {
+            status: 'ready',
+            name: 'John Doe',
+            email: 'john@doe.com',
+            instance: 'http://cozy.local:8080',
+            read_only: true
+          }
+        ]
+      }
+    }
+    const newState = reducer(
+      {},
+      receiveSharings({
+        sharings: [SHARED_DRIVE_READ_ONLY]
+      })
+    )
+    expect(
+      getSharingType(
+        newState,
+        SHARED_DRIVE_READ_ONLY.attributes.rules[0].values[0],
+        'http://cozy.local:8080'
+      )
+    ).toBe('one-way')
+  })
 })
 
 describe('getDocumentSharingType', () => {

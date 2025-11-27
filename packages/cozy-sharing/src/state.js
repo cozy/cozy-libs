@@ -448,10 +448,19 @@ export const getSharingForSelf = (state, docId) =>
 export const getSharingType = (state, docId, instanceUri) => {
   const sharing = getSharingForSelf(state, docId)
   if (!sharing) return false
+
   const type = getDocumentSharingType(sharing, docId)
-  if (sharing.attributes.owner) return type
+  if (sharing.attributes?.owner) return type
+
   const me = sharing.attributes.members.find(matchingInstanceName(instanceUri))
-  return me && me.read_only ? 'one-way' : type
+  if (!me) return type
+  if (me.read_only) {
+    return 'one-way'
+  }
+  if (sharing.attributes.drive) {
+    return 'two-way'
+  }
+  return type
 }
 
 export const getDocumentSharing = (state, docId) =>
@@ -619,7 +628,6 @@ export const getDocumentSharingType = (sharing, docId) => {
   const rule = getSharingRule(sharing, docId)
   const directorySharingType = getDirectorySharingType(rule)
   const fileSharingType = getFileSharingType(rule)
-
   return directorySharingType === SHARING_TYPE.TWO_WAY ||
     fileSharingType === SHARING_TYPE.TWO_WAY
     ? SHARING_TYPE.TWO_WAY
