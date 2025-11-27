@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.12.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.11.1...cozy-dataproxy-lib@4.12.0) (2025-11-27)
+
+### Features
+
+- **cozy-dataproxy-lib:** Implement realtime features ([a39a4f7](https://github.com/cozy/cozy-libs/commit/a39a4f775afe1777a7856179321c1aa1fef3f36f))
+- **cozy-dataproxy-lib:** Update cozy-client and cozy-pouch-link ([6dfb06b](https://github.com/cozy/cozy-libs/commit/6dfb06b4964289ffe4b664cf3b0334da86f9c760))
+- Integrate shared drive files into search functionality ([34ff181](https://github.com/cozy/cozy-libs/commit/34ff181679139ceb56d18fceb33066f13a169469))
+
 ## [4.11.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.11.0...cozy-dataproxy-lib@4.11.1) (2025-10-30)
 
 **Note:** Version bump only for package cozy-dataproxy-lib
