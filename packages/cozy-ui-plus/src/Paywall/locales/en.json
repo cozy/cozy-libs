@@ -91,5 +91,17 @@
       "content": "Your current plan does not allow you to take advantage of this feature.",
       "action": "I understand"
     }
+  },
+  "AIAssistantPaywall": {
+    "premium": {
+      "title": "This feature isn't available for you",
+      "content": "AI features is only available on premium. You need to upgrade your plan to access to this feature.",
+      "action": "Upgrade my plan"
+    },
+    "default": {
+      "title": "Information",
+      "content": "Your current plan does not allow you to take advantage of this feature.",
+      "action": "I understand"
+    }
   }
 }
