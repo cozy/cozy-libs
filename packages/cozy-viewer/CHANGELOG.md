@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [24.2.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@24.1.9...cozy-viewer@24.2.0) (2025-11-28)
+
+### Bug Fixes
+
+- **cozy-viewer:** Make video viewer bigger ([801e68c](https://github.com/cozy/cozy-libs/commit/801e68cab5c0d4e24057f6b5a4d3dbf2373cd5c6))
+
+### Features
+
+- Minimize bottom sheet by default ([2975dac](https://github.com/cozy/cozy-libs/commit/2975dac3a1f99f4cf22d5e623b2a63c94e8e5342))
+- Minimize bottom sheet by default ([f97b3b9](https://github.com/cozy/cozy-libs/commit/f97b3b9f830c6212f88e91d50a72dea633767421))
+
 ## [24.1.9](https://github.com/cozy/cozy-libs/compare/cozy-viewer@24.1.8...cozy-viewer@24.1.9) (2025-11-27)
 
 **Note:** Version bump only for package cozy-viewer
