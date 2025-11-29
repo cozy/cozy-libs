@@ -7,12 +7,13 @@ export const FILES_DOCTYPE = 'io.cozy.files'
 
 const defaultFetchPolicy = fetchPolicies.olderThan(86400) // 24 hours
 
-export const buildFilesByIds = ids => {
+export const buildFilesByIds = (ids, enabled) => {
   return {
     definition: Q(FILES_DOCTYPE).getByIds(ids),
     options: {
       as: `${FILES_DOCTYPE}/${ids.join('')}`,
-      fetchPolicy: defaultFetchPolicy
+      fetchPolicy: defaultFetchPolicy,
+      enabled: enabled
     }
   }
 }
