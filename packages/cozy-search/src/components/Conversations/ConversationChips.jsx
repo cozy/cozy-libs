@@ -11,9 +11,127 @@ import { ExpertIcon } from '../AssistantIcon/ExpertIcon'
 import { KnowledgeBaseIcon } from '../AssistantIcon/KnowledgeBaseIcon'
 import { TwakeAssistantIconColor } from '../AssistantIcon/TwakeAssistantIconColor'
 
+const ChatChips = ({
+  modes,
+  onModeSelect,
+  splice = 3,
+  startIcon = ExpertIcon,
+  moreEndLabel
+}) => {
+  const visibleModes = modes.slice(0, splice)
+  const remainingCount = modes.length - splice
+
+  return (
+    <div
+      className="u-flex u-flex-row u-flex-wrap u-w-100 u-flex-justify-between u-flex-items-center u-mb-1"
+      style={{ gap: 8 }}
+    >
+      <Icon icon={startIcon} size={24} style={{ opacity: 0.6 }} />
+
+      {visibleModes.map(mode => {
+        const warningColor = mode.selected ? 'var(--warningColor)' : undefined
+        return (
+          <Chip
+            icon={<Icon icon={mode.icon} style={{ marginLeft: 12 }} />}
+            label={mode.label}
+            clickable
+            onDelete={mode.external && (() => {})}
+            deleteIcon={
+              mode.external && (
+                <Icon
+                  icon="openwith"
+                  className="u-h-1"
+                  style={{ fill: warningColor, color: warningColor }}
+                />
+              )
+            }
+            color={mode.external && mode.selected ? 'warning' : undefined}
+            key={mode.label}
+            variant={mode.selected ? 'ghost' : 'default'}
+            style={{
+              borderStyle: 'solid'
+            }}
+            className="u-mr-0"
+            onClick={() => {
+              onModeSelect(mode.key)
+            }}
+          />
+        )
+      })}
+
+      {remainingCount > 0 && (
+        <Chip
+          label={`+${remainingCount} ${moreEndLabel || 'more'}`}
+          clickable
+          variant="outlined"
+        />
+      )}
+    </div>
+  )
+}
+
+const ChatExperts = ({ experts, selectedExpert, setSelectedExpert }) => {
+  const { t } = useI18n()
+
+  const expertsState = useMemo(
+    () =>
+      experts.map(expert => ({
+        ...expert,
+        selected: expert.key === selectedExpert
+      })),
+    [selectedExpert, experts]
+  )
+
+  return (
+    <ChatChips
+      modes={expertsState}
+      onModeSelect={key => {
+        setSelectedExpert(key === selectedExpert ? null : key)
+      }}
+      splice={4}
+      startIcon={ExpertIcon}
+      moreEndLabel={t('assistant.conversationBar.more.experts')}
+    />
+  )
+}
+
+const ChatKnowledges = ({
+  knowledges,
+  selectedKnowledges,
+  setSelectedKnowledges
+}) => {
+  const { t } = useI18n()
+
+  const knowledgesState = useMemo(
+    () =>
+      knowledges.map(knowledge => ({
+        ...knowledge,
+        selected: selectedKnowledges.includes(knowledge.key)
+      })),
+    [selectedKnowledges, knowledges]
+  )
+
+  return (
+    <ChatChips
+      modes={knowledgesState}
+      onModeSelect={key => {
+        if (selectedKnowledges.includes(key)) {
+          setSelectedKnowledges(selectedKnowledges.filter(k => k !== key))
+        } else {
+          setSelectedKnowledges([...selectedKnowledges, key])
+        }
+      }}
+      splice={4}
+      startIcon={KnowledgeBaseIcon}
+      moreEndLabel={t('assistant.conversationBar.more.knowledge_bases')}
+    />
+  )
+}
+
 const ChatModes = () => {
   const { t } = useI18n()
 
+  // Data
   const experts = useMemo(
     () => [
       {
@@ -66,7 +184,7 @@ const ChatModes = () => {
     ],
     [t]
   )
-
+  // Data
   const knowledges = useMemo(
     () => [
       {
@@ -156,123 +274,6 @@ const ChatModes = () => {
       />
 
       {isExternalExpertSelected && <ExternalExpertWarning />}
-    </div>
-  )
-}
-
-const ChatExperts = ({ experts, selectedExpert, setSelectedExpert }) => {
-  const { t } = useI18n()
-
-  const expertsState = useMemo(
-    () =>
-      experts.map(expert => ({
-        ...expert,
-        selected: expert.key === selectedExpert
-      })),
-    [selectedExpert, experts]
-  )
-
-  return (
-    <ChatChips
-      modes={expertsState}
-      onModeSelect={key => {
-        setSelectedExpert(key === selectedExpert ? null : key)
-      }}
-      splice={4}
-      startIcon={ExpertIcon}
-      moreEndLabel={t('assistant.conversationBar.more.experts')}
-    />
-  )
-}
-
-const ChatKnowledges = ({
-  knowledges,
-  selectedKnowledges,
-  setSelectedKnowledges
-}) => {
-  const { t } = useI18n()
-
-  const knowledgesState = useMemo(
-    () =>
-      knowledges.map(knowledge => ({
-        ...knowledge,
-        selected: selectedKnowledges.includes(knowledge.key)
-      })),
-    [selectedKnowledges]
-  )
-
-  return (
-    <ChatChips
-      modes={knowledgesState}
-      onModeSelect={key => {
-        if (selectedKnowledges.includes(key)) {
-          setSelectedKnowledges(selectedKnowledges.filter(k => k !== key))
-        } else {
-          setSelectedKnowledges([...selectedKnowledges, key])
-        }
-      }}
-      splice={4}
-      startIcon={KnowledgeBaseIcon}
-      moreEndLabel={t('assistant.conversationBar.more.knowledge_bases')}
-    />
-  )
-}
-
-const ChatChips = ({
-  modes,
-  onModeSelect,
-  splice = 3,
-  startIcon = ExpertIcon,
-  moreEndLabel
-}) => {
-  const visibleModes = modes.slice(0, splice)
-  const remainingCount = modes.length - splice
-
-  return (
-    <div
-      className="u-flex u-flex-row u-flex-wrap u-w-100 u-flex-justify-between u-flex-items-center u-mb-1"
-      style={{ gap: 8 }}
-    >
-      <Icon icon={startIcon} size={24} style={{ opacity: 0.6 }} />
-
-      {visibleModes.map(mode => {
-        const warningColor = mode.selected ? 'var(--warningColor)' : undefined
-        return (
-          <Chip
-            icon={<Icon icon={mode.icon} style={{ marginLeft: 12 }} />}
-            label={mode.label}
-            clickable
-            onDelete={mode.external && (() => {})}
-            deleteIcon={
-              mode.external && (
-                <Icon
-                  icon="openwith"
-                  className="u-h-1"
-                  style={{ fill: warningColor, color: warningColor }}
-                />
-              )
-            }
-            color={mode.external && mode.selected ? 'warning' : undefined}
-            key={mode.label}
-            variant={mode.selected ? 'ghost' : 'default'}
-            style={{
-              borderStyle: 'solid'
-            }}
-            className="u-mr-0"
-            onClick={() => {
-              onModeSelect(mode.key)
-            }}
-          />
-        )
-      })}
-
-      {remainingCount > 0 && (
-        <Chip
-          label={`+${remainingCount} ${moreEndLabel || 'more'}`}
-          clickable
-          variant="outlined"
-        />
-      )}
     </div>
   )
 }
