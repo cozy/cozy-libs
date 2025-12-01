@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 
+import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import PaperplaneIcon from 'cozy-ui/transpiled/react/Icons/Paperplane'
@@ -79,7 +80,7 @@ const ConversationBar = ({ assistantStatus, hasConversationStarted }) => {
               className: styles['conversationBar-input']
             },
             autoFocus: !isMobile,
-            startAdornment: (
+            startAdornment: flag('cozy.assistant.demo') && (
               <Button
                 classes={{ label: 'u-w-2 u-h-2' }}
                 label={<Icon icon="plus" size={14} />}
@@ -136,11 +137,13 @@ const ConversationBar = ({ assistantStatus, hasConversationStarted }) => {
         onChange={handleChange}
       />
 
-      <div
-        className={`${styles['conversationBarSibling']} u-flex u-flex-column u-flex-items-center u-flex-justify-start`}
-      >
-        <ChatModes />
-      </div>
+      {flag('cozy.assistant.demo') && (
+        <div
+          className={`${styles['conversationBarSibling']} u-flex u-flex-column u-flex-items-center u-flex-justify-start`}
+        >
+          <ChatModes />
+        </div>
+      )}
     </div>
   )
 }

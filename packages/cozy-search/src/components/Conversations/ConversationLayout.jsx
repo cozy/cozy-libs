@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import { useQuery } from 'cozy-client'
+import flag from 'cozy-flags'
 import AppTitle from 'cozy-ui/transpiled/react/AppTitle'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -51,12 +52,14 @@ const ConversationLayout = ({ conversationId, assistantState }) => {
             style={{ padding: 0, minWidth: 36, height: 30 }}
           />
 
-          <Button
-            label={<Icon icon="magnifier" />}
-            variant="text"
-            className="u-bdrs-4"
-            style={{ padding: 0, minWidth: 36, height: 30 }}
-          />
+          {flag('cozy.assistant.demo') && (
+            <Button
+              label={<Icon icon="magnifier" />}
+              variant="text"
+              className="u-bdrs-4"
+              style={{ padding: 0, minWidth: 36, height: 30 }}
+            />
+          )}
         </div>
 
         <div
