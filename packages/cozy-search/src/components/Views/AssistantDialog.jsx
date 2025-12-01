@@ -6,8 +6,6 @@ import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
 
 import AssistantProvider, { useAssistant } from '../AssistantProvider'
-import Conversation from '../Conversations/Conversation'
-import ConversationBar from '../Conversations/ConversationBar'
 import ConversationLayout from '../Conversations/ConversationLayout'
 
 const AssistantDialog = () => {
@@ -44,7 +42,12 @@ const AssistantDialog = () => {
       }}
       disableGutters
       title={isMobile ? ' ' : ' '}
-      content={<ConversationLayout conversationId={conversationId} assistantState={assistantState} />}
+      content={
+        <ConversationLayout
+          conversationId={conversationId}
+          assistantState={assistantState}
+        />
+      }
       onClose={onClose}
     />
   )

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
@@ -6,19 +6,14 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import PaperplaneIcon from 'cozy-ui/transpiled/react/Icons/Paperplane'
 import StopIcon from 'cozy-ui/transpiled/react/Icons/Stop'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
-import Chip from 'cozy-ui/transpiled/react/Chips'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
+import ChatModes from './ConversationChips'
 import styles from './styles.styl'
 import { useAssistant } from '../AssistantProvider'
-import Typography from 'cozy-ui/transpiled/react/Typography'
-import { TwakeAssistantIcon } from '../AssistantIcon/TwakeAssistantIcon'
-import { TwakeAssistantIconColor } from '../AssistantIcon/TwakeAssistantIconColor'
-import { ExpertIcon } from '../AssistantIcon/ExpertIcon'
-import { KnowledgeBaseIcon } from '../AssistantIcon/KnowledgeBaseIcon'
-import ChatModes from './ConversationChips'
 
 const ConversationBar = ({ assistantStatus, hasConversationStarted }) => {
   const { t } = useI18n()
@@ -55,7 +50,13 @@ const ConversationBar = ({ assistantStatus, hasConversationStarted }) => {
 
   return (
     <div className="u-w-100 u-maw-7 u-mh-auto">
-      <div className={`${styles['conversationBarSibling']} ${hasConversationStarted ? styles['conversationBarSibling--started'] : ''} u-flex u-flex-column u-flex-items-center u-flex-justify-end`}>
+      <div
+        className={`${styles['conversationBarSibling']} ${
+          hasConversationStarted
+            ? styles['conversationBarSibling--started']
+            : ''
+        } u-flex u-flex-column u-flex-items-center u-flex-justify-end`}
+      >
         <Typography variant="h3" align="center" className="u-mb-2">
           {t('assistant.conversationBar.startMessage')}
         </Typography>
@@ -81,7 +82,7 @@ const ConversationBar = ({ assistantStatus, hasConversationStarted }) => {
             startAdornment: (
               <Button
                 classes={{ label: 'u-w-2 u-h-2' }}
-                label={<Icon icon={"plus"} size={14} />}
+                label={<Icon icon="plus" size={14} />}
                 variant="text"
                 color="inherit"
                 style={{ marginRight: 2, marginLeft: -12 }}
@@ -95,7 +96,7 @@ const ConversationBar = ({ assistantStatus, hasConversationStarted }) => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   gap: 4,
-                  flex: "none"
+                  flex: 'none'
                 }}
               >
                 {assistantStatus !== 'idle' ? (
@@ -135,7 +136,9 @@ const ConversationBar = ({ assistantStatus, hasConversationStarted }) => {
         onChange={handleChange}
       />
 
-      <div className={`${styles['conversationBarSibling']} u-flex u-flex-column u-flex-items-center u-flex-justify-start`}>
+      <div
+        className={`${styles['conversationBarSibling']} u-flex u-flex-column u-flex-items-center u-flex-justify-start`}
+      >
         <ChatModes />
       </div>
     </div>
