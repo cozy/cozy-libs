@@ -461,9 +461,12 @@
       "add": "Ajouter",
       "cancel": "Annuler",
       "create": "Créer",
+      "save": "Enregistrer",
       "addPeople": "Ajouter des utilisateurs au drive partagé :",
       "successNotification": "Le drive partagé a été ajouté",
-      "errorNotification": "Erreur lors de la création du drive partagé"
+      "errorNotification": "Erreur lors de la création du drive partagé",
+      "successNotificationUpdate": "Votre drive partagé a été modifié",
+      "errorNotificationUpdate": "Erreur lors de la modification du drive partagé"
     }
   }
 }
