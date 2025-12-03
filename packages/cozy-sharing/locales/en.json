@@ -463,9 +463,13 @@
       "add": "Add",
       "cancel": "Cancel",
       "create": "Create",
+      "save": "Save",
       "addPeople": "Add people to the shared drive :",
       "successNotification": "Shared drive has been added",
-      "errorNotification": "Error during shared drive creation"
+      "errorNotification": "Error during shared drive creation",
+      "successNotificationUpdate": "Your shared drive has been modified",
+      "errorNotificationUpdate": "Error durring shared drive modification"
     }
   }
 }
+

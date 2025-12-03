@@ -461,9 +461,12 @@
       "add": "Thêm",
       "cancel": "Hủy",
       "create": "Tạo",
+      "save": "Lưu",
       "addPeople": "Thêm người vào ổ đĩa được chia sẻ:",
       "successNotification": "Ổ đĩa được chia sẻ đã được thêm",
-      "errorNotification": "Lỗi trong quá trình tạo ổ đĩa được chia sẻ"
+      "errorNotification": "Lỗi trong quá trình tạo ổ đĩa được chia sẻ",
+      "successNotificationUpdate": "Ổ đĩa được chia sẻ của bạn đã được sửa đổi",
+      "errorNotificationUpdate": "Lỗi khi sửa đổi ổ đĩa được chia sẻ"
     }
   }
 }

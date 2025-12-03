@@ -463,9 +463,12 @@
       "add": "Добавить",
       "cancel": "Отмена",
       "create": "Создать",
+      "save": "Сохранить",
       "addPeople": "Добавить людей в общий диск:",
       "successNotification": "Общий диск добавлен",
-      "errorNotification": "Ошибка при создании общего диска"
+      "errorNotification": "Ошибка при создании общего диска",
+      "successNotificationUpdate": "Ваш общий диск был изменён",
+      "errorNotificationUpdate": "Ошибка при модификации общего диска"
     }
   }
 }
