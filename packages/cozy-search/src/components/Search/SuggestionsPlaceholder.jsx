@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { TypeAnimation } from 'react-type-animation'
 import { useTimeoutWhen } from 'rooks'
+import { useI18n } from 'twake-i18n'
 
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import styles from './styles.styl'
 

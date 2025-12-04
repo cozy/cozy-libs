@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types'
 import React, { useReducer, useRef } from 'react'
+import { useI18n } from 'twake-i18n'
 
+import { useClient } from 'cozy-client'
 import { isDirectory as isDir } from 'cozy-client/dist/models/file'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
@@ -12,7 +14,6 @@ import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { useSharingContext } from '../../hooks/useSharingContext'
 import { editPermissionLink } from '../Recipient/actions/editPermissionLink'
@@ -26,10 +27,12 @@ export const BoxEditingRights = ({ file, editingRights, setEditingRights }) => {
   const buttonRef = useRef()
   const { t } = useI18n()
   const { documentType } = useSharingContext()
+  const client = useClient()
 
   const isDirectory = isDir(file)
 
   const actions = makeActions([readOnlyPermissionLink, editPermissionLink], {
+    client,
     t,
     editingRights,
     setEditingRights,

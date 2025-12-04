@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { Field, useForm } from 'react-final-form'
+import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import { useI18n, useExtendI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { makeFormattedAddressWithSubFields } from './helpers'
 import { locales } from './locales'

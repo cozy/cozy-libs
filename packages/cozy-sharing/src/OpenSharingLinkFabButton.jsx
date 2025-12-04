@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useI18n } from 'twake-i18n'
 
 import { ExtendableFab } from 'cozy-ui/transpiled/react/Fab'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { getIconWithlabel, openExternalLink } from './helpers/sharings'
 import withLocales from './hoc/withLocales'

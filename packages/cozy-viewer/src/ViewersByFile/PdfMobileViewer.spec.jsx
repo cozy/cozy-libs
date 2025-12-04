@@ -1,10 +1,10 @@
 import { render, waitFor } from '@testing-library/react'
 import React from 'react'
+import I18n from 'twake-i18n'
 
 import { CozyProvider, createMockClient } from 'cozy-client'
 import logger from 'cozy-logger'
 import EncryptedProvider from 'cozy-ui/transpiled/react/providers/Encrypted'
-import { I18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { PdfMobileViewer } from './PdfMobileViewer'
 

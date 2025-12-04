@@ -1,6 +1,5 @@
 import React from 'react'
-
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
+import { useI18n } from 'twake-i18n'
 
 import { ErrorAlert } from './ErrorAlert'
 import { MaintenanceAlert } from './MaintenanceAlert'

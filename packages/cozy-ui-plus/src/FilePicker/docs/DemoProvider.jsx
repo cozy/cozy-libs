@@ -1,10 +1,10 @@
 import React from 'react'
+import { I18nContext } from 'twake-i18n'
 
 import CozyClient, { CozyProvider } from 'cozy-client'
 import { initQuery, receiveQueryResult } from 'cozy-client/dist/store'
 import { normalizeDoc } from 'cozy-stack-client'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import { I18nContext } from 'cozy-ui/transpiled/react/providers/I18n'
 
 /**
  * @typedef {object} CreateMockClientForDocParam

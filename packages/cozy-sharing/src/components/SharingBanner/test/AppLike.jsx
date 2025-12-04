@@ -1,10 +1,10 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
+import { I18n } from 'twake-i18n'
 
 import { CozyProvider } from 'cozy-client'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import { I18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { AcceptingSharingProvider } from './AcceptingSharingContext'
 import FabProvider from './FabProvider'

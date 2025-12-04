@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { translate } from 'twake-i18n'
 
 import DialogTitle from 'cozy-ui/transpiled/react/Dialog/DialogTitle'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import AccountsList from './AccountsList/AccountsList'
 import KonnectorIcon from './KonnectorIcon'

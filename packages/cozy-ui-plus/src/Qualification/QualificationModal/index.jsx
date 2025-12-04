@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
+import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import { isSupportedQualification } from 'cozy-client/dist/models/document/qualification'
 import NestedSelectResponsive from 'cozy-ui/transpiled/react/NestedSelect/NestedSelectResponsive'
-import { useI18n, useExtendI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { makeOptions, makeSearchOptions } from './helpers'
 import { locales } from './locales'

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useEffect } from 'react'
+import { useI18n } from 'twake-i18n'
 
 import { useVaultUnlockContext, VaultUnlockPlaceholder } from 'cozy-keys-lib'
 import {
@@ -9,7 +10,6 @@ import {
 import Dialog from 'cozy-ui/transpiled/react/Dialog'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { DatacardOptions } from './Datacards/DatacardOptionsContext'
 import DialogContext from './DialogContext'

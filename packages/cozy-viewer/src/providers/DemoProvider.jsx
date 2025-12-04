@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react'
+import I18n from 'twake-i18n'
 
 import { CozyProvider } from 'cozy-client'
 import CloudWallpaper from 'cozy-ui/docs/cloud-wallpaper.jpg'
 import AlertProvider from 'cozy-ui/transpiled/react/providers/Alert'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import I18n from 'cozy-ui/transpiled/react/providers/I18n'
 
 import ViewerProvider from './ViewerProvider'
 import { locales } from '../locales/index'

@@ -1,10 +1,10 @@
 import cx from 'classnames'
 import React from 'react'
+import { useI18n } from 'twake-i18n'
 
 import List from 'cozy-ui/transpiled/react/List'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import MemberRecipient from './Recipient/MemberRecipient'
 import ShareDialogTwoStepsConfirmationContainer from './ShareDialogTwoStepsConfirmationContainer'

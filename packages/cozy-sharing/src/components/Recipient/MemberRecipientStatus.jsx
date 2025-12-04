@@ -1,11 +1,11 @@
 import React from 'react'
+import { useI18n } from 'twake-i18n'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import EyeIcon from 'cozy-ui/transpiled/react/Icons/Eye'
 import PaperplaneIcon from 'cozy-ui/transpiled/react/Icons/Paperplane'
 import ToTheCloudIcon from 'cozy-ui/transpiled/react/Icons/ToTheCloud'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 const MemberRecipientStatus = ({ status, isMe, instance, typographyProps }) => {
   const { t } = useI18n()

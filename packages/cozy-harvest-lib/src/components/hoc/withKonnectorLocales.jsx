@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-
-import { extend } from 'cozy-ui/transpiled/react/providers/I18n'
+import { extend } from 'twake-i18n'
 
 import { getDisplayName } from './utils'
 

@@ -2,13 +2,13 @@
 import compose from 'lodash/flowRight'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useI18n } from 'twake-i18n'
 
 import CozyClient, { Q, queryConnect, RealTimeQueries } from 'cozy-client'
 import NavigationList, {
   NavigationListSection,
   NavigationListHeader
 } from 'cozy-ui/transpiled/react/NavigationList'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
 
 import BIContractActivationWindow from './BiContractActivationWindow'

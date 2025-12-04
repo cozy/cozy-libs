@@ -1,7 +1,7 @@
 import React from 'react'
+import { translate } from 'twake-i18n'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 /**
  * onClick is not called when we are on mobile device.

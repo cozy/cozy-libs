@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
+import { useI18n } from 'twake-i18n'
 
 import Alert from 'cozy-ui/transpiled/react/Alert'
 import Snackbar from 'cozy-ui/transpiled/react/Snackbar'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import ExpandedAttribute from './ExpandedAttribute'
 import { makeAttrsLabelAndFormattedValue } from './helpers'

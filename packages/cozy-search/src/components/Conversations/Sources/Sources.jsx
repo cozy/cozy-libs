@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { useI18n } from 'twake-i18n'
 
 import { useQuery, isQueryLoading } from 'cozy-client'
 import Box from 'cozy-ui/transpiled/react/Box'
@@ -7,7 +8,6 @@ import Grow from 'cozy-ui/transpiled/react/Grow'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import MultiFilesIcon from 'cozy-ui/transpiled/react/Icons/MultiFiles'
 import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import SourcesItem from './SourcesItem'
 import { buildFilesByIds } from '../../queries'

@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useI18n } from 'twake-i18n'
 
 import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 const RedirectToAccountFormButton = ({ trigger }) => {
   const { t } = useI18n()

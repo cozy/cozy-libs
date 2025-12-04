@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { createPortal } from 'react-dom'
+import { useI18n } from 'twake-i18n'
 
 import { useWebviewIntent } from 'cozy-intent'
 import Backdrop from 'cozy-ui/transpiled/react/Backdrop'
 import LinearProgress from 'cozy-ui/transpiled/react/LinearProgress'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 const useStyles = makeStyles({

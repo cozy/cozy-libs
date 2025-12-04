@@ -1,6 +1,7 @@
 import { format } from 'date-fns'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useI18n } from 'twake-i18n'
 
 import Box from 'cozy-ui/transpiled/react/Box'
 import DatePicker from 'cozy-ui/transpiled/react/DatePicker'
@@ -12,7 +13,6 @@ import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Switch from 'cozy-ui/transpiled/react/Switch'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 export const BoxDate = ({ onChange, date, toggle, onToggle }) => {
   const { t, lang } = useI18n()

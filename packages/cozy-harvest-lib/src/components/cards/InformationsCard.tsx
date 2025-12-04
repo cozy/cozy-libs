@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import cx from 'classnames'
 import React from 'react'
+import { useI18n } from 'twake-i18n'
 
 import { useClient, generateWebLink } from 'cozy-client'
 import Card from 'cozy-ui/transpiled/react/Card'
@@ -14,7 +15,6 @@ import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { getErrorMessage } from '../../helpers/getErrorMessage'
 import logger from '../../logger'

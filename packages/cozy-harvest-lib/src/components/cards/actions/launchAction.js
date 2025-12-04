@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react'
+import { useI18n } from 'twake-i18n'
 
 import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
@@ -6,7 +7,6 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { findKonnectorPolicy } from '../../../konnector-policies'
 import OpenOAuthWindowButton from '../../AccountModalWithoutTabs/OpenOAuthWindowButton'

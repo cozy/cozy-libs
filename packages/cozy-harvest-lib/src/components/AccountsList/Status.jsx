@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { translate } from 'twake-i18n'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import CheckIcon from 'cozy-ui/transpiled/react/Icons/Check'
 import WarningIcon from 'cozy-ui/transpiled/react/Icons/Warning'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { getErrorLocale } from '../../helpers/konnectors'
 import FlowProvider from '../FlowProvider'

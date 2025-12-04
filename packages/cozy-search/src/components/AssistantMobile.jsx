@@ -2,11 +2,11 @@ import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import useExtendI18n from 'twake-i18n'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import MagnifierIcon from 'cozy-ui/transpiled/react/Icons/Magnifier'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
-import useExtendI18n from 'cozy-ui/transpiled/react/providers/I18n/useExtendI18n'
 
 import { locales } from '../locales'
 import styles from './Search/styles.styl'

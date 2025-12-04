@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Fragment, useState } from 'react'
+import { useI18n } from 'twake-i18n'
 
 import Grid from 'cozy-ui/transpiled/react/Grid'
 import BankIcon from 'cozy-ui/transpiled/react/Icons/Bank'
@@ -12,7 +13,6 @@ import HomeIcon from 'cozy-ui/transpiled/react/Icons/Home'
 import PeopleIcon from 'cozy-ui/transpiled/react/Icons/People'
 import TeamIcon from 'cozy-ui/transpiled/react/Icons/Team'
 import WorkIcon from 'cozy-ui/transpiled/react/Icons/Work'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { getThemesList } from './helpers'
 import QualificationItem from '../QualificationItem'

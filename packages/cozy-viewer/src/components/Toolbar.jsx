@@ -1,6 +1,7 @@
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import { downloadFile } from 'cozy-client/dist/models/file'
@@ -21,7 +22,6 @@ import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import { useEncrypted } from 'cozy-ui/transpiled/react/providers/Encrypted'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { ToolbarFilePath } from './ToolbarFilePath'
 import styles from './styles.styl'

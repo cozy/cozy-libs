@@ -1,7 +1,7 @@
 import get from 'lodash/get'
+import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
-import { useI18n, useExtendI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { useSelectedGroup } from './GroupsSelectProvider'
 import { isExistingGroup } from './helpers'

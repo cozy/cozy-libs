@@ -1,10 +1,10 @@
 import arrayMutators from 'final-form-arrays'
 import React, { useState } from 'react'
 import { Form } from 'react-final-form'
+import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { getHasManyItems } from 'cozy-client/dist/associations/HasMany'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import { useI18n, useExtendI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import FieldInputLayout from './FieldInputLayout'
 import contactToFormValues from './contactToFormValues'

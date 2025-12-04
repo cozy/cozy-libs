@@ -5,7 +5,7 @@ import 'cozy-ui/dist/cozy-ui.utils.min.css'
 import 'cozy-ui/transpiled/react/stylesheet.css'
 import '../dist/stylesheet.css'
 
-import I18n from 'cozy-ui/transpiled/react/providers/I18n'
+import I18n from "twake-i18n"
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
 import { CozyProvider, createFakeClient } from 'cozy-client'

@@ -1,5 +1,6 @@
 import cx from 'classnames'
 import React from 'react'
+import { translate } from 'twake-i18n'
 
 import { splitFilename } from 'cozy-client/dist/models/file'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -8,7 +9,6 @@ import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { Img } from 'cozy-ui/transpiled/react/deprecated/Media'
-import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import FileUploadProgress from './FileUploadProgress'
 import Pending from './Pending'

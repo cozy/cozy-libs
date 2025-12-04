@@ -1,6 +1,7 @@
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { createRef, useState, useEffect } from 'react'
+import { useExtendI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import { isDocumentReadOnly } from 'cozy-client/dist/models/permission'
@@ -10,7 +11,6 @@ import Dialog from 'cozy-ui/transpiled/react/Dialog'
 import AlertProvider from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import EncryptedProvider from 'cozy-ui/transpiled/react/providers/Encrypted'
-import { useExtendI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { FileDoctype } from 'cozy-ui-plus/dist/proptypes'
 
 import Viewer from './Viewer'

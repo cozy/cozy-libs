@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useState, forwardRef } from 'react'
+import { useI18n } from 'twake-i18n'
 
 import {
   useClient,
@@ -25,7 +26,6 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 import { withStyles } from 'cozy-ui/transpiled/react/styles'
 import CollectionField from 'cozy-ui-plus/dist/CollectionField'
 import BaseContactPicker from 'cozy-ui-plus/dist/ContactPicker'

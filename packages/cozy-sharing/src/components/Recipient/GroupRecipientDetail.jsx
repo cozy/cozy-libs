@@ -1,11 +1,11 @@
 import React from 'react'
+import { useI18n } from 'twake-i18n'
 
 import { useClient, generateWebLink } from 'cozy-client'
 import Buttons from 'cozy-ui/transpiled/react/Buttons'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Empty from 'cozy-ui/transpiled/react/Empty'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { GroupRecipientDetailWithAccess } from './GroupRecipientDetailWithAccess'
 import { GroupRecipientDetailWithoutAccess } from './GroupRecipientDetailWithoutAccess'

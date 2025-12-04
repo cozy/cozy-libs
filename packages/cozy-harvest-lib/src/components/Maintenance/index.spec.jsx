@@ -2,8 +2,7 @@ import KonnectorMaintenance from 'components/Maintenance'
 import { mount } from 'enzyme'
 import enLocale from 'locales/en.json'
 import React from 'react'
-
-import I18n from 'cozy-ui/transpiled/react/providers/I18n'
+import I18n from 'twake-i18n'
 
 describe('KonnectorMaintenance', () => {
   it('should match the snapshot', () => {

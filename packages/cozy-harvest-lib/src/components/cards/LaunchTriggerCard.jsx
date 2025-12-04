@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { translate } from 'twake-i18n'
 
 import Card from 'cozy-ui/transpiled/react/Card'
-import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import LaunchTriggerAlert from './LaunchTriggerAlert'
 import { intentsApiProptype } from '../../helpers/proptypes'

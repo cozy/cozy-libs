@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { forwardRef } from 'react'
+import { useI18n } from 'twake-i18n'
 
 import {
   isExpired,
@@ -18,7 +19,6 @@ import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import QualificationListItemText from './QualificationListItemText'
 import ExpirationAnnotation from '../../components/ExpirationAnnotation'

@@ -1,9 +1,9 @@
 import React from 'react'
+import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Infos from 'cozy-ui/transpiled/react/deprecated/Infos'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { loadSelectedAccountId } from '../../helpers/accounts'
 import withLocales from '../hoc/withLocales'

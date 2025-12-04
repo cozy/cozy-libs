@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { getInitials } from 'cozy-client/dist/models/contact'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import { TableCell } from 'cozy-ui/transpiled/react/deprecated/Table'
-import { useI18n, useExtendI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import ContactName from './ContactName'
 import { locales } from '../locales/withContactsListLocales'

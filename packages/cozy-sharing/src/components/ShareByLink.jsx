@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useReducer } from 'react'
+import { useI18n } from 'twake-i18n'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -7,7 +8,6 @@ import CopyIcon from 'cozy-ui/transpiled/react/Icons/Copy'
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { ShareRestrictionModal } from './ShareRestrictionModal/ShareRestrictionModal'
 import { copyToClipboard } from './ShareRestrictionModal/helpers'

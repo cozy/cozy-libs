@@ -1,8 +1,8 @@
 import React from 'react'
+import { useI18n } from 'twake-i18n'
 
 import { getDisplayName } from 'cozy-client/dist/models/contact'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import EmptyMessage from './EmptyMessage'
 import { withContactsListLocales } from './withContactsListLocales'

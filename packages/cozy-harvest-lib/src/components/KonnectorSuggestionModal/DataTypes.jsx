@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { translate } from 'twake-i18n'
 
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import CompositeRow from 'cozy-ui/transpiled/react/deprecated/CompositeRow'
-import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import activityIcon from '../../assets/datatypes/icon-activity.svg'
 import appointmentIcon from '../../assets/datatypes/icon-appointment.svg'

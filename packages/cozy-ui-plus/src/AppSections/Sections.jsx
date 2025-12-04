@@ -1,11 +1,10 @@
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+import { useI18n, useExtendI18n, withOnlyLocales } from 'twake-i18n'
 
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import { useI18n, useExtendI18n } from 'cozy-ui/transpiled/react/providers/I18n'
-import withOnlyLocales from 'cozy-ui/transpiled/react/providers/I18n/withOnlyLocales'
 
 import styles from './Sections.styl'
 import * as catUtils from './categories'

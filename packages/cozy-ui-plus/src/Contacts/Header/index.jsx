@@ -1,12 +1,12 @@
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import PersonAddIcon from 'cozy-ui/transpiled/react/Icons/PersonAdd'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import { useI18n, useExtendI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import GroupsSelection from './GroupsSelection'
 import ImportDropdown from './ImportDropdown'

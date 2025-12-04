@@ -1,11 +1,11 @@
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+import { translate } from 'twake-i18n'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import BanksLink from './KonnectorConfiguration/Success/BanksLink'
 import DriveLink from './KonnectorConfiguration/Success/DriveLink'
