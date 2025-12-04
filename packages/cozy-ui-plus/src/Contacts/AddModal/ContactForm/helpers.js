@@ -372,6 +372,7 @@ export const makeInitialCustomValue = (name, value) => {
 }
 
 /**
+ * Merge custom fields and default fields
  * @param {(import('../types').Field)[]|undefined} customFields
  * @param {(import('../types').Field)[]} defaultFields
  * @returns {(import('../types').Field)[]}
