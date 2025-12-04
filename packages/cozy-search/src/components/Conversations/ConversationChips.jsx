@@ -7,15 +7,13 @@ import Chip from 'cozy-ui/transpiled/react/Chips'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-import { ExpertIcon } from '../AssistantIcon/ExpertIcon'
-import { KnowledgeBaseIcon } from '../AssistantIcon/KnowledgeBaseIcon'
 import { TwakeAssistantIconColor } from '../AssistantIcon/TwakeAssistantIconColor'
 
 const ChatChips = ({
   modes,
   onModeSelect,
   splice = 3,
-  startIcon = ExpertIcon,
+  startIcon = 'expert',
   moreEndLabel
 }) => {
   const visibleModes = modes.slice(0, splice)
@@ -89,7 +87,7 @@ const ChatExperts = ({ experts, selectedExpert, setSelectedExpert }) => {
         setSelectedExpert(key === selectedExpert ? null : key)
       }}
       splice={4}
-      startIcon={ExpertIcon}
+      startIcon="expert"
       moreEndLabel={t('assistant.conversationBar.more.experts')}
     />
   )
@@ -122,7 +120,7 @@ const ChatKnowledges = ({
         }
       }}
       splice={4}
-      startIcon={KnowledgeBaseIcon}
+      startIcon="database"
       moreEndLabel={t('assistant.conversationBar.more.knowledge_bases')}
     />
   )
