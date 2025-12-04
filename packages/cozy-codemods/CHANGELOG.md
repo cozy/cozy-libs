@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.33.0](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.32.0...@cozy/codemods@1.33.0) (2025-12-04)
+
+### Features
+
+- **codemods:** Provides cozy-ui v135 BC helper ([7966de0](https://github.com/cozy/cozy-libs/commit/7966de09b80d60a34d3e2bbc3f047d1a26e07c3d))
+
 # [1.32.0](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.31.3...@cozy/codemods@1.32.0) (2025-11-06)
 
 ### Features
