@@ -1,11 +1,11 @@
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { translate } from 'twake-i18n'
 
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
-import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import MaintenanceIcon from './MaintenanceIcon'
 

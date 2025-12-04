@@ -1,5 +1,6 @@
 import compose from 'lodash/flowRight'
 import React from 'react'
+import { translate } from 'twake-i18n'
 
 import { withClient } from 'cozy-client'
 import {
@@ -7,7 +8,6 @@ import {
   withVaultUnlockContext,
   VaultUnlockPlaceholder
 } from 'cozy-keys-lib'
-import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { DumbTriggerManager } from './DumbTriggerManager'
 import FlowProvider from './FlowProvider'

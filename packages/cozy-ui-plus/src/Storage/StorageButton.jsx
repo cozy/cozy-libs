@@ -1,12 +1,12 @@
 import cx from 'classnames'
 import React from 'react'
+import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { useInstanceInfo } from 'cozy-client'
 import { buildPremiumLink } from 'cozy-client/dist/models/instance'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import TwakeWorkplaceIcon from 'cozy-ui/transpiled/react/Icons/TwakeWorkplace'
-import { useI18n, useExtendI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { locales } from './locales'
 

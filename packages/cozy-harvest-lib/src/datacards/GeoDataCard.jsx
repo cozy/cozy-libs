@@ -6,6 +6,7 @@ import sortBy from 'lodash/sortBy'
 import PropTypes from 'prop-types'
 import React, { useEffect, useRef, useMemo, memo } from 'react'
 import SwipeableViews from 'react-swipeable-views'
+import { useI18n } from 'twake-i18n'
 
 import CozyClient, {
   Q,
@@ -28,7 +29,6 @@ import Skeleton from 'cozy-ui/transpiled/react/Skeleton'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { Media, Bd, Img } from 'cozy-ui/transpiled/react/deprecated/Media'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import {
   transformTimeSeriesToTrips,

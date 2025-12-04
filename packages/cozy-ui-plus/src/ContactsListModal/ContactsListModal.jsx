@@ -1,6 +1,7 @@
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
+import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
@@ -16,7 +17,6 @@ import TextField from 'cozy-ui/transpiled/react/TextField'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 import useRealtime from 'cozy-ui/transpiled/react/hooks/useRealtime'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import AddContactDialog from './AddContact/AddContactDialog'
 import ContactsListContent from './ContactsListContent'

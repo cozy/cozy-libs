@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react'
+import { useI18n } from 'twake-i18n'
 
+import { useClient } from 'cozy-client'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import {
   makeActions,
@@ -10,7 +12,6 @@ import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { permission } from './actions/permission'
 import { revokeGroup as revokeGroupAction } from './actions/revokeGroup'
@@ -29,6 +30,7 @@ const GroupRecipientPermissions = ({
 }) => {
   const { t } = useI18n()
   const buttonRef = useRef()
+  const client = useClient()
   const { revokeGroup, revokeSelf } = useSharingContext()
 
   const [isMenuDisplayed, setMenuDisplayed] = useState(false)
@@ -52,6 +54,7 @@ const GroupRecipientPermissions = ({
   const type = isReadOnly ? 'one-way' : 'two-way'
 
   const actions = makeActions([permission, divider, revokeGroupAction], {
+    client,
     t,
     type,
     isOwner,

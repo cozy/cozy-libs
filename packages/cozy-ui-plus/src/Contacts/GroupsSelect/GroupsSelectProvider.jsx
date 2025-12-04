@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react'
-
-import { useI18n, useExtendI18n } from 'cozy-ui/transpiled/react/providers/I18n'
+import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { translatedDefaultSelectedGroup } from './helpers'
 import { locales } from './locales'

@@ -1,10 +1,10 @@
 import { addDays, isValid } from 'date-fns'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useI18n } from 'twake-i18n'
 
 import Box from 'cozy-ui/transpiled/react/Box'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { BoxDate } from './BoxDate'
 import { BoxEditingRights } from './BoxEditingRights'

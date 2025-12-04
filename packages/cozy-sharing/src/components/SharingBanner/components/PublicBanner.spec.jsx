@@ -1,12 +1,12 @@
 import { render } from '@testing-library/react'
 import React from 'react'
+import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { SharingBannerCozyToCozy } from './PublicBanner'
 
-jest.mock('cozy-ui/transpiled/react/providers/I18n')
+jest.mock('twake-i18n')
 jest.mock('cozy-client')
 
 describe('PublicBanner', () => {

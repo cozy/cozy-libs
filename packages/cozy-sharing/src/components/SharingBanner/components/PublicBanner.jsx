@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import snarkdown from 'snarkdown'
+import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
 import Banner from 'cozy-ui/transpiled/react/Banner'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import CozyHomeLinkIcon from './CozyHomeLinkIcon'
 import styles from '../../../styles/publicBanner.styl'

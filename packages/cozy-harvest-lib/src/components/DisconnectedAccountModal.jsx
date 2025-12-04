@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useRef, useState } from 'react'
+import { useI18n } from 'twake-i18n'
 
 import { getCreatedByApp } from 'cozy-client/dist/models/utils'
 import Card from 'cozy-ui/transpiled/react/Card'
@@ -12,7 +13,6 @@ import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import { Tab, Tabs } from 'cozy-ui/transpiled/react/MuiTabs'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { Contracts } from './KonnectorConfiguration/ConfigurationTab/Contracts'
 import { getAccountInstitutionLabel } from './KonnectorConfiguration/ConfigurationTab/bankAccountHelpers'

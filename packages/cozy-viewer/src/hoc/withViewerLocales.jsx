@@ -1,4 +1,4 @@
-import withLocales from 'cozy-ui/transpiled/react/providers/I18n/withLocales'
+import { withLocales } from 'twake-i18n'
 
 import { locales } from '../locales'
 

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
+import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
-import { useI18n, useExtendI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import ContactForm, { getSubmitContactForm } from './ContactForm'
 import { locales } from './locales'

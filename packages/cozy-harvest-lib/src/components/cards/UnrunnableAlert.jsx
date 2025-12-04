@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useI18n } from 'twake-i18n'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import InfoIcon from 'cozy-ui/transpiled/react/Icons/Info'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { TriggerAlertTemplate } from './TriggerAlertTemplate'
 

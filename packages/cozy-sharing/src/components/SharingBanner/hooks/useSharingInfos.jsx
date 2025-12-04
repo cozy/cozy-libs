@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 
 import { useClient, models } from 'cozy-client'
+import flag from 'cozy-flags'
 
 import logger from '../../../logger'
 import { buildSharingsByIdQuery } from '../../../queries/queries'
 import getQueryParameter from '../helpers/QueryParameter'
-import flag from 'cozy-flags'
 
 const getSharingId = permission => {
   const sourceId = permission.data.attributes.source_id

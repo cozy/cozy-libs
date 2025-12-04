@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useI18n } from 'twake-i18n'
 
 import {
   computeExpirationDate,
@@ -8,7 +9,6 @@ import {
   makeExpiresInMessage
 } from 'cozy-client/dist/models/paper'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import withListItemLocales from '../hoc/withListItemLocales'
 

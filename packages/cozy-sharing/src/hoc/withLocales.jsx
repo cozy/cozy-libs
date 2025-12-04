@@ -1,7 +1,6 @@
 import React from 'react'
-
-import { I18n, translate } from 'cozy-ui/transpiled/react/providers/I18n'
-import { getI18n } from 'cozy-ui/transpiled/react/providers/I18n/helpers'
+import { I18n, translate } from 'twake-i18n'
+import { getI18n } from 'twake-i18n'
 
 const locales = {
   en: require(`../../locales/en.json`),

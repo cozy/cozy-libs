@@ -13,7 +13,7 @@ jest.mock('cozy-device-helper', () => ({
 
 jest.mock('cozy-flags')
 
-jest.mock('cozy-ui/transpiled/react/providers/I18n', () => ({
+jest.mock('twake-i18n', () => ({
   useI18n: jest.fn(() => ({ t: key => key, lang: 'en' }))
 }))
 

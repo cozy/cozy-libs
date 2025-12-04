@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
+import { useI18n } from 'twake-i18n'
 
 import { useInstanceInfo } from 'cozy-client'
 import { buildPremiumLink } from 'cozy-client/dist/models/instance'
@@ -12,7 +13,6 @@ import CozyUpgradeIcon from 'cozy-ui/transpiled/react/Icons/CozyUpgrade'
 import Markdown from 'cozy-ui/transpiled/react/Markdown'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { makeType } from './helpers'
 import withPaywallLocales from './locales/withPaywallLocales'

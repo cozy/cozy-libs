@@ -1,7 +1,7 @@
 import React from 'react'
+import { useI18n } from 'twake-i18n'
 
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 const SharedDriveRecipientStatus = ({ members, email }) => {
   const { t } = useI18n()

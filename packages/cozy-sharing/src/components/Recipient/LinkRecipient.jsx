@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useI18n } from 'twake-i18n'
 
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import Fade from 'cozy-ui/transpiled/react/Fade'
@@ -10,7 +11,6 @@ import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import LinkRecipientPermissions from './LinkRecipientPermissions'
 import RecipientConfirm from './RecipientConfirm'

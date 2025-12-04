@@ -1,12 +1,13 @@
 import React, { useState, useRef } from 'react'
+import { useI18n } from 'twake-i18n'
 
+import { useClient } from 'cozy-client'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import {
   makeActions,
   divider
 } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { revokeSharedDriveMember } from '../Recipient/actions/revokeSharedDriveMember'
 import { setReadOnlySharedPermission } from '../Recipient/actions/setReadOnlySharedPermission'
@@ -20,6 +21,7 @@ const ShareDriveRecipientPermissions = ({
 }) => {
   const { t } = useI18n()
   const buttonRef = useRef()
+  const client = useClient()
   const [isMenuDisplayed, setMenuDisplayed] = useState(false)
 
   const toggleMenu = () => setMenuDisplayed(!isMenuDisplayed)
@@ -46,6 +48,7 @@ const ShareDriveRecipientPermissions = ({
     ],
     {
       t,
+      client,
       type,
       setType,
       handleRevocation

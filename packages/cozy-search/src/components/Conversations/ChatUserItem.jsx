@@ -1,8 +1,8 @@
 import React from 'react'
+import { useI18n } from 'twake-i18n'
 
 import { getDisplayName, getInitials } from 'cozy-client/dist/models/contact'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import ChatItem from './ChatItem'
 

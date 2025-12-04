@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useI18n } from 'twake-i18n'
 
 import Fade from 'cozy-ui/transpiled/react/Fade'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
@@ -7,7 +8,6 @@ import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import SharedDriveRecipientPermissions from './SharedDriveRecipientPermissions'
 import SharedDriveRecipientStatus from './SharedDriveRecipientStatus'

@@ -1,10 +1,10 @@
 // @ts-check on
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useI18n } from 'twake-i18n'
 
 import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { isDisconnected } from '../../helpers/konnectors'
 import { findKonnectorPolicy } from '../../konnector-policies'

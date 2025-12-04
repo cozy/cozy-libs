@@ -1,6 +1,7 @@
 import { addDays } from 'date-fns'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
+import { useI18n } from 'twake-i18n'
 
 import { generateWebLink, useClient } from 'cozy-client'
 import flag from 'cozy-flags'
@@ -9,7 +10,6 @@ import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { ShareRestrictionContentModal } from './ShareRestrictionContentModal'
 import {

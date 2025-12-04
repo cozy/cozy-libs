@@ -1,12 +1,11 @@
 import cx from 'classnames'
 import React, { Component } from 'react'
+import { formatLocallyDistanceToNow, withLocales } from 'twake-i18n'
 
 import LinearProgress from 'cozy-ui/transpiled/react/LinearProgress'
 import List from 'cozy-ui/transpiled/react/List'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import Button from 'cozy-ui/transpiled/react/deprecated/Button'
-import { formatLocallyDistanceToNow } from 'cozy-ui/transpiled/react/providers/I18n/format'
-import withLocales from 'cozy-ui/transpiled/react/providers/I18n/withLocales'
 import { withStyles } from 'cozy-ui/transpiled/react/styles'
 
 import Item from './Item'

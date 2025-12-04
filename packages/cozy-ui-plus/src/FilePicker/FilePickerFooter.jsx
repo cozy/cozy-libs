@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import React, { memo } from 'react'
+import { createUseI18n } from 'twake-i18n'
 
 import Button from 'cozy-ui/transpiled/react/deprecated/Button'
-import { createUseI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import en from './locales/en.json'
 import fr from './locales/fr.json'

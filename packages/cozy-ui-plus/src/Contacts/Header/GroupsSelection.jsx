@@ -1,8 +1,8 @@
 import React from 'react'
+import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { ControlDefault } from 'cozy-ui/transpiled/react/SelectBox'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import { useI18n, useExtendI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { locales } from './locales'
 import GroupsSelect from '../GroupsSelect/GroupsSelect'

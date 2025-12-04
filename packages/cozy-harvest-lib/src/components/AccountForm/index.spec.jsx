@@ -6,9 +6,9 @@ import enLocale from 'locales/en.json'
 import Polyglot from 'node-polyglot'
 import PropTypes from 'prop-types'
 import React from 'react'
+import I18n from 'twake-i18n'
 
 import { isMobile } from 'cozy-device-helper'
-import I18n from 'cozy-ui/transpiled/react/providers/I18n'
 
 const polyglot = new Polyglot()
 polyglot.extend(enLocale)

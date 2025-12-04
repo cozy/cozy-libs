@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { translate } from 'twake-i18n'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Card from 'cozy-ui/transpiled/react/Card'
 import { DialogContent } from 'cozy-ui/transpiled/react/Dialog'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
-import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import AccountsListItem from './AccountsListItem'
 

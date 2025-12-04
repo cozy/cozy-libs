@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { forwardRef } from 'react'
+import { useI18n } from 'twake-i18n'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Copy from 'cozy-ui/transpiled/react/Icons/Copy'
@@ -8,7 +9,6 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import ActionMenu, {
   ActionMenuItem
 } from 'cozy-ui/transpiled/react/deprecated/ActionMenu'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import styles from './styles.styl'
 import IntentOpener from '../components/IntentOpener'

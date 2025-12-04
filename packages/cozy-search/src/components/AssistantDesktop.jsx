@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-
-import useExtendI18n from 'cozy-ui/transpiled/react/providers/I18n/useExtendI18n'
+import useExtendI18n from 'twake-i18n'
 
 import AssistantProvider from './AssistantProvider'
 import { locales } from '../locales'

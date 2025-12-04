@@ -1,4 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react'
+import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
@@ -9,7 +10,6 @@ import {
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { permission } from './actions/permission'
 import { revokeMember } from './actions/revokeMember'
@@ -56,6 +56,7 @@ const MemberRecipientPermissions = ({
   }, [isOwner, onRevoke, onRevokeSelf, document, sharingId, memberIndex])
 
   const actions = makeActions([permission, divider, revokeMember], {
+    client,
     t,
     type: type ?? 'one-way',
     isOwner,

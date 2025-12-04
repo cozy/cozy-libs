@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import React, { useState, useRef } from 'react'
+import { useI18n } from 'twake-i18n'
 
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { checkIsReadOnlyPermissions } from '../../helpers/permissions'
 import { ShareRestrictionModal } from '../ShareRestrictionModal/ShareRestrictionModal'

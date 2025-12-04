@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
 
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
+import { useI18n } from 'twake-i18n'
 
 import styles from './AppsSection.styl'
 import AppTile from '../../AppTile'

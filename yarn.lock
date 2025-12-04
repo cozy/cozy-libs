@@ -17161,7 +17161,7 @@ __metadata:
     cozy-logger: "npm:^1.17.0"
     cozy-realtime: "npm:^5.8.1"
     cozy-tsconfig: "npm:^1.8.1"
-    cozy-ui: "npm:^123.2.1"
+    cozy-ui: "npm:^135.0.0"
     cozy-ui-plus: "npm:^3.1.2"
     cozy-viewer: "npm:^24.2.4"
     date-fns: "npm:2.30.0"
@@ -17191,6 +17191,7 @@ __metadata:
     react-swipeable-views: "npm:0.13.9"
     storybook: "npm:^7.0.23"
     storybook-addon-remix-react-router: "npm:^3.0.1"
+    twake-i18n: "npm:^0.3.0"
     use-deep-compare-effect: "npm:^1.8.1"
     uuid: "npm:^3.3.2"
   peerDependencies:
@@ -17203,11 +17204,12 @@ __metadata:
     cozy-interapp: ">=0.9.0"
     cozy-keys-lib: ">=6.1.1"
     cozy-realtime: ">=4.2.8"
-    cozy-ui: ">=123.2.1"
+    cozy-ui: ">=135.0.0"
     cozy-ui-plus: ">=1.2.0"
     cozy-viewer: ">=11.3.1"
     leaflet: ^1.7.1
     react-router-dom: ">=6.14.2"
+    twake-i18n: ">=0.3.0"
   languageName: unknown
   linkType: soft
 
@@ -17530,7 +17532,7 @@ __metadata:
     cozy-minilog: "npm:^3.10.0"
     cozy-pouch-link: "npm:^54.0.0"
     cozy-realtime: "npm:^5.8.1"
-    cozy-ui: "npm:^122.0.0"
+    cozy-ui: "npm:^135.0.0"
     cozy-ui-plus: "npm:^3.1.2"
     cross-fetch: "npm:^4.0.0"
     jest: "npm:26.6.3"
@@ -17542,6 +17544,7 @@ __metadata:
     react-type-animation: "npm:3.2.0"
     rooks: "npm:7.14.1"
     stylus: "npm:^0.64.0"
+    twake-i18n: "npm:^0.3.0"
     typescript: "npm:5.5.2"
   peerDependencies:
     cozy-client: ">=54.8.0"
@@ -17552,11 +17555,12 @@ __metadata:
     cozy-minilog: ">=3.3.1"
     cozy-pouch-link: 54.0.0
     cozy-realtime: ">=5.6.4"
-    cozy-ui: ">=122.0.0"
+    cozy-ui: ">=135.0.0"
     cozy-ui-plus: ">=1.2.0"
     react: ">=16.12.0"
     react-dom: ">=16.12.0"
     react-router-dom: ^6.28.0
+    twake-i18n: ">=0.3.0"
   languageName: unknown
   linkType: soft
 
@@ -17586,7 +17590,7 @@ __metadata:
     cozy-doctypes: "npm:^1.98.2"
     cozy-intent: "npm:^2.30.1"
     cozy-minilog: "npm:^3.10.0"
-    cozy-ui: "npm:^128.3.5"
+    cozy-ui: "npm:^135.0.0"
     cozy-ui-plus: "npm:^3.1.2"
     date-fns: "npm:2.30.0"
     jest: "npm:26.6.3"
@@ -17599,16 +17603,18 @@ __metadata:
     react-tooltip: "npm:^3.11.1"
     snarkdown: "npm:^2.0.0"
     storybook: "npm:7.6.0"
+    twake-i18n: "npm:^0.3.0"
   peerDependencies:
     cozy-client: ">=60.19.0"
     cozy-device-helper: ">=3.7.1"
     cozy-intent: ">=2.29.1"
     cozy-minilog: ">=3.9.1"
-    cozy-ui: ">=128.3.5"
+    cozy-ui: ">=135.0.0"
     cozy-ui-plus: ">=1.2.0"
     prop-types: ">=15.7.2"
     react: ">=16.12.0"
     react-router: ">=5.0.1"
+    twake-i18n: ">=0.3.0"
   languageName: unknown
   linkType: soft
 
@@ -17797,7 +17803,7 @@ __metadata:
     cozy-interapp: "npm:^0.5.4"
     cozy-logger: "npm:^1.17.0"
     cozy-stack-client: "npm:^60.1.0"
-    cozy-ui: "npm:^134.0.0"
+    cozy-ui: "npm:^135.0.0"
     filesize: "npm:8.0.7"
     final-form: "npm:4.20.9"
     final-form-arrays: "npm:3.1.0"
@@ -17817,15 +17823,17 @@ __metadata:
     react-test-renderer: "npm:16.12.0"
     rooks: "npm:7.14.1"
     stylus: "npm:0.64.0"
+    twake-i18n: "npm:^0.3.0"
     typescript: "npm:5.5.2"
   peerDependencies:
     cozy-client: ">=60.5.0"
     cozy-device-helper: ">=2.0.0"
     cozy-intent: ">=2.30.0"
     cozy-logger: ">=1.17.0"
-    cozy-ui: ">=134.0.0"
+    cozy-ui: ">=135.0.0"
     react: ^16 || ^17 || ^18
     react-dom: ^16 || ^17 || ^18
+    twake-i18n: ">=0.3.0"
   languageName: unknown
   linkType: soft
 
@@ -17947,188 +17955,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-ui@npm:^122.0.0":
-  version: 122.0.0
-  resolution: "cozy-ui@npm:122.0.0"
-  dependencies:
-    "@babel/runtime": "npm:^7.3.4"
-    "@date-io/date-fns": "npm:1"
-    "@material-ui/core": "npm:4.12.3"
-    "@material-ui/lab": "npm:^4.0.0-alpha.61"
-    "@material-ui/pickers": "npm:3.3.11"
-    "@popperjs/core": "npm:^2.4.4"
-    chart.js: "npm:3.7.1"
-    classnames: "npm:^2.2.5"
-    cozy-interapp: "npm:^0.5.4"
-    date-fns: "npm:2.30.0"
-    filesize: "npm:8.0.7"
-    hammerjs: "npm:^2.0.8"
-    intersection-observer: "npm:0.11.0"
-    mime-types: "npm:2.1.35"
-    mui-bottom-sheet: "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9"
-    node-polyglot: "npm:^2.5.0"
-    normalize.css: "npm:^8.0.0"
-    pdf-lib: "npm:1.17.1"
-    react-chartjs-2: "npm:4.1.0"
-    react-markdown: "npm:^4.0.8"
-    react-popper: "npm:^2.2.3"
-    react-remove-scroll: "npm:^2.4.0"
-    react-select: "npm:^4.3.0"
-    react-swipeable-views: "npm:^0.13.3"
-    rooks: "npm:^5.11.2"
-  peerDependencies:
-    cozy-client: ">=52.1.0"
-    cozy-device-helper: ^2.0.0
-    cozy-flags: ">=2.10.1"
-    cozy-intent: ">=2.29.1"
-    react: ^16.8.6
-    react-dom: ^16.8.6
-  bin:
-    rsg-screenshots: scripts/screenshots.js
-  checksum: 10c0/575cb9a46baab03c6c9175ed6fd7630dfa363f30e925a639e6153440784059eda60aaafd9b4c2e9f9718d7f829f5300544de15d07ed13e373786f63efe262474
-  languageName: node
-  linkType: hard
-
-"cozy-ui@npm:^123.2.1":
-  version: 123.2.1
-  resolution: "cozy-ui@npm:123.2.1"
-  dependencies:
-    "@babel/runtime": "npm:^7.3.4"
-    "@date-io/date-fns": "npm:1"
-    "@material-ui/core": "npm:4.12.3"
-    "@material-ui/lab": "npm:^4.0.0-alpha.61"
-    "@material-ui/pickers": "npm:3.3.11"
-    "@popperjs/core": "npm:^2.4.4"
-    chart.js: "npm:3.7.1"
-    classnames: "npm:^2.2.5"
-    cozy-interapp: "npm:^0.5.4"
-    date-fns: "npm:2.30.0"
-    filesize: "npm:8.0.7"
-    hammerjs: "npm:^2.0.8"
-    intersection-observer: "npm:0.11.0"
-    mime-types: "npm:2.1.35"
-    mui-bottom-sheet: "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9"
-    node-polyglot: "npm:^2.5.0"
-    normalize.css: "npm:^8.0.0"
-    pdf-lib: "npm:1.17.1"
-    react-chartjs-2: "npm:4.1.0"
-    react-markdown: "npm:^4.0.8"
-    react-popper: "npm:^2.2.3"
-    react-remove-scroll: "npm:^2.4.0"
-    react-select: "npm:^4.3.0"
-    react-swipeable-views: "npm:^0.13.3"
-    rooks: "npm:^5.11.2"
-  peerDependencies:
-    cozy-client: ">=52.1.0"
-    cozy-device-helper: ">=2.0.0"
-    cozy-flags: ">=2.10.1"
-    cozy-intent: ">=2.29.1"
-    react: ^16.8.6
-    react-dom: ^16.8.6
-  bin:
-    rsg-screenshots: scripts/screenshots.js
-  checksum: 10c0/8c56c0b63b9f6f57761cb9825f4e59ac6e3268bc992ed3289a7f6deb0322ab8a03b45fbc59820b970804d07d68d4ad7e40aabf20629647115e08fd7aed2cd298
-  languageName: node
-  linkType: hard
-
-"cozy-ui@npm:^126.0.0":
-  version: 126.0.0
-  resolution: "cozy-ui@npm:126.0.0"
-  dependencies:
-    "@babel/runtime": "npm:^7.3.4"
-    "@date-io/date-fns": "npm:1"
-    "@material-ui/core": "npm:4.12.3"
-    "@material-ui/lab": "npm:^4.0.0-alpha.61"
-    "@material-ui/pickers": "npm:3.3.11"
-    "@popperjs/core": "npm:^2.4.4"
-    chart.js: "npm:3.7.1"
-    classnames: "npm:^2.2.5"
-    cozy-interapp: "npm:^0.5.4"
-    date-fns: "npm:2.30.0"
-    filesize: "npm:8.0.7"
-    hammerjs: "npm:^2.0.8"
-    intersection-observer: "npm:0.11.0"
-    mime-types: "npm:2.1.35"
-    mui-bottom-sheet: "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9"
-    node-polyglot: "npm:^2.5.0"
-    normalize.css: "npm:^8.0.0"
-    pdf-lib: "npm:1.17.1"
-    react-chartjs-2: "npm:4.1.0"
-    react-markdown: "npm:^4.0.8"
-    react-popper: "npm:^2.2.3"
-    react-remove-scroll: "npm:^2.4.0"
-    react-select: "npm:^4.3.0"
-    react-swipeable-views: "npm:^0.13.3"
-    react-virtuoso: "npm:4.12.7"
-    rooks: "npm:^5.11.2"
-  peerDependencies:
-    cozy-client: ">=52.1.0"
-    cozy-device-helper: ">=2.0.0"
-    cozy-flags: ">=2.10.1"
-    cozy-intent: ">=2.29.1"
-    react: ^16.14.0
-    react-dnd: ^16.0.1
-    react-dnd-html5-backend: ^16.0.1
-    react-dom: ^16.14.0
-  bin:
-    rsg-screenshots: scripts/screenshots.js
-  checksum: 10c0/2bee52d6fb5b6b8d547301771f1a955b3cd62fabecb87d653d7ef18fca2a10676f3fb5a28f5cf2858862c0128b12743234c8fde364d82ee32c14d9ea393214b7
-  languageName: node
-  linkType: hard
-
-"cozy-ui@npm:^128.3.5":
-  version: 128.3.5
-  resolution: "cozy-ui@npm:128.3.5"
-  dependencies:
-    "@babel/runtime": "npm:^7.3.4"
-    "@date-io/date-fns": "npm:1"
-    "@material-ui/core": "npm:4.12.3"
-    "@material-ui/lab": "npm:^4.0.0-alpha.61"
-    "@material-ui/pickers": "npm:3.3.11"
-    "@popperjs/core": "npm:^2.4.4"
-    chart.js: "npm:3.7.1"
-    classnames: "npm:^2.2.5"
-    cozy-interapp: "npm:^0.5.4"
-    date-fns: "npm:2.30.0"
-    filesize: "npm:8.0.7"
-    final-form: "npm:4.20.9"
-    final-form-arrays: "npm:3.1.0"
-    hammerjs: "npm:^2.0.8"
-    intersection-observer: "npm:0.11.0"
-    mime-types: "npm:2.1.35"
-    mui-bottom-sheet: "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9"
-    node-polyglot: "npm:^2.5.0"
-    normalize.css: "npm:^8.0.0"
-    patch-package: "npm:^8.0.0"
-    pdf-lib: "npm:1.17.1"
-    react-chartjs-2: "npm:4.1.0"
-    react-final-form: "npm:6.5.9"
-    react-final-form-arrays: "npm:3.1.4"
-    react-markdown: "npm:^4.0.8"
-    react-popper: "npm:^2.2.3"
-    react-remove-scroll: "npm:^2.4.0"
-    react-select: "npm:^4.3.0"
-    react-swipeable-views: "npm:^0.13.3"
-    react-virtuoso: "npm:^4.13.0"
-    rooks: "npm:7.14.1"
-  peerDependencies:
-    cozy-client: ">=60.5.0"
-    cozy-device-helper: ">=2.0.0"
-    cozy-flags: ">=2.10.1"
-    cozy-intent: ">=2.29.1"
-    react: ^16.14.0
-    react-dnd: ^16.0.1
-    react-dnd-html5-backend: ^16.0.1
-    react-dom: ^16.14.0
-  bin:
-    rsg-screenshots: scripts/screenshots.js
-  checksum: 10c0/dec43d5fa68364a26c89add43fd5717b53ff1801af3d0fed8cce2fa8e4029745e16e832cfdba431221acf5654ea2ab4a0effa1dbe7fdf6d3c0282c1eb02fc9d9
-  languageName: node
-  linkType: hard
-
-"cozy-ui@npm:^134.0.0":
-  version: 134.0.0
-  resolution: "cozy-ui@npm:134.0.0"
+"cozy-ui@npm:^135.0.0":
+  version: 135.0.0
+  resolution: "cozy-ui@npm:135.0.0"
   dependencies:
     "@babel/runtime": "npm:^7.3.4"
     "@date-io/date-fns": "npm:1"
@@ -18161,9 +17990,10 @@ __metadata:
     react-dnd: ^16.0.1
     react-dnd-html5-backend: ^16.0.1
     react-dom: ^16 || ^17 || ^18
+    twake-i18n: ">=0.3.0"
   bin:
     rsg-screenshots: scripts/screenshots.js
-  checksum: 10c0/881e95012d1f22e1ea11aaf34cec010600f23f72f1e5eb0606cbfeb22607738b704a3451558675b50a862f474ddd57e31512308ef8df202c0a76f4dca0f19fbe
+  checksum: 10c0/551c460fbd67a49a81bc55527781b0325ae9c685c481ab938d3e46010e4821a68db2399145d6055db6b426e6835671a5e56ac6571b60a59cf3741368d2047424
   languageName: node
   linkType: hard
 
@@ -18219,7 +18049,7 @@ __metadata:
     cozy-intent: "npm:^2.30.1"
     cozy-logger: "npm:^1.17.0"
     cozy-sharing: "npm:^27.2.0"
-    cozy-ui: "npm:^126.0.0"
+    cozy-ui: "npm:^135.0.0"
     cozy-ui-plus: "npm:^3.1.2"
     hammerjs: "npm:^2.0.8"
     identity-obj-proxy: "npm:3.0.0"
@@ -18233,6 +18063,7 @@ __metadata:
     react-pdf: "npm:^5.7.2"
     react-test-renderer: "npm:16.12.0"
     stylus: "npm:0.63.0"
+    twake-i18n: "npm:^0.3.0"
     typescript: "npm:5.5.2"
   peerDependencies:
     cozy-client: ">=57.0.0"
@@ -18241,10 +18072,11 @@ __metadata:
     cozy-intent: ">=2.30.0"
     cozy-logger: ">=1.17.0"
     cozy-sharing: ">=25.4.0"
-    cozy-ui: ">=126.0.0"
+    cozy-ui: ">=135.0.0"
     cozy-ui-plus: ">=1.2.0"
     react: ">=16.12.0"
     react-dom: ">=16.12.0"
+    twake-i18n: ">=0.3.0"
   languageName: unknown
   linkType: soft
 
@@ -36688,16 +36520,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-virtuoso@npm:4.12.7":
-  version: 4.12.7
-  resolution: "react-virtuoso@npm:4.12.7"
-  peerDependencies:
-    react: ">=16 || >=17 || >= 18 || >= 19"
-    react-dom: ">=16 || >=17 || >= 18 || >=19"
-  checksum: 10c0/56f4ea49668ad1004be42ff75dc0eade581754dd37a0aa04a3b7470cb132b324de2e7af5d8e29c420bf9726fd4a016104e2a14347ed9cc23235ce7a658a0591e
-  languageName: node
-  linkType: hard
-
 "react-virtuoso@npm:^4.13.0":
   version: 4.14.0
   resolution: "react-virtuoso@npm:4.14.0"
@@ -41975,7 +41797,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"twake-i18n@workspace:packages/twake-i18n":
+"twake-i18n@npm:^0.3.0, twake-i18n@workspace:packages/twake-i18n":
   version: 0.0.0-use.local
   resolution: "twake-i18n@workspace:packages/twake-i18n"
   dependencies:

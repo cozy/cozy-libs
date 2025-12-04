@@ -1,7 +1,7 @@
 import React from 'react'
+import { useI18n } from 'twake-i18n'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import ChatItem from './ChatItem'
 import Sources from './Sources/Sources'

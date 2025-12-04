@@ -1,6 +1,7 @@
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { createUseI18n } from 'twake-i18n'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import WrenchCircleIcon from 'cozy-ui/transpiled/react/Icons/WrenchCircle'
@@ -11,7 +12,6 @@ import Tile, {
   TileIcon,
   TileDescription
 } from 'cozy-ui/transpiled/react/Tile'
-import { createUseI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { APP_STATUS, getCurrentStatusLabel } from './helpers'
 import en from './locales/en.json'

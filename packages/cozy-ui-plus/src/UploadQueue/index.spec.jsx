@@ -1,19 +1,10 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
+import DemoProvider from 'cozy-ui/transpiled/react/providers/DemoProvider'
 
 import { UploadQueue, formatRemainingTime } from '.'
-
-jest.mock('cozy-ui/transpiled/react/providers/I18n/withLocales', () =>
-  jest.fn().mockImplementation(() => x => x)
-)
-
-jest.mock('cozy-ui/transpiled/react/providers/I18n', () => ({
-  translate: jest.fn().mockImplementation(() => x => x),
-  useI18n: jest.fn(),
-  DEFAULT_LANG: 'en'
-}))
+import localeEn from './locales/en.json'
 
 describe('UploadQueue', () => {
   describe('formatRemainingTime', () => {
@@ -25,13 +16,6 @@ describe('UploadQueue', () => {
   })
 
   describe('UploadQueue', () => {
-    beforeEach(() => {
-      useI18n.mockReturnValue({
-        t: (key, format) =>
-          format ? `${key} ${format.time} ${format.smart_count}` : key
-      })
-    })
-
     it('should set singular value when "1 minute remaining"', () => {
       const item = {
         file: { name: 'file' },
@@ -41,11 +25,15 @@ describe('UploadQueue', () => {
         getMimeTypeIcon: 'getMimeTypeIcon'
       }
 
-      const { container } = render(<UploadQueue queue={[item]} />)
+      const { container } = render(
+        <DemoProvider dictRequire={() => localeEn}>
+          <UploadQueue queue={[item]} />
+        </DemoProvider>
+      )
 
       expect(
         container.getElementsByClassName('u-flex-shrink')[0]
-      ).toHaveTextContent('item.remainingTime 1 minute 1')
+      ).toHaveTextContent('1 minute remaining')
     })
 
     it('should set singular value when "moins d 1 minute remaining"', () => {
@@ -57,11 +45,15 @@ describe('UploadQueue', () => {
         getMimeTypeIcon: 'getMimeTypeIcon'
       }
 
-      const { container } = render(<UploadQueue queue={[item]} />)
+      const { container } = render(
+        <DemoProvider dictRequire={() => localeEn}>
+          <UploadQueue queue={[item]} />
+        </DemoProvider>
+      )
 
       expect(
         container.getElementsByClassName('u-flex-shrink')[0]
-      ).toHaveTextContent('item.remainingTime less than a minute 1')
+      ).toHaveTextContent('less than a minute remaining')
     })
 
     it('should set plural value when "44 minutes remainings"', () => {
@@ -73,11 +65,15 @@ describe('UploadQueue', () => {
         getMimeTypeIcon: 'getMimeTypeIcon'
       }
 
-      const { container } = render(<UploadQueue queue={[item]} />)
+      const { container } = render(
+        <DemoProvider dictRequire={() => localeEn}>
+          <UploadQueue queue={[item]} />
+        </DemoProvider>
+      )
 
       expect(
         container.getElementsByClassName('u-flex-shrink')[0]
-      ).toHaveTextContent('item.remainingTime 44 minutes 2')
+      ).toHaveTextContent('44 minutes remaining')
     })
 
     it('should set singular value when "1 hour remaining" - low limit', () => {
@@ -89,11 +85,15 @@ describe('UploadQueue', () => {
         getMimeTypeIcon: 'getMimeTypeIcon'
       }
 
-      const { container } = render(<UploadQueue queue={[item]} />)
+      const { container } = render(
+        <DemoProvider dictRequire={() => localeEn}>
+          <UploadQueue queue={[item]} />
+        </DemoProvider>
+      )
 
       expect(
         container.getElementsByClassName('u-flex-shrink')[0]
-      ).toHaveTextContent('item.remainingTime about 1 hour 1')
+      ).toHaveTextContent('about 1 hour remaining')
     })
 
     it('should set singular value when "about 1 hour remaining" - high limit', () => {
@@ -105,11 +105,15 @@ describe('UploadQueue', () => {
         getMimeTypeIcon: 'getMimeTypeIcon'
       }
 
-      const { container } = render(<UploadQueue queue={[item]} />)
+      const { container } = render(
+        <DemoProvider dictRequire={() => localeEn}>
+          <UploadQueue queue={[item]} />
+        </DemoProvider>
+      )
 
       expect(
         container.getElementsByClassName('u-flex-shrink')[0]
-      ).toHaveTextContent('item.remainingTime about 1 hour 1')
+      ).toHaveTextContent('about 1 hour remaining')
     })
 
     it('should set plural value when more than "2 hours remainings"', () => {
@@ -121,11 +125,15 @@ describe('UploadQueue', () => {
         getMimeTypeIcon: 'getMimeTypeIcon'
       }
 
-      const { container } = render(<UploadQueue queue={[item]} />)
+      const { container } = render(
+        <DemoProvider dictRequire={() => localeEn}>
+          <UploadQueue queue={[item]} />
+        </DemoProvider>
+      )
 
       expect(
         container.getElementsByClassName('u-flex-shrink')[0]
-      ).toHaveTextContent('item.remainingTime about 2 hours 2')
+      ).toHaveTextContent('about 2 hours remaining')
     })
 
     it('should not update time and bar everytime loaded/remaining time update', () => {
@@ -138,22 +146,28 @@ describe('UploadQueue', () => {
       })
 
       const { rerender, getAllByRole, container } = render(
-        <UploadQueue queue={[item(5371, 1234)]} />
+        <DemoProvider dictRequire={() => localeEn}>
+          <UploadQueue queue={[item(5371, 1234)]} />
+        </DemoProvider>
       )
 
       expect(
         container.getElementsByClassName('u-flex-shrink')[0]
-      ).toHaveTextContent('item.remainingTime about 2 hours 2')
+      ).toHaveTextContent('about 2 hours remaining')
       expect(getAllByRole('progressbar')[1]).toHaveAttribute(
         'aria-valuenow',
         '25'
       )
 
-      rerender(<UploadQueue queue={[item(1, 5677)]} />)
+      rerender(
+        <DemoProvider dictRequire={() => localeEn}>
+          <UploadQueue queue={[item(1, 5677)]} />
+        </DemoProvider>
+      )
 
       expect(
         container.getElementsByClassName('u-flex-shrink')[0]
-      ).toHaveTextContent('item.remainingTime about 2 hours 2')
+      ).toHaveTextContent('about 2 hours remaining')
       expect(getAllByRole('progressbar')[1]).toHaveAttribute(
         'aria-valuenow',
         '25'

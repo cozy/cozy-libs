@@ -7,7 +7,7 @@ import PermissionDialog from 'cozy-ui/transpiled/react/CozyDialogs/PermissionDia
 import CozyAuthentificationIcon from 'cozy-ui/transpiled/react/Icons/CozyAuthentification'
 import PasswordField from 'cozy-ui/transpiled/react/PasswordField'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
+import { useI18n } from 'twake-i18n'
 
 import withSpecificDialogsLocales from './withSpecificDialogsLocales'
 

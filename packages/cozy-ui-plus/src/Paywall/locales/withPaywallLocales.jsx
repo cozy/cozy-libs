@@ -1,4 +1,4 @@
-import withOnlyLocales from 'cozy-ui/transpiled/react/providers/I18n/withOnlyLocales'
+import { withOnlyLocales } from 'twake-i18n'
 
 import en from './en.json'
 import fr from './fr.json'

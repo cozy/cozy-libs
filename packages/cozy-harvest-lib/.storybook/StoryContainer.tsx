@@ -6,7 +6,7 @@ import { Provider as ReduxProvider } from 'react-redux'
 
 import CozyClient, { CozyProvider as CozyClientProvider } from 'cozy-client'
 import { useCozyDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import I18n from 'cozy-ui/transpiled/react/providers/I18n'
+import I18n from 'twake-i18n'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import DialogContext from '../src/components/DialogContext'

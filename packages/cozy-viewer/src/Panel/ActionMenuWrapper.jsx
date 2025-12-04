@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import React, { forwardRef } from 'react'
+import { useI18n } from 'twake-i18n'
 
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import ActionMenuDesktop from './ActionMenuDesktop'
 import ActionMenuMobile from './ActionMenuMobile'

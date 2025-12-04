@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
+import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import DropdownIcon from 'cozy-ui/transpiled/react/Icons/Dropdown'
 import DropupIcon from 'cozy-ui/transpiled/react/Icons/Dropup'
-import { useI18n, useExtendI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import FieldInput from './FieldInput'
 import { locales } from './locales'

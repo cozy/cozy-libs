@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useCallback } from 'react'
+import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import { useWebviewIntent } from 'cozy-intent'
@@ -7,7 +8,6 @@ import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 import { ActionMenuItem } from 'cozy-ui/transpiled/react/deprecated/ActionMenu'
-import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { intentsApiProptype } from '../../helpers/proptypes'
 import { OAUTH_SERVICE_OK, openOAuthWindow } from '../OAuthService'

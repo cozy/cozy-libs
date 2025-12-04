@@ -1,4 +1,4 @@
-import { getI18n } from 'cozy-ui/transpiled/react/providers/I18n/helpers'
+import { getI18n } from 'twake-i18n'
 
 import en from './en.json'
 import fr from './fr.json'

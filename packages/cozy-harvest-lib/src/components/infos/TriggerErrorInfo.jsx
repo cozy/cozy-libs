@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
+import { translate } from 'twake-i18n'
 
 import { withClient } from 'cozy-client'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import Infos from 'cozy-ui/transpiled/react/deprecated/Infos'
-import { translate } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import TriggerErrorDescription from './TriggerErrorDescription'
 import { getErrorLocale } from '../../helpers/konnectors'
