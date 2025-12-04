@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const FooterContent = ({ toolbarRef, children }) => {
+const FooterContent = ({ toolbarRef, children, isDisplayChildrenDirectly }) => {
   const styles = useStyles()
   const { file, isPublic } = useViewer()
 
@@ -50,12 +50,19 @@ const FooterContent = ({ toolbarRef, children }) => {
       portalProps={{ disablePortal: true }}
       settings={bottomSheetSettings}
     >
-      <BottomSheetHeader
-        className={cx('u-ph-1 u-pb-1', styles.bottomSheetHeader)}
-      >
-        {FooterActionButtonsWithFile}
-      </BottomSheetHeader>
-      <BottomSheetContent />
+      {isDisplayChildrenDirectly ? (
+        children
+      ) : (
+        <>
+          <BottomSheetHeader
+            className={cx('u-ph-1 u-pb-1', styles.bottomSheetHeader)}
+          >
+            {FooterActionButtonsWithFile}
+          </BottomSheetHeader>
+
+          <BottomSheetContent />
+        </>
+      )}
     </BottomSheet>
   )
 }
@@ -65,7 +72,8 @@ FooterContent.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node)
-  ])
+  ]),
+  isDisplayChildrenDirectly: PropTypes.bool
 }
 
 export default FooterContent

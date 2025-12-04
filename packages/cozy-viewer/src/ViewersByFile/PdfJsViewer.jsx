@@ -11,6 +11,7 @@ import ToolbarButton from '../components/PdfToolbarButton'
 import ViewerSpinner from '../components/ViewerSpinner'
 import withFileUrl from '../hoc/withFileUrl'
 import { withViewerLocales } from '../hoc/withViewerLocales'
+import { ViewerContext } from '../providers/ViewerProvider'
 
 export const MIN_SCALE = 0.25
 export const MAX_SCALE = 3
@@ -29,6 +30,8 @@ const makeInputPageStyle = nbPages => {
 }
 
 export class PdfJsViewer extends Component {
+  static contextType = ViewerContext
+
   state = {
     totalPages: 1,
     scale: 1,
@@ -105,6 +108,11 @@ export class PdfJsViewer extends Component {
         parseInt(this.props.file.size, 10) <= MAX_SIZE_FILE,
       loaded: true
     })
+
+    // Update page count in ViewerContext for AI summary compatibility check
+    if (this.context && this.context.setPdfPageCount) {
+      this.context.setPdfPageCount(numPages)
+    }
   }
 
   onLoadError = error => {

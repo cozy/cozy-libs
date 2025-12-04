@@ -1,9 +1,11 @@
 import { render } from '@testing-library/react'
 import React from 'react'
+import { MemoryRouter } from 'react-router-dom'
 
 import DemoProvider from 'cozy-ui/transpiled/react/providers/DemoProvider'
 
 import ViewerInformationsWrapper from './ViewerInformationsWrapper'
+import ViewerProvider from './providers/ViewerProvider'
 
 /* eslint-disable react/display-name */
 jest.mock('./components/Footer', () => ({ children }) => (
@@ -22,13 +24,17 @@ jest.mock('./Footer/FooterContent', () => () => (
 
 const setup = ({ validForPanel, disableFooter } = {}) => {
   return render(
-    <DemoProvider>
-      <ViewerInformationsWrapper
-        currentFile={{}}
-        disableFooter={disableFooter}
-        validForPanel={validForPanel}
-      />
-    </DemoProvider>
+    <MemoryRouter>
+      <DemoProvider>
+        <ViewerProvider file={{}}>
+          <ViewerInformationsWrapper
+            currentFile={{}}
+            disableFooter={disableFooter}
+            validForPanel={validForPanel}
+          />
+        </ViewerProvider>
+      </DemoProvider>
+    </MemoryRouter>
   )
 }
 
