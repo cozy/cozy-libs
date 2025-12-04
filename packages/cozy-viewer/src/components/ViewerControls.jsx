@@ -120,7 +120,13 @@ class ViewerControls extends Component {
       classes,
       isDesktop
     } = this.props
-    const { showToolbar, showClose, toolbarRef, showFilePath } = toolbarProps
+    const {
+      showToolbar,
+      showClose,
+      toolbarRef,
+      showFilePath,
+      onPaywallRedirect
+    } = toolbarProps
     const { hidden } = this.state
 
     return (
@@ -140,6 +146,7 @@ class ViewerControls extends Component {
             onMouseEnter={this.showControls}
             onMouseLeave={this.hideControls}
             onClose={showClose ? onClose : undefined}
+            onPaywallRedirect={onPaywallRedirect}
           >
             {children}
           </Toolbar>

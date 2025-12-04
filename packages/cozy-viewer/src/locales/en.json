@@ -79,6 +79,13 @@
         "success": "Copied to clipboard",
         "error": "Cannot copy to clipboard"
       }
+    },
+    "summriseWithAi": "Summarise",
+    "ai": {
+      "error": {
+        "summary": "Failed to generate summary. Please try again."
+      },
+      "copied": "Summary copied to clipboard"
     }
   }
 }
