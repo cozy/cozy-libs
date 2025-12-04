@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@3.0.0...cozy-ui-plus@3.1.0) (2025-12-04)
+
+### Features
+
+- Implement AI assistant paywall view :sparkles: ([a277ed3](https://github.com/cozy/cozy-libs/commit/a277ed341ffc066426f1735267753137a1ce5bff))
+
 # [3.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@2.2.0...cozy-ui-plus@3.0.0) (2025-11-13)
 
 ### Features

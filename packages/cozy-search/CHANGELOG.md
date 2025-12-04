@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.6](https://github.com/cozy/cozy-libs/compare/cozy-search@0.13.5...cozy-search@0.13.6) (2025-12-04)
+
+**Note:** Version bump only for package cozy-search
+
 ## [0.13.5](https://github.com/cozy/cozy-libs/compare/cozy-search@0.13.4...cozy-search@0.13.5) (2025-11-13)
 
 **Note:** Version bump only for package cozy-search
