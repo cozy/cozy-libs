@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [36.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@35.1.14...cozy-harvest-lib@36.0.0) (2025-12-04)
+
+### Features
+
+- Add twake-i18n in packages ([f8689a9](https://github.com/cozy/cozy-libs/commit/f8689a9a58dc6384ccf494a19fd1afb595da39f0))
+
+### BREAKING CHANGES
+
+- You must have `twake-i18n >= 0.3.0` and `cozy-ui >= 135.0.0`
+
 ## [35.1.14](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@35.1.13...cozy-harvest-lib@35.1.14) (2025-12-04)
 
 **Note:** Version bump only for package cozy-harvest-lib

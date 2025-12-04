@@ -1,6 +1,6 @@
 {
   "name": "cozy-ui-plus",
-  "version": "3.1.2",
+  "version": "4.0.0",
   "description": "Cozy-ui-plus is an extension of cozy-ui and provides components based on cozy-client",
   "main": "dist/index.js",
   "license": "MIT",
