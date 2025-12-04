@@ -5,6 +5,8 @@ import AlertTitle from 'cozy-ui/transpiled/react/AlertTitle'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Chip from 'cozy-ui/transpiled/react/Chips'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import Database from 'cozy-ui/transpiled/react/Icons/Database'
+import Expert from 'cozy-ui/transpiled/react/Icons/Expert'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import styles from './ConversationChips.styl'
@@ -14,7 +16,7 @@ const ChatChips = ({
   modes,
   onModeSelect,
   splice = 3,
-  startIcon = 'expert',
+  startIcon = Expert,
   moreEndLabel
 }) => {
   const visibleModes = modes.slice(0, splice)
@@ -26,7 +28,7 @@ const ChatChips = ({
     >
       <Icon
         icon={startIcon}
-        size={24}
+        size={18}
         className={styles['conversationChips-startIcon']}
       />
 
@@ -93,7 +95,7 @@ const ChatExperts = ({ experts, selectedExpert, setSelectedExpert }) => {
         setSelectedExpert(key === selectedExpert ? null : key)
       }}
       splice={4}
-      startIcon="expert"
+      startIcon={Expert}
       moreEndLabel={t('assistant.conversationBar.more.experts')}
     />
   )
@@ -126,7 +128,7 @@ const ChatKnowledges = ({
         }
       }}
       splice={4}
-      startIcon="database"
+      startIcon={Database}
       moreEndLabel={t('assistant.conversationBar.more.knowledge_bases')}
     />
   )
