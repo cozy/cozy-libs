@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.1](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@3.1.0...cozy-ui-plus@3.1.1) (2025-12-04)
+
+### Bug Fixes
+
+- **cozy-ui-plus:** Import ListItem from transpiled cozy-ui ([997f4e2](https://github.com/cozy/cozy-libs/commit/997f4e27fd3bc7d54e02637a45180c908cbc39d5))
+
 # [3.1.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@3.0.0...cozy-ui-plus@3.1.0) (2025-12-04)
 
 ### Features
