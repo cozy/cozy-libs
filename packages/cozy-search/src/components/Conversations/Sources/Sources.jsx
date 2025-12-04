@@ -9,10 +9,11 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import MultiFilesIcon from 'cozy-ui/transpiled/react/Icons/MultiFiles'
 import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 
-import SourcesItem from './SourcesItem'
+import EmailSourceItem from './EmailSourceItem'
+import FileSourcesItem from './FileSourcesItem'
 import { buildFilesByIds } from '../../queries'
 
-const Sources = ({ messageId, files }) => {
+const Sources = ({ messageId, files, emails }) => {
   const [showSources, setShowSources] = useState(false)
   const { t } = useI18n()
   const ref = useRef()
@@ -43,7 +44,7 @@ const Sources = ({ messageId, files }) => {
       <Chip
         className="u-mb-1"
         icon={<Icon icon={MultiFilesIcon} className="u-ml-half" />}
-        label={t('assistant.sources', files.length)}
+        label={t('assistant.sources', files.length + emails.length)}
         deleteIcon={
           <Icon
             className="u-h-1"
@@ -63,7 +64,10 @@ const Sources = ({ messageId, files }) => {
       >
         <div>
           {files.map(file => (
-            <SourcesItem key={`${messageId}-${file._id}`} file={file} />
+            <FileSourcesItem key={`${messageId}-${file._id}`} file={file} />
+          ))}
+          {emails.map(email => (
+            <EmailSourceItem key={`${messageId}-${email.id}`} email={email} />
           ))}
         </div>
       </Grow>
@@ -72,19 +76,28 @@ const Sources = ({ messageId, files }) => {
 }
 
 const SourcesWithFilesQuery = ({ messageId, sources }) => {
-  const fileIds = sources.map(source => source.id)
-
-  const filesByIds = buildFilesByIds(fileIds)
-  const { data: files, ...queryResult } = useQuery(
+  const fileIds = []
+  const emails = []
+  let files = []
+  sources.map(source => {
+    source.doctype === 'com.linagora.email'
+      ? emails.push(source)
+      : fileIds.push(source.id)
+  })
+  const enabled = fileIds && fileIds.length > 0
+  const filesByIds = buildFilesByIds(fileIds, enabled)
+  const { data: fetchedFiles, ...queryResult } = useQuery(
     filesByIds.definition,
     filesByIds.options
   )
 
   const isLoading = isQueryLoading(queryResult)
+  files = fetchedFiles || []
 
-  if (isLoading || files.length === 0) return null
+  if ((isLoading && enabled) || (files.length === 0 && emails.length === 0))
+    return null
 
-  return <Sources messageId={messageId} files={files} />
+  return <Sources messageId={messageId} files={files} emails={emails} />
 }
 
 export default SourcesWithFilesQuery
