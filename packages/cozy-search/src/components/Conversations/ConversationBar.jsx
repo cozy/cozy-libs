@@ -52,11 +52,10 @@ const ConversationBar = ({ assistantStatus, hasConversationStarted }) => {
   return (
     <div className="u-w-100 u-maw-7 u-mh-auto">
       <div
-        className={`${styles['conversationBarSibling']} ${
-          hasConversationStarted
+        className={`${styles['conversationBarSibling']} ${hasConversationStarted
             ? styles['conversationBarSibling--started']
             : ''
-        } u-flex u-flex-column u-flex-items-center u-flex-justify-end`}
+          } u-flex u-flex-column u-flex-items-center u-flex-justify-end`}
       >
         <Typography variant="h3" align="center" className="u-mb-2">
           {t('assistant.conversationBar.startMessage')}
@@ -86,20 +85,13 @@ const ConversationBar = ({ assistantStatus, hasConversationStarted }) => {
                 label={<Icon icon="plus" size={14} />}
                 variant="text"
                 color="inherit"
-                style={{ marginRight: 2, marginLeft: -12 }}
+                variant="text"
+                color="inherit"
+                className={styles['conversationBar-startAdornment']}
               />
             ),
             endAdornment: (
-              <div
-                style={{
-                  marginRight: -8,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: 4,
-                  flex: 'none'
-                }}
-              >
+              <div className={styles['conversationBar-endAdornment']}>
                 {assistantStatus !== 'idle' ? (
                   <Button
                     component="div"

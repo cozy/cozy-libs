@@ -3,10 +3,23 @@
 .conversationBar
     max-height 95px
     min-height 48px
+    border 1px solid var(--borderMainColor)
     z-index calc(var(--zIndex-modal) + 15)
 
     +gt-mobile()
       max-height 178px
+
+.conversationBar-startAdornment
+    margin-right 2px
+    margin-left -12px
+
+.conversationBar-endAdornment
+    margin-right -8px
+    display flex
+    align-items center
+    justify-content center
+    gap 4px
+    flex none
 
 .conversationBar-input
   max-height 80px

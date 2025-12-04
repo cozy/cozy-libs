@@ -9,6 +9,8 @@ import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
 import { TwakeAssistantIconColor } from '../AssistantIcon/TwakeAssistantIconColor'
 
+import styles from './ConversationChips.styl'
+
 const ChatChips = ({
   modes,
   onModeSelect,
@@ -21,35 +23,30 @@ const ChatChips = ({
 
   return (
     <div
-      className="u-flex u-flex-row u-flex-wrap u-w-100 u-flex-justify-between u-flex-items-center u-mb-1"
-      style={{ gap: 8 }}
+      className={`u-flex u-flex-row u-flex-wrap u-w-100 u-flex-justify-between u-flex-items-center u-mb-1 ${styles['conversationChips-container']}`}
     >
-      <Icon icon={startIcon} size={24} style={{ opacity: 0.6 }} />
+      <Icon icon={startIcon} size={24} className={styles['conversationChips-startIcon']} />
 
       {visibleModes.map(mode => {
         const warningColor = mode.selected ? 'var(--warningColor)' : undefined
         return (
           <Chip
-            icon={<Icon icon={mode.icon} style={{ marginLeft: 12 }} />}
+            icon={<Icon icon={mode.icon} className={styles['conversationChips-chipIcon']} />}
             label={mode.label}
             clickable
-            onDelete={mode.external && (() => {})}
+            onDelete={mode.external && (() => { })}
             deleteIcon={
               mode.external && (
                 <Icon
                   icon="openwith"
-                  className="u-h-1"
-                  style={{ fill: warningColor, color: warningColor }}
+                  className={`${styles['conversationChips-deleteIcon']} ${mode.external ? styles['is-warning'] : ''}`}
                 />
               )
             }
             color={mode.external && mode.selected ? 'warning' : undefined}
             key={mode.label}
             variant={mode.selected ? 'ghost' : 'default'}
-            style={{
-              borderStyle: 'solid'
-            }}
-            className="u-mr-0"
+            className={styles['conversationChips-chip']}
             onClick={() => {
               onModeSelect(mode.key)
             }}
@@ -282,7 +279,8 @@ const ExternalExpertWarning = () => {
   return (
     <Alert
       severity="warning"
-      style={{ width: 'calc(100% - (16px * 2))' }}
+      severity="warning"
+      className="u-w-100 u-mh-1"
       action={
         <Button
           variant="text"

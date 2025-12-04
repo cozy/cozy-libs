@@ -16,6 +16,8 @@ import {
   CHAT_CONVERSATIONS_DOCTYPE
 } from '../queries'
 
+import styles from './ConversationList.styl'
+
 const ConversationList = ({ id }) => {
   const { t } = useI18n()
   const client = useClient()
@@ -57,11 +59,7 @@ const ConversationList = ({ id }) => {
   return (
     <div className="u-flex u-flex-column u-w-100 u-h-100 u-flex-align-center u-flex-justify-start">
       <RealTimeQueries doctype={CHAT_CONVERSATIONS_DOCTYPE} client={client} />
-      <div
-        style={{
-          height: 44
-        }}
-      />
+      <div className={styles['conversationList-spacer']} />
       <div className="u-m-1-half u-mb-0">
         <Button
           startIcon={<Icon icon="plus" size={14} />}
@@ -78,27 +76,16 @@ const ConversationList = ({ id }) => {
       >
         {t('assistant.conversationList.recentConversations')}
       </Typography>
-      <div
-        style={{
-          height: '100%',
-          width: '100%',
-          overflow: 'scroll'
-        }}
-      >
+      <div className={styles['conversationList-container']}>
         <List className="u-ph-half" disabledGutters>
           {conversations &&
             conversations.map((conv, index) => (
               <ListItem
                 dense
                 button
-                className="u-bdrs-4 u-mb-half"
+                className={`u-bdrs-4 u-mb-half ${styles['conversationList-item']} ${conversationId === conv.id ? styles['is-selected'] : ''
+                  }`}
                 key={index}
-                style={{
-                  backgroundColor:
-                    conversationId === conv.id
-                      ? 'var(--defaultBackgroundColor)'
-                      : undefined
-                }}
                 onClick={() => goToConversation(conv.id)}
               >
                 <ListItemText>
