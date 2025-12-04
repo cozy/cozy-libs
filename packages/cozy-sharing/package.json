@@ -20,7 +20,7 @@
     "deploy:doc": "(cd ../.. && yarn deploy:doc)",
     "prepublishOnly": "yarn build",
     "test": "env NODE_ENV=test jest",
-    "lint": "cd .. && yarn eslint --ext js,jsx packages/cozy-sharing",
+    "lint": "cd ../.. && yarn eslint --ext js,jsx packages/cozy-sharing",
     "start": "yarn build --watch",
     "watch": "yarn run start",
     "watch:doc:react": "(cd ../.. && TARGET=cozy-sharing yarn watch:doc:react)",
