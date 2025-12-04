@@ -37,7 +37,7 @@ export const useI18n = () => {
 }
 
 // Provider root component
-export class I18n extends Component {
+class I18n extends Component {
   constructor(props) {
     super(props)
     this.init(this.props)
@@ -98,10 +98,5 @@ I18n.childContextTypes = {
   polyglot: PropTypes.object,
   lang: PropTypes.string
 }
-
-export { initTranslation, extend } from './translation'
-export { default as translate } from './translate'
-export { default as createUseI18n } from './createUseI18n'
-export { default as useExtendI18n } from './useExtendI18n'
 
 export default I18n
