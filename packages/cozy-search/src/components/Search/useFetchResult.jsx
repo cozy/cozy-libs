@@ -96,7 +96,15 @@ export const useFetchResult = (searchValue, searchOptions = {}) => {
     } else {
       setState({ isLoading: true, results: null, searchValue: null })
     }
-  }, [dataProxy, searchValue, state.searchValue, setState])
+  }, [
+    dataProxy,
+    searchValue,
+    state.searchValue,
+    setState,
+    client,
+    navigate,
+    searchOptions
+  ])
 
   return {
     isLoading: state.isLoading,

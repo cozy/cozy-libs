@@ -52,10 +52,11 @@ const ConversationBar = ({ assistantStatus, hasConversationStarted }) => {
   return (
     <div className="u-w-100 u-maw-7 u-mh-auto">
       <div
-        className={`${styles['conversationBarSibling']} ${hasConversationStarted
+        className={`${styles['conversationBarSibling']} ${
+          hasConversationStarted
             ? styles['conversationBarSibling--started']
             : ''
-          } u-flex u-flex-column u-flex-items-center u-flex-justify-end`}
+        } u-flex u-flex-column u-flex-items-center u-flex-justify-end`}
       >
         <Typography variant="h3" align="center" className="u-mb-2">
           {t('assistant.conversationBar.startMessage')}
@@ -83,8 +84,6 @@ const ConversationBar = ({ assistantStatus, hasConversationStarted }) => {
               <Button
                 classes={{ label: 'u-w-2 u-h-2' }}
                 label={<Icon icon="plus" size={14} />}
-                variant="text"
-                color="inherit"
                 variant="text"
                 color="inherit"
                 className={styles['conversationBar-startAdornment']}

@@ -7,9 +7,8 @@ import Chip from 'cozy-ui/transpiled/react/Chips'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
-import { TwakeAssistantIconColor } from '../AssistantIcon/TwakeAssistantIconColor'
-
 import styles from './ConversationChips.styl'
+import { TwakeAssistantIconColor } from '../AssistantIcon/TwakeAssistantIconColor'
 
 const ChatChips = ({
   modes,
@@ -25,21 +24,31 @@ const ChatChips = ({
     <div
       className={`u-flex u-flex-row u-flex-wrap u-w-100 u-flex-justify-between u-flex-items-center u-mb-1 ${styles['conversationChips-container']}`}
     >
-      <Icon icon={startIcon} size={24} className={styles['conversationChips-startIcon']} />
+      <Icon
+        icon={startIcon}
+        size={24}
+        className={styles['conversationChips-startIcon']}
+      />
 
       {visibleModes.map(mode => {
-        const warningColor = mode.selected ? 'var(--warningColor)' : undefined
         return (
           <Chip
-            icon={<Icon icon={mode.icon} className={styles['conversationChips-chipIcon']} />}
+            icon={
+              <Icon
+                icon={mode.icon}
+                className={styles['conversationChips-chipIcon']}
+              />
+            }
             label={mode.label}
             clickable
-            onDelete={mode.external && (() => { })}
+            onDelete={mode.external && (() => {})}
             deleteIcon={
               mode.external && (
                 <Icon
                   icon="openwith"
-                  className={`${styles['conversationChips-deleteIcon']} ${mode.external ? styles['is-warning'] : ''}`}
+                  className={`${styles['conversationChips-deleteIcon']} ${
+                    mode.external ? styles['is-warning'] : ''
+                  }`}
                 />
               )
             }
@@ -278,7 +287,6 @@ const ExternalExpertWarning = () => {
 
   return (
     <Alert
-      severity="warning"
       severity="warning"
       className="u-w-100 u-mh-1"
       action={

@@ -15,7 +15,6 @@ import {
   buildRecentConversationsQuery,
   CHAT_CONVERSATIONS_DOCTYPE
 } from '../queries'
-
 import styles from './ConversationList.styl'
 
 const ConversationList = ({ id }) => {
@@ -83,8 +82,9 @@ const ConversationList = ({ id }) => {
               <ListItem
                 dense
                 button
-                className={`u-bdrs-4 u-mb-half ${styles['conversationList-item']} ${conversationId === conv.id ? styles['is-selected'] : ''
-                  }`}
+                className={`u-bdrs-4 u-mb-half ${
+                  styles['conversationList-item']
+                } ${conversationId === conv.id ? styles['is-selected'] : ''}`}
                 key={index}
                 onClick={() => goToConversation(conv.id)}
               >

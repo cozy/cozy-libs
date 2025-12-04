@@ -9,10 +9,11 @@ import styles from '../../Stylus/Conversation.styl'
 const ConversationSwitcher = ({ historyOpen, setHistoryOpen }) => {
   return (
     <div
-      className={`${styles['conversationSwitcher']} ${historyOpen
+      className={`${styles['conversationSwitcher']} ${
+        historyOpen
           ? styles['conversationSwitcher--open']
           : styles['conversationSwitcher--closed']
-        }`}
+      }`}
     >
       <Button
         label={<Icon icon="burger" />}
@@ -20,14 +21,12 @@ const ConversationSwitcher = ({ historyOpen, setHistoryOpen }) => {
           setHistoryOpen(!historyOpen)
         }}
         variant={historyOpen ? 'ghost' : 'text'}
-        variant={historyOpen ? 'ghost' : 'text'}
         className={`u-bdrs-4 ${styles['conversationSwitcher-button']}`}
       />
 
       {flag('cozy.assistant.demo') && (
         <Button
           label={<Icon icon="magnifier" />}
-          variant="text"
           variant="text"
           className={`u-bdrs-4 ${styles['conversationSwitcher-button']}`}
         />
