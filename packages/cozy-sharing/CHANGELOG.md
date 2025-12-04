@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [27.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@27.1.4...cozy-sharing@27.2.0) (2025-12-04)
+
+### Bug Fixes
+
+- **cozy-sharing:** Lint command ([3d6474a](https://github.com/cozy/cozy-libs/commit/3d6474a857f51ee604e049a85c277482ab7d1756))
+
+### Features
+
+- **cozy-sharing:** Add rename feature to shared drive ([a0eb9ae](https://github.com/cozy/cozy-libs/commit/a0eb9ae336fe45888e05b078625ea9d14525cd48))
+
 ## [27.1.4](https://github.com/cozy/cozy-libs/compare/cozy-sharing@27.1.3...cozy-sharing@27.1.4) (2025-12-04)
 
 **Note:** Version bump only for package cozy-sharing
