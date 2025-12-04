@@ -1,10 +1,45 @@
 {
   "assistant": {
     "search": {
-      "placeholder": "Une question ?",
+      "placeholder": "Une question ?",
       "send": "Envoyer",
       "noItem": "Aucun résultat",
       "notEnough": "Votre recherche doit contenir au moins 3 caractères"
+    },
+    "conversationBar": {
+      "startMessage": "Comment puis-je vous aider ?",
+      "newChat": "Nouveau",
+      "more": {
+        "experts": "autres expertises",
+        "knowledge_bases": "autres bases de connaissances"
+      }
+    },
+    "conversationList": {
+      "recentConversations": "Conversations récentes"
+    },
+    "experts": {
+      "legal": "Juridique",
+      "financial": "Financier",
+      "image_creation": "Création d'images",
+      "marketing": "Marketing",
+      "code_assistant": "Assistant de code",
+      "brainstorming": "Brainstorming",
+      "travel_planner": "Planificateur de voyage",
+      "fitness_coach": "Coach sportif",
+      "recipe_suggester": "Suggestions de recettes",
+      "web_search": "Recherche web",
+      "external_warning": {
+        "title": "Expert externe sélectionné",
+        "description": "Attention aux bases de données sélectionnées.",
+        "know_more": "En savoir plus"
+      }
+    },
+    "knowledge_bases": {
+      "twake_knowledge": "Connaissances Twake",
+      "web": "Web",
+      "linagora_client": "CRM",
+      "security_procedures": "Sécurité",
+      "other": "Autre base de connaissances"
     },
     "dialog": {
       "close": "Fermer"

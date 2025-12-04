@@ -3,13 +3,40 @@
 .conversationBar
     max-height 95px
     min-height 48px
+    border 1px solid var(--borderMainColor)
     z-index calc(var(--zIndex-modal) + 15)
 
     +gt-mobile()
       max-height 178px
+
+.conversationBar-startAdornment
+    margin-right 2px !important
+    margin-left -12px !important
+
+.conversationBar-endAdornment
+    margin-right -8px
+    display flex
+    align-items center
+    justify-content center
+    gap 4px
+    flex none
 
 .conversationBar-input
   max-height 80px
 
   +gt-mobile()
     max-height 155px
+
+.conversationBarSibling
+  height 81px
+  width 100%
+  margin 16px 0px
+  opacity 1
+
+  transition: height 0.4s 0.25s, opacity 0.4s 0.1s, margin 0.4s 0.25s
+  transition-timing-function: cubic-bezier(0.31, 0.1, 0, 1.06)
+
+.conversationBarSibling--started
+  height 0px
+  opacity 0
+  margin 0px

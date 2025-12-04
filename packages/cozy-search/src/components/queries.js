@@ -37,3 +37,15 @@ export const buildMyselfQuery = () => {
     }
   }
 }
+
+export const buildRecentConversationsQuery = () => ({
+  definition: () =>
+    Q(CHAT_CONVERSATIONS_DOCTYPE)
+      .where({ 'cozyMetadata.doctypeVersion': '1' })
+      .sortBy([{ 'cozyMetadata.updatedAt': 'desc' }])
+      .limitBy(50),
+  options: {
+    as: CHAT_CONVERSATIONS_DOCTYPE + '/recent',
+    fetchPolicy: defaultFetchPolicy
+  }
+})

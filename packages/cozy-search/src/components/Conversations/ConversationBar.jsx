@@ -1,19 +1,22 @@
 import React, { useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 
+import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import PaperplaneIcon from 'cozy-ui/transpiled/react/Icons/Paperplane'
 import StopIcon from 'cozy-ui/transpiled/react/Icons/Stop'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/providers/I18n'
 
+import ChatModes from './ConversationChips'
 import styles from './styles.styl'
 import { useAssistant } from '../AssistantProvider'
 
-const ConversationBar = ({ assistantStatus }) => {
+const ConversationBar = ({ assistantStatus, hasConversationStarted }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
   const { onAssistantExecute } = useAssistant()
@@ -48,6 +51,18 @@ const ConversationBar = ({ assistantStatus }) => {
 
   return (
     <div className="u-w-100 u-maw-7 u-mh-auto">
+      <div
+        className={`${styles['conversationBarSibling']} ${
+          hasConversationStarted
+            ? styles['conversationBarSibling--started']
+            : ''
+        } u-flex u-flex-column u-flex-items-center u-flex-justify-end`}
+      >
+        <Typography variant="h3" align="center" className="u-mb-2">
+          {t('assistant.conversationBar.startMessage')}
+        </Typography>
+      </div>
+
       <SearchBar
         className={styles['conversationBar']}
         icon={null}
@@ -65,25 +80,37 @@ const ConversationBar = ({ assistantStatus }) => {
               className: styles['conversationBar-input']
             },
             autoFocus: !isMobile,
-            endAdornment:
-              assistantStatus !== 'idle' ? (
-                <Button
-                  component="div"
-                  className="u-miw-auto u-mih-auto u-w-2 u-h-2 u-bdrs-circle u-p-1 u-mr-1"
-                  classes={{ label: 'u-flex u-w-auto' }}
-                  label={<Icon icon={StopIcon} size={12} />}
-                  onClick={handleStop}
-                />
-              ) : (
-                <Button
-                  component="div"
-                  className="u-miw-auto u-mih-auto u-w-2 u-h-2 u-bdrs-circle u-p-1 u-mr-1"
-                  classes={{ label: 'u-flex u-w-auto' }}
-                  label={<Icon icon={PaperplaneIcon} size={12} />}
-                  disabled={!inputValue}
-                  onClick={handleClick}
-                />
-              ),
+            startAdornment: flag('cozy.assistant.demo') && (
+              <Button
+                classes={{ label: 'u-w-2 u-h-2' }}
+                label={<Icon icon="plus" size={14} />}
+                variant="text"
+                color="inherit"
+                className={styles['conversationBar-startAdornment']}
+              />
+            ),
+            endAdornment: (
+              <div className={styles['conversationBar-endAdornment']}>
+                {assistantStatus !== 'idle' ? (
+                  <Button
+                    component="div"
+                    className="u-miw-auto u-mih-auto u-w-2 u-h-2 u-bdrs-circle u-p-1 u-mr-1"
+                    classes={{ label: 'u-flex u-w-auto' }}
+                    label={<Icon icon={StopIcon} size={12} />}
+                    onClick={handleStop}
+                  />
+                ) : (
+                  <Button
+                    component="div"
+                    className="u-miw-auto u-mih-auto u-w-2 u-h-2 u-bdrs-circle u-p-1 u-mr-1"
+                    classes={{ label: 'u-flex u-w-auto' }}
+                    label={<Icon icon={PaperplaneIcon} size={14} />}
+                    disabled={!inputValue}
+                    onClick={handleClick}
+                  />
+                )}
+              </div>
+            ),
             onKeyDown: ev => {
               if (!isMobile) {
                 if (ev.shiftKey && ev.key === 'Enter') {
@@ -100,6 +127,14 @@ const ConversationBar = ({ assistantStatus }) => {
         }}
         onChange={handleChange}
       />
+
+      {flag('cozy.assistant.demo') && (
+        <div
+          className={`${styles['conversationBarSibling']} u-flex u-flex-column u-flex-items-center u-flex-justify-start`}
+        >
+          <ChatModes />
+        </div>
+      )}
     </div>
   )
 }

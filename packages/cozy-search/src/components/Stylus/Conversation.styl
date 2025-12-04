@@ -1,0 +1,111 @@
+.conversationApp
+  height 100vh
+  width 100vw
+
+  display flex
+  flex-direction column
+
+.conversationHeader
+  height 48px
+  width calc(100% - 16px * 2)
+  display flex
+  align-items center
+  justify-content flex-start
+  padding 0 16px
+  border-bottom 1px solid var(--borderMainColor)
+
+.conversationLayout
+  height 100%
+  width 100vw
+  flex 1
+
+  display flex
+  align-items center
+  justify-content center
+  flex-direction row
+  overflow hidden
+
+.conversationWindowContainer
+  flex 1
+  height 100%
+  display flex
+  align-items center
+  justify-content center
+
+.conversationWindow
+  width calc(100% - 40px)
+  max-width 1000px
+  height calc(100% - 40px)
+  padding 20px
+
+.conversationContainer 
+  height 1px
+  margin-top -100px
+  opacity 0
+  overflow visible
+  width 100%
+  transition height .6s .1s, opacity .2s .4s, margin-top .6s .1s
+  transition-timing-function cubic-bezier(0.31, .1, 0, 1.06)
+
+.conversationContainer--started
+  height 100%
+  margin-top 0px
+  opacity 1 !important
+  max-height 100% !important
+  overflow scroll
+  padding-bottom 20px
+
+.conversationHistory
+  width 236px
+  height 100%
+  border-right-style solid
+  border-right-width 1px
+  border-right-color transparent
+  margin-left -236px
+  transition margin-left .3s
+
+.conversationHistory--open
+  margin-left 0px
+  border-right-color var(--borderMainColor)
+
+.conversationHistory--mobile
+  height calc(100vh - 48px)
+  width 100vw
+  position absolute
+  top 48px
+  left 0px
+  z-index 90
+  background-color var(--paperBackgroundColor)
+  display none
+
+.conversationHistory--mobile.conversationHistory--open
+  display block
+
+.conversationSwitcher {
+  position absolute
+  top 48px
+  left 0px
+  display flex
+  align-items center
+  justify-content space-between
+  width calc(236px - (24px * 2) + 4px)
+  height calc(68px - (24px * 2))
+  padding 24px
+  z-index 99
+
+  transition width .2s, height .2s, padding .2s
+}
+
+.conversationSwitcher--closed {
+  background-color var(--paperBackgroundColor)
+  border-right 1px solid var(--borderMainColor)
+  border-bottom 1px solid var(--borderMainColor)
+  border-bottom-right-radius 8px
+  padding 14px
+  width fit-content
+}
+
+.conversationSwitcher-button
+  padding 0 !important
+  min-width 36px !important
+  height 30px !important

@@ -6,6 +6,41 @@
       "noItem": "No results",
       "notEnough": "Your query must contain at least 3 characters"
     },
+    "conversationBar": {
+      "startMessage": "What can I do for you?",
+      "newChat": "New chat",
+      "more": {
+        "experts": "more experts",
+        "knowledge_bases": "more knowledge bases"
+      }
+    },
+    "conversationList": {
+      "recentConversations": "Recent conversations"
+    },
+    "experts": {
+      "legal": "Legal",
+      "financial": "Financial",
+      "image_creation": "Image creation",
+      "marketing": "Marketing",
+      "code_assistant": "Code assistant",
+      "brainstorming": "Brainstorming",
+      "travel_planner": "Travel planner",
+      "fitness_coach": "Fitness coach",
+      "recipe_suggester": "Recipe suggester",
+      "web_search": "Web search",
+      "external_warning": {
+        "title": "External expert selected",
+        "description": "Be careful with the selected knowledge bases",
+        "know_more": "Know more"
+      }
+    },
+    "knowledge_bases": {
+      "twake_knowledge": "My Twake",
+      "web": "Web",
+      "linagora_client": "CRM",
+      "security_procedures": "Security",
+      "other": "Other knowledge base"
+    },
     "dialog": {
       "close": "Close"
     },
