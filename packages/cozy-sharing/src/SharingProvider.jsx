@@ -89,7 +89,8 @@ export class SharingProvider extends Component {
       allLoaded: false,
       revokeAllRecipients: this.revokeAllRecipients,
       refresh: this.fetchAllSharings,
-      hasWriteAccess: this.hasWriteAccess
+      hasWriteAccess: this.hasWriteAccess,
+      renameSharedDrive: this.renameSharedDrive
     }
     this.isPublic = props.isPublic ?? false
     this.realtime = null
@@ -276,6 +277,13 @@ export class SharingProvider extends Component {
       readOnlyRecipients
     })
     this.dispatch(updateSharing(resp.data))
+  }
+
+  renameSharedDrive = async (document, newName) => {
+    const sharing = getDocumentSharing(this.state, document.id)
+    await this.sharingCol.renameSharedDrive(sharing, newName)
+    sharing.description = newName
+    this.dispatch(updateSharing(sharing))
   }
 
   revokeAllRecipients = async document => {
