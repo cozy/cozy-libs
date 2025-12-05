@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [28.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.0.0...cozy-sharing@28.0.1) (2025-12-05)
+
+### Bug Fixes
+
+- **cozy-sharing:** Add twake-i18n to jest config to fix unit tests ([781e991](https://github.com/cozy/cozy-libs/commit/781e9919ff6f6326c041c893949edd9a5e5a4e91))
+
 # [28.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@27.2.0...cozy-sharing@28.0.0) (2025-12-04)
 
 ### Features

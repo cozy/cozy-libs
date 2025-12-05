@@ -17126,7 +17126,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"cozy-harvest-lib@npm:^36.0.0, cozy-harvest-lib@workspace:packages/cozy-harvest-lib":
+"cozy-harvest-lib@npm:^36.0.1, cozy-harvest-lib@workspace:packages/cozy-harvest-lib":
   version: 0.0.0-use.local
   resolution: "cozy-harvest-lib@workspace:packages/cozy-harvest-lib"
   dependencies:
@@ -17163,7 +17163,7 @@ __metadata:
     cozy-tsconfig: "npm:^1.8.1"
     cozy-ui: "npm:^135.0.0"
     cozy-ui-plus: "npm:^4.0.0"
-    cozy-viewer: "npm:^25.0.0"
+    cozy-viewer: "npm:^25.0.1"
     date-fns: "npm:2.30.0"
     enzyme: "npm:3.11.0"
     enzyme-adapter-react-16: "npm:1.15.6"
@@ -17390,7 +17390,7 @@ __metadata:
     cozy-device-helper: "npm:^4.0.1"
     cozy-doctypes: "npm:^1.98.2"
     cozy-realtime: "npm:^5.8.1"
-    cozy-sharing: "npm:^28.0.0"
+    cozy-sharing: "npm:^28.0.1"
     cozy-ui: "npm:40.9.1"
     date-fns: "npm:1.30.1"
     lodash: "npm:^4.17.21"
@@ -17564,7 +17564,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"cozy-sharing@npm:^28.0.0, cozy-sharing@workspace:packages/cozy-sharing":
+"cozy-sharing@npm:^28.0.1, cozy-sharing@workspace:packages/cozy-sharing":
   version: 0.0.0-use.local
   resolution: "cozy-sharing@workspace:packages/cozy-sharing"
   dependencies:
@@ -18031,7 +18031,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-viewer@npm:^25.0.0, cozy-viewer@workspace:packages/cozy-viewer":
+"cozy-viewer@npm:^25.0.1, cozy-viewer@workspace:packages/cozy-viewer":
   version: 0.0.0-use.local
   resolution: "cozy-viewer@workspace:packages/cozy-viewer"
   dependencies:
@@ -18045,10 +18045,10 @@ __metadata:
     classnames: "npm:^2.5.1"
     cozy-client: "npm:^57.0.0"
     cozy-device-helper: "npm:2.0.0"
-    cozy-harvest-lib: "npm:^36.0.0"
+    cozy-harvest-lib: "npm:^36.0.1"
     cozy-intent: "npm:^2.30.1"
     cozy-logger: "npm:^1.17.0"
-    cozy-sharing: "npm:^28.0.0"
+    cozy-sharing: "npm:^28.0.1"
     cozy-ui: "npm:^135.0.0"
     cozy-ui-plus: "npm:^4.0.0"
     hammerjs: "npm:^2.0.8"
