@@ -7,6 +7,7 @@ import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 
 import { DumbSharedDriveModal } from './DumbSharedDriveModal'
 import withLocales from '../../hoc/withLocales'
+import { useSharingContext } from '../../hooks/useSharingContext'
 import { Contact } from '../../models'
 
 export const SharedDriveEditModal = withLocales(
@@ -14,6 +15,7 @@ export const SharedDriveEditModal = withLocales(
     const client = useClient()
     const { t } = useI18n()
     const { showAlert } = useAlert()
+    const { renameSharedDrive } = useSharingContext()
 
     const createContact = contact => client.create(Contact.doctype, contact)
     const [name, setName] = useState(sharing?.description)
@@ -23,9 +25,7 @@ export const SharedDriveEditModal = withLocales(
     }
     const onRename = async value => {
       try {
-        await client
-          .collection('io.cozy.sharings')
-          .renameSharedDrive(sharing, value)
+        await renameSharedDrive(document, value)
         showAlert({
           message: t('SharedDrive.sharedDriveModal.successNotificationUpdate'),
           severity: 'success'
