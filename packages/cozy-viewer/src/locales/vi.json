@@ -79,6 +79,18 @@
         "success": "Đã sao chép vào khay nhớ tạm",
         "error": "Không thể sao chép vào khay nhớ tạm"
       }
+    },
+    "summariseWithAi": "Tóm tắt",
+    "ai": {
+      "panelTitle": "Trợ lý AI",
+      "bodyText": "Tóm tắt",
+      "error": {
+        "summary": "Không thể tạo tóm tắt. Vui lòng thử lại."
+      },
+      "copied": "Đã sao chép tóm tắt vào khay nhớ tạm",
+      "footerText": "Nội dung này được tạo bởi AI và có thể chứa lỗi.",
+      "stop": "Dừng",
+      "loadingText": "Đang tóm tắt nội dung"
     }
   }
 }

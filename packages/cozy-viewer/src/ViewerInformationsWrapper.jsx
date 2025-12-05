@@ -1,14 +1,17 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
 import { useSetFlagshipUI } from 'cozy-ui/transpiled/react/hooks/useSetFlagshipUi/useSetFlagshipUI'
 import { useCozyTheme } from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import { useTheme } from 'cozy-ui/transpiled/react/styles'
 
 import FooterContent from './Footer/FooterContent'
+import AIAssistantPanel from './Panel/AI/AIAssistantPanel'
 import PanelContent from './Panel/PanelContent'
 import Footer from './components/Footer'
 import InformationPanel from './components/InformationPanel'
+import { useViewer } from './providers/ViewerProvider'
 
 const ViewerInformationsWrapper = ({
   disableFooter,
@@ -18,7 +21,15 @@ const ViewerInformationsWrapper = ({
 }) => {
   const theme = useTheme()
   const { isLight } = useCozyTheme()
+  const { isOpenAiAssistant, setIsOpenAiAssistant } = useViewer()
   const sidebar = document.querySelector('[class*="sidebar"]')
+  const location = useLocation()
+
+  useEffect(() => {
+    if (location?.state?.showAIAssistant) {
+      setIsOpenAiAssistant(true)
+    }
+  }, [location, setIsOpenAiAssistant])
 
   useSetFlagshipUI(
     {
@@ -32,15 +43,37 @@ const ViewerInformationsWrapper = ({
 
   return (
     <>
-      {!disableFooter && (
-        <Footer>
-          <FooterContent toolbarRef={toolbarRef}>{children}</FooterContent>
-        </Footer>
-      )}
-      {validForPanel && (
-        <InformationPanel>
-          <PanelContent />
-        </InformationPanel>
+      {isOpenAiAssistant ? (
+        <>
+          {!disableFooter && (
+            <Footer>
+              <FooterContent
+                toolbarRef={toolbarRef}
+                isDisplayChildrenDirectly={true}
+              >
+                <AIAssistantPanel />
+              </FooterContent>
+            </Footer>
+          )}
+          {validForPanel && (
+            <InformationPanel>
+              <AIAssistantPanel />
+            </InformationPanel>
+          )}
+        </>
+      ) : (
+        <>
+          {!disableFooter && (
+            <Footer>
+              <FooterContent toolbarRef={toolbarRef}>{children}</FooterContent>
+            </Footer>
+          )}
+          {validForPanel && (
+            <InformationPanel>
+              <PanelContent />
+            </InformationPanel>
+          )}
+        </>
       )}
     </>
   )

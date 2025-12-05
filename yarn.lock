@@ -8130,6 +8130,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@remix-run/router@npm:1.23.1":
+  version: 1.23.1
+  resolution: "@remix-run/router@npm:1.23.1"
+  checksum: 10c0/94ac9632c0070199b8275cd6dffe78eb4c02e8926328937c65561c5c30d7ddf842743df3c8f7df302f00a593dd204846d93667fbbbe3c3641437d7b8f333ed90
+  languageName: node
+  linkType: hard
+
 "@remix-run/router@npm:1.7.2":
   version: 1.7.2
   resolution: "@remix-run/router@npm:1.7.2"
@@ -16705,43 +16712,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-client@npm:^57.0.0":
-  version: 57.0.0
-  resolution: "cozy-client@npm:57.0.0"
-  dependencies:
-    "@cozy/minilog": "npm:1.0.0"
-    "@types/jest": "npm:^26.0.20"
-    "@types/lodash": "npm:^4.14.170"
-    btoa: "npm:^1.2.1"
-    cozy-stack-client: "npm:^57.0.0"
-    date-fns: "npm:2.29.3"
-    json-stable-stringify: "npm:^1.0.1"
-    lodash: "npm:^4.17.13"
-    microee: "npm:^0.0.6"
-    node-fetch: "npm:^2.6.1"
-    node-polyglot: "npm:2.4.2"
-    open: "npm:7.4.2"
-    prop-types: "npm:^15.6.2"
-    react-redux: "npm:^7.2.0"
-    redux: "npm:3 || 4"
-    redux-thunk: "npm:^2.3.0"
-    server-destroy: "npm:^1.0.1"
-    sift: "npm:^6.0.0"
-    url-search-params-polyfill: "npm:^8.0.0"
-  peerDependencies:
-    cozy-device-helper: ">=2.1.0"
-    cozy-flags: ">2.8.6"
-    cozy-intent: ">=2.23.0"
-    cozy-logger: ">1.7.0"
-    react: ^16.7.0
-    react-native: ^0.65.0
-    react-native-google-play-integrity: "*"
-    react-native-inappbrowser-reborn: ^3.5.1
-    react-native-ios11-devicecheck: "*"
-  checksum: 10c0/85bea17094305bdf5f7a4ab76841ebb0ea61fb4fec2645e2111893e0716056aafe03b8e62a8009dc7e2e8bb8d28219afecbee2ee169f3b110080a16783477d08
-  languageName: node
-  linkType: hard
-
 "cozy-client@npm:^60.15.2":
   version: 60.15.2
   resolution: "cozy-client@npm:60.15.2"
@@ -16817,6 +16787,45 @@ __metadata:
     react-native-inappbrowser-reborn: ^3.5.1
     react-native-ios11-devicecheck: ^0.0.3
   checksum: 10c0/eefaf039638f52aa95b1b35f9e7fda0a50ea5bd55670ca4ea3abca6abcc41c337473b414a6984ed71ab17ec64a5379b4dc051990d20dc27875f7daa58dc2eb3f
+  languageName: node
+  linkType: hard
+
+"cozy-client@npm:^60.20.0":
+  version: 60.20.0
+  resolution: "cozy-client@npm:60.20.0"
+  dependencies:
+    "@cozy/minilog": "npm:1.0.0"
+    "@fastify/deepmerge": "npm:^2.0.2"
+    "@types/jest": "npm:^26.0.20"
+    "@types/lodash": "npm:^4.14.170"
+    btoa: "npm:^1.2.1"
+    cozy-stack-client: "npm:^60.19.0"
+    date-fns: "npm:^2.30.0"
+    fast-deep-equal: "npm:^3.1.3"
+    json-stable-stringify: "npm:^1.0.1"
+    lodash: "npm:^4.17.13"
+    microee: "npm:^0.0.6"
+    node-fetch: "npm:^2.6.1"
+    node-polyglot: "npm:2.4.2"
+    open: "npm:7.4.2"
+    prop-types: "npm:^15.6.2"
+    react-redux: "npm:^7.2.0"
+    redux: "npm:3 || 4"
+    redux-thunk: "npm:^2.3.0"
+    server-destroy: "npm:^1.0.1"
+    sift: "npm:^6.0.0"
+    url-search-params-polyfill: "npm:^8.0.0"
+  peerDependencies:
+    cozy-device-helper: ">=2.1.0"
+    cozy-flags: ">2.8.6"
+    cozy-intent: ">=2.23.0"
+    cozy-logger: ">1.7.0"
+    react: ^16.7.0
+    react-native: ~0.63.5
+    react-native-google-play-integrity: ^1.1.0
+    react-native-inappbrowser-reborn: ^3.5.1
+    react-native-ios11-devicecheck: ^0.0.3
+  checksum: 10c0/8a6e74611f8e20755a0d5bb6cee026eca642a682821361b12283daffa370a4f092211323ecee74185a76bfd4099cc4bbedf047d4effe42cf6735807a590a532b
   languageName: node
   linkType: hard
 
@@ -17661,19 +17670,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-stack-client@npm:^57.0.0":
-  version: 57.0.0
-  resolution: "cozy-stack-client@npm:57.0.0"
-  dependencies:
-    detect-node: "npm:^2.0.4"
-    mime: "npm:^2.4.0"
-    qs: "npm:^6.7.0"
-  peerDependencies:
-    cozy-flags: ">2.8.6"
-  checksum: 10c0/31c29592d9ded46a664f09828d3a186d8aa89156644bf96abfb555ab8c677500fc1391501dac29bcdee51260b0754f6b5c36b0ba2ab102b9b7b2835ed00c5351
-  languageName: node
-  linkType: hard
-
 "cozy-stack-client@npm:^60.1.0":
   version: 60.1.0
   resolution: "cozy-stack-client@npm:60.1.0"
@@ -17710,6 +17706,19 @@ __metadata:
   peerDependencies:
     cozy-flags: ">2.8.6"
   checksum: 10c0/63b1019698aa581071682575d2113db2f84ad48f1d86c7d345350607d287ac1f288c206e30f1789218c2147e6315e853f037de6d076c7bdd4f99703eab2d202c
+  languageName: node
+  linkType: hard
+
+"cozy-stack-client@npm:^60.19.0":
+  version: 60.19.0
+  resolution: "cozy-stack-client@npm:60.19.0"
+  dependencies:
+    detect-node: "npm:^2.0.4"
+    mime: "npm:^2.4.0"
+    qs: "npm:^6.7.0"
+  peerDependencies:
+    cozy-flags: ">2.8.6"
+  checksum: 10c0/666c60029e0f470243a0fd6a99f9070cc7f52f7fc74ea14071675a290737deb6e6ebfbbec8ce230a324212354dbf4ab72c1002c76edd240ba7dde1d4ee778d07
   languageName: node
   linkType: hard
 
@@ -18161,7 +18170,7 @@ __metadata:
     babel-plugin-inline-json-import: "npm:0.3.2"
     babel-preset-cozy-app: "npm:^2.8.2"
     classnames: "npm:^2.5.1"
-    cozy-client: "npm:^57.0.0"
+    cozy-client: "npm:^60.20.0"
     cozy-device-helper: "npm:2.0.0"
     cozy-harvest-lib: "npm:^35.1.10"
     cozy-intent: "npm:^2.30.1"
@@ -18179,6 +18188,7 @@ __metadata:
     react-dom: "npm:16.12.0"
     react-markdown: "npm:^4.0.8"
     react-pdf: "npm:^5.7.2"
+    react-router-dom: "npm:^6.14.2"
     react-test-renderer: "npm:16.12.0"
     stylus: "npm:0.63.0"
     typescript: "npm:5.5.2"
@@ -18193,6 +18203,7 @@ __metadata:
     cozy-ui-plus: ">=1.2.0"
     react: ">=16.12.0"
     react-dom: ">=16.12.0"
+    react-router-dom: ">=6.14.2"
   languageName: unknown
   linkType: soft
 
@@ -36288,6 +36299,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-router-dom@npm:^6.14.2":
+  version: 6.30.2
+  resolution: "react-router-dom@npm:6.30.2"
+  dependencies:
+    "@remix-run/router": "npm:1.23.1"
+    react-router: "npm:6.30.2"
+  peerDependencies:
+    react: ">=16.8"
+    react-dom: ">=16.8"
+  checksum: 10c0/d0c6edf4e2aa7639b4a4f64a7747f03d8861bdf4857e8981b1cff1451b7cb91fcdcd7e315a6e3df910271b2f5071825d2aec218d5f7890f2269fc074f198e42a
+  languageName: node
+  linkType: hard
+
 "react-router@npm:6.14.2":
   version: 6.14.2
   resolution: "react-router@npm:6.14.2"
@@ -36307,6 +36331,17 @@ __metadata:
   peerDependencies:
     react: ">=16.8"
   checksum: 10c0/ac8785a0b28d363940763e49119e5160331099d4f0196235b143ba9cdc984048ca44a77497f393b12165c99baf8ae6c11386f1f6f20ef52d99c2e07b31920862
+  languageName: node
+  linkType: hard
+
+"react-router@npm:6.30.2":
+  version: 6.30.2
+  resolution: "react-router@npm:6.30.2"
+  dependencies:
+    "@remix-run/router": "npm:1.23.1"
+  peerDependencies:
+    react: ">=16.8"
+  checksum: 10c0/cff5ea92d248d2230adc46d4e2ed3fbeddfaf1ae2e63411da8b7ea6ddc207d71dbc522c05c492e671e553e2153934f4ab180ac02bd36205b274e097f2cfe6fc4
   languageName: node
   linkType: hard
 
