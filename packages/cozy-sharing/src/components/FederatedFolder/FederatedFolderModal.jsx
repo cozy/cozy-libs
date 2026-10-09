@@ -30,7 +30,8 @@ const FederatedFolderModalContent = ({
   document: existingDocument,
   recipients,
   autoOpenShareRestriction,
-  showGenerateLinkButton
+  showGenerateLinkButton,
+  canManageMembers = true
 }) => {
   // share from CozyProvider is wired to callbacks and realtime that
   // makes existingDocument and existingRecipients reactive to changes.
@@ -104,9 +105,10 @@ const FederatedFolderModalContent = ({
       ? isOwner(documentId)
       : false
   const isMemberReadOnly =
-    isInsideSharedDrive &&
-    !isCurrentUserOwner &&
-    !hasWriteAccess(documentId, existingDocument?.driveId)
+    !canManageMembers ||
+    (isInsideSharedDrive &&
+      !isCurrentUserOwner &&
+      !hasWriteAccess(documentId, existingDocument?.driveId))
   const canManageSharing =
     isCurrentUserOwner || (documentId ? canReshare(documentId) : false)
 
@@ -320,7 +322,8 @@ FederatedFolderModalContent.propTypes = {
   document: PropTypes.object.isRequired,
   recipients: PropTypes.array,
   autoOpenShareRestriction: PropTypes.bool,
-  showGenerateLinkButton: PropTypes.bool
+  showGenerateLinkButton: PropTypes.bool,
+  canManageMembers: PropTypes.bool
 }
 
 const FederatedFolderModalWrapper = ({ document, ...props }) => {
@@ -365,7 +368,8 @@ FederatedFolderModal.propTypes = {
   onRevokeSuccess: PropTypes.func,
   document: PropTypes.object.isRequired,
   autoOpenShareRestriction: PropTypes.bool,
-  showGenerateLinkButton: PropTypes.bool
+  showGenerateLinkButton: PropTypes.bool,
+  canManageMembers: PropTypes.bool
 }
 
 export default FederatedFolderModal

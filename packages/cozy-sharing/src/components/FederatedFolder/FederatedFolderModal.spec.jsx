@@ -246,6 +246,24 @@ describe('FederatedFolderModal', () => {
       ).toBe(null)
     })
 
+    it('should only share by link when members cannot be managed', async () => {
+      mockHasWriteAccess.mockReturnValue(true)
+
+      const { findByText, queryByText } = setup({
+        document: {
+          ...mockDocument,
+          driveId: 'federated-folder-id',
+          type: 'directory'
+        },
+        canManageMembers: false
+      })
+
+      await findByText('Copy link')
+
+      expect(queryByText('Add users')).toBe(null)
+      expect(queryByText('Done')).toBe(null)
+    })
+
     it('should allow share by email when document is the federated shared folder root', async () => {
       mockGetSharingById.mockReturnValue({
         attributes: {

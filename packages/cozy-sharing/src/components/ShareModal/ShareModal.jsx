@@ -68,5 +68,7 @@ ShareModal.propTypes = {
   autoOpenShareRestriction: PropTypes.bool,
   document: PropTypes.object.isRequired,
   onRevokeSuccess: PropTypes.func,
-  showGenerateLinkButton: PropTypes.bool
+  showGenerateLinkButton: PropTypes.bool,
+  /** Whether members can be added, changed or removed from the modal */
+  canManageMembers: PropTypes.bool
 }
