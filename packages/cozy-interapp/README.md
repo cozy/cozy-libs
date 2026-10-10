@@ -167,9 +167,21 @@ intents.create('EDIT', 'io.cozy.apps')
 
 ### `intents.createService()`
 
-`intents.createService([intentId, window])` has to be used in the intent service page. It initializes communication with the parent window (remember: the service is supposed to be in an iframe).
+`intents.createService([intentId, window, options])` has to be used in the intent service page. It initializes communication with the parent window (remember: the service is supposed to be in an iframe).
 
 If `intentId` and `window` parameters are not provided the method will try to retrieve them automatically.
+
+`options`:
+
+- `requireFrameAncestors` (default `false`): cancels the intent, and rejects the returned promise, when `frameAncestors` of the intent is missing or not a list of origins, or when one of `location.ancestorOrigins` is not in it. Browsers without `location.ancestorOrigins` (Firefox before 148) only get the `frameAncestors` check.
+  Set it on a service hosted on another origin than the stack: the stack only enforces `frame-ancestors` on the services it serves.
+  It needs a stack that gives `frameAncestors` (linagora/cozy-stack#4978): on an older stack, every intent is refused.
+
+```js
+const service = await intents.createService(null, window, {
+  requireFrameAncestors: true
+})
+```
 
 It returns a *service* object, which provides the following methods :
 
