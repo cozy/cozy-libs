@@ -23,8 +23,8 @@ export const i18nPropTypes = {
 
 /**
  * @typedef useI18nReturnTypes
- * @property {(key: string) => string} t
- * @property {(date: string, format: string) => string} f
+ * @property {(key: string, options?: number | Record<string, unknown>) => string} t
+ * @property {(date: string | number | Date, format: string, options?: Record<string, unknown>) => string} f
  * @property {string} lang
  */
 
