@@ -1,6 +1,6 @@
 {
   "name": "cozy-ui-plus",
-  "version": "14.0.2",
+  "version": "14.0.3",
   "description": "Cozy-ui-plus is an extension of cozy-ui and provides components based on cozy-client",
   "main": "dist/index.js",
   "license": "MIT",
@@ -38,7 +38,7 @@
     "cozy-intent": "^2.31.1",
     "cozy-interapp": "^0.21.0",
     "cozy-logger": "^1.18.1",
-    "cozy-sharing": "^39.0.3",
+    "cozy-sharing": "^39.0.4",
     "cozy-stack-client": "^60.21.1",
     "cozy-ui": "^138.1.0",
     "jest": "30.3.0",
@@ -50,7 +50,7 @@
     "react-dom": "16.12.0",
     "react-test-renderer": "16.12.0",
     "stylus": "0.64.0",
-    "twake-i18n": "^0.7.0",
+    "twake-i18n": "^0.7.1",
     "typescript": "5.5.2"
   },
   "dependencies": {

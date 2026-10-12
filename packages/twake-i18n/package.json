@@ -1,6 +1,6 @@
 {
   "name": "twake-i18n",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Twake-i18n provides everything to deal with translation",
   "main": "dist/index.js",
   "license": "MIT",

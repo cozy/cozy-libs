@@ -16889,7 +16889,7 @@ __metadata:
     cozy-realtime: "npm:^4.0.5"
     cozy-search: "npm:^0.24.0"
     cozy-ui: "npm:^138.1.0"
-    cozy-ui-plus: "npm:^14.0.2"
+    cozy-ui-plus: "npm:^14.0.3"
     css-loader: "npm:^7.1.4"
     identity-obj-proxy: "npm:3.0.0"
     jest: "npm:30.3.0"
@@ -17653,8 +17653,8 @@ __metadata:
     cozy-realtime: "npm:^5.9.4"
     cozy-tsconfig: "npm:^2.0.0"
     cozy-ui: "npm:^138.1.0"
-    cozy-ui-plus: "npm:^14.0.2"
-    cozy-viewer: "npm:^31.1.5"
+    cozy-ui-plus: "npm:^14.0.3"
+    cozy-viewer: "npm:^31.1.6"
     date-fns: "npm:2.30.0"
     final-form: "npm:^4.18.5"
     form-data: "npm:4.0.0"
@@ -17680,7 +17680,7 @@ __metadata:
     react-swipeable-views: "npm:0.13.9"
     storybook: "npm:^7.0.23"
     storybook-addon-remix-react-router: "npm:^3.0.1"
-    twake-i18n: "npm:^0.7.0"
+    twake-i18n: "npm:^0.7.1"
     use-deep-compare-effect: "npm:^1.8.1"
     uuid: "npm:^3.3.2"
   peerDependencies:
@@ -18017,7 +18017,7 @@ __metadata:
     cozy-pouch-link: "npm:^54.0.0"
     cozy-realtime: "npm:^5.9.4"
     cozy-ui: "npm:^138.4.0"
-    cozy-ui-plus: "npm:^14.0.2"
+    cozy-ui-plus: "npm:^14.0.3"
     cross-fetch: "npm:^4.0.0"
     jest: "npm:30.3.0"
     lodash: "npm:^4.17.21"
@@ -18028,7 +18028,7 @@ __metadata:
     react-type-animation: "npm:3.2.0"
     rooks: "npm:7.14.1"
     stylus: "npm:^0.64.0"
-    twake-i18n: "npm:^0.7.0"
+    twake-i18n: "npm:^0.7.1"
     typescript: "npm:5.5.2"
   peerDependencies:
     "@linagora/twake-icons": ">=2.6.6"
@@ -18050,7 +18050,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"cozy-sharing@npm:^39.0.3, cozy-sharing@workspace:packages/cozy-sharing":
+"cozy-sharing@npm:^39.0.4, cozy-sharing@workspace:packages/cozy-sharing":
   version: 0.0.0-use.local
   resolution: "cozy-sharing@workspace:packages/cozy-sharing"
   dependencies:
@@ -18077,7 +18077,7 @@ __metadata:
     cozy-intent: "npm:^2.31.1"
     cozy-minilog: "npm:^3.10.1"
     cozy-ui: "npm:^140.5.0"
-    cozy-ui-plus: "npm:^14.0.2"
+    cozy-ui-plus: "npm:^14.0.3"
     date-fns: "npm:2.30.0"
     jest: "npm:30.3.0"
     jest-environment-jsdom: "npm:30.3.0"
@@ -18089,7 +18089,7 @@ __metadata:
     react-tooltip: "npm:^3.11.1"
     snarkdown: "npm:^2.0.0"
     storybook: "npm:7.6.0"
-    twake-i18n: "npm:^0.7.0"
+    twake-i18n: "npm:^0.7.1"
   peerDependencies:
     "@linagora/twake-icons": ">=2.9.0"
     cozy-client: ">=60.28.0"
@@ -18258,7 +18258,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"cozy-ui-plus@npm:^14.0.2, cozy-ui-plus@workspace:packages/cozy-ui-plus":
+"cozy-ui-plus@npm:^14.0.3, cozy-ui-plus@workspace:packages/cozy-ui-plus":
   version: 0.0.0-use.local
   resolution: "cozy-ui-plus@workspace:packages/cozy-ui-plus"
   dependencies:
@@ -18279,7 +18279,7 @@ __metadata:
     cozy-intent: "npm:^2.31.1"
     cozy-interapp: "npm:^0.21.0"
     cozy-logger: "npm:^1.18.1"
-    cozy-sharing: "npm:^39.0.3"
+    cozy-sharing: "npm:^39.0.4"
     cozy-stack-client: "npm:^60.21.1"
     cozy-ui: "npm:^138.1.0"
     filesize: "npm:8.0.7"
@@ -18300,7 +18300,7 @@ __metadata:
     react-test-renderer: "npm:16.12.0"
     rooks: "npm:7.14.1"
     stylus: "npm:0.64.0"
-    twake-i18n: "npm:^0.7.0"
+    twake-i18n: "npm:^0.7.1"
     typescript: "npm:5.5.2"
   peerDependencies:
     "@linagora/twake-icons": ">=2.6.6"
@@ -18553,7 +18553,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-viewer@npm:^31.1.5, cozy-viewer@workspace:packages/cozy-viewer":
+"cozy-viewer@npm:^31.1.6, cozy-viewer@workspace:packages/cozy-viewer":
   version: 0.0.0-use.local
   resolution: "cozy-viewer@workspace:packages/cozy-viewer"
   dependencies:
@@ -18570,9 +18570,9 @@ __metadata:
     cozy-device-helper: "npm:2.0.0"
     cozy-intent: "npm:^2.31.1"
     cozy-logger: "npm:^1.18.1"
-    cozy-sharing: "npm:^39.0.3"
+    cozy-sharing: "npm:^39.0.4"
     cozy-ui: "npm:^138.1.0"
-    cozy-ui-plus: "npm:^14.0.2"
+    cozy-ui-plus: "npm:^14.0.3"
     hammerjs: "npm:^2.0.8"
     identity-obj-proxy: "npm:3.0.0"
     jest: "npm:30.3.0"
@@ -18586,7 +18586,7 @@ __metadata:
     react-router-dom: "npm:^6.14.2"
     react-test-renderer: "npm:16.12.0"
     stylus: "npm:0.63.0"
-    twake-i18n: "npm:^0.7.0"
+    twake-i18n: "npm:^0.7.1"
     typescript: "npm:5.5.2"
   peerDependencies:
     "@linagora/twake-icons": ">=2.6.6"
@@ -39812,7 +39812,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"twake-i18n@npm:^0.7.0, twake-i18n@workspace:packages/twake-i18n":
+"twake-i18n@npm:^0.7.1, twake-i18n@workspace:packages/twake-i18n":
   version: 0.0.0-use.local
   resolution: "twake-i18n@workspace:packages/twake-i18n"
   dependencies:

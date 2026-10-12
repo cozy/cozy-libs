@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/cozy/cozy-libs/compare/twake-i18n@0.7.0...twake-i18n@0.7.1) (2026-10-12)
+
+### Bug Fixes
+
+- **twake-i18n:** Type the options of t and f ([2bfe5e1](https://github.com/cozy/cozy-libs/commit/2bfe5e13be76780005c2df8ff953ab44ba13b4c4))
+
 # [0.7.0](https://github.com/cozy/cozy-libs/compare/twake-i18n@0.6.1...twake-i18n@0.7.0) (2026-10-06)
 
 ### Features

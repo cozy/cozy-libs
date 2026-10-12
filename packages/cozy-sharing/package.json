@@ -1,6 +1,6 @@
 {
   "name": "cozy-sharing",
-  "version": "39.0.3",
+  "version": "39.0.4",
   "description": "Provides sharing login for React applications.",
   "main": "dist/index.js",
   "author": "Cozy",
@@ -58,14 +58,14 @@
     "cozy-intent": "^2.31.1",
     "cozy-minilog": "^3.10.1",
     "cozy-ui": "^140.5.0",
-    "cozy-ui-plus": "^14.0.2",
+    "cozy-ui-plus": "^14.0.3",
     "jest": "30.3.0",
     "jest-environment-jsdom": "30.3.0",
     "react": "16.12.0",
     "react-dom": "16.13.0",
     "react-router": "^5.0.1",
     "storybook": "7.6.0",
-    "twake-i18n": "^0.7.0"
+    "twake-i18n": "^0.7.1"
   },
   "peerDependencies": {
     "@linagora/twake-icons": ">=2.9.0",

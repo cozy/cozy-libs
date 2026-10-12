@@ -1,6 +1,6 @@
 {
   "name": "cozy-harvest-lib",
-  "version": "39.2.5",
+  "version": "39.2.6",
   "description": "Provides logic, modules and components for Cozy's harvest applications.",
   "main": "dist/index.js",
   "author": "Cozy",
@@ -75,8 +75,8 @@
     "cozy-realtime": "^5.9.4",
     "cozy-tsconfig": "^2.0.0",
     "cozy-ui": "^138.1.0",
-    "cozy-ui-plus": "^14.0.2",
-    "cozy-viewer": "^31.1.5",
+    "cozy-ui-plus": "^14.0.3",
+    "cozy-viewer": "^31.1.6",
     "form-data": "4.0.0",
     "identity-obj-proxy": "3.0.0",
     "isomorphic-fetch": "^2.2.1",
@@ -93,7 +93,7 @@
     "react-swipeable-views": "0.13.9",
     "storybook": "^7.0.23",
     "storybook-addon-remix-react-router": "^3.0.1",
-    "twake-i18n": "^0.7.0"
+    "twake-i18n": "^0.7.1"
   },
   "peerDependencies": {
     "@babel/runtime": ">=7.12.5",

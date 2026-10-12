@@ -1,6 +1,6 @@
 {
   "name": "cozy-viewer",
-  "version": "31.1.5",
+  "version": "31.1.6",
   "description": "Cozy-Viewer provides a component to show files in a viewer.",
   "main": "dist/index.js",
   "license": "MIT",
@@ -34,9 +34,9 @@
     "cozy-device-helper": "2.0.0",
     "cozy-intent": "^2.31.1",
     "cozy-logger": "^1.18.1",
-    "cozy-sharing": "^39.0.3",
+    "cozy-sharing": "^39.0.4",
     "cozy-ui": "^138.1.0",
-    "cozy-ui-plus": "^14.0.2",
+    "cozy-ui-plus": "^14.0.3",
     "identity-obj-proxy": "3.0.0",
     "jest": "30.3.0",
     "jest-canvas-mock": "2.3.1",
@@ -46,7 +46,7 @@
     "react-router-dom": "^6.14.2",
     "react-test-renderer": "16.12.0",
     "stylus": "0.63.0",
-    "twake-i18n": "^0.7.0",
+    "twake-i18n": "^0.7.1",
     "typescript": "5.5.2"
   },
   "dependencies": {
