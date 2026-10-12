@@ -24,10 +24,13 @@ export const ShareModal = ({
   sharing,
   sharingDesc,
   showGenerateLinkButton,
-  twoStepsConfirmationMethods
+  twoStepsConfirmationMethods,
+  canManageMembers = true
 }) => {
   const shareDialogOnlyByLink =
-    flag('cozy.hide-sharing-cozy-to-cozy') || documentType === 'Albums'
+    !canManageMembers ||
+    flag('cozy.hide-sharing-cozy-to-cozy') ||
+    documentType === 'Albums'
 
   const showShareByEmail = !hasSharedParent && !hasSharedChild
   const showShareByLink = documentType !== 'Organizations'
@@ -47,6 +50,7 @@ export const ShareModal = ({
       permissions={permissions}
       showGenerateLinkButton={showGenerateLinkButton}
       autoOpenShareRestriction={autoOpenShareRestriction}
+      canManageMembers={canManageMembers}
     />
   ) : (
     <ShareDialogCozyToCozy
@@ -91,6 +95,7 @@ ShareModal.propTypes = {
   recipients: PropTypes.array.isRequired,
   sharingDesc: PropTypes.string,
   showGenerateLinkButton: PropTypes.bool,
+  canManageMembers: PropTypes.bool,
   twoStepsConfirmationMethods: PropTypes.shape({
     getRecipientsToBeConfirmed: PropTypes.func,
     confirmRecipient: PropTypes.func,

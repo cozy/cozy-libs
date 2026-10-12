@@ -46,6 +46,12 @@ describe('ShareModal component', () => {
     expect(root.getByText('ShareDialogCozyToCozy'))
   })
 
+  it('should render ShareDialogOnlyByLink when members cannot be managed', () => {
+    const root = setup({ documentType: 'Document', canManageMembers: false })
+
+    expect(root.getByText('ShareDialogOnlyByLink'))
+  })
+
   it('should render ShareDialogOnlyByLink if flag cozy.hide-sharing-cozy-to-cozy is true', () => {
     flag.mockImplementation(name => name === 'cozy.hide-sharing-cozy-to-cozy')
 

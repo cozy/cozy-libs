@@ -21,7 +21,8 @@ const ShareDialogOnlyByLink = ({
   onClose,
   permissions,
   showGenerateLinkButton,
-  autoOpenShareRestriction
+  autoOpenShareRestriction,
+  canManageMembers = true
 }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
@@ -50,6 +51,7 @@ const ShareDialogOnlyByLink = ({
             document={document}
             documentType={documentType}
             isOwner={isOwner}
+            canManageMembers={canManageMembers}
             onRevoke={onRevoke}
             onRevokeSelf={onRevokeSelf}
             recipients={recipients}
