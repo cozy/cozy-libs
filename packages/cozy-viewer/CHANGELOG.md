@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [31.1.7](https://github.com/cozy/cozy-libs/compare/cozy-viewer@31.1.6...cozy-viewer@31.1.7) (2026-10-13)
+
+### Bug Fixes
+
+- **cozy-viewer:** Escape "at" in the panel date format ([68322fd](https://github.com/cozy/cozy-libs/commit/68322fdbbba4a1219eaad8916989c17cecf90e58))
+- **cozy-viewer:** Show file sizes in decimal units in the panel ([430b264](https://github.com/cozy/cozy-libs/commit/430b264d1a74c8a623d162fbb43727347e78566d))
+
 ## [31.1.6](https://github.com/cozy/cozy-libs/compare/cozy-viewer@31.1.5...cozy-viewer@31.1.6) (2026-10-12)
 
 **Note:** Version bump only for package cozy-viewer
