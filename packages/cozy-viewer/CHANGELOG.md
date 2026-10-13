@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [31.2.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@31.1.7...cozy-viewer@31.2.0) (2026-10-13)
+
+### Bug Fixes
+
+- **cozy-viewer:** Pass generateWebLink to the View in Drive action ([3dd9b85](https://github.com/cozy/cozy-libs/commit/3dd9b85c767bd9880f3e86ef903ebb6aea2bb436))
+
+### Features
+
+- **cozy-viewer:** Let the host app handle a click on the file path ([32346cc](https://github.com/cozy/cozy-libs/commit/32346ccfde79439ff652b566586bf0383e6f0e7d))
+
 ## [31.1.7](https://github.com/cozy/cozy-libs/compare/cozy-viewer@31.1.6...cozy-viewer@31.1.7) (2026-10-13)
 
 ### Bug Fixes

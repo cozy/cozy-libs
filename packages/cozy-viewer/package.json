@@ -1,6 +1,6 @@
 {
   "name": "cozy-viewer",
-  "version": "31.1.7",
+  "version": "31.2.0",
   "description": "Cozy-Viewer provides a component to show files in a viewer.",
   "main": "dist/index.js",
   "license": "MIT",
