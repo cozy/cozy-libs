@@ -9,6 +9,8 @@ export const toolbarPropsPropType = {
   toolbarRef: PropTypes.object,
   /** Whether to show file path below his name */
   showFilePath: PropTypes.bool,
+  /** Called with the file when its path is clicked, instead of opening the folder in Drive */
+  onFilePathClick: PropTypes.func,
   /** Whether to hide summize button or not */
   hideSummarizeBtn: PropTypes.bool
 }
