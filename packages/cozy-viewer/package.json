@@ -37,6 +37,7 @@
     "cozy-sharing": "^39.0.4",
     "cozy-ui": "^138.1.0",
     "cozy-ui-plus": "^14.0.3",
+    "date-fns": "2.30.0",
     "identity-obj-proxy": "3.0.0",
     "jest": "30.3.0",
     "jest-canvas-mock": "2.3.1",

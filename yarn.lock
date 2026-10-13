@@ -18573,6 +18573,7 @@ __metadata:
     cozy-sharing: "npm:^39.0.4"
     cozy-ui: "npm:^138.1.0"
     cozy-ui-plus: "npm:^14.0.3"
+    date-fns: "npm:2.30.0"
     hammerjs: "npm:^2.0.8"
     identity-obj-proxy: "npm:3.0.0"
     jest: "npm:30.3.0"
