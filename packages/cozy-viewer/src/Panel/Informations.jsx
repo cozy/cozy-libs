@@ -12,7 +12,7 @@ import {
   Safe,
   Server
 } from '@linagora/twake-icons'
-import { useClient } from 'cozy-client'
+import { generateWebLink, useClient } from 'cozy-client'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import {
   makeActions,
@@ -43,7 +43,7 @@ const Informations = ({ file, isPublic, t }) => {
   const hasElectronicSafe = has(file, 'metadata.electronicSafe')
   const anchorRef = useRef()
 
-  const actions = makeActions([viewInDrive], { client })
+  const actions = makeActions([viewInDrive], { client, generateWebLink })
 
   return (
     <List>
