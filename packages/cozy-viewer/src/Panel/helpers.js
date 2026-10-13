@@ -30,9 +30,9 @@ export const makeDate = lang =>
 export const makeSize = bytes => {
   if (!+bytes) return '0'
 
-  const k = 1024
+  const k = 1000
   const dm = 2
-  const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+  const sizes = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
 
   const i = Math.floor(Math.log(bytes) / Math.log(k))
 
