@@ -20,7 +20,7 @@ export const makeFormat = file => {
  * @returns {string}
  */
 export const makeDate = lang =>
-  lang === 'fr' ? 'dd LLL yyyy à HH:mm' : 'LLL dd yyyy at HH:mm'
+  lang === 'fr' ? 'dd LLL yyyy à HH:mm' : "LLL dd yyyy 'at' HH:mm"
 
 /**
  * Returns a formatted size

@@ -1,4 +1,18 @@
-import { makeHideDivider, getAntivirusStatus } from './helpers'
+import { format } from 'date-fns'
+
+import { makeHideDivider, getAntivirusStatus, makeDate } from './helpers'
+
+describe('makeDate', () => {
+  const date = new Date(2026, 8, 18, 7, 11)
+
+  it('should format an english date with a literal "at"', () => {
+    expect(format(date, makeDate('en'))).toBe('Sep 18 2026 at 07:11')
+  })
+
+  it('should format a french date', () => {
+    expect(format(date, makeDate('fr'))).toBe('18 Sep 2026 à 07:11')
+  })
+})
 
 describe('getAntivirusStatus', () => {
   const t = jest.fn(key => key)
