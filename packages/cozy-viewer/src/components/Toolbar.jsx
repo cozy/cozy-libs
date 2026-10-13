@@ -37,6 +37,7 @@ const Toolbar = ({
   breakpoints: { isDesktop },
   children,
   showFilePath,
+  onFilePathClick,
   onPaywallRedirect,
   hideSummarizeBtn
 }) => {
@@ -86,7 +87,7 @@ const Toolbar = ({
         >
           <MidEllipsis text={file.name} />
         </Typography>
-        {showFilePath ? <ToolbarFilePath /> : null}
+        {showFilePath ? <ToolbarFilePath onClick={onFilePathClick} /> : null}
       </div>
 
       {isDesktop && (
@@ -142,6 +143,7 @@ Toolbar.propTypes = {
   onMouseLeave: PropTypes.func.isRequired,
   onClose: PropTypes.func,
   showFilePath: PropTypes.bool,
+  onFilePathClick: PropTypes.func,
   onPaywallRedirect: PropTypes.func,
   hideSummarizeBtn: PropTypes.bool
 }

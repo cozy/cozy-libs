@@ -15,7 +15,7 @@ import {
 import { useViewer } from '../providers/ViewerProvider'
 import { buildFileByIdQuery } from '../queries'
 
-const ToolbarFilePath = () => {
+const ToolbarFilePath = ({ onClick }) => {
   const client = useClient()
   const { isDesktop } = useBreakpoints()
   const { file } = useViewer()
@@ -43,6 +43,21 @@ const ToolbarFilePath = () => {
       : `/folder/${fileWithPath.dir_id}`
     const path = removeFilenameFromPath(fileWithPath.path)
     const link = makeWebLink({ client, path: nativePath, slug: appSlug })
+
+    if (isDesktop && link && onClick) {
+      return (
+        <Link
+          href={link}
+          onClick={ev => {
+            ev.preventDefault()
+            onClick(fileWithPath)
+          }}
+          color="inherit"
+        >
+          <FilePath className="u-white">{path}</FilePath>
+        </Link>
+      )
+    }
 
     if (isDesktop && link) {
       return (

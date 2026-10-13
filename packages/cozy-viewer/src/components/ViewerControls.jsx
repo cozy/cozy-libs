@@ -129,6 +129,7 @@ class ViewerControls extends Component {
       showClose,
       toolbarRef,
       showFilePath,
+      onFilePathClick,
       onPaywallRedirect,
       hideSummarizeBtn
     } = toolbarProps
@@ -149,6 +150,7 @@ class ViewerControls extends Component {
           <Toolbar
             toolbarRef={toolbarRef}
             showFilePath={showFilePath}
+            onFilePathClick={onFilePathClick}
             onMouseEnter={this.showControls}
             onMouseLeave={this.hideControls}
             onClose={showClose ? onClose : undefined}
