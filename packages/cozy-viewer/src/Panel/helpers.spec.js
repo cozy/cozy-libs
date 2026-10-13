@@ -1,6 +1,18 @@
 import { format } from 'date-fns'
 
-import { makeHideDivider, getAntivirusStatus, makeDate } from './helpers'
+import {
+  makeHideDivider,
+  getAntivirusStatus,
+  makeDate,
+  makeSize
+} from './helpers'
+
+describe('makeSize', () => {
+  it('should use decimal units like the Drive file list', () => {
+    expect(makeSize(24177)).toBe('24.18 kB')
+    expect(makeSize(5000000000)).toBe('5 GB')
+  })
+})
 
 describe('makeDate', () => {
   const date = new Date(2026, 8, 18, 7, 11)
