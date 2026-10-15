@@ -206,7 +206,8 @@ export const getLinkAccessOptions = ({
     verbs: editingRights === 'write' ? WRITE_PERMS : READ_ONLY_PERMS,
     expiresAt: expirationDate?.toISOString() || '',
     ttl: expirationDate ? makeTTL(expirationDate) : undefined,
-    password: passwordEnabled ? password : ''
+    // An empty field means "unchanged": undefined is left out of the request
+    password: passwordEnabled ? password || undefined : ''
   }
 }
 
