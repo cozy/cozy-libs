@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Autosuggest from 'react-autosuggest'
 
 import Chip from 'cozy-ui/transpiled/react/Chips'
@@ -10,9 +10,13 @@ import { MemberAvatar } from './Avatar/MemberAvatar'
 import ContactSuggestion from './ContactSuggestion'
 import { isContactToBeCreated } from '../helpers/contacts'
 import { extractEmails, validateEmail } from '../helpers/email'
+import logger from '../logger'
 import { getDisplayName, DOCTYPE_CONTACTS, DOCTYPE_GROUPS } from '../models'
 import styles from '../styles/autosuggest.styl'
 import { contactOrGroupMatch } from '../suggestionMatchers'
+
+const FETCH_CONTACTS_DEBOUNCE = 300
+const FETCH_CONTACTS_MIN_LENGTH = 3
 
 const ShareAutosuggest = ({
   loading,
@@ -24,15 +28,21 @@ const ShareAutosuggest = ({
   enableCreateContact,
   placeholder,
   autoFocus,
-  endAdornment
+  endAdornment,
+  fetchContacts
 }) => {
   const [inputValue, setInputValue] = useState('')
   const [suggestions, setSuggestions] = useState([])
   const [isPasted, setIsPasted] = useState(false)
   const [isLoadingDisplayed, setLoadingDisplayed] = useState(false)
+  const [isFetching, setIsFetching] = useState(false)
 
   const autosuggestRef = useRef(null)
   const containerRef = useRef(null)
+  const fetchTimeoutRef = useRef(null)
+  const fetchedValueRef = useRef(null)
+
+  useEffect(() => () => clearTimeout(fetchTimeoutRef.current), [])
 
   const computeSuggestions = value => {
     const inputValue = value.trim().toLowerCase()
@@ -44,9 +54,7 @@ const ShareAutosuggest = ({
         )
   }
 
-  const onSuggestionsFetchRequested = ({ value }) => {
-    const computedSuggestions = computeSuggestions(value)
-
+  const showSuggestions = (computedSuggestions, value) => {
     if (computedSuggestions.length > 0) {
       setSuggestions(computedSuggestions)
     } else if (enableCreateContact && validateEmail(value)) {
@@ -61,7 +69,36 @@ const ShareAutosuggest = ({
     }
   }
 
+  const onSuggestionsFetchRequested = ({ value }) => {
+    const computedSuggestions = computeSuggestions(value)
+    clearTimeout(fetchTimeoutRef.current)
+    fetchedValueRef.current = value
+
+    if (!fetchContacts || value.trim().length < FETCH_CONTACTS_MIN_LENGTH) {
+      setIsFetching(false)
+      showSuggestions(computedSuggestions, value)
+      return
+    }
+
+    setIsFetching(true)
+    fetchTimeoutRef.current = setTimeout(async () => {
+      let contacts = []
+      try {
+        contacts = await fetchContacts(value.trim())
+      } catch (err) {
+        logger.error('Failed to fetch contact suggestions', err)
+      }
+      // The user kept typing or left the input while the stack was answering
+      if (fetchedValueRef.current !== value) return
+      setIsFetching(false)
+      showSuggestions([...contacts, ...computedSuggestions], value)
+    }, FETCH_CONTACTS_DEBOUNCE)
+  }
+
   const onSuggestionsClearRequested = () => {
+    clearTimeout(fetchTimeoutRef.current)
+    fetchedValueRef.current = null
+    setIsFetching(false)
     setSuggestions([])
   }
 
@@ -174,7 +211,7 @@ const ShareAutosuggest = ({
         )
       })}
       <input {...inputProps} onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
-      {loading && isLoadingDisplayed ? (
+      {(loading || isFetching) && isLoadingDisplayed ? (
         <Spinner color="var(--primaryColor)" />
       ) : null}
       {endAdornment ? (
@@ -231,7 +268,8 @@ ShareAutosuggest.propTypes = {
   enableCreateContact: PropTypes.bool,
   placeholder: PropTypes.string,
   autoFocus: PropTypes.bool,
-  endAdornment: PropTypes.node
+  endAdornment: PropTypes.node,
+  fetchContacts: PropTypes.func
 }
 
 export default ShareAutosuggest

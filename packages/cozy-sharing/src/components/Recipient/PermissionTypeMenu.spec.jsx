@@ -160,7 +160,9 @@ describe('PermissionTypeMenu component', () => {
     }
 
     beforeEach(() => {
-      flag.mockReturnValue(true)
+      flag.mockImplementation(
+        name => name === 'drive.federated-shared-folder.enabled'
+      )
       mockHasSharedParent.mockReturnValue(true)
       mockGetSharingById.mockReturnValue({
         id: 'sharing-123',

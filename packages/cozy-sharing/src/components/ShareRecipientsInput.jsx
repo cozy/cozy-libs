@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { useQueryAll, isQueryLoading } from 'cozy-client'
+import { useClient, useQueryAll, isQueryLoading } from 'cozy-client'
 import { models } from 'cozy-client'
 import flag from 'cozy-flags'
 
 import ShareAutosuggest from './ShareAutosuggest'
-import { getContactsFromGroupId } from '../helpers/contacts'
+import { getContactsFromGroupId, suggestContacts } from '../helpers/contacts'
 import {
   buildReachableContactsQuery,
   buildContactGroupsQuery,
@@ -19,6 +19,7 @@ const ContactModel = models.contact
  * ShareRecipientsInput is responsible for fetching contacts and groups.
  * We retrieve all the contacts that are reachable and the groups they belong to.
  * In order to display the total number of members in each group, we also retrieve the contacts that are not reachable.
+ * With sharing.contacts-suggest.enabled, the stack suggests the contacts and we only retrieve the group members.
  */
 const isCurrentUser = contact => contact.me === true
 
@@ -33,7 +34,12 @@ const ShareRecipientsInput = ({
   autoFocus,
   endAdornment
 }) => {
-  const reachableContactsQuery = buildReachableContactsQuery()
+  const client = useClient()
+  const isSuggestEnabled = !!flag('sharing.contacts-suggest.enabled')
+
+  const reachableContactsQuery = buildReachableContactsQuery({
+    inGroups: isSuggestEnabled
+  })
   const reachableContactsResult = useQueryAll(
     reachableContactsQuery.definition,
     reachableContactsQuery.options
@@ -117,7 +123,18 @@ const ShareRecipientsInput = ({
       }
     })
 
-  const contactsAndGroups = [...reachableContacts, ...contactGroups]
+  const contactsAndGroups = isSuggestEnabled
+    ? contactGroups
+    : [...reachableContacts, ...contactGroups]
+
+  const isRecipient = email =>
+    currentRecipients.some(r => r.email === email) ||
+    recipients.some(r => ContactModel.getPrimaryEmail(r) === email)
+
+  const fetchContacts = async q =>
+    (await suggestContacts(client, q)).filter(
+      contact => !isRecipient(ContactModel.getPrimaryEmail(contact))
+    )
 
   return (
     <ShareAutosuggest
@@ -131,6 +148,7 @@ const ShareRecipientsInput = ({
       placeholder={placeholder}
       autoFocus={autoFocus}
       endAdornment={endAdornment}
+      fetchContacts={isSuggestEnabled ? fetchContacts : undefined}
     />
   )
 }

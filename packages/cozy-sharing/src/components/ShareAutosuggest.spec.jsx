@@ -1,4 +1,4 @@
-import { render, fireEvent, screen } from '@testing-library/react'
+import { act, render, fireEvent, screen } from '@testing-library/react'
 import React from 'react'
 
 import ShareAutosuggest from './ShareAutosuggest'
@@ -13,7 +13,8 @@ describe('ShareAutosuggest', () => {
     onPick,
     onRemove,
     loading = false,
-    enableCreateContact = true
+    enableCreateContact = true,
+    fetchContacts
   }) => {
     render(
       <AppLike>
@@ -25,6 +26,7 @@ describe('ShareAutosuggest', () => {
           recipients={[]}
           onRemove={onRemove}
           enableCreateContact={enableCreateContact}
+          fetchContacts={fetchContacts}
         />
       </AppLike>
     )
@@ -87,5 +89,60 @@ describe('ShareAutosuggest', () => {
     setup({ onPick, onRemove, loading: false })
 
     expect(screen.queryByText('loading')).toBeNull()
+  })
+
+  describe('with fetchContacts', () => {
+    beforeEach(() => {
+      jest.useFakeTimers()
+      // Not implemented by jsdom, called when a suggestion is highlighted
+      Element.prototype.scrollIntoView = jest.fn()
+    })
+
+    afterEach(() => {
+      jest.useRealTimers()
+    })
+
+    it('should suggest the fetched contacts, debounced and from 3 characters', async () => {
+      const fetchContacts = jest.fn().mockResolvedValue([
+        {
+          _id: 'org-member-1',
+          _type: 'io.cozy.contacts',
+          displayName: 'Jean Dupont',
+          email: [{ address: 'jean@org.example', primary: true }]
+        }
+      ])
+
+      setup({ onPick: jest.fn(), onRemove: jest.fn(), fetchContacts })
+
+      const inputNode = screen.getByPlaceholderText('myPlaceHolder')
+      fireEvent.change(inputNode, { target: { value: 'du' } })
+      act(() => jest.runAllTimers())
+      expect(fetchContacts).not.toHaveBeenCalled()
+
+      fireEvent.change(inputNode, { target: { value: 'dup' } })
+      fireEvent.change(inputNode, { target: { value: 'dupo' } })
+      act(() => jest.runAllTimers())
+      expect(fetchContacts).toHaveBeenCalledTimes(1)
+      expect(fetchContacts).toHaveBeenCalledWith('dupo')
+
+      expect(await screen.findByText('Jean Dupont')).toBeInTheDocument()
+    })
+
+    it('should show the loading indicator until the contacts are fetched', async () => {
+      let resolveFetch
+      const fetchContacts = jest.fn(
+        () => new Promise(resolve => (resolveFetch = resolve))
+      )
+
+      setup({ onPick: jest.fn(), onRemove: jest.fn(), fetchContacts })
+
+      const inputNode = screen.getByPlaceholderText('myPlaceHolder')
+      fireEvent.change(inputNode, { target: { value: 'dup' } })
+      expect(screen.getByText('loading')).toBeInTheDocument()
+
+      act(() => jest.runAllTimers())
+      await act(async () => resolveFetch([]))
+      expect(screen.queryByText('loading')).toBeNull()
+    })
   })
 })

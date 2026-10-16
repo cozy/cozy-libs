@@ -16,7 +16,7 @@ export const buildSharingsByIdQuery = sharingId => ({
   }
 })
 
-export const buildReachableContactsQuery = () => ({
+export const buildReachableContactsQuery = ({ inGroups } = {}) => ({
   definition: Q(DOCTYPE_CONTACTS)
     .where({
       _id: {
@@ -42,12 +42,15 @@ export const buildReachableContactsQuery = () => ({
             }
           }
         }
-      ]
+      ],
+      ...(inGroups && { 'relationships.groups.data': { $exists: true } })
     })
     .indexFields(['_id'])
     .limitBy(1000),
   options: {
-    as: 'io.cozy.contacts/reachable'
+    as: inGroups
+      ? 'io.cozy.contacts/reachable-with-groups'
+      : 'io.cozy.contacts/reachable'
   }
 })
 
