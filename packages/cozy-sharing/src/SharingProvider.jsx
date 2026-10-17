@@ -280,6 +280,10 @@ export class SharingProvider extends Component {
 
     const previewPath = this.props.previewPath ?? '/preview'
 
+    // Pass driveId so SharingCollection delegates the creation to the drive
+    // owner's instance when the document lives in a shared drive we don't own.
+    const { driveId } = document
+
     const { data } = await this.sharingCol.create({
       document,
       recipients,
@@ -287,7 +291,8 @@ export class SharingProvider extends Component {
       description,
       previewPath,
       openSharing,
-      sharedDrive
+      sharedDrive,
+      driveId
     })
 
     this.dispatch(
