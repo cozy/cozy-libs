@@ -521,9 +521,10 @@ describe('shared drive recipient revocation', () => {
 
   let provider
   let sharingCol
+  let mockClient
 
   beforeEach(() => {
-    const mockClient = createMockClient({})
+    mockClient = createMockClient({})
     mockClient.getStackClient = () => ({ uri: 'http://cozy.local' })
     mockClient.collection = jest.fn().mockReturnValue({})
 
@@ -535,6 +536,7 @@ describe('shared drive recipient revocation', () => {
     sharingCol = {
       addRecipients: jest.fn(),
       create: jest.fn().mockResolvedValue({ data: NEW_SHARING }),
+      createSharedDrive: jest.fn(),
       revokeRecipient: jest.fn().mockResolvedValue({}),
       fetchEffectiveRecipients: jest.fn().mockResolvedValue({ data: [] })
     }
@@ -596,9 +598,11 @@ describe('shared drive recipient revocation', () => {
       description: 'Sub folder',
       previewPath: '/preview',
       openSharing: false,
-      sharedDrive: true
+      sharedDrive: true,
+      driveId: SHARED_DRIVE.id
     })
     expect(sharingCol.addRecipients).not.toHaveBeenCalled()
+    expect(sharingCol.createSharedDrive).not.toHaveBeenCalled()
   })
 
   it('clears effective recipients when the sharing was deleted (404)', async () => {
