@@ -20,7 +20,8 @@
       },
       "generic": "Se ha producido un error al abrir este archivo. Inténtelo de nuevo.",
       "missing": "Falta este archivo",
-      "network": "No se ha podido cargar este archivo. ¿Tiene conexión a Internet en este momento?"
+      "network": "No se ha podido cargar este archivo. ¿Tiene conexión a Internet en este momento?",
+      "unplayableVideo": "Este vídeo no se puede reproducir en este dispositivo."
     },
     "goto": "Ir a %{url}",
     "next": "Siguiente",
