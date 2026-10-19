@@ -12,15 +12,11 @@ import withLocales from './hoc/withLocales'
 
 export const ShareButton = withLocales(({ docId, useShortLabel, ...rest }) => {
   const { t } = useI18n()
-  const restProps = { ...rest, t: null, f: null, lang: null }
   return (
     <SharingContext.Consumer>
       {({ byDocId, documentType, isOwner }) => {
         return !byDocId[docId] ? (
-          <DumbShareButton
-            label={t(`${documentType}.share.cta`)}
-            {...restProps}
-          />
+          <DumbShareButton label={t(`${documentType}.share.cta`)} {...rest} />
         ) : isOwner(docId) ? (
           <SharedByMeButton
             label={
@@ -28,7 +24,7 @@ export const ShareButton = withLocales(({ docId, useShortLabel, ...rest }) => {
                 ? t(`${documentType}.share.shared`)
                 : t(`${documentType}.share.sharedByMe`)
             }
-            {...restProps}
+            {...rest}
           />
         ) : (
           <SharedWithMeButton
@@ -37,7 +33,7 @@ export const ShareButton = withLocales(({ docId, useShortLabel, ...rest }) => {
                 ? t(`${documentType}.share.shared`)
                 : t(`${documentType}.share.sharedWithMe`)
             }
-            {...restProps}
+            {...rest}
           />
         )
       }}
