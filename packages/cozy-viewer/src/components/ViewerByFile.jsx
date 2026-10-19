@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
 
 import { isPlainText } from 'cozy-client/dist/models/file'
-import { isMobile as isMobileDevice } from 'cozy-device-helper'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import { useEncrypted } from 'cozy-ui/transpiled/react/providers/Encrypted'
 
@@ -33,7 +32,7 @@ export const getViewerComponentName = ({
     case 'audio':
       return AudioViewer
     case 'video':
-      return isMobileDevice() ? NoViewer : VideoViewer
+      return VideoViewer
     case 'pdf':
       return isBlankPaper(file)
         ? BlankPaperViewer
