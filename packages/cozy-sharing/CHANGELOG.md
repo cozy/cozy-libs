@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [40.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@39.0.4...cozy-sharing@40.0.0) (2026-10-19)
+
+### Bug Fixes
+
+- **cozy-sharing:** Stop passing translate props to wrapped components ([fe0a85a](https://github.com/cozy/cozy-libs/commit/fe0a85aa9bc830bfc26aa338edae5df0eddb4882))
+
+### BREAKING CHANGES
+
+- **cozy-sharing:** components wrapped with the exported withLocales HOC
+  no longer receive the t, f and lang props. Read them with useI18n()
+  from twake-i18n instead.
+
 ## [39.0.4](https://github.com/cozy/cozy-libs/compare/cozy-sharing@39.0.3...cozy-sharing@39.0.4) (2026-10-12)
 
 **Note:** Version bump only for package cozy-sharing
