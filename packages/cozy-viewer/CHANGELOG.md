@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [31.3.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@31.2.1...cozy-viewer@31.3.0) (2026-10-19)
+
+### Bug Fixes
+
+- **cozy-viewer:** Play videos on mobile devices ([6b90277](https://github.com/cozy/cozy-libs/commit/6b902772582fe6aa0955d99b9f7296724b35b9a6)), closes [linagora/twake-drive#3846](https://github.com/linagora/twake-drive/issues/3846)
+
+### Features
+
+- **cozy-viewer:** Fall back to NoViewer when a video can't be played ([c3d86a1](https://github.com/cozy/cozy-libs/commit/c3d86a1aa8f51930374856c120670e4b19a4fc3c))
+
 ## [31.2.1](https://github.com/cozy/cozy-libs/compare/cozy-viewer@31.2.0...cozy-viewer@31.2.1) (2026-10-19)
 
 **Note:** Version bump only for package cozy-viewer
