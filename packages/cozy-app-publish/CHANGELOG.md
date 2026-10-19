@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.44.3](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.44.2...cozy-app-publish@0.44.3) (2026-10-19)
+
+### Bug Fixes
+
+- **cozy-app-publish:** Exit once the Mattermost message is sent ([64cb163](https://github.com/cozy/cozy-libs/commit/64cb163e12a66c4e0ade3b7b086ed496e0639c75))
+
 ## [0.44.2](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.44.1...cozy-app-publish@0.44.2) (2026-10-05)
 
 ### Bug Fixes
