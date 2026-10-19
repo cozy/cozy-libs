@@ -1,11 +1,5 @@
-import { isMobile as isMobileDevice } from 'cozy-device-helper'
-
 import { getViewerComponentName } from './ViewerByFile'
 
-jest.mock('cozy-device-helper', () => ({
-  ...jest.requireActual('cozy-device-helper'),
-  isMobile: jest.fn()
-}))
 jest.mock('../ViewersByFile/ShortcutViewer', () => 'ShortcutViewer')
 jest.mock('../ViewersByFile/ImageViewer', () => 'ImageViewer')
 jest.mock('../ViewersByFile/AudioViewer', () => 'AudioViewer')
@@ -18,10 +12,6 @@ jest.mock('../ViewersByFile/OnlyOfficeViewer', () => 'OnlyOfficeViewer')
 jest.mock('../NoViewer', () => 'NoViewer')
 
 describe('getViewerComponentName', () => {
-  beforeEach(() => {
-    isMobileDevice.mockReturnValue(false)
-  })
-
   it('should return the correct component', () => {
     expect(getViewerComponentName({ file: { class: 'shortcut' } })).toBe(
       'ShortcutViewer'
@@ -35,11 +25,6 @@ describe('getViewerComponentName', () => {
     expect(getViewerComponentName({ file: { class: 'video' } })).toBe(
       'VideoViewer'
     )
-    isMobileDevice.mockReturnValue(true)
-    expect(getViewerComponentName({ file: { class: 'video' } })).toBe(
-      'NoViewer'
-    )
-    isMobileDevice.mockReturnValue(false)
     expect(
       getViewerComponentName({ file: { class: 'pdf' }, isDesktop: false })
     ).toBe('PdfMobileViewer')
