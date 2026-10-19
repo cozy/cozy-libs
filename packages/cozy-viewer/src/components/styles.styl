@@ -4,10 +4,13 @@
 
 .viewer-nav
     position absolute
-    top $toolbarHeight
-    bottom 0
+    top 'calc(50% + %s)' % ($toolbarHeight / 2)
+    transform translateY(-50%)
     z-index var(--zIndex-modal-toolbar)
     width 20%
+    max-width 200px
+    max-height 200px
+    aspect-ratio 1
     cursor pointer
     background-color transparent
     transition .4s opacity ease-out
