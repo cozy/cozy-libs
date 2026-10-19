@@ -20,7 +20,8 @@
       },
       "generic": "Beim Öffnen dieser Datei ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
       "missing": "Diese Datei fehlt",
-      "network": "Diese Datei konnte nicht geladen werden. Haben Sie gerade eine funktionierende Internetverbindung?"
+      "network": "Diese Datei konnte nicht geladen werden. Haben Sie gerade eine funktionierende Internetverbindung?",
+      "unplayableVideo": "Dieses Video kann auf diesem Gerät nicht abgespielt werden."
     },
     "goto": "Zu %{url} wechseln",
     "next": "Weiter",

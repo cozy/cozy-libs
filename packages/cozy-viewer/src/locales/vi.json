@@ -20,7 +20,8 @@
       },
       "generic": "Đã xảy ra lỗi khi mở tệp này, vui lòng thử lại.",
       "missing": "Tệp này bị thiếu",
-      "network": "Không thể tải tệp này. Bạn có kết nối internet hoạt động không?"
+      "network": "Không thể tải tệp này. Bạn có kết nối internet hoạt động không?",
+      "unplayableVideo": "Không thể phát video này trên thiết bị này."
     },
     "goto": "Truy cập %{url}",
     "next": "Tiếp theo",

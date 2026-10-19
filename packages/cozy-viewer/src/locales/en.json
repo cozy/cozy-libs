@@ -20,7 +20,8 @@
       },
       "generic": "An error occurred when opening this file, please try again.",
       "missing": "This file is missing",
-      "network": "This file could not be loaded. Do you have a working internet connection right now?"
+      "network": "This file could not be loaded. Do you have a working internet connection right now?",
+      "unplayableVideo": "This video can't be played on this device."
     },
     "goto": "Go to %{url}",
     "next": "Next",

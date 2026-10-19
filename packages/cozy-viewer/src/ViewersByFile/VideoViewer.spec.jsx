@@ -1,4 +1,4 @@
-import { render, waitFor } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import React from 'react'
 
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
@@ -36,5 +36,16 @@ describe('VideoViewer', () => {
       expect(queryByRole('progressbar')).toBeFalsy()
       expect(container).toMatchSnapshot()
     })
+  })
+
+  it('should fall back to the no viewer when the video cannot be played', async () => {
+    const { root } = setup()
+    const { container, queryByTestId, queryByText } = root
+
+    await waitFor(() => expect(container.querySelector('video')).toBeTruthy())
+    fireEvent.error(container.querySelector('video'))
+
+    expect(queryByTestId('no-viewer')).toBeTruthy()
+    expect(queryByText('Viewer.error.unplayableVideo')).toBeTruthy()
   })
 })

@@ -20,7 +20,8 @@
       },
       "generic": "Si è verificato un errore durante l'apertura di questo file, riprova.",
       "missing": "Questo file è mancante",
-      "network": "Impossibile caricare questo file. La tua connessione a Internet funziona?"
+      "network": "Impossibile caricare questo file. La tua connessione a Internet funziona?",
+      "unplayableVideo": "Questo video non può essere riprodotto su questo dispositivo."
     },
     "goto": "Vai a %{url}",
     "next": "Successivo",

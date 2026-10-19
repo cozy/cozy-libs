@@ -20,7 +20,8 @@
       },
       "generic": "Une erreur s'est produite lors de l'ouverture de ce fichier, veuillez réessayer.",
       "missing": "Le fichier est manquant",
-      "network": "Ce fichier n'a pas pu être chargé. Avez-vous une connexion internet qui fonctionne actuellement ?"
+      "network": "Ce fichier n'a pas pu être chargé. Avez-vous une connexion internet qui fonctionne actuellement ?",
+      "unplayableVideo": "Cette vidéo ne peut pas être lue sur cet appareil."
     },
     "goto": "Ouvrir %{url}",
     "next": "Suivante",
