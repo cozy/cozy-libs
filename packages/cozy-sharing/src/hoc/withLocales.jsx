@@ -21,9 +21,9 @@ export const getActionsI18n = () => getI18n(undefined, lang => locales[lang])
  * @param {Function} Component - React component
  */
 const withLocales = Component =>
-  translate()(props => {
+  translate()(({ t, f, lang, ...props }) => {
     return (
-      <I18n dictRequire={localeCode => locales[localeCode]} lang={props.lang}>
+      <I18n dictRequire={localeCode => locales[localeCode]} lang={lang}>
         <Component {...props} />
       </I18n>
     )
