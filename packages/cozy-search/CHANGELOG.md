@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.12.0](https://github.com/cozy/cozy-libs/compare/cozy-search@2.11.6...cozy-search@2.12.0) (2026-10-20)
+
+### Features
+
+- **cozy-search:** Gate assistant icon behind legacy flag ([f07d2b8](https://github.com/cozy/cozy-libs/commit/f07d2b8437f0b9abfb92940722cb620a84f51993))
+
 ## [2.11.6](https://github.com/cozy/cozy-libs/compare/cozy-search@2.11.5...cozy-search@2.11.6) (2026-10-19)
 
 **Note:** Version bump only for package cozy-search
