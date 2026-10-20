@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [40.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@40.0.0...cozy-sharing@40.1.0) (2026-10-20)
+
+### Features
+
+- **cozy-sharing:** Share nested folder as member ([6627701](https://github.com/cozy/cozy-libs/commit/6627701435d1270f92ee76cead6772f525f5c276))
+
 # [40.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@39.0.4...cozy-sharing@40.0.0) (2026-10-19)
 
 ### Bug Fixes
