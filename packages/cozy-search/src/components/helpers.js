@@ -3,7 +3,7 @@ import flag from 'cozy-flags'
 export const makeConversationId = () =>
   `${Date.now()}-${Math.floor(Math.random() * 90000) + 10000}`
 
-export const isAssistantEnabled = () => flag('cozy.assistant.enabled')
+export const isAssistantEnabled = () => flag('cozy.assistant.legacy.enabled')
 
 /**
  * Sanitize chat content by removing special sources tags like
