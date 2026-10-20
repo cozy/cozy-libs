@@ -23,9 +23,9 @@ module.exports = {
     // identity-obj-proxy module is installed by cozy-scripts
     '.styl$': 'identity-obj-proxy',
     '^cozy-logger$': 'cozy-logger/dist/index.js',
-    '^cozy-client$': '<rootDir>/../../node_modules/cozy-client/dist/index.js',
+    '^cozy-client$': '<rootDir>/node_modules/cozy-client/dist/index.js',
     '^cozy-client/dist/types$':
-      '<rootDir>/../../node_modules/cozy-client/dist/types.js',
+      '<rootDir>/node_modules/cozy-client/dist/types.js',
     '^twake-i18n$': '<rootDir>/../twake-i18n/dist/index.js'
   },
   transformIgnorePatterns: [
