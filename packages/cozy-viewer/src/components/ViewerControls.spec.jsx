@@ -7,9 +7,6 @@ import ViewerControls from './ViewerControls'
 import DemoProvider from '../providers/DemoProvider'
 
 jest.mock('../ViewersByFile/AudioViewer', () => () => <div>AudioViewer</div>)
-jest.mock('cozy-ui/transpiled/react/providers/Encrypted', () => ({
-  useEncrypted: () => ({ url: 'random' })
-}))
 
 describe('ViewerControls', () => {
   const file = {

@@ -3,7 +3,6 @@ import React from 'react'
 
 import { CozyProvider, createMockClient } from 'cozy-client'
 import logger from 'cozy-logger'
-import EncryptedProvider from 'cozy-ui/transpiled/react/providers/Encrypted'
 import I18n from 'twake-i18n'
 
 import { PdfMobileViewer } from './PdfMobileViewer'
@@ -37,9 +36,7 @@ const setup = ({ file }) => {
   const root = render(
     <CozyProvider client={client}>
       <I18n lang="en" dictRequire={() => ''}>
-        <EncryptedProvider>
-          <PdfMobileViewer file={file} t={x => x} />
-        </EncryptedProvider>
+        <PdfMobileViewer file={file} t={x => x} />
       </I18n>
     </CozyProvider>
   )

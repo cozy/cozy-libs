@@ -214,7 +214,7 @@ class ImageViewer extends Component {
       return <NoNetworkViewer onReload={this.reload} />
     }
 
-    const { file, url } = this.props
+    const { file } = this.props
     const { scale, offsetX, offsetY, loading } = this.state
     const style = {
       transform: `scale(${scale}) translate(${offsetX}px, ${offsetY}px)`
@@ -226,7 +226,6 @@ class ImageViewer extends Component {
         {file && (
           <FileImageLoader
             file={file}
-            url={url}
             linkType="large"
             onError={this.onImageError}
             key={file.id}

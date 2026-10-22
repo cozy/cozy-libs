@@ -9,7 +9,6 @@ import { useSharingContext } from 'cozy-sharing'
 import Dialog from 'cozy-ui/transpiled/react/Dialog'
 import AlertProvider from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import EncryptedProvider from 'cozy-ui/transpiled/react/providers/Encrypted'
 import { FileDoctype } from 'cozy-ui-plus/dist/proptypes'
 import { useExtendI18n } from 'twake-i18n'
 
@@ -31,7 +30,6 @@ const ViewerContainer = props => {
     isPublic,
     currentIndex,
     files,
-    currentURL,
     ...rest
   } = props
   const toolbarRef = createRef()
@@ -103,21 +101,18 @@ const ViewerContainer = props => {
               id="viewer-wrapper"
               className={cx(styles['viewer-wrapper'], className)}
             >
-              <EncryptedProvider url={currentURL}>
-                <Viewer
-                  {...rest}
-                  currentIndex={currentIndex}
-                  files={files}
-                  currentURL={currentURL}
-                  componentsProps={componentsPropsWithDefault}
-                  hasPrevious={hasPrevious}
-                  hasNext={hasNext}
-                  validForPanel={validForPanel}
-                  toolbarRef={toolbarRef}
-                >
-                  {children}
-                </Viewer>
-              </EncryptedProvider>
+              <Viewer
+                {...rest}
+                currentIndex={currentIndex}
+                files={files}
+                componentsProps={componentsPropsWithDefault}
+                hasPrevious={hasPrevious}
+                hasNext={hasNext}
+                validForPanel={validForPanel}
+                toolbarRef={toolbarRef}
+              >
+                {children}
+              </Viewer>
               <ViewerInformationsWrapper
                 disableFooter={disableFooter}
                 validForPanel={validForPanel}
@@ -140,7 +135,6 @@ ViewerContainer.propTypes = {
   /** Index of the file to show */
   currentIndex: PropTypes.number,
   /** Optionnal URL of the file */
-  currentURL: PropTypes.string,
   className: PropTypes.string,
   /** Called when the user wants to leave the Viewer */
   onCloseRequest: PropTypes.func,

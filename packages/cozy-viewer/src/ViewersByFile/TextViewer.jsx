@@ -9,7 +9,6 @@ import { FileDoctype } from 'cozy-ui-plus/dist/proptypes'
 import styles from './styles.styl'
 import NoViewer from '../NoViewer'
 import ViewerSpinner from '../components/ViewerSpinner'
-import { isFileEncrypted } from '../helpers'
 import withFileUrl from '../hoc/withFileUrl'
 
 const MarkdownRenderer = ({ text }) => (
@@ -60,14 +59,9 @@ export class TextViewer extends React.Component {
   async loadFile() {
     const { url, file } = this.props
     try {
-      let response
-      if (isFileEncrypted(file)) {
-        response = await fetch(url)
-      } else {
-        const { pathname } = new URL(url)
-        const client = this.props.client.getStackClient()
-        response = await client.fetch('GET', pathname)
-      }
+      const { pathname } = new URL(url)
+      const client = this.props.client.getStackClient()
+      const response = await client.fetch('GET', pathname)
       const text = await response.text()
 
       if (this._mounted) {
