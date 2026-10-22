@@ -174,6 +174,21 @@ export default function testFlagAPI(flag) {
         expect(util.inspect(initializing2)).toContain('pending')
       })
 
+      it('should log in without flags when they cannot be read', async () => {
+        const warn = jest.spyOn(console, 'warn').mockImplementation(() => {})
+        const { client } = setup()
+        client.query = jest.fn().mockRejectedValue(new Error('offline'))
+        client.isLogged = true
+        client.registerPlugin(flag.plugin)
+        const onLogin = jest.fn()
+        client.on('plugin:flag:login', onLogin)
+        await client.plugins.flags.initializing
+        await expect(client.plugins.flags.refresh()).rejects.toThrow('offline')
+        expect(onLogin).toHaveBeenCalled()
+        expect(flag.list()).toEqual([])
+        warn.mockRestore()
+      })
+
       it('should ask the stack for the flags on refresh', async () => {
         const { client } = setup()
         client.registerPlugin(flag.plugin)
