@@ -36655,6 +36655,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rslint-config-cozy-app@workspace:config/rslint-config-cozy-app":
+  version: 0.0.0-use.local
+  resolution: "rslint-config-cozy-app@workspace:config/rslint-config-cozy-app"
+  dependencies:
+    eslint-plugin-react-hooks: "npm:7.0.1"
+  peerDependencies:
+    rstack: ">=0.8.5 <0.9.0"
+  languageName: unknown
+  linkType: soft
+
 "rslog@npm:^2.1.2":
   version: 2.3.0
   resolution: "rslog@npm:2.3.0"
