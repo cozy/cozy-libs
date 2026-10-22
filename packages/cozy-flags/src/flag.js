@@ -178,7 +178,14 @@ class FlagClientPlugin {
   }
 
   async handleLogin() {
-    await flag.initialize(this.client)
+    // Offline or on a stack error, log in without flags rather than leave
+    // `initializing` pending: nothing awaits handleLogin.
+    try {
+      await flag.initialize(this.client)
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.warn('flags.handleLogin: could not fetch the instance flags', err)
+    }
     this.resolveInitializing()
     this.client.emit('plugin:flag:login')
   }
