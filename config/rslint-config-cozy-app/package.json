@@ -1,0 +1,34 @@
+{
+  "name": "rslint-config-cozy-app",
+  "version": "0.1.0",
+  "description": "Rslint and rs fmt config for Cozy Applications (Cozy Cloud)",
+  "type": "module",
+  "author": "Cozy Cloud",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cozy/cozy-libs.git"
+  },
+  "homepage": "https://github.com/cozy/cozy-libs/tree/master/config/rslint-config-cozy-app",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cozy/cozy-libs/issues"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./basics": "./basics.js",
+    "./react": "./react.js",
+    "./fmt": "./fmt.js"
+  },
+  "files": [
+    "index.js",
+    "basics.js",
+    "react.js",
+    "fmt.js"
+  ],
+  "dependencies": {
+    "eslint-plugin-react-hooks": "7.0.1"
+  },
+  "peerDependencies": {
+    "rstack": ">=0.8.5 <0.9.0"
+  }
+}
