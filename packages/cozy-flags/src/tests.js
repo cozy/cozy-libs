@@ -174,6 +174,37 @@ export default function testFlagAPI(flag) {
         expect(util.inspect(initializing2)).toContain('pending')
       })
 
+      it.each([
+        ['succeeds', answer => answer.resolve(flagRemoteResponse)],
+        ['fails', answer => answer.reject(new Error('offline'))]
+      ])(
+        'should not finish a login cut by a logout when the read %s',
+        async (_, settle) => {
+          const warn = jest.spyOn(console, 'warn').mockImplementation(() => {})
+          const { client } = setup()
+          let answer
+          client.query = jest.fn(
+            () =>
+              new Promise((resolve, reject) => {
+                answer = { resolve, reject }
+              })
+          )
+          client.isLogged = true
+          client.registerPlugin(flag.plugin)
+          const onLogin = jest.fn()
+          client.on('plugin:flag:login', onLogin)
+          await client.plugins.flags.handleLogout()
+          settle(answer)
+          await new Promise(resolve => setTimeout(resolve, 0))
+          expect(flag.list()).toEqual([])
+          expect(onLogin).not.toHaveBeenCalled()
+          expect(util.inspect(client.plugins.flags.initializing)).toContain(
+            'pending'
+          )
+          warn.mockRestore()
+        }
+      )
+
       it('should log in without flags when they cannot be read', async () => {
         const warn = jest.spyOn(console, 'warn').mockImplementation(() => {})
         const { client } = setup()
