@@ -632,6 +632,83 @@ describe('shared drive recipient revocation', () => {
   })
 })
 
+describe('revokeSelf', () => {
+  const document = { id: 'received-folder', _id: 'received-folder' }
+  const sharing = {
+    id: 'received-sharing',
+    type: 'io.cozy.sharings',
+    attributes: {
+      owner: false,
+      drive: true,
+      rules: [{ values: [document.id] }],
+      members: []
+    }
+  }
+  const recipients = [{ sharingId: sharing.id, memberIndex: 1 }]
+  const forbidden = Object.assign(new Error('Forbidden'), { status: 403 })
+  let provider
+  let sharingCol
+
+  beforeEach(() => {
+    const client = createMockClient({})
+    sharingCol = {
+      revokeSelf: jest.fn().mockResolvedValue({}),
+      fetchEffectiveRecipients: jest.fn().mockRejectedValue(forbidden)
+    }
+    client.collection = () => sharingCol
+    provider = setupProvider(
+      client,
+      {},
+      reducer(undefined, receiveSharings({ sharings: [sharing] }))
+    )
+    provider.dispatch(receiveEffectiveRecipients(document.id, recipients))
+    provider.dispatch(receiveEffectiveRecipients('other-folder', recipients))
+  })
+
+  it.each([true, false])(
+    'forgets the sharing and clears its recipients without reloading lost access (drive: %s)',
+    async drive => {
+      provider.state.sharings = [
+        { ...sharing, attributes: { ...sharing.attributes, drive } }
+      ]
+
+      await provider.revokeSelf(document)
+
+      expect(getDocumentSharing(provider.state, document.id)).toBeNull()
+      expect(getEffectiveRecipients(provider.state, document.id)).toEqual([])
+      expect(getEffectiveRecipients(provider.state, 'other-folder')).toEqual(
+        recipients
+      )
+      expect(sharingCol.fetchEffectiveRecipients).not.toHaveBeenCalled()
+    }
+  )
+
+  it.each([403, 500])(
+    'preserves sharing state and rejects when self-revocation fails (%s)',
+    async status => {
+      const error = Object.assign(new Error('Revocation failed'), { status })
+      sharingCol.revokeSelf.mockRejectedValue(error)
+
+      await expect(provider.revokeSelf(document)).rejects.toBe(error)
+
+      expect(getDocumentSharing(provider.state, document.id)).toEqual(sharing)
+      expect(getEffectiveRecipients(provider.state, document.id)).toEqual(
+        recipients
+      )
+    }
+  )
+
+  it('still rejects forbidden recipient refreshes outside self-revocation', async () => {
+    await expect(provider.fetchEffectiveRecipients(document.id)).rejects.toBe(
+      forbidden
+    )
+
+    expect(getEffectiveRecipients(provider.state, document.id)).toEqual(
+      recipients
+    )
+  })
+})
+
 describe('share flow reused by PermissionTypeMenu upgrade', () => {
   const PARENT_SHARING = {
     _id: 'parent_sharing',
