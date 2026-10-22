@@ -12,9 +12,12 @@ jest.mock('cozy-flags', () => ({
   default: jest.fn(() => null)
 }))
 
+let mockAutosuggestProps
 jest.mock('./ShareAutosuggest', () => ({
   __esModule: true,
-  default: ({ contactsAndGroups }) => {
+  default: props => {
+    mockAutosuggestProps = props
+    const { contactsAndGroups } = props
     return (
       <ul>
         {contactsAndGroups.map(contactOrGroup => {
@@ -39,7 +42,7 @@ jest.mock('./ShareAutosuggest', () => ({
 
 describe('ShareRecipientsInput component', () => {
   const setup = (
-    { contacts, contactGroups, unreachableContact },
+    { contacts, contactGroups, unreachableContact, groupMembers },
     { currentRecipients, recipients } = {}
   ) => {
     const mockClient = createMockClient({
@@ -55,6 +58,10 @@ describe('ShareRecipientsInput component', () => {
         'io.cozy.contacts/unreachable-with-groups': {
           doctype: 'io.cozy.contacts',
           data: unreachableContact
+        },
+        'io.cozy.contacts/reachable-with-groups': {
+          doctype: 'io.cozy.contacts',
+          data: groupMembers
         }
       }
     })
@@ -69,6 +76,7 @@ describe('ShareRecipientsInput component', () => {
         />
       </AppLike>
     )
+    return mockClient
   }
 
   it('should include groups and contacts when are loaded', async () => {
@@ -219,7 +227,7 @@ describe('ShareRecipientsInput component', () => {
   })
 
   it('should include unreachable members when flag sharing.show-recipient-groups is activated', async () => {
-    flag.mockReturnValue(true)
+    flag.mockImplementation(name => name === 'sharing.show-recipient-groups')
 
     const contacts = [
       {
@@ -293,5 +301,68 @@ describe('ShareRecipientsInput component', () => {
     expect(
       screen.getByText("The Night's Watch - 3 members")
     ).toBeInTheDocument()
+  })
+
+  describe('with sharing.contacts-suggest.enabled', () => {
+    beforeEach(() => {
+      flag.mockImplementation(
+        name => name === 'sharing.contacts-suggest.enabled'
+      )
+    })
+
+    it('should suggest only groups, with the count of their members', () => {
+      const groupMembers = [
+        {
+          id: '5a3b4ccf-c257',
+          _id: '5a3b4ccf-c257',
+          _type: 'io.cozy.contacts',
+          name: { givenName: 'Teagan', familyName: 'Wolf' },
+          relationships: {
+            groups: {
+              data: [{ _id: 'fe86af20-c6c5', _type: 'io.cozy.contacts.groups' }]
+            }
+          }
+        }
+      ]
+      const contactGroups = [
+        {
+          id: 'fe86af20-c6c5',
+          _id: 'fe86af20-c6c5',
+          _type: 'io.cozy.contacts.groups',
+          name: 'Friends'
+        }
+      ]
+
+      setup({ contactGroups, groupMembers })
+
+      expect(screen.getByText('Friends - 1 members')).toBeInTheDocument()
+      expect(screen.queryByText('Teagan Wolf')).not.toBeInTheDocument()
+    })
+
+    it('should fetch suggestions without the current and pending recipients', async () => {
+      const suggestion = email => ({
+        type: 'io.cozy.contacts',
+        attributes: { fullname: email, email: [{ address: email }] }
+      })
+      const mockClient = setup(
+        { contactGroups: [], groupMembers: [] },
+        {
+          currentRecipients: [{ email: 'current@cozy.cc' }],
+          recipients: [{ email: 'pending@cozy.cc' }]
+        }
+      )
+      const fetchJSON = jest.fn().mockResolvedValue({
+        data: [
+          suggestion('current@cozy.cc'),
+          suggestion('pending@cozy.cc'),
+          suggestion('new@cozy.cc')
+        ]
+      })
+      jest.spyOn(mockClient, 'getStackClient').mockReturnValue({ fetchJSON })
+
+      const contacts = await mockAutosuggestProps.fetchContacts('coz')
+
+      expect(contacts.map(c => c.fullname)).toEqual(['new@cozy.cc'])
+    })
   })
 })
