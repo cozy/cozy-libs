@@ -173,6 +173,16 @@ export default function testFlagAPI(flag) {
         expect(initializing2).not.toBe(initializing1)
         expect(util.inspect(initializing2)).toContain('pending')
       })
+
+      it('should ask the stack for the flags on refresh', async () => {
+        const { client } = setup()
+        client.registerPlugin(flag.plugin)
+        await client.plugins.flags.refresh()
+        expect(client.query).toHaveBeenCalledWith(expect.anything(), {
+          forceLink: 'stack',
+          forceStack: true
+        })
+      })
     })
 
     if (typeof document !== 'undefined') {
@@ -220,10 +230,13 @@ export default function testFlagAPI(flag) {
       expect(flag('has_feature2')).toBe(false)
       expect(flag('from_remote')).toBe(true)
       expect(flag('number_of_foos')).toBe(10)
-      expect(client.query).toHaveBeenCalledWith({
-        doctype: 'io.cozy.settings',
-        id: 'io.cozy.settings.flags'
-      })
+      expect(client.query).toHaveBeenCalledWith(
+        {
+          doctype: 'io.cozy.settings',
+          id: 'io.cozy.settings.flags'
+        },
+        { forceLink: 'stack', forceStack: true }
+      )
       expect(flag('bar_config')).toEqual({ qux: 'quux' })
     })
   })

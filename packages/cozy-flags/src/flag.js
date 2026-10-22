@@ -72,7 +72,11 @@ export const initializeFromRemote = async client => {
   const {
     data: { attributes }
   } = await client.query(
-    Q('io.cozy.settings').getById('io.cozy.settings.flags')
+    Q('io.cozy.settings').getById('io.cozy.settings.flags'),
+    // The stack builds this document per request; an app replicating
+    // io.cozy.settings would get a stale, flattened copy with no `attributes`.
+    // forceStack: the name cozy-client 52 to 60.28 knows, ignored after.
+    { forceLink: 'stack', forceStack: true }
   )
 
   enable(attributes)
