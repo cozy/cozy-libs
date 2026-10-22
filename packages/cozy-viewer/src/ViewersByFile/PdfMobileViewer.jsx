@@ -15,7 +15,7 @@ import NoViewer from '../NoViewer'
 import DownloadButton from '../NoViewer/DownloadButton'
 import { withViewerLocales } from '../hoc/withViewerLocales'
 
-export const PdfMobileViewer = ({ file, url, t, gestures }) => {
+export const PdfMobileViewer = ({ file, t, gestures }) => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const imgRef = useRef(null)
@@ -88,7 +88,6 @@ export const PdfMobileViewer = ({ file, url, t, gestures }) => {
       {file && (
         <FileImageLoader
           file={file}
-          url={url}
           linkType="medium"
           onError={onImageError}
           key={file.id}
@@ -109,7 +108,6 @@ export const PdfMobileViewer = ({ file, url, t, gestures }) => {
 
 PdfMobileViewer.prototype = {
   file: FileDoctype.isRequired,
-  url: PropTypes.string,
   gestures: PropTypes.object
 }
 

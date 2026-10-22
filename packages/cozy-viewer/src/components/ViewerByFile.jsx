@@ -3,7 +3,6 @@ import React, { useMemo } from 'react'
 
 import { isPlainText } from 'cozy-client/dist/models/file'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
-import { useEncrypted } from 'cozy-ui/transpiled/react/providers/Encrypted'
 
 import NoViewer from '../NoViewer'
 import AudioViewer from '../ViewersByFile/AudioViewer'
@@ -69,8 +68,6 @@ const ViewerByFile = withBreakpoints()(({
   const isPdfEditorEnabled = componentsProps?.PdfViewer?.isPdfEditorEnabled
   const editPdfOpener = componentsProps?.PdfViewer?.opener
 
-  const { url } = useEncrypted()
-
   const ComponentName = useMemo(
     () =>
       getViewerComponentName({
@@ -84,7 +81,6 @@ const ViewerByFile = withBreakpoints()(({
   return (
     <ComponentName
       file={file}
-      url={url}
       renderFallbackExtraContent={renderFallbackExtraContent}
       gestures={gestures}
       gesturesRef={gesturesRef}

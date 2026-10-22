@@ -25,10 +25,7 @@ const withFileUrl = BaseComponent =>
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
-      if (
-        nextProps.file.id !== this.props.file.id ||
-        nextProps.url !== this.props.url
-      ) {
+      if (nextProps.file.id !== this.props.file.id) {
         this.reset()
       }
     }
@@ -40,7 +37,7 @@ const withFileUrl = BaseComponent =>
     }
 
     async loadDownloadUrl() {
-      const { file, url } = this.props
+      const { file } = this.props
       this.timeout = setTimeout(
         () => this.setState(state => ({ ...state, status: FAILED })),
         TTL
@@ -48,10 +45,6 @@ const withFileUrl = BaseComponent =>
       try {
         if (isFileEncrypted(file)) {
           // The download link cannot be provided by the stack if the file is encrypted
-          if (url) {
-            this.clearTimeout()
-            this.setState({ downloadUrl: url, status: LOADED })
-          }
           return
         }
         const downloadUrl = await this.getDownloadLink(file)

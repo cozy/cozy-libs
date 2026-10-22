@@ -2,7 +2,6 @@ import { render, waitFor } from '@testing-library/react'
 import React from 'react'
 
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import EncryptedProvider from 'cozy-ui/transpiled/react/providers/Encrypted'
 import { checkImageSource } from 'cozy-ui-plus/dist/FileImageLoader/checkImageSource'
 
 import ImageViewer from './ImageViewer'
@@ -33,14 +32,12 @@ const setup = () => {
   const root = render(
     <DemoProvider>
       <BreakpointsProvider>
-        <EncryptedProvider>
-          <ImageViewer
-            file={file}
-            gestures={gestures}
-            gesturesRef={{}}
-            onSwipe={jest.fn()}
-          />
-        </EncryptedProvider>
+        <ImageViewer
+          file={file}
+          gestures={gestures}
+          gesturesRef={{}}
+          onSwipe={jest.fn()}
+        />
       </BreakpointsProvider>
     </DemoProvider>
   )

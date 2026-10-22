@@ -18,7 +18,6 @@ import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
-import { useEncrypted } from 'cozy-ui/transpiled/react/providers/Encrypted'
 import { useI18n } from 'twake-i18n'
 
 import SummarizeByAIButton from './SummarizeByAIButton'
@@ -49,7 +48,6 @@ const Toolbar = ({
     useSharingInfos()
   const { isOwner } = useSharingContext()
   const { setShowShareModal } = useShareModal()
-  const { url } = useEncrypted()
 
   const isCozySharing = window.location.pathname === '/preview'
   const isShareNotAdded = !loading && !isSharingShortcutCreated
@@ -121,13 +119,10 @@ const Toolbar = ({
             label={t('Viewer.download')}
             startIcon={<Icon icon={Download} />}
             onClick={() =>
-              download({ client, encryptedUrl: url, downloadFile }).action(
-                [file],
-                {
-                  webviewIntent,
-                  driveId: file.driveId
-                }
-              )
+              download({ client, downloadFile }).action([file], {
+                webviewIntent,
+                driveId: file.driveId
+              })
             }
           />
         </div>

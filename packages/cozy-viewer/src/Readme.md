@@ -13,7 +13,6 @@ The `Viewer` can display an **information panel** to show additional information
 
 - **files** : `<array>` – One or more `io.cozy.files` to display
 - **currentIndex** : `<number>` – Index of the file to show
-- **currentURL** : `<string>` – Optionnal URL of the file
 - **className** : `<string>` – CSS classes
 - **showNavigation** : `<boolean>` – Whether to show left and right arrows to navigate between files
 - **renderFallbackExtraContent** : `<function>` – A render prop that is called when a file can't be displayed
@@ -119,14 +118,6 @@ const files = [
       }
     }
   },
-    {
-    _id: 'text',
-    class: 'text',
-    type: 'file',
-    name: 'encrypted-example.txt',
-    mime: 'text/plain',
-    encrypted: true
-  },
   {
     _id: 'image',
     class: 'image',
@@ -203,21 +194,10 @@ const initialVariants = [
   { navigation: true, toolbar: true, onlyOfficeEnabled: true, disableModal: false, isPublic: false }
 ]
 
-const getURL = (file) => {
-  if (file.encrypted && file.class === 'text') {
-    const text = 'Well, hello there. This file is served through an URL'
-    const textBlob = new Blob([text], {
-      type: 'text/plain'
-    })
-    return URL.createObjectURL(textBlob)
-  }
-  return null
-}
-
 const toggleViewer = () => setState({ viewerOpened: !state.viewerOpened })
 const handleToggleToolbarClose = () => setState({ showToolbarCloseButton: !state.showToolbarCloseButton })
 const handleToggleToolbarWithPath = () => setState({ showToolbarWithPath: !state.showToolbarWithPath })
-const onFileChange = (file, nextIndex) => setState({ currentIndex: nextIndex, currentURL: getURL(file) })
+const onFileChange = (file, nextIndex) => setState({ currentIndex: nextIndex })
 
 ;
 
@@ -248,7 +228,6 @@ const onFileChange = (file, nextIndex) => setState({ currentIndex: nextIndex, cu
               files={files}
               isPublic={variant.isPublic}
               currentIndex={state.currentIndex}
-              currentURL={state.currentURL}
               disableModal={variant.disableModal}
               showNavigation={variant.navigation}
               onCloseRequest={toggleViewer}
@@ -333,9 +312,3 @@ The worker is emitted as an asset. If the viewer is used on a public page, make 
 ### Only works with React
 
 The `Viewer` can be used only in a `React` Application. You can't use it with `Preact`.
-
-### Special case: client-side encrypted files
-
-When a file is client-side encrypted, it is not possible to get the download link from the server anymore.
-Hence, an additional `currentURL` prop must be eventually given to the `<Viewer>`. This URL is the decrypted
-file, asynchronously provided by the app.

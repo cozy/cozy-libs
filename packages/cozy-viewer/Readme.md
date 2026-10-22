@@ -18,7 +18,6 @@ Cozy-Viewer provides a component to show files in a viewer.
 
 - **files** : `<array>` – One or more `io.cozy.files` to display
 - **currentIndex** : `<number>` – Index of the file to show
-- **currentURL** : `<string>` – Optionnal URL of the file
 - **className** : `<string>` – CSS classes
 - **showNavigation** : `<boolean>` – Whether to show left and right arrows to navigate between files
 - **renderFallbackExtraContent** : `<function>` – A render prop that is called when a file can't be displayed
