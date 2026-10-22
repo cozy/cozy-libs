@@ -1,7 +1,9 @@
-import { Icon, WrenchCircle } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
+
+import { Icon, WrenchCircle } from '@linagora/twake-icons'
+import { createUseI18n } from 'twake-i18n'
 
 import Tile, {
   TileTitle,
@@ -9,9 +11,7 @@ import Tile, {
   TileFooter,
   TileIcon,
   TileDescription
-} from 'cozy-ui/transpiled/react/Tile'
-import { createUseI18n } from 'twake-i18n'
-
+} from '../Tile'
 import { APP_STATUS, getCurrentStatusLabel } from './helpers'
 import de from './locales/de.json'
 import en from './locales/en.json'

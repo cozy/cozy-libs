@@ -1,11 +1,11 @@
 import React from 'react'
 
 import { nameToColor } from 'cozy-ui/transpiled/react/Avatar/helpers'
-import { TileIcon } from 'cozy-ui/transpiled/react/Tile'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import styles from '../AppTile/styles.styl'
+import { TileIcon } from '../Tile'
 
 interface ShortcutTileProps {
   file: Partial<object> & {
