@@ -62,13 +62,13 @@ export const enable = flagsToEnable => {
 }
 
 /**
- * Initializes flags from the remote endpoint serving instance flags
+ * Reads the instance flags from the remote endpoint serving them
  *
- * @private
  * @see  https://docs.cozy.io/en/cozy-stack/settings/#get-settingsflags
  * @param  {import('cozy-client/types/CozyClient').default} client
+ * @returns {Promise<Object>} flagName -> flagValue
  */
-export const initializeFromRemote = async client => {
+const fetchRemoteFlags = async client => {
   const {
     data: { attributes }
   } = await client.query(
@@ -78,8 +78,17 @@ export const initializeFromRemote = async client => {
     // forceStack: the name cozy-client 52 to 60.28 knows, ignored after.
     { forceLink: 'stack', forceStack: true }
   )
+  return attributes
+}
 
-  enable(attributes)
+/**
+ * Initializes flags from the remote endpoint serving instance flags
+ *
+ * @private
+ * @param  {import('cozy-client/types/CozyClient').default} client
+ */
+export const initializeFromRemote = async client => {
+  enable(await fetchRemoteFlags(client))
 }
 
 const capitalize = str => str[0].toUpperCase() + str.slice(1)
@@ -156,6 +165,7 @@ class FlagClientPlugin {
     this.client.on('logout', this.handleLogout)
 
     this.setupInitializing()
+    this.attempt = 0
 
     if (client.isLogged) this.handleLogin()
   }
@@ -178,19 +188,27 @@ class FlagClientPlugin {
   }
 
   async handleLogin() {
+    const attempt = ++this.attempt
+    let remoteFlags
     // Offline or on a stack error, log in without flags rather than leave
     // `initializing` pending: nothing awaits handleLogin.
     try {
-      await flag.initialize(this.client)
+      if (!(await flag.initializeFromDOM())) {
+        remoteFlags = await fetchRemoteFlags(this.client)
+      }
     } catch (err) {
       // eslint-disable-next-line no-console
       console.warn('flags.handleLogin: could not fetch the instance flags', err)
     }
+    // A logout or a newer login came in while the flags were being read.
+    if (attempt !== this.attempt) return
+    enable(remoteFlags)
     this.resolveInitializing()
     this.client.emit('plugin:flag:login')
   }
 
   async handleLogout() {
+    this.attempt++
     flag.reset()
     this.setupInitializing()
     this.client.emit('plugin:flag:logout')
