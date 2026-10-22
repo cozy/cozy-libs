@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.22.0](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.21.0...cozy-interapp@0.22.0) (2026-10-22)
+
+### Features
+
+- **cozy-interapp:** Let a service check who frames it ([ab320df](https://github.com/cozy/cozy-libs/commit/ab320df0a48015f7f9ac0f98e72bb2b1c6ac2074))
+
 # [0.21.0](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.20.1...cozy-interapp@0.21.0) (2026-10-06)
 
 ### Features

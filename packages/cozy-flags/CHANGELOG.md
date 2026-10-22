@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.9.2](https://github.com/cozy/cozy-libs/compare/cozy-flags@4.9.1...cozy-flags@4.9.2) (2026-10-22)
+
+### Bug Fixes
+
+- **cozy-flags:** Drop a login cut by a logout ([5c71622](https://github.com/cozy/cozy-libs/commit/5c71622a15b173040f9ef715510038fc1bc9423c))
+- **cozy-flags:** Log in without flags when they can't be read ([2f14b11](https://github.com/cozy/cozy-libs/commit/2f14b11614fe8afbce1fb0987406d2f048df1304))
+- **cozy-flags:** Read the instance flags from the stack ([e291edb](https://github.com/cozy/cozy-libs/commit/e291edba165958e2ea4a74daf3a5b50b3a873712))
+
 ## [4.9.1](https://github.com/cozy/cozy-libs/compare/cozy-flags@4.9.0...cozy-flags@4.9.1) (2026-03-17)
 
 **Note:** Version bump only for package cozy-flags

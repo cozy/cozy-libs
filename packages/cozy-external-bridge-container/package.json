@@ -1,7 +1,7 @@
 {
   "name": "cozy-external-bridge-container",
   "description": "Library allows communication between a container app and an app embedded in an iframe",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "author": {
     "name": "Cozy Cloud",
     "url": "https://github.com/cozy"
@@ -30,8 +30,8 @@
     "babel-plugin-tsconfig-paths": "^1.0.3",
     "babel-preset-cozy-app": "^2.8.4",
     "cozy-client": "^58.4.0",
-    "cozy-dataproxy-lib": "^4.15.7",
-    "cozy-flags": "^4.9.1",
+    "cozy-dataproxy-lib": "^4.15.8",
+    "cozy-flags": "^4.9.2",
     "cozy-minilog": "^3.10.1",
     "jest": "30.3.0",
     "react": "16.12.0",
