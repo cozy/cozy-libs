@@ -116,6 +116,10 @@ The path to the build folder, relative to the current directory. Since the 'stan
 
 For now, the registry a build archive (.tar.gz file) from an external link to be used in the cozy-stack. In the travis script, this url is computed using the Github trick to get archives from a commit url (but it's overwritten if provided by this option). For the manual script, we have to provide it.
 
+#### `--build-file <path>`
+
+Path of a local application archive (.tar.gz file). It is uploaded to the registry with the version, so `--build-url` is not needed. Requires a registry supporting archive upload.
+
 #### `--build-commit <commit-hash>`
 
 Using the `travis` mode, the archive tarball URL is computed using github and the build commit hash. If you are not on your build branch to publish, you can specify the correct build commit hash using this parameter.

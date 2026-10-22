@@ -31,6 +31,20 @@ describe('Prepublish script', () => {
     await expect(prepublishLib(optionsMock)).resolves.toMatchSnapshot()
   })
 
+  it('computes sha256 from a local file when appBuildFile is given', async () => {
+    const result = await prepublishLib({
+      ...optionsMock,
+      appBuildFile: './package.json'
+    })
+    expect(prepublishLib.shasum256FromURL).not.toHaveBeenCalled()
+    expect(result.sha256Sum).toBe(
+      require('crypto')
+        .createHash('sha256')
+        .update(require('fs').readFileSync('./package.json'))
+        .digest('hex')
+    )
+  })
+
   it('sanitize options from hook script', async () => {
     const options = {
       ...optionsMock,
