@@ -1,6 +1,6 @@
 {
   "name": "cozy-sharing",
-  "version": "40.1.0",
+  "version": "40.1.1",
   "description": "Provides sharing login for React applications.",
   "main": "dist/index.js",
   "author": "Cozy",
@@ -58,7 +58,7 @@
     "cozy-intent": "^2.31.1",
     "cozy-minilog": "^3.10.1",
     "cozy-ui": "^140.5.0",
-    "cozy-ui-plus": "^14.0.5",
+    "cozy-ui-plus": "^14.0.6",
     "jest": "30.3.0",
     "jest-environment-jsdom": "30.3.0",
     "react": "16.12.0",

@@ -1,7 +1,7 @@
 {
   "name": "cozy-search",
   "description": "UI components about search bar and IA assistant",
-  "version": "2.12.1",
+  "version": "2.12.2",
   "author": {
     "name": "Cozy Cloud",
     "url": "https://github.com/cozy"
@@ -37,7 +37,7 @@
     "cozy-pouch-link": "^54.0.0",
     "cozy-realtime": "^5.9.4",
     "cozy-ui": "^138.4.0",
-    "cozy-ui-plus": "^14.0.5",
+    "cozy-ui-plus": "^14.0.6",
     "cross-fetch": "^4.0.0",
     "jest": "30.3.0",
     "react": "18.2.0",
