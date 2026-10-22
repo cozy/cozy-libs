@@ -381,10 +381,8 @@ export class SharingProvider extends Component {
     const sharing = getSharingForSelf(this.state, document.id)
     await this.sharingCol.revokeSelf(sharing)
     this.dispatch(revokeSelf(sharing))
-    await this.fetchEffectiveRecipients(
-      getDocumentId(document),
-      document.driveId
-    )
+    // Leaving removes our access to the sharing's effective recipients.
+    this.dispatch(receiveEffectiveRecipients(getDocumentId(document), []))
   }
 
   /**
