@@ -4,7 +4,7 @@ import CozyClient, { defaultPerformanceApi } from 'cozy-client'
 import type { PerformanceAPI } from 'cozy-client/types/performances/types'
 import { IOCozyFile } from 'cozy-client/types/types'
 import Minilog from 'cozy-minilog'
-import { RealtimePlugin } from 'cozy-realtime'
+import { RealtimePlugin, HandshakeQueue } from 'cozy-realtime'
 import CozyRealtime from 'cozy-realtime'
 
 import { SHARED_DRIVE_FILES_DOCTYPE } from './consts'
@@ -73,6 +73,7 @@ export class SearchEngine {
   performanceApi: PerformanceAPI
   engineOptions: EngineOptions
   sharedDrivesRealtimes: Record<string, CozyRealtime>
+  sharedDrivesHandshakes: InstanceType<typeof HandshakeQueue>
 
   constructor(
     client: CozyClient,
@@ -86,6 +87,11 @@ export class SearchEngine {
     this.performanceApi = performanceApi ?? defaultPerformanceApi
     this.engineOptions = { shouldInit: true, ...engineOptions }
     this.sharedDrivesRealtimes = {}
+    // One connection per shared drive means a single network change makes them
+    // all reconnect at once, and a handshake that never completes holds a slot
+    // in the browser WebSocket budget until the browser times it out. They
+    // share one queue so only a few of them handshake at a time.
+    this.sharedDrivesHandshakes = new HandshakeQueue()
 
     this.isLocalSearch = !!getPouchLink(this.client)
     log.info('Use local data on trusted device: ', this.isLocalSearch)
@@ -272,13 +278,22 @@ export class SearchEngine {
   }
 
   private addSharedDriveRealtime(sharedDriveId: string): void {
-    this.sharedDrivesRealtimes[sharedDriveId]?.stop()
+    const existing = this.sharedDrivesRealtimes[sharedDriveId]
+    if (existing?.isAlive()) {
+      // Nothing to do: the drive is already connected, or its connection is
+      // being established. Replacing it would drop a working socket, and
+      // replacing one that is waiting on a reconnection backoff would leave
+      // its pending connection attempt orphaned.
+      return
+    }
+    existing?.stop()
     // background: the indexer watches the drive without the user looking at
     // it, so the stack must not mark the sharing as seen
     const realtime = new CozyRealtime({
       client: this.client,
       sharedDriveId,
-      background: true
+      background: true,
+      handshakeQueue: this.sharedDrivesHandshakes
     })
     this.subscribeDoctype(this.client, FILES_DOCTYPE, realtime, sharedDriveId)
     this.sharedDrivesRealtimes[sharedDriveId] = realtime

@@ -7,7 +7,10 @@ import {
   timeBeforeSuccessful,
   baseWaitAfterFirstFailure,
   maxWaitBetweenRetries,
-  maxBackgroundConnectionAttempts
+  maxBackgroundConnectionAttempts,
+  heartbeatInterval,
+  heartbeatTimeout,
+  heartbeatProbeDoctype
 } from './config'
 import defaultLogger from './logger'
 import {
@@ -38,6 +41,7 @@ class CozyRealtime {
    * @param {string} [options.sharedDriveId] - The ID of the shared drive to connect to
    * @param {boolean} [options.background] - Whether the shared drive connection is made by a background service rather than the user viewing the drive, so the stack does not mark the sharing as seen
    * @param {number} [options.maxReconnectionAttempts] - Give up reconnecting after this many failed attempts (defaults to unlimited, or a finite cap for background connections)
+   * @param {HandshakeQueue} [options.handshakeQueue] - Limits how many of a group of connections may handshake at once. Whoever opens the group owns the queue and passes the same one to each connection.
    */
   constructor(options) {
     this.sharedDriveId = options.sharedDriveId
@@ -45,6 +49,16 @@ class CozyRealtime {
     this.maxReconnectionAttempts =
       options.maxReconnectionAttempts ??
       (this.background ? maxBackgroundConnectionAttempts : null)
+    this.handshakeQueue = options.handshakeQueue ?? null
+    this.handshakeSlot = null
+    this.heartbeatInterval = options.heartbeatInterval ?? heartbeatInterval
+    this.heartbeatTimeout = options.heartbeatTimeout ?? heartbeatTimeout
+    this.heartbeatProbeDoctype =
+      options.heartbeatProbeDoctype ?? heartbeatProbeDoctype
+    this.heartbeatTimer = null
+    this.heartbeatDeadline = null
+    this.heartbeatProven = false
+    this.lastMessageAt = null
     this.client = getCozyClientFromOptions(options)
     this.createWebSocket = options.createWebSocket || createWebSocket
     this.logger = options.logger || defaultLogger
@@ -120,6 +134,15 @@ class CozyRealtime {
       try {
         this.waitingForConnect = true
         if (!immediate) await this.retryManager.waitBeforeNextAttempt()
+        // `stop()` may have been called while we were waiting. It cannot
+        // cancel this pending connection - there is no socket to revoke yet -
+        // so a stopped instance would otherwise still open a socket that
+        // nobody holds a reference to, and nobody will ever close.
+        if (!this.isStarted) return
+        if (this.handshakeQueue) {
+          this.handshakeSlot = await this.handshakeQueue.acquire()
+          if (!this.isStarted) return this.releaseHandshakeSlot()
+        }
         this.createSocket()
       } finally {
         this.waitingForConnect = false
@@ -148,10 +171,38 @@ class CozyRealtime {
   }
 
   /**
+   * Gives back the handshake queue slot held by this instance, if any.
+   */
+  releaseHandshakeSlot() {
+    if (this.handshakeSlot) {
+      this.handshakeSlot.release()
+      this.handshakeSlot = null
+    }
+  }
+
+  /**
+   * Whether this instance already has a usable connection, either open or
+   * still being established.
+   *
+   * Callers use this to avoid tearing down a connection that is doing fine.
+   * It reports true during a reconnection backoff too: there is no socket then,
+   * but a connection attempt is pending and stopping it would orphan it.
+   *
+   * @returns {boolean}
+   */
+  isAlive() {
+    return Boolean(
+      this.isStarted && (this.hasWebSocket() || this.waitingForConnect)
+    )
+  }
+
+  /**
    * Removes all handlers on a websocket to avoid callbacks from an old rejected socket
    */
   revokeWebSocket() {
     this.emit('disconnected')
+    this.releaseHandshakeSlot()
+    this.stopHeartbeat()
     if (this.hasWebSocket()) {
       this.logger.info('trashing the previous websocket…')
       this.websocket.onmessage = null
@@ -185,6 +236,8 @@ class CozyRealtime {
       this.logger.info('stopped')
       this.unsubscribeGlobalEvents()
       this.unsubscribeClientEvents()
+      this.releaseHandshakeSlot()
+      this.stopHeartbeat()
       if (this.hasWebSocket()) {
         this.revokeWebSocket()
       }
@@ -468,6 +521,12 @@ class CozyRealtime {
    */
   onWebSocketMessage(message) {
     const { event, payload } = JSON.parse(message.data)
+    // Any message proves the stack is still on the other end.
+    this.lastMessageAt = Date.now()
+    if (this.isHeartbeatAnswer(event, payload)) {
+      this.logger.debug('liveness probe answered')
+      return
+    }
     this.logger.info('receive message from server', { event, payload })
     const handlers = this.subscriptions.getAllHandlersForEvent(
       event,
@@ -489,11 +548,91 @@ class CozyRealtime {
   }
 
   /**
+   * Whether a server message is the refusal of our liveness probe.
+   *
+   * @private
+   * @param {string} event
+   * @param {object} payload
+   * @returns {boolean}
+   */
+  isHeartbeatAnswer(event, payload) {
+    return (
+      event === 'error' &&
+      payload &&
+      payload.source &&
+      payload.source.payload &&
+      payload.source.payload.type === this.heartbeatProbeDoctype
+    )
+  }
+
+  /**
+   * Asks the stack whether it is still on the other end.
+   *
+   * The protocol has no PING method and stays silent on a valid SUBSCRIBE, so
+   * we subscribe to a doctype nobody has permission on: the refusal it sends
+   * back is the only reply the protocol guarantees.
+   *
+   * @private
+   */
+  sendHeartbeat() {
+    if (!this.isWebSocketOpen()) return
+    const sentAt = Date.now()
+    this.sendWebSocketMessage('SUBSCRIBE', {
+      type: this.heartbeatProbeDoctype
+    })
+    global.clearTimeout(this.heartbeatDeadline)
+    this.heartbeatDeadline = global.setTimeout(() => {
+      if (this.lastMessageAt && this.lastMessageAt >= sentAt) {
+        this.heartbeatProven = true
+        return
+      }
+      if (!this.heartbeatProven) {
+        // The probe has never been answered on this connection, so its silence
+        // tells us nothing. Dropping a connection on a signal we have never
+        // seen work would be worse than not checking at all.
+        this.logger.warn(
+          'the liveness probe was never answered on this connection, disabling the heartbeat'
+        )
+        this.stopHeartbeat()
+        return
+      }
+      this.logger.warn('no answer to the liveness probe, the socket looks dead')
+      this.emit('dead')
+      this.retryManager.onFailure(new Error('liveness probe timed out'))
+      this.reconnect()
+    }, this.heartbeatTimeout)
+  }
+
+  /**
+   * @private
+   */
+  startHeartbeat() {
+    this.stopHeartbeat()
+    this.heartbeatProven = false
+    this.sendHeartbeat()
+    this.heartbeatTimer = global.setInterval(
+      () => this.sendHeartbeat(),
+      this.heartbeatInterval
+    )
+  }
+
+  /**
+   * @private
+   */
+  stopHeartbeat() {
+    global.clearInterval(this.heartbeatTimer)
+    global.clearTimeout(this.heartbeatDeadline)
+    this.heartbeatTimer = null
+    this.heartbeatDeadline = null
+  }
+
+  /**
    * When an error raises in a websocket - reconnects
    * @private
    */
   onWebSocketError(error) {
     this.logger.info('An error was raised on the websocket', error)
+    this.releaseHandshakeSlot()
     this.retryManager.onFailure(error)
     this.reconnect()
   }
@@ -503,9 +642,11 @@ class CozyRealtime {
    * @private
    */
   onWebSocketOpen() {
+    this.releaseHandshakeSlot()
     this.retryManager.onSuccess()
     this.authenticate()
     this.sendSubscriptions()
+    this.startHeartbeat()
     this.emit('ready')
   }
 
@@ -515,6 +656,7 @@ class CozyRealtime {
    */
   onWebSocketClose(event) {
     this.logger.info('The current websocket was closed by a third party', event)
+    this.releaseHandshakeSlot()
     this.retryManager.onFailure(event)
     this.reconnect()
   }

@@ -4,7 +4,8 @@ import {
   maxWaitBetweenRetries as defaultMaxWaitBetweenRetries,
   baseWaitAfterFirstFailure as defaultBaseWaitAfterFirstFailure,
   timeBeforeSuccessful as defaultTimeBeforeSuccessful,
-  raiseErrorAfterAttempts as defaultRaiseErrorAfterAttempts
+  raiseErrorAfterAttempts as defaultRaiseErrorAfterAttempts,
+  retryJitterRatio as defaultRetryJitterRatio
 } from './config'
 import defaultLogger from './logger'
 
@@ -27,6 +28,7 @@ class RetryManager {
     baseWaitAfterFirstFailure = defaultBaseWaitAfterFirstFailure,
     timeBeforeSuccessful = defaultTimeBeforeSuccessful,
     raiseErrorAfterAttempts = defaultRaiseErrorAfterAttempts,
+    jitterRatio = defaultRetryJitterRatio,
     logger = defaultLogger
   } = {}) {
     this.logger = logger
@@ -38,6 +40,7 @@ class RetryManager {
     this.timeBeforeSuccessful = timeBeforeSuccessful
     this.baseWaitAfterFirstFailure = baseWaitAfterFirstFailure
     this.maxWaitBetweenRetries = maxWaitBetweenRetries
+    this.jitterRatio = jitterRatio
   }
 
   /**
@@ -162,6 +165,21 @@ class RetryManager {
   /**
    * Wait an amount of time before the next attempt (if needed)
    */
+  /**
+   * The backoff delay, spread randomly around its nominal value.
+   *
+   * Connections that failed together - one per shared drive when the network
+   * drops - share the same backoff constants, so without this they would all
+   * retry at the same instant and burst together.
+   *
+   * @returns {number} time to wait in millisecond
+   */
+  jitteredWait() {
+    if (!this.wait || !this.jitterRatio) return this.wait
+    const spread = this.wait * this.jitterRatio
+    return Math.round(this.wait - spread / 2 + Math.random() * spread)
+  }
+
   async waitBeforeNextAttempt() {
     this.logger.debug('waitBeforeNextAttempt', this.wait)
     if (this.wait) {
@@ -174,7 +192,7 @@ class RetryManager {
             if (this.waiting === promise) this.waiting = null
             resolve()
           }
-          global.setTimeout(stop, this.wait)
+          global.setTimeout(stop, this.jitteredWait())
         })
         promise.stop = stop
         this.waiting = promise
