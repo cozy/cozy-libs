@@ -3,7 +3,6 @@ import React from 'react'
 
 import { createMockClient } from 'cozy-client'
 import logger from 'cozy-logger'
-import EncryptedProvider from 'cozy-ui/transpiled/react/providers/Encrypted'
 
 import { FileImageLoader } from '.'
 import { checkImageSource } from './checkImageSource'
@@ -38,26 +37,22 @@ const file = {
   }
 }
 
-const setup = ({ file, url }) => {
+const setup = ({ file }) => {
   const root = render(
-    <EncryptedProvider url={url}>
-      <FileImageLoader
-        file={file}
-        linkType="large"
-        key={file.id}
-        render={src => (
-          <img alt={file.name} src={src} data-testid="img_image" />
-        )}
-        renderFallback={() => (
-          <img
-            alt="render fallback"
-            src="http://url.img_image_render_fallback/"
-            data-testid="img_image_renderFallback"
-          />
-        )}
-        client={client}
-      />
-    </EncryptedProvider>
+    <FileImageLoader
+      file={file}
+      linkType="large"
+      key={file.id}
+      render={src => <img alt={file.name} src={src} data-testid="img_image" />}
+      renderFallback={() => (
+        <img
+          alt="render fallback"
+          src="http://url.img_image_render_fallback/"
+          data-testid="img_image_renderFallback"
+        />
+      )}
+      client={client}
+    />
   )
 
   return { root }
@@ -77,18 +72,6 @@ describe('FileImageLoader', () => {
 
     const img = getByTestId('img_image')
     expect(img.src).toEqual(file.links.large)
-  })
-
-  it('should use URL when set', async () => {
-    const url = 'blob:http://theimageblob'
-    const { root } = setup({ file, url })
-    const { getByTestId } = root
-    checkImageSource.mockResolvedValue('ok')
-    await waitFor(() => getByTestId('img_image'))
-
-    const img = getByTestId('img_image')
-    expect(img.src).toEqual(url)
-    expect(getMock).not.toHaveBeenCalled()
   })
 
   it('should makes a request to fetch links if the links is not right anymore', async () => {

@@ -12,15 +12,12 @@ const LOADED = 'LOADED'
 const FAILED = 'FAILED'
 const GET_LINK = 'GET_LINK'
 
-import { EncryptedContext } from 'cozy-ui/transpiled/react/providers/Encrypted'
-
 import { checkImageSource } from './checkImageSource'
 
 export class FileImageLoader extends Component {
   state = {
     src: null
   }
-  static contextType = EncryptedContext
   _mounted = false
 
   componentDidMount() {
@@ -161,9 +158,6 @@ export class FileImageLoader extends Component {
     const { src } = this.state
 
     const { render, renderFallback } = this.props
-    if (this.context && this.context.url) {
-      return render(this.context.url)
-    }
     if (src) return render(src)
     else if (renderFallback) return renderFallback()
     else return null
