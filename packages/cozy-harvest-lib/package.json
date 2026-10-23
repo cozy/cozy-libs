@@ -1,6 +1,6 @@
 {
   "name": "cozy-harvest-lib",
-  "version": "39.2.14",
+  "version": "39.2.15",
   "description": "Provides logic, modules and components for Cozy's harvest applications.",
   "main": "dist/index.js",
   "author": "Cozy",
@@ -75,8 +75,8 @@
     "cozy-realtime": "^5.9.4",
     "cozy-tsconfig": "^2.0.0",
     "cozy-ui": "^138.1.0",
-    "cozy-ui-plus": "^14.0.7",
-    "cozy-viewer": "^32.0.1",
+    "cozy-ui-plus": "^14.0.8",
+    "cozy-viewer": "^32.0.2",
     "form-data": "4.0.0",
     "identity-obj-proxy": "3.0.0",
     "isomorphic-fetch": "^2.2.1",

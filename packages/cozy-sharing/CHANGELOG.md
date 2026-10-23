@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [40.1.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@40.1.2...cozy-sharing@40.1.3) (2026-10-23)
+
+### Bug Fixes
+
+- **cozy-sharing:** Complete self-revocation without member reload ([9409b0d](https://github.com/cozy/cozy-libs/commit/9409b0d3c468c277ca3e7e4db823035dea13de62))
+
 ## [40.1.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@40.1.1...cozy-sharing@40.1.2) (2026-10-22)
 
 **Note:** Version bump only for package cozy-sharing
